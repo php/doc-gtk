@@ -6,7 +6,14 @@
    Base class for all container widgets.
   </shortdesc>
   <desc>
-
+   <simpara>
+    <classname>GtkContainer</classname> is an abstract base class
+    providing all widgets derived from it with the ability to contain
+    child widgets.
+   </simpara>
+   <simpara>
+    It also endows those child widgets with a resizing mechanism.
+   </simpara>
   </desc>
  </classmeta>
 
@@ -20,10 +27,16 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets border width.
    </shortdesc>
    <desc>
-
+    <simpara>
+     <function class="GtkContainer">set_border_width</function> sets the
+     width of the container's border, in pixels.
+    </simpara>
+    <simpara>
+     The default setting is <literal>0</literal>.
+    </simpara>
    </desc>
   </method>
 
@@ -31,15 +44,25 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>add</function></funcdef>
-     <paramdef><classname>GtkWidget</classname> 
-<parameter>widget</parameter></paramdef>
+     <paramdef>
+      <classname>GtkWidget</classname> 
+      <parameter>widget</parameter>
+     </paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Adds child widget to container.
    </shortdesc>
    <desc>
-
+    <simpara>
+     <function class="GtkContainer">add()</function> adds the child
+     widget passed as the parameter to the container.
+    </simpara>
+    <simpara>
+     See also:  <classname>GtkBin</classname>, <classname>GtkBox</classname>, 
+     <function class="GtkBox">pack_start()</function>, 
+     <function class="GtkBox">pack_end()</function>.
+    </simpara>
    </desc>
   </method>
 
@@ -47,15 +70,21 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>remove</function></funcdef>
-     <paramdef><classname>GtkWidget</classname> 
-<parameter>widget</parameter></paramdef>
+     <paramdef>
+      <classname>GtkWidget</classname> 
+      <parameter>widget</parameter>
+     </paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Removes child widget from container.
    </shortdesc>
    <desc>
-
+    <simpara>
+     <function class="GtkContainer">remove()</function> removes the child
+     widget passed as the parameter from the container, regardless of the
+     method used to pack that child.
+    </simpara>
    </desc>
   </method>
 
@@ -63,15 +92,23 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_resize_mode</function></funcdef>
-     <paramdef><enumname>GtkResizeMode</enumname> 
-<parameter>resize_mode</parameter></paramdef>
+     <paramdef>
+      <enumname>GtkResizeMode</enumname> 
+      <parameter>resize_mode</parameter>
+     </paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets priority of resize requests.
    </shortdesc>
    <desc>
-
+    <simpara>
+     <function class="GtkContainer">set_resize_mode()</function> sets the
+     priority of any resize requests for the container widget calling the
+     method.  The standard behaviour is to have any such requests added to
+     a queue; setting the resize mode to 
+     <literal>GTK_RESIZE_IMMEDIATE</literal> bypasses that queue.
+    </simpara>
    </desc>
   </method>
 
@@ -83,25 +120,43 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Emits check_resize signal.
    </shortdesc>
    <desc>
-
+    <simpara>
+     <function class="GtkContainer">check_resize()</function> emits the
+     <signalname>check-resize</signalname> signal, which triggers a series
+     of functions to check exactly what needs to be resized before either
+     resetting the container's size allocation or calling the 
+     <function class="GtkContainer">resize_children()</function> method.
+    </simpara>
+    <simpara>
+     This method is mostly used internally.
+    </simpara>
    </desc>
   </method>
 
   <method id="gtk.gtkcontainer.method.children">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>XXX <function>children</function></funcdef>
-     <paramdef>XXX</paramdef>
+     <funcdef>array <function>children</function></funcdef>
+     <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns array of container's child widgets.
    </shortdesc>
    <desc>
-
+    <simpara>
+     <function class="GtkContainer">children()</function> provides an
+     alternative means of accessing a container's child widgets, the other
+     being through the container's properties.
+    </simpara>
+    <simpara>
+     The chief and potentially useful difference is that the array returned
+     by this method is reversed, so that the last item added to the container
+     has the position <literal>[0]</literal>.
+    </simpara>
    </desc>
   </method>
 
@@ -109,15 +164,27 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>int <function>focus</function></funcdef>
-     <paramdef><enumname>GtkDirectionType</enumname> 
-<parameter>direction</parameter></paramdef>
+     <paramdef>
+      <enumname>GtkDirectionType</enumname> 
+      <parameter>direction</parameter>
+     </paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Queues child focus in a given direction.
    </shortdesc>
    <desc>
-
+    <simpara>
+     <function class="GtkContainer">focus()</function> creates an internal
+     array of the child widgets able to have focus, and sorts it
+     according to the direction given.  The first child in the array will
+     receive focus on opening.
+    </simpara>
+    <simpara>
+     To be included in this array, <literal>child</literal> can be taken as
+     any widget having the container in its ancestry; it need not be a direct
+     child of the container.
+    </simpara>
    </desc>
   </method>
 
@@ -129,10 +196,20 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Toggles whether redraws are necessary.
    </shortdesc>
    <desc>
-
+    <simpara>
+     <function class="GtkContainer">set_reallocate_redraws()</function> 
+     toggles whether redraws are necessary for the container, and if set
+     to <literal>true</literal> will initiate the 
+     <classname>GtkWidget</classname> method 
+     <function class="GtkWidget">queue_draw()</function> as appropriate, 
+     allowing the content of the container to be re-set on the fly.
+    </simpara>
+    <simpara>
+     The default setting is <literal>false</literal>.
+    </simpara>
    </desc>
   </method>
 
@@ -140,15 +217,20 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_focus_child</function></funcdef>
-     <paramdef><classname>GtkWidget</classname> 
-<parameter>child</parameter></paramdef>
+     <paramdef>
+      <classname>GtkWidget</classname> 
+      <parameter>child</parameter>
+     </paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets initial child focus.
    </shortdesc>
    <desc>
-
+    <simpara>
+     <function class="GtkContainer">set_focus_child()</function> is used
+     to denote which child widget should receive focus on opening.
+    </simpara>
    </desc>
   </method>
 
@@ -156,15 +238,29 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_focus_vadjustment</function></funcdef>
-     <paramdef><classname>GtkAdjustment</classname> 
-<parameter>adjustment</parameter></paramdef>
+     <paramdef>
+      <classname>GtkAdjustment</classname> 
+      <parameter>adjustment</parameter>
+     </paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets focus on a vertical <classname>GtkAdjustment</classname>.
    </shortdesc>
    <desc>
-
+    <simpara>
+     <function class="GtkContainer">set_focus_vadjustment()</function> sets
+     a vertical instance of a <classname>GtkAdjustment</classname> to have
+     focus.  In practice, this means that the adjustment will respond to
+     changes made by the user, e.g. the position of a vertical scrollbar's
+     handle in a <classname>GtkScrolledWindow</classname> will reflect the
+     current focus within the scolled window.
+    </simpara>
+    <simpara>
+     There is a method named <literal>get_vadjustment()</literal> which is
+     implemented in all the classes where this method is likely to be
+     utilised.  Use it to provide the parameter.
+    </simpara>
    </desc>
   </method>
 
@@ -172,15 +268,27 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_focus_hadjustment</function></funcdef>
-     <paramdef><classname>GtkAdjustment</classname> 
-<parameter>adjustment</parameter></paramdef>
+     <paramdef>
+      <classname>GtkAdjustment</classname> 
+      <parameter>adjustment</parameter>
+     </paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets focus on a horizontal <classname>GtkAdjustment</classname>.
    </shortdesc>
    <desc>
-
+    <simpara>
+     <function class="GtkContainer">set_focus_hadjustment()</function> sets
+     a horizontal instance of a <classname>GtkAdjustment</classname> to have
+     focus, allowing it to act in synchronicity with the movement of the
+     adjusted widget.
+    </simpara>
+    <simpara>
+     See also:  
+     <function class="GtkContainer">set_focus_vadjustment()</function>, 
+     <classname>GtkAdjustment</classname>.
+    </simpara>
    </desc>
   </method>
 
@@ -192,10 +300,18 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Registers container as toplevel.
    </shortdesc>
    <desc>
-
+    <simpara>
+     <function class="GtkContainer">register_toplevel()</function> adds
+     the calling container to an internal array of widgets having
+     toplevel status within that application.
+    </simpara>
+    <simpara>
+     Registering a container as toplevel can speed up some of the
+     processing involved in resizing.
+    </simpara>
    </desc>
   </method>
 
@@ -207,10 +323,18 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Unregisters a toplevel container.
    </shortdesc>
    <desc>
-
+    <simpara>
+     <function class="GtkContainer">unregister_toplevel()</function> 
+     removes the calling container from an internal array of widgets
+     having toplevel status.  Note that the container must first have
+     been prepended to this array using 
+     <function class="GtkContainer">register_toplevel()</function>; 
+     simply declaring a container as toplevel does not add it to the
+     registry.
+    </simpara>
    </desc>
   </method>
 
@@ -222,10 +346,13 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Resizes child widgets.
    </shortdesc>
    <desc>
-
+    <simpara>
+     <function class="GtkContainer">resize_children()</function> resizes
+     child widgets following an alteration in their size requests.
+    </simpara>
    </desc>
   </method>
 
@@ -237,59 +364,156 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Describes expected child type.
    </shortdesc>
    <desc>
-
-   </desc>
-  </method>
-
-  <method id="gtk.gtkcontainer.method.queue_resize">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>void <function>queue_resize</function></funcdef>
-     <paramdef>void</paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </method>
-
-  <method id="gtk.gtkcontainer.method.clear_resize_widgets">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>void <function>clear_resize_widgets</function></funcdef>
-     <paramdef>void</paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </method>
-
-  <method id="gtk.gtkcontainer.method.child_composite_name">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>string <function>child_composite_name</function></funcdef>
-     <paramdef><classname>GtkWidget</classname> 
-<parameter>child</parameter></paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-   <desc>
-
+    <simpara>
+     <function class="GtkContainer">child_type()</function> returns an
+     integer describing the type of child the container is expecting to
+     be packed into it.  This is mostly for internal use, but could perhaps
+     be useful for diagnosis.
+    </simpara>
+    <simpara>
+     The return values are as follows from most containers:
+     GTK_TYPE_NONE = 1 (generated where no widget can be added, e.g. by a
+     descendant of GtkBin already containing a child, or a GtkPaned already
+     containing both children, or a GtkOptionMenu)
+     GTK_TYPE_WIDGET = 39701 (generated where non-specific widgets may be
+     added, e.g. by GtkBox descendants, GtkNotebook, GtkFixed, GtkPacker or
+     GtkTable)
+     The exceptions are GTK_TYPE_LIST_ITEM, GTK_MENU_ITEM and GTK_TREE_ITEM, 
+     all of which can be any of a variety of widget types depending on how
+     the items are produced.
+    </simpara>
    </desc>
   </method>
 
  </methods>
+
+ <signals>
+
+  <signal id="gtk.gtkcontainer.signal.add">
+   <signalname>add</signalname>
+   <callback>
+    <funcprototype>
+     <funcdef>void <function>callback</function></funcdef>
+     <paramdef><classname>GtkContainer</classname> container</paramdef>
+     <paramdef><classname>GtkWidget</classname> child</paramdef>
+    </funcprototype>
+   </callback>
+   <shortdesc>
+    Emitted when the <function class="GtkContainer">add()</function> method
+    is called.
+   </shortdesc>
+   <desc>
+    <simpara>
+     The <signalname>add</signalname> signal is emitted when the 
+     <function class="GtkContainer">add()</function> method is called.
+    </simpara>
+    <simpara>
+     It is generally used internally.
+    </simpara>
+   </desc>
+  </signal>
+
+  <signal id="gtk.gtkcontainer.signal.remove">
+   <signalname>remove</signalname>
+   <callback>
+    <funcprototype>
+     <funcdef>void <function>callback</function></funcdef>
+     <paramdef><classname>GtkContainer</classname> container</paramdef>
+     <paramdef><classname>GtkWidget</classname> child</paramdef>
+    </funcprototype>
+   </callback>
+   <shortdesc>
+    Emitted when the <function class="GtkContainer">remove()</function> 
+    method is called.
+   </shortdesc>
+   <desc>
+    <simpara>
+     The <signalname>remove</signalname> signal is emitted when the 
+     <function class="GtkContainer">remove()</function> method is called.
+    </simpara>
+    <simpara>
+     It is generally used internally.
+    </simpara>
+   </desc>
+  </signal>
+
+  <signal id="gtk.gtkcontainer.signal.check-resize">
+   <signalname>check-resize</signalname>
+   <callback>
+    <funcprototype>
+     <funcdef>void <function>callback</function></funcdef>
+     <paramdef><classname>GtkContainer</classname> container</paramdef>
+    </funcprototype>
+   </callback>
+   <shortdesc>
+    Emitted when the <function class="GtkContainer">check_resize()</function> 
+    method is called.
+   </shortdesc>
+   <desc>
+    <simpara>
+     The <signalname>check-resize</signalname> signal is emitted when the 
+     <function class="GtkContainer">check-resize()</function> method is
+     called.
+    </simpara>
+    <simpara>
+     It is generally used internally.
+    </simpara>
+   </desc>
+  </signal>
+
+  <signal id="gtk.gtkcontainer.signal.focus">
+   <signalname>focus</signalname>
+   <callback>
+    <funcprototype>
+     <funcdef>void <function>callback</function></funcdef>
+     <paramdef><classname>GtkContainer</classname> container</paramdef>
+     <paramdef><enumname>GtkDirectionType</enumname> direction</paramdef>
+    </funcprototype>
+   </callback>
+   <shortdesc>
+    Emitted when the <function class="GtkContainer">focus()</function> method
+    is called.
+   </shortdesc>
+   <desc>
+    <simpara>
+     The <signalname>focus</signalname> signal is emitted when the 
+     <function class="GtkContainer">focus()</function> method is called.
+    </simpara>
+    <simpara>
+     It is generally used internally.
+    </simpara>
+   </desc>
+  </signal>
+
+  <signal id="gtk.gtkcontainer.signal.set-focus-child">
+   <signalname>set-focus-child</signalname>
+   <callback>
+    <funcprototype>
+     <funcdef>void <function>callback</function></funcdef>
+     <paramdef><classname>GtkContainer</classname> container</paramdef>
+     <paramdef><classname>GtkWidget</classname> child</paramdef>
+    </funcprototype>
+   </callback>
+   <shortdesc>
+    Emitted when the 
+    <function class="GtkContainer">set_focus_child()</function> method is
+    called.
+   </shortdesc>
+   <desc>
+    <simpara>
+     The <signalname>set-focus-child</signalname> signal is emitted when
+     the <function class="GtkContainer">set_focus_child()</function> method
+     is called.
+    </simpara>
+    <simpara>
+     It is generally used internally.
+    </simpara>
+   </desc>
+  </signal>
+
+ </signals>
 
 </classentry>

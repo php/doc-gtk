@@ -323,6 +323,59 @@ calendar
  
 </enum>
 
+<enum id="gtk.enum.gtkdirectiontype">
+ <enumname>GtkDirectionType</enumname>
+
+ <enumoption>
+  <optionname>GTK_DIR_TAB_FORWARD</optionname>
+  <shortdesc>
+   Intended to tab forward through the children capable of having focus, 
+   starting at the left or top.  This option appears not to work in the
+   versions of GTK+ used in PHP-GTK, and has been completely rewritten for
+   GTK 2.
+  </shortdesc>
+ </enumoption>
+ 
+ <enumoption>
+  <optionname>GTK_DIR_TAB_BACKWARD</optionname>
+  <shortdesc>
+   Intended to tab backward through the children with focus capability, 
+   starting at the right or bottom.  This option appears not to work in the
+   versions of GTK+ used in PHP-GTK, and has been completely rewritten for
+   GTK 2.
+  </shortdesc>
+ </enumoption>
+ 
+ <enumoption>
+  <optionname>GTK_DIR_UP</optionname>
+  <shortdesc>
+   Sets initial focus on the child nearest the bottom of the container.
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GTK_DIR_DOWN</optionname>
+  <shortdesc>
+   Sets initial focus on the child nearest the top of the container.
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GTK_DIR_LEFT</optionname>
+  <shortdesc>
+   Sets initial focus on the child nearest the right edge of the container.
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GTK_DIR_RIGHT</optionname>
+  <shortdesc>
+   Sets initial focus on the child nearest the left edge of the container.
+  </shortdesc>
+ </enumoption>
+ 
+</enum>
+
 <enum id="gtk.enum.gtkfontfiltertype">
  <enumname>GtkFontFilterType</enumname>
 
@@ -548,6 +601,37 @@ calendar
    <optionname>GTK_SHADOW_NONE</optionname> except when the cursor enters
    the area of the button, meaning that only the contents (e.g. the label) of
    the button show until that point.
+  </shortdesc>
+ </enumoption>
+
+</enum>
+
+<enum id="gtk.enum.gtkresizemode">
+ <enumname>GtkResizeMode</enumname>
+
+ <enumoption>
+  <optionname>GTK_RESIZE_PARENT</optionname>
+  <shortdesc>
+   Default setting.  Effectively shares the behaviour described in
+   <literal>GTK_RESIZE_QUEUE</literal>.  Only used when actually writing
+   an original container widget.
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GTK_RESIZE_QUEUE</optionname>
+  <shortdesc>
+   Adds any resize requests from a container widget to a queue of resize
+   requests marked <literal>GTK_RESIZE_PENDING</literal>.
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GTK_RESIZE_IMMEDIATE</optionname>
+  <shortdesc>
+   Immediately resets the private flags on a container to
+   <literal>GTK_RESIZE_NEEDED</literal>, giving the request priority
+   over any (standard) queued resize requests.
   </shortdesc>
  </enumoption>
 
