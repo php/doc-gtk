@@ -37,15 +37,404 @@
 
 <enum id="gdk.enum.gdkcursortype">
  <enumname>GdkCursorType</enumname>
- <desc></desc>
+ <desc>
+  <simpara>
+   The cursor type determines which symbol is used for the mouse pointer.
+   Default is an arrow pointing to the upper left.
+  </simpara>
+ </desc>
  <enumoption>
+  <value>-1</value>
   <optionname>GDK_CURSOR_IS_PIXMAP</optionname>
-  <shortdesc>
-
-  </shortdesc>
+  <shortdesc>The cursor is self-created from pixmap.</shortdesc>
  </enumoption>
-
+ <enumoption>
+  <value>0</value>
+  <optionname>GDK_X_CURSOR</optionname>
+  <shortdesc>A fat black line from the upper left to the lower right, and a fat black line lower left to upper right</shortdesc>
+ </enumoption>
+ <enumoption>
+  <value>2</value>
+  <optionname>GDK_ARROW</optionname>
+  <shortdesc>Arrow pointing to the upper right.</shortdesc>
+ </enumoption>
+ <enumoption>
+  <value>4</value>
+  <optionname>GDK_BASED_ARROW_DOWN</optionname>
+  <shortdesc></shortdesc>
+ </enumoption>
+ <enumoption>
+  <value>6</value>
+  <optionname>GDK_BASED_ARROW_UP</optionname>
+  <shortdesc></shortdesc>
+ </enumoption>
+ <enumoption>
+  <value>8</value>
+  <optionname>GDK_BOAT</optionname>
+  <shortdesc></shortdesc>
+ </enumoption>
+ <enumoption>
+  <value>10</value>
+  <optionname>GDK_BOGOSITY</optionname>
+  <shortdesc></shortdesc>
+ </enumoption>
+ <enumoption>
+  <value>12</value>
+  <optionname>GDK_BOTTOM_LEFT_CORNER</optionname>
+  <shortdesc>Cursor indicating the lower left corner.</shortdesc>
+ </enumoption>
+ <enumoption>
+  <value>14</value>
+  <optionname>GDK_BOTTOM_RIGHT_CORNER</optionname>
+  <shortdesc>Cursor indicating the lower right corner.</shortdesc>
+ </enumoption>
+ <enumoption>
+  <value>16</value>
+  <optionname>GDK_BOTTOM_SIDE</optionname>
+  <shortdesc>Cursor indicating the lower edge.</shortdesc>
+ </enumoption>
+ <enumoption>
+  <value>18</value>
+  <optionname>GDK_BOTTOM_TEE</optionname>
+  <shortdesc></shortdesc>
+ </enumoption>
+ <enumoption>
+  <value>20</value>
+  <optionname>GDK_BOX_SPIRAL</optionname>
+  <shortdesc></shortdesc>
+ </enumoption>
+ <enumoption>
+  <value>22</value>
+  <optionname>GDK_CENTER_PTR</optionname>
+  <shortdesc></shortdesc>
+ </enumoption>
+ <enumoption>
+  <value>24</value>
+  <optionname>GDK_CIRCLE</optionname>
+  <shortdesc></shortdesc>
+ </enumoption>
+ <enumoption>
+  <value>26</value>
+  <optionname>GDK_CLOCK</optionname>
+  <shortdesc></shortdesc>
+ </enumoption>
+ <enumoption>
+  <value>28</value>
+  <optionname>GDK_COFFEE_MUG</optionname>
+  <shortdesc></shortdesc>
+ </enumoption>
+ <enumoption>
+  <value>30</value>
+  <optionname>GDK_CROSS</optionname>
+  <shortdesc></shortdesc>
+ </enumoption>
+ <enumoption>
+  <value>32</value>
+  <optionname>GDK_CROSS_REVERSE</optionname>
+  <shortdesc></shortdesc>
+ </enumoption>
+ <enumoption>
+  <value>34</value>
+  <optionname>GDK_CROSSHAIR</optionname>
+  <shortdesc></shortdesc>
+ </enumoption>
+ <enumoption>
+  <value>36</value>
+  <optionname>GDK_DIAMOND_CROSS</optionname>
+  <shortdesc></shortdesc>
+ </enumoption>
+ <enumoption>
+  <value>38</value>
+  <optionname>GDK_DOT</optionname>
+  <shortdesc></shortdesc>
+ </enumoption>
+ <enumoption>
+  <value>40</value>
+  <optionname>GDK_DOTBOX</optionname>
+  <shortdesc></shortdesc>
+ </enumoption>
+ <enumoption>
+  <value>42</value>
+  <optionname>GDK_DOUBLE_ARROW</optionname>
+  <shortdesc>For resizing a horizontal edge (up-down).</shortdesc>
+ </enumoption>
+ <enumoption>
+  <value>44</value>
+  <optionname>GDK_DRAFT_LARGE</optionname>
+  <shortdesc></shortdesc>
+ </enumoption>
+ <enumoption>
+  <value>46</value>
+  <optionname>GDK_DRAFT_SMALL</optionname>
+  <shortdesc></shortdesc>
+ </enumoption>
+ <enumoption>
+  <value>48</value>
+  <optionname>GDK_DRAPED_BOX</optionname>
+  <shortdesc></shortdesc>
+ </enumoption>
+ <enumoption>
+  <value>50</value>
+  <optionname>GDK_EXCHANGE</optionname>
+  <shortdesc>Reload symbol</shortdesc>
+ </enumoption>
+ <enumoption>
+  <value>52</value>
+  <optionname>GDK_FLEUR</optionname>
+  <shortdesc>Move symbol</shortdesc>
+ </enumoption>
+ <enumoption>
+  <value>54</value>
+  <optionname>GDK_GOBBLER</optionname>
+  <shortdesc>A bird</shortdesc>
+ </enumoption>
+ <enumoption>
+  <value>56</value>
+  <optionname>GDK_GUMBY</optionname>
+  <shortdesc></shortdesc>
+ </enumoption>
+ <enumoption>
+  <value>58</value>
+  <optionname>GDK_HAND1</optionname>
+  <shortdesc>Hand pointing to the upper right.</shortdesc>
+ </enumoption>
+ <enumoption>
+  <value>60</value>
+  <optionname>GDK_HAND2</optionname>
+  <shortdesc>Hand pointing to the upper left.</shortdesc>
+ </enumoption>
+ <enumoption>
+  <value>62</value>
+  <optionname>GDK_HEART</optionname>
+  <shortdesc>A heart.</shortdesc>
+ </enumoption>
+ <enumoption>
+  <value>64</value>
+  <optionname>GDK_ICON</optionname>
+  <shortdesc></shortdesc>
+ </enumoption>
+ <enumoption>
+  <value>66</value>
+  <optionname>GDK_IRON_CROSS</optionname>
+  <shortdesc></shortdesc>
+ </enumoption>
+ <enumoption>
+  <value>68</value>
+  <optionname>GDK_LEFT_PTR</optionname>
+  <shortdesc>Normal pointer to the upper left.</shortdesc>
+ </enumoption>
+ <enumoption>
+  <value>70</value>
+  <optionname>GDK_LEFT_SIDE</optionname>
+  <shortdesc>Cursor indicating the left edge.</shortdesc>
+ </enumoption>
+ <enumoption>
+  <value>72</value>
+  <optionname>GDK_LEFT_TEE</optionname>
+  <shortdesc></shortdesc>
+ </enumoption>
+ <enumoption>
+  <value>74</value>
+  <optionname>GDK_LEFTBUTTON</optionname>
+  <shortdesc>Three-button mouse with left button activated.</shortdesc>
+ </enumoption>
+ <enumoption>
+  <value>76</value>
+  <optionname>GDK_LL_ANGLE</optionname>
+  <shortdesc></shortdesc>
+ </enumoption>
+ <enumoption>
+  <value>78</value>
+  <optionname>GDK_LR_ANGLE</optionname>
+  <shortdesc></shortdesc>
+ </enumoption>
+ <enumoption>
+  <value>80</value>
+  <optionname>GDK_MAN</optionname>
+  <shortdesc></shortdesc>
+ </enumoption>
+ <enumoption>
+  <value>82</value>
+  <optionname>GDK_MIDDLEBUTTON</optionname>
+  <shortdesc>Three-button mouse with middle button activated.</shortdesc>
+ </enumoption>
+ <enumoption>
+  <value>84</value>
+  <optionname>GDK_MOUSE</optionname>
+  <shortdesc>The upper half of a mouse.</shortdesc>
+ </enumoption>
+ <enumoption>
+  <value>86</value>
+  <optionname>GDK_PENCIL</optionname>
+  <shortdesc>A pencil.</shortdesc>
+ </enumoption>
+ <enumoption>
+  <value>88</value>
+  <optionname>GDK_PIRATE</optionname>
+  <shortdesc>The pirate sign (skull with crossed bones).</shortdesc>
+ </enumoption>
+ <enumoption>
+  <value>90</value>
+  <optionname>GDK_PLUS</optionname>
+  <shortdesc>Just a plus.</shortdesc>
+ </enumoption>
+ <enumoption>
+  <value>92</value>
+  <optionname>GDK_QUESTION_ARROW</optionname>
+  <shortdesc>Question cursor; mostly used for "What's this?" functions.</shortdesc>
+ </enumoption>
+ <enumoption>
+  <value>94</value>
+  <optionname>GDK_RIGHT_PTR</optionname>
+  <shortdesc>Normal cursor pointing to the upper right.</shortdesc>
+ </enumoption>
+ <enumoption>
+  <value>96</value>
+  <optionname>GDK_RIGHT_SIDE</optionname>
+  <shortdesc>Cursor indicating the right edge.</shortdesc>
+ </enumoption>
+ <enumoption>
+  <value>98</value>
+  <optionname>GDK_RIGHT_TEE</optionname>
+  <shortdesc></shortdesc>
+ </enumoption>
+ <enumoption>
+  <value>100</value>
+  <optionname>GDK_RIGHTBUTTON</optionname>
+  <shortdesc>Three-button mouse with right button activated.</shortdesc>
+ </enumoption>
+ <enumoption>
+  <value>102</value>
+  <optionname>GDK_RTL_LOGO</optionname>
+  <shortdesc></shortdesc>
+ </enumoption>
+ <enumoption>
+  <value>104</value>
+  <optionname>GDK_SAILBOAT</optionname>
+  <shortdesc>Sailing boat.</shortdesc>
+ </enumoption>
+ <enumoption>
+  <value>106</value>
+  <optionname>GDK_SB_DOWN_ARROW</optionname>
+  <shortdesc></shortdesc>
+ </enumoption>
+ <enumoption>
+  <value>108</value>
+  <optionname>GDK_SB_H_DOUBLE_ARROW</optionname>
+  <shortdesc></shortdesc>
+ </enumoption>
+ <enumoption>
+  <value>110</value>
+  <optionname>GDK_SB_LEFT_ARROW</optionname>
+  <shortdesc></shortdesc>
+ </enumoption>
+ <enumoption>
+  <value>112</value>
+  <optionname>GDK_SB_RIGHT_ARROW</optionname>
+  <shortdesc></shortdesc>
+ </enumoption>
+ <enumoption>
+  <value>114</value>
+  <optionname>GDK_SB_UP_ARROW</optionname>
+  <shortdesc></shortdesc>
+ </enumoption>
+ <enumoption>
+  <value>116</value>
+  <optionname>GDK_SB_V_DOUBLE_ARROW</optionname>
+  <shortdesc></shortdesc>
+ </enumoption>
+ <enumoption>
+  <value>118</value>
+  <optionname>GDK_SHUTTLE</optionname>
+  <shortdesc>Space shuttle.</shortdesc>
+ </enumoption>
+ <enumoption>
+  <value>120</value>
+  <optionname>GDK_SIZING</optionname>
+  <shortdesc></shortdesc>
+ </enumoption>
+ <enumoption>
+  <value>122</value>
+  <optionname>GDK_SPIDER</optionname>
+  <shortdesc>Spider...</shortdesc>
+ </enumoption>
+ <enumoption>
+  <value>124</value>
+  <optionname>GDK_SPRAYCAN</optionname>
+  <shortdesc>Spraying can, useful for drawing programs.</shortdesc>
+ </enumoption>
+ <enumoption>
+  <value>126</value>
+  <optionname>GDK_STAR</optionname>
+  <shortdesc>Star with 5 corners.</shortdesc>
+ </enumoption>
+ <enumoption>
+  <value>128</value>
+  <optionname>GDK_TARGET</optionname>
+  <shortdesc></shortdesc>
+ </enumoption>
+ <enumoption>
+  <value>130</value>
+  <optionname>GDK_TCROSS</optionname>
+  <shortdesc>Thin cross.</shortdesc>
+ </enumoption>
+ <enumoption>
+  <value>132</value>
+  <optionname>GDK_TOP_LEFT_ARROW</optionname>
+  <shortdesc>Arrow pointing to the upper left.</shortdesc>
+ </enumoption>
+ <enumoption>
+  <value>134</value>
+  <optionname>GDK_TOP_LEFT_CORNER</optionname>
+  <shortdesc>Cursor indicating the upper left corner.</shortdesc>
+ </enumoption>
+ <enumoption>
+  <value>136</value>
+  <optionname>GDK_TOP_RIGHT_CORNER</optionname>
+  <shortdesc>Cursor indicating the upper right corner.</shortdesc>
+ </enumoption>
+ <enumoption>
+  <value>138</value>
+  <optionname>GDK_TOP_SIDE</optionname>
+  <shortdesc>Cursor indicating the upper edge.</shortdesc>
+ </enumoption>
+ <enumoption>
+  <value>140</value>
+  <optionname>GDK_TOP_TEE</optionname>
+  <shortdesc></shortdesc>
+ </enumoption>
+ <enumoption>
+  <value>142</value>
+  <optionname>GDK_TREK</optionname>
+  <shortdesc>Star Trek ship NCC 1701-A</shortdesc>
+ </enumoption>
+ <enumoption>
+  <value>144</value>
+  <optionname>GDK_UL_ANGLE</optionname>
+  <shortdesc></shortdesc>
+ </enumoption>
+ <enumoption>
+  <value>146</value>
+  <optionname>GDK_UMBRELLA</optionname>
+  <shortdesc>An umbrella symbol.</shortdesc>
+ </enumoption>
+ <enumoption>
+  <value>148</value>
+  <optionname>GDK_UR_ANGLE</optionname>
+  <shortdesc></shortdesc>
+ </enumoption>
+ <enumoption>
+  <value>150</value>
+  <optionname>GDK_WATCH</optionname>
+  <shortdesc>A watch for the wrist.</shortdesc>
+ </enumoption>
+ <enumoption>
+  <value>152</value>
+  <optionname>GDK_XTERM</optionname>
+  <shortdesc>Caret symbol (text input)</shortdesc>
+ </enumoption>
 </enum>
+
 
 <enum id="gdk.enum.gdkdragaction">
  <enumname>GdkDragAction</enumname>
