@@ -27,8 +27,7 @@ if ($_SERVER["argc"] < 3) {
 set_time_limit(30*60); // can run long, but not more than 30 minutes
 
 require 'geshi/geshi.php';
-$geshi = new GeSHi($with_tags, 'php', 'geshi/geshi');
-$geshi->set_language_path('../geshi/geshi/');
+$geshi = new GeSHi($with_tags, 'php', dirname(__FILE__).'/geshi/geshi');
 $geshi->set_header_type(GESHI_HEADER_DIV);
 $geshi->set_tab_width(2);
 $geshi->set_overall_class('phpcode');
@@ -50,7 +49,7 @@ function callback_highlight_php($matches) {
 	if ($GLOBALS["TYPE"] == "php") {
 		global $geshi;
 		$geshi->set_source($with_tags);
-		return $geshi->parse_code();
+		var_dump($geshi->parse_code()); exit;
 	} else { // "html"
 		$bRemoveTags	= false;
 		if( substr( $with_tags, 0, 5) != '<' . '?php') {
