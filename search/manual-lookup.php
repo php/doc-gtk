@@ -41,7 +41,9 @@ function multi_choice($file) {
 		elseif(sizeof($piece) == 4 && $piece[2] == "constructor")
 		echo "<P>&nbsp;$piece[1]() as in the <B><a href = 'http://$_SERVER[HTTP_HOST]$classlink'>$piece[1] $piece[2]</a></B>?</P>";
 		elseif(sizeof($piece) == 4)
-		echo "<P>&nbsp;$piece[2]() as in the $GTK static function <B><a href = 'http://$_SERVER[HTTP_HOST]$classlink'>$piece[0]::$piece[2]</a></B>?</P>";
+		echo "<P>&nbsp;$piece[2]() as in the <B><a href = 'http://$_SERVER[HTTP_HOST]$classlink'>$GTK function</a></B>?</P>";
+		elseif(sizeof($piece) == 3 && $piece[2] == "constructor")
+		echo "<P>&nbsp;$piece[1] as in the <B><a href = 'http://$_SERVER[HTTP_HOST]$classlink.php'>$piece[1] $piece[2]</a></B>?</P>";
 		elseif(sizeof($piece) == 3)
 		echo "<P>&nbsp;$piece[1] as in the <B><a href = 'http://$_SERVER[HTTP_HOST]$classlink'>$piece[1] class</a></B>?</P>";
 	}
