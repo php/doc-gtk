@@ -1377,9 +1377,15 @@ while(gtk::events_pending()) gtk::main_iteration();
      <literal>null</literal>, o como un string cualquier esta bien.
     </simpara>
     <para>
-$rectangle = &amp;new GdkRectangle($x, $y, $width, $height);
+    <informalexample>
+     <programlisting role="php">
+<![CDATA[
+$rectangle = &new GdkRectangle($x, $y, $width, $height);
 gtk::paint_flat_box($style, $gdkwindow, GTK_STATE_ACTIVE, GTK_SHADOW_NONE, 
 $rectangle, $drawingarea, null, $x, $y, $width, $height);
+]]>
+      </programlisting>
+     </informalexample>
     </para>
    </desc>
   </method>
