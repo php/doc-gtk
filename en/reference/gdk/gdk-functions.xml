@@ -597,6 +597,12 @@ gdk::font_load('-unknown-Arial-normal-r-normal--*-120-96-96-p-0-iso8859-1');
       <classname>GtkFontSelectionDialog</classname> widgets.
      </simpara>
     </note>
+    <simpara>
+     Note that there are sizing issues in <classname>GdkFont</classname> in
+     the version of GTK+ currently used in PHP-GTK under win32.  As a result, 
+     <emphasis>the point size should always be set in win32</emphasis> - 
+     using the pixel size may give unexpected results.
+    </simpara>
    </desc>
   </method>
 
@@ -627,8 +633,8 @@ gdk::font_load('-unknown-Arial-normal-r-normal--*-120-96-96-p-0-iso8859-1');
      use the first font in the set that achieves a match.
     </simpara>
     <simpara>
-     In win32 currently, the <function>fontset_load()</function> method is
-     used internally regardless of whether this or 
+     In win32, the <function>fontset_load()</function> method is used
+     internally regardless of whether this or 
      <function>gdk::font_load()</function> is called.
     </simpara>
    </desc>

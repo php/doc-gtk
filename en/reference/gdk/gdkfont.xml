@@ -38,7 +38,7 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>array <function>extents</function></funcdef>
-     <paramdef>void</paramdef>
+     <paramdef>string <parameter>text_string</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -64,15 +64,15 @@
     </simpara>
     <simpara>
      The ascent and descent are the pixel measurements of the extents of
-     the font above and below the baseline.
+     the current string above and below the baseline.
     </simpara>
     <simpara>
      If you're working with unix, all the above should be correct.  If you're
      using win32, the left bearing will always be <literal>0</literal>, the
      right bearing will match the width, the ascent is actually the
-     line-height + 1 pixel, and the descent - even more strangely - is the
-     descent + 1 pixel.  Use <classname>GdkFont</classname> properties if you
-     need the <propname class="GdkFont">ascent</propname> and 
+     line-height + 1 pixel, and the descent is the descent + 1 pixel.  Use 
+     <classname>GdkFont</classname> properties if you need the 
+     <propname class="GdkFont">ascent</propname> and 
      <propname class="GdkFont">descent</propname> values under win32.
     </simpara>
    </desc>
@@ -82,7 +82,7 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>int <function>measure</function></funcdef>
-     <paramdef>void</paramdef>
+     <paramdef>string <parameter>text_string</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -107,27 +107,26 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>int <function>height</function></funcdef>
-     <paramdef>void</paramdef>
+     <paramdef>string <parameter>text_string</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-     The <function class="GdkFont">height()</function> method is a
-     particularly useful one.  It returns the line height, measured
-     in pixels.
+     Returns the line height, measured in pixels.
    </shortdesc>
    <desc>
     <simpara>
      The return value of <function class="GdkFont">height()</function> is
      arrived at by summing the values of <parameter>ascent</parameter> and
      <parameter>descent</parameter> returned by 
-     <function class="GdkFont">extents()</function>.
+     <function class="GdkFont">extents()</function> and relating to the
+     current string.
     </simpara>
     <simpara>
      Under win32, this is a bogus value.  Add the values returned by the
      <classname>GdkFont</classname> properties 
      <propname class="GdkFont">ascent</propname> and 
-     <propname class="GdkFont">descent</propname> to get the correct value
-     for logical height if you are using or intending to port to Windows.
+     <propname class="GdkFont">descent</propname> to get the value of the
+     font's height.
     </simpara>
     <simpara>
      The value of the height is the line-height, given in pixels, and
@@ -142,7 +141,7 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>int <function>width</function></funcdef>
-     <paramdef>void</paramdef>
+     <paramdef>string <parameter>text_string</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -180,7 +179,9 @@
     </simpara>
     <simpara>
      Note that under win32 this property will always have a value of 
-     <literal>1</literal>, as all fonts are loaded as fontsets.
+     <literal>1</literal>, as all fonts are loaded as fontsets in order
+     to provide support for the wide characters used by the operating
+     system.
     </simpara>
    </desc>
   </property>
@@ -199,7 +200,7 @@
     </simpara>
     <simpara>
      Add this to the <propname class="GdkFont">descent</propname> to
-     obtain the full line-height value in pixels.
+     obtain the full font height value in pixels.
     </simpara>
    </desc>
   </property>

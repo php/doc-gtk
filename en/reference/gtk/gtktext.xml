@@ -381,7 +381,9 @@ gtk::main();
      This is a complex method offering more control over the appearance of
      the text in a <classname>GtkText</classname> widget than the alternative
      <function class="GtkEditable">insert_text()</function> inherited from
-     <classname>GtkEditable</classname>.
+     <classname>GtkEditable</classname>.  It also has the bonus that it allows
+     some support for internationalization on all platforms, although
+     multibyte conversion under win32 is not currently included in this.
     </simpara>
     <simpara>
      Any of the first three parameters can be passed as 
@@ -412,6 +414,14 @@ gtk::main();
      by a user.  The default length <literal>-1</literal> will allow the
      entire string.
     </simpara>
+    <para>
+     You can use the current default style with:
+     <informalexample>
+      <programlisting role="php">
+$text-&gt;insert(null, null, null, &quot;A string of text.&quot;);
+      </programlisting>
+     </informalexample>
+    </para>
    </desc>
   </method>
 
