@@ -50,11 +50,11 @@ STYLESHEET=$(CHUNK_STYLESHEET)
 #
 # Dependencies
 #
-COMMON_DEPS=builddir
+COMMON_DEPS=
 HTML_DEPS=$(HTML_STYLESHEET) $(COMMON_DEPS)	
-CHUNK_DEPS=$(COMMON_DEPS) htmldir
-PHPWEB_DEPS=$(COMMON_DEPS)	phpdir
-TEST_DEPS=$(COMMON_DEPS) testdir
+CHUNK_DEPS=$(COMMON_DEPS)
+PHPWEB_DEPS=$(COMMON_DEPS)
+TEST_DEPS=$(COMMON_DEPS)
 MANUAL_DEPS=chapters.ent
 
 #
@@ -87,10 +87,6 @@ html.xsl: @STYLESHEET_DIR@/html.xsl
 chunk.xsl: @STYLESHEET_DIR@/chunk.xsl
 phpweb.xsl:	@STYLESHEET_DIR@/phpweb.xsl
 common.xsl:	@STYLESHEET_DIR@/common.xsl
-builddir: build
-htmldir: build/html
-phpdir:	build/php
-testdir: build/test
 genchapterents.php:	scripts/genchapterents.php
 udocs:	scripts/udocs
 custom.titlepage.xsl: @STYLESHEET_DIR@/html/custom.titlepage.xsl
@@ -110,31 +106,19 @@ custom.titlepage.xsl: @STYLESHEET_DIR@/html/custom.titlepage.xsl
 @STYLESHEET_DIR@/common.xsl:  @STYLESHEET_DIR@/common.xsl.in	./config.status
 	CONFIG_FILES=$@	CONFIG_HEADERS=	./config.status
 
-build:
-	@test -d	build || mkdir build
-
-build/html:	builddir
-	@test -d	$@ || mkdir	$@
-
-build/php: builddir
-	@test -d	$@ || mkdir	$@
-
-build/test:	builddir
-	@test -d	$@ || mkdir	$@
-
 chapters.ent:
 	@$(PHP) -q scripts/genchapterents.php > $@
 
 #
 # Forced Rules
 #
-.manual.xml:
-	touch manual.xml
+.manual.xml: $(XMLFILES) $(MANUAL_DEPS) 
+	touch .manual.xml
 
 #
 # Utility Rules
 #
-manual.xml:	$(XMLFILES)	$(MANUAL_DEPS) .manual.xml
+manual.xml: .manual.xml
 	CONFIG_FILES=$@	CONFIG_HEADERS=	./config.status
 
 scripts/udocs:
@@ -156,30 +140,39 @@ FORCE:
 	$(SAXON) $(html_stylesheet_dir)/custom.titlepage.xml	$(DOCBOOKXSL)/template/titlepage.xsl > $@
 
 build/manual.txt: bigmanual.html
+	@mkdir -p build
 	lynx -nolist -dump file:`pwd`/build/bigmanual.html > $@
 
 build/php/index.php: manual.xml	$(PHPWEB_DEPS)
+	@mkdir -p build/php
 	$(XSLTPROC) $(stylesheet_dir)/phpweb.xsl manual.xml 
 
 build/html/index.html: manual.xml $(CHUNK_DEPS)
+	@mkdir -p build/html
 	$(XSLTPROC) $(stylesheet_dir)/chunk.xsl manual.xml	
 
 build/bigmanual.html: manual.xml $(HTML_DEPS)
+	@mkdir -p build
 	$(XSLTPROC) $(stylesheet_dir)/docbook.xsl manual.xml > $@
 
 build/php_gtk_manual_@LANG@.zip: build/html/index.html
-	(cd build/html; zip -q -9 ../$@)
+	@mkdir -p build
+	(cd build/html; zip -q -9 ../$@ *.html)
 
 build/php_gtk_manual_@LANG@.tar.gz: build/html/index.html
-	(cd build/html; tar -cf -) | gzip -9 > $@
+	@mkdir -p build
+	(cd build/html; tar -cf - *.html ) | gzip -9 > $@
 
 build/php_gtk_manual_@LANG@.tar.bz2: build/html/index.html
-	(cd build/html; tar -cf -) | bzip2 -9 > $@
+	@mkdir -p build
+	(cd build/html; tar -cf - *.html) | bzip2 -9 > $@
 
 build/php_gtk_manual_@LANG@.html.gz: build/bigmanual.html
+	@mkdir -p build
 	gzip -c -9 $< > $@
 
 build/php_gtk_manual_@LANG@.txt.gz: build/manual.txt
+	@mkdir -p build
 	gzip -c -9 $< > $@
 
 updatexml:
