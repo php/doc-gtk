@@ -62,6 +62,35 @@
 $window->set_usize(gdk::screen_width(),gdk::screen_height());
 ]]>
     </programlisting>
+    This leads to the problem that the size of task bars are <emphasis>not</emphasis>
+    respected; so you shouldn't do that. For Windows you can use an API call:
+    <programlisting role="php">
+<![CDATA[
+dl("php_w32api.dll");
+$api =& new win32;
+define('SW_MAXIMIZE',3);
+define('SW_MINIMIZE',6);
+
+//register windows functions
+$api->registerfunction("long GetLastError Alias GetError () From kernel32.dll");
+$api->registerfunction("long FindWindow (string &ClassName, string &WindowName) From user32.dll");
+$api->registerfunction("long ShowWindow (long hWnd, long nCmdShow) From user32.dll");
+
+$window =& new GtkWindow();
+$window->set_title('PHP Test');
+$window->show();
+$class_string = 'gdkWindowToplevel';
+$title_string = 'PHP Test';
+if(!$sw = $api->FindWindow($class_string,$title_string)){
+    $error = $api->getError();
+    echo ' Oops FindWindow error: '.$error."\n";
+}else{
+    $api->ShowWindow($sw,SW_MAXIMIZE);
+}
+]]>
+    </programlisting>
+    You still have to take care only to call these functions when 
+    the php-gtk application is running on Windows.
    </para>
    <simpara>
     If you need to set the window cursor, you should have look at <classname>GdkWindow</classname>.
