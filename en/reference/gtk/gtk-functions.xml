@@ -18,7 +18,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Gets the toplevel window's default <classname>GtkAccelGroup</classname>.
    </shortdesc>
    <desc>
 
@@ -36,7 +36,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets <classname>GtkButtonBox</classname> default child internal padding.
    </shortdesc>
    <desc>
 
@@ -54,7 +54,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets <classname>GtkButtonBox</classname> default minimum child size.
    </shortdesc>
    <desc>
 
@@ -71,7 +71,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Checks which version of GTK+ is being used.
    </shortdesc>
    <desc>
 
@@ -300,10 +300,26 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Draws an arrow.
    </shortdesc>
    <desc>
-
+    <simpara>
+     The chief advantage of drawing your own GTK arrow rather than using the 
+     <classname>GtkArrow</classname> widget is that you can shape it, using
+     the <parameter>width</parameter> and <parameter>height</parameter> 
+     parameters.  The <parameter>fill</parameter> parameter refers to the
+     color of the arrow, with <literal>false</literal> giving it the same
+     color as the area it is drawn onto.  All positions and sizes are 
+     absolute in terms of the underlying drawable.
+    </simpara>
+    <para>
+     <informalexample>
+      <programlisting role="php">
+gtk::draw_arrow($style, $gdkwindow, GTK_STATE_NORMAL, GTK_SHADOW_OUT, 
+GTK_ARROW_RIGHT, false, $x, $y, $width, $height);
+      </programlisting>
+     </informalexample>
+    </para>
    </desc>
   </method>
 
@@ -334,10 +350,22 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Draws a box.
    </shortdesc>
    <desc>
-
+    <simpara>
+     This is the simplest way to draw a box, with or without a shadow. 
+     Any coloring is completely dependant on the 
+     <classname>GtkStyle</classname> that is passed as the first parameter. 
+    </simpara>
+    <para>
+     <informalexample>
+      <programlisting role="php">
+gtk::draw_box($style, $gdkwindow, GTK_STATE_ACTIVE, GTK_SHADOW_IN, $x, $y, 
+$width, $height);
+      </programlisting>
+     </informalexample>
+    </para>
    </desc>
   </method>
 
@@ -541,7 +569,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Creates a limited-character <classname>GtkEntry</classname>.
    </shortdesc>
    <desc>
 
@@ -556,10 +584,29 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Tests whether there are <classname>GdkEvent</classname>s queueing.
    </shortdesc>
    <desc>
-
+    <simpara>
+     <function>gtk::events_pending()</function> is useful when there is
+     a function that needs to be carried out during a long-running process, 
+     for example, updating a status bar during an SQL query.
+    </simpara>
+    <para>
+     The way it would be used in such a situation is to have
+     <informalexample>
+      <programlisting role="php">
+while(gtk::events_pending()) gtk::main_iteration();
+      </programlisting>
+     </informalexample>
+     after every update that is made to the GUI.  This causes the main loop
+     to run once each time events are anticipated.
+    </para>
+    <simpara>
+     See also:  <function>gtk::main_iteration()</function>, 
+     <function>gtk::main_iteration_do()</function>, 
+     <function>gtk::timeout_add()</function>.
+    </simpara>
    </desc>
   </method>
 
@@ -593,7 +640,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns <classname>GtkHButtonBox</classname> layout default.
    </shortdesc>
    <desc>
 
@@ -610,7 +657,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns <classname>GtkHButtonBox</classname> spacing default.
    </shortdesc>
    <desc>
 
@@ -628,7 +675,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Endows a widget with keyboard grab.
    </shortdesc>
    <desc>
 
@@ -646,7 +693,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns widget that currently has keyboard grab.
    </shortdesc>
    <desc>
 
@@ -664,7 +711,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Removes keyboard grab from a widget.
    </shortdesc>
    <desc>
 
@@ -684,7 +731,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets layout default for <classname>GtkHButtonBox</classname>es.
    </shortdesc>
    <desc>
 
@@ -701,7 +748,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets spacing default for <classname>GtkHButtonBox</classname>es.
    </shortdesc>
    <desc>
 
@@ -891,7 +938,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Runs the main loop.
    </shortdesc>
    <desc>
 
@@ -909,7 +956,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Processes a single <classname>GdkEvent</classname>.
    </shortdesc>
    <desc>
 
@@ -924,7 +971,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Runs the main loop once and then blocks GTK until an event is pending.
    </shortdesc>
    <desc>
 
@@ -941,7 +988,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Runs the main loop once, with optional blocking.
    </shortdesc>
    <desc>
 
@@ -956,7 +1003,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the main loop nesting level.
    </shortdesc>
    <desc>
 
@@ -971,7 +1018,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Quits the main loop.
    </shortdesc>
    <desc>
 
@@ -1306,10 +1353,29 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Paints a flat box.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Regardless of the <enumname>GtkShadowType</enumname> detailed here, 
+     the effect is similar to the box drawn using 
+     <function>gtk::draw_box()</function> and 
+     <literal>GTK_SHADOW_NONE</literal>.
+    </simpara>
+    <simpara>
+     The <classname>GdkRectangle</classname> used should be in the same
+     position and have the same dimensions as those passed in the function,
+     as otherwise only the overlap between the two rectangles will be
+     displayed, or nothing at all if there is no overlapping area. 
+     The <parameter>detail</parameter> parameter actually does nothing here, 
+     but is needed for back compatibility.  Passing it as 
+     <literal>null</literal>, or as any string you feel, is okay.
+    </simpara>
+    <para>
+$rectangle = &amp;new GdkRectangle($x, $y, $width, $height);
+gtk::paint_flat_box($style, $gdkwindow, GTK_STATE_ACTIVE, GTK_SHADOW_NONE, 
+$rectangle, $drawingarea, null, $x, $y, $width, $height);
+    </para>
    </desc>
   </method>
 
@@ -1514,7 +1580,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Not implemented.
    </shortdesc>
    <desc>
 
@@ -2067,7 +2133,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Parses an application's rc file(s).
    </shortdesc>
    <desc>
 
@@ -2119,7 +2185,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets up a function to be called at regular intervals.
    </shortdesc>
    <desc>
 
@@ -2134,7 +2200,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Removes timeout.
    </shortdesc>
    <desc>
 
@@ -2167,7 +2233,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns object type from object name.
    </shortdesc>
    <desc>
 
@@ -2182,7 +2248,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns name of object.
    </shortdesc>
    <desc>
 
@@ -2200,7 +2266,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns <classname>GtkVButtonBox</classname> layout default.
    </shortdesc>
    <desc>
 
@@ -2217,7 +2283,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns <classname>GtkVButtonBox</classname> spacing default.
    </shortdesc>
    <desc>
 
@@ -2237,7 +2303,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets layout default for <classname>GtkVButtonBox</classname>es.
    </shortdesc>
    <desc>
 
@@ -2254,7 +2320,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets spacing default for <classname>GtkVButtonBox</classname>es.
    </shortdesc>
    <desc>
 
@@ -2272,7 +2338,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the application's default <classname>GdkColormap</classname>.
    </shortdesc>
    <desc>
 
@@ -2290,7 +2356,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Returns the current default style.
+    Returns the application's default <classname>GtkStyle</classname>.
    </shortdesc>
    <desc>
     <simpara>
@@ -2315,7 +2381,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the application's default <classname>GdkVisual</classname>.
    </shortdesc>
    <desc>
 
@@ -2466,7 +2532,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets a <classname>GdkColormap</classname> as default for the application.
    </shortdesc>
    <desc>
 
@@ -2486,7 +2552,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Sets default widget style across an application.
+    Sets a <classname>GtkStyle</classname> as default for the application.
    </shortdesc>
    <desc>
 
@@ -2506,7 +2572,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets a <classname>GdkVisual</classname> as default for the application.
    </shortdesc>
    <desc>
 

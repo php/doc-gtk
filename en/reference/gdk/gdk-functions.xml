@@ -275,7 +275,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Draws a line.
    </shortdesc>
    <desc>
 
@@ -463,7 +463,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Draws a string of text.
    </shortdesc>
    <desc>
 
@@ -660,7 +660,7 @@ gdk::font_load('-unknown-Arial-normal-r-normal--*-120-96-96-p-0-iso8859-1');
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the name of the system.
    </shortdesc>
    <desc>
 
@@ -735,7 +735,32 @@ gdk::font_load('-unknown-Arial-normal-r-normal--*-120-96-96-p-0-iso8859-1');
     Creates a <classname>GdkPixmap</classname> from an xpm file.
    </shortdesc>
    <desc>
-
+    <simpara>
+     <function>gdk::pixmap_create_from_xpm()</function> returns a 
+     <classname>GdkPixmap</classname> that has been created from an
+     existing .xpm file.
+    </simpara>
+    <para>
+     The <classname>GdkPixmap</classname> is the underlying 
+     structure that holds the image ready to be displayed in a 
+     <classname>GtkPixmap</classname>.  In order to make that image appear
+     on the screen, you will need to use one of the following constructs:
+     <informalexample>
+      <programlisting role="php">
+$gdkpixmap = gdk::pixmap_create_from_xpm($main_window-&gt;window, null, 
+'test.xpm');
+$image = &amp;new GtkPixmap($gdkpixmap[0], $gdkpixmap[1]);
+      </programlisting>
+     </informalexample>
+     or 
+     <informalexample>
+      <programlisting role="php">
+list ($gdkpixmap, $mask) = 
+gdk::pixmap_create_from_xpm($gdkwindow, $transparent_color, 'test.xpm');
+$image = &amp;new GtkPixmap($gdkpixmap, $mask);
+      </programlisting>
+     </informalexample>
+    </para>
    </desc>
   </method>
 
@@ -746,14 +771,28 @@ gdk::font_load('-unknown-Arial-normal-r-normal--*-120-96-96-p-0-iso8859-1');
       <classname>GdkPixmap</classname> 
       <function>gdk::pixmap_create_from_xpm_d</function>
      </funcdef>
-     <paramdef>XXX</paramdef>
+     <paramdef><classname>GdkWindow</classname> 
+      <parameter>window</parameter>
+     </paramdef>
+     <paramdef><classname>GdkColor</classname> 
+      <parameter><optional>transparent_color</optional></parameter>
+     </paramdef>
+     <paramdef>array <parameter>data</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
     Creates a <classname>GdkPixmap</classname> from inline data.
    </shortdesc>
    <desc>
-
+    <para>
+     <informalexample>
+      <programlisting role="php">
+$gdkpixmap = gdk::pixmap_create_from_xpm_d($main_window-&gt;window, 
+$transparent_color, $data);
+      </programlisting>
+     </informalexample>
+     <!-- No I am NOT going to leave it like this..   sf mar 02 -->
+    </para>
    </desc>
   </method>
 
@@ -891,7 +930,11 @@ gdk::font_load('-unknown-Arial-normal-r-normal--*-120-96-96-p-0-iso8859-1');
     Returns screen height in mm.
    </shortdesc>
    <desc>
-
+    <simpara>
+     This function returns the screen height in millimeters.  This can be
+     used in size-setting methods to ensure that containers are sized
+     relative to the screen size being used.
+    </simpara>
    </desc>
   </method>
 
@@ -925,7 +968,11 @@ gdk::font_load('-unknown-Arial-normal-r-normal--*-120-96-96-p-0-iso8859-1');
     Returns screen width in mm.
    </shortdesc>
    <desc>
-
+    <simpara>
+     This function returns the screen width in millimeters.  This can be
+     used in size-setting methods to ensure that containers are sized
+     relative to the screen size being used.
+    </simpara>
    </desc>
   </method>
 
@@ -1049,10 +1096,13 @@ gdk::font_load('-unknown-Arial-normal-r-normal--*-120-96-96-p-0-iso8859-1');
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the system visual.
    </shortdesc>
    <desc>
-
+    <simpara>
+     This function returns the <classname>GdkVisual</classname> that is
+     currently used by the system.
+    </simpara>
    </desc>
   </method>
 
