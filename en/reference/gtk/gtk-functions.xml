@@ -699,10 +699,17 @@ while(gtk::events_pending()) gtk::main_iteration();
    </shortdesc>
    <desc>
     <simpara>
-     Returns the widget which currently has the keyboard focus.
+     Returns the widget which currently has the keyboard grab.
      <literal>NULL</literal> is returned if there is no active
      grab.
     </simpara>
+    <simpara>
+     Widgets can grab the pointer and keyboard away from other widgets. 
+     This essentially means that the widget becomes "modal"; input goes 
+     only to that widget, and the focus can't be changed to another widget. 
+     A typical reason to grab input is to create a modal dialog; 
+     if a window has the grab, interaction with other windows is blocked.
+    </simpara> 
    </desc>
   </method>
 
@@ -721,10 +728,12 @@ while(gtk::events_pending()) gtk::main_iteration();
    </shortdesc>
    <desc>
     <simpara>
-     Removes the keyboard focus from the given <parameter>widget</parameter>.
-     You should use <link linked="gtk.method.grab_remove">grab_remove</link>
-     and <link linked="gtk.method.grab_add">grab_add</link> in pairs to avoid
-     undefined states.
+     Removes the keyboard grab from the given <parameter>widget</parameter>.
+    </simpara>
+    <simpara>
+     If you don't know what a <emphasis>grab</emphasis> is, have a 
+     look at <link linked="gtk.method.grab_get_current">grab_get_current</link>
+     function.
     </simpara>
    </desc>
   </method>
