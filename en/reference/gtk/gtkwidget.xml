@@ -186,7 +186,8 @@
     </simpara>
     <simpara>
      See also:  <function class="GtkWidget">map</function>,
-                <function class="GtkWidget">realize</function>.
+                <function class="GtkWidget">realize</function>,
+                <function class="GtkWdiget">hide</function>.
     </simpara>
    </desc>
   </method>
@@ -194,12 +195,32 @@
   <method id="gtk.gtkwidget.method.show_now">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>void <function>show_now</function></funcdef>
+     <funcdef>void
+      <function>show_now</function>
+     </funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
-   <shortdesc></shortdesc>
-   <desc></desc>
+   <shortdesc>
+    Shows a widget and enters the main loop.
+   </shortdesc>
+   <desc>
+    <simpara> 
+     Shows a widget. If the widget is an unmapped toplevel widget (i.e. a
+     GtkWindow that has not yet been shown), enter the main loop and wait for
+     the window to actually be mapped. This is equivilent to calling show
+     immediately followed by <function>gtk::main</function>.
+    </simpara>
+    <simpara>
+     Note: Once the main loop has begun your application will be able to
+     recveive user events. Make sure that <function
+     class="GtkWidget">show_now</function> is the method you want to call
+     before using it.
+    </simpara>
+    <simpara>
+     See also: <function class="GtkWidget">show</function>.
+    </simpara>
+   </desc>
   </method>
 
   <method id="gtk.gtkwidget.method.hide">
@@ -217,6 +238,9 @@
      <function class="GtkWidget">hide</function> is the corollary to the
      <function class="GtkWidget">show</function> method.  It combines
      other methods in order to hide the calling widget from display.
+    </simpara>
+    <simpara>
+     See also: <function class="GtkWidget">show</function>.
     </simpara>
    </desc>
   </method>
@@ -262,6 +286,9 @@
      reservations regards the levels of children that will respond to this
      call, apply.  If in doubt, <function class="GtkWidget">hide</function> 
      the child widgets individually.
+    </simpara>
+    <simpara>
+     See also: <function class="GtkWidget">hide</function>
     </simpara>
    </desc>
   </method>
@@ -328,6 +355,9 @@
      also be emitted by that widget.  Use this signal to trigger functions
      that rely on the unmap event having occurred.
     </simpara>
+    <simpara>
+     See also: <function class="GtkWidget">map</function>
+    </simpara>
    </desc>
   </method>
 
@@ -365,8 +395,8 @@
      when it is appropriate to use <function class="GtkWidget">realize</function>.
     </simpara>
     <simpara>
-     See also: <function class="GtkWidget">map</function>,
-               <function class="GtkWidget">realize</function>.
+     See also: <function class="GtkWidget">map</function>
+               <function class="GtkWidget">unrealize</function>.
     </simpara>
    </desc>
   </method>
@@ -388,6 +418,9 @@
      <function class="GtkWidget">unrealize</function> is the corollary to
      <function class="GtkWidget">realize</function>. When a widget is unrealized,
      all of its GDK resources ($widget->window) are released.
+    </simpara>
+    <simpara>
+     See also: <function class="GtkWidget">realize</function>
     </simpara>
    </desc>
   </method>
@@ -452,6 +485,9 @@
      and <parameter>y</parameter>. <parameter>width</parameter> is the width of the
      rectangle to be redrawn and <parameter>height</parameter> is the height of the
      rectangle to be redrawn.
+    </simpara>
+    <simpara>
+     See also: <function class="GtkWidget">queue_draw</function>
     </simpara>
    </desc>
   </method>
@@ -834,12 +870,29 @@
   <method id="gtk.gtkwidget.method.intersect">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>XXX <function>intersect</function></funcdef>
-     <paramdef>XXX</paramdef>
+     <funcdef><classname>GdkRectangle</classname>
+      <function>intersect</function>
+     </funcdef>
+     <paramdef>
+      <classname>GdkRectangle</classname>
+      <parameter>area</parameter>
+     </paramdef>
     </funcprototype>
    </funcsynopsis>
-   <shortdesc></shortdesc>
-   <desc></desc>
+   <shortdesc>
+    Checks for an intersection with a given area.
+   </shortdesc>
+   <desc>
+    <simpara>
+     <function class="GtkWidget">intersect</function> returns the rectangle
+     consisting of the overlap of the area taken up by the calling widget and
+     <parameter>area</parameter>. This method could be useful to determine if
+     a use is trying to drag and drop a widget some where that they shouldn't.
+    </simpara>
+    <simpara>
+     If the two areas do not intersect <literal>false</literal> is return.
+    </simpara>
+   </desc>
   </method>
 
   <method id="gtk.gtkwidget.method.grab_focus">
@@ -1276,8 +1329,16 @@
      </paramdef>
     </funcprototype>
    </funcsynopsis>
-   <shortdesc></shortdesc>
-   <desc></desc>
+   <shortdesc>
+    Sets the widget's colormap.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Sets the widget's colormap to <parameter>colorman</parameter>. The widget
+     must not have been realized or shown before calling <function
+     class="GtkWidget">set_colormap</function>.
+    </simpara>
+   </desc>
   </method>
 
   <method id="gtk.gtkwidget.method.set_visual">
@@ -2980,7 +3041,7 @@ elseif($event->keyval > GDK_KEY__a) {
 
   <prop id="gtk.gtkwidget.property.style" type="ro">
    <propname>style</propname>
-   <proptype>GtkStyle</proptype>
+   <proptype><classname>GtkStyle</classname></proptype>
    <shortdesc>
     Style associated with a widget.
    </shortdesc>
@@ -2993,7 +3054,7 @@ elseif($event->keyval > GDK_KEY__a) {
 
   <prop id="gtk.gtkwidget.property.window" type="ro">
    <propname>window</propname>
-   <proptype>GdkWindow</proptype>
+   <proptype><classname>GdkWindow</classname></proptype>
    <shortdesc>
     Underlying GdkWindow that captures events on a widget.
    </shortdesc>
@@ -3032,13 +3093,14 @@ elseif($event->keyval > GDK_KEY__a) {
 
   <prop id="gtk.gtkwidget.property.parent" type="ro">
    <propname>parent</propname>
-   <proptype>GtkWidget</proptype>
+   <proptype><classname>GtkWidget</classname></proptype>
    <shortdesc>
     A widget's parent.
    </shortdesc>
    <desc>
     <simpara>
-     
+     The widget's parent must be derived from
+     <classname>GtkContainer</classname>.
     </simpara>
    </desc>
   </prop>
@@ -3046,3 +3108,22 @@ elseif($event->keyval > GDK_KEY__a) {
  </properties>
 
 </classentry>
+<!-- Keep this comment at the end of the file
+Local variables:
+mode: xml
+sgml-omittag:t
+sgml-shorttag:t
+sgml-minimize-attributes:nil
+sgml-always-quote-attributes:t
+sgml-indent-step:1
+sgml-indent-data:t
+indent-tabs-mode:nil
+sgml-parent-document:nil
+sgml-exposed-tags:nil
+sgml-local-catalogs:nil
+sgml-local-ecat-files:nil
+End:
+vim600: syn=xml fen fdm=syntax fdl=2 si
+vim: et tw=78 syn=sgml
+vi: ts=1 sw=1
+-->
