@@ -359,7 +359,7 @@ for ($i = 0; $i < 10; ++$i) {
 }
 
 if ($notebook->get_current_page() != 0) {
-    $notebook->set_current_page(0);
+    $notebook->set_page(0);
 }
 ?>
 ]]>
@@ -385,7 +385,16 @@ if ($notebook->get_current_page() != 0) {
     Returns the page in the given position.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Returns the child widget with index <parameter>page_num</parameter>. If
+     <parameter>page_num</parameter> is <literal>-1</literal>, the last page
+     is returned. If <parameter>page_num</parameter> is greater then the
+     number of pages minus one (the highest index), <literal>NULL</literal> is
+     returned.
+    </simpara>
+    <simpara>
+     See also: <function class="GtkNotebook">page_num</function>
+    </simpara>
    </desc>
   </method>
 
@@ -405,7 +414,14 @@ if ($notebook->get_current_page() != 0) {
     Returns the position of the given child widget.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Returns the index of <parameter>child</parameter>. If
+     <parameter>child</parameter> is not a child of the notebook, <literal>-1</literal> is
+     returned.
+    </simpara>
+    <simpara>
+     See also: <function class="GtkNotebook">get_nth_page</function>
+    </simpara>
    </desc>
   </method>
 
@@ -424,7 +440,10 @@ if ($notebook->get_current_page() != 0) {
     Sets the page in the given position as the top page in the notebook.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Sets the page with index <parameter>page_num</parameter> as the top page
+     in the notebook.
+    </simpara>
    </desc>
   </method>
 
