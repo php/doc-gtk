@@ -21,7 +21,7 @@
   <xsl:text disable-output-escaping="yes">&lt;/xsl:text&gt;&#xA;&lt;/xsl:when&gt;&#xA;</xsl:text>
 </xsl:template>
 
-<xsl:template match="property">
+<xsl:template match="prop">
   <xsl:variable name="id" select="@id"/>
   <xsl:variable name="propname" >
     <xsl:value-of select="./propname"/>
@@ -112,14 +112,14 @@
   &lt;/xsl:template&gt;&#xA;
  </xsl:text>
 
-  <xsl:if test="count(.//property)>0">
+  <xsl:if test="count(.//prop)>0">
   <xsl:text disable-output-escaping="yes">
   &lt;xsl:template name="get_prop_id_from_name"&gt;&#xA;
   &lt;xsl:param name="propname" /&gt;&#xA;
   &lt;xsl:param name="class" select="no" /&gt;&#xA;
   &lt;xsl:choose&gt;&#xA;
  </xsl:text>
- <xsl:apply-templates select=".//property" />
+ <xsl:apply-templates select=".//prop" />
  <xsl:text disable-output-escaping="yes">&#xA;
   &lt;xsl:otherwise&gt;&#xA;
    &lt;xsl:text&gt;no&lt;/xsl:text&gt;&#xA;
