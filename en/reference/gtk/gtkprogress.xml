@@ -8,17 +8,13 @@
   <desc>
    <simpara>
     <classname>GtkProgress</classname> is a base class providing methods
-    and properties for widgets implementing progress bar style
-    functionality. The only built-in widget using
-    <classname>GtkProgress</classname> is
+    for widgets implementing progress bar functionality.  The only built-in
+    widget using <classname>GtkProgress</classname> is 
     <classname>GtkProgressBar</classname>.
    </simpara>
    <simpara>
     Note that <classname>GtkProgress</classname> is an abstract class
     and cannot be constructed directly.
-   </simpara>
-   <simpara>
-    See also: <classname>GtkProgressBar</classname>.
    </simpara>
   </desc>
  </classmeta>
@@ -33,12 +29,15 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Controls progress text display.
+    Toggles progress text display.
    </shortdesc>
    <desc>
     <simpara>
      The <parameter>show_text</parameter> parameter controls whether the
-     progress text is shown or not.
+     progress text is shown.  The default setting is <literal>false</literal>.
+    </simpara>
+    <simpara>
+     See also:  <function class="GtkProgress">set_format_string()</function>.
     </simpara>
    </desc>
   </method>
@@ -61,7 +60,10 @@
      <parameter>y_align</parameter> parameters control the horizontal and
      vertical alignment of the text, respectively. Their range can be
      from <literal>0.0</literal> to <literal>1.0</literal> (meaning from
-     one side of progress area to another).
+     one side of the progress area to another).
+    </simpara>
+    <simpara>
+     The default setting is <literal>(0.5, 0.5)</literal>.
     </simpara>
    </desc>
   </method>
@@ -74,12 +76,12 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Sets progress text formatting.
+    Sets and formats progress text.
    </shortdesc>
    <desc>
     <para>
-     The format of the progress text can be modified with the
-     <parameter>format</parameter> string. It can contain the following
+     The content of the progress text can be modified with the 
+     <parameter>format</parameter> string.  It can contain the following
      format characters:
      <itemizedlist>
       <listitem>
@@ -103,8 +105,16 @@
        </simpara>
       </listitem>
      </itemizedlist>
-     The <literal>%</literal> character itself can be specified as <literal>%%</literal>.
+     The <literal>%</literal> character itself can be specified as 
+     <emphasis>%%</emphasis>.
     </para>
+    <simpara>
+     The default text string is &quot;%p%%&quot;.
+    </simpara>
+    <simpara>
+     See also:  <classname>GtkAdjustment</classname>, where the progress
+     value and bounds are set.
+    </simpara>
    </desc>
   </method>
 
@@ -112,7 +122,10 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_adjustment</function></funcdef>
-     <paramdef><classname>GtkAdjustment</classname> <parameter>adjustment</parameter></paramdef>
+     <paramdef>
+      <classname>GtkAdjustment</classname> 
+      <parameter>adjustment</parameter>
+     </paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -120,10 +133,10 @@
    </shortdesc>
    <desc>
     <simpara>
-     A progress has an associated <classname>GtkAdjustment</classname>
-     object which specifies the bounds and the step increment of the
-     value the progress of which is being displayed. This method
-     associates an adjustment object with the progress.
+     A progress has an associated <classname>GtkAdjustment</classname> 
+     object which specifies the bounds of the value having its progress
+     displayed.  This method associates the specified adjustment object
+     with the progress.
     </simpara>
    </desc>
   </method>
@@ -145,6 +158,9 @@
      This method provides a way to directly control the current value
      and the bounds of a <classname>GtkProgress</classname>.
     </simpara>
+    <simpara>
+     See also:  <classname>GtkAdjustment</classname>.
+    </simpara>
    </desc>
   </method>
 
@@ -160,9 +176,13 @@
    </shortdesc>
    <desc>
     <simpara>
-     This method sets the current percentage for
-     <classname>GtkProgress</classname>. Its value must be between
-     <literal>0.0</literal> to <literal>1.0</literal>.
+     This method sets the current percentage for a 
+     <classname>GtkProgress</classname>.  Its value must be between
+     <literal>0.0</literal> and <literal>1.0</literal>.
+    </simpara>
+    <simpara>
+     Use this method to update a <classname>GtkProgressBar</classname> that
+     is in <literal>percentage</literal> mode.
     </simpara>
    </desc>
   </method>
@@ -180,8 +200,13 @@
    <desc>
     <simpara>
      The progress value can be set directly with this method. The value
-     must be within the range of an underlying
-     <classname>GtkAdjustment</classname>.
+     must be within the range of the underlying 
+     <classname>GtkAdjustment</classname> in order for the 
+     <classname>GtkProgressBar</classname> to display it.
+    </simpara>
+    <simpara>
+     Use this method to update a <classname>GtkProgressBar</classname> that
+     is in <literal>activity</literal> mode.
     </simpara>
    </desc>
   </method>
@@ -197,7 +222,9 @@
     Gets the current progress value.
    </shortdesc>
    <desc>
-    Returns the current progress value.
+    <simpara>
+     Returns the current progress value.
+    </simpara>
    </desc>
   </method>
 
@@ -209,18 +236,23 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Controls progress mode.
+    Toggles progress mode.
    </shortdesc>
    <desc>
     <simpara>
-     <classname>GtkProgress</classname> can be either in percentage mode
-     (when the total amount of work is known and progress can be
-     calculated) or activity mode (when there is no way to estimate
-     total amount of work and only progress must be indicated somehow). 
+     <classname>GtkProgress</classname> can be either in 
+     <literal>percentage</literal> mode (when the total amount of work is
+     known and progress can be calculated) or <literal>activity</literal> 
+     mode (when there is no way to estimate the total amount of work and
+     only activity must be indicated somehow). 
     </simpara>
     <simpara>
      If <parameter>activity_mode</parameter> is <literal>true</literal>,
      the activity mode is turned on, otherwise - the percentage mode.
+    </simpara>
+    <simpara>
+     See also:  <function class="GtkProgressBar">set_value()</function>, 
+     <function class="GtkProgress">set_percentage()</function>.
     </simpara>
    </desc>
   </method>
@@ -238,9 +270,11 @@
    <desc>
     <simpara>
      The text indicating the amount of progress can be retrieved with
-     this method. Before the text is returned, it is formatted with the
-     currently set progress format (see <function
-      class="GtkProgress">set_format_string</function>).
+     this method.  Before the text is returned, it is formatted using the
+     current progress format.
+    </simpara>
+    <simpara>
+     See also:  <function class="GtkProgress">set_format_string()</function>).
     </simpara>
    </desc>
   </method>
@@ -295,8 +329,8 @@
    <desc>
     <simpara>
      If you wish to retrieve the progress percentage based on some value
-     other than the current one, then this method should be used. It
-     returns the desired percentage as a number between
+     other than the current one, then this method should be used.  It
+     returns the desired percentage as a number between 
      <literal>0.0</literal> and <literal>1.0</literal>.
     </simpara>
    </desc>
