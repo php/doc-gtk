@@ -23,6 +23,7 @@
 STYLESHEET_DIR = @STYLESHEET_DIR@
 BUILD = build/@LANG@
 BUILD_SEARCHABLE = htdocs
+BUILD_TEST = testbuild
 
 #
 # Programs
@@ -44,6 +45,7 @@ phpweb: $(BUILD)/php/index.php
 searchable_zip: $(BUILD)/searchable_manual_$(LANG).zip
 searchable_tar: $(BUILD)/searchable_manual_$(LANG).tar.gz
 text: $(BUILD)/manual.txt
+test: $(BUILD_TEST)/index.html
 
 mirror-files:	$(BUILD)/php_gtk_manual_$(LANG).tar.gz \
 				$(BUILD)/php_gtk_manual_$(LANG).tar.bz2 \
@@ -98,6 +100,11 @@ $(BUILD)/php_gtk_manual_$(LANG).html.gz: $(BUILD)/bigmanual.html
 $(BUILD)/php_gtk_manual_$(LANG).txt.gz: $(BUILD)/manual.txt
 	@mkdir -p $(BUILD)
 	gzip -c -9 $< > $@
+
+$(BUILD_TEST)/index.html: testmanual.xml
+	@mkdir -p $(BUILD_TEST)
+	$(XSLTPROC) --param base.dir "'$(BUILD_TEST)/'" $(chunk) testmanual.xml
+
 
 #
 # The 'searchable' builds should only ever be created LOCALLY!!!

@@ -16,11 +16,11 @@ A: When you do a first-time compile, you have to do a
     - searchable_tar
     - text
     - mirror-files
+    - test
 
 Q: I just want to compile one small file... how to stop compiling _all_?
-A: There is now real solution... it seems that the *whole* manual has to be compiled
-   - deleting just some output files doesn't help
-   - removing the html directory in build/en/ causes _all_ files to be rebuilt...
+A: Do a "./configure" and then "make test". This will compile the docs for the classes
+    which were changed since the last "./configure" in the "testbuild/" directory
 
 Q: For what is UTF8-dir?
 A: All the xml files are converted to utf-8 when doing a ./configure and saved under the

@@ -182,6 +182,7 @@ case "$ENCODING" in
 			then
 				echo Updating "$xmlfile"...
 				(echo "<?xml version='1.0' encoding='utf-8' ?>"; iconv -s -f $ENCODING -t UTF-8 $oldfilepath | tail +2 ) > $xmlfilepath
+                updates="$updates $xmlfilepath"
 			fi
 		fi
 	done;;
@@ -190,6 +191,7 @@ esac
 AC_OUTPUT(\
 Makefile \
 manual.xml \
+testmanual.xml \
 stylesheets/html/phpweb.xsl \
 scripts/genchapterents.php )
 
@@ -197,5 +199,19 @@ echo creating chapters.ent
 $PHP -q scripts/genchapterents.php > chapters.ent
 echo creating name_to_id.xsl
 $XSLTPROC gen_name_to_id.xsl manual.xml > stylesheets/html/name_to_id.xsl
+
+
+#now add the list of updated files to the testclasses.xml
+# this has to be done after chapters.ent is created
+echo creating testclasses.xml
+for updatedfile in $updates
+do
+	updatedfile=`echo $updatedfile | sed -e "s/^.\///"`
+	ref=`grep -e "$updatedfile" chapters.ent | sed "s/^<!ENTITY //" | sed "s/ .*//"`
+	#FIXME: check if $ref is empty
+	refs="$refs \&$ref;"
+done
+#can't I do 2x AC_OUTPUT?
+sed "s/@TEST_REFERENCES@/$refs/g" testclasses.xml.in > testclasses.xml
 
 chmod +x scripts/genchapterents.php
