@@ -101,10 +101,18 @@ gtk::main();
     </example>
     To create a progress bar in <literal>activity</literal> mode, delete
     the references to the text string and replace them with
-    <programlisting>
+    <programlisting role="php">
 $progressbar-&gt;set_activity_mode(true);
     </programlisting>
-    and any further methods appropriate to an activity indicator.
+    and any further methods appropriate to an activity indicator.  You will
+    also need to replace
+    <programlisting role="php">
+$progressbar-&gt;set_percentage($value);
+    </programlisting>
+    in the <literal>update_bar()</literal> function with
+    <programlisting role="php">
+$progressbar-&gt;set_value($value);
+    </programlisting>
    </para>
    <simpara>
     Note that a progress bar in <literal>activity</literal> mode will not
