@@ -1,6 +1,6 @@
 <?php
 
-$lang = '@LANG@';
+$lang = 'UTF8dir/@LANG@';
 $entities = array();
 
 if($argv[1])
@@ -31,13 +31,13 @@ function gen_dir_ents($path)
 			{
 				if(substr($file, -4) == ".xml")
 				{
-					if(($lang != "en") and (file_exists(preg_replace("%^(..[\\/])?en(/?|$)%", "\\1".$lang."\\2", $path)."/".$file)))
+					if(($lang != "UTF8dir/en") and (file_exists(preg_replace("%^(..[\\/])?en(/?|$)%", "\\1".$lang."\\2", $path)."/".$file)))
 					{
 						$entities[] = gen_ent($path, $file, $lang);
 					}
 					else
 					{
-						$entities[] = gen_ent($path, $file, "en");
+						$entities[] = gen_ent($path, $file, "UTF8dir/en");
 					}
 				}
 			}
