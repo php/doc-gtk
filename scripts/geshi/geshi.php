@@ -1194,7 +1194,12 @@ class GeSHi {
 		{
 			if ( $this->lexic_permissions['REGEXPS'][$key] )
 			{
-				$stuff_to_parse = preg_replace( "#(" . $regexp . ")#", "<|!REG3XP$key!>\\1|>", $stuff_to_parse);
+				if( is_array( $regexp)) {
+//                    var_dump( $stuff_to_parse); echo "\r\n";
+                	$stuff_to_parse = preg_replace( $regexp[0], $regexp[1], $stuff_to_parse);
+                } else {
+                	$stuff_to_parse = preg_replace( "#(" . $regexp . ")#", "<|!REG3XP$key!>\\1|>", $stuff_to_parse);
+                }
 			}
 		}
 

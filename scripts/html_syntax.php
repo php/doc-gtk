@@ -27,9 +27,12 @@ if ($_SERVER["argc"] < 3) {
 set_time_limit(5*60); // can run long, but not more than 5 minutes
 
 require dirname(__FILE__).'/geshi/geshi.php';
-$geshi = new GeSHi($with_tags, 'php', dirname(__FILE__).'/geshi/geshi');
+$geshi = new GeSHi('', 'php', dirname(__FILE__).'/geshi/geshi');
 $geshi->set_tab_width(4);
-$geshi->enable_classes();
+if ($GLOBALS["TYPE"] == "php") {
+	//use css in php mode only
+	$geshi->enable_classes();
+}
 $geshi->set_overall_class('phpcode');
 $geshi->set_overall_style('font-size: 85%', true);
 $geshi->set_keyword_group_style(1, 'color: #907000; font-weight: bold', true);
@@ -48,9 +51,10 @@ function callback_html_number_entities_decode($matches) {
 
 function callback_highlight_php($matches) {
 //	$with_tags = preg_replace_callback("!&#([0-9]+);!", "callback_html_number_entities_decode", $matches[1]);
-	$with_tags	= trim( html_entity_decode( $matches[1]));
-	if ($GLOBALS["TYPE"] == "php") {
+    $with_tags	= trim( html_entity_decode( $matches[1]));
+    if (1 || $GLOBALS["TYPE"] == "php") {
 		global $geshi;
+		$geshi->set_language('php');
 		$geshi->set_source($with_tags);
 		return $geshi->parse_code();
 	} else { // "html"
@@ -66,6 +70,16 @@ function callback_highlight_php($matches) {
 		}
 		return $with_tags;
 	}
+}
+
+function callback_highlight_xml($matches) {
+	$with_tags	= trim( html_entity_decode( $matches[1]));
+    global $geshi;
+	$geshi->set_language('xml');
+	$geshi->set_source($with_tags);
+    
+	$strCode	= $geshi->parse_code();
+	return $strCode;
 }
 
 $files = $_SERVER["argv"];
@@ -87,6 +101,7 @@ while (($file = array_shift($files)) !== null) {
 		echo "highlighting $filename ...\n";
 		$original = file_get_contents($filename);
 		$highlighted = preg_replace_callback("!<pre class=\"phpcode\">(.*)</pre>!sU", "callback_highlight_php", $original);
+		$highlighted = preg_replace_callback("!<pre class=\"xml\">(.*)</pre>!sU", "callback_highlight_xml", $highlighted);
 		if ($original != $highlighted) {
 			// file_put_contents is only in PHP >= 5
 			$fp = fopen( $filename, "wb");

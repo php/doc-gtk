@@ -7,7 +7,7 @@
                 version='1.0'>
 
 <!-- ********************************************************************
-     $Id: verbatim.xsl,v 1.4 2004-08-06 07:15:18 cweiske Exp $
+     $Id: verbatim.xsl,v 1.5 2004-08-31 17:32:21 cweiske Exp $
      ********************************************************************
 
      This file is part of the XSL DocBook Stylesheet distribution.
@@ -32,6 +32,11 @@
   <xsl:choose>
    <xsl:when test="@role='php'">
     <pre class="phpcode">
+     <xsl:apply-templates/>
+    </pre>
+   </xsl:when>
+   <xsl:when test="@role='xml'">
+    <pre class="xml">
      <xsl:apply-templates/>
     </pre>
    </xsl:when>
