@@ -146,7 +146,8 @@ foreach ($pages as $pageNumber) {
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Appends a page to the notebook, specifying the widget to use as the label in
+    the popup menu.
    </shortdesc>
    <desc>
 
@@ -203,7 +204,8 @@ foreach ($pages as $pageNumber) {
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Prepends a page to the notebook, specifying the widget to use as the label in
+    the popup menu.
    </shortdesc>
    <desc>
 
@@ -285,7 +287,8 @@ foreach ($pages as $pageNumber) {
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Inserts a page into the notebook at the given position, specifying the
+    widget to use as the label in the popup menu.
    </shortdesc>
    <desc>
 
@@ -460,7 +463,13 @@ if ($notebook->get_current_page() != 0) {
     Moves the next page in the notebook to the top.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Sets the page after the current page as the top page in the notebook.
+     If the current page is the last page in the notebook, nothing happens.
+    </simpara>
+    <simpara>
+     See also: <function class="GtkNotebook">next_page</function>
+    </simpara>
    </desc>
   </method>
 
@@ -477,7 +486,13 @@ if ($notebook->get_current_page() != 0) {
     Moves the previous page in the notebook to the top.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Sets the page before the current page as the top page in the notebook.
+     If the current page is the first page in the notebook, nothing happens.
+    </simpara>
+    <simpara>
+     See also: <function class="GtkNotebook">next_page</function>
+    </simpara>
    </desc>
   </method>
 
@@ -519,7 +534,7 @@ if ($notebook->get_current_page() != 0) {
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the edge on which the notebook tabs will be displayed.
    </shortdesc>
    <desc>
 
@@ -534,7 +549,7 @@ if ($notebook->get_current_page() != 0) {
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets whether or not all tabs should be the same width.
    </shortdesc>
    <desc>
 
@@ -549,7 +564,7 @@ if ($notebook->get_current_page() != 0) {
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the border around all edges of the notebook's tabs.
    </shortdesc>
    <desc>
 
@@ -564,7 +579,7 @@ if ($notebook->get_current_page() != 0) {
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the border for the left and right sides of the notebook's tabs.
    </shortdesc>
    <desc>
 
@@ -579,7 +594,7 @@ if ($notebook->get_current_page() != 0) {
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the border for the top and bottom sides of the notebook's tabs.
    </shortdesc>
    <desc>
 
@@ -594,7 +609,8 @@ if ($notebook->get_current_page() != 0) {
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets whether the tab label area will have arrows for scrolling if there
+    are too many tabs to fit in the area.
    </shortdesc>
    <desc>
 
@@ -609,7 +625,8 @@ if ($notebook->get_current_page() != 0) {
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Enables the popup menu: if the user clicks with the right mouse button on
+    the bookmarks, a menu with all the pages will be popped up.
    </shortdesc>
    <desc>
 
@@ -624,7 +641,7 @@ if ($notebook->get_current_page() != 0) {
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Disables the popup menu.
    </shortdesc>
    <desc>
 
@@ -639,7 +656,7 @@ if ($notebook->get_current_page() != 0) {
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the tab's label widget.
    </shortdesc>
    <desc>
 
@@ -655,7 +672,7 @@ if ($notebook->get_current_page() != 0) {
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the tab widget of the given child.
    </shortdesc>
    <desc>
 
@@ -671,7 +688,7 @@ if ($notebook->get_current_page() != 0) {
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Creates a new label and sets it as the tab label for the given child.
    </shortdesc>
    <desc>
 
