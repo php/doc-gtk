@@ -41,27 +41,27 @@ function delete_event()
 
 function shutdown()
 {
-    print(&quot;Shutting down...\n&quot;);
+    print("Shutting down...\n");
     gtk::main_quit();
 }
 
 function hello()
 {
     global $window;
-    print &quot;Hello World!\n&quot;;
-    $window-&gt;destroy();
+    print "Hello World!\n";
+    $window->destroy();
 }
 
-$window = &amp;new GtkWindow();
-$window-&gt;connect('destroy', 'shutdown');
-$window-&gt;connect('delete-event', 'delete_event');
-$window-&gt;set_border_width(10);
+$window = &new GtkWindow();
+$window->connect('destroy', 'shutdown');
+$window->connect('delete-event', 'delete_event');
+$window->set_border_width(10);
 
-$button = &amp;new GtkButton('Hello World!');
-$button-&gt;connect('clicked', 'hello');
-$window-&gt;add($button);
+$button = &new GtkButton('Hello World!');
+$button->connect('clicked', 'hello');
+$window->add($button);
 
-$window-&gt;show_all();
+$window->show_all();
 
 gtk::main();
 
@@ -141,7 +141,7 @@ function delete_event()
 
 function shutdown()
 {
-    print(&quot;Shutting down...\n&quot;);
+    print("Shutting down...\n");
     gtk::main_quit();
 }
 
@@ -164,8 +164,8 @@ function shutdown()
 function hello()
 {
     global $window;
-    print &quot;Hello World!\n&quot;;
-    $window-&gt;destroy();
+    print "Hello World!\n";
+    $window->destroy();
 }
 
 ?>
@@ -194,10 +194,10 @@ function hello()
 <![CDATA[
 <?php
 
-$window = &amp;new GtkWindow();
-$window-&gt;connect('destroy', 'shutdown');
-$window-&gt;connect('delete-event', 'delete_event');
-$window-&gt;set_border_width(10);
+$window = &new GtkWindow();
+$window->connect('destroy', 'shutdown');
+$window->connect('delete-event', 'delete_event');
+$window->set_border_width(10);
 
 ?>
 ]]>
@@ -222,11 +222,11 @@ $window-&gt;set_border_width(10);
 <![CDATA[
 <?php
 
-$button = &amp;new GtkButton('Hello World!');
-$button-&gt;connect('clicked', 'hello');
-$window-&gt;add($button);
+$button = &new GtkButton('Hello World!');
+$button->connect('clicked', 'hello');
+$window->add($button);
 
-$window-&gt;show_all();
+$window->show_all();
 
 ?>
 ]]>
