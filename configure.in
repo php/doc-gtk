@@ -23,6 +23,63 @@ AC_INIT(global.ent)
 AC_PATH_PROG(XSLTPROC, xsltproc, no)
 AC_PATH_PROG(PHP, php, no)
 
+AC_DEFUN(FetchSS, [
+AC_PATH_PROG(WGET, wget, no)
+if test "$WGET" = "no";
+then
+    AC_MSG_ERROR(Cannot find wget - 
+    **********************************************
+    *    Please get the stylesheets from         *
+    *  http://www.phpuk.org/~james/gtkss.tar.gz  *
+    * and extract them in the php-gtk-doc dir    *
+    **********************************************)
+
+fi
+
+AC_PATH_PROG(TAR, tar, no)
+if test "$TAR" = "no";
+then
+    AC_MSG_ERROR(Cannot find tar - 
+    **********************************************
+    *    Please get the stylesheets from         *
+    *  http://www.phpuk.org/~james/gtkss.tar.gz  *
+    * and extract them in the php-gtk-doc dir    *
+    **********************************************)
+fi
+
+AC_MSG_CHECKING(For stylesheets dir)
+if test ! -f "stylesheets/README";
+then
+    AC_MSG_RESULT(not found)
+else
+    AC_MSG_RESULT(found)
+    echo "Backing up Stylesheet dir"
+    mv stylesheets stylesheets.old    
+fi
+
+if test -f "gtkss.tar.gz";
+then
+    echo "Backing up gtkss.tar.gz"
+    mv gtkss.tar.gz gtkss.tar.gz.old
+fi
+
+echo "Downloading Stylesheets"
+$WGET http://www.phpuk.org/~james/gtkss.tar.gz
+
+if(test ! -f gtkss.tar.gz)
+then
+    AC_MSG_ERROR(Download failed - 
+    **********************************************
+    *    Please get the stylesheets from         *
+    *  http://www.phpuk.org/~james/gtkss.tar.gz  *
+    * and extract them in the php-gtk-doc dir    *
+    **********************************************)
+fi
+
+echo "Unpacking Stylesheets"
+tar -xvzf gtkss.tar.gz
+])
+
 if test "$XSLTPROC" = "no";
 then
     AC_MSG_ERROR(cannot find xsltproc)
@@ -32,18 +89,35 @@ if test "$PHP" = "no";
 then
     AC_MSG_ERROR(unable to locate php exectuable)
 fi
+
 AC_MSG_CHECKING(for the stylesheets)
 if test ! -f "stylesheets/README";
 then
     AC_MSG_RESULT(not found)
-    AC_MSG_ERROR(- 
-    *******************************************
-    *    Please get the stylesheets from      *
-    *  http://www.phpuk.org/~james/gtkss.zip  *
-    * and extract them in the php-gtk-doc dir *
-    *******************************************)
+    FetchSS()
 fi
 AC_MSG_RESULT(found)
+
+AC_MSG_CHECKING(Stylesheet Version)
+
+if test ! -f "stylesheets/GTKVERSION";
+then
+    AC_MSG_RESULT(No Version Information)
+    AC_MSG_WARN(No Version information found. 
+    		Persuming old version. 
+		Updating Stylesheets)
+
+    FetchSS()
+fi
+
+if test ! "0.1" = "`cat stylesheets/GTKVERSION`"
+then
+    AC_MSG_RESULT(Incorrect Version)
+    echo "Automatically updating stylesheets"
+    FetchSS()
+fi
+
+AC_MSG_RESULT(Correct Verison)
 
 DOCBOOK_DOCTYPE="-//PHP Group//DTD DocBk XML V3.1.7-Based Extension//EN"
 AC_SUBST(DOCBOOK_DOCTYPE)
