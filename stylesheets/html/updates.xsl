@@ -16,12 +16,12 @@
 <xsl:strip-space elements="*"/>
 
 <xsl:template name="last">
-	<xsl:param name="path"/>
-	<xsl:param name="titlepath"/>
-	<xsl:for-each select="$path">
+	<xsl:param name="nodes"/>
+	<xsl:param name="titlename"/>
+	<xsl:for-each select="$nodes">
 		<li>
 			<xsl:variable name="id"><xsl:value-of select="@id"/></xsl:variable>
-			<a href="http://gtk.php.net/manual/en/{$id}.php"><xsl:value-of select="$titlepath"/></a>
+			<a href="http://gtk.php.net/manual/en/{$id}.php"><xsl:value-of select="descendant::*[name()=$titlename]"/></a>
 		</li>
 <xsl:text>
 </xsl:text>
@@ -36,16 +36,16 @@
 <p>
 	<ul>
 		<xsl:call-template name="last">
-			<xsl:with-param name="path" select="//classentry"/>
-			<xsl:with-param name="titlepath" select="//classtitle"/>
+			<xsl:with-param name="nodes" select="./classset/classentry"/>
+			<xsl:with-param name="titlename">classtitle</xsl:with-param>
 		</xsl:call-template>
 		<xsl:call-template name="last">
-			<xsl:with-param name="path" select="//refentry"/>
-			<xsl:with-param name="titlepath" select="//refentrytitle"/>
+			<xsl:with-param name="nodes" select="//refentry"/>
+			<xsl:with-param name="titlename">refentrytitle</xsl:with-param>
 		</xsl:call-template>
 		<xsl:call-template name="last">
-			<xsl:with-param name="path" select="//chapter"/>
-			<xsl:with-param name="titlepath" select="//chapter/title"/>
+			<xsl:with-param name="nodes" select="//chapter"/>
+			<xsl:with-param name="titlename">title</xsl:with-param>
 		</xsl:call-template>
 	</ul>
 </p>
