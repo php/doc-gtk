@@ -3,7 +3,7 @@
                 version='1.0'>
 
 <!-- ********************************************************************
-     $Id: toc.xsl,v 1.1.1.1 2001-06-01 14:33:47 andrei Exp $
+     $Id: toc.xsl,v 1.2 2001-06-02 17:57:09 jmoore Exp $
      ********************************************************************
 -->
 
@@ -114,6 +114,52 @@
     <xsl:copy-of select="$subtoc.list"/>
   </xsl:if>
 </xsl:template>
+
+<xsl:template match="set" mode="toc">
+  <xsl:variable name="nodes" select="book|part|reference
+                                     |preface|chapter|appendix
+                                     |bibliography|glossary|index
+                                     |refentry|classset"/>
+
+  <xsl:variable name="subtoc">
+    <xsl:element name="{$toc.list.type}">
+      <xsl:apply-templates mode="toc" select="$nodes"/>
+    </xsl:element>
+  </xsl:variable>
+
+  <xsl:variable name="subtoc.list">
+    <xsl:choose>
+      <xsl:when test="$toc.dd.type = ''">
+        <xsl:copy-of select="$subtoc"/>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:element name="{$toc.dd.type}">
+          <xsl:copy-of select="$subtoc"/>
+        </xsl:element>
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:variable>
+
+  <xsl:element name="{$toc.listitem.type}">
+    <xsl:apply-templates select="." mode="label.content"/>
+    <xsl:text> </xsl:text>
+    <a>
+      <xsl:attribute name="href">
+        <xsl:call-template name="href.target"/>
+      </xsl:attribute>
+      <xsl:apply-templates select="." mode="title.content"/>
+    </a>
+    <xsl:if test="$toc.listitem.type = 'li'
+                  and $toc.section.depth>0 and count($nodes)&gt;0">
+      <xsl:copy-of select="$subtoc.list"/>
+    </xsl:if>
+  </xsl:element>
+  <xsl:if test="$toc.listitem.type != 'li'
+                and $toc.section.depth>0 and count($nodes)&gt;0">
+    <xsl:copy-of select="$subtoc.list"/>
+  </xsl:if>
+</xsl:template>
+
 
 <xsl:template match="part|reference|preface|chapter|appendix|classset"
               mode="toc">
