@@ -8,10 +8,10 @@
   </shortdesc>
   <desc>
    <simpara>
-    <classname>GtkWidget</classname> ist eine abstrakte Basisklasse die ihre
+    <classname>GtkWidget</classname> ist eine abstrakte Basisklasse, die ihre
     Nachfolger mit angemessenen Eigenschaften, Methoden und Signalen f&uuml;r
-    anzeigbare Userinterface-Elemente versorgt. Die einzigen Objekte die keine
-    <classname>GtkWidget</classname> Charakteristiken erben sind
+    anzeigbare Userinterface-Elemente versorgt. Die einzigen Objekte, die keine
+    <classname>GtkWidget</classname> Charakteristiken erben, sind
     <classname>GtkTooltips</classname>, <classname>GtkAdjustment</classname> 
     und <classname>GtkItemFactory</classname> - die alle relativ abstrakte
     Konzepte sind. Alle anderen Mitglieder der Objekthierarchie sind Nachfolger
@@ -19,7 +19,7 @@
     Anspruch, und k&ouml;nnen als <literal>Widget</literal> betrachtet werden.
    </simpara>
    <simpara>
-    Beachten Sie dass <classname>GtkWidget</classname> nicht direkt konstruiert werden
+    Beachten Sie, dass <classname>GtkWidget</classname> nicht direkt konstruiert werden
     kann.
    </simpara>
   </desc>
@@ -186,13 +186,13 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Dissociates widget from current parent.
+    Trennt ein Widget vom aktuellen Vaterobjekt.
    </shortdesc>
    <desc>
     <simpara>
-     This method takes away the association between the calling widget
-     and its current <classname>GdkWindow</classname> parent, allowing
-     a new parent to be set for the widget.
+     Diese Methode hebt die Verbindung zwischen dem aufrufenden Widget
+     und seinem aktuellen <classname>GdkWindow</classname> Vaterobjekt auf,
+     so dass ein neues Vaterobjekt für das Widget gesetzt werden kann.
     </simpara>
    </desc>
   </method>
@@ -205,16 +205,16 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Displays the calling widget.
+    Zeigt das aufrufende Widget an.
    </shortdesc>
    <desc>
     <simpara>
-     <function class="GtkWidget">show</function> is a commonly-used method
-     that combines a series of other methods in order to display a widget on
-     the screen.
+     <function class="GtkWidget">show</function> ist eine häufig
+     verwendete Methode, die eine Serie anderer Methoden kombiniert,
+     um ein Widget auf dem Bildschirm anzuzeigen.
     </simpara>
     <simpara>
-     See also:  <function class="GtkWidget">map</function>, 
+     Siehe auch:  <function class="GtkWidget">map</function>, 
      <function class="GtkWidget">realize</function>.
     </simpara>
    </desc>
@@ -243,13 +243,13 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Hides the calling widget.
+    Versteckt das aufrufende Widget.
    </shortdesc>
    <desc>
     <simpara>
-     <function class="GtkWidget">hide</function> is the corollary to the
-     <function class="GtkWidget">show</function> method.  It combines
-     other methods in order to hide the calling widget from display.
+     <function class="GtkWidget">hide</function> ist das Gegenstück zur
+     <function class="GtkWidget">show</function> Methode. Es kombiniert
+     andere Methoden, um das aufrufende Widget vom Bildschirm zu entfernen.
     </simpara>
    </desc>
   </method>
@@ -262,18 +262,18 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Displays calling widget and its children.
+    Zeigt das aufrufende Widget und dessen Kindobjekte an.
    </shortdesc>
    <desc>
     <simpara>
-     This method is used to display the calling widget and its children. 
-     The extent to which it 'sees' children is system-dependant; some
-     systems will not display children belonging to a child widget when
-     <function class="GtkWidget">show_all</function> is called from a
-     top-level container.  You may find that you still need to 
-     <function class="GtkWidget">show</function> the children individually
-     in order to display them, and it is good practice to do so
-     consistently.
+     Diese Methode wird verwendet, um das sie aufrufende Widget und
+     dessen Kindobjekte anzuzeigen. Das Ausmass, in welchem sie Kindobjekte
+     'wahrnimmt', ist systemabhängig; einige Systeme werden keine Kindobjekte
+     anzeigen, die zu einem Kindwidget gehören, wenn <function class="GtkWidget">show_all</function>
+     von einem Toplevel-Container aufgerufen wird.
+     Sie werden eventuell feststellen, dass Sie für jedes Kindobjekt einzeln
+     <function class="GtkWidget">show</function> aufrufen müssen, um sie anzuzeigen,
+     daher er ist es eine gute Angewohnheit, dies immer konsistent zu tun.
     </simpara>
    </desc>
   </method>
