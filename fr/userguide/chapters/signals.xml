@@ -352,10 +352,10 @@ gtk::main();
     approprié) une <classname>GtkMenuBar</classname>, une 
     <classname>GtkToolbar</classname> et un <classname>GtkButton</classname>. 
     Quant l'utilisateur choisit de <literal>quitter</literal> l'application
-		à partir d'un des widgets, une fonction d'arrêt peut etre appelé en passant
-		une instance d'objet <classname>GtkWindow</classname> comme premier 
-		paramêtre, permettant ainsi de détruire la fenêtre a partir de toutes
-		les connexions. par exemple :
+    à partir d'un des widgets, une fonction d'arrêt peut etre appelé en passant
+    une instance d'objet <classname>GtkWindow</classname> comme premier 
+    paramêtre, permettant ainsi de détruire la fenêtre a partir de toutes
+    les connexions. par exemple :
     <example>
      <title>
       Utilisation de la méthode <function class="GtkObject">connect_object()</function> 
@@ -379,12 +379,12 @@ $exit_button-&gt;connect_object(&quot;clicked&quot;,
     la méthode connect_after*  permet d'éxécuter le rappel &quot;aprés&quot;
     le signal par défaut.  Cela peut être utile dans certaines situations
     Par exemple, si vous voulez détruire une seule fenêtre dans une certaine
-		circonstance. Cependant, les methodes connect_after* ne marcheront que si
+    circonstance. Cependant, les methodes connect_after* ne marcheront que si
     le signal a été crée avec le flag  <literal>GTK_RUN_LAST</literal>. le 
-		signal <signalname>destroy</signalname> ainsi que tous les autres signaux
-		<literal>'événement'</literal> possède ce flag; Deux méthodes pour savoir
-		si le signal posséde ce flag : faire un test avec PHP-GTK ou alors lire le 
-		source de GTK.
+    signal <signalname>destroy</signalname> ainsi que tous les autres signaux
+    <literal>'événement'</literal> possède ce flag; Deux méthodes pour savoir
+    si le signal posséde ce flag : faire un test avec PHP-GTK ou alors lire le 
+    source de GTK.
     <example> 
      <title>Utiliastion de la méthode 
       <function class="GtkObject">connect_after()</function>.
@@ -428,37 +428,37 @@ gtk::main();
   </simpara>
   <simpara>
    Un signal n'est pas un événement et inversement. Un signal est un message 
-	 émis par un <classname>GtkObject</classname> en fonction d'éléments 
-	 prédeterminé de son environement (une action de l'utilisateur ou une 
-	 instruction venant d'une méthode ou d'une fonction). les Signaux sont 
-	 toujours définis dans le code, soit internement dans GTK ou alors dans
-	 votre application.
+   émis par un <classname>GtkObject</classname> en fonction d'éléments 
+   prédeterminé de son environement (une action de l'utilisateur ou une 
+   instruction venant d'une méthode ou d'une fonction). les Signaux sont 
+   toujours définis dans le code, soit internement dans GTK ou alors dans
+   votre application.
   </simpara>
   <simpara>
    Les évenements sont représentés par un flux de messages sur l'etat de 
-	 l'environnement. La boucle principale de GTK contient ces évenements.
+   l'environnement. La boucle principale de GTK contient ces évenements.
   </simpara>
   <note>
    <simpara>
     il n'est pas possible de connecter directement un rappel à un 
-		événement <classname>GdkEvent</classname>.
+    événement <classname>GdkEvent</classname>.
    </simpara>
   </note>
   <simpara>
    Chaque widget possédant un objet <classname>GdkWindow</classname> peut 
-	 capturer les événements qui lui sont associés. Les widgets sans  
+   capturer les événements qui lui sont associés. Les widgets sans  
    <classname>GdkWindow</classname> - ceux créent avec l'option 
    <literal>GTK_NO_WINDOW</literal> - ne peuvent pas recevoir les évenements
-	 a moins d'utiliser l'objet <classname>GtkEventBox</classname>- un widget creé
-	 a cet effet. Il existe des occasions ou il est très utile de capturer les
-	 événements; Par exemple, la création  d'une instance de 
-	 <classname>GtkToolTips</classname> est déclenché lorsque le widget
+   a moins d'utiliser l'objet <classname>GtkEventBox</classname>- un widget creé
+   a cet effet. Il existe des occasions ou il est très utile de capturer les
+   événements; Par exemple, la création  d'une instance de 
+   <classname>GtkToolTips</classname> est déclenché lorsque le widget
    capture l'événement <literal>GDK_ENTER_NOTIFY</literal> et détruit lorqu'il
-	 recoit l'événement <literal>GDK_LEAVE_NOTIFY</literal>.
+   recoit l'événement <literal>GDK_LEAVE_NOTIFY</literal>.
   </simpara>
   <simpara>
    Il est également impossible d'utiliser l'évenement pour déclencher un rappel
-	 comme le ferait un signal, il existe une série de signal dérivés de l'objet
+   comme le ferait un signal, il existe une série de signal dérivés de l'objet
    <classname>GtkWidget</classname>, connu sous le nom de  
    <literal>signaux événement</literal>.  Il est possible de définir un 
    événement comme un signal en permettant à un rappel d'être déclenché lors de 
