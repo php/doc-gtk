@@ -15,6 +15,22 @@
     "New document", "Open", "Save" and such. The toolbar can show buttons of
     text and icons as well as only one of both, which can be set during runtime.
    </simpara>
+   <note>
+    <simpara>
+     The methods <function class="GtkToolbar">insert_element</function>,
+     <function class="GtkToolbar">append_element</function>,
+     <function class="GtkToolbar">prepend_element</function>,
+     <function class="GtkToolbar">insert_item</function>,
+     <function class="GtkToolbar">append_item</function> and
+     <function class="GtkToolbar">prepend_item</function> 
+     are available since PHP-Gtk 1.0.1 only. 
+    </simpara>
+    <simpara>
+     Before, you had to use <function>insert_widget</function>, and the toolbar 
+     was not half as usable as the original Gtk version as
+     you had to create every single button yourself.
+    </simpara>
+   </note>
   </desc>
  </classmeta>
 
@@ -31,14 +47,7 @@
   </shortdesc>
   <desc>
    <simpara>
-    Creates a new toolbar instance. Since php-gtk doesn't give access to the
-    <literal>insert_element</literal> function, the toolbar in php-gtk is not half
-    as usable as the original Gtk version. 
-   </simpara>
-   <simpara>
-    The original toolbar creates buttons with icons and text automatically 
-    in a way <classname>GtkItemFactory</classname>
-    allows it. In php-gtk, you have to create every single button yourself.
+    Creates a new toolbar instance.
    </simpara>
    <example>
     <title>A detachable toolbar</title>
@@ -49,25 +58,52 @@ if( !extension_loaded('gtk')) {
 	dl( 'php_gtk.' . PHP_SHLIB_SUFFIX); 
 }
 
-function toolbarClicked( $objButton, $strType) {
+function toolbarClicked( $objButton, $strType)
+{
 	echo 'clicked ' . $strType . "\r\n";
 }
 
 $window	= &new GtkWindow();
-$window->set_title( 'plug controller');
-$window->set_default_size( 400, 50);
+$window->set_title( 'toolbar test');
+$window->set_default_size( 400, 70);
 $window->connect_object('destroy', array('gtk', 'main_quit'));
 $vbox = &new GtkVBox();
 
-$toolbar	= &new GtkToolbar( GTK_ORIENTATION_HORIZONTAL, GTK_TOOLBAR_BOTH);
+$systemimage = array(
+'13 13 5 2',
+'  c None s None',
+'. c topShadowColor m white c lightblue',
+'X s iconColor1 m black c black',
+'o s bottomShadowColor m black c #646464646464',
+'O s selectColor m white c red',
+"                          ",
+"          . . .           ",
+"      . . X X X o o       ",
+"    . X X X X X X X o     ",
+"    . X X X X X X X o     ",
+"  . X X X X O X X X X o   ",
+"  . X X X O O O X X X o   ",
+"  . X X X X O X X X X o   ",
+"    . X X X X X X X o     ",
+"    . X X X X X X X o     ",
+"      o o X X X o o       ",
+"          o o o           ",
+"                          "
+);
+$window->realize();
+list($pixmap, $mask) = Gdk::pixmap_create_from_xpm_d($window->window, null, $systemimage);
+$pixmapwid = &new GtkPixmap($pixmap, $mask);
 
-$btnNew		= &new GtkButton( 'new');
-$btnOpen	= &new GtkButton( 'open');
-$btnNew->connect( 'clicked', 'toolbarClicked', 'new');
-$btnOpen->connect( 'clicked', 'toolbarClicked', 'open');
+$toolbar = &new GtkToolbar( GTK_ORIENTATION_HORIZONTAL, GTK_TOOLBAR_BOTH);
+$toolbar->set_button_relief( GTK_RELIEF_NONE);
+$toolbar->set_space_style( GTK_TOOLBAR_SPACE_LINE);
 
-$toolbar->append_widget( $btnNew, 'Creates a new document', 'Private new text');
-$toolbar->add( $btnOpen);
+$toolbar->append_item( 'new', 'Creates a new document', "Closes the active document\r\nand creates an empty new one", 
+	null, 'toolbarClicked', 'new' );
+$toolbar->append_item( 'open', 'Opens an existing document', null, null, 'toolbarClicked', 'open' );
+$toolbar->append_space();
+$toolbar->append_item( 'save', 'Saves the document', 'Saves the document on the harddisk', $pixmapwid, 'toolbarClicked', 'save' );
+$toolbar->append_item( 'saveas', 'Saves the document with another filename', null, null, 'toolbarClicked', 'saveas' );
 
 $handlebox = &new GtkHandleBox();
 $handlebox->add( $toolbar);
@@ -164,9 +200,230 @@ gtk::main();
      value is 0, and the maximum is the number of items which
      are attached to the toolbar.
     </simpara>
+    <simpara>
+     In the end, insert_space calls 
+     <function class="GtkToolbar">insert_item</function> with
+     the type parameter set to <literal>space</literal>.
+    </simpara>
    </desc>
   </method>
 
+  
+  <!-- the base of all... *_element -->
+  <method id="gtk.gtktoolbar.method.append_element">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef><classname>GtkWidget</classname> <function>append_element</function></funcdef>
+     <paramdef><enumname>GtkToolbarChildType</enumname> <parameter>widget_type</parameter></paramdef>
+     <paramdef><classname>GtkWidget</classname> <parameter>widget</parameter></paramdef>
+     <paramdef>string <parameter>button_text</parameter></paramdef>
+     <paramdef>string <parameter>tooltip_text</parameter></paramdef>
+     <paramdef>string <parameter>tooltip_private_text</parameter></paramdef>
+     <paramdef><classname>GtkPixmap</classname> <parameter>icon</parameter></paramdef>
+     <paramdef>string <parameter>callback</parameter></paramdef>
+     <paramdef>mixed <parameter><optional>userparam</optional></parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+     Adds a new toolbar element button to the end.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Adds a new toolbar element to the end. Just calls 
+     <function class="GtkToolbar">insert_element</function> with the 
+     position parameter set to the number of widgets.
+    </simpara>
+   </desc>
+  </method>
+
+  <method id="gtk.gtktoolbar.method.prepend_element">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef><classname>GtkWidget</classname> <function>prepend_element</function></funcdef>
+     <paramdef><enumname>GtkToolbarChildType</enumname> <parameter>widget_type</parameter></paramdef>
+     <paramdef><classname>GtkWidget</classname> <parameter>widget</parameter></paramdef>
+     <paramdef>string <parameter>button_text</parameter></paramdef>
+     <paramdef>string <parameter>tooltip_text</parameter></paramdef>
+     <paramdef>string <parameter>tooltip_private_text</parameter></paramdef>
+     <paramdef><classname>GtkPixmap</classname> <parameter>icon</parameter></paramdef>
+     <paramdef>string <parameter>callback</parameter></paramdef>
+     <paramdef>mixed <parameter><optional>userparam</optional></parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Adds a new toolbar element before the first item.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Adds a new toolbar element before the first item. Just calls 
+     <function class="GtkToolbar">insert_element</function> with the 
+     position parameter set to 0.
+    </simpara>
+   </desc>
+  </method>
+
+  <method id="gtk.gtktoolbar.method.insert_element">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef><classname>GtkWidget</classname> <function>insert_element</function></funcdef>
+     <paramdef><enumname>GtkToolbarChildType</enumname> <parameter>widget_type</parameter></paramdef>
+     <paramdef><classname>GtkWidget</classname> <parameter>widget</parameter></paramdef>
+     <paramdef>string <parameter>button_text</parameter></paramdef>
+     <paramdef>string <parameter>tooltip_text</parameter></paramdef>
+     <paramdef>string <parameter>tooltip_private_text</parameter></paramdef>
+     <paramdef><classname>GtkWidget</classname> <parameter>icon</parameter></paramdef>
+     <paramdef>int <parameter>position</parameter></paramdef>
+     <paramdef>string <parameter>callback</parameter></paramdef>
+     <paramdef>mixed <parameter><optional>userparam</optional></parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Inserts a new toolbar element at the given position.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Inserts a new toolbar element at the given <parameter>position</parameter>. 
+     This is the base function for all other insert/append/prepend functions.
+    </simpara>
+    <simpara>
+     The <parameter>widget_type</parameter> determines which type of widget
+     shall be inserted/created. <parameter>widget</parameter> has to be set
+     if <parameter>widget_type</parameter> is set to <literal>GTK_TOOLBAR_CHILD_WIDGET</literal>.
+     All other types require a <literal>null</literal> as <parameter>widget</parameter>
+     because they are created by the function.
+    </simpara>
+    <simpara>
+     <parameter>button_text</parameter> specifies the text (&quot;label&quot;) to be visible
+     on the button, <parameter>tooltip_text</parameter> is the tooltip text which will
+     be visible when the user hovers the button for a specific time. 
+     <parameter>tooltip_private_text</parameter> is the text being visible using
+     a <classname>GtkTipsQuery</classname>. See <classname>GtkTooltips</classname>
+     for more details on this topic.
+    </simpara>
+    <simpara>
+     <parameter>icon</parameter> is a widget, preferably a <classname>GtkPixmap</classname>
+     which shall be used as an icon. The icon is used when the <classname>GtkToolbarStyle</classname>
+     is <link linkend="gtk.gtktoolbar.method.set_style">set</link> to <literal>icon</literal> or
+     <literal>both</literal>  (only with widgets created by <literal>insert_element</literal>). 
+     You can use every type of widget, but take care that
+     the toolbar button can be identified by it when the style is <literal>icon</literal> only.
+     If the icon is set to <literal>null</literal>, the text will still be visible.
+    </simpara>
+    <simpara>
+     The <parameter>position</parameter> parameter can be in the range from 0 (insert
+     as first element) to the number of widgets (append after the last) 
+     being on the toolbar. This can be determined by doing a
+     <literal>count( $toolbar-&gt;children())</literal>, but just an 
+     <function class="GtkToolbar">append_element</function> should be more
+     easy.
+    </simpara>
+    <simpara>
+     Last parameter is <parameter>callback</parameter>, the function to be called
+     when the widget is clicked. You can pass a number of self-defined extra 
+     parameters to the callback function by appending them after the callback parameter.
+    </simpara>
+    <example>
+     <title>Using the insert_element toolbar function</title>
+     <programlisting role="php">
+<![CDATA[
+list($pixmap, $mask) = Gdk::pixmap_create_from_xpm($window->window, null, 'icon-new.xpm');
+$newicon = &new GtkPixmap($pixmap, $mask);
+
+$toolbar->insert_element(
+GTK_TOOLBAR_CHILD_BUTTON,
+'New',
+'Create a new document',
+"Closes the current document and\r\ncreates a new, empty one.",
+$newicon,
+0,
+'toolbarClicked',
+'new'
+);
+]]>
+     </programlisting>
+    </example>
+   </desc>
+  </method>
+
+
+  <!-- **_item -->
+  <method id="gtk.gtktoolbar.method.append_item">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef><classname>GtkButton</classname> <function>append_item</function></funcdef>
+     <paramdef>string <parameter>button_text</parameter></paramdef>
+     <paramdef>string <parameter>tooltip_text</parameter></paramdef>
+     <paramdef>string <parameter>tooltip_private_text</parameter></paramdef>
+     <paramdef><classname>GtkPixmap</classname> <parameter>icon</parameter></paramdef>
+     <paramdef>string <parameter>callback</parameter></paramdef>
+     <paramdef>mixed <parameter><optional>userparam</optional></parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+     Adds a new button to the end.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Adds a new button to the end. Just calls 
+     <function class="GtkToolbar">insert_element</function> with the 
+     position parameter set to the number of widgets and the widget
+     type set to <literal>button</literal>.
+    </simpara>
+   </desc>
+  </method>
+
+  <method id="gtk.gtktoolbar.method.prepend_item">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef><classname>GtkButton</classname> <function>prepend_item</function></funcdef>
+     <paramdef>string <parameter>button_text</parameter></paramdef>
+     <paramdef>string <parameter>tooltip_text</parameter></paramdef>
+     <paramdef>string <parameter>tooltip_private_text</parameter></paramdef>
+     <paramdef><classname>GtkPixmap</classname> <parameter>icon</parameter></paramdef>
+     <paramdef>string <parameter>callback</parameter></paramdef>
+     <paramdef>mixed <parameter><optional>userparam</optional></parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Adds a new button before the first item.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Adds a widget before the first item. Just calls 
+     <function class="GtkToolbar">insert_element</function> with the 
+     position parameter set to 0 and the widget
+     type set to <literal>button</literal>.
+    </simpara>
+   </desc>
+  </method>
+
+  <method id="gtk.gtktoolbar.method.insert_item">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef><classname>GtkButton</classname> <function>insert_item</function></funcdef>
+     <paramdef>string <parameter>button_text</parameter></paramdef>
+     <paramdef>string <parameter>tooltip_text</parameter></paramdef>
+     <paramdef>string <parameter>tooltip_private_text</parameter></paramdef>
+     <paramdef><classname>GtkPixmap</classname> <parameter>icon</parameter></paramdef>
+     <paramdef>int <parameter>position</parameter></paramdef>
+     <paramdef>string <parameter>callback</parameter></paramdef>
+     <paramdef>mixed <parameter><optional>userparam</optional></parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Inserts a new button at the given position.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Inserts a new button at the given <parameter>position</parameter>. 
+     Just calls <function class="GtkToolbar">insert_element</function> 
+     with the the widget type set to <literal>button</literal>.
+    </simpara>
+   </desc>
+  </method>
+ 
+   
+  <!-- append|prepend|insert_widget -->
   <method id="gtk.gtktoolbar.method.append_widget">
    <funcsynopsis>
     <funcprototype>
@@ -236,6 +493,8 @@ gtk::main();
    </desc>
   </method>
 
+  
+  <!-- non-inserting functions -->
   <method id="gtk.gtktoolbar.method.set_orientation">
    <funcsynopsis>
     <funcprototype>
@@ -272,8 +531,7 @@ gtk::main();
      Sets the text/icon style of the toolbar. This setting is 
      applied to all buttons on the toolbar, except for the widgets
      added via the <function class="GtkToolbar">insert_widget</function>
-     function. See <function class="GtkToolbar">set_button_relief</function>
-     for more details on this problem.
+     function.
     </simpara>
     <simpara>
      You could write your own method which changes the styles of all the widgets
@@ -368,16 +626,6 @@ gtk::main();
      affect widgets added via the <function class="GtkToolbar">insert_widget</function>,
      equal if they are buttons or not. 
     </simpara>
-    <simpara>
-     In-depth information: It works only with widgets created directly by the 
-     <literal>insert_element</literal> gtk function. Since php-gtk doesn't give
-     access to this, there is no way to get it work.
-    </simpara>
-    <simpara>
-     It works if you use glade for the creation of the toolbar which itself uses
-     the <literal>insert_element</literal> function. All buttons on toolbars created
-     with glade are affected by <literal>set_button_relief</literal>.
-    </simpara>
    </desc>
   </method>
 
@@ -402,6 +650,8 @@ gtk::main();
  </methods>
  
  
+ 
+ 
  <signals>
 
   <signal id="gtk.gtktoolbar.signal.style-changed">
@@ -418,8 +668,9 @@ gtk::main();
    </shortdesc>
    <desc>
     <simpara>
-     Emitted when the style has changed. Connect the toolbar with signal to your own function
-     if you want to implement the style changing for widgets added via the
+     Emitted when the style has changed. Connect the toolbar with this signal 
+     to your own function if you want to implement the style changing 
+     for widgets added via the
      <function class="GtkToolbar">insert_widget</function> function.
     </simpara>
    </desc>
