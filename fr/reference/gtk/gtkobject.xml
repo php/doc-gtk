@@ -8,8 +8,8 @@
    <para>
     <classname>GtkObject</classname> est la classe de base de la hiérarchie 
     objet de PHP-GTK. Il impémente les fonctionnalités de chaque objet 
-    possède. Cet objet ne peut être implémenter depuis PHP-GTK mais il est 
-    documenté pour accéder au méthodes référencées dans les objets qui hérite
+    possédé. Cet objet ne peut être implémenté depuis PHP-GTK mais il est 
+    documenté pour accéder aux méthodes référencées dans les objets qui héritent
     de cet objet.
    </para>
   </desc>
@@ -30,8 +30,8 @@
    <desc>
     <para>
      Cette méthode renvoie le flag de l'objet, qui est défini dans la liste
-     <enumname>GtkObjectFlags</enumname>. La valeur renvoyées peut être 
-     utilisé pour avoir des informations sur l'état actuel de l'objet.
+     <enumname>GtkObjectFlags</enumname>. La valeur renvoyée peut être 
+     utilisée pour avoir des informations sur l'état actuel de l'objet.
     </para>
     <simpara>
      Voir aussi: <function>set_flags</function>, <function>unset_flags</function>.
@@ -73,8 +73,8 @@
    </shortdesc>
    <desc>
     <para>
-     Cet méthode permet d'annuler les flags, qui sont disponible dans la 
-     liste <enumname>GtkObjectFlags</enumname>. Ce flag peut etre modifier
+     Cette méthode permet d'annuler les flags, qui sont disponibles dans la 
+     liste <enumname>GtkObjectFlags</enumname>. Ce flag peut etre modifié
      pour montrer l'état actuel de l'objet.
     </para>
     <simpara>
@@ -114,7 +114,7 @@
    </shortdesc>
    <desc>
     <simpara>
-     Cette permet d'avoir un controle sur la procédure de construction.
+     Cette méthode permet d'avoir un controle sur la procédure de construction.
      Lorsque l'objet est construit, Cela permet de stopper tout appel
      à un autre constructeur.
     </simpara>
@@ -129,18 +129,18 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Décrémente la référence initial Decrease the initial reference count by 1.
+    Décrémente la référence initiale par 1.
    </shortdesc>
    <desc>
     <simpara>
-     Cette méthode permet de décrementer les références de l'objet de 1,
-     cela se produit uniquement lors du premier appel à la fonction sink.
+     Cette méthode permet de décrementer les références de l'objet par 1,
+     cela se produit uniquement lors du premier appel de la fonction sink.
     </simpara>
     <simpara>
-     Cette méthode peut être utilisé lors de la création d'un objet 
-     flottant. Quand l'objet est attaché a un parent il est 
+     Cette méthode peut être utilisée lors de la création d'un objet 
+     flottant. Quand l'objet est attaché à un parent il est 
      <function>sunk</function>, mais, l'objet parent possède une
-     référence vers l'objet donc le nombre de reéférence est 
+     référence vers l'objet donc le nombre de références est 
      <literal>1</literal>.
     </simpara>
    </desc>
@@ -154,11 +154,11 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Augmente le nombre de référence sur l'objet.
+    Augmente le nombre de références sur l'objet.
    </shortdesc>
    <desc>
     <simpara>
-     Augmente le nombre de référence sur l'objet.
+     Augmente le nombre de références sur l'objet.
     </simpara>
    </desc>
   </method>
@@ -171,15 +171,15 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Diminue le nombre de référence sur l'objet.
+    Diminue le nombre de références sur l'objet.
    </shortdesc>
    <desc>
     <simpara>
-     Diminue le nombre de référence sur l'objet.
+     Diminue le nombre de références sur l'objet.
     </simpara>
     <note>
      <simpara>
-      Si vous diminuer le nombre de réference jusqu'à 
+      Si vous diminuer le nombre de réferences jusqu'à 
       <literal>0</literal> alors l'objet sera détruit.
      </simpara>
     </note>
@@ -199,7 +199,7 @@
    <desc>
     <simpara>
      Cette méthode appelle la fonction de destruction de l'objet.
-     La mémoire allouée par l'objet ne sera pas libéré tant que 
+     La mémoire allouée par l'objet ne sera pas libérée tant que 
      le compteur de référence de l'objet ne sera pas égal à 
      <literal>0</literal>.
     </simpara>
@@ -262,7 +262,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Supprime les données relative associé à la clé.
+    Supprime les données relatives associées à la clé.
    </shortdesc>
    <desc>
    </desc>
@@ -292,7 +292,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Supprime les données associés à la clé mais sans appeler la fonction 
+    Supprime les données associées à la clé mais sans appeler la fonction 
     de desctruction.
    </shortdesc>
    <desc>
@@ -342,15 +342,15 @@
    <desc>
     <simpara>
      Cette méthode permet de connecter une fonction à un signal et la 
-     fonction sera appelé lors de l'émission du signal sur le widget.
+     fonction sera appelée lors de l'émission du signal sur le widget.
     </simpara>
     <simpara>
-     la fonction prends deux ou trois arguments. Le premier paramêtre,
+     la fonction prend deux ou trois arguments. Le premier paramêtre,
      <parameter>signal</parameter> est la chaîne de caractère du nom du
      signal, le second, <parameter>function</parameter> est le nom de la 
-     fonction qui sera utilisé comme rappel. le troisième,
-     <parameter>custom</parameter> est facultatif and peut être utilisé 
-     passer des paramètres supplémentaires au rappel. Reportez au Guide 
+     fonction qui sera utilisée comme rappel. le troisième,
+     <parameter>custom</parameter> est facultatif et peut être utilisé 
+     pour passer des paramètres supplémentaires au rappel. Reportez au Guide 
      l'utilisateur pour plus d'informations.
     </simpara>
     <simpara>
@@ -379,14 +379,14 @@
    <desc>
     <simpara>
      Cette méthode permet de connecter une fonction à un signal et la 
-     fonction sera appelé lors de l'émission du signal sur le widget.
+     fonction sera appelée lors de l'émission du signal sur le widget.
      Le rappel sera appelé seulement après les autres.
     </simpara>
     <simpara>
-     la fonction prends deux ou trois arguments. Le premier paramêtre,
+     la fonction prend deux ou trois arguments. Le premier paramêtre,
      <parameter>signal</parameter> est la chaîne de caractère du nom du
      signal, le second, <parameter>function</parameter> est le nom de la 
-     fonction qui sera utilisé comme rappel. le troisième,
+     fonction qui sera utilisée comme rappel. le troisième,
      <parameter>custom</parameter> est facultatif and peut être utilisé 
      passer des paramètres supplémentaires au rappel. Reportez au Guide 
      l'utilisateur pour plus d'informations.
@@ -444,26 +444,26 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Passe un objet différent au rappel, et exécute la fonction aprés
+    Passe un objet différent au rappel et exécute la fonction après
     les autres.
    </shortdesc>
    <desc>
     <simpara>
      <function class="GtkObject">connect_object_after</function> permet de
      passer un autre objet au rappel que celui qui a émis le signal. 
-     En utilisant  <function class="GtkObject">connect_object_after</function>
-     les autres handlers et le handler par défaut seront appelé en premier.
+     En utilisant <function class="GtkObject">connect_object_after</function>
+     les autres handlers et le handler par défaut seront appelés en premier.
     </simpara>
     <simpara>
-     la fonction prends deux ou trois arguments. Le premier paramêtre,
+     la fonction prend deux ou trois arguments. Le premier paramêtre,
      <parameter>signal</parameter> est la chaîne de caractère du nom du
      signal, le second, <parameter>function</parameter> est le nom de la 
-     fonction qui sera utilisé comme rappel. le troisième,
+     fonction qui sera utilisée comme rappel. le troisième,
      <parameter>param</parameter> est l'objet que l'on va passer en 
-     paramêtre
+     paramêtre.
      </simpara>
     <simpara>
-     la fonction renvoi le signal_id.
+     la fonction renvoie le signal_id.
     </simpara>
     <simpara>
      See Also: <function class="GtkObject">connect</function>, 
