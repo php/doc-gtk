@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
-<chapter id="gtk.signals">
+<chapter id="signals">
  <title>Signaux et Rappels</title>
+ <sect1 id="signals.intro"></sect1>
 
- <sect1 id="gtk.signals.whatare">
+ <sect1 id="signals.whatare">
   <title>Qu'est-ce qu'un Signal?</title>
   <simpara>
    <emphasis>un signal est un événement émis par un
-   <link linkend="gtk.widgets.whatare">widget</link>.</emphasis>
+   <link linkend="widgets.whatare">widget</link>.</emphasis>
   </simpara>
   <simpara>
    Quand une programme un interface graphique (<acronym>GUI</acronym>), 
@@ -30,25 +31,25 @@
    Par exemple, quand un utilisateur clicke sur un bouton (objet 
    <classname>GtkButton</classname>) le widget bouton émet un signal de type 
    <signalname>clicked</signalname>.  Le développeur devra alors programmer le 
-   <link linkend="gtk.callbacks.whatare">rappel</link> correspondant au signal
+   <link linkend="callbacks.whatare">rappel</link> correspondant au signal
    émis.
   </simpara>
  </sect1>
 
- <sect1 id="gtk.callbacks.whatare">
+ <sect1 id="callbacks.whatare">
   <title>Qu'est-ce que les Rappels?</title>
   <simpara>
    <emphasis>
     Les rappels sont les fonctions qui sont appelés quand un  
-    <link linkend="gtk.signals.whatare">signal</link> est émis par un 
-    <link linkend="gtk.widgets.whatare">widget</link>.
+    <link linkend="signals.whatare">signal</link> est émis par un 
+    <link linkend="widgets.whatare">widget</link>.
    </emphasis>
   </simpara>
   <simpara>
    Les rappels sont les fonctions définis par le développeur et qui réagisse
    aux événements emis par le widget.  Pour définir la fonction qui doit être
    appelée, il faut définir la 
-   <link linkend="gtk.signals.connection">connexion</link> entre la fonction
+   <link linkend="signals.connection">connexion</link> entre la fonction
    et le signal.
   </simpara>
   <simpara>
@@ -59,7 +60,7 @@
   </simpara>
  </sect1>
 
- <sect1 id="gtk.signal.inheritance">
+ <sect1 id="signals.inheritance">
   <title>Héritage des signaux</title>
   <simpara>
    Les signaux sont hérités par les objets au même titre que les méthodes. un
@@ -73,10 +74,10 @@
   </simpara>
  </sect1>
 
- <sect1 id="gtk.signals.connection">
+ <sect1 id="signals.connection">
   <title>Connecter un signal</title>
 
-  <sect2 id="gtk.signals.connection.simple">
+  <sect2 id="signals.connection.simple">
    <title>Une connexion simple</title>
    <simpara>
     Pour que le widget réagisse, vous devez connecter le signal au rappel
@@ -152,7 +153,7 @@ gtk::main();
    </para>
   </sect2>
 
-  <sect2 id="gtk.signals.connection.multiple">
+  <sect2 id="signals.connection.multiple">
    <title>Les Connexions Multiples</title>
    <simpara>
     En utilisant PHP-GTK, vous pouvez inscrire plusieurs méthodes pour être
@@ -209,12 +210,12 @@ Second appel !
   </sect2>
  </sect1>
  
- <sect1 id="gtk.signals.custom.params">
+ <sect1 id="signals.custom.params">
   <title>Paramètres personnalisé</title>
-  <sect2 id="gtk.signals.custom.data">
+  <sect2 id="signals.custom.data">
    <title>Passer des données en paramètres</title>
    <simpara>
-    Lors de la <link linkend="gtk.signals.connection">connexion</link>
+    Lors de la <link linkend="signals.connection">connexion</link>
     d'un signal, il est possible d'ajouter un paramètre personnalisé aux
     rappels.  Cela peut être trés utile pour passer un objet en paramêtre et
     ainsi effectuer une action sur celle-ci.
@@ -317,7 +318,7 @@ gtk::main();
    </para>
   </sect2>
  
-  <sect2 id="gtk.signals.connect.object">
+  <sect2 id="signals.connect.object">
    <title>Utlisation de la méthode connect_object*</title>
    <para>
     les méthodes <function class="GtkObject">connect_object()</function> et 
@@ -422,7 +423,7 @@ gtk::main();
   </sect2>
  </sect1>
 
- <sect1 id="gtk.signals.events">
+ <sect1 id="signals.events">
   <title>Signaux et Evénements</title>
   <simpara>
    <emphasis>Les signaux GTK, les événements GDK.</emphasis>
