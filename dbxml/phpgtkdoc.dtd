@@ -2,7 +2,7 @@
    Docbook Customization layer of PHP-GTK docs
    Authors: James Moore <jmoore@php.net>
 
-   $Id: phpgtkdoc.dtd,v 1.12 2003-06-17 13:29:33 sfox Exp $
+   $Id: phpgtkdoc.dtd,v 1.13 2003-08-03 18:03:51 sfox Exp $
 
 -->
 
@@ -28,7 +28,12 @@
     %common.attrib;
 >
 
-<!ELEMENT enums ((title), (partintro), (enum)+)>
+<!ELEMENT enumset ((title), (partintro), (enums))>
+<!ATTLIST enumset
+    %common.attrib;
+>
+
+<!ELEMENT enums ((enum)+)>
 <!ATTLIST enums
     %common.attrib;
 >
