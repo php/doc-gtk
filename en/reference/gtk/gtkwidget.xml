@@ -35,8 +35,23 @@
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
-   <shortdesc></shortdesc>
-   <desc></desc>
+   <shortdesc>
+    Highlight the widget.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Highlights the calling widget. This method is usually called internally
+     when a widget is selected. When called, <function
+     class="GtkWidget">drag_hihglight</function> attaches handlers to
+     <signalname class="GtkWidget">expose-event</signalname> and <signalname
+     class="GtkWidget">draw</signalname> so that the widget will remain
+     highlighed until it is unhighlighted using <function
+     class="GtkWidget">drag_unhighlight</function>.
+    </simpara>
+    <simpara>
+     See also: <function class="GtkWidget">drag_unhighlight</function>
+    </simpara>
+   </desc>
   </method>
 
   <method id="gtk.gtkwidget.method.drag_unhighlight">
@@ -46,8 +61,77 @@
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
-   <shortdesc></shortdesc>
-   <desc></desc>
+   <shortdesc>
+    Unhighlight the widget.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Unhighlights the calling widget. This method is usually used internally
+     when another widget is selected. 
+    </simpara>
+    <simpara>
+     See also: <function class="GtkWidget">drag_highlight</function>
+    </simpara>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkwidget.method.drag_dest_set">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>drag_dest_set</function></funcdef>
+     <paramdef>
+      <enumname>GtkDestDefaults</enumname>
+      <parameter>flags</parameter>
+     </paramdef>
+     <paramdef>array
+      <parameter>targets</parameter>
+     </paramdef>
+     <paramdef>int
+      <parameter>actions</parameter>
+     </paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Set a widget as a drag-and-drop destination.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Sets the calling widget as a drag-and-drop destination.
+     <parameter>flags</parameter> is one of four
+     <enumname>GtkDestDefaults</enumname> values which define how the widget
+     reacts when the drag is over the widget.
+    </simpara>
+    <para>
+     <parameter>targets</parameter> is a two dimensional array describing the
+     drop areas of the widget.
+     <example>
+      <title>Format of <parameter>targets</parameter></title>
+      <programlisting role="php">
+<![CDATA[
+array
+(
+    [0] => Array
+        (
+            [target] => target
+            [flags]  => flags
+            [info]   => info
+        )
+
+)
+]]>
+      </programlisting>
+     </example>
+    </para>
+    <simpara>
+     <parameter>actions</parameter> is one of six
+     <enumname>GdkDragAction</enumname> values.
+     <parameter>actions</parameter> defines what happens when the drag is
+     completed.
+    </simpara>
+    <simpara>
+     See also: <function class="GtkWidget">drag_dest_unset</function>
+    </simpara>
+   </desc>
   </method>
 
   <method id="gtk.gtkwidget.method.drag_dest_unset">
