@@ -49,10 +49,11 @@
      <title>Adding more than one widget to a 
 <classname>GtkButton</classname></title>
       <programlisting role="php">
+dl('php_gtk.' . (strstr(PHP_OS, 'WIN') ? 'dll' : 'so'));
+    
 $window = &amp;new GtkWindow(GTK_WINDOW_DIALOG);
 $window-&gt;set_position(GTK_WIN_POS_MOUSE);
-$window-&gt;connect_object(&quot;destroy&quot;, array(&quot;gtk&quot;, 
-&quot;main_quit&quot;));
+$window-&gt;connect_object('destroy', array('gtk', 'main_quit'));
 $window-&gt;realize();
     
 list ($gdkpixmap, $mask) = gdk::pixmap_create_from_xpm($window-&gt;window, 
@@ -89,11 +90,12 @@ gtk::main();
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Emits <signalname>pressed</signalname> signal.
+    Emits <signalname class="GtkButton">pressed</signalname> signal.
    </shortdesc>
    <desc>
     <simpara>
-     Makes the button emit the <signalname>pressed</signalname> signal.
+     Makes the button emit the 
+     <signalname class="GtkButton">pressed</signalname> signal.
     </simpara>
    </desc>
   </method>
@@ -106,11 +108,12 @@ gtk::main();
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Emits <signalname>released</signalname> signal.
+    Emits <signalname class="GtkButton">released</signalname> signal.
    </shortdesc>
    <desc>
     <simpara>
-     Makes the button emit the <signalname>released</signalname> signal.
+     Makes the button emit the 
+     <signalname class="GtkButton">released</signalname> signal.
     </simpara>
    </desc>
   </method>
@@ -123,11 +126,12 @@ gtk::main();
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Emits <signalname>clicked</signalname> signal.
+    Emits <signalname class="GtkButton">clicked</signalname> signal.
    </shortdesc>
    <desc>
     <simpara>
-     Makes the button emit the <signalname>clicked</signalname> signal.
+     Makes the button emit the 
+     <signalname class="GtkButton">clicked</signalname> signal.
     </simpara>
    </desc>
   </method>
@@ -140,11 +144,12 @@ gtk::main();
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Emits <signalname>enter</signalname> signal.
+    Emits <signalname class="GtkButton">enter</signalname> signal.
    </shortdesc>
    <desc>
     <simpara>
-     Makes the button emit the <signalname>enter</signalname> signal.
+     Makes the button emit the 
+     <signalname class="GtkButton">enter</signalname> signal.
     </simpara>
    </desc>
   </method>
@@ -157,11 +162,12 @@ gtk::main();
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Emits <signalname>leave</signalname> signal.
+    Emits <signalname class="GtkButton">leave</signalname> signal.
    </shortdesc>
    <desc>
     <simpara>
-     Makes the button emit the <signalname>leave</signalname> signal.
+     Makes the button emit the 
+     <signalname class="GtkButton">leave</signalname> signal.
     </simpara>
    </desc>
   </method>
@@ -265,16 +271,22 @@ gtk::main();
    </shortdesc>
    <desc>
     <simpara>
-     The <signalname>clicked</signalname> signal is emitted at the
-     midpoint between pressing and releasing the mouse-button.  This
-     is the most commonly used <classname>GtkButton</classname> signal,
-     and holds an advantage over the other signals listed here in that
-     it also responds to <literal>enter</literal> or 
-     <literal>spacebar</literal> keypresses as though they were
-     mouse-clicks, by default.  However, note that the 
-     <signalname>clicked</signalname> signal will not fire when the
-     user releases the mouse-button after the cursor has left the
-     widget's region.
+     The <signalname class="GtkButton">clicked</signalname> signal is
+     emitted at the midpoint between pressing and releasing the
+     mouse-button.  This is the most commonly used 
+     <classname>GtkButton</classname> signal, and holds an advantage over
+     the other signals listed here in that it also responds to 
+     <literal>enter</literal> or <literal>spacebar</literal> keypresses as
+     though they were mouse-clicks.  Signals that have this property have a
+     direct relationship with <classname>GtkWidget</classname>'s 
+     <signalname class="GtkWidget">activate</signalname> signal; all
+     interactive widgets contain one such method/signal pair.
+    </simpara>
+    <simpara>
+     Note that the <signalname class="GtkButton">clicked</signalname> 
+     signal will not fire when the mouse-button is released after the cursor
+     has left the widget's region.  The <literal>activate</literal> type of
+     signals are by nature region-specific.
     </simpara>
     <para>
      Use one of the <function class="GtkObject">connect()</function> 
@@ -284,21 +296,22 @@ gtk::main();
      <example>
       <title>Making a simple connection</title>
       <programlisting role="php">
+dl('php_gtk.' . (strstr(PHP_OS, 'WIN') ? 'dll' : 'so'));
+    
 function my_function() {
-	echo &quot;The button was clicked\n&quot;;
+  echo &quot;The button was clicked\n&quot;;
 }
-
+    
 $window = &amp;new GtkWindow();
 $window-&gt;set_position(GTK_WIN_POS_MOUSE);
-$window-&gt;connect_object(&quot;destroy&quot;, array(&quot;gtk&quot;, 
-&quot;main_quit&quot;));
-
+$window-&gt;connect_object('destroy', array('gtk', 'main_quit'));
+    
 $button = &amp;new GtkButton(&quot;Click Me&quot;);
-$button-&gt;connect(&quot;clicked&quot;, &quot;my_function&quot;);
+$button-&gt;connect('clicked', 'my_function');
 $window-&gt;add($button);
-
+    
 $window-&gt;show_all();
-
+    
 gtk::main();
       </programlisting>
      </example>
@@ -322,8 +335,9 @@ gtk::main();
    </shortdesc>
    <desc>
     <simpara>
-     The <signalname>released</signalname> signal is emitted when the
-     user releases the mouse-button, regardless of cursor position.
+     The <signalname class="GtkButton">released</signalname> signal is
+     emitted when the user releases the mouse-button, regardless of
+     the cursor position.
     </simpara>
    </desc>
   </signal>
@@ -341,11 +355,13 @@ gtk::main();
    </shortdesc>
    <desc>
     <simpara>
-     The <signalname>leave</signalname> signal is emitted when the cursor
-     leaves the area of the screen where the button is positioned.
+     The <signalname class="GtkButton">leave</signalname> signal is emitted
+     when the cursor leaves the area of the screen where the button is
+     positioned.
     </simpara>
    </desc>
   </signal>
+
  </signals>
 
 </classentry>
