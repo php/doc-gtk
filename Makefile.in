@@ -77,7 +77,7 @@ html: build/html/index.html
 nochunk: bigmanual.html
 phpweb:	build/php/index.php
 text: build/manual.txt
-util: name_to_id.xsl custom.titlepage.xsl genchapters
+util: custom.titlepage.xsl
 
 #
 # Dependency Aliases
@@ -92,7 +92,6 @@ phpdir:	build/php
 testdir: build/test
 genchapterents.php:	scripts/genchapterents.php
 udocs:	scripts/udocs
-name_to_id.xsl:	@STYLESHEET_DIR@/html/name_to_id.xsl
 custom.titlepage.xsl: @STYLESHEET_DIR@/html/custom.titlepage.xsl
 
 #
@@ -151,9 +150,6 @@ FORCE:
 #
 # Make Rules
 #
-
-@STYLESHEET_DIR@/html/name_to_id.xsl: manual.xml
-	$(SAXON) manual.xml	$(stylesheet_dir)/gen_name_to_id.xsl > $@  
 
 @STYLESHEET_DIR@/html/custom.titlepage.xsl:	manual.xml
 	$(SAXON) $(html_stylesheet_dir)/custom.titlepage.xml	$(DOCBOOKXSL)/template/titlepage.xsl > $@
