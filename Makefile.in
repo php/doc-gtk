@@ -76,7 +76,9 @@ util: custom.titlepage.xsl
 
 mirror-files: build/php_gtk_manual_@LANG@.tar.gz \
 	      build/php_gtk_manual_@LANG@.tar.bz2 \
-	      build/php_gtk_manual_@LANG@.zip
+	      build/php_gtk_manual_@LANG@.zip \
+	      build/php_gtk_manual_@LANG@.html.gz \
+	      build/php_gtk_manual_@LANG@.txt.gz
 
 #
 # Dependency Aliases
@@ -173,6 +175,12 @@ build/php_gtk_manual_@LANG@.tar.gz: build/html/index.html
 
 build/php_gtk_manual_@LANG@.tar.bz2: build/html/index.html
 	(cd build/html; tar -cf -) | bzip2 -9 > $@
+
+build/php_gtk_manual_@LANG@.html.gz: build/bigmanual.html
+	gzip -c -9 $< > $@
+
+build/php_gtk_manual_@LANG@.txt.gz: build/manual.txt
+	gzip -c -9 $< > $@
 
 updatexml:
 ifeq "$(mode)" "update"
