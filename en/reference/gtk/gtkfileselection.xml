@@ -2,11 +2,40 @@
  <classmeta>
   <classtitle>GtkFileSelection</classtitle>
   <classparent>GtkWindow</classparent>
-  <shortdesc>
-   Widget for selecting a file or a directory.
-  </shortdesc>
+  <shortdesc>Widget for selecting a file or a directory.</shortdesc>
   <desc>
-
+   <simpara>
+    <classname>GtkFileSelection</classname> is used to retrieve file
+    or directory names selected by the user. It creates a dialog
+    window containing a directory list and a file list corresponding
+    to the specified or current working directory and its contents.  
+    The filesystem can be navigated using either the directory tree
+    or the drop-down history menu.  Alternatively, the 
+    <literal>TAB</literal> key can be used either to auto-complete
+    file-names typed into the entry field or to navigate either list,
+    and the <literal>spacebar</literal> can be used to select items.
+   </simpara>
+   <simpara>
+    The default filename or directory can be set using
+    <function class="GtkFileSelection">set_filename()</function> and
+    the selected filename retrieved using 
+    <function class="GtkFileSelection">get_filename()</function>.  If
+    no filename has been selected then the current directory will be
+    returned.
+   </simpara>
+   <simpara>
+    Use <function class="GtkFileSelection">complete()</function> to
+    display files that match a given pattern.  This can be used for
+    example, to show only <literal>*.txt</literal> files, or only files
+    beginning with <literal>gtk*</literal>.
+   </simpara>
+   <simpara>
+    Simple file operations - <literal>create directory</literal>, 
+    <literal>delete file</literal> and <literal>rename file</literal> 
+    - are available from buttons in the dialog which are shown by default. 
+    These can be hidden using 
+    <function class="GtkFileSelection">hide_fileop_buttons()</function>.
+   </simpara>
   </desc>
  </classmeta>
 
@@ -14,14 +43,27 @@
   <funcsynopsis>
    <funcprototype>
     <funcdef> <function>GtkFileSelection</function></funcdef>
-    <paramdef>string <parameter><optional>title = NULL</optional></parameter></paramdef>
+    <paramdef>string 
+     <parameter><optional>title = NULL</optional></parameter>
+    </paramdef>
    </funcprototype>
   </funcsynopsis>
   <shortdesc>
-
+   Creates a new <classname>GtkFileSelection</classname> widget.
   </shortdesc>
   <desc>
-
+   <para>
+    The syntax to create a <classname>GtkFileSelection</classname> 
+    widget is:
+    <informalexample>
+     <programlisting role="php">
+      $fs = &amp;new GtkFileSelection(&quot;My File Selection&quot;);
+     </programlisting>
+    </informalexample>
+    Note that if the <parameter>title</parameter> parameter is not
+    supplied or is <literal>NULL</literal> the title will be set to
+    the name of the file in which the PHP code resides.
+   </para>
   </desc>
  </constructor>
 
@@ -35,10 +77,19 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the default path.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Sets the default path for the directory and/or filename.
+    </simpara>
+    <para>
+     <informalexample>
+      <programlisting role = "php">
+       $fs-&gt;set_filename(&quot;/home/user/php/&quot;);
+      </programlisting>
+     </informalexample>
+    </para>
    </desc>
   </method>
 
@@ -46,14 +97,25 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>string <function>get_filename</function></funcdef>
-     <paramdef>void</paramdef>
+     <paramdef>void<parameter></parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the current selected path.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Returns a string representing the current value in the file
+     selector.  If no directory or file has been selected then the
+     current path is returned.
+    </simpara>
+    <para>
+     <informalexample>
+      <programlisting role="php">
+       $filename = $fs-&gt;get_filename();
+      </programlisting>
+     </informalexample>
+    </para>
    </desc>
   </method>
 
@@ -65,10 +127,26 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Matches a given pattern to a valid filename.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Will attempt to match the given pattern to a valid filename in
+     the current directory.  If a full match is made, the matched
+     filename will appear in both the file list and the text entry
+     field of the file selection dialog. If only partial matches can
+     be found, the file list will contain the resulting filenames and
+     the text entry field will contain the closest matched string 
+     (not the full filename).  Note that only a single wildcard field
+     is effective here.
+    </simpara>
+    <para>
+     <informalexample>
+      <programlisting role="php">
+       $fs-&gt;complete(&quot;*.php&quot;);
+      </programlisting>
+     </informalexample>
+    </para>
    </desc>
   </method>
 
@@ -76,14 +154,32 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>show_fileop_buttons</function></funcdef>
-     <paramdef>void</paramdef>
+     <paramdef>void<parameter></parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Shows the file operation buttons.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Shows the file operation buttons <literal>Create Dir</literal>, 
+     <literal>Delete File</literal> and <literal>Rename File</literal>. 
+     This is their default state, so that 
+     <function class="GtkFileSelection">show_fileop_buttons()</function> 
+     would only be used following a call to 
+     <function class="GtkFileSelection">hide_fileop_buttons()</function>. 
+     The rest of the widgets in the dialog will be automatically resized
+     to accommodate the status of the file operation buttons.  These
+     buttons do not need any programming in order to carry out their
+     respective functions, as these are already hard-coded into GTK+.
+    </simpara>
+    <para>
+     <informalexample>
+      <programlisting role="php">
+       $fs-&gt;show_fileop_buttons();
+      </programlisting>
+     </informalexample>
+    </para>
    </desc>
   </method>
 
@@ -91,17 +187,254 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>hide_fileop_buttons</function></funcdef>
-     <paramdef>void</paramdef>
+     <paramdef>void<parameter></parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Hides the file operation buttons.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Hides the file operation buttons <literal>Create Dir</literal>, 
+     <literal>Delete File</literal> and <literal>Rename File</literal> 
+     which by default appear at the top left-hand corner of a
+     <classname>GtkFileSelection</classname>. 
+     <function class="GtkFileSelection">hide_fileop_buttons()</function> 
+     is useful where a custom file selector based on the
+     <classname>GtkFileSelection</classname> widget is required.
+    </simpara>
+    <para>
+     <informalexample>
+      <programlisting role="php">
+       $fs-&gt;hide_fileop_buttons();
+      </programlisting>
+     </informalexample>
+    </para>
    </desc>
   </method>
 
  </methods>
+
+ <properties>
+
+  <property id="gtk.gtkfileselection.property.dir_list">
+   <propname>dir_list</propname>
+   <proptype>GtkWidget</proptype>
+   <shortdesc>
+    Accessible <classname>GtkCList</classname> within the
+    <classname>GtkFileSelection</classname> widget's structure.
+   </shortdesc>
+   <desc>
+    <simpara>
+     <classname>GtkCList</classname> widget embedded in the
+     <classname>GtkFileSelection</classname> dialog that displays the
+     subdirectories available in the current directory.
+    </simpara>
+    <para>
+     In order to access 
+     <property class="GtkFileSelection">dir_list</property> it is
+     necessary to create a handle for it, e.g.
+     <informalexample>
+      <programlisting role="php">
+       $dir_list_handle = $fs-&gt;dir_list;
+      </programlisting>
+     </informalexample>
+    </para>
+   </desc>
+  </property>
+
+  <property id="gtk.gtkfileselection.property.file_list">
+   <propname>file_list</propname>
+   <proptype>GtkWidget</proptype>
+   <shortdesc>
+    Accessible <classname>GtkCList</classname> within the
+    <classname>GtkFileSelection</classname> widget's structure.
+   </shortdesc>
+   <desc>
+    <simpara>
+     <classname>GtkCList</classname> widget embedded in the
+     <classname>GtkFileSelection</classname> dialog that displays the
+     list of files available in the current directory.
+    </simpara>
+    <para>
+     In order to access 
+     <property class="GtkFileSelection">file_list</property> it is
+     necessary to create a handle for it, e.g.
+     <informalexample>
+      <programlisting role="php">
+       $file_list_handle = $fs-&gt;file_list;
+      </programlisting>
+     </informalexample>
+    </para>
+   </desc>
+  </property>
+
+  <property id="gtk.gtkfileselection.property.selection_entry">
+   <propname>selection_entry</propname>
+   <proptype>GtkWidget</proptype>
+   <shortdesc>
+    Accessible <classname>GtkEntry</classname> within the
+    <classname>GtkFileSelection</classname> widget's structure.
+   </shortdesc>
+   <desc>
+    <simpara>
+     <classname>GtkEntry</classname> widget at the bottom of the
+     <classname>GtkFileSelection</classname> dialog that displays the
+     current file selection.
+    </simpara>
+    <para>
+     In order to access 
+     <property class="GtkFileSelection">selection_entry</property> it
+     is necessary to create a handle for it, e.g.
+     <informalexample>
+      <programlisting role="php">
+       $selection_entry_handle = $fs-&gt;selection_entry;
+      </programlisting>
+     </informalexample>
+    </para>
+   </desc>
+  </property>
+
+  <property id="gtk.gtkfileselection.property.selection_text">
+   <propname>selection_text</propname>
+   <proptype>GtkWidget</proptype>
+   <shortdesc>
+    Accessible <classname>GtkLabel</classname> within the
+    <classname>GtkFileSelection</classname> widget's structure.
+   </shortdesc>
+   <desc>
+    <simpara>
+     The <property class="GtkFileSelection">selection_text</property> 
+     property is a <classname>GtkLabel</classname> that by default
+     contains the string <literal>Selection: </literal> plus the current
+     directory selected.
+    </simpara>
+    <para>
+     In order to access 
+     <property class="GtkFileSelection">selection_text</property> it is
+     necessary to create a handle for it, e.g.
+     <informalexample>
+      <programlisting role="php">
+       $selection_text_handle = $fs-&gt;selection_text;
+      </programlisting>
+     </informalexample>
+    </para>
+   </desc>
+  </property>
+
+  <property id="gtk.gtkfileselection.property.main_vbox">
+   <propname>main_vbox</propname>
+   <proptype>GtkWidget</proptype>
+   <shortdesc>
+    Accessible <classname>GtkVBox</classname> within the
+    <classname>GtkFileSelection</classname> widget's structure.
+   </shortdesc>
+   <desc>
+    <simpara>
+     A <classname>GtkVBox</classname> placed below the two 
+     <classname>GtkCList</classname>s and above the 
+     <property class="GtkFileSelection">selection_entry</property>
+     widget.  Additional Gtk widgets can be packed into this container
+     and will appear below the <literal>Create Dir</literal>, 
+     <literal>Delete File</literal> and <literal>Rename File</literal> 
+     buttons that are standard with the 
+     <classname>GtkFileSelection</classname> (if shown).
+    </simpara>
+    <para>
+     In order to access 
+     <property class="GtkFileSelection">main_vbox</property> it is
+     necessary to create a handle for it, e.g.
+     <informalexample>
+      <programlisting role="php">
+       $main_vbox_handle = $fs-&gt;main_vbox;
+      </programlisting>
+     </informalexample>
+    </para>
+   </desc>
+  </property>
+
+  <property id="gtk.gtkfileselection.property.ok_button">
+   <propname>ok_button</propname>
+   <proptype>GtkWidget</proptype>
+   <shortdesc>
+    Accessible <classname>GtkButton</classname> within the
+    <classname>GtkFileSelection</classname> widget's structure.
+   </shortdesc>
+   <desc>
+    <simpara>
+     <classname>GtkButton</classname> widget at the bottom of the
+     <classname>GtkFileSelection</classname> dialog. It is the
+     programmer's responsibility to listen for signals from this
+     button and take the appropriate action.
+    </simpara>
+    <para>
+     In order to access 
+     <property class="GtkFileSelection">ok_button</property> it is
+     necessary to create a handle for it, e.g.
+     <informalexample>
+      <programlisting role="php">
+       $ok_button_handle = $fs-&gt;ok_button;
+      </programlisting>
+     </informalexample>
+    </para>
+   </desc>
+  </property>
+
+  <property id="gtk.gtkfileselection.property.cancel_button">
+   <propname>cancel_button</propname>
+   <proptype>GtkWidget</proptype>
+   <shortdesc>
+    Accessible <classname>GtkButton</classname> within the
+    <classname>GtkFileSelection</classname> widget's structure.
+   </shortdesc>
+   <desc>
+    <simpara>
+     <classname>GtkButton</classname> widget at the bottom of the
+     <classname>GtkFileSelection</classname> dialog. As with the 
+     <property class="GtkFileSelection">ok_button</property>,
+     it is the programmer's responsibility to listen for signals from
+     this button and take the appropriate action.
+    </simpara>
+    <para>
+     In order to access 
+     <property class="GtkFileSelection">cancel_button</property> it is
+     necessary to create a handle for it, e.g.
+     <informalexample>
+      <programlisting role="php">
+       $cancel_button_handle = $fs-&gt;cancel_button;
+      </programlisting>
+     </informalexample>
+    </para>
+   </desc>
+  </property>
+
+  <property id="gtk.gtkfileselection.property.action_area">
+   <propname>action_area</propname>
+   <proptype>GtkWidget</proptype>
+   <shortdesc>
+    Accessible <classname>GtkHBox</classname> within the
+    <classname>GtkFileSelection</classname> widget's structure.
+   </shortdesc>
+   <desc>
+    <simpara>
+     A <classname>GtkHBox</classname> placed between the 
+     <property class="GtkFileSelection">main_vbox</property> mentioned
+     above and the two <classname>GtkCList</classname>s  for the
+     directory and file list.
+    </simpara>
+    <para>
+     In order to access 
+     <property class="GtkFileSelection">action_area</property> it is
+     necessary to create a handle for it, e.g.
+     <informalexample>
+      <programlisting role="php">
+       $action_area_handle = $fs-&gt;action_area;
+      </programlisting>
+     </informalexample>
+    </para>
+   </desc>
+  </property>
+
+ </properties>
 
 </classentry>
