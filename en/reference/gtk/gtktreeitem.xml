@@ -118,40 +118,92 @@ $treeItem->set_subtree($subTree);
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Highlights the node as selected.
+    Selects the node.
    </shortdesc>
    <desc>
-    
+    <simpara>
+     Selects the node and emits the select signal.
+    </simpara>
+    <para>
+     <example>
+      <title>Selecting a node</title>
+      <programlisting role="php">
+<![CDATA[
+<?php
+function treeItemSelected() {
+ echo "A tree item was selected.\n";
+}
+
+// Create a new button.
+$button = &new GtkButton('Press Me');
+// Create a new tree item
+$treeItem = &new GtkTreeItem('I\'ll get selected.');
+
+// Have the treeItemSelected function called when
+// the tree item is selected.
+$treeItem->connect('select', 'treeItemSelected');
+
+// When the button is clicked the treeItemSelected
+// function will be called and a message will be 
+// printed to the terminal.
+$button->connect('clicked', array(&$treeItem, 'select'));
+]]>
+      </programlisting>
+     </example>
+    </para>
+    <simpara>
+     This method is connected to the <signalname>clicked</signalname>
+     signal on construction.  
+    </simpara>
+    <simpara>
+     See also: <function class="GtkTreeItem">deselect</function>
+    </simpara>
    </desc>
   </method>
 
   <method id="gtk.gtktreeitem.method.deselect">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>void <function>deselect</function></funcdef>
+     <funcdef>void
+      <function>deselect</function>
+     </funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Deselects the node.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Deselects the node and emits the deselect signal. This method
+     is called implicitly when another node in either the parent or
+     child trees is selected.
+    </simpara>
+    <simpara>
+     See also: <function class="GtkTreeItem">select</function>
+    </simpara>
    </desc>
   </method>
 
   <method id="gtk.gtktreeitem.method.expand">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>void <function>expand</function></funcdef>
+     <funcdef>void 
+      <function>expand</function>
+     </funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Shows the node's subtree.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Shows the node's subtree and emits the <signalname>expand</signalname> 
+     signal. When expanded, the icon to the left of the node changes from a
+     + (plus) to a - (minus). Show must also be called on each subtree item
+     before it will be visible.
+    </simpara>
    </desc>
   </method>
 
@@ -163,10 +215,11 @@ $treeItem->set_subtree($subTree);
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Hides the node's subtree.
    </shortdesc>
    <desc>
-
+    Hides the node's subtree and emits the <signalname>collapse</signalname>
+    signal.
    </desc>
   </method>
 
