@@ -47,6 +47,7 @@ searchable_zip: $(BUILD)/searchable_manual_$(LANG).zip
 searchable_tar: $(BUILD)/searchable_manual_$(LANG).tar.gz
 text: $(BUILD)/manual.txt
 test: $(BUILD_TEST)/index.html
+updates: $(BUILD_TEST)/updates.php
 
 mirror-files:	$(BUILD)/php_gtk_manual_$(LANG).tar.gz \
 				$(BUILD)/php_gtk_manual_$(LANG).tar.bz2 \
@@ -62,6 +63,7 @@ chunk = $(STYLESHEET_DIR)/chunk.xsl
 phpweb = $(STYLESHEET_DIR)/phpweb.xsl
 common = $(STYLESHEET_DIR)/common.xsl
 docbook = $(STYLESHEET_DIR)/docbook.xsl
+updates = $(STYLESHEET_DIR)/updates.xsl
 
 #
 # Make Rules
@@ -81,6 +83,10 @@ $(BUILD)/html/index.html: manual.xml
 $(BUILD)/bigmanual.html: manual.xml
 	@mkdir -p $(BUILD)
 	$(XSLTPROC) $(docbook) manual.xml > $(BUILD)/bigmanual.html
+
+$(BUILD_TEST)/updates.php: testclasses.xml
+	@mkdir -p $(BUILD_TEST)
+	$(XSLTPROC) $(updates) testmanual.xml > $(BUILD_TEST)/updates.php
 
 $(BUILD)/php_gtk_manual_$(LANG).zip: $(BUILD)/html/index.html
 	@mkdir -p $(BUILD)
@@ -129,14 +135,15 @@ $(BUILD)/searchable_manual_$(LANG).tar.gz: $(BUILD_SEARCHABLE)/manual/index.php
 # Clean Rules
 #
 clean:
-	rm -rf $(BUILD)
+	rm -rf $(BUILD) $(BUILD_TEST)
 	rm -f chapters.ent
+	rm -f testmanual.xml testclasses.xml
 
 distclean: clean
 	rm -f Makefile manual.xml configure
 	rm -f config.cache config.log config.status version.ent
 	cd scripts; rm -f genchapterents.php
-	cd /stylesheets/html; rm -f phpweb.xsl
+	cd stylesheets/html; rm -f phpweb.xsl
 
 cvsclean:
 	@for i in `find . -name .cvsignore`; do \

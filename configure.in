@@ -203,6 +203,7 @@ $XSLTPROC gen_name_to_id.xsl manual.xml > stylesheets/html/name_to_id.xsl
 
 #now add the list of updated files to the testclasses.xml
 # this has to be done after chapters.ent is created
+if test -n "$updates" ; then
 echo creating testclasses.xml
 for updatedfile in $updates
 do
@@ -213,5 +214,6 @@ do
 done
 # can't I do 2x AC_OUTPUT?
 sed "s/@TEST_REFERENCES@/$refs/g" testclasses.xml.in > testclasses.xml
+fi
 
 chmod +x scripts/genchapterents.php
