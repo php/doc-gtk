@@ -31,7 +31,7 @@
     <itemizedlist>
      <listitem>
       <para>
-       <filename>\php4</filename> - PHP dev and PHP-GTK 
+       <filename>\php4</filename> -&gt; PHP dev and PHP-GTK 
        &version.phpgtk; binary files
       </para>
      </listitem>
@@ -66,27 +66,33 @@
     <listitem>
      <simpara>
       If this is a new installation you should create 
-      <filename>c:\php4</filename> and copy the files under 
+      <filename>C:\php4</filename> and copy the files under 
       <filename>\php4</filename> to this directory.  If you have an existing
       PHP installation (for example, with Apache) or intend to have one, you
-      will need to put your php.ini file in here too.  The files that are in
-      this folder by default are PHP or PHP-GTK-related and will all need to
-      be updated from time to time.
+      will need to put your <filename>php.ini</filename> file in here too. 
+      The files that are in this folder by default are PHP or PHP-GTK-related
+      and will all need to be updated from time to time.  Note that 
+      <filename>C:\php4</filename> is the default directory and that if you
+      install PHP-GTK anywhere else, you will need to specify the full path
+      as your extension_dir in the copy of <filename>php.ini</filename> that
+      is being used by PHP.
      </simpara>
     </listitem>
     <listitem>
      <simpara>
-      Copy <filename>\winnt\system32</filename> to your windows system32
-      directory.  On Windows NT and Windows 2000 that is 
-      <filename>c:\winnt\system32</filename>.  On Windows 95/98 that is 
-      <filename>c:\windows\system32</filename>.  This group of files is
-      GTK-related and will not need to be updated until PHP-GTK2 is released.
+      Copy the contents of <filename>\winnt\system32</filename> to your
+      system32 directory.  On Windows NT and Windows 2000 that is 
+      <filename>C:\winnt\system32</filename>.  On Windows 95/98 that can be 
+      <filename>C:\Windows\system</filename> or 
+      <filename>C:\Windows\system32</filename>, take your pick.  This group
+      of files is GTK-related and will not need to be updated until PHP-GTK2
+      is released.
      </simpara>
     </listitem>
     <listitem>
      <simpara>
-      Copy <filename>\test</filename> to the location where you want to run
-      your scripts (e.g. <filename>c:\php4\test</filename>).
+      Copy the contents of <filename>\test</filename> to the location where
+      you want to run your scripts (e.g. <filename>C:\php4\test</filename>).
      </simpara>
     </listitem>
    </orderedlist>
@@ -96,7 +102,7 @@
    <simpara>
     PHP-GTK applications can be started from the command line (or a batch
     file) with this syntax: 
-    <command>c:\php4\php -q c:\path\to\php-gtk\script.php</command>
+    <command>C:\php4\php -q C:\path\to\php-gtk\script.php</command>
    </simpara>
   </sect2>
  </sect1>
