@@ -153,6 +153,9 @@ foreach ($nodes as $node) {
    </shortdesc>
    <desc>
     <simpara>
+     Adds <parameter>tree_item</parameter> to the begining of the tree. The first node of the tree is in position zero.
+    </simpara>
+    <simpara>
      See also: <function class="GtkTree">append</function>, <function class="GtkTree">insert</function>
     </simpara>
    </desc>
@@ -174,11 +177,64 @@ foreach ($nodes as $node) {
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Adds a node to the tree in the given position
+    Adds a node to the tree in the given position.
    </shortdesc>
    <desc>
     <simpara>
+     Adds <parameter>tree_item</parameter> to the tree at <parameter>position</parameter>. The first node of the tree is in position zero.
+    </simpara>
+    <para>
+     If <parameter>position</parameter> is greater than the first empty position, <parameter>tree_item</parameter> is put in the first empty position.
+     <example>
+      <title>Inserting a tree item</title>
+      <programlisting role="php">
+<![CDATA[
+<?php
+dl('php_gtk.' . (strstr(PHP_OS, 'WIN') ? 'dll' : 'so'));
+
+// Create a tree
+$tree = &new GtkTree;
+
+// Create a tree item
+$treeItem = &new GtkTreeItem('A tree item');
+
+// Insert the tree item into the 100th position.
+$tree->insert($treeItem, 100);
+
+// Check the position of the tree item.
+echo $tree->child_position($treeItem); // Outputs 0
+?>
+]]>
+      </programlisting>
+     </example>
+    </para>
+    <simpara>
      See also: <function class="GtkTree">append</function>, <function class="GtkTree">prepend</function>
+    </simpara>
+   </desc>
+  </method>
+
+  <method id="gtk.gtktree.method.remove_item">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void
+      <function>remove_item</function>
+     </funcdef>
+     <paramdef>
+      <classname>GtkWidget</classname>
+      <parameter>child</parameter>
+     </paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Removes a node from a tree.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Removes <parameter>child</parameter> from the tree.
+    </simpara>
+    <simpara>
+     If <parameter>child</parameter> is not a node of the tree, a Gtk-CRITICAL warning will be issued.
     </simpara>
    </desc>
   </method>
@@ -186,46 +242,105 @@ foreach ($nodes as $node) {
   <method id="gtk.gtktree.method.clear_items">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>void <function>clear_items</function></funcdef>
-     <paramdef>int <parameter>start</parameter></paramdef>
-     <paramdef>int <parameter>end</parameter></paramdef>
+     <funcdef>void
+      <function>clear_items</function>
+     </funcdef>
+     <paramdef>int
+      <parameter>start</parameter>
+     </paramdef>
+     <paramdef>int
+      <parameter>end</parameter>
+     </paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Removes a range of nodes from the tree.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Removes nodes from <parameter>start</parameter> to <parameter>end</parameter> inclusive.
+    </simpara>
+    <simpara>
+     If <parameter>end</parameter> is greater than the number of nodes, all nodes from <parameter>start</parameter> to the end of the tree will be removed.
+    </simpara>
+    <simpara>
+     Unlike gtk, nodes that are removed from the tree are not destroyed.
+    </simpara>
+    <simpara>
+     See also: <function class="GtkTree">remove_item</function>
+    </simpara>
    </desc>
   </method>
 
   <method id="gtk.gtktree.method.select_item">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>void <function>select_item</function></funcdef>
-     <paramdef>int <parameter>item</parameter></paramdef>
+     <funcdef>void
+      <function>select_item</function>
+     </funcdef>
+     <paramdef>int
+      <parameter>position</parameter>
+     </paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Selects a node of the tree.
    </shortdesc>
    <desc>
+    <simpara>
+     Highlights the node in <parameter>position</parameter> as selected.  This will cause the node to emit the <signalname class="GtkTreeItem">select</signalname> signal. Selecting a node which is already selected will unselect that node.
+    </simpara>
+    <para>
+     <example>
+      <title>Selecting a node twice</title>
+      <programlisting role="php">
+<![CDATA[
+// Call back function to notify when an item is deselected
+function itemDeselected() {
+  echo 'A tree item was deselected!';
+}
 
+// Create a tree
+$tree = &new GtkTree;
+
+// Create an item and add it to the tree
+$treeItem = &new GtkTreeItem('Select me twice');
+$tree->append($treeItem);
+
+// Select the item twice and see what happens
+$tree->select_item(0);
+$tree->select_item(0); // itemDeselected() will be called.
+]]>
+      </programlisting>
+     </example>
+    </para>
+    <simpara>
+     Node positions are indexed begining with zero.  The fourth node in a tree is in position three.
+    </simpara>
+    <simpara>
+     See also: <function class="GtkTree">unselect_item</function>, <function class="GtkTree">select_child</function>, <function class="GtkTree">unselect_child</function>
+    </simpara>
    </desc>
   </method>
 
   <method id="gtk.gtktree.method.unselect_item">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>void <function>unselect_item</function></funcdef>
-     <paramdef>int <parameter>item</parameter></paramdef>
+     <funcdef>void
+      <function>unselect_item</function>
+     </funcdef>
+     <paramdef>int
+      <parameter>item</parameter>
+     </paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Unselects a node of the tree.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Unhighlights and unselects a previously selected node.
+    </simpara>
    </desc>
   </method>
 
@@ -262,15 +377,25 @@ foreach ($nodes as $node) {
   <method id="gtk.gtktree.method.child_position">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>int <function>child_position</function></funcdef>
-     <paramdef><classname>GtkWidget</classname> <parameter>child</parameter></paramdef>
+     <funcdef>int
+      <function>child_position</function>
+     </funcdef>
+     <paramdef>
+      <classname>GtkWidget</classname>
+      <parameter>child</parameter>
+     </paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the position of a node.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Returns the position of <parameter>child</parameter>. The first node of a tree is in position zero.
+    </simpara>
+    <simpara>
+     If <parameter>child</parameter> is not a node of the tree, -1 is returned.
+    </simpara>
    </desc>
   </method>
 
@@ -309,21 +434,6 @@ foreach ($nodes as $node) {
     <funcprototype>
      <funcdef>void <function>set_view_lines</function></funcdef>
      <paramdef>int <parameter>flag</parameter></paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </method>
-
-  <method id="gtk.gtktree.method.remove_item">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>void <function>remove_item</function></funcdef>
-     <paramdef><classname>GtkWidget</classname> <parameter>child</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
