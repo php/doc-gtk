@@ -24,20 +24,23 @@ if ($_SERVER["argc"] < 3) {
 		.'"html" - highlight_string() is applied, "php" - highlight_php() is added' ."\n"
 	);
 }
-set_time_limit(30*60); // can run long, but not more than 30 minutes
+set_time_limit(5*60); // can run long, but not more than 5 minutes
 
 require 'geshi/geshi.php';
 $geshi = new GeSHi($with_tags, 'php', dirname(__FILE__).'/geshi/geshi');
-$geshi->set_header_type(GESHI_HEADER_DIV);
-$geshi->set_tab_width(2);
-$geshi->set_overall_class('phpcode');
+$geshi->set_tab_width(4);
 $geshi->enable_classes();
+$geshi->set_overall_class('phpcode');
+$geshi->set_overall_style('font-size: 85%', true);
 $geshi->set_keyword_group_style(1, 'color: #907000; font-weight: bold', true);
 $geshi->set_strings_style('color: green', true);
 $geshi->set_symbols_highlighting(false);
 $geshi->set_numbers_style('color: #aa0000; font-weight: bold', true);
 $geshi->set_methods_style('color: black; font-style: italic', true);
 $geshi->set_regexps_style(0, 'color: #004090', true);
+
+// use this to get updated stylesheet info if changed via abovementioned API
+// $styles = $geshi->get_stylesheet();_
 
 function callback_html_number_entities_decode($matches) {
 	return chr($matches[1]);
@@ -81,7 +84,7 @@ while (($file = array_shift($files)) !== null) {
 		if (!is_file($filename)) { // do not recurse
 			continue;
 		}
-		//~ echo "$filename\n";
+		echo "highlighting $filename ...\n";
 		$original = file_get_contents($filename);
 		$highlighted = preg_replace_callback("!<pre class=\"phpcode\">(.*)</pre>!sU", "callback_highlight_php", $original);
 		if ($original != $highlighted) {
@@ -90,6 +93,7 @@ while (($file = array_shift($files)) !== null) {
 			fwrite($fp, $highlighted);
 			fclose($fp);
 		}
+		echo "done highlighting.\n";
 	}
 }
 ?>
