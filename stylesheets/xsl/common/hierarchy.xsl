@@ -2,12 +2,13 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 		version="1.0">
 
-<!-- $Id: hierarchy.xsl,v 1.2 2001-08-10 09:58:37 jmoore Exp $ -->
+<!-- $Id: hierarchy.xsl,v 1.3 2001-08-10 10:40:51 jmoore Exp $ -->
 		
 <!-- ================== Common Hierarchy Functions ============================ -->
 
 <!--
   * Function: 	get.class.hierarchy.as.nodes
+  * Params:	classentry : The class entry that we want the hierarchy for.
   * Returns: 	Each of the current classes parent classentry's as nodes
   *          	returns no if the class does not have a parent.
   *             The function returns the classes going up the tree.
@@ -15,7 +16,34 @@
   *		xml definition of the class.
 -->
  <xsl:template name="get.class.hierarchy.as.nodes">
+  <xsl:param name="classentry"/>
 
+  <xsl:if test="$classentry!='no'">
+   <xsl:copy select="$classentry"/>
+   <xsl:call-template name="get.class.hierarchy.as.nodes">
+    <xsl:with-param name="classentry">
+     <xsl:call-template name="get.parent.node.from.child.node">
+      <xsl:with-param name="classentry" select="$classentry"/>
+     </xsl:call-template>
+    </xsl:with-param>
+   </xsl:call-template>
+  </xsl:if>
+    
+ </xsl:template>
+
+<!--
+  * Function:	get.parent.node.from.child.node
+  * Params:     classentry: the childs class entry node
+  * Returns:	The parents classentry node.
+-->
+ <xsl:template name="get.parent.node.from.child.node">
+  <xsl:param name="classentry"/>
+  <xsl:variable name="parentname"/>
+   <xsl:value-of select="$classentry/classmeta/classparent"/>
+  </xsl:variable>
+  <xsl:if test="$parentname!=''">
+   <xsl:copy select="//classentry[classmeta/classtitle=$parentname]" />
+  </xsl:if>
  </xsl:template>
 
 <!--
