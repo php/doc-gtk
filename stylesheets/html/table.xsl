@@ -8,7 +8,7 @@
                 version='1.0'>
 
 <!-- ********************************************************************
-     $Id: table.xsl,v 1.1 2003-05-02 17:18:13 sfox Exp $
+     $Id: table.xsl,v 1.2 2003-06-13 19:53:21 sfox Exp $
      ********************************************************************
 
      This file is part of the XSL DocBook Stylesheet distribution.
@@ -169,14 +169,6 @@
     <xsl:apply-templates select="tbody"/>
     <xsl:apply-templates select="tfoot"/>
 
-    <xsl:if test=".//footnote">
-      <tr>
-        <td colspan="{@cols}">
-          <xsl:apply-templates select=".//footnote" 
-                               mode="table.footnote.mode"/>
-        </td>
-      </tr>
-    </xsl:if>
   </table>
 </xsl:template>
 

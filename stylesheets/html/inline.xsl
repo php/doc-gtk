@@ -3,7 +3,7 @@
                 version='1.0'>
 
 <!-- ********************************************************************
-     $Id: inline.xsl,v 1.3 2003-06-10 06:18:38 sfox Exp $
+     $Id: inline.xsl,v 1.4 2003-06-13 19:53:21 sfox Exp $
      ********************************************************************
 
      This file is part of the XSL DocBook Stylesheet distribution.
@@ -116,11 +116,15 @@
   <sub><xsl:copy-of select="$content"/></sub>
 </xsl:template>
 
-<!-- ==================================================================== -->
 <!-- some special cases -->
+<!-- ==============================credit terms================== -->
 
 <xsl:template match="author">
   <span class="{name(.)}"><xsl:call-template name="person.name"/></span>
+</xsl:template>
+
+<xsl:template match="authorinitials">
+  <xsl:call-template name="inline.charseq"/>
 </xsl:template>
 
 <xsl:template match="editor">
@@ -131,37 +135,9 @@
   <span class="{name(.)}"><xsl:call-template name="person.name"/></span>
 </xsl:template>
 
-<xsl:template match="authorinitials">
-  <xsl:call-template name="inline.charseq"/>
-</xsl:template>
-
-<!-- ==================================================================== -->
-
-<xsl:template match="accel">
-  <xsl:call-template name="inline.charseq"/>
-</xsl:template>
-
-<xsl:template match="action">
-  <xsl:call-template name="inline.charseq"/>
-</xsl:template>
-
-<xsl:template match="application">
-  <xsl:call-template name="inline.charseq"/>
-</xsl:template>
+<!-- ===========================coding terms===================== -->
 
 <xsl:template match="classname">
-  <xsl:call-template name="inline.monoseq"/>
-</xsl:template>
-
-<xsl:template match="exceptionname">
-  <xsl:call-template name="inline.monoseq"/>
-</xsl:template>
-
-<xsl:template match="interfacename">
-  <xsl:call-template name="inline.monoseq"/>
-</xsl:template>
-
-<xsl:template match="methodname">
   <xsl:call-template name="inline.monoseq"/>
 </xsl:template>
 
@@ -228,83 +204,14 @@
   </xsl:if>
 </xsl:template>
 
-<xsl:template match="function/replaceable" priority="2">
-  <xsl:call-template name="inline.italicmonoseq"/>
-  <xsl:if test="following-sibling::*">
-    <xsl:text>, </xsl:text>
-  </xsl:if>
-</xsl:template>
-
-<xsl:template match="guibutton">
-  <xsl:call-template name="inline.charseq"/>
-</xsl:template>
-
-<xsl:template match="guiicon">
-  <xsl:call-template name="inline.charseq"/>
-</xsl:template>
-
-<xsl:template match="guilabel">
-  <xsl:call-template name="inline.charseq"/>
-</xsl:template>
-
-<xsl:template match="guimenu">
-  <xsl:call-template name="inline.charseq"/>
-</xsl:template>
-
-<xsl:template match="guimenuitem">
-  <xsl:call-template name="inline.charseq"/>
-</xsl:template>
-
-<xsl:template match="guisubmenu">
-  <xsl:call-template name="inline.charseq"/>
-</xsl:template>
-
-<xsl:template match="hardware">
-  <xsl:call-template name="inline.charseq"/>
-</xsl:template>
-
-<xsl:template match="interface">
-  <xsl:call-template name="inline.charseq"/>
-</xsl:template>
-
-<xsl:template match="interfacedefinition">
-  <xsl:call-template name="inline.charseq"/>
-</xsl:template>
-
-<xsl:template match="keycap">
-  <xsl:call-template name="inline.boldseq"/>
-</xsl:template>
-
-<xsl:template match="keycode">
-  <xsl:call-template name="inline.charseq"/>
-</xsl:template>
-
 <xsl:template match="keysym">
   <xsl:call-template name="inline.charseq"/>
 </xsl:template>
-
- <xsl:template match="en">
- <span dir="ltr">
-  <xsl:call-template name="inline.charseq"/>
- </span>
- </xsl:template>
 
 <xsl:template match="literal">
  <span dir="ltr">
   <xsl:call-template name="inline.monoseq"/>
  </span>
-</xsl:template>
-
-<xsl:template match="medialabel">
-  <xsl:call-template name="inline.italicseq"/>
-</xsl:template>
-
-<xsl:template match="shortcut">
-  <xsl:call-template name="inline.boldseq"/>
-</xsl:template>
-
-<xsl:template match="mousebutton">
-  <xsl:call-template name="inline.charseq"/>
 </xsl:template>
 
 <xsl:template match="option">
@@ -317,14 +224,6 @@
 
 <xsl:template match="property">
   <xsl:call-template name="inline.charseq"/>
-</xsl:template>
-
-<xsl:template match="prompt">
-  <xsl:call-template name="inline.monoseq"/>
-</xsl:template>
-
-<xsl:template match="replaceable" priority="1">
-  <xsl:call-template name="inline.italicmonoseq"/>
 </xsl:template>
 
 <xsl:template match="returnvalue">
@@ -343,10 +242,6 @@
   <xsl:call-template name="inline.charseq"/>
 </xsl:template>
 
-<xsl:template match="systemitem">
-  <xsl:call-template name="inline.monoseq"/>
-</xsl:template>
-
 <xsl:template match="token">
   <xsl:call-template name="inline.charseq"/>
 </xsl:template>
@@ -359,44 +254,14 @@
   <xsl:call-template name="inline.boldmonoseq"/>
 </xsl:template>
 
+<!-- ===================language terms===================== -->
+
 <xsl:template match="abbrev">
   <xsl:call-template name="inline.charseq"/>
 </xsl:template>
 
 <xsl:template match="acronym">
   <xsl:call-template name="inline.charseq"/>
-</xsl:template>
-
-<xsl:template match="citerefentry">
-  <xsl:choose>
-    <xsl:when test="$citerefentry.link != '0'">
-      <a>
-        <xsl:attribute name="href">
-          <xsl:call-template name="generate.citerefentry.link"/>
-        </xsl:attribute>
-        <xsl:call-template name="inline.charseq"/>
-      </a>
-    </xsl:when>
-    <xsl:otherwise>
-      <xsl:call-template name="inline.charseq"/>
-    </xsl:otherwise>
-  </xsl:choose>
-</xsl:template>
-
-<xsl:template name="generate.citerefentry.link">
-  <!-- nop -->
-</xsl:template>
-
-<xsl:template name="x.generate.citerefentry.link">
-  <xsl:text>http://example.com/cgi-bin/man.cgi?</xsl:text>
-  <xsl:value-of select="refentrytitle"/>
-  <xsl:text>(</xsl:text>
-  <xsl:value-of select="manvolnum"/>
-  <xsl:text>)</xsl:text>
-</xsl:template>
-
-<xsl:template match="citetitle">
-  <xsl:call-template name="inline.italicseq"/>
 </xsl:template>
 
 <xsl:template match="emphasis">
@@ -409,6 +274,12 @@
     </xsl:otherwise>
   </xsl:choose>
 </xsl:template>
+
+ <xsl:template match="en">
+ <span dir="ltr">
+  <xsl:call-template name="inline.charseq"/>
+ </span>
+ </xsl:template>
 
 <xsl:template match="foreignphrase">
   <xsl:call-template name="inline.italicseq"/>
@@ -486,149 +357,6 @@
   <xsl:call-template name="inline.italicseq"/>
 </xsl:template>
 
-<xsl:template match="glossterm">
-  <xsl:choose>
-    <xsl:when test="@linkend">
-      <xsl:variable name="targets" select="id(@linkend)"/>
-      <xsl:variable name="target" select="$targets[1]"/>
-
-      <xsl:call-template name="check.id.unique">
-        <xsl:with-param name="linkend" select="@linkend"/>
-      </xsl:call-template>
-
-      <a>
-        <xsl:if test="@id">
-          <xsl:attribute name="name">
-            <xsl:value-of select="@id"/>
-          </xsl:attribute>
-        </xsl:if>
-
-        <xsl:attribute name="href">
-          <xsl:call-template name="href.target">
-            <xsl:with-param name="object" select="$target"/>
-          </xsl:call-template>
-        </xsl:attribute>
-
-        <xsl:call-template name="inline.italicseq"/>
-      </a>
-    </xsl:when>
-    <xsl:otherwise>
-      <xsl:call-template name="inline.italicseq"/>
-    </xsl:otherwise>
-  </xsl:choose>
-</xsl:template>
-
-<xsl:template match="sgmltag">
-  <xsl:call-template name="format.sgmltag"/>
-</xsl:template>
-
-<xsl:template name="format.sgmltag">
-  <xsl:param name="class">
-    <xsl:choose>
-      <xsl:when test="@class">
-        <xsl:value-of select="@class"/>
-      </xsl:when>
-      <xsl:otherwise>element</xsl:otherwise>
-    </xsl:choose>
-  </xsl:param>
-
-  <xsl:choose>
-    <xsl:when test="$class='attribute'">
-      <xsl:call-template name="inline.monoseq"/>
-    </xsl:when>
-    <xsl:when test="$class='attvalue'">
-      <xsl:call-template name="inline.monoseq"/>
-    </xsl:when>
-    <xsl:when test="$class='element'">
-      <xsl:call-template name="inline.monoseq"/>
-    </xsl:when>
-    <xsl:when test="$class='endtag'">
-      <xsl:call-template name="inline.monoseq">
-        <xsl:with-param name="content">
-          <xsl:text>&lt;/</xsl:text>
-          <xsl:apply-templates/>
-          <xsl:text>&gt;</xsl:text>
-        </xsl:with-param>
-      </xsl:call-template>
-    </xsl:when>
-    <xsl:when test="$class='genentity'">
-      <xsl:call-template name="inline.monoseq">
-        <xsl:with-param name="content">
-          <xsl:text>&amp;</xsl:text>
-          <xsl:apply-templates/>
-          <xsl:text>;</xsl:text>
-        </xsl:with-param>
-      </xsl:call-template>
-    </xsl:when>
-    <xsl:when test="$class='numcharref'">
-      <xsl:call-template name="inline.monoseq">
-        <xsl:with-param name="content">
-          <xsl:text>&amp;#</xsl:text>
-          <xsl:apply-templates/>
-          <xsl:text>;</xsl:text>
-        </xsl:with-param>
-      </xsl:call-template>
-    </xsl:when>
-    <xsl:when test="$class='paramentity'">
-      <xsl:call-template name="inline.monoseq">
-        <xsl:with-param name="content">
-          <xsl:text>%</xsl:text>
-          <xsl:apply-templates/>
-          <xsl:text>;</xsl:text>
-        </xsl:with-param>
-      </xsl:call-template>
-    </xsl:when>
-    <xsl:when test="$class='pi'">
-      <xsl:call-template name="inline.monoseq">
-        <xsl:with-param name="content">
-          <xsl:text>&lt;?</xsl:text>
-          <xsl:apply-templates/>
-          <xsl:text>&gt;</xsl:text>
-        </xsl:with-param>
-      </xsl:call-template>
-    </xsl:when>
-    <xsl:when test="$class='xmlpi'">
-      <xsl:call-template name="inline.monoseq">
-        <xsl:with-param name="content">
-          <xsl:text>&lt;?</xsl:text>
-          <xsl:apply-templates/>
-          <xsl:text>?&gt;</xsl:text>
-        </xsl:with-param>
-      </xsl:call-template>
-    </xsl:when>
-    <xsl:when test="$class='starttag'">
-      <xsl:call-template name="inline.monoseq">
-        <xsl:with-param name="content">
-          <xsl:text>&lt;</xsl:text>
-          <xsl:apply-templates/>
-          <xsl:text>&gt;</xsl:text>
-        </xsl:with-param>
-      </xsl:call-template>
-    </xsl:when>
-    <xsl:when test="$class='emptytag'">
-      <xsl:call-template name="inline.monoseq">
-        <xsl:with-param name="content">
-          <xsl:text>&lt;</xsl:text>
-          <xsl:apply-templates/>
-          <xsl:text>/&gt;</xsl:text>
-        </xsl:with-param>
-      </xsl:call-template>
-    </xsl:when>
-    <xsl:when test="$class='sgmlcomment'">
-      <xsl:call-template name="inline.monoseq">
-        <xsl:with-param name="content">
-          <xsl:text>&lt;!--</xsl:text>
-          <xsl:apply-templates/>
-          <xsl:text>--&gt;</xsl:text>
-        </xsl:with-param>
-      </xsl:call-template>
-    </xsl:when>
-    <xsl:otherwise>
-      <xsl:call-template name="inline.charseq"/>
-    </xsl:otherwise>
-  </xsl:choose>
-</xsl:template>
-
 <xsl:template match="email">
   <xsl:call-template name="inline.monoseq">
     <xsl:with-param name="content">
@@ -640,25 +368,6 @@
       <xsl:text>&gt;</xsl:text>
     </xsl:with-param>
   </xsl:call-template>
-</xsl:template>
-
-<xsl:template match="keycombo">
-  <xsl:variable name="action" select="@action"/>
-  <xsl:variable name="joinchar">
-    <xsl:choose>
-      <xsl:when test="$action='seq'"><xsl:text> </xsl:text></xsl:when>
-      <xsl:when test="$action='simul'">+</xsl:when>
-      <xsl:when test="$action='press'">-</xsl:when>
-      <xsl:when test="$action='click'">-</xsl:when>
-      <xsl:when test="$action='double-click'">-</xsl:when>
-      <xsl:when test="$action='other'"></xsl:when>
-      <xsl:otherwise>-</xsl:otherwise>
-    </xsl:choose>
-  </xsl:variable>
-  <xsl:for-each select="./*">
-    <xsl:if test="position()>1"><xsl:value-of select="$joinchar"/></xsl:if>
-    <xsl:apply-templates/>
-  </xsl:for-each>
 </xsl:template>
 
 <!-- ==================================================================== -->
@@ -712,49 +421,12 @@
   <xsl:value-of select="$arg.choice.opt.close.str"/>
 </xsl:template>
 
-<xsl:template match="citation">
-  <!-- todo: biblio-citation-check -->
-  <xsl:text>[</xsl:text>
-  <xsl:call-template name="inline.charseq"/>
-  <xsl:text>]</xsl:text>
-</xsl:template>
-
 <!-- ==================================================================== -->
 
 <xsl:template match="comment|remark">
   <xsl:if test="$show.comments != 0">
     <i><xsl:call-template name="inline.charseq"/></i>
   </xsl:if>
-</xsl:template>
-
-<!-- ==================================================================== -->
-
-<xsl:template match="productname">
-  <xsl:call-template name="inline.charseq"/>
-  <xsl:if test="@class">
-    <xsl:call-template name="dingbat">
-      <xsl:with-param name="dingbat" select="@class"/>
-    </xsl:call-template>
-  </xsl:if>
-</xsl:template>
-
-<xsl:template match="productnumber">
-  <xsl:call-template name="inline.charseq"/>
-</xsl:template>
-
-<!-- ==================================================================== -->
-
-<xsl:template match="pob|street|city|state|postcode|country|otheraddr">
-  <xsl:call-template name="inline.charseq"/>
-</xsl:template>
-
-<xsl:template match="phone|fax">
-  <xsl:call-template name="inline.charseq"/>
-</xsl:template>
-
-<!-- in Addresses, for example -->
-<xsl:template match="honorific|firstname|surname|lineage|othername">
-  <xsl:call-template name="inline.charseq"/>
 </xsl:template>
 
 <!-- ==================================================================== -->

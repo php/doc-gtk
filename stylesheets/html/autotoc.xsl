@@ -3,7 +3,7 @@
                 version='1.0'>
 
 <!-- ********************************************************************
-     $Id: autotoc.xsl,v 1.2 2003-06-05 12:57:44 sfox Exp $
+     $Id: autotoc.xsl,v 1.3 2003-06-13 19:53:21 sfox Exp $
      ********************************************************************
 
      This file is part of the XSL DocBook Stylesheet distribution.
@@ -62,7 +62,7 @@
 
 <xsl:template name="division.toc">
   <xsl:if test="$generate.division.toc != 0">
-   <xsl:variable name="nodes" select="part|reference|classset|enums
+   <xsl:variable name="nodes" select="part|classset|enums
                                        |chapter|appendix
                                        |refentry|bridgehead"/>
     <xsl:if test="$nodes">
@@ -187,39 +187,6 @@
     <xsl:copy-of select="$subtoc.list"/>
   </xsl:if>
 </xsl:template>
-
-<!--
-<xsl:template match="sect1" mode="toc">
-  <xsl:variable name="subtoc">
-    <xsl:element name="{$toc.list.type}">
-      <xsl:apply-templates select="bridgehead" mode="toc"/>
-    </xsl:element>
-  </xsl:variable>
-
-  <xsl:variable name="subtoc.list">
-    <xsl:choose>
-      <xsl:when test="$toc.dd.type = ''">
-        <xsl:copy-of select="$subtoc"/>
-      </xsl:when>
-      <xsl:otherwise>
-        <xsl:element name="{$toc.dd.type}">
-          <xsl:copy-of select="$subtoc"/>
-        </xsl:element>
-      </xsl:otherwise>
-    </xsl:choose>
-  </xsl:variable>
-
-  <xsl:element name="{$toc.listitem.type}">
-    <a>
-      <xsl:attribute name="href">
-        <xsl:call-template name="href.target"/>
-      </xsl:attribute>
-      <xsl:apply-templates select="." mode="title.markup"/>
-    </a>
-    <xsl:copy-of select="$subtoc.list"/>
-  </xsl:element>
-</xsl:template>
--->
 
 <xsl:template match="bridgehead" mode="toc">
   <xsl:if test="$bridgehead.in.toc != 0">

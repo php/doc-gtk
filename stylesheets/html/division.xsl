@@ -3,7 +3,7 @@
                 version='1.0'>
 
 <!-- ********************************************************************
-     $Id: division.xsl,v 1.3 2003-06-10 06:16:23 sfox Exp $
+     $Id: division.xsl,v 1.4 2003-06-13 19:53:21 sfox Exp $
      ********************************************************************
 
      This file is part of the XSL DocBook Stylesheet distribution.
@@ -18,7 +18,20 @@
   <xsl:variable name="id">
     <xsl:call-template name="object.id"/>
   </xsl:variable>
-
+  <xsl:variable name="lang" select="ancestor-or-self::*/@lang"/>
+  <xsl:choose>
+   <xsl:when test="$lang='he' or $lang='ar'">
+  <div class="{name(.)}" id="{$id}">
+  <div dir="rtl">
+    <xsl:call-template name="set.titlepage"/>
+    <xsl:if test="$generate.set.toc != '0'">
+      <xsl:call-template name="set.toc"/>
+    </xsl:if>
+	</div>
+    <xsl:apply-templates/>
+  </div>
+ </xsl:when>
+ <xsl:otherwise>
   <div class="{name(.)}" id="{$id}">
     <xsl:call-template name="set.titlepage"/>
     <xsl:if test="$generate.set.toc != '0'">
@@ -26,9 +39,13 @@
     </xsl:if>
     <xsl:apply-templates/>
   </div>
+  </xsl:otherwise>
+ </xsl:choose>
 </xsl:template>
 
-<xsl:template match="set/setinfo"></xsl:template>
+<xsl:template match="set/setinfo">
+</xsl:template>
+
 <xsl:template match="set/title"></xsl:template>
 
 <!-- ==================================================================== -->
@@ -37,14 +54,29 @@
   <xsl:variable name="id">
     <xsl:call-template name="object.id"/>
   </xsl:variable>
+  <xsl:variable name="lang" select="ancestor-or-self::*/@lang"/>
+  <xsl:choose>
+   <xsl:when test="$lang='he' or $lang='ar'">
+  <div class="{name(.)}" id="{$id}">
+   <div dir="rtl">
+    <xsl:call-template name="book.titlepage"/>
+    <xsl:if test="$generate.book.toc != '0'">
+      <xsl:call-template name="division.toc"/>
+    </xsl:if>
+   </div>
+    <xsl:apply-templates/>
+  </div>
+  </xsl:when>
+  <xsl:otherwise>
   <div class="{name(.)}" id="{$id}">
     <xsl:call-template name="book.titlepage"/>
-    <xsl:apply-templates select="dedication" mode="dedication"/>
     <xsl:if test="$generate.book.toc != '0'">
       <xsl:call-template name="division.toc"/>
     </xsl:if>
     <xsl:apply-templates/>
   </div>
+  </xsl:otherwise>
+  </xsl:choose>
 </xsl:template>
 
 <xsl:template match="book/bookinfo"></xsl:template>
@@ -56,7 +88,20 @@
   <xsl:variable name="id">
     <xsl:call-template name="object.id"/>
   </xsl:variable>
-
+  <xsl:variable name="lang" select="ancestor-or-self::*/@lang"/>
+  <xsl:choose>
+   <xsl:when test="$lang='he' or $lang='ar'">
+  <div class="{name(.)}" id="{$id}">
+   <div dir="rtl">
+    <xsl:call-template name="part.titlepage"/>
+    <xsl:if test="not(partintro) and $generate.part.toc != '0'">
+      <xsl:call-template name="division.toc"/>
+    </xsl:if>
+	</div>
+    <xsl:apply-templates/>
+  </div>
+  </xsl:when>
+  <xsl:otherwise>
   <div class="{name(.)}" id="{$id}">
     <xsl:call-template name="part.titlepage"/>
     <xsl:if test="not(partintro) and $generate.part.toc != '0'">
@@ -64,28 +109,48 @@
     </xsl:if>
     <xsl:apply-templates/>
   </div>
+  </xsl:otherwise>
+ </xsl:choose>
 </xsl:template>
 
 <xsl:template match="part" mode="make.part.toc">
+  <xsl:variable name="lang" select="ancestor-or-self::*/@lang"/>
+  <xsl:choose>
+   <xsl:when test="$lang='he' or $lang='ar'">
+   <div dir="rtl">
   <xsl:call-template name="division.toc"/>
-</xsl:template>
-
-<xsl:template match="reference" mode="make.part.toc">
+  </div>
+  </xsl:when>
+  <xsl:otherwise>
   <xsl:call-template name="division.toc"/>
+  </xsl:otherwise>
+  </xsl:choose>
 </xsl:template>
 
 <xsl:template match="part/title"></xsl:template>
 
 <xsl:template match="partintro">
+  <xsl:variable name="lang" select="ancestor-or-self::*/@lang"/>
+  <xsl:choose>
+   <xsl:when test="$lang='he' or $lang='ar'">
+  <div class="{name(.)}" dir="rtl">
+    <xsl:call-template name="partintro.titlepage"/>
+    <xsl:apply-templates/>
+    <xsl:if test="not(ancestor::enums) and not(ancestor::classset) and $generate.part.toc != '0'">
+      <xsl:apply-templates select="parent::*" mode="make.part.toc"/>
+    </xsl:if>
+  </div>
+  </xsl:when>
+  <xsl:otherwise>
   <div class="{name(.)}">
     <xsl:call-template name="partintro.titlepage"/>
     <xsl:apply-templates/>
     <xsl:if test="not(ancestor::enums) and not(ancestor::classset) and $generate.part.toc != '0'">
-      <!-- not ancestor::part because partintro appears in reference -->
       <xsl:apply-templates select="parent::*" mode="make.part.toc"/>
     </xsl:if>
-    <xsl:call-template name="process.footnotes"/>
   </div>
+  </xsl:otherwise>
+  </xsl:choose>
 </xsl:template>
 
 <xsl:template match="partintro/title"></xsl:template>

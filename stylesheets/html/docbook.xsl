@@ -9,7 +9,7 @@
             indent="no"/>
 
 <!-- ********************************************************************
-     $Id: docbook.xsl,v 1.3 2003-06-10 06:16:23 sfox Exp $
+     $Id: docbook.xsl,v 1.4 2003-06-13 19:53:21 sfox Exp $
      ********************************************************************
 
      This file is part of the XSL DocBook Stylesheet distribution.
@@ -20,40 +20,36 @@
 
 <!-- ==================================================================== -->
 
-<xsl:include href="../VERSION"/>
-<xsl:include href="param.xsl"/>
-<xsl:include href="../lib/lib.xsl"/>
 <xsl:include href="../common/l10n.xsl"/>
 <xsl:include href="../common/common.xsl"/>
+<xsl:include href="../common/gentext.xsl"/>
 <xsl:include href="../common/labels.xsl"/>
 <xsl:include href="../common/titles.xsl"/>
-<xsl:include href="../common/subtitles.xsl"/>
-<xsl:include href="../common/gentext.xsl"/>
+<xsl:include href="../lib/lib.xsl"/>
+<xsl:include href="../VERSION"/>
+<xsl:include href="admon.xsl"/>
 <xsl:include href="autotoc.xsl"/>
-<xsl:include href="lists.xsl"/>
-<xsl:include href="verbatim.xsl"/>
-<xsl:include href="graphics.xsl"/>
-<xsl:include href="xref.xsl"/>
+<xsl:include href="block.xsl"/>
+<xsl:include href="class.xsl"/>
+<xsl:include href="component.xsl"/>
+<xsl:include href="division.xsl"/>
+<xsl:include href="enum.xsl"/>
 <xsl:include href="formal.xsl"/>
-<xsl:include href="table.xsl"/>
+<xsl:include href="graphics.xsl"/>
+<xsl:include href="hierarchy.xsl"/>
+<xsl:include href="html.xsl"/>
+<xsl:include href="inline.xsl"/>
+<xsl:include href="lists.xsl"/>
+<xsl:include href="name_to_id.xsl"/>
+<xsl:include href="param.xsl"/>
 <xsl:include href="pi.xsl"/>
 <xsl:include href="sections.xsl"/>
-<xsl:include href="inline.xsl"/>
-<xsl:include href="footnote.xsl"/>
-<xsl:include href="html.xsl"/>
-<xsl:include href="division.xsl"/>
-<xsl:include href="toc.xsl"/>
-<xsl:include href="refentry.xsl"/>
-<xsl:include href="admon.xsl"/>
-<xsl:include href="component.xsl"/>
-<xsl:include href="block.xsl"/>
 <xsl:include href="synop.xsl"/>
+<xsl:include href="table.xsl"/>
 <xsl:include href="titlepage.templates.xsl"/>
 <xsl:include href="titlepage.xsl"/>
-<xsl:include href="class.xsl"/>
-<xsl:include href="hierarchy.xsl"/>
-<xsl:include href="name_to_id.xsl"/>
-<xsl:include href="enum.xsl"/>
+<xsl:include href="verbatim.xsl"/>
+<xsl:include href="xref.xsl"/>
 
 <!-- ==================================================================== -->
 
@@ -118,14 +114,9 @@
   <xsl:apply-templates select="artheader/keywordset" mode="html.header"/>
   <xsl:apply-templates select="sect1info/keywordset" mode="html.header"/>
   <xsl:apply-templates select="sect2info/keywordset" mode="html.header"/>
-  <xsl:apply-templates select="sect3info/keywordset" mode="html.header"/>
-  <xsl:apply-templates select="sect4info/keywordset" mode="html.header"/>
-  <xsl:apply-templates select="sect5info/keywordset" mode="html.header"/>
   <xsl:apply-templates select="refsect1info/keywordset" mode="html.header"/>
   <xsl:apply-templates select="refsect2info/keywordset" mode="html.header"/>
   <xsl:apply-templates select="refsect3info/keywordset" mode="html.header"/>
-  <xsl:apply-templates select="glossaryinfo/keywordset" mode="html.header"/>
-  <xsl:apply-templates select="indexinfo/keywordset" mode="html.header"/>
   <xsl:apply-templates select="refentryinfo/keywordset" mode="html.header"/>
   <xsl:apply-templates select="partinfo/keywordset" mode="html.header"/>
   <xsl:apply-templates select="referenceinfo/keywordset" mode="html.header"/>

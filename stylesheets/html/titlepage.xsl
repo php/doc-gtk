@@ -3,7 +3,7 @@
                 version='1.0'>
 
 <!-- ********************************************************************
-     $Id: titlepage.xsl,v 1.1 2003-05-02 17:18:13 sfox Exp $
+     $Id: titlepage.xsl,v 1.2 2003-06-13 19:53:21 sfox Exp $
      ********************************************************************
 
      This file is part of the XSL DocBook Stylesheet distribution.
@@ -121,6 +121,9 @@
  </xsl:template>
 
  <xsl:template match="authorgroup">
+ <xsl:choose>
+  <xsl:when test="ancestor::appendix[@rtl='1']">
+ <div dir="rtl">
   <b>
    <xsl:call-template name="authorgroup-title">
     <xsl:with-param name="id">
@@ -128,7 +131,22 @@
     </xsl:with-param>
    </xsl:call-template>
   </b>
-  <xsl:apply-templates mode="titlepage.mode" /> 
+  <xsl:apply-templates mode="titlepage.mode" />
+  </div>
+  </xsl:when>
+  <xsl:otherwise>
+ <div dir="ltr">
+  <b>
+   <xsl:call-template name="authorgroup-title">
+    <xsl:with-param name="id">
+     <xsl:value-of select="@id" />
+    </xsl:with-param>
+   </xsl:call-template>
+  </b>
+  <xsl:apply-templates mode="titlepage.mode" />
+  </div>
+  </xsl:otherwise>
+  </xsl:choose>
  </xsl:template>
  
  <xsl:template match="author" mode="titlepage.mode">

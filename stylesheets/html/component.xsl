@@ -3,7 +3,7 @@
                 version='1.0'>
 
 <!-- ********************************************************************
-     $Id: component.xsl,v 1.2 2003-06-05 12:57:44 sfox Exp $
+     $Id: component.xsl,v 1.3 2003-06-13 19:53:21 sfox Exp $
      ********************************************************************
 
      This file is part of the XSL DocBook Stylesheet distribution.
@@ -37,7 +37,21 @@
   <xsl:variable name="id">
     <xsl:call-template name="object.id"/>
   </xsl:variable>
-
+  <xsl:variable name="lang" select="ancestor-or-self::*/@lang"/>
+  <xsl:choose>
+   <xsl:when test="$lang='he' or $lang='ar'">
+  <div id="{$id}" class="{name(.)}">
+   <div dir="rtl">
+    <xsl:call-template name="component.separator"/>
+    <xsl:call-template name="chapter.titlepage"/>
+    <xsl:if test="$generate.chapter.toc != '0'">
+      <xsl:call-template name="component.toc"/>
+    </xsl:if>
+	</div>
+    <xsl:apply-templates/>
+  </div>
+ </xsl:when>
+ <xsl:otherwise>
   <div id="{$id}" class="{name(.)}">
     <xsl:call-template name="component.separator"/>
     <xsl:call-template name="chapter.titlepage"/>
@@ -45,8 +59,9 @@
       <xsl:call-template name="component.toc"/>
     </xsl:if>
     <xsl:apply-templates/>
-    <xsl:call-template name="process.footnotes"/>
   </div>
+  </xsl:otherwise>
+  </xsl:choose>
 </xsl:template>
 
 <xsl:template match="title" mode="chapter.titlepage.recto.mode">
@@ -63,7 +78,18 @@
   <xsl:variable name="id">
     <xsl:call-template name="object.id"/>
   </xsl:variable>
-
+  <xsl:choose>
+   <xsl:when test="self::appendix[@rtl='1']">
+  <div id="{$id}" class="{name(.)}" dir="rtl">
+    <xsl:call-template name="component.separator"/>
+    <xsl:call-template name="appendix.titlepage"/>
+    <xsl:if test="$generate.appendix.toc != '0'">
+      <xsl:call-template name="component.toc"/>
+    </xsl:if>
+    <xsl:apply-templates/>
+  </div>
+  </xsl:when>
+  <xsl:otherwise>
   <div id="{$id}" class="{name(.)}">
     <xsl:call-template name="component.separator"/>
     <xsl:call-template name="appendix.titlepage"/>
@@ -71,8 +97,9 @@
       <xsl:call-template name="component.toc"/>
     </xsl:if>
     <xsl:apply-templates/>
-    <xsl:call-template name="process.footnotes"/>
   </div>
+  </xsl:otherwise>
+ </xsl:choose>
 </xsl:template>
 
 <xsl:template match="title" mode="appendix.titlepage.recto.mode">

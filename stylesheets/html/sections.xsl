@@ -3,7 +3,7 @@
                 version='1.0'>
 
 <!-- ********************************************************************
-     $Id: sections.xsl,v 1.1 2003-05-02 17:18:13 sfox Exp $
+     $Id: sections.xsl,v 1.2 2003-06-13 19:53:21 sfox Exp $
      ********************************************************************
 
      This file is part of the XSL DocBook Stylesheet distribution.
@@ -27,7 +27,6 @@
       <xsl:call-template name="section.toc"/>
     </xsl:if>
     <xsl:apply-templates/>
-    <xsl:call-template name="process.chunk.footnotes"/>
   </div>
 </xsl:template>
 
@@ -100,7 +99,6 @@
       <xsl:call-template name="section.toc"/>
     </xsl:if>
     <xsl:apply-templates/>
-    <xsl:call-template name="process.chunk.footnotes"/>
   </div>
 </xsl:template>
 
@@ -163,35 +161,22 @@
 <xsl:template match="bridgehead">
   <xsl:variable name="container"
                 select="(ancestor::appendix
-                        |ancestor::article
                         |ancestor::chapter
-                        |ancestor::glossdiv
-                        |ancestor::index
                         |ancestor::partintro
-                        |ancestor::preface
                         |ancestor::refsect1
                         |ancestor::refsect2
-                        |ancestor::refsect3
                         |ancestor::sect1
-                        |ancestor::sect2
-                        |ancestor::section
-                        |ancestor::setindex)[last()]"/>
+                        |ancestor::sect2)[last()]"/>
 
   <xsl:variable name="clevel">
     <xsl:choose>
       <xsl:when test="local-name($container) = 'appendix'
                       or local-name($container) = 'chapter'
-                      or local-name($container) = 'article'
-                      or local-name($container) = 'index'
-                      or local-name($container) = 'partintro'
-                      or local-name($container) = 'preface'
-                      or local-name($container) = 'setindex'">2</xsl:when>
+                      or local-name($container) = 'partintro'">2</xsl:when>
        <xsl:when test="local-name($container) = 'sect1'
                       or local-name($container) = 'sect2'
                       or local-name($container) = 'refsect1'
-                      or local-name($container) = 'refsect2'
-                      or local-name($container) = 'refsect3'
-                      or local-name($container) = 'section'">
+                      or local-name($container) = 'refsect2'">
         <xsl:variable name="slevel">
           <xsl:call-template name="section.level">
             <xsl:with-param name="node" select="$container"/>

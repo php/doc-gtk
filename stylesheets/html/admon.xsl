@@ -3,7 +3,7 @@
                 version='1.0'>
 
 <!-- ********************************************************************
-     $Id: admon.xsl,v 1.2 2003-06-05 12:57:44 sfox Exp $
+     $Id: admon.xsl,v 1.3 2003-06-13 19:53:21 sfox Exp $
      ********************************************************************
 
      This file is part of the XSL DocBook Stylesheet distribution.
@@ -100,9 +100,6 @@
 </xsl:template>
 
 <xsl:template match="note/title"></xsl:template>
-<xsl:template match="important/title"></xsl:template>
-<xsl:template match="warning/title"></xsl:template>
-<xsl:template match="caution/title"></xsl:template>
 <xsl:template match="tip/title"></xsl:template>
 
 <xsl:template match="title" mode="admonition.title.mode">
