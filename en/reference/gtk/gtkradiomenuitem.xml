@@ -16,14 +16,15 @@
     is used alongside toggle switches in arrays.  In this particular widget, 
     the overriding <classname>GtkMenuItem</classname> version of 
     <signalname class="GtkMenuItem">activate</signalname> is the
-    activating signal, and repeats itself as a result of this.
+    activating signal, and as a result of this feature repeats itself when
+    another group member is activated.
    </simpara>
    <simpara>
     One way around this would be to use the 
     <signalname class="GtkWidget">button-press-event</signalname> signal. 
     Another would be to set up a count for each individual function and test
-    that the count is divisible by 2.  Or, depending on the kind of function
-    you are calling, you could simply allow 
+    that the count is not divisible by 2.  Or, depending on the kind of
+    function you are calling, you could simply allow 
     <signalname class="GtkMenuItem">activate</signalname> to be emitted twice.
    </simpara>
   </desc>

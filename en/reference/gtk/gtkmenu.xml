@@ -545,6 +545,8 @@ $event-&gt;time);
      this:
      <informalexample>
       <programlisting role="php">
+dl('php_gtk.' . (strstr(PHP_OS, 'WIN') ? 'dll' : 'so'));
+    
 function exit_activated($menu) {
 $menu-&gt;destroy();
 }
@@ -561,6 +563,7 @@ $menu-&gt;connect_object('destroy', array('gtk', 'main_quit'));
 ....
 $exit = &amp;new GtkMenuItem(&quot;Exit&quot;);
 $exit-&gt;connect_object('activate', 'exit_activated', $menu);
+    
 $menu-&gt;set_title(&quot;Tested!&quot;);
 $menu-&gt;set_tearoff_state(true);
 $menu-&gt;show_all();
@@ -596,7 +599,8 @@ gtk::main();
    <desc>
     <simpara>
      <function class="GtkMenu">set_title()</function> sets the window title
-     for a menu that has been torn off using 
+     for a menu that has been detached from its parent through either a 
+     <classname>GtkTearoffMenuItem</classname> widget or the 
      <function class="GtkMenu">set_tearoff_state()</function>.  As with all
      window titles, the text will be truncated to fit the area available.
     </simpara>

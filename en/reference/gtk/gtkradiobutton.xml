@@ -15,15 +15,16 @@
     the <signalname class="GtkWidget">activate</signalname> signal where it
     is used alongside toggle switches in arrays.  In this particular widget, 
     the <signalname class="GtkButton">clicked</signalname> signal is the
-    activating signal, and repeats itself as a result of this.
+    activating signal, and as a result of this feature repeats itself when
+    another group member is activated.
    </simpara>
    <simpara>
     One way around this is to use the 
     <signalname class="GtkButton">pressed</signalname> signal.  Another would
     be to set up a count for each individual function and test that the count
-    is divisible by 2.  Or, depending on the kind of function you are calling,
-    you could simply allow <signalname class="GtkButton">clicked</signalname> 
-    to be fired twice.
+    is not divisible by 2.  Or, depending on the kind of function you are
+    calling, you could simply allow 
+    <signalname class="GtkButton">clicked</signalname> to be fired twice.
    </simpara>
   </desc>
  </classmeta>
