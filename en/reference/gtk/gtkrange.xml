@@ -4,11 +4,11 @@
   <classtitle>GtkRange</classtitle>
   <classparent>GtkWidget</classparent>
   <shortdesc>
-   Base class for <classname>GtkScale</classname> and <classname>GtkScrollbar</classname>.
+   Base class for widgets that provide visual representations of <classname>GtkAdjustment</classname>.
   </shortdesc>
   <desc>
    <simpara>
-    <classname>GtkRange</classname> is the base class for <classname>GtkScale</classname> and <classname>GtkScrollbar</classname>. <classname>GtkRange</classname> provides methods for dealing with the visual display of widgets with sliders.
+    <classname>GtkRange</classname> is the base class for widgets that provide a visual representation for <classname>GtkAdjustment</classname>. In PHP-GTK 1.0 those widgets are <classname>GtkScale</classname> and <classname>GtkScrollbar</classname>. <classname>GtkRange</classname> provides the methods common to classes that deal with representing adjustments.
    </simpara>
    <simpara>
     <classname>GtkRange</classname> is an abstract class and may not be directly instantiated.
@@ -29,11 +29,11 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Returns a reference to the widget's adjustment child.
+    Returns the widget's adjustment child.
    </shortdesc>
    <desc>
     <simpara>
-     Returns a reference to the widget's adjustment child. 
+     Returns the widget's adjustment child. The returned value should be assigned by reference if you want method calls and other changes to be shown in the adjustment's parent widget.
     </simpara>
     <para>
      <example>
@@ -45,7 +45,7 @@
 $hScale = &new GtkHScale(new GtkAdjustment(.5, 0, 1, .1, .1, .1));
 
 // Get the adjustment from the hScale
-$adj = &$hScale->get_adjustment();
+$adj =& $hScale->get_adjustment();
 
 // Set the value to zero
 $adj->set_value(0);
@@ -68,10 +68,15 @@ $adj->set_value(0);
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the widgets update policy.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Sets the widgets update policy to <parameter>policy</parameter>.  The update policy describes when the value of the adjustment is changed. When <parameter>policy</parameter> is <enumname>GTK_UPDATE_CONTINUOUS</enumname>, the value of the adjustment is updated while the slider is being moved. If <parameter>policy</parameter> is <enumname>GTK_UPDATE_DELAYED</enumname>, the value of the adjustment will be updated when the user has stopped moving the slider. When <parameter>policy</parameter> is set to <enumname>GTK_UPDATE_DISCONTINUOUS</enumname>, the value of the adjustment will not be changed until the user has released the mouse button and ended the slider drag operation.
+    </simpara>
+    <simpara>
+     Anytime the value of the adjustment is changed, the <signalname class="GtkAdjustment">value-changed</signalname> signal is emitted.
+    </simpara>
    </desc>
   </method>
 
