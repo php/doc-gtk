@@ -1,10 +1,23 @@
+<<<<<<< widgets.xml
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<chapter id="widgets">
+=======
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 <chapter id="gtk.widgets">
+>>>>>>> 1.7
  <title>Widgets and Containers</title>
+ <sect1 id="widgets.intro"></sect1>
 
- <sect1 id="gtk.widgets.intro">
-  <title>Introduction</title>
+ <sect1 id="widgets.whatare">
+  <title>What are Widgets?</title>
   <simpara>
+<<<<<<< widgets.xml
+   <literal>widget</literal> is a term used in the world of X for any user
+   interface.  A widget can be a text box, label, frame, window or any other
+   GUI component.  GTK widgets are all derived from the abstract base class
+   <classname>GtkWidget</classname>, and inherit the methods, signals and
+   properties implemented therein.
+=======
    This chapter will explain some of the concepts behind GTK+ and how you
    can use them.
   </simpara>
@@ -18,6 +31,7 @@
    GUI component.  GTK widgets are all derived from the abstract base class
    <classname>GtkWidget</classname>, and inherit the methods, signals and
    properties implemented therein.
+>>>>>>> 1.7
   </simpara>
   <simpara>
    From a programming point of view a widget has five parts to its life cycle:
@@ -35,8 +49,13 @@
      <simpara>Placement</simpara>
      <simpara>
       This is the step of adding a widget to a 
+<<<<<<< widgets.xml
+      <link linkend="containers.whatare">container</link>. This is
+      achieved most straightforwardly in PHP-GTK by using the syntax 
+=======
       <link linkend="gtk.containers.whatare">container</link>. This is
       achieved most straightforwardly in PHP-GTK by using the syntax 
+>>>>>>> 1.7
       <literal>$container-&gt;add($widget);</literal>
      </simpara>
     </listitem>
@@ -73,9 +92,25 @@
   </para>
  </sect1>
 
+<<<<<<< widgets.xml
+ <sect1 id="containers.whatare">
+  <title>What are Containers?</title>
+=======
  <sect1 id="gtk.containers.whatare">
   <title>What are Containers?</title>
+>>>>>>> 1.7
   <simpara>
+<<<<<<< widgets.xml
+   A container is simply a <link linkend="widgets.whatare">widget</link>
+   that is able to contain another widget.  The vast majority of widgets fall
+   into this class; obvious examples include <classname>GtkWindow</classname>, 
+   <classname>GtkTable</classname> and <classname>GtkBox</classname>.  Other
+   than this property they are exactly the same as any other widget, and may
+   be added to other containers as well as supporting child widgets of their
+   own.  They are derived from the <classname>GtkContainer</classname> base
+   class, which is itself derived from the <classname>GtkWidget</classname> 
+   class.
+=======
    A container is simply a <link linkend="gtk.widgets.whatare">widget</link>
    that is able to contain another widget.  The vast majority of widgets fall
    into this class; obvious examples include <classname>GtkWindow</classname>, 
@@ -85,6 +120,7 @@
    own.  They are derived from the <classname>GtkContainer</classname> base
    class, which is itself derived from the <classname>GtkWidget</classname> 
    class.
+>>>>>>> 1.7
   </simpara>
  </sect1>
 
