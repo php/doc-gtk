@@ -107,7 +107,8 @@ $notebook->show_all();
     </simpara>
     <simpara>
      <parameter>tab_label</parameter> is optional. If it is not supplied the
-     tab will be empty.
+     tab will be set to "page <literal>n</literal>" where <literal>n</literal>
+     is the page number.
     </simpara>
     <para>
      <example>
@@ -150,7 +151,18 @@ foreach ($pages as $pageNumber) {
     the popup menu.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Adds <parameter>child</parameter> as the last page in the notebook with
+     <parameter>tab_label</parameter> as the page's tab. Also adds
+     <parameter>menu_label</parameter> as the page's popup menu label.
+     <parameter>menu_label</parameter> will only be visible if the popup menu
+     is enabled by calling <function
+     class="GtkNotebook">popup_enable</function>.
+    </simpara>
+    <simpara>
+     See also: <function class="GtkNotebook">prepend_page_menu</function>,
+     <function class="GtkNotebook">insert_page_menu</function>
+    </simpara>
    </desc>
   </method>
 
@@ -185,7 +197,8 @@ foreach ($pages as $pageNumber) {
     </simpara>
     <simpara>
      <parameter>tab_label</parameter> is optional. If it is not supplied the
-     tab will be empty.
+     tab will be set to "page <literal>n</literal>" where <literal>n</literal>
+     is the page number.
     </simpara>
     <simpara>
      See also: <function class="GtkNotebook">append_page</function>,
@@ -208,7 +221,18 @@ foreach ($pages as $pageNumber) {
     the popup menu.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Adds <parameter>child</parameter> as the first page in the notebook with
+     <parameter>tab_label</parameter> as the page's tab. Also adds
+     <parameter>menu_label</parameter> as the page's popup menu label.
+     <parameter>menu_label</parameter> will only be visible if the popup menu
+     is enabled by calling <function
+     class="GtkNotebook">popup_enable</function>.
+    </simpara>
+    <simpara>
+     See also: <function class="GtkNotebook">append_page_menu</function>,
+     <function class="GtkNotebook">insert_page_menu</function>
+    </simpara>
    </desc>
   </method>
 
@@ -249,11 +273,13 @@ foreach ($pages as $pageNumber) {
     </simpara>
     <simpara>
      <parameter>tab_label</parameter> is optional. If it is not supplied the
-     tab will be empty.
+     tab will be set to "page <literal>n</literal>" where <literal>n</literal>
+     is the page number.
     </simpara>
     <simpara>
      <parameter>position</parameter> is optional. If it is not supplied it
-     will default to <literal>-1</literal>
+     will default to <literal>-1</literal> which will put the page at the end
+     of the notebook.
     </simpara>
     <simpara>
      See also: <function class="GtkNotebook">append_page</function>,
@@ -291,7 +317,18 @@ foreach ($pages as $pageNumber) {
     widget to use as the label in the popup menu.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Adds <parameter>child</parameter> as the notebook page in 
+     <parameter>position</parameter> <parameter>tab_label</parameter> as the
+     page's tab. Also adds <parameter>menu_label</parameter> as the page's 
+     popup menu label. <parameter>menu_label</parameter> will only be visible
+     if the popup menu is enabled by calling <function
+     class="GtkNotebook">popup_enable</function>.
+    </simpara>
+    <simpara>
+     See also: <function class="GtkNotebook">append_page_menu</function>,
+     <function class="GtkNotebook">prepend_page_menu</function>
+    </simpara>
    </desc>
   </method>
 
@@ -504,10 +541,19 @@ if ($notebook->get_current_page() != 0) {
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Set whether a bevel will be drawn around the notebook pages.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Sets whether or not a beveled edge will be drawn around the notebook
+     pages. If <parameter>show_border</parameter> is <literal>false</literal>
+     the border will not be shown. Setting the border to be shown when the
+     border is already showing or setting it to be hidden when the border is
+     already hidden has no effect. This only has an effect when tabs are not shown.
+    </simpara>
+    <simpara>
+     See also: <function class="GtkNotebook">set_show_tabs</function>
+    </simpara>
    </desc>
   </method>
 
@@ -522,7 +568,16 @@ if ($notebook->get_current_page() != 0) {
     Set whether or not to show the page tabs.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Sets whether or not the page tabs will be shown. If
+     <parameter>show_tab</parameter> is <literal>false</literal> the tabs will
+     not be visible. Setting the tabs to be visible when they are already
+     visisble or setting them to be hidden when they are already hidden has
+     not effect.
+    </simpara>
+    <simpara>
+     See also: <function class="GtkNotebook">set_tab_pos</function>
+    </simpara>
    </desc>
   </method>
 
@@ -534,10 +589,15 @@ if ($notebook->get_current_page() != 0) {
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Sets the edge on which the notebook tabs will be displayed.
+    Set the edge on which the notebook tabs will be displayed.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Sets the edge on which the page tabs will appear if they are to be shown. 
+    </simpara>
+    <simpara>
+     See also: <function class="GtkNotebook">set_show_tabs</function>
+    </simpara>
    </desc>
   </method>
 
@@ -549,10 +609,16 @@ if ($notebook->get_current_page() != 0) {
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Sets whether or not all tabs should be the same width.
+    Set whether or not all tabs should be the same width.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Sets whether or not all tabs should be the same width. If
+     <parameter>homogeneous</parameter> is <literal>true</literal> all tabs
+     will have equal width. If <parameter>homogeneous</parameter> is
+     <literal>false</literal> the width of each tab will depend on the size of
+     the label.
+    </simpara>
    </desc>
   </method>
 
@@ -567,7 +633,22 @@ if ($notebook->get_current_page() != 0) {
     Sets the border around all edges of the notebook's tabs.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Sets the border around all edges of the tabs to
+     <parameter>border_width</parameter>. This is equivilent to calling
+     <function class="GtkNotebook">set_tab_hborder</function> and <function
+     class="GtkNotebook">set_tab_vborder</function> with the same value.
+    </simpara>
+    <note>
+     This method is deprecated in GTK+ and should not be used in new code.
+     Instead you should use <function
+     class="GtkNotebook">set_tab_hborder</function> and <function
+     class="GtkNotebook">set_tab_vborder</function>.
+    </note>
+    <simpara>
+     See also: <function class="GtkNotebook">set_tab_hborder</function>,
+     <function class="GtkNotebook">set_tab_vborder</function>
+    </simpara>
    </desc>
   </method>
 
@@ -582,7 +663,18 @@ if ($notebook->get_current_page() != 0) {
     Sets the border for the left and right sides of the notebook's tabs.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Sets the left and right borders to be <parameter>tab_hborder</parameter> 
+     pixels wide for all the notebook's tabs.
+    </simpara>
+    <simpara>
+     Combined with <function class="GtkNotebook">set_tab_vborder</function>
+     this is the suggested method for setting tab borders.
+    </simpara>
+    <simpara>
+     See also: <function class="GtkNotebook">set_tab_border</function>,
+     <function class="GtkNotebook">set_tab_vborder</function>
+    </simpara>
    </desc>
   </method>
 
@@ -597,7 +689,18 @@ if ($notebook->get_current_page() != 0) {
     Sets the border for the top and bottom sides of the notebook's tabs.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Sets the top and bottom borders to be <parameter>tab_vborder</parameter> 
+     pixels wide for all the notebook's tabs.
+    </simpara>
+    <simpara>
+     Combined with <function class="GtkNotebook">set_tab_hborder</function>
+     this is the suggested method for setting tab borders.
+    </simpara>
+    <simpara>
+     See also: <function class="GtkNotebook">set_tab_border</function>,
+     <function class="GtkNotebook">set_tab_hborder</function>
+    </simpara>
    </desc>
   </method>
 
@@ -609,11 +712,17 @@ if ($notebook->get_current_page() != 0) {
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Sets whether the tab label area will have arrows for scrolling if there
-    are too many tabs to fit in the area.
+    Set whether the tab label area will allow scrolling.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Sets whether or not there will be arrows for scrolling if there are more
+     tabs than can be displayed in the tab label area. If
+     <parameter>scrollable</parameter> is set to <literal>true</literal>
+     scrolling arrows will appear when needed. If
+     <parameter>scrollable</parameter> is set to <literal>false</literal> the
+     tab label area will not be scrollable.
+    </simpara>
    </desc>
   </method>
 
@@ -625,11 +734,16 @@ if ($notebook->get_current_page() != 0) {
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Enables the popup menu: if the user clicks with the right mouse button on
-    the bookmarks, a menu with all the pages will be popped up.
+    Enable the popup menu.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Enables the popup menu allowing the user to change pages by right
+     clicking on the bookmarks and selecting a page from the menu.
+    </simpara>
+    <simpara>
+     See also: <function class="GtkNotebook">popup_disable</function>
+    </simpara>
    </desc>
   </method>
 
@@ -641,10 +755,15 @@ if ($notebook->get_current_page() != 0) {
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Disables the popup menu.
+    Disable the popup menu.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Disables the popup menu.
+    </simpara>
+    <simpara>
+     See also: <function class="GtkNotebook">popup_enable</function>
+    </simpara>
    </desc>
   </method>
 
@@ -656,10 +775,21 @@ if ($notebook->get_current_page() != 0) {
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Returns the tab's label widget.
+    Get the tab's label widget.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Returns <parameter>child</parameter>'s tab label widget.
+     <literal>NULL</literal> is returned if <parameter>child</parameter> is
+     not in the notebook or if there was no label set for
+     <parameter>child</parameter>.
+    </simpara>
+    <simpara>
+     Tab labels are normally set when the page is added to the notebook.
+    </simpara>
+    <simpara>
+     See also: <function class="GtkNotebook">set_tab_label</function>
+    </simpara>
    </desc>
   </method>
 
@@ -672,10 +802,19 @@ if ($notebook->get_current_page() != 0) {
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Sets the tab widget of the given child.
+    Set the tab widget of the given child.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Sets <parameter>child</parameter>'s tab label widget to
+     <parameter>tab_label</parameter>. If <literal>null</literal> is given for
+     <parameter>tab_label</parameter>, the default label of "page
+     <literal>n</literal>", where <literal>n</literal> is the page number,
+     will be used.
+    </simpara>
+    <simpara>
+     See also: <function class="GtkNotebook">get_tab_label</function>
+    </simpara>
    </desc>
   </method>
 
@@ -688,10 +827,16 @@ if ($notebook->get_current_page() != 0) {
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Creates a new label and sets it as the tab label for the given child.
+    Create a new label and set it as the tab label for the given child.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Creates a new <classname>GtkLabel</classname> with <parameter>tab_text</parameter>
+     as the label and sets it as the tab label widget for <parameter>child</parameter>.
+    </simpara>
+    <simpara>
+     See also: <function class="GtkNotebook">set_tab_label</function>
+    </simpara>
    </desc>
   </method>
 
@@ -703,10 +848,15 @@ if ($notebook->get_current_page() != 0) {
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Get the popup menu label for a notebook page.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Returns the menu label widget for <parameter>child</parameter>. If
+     <parameter>child</parameter> is not a child of the notebook or does not
+     have a menu label other than the default tab label,
+     <literal>NULL</literal> is returned.
+    </simpara>
    </desc>
   </method>
 
@@ -719,10 +869,17 @@ if ($notebook->get_current_page() != 0) {
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Set the popup menu label for a notebook page.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Sets <parameter>menu_label</parameter> as the popup menu label widget for
+     <parameter>child</parameter>. 
+    </simpara>
+    <simpara>
+     See also: <function class="GtkNotebook">get_menu_label</function>,
+     <function class="GtkNotebook">set_menu_label_text</function>
+    </simpara>
    </desc>
   </method>
 
@@ -735,10 +892,14 @@ if ($notebook->get_current_page() != 0) {
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Set the popup menu label text for a notebook page.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Creates a new <classname>GtkLabel</classname> with
+     <parameter>menu_text</parameter> as its label text and sets it as
+     <parameter>child</parameter>'s popup menu label.
+    </simpara>
    </desc>
   </method>
 
@@ -753,26 +914,46 @@ if ($notebook->get_current_page() != 0) {
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Set how the popup menu label for a page will be packed.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Sets the packing parameters for the tab label of the page containing
+     child. See <function class="GtkBox">pack_start</function> for the exact
+     meaning of the parameters.
+    </simpara>
    </desc>
   </method>
 
   <method id="gtk.gtknotebook.method.reorder_child">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>void <function>reorder_child</function></funcdef>
-     <paramdef><classname>GtkWidget</classname> <parameter>child</parameter></paramdef>
-     <paramdef>int <parameter>position</parameter></paramdef>
+     <funcdef>void
+      <function>reorder_child</function>
+     </funcdef>
+     <paramdef>
+      <classname>GtkWidget</classname>
+      <parameter>child</parameter>
+     </paramdef>
+     <paramdef>int
+      <parameter>position</parameter>
+     </paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Move a page to a given position.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Moves <parameter>child</parameter> to position
+     <parameter>position</parameter>. If <parameter>position</parameter> is
+     greater than the number of pages or is negative, the page will be moved
+     to the end of the notebook. 
+    </simpara>
+    <simpara>
+     Page positions start from zero. The third page in the notebook is in
+     position two.
+    </simpara> 
    </desc>
   </method>
 
