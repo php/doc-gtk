@@ -219,11 +219,48 @@ $button->connect('clicked', array(&$treeItem, 'select'));
     Hides the node's subtree.
    </shortdesc>
    <desc>
-    Hides the node's subtree and emits the <signalname>collapse</signalname>
-    signal.
+    Hides the node's subtree and emits the <signalname>collapse</signalname> signal. When collapsed the icon to the left of the node changes from a - (minus) to a + (plus).  
    </desc>
   </method>
 
  </methods>
+
+ <signals>
+
+  <signal id="gtk.gtktreeitem.signal.expand">
+   <signalname>expand</signalname>
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
+     <paramdef><classname>GtkTreeItem</classname> tree_item</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Emitted when <function class="GtkTreeItem">expand</function> is called.
+   </shortdesc>
+   <desc>
+    <simpara>
+     The <signalname class="GtkTreeItem">expand</signalname> signal is emitted when the <function class="GtkTreeItem">expand</function> method is called. This normally occurs when the user clicks on the label of a collapsed node.
+    </simpara>
+   </desc>
+  </signal>
+  <signal id="gtk.gtktreeitem.signal.collapse">
+   <signalname>collapse</signalname>
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
+     <paramdef><classname>GtkTreeItem</classname> tree_item</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Emitted when <function class="GtkTreeItem">collapse</function> is called.
+   </shortdesc>
+   <desc>
+    <simpara>
+     The <signalname class="GtkTreeItem">collapse</signalname> signal is emitted when the <function class="GtkTreeItem">collapse</function> method is called. This normally occurs when the user clicks on the label of an expanded node.
+    </simpara>
+   </desc>
+  </signal>
+ </signals>
 
 </classentry>
