@@ -1319,6 +1319,10 @@ GTK::main();
      This is either GTK_SORT_ASCENDING for ascening sort or GTK_SORT_DESCENDING for descending 
      <link linkend="gtk.gtkclist.method.sort">sort</link>.
     </simpara>
+    <simpara>
+     It can be read via the <propname class="GtkCList">sort_type</propname>
+     property.
+    </simpara>
    </desc>
   </method>
 
@@ -1518,6 +1522,78 @@ $objList->connect( 'click-column', 'sortList');
  
  
  <properties>
+  <prop id="gtk.gtkclist.property.focus_row" type="ro">
+   <propname>focus_row</propname>
+   <proptype>int</proptype>
+   <shortdesc>
+    Number of the row having the focus.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Returns the number of the row which currently
+     has the focus. Note that the focus doesn't mean the
+     row is selected - see <enumname>GtkSelectionMode</enumname>
+     for a detailed explanation.
+    </simpara>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtkclist.property.rows" type="ro">
+   <propname>rows</propname>
+   <proptype>int</proptype>
+   <shortdesc>
+    Returns the number of rows.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Returns the number of rows/entries in the list.
+    </simpara>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtkclist.property.row_list" type="ro">
+   <propname>row_list</propname>
+   <proptype>array</proptype>
+   <shortdesc>
+    Returns all rows in the list.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Returns an array of <classname>GtkCListRow</classname>s
+     containing all the rows of the list.
+    </simpara>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtkclist.property.selection" type="ro">
+   <propname>selection</propname>
+   <proptype>array</proptype>
+   <shortdesc>
+    Array of selected rows.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Returns an array of int values which describe the row
+     number of the selected row. This is independent of the
+     <propname class="GtkCList">selection_mode</propname> - 
+     it is always an array.
+    </simpara>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtkclist.property.selection_mode" type="ro">
+   <propname>selection_mode</propname>
+   <proptype><enumname>GtkSelectionMode</enumname></proptype>
+   <shortdesc>
+    Returns the current selection mode.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Returns the current selection mode set with
+     <function class="GtkCList">set_selection_mode</function>.
+    </simpara>
+   </desc>
+  </prop>
 
   <prop id="gtk.gtkclist.property.sort_column" type="ro">
    <propname>sort_column</propname>
@@ -1535,15 +1611,15 @@ $objList->connect( 'click-column', 'sortList');
 
   <prop id="gtk.gtkclist.property.sort_type" type="ro">
    <propname>sort_type</propname>
-   <proptype>int</proptype>
+   <proptype><enumname>GtkSortType</enumname></proptype>
    <shortdesc>
-    The current sort type (order)
+    The current sort type (order).
    </shortdesc>
    <desc>
     <simpara>
      The current sort type (order) after which the list shall be 
      <link linkend="gtk.gtkclist.method.sort">sorted</link>.
-     Can be one of GTK_SORT_ASCENDING or GTK_SORT_DESCENDING.
+     Can be GTK_SORT_ASCENDING or GTK_SORT_DESCENDING.
     </simpara>
    </desc>
   </prop>
