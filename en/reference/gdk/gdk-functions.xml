@@ -142,7 +142,13 @@
     Creates a new <classname>GdkCursor</classname>.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Creates a new cursor from one of the predefined cursor types.
+    </simpara>
+    <simpara>
+     You can find an example at
+     <function class="GdkWindow">set_cursor</function>.
+    </simpara>
    </desc>
   </method>
 
@@ -177,7 +183,78 @@
     Creates a new <classname>GdkCursor</classname> using a pixmap.
    </shortdesc>
    <desc>
+    <simpara>
+     This function creates a new cursor from a pixmap. After you have
+     created the cursor, the <function class="GdkWindow">set_cursor</function>
+     has to be used on a widget's gdk window to make the cursor active. The
+     cursor will be visible when the mouse hovers the widget on which it
+     has been set.
+    </simpara>
+    <simpara>
+     In Gtk 1.x, you can make monochrome cursors only. This means,
+     that every color (except black and <literal>None</literal>) is 
+     converted to the <parameter>fg</parameter> or <parameter>bg</parameter>
+     color.
+    </simpara>
+    <simpara>
+     The <parameter>x</parameter> and <parameter>y</parameter> parameters
+     are the hotspot coordinates with <literal>(0,0)</literal> describing 
+     the top left position.
+    </simpara>
+    <note>
+     This function is working since PHP-Gtk 1.0.1
+    </note>
+    <example>
+     <title>Using a new cursor</title>
+     <programlisting role="php">
+<![CDATA[<?php
+if( !extension_loaded('gtk')) {	
+	dl( 'php_gtk.' . PHP_SHLIB_SUFFIX);
+}
 
+$window = &new GtkWindow();
+$window->set_default_size(300, 300);
+$window->connect_object('destroy', array('gtk', 'main_quit'));
+
+$cursorpmp = array(
+  "16 16 3 1",
+  "  c None",
+  ". c white",
+  "1 c black",
+  "                ",
+  "....  . . ...   ",
+  ".111..1.1.111.  ",
+  ".1..1.1.1.1..1. ",
+  ".111..111.111.  ",
+  ".1.. .1.1.1..   ",
+  ".1.  .1.1.1.    ",
+  " .    .   .     ",
+  "  ...   .       ",
+  " .111. .1. .  . ",
+  ".1...  .1..1..1.",
+  ".1. .. .1..1.1. ",
+  ".1..11.111.11.  ",
+  ".1. .1..1..1.1. ",
+  " .111. .11.1..1.",
+  "  ...   .. .  . ",
+);
+
+$window->realize();
+$gdkwin = $window->window;
+
+list($pixmap, $mask) = gdk::pixmap_create_from_xpm_d($gdkwin, null, $cursorpmp);
+
+$colBlue	= &new GdkColor( 'blue');
+$style = new GtkStyle();
+$cursor =gdk::cursor_new_from_pixmap($pixmap, $mask, $style->white, $colBlue, 1, 1);
+
+$gdkwin->set_cursor($cursor);
+$window->show();
+
+gtk::main();
+?>]]>
+     </programlisting>
+    </example>
    </desc>
   </method>
 
