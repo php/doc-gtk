@@ -43,6 +43,7 @@ all: html
 #
 bigmanual.html: $(BUILD)/bigmanual.html
 html: $(BUILD)/html/index.html
+mtoc: $(BUILD_TEST)/mtoc.xml
 phpweb: $(BUILD)/php/index.php
 searchable_zip: $(BUILD)/searchable_manual_$(LANG).zip
 searchable_tar: $(BUILD)/searchable_manual_$(LANG).tar.gz
@@ -113,6 +114,10 @@ $(BUILD)/php_gtk_manual_$(LANG).txt.gz: $(BUILD)/manual.txt
 $(BUILD_TEST)/index.html: testmanual.xml
 	@mkdir -p $(BUILD_TEST)
 	$(XSLTPROC) --param base.dir "'$(BUILD_TEST)/'" $(chunk) testmanual.xml
+
+$(BUILD_TEST)/mtoc.xml: mtoc.xml
+	@mkdir -p $(BUILD_TEST)
+	$(XSLTPROC) --param base.dir "'$(BUILD_TEST)/'" $(chunk) mtoc.xml
 
 
 #

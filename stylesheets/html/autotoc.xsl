@@ -1,4 +1,4 @@
-<?xml version='1.0'?>
+<?xml version='1.0' encoding="iso-8859-1" ?>
 <!DOCTYPE xsl:stylesheet [
 <!ENTITY nbsp "&#160;">
 ]>
@@ -6,7 +6,7 @@
                 version='1.0'>
 
 <!-- ********************************************************************
-     $Id: autotoc.xsl,v 1.6 2004-08-01 16:41:29 cweiske Exp $
+     $Id: autotoc.xsl,v 1.7 2004-10-07 15:44:44 cweiske Exp $
      ********************************************************************
 
      This file is part of the XSL DocBook Stylesheet distribution.
@@ -281,6 +281,92 @@
   </xsl:element>
 </xsl:template>
 
+
+<!-- machine-readable TOC in XML format-->
+<!-- 
+TODO:
+- use given directory
+- Methods, properties and signals shall be Uppercase (word) 
+-->
+<xsl:template match="mtoc">
+  <xsl:call-template name="write.chunk">
+    <xsl:with-param name="filename">testbuild/mtoc.xml</xsl:with-param>
+    <xsl:with-param name="indent">'yes'</xsl:with-param>
+    <xsl:with-param name="content">
+     <xsl:text disable-output-escaping="yes"><![CDATA[<?xml version='1.0' encoding='utf-8' ?>
+]]></xsl:text>
+      <mtoc>
+        <xsl:call-template name="tocentry">
+          <xsl:with-param name="indent">
+            <xsl:text><![CDATA[
+]]>  </xsl:text>
+          </xsl:with-param>
+        </xsl:call-template>
+      <xsl:text><![CDATA[
+]]></xsl:text>
+      </mtoc>
+    </xsl:with-param>
+  </xsl:call-template>
+</xsl:template>
+
+<xsl:template name="tocentry">
+  <xsl:param name="indent"/>
+  <xsl:for-each select="*[@id!='']|methods|properties|signals|enums/enum">
+    <xsl:variable name="title">
+      <xsl:choose>
+        <xsl:when test="name(.)='classentry'">
+          <xsl:value-of select="classmeta/classtitle"/>
+        </xsl:when>
+        <xsl:when test="name(.)='constructor'">
+          <xsl:text>Constructor</xsl:text>
+        </xsl:when>
+        
+        <xsl:when test="(name(.)='methods') or (name(.)='properties') or (name(.)='signals')">
+          <xsl:value-of select="name(.)"/>
+        </xsl:when>
+        
+        <xsl:when test="name(.)='prop'">
+          <xsl:value-of select="propname"/>
+        </xsl:when>
+        <xsl:when test="name(.)='method'">
+          <xsl:value-of select="funcsynopsis/funcprototype/funcdef/function"/>
+        </xsl:when>
+        <xsl:when test="name(.)='signal'">
+          <xsl:value-of select="signalname"/>
+        </xsl:when>
+        <xsl:when test="name(.)='enum'">
+          <xsl:value-of select="enumname"/>
+        </xsl:when>
+        
+        <xsl:otherwise>
+          <xsl:value-of select="title" />
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:variable>
+    <xsl:if test="$title!=''">
+      <xsl:value-of select="$indent"/>
+      <xsl:variable name="file">
+        <xsl:choose>
+          <xsl:when test="@id!=''"><xsl:value-of select="@id"/><xsl:text>.html</xsl:text></xsl:when>
+          <xsl:otherwise></xsl:otherwise>
+        </xsl:choose>
+      </xsl:variable>
+      <tocentry file="{$file}">
+        <xsl:value-of select="$indent"/>
+        <xsl:text>  </xsl:text>
+        <title>    
+          <xsl:value-of select="$title" />
+        </title>
+        
+        <xsl:call-template name="tocentry">
+          <xsl:with-param name="indent"><xsl:value-of select="$indent"/><xsl:text>  </xsl:text></xsl:with-param>
+        </xsl:call-template>
+      <xsl:value-of select="$indent"/>
+      </tocentry>
+    </xsl:if>
+  </xsl:for-each>
+
+</xsl:template>
 
 </xsl:stylesheet>
 
