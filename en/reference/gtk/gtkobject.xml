@@ -3,14 +3,18 @@
  <classmeta>
   <classtitle>GtkObject</classtitle>
   <classparent></classparent>
-  <shortdesc>The base class of the PHP-GTK class hierachy.</shortdesc>
+  <shortdesc>
+   The base class of the PHP-GTK class hierarchy.
+  </shortdesc>
   <desc>
-   <para>
-    <classname>GtkObject</classname> is the base class of the PHP-GTK object 
-    hierachy. It implements the functionality that every object below it in 
-    the tree has. This object should not be directly constructed from PHP-GTK
-    but is documented here for reference reasons.
-   </para>
+   <simpara>
+    <classname>GtkObject</classname> is the base class of the GTK
+    object hierarchy.  It implements the functionality that every
+    object below it in the tree has.  This object cannot be directly
+    constructed from PHP-GTK, but is documented here for reference
+    purposes as its methods and signal are generic throughout the
+    hierarchy.
+   </simpara>
   </desc>
  </classmeta>
 
@@ -24,16 +28,23 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Fetch the current objects flags.
+    Returns an object's current <enumname>GtkObjectFlags</enumname> 
+    settings.
    </shortdesc>
    <desc>
-    <para>
-     This method returns the objects flags and defined in the enum 
-     <enumname>GtkObjectFlags</enumname>. The return value can be used 
-     to find information about the objects current state.
-    </para>
     <simpara>
-     See also: <function>set_flags</function>, <function>unset_flags</function>.
+     This method returns the object's flags as defined by the
+     enumerated values in <enumname>GtkObjectFlags</enumname>.  The
+     return value can be used to find information about an object's
+     current status, i.e. whether the object has been fully
+     constructed, whether the object has a floating reference or is
+     associated with a parent object, whether the object has
+     signals connected to it, and whether the object has been
+     destroyed.
+    </simpara>
+    <simpara>
+     See also: <function class="GtkObject">set_flags()</function>, 
+     <function class="GtkObject">unset_flags()</function>.
     </simpara>
    </desc>
   </method>
@@ -42,20 +53,58 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_flags</function></funcdef>
-     <paramdef>int <parameter>flags</parameter></paramdef>
+     <paramdef>
+      <enumname>GtkWidgetFlags</enumname> 
+      <parameter>flags</parameter>
+     </paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Sets various flags on the object.
+    Sets the <enumname>GtkWidgetFlags</enumname> on a derived object.
    </shortdesc>
    <desc>
     <simpara>
-     This method allows you to set the flags defined in the 
-     <enumname>GtkObjectFlags</enumname> enum. The flags can be
-     set to reflect an objects current state.
+     This method allows you to set any of the flags defined by the 
+     <enumname>GtkWidgetFlags</enumname> enumerated values.  These
+     flags share the flags space in <classname>GtkObject</classname>; 
+     the first four bits are taken by 
+     <enumname>GtkObjectFlags</enumname>, and derived objects use
+     the remaining bitfields.  The <enumname>GtkWidgetFlags</enumname>
+     settings determine the capabilities of a widget; e.g the flag 
+     <literal>GTK_NO_WINDOW</literal> is set on certain widgets during
+     their creation in the GTK source, reversing the generic widget
+     property of <literal>$widget->window;</literal> - such widgets
+     are not able to respond unilaterally to GDK events.  (Use a 
+     <classname>GtkEventBox</classname> to capture events on windowless
+     widgets.)
     </simpara>
     <simpara>
-     See also: <function>flags</function>, <function>unset_flags</function>.
+     You would use <function class="GtkObject">set_flags()</function> 
+     in a situation where the widget needs capabilities it does not
+     have at base; setting for instance 
+     <literal>GTK_CAN_DEFAULT</literal> on a 
+     <classname>GtkButton</classname> you want to have keyboard grab
+     by default will cause that button to be drawn in such a way that
+     space is allowed for it to be displayed with default status.
+    </simpara>
+    <simpara>
+     Although all the flag bitfields are reversible in this way, it is
+     not always sane to alter them, given that the chief
+     characteristics of a widget are controlled by them.  For example,
+     unsetting the <literal>GTK_NO_WINDOW</literal> flag on a 
+     <classname>GtkLabel</classname> widget will prevent the label from
+     displaying its current text.
+    </simpara>
+    <simpara>
+     See also: <function class="GtkObject">flags()</function>, 
+     <function class="GtkObject">unset_flags()</function>, and a whole
+     host of <classname>GtkWidget</classname> methods such as 
+     <function classname="GtkWidget">set_sensitive()</function> and 
+     <function classname="GtkWidget">grab_default()</function> which
+     either act as wrappers for the 
+     <function class="GtkObject">set_flags()</function> function or
+     need to work in tandem with <enumname>GtkWidgetFlags</enumname> 
+     values set in this way.
     </simpara>
    </desc>
   </method>
@@ -64,20 +113,31 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>unset_flags</function></funcdef>
-     <paramdef>int <parameter>flags</parameter></paramdef>
+     <paramdef>
+      <enumname>GtkWidgetFlags</enumname> 
+      <parameter>flags</parameter>
+     </paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Unset certain flags on the object.
+    Unsets the <enumname>GtkWidgetFlags</enumname> on a derived object
    </shortdesc>
    <desc>
-    <para>
-     This method allows the programmer to unset various flags, as defined
-     in the <enumname>GtkObjectFlags</enumname> enum. These flags can be 
-     changed to reflect the objects current state.
-    </para>
     <simpara>
-     See also: <function>flags</function>, <function>set_flags</function>
+     This method allows the programmer to reverse the switch of the
+     bitfield flags on a widget, as defined by the 
+     <enumname>GtkWidgetFlags</enumname> enumerated values.  These
+     flags reflect a widget's current state or capabilities.  Note
+     that <enumname>GtkObjectFlags</enumname> and 
+     <enumname>GtkWidgetFlags</enumname> share the same flag space, but
+     are fairly different in nature.  The object flags are public so
+     that they can be queried rather than so that they can be altered,
+     relating as they do to the basic construction of any object.  The
+     widget flags determine the nature of that object.
+    </simpara>
+    <simpara>
+     See also: <function class="GtkObject">flags()</function>, 
+     <function class="GtkObject">set_flags()</function>.
     </simpara>
    </desc>
   </method>
@@ -94,9 +154,11 @@
    </shortdesc>
    <desc>
     <simpara>
-     This constructor is called when arguments have the 
-     <optionname>GTK_ARG_CONSTRUCT</optionname> flag set within 
-     <enumname>GtkArgFlags</enumname>.
+     This construction method is called internally in GTK+ after the
+     arguments for a new object have been set, if the 
+     <enumname>GtkObjectFlags</enumname> value 
+     <literal>GTK_CONSTRUCTED</literal> does not return true.  You are
+     unlikely to use it in PHP-GTK programming.
     </simpara>
    </desc>
   </method>
@@ -109,13 +171,21 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Mark object as constructed.
+    Marks an object as constructed.
    </shortdesc>
    <desc>
     <simpara>
-     This method allows precise control over the construction
-     process. It marks an object as being constructed, this
-     stops any further constructors being called on the object.
+     <function class="GtkObject">constructed()</function> is a wrapper
+     method providing a way to switch the 
+     <enumname>GtkObjectFlaga</enumname> value 
+     <literal>GTK_CONSTRUCTED</literal>.  It may be called internally
+     in GTK+ during the construction of a new object, as a fallback
+     when <function class="GtkObject">default_construct()</function> 
+     fails.
+    </simpara>
+    <simpara>
+     It is unlikely (but not impossible) that you will use this method
+     in PHP-GTK programming.
     </simpara>
    </desc>
   </method>
@@ -128,19 +198,27 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Decrease the initial reference count by 1.
+    Removes an object's initial floating reference.
    </shortdesc>
    <desc>
     <simpara>
-     This method allows the programmer to decrease the objects 
-     reference count by 1, this only occurs the first time the
-     sink method is called.
+     This method might be used when a newly-created object has not been
+     assigned a parent.  <function class="GtkObject">sink()</function> 
+     is called internally when the object is assigned a parent.  The
+     object is assigned a reference count of <literal>1</literal> at
+     that point, and is kept alive only through its association with
+     the parent.
     </simpara>
     <simpara>
-     This might be used when an object that is floating is created.
-     When the object is assigned a parent then it is 
-     <function>sunk</function>, but, the parent now also has a reference
-     to the object so its reference count is now <literal>1</literal>.
+     <function class="GtkObject">sink()</function> would be called by a
+     PHP-GTK programmer in a situation where the object needed to be
+     fully referenced, for example after calling 
+     <function class="GtkObject">ref()</function> and prior to calling 
+     <function class="GtkObject">unref()</function> on an object, where
+     the object has no reference-giving parent.  It's basically a
+     wrapper method that provides access to the 
+     <enumname>GtkObjectFlags</enumname> value 
+     <literal>GTK_FLOATING</literal>.
     </simpara>
    </desc>
   </method>
@@ -153,11 +231,22 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Increase the reference count on an object.
+    Increases the reference count on an object.
    </shortdesc>
    <desc>
     <simpara>
-     Increase the reference count on an object.
+     Increases the reference count on an object by 
+     <literal>1</literal>.  This method is called internally when a
+     newly created object is claimed by its parent widget and before
+     its floating reference count is sunk, leaving the life of the
+     child completely in the hands of the parent's own reference value.
+    </simpara>
+    <simpara>
+     If you are planning to 
+     <function class="GtkContainer">remove()</function> a child from
+     its parent container, you will therefore need to call 
+     <function class="GtkObject">ref()</function> on that child first,
+     in order to maintain its life away from the parent.
     </simpara>
    </desc>
   </method>
@@ -170,16 +259,18 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Decrease a reference count on an object.
+    Decreases the reference count on an object.
    </shortdesc>
    <desc>
     <simpara>
-     Decrease a reference count on an object.
+     This method decreases the reference count on an object by 
+     <literal>1</literal>.
     </simpara>
     <note>
      <simpara>
-      If you decrease the refcount to <literal>0</literal>
-      then the object will be destroyed.
+      If the reference count reaches <literal>1</literal> then 
+      <function class="GtkObject">destroy()</function> will be called
+      on the object from source.
      </simpara>
     </note>
    </desc>
@@ -193,16 +284,25 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Call an objects shutdown handler.
+    Causes the object to be destroyed.
    </shortdesc>
    <desc>
     <simpara>
-     This method causes the objects shutdown handler to be called.
-     The objects memory wont be freed though until the object's 
-     reference count is <literal>0</literal>.
+     <function class="GtkObject">destroy()</function> causes an object
+     and all its signal connections to be destroyed.  During this
+     process the <signalname class="GtkObject">destroy</signalname> 
+     signal is emitted.
     </simpara>
     <simpara>
-     See Also: <function>unref</function>
+     Note that the object's memory is currently not freed at the point
+     of destruction, as the reference count is maintained by both the 
+     <function class="GtkObject">destroy()</function> method within
+     GTK, and the Zend registry within PHP.  In both cases, this way of
+     coping with object destruction has either changed or is about to
+     change in the near future.
+    </simpara>
+    <simpara>
+     See also: <function class="GtkObject">unref()</function>.
     </simpara>
    </desc>
   </method>
@@ -210,42 +310,125 @@
   <method id="gtk.gtkobject.method.get_arg">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>XXX <function>get_arg</function></funcdef>
-     <paramdef>XXX</paramdef>
+     <funcdef>mixed <function>get_arg</function></funcdef>
+     <paramdef>string <parameter>arg_name</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns current argument set.
    </shortdesc>
    <desc>
-
+    <simpara>
+     In most cases where you are likely to need to know the content of
+     an argument, there will be a <literal>get</literal> method in
+     place which is basically a wrapper for 
+     <function class="GtkObject">get_arg()</function>.  This is good, 
+     because there is, unfortunately, no way to know for certain the
+     name of the argument to pass to this function without looking at
+     GTK+ source.  A brief tutorial on making sense of what you see
+     there follows.
+    </simpara>
+    <para>
+     An individual widget's arguments are initialized as a set of
+     enumerated values at the beginning of the c file relating to that
+     object.  For example, in <filename>gtklabel.c</filename> in GTK
+     1.2.10 you will see this directly after the includes:
+     <informalexample>
+      <programlisting>
+enum {
+  ARG_0,
+  ARG_LABEL,
+  ARG_PATTERN,
+  ARG_JUSTIFY,
+  ARG_WRAP
+};
+      </programlisting>
+     </informalexample>
+     Around a hundred lines later, these argument types are defined as
+     they are added to the widget, in the <literal>class_init</literal>
+     function:
+     <informalexample>
+      <programlisting>
+gtk_object_add_arg_type (&quot;GtkLabel::label&quot;, GTK_TYPE_STRING, 
+GTK_ARG_READWRITE, ARG_LABEL);
+gtk_object_add_arg_type (&quot;GtkLabel::pattern&quot;, GTK_TYPE_STRING, 
+GTK_ARG_READWRITE, ARG_PATTERN);
+gtk_object_add_arg_type (&quot;GtkLabel::justify&quot;, 
+GTK_TYPE_JUSTIFICATION, GTK_ARG_READWRITE, ARG_JUSTIFY);
+gtk_object_add_arg_type (&quot;GtkLabel::wrap&quot;, GTK_TYPE_BOOL, 
+GTK_ARG_READWRITE, ARG_WRAP);
+      </programlisting>
+     </informalexample>
+    </para>
+    <simpara>
+     This gives you the name (in quotes) that you are looking for, the
+     type of data that the argument will consist of, the fact that it
+     is writeable (always), and the name of the original enumerated
+     value to bind this information to.
+    </simpara>
+    <simpara>
+     For <function class="GtkObject">get_arg()</function>, all you
+     really need is the part that is in quotes, which can be surmised
+     by looking at the initial enums.  The datatype may, however, be
+     useful information if you need to set an argument and have no
+     other means of doing so than 
+     <function class="GtkObject">set_arg()</function>.
+    </simpara>
+    <para>
+     The way you would access this is as follows:
+     <informalexample>
+      <programlisting role="php">
+$label = &amp;new GtkLabel('This is an argumentative label');
+$arg = $label-&gt;get_arg('GtkLabel::label');
+echo $arg.&quot;\n&quot;;
+      </programlisting>
+     </informalexample>
+    </para>
    </desc>
   </method>
 
   <method id="gtk.gtkobject.method.set_arg">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>XXX <function>set_arg</function></funcdef>
-     <paramdef>XXX</paramdef>
+     <funcdef>void <function>set_arg</function></funcdef>
+     <paramdef>array <parameter>arg_name</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets an argument or arguments on an object.
    </shortdesc>
    <desc>
-
+    <simpara>
+     In most cases, you will find that there is a 
+     <literal>set</literal> method in place that is a wrapper function
+     for <function class="GtkObject">set_arg()</function>.  In the rare
+     situation where this is not in place, you will need to refer to
+     the GTK source in order to find the argument name expected by this
+     method.  There is a short tutorial explaining what to look for, 
+     under <function class="GtkObject">get_arg()</function>.
+    </simpara>
+    <para>
+     The syntax used in this method is as follows:
+     <informalexample>
+      <programlisting role="php">
+$label-&gt;set_arg(array('GtkLabel::label'=&gt;'RTFS', 
+'GtkLabel::pattern'=&gt;'____'));
+      </programlisting>
+     </informalexample>
+    </para>
    </desc>
   </method>
 
   <method id="gtk.gtkobject.method.set_data">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>XXX <function>set_data</function></funcdef>
-     <paramdef>XXX</paramdef>
+     <funcdef>void <function>set_data</function></funcdef>
+     <paramdef>string <parameter>key</parameter></paramdef>
+     <paramdef>mixed <parameter>value</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Associates data with an object as a key/values pair.
    </shortdesc>
    <desc>
 
@@ -269,12 +452,12 @@
   <method id="gtk.gtkobject.method.get_data">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>XXX <function>get_data</function></funcdef>
-     <paramdef>XXX</paramdef>
+     <funcdef>mixed <function>get_data</function></funcdef>
+     <paramdef>string <parameter>key</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns data from the objects data associations.
    </shortdesc>
    <desc>
 
@@ -568,6 +751,31 @@
   </method>
 
  </methods>
+
+ <signals>
+
+  <signal id="gtk.gtkobject.signal.destroy">
+   <signalname>destroy</signalname>
+   <callback>
+    <funcprototype>
+     <funcdef>void <function>callback</function></funcdef>
+     <paramdef><classname>GtkObject</classname> object</paramdef>
+    </funcprototype>
+   </callback>
+   <shortdesc>
+    Emitted when an object is destroyed.
+   </shortdesc>
+   <desc>
+    <simpara>
+     The <signalname class="GtkObject">destroy</signalname> signal is
+     emitted by an object when it is in the process of being destroyed.
+     The signal connections associated with the object are destroyed
+     immediately after this emission.
+    </simpara>
+   </desc>
+  </signal>
+
+ </signals>
 
 </classentry>
 <!--
