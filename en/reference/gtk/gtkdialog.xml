@@ -2,11 +2,73 @@
  <classmeta>
   <classtitle>GtkDialog</classtitle>
   <classparent>GtkWindow</classparent>
-  <shortdesc>
-   Widget that eases creation of popup dialogs.
-  </shortdesc>
+  <shortdesc>Widget that eases creation of popup dialogs.</shortdesc>
   <desc>
+   <simpara>
+    GtkDialog is used to create a popup window for presenting or
+    requesting small amounts of information. It is composed of two
+    containers separated by a <classname>GtkHSeparator</classname>. 
+    The top container is a <classname>GtkVBox</classname>, and would
+    typically contain <classname>GtkLabel</classname> and
+    <classname>GtkEntry</classname> widgets to present the user with
+    information and allow input.  The bottom container is a
+    <classname>GtkHBox</classname> and would usually contain dialog
+    buttons (<literal>OK</literal>, <literal>Apply</literal>,
+    <literal>Cancel</literal> etc..).
+   </simpara>
+   <simpara>
+    It is the programmer's responsibilty to create the component
+    widgets, add them to the containers and connect their signals
+    (where applicable).
+   </simpara>
+   <simpara>
+    Note that widgets should not be added to the GtkDialog itself, but
+    rather to the <classname>GtkVBox</classname> and
+    <classname>GtkHBox</classname>.  These container widgets can be
+    accessed as <property class="GtkDialog">vbox</property> and 
+    <property class="GtkDialog">action_area</property> respectively. 
+   </simpara>
+   <para>
+    <example>
+     <title>Adding widgets to GtkDialog</title>
+     <programlisting role="php">
+$dialog = &amp;new GtkDialog(); 
+$dialog_vbox = $dialog-&gt;vbox; 
+$dialog_action_area = $dialog-&gt;action_area; 
 
+$user_info_label = &amp;new GtkLabel(&quot;Some Important Information&quot;);
+$dialog_vbox-&gt;pack_start($user_info_label); 
+
+$ok_button = &amp;new GtkButton(&quot;OK&quot;);
+$dialog_action_area-&gt;pack_start($ok_button);
+     </programlisting>
+    </example>
+   </para>
+   <simpara>
+    Dialogs can be made modal (in effect freezing input to the rest of
+    the application) by	calling the
+    <function class="GtkWindow">set_modal()</function> method on the 
+    GtkDialog object.
+   </simpara>
+   <simpara>
+    Note that making a GtkDialog modal does not stop execution of the
+    code that calls it. In the example below, the call to 'echo' will
+    still get executed even though the main application may not respond
+    to user input.  To stop execution of the code the GtkDialog must
+    contain a call to a nested Gtk::<function>main()</function> function. 
+    Execution will then continue when the corresponding
+    Gtk::<function>main_quit()</function> function is called.
+   </simpara>
+   <para>
+    <example>
+     <title>Using <function class="GtkWindow">set_modal()</function></title>
+     <programlisting role="php">
+$dialog = &amp;new GtkDialog(); 
+$dialog-&gt;set_modal(TRUE); 
+echo &quot;This message will still be printed \n&quot;; 
+     </programlisting>
+    </example>
+   </para>
   </desc>
  </classmeta>
 
@@ -14,15 +76,87 @@
   <funcsynopsis>
    <funcprototype>
     <funcdef> <function>GtkDialog</function></funcdef>
-    <paramdef>void</paramdef>
+    <paramdef>void<parameter></parameter></paramdef>
    </funcprototype>
   </funcsynopsis>
   <shortdesc>
-
+   Creates the basis for a popup dialog window.
   </shortdesc>
   <desc>
-
+   <para>
+    The syntax to create a GtkDialog widget is:
+    <informalexample>
+     <programlisting role="php">
+$dialog = &amp;new GtkDialog();
+     </programlisting>
+    </informalexample>
+   </para>
   </desc>
  </constructor>
+
+ <properties>
+
+  <property id="gtk.gtkdialog.property.vbox">
+   <propname>vbox</propname>
+   <proptype>GtkWidget</proptype>
+   <shortdesc>
+    Accessible <classname>GtkVBox</classname> within the GtkDialog
+    widget's structure.
+   </shortdesc>
+   <desc>
+    <simpara>
+     <property class="GtkDialog">vbox</property> is the
+     <classname>GtkVBox</classname> at the top of the GtkDialog
+     widget.  The programmer would typically add widgets such as
+     <classname>GtkLabel</classname> and <classname>GtkEntry</classname>
+     here for the purpose of exchanging information with the end user.
+    </simpara>
+    <para>
+     In order to access <property class="GtkDialog">vbox</property>
+     it is necessary to create a handle for it, e.g.
+     <informalexample>
+      <programlisting role="php">
+$vbox_handle = $dialog-&gt;vbox;
+      </programlisting>
+     </informalexample>
+     It can then be treated as a normal instance of
+     <classname>GtkVBox</classname>.
+    </para>
+   </desc>
+  </property>
+
+  <property id="gtk.gtkdialog.property.action_area">
+   <propname>action_area</propname>
+   <proptype>GtkWidget</proptype>
+   <shortdesc>
+    Accessible <classname>GtkHBox</classname> within the GtkDialog
+    widget's structure.
+   </shortdesc>
+   <desc>
+    <simpara>
+     <property class="GtkDialog">action_area</property> is the
+     <classname>GtkHBox</classname> at the bottom of the GtkDialog
+     widget, below the <classname>GtkHSeparator</classname>.  This is
+     where the programmer would usually add one or two
+     <classname>GtkButton</classname>s, connecting these to functions
+     that terminate the dialog and/or act upon the information gathered
+     through it.
+    </simpara>
+    <para>
+     In order to access 
+     <property class="GtkDialog">action_area</property> it is necessary
+     to create a handle for it, e.g.
+      <informalexample>
+       <programlisting role="php">
+$action_area_handle = $dialog-&gt;action_area;
+       </programlisting>
+      </informalexample>
+     It can then be treated as a normal instance of
+     <classname>GtkHBox</classname>.
+    </para>
+   </desc>
+  </property>
+
+ </properties>
 
 </classentry>
