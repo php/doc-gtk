@@ -178,4 +178,34 @@
  
 </xsl:template>
 
+
+<xsl:template name="get_direct_subclasses">
+ <xsl:param name="classname" />
+ 
+ <xsl:if test="count(/set/book/classset/classentry[classmeta/classparent=$classname])=0">
+  <xsl:call-template name="gentext">
+   <xsl:with-param name="key">nosubclasses</xsl:with-param>
+  </xsl:call-template>
+  
+ </xsl:if>
+ <xsl:for-each select="/set/book/classset/classentry[classmeta/classparent=$classname]">
+  <xsl:variable name="link">
+   <xsl:call-template name="href.target">
+    <xsl:with-param name="object" select="id(./@id)"/>
+   </xsl:call-template>
+  </xsl:variable>
+  <span dir="ltr">
+  <a>
+   <xsl:attribute name="href">
+    <xsl:value-of select="$link" />
+   </xsl:attribute>
+   <xsl:value-of select="classmeta/classtitle" />
+  </a>
+  </span>
+  <xsl:if test="position()!=last()">
+   <xsl:text>, </xsl:text> 
+  </xsl:if>
+ </xsl:for-each> 
+</xsl:template>
+
 </xsl:stylesheet>
