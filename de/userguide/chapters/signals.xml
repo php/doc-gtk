@@ -59,27 +59,28 @@
  </sect1>
 
  <sect1 id="gtk.signals.custom.params">
-  <title>Using Custom Parameters</title>
+  <title>Verwendung von eigenen Parametern</title>
   <sect2 id="gtk.signals.custom.data">
-   <title>Passing Custom Data as a Parameter</title>
+   <title>Eigene Daten als Parameter &uuml;bergeben</title>
    <simpara>
-    When <link linkend="gtk.signals.connection">connecting</link> signals its
-    possible to add an extra custom parameter to the callback. This is often
-    useful for passing the object you want to perform an action on to your
-    callback.
+    Beim <link linkend="gtk.signals.connection">verbinden</link> von Signalen
+    ist es m&ouml;glich, einen zus&auml;tzlichen eigenen Parameter an den Callback
+    zu &uuml;bergeben. Dies ist oft n&uuml;tzlich um das Objekt auf das man eine
+    Aktion anwenden will an den Callback zu &uuml;bergeben.
    </simpara>
    <simpara>
-    For example, when a button is pressed we might want to destroy the parent
-    instance of <classname>GtkWindow</classname> that that instance of
-    <classname>GtkButton</classname> has been 
-    <function class="gtkcontainer">add</function>ed to.
+    Wenn zum Beispiel ein Button gedr&uuml;ckt wird, m&ouml;chte man vielleicht
+    die Vaterinstanz von <classname>GtkWindow</classname>, zu der diese Instanz von
+    <classname>GtkButton</classname> hinzugef&uuml;gt
+    (ge<function class="gtkcontainer">add</function>et) wurde, zerst&ouml;ren.
    </simpara>
    <simpara>
-    You can do this by including an optional third parameter to the 
-    <function class="GtkObject">connect</function> call. This parameter will be
-    passed to your callback function as the final parameter passed to the 
-    callback.
-   </simpara>
+    Dies kann man dann z.B. tun indem man einen optionalen dritten Parameter
+    zum <function class="GtkObject">connect</function> Aufruf hinzuf&uuml;gt.
+    Dieser Parameter wird dann zu Ihrer Callbackfunktion als letzter an den
+    Callback &uuml;bergebenen Parameter weitergegeben.
+   </simpara>   
+   
    <para>
     <example>
      <title>
