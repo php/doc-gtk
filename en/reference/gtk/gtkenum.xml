@@ -403,28 +403,33 @@ calendar
  <enumoption>
   <optionname>GTK_CORNER_TOP_LEFT</optionname>
   <shortdesc>
-
+   The child is above and to the left of the scrollbars, so that
+   the scrollbars are placed to the right and bottom of it.  This
+   is the default behaviour.
   </shortdesc>
  </enumoption>
 
  <enumoption>
   <optionname>GTK_CORNER_BOTTOM_LEFT</optionname>
   <shortdesc>
-
+   The child is below and to the left of the scrollbars, so that
+   the scrollbars are placed at the right and top of the window.
   </shortdesc>
  </enumoption>
 
  <enumoption>
   <optionname>GTK_CORNER_TOP_RIGHT</optionname>
   <shortdesc>
-
+   The child is above and to the right of the scrollbars, i.e. the
+   scrollbars are positioned at the left and bottom of the window.
   </shortdesc>
  </enumoption>
 
  <enumoption>
   <optionname>GTK_CORNER_BOTTOM_RIGHT</optionname>
   <shortdesc>
-
+   The child is below and to the right of the scrollbars, so that
+   the scrollbars are displayed at the left and top of the window.
   </shortdesc>
  </enumoption>
 
@@ -697,10 +702,10 @@ calendar
   <optionname>GTK_FONT_BITMAP</optionname>
   <shortdesc>
    Instructs PHP-GTK to show bitmap fonts when calling
-   <classname>GtkFontSelection</classname>::<function>set_filter</function> or
-   
-<classname>GtkFontSelectionDialog</classname>::<function>set_filter</function>
-.
+   <classname>GtkFontSelection</classname>::
+   <function class="GtkFontSelection">set_filter()</function> or
+   <classname>GtkFontSelectionDialog</classname>::
+   <function class="GtkFontSelectionDialog">set_filter()</function>.
   </shortdesc>
  </enumoption>
 
@@ -708,10 +713,10 @@ calendar
   <optionname>GTK_FONT_SCALABLE</optionname>
   <shortdesc>
    Instructs PHP-GTK to show scaleable fonts when calling
-   <classname>GtkFontSelection</classname>::<function>set_filter</function> or
-   
-<classname>GtkFontSelectionDialog</classname>::<function>set_filter</function>
-.
+   <classname>GtkFontSelection</classname>::
+   <function class="GtkFontSelection">set_filter()</function> or
+   <classname>GtkFontSelectionDialog</classname>::
+   <function class="GtkFontSelectionDialog">set_filter()</function>.
   </shortdesc>
  </enumoption>
 
@@ -719,22 +724,22 @@ calendar
   <optionname>GTK_FONT_SCALABLE_BITMAP</optionname>
   <shortdesc>
    Instructs PHP-GTK to show scaleable bitmap fonts when calling
-   <classname>GtkFontSelection</classname>::<function>set_filter</function> or
-   
-<classname>GtkFontSelectionDialog</classname>::<function>set_filter</function>
-.
+   <classname>GtkFontSelection</classname>::
+   <function class="GtkFontSelection">set_filter()</function> or
+   <classname>GtkFontSelectionDialog</classname>::
+   <function class="GtkFontSelectionDialog">set_filter()</function>.
   </shortdesc>
  </enumoption>
 
  <enumoption>
   <optionname>GTK_FONT_ALL</optionname>
   <shortdesc>
-   Instructs PHP-GTK to show any font that matches any of the above flags when
-   calling
-   <classname>GtkFontSelection</classname>::<function>set_filter</function> or
-   
-<classname>GtkFontSelectionDialog</classname>::<function>set_filter</function>
-.
+   Instructs PHP-GTK to show any font that matches any of the above flags
+   when calling
+   <classname>GtkFontSelection</classname>::
+   <function class="GtkFontSelection">set_filter()</function> or
+   <classname>GtkFontSelectionDialog</classname>::
+   <function class="GtkFontSelectionDialog">set_filter()</function>.
   </shortdesc>
  </enumoption>
 
@@ -880,21 +885,25 @@ calendar
  <enumoption>
   <optionname>GTK_POLICY_ALWAYS</optionname>
   <shortdesc>
-
+   The scrollbar is always on display.
   </shortdesc>
  </enumoption>
 
  <enumoption>
   <optionname>GTK_POLICY_AUTOMATIC</optionname>
   <shortdesc>
-
+   The scrollbar is shown only when it is needed.  For instance, a 
+   <classname>GtkText</classname> may alter in size according to the
+   amount of text displayed in it.  The scrollbar will not be present
+   when the text widget is empty, but will become apparent when the
+   size of the text exceeds the size of the displayable page.
   </shortdesc>
  </enumoption>
 
  <enumoption>
   <optionname>GTK_POLICY_NEVER</optionname>
   <shortdesc>
-
+   The scrollbar is never shown.
   </shortdesc>
  </enumoption>
 

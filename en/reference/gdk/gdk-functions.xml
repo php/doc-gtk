@@ -91,7 +91,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the size of the system colormap.
    </shortdesc>
    <desc>
 
@@ -101,15 +101,27 @@
   <method id="gdk.method.color_parse">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>XXX <function>gdk::color_parse</function></funcdef>
-     <paramdef>XXX</paramdef>
+     <funcdef>GdkColor <function>gdk::color_parse</function></funcdef>
+     <paramdef>string <parameter>color_spec</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Creates a <classname>GdkColor</classname> from a color specification.
    </shortdesc>
    <desc>
-
+    <simpara>
+     This function creates a new <classname>GdkColor</classname> structure
+     and fills it according to the color named in the 
+     <parameter>color_spec</parameter> parameter.  The string that is passed
+     as the parameter can be the hex triplet version of the color, e.g. 
+     <literal>'#FF0000'</literal>, or the equivalent color name linked in 
+     <filename>rgb.txt</filename>, e.g. <literal>'red'</literal>.
+    </simpara>
+    <para>
+     Win32 users will not be able to find that file, as it is compiled. 
+     There is a good <filename>rgb.txt</filename> reference page 
+     <ulink url="&url.rgbtxt;">here</ulink>.
+    </para>
    </desc>
   </method>
 

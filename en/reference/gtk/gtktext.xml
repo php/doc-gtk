@@ -17,11 +17,10 @@
    </simpara>
    <simpara>
     <classname>GtkText</classname> is one of two widgets marked as 
-    <literal>BROKEN</literal> throughout the series of GTK+ releases that
-    can be used with PHP-GTK, and is being replaced entirely by a new set
-    of text and editing widgets in GTK 2.0.  If you can avoid using it, do
-    so.  If you can't, be aware that it has issues which are never going to
-    be fixed.
+    <literal>BROKEN</literal> throughout the 1.3 series of GTK+ releases,
+    and is being replaced entirely by a new set of text and editing widgets
+    in GTK 2.0.  If you can avoid using it, do so.  If you can't, be aware
+    that it has issues which are never going to be fixed.
    </simpara>
    <simpara>
     One of these issues is that the horizontal 
@@ -34,8 +33,8 @@
    <simpara>
     Another feature is that it cannot cope with very frequent text updates
     for long, that being when you're most likely to generate a string that
-    is too big for it (or its adjustment?) to handle.  You may find it better
-    to use a <classname>GtkCList</classname> if you are using it to display
+    is too big for its XWindow to handle.  You may find it better to use a 
+    <classname>GtkCList</classname> if you are using it to display
     the output for any form of network monitoring, for example.
    </simpara>
    <simpara>
@@ -81,24 +80,62 @@
   <desc>
    <simpara>
     Creates a text widget that is by default scrollable up and down
-    using the arrow keys, when there is enough text present.  The
-    horizontal adjustment, and therefore the horizontal scrolling, do
+    using the bound keys given below, when there is enough text present. 
+    The horizontal adjustment, and therefore the horizontal scrolling, do
     not work; the horizontal adjustment parameter in the constructor should
-    always be declared as <literal>null</literal> for that reason.
+    always be declared as <literal>null</literal> (the default setting) for
+    that reason.
    </simpara>
+   <para>
+    <table>
+     <title>Key bindings for scrolling <classname>GtkText</classname></title>
+     <tgroup cols="2">
+      <thead>
+       <row>
+        <entry>Key combination</entry>
+        <entry>Scroll function</entry>
+       </row>
+      </thead>
+      <tbody>
+       <row>
+        <entry>Control + Home</entry>
+        <entry>Move to the top of the text</entry>
+       </row>
+       <row>
+        <entry>Control + End</entry>
+        <entry>Move to the end of the text</entry>
+       </row>
+       <row>
+        <entry>Page Up</entry>
+        <entry>Move up one page increment</entry>
+       </row>
+       <row>
+        <entry>Page Down</entry>
+        <entry>Move down one page increment</entry>
+       </row>
+       <row>
+        <entry>Up arrow</entry>
+        <entry>Move up one line</entry>
+       </row>
+       <row>
+        <entry>Down arrow</entry>
+        <entry>Move down one line</entry>
+       </row>
+      </tbody>
+     </tgroup>
+    </table>
+   </para>
    <para>
     <example>
      <title>
       Adding a scrollbar to a <classname>GtkText</classname> widget
      </title>
      <programlisting role="php">
-dl(&quot;php_gtk.&quot; . (strstr(PHP_OS, &quot;WIN&quot;) ? &quot;dll&quot; : 
-&quot;so&quot;));
+dl('php_gtk.'.(strstr(PHP_OS, 'WIN') ? 'dll' : 'so'));
     
 $window = &amp;new GtkWindow();
 $window-&gt;set_position(GTK_WIN_POS_CENTER);
-$window-&gt;connect_object(&quot;destroy&quot;, array(&quot;gtk&quot;, 
-&quot;main_quit&quot;));
+$window-&gt;connect_object('destroy', array('gtk', 'main_quit'));
     
 $box = &amp;new GtkHBox();
 $window-&gt;add($box);
@@ -110,7 +147,7 @@ GtkText widget.\n\nIt isn't long enough to allow scrolling, so you will
 probably need to extend it.\n\nOn the other hand, the box isn't sized, so 
 it may just creep over that limit and be a useful demonstration after 
 all.&quot;;
-if(strstr(PHP_OS, &quot;WIN&quot;)) $string = wordwrap($string, 26);
+if(strstr(PHP_OS, 'WIN')) $string = wordwrap($string, 26);
 $text-&gt;insert_text($string, 0);
 $box-&gt;pack_start($text);
     
@@ -323,7 +360,8 @@ gtk::main();
     <simpara>
      Call the <function class="GtkText">freeze()</function> method prior
      to any text update.  This prevents the display from flickering during
-     the time it takes for the update to be made.
+     the time it takes for the update to be made, as the full update is
+     only drawn once rather than for every new character.
     </simpara>
     <simpara>
      See also:  <function class="GtkText">thaw()</function>.
@@ -346,7 +384,7 @@ gtk::main();
      The <function class="GtkText">thaw()</function> method is the 
      corollary to the <function class="GtkText">freeze()</function> method,
      and should be used in conjunction with it.  Call this method following
-     an update to restore the display.
+     an update to redraw the display.
     </simpara>
    </desc>
   </method>

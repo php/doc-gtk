@@ -20,7 +20,6 @@
     have the potential to be edited by the user, and share a fairly large
     number of key bindings to that end.  These are listed under 
     <classname>GtkEditable</classname> for the sake of completeness; 
-    <!-- OK, but they will be very soon! - sf -->
     however, note that they are replaced by a more intuitive set in GTK+ 2.0.
    </simpara>
    <note>
@@ -61,29 +60,43 @@
    </simpara>
    <para>
     <example>
-     <title>Retrieving text from a <classname>GtkEntry</classname> 
-widget</title>
+     <title>
+      Retrieving text from a <classname>GtkEntry</classname> widget
+     </title>
      <programlisting role="php">
-function get_input() {
-    global $entry;
-$input=$entry-&gt;get_text();
-print &quot;$input\n&quot;;
-$entry-&gt;grab_focus();
-$entry-&gt;set_text(&quot;&quot;);
+dl('php_gtk.'.(strstr(PHP_OS, 'WIN') ? 'dll' : 'so'));
+    
+/* set up a function to collect the input from the entry and print it */
+function get_input($entry) {
+  $input=$entry-&gt;get_text();
+  echo &quot;$input\n&quot;;
+  $entry-&gt;grab_focus();
+  $entry-&gt;set_text(&quot;&quot;);
 }
-
+    
+/* set up the window */
 $window = &amp;new GtkWindow();
 $window-&gt;set_position(GTK_WIN_POS_MOUSE);
-$window-&gt;connect_object(&quot;destroy&quot;, array(&quot;gtk&quot;, 
-&quot;main_quit&quot;));
-
+$window-&gt;connect_object('destroy', array('gtk', 'main_quit'));
+    
+/* add a box container to the window to allow more than one child widget */
+$box = &amp;new GtkVBox();
+$window-&gt;add($box);
+   
+/* add a GtkEntry to the box and connect it to the callback function */
 $entry = &amp;new GtkEntry();
-$window-&gt;add($entry);
-$entry-&gt;connect(&quot;activate&quot;, &quot;get_input&quot;);
-$entry-&gt;show();
-
+$entry-&gt;connect('activate', 'get_input');
+$box-&gt;add($entry);
+    
+/* add a GtkButton to the box and use connect_object() so that it
+   will pass the GtkEntry to the callback when it is clicked */
+$button = &amp;new GtkButton('Return or click me to echo input');
+$button-&gt;connect_object('clicked', 'get_input', $entry);
+$box-&gt;add($button);
+    
+/* display everything and set the main loop running */
+$box-&gt;show_all();
 $window-&gt;show_all();
-
 gtk::main();
      </programlisting>
     </example>

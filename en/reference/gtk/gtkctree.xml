@@ -22,7 +22,97 @@
 
   </shortdesc>
   <desc>
+   <para>
+    Notice how much of the code here is actually the arrays of data needed
+    to populate the <classname>GtkCTree</classname>.  It would probably be
+    cleaner to keep your data generation in an include file.
+    <example>
+     <title>Setting up a <classname>GtkCTree</classname></title>
+      <programlisting role="php">
+dl('php_gtk.' . (strstr(PHP_OS, 'WIN') ? 'dll' : 'so'));
+    
+/* start of data generation arrays */
+$widgets_ = array(
+/*level 0*/
+array('Object'),
+/*level 1*/
+array('Widget', 'Data', 'ItemFactory'),
+/*level 2*/
+array('Misc', 'Container', 'Calendar', 'DrawingArea', 'Editable', 'Ruler', 
+'Range', 'Separator', 'Preview', 'Progress'), array('Adjustment', 'Tooltips'),
+/*level 3*/
+array('Label', 'Arrow', 'Image', 'Pixmap'), array('Bin', 'Box', 'CList',
+'Fixed', 'Notebook', 'Paned', 'Layout', 'List', 'MenuShell', 'Packer',
+'Socket',
+'Table', 'Toolbar', 'Tree'), array('Curve'), array('Entry', 'Text'),
+array('HRuler', 'VRuler'), array('Scale', 'Scrollbar'), array('HSeparator',
+'VSeparator'), array('ProgressBar'),
+/*level 4*/
+array('AccelLabel', 'TipsQuery'), array('Alignment', 'Frame', 'Button',
+'Item', 'Window', 'EventBox', 'HandleBox', 'ScrolledWindow', 'Viewport',
+'Invisible'), 
+array('ButtonBox', 'HBox', 'VBox'), array('CTree'), array('FontSelection'),
+array('HPaned', 'VPaned'), array('MenuBar', 'Menu'), array('SpinButton'),
+array('HScale', 'VScale'), array('HScrollbar', 'VScrollbar'),
+/*level 5*/
+array('AspectFrame'), array('ToggleButton', 'OptionMenu'), array('ListItem',
+'MenuItem', 'TreeItem'), array('ColorSelectionDialog', 'Dialog',
+'FileSelection', 'FontSelectionDialog', 'Plug'), array('HButtonBox',
+'VButtonBox'), array('Combo', 'Statusbar'), array('ColorSelection',
+'GammaCurve'),
+/*level 6*/
+array('CheckButton'), array('CheckMenuItem', 'TearoffMenuItem'),
+array('InputDialog'),
+/*level 7*/
+array('RadioButton'), array('RadioMenuItem')
+);
+    
+$row = array(0, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 4, 5, 5, 5, 5, 5, 5, 7, 9, 9,
+13, 13, 13, 13, 14, 14, 14, 23, 24, 25, 29, 30);
+    
+$class = array(0, 0, 1, 0, 1, 3, 4, 5, 6, 7, 9, 0, 0, 1, 2, 4, 5, 8, 0, 0, 1,
+1, 2, 3, 4, 0, 1, 2, 0, 1, 1, 0, 0);
+/* end of data generation arrays */
 
+$window = &amp;new GtkWindow();
+$window-&gt;set_title('The GTK Class Hierarchy');
+$window-&gt;set_position(GTK_WIN_POS_CENTER);
+$window-&gt;set_default_size(300, (gdk::screen_height()-30));
+$window-&gt;connect_object('destroy', array('gtk', 'main_quit'));
+    
+$scrolledwindow = &amp;new GtkScrolledWindow();
+$scrolledwindow-&gt;set_policy(GTK_POLICY_NEVER, GTK_POLICY_ALWAYS);
+$window-&gt;add($scrolledwindow);
+    
+$ctree = &amp;new GtkCTree(1, 0);
+$ctree-&gt;set_line_style(GTK_CTREE_LINES_SOLID);
+    
+for($x = 0; $x &lt; count($widgets_); $x++) {
+  $sibling[$x] = array();
+  switch($x) {
+    case 0:
+      $parent = null;
+      break;
+    default:
+      $parent = $sibling[$row[$x-1]][$class[$x-1]];
+    break;
+  }
+  for ($i = 0; $i &lt; count($widgets_[$x]); $i++) {
+    $widgets[0] = &quot;Gtk&quot;.$widgets_[$x][$i];
+    $sibling[$x][$i] = $ctree-&gt;insert_node($parent, $sibling[$x][], 
+    $widgets, 5, null, null, null, null, false, true);
+  }
+}
+    
+$ctree-&gt;connect('select-row', 'try_this');
+$scrolledwindow-&gt;add($ctree);
+$ctree-&gt;show();
+    
+$window-&gt;show_all();
+gtk::main();
+     </programlisting>
+    </example>
+   </para>
   </desc>
  </constructor>
 
@@ -47,7 +137,8 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>remove_node</function></funcdef>
-     <paramdef><classname>GtkCTreeNode</classname> <parameter>node</parameter></paramdef>
+     <paramdef><classname>GtkCTreeNode</classname> 
+<parameter>node</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -122,7 +213,8 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>bool <function>is_viewable</function></funcdef>
-     <paramdef><classname>GtkCTreeNode</classname> <parameter>node</parameter></paramdef>
+     <paramdef><classname>GtkCTreeNode</classname> 
+<parameter>node</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -136,8 +228,10 @@
   <method id="gtk.gtkctree.method.last">
    <funcsynopsis>
     <funcprototype>
-     <funcdef><classname>GtkCTreeNode</classname> <function>last</function></funcdef>
-     <paramdef><classname>GtkCTreeNode</classname> <parameter>node</parameter></paramdef>
+     <funcdef><classname>GtkCTreeNode</classname> 
+<function>last</function></funcdef>
+     <paramdef><classname>GtkCTreeNode</classname> 
+<parameter>node</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -151,7 +245,8 @@
   <method id="gtk.gtkctree.method.node_nth">
    <funcsynopsis>
     <funcprototype>
-     <funcdef><classname>GtkCTreeNode</classname> <function>node_nth</function></funcdef>
+     <funcdef><classname>GtkCTreeNode</classname> 
+<function>node_nth</function></funcdef>
      <paramdef>int <parameter>row</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
@@ -167,8 +262,10 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>bool <function>find</function></funcdef>
-     <paramdef><classname>GtkCTreeNode</classname> <parameter>node</parameter></paramdef>
-     <paramdef><classname>GtkCTreeNode</classname> <parameter>child</parameter></paramdef>
+     <paramdef><classname>GtkCTreeNode</classname> 
+<parameter>node</parameter></paramdef>
+     <paramdef><classname>GtkCTreeNode</classname> 
+<parameter>child</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -183,8 +280,10 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>bool <function>is_ancestor</function></funcdef>
-     <paramdef><classname>GtkCTreeNode</classname> <parameter>node</parameter></paramdef>
-     <paramdef><classname>GtkCTreeNode</classname> <parameter>child</parameter></paramdef>
+     <paramdef><classname>GtkCTreeNode</classname> 
+<parameter>node</parameter></paramdef>
+     <paramdef><classname>GtkCTreeNode</classname> 
+<parameter>child</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -215,9 +314,12 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>move</function></funcdef>
-     <paramdef><classname>GtkCTreeNode</classname> <parameter>node</parameter></paramdef>
-     <paramdef><classname>GtkCTreeNode</classname> <parameter>new_parent</parameter></paramdef>
-     <paramdef><classname>GtkCTreeNode</classname> <parameter>new_sibling</parameter></paramdef>
+     <paramdef><classname>GtkCTreeNode</classname> 
+<parameter>node</parameter></paramdef>
+     <paramdef><classname>GtkCTreeNode</classname> 
+<parameter>new_parent</parameter></paramdef>
+     <paramdef><classname>GtkCTreeNode</classname> 
+<parameter>new_sibling</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -232,7 +334,8 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>expand</function></funcdef>
-     <paramdef><classname>GtkCTreeNode</classname> <parameter>node</parameter></paramdef>
+     <paramdef><classname>GtkCTreeNode</classname> 
+<parameter>node</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -247,7 +350,8 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>expand_recursive</function></funcdef>
-     <paramdef><classname>GtkCTreeNode</classname> <parameter><optional>node = NULL</optional></parameter></paramdef>
+     <paramdef><classname>GtkCTreeNode</classname> <parameter><optional>node = 
+NULL</optional></parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -262,7 +366,8 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>expand_to_depth</function></funcdef>
-     <paramdef><classname>GtkCTreeNode</classname> <parameter>node</parameter></paramdef>
+     <paramdef><classname>GtkCTreeNode</classname> 
+<parameter>node</parameter></paramdef>
      <paramdef>int <parameter>depth</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
@@ -278,7 +383,8 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>collapse</function></funcdef>
-     <paramdef><classname>GtkCTreeNode</classname> <parameter>node</parameter></paramdef>
+     <paramdef><classname>GtkCTreeNode</classname> 
+<parameter>node</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -293,7 +399,8 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>collapse_recursive</function></funcdef>
-     <paramdef><classname>GtkCTreeNode</classname> <parameter><optional>node = NULL</optional></parameter></paramdef>
+     <paramdef><classname>GtkCTreeNode</classname> <parameter><optional>node = 
+NULL</optional></parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -308,7 +415,8 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>collapse_to_depth</function></funcdef>
-     <paramdef><classname>GtkCTreeNode</classname> <parameter>node</parameter></paramdef>
+     <paramdef><classname>GtkCTreeNode</classname> 
+<parameter>node</parameter></paramdef>
      <paramdef>int <parameter>depth</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
@@ -324,7 +432,8 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>toggle_expansion</function></funcdef>
-     <paramdef><classname>GtkCTreeNode</classname> <parameter>node</parameter></paramdef>
+     <paramdef><classname>GtkCTreeNode</classname> 
+<parameter>node</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -339,7 +448,8 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>toggle_expansion_recursive</function></funcdef>
-     <paramdef><classname>GtkCTreeNode</classname> <parameter>node</parameter></paramdef>
+     <paramdef><classname>GtkCTreeNode</classname> 
+<parameter>node</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -354,7 +464,8 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>select</function></funcdef>
-     <paramdef><classname>GtkCTreeNode</classname> <parameter>node</parameter></paramdef>
+     <paramdef><classname>GtkCTreeNode</classname> 
+<parameter>node</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -369,7 +480,8 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>select_recursive</function></funcdef>
-     <paramdef><classname>GtkCTreeNode</classname> <parameter><optional>node = NULL</optional></parameter></paramdef>
+     <paramdef><classname>GtkCTreeNode</classname> <parameter><optional>node = 
+NULL</optional></parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -384,7 +496,8 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>unselect</function></funcdef>
-     <paramdef><classname>GtkCTreeNode</classname> <parameter>node</parameter></paramdef>
+     <paramdef><classname>GtkCTreeNode</classname> 
+<parameter>node</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -399,7 +512,8 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>unselect_recursive</function></funcdef>
-     <paramdef><classname>GtkCTreeNode</classname> <parameter><optional>node = NULL</optional></parameter></paramdef>
+     <paramdef><classname>GtkCTreeNode</classname> <parameter><optional>node = 
+NULL</optional></parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -414,7 +528,8 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>node_set_text</function></funcdef>
-     <paramdef><classname>GtkCTreeNode</classname> <parameter>node</parameter></paramdef>
+     <paramdef><classname>GtkCTreeNode</classname> 
+<parameter>node</parameter></paramdef>
      <paramdef>int <parameter>column</parameter></paramdef>
      <paramdef>string <parameter>text</parameter></paramdef>
     </funcprototype>
@@ -431,10 +546,13 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>node_set_pixmap</function></funcdef>
-     <paramdef><classname>GtkCTreeNode</classname> <parameter>node</parameter></paramdef>
+     <paramdef><classname>GtkCTreeNode</classname> 
+<parameter>node</parameter></paramdef>
      <paramdef>int <parameter>column</parameter></paramdef>
-     <paramdef><classname>GdkPixmap</classname> <parameter>pixmap</parameter></paramdef>
-     <paramdef><classname>GdkBitmap</classname> <parameter>mask</parameter></paramdef>
+     <paramdef><classname>GdkPixmap</classname> 
+<parameter>pixmap</parameter></paramdef>
+     <paramdef><classname>GdkBitmap</classname> 
+<parameter>mask</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -449,12 +567,15 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>node_set_pixtext</function></funcdef>
-     <paramdef><classname>GtkCTreeNode</classname> <parameter>node</parameter></paramdef>
+     <paramdef><classname>GtkCTreeNode</classname> 
+<parameter>node</parameter></paramdef>
      <paramdef>int <parameter>column</parameter></paramdef>
      <paramdef>string <parameter>text</parameter></paramdef>
      <paramdef>int <parameter>spacing</parameter></paramdef>
-     <paramdef><classname>GdkPixmap</classname> <parameter>pixmap</parameter></paramdef>
-     <paramdef><classname>GdkBitmap</classname> <parameter>mask</parameter></paramdef>
+     <paramdef><classname>GdkPixmap</classname> 
+<parameter>pixmap</parameter></paramdef>
+     <paramdef><classname>GdkBitmap</classname> 
+<parameter>mask</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -469,13 +590,18 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_node_info</function></funcdef>
-     <paramdef><classname>GtkCTreeNode</classname> <parameter>node</parameter></paramdef>
+     <paramdef><classname>GtkCTreeNode</classname> 
+<parameter>node</parameter></paramdef>
      <paramdef>string <parameter>text</parameter></paramdef>
      <paramdef>int <parameter>spacing</parameter></paramdef>
-     <paramdef><classname>GdkPixmap</classname> <parameter>pixmap_closed</parameter></paramdef>
-     <paramdef><classname>GdkBitmap</classname> <parameter>mask_closed</parameter></paramdef>
-     <paramdef><classname>GdkPixmap</classname> <parameter>pixmap_opened</parameter></paramdef>
-     <paramdef><classname>GdkBitmap</classname> <parameter>mask_opened</parameter></paramdef>
+     <paramdef><classname>GdkPixmap</classname> 
+<parameter>pixmap_closed</parameter></paramdef>
+     <paramdef><classname>GdkBitmap</classname> 
+<parameter>mask_closed</parameter></paramdef>
+     <paramdef><classname>GdkPixmap</classname> 
+<parameter>pixmap_opened</parameter></paramdef>
+     <paramdef><classname>GdkBitmap</classname> 
+<parameter>mask_opened</parameter></paramdef>
      <paramdef>bool <parameter>is_leaf</parameter></paramdef>
      <paramdef>bool <parameter>expanded</parameter></paramdef>
     </funcprototype>
@@ -492,7 +618,8 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>node_set_shift</function></funcdef>
-     <paramdef><classname>GtkCTreeNode</classname> <parameter>node</parameter></paramdef>
+     <paramdef><classname>GtkCTreeNode</classname> 
+<parameter>node</parameter></paramdef>
      <paramdef>int <parameter>column</parameter></paramdef>
      <paramdef>int <parameter>vertical</parameter></paramdef>
      <paramdef>int <parameter>horizontal</parameter></paramdef>
@@ -510,7 +637,8 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>node_set_selectable</function></funcdef>
-     <paramdef><classname>GtkCTreeNode</classname> <parameter>node</parameter></paramdef>
+     <paramdef><classname>GtkCTreeNode</classname> 
+<parameter>node</parameter></paramdef>
      <paramdef>bool <parameter>selectable</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
@@ -526,7 +654,8 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>bool <function>node_get_selectable</function></funcdef>
-     <paramdef><classname>GtkCTreeNode</classname> <parameter>node</parameter></paramdef>
+     <paramdef><classname>GtkCTreeNode</classname> 
+<parameter>node</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -540,8 +669,10 @@
   <method id="gtk.gtkctree.method.node_get_cell_type">
    <funcsynopsis>
     <funcprototype>
-     <funcdef><enumname>GtkCellType</enumname> <function>node_get_cell_type</function></funcdef>
-     <paramdef><classname>GtkCTreeNode</classname> <parameter>node</parameter></paramdef>
+     <funcdef><enumname>GtkCellType</enumname> 
+<function>node_get_cell_type</function></funcdef>
+     <paramdef><classname>GtkCTreeNode</classname> 
+<parameter>node</parameter></paramdef>
      <paramdef>int <parameter>column</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
@@ -602,8 +733,10 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>node_set_row_style</function></funcdef>
-     <paramdef><classname>GtkCTreeNode</classname> <parameter>node</parameter></paramdef>
-     <paramdef><classname>GtkStyle</classname> <parameter>style</parameter></paramdef>
+     <paramdef><classname>GtkCTreeNode</classname> 
+<parameter>node</parameter></paramdef>
+     <paramdef><classname>GtkStyle</classname> 
+<parameter>style</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -617,8 +750,10 @@
   <method id="gtk.gtkctree.method.node_get_row_style">
    <funcsynopsis>
     <funcprototype>
-     <funcdef><classname>GtkStyle</classname> <function>node_get_row_style</function></funcdef>
-     <paramdef><classname>GtkCTreeNode</classname> <parameter>node</parameter></paramdef>
+     <funcdef><classname>GtkStyle</classname> 
+<function>node_get_row_style</function></funcdef>
+     <paramdef><classname>GtkCTreeNode</classname> 
+<parameter>node</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -633,9 +768,11 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>node_set_cell_style</function></funcdef>
-     <paramdef><classname>GtkCTreeNode</classname> <parameter>node</parameter></paramdef>
+     <paramdef><classname>GtkCTreeNode</classname> 
+<parameter>node</parameter></paramdef>
      <paramdef>int <parameter>column</parameter></paramdef>
-     <paramdef><classname>GtkStyle</classname> <parameter>style</parameter></paramdef>
+     <paramdef><classname>GtkStyle</classname> 
+<parameter>style</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -649,8 +786,10 @@
   <method id="gtk.gtkctree.method.node_get_cell_style">
    <funcsynopsis>
     <funcprototype>
-     <funcdef><classname>GtkStyle</classname> <function>node_get_cell_style</function></funcdef>
-     <paramdef><classname>GtkCTreeNode</classname> <parameter>node</parameter></paramdef>
+     <funcdef><classname>GtkStyle</classname> 
+<function>node_get_cell_style</function></funcdef>
+     <paramdef><classname>GtkCTreeNode</classname> 
+<parameter>node</parameter></paramdef>
      <paramdef>int <parameter>column</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
@@ -666,8 +805,10 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>node_set_foreground</function></funcdef>
-     <paramdef><classname>GtkCTreeNode</classname> <parameter>node</parameter></paramdef>
-     <paramdef><classname>GdkColor</classname> <parameter>color</parameter></paramdef>
+     <paramdef><classname>GtkCTreeNode</classname> 
+<parameter>node</parameter></paramdef>
+     <paramdef><classname>GdkColor</classname> 
+<parameter>color</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -682,8 +823,10 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>node_set_background</function></funcdef>
-     <paramdef><classname>GtkCTreeNode</classname> <parameter>node</parameter></paramdef>
-     <paramdef><classname>GdkColor</classname> <parameter>color</parameter></paramdef>
+     <paramdef><classname>GtkCTreeNode</classname> 
+<parameter>node</parameter></paramdef>
+     <paramdef><classname>GdkColor</classname> 
+<parameter>color</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -728,7 +871,8 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>node_moveto</function></funcdef>
-     <paramdef><classname>GtkCTreeNode</classname> <parameter>node</parameter></paramdef>
+     <paramdef><classname>GtkCTreeNode</classname> 
+<parameter>node</parameter></paramdef>
      <paramdef>int <parameter>column</parameter></paramdef>
      <paramdef>double <parameter>row_align</parameter></paramdef>
      <paramdef>double <parameter>col_align</parameter></paramdef>
@@ -745,8 +889,10 @@
   <method id="gtk.gtkctree.method.node_is_visible">
    <funcsynopsis>
     <funcprototype>
-     <funcdef><enumname>GtkVisibility</enumname> <function>node_is_visible</function></funcdef>
-     <paramdef><classname>GtkCTreeNode</classname> <parameter>node</parameter></paramdef>
+     <funcdef><enumname>GtkVisibility</enumname> 
+<function>node_is_visible</function></funcdef>
+     <paramdef><classname>GtkCTreeNode</classname> 
+<parameter>node</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -806,7 +952,8 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_line_style</function></funcdef>
-     <paramdef><enumname>GtkCTreeLineStyle</enumname> <parameter>line_style</parameter></paramdef>
+     <paramdef><enumname>GtkCTreeLineStyle</enumname> 
+<parameter>line_style</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -821,7 +968,8 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_expander_style</function></funcdef>
-     <paramdef><enumname>GtkCTreeExpanderStyle</enumname> <parameter>expander_style</parameter></paramdef>
+     <paramdef><enumname>GtkCTreeExpanderStyle</enumname> 
+<parameter>expander_style</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -836,7 +984,8 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>sort_node</function></funcdef>
-     <paramdef><classname>GtkCTreeNode</classname> <parameter>node</parameter></paramdef>
+     <paramdef><classname>GtkCTreeNode</classname> 
+<parameter>node</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -851,7 +1000,8 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>sort_recursive</function></funcdef>
-     <paramdef><classname>GtkCTreeNode</classname> <parameter><optional>node = NULL</optional></parameter></paramdef>
+     <paramdef><classname>GtkCTreeNode</classname> <parameter><optional>node = 
+NULL</optional></parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
