@@ -187,10 +187,14 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Disassociates widget from current parent.
    </shortdesc>
    <desc>
-
+    <simpara>
+     This method takes away the association between the calling widget
+     and its current <classname>GdkWindow</classname> parent, allowing
+     a new parent to be set for the widget.
+    </simpara>
    </desc>
   </method>
 
@@ -262,7 +266,16 @@
     Displays calling widget and its children.
    </shortdesc>
    <desc>
-
+    <simpara>
+     This method is used to display the calling widget and its children. 
+     The extent to which it 'sees' children is system-dependant; some
+     systems will not display children belonging to a child widget when
+     <function class="GtkWidget">show_all()</function> is called from a
+     top-level container.  You may find that you still need to 
+     <function class="GtkWidget">show()</function> the children individually
+     in order to display them, and it is good practice to do so
+     consistently.
+    </simpara>
    </desc>
   </method>
 
@@ -277,7 +290,13 @@
     Hides calling widget and its children.
    </shortdesc>
    <desc>
-
+    <simpara>
+     <function class="GtkWidget">hide_all()</function> is the corollary to
+     <function class="GtkWidget">show_all()</function>, and the same
+     reservations regards the levels of children that will respond to this
+     call, apply.  If in doubt, <function class="GtkWidget">hide()</function> 
+     the child widgets individually.
+    </simpara>
    </desc>
   </method>
 
@@ -292,7 +311,22 @@
     Maps calling widget to the screen.
    </shortdesc>
    <desc>
-
+    <simpara>
+     This method maps a widget to the screen area it will take.  It is
+     mostly used internally, being one of the methods that is called as
+     part of the <function class="GtkWidget">show()</function> routine. 
+     It causes the <signalname class="GtkWidget">map</signalname> signal to
+     be emitted by the widget, which in turn switches a flag causing the
+     widget to be mapped.
+    </simpara>
+    <simpara>
+     At the point of a widget's becoming mapped, the 
+     <classname>GdkEvent</classname> <literal>GDK_MAP</literal> is
+     triggered, causing the 
+     <signalname class="GtkWidget">map-event</signalname> signal to also
+     be emitted by that widget.  Use this signal to trigger functions
+     that rely on the map event having occurred.
+    </simpara>
    </desc>
   </method>
 
@@ -307,7 +341,23 @@
     Unmaps calling widget from the screen.
    </shortdesc>
    <desc>
-
+    <simpara>
+     This method destroys information regards the dimensions of the screen
+     area where the widget is displayed .  It is mostly used internally, 
+     being one of the methods that is called as part of the 
+     <function class="GtkWidget">hide()</function> routine.  It causes
+     the <signalname class="GtkWidget">unmap</signalname> signal to be
+     emitted by the widget, which in turn switches a flag causing the
+     widget to be unmapped.
+    </simpara>
+    <simpara>
+     At the point of a widget's becoming unmapped, the 
+     <classname>GdkEvent</classname> <literal>GDK_UNMAP</literal> is
+     triggered, causing the 
+     <signalname class="GtkWidget">unmap-event</signalname> signal to
+     also be emitted by that widget.  Use this signal to trigger functions
+     that rely on the unmap event having occurred.
+    </simpara>
    </desc>
   </method>
 
@@ -672,14 +722,10 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Causes widget to emit the 
-    <signalname class="GtkWidget">event</signalname> signal.
+
    </shortdesc>
    <desc>
-    <simpara>
-     <function class="GtkWidget">event()</function> makes the calling widget
-     emit the <signalname class="GtkWidget">event</signalname> signal.
-    </simpara>
+
    </desc>
   </method>
 

@@ -7,7 +7,13 @@
    Base class for text-editing widgets.
   </shortdesc>
   <desc>
-
+   <simpara>
+    <classname>GtkEditable</classname> is an abstract base class providing
+    <classname>GtkEntry</classname> and <classname>GtkText</classname> with
+    several methods, signals and properties, and also a set of keybindings
+    that can be used for editing.
+   </simpara>
+   <!-- of which more later! - sf feb 02 -->
   </desc>
  </classmeta>
 
@@ -32,15 +38,26 @@
   <method id="gtk.gtkeditable.method.insert_text">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>XXX <function>insert_text</function></funcdef>
-     <paramdef>XXX</paramdef>
+     <funcdef>void <function>insert_text</function></funcdef>
+     <paramdef>string <parameter>text_string</parameter></paramdef>
+     <paramdef>int <parameter>position</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Inserts a string of text.
    </shortdesc>
    <desc>
-
+    <simpara>
+     <function class="GtkEditable">insert_text()</function> is the simplest
+     way of putting text into an editable widget. 
+     <classname>GtkText</classname> has an alternative method, 
+     <function class="GtkText">insert()</function>, which gives greater
+     control over the appearance of the text, amongst other things.
+    </simpara>
+    <simpara>
+     The <function class="GtkEditable">insert_text()</function> method also
+     causes the signal of the same name to be emitted.
+    </simpara>
    </desc>
   </method>
 
