@@ -6,7 +6,7 @@
   <para>
    PHP-GTK &version.phpgtk; source and the binaries for Windows can be found
    at <ulink url="&url.phpgtk;">&url.phpgtk;</ulink>.  Source users will
-   also need to install the latest version of PHP from CVS 
+   also need to install the latest version of PHP from CVS - see 
    <ulink url="&url.php.anoncvs;">&url.php.anoncvs;</ulink>.
   </para>
  </sect1>
@@ -108,7 +108,7 @@
  <sect1 id="install.unix">
   <title>Installing PHP-GTK Under Unix</title>
   <para>
-   PHP GTK depends on a number of packages, which must be installed before 
+   PHP GTK depends on a number of packages, which need to be installed before
    starting the PHP-GTK installation:
    <itemizedlist>
     <listitem>
@@ -118,9 +118,10 @@
     </listitem>
     <listitem>
      <para>
-      <ulink url="&url.gtk.download;">GTK libraries</ulink> or you can use
-      the packaged versions for your system e.g. <literal>gtk</literal> and 
-      <literal>gtk-devel</literal>
+      The GTK+ libraries, available from 
+      <ulink url="&url.gtk.download;">&url.gtk.download;</ulink>, or you can
+      use the packaged versions for your system, e.g. <literal>gtk</literal> 
+      and <literal>gtk-devel</literal>
      </para>
     </listitem>
     <listitem>
@@ -138,7 +139,7 @@
       <ulink url="&url.pixbuf;">Gdk-Pixbuf libraries</ulink>.  Again, these
       may be available packaged on your system, just ensure that you also
       install the development package.  GtkHTML, notably, has a number of
-      sub-dependencies, e.g. <literal>GAL</literal>, which can also be
+      sub-dependencies, e.g. <literal>GAL</literal>, that can also be
       obtained from the <ulink url="&url.gnome.ftp;">Gnome ftp site</ulink>.
      </para>
     </listitem>
@@ -162,40 +163,40 @@
    <command>./configure</command> can also be used to build the extra 
    widgets, e.g.
    <command>./configure --enable-scintilla --enable-gtkhtml</command>.  To
-   list all the available options use <command>./configure --help</command> 
-   - and remember that each extra widget may have a number of dependencies
+   list all the available options use <command>./configure --help</command>.  
+   Remember that each extra widget may have a number of dependencies
    that need to be available for the build to be successful.
   </simpara>
   <simpara>
    Finally, run <command>make</command> to compile the extension.  Some
    source files are generated from .defs files by the code generator.  If
-   you see messages like &quot;Could not write...&quot;, it means that the
-   listed GTK+ objects or features are not yet supported.  If the
-   compilation is successful, run <command>make install</command> to install
-   the extension into your default PHP extension directory (usually 
+   you see messages like <literal>&quot;Could not write...&quot;</literal>, 
+   it means that the listed GTK+ objects or features are not yet supported. 
+   If the compilation is successful, run <command>make install</command> to
+   install the extension into your default PHP extension directory (usually 
    <filename>/usr/local/lib/php/extensions</filename>).
   </simpara>
   <para>
-   Common problems from <command>./configure</command> or 
+   Troubleshooting: common problems from <command>./configure</command> or 
    <command>make</command>
    <itemizedlist>
     <listitem>
      <simpara>
       <literal>./ltconfig: ltconfig : No such file or directory, configure: 
-      error: libtool configure failed</literal> is caused by not having
+      error: libtool configure failed</literal>  is caused by not having
       one of libtool, automake or autoconf installed.
     </simpara>
    </listitem>
    <listitem>
     <simpara>
      <literal>./aclocal.m4:813: error: m4_defn: undefined: 
-     _m4_divert_diversion</literal> is caused by an incompatible version
+     _m4_divert_diversion</literal>  is caused by an incompatible version
      of autoconf, see the recommended  versions above.
     </simpara>
    </listitem>
    <listitem>
     <para>
-     <literal>php_gtk+.c:33: parse error before `TSRMLS_DC'</literal> is
+     <literal>php_gtk+.c:33: parse error before `TSRMLS_DC'</literal>  is
      caused by either an old version of php being found by the build system
      or trying to build php-gtk with an old version of PHP - please upgrade
      to PHP version &version.php; to fix this.
@@ -203,7 +204,7 @@
    </listitem>
    <listitem>
     <simpara>
-     <literal>gen_gtk.c:1: parse error before '&lt;'</literal> is caused by
+     <literal>gen_gtk.c:1: parse error before '&lt;'</literal>  is caused by
      an error occurring in the generator.  Usually this error is resolved by
      adding the line 
      <literal>ini_set(&quot;memory_limit&quot;, &quot;32M&quot;);</literal> 
@@ -215,14 +216,14 @@
    <listitem>
     <simpara>
      <literal>checking for gnome-config... Unknown library `gtkhtml'</literal>
-     (from <command>./configure</command>) is due to an old or unavailable
+     (from <command>./configure</command>)  is due to an old or unavailable
      development header file - if you installed by rpm or a similar package
      system you will need the <literal>-devel</literal> packages
     </simpara>
    </listitem>
    <listitem>
     <simpara>
-     <literal>Unable to find -lgal</literal> or similar message is caused
+     <literal>Unable to find -lgal</literal>  or similar message is caused
      by a missing <literal>gal-devel</literal> or similar library.  Usually
      this will be a sub dependancy of some of the more complex widgets, like
      gtkhtml.
