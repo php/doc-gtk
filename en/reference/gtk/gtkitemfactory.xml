@@ -36,12 +36,10 @@
     The <parameter>container_type</parameter> determines, which type the root menu will have:
     <classname>GtkMenu</classname>, <classname>GtkMenuBar</classname> or 
     <classname>GtkOptionMenu</classname>. To get the <classname>GtkType</classname> you want, 
-    just create an object of this specific class and use the <literal>get_type()</literal>
-    function:
+    just use the the <literal>get_type()</literal> function of this class:
     <programlisting role="php">
 <![CDATA[
-$menubar = &new GtkMenuBar();
-$type = $menubar->get_type();     
+$type = GtkMenuBar::get_type();     
 ]]>
     </programlisting>
    </para>
@@ -71,8 +69,7 @@ $window->connect_object('destroy', array('gtk', 'main_quit'));
 $accelgroup	= &new GtkAccelGroup();
 $window->add_accel_group( $accelgroup);
 
-$dummybar = &new GtkMenuBar();
-$fac	= &new GtkItemFactory( $dummybar->get_type(), "<mainmenu>", $accelgroup);
+$fac	= &new GtkItemFactory( GtkMenuBar::get_type(), "<mainmenu>", $accelgroup);
 
 function quit( $number, $item) {
 	gtk::main_quit();
@@ -251,8 +248,7 @@ $window->connect_object('destroy', array('gtk', 'main_quit'));
 $accelgroup	= &new GtkAccelGroup();
 $window->add_accel_group( $accelgroup);
 
-$dummybar = &new GtkMenuBar();
-$fac	= &new GtkItemFactory( $dummybar->get_type(), '<mainmenu>', $accelgroup);
+$fac	= &new GtkItemFactory( GtkMenuBar::get_type(), '<mainmenu>', $accelgroup);
 
 function menucall( $number, $item) {
 	switch( $number) {
