@@ -3,10 +3,18 @@
   <classtitle>GtkButton</classtitle>
   <classparent>GtkBin</classparent>
   <shortdesc>
-
+   A container widget that emits a signal when clicked on.
   </shortdesc>
   <desc>
-
+   <para>
+    The GtkButton widget is a container widget that can hold any valid child
+    widget derived from <classname>GtkWidget</classname>. The most commonly
+    used child widget is a <classname>GtkLabel</classname>.
+   </para>
+   <para>
+    The GtkButton widget is mainly used to call some function when the button
+    is pressed.
+   </para>
   </desc>
  </classmeta>
 
@@ -14,14 +22,18 @@
   <funcsynopsis>
    <funcprototype>
     <funcdef> <function>GtkButton</function></funcdef>
-    <paramdef>XXX</paramdef>
+    <paramdef>string <parameter><optional>label</optional></parameter></paramdef>
    </funcprototype>
   </funcsynopsis>
   <shortdesc>
-
+   Creates a button.
   </shortdesc>
   <desc>
-
+   <para>
+    This function creates and returns a <classname>GtkButton</classname>
+    widget; if optional <parameter>label</parameter> is passed the button will
+    contain a <classname>GtkLabel</classname> widget with the given text.
+   </para>
   </desc>
  </constructor>
 
@@ -35,10 +47,12 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Emits <signalname>pressed</signalname> signal.
    </shortdesc>
    <desc>
-
+    <para>
+     Makes the button emit the <signalname>pressed</signalname> signal.
+    </para>
    </desc>
   </method>
 
@@ -50,10 +64,12 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Emits <signalname>released</signalname> signal.
    </shortdesc>
    <desc>
-
+    <para>
+     Makes the button emit the <signalname>released</signalname> signal.
+    </para>
    </desc>
   </method>
 
@@ -65,10 +81,12 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Emits <signalname>clicked</signalname> signal.
    </shortdesc>
    <desc>
-
+    <para>
+     Makes the button emit the <signalname>clicked</signalname> signal.
+    </para>
    </desc>
   </method>
 
@@ -80,10 +98,12 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Emits <signalname>enter</signalname> signal.
    </shortdesc>
    <desc>
-
+    <para>
+     Makes the button emit the <signalname>enter</signalname> signal.
+    </para>
    </desc>
   </method>
 
@@ -95,10 +115,12 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Emits <signalname>leave</signalname> signal.
    </shortdesc>
    <desc>
-
+    <para>
+     Makes the button emit the <signalname>leave</signalname> signal.
+    </para>
    </desc>
   </method>
 
@@ -110,10 +132,14 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the button relief style.
    </shortdesc>
    <desc>
-
+    <para>
+     Sets the relief style of the button widget edges. The available styles are
+     GTK_RELIEF_NORMAL, GTK_RELIEF_HALF, and GTK_RELIEF_NONE. The default
+     relief style is GTK_RELIEF_NORMAL.
+    </para>
    </desc>
   </method>
 
@@ -125,10 +151,12 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Gets the button relief style.
    </shortdesc>
    <desc>
-
+    <para>
+     Returns the current relief style of the button.
+    </para>
    </desc>
   </method>
 

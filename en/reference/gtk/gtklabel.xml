@@ -2,11 +2,18 @@
  <classmeta>
   <classtitle>GtkLabel</classtitle>
   <classparent>GtkMisc</classparent>
-  <shortdesc>
-
-  </shortdesc>
+  <shortdesc>A widget that displays a small amount of text.</shortdesc>
   <desc>
-
+   <para>
+    A very common use of GtkLabel is displaying some text that describes an
+    adjacent widget or makes some comment about its use. If you need to
+    display a great deal of text, use GtkText instead.
+   </para>
+   <para>
+    Note that labels do not generate events. If you want to catch events (e.g.
+    from a button click) you will need to put the label in a
+    <classname>GtkEventBox</classname>.
+   </para>
   </desc>
  </classmeta>
 
@@ -14,14 +21,18 @@
   <funcsynopsis>
    <funcprototype>
     <funcdef> <function>GtkLabel</function></funcdef>
-    <paramdef>string <parameter><optional>str = NULL</optional></parameter></paramdef>
+    <paramdef>string <parameter><optional>label_text = NULL</optional></parameter></paramdef>
    </funcprototype>
   </funcsynopsis>
   <shortdesc>
-
+   Creates a new label with the given text inside it. If no text is specified,
+   an empty label is created.
   </shortdesc>
   <desc>
-
+   <para>
+    The syntax to create a new GtkLabel widget is
+    <programlisting>$label = &amp;new GtkLabel(&quot;Initial or static label text&quot;);</programlisting>
+   </para>
   </desc>
  </constructor>
 
@@ -31,14 +42,23 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_text</function></funcdef>
-     <paramdef>string <parameter>str</parameter></paramdef>
+     <paramdef>string <parameter>label_text</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the label text.
    </shortdesc>
    <desc>
-
+    <para>
+     Sets the text for the label widget. Previous text in the label is not
+     kept.  Note that the existing underlines are not overwritten, use
+     <function>set_pattern()</function> with no parameters to erase the
+     underlines.
+    </para>
+    <para>
+     <programlisting>$label-&gt;set_text(&quot;Whatever you wish to pass&quot;);
+     </programlisting>
+    </para>
    </desc>
   </method>
 
@@ -46,14 +66,28 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_justify</function></funcdef>
-     <paramdef><enumname>GtkJustification</enumname> <parameter>jtype</parameter></paramdef>
+     <paramdef><enumname>GtkJustification</enumname> <parameter>justification</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets label justification.
    </shortdesc>
    <desc>
-
+    <para>
+     This is the method for justifying text in GtkLabel.  The options are
+     enumerated flags, giving the choices of:
+    </para>
+    <para>
+     <simplelist>
+      <member>GTK_JUSTIFY_LEFT,</member>
+      <member>GTK_JUSTIFY_RIGHT,</member>
+      <member>GTK_JUSTIFY_CENTER,</member>
+      <member>GTK_JUSTIFY_FILL.</member> 
+     </simplelist>
+    </para>
+    <para>
+     <programlisting>$label-&gt;set_justify(GTK_JUSTIFY_CENTER);</programlisting>
+    </para>
    </desc>
   </method>
 
@@ -65,10 +99,23 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Underlines text in the label.
    </shortdesc>
    <desc>
-
+    <para>
+     This is the method for underlining text in GtkLabel.  It needs to be
+     defined as a pattern, e.g. if your text consists of
+     <literal>&quot;Apple Banana Carrot&quot;</literal>, then
+     <literal>&quot;_____        ______&quot;</literal>
+     will underline <literal>Apple</literal> and <literal>Carrot</literal> but
+     not <literal>Banana</literal>, as that is where the space falls.
+    </para>
+    <para>
+     <programlisting>$label-&gt;set_pattern(&quot;__  __&quot;);</programlisting>
+    </para>
+    <para>
+     Call this method with no parameters to erase the underlines.
+    </para>
    </desc>
   </method>
 
@@ -80,25 +127,38 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Toggles line wrapping.
    </shortdesc>
    <desc>
-
+    <para>
+     Toggles line wrapping in the label. When <parameter>wrap</parameter> is
+     <literal>true</literal>, the lines exceeding the widget's size will be
+     broken, when it's <literal>false</literal>, those line will be cut off at
+     the widget's edge.
+    </para>
+    <para>
+     <programlisting>$label-&gt;set_line_wrap(true);</programlisting>
+    </para>
    </desc>
   </method>
 
   <method id="gtk.gtklabel.method.get">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>XXX <function>get</function></funcdef>
-     <paramdef>XXX</paramdef>
+     <funcdef>string <function>get</function></funcdef>
+     <paramdef>void <parameter></parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Gets label text.
    </shortdesc>
    <desc>
-
+    <para>
+     Returns the current text content of the label.
+    </para>
+    <para>
+     <programlisting>$label-&gt;get();</programlisting>
+    </para>
    </desc>
   </method>
 
@@ -110,10 +170,19 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Parses underscores into underlines.
    </shortdesc>
    <desc>
-
+    <para>
+     This method checks the text for underscores, and then underlines the
+     character following the underscore. It will take the last underlined
+     character in a label and return it as a lower-case accelerator key, e.g.
+     &quot;_Save&quot; will return the accelerator key value for &quot;s&quot;.
+     This method is mostly used internally by Gtk+ for menu items and such.
+    </para>
+    <para>
+     <programlisting>$label-&gt;parse_uline(&quot;_File&quot;);</programlisting>
+    </para>
    </desc>
   </method>
 
