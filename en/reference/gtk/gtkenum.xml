@@ -809,6 +809,105 @@ calendar
 
 </enum>
 
+<enum id="gtk.enum.gtkscrolltype">
+ <enumname>GtkScrollType</enumname>
+
+ <enumoption>
+  <optionname>GTK_SCROLL_NONE</optionname>
+  <shortdesc>
+   The default setting.  Indicates that the scrollbar's slider is not moved.
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GTK_SCROLL_STEP_BACKWARD</optionname>
+  <shortdesc>
+   Sets the scrollbar's slider back one step increment from its current
+   position.  The value of the step increment is taken from the underlying
+   <classname>GtkAdjustment</classname> in the scrollbar.
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GTK_SCROLL_STEP_FORWARD</optionname>
+  <shortdesc>
+   Sets the scrollbar's slider forward one step increment from its current
+   position.  The value of the step increment is taken from the underlying
+   <classname>GtkAdjustment</classname> in the scrollbar.
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GTK_SCROLL_PAGE_BACKWARD</optionname>
+  <shortdesc>
+   Sets the scrollbar's slider back one page increment from its current
+   position.  The value of the page increment is taken from the underlying
+   <classname>GtkAdjustment</classname> in the scrollbar.
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GTK_SCROLL_PAGE_FORWARD</optionname>
+  <shortdesc>
+   Sets the scrollbar's slider forward one page increment from its current
+   position.  The value of the page increment is taken from the underlying
+   <classname>GtkAdjustment</classname> in the scrollbar.
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GTK_SCROLL_JUMP</optionname>
+  <shortdesc>
+   Sets the scrollbar's slider to the position described in the accompanying
+   float parameter.  The range of values are <literal>0</literal> to 
+   <literal>1</literal>, with the halfway point being <literal>0.5</literal>.
+  </shortdesc>
+ </enumoption>
+
+</enum>
+
+<enum id="gtk.enum.gtkselectionmode">
+ <enumname>GtkSelectionMode</enumname>
+
+ <enumoption>
+  <optionname>GTK_SELECTION_SINGLE</optionname>
+  <shortdesc>
+   Only one item can be selected at any given moment.  Other items
+   can have focus, but will not be marked as selected.
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GTK_SELECTION_BROWSE</optionname>
+  <shortdesc>
+   Only one item can be selected at any given moment.  Any item
+   currently having focus will be marked as selected.
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GTK_SELECTION_MULTIPLE</optionname>
+  <shortdesc>
+   Several items may be selected or unselected with a click or using
+   the spacebar.  They cannot be selected or unselected in any other
+   way.  Note that multiple selection should only be used where all
+   items share the exact same callback routine.
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GTK_SELECTION_EXTENDED</optionname>
+  <shortdesc>
+   Several items may be selected or unselected using drag, or the shift
+   (selects all items from the leader to the current focus) or control 
+   (selects the item having current focus) keys.  Note that extended
+   selection should only be used where all items share the exact same
+   callback routine.
+  </shortdesc>
+ </enumoption>
+
+</enum>
+
 <enum id="gtk.enum.gtkshadowtype">
  <enumname>GtkShadowType</enumname>
 

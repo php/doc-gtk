@@ -10,7 +10,10 @@
    <simpara>
     <classname>GtkVBox</classname> is a box container that packs child
     widgets in a single column, using the packing methods inherited from 
-    <classname>GtkBox</classname>.
+    <classname>GtkBox</classname>, such as 
+    <function class="GtkBox">pack_start()</function>, as well as the less
+    flexible <function class="GtkContainer">add()</function> method available
+    to most container widgets.
    </simpara>
    <simpara>
     Note that all children in a <classname>GtkVBox</classname> are allocated
@@ -18,8 +21,46 @@
     Widgets taking up less than the allocated width are by default centered
     within the available area in that dimension.
    </simpara>
-    <!--TODO This is a temporary measure, example will eventually be in 
-    the userguide but I think we need one available *now*.  -sf -->
+   <simpara>
+    See also: <classname>GtkContainer</classname>, 
+    <classname>GtkBox</classname>, <classname>GtkHBox</classname>, 
+    <classname>GtkButtonBox</classname>, <classname>GtkTable</classname>.
+   </simpara>
+  </desc>
+ </classmeta>
+
+ <constructor id="gtk.gtkvbox.constructor">
+  <funcsynopsis>
+   <funcprototype>
+    <funcdef> <function>GtkVBox</function></funcdef>
+    <paramdef>bool 
+     <parameter><optional>homogeneous = false</optional></parameter>
+    </paramdef>
+    <paramdef>int 
+     <parameter><optional>spacing = 0</optional></parameter>
+    </paramdef>
+   </funcprototype>
+  </funcsynopsis>
+  <shortdesc>
+   Creates a container for a single column of child widgets.
+  </shortdesc>
+  <desc>
+   <simpara>
+    Creates a new vertical box container designed for packing a single
+    column of child widgets.
+   </simpara>
+   <para>
+    The first parameter, <parameter>homogeneous</parameter>, is a boolean
+    value which, if set to <literal>true</literal>, will set each child
+    widget in the <classname>GtkVBox</classname> to the same height as that
+    of the largest child widget.  The second parameter, 
+    <parameter>spacing</parameter>, sets the minimum spacing between the
+    child widgets, in pixels.  Leaving both parameters empty, e.g.
+    <informalexample>
+     <programlisting role="php">$vbox = &amp;new GtkVBox();</programlisting>
+    </informalexample>
+    will set the default behaviour of individual sizing and zero spacing.
+   </para>
    <para>
     <example>
      <title>Packing child widgets using <classname>GtkVBox</classname> and 
@@ -61,46 +102,6 @@ $window-&gt;show_all();
 Gtk::main();
      </programlisting>
     </example>
-   </para>
-   <simpara>
-    See also: <classname>GtkContainer</classname>, 
-    <classname>GtkBox</classname>, <classname>GtkHBox</classname>, 
-    <classname>GtkButtonBox</classname>, <classname>GtkTable</classname>.
-   </simpara>
-  </desc>
- </classmeta>
-
- <constructor id="gtk.gtkvbox.constructor">
-  <funcsynopsis>
-   <funcprototype>
-    <funcdef> <function>GtkVBox</function></funcdef>
-    <paramdef>bool 
-     <parameter><optional>homogeneous = false</optional></parameter>
-    </paramdef>
-    <paramdef>int 
-     <parameter><optional>spacing = 0</optional></parameter>
-    </paramdef>
-   </funcprototype>
-  </funcsynopsis>
-  <shortdesc>
-   Creates a container for a single column of child widgets.
-  </shortdesc>
-  <desc>
-   <simpara>
-    Creates a new vertical box container designed for packing a single
-    column of child widgets.
-   </simpara>
-   <para>
-    The first parameter, <parameter>homogeneous</parameter>, is a boolean
-    value which, if set to <literal>true</literal>, will set each child
-    widget in the <classname>GtkVBox</classname> to the same height as that
-    of the largest child widget.  The second parameter, 
-    <parameter>spacing</parameter>, sets the minimum spacing between the
-    child widgets, in pixels.  Leaving both parameters empty, e.g.
-    <informalexample>
-     <programlisting role="php">$vbox = &amp;new GtkVBox();</programlisting>
-    </informalexample>
-    will set the default behaviour of individual sizing and zero spacing.
    </para>
   </desc>
  </constructor>
