@@ -13,6 +13,7 @@
      <div dir="rtl">
      <xsl:apply-templates select="./title"/>
      <xsl:apply-templates select="./partintro"/>
+     <xsl:apply-templates select="./classtree" />
      <xsl:call-template name="component.toc"/>
      </div>
      <xsl:apply-templates select="./classentry|./refentry"/>
@@ -22,6 +23,7 @@
     <div class="{name(.)}" id="{$id}">
      <xsl:apply-templates select="./title"/>
      <xsl:apply-templates select="./partintro"/>
+     <xsl:apply-templates select="./classtree" />
      <xsl:call-template name="component.toc"/>
      <xsl:apply-templates select="./classentry|./refentry"/>
     </div>
@@ -60,6 +62,17 @@
   <h1>
    <xsl:apply-templates />
   </h1>
+ </xsl:template>
+ 
+ <xsl:template match="classtree">
+  <h2>
+   <xsl:copy-of select="title/node()" />  
+  </h2>
+  <pre class="classtree">
+   <xsl:call-template name="classtree_display">
+    <xsl:with-param name="classid"><xsl:value-of select="topclass" /></xsl:with-param>
+   </xsl:call-template>
+  </pre>
  </xsl:template>
 
 <!--========================================================================-->

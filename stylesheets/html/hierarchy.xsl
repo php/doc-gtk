@@ -208,4 +208,60 @@
  </xsl:for-each> 
 </xsl:template>
 
+
+<!--
+ creates a class tree beginning from
+ one top class with all its subclasses
+-->
+<xsl:template name="classtree_display">
+ <!-- class is the ID of the class, e.g. "gtk.gtkwidget"-->
+ <xsl:param name="classid"/>
+ <xsl:param name="indent"/>
+
+ <!-- display the current class -->
+ <xsl:variable name="classname" select="/set/book/classset/classentry[@id=$classid]/classmeta/classtitle" />
+ 
+ <xsl:value-of select="$indent"/>
+ <xsl:text>+- </xsl:text>
+ <xsl:variable name="link">
+  <xsl:call-template name="href.target">
+   <xsl:with-param name="object" select="id($classid)"/>
+  </xsl:call-template>
+ </xsl:variable>
+ <span dir="ltr">
+ <a>
+  <xsl:attribute name="href">
+   <xsl:value-of select="$link" />
+  </xsl:attribute>
+  <xsl:value-of select="$classname" />
+ </a>
+ </span>
+ <br/>
+ 
+ <!-- display all the other classes below the current one -->
+ <xsl:variable name="newindent">
+  <xsl:value-of select="$indent"/>
+  <xsl:choose>
+   <xsl:when test="position() = last()">
+    <xsl:text>   </xsl:text>
+   </xsl:when>
+   <xsl:otherwise>
+    <xsl:text>|  </xsl:text>
+   </xsl:otherwise>
+  </xsl:choose>
+ </xsl:variable>
+ 
+ <xsl:for-each select="/set/book/classset/classentry[classmeta/classparent=$classname]">
+  <xsl:call-template name="classtree_display">
+   <xsl:with-param name="classid">
+    <xsl:value-of select="@id" />
+   </xsl:with-param>
+   <xsl:with-param name="indent">
+    <xsl:value-of select="$newindent"/>
+   </xsl:with-param>
+  </xsl:call-template>
+ </xsl:for-each>
+
+</xsl:template>
+
 </xsl:stylesheet>

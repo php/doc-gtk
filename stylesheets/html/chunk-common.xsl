@@ -97,6 +97,7 @@ its parent.
     <xsl:when test="name($node)='set'">1</xsl:when>
     <xsl:when test="name($node)='classset'">1</xsl:when>
     <xsl:when test="name($node)='enumset'">1</xsl:when>
+    <xsl:when test="name($node)='classtree'">1</xsl:when>
     <xsl:when test="name($node)='classentry'">1</xsl:when>
     <xsl:when test="name($node)='method'">1</xsl:when>
     <xsl:when test="name($node)='signal'">1</xsl:when>
@@ -711,6 +712,7 @@ its parent.
              |preceding::classset[1]
              |preceding::enumset[1]
              |preceding::prop[1]
+             |preceding::classtree[1]
              |preceding::classentry[1]
              |preceding::refentry[1]
              |preceding::enum[1]
@@ -725,6 +727,7 @@ its parent.
              |ancestor::signal[1]
              |ancestor::classset[1]
              |ancestor::enumset[1]
+             |ancestor::classtree[1]
              |ancestor::classentry[1])[last()]"/>
 
   <xsl:variable name="next"
@@ -737,6 +740,7 @@ its parent.
              |following::constructor[1]
              |following::method[1]
              |following::signal[1]
+             |following::classtree[1]
              |following::classentry[1]
              |following::refentry[1]
              |following::enum[1]
@@ -754,6 +758,7 @@ its parent.
              |descendant::signal[1]
              |descendant::classset[1]
              |descendant::enumset[1]
+             |descendant::classtree[1]
              |descendant::classentry[1]
              |descendant::reference[1]
              |descendant::refentry[1]
@@ -777,6 +782,7 @@ its parent.
              |preceding::classset[1]
              |preceding::enumset[1]
              |preceding::prop[1]
+             |preceding::classtree[1]
              |preceding::classentry[1]
              |preceding::refentry[1]
              |preceding::enum[1]
@@ -791,6 +797,7 @@ its parent.
              |ancestor::signal[1]
              |ancestor::classset[1]
              |ancestor::enumset[1]
+             |ancestor::classtree[1]
              |ancestor::classentry[1])[last()]"/>
 
   <xsl:variable name="next"
@@ -803,6 +810,7 @@ its parent.
              |following::constructor[1]
              |following::method[1]
              |following::signal[1]
+             |following::classtree[1]
              |following::classentry[1]
              |following::refentry[1]
              |following::enum[1]
@@ -820,6 +828,7 @@ its parent.
              |descendant::signal[1]
              |descendant::classset[1]
              |descendant::enumset[1]
+             |descendant::classtree[1]
              |descendant::classentry[1]
              |descendant::refentry[1]
              |descendant::sect1[name(parent::*) != 'sect1'][1])[1]"/>
@@ -842,6 +851,7 @@ its parent.
              |preceding::classset[1]
              |preceding::enumset[1]
              |preceding::prop[1]
+             |preceding::classtree[1]
              |preceding::classentry[1]
              |preceding::refentry[1]
              |preceding::enum[1]
@@ -856,6 +866,7 @@ its parent.
              |ancestor::signal[1]
              |ancestor::classset[1]
              |ancestor::enumset[1]
+             |ancestor::classtree[1]
              |ancestor::classentry[1])[last()]"/>
 
   <xsl:variable name="next"
@@ -868,6 +879,7 @@ its parent.
              |following::constructor[1]
              |following::method[1]
              |following::signal[1]
+             |following::classtree[1]
              |following::classentry[1]
              |following::refentry[1]
              |following::enum[1]
@@ -883,6 +895,7 @@ its parent.
              |descendant::signal[1]
              |descendant::enumset[1]
              |descendant::classset[1]
+             |descendant::classtree[1]
              |descendant::classentry[1]
              |descendant::refentry[1]
              |descendant::part[1]
@@ -1036,7 +1049,7 @@ its parent.
   </xsl:choose>
 </xsl:template>
 
-<xsl:template match="enumset|classset|classentry|method|signal|prop|constructor|enum">
+<xsl:template match="enumset|classset|classtree|classentry|method|signal|prop|constructor|enum">
   <xsl:call-template name="process-chunk-element"/>
  </xsl:template>
 

@@ -6,7 +6,7 @@
                 version='1.0'>
 
 <!-- ********************************************************************
-     $Id: autotoc.xsl,v 1.5 2003-12-30 23:43:45 sfox Exp $
+     $Id: autotoc.xsl,v 1.6 2004-08-01 16:41:29 cweiske Exp $
      ********************************************************************
 
      This file is part of the XSL DocBook Stylesheet distribution.
@@ -89,6 +89,7 @@
   <xsl:if test="$generate.component.toc != 0">
     <xsl:variable name="nodes" select="section|sect1|sect2|refentry
     				       |classentry[@hide='0']
+                           |classtree
     				       |enums/enum[@hide='0']
                            |bridgehead[not(@renderas)]
                            |.//bridgehead[@renderas='sect1']"/>
@@ -266,8 +267,20 @@
    </xsl:attribute>
    <xsl:apply-templates select="./enumname" mode="title" />
   </a>
+ </xsl:element>
+</xsl:template>
+
+<xsl:template match="classtree" mode="toc">
+ <xsl:element name="{$toc.listitem.type}">
+  <a>
+   <xsl:attribute name="href">
+    <xsl:call-template name="href.target"/>
+   </xsl:attribute>
+   <xsl:apply-templates select="./title" mode="title" />
+  </a>
   </xsl:element>
 </xsl:template>
+
 
 </xsl:stylesheet>
 
