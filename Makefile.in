@@ -25,18 +25,18 @@ VPATH=@srcdir@
 srcdir=@srcdir@
 
 #
-# Programs
-#
-XSLTPROC=@XSLTPROC@
-PHP=@PHP@
-UDOCS=scripts/udocs
-
-#
 # Paths
 #
 PHPGTK_SRCDIR="@PHPGTK_SRCDIR@"
 stylesheet_dir=@STYLESHEET_DIR@
 LANG=@LANG@
+
+#
+# Programs
+#
+XSLTPROC=@XSLTPROC@
+PHP=@PHP@
+UDOCS=scripts/udocs
 
 #
 # Default Variables
@@ -140,39 +140,39 @@ FORCE:
 	$(SAXON) $(html_stylesheet_dir)/custom.titlepage.xml	$(DOCBOOKXSL)/template/titlepage.xsl > $@
 
 build/manual.txt: bigmanual.html
-	@mkdir -p build
-	lynx -nolist -dump file:`pwd`/build/bigmanual.html > $@
+	@mkdir -p build/$(LANG)
+	lynx -nolist -dump file:`pwd`/build/$(LANG)/bigmanual.html > $@
 
 build/php/index.php: manual.xml	$(PHPWEB_DEPS)
-	@mkdir -p build/php
-	$(XSLTPROC) $(stylesheet_dir)/phpweb.xsl manual.xml 
+	@mkdir -p build/$(LANG)/php
+	$(XSLTPROC) --param base.dir "'build/$(LANG)/php/'" $(stylesheet_dir)/phpweb.xsl manual.xml 
 
 build/html/index.html: manual.xml $(CHUNK_DEPS)
-	@mkdir -p build/html
-	$(XSLTPROC) $(stylesheet_dir)/chunk.xsl manual.xml	
+	@mkdir -p build/$(LANG)/html
+	$(XSLTPROC) --param base.dir "'build/$(LANG)/html/'" $(stylesheet_dir)/chunk.xsl manual.xml	
 
 build/bigmanual.html: manual.xml $(HTML_DEPS)
-	@mkdir -p build
-	$(XSLTPROC) $(stylesheet_dir)/docbook.xsl manual.xml > $@
+	@mkdir -p build/$(LANG)
+	$(XSLTPROC) $(stylesheet_dir)/docbook.xsl manual.xml > build/$(LANG)/bigmanual.html
 
 build/php_gtk_manual_@LANG@.zip: build/html/index.html
-	@mkdir -p build
-	(cd build/html; zip -q -9 ../../$@ *.html)
+	@mkdir -p build/$(LANG)
+	(cd build/$(LANG)/html; zip -q -9 ../../$@ *.html)
 
 build/php_gtk_manual_@LANG@.tar.gz: build/html/index.html
 	@mkdir -p build
-	(cd build/html; tar -cf - *.html ) | gzip -9 > $@
+	(cd build/$(LANG)/html; tar -cf - *.html ) | gzip -9 > $@
 
 build/php_gtk_manual_@LANG@.tar.bz2: build/html/index.html
 	@mkdir -p build
-	(cd build/html; tar -cf - *.html) | bzip2 -9 > $@
+	(cd build/$(LANG)/html; tar -cf - *.html) | bzip2 -9 > $@
 
 build/php_gtk_manual_@LANG@.html.gz: build/bigmanual.html
-	@mkdir -p build
+	@mkdir -p build/$(LANG)
 	gzip -c -9 $< > $@
 
 build/php_gtk_manual_@LANG@.txt.gz: build/manual.txt
-	@mkdir -p build
+	@mkdir -p build/$(LANG)
 	gzip -c -9 $< > $@
 
 updatexml:
