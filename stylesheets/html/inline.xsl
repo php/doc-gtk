@@ -3,7 +3,7 @@
                 version='1.0'>
 
 <!-- ********************************************************************
-     $Id: inline.xsl,v 1.2 2003-06-05 12:57:44 sfox Exp $
+     $Id: inline.xsl,v 1.3 2003-06-10 06:18:38 sfox Exp $
      ********************************************************************
 
      This file is part of the XSL DocBook Stylesheet distribution.
@@ -283,8 +283,16 @@
   <xsl:call-template name="inline.charseq"/>
 </xsl:template>
 
+ <xsl:template match="en">
+ <span dir="ltr">
+  <xsl:call-template name="inline.charseq"/>
+ </span>
+ </xsl:template>
+
 <xsl:template match="literal">
+ <span dir="ltr">
   <xsl:call-template name="inline.monoseq"/>
+ </span>
 </xsl:template>
 
 <xsl:template match="medialabel">
