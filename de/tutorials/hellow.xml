@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 <chapter id="tutorials.hellow">
- <title>&Uuml;bung: Hallo Welt</title>
+ <title>Übung: Hallo Welt</title>
  <simpara>
   Wenn man eine Programmiersprache zu lernen beginnt ist oft das erste
   Programm das man schreibt ein &quot;Hallo Welt&quot; Programm.
-  Um sich also allen anderen anzupassen, ist die erste &Uuml;bung in diesem
-  Handbuch eine Hallo Welt &Uuml;bung!
+  Um sich also allen anderen anzupassen, ist die erste Übung in diesem
+  Handbuch eine Hallo Welt Übung!
  </simpara>
  <simpara>
-  Als Voraussetzung f&uuml;r die &Uuml;bungen sollte man bereits
-  angemessene Kenntnisse von PHP selbst haben. Die &Uuml;bungen
+  Als Voraussetzung für die Übungen sollte man bereits
+  angemessene Kenntnisse von PHP selbst haben. Die Übungen
   sollen dazu dienen dem Benutzer zu veranschaulichen wie man
   dann PHP-GTK benutzen kann und die dahinterstehenden Grundlagen 
   und Techniken und zu vermitteln.
  </simpara>
  <simpara>
-  In dieser &Uuml;ung werden wir ein einfaches Fenster mit dem Text "Hallo
-  Welt" erstellen, dies wird Ihnen einen &Uuml;berblick einer 
+  In dieser Üung werden wir ein einfaches Fenster mit dem Text "Hallo
+  Welt" erstellen, dies wird Ihnen einen Überblick einer 
   grundlegenden PHP-GTK Anwendung geben. 
  </simpara>
  <simpara>
-  Wir werden zun&auml;chst das Programm auflisten und es dann
-  Zeile f&uuml;r Zeile erkl&auml;ren.
+  Wir werden zunächst das Programm auflisten und es dann
+  Zeile für Zeile erklären.
  </simpara>
  <para>
   <example>
@@ -41,8 +41,8 @@ function delete_event()
 
 function shutdown()
 {
-    print("Shutting Down");
-    Gtk::main_quit();
+    print("Shutting down");
+    gtk::main_quit();
 }
 
 function hello()
@@ -63,7 +63,7 @@ $window->add($button);
 
 $window->show_all();
 
-Gtk::main();
+gtk::main();
    </programlisting>
   </example>
  </para>
@@ -79,7 +79,7 @@ if(!class_exists('gtk')){
 }
   </programlisting>
  </example>
-  Diese wenigen Zeilen pr&uuml;fen ob die PHP-GTK Erweiterung
+  Diese wenigen Zeilen prüfen ob die PHP-GTK Erweiterung
   bereits geladen ist, wenn nicht wird sie geladen. Dies wird durch
   den Befehl <literal>dl('php_gtk.dll')</literal> unter Windows oder 
   <literal>dl('php_gtk.so')</literal> unter allen anderen Systemen
@@ -96,11 +96,11 @@ function delete_event()
    </programlisting>
   </example> 
   Die <literal>delete_event()</literal> Funktion ist als Handler (siehe
-  unten) f&uuml;r das <signalname>delete-event</signalname> Signal
-  registriert. Sie gibt <literal>false</literal> zur&uuml;ck um PHP-GTK zu
-  sagen dass es mit dem Erscheinen des Events weitermachen soll. Wenn die
-  Funktion <literal>true</literal> zur&uuml;ckgeben w&uuml;rde, w&uuml;rde
-  PHP-GTK mit der Ereignisbehandlung hier aufh&ouml;ren.
+  unten) für das <signalname>delete-event</signalname> Signal
+  registriert.  Sie gibt <literal>false</literal> zurück um PHP-GTK zu
+  sagen dass es mit dem Erscheinen des Events weitermachen soll.  Wenn die
+  Funktion <literal>true</literal> zurückgeben würde, würde
+  PHP-GTK mit der Ereignisbehandlung hier aufhören.
  </para>
  <para>
   <example>
@@ -109,14 +109,14 @@ function delete_event()
 function shutdown()
 {
      print("Herunterfahren");
-     Gtk::main_quit();
+     gtk::main_quit();
 }
    </programlisting>
   </example>
-  Die <literal>shutdown()</literal> Funktion ist als Handler f&uuml;r das
+  Die <literal>shutdown()</literal> Funktion ist als Handler für das
   <signalname>shutdown</signalname> Signal registriert. Die Funktion gibt
   den Text <literal>"Herunterfahren"</literal> an der Konsole aus und ruft
-  dann die statische Funktion Gtk::<function>main_quit</function> auf.
+  dann die statische Funktion <function>gtk::main_quit</function> auf.
  </para>
  <para>
   <example>
@@ -130,13 +130,13 @@ function hello()
 }   
    </programlisting>
   </example>
-  Die <literal>hello()</literal> Funktion ist als Handler f&uuml;r das
-  <signalname>clicked</signalname> Signal des Buttons registriert. Sie globalisiert
-  die <literal>$window</literal> Variable so dass es auf die Instanz von
-  <classname>GtkWindow</classname> weiter unten im Skript zugreifen kann. Sie
-  gibt den Text "<literal>Hallo Welt!</literal>" auf der Konsole aus und
-  zerst&ouml;rt dann das Fenster, was wiederum das
-  <signalname>destroy</signalname> Signal ausl&ouml;st.
+  Die <literal>hello()</literal> Funktion ist als Handler für das
+  <signalname>clicked</signalname> Signal des Buttons registriert. Sie
+  globalisiert die <literal>$window</literal> Variable so dass es auf die
+  Instanz von <classname>GtkWindow</classname> weiter unten im Skript
+  zugreifen kann.  Sie gibt den Text "<literal>Hallo Welt!</literal>" auf
+  der Konsole aus und zerstört dann das Fenster, was wiederum das 
+  <signalname>destroy</signalname> Signal auslöst.
  </para>
  <para>
   <example>
@@ -148,17 +148,17 @@ $window->connect('delete-event', 'delete_event');
 $window->set_border_width(10);
    </programlisting>
   </example>
-  Die n&auml;chsten vier Zeilen bauen das eigentliche Fenster der Applikation
-  auf. Zunerst erzeugen wir eine Instanz von <classname>GtkWindow</classname>,
-  wenn dies erfolgreich war rufen wir die Funktion 
-  <function class="GtkObject">connect</function> auf um die
-  <literal>shutdown</literal> Funktion als Handler f&uuml;r das
+  Die nächsten vier Zeilen bauen das eigentliche Fenster der Applikation
+  auf. Zunerst erzeugen wir eine Instanz von 
+  <classname>GtkWindow</classname>, wenn dies erfolgreich war rufen wir die
+  Funktion <function class="GtkObject">connect</function> auf um die 
+  <literal>shutdown</literal> Funktion als Handler für das
   <signalname>destroy</signalname> Signal zu registrieren und die
-  <literal>delete_event</literal> Funktion als Handler f&uuml;r das
-  <signalname>delete-event</signalname> Signal. Zuletzt rufen wir die Funktion
-  <function class="GtkContainer">set_border_width</function> auf um den Rahmen
-  um die Instanz der <classname>GtkWindow</classname> Klassse zu setzen die
-  wir gerade erstellt haben.
+  <literal>delete_event</literal> Funktion als Handler für das
+  <signalname>delete-event</signalname> Signal.  Zuletzt rufen wir die
+  Funktion <function class="GtkContainer">set_border_width</function> auf
+  um den Rahmen um die Instanz der <classname>GtkWindow</classname> Klassse
+  zu setzen die wir gerade erstellt haben.
  </para>
  <para>
   <example>
@@ -171,13 +171,13 @@ $window->add($button);
 $window->show_all();
    </programlisting>
   </example>
-  Diese drei Zeilen des Scriptes rufen die Funktion <function>main</function>
-  auf, diese weist PHP-GTK an das Fenster das wir erstellt haben anzuzeigen
-  und auf Benutzereingaben zu warten um Ereignisse zu starten so dass die
-  Callback Funktionen die wir zuvor definiert haben aufgerufen werden und die
-  verschiedenen Aktionen ausgef&uuml;hrt.
- </para>  
-  
+  Diese drei Zeilen des Scriptes rufen die Funktion 
+  <function>gtk::main</function> auf, diese weist PHP-GTK an das Fenster das
+  wir erstellt haben anzuzeigen und auf Benutzereingaben zu warten um
+  Ereignisse zu starten so dass die Callback Funktionen die wir zuvor
+  definiert haben aufgerufen werden und  die verschiedenen Aktionen
+  ausgeführt.
+ </para>
 </chapter>
 
 <!--
