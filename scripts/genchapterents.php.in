@@ -8,6 +8,13 @@ if($argv[1])
 else
     $dir = "../$lang";
 
+function gen_ent($path, $file, $lang)
+{
+    $ent = preg_replace("%[\\/]%",".", preg_replace("%.*[\\/]en+[\\/]((userguide|reference)[\\/])?(.*)\.xml%",'\\3', $path."/".$file));
+    return "<!ENTITY $ent SYSTEM \"".preg_replace("%(en)+([\\/](userguide|reference)[\\/])%","$lang\\2",preg_replace("%.*[\\/](en+[\\/])%","\\1","$path/$file"))."\">";
+
+}
+
 function gen_dir_ents($path)
 {
     global $entities, $lang;
@@ -24,8 +31,14 @@ function gen_dir_ents($path)
             {
                 if(substr($file, -4) == ".xml")
                 {
-                    $ent = preg_replace("%[\\/]%",".", preg_replace("%.*[\\/]$lang+[\\/]((userguide|reference)[\\/])?(.*)\.xml%",'\\3', $path."/".$file));
-                    $entities[] = "<!ENTITY $ent SYSTEM \"".preg_replace("%($lang+[\\/](userguide|reference)[\\/])%",'\\1',preg_replace("%.*[\\/]($lang+[\\/])%","\\1","$path/$file"))."\">";                
+                    if(($lang != "en") and (file_exists(str_replace("/en/", "/".$lang."/", $path)."/".$file)))
+                    { 
+                            $entities[] = gen_ent($path, $file, $lang);
+                    }
+                    else
+                    {
+                            $entities[] = gen_ent($path, $file, "en");
+                    }                
                 }
             }
         }
@@ -33,7 +46,7 @@ function gen_dir_ents($path)
     closedir($dir_handle);
 }
 
-gen_dir_ents($dir);
+gen_dir_ents("../en");
 sort($entities, SORT_STRING);
 while(list(,$val) = each($entities))
 {
