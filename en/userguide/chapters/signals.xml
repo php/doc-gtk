@@ -429,7 +429,8 @@ gtk::main();
   <simpara>
    Events, on the other hand, are a continual stream of impulses
    communicating messages concerning environmental changes in the underlying
-   windowing system.  The GTK main loop is made up of this stream of events.
+   windowing system.  The GTK main loop is made up of this stream of events, 
+   among other things.
   </simpara>
   <note>
    <simpara>
@@ -521,7 +522,8 @@ function show_event_type($button, $event, $text)
         $text-&gt;insert_text(&quot;GDK_UNMAP\n&quot;, $insert);
         $button-&gt;destroy();
         $text->insert_text(
-"\n* GDK EVENTS AND GTK SIGNALS - background stream vs foreground messaging *
+&quot;\n* GDK EVENTS AND GTK SIGNALS - background stream vs foreground 
+messaging *
 \n
 * Most GdkEventTypes have counterpart GTK signals, known as 'event'
   signals, implemented in GtkWidget.  The types on your screen are there
@@ -537,7 +539,7 @@ function show_event_type($button, $event, $text)
                       \$button->connect('pressed', 'whatever');
   has no relationship to the GDK_BUTTON_PRESS event it generates, which
   refers to mouse-button activity and not to the GtkButton 'pressed' signal. *
-\n", 0);
+\n&quot;, 0);
       break;
     }
     $text-&gt;thaw();
