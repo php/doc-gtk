@@ -99,7 +99,7 @@ then
                 xmlfiles="$xmlfiles $xmlfilepath"
             fi
         done
-        if [  -z $xmlfiles ]
+        if [ -z "$xmlfiles" ]
         then
             echo "Nothing to update"
             exit 0
@@ -128,7 +128,7 @@ case $mode in
     s ) for file in $xmlfiles
         do
             ID=`head -n 1 $file | sed -e's%<[a-zA-Z0-9 \t\n]\+id="\([A-Za-z0-9.]\+\)"[a-zA-Z0-9 \t\n]\?>%\1%g'`
-            if [ -z $ID ]
+            if [ -z "$ID" ]
             then
                 echo "Could not find ID in $file"
                 exit 1
