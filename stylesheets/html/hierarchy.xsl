@@ -78,7 +78,6 @@
   </xsl:call-template>
  </xsl:if>
 
- <!-- Horrible hack but xsl doesnt have foreach :( -->
  <xsl:variable name="bad.hack">
  <xsl:choose>
   <xsl:when test="$depth=0">

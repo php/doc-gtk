@@ -41,38 +41,80 @@
  </xsl:template>
 
  <xsl:template match="enum">
-  <table cellpadding="2" cellspacing="1">
-   <tr>
-    <td colspan="2">
-     <h1>
-      <xsl:attribute name="class">
-       <xsl:value-of select="name(.)" />
-      </xsl:attribute>
-       <a>
-        <xsl:attribute name="name"><xsl:value-of select="@id"/></xsl:attribute>
-       </a>
-      <xsl:apply-templates select="./enumname" />
-     </h1>
-    </td>
-   </tr>
-   <tr>
-    <td>
-     <h2>
-      Symbolic Name
-     </h2>
-    </td>
-    <td>
-     <h2>
-      Description
-     </h2>
-    </td>
-   </tr>
-    <xsl:apply-templates select="./enumoption" />
-  </table>
+  <div class="enum">
+   <a>
+    <xsl:attribute name="class">
+     <xsl:value-of select="name(.)" />
+    </xsl:attribute>
+    <xsl:attribute name="name">
+     <xsl:value-of select="@id"/>
+    </xsl:attribute>
+   </a>
+   <h1 class="title">
+    <xsl:apply-templates select="./enumname" />
+   </h1>
+   <p>
+    <h3>
+     <xsl:choose>
+      <xsl:when test="@type='flags'">
+       <xsl:text>Flags</xsl:text>
+      </xsl:when>
+      <xsl:otherwise>
+       <xsl:text>Enums</xsl:text>
+      </xsl:otherwise>
+     </xsl:choose>
+    </h3>
+   </p>
+   <p>
+    <blockquote>
+     <xsl:apply-templates select="./desc"/>
+    </blockquote>
+   </p>
+   <table cellpadding="2" cellspacing="2">
+    <tr>
+     <td width="5%">
+      <h3>
+       Value
+      </h3>
+     </td>
+     <td width="40%">
+      <h3>
+       Symbolic Name
+      </h3>
+     </td>
+     <td width="54%">
+      <h3>
+       Description
+      </h3>
+     </td>
+     </tr>
+     <xsl:apply-templates select="./enumoption" />
+   </table>
+  </div>
  </xsl:template>
 
  <xsl:template match="enumoption">
   <tr valign="top">
+   <td>
+    <xsl:call-template name="spaceholder" />
+    <xsl:choose>
+     <xsl:when test="../enumname = 'GdkEventType'">
+      <xsl:choose>
+       <xsl:when test="./optionname = 'GDK_NOTHING'">
+        <xsl:text>-1</xsl:text>
+       </xsl:when>
+       <xsl:otherwise>
+        <xsl:call-template name="spaceholder" />
+        <xsl:number value="position()-2" format="1" />
+       </xsl:otherwise>
+      </xsl:choose>
+     </xsl:when>
+     <xsl:otherwise>
+      <xsl:call-template name="spaceholder" />
+      <xsl:number value="position()-1" format="1" />
+     </xsl:otherwise>
+    </xsl:choose>
+   </td>
    <td>
     <xsl:apply-templates select="./optionname" />
    </td>

@@ -227,8 +227,7 @@
    </xsl:call-template>
   </xsl:if>
 
-  <!-- Horrible hack but xsl doesnt have foreach :( -->
-  <xsl:variable name="bad.hack">
+  <xsl:variable name="new.hack">
    <xsl:choose>
     <xsl:when test="$depth=0">
      <xsl:text></xsl:text>
@@ -242,66 +241,17 @@
 print_image('inhier-arrow.gif');
      </xsl:text>
     </xsl:when>
-    <xsl:when test="$depth=3">
-     <xsl:text disable-output-escaping="yes">
-echo str_repeat(make_image('inhier-blank.gif'), 1); print_image('inhier-arrow.gif');
-     </xsl:text>
-    </xsl:when>
-    <xsl:when test="$depth=4">
-     <xsl:text disable-output-escaping="yes">
-echo str_repeat(make_image('inhier-blank.gif'), 2); print_image('inhier-arrow.gif');
-     </xsl:text>
-    </xsl:when>
-    <xsl:when test="$depth=5">
-     <xsl:text disable-output-escaping="yes">
-echo str_repeat(make_image('inhier-blank.gif'), 3); print_image('inhier-arrow.gif');
-     </xsl:text>
-    </xsl:when>
-    <xsl:when test="$depth=6">
-     <xsl:text disable-output-escaping="yes">
-echo str_repeat(make_image('inhier-blank.gif'), 4); print_image('inhier-arrow.gif');
-     </xsl:text>
-    </xsl:when>
-    <xsl:when test="$depth=7">
-     <xsl:text disable-output-escaping="yes">
-echo str_repeat(make_image('inhier-blank.gif'), 5); print_image('inhier-arrow.gif');
-     </xsl:text>
-    </xsl:when>
-    <xsl:when test="$depth=8">
-     <xsl:text disable-output-escaping="yes">
-echo str_repeat(make_image('inhier-blank.gif'), 6); print_image('inhier-arrow.gif');
-     </xsl:text>
-    </xsl:when>
-    <xsl:when test="$depth=9">
-     <xsl:text disable-output-escaping="yes">
-echo str_repeat(make_image('inhier-blank.gif'), 7); print_image('inhier-arrow.gif');
-     </xsl:text>
-    </xsl:when>
-    <xsl:when test="$depth=10">
-     <xsl:text disable-output-escaping="yes">
-echo str_repeat(make_image('inhier-blank.gif'), 8); print_image('inhier-arrow.gif');
-     </xsl:text>
-    </xsl:when>
-    <xsl:when test="$depth=11">
-     <xsl:text disable-output-escaping="yes">
-echo str_repeat(make_image('inhier-blank.gif'), 9); print_image('inhier-arrow.gif');
-     </xsl:text>
-    </xsl:when>
-    <xsl:when test="$depth=12">
-     <xsl:text disable-output-escaping="yes">
-echo str_repeat(make_image('inhier-blank.gif'), 10); print_image('inhier-arrow.gif');
-     </xsl:text>
-    </xsl:when>
     <xsl:otherwise>
-     <xsl:message>
-      <xsl:text>
-       You need to modify phpweb.xsl to allow for a depth greater than 12
-      </xsl:text>
-     </xsl:message>
+     <xsl:text disable-output-escaping="yes">
+echo str_repeat(make_image('inhier-blank.gif'), 
+     </xsl:text>
+     <xsl:number value="$depth+-2" format="1"/>
+     <xsl:text disable-output-escaping="yes">
+); print_image('inhier-arrow.gif');
+     </xsl:text>
     </xsl:otherwise>
    </xsl:choose>
   </xsl:variable>
-
 
   <xsl:choose>
    <xsl:when test="$id!='no'">
@@ -311,7 +261,7 @@ echo str_repeat(make_image('inhier-blank.gif'), 10); print_image('inhier-arrow.g
      </xsl:call-template>
     </xsl:variable>
     <xsl:processing-instruction name="php">
-     <xsl:value-of select="$bad.hack"/>
+     <xsl:value-of select="$new.hack"/>
     </xsl:processing-instruction> 
     <xsl:text>&nbsp;</xsl:text>
     <a>
@@ -324,7 +274,7 @@ echo str_repeat(make_image('inhier-blank.gif'), 10); print_image('inhier-arrow.g
    </xsl:when>
    <xsl:otherwise>
     <xsl:processing-instruction name="php">
-     <xsl:value-of select="$bad.hack"/>
+     <xsl:value-of select="$new.hack"/>
      <xsl:value-of select="$classname" />
     </xsl:processing-instruction> 
    </xsl:otherwise>

@@ -34,17 +34,17 @@
 
 <!--========================================================================-->
 
+ <xsl:template match="classtitle">
+  <xsl:apply-templates />
+ </xsl:template>
+
  <xsl:template match="desc|shortdesc">
   <xsl:apply-templates />
  </xsl:template>
 
- <xsl:template match="firedwhen">
-  <xsl:apply-templates />
- </xsl:template>
-
- <xsl:template match="classtitle">
-  <xsl:apply-templates />
- </xsl:template>
+  <xsl:template match="proptype">
+   <xsl:apply-templates />
+  </xsl:template>
 
 <!--========================================================================-->
 
@@ -260,12 +260,12 @@
      <div class="literallayout">
       <xsl:choose>
        <xsl:when test="$phpweb=true()">
-       	<xsl:call-template name="phpweb.get_class_hierarchy">
-        <xsl:with-param name="classname">
-         <xsl:value-of select="./classmeta/classtitle"/>
-        </xsl:with-param>
-       </xsl:call-template>
-      </xsl:when>
+        <xsl:call-template name="phpweb.get_class_hierarchy">
+         <xsl:with-param name="classname">
+          <xsl:value-of select="./classmeta/classtitle"/>
+         </xsl:with-param>
+        </xsl:call-template>
+       </xsl:when>
       <xsl:otherwise>
        <xsl:call-template name="get_class_hierarchy">
         <xsl:with-param name="classname">
@@ -325,10 +325,8 @@
    <h3>Constructor</h3>
     <blockquote>
      <xsl:apply-templates select="./funcsynopsis"/>
-<!--    <dd> -->
      <xsl:text> &#8212;</xsl:text>
      <xsl:apply-templates select="./shortdesc" />
-<!--    </dd> -->
     </blockquote>
   </div>
  </xsl:template>
@@ -444,7 +442,7 @@
    <xsl:apply-templates select="." mode="title.markup"/>
   </h1>
   <p>
-   <xsl:text>Type: </xsl:text>
+   <xsl:text>Access: </xsl:text>
    <xsl:choose>
     <xsl:when test="@type='rw'">
      <xsl:text>Read Write</xsl:text>
@@ -456,6 +454,9 @@
      <xsl:text>UNKNOWN</xsl:text>
     </xsl:otherwise>
    </xsl:choose>
+   <br/>
+   <xsl:text>Type: </xsl:text>
+   <xsl:apply-templates select="./proptype"/>
   </p>
   <p>
    <xsl:apply-templates select="./desc"/>

@@ -335,6 +335,51 @@
 <xsl:when test="$classname='GdkEvent'">
 <xsl:text>gdk.gdkevent</xsl:text>
 </xsl:when>
+<xsl:when test="$classname='GdkEventAny'">
+<xsl:text>gdk.gdkeventany</xsl:text>
+</xsl:when>
+<xsl:when test="$classname='GdkEventButton'">
+<xsl:text>gdk.gdkeventbutton</xsl:text>
+</xsl:when>
+<xsl:when test="$classname='GdkEventClient'">
+<xsl:text>gdk.gdkeventclient</xsl:text>
+</xsl:when>
+<xsl:when test="$classname='GdkEventConfigure'">
+<xsl:text>gdk.gdkeventconfigure</xsl:text>
+</xsl:when>
+<xsl:when test="$classname='GdkEventCrossing'">
+<xsl:text>gdk.gdkeventcrossing</xsl:text>
+</xsl:when>
+<xsl:when test="$classname='GdkEventDND'">
+<xsl:text>gdk.gdkeventdnd</xsl:text>
+</xsl:when>
+<xsl:when test="$classname='GdkEventExpose'">
+<xsl:text>gdk.gdkeventexpose</xsl:text>
+</xsl:when>
+<xsl:when test="$classname='GdkEventFocus'">
+<xsl:text>gdk.gdkeventfocus</xsl:text>
+</xsl:when>
+<xsl:when test="$classname='GdkEventKey'">
+<xsl:text>gdk.gdkeventkey</xsl:text>
+</xsl:when>
+<xsl:when test="$classname='GdkEventMotion'">
+<xsl:text>gdk.gdkeventmotion</xsl:text>
+</xsl:when>
+<xsl:when test="$classname='GdkEventNoExpose'">
+<xsl:text>gdk.gdkeventnoexpose</xsl:text>
+</xsl:when>
+<xsl:when test="$classname='GdkEventProperty'">
+<xsl:text>gdk.gdkeventproperty</xsl:text>
+</xsl:when>
+<xsl:when test="$classname='GdkEventProximity'">
+<xsl:text>gdk.gdkeventproximity</xsl:text>
+</xsl:when>
+<xsl:when test="$classname='GdkEventSelection'">
+<xsl:text>gdk.gdkeventselection</xsl:text>
+</xsl:when>
+<xsl:when test="$classname='GdkEventVisibility'">
+<xsl:text>gdk.gdkeventvisibility</xsl:text>
+</xsl:when>
 <xsl:when test="$classname='GdkFont'">
 <xsl:text>gdk.gdkfont</xsl:text>
 </xsl:when>
@@ -352,6 +397,9 @@
 </xsl:when>
 <xsl:when test="$classname='GladeXML'">
 <xsl:text>glade.gladexml</xsl:text>
+</xsl:when>
+<xsl:when test="$classname='GtkScintilla'">
+<xsl:text>scn.gtkscintilla</xsl:text>
 </xsl:when>
 <xsl:when test="$classname='GtkSQPane'">
 <xsl:text>sqp.gtksqpane</xsl:text>
@@ -3029,6 +3077,921 @@
 <xsl:when test="($funcname='xml_new_from_memory' and $class='no') or ($funcname='xml_new_from_memory' and $class='')">
 <xsl:text>glade.method.xml_new_from_memory</xsl:text>
 </xsl:when>
+<xsl:when test="($funcname='GtkScintilla' and $class='no') or ($funcname='GtkScintilla' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.constructor</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='find_text' and $class='no') or ($funcname='find_text' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.find_text</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='add_text' and $class='no') or ($funcname='add_text' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.add_text</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='insert_text' and $class='no') or ($funcname='insert_text' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.insert_text</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='clear_all' and $class='no') or ($funcname='clear_all' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.clear_all</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='clear_document_style' and $class='no') or ($funcname='clear_document_style' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.clear_document_style</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='get_length' and $class='no') or ($funcname='get_length' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.get_length</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='get_char_at' and $class='no') or ($funcname='get_char_at' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.get_char_at</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='get_current_pos' and $class='no') or ($funcname='get_current_pos' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.get_current_pos</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='get_anchor' and $class='no') or ($funcname='get_anchor' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.get_anchor</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='get_style_at' and $class='no') or ($funcname='get_style_at' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.get_style_at</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='redo' and $class='no') or ($funcname='redo' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.redo</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='set_undo_collection' and $class='no') or ($funcname='set_undo_collection' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.set_undo_collection</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='select_all' and $class='no') or ($funcname='select_all' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.select_all</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='set_save_point' and $class='no') or ($funcname='set_save_point' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.set_save_point</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='can_redo' and $class='no') or ($funcname='can_redo' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.can_redo</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='marker_line_from_handle' and $class='no') or ($funcname='marker_line_from_handle' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.marker_line_from_handle</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='marker_delete_handle' and $class='no') or ($funcname='marker_delete_handle' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.marker_delete_handle</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='get_undo_collection' and $class='no') or ($funcname='get_undo_collection' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.get_undo_collection</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='get_view_ws' and $class='no') or ($funcname='get_view_ws' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.get_view_ws</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='set_view_ws' and $class='no') or ($funcname='set_view_ws' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.set_view_ws</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='position_from_point' and $class='no') or ($funcname='position_from_point' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.position_from_point</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='goto_line' and $class='no') or ($funcname='goto_line' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.goto_line</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='goto_pos' and $class='no') or ($funcname='goto_pos' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.goto_pos</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='set_anchor' and $class='no') or ($funcname='set_anchor' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.set_anchor</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='get_cur_line' and $class='no') or ($funcname='get_cur_line' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.get_cur_line</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='get_end_styled' and $class='no') or ($funcname='get_end_styled' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.get_end_styled</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='convert_eols' and $class='no') or ($funcname='convert_eols' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.convert_eols</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='get_eol_mode' and $class='no') or ($funcname='get_eol_mode' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.get_eol_mode</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='set_eol_mode' and $class='no') or ($funcname='set_eol_mode' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.set_eol_mode</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='start_styling' and $class='no') or ($funcname='start_styling' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.start_styling</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='set_styling' and $class='no') or ($funcname='set_styling' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.set_styling</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='get_buffered_draw' and $class='no') or ($funcname='get_buffered_draw' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.get_buffered_draw</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='set_buffered_draw' and $class='no') or ($funcname='set_buffered_draw' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.set_buffered_draw</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='set_tab_width' and $class='no') or ($funcname='set_tab_width' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.set_tab_width</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='get_tab_width' and $class='no') or ($funcname='get_tab_width' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.get_tab_width</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='set_code_page' and $class='no') or ($funcname='set_code_page' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.set_code_page</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='set_use_palette' and $class='no') or ($funcname='set_use_palette' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.set_use_palette</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='marker_define' and $class='no') or ($funcname='marker_define' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.marker_define</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='marker_set_fore' and $class='no') or ($funcname='marker_set_fore' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.marker_set_fore</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='marker_set_back' and $class='no') or ($funcname='marker_set_back' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.marker_set_back</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='marker_add' and $class='no') or ($funcname='marker_add' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.marker_add</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='marker_delete' and $class='no') or ($funcname='marker_delete' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.marker_delete</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='marker_delete_all' and $class='no') or ($funcname='marker_delete_all' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.marker_delete_all</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='marker_get' and $class='no') or ($funcname='marker_get' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.marker_get</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='marker_next' and $class='no') or ($funcname='marker_next' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.marker_next</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='marker_previous' and $class='no') or ($funcname='marker_previous' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.marker_previous</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='set_margin_type_n' and $class='no') or ($funcname='set_margin_type_n' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.set_margin_type_n</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='get_margin_type_n' and $class='no') or ($funcname='get_margin_type_n' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.get_margin_type_n</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='set_margin_width_n' and $class='no') or ($funcname='set_margin_width_n' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.set_margin_width_n</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='get_margin_width_n' and $class='no') or ($funcname='get_margin_width_n' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.get_margin_width_n</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='set_margin_mask_n' and $class='no') or ($funcname='set_margin_mask_n' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.set_margin_mask_n</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='get_margin_mask_n' and $class='no') or ($funcname='get_margin_mask_n' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.get_margin_mask_n</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='set_margin_sensitive_n' and $class='no') or ($funcname='set_margin_sensitive_n' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.set_margin_sensitive_n</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='get_margin_sensitive_n' and $class='no') or ($funcname='get_margin_sensitive_n' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.get_margin_sensitive_n</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='style_clear_all' and $class='no') or ($funcname='style_clear_all' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.style_clear_all</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='style_set_fore' and $class='no') or ($funcname='style_set_fore' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.style_set_fore</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='style_set_back' and $class='no') or ($funcname='style_set_back' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.style_set_back</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='style_set_bold' and $class='no') or ($funcname='style_set_bold' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.style_set_bold</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='style_set_italic' and $class='no') or ($funcname='style_set_italic' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.style_set_italic</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='style_set_size' and $class='no') or ($funcname='style_set_size' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.style_set_size</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='style_set_font' and $class='no') or ($funcname='style_set_font' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.style_set_font</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='style_set_eol_filled' and $class='no') or ($funcname='style_set_eol_filled' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.style_set_eol_filled</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='style_reset_default' and $class='no') or ($funcname='style_reset_default' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.style_reset_default</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='style_set_underline' and $class='no') or ($funcname='style_set_underline' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.style_set_underline</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='style_set_case' and $class='no') or ($funcname='style_set_case' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.style_set_case</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='style_set_character_set' and $class='no') or ($funcname='style_set_character_set' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.style_set_character_set</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='set_sel_fore' and $class='no') or ($funcname='set_sel_fore' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.set_sel_fore</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='set_sel_back' and $class='no') or ($funcname='set_sel_back' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.set_sel_back</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='set_caret_fore' and $class='no') or ($funcname='set_caret_fore' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.set_caret_fore</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='clear_all_cmd_keys' and $class='no') or ($funcname='clear_all_cmd_keys' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.clear_all_cmd_keys</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='set_styling_ex' and $class='no') or ($funcname='set_styling_ex' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.set_styling_ex</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='style_set_visible' and $class='no') or ($funcname='style_set_visible' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.style_set_visible</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='get_caret_period' and $class='no') or ($funcname='get_caret_period' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.get_caret_period</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='set_caret_period' and $class='no') or ($funcname='set_caret_period' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.set_caret_period</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='set_word_chars' and $class='no') or ($funcname='set_word_chars' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.set_word_chars</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='begin_undo_action' and $class='no') or ($funcname='begin_undo_action' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.begin_undo_action</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='end_undo_action' and $class='no') or ($funcname='end_undo_action' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.end_undo_action</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='indic_set_style' and $class='no') or ($funcname='indic_set_style' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.indic_set_style</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='indic_get_style' and $class='no') or ($funcname='indic_get_style' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.indic_get_style</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='indic_set_fore' and $class='no') or ($funcname='indic_set_fore' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.indic_set_fore</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='indic_get_fore' and $class='no') or ($funcname='indic_get_fore' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.indic_get_fore</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='set_style_bits' and $class='no') or ($funcname='set_style_bits' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.set_style_bits</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='get_style_bits' and $class='no') or ($funcname='get_style_bits' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.get_style_bits</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='set_line_state' and $class='no') or ($funcname='set_line_state' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.set_line_state</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='get_line_state' and $class='no') or ($funcname='get_line_state' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.get_line_state</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='get_max_line_state' and $class='no') or ($funcname='get_max_line_state' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.get_max_line_state</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='get_caret_line_visible' and $class='no') or ($funcname='get_caret_line_visible' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.get_caret_line_visible</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='set_caret_line_visible' and $class='no') or ($funcname='set_caret_line_visible' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.set_caret_line_visible</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='get_caret_line_back' and $class='no') or ($funcname='get_caret_line_back' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.get_caret_line_back</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='set_caret_line_back' and $class='no') or ($funcname='set_caret_line_back' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.set_caret_line_back</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='autoc_show' and $class='no') or ($funcname='autoc_show' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.autoc_show</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='autoc_cancel' and $class='no') or ($funcname='autoc_cancel' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.autoc_cancel</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='autoc_active' and $class='no') or ($funcname='autoc_active' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.autoc_active</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='autoc_pos_start' and $class='no') or ($funcname='autoc_pos_start' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.autoc_pos_start</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='autoc_complete' and $class='no') or ($funcname='autoc_complete' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.autoc_complete</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='autoc_stops' and $class='no') or ($funcname='autoc_stops' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.autoc_stops</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='autoc_set_separator' and $class='no') or ($funcname='autoc_set_separator' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.autoc_set_separator</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='autoc_get_separator' and $class='no') or ($funcname='autoc_get_separator' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.autoc_get_separator</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='autoc_select' and $class='no') or ($funcname='autoc_select' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.autoc_select</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='autoc_set_cancel_at_start' and $class='no') or ($funcname='autoc_set_cancel_at_start' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.autoc_set_cancel_at_start</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='autoc_get_cancel_at_start' and $class='no') or ($funcname='autoc_get_cancel_at_start' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.autoc_get_cancel_at_start</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='autoc_set_fill_ups' and $class='no') or ($funcname='autoc_set_fill_ups' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.autoc_set_fill_ups</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='autoc_set_choose_single' and $class='no') or ($funcname='autoc_set_choose_single' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.autoc_set_choose_single</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='autoc_get_choose_single' and $class='no') or ($funcname='autoc_get_choose_single' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.autoc_get_choose_single</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='autoc_set_ignore_case' and $class='no') or ($funcname='autoc_set_ignore_case' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.autoc_set_ignore_case</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='autoc_get_ignore_case' and $class='no') or ($funcname='autoc_get_ignore_case' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.autoc_get_ignore_case</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='user_list_show' and $class='no') or ($funcname='user_list_show' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.user_list_show</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='autoc_set_auto_hide' and $class='no') or ($funcname='autoc_set_auto_hide' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.autoc_set_auto_hide</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='autoc_get_auto_hide' and $class='no') or ($funcname='autoc_get_auto_hide' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.autoc_get_auto_hide</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='set_indent' and $class='no') or ($funcname='set_indent' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.set_indent</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='get_indent' and $class='no') or ($funcname='get_indent' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.get_indent</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='set_use_tabs' and $class='no') or ($funcname='set_use_tabs' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.set_use_tabs</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='get_use_tabs' and $class='no') or ($funcname='get_use_tabs' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.get_use_tabs</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='set_line_indentation' and $class='no') or ($funcname='set_line_indentation' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.set_line_indentation</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='get_line_indentation' and $class='no') or ($funcname='get_line_indentation' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.get_line_indentation</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='get_line_indent_position' and $class='no') or ($funcname='get_line_indent_position' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.get_line_indent_position</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='get_column' and $class='no') or ($funcname='get_column' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.get_column</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='set_h_scroll_bar' and $class='no') or ($funcname='set_h_scroll_bar' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.set_h_scroll_bar</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='get_h_scroll_bar' and $class='no') or ($funcname='get_h_scroll_bar' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.get_h_scroll_bar</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='set_indentation_guides' and $class='no') or ($funcname='set_indentation_guides' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.set_indentation_guides</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='get_indentation_guides' and $class='no') or ($funcname='get_indentation_guides' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.get_indentation_guides</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='set_highlight_guide' and $class='no') or ($funcname='set_highlight_guide' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.set_highlight_guide</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='get_highlight_guide' and $class='no') or ($funcname='get_highlight_guide' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.get_highlight_guide</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='get_line_end_position' and $class='no') or ($funcname='get_line_end_position' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.get_line_end_position</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='get_code_page' and $class='no') or ($funcname='get_code_page' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.get_code_page</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='get_caret_fore' and $class='no') or ($funcname='get_caret_fore' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.get_caret_fore</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='get_use_palette' and $class='no') or ($funcname='get_use_palette' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.get_use_palette</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='get_read_only' and $class='no') or ($funcname='get_read_only' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.get_read_only</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='set_current_pos' and $class='no') or ($funcname='set_current_pos' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.set_current_pos</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='set_selection_start' and $class='no') or ($funcname='set_selection_start' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.set_selection_start</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='get_selection_start' and $class='no') or ($funcname='get_selection_start' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.get_selection_start</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='set_selection_end' and $class='no') or ($funcname='set_selection_end' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.set_selection_end</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='get_selection_end' and $class='no') or ($funcname='get_selection_end' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.get_selection_end</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='set_print_magnification' and $class='no') or ($funcname='set_print_magnification' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.set_print_magnification</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='get_print_magnification' and $class='no') or ($funcname='get_print_magnification' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.get_print_magnification</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='set_print_colour_mode' and $class='no') or ($funcname='set_print_colour_mode' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.set_print_colour_mode</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='get_print_colour_mode' and $class='no') or ($funcname='get_print_colour_mode' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.get_print_colour_mode</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='get_first_visible_line' and $class='no') or ($funcname='get_first_visible_line' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.get_first_visible_line</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='get_line' and $class='no') or ($funcname='get_line' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.get_line</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='get_line_count' and $class='no') or ($funcname='get_line_count' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.get_line_count</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='set_margin_left' and $class='no') or ($funcname='set_margin_left' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.set_margin_left</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='get_margin_left' and $class='no') or ($funcname='get_margin_left' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.get_margin_left</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='set_margin_right' and $class='no') or ($funcname='set_margin_right' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.set_margin_right</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='get_margin_right' and $class='no') or ($funcname='get_margin_right' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.get_margin_right</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='get_modify' and $class='no') or ($funcname='get_modify' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.get_modify</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='set_sel' and $class='no') or ($funcname='set_sel' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.set_sel</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='get_sel_text' and $class='no') or ($funcname='get_sel_text' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.get_sel_text</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='hide_selection' and $class='no') or ($funcname='hide_selection' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.hide_selection</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='point_x_from_position' and $class='no') or ($funcname='point_x_from_position' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.point_x_from_position</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='point_y_from_position' and $class='no') or ($funcname='point_y_from_position' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.point_y_from_position</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='line_from_position' and $class='no') or ($funcname='line_from_position' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.line_from_position</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='position_from_line' and $class='no') or ($funcname='position_from_line' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.position_from_line</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='line_scroll' and $class='no') or ($funcname='line_scroll' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.line_scroll</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='scroll_caret' and $class='no') or ($funcname='scroll_caret' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.scroll_caret</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='replace_sel' and $class='no') or ($funcname='replace_sel' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.replace_sel</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='set_read_only' and $class='no') or ($funcname='set_read_only' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.set_read_only</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='null' and $class='no') or ($funcname='null' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.null</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='can_paste' and $class='no') or ($funcname='can_paste' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.can_paste</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='can_undo' and $class='no') or ($funcname='can_undo' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.can_undo</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='empty_undo_buffer' and $class='no') or ($funcname='empty_undo_buffer' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.empty_undo_buffer</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='undo' and $class='no') or ($funcname='undo' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.undo</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='cut' and $class='no') or ($funcname='cut' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.cut</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='copy' and $class='no') or ($funcname='copy' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.copy</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='paste' and $class='no') or ($funcname='paste' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.paste</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='clear' and $class='no') or ($funcname='clear' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.clear</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='set_text' and $class='no') or ($funcname='set_text' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.set_text</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='get_text' and $class='no') or ($funcname='get_text' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.get_text</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='get_text_length' and $class='no') or ($funcname='get_text_length' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.get_text_length</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='get_direct_function' and $class='no') or ($funcname='get_direct_function' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.get_direct_function</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='get_direct_pointer' and $class='no') or ($funcname='get_direct_pointer' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.get_direct_pointer</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='set_overtype' and $class='no') or ($funcname='set_overtype' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.set_overtype</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='get_overtype' and $class='no') or ($funcname='get_overtype' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.get_overtype</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='set_caret_width' and $class='no') or ($funcname='set_caret_width' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.set_caret_width</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='get_caret_width' and $class='no') or ($funcname='get_caret_width' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.get_caret_width</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='set_target_start' and $class='no') or ($funcname='set_target_start' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.set_target_start</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='get_target_start' and $class='no') or ($funcname='get_target_start' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.get_target_start</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='set_target_end' and $class='no') or ($funcname='set_target_end' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.set_target_end</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='get_target_end' and $class='no') or ($funcname='get_target_end' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.get_target_end</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='replace_target' and $class='no') or ($funcname='replace_target' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.replace_target</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='replace_target_re' and $class='no') or ($funcname='replace_target_re' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.replace_target_re</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='search_in_target' and $class='no') or ($funcname='search_in_target' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.search_in_target</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='set_search_flags' and $class='no') or ($funcname='set_search_flags' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.set_search_flags</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='get_search_flags' and $class='no') or ($funcname='get_search_flags' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.get_search_flags</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='call_tip_show' and $class='no') or ($funcname='call_tip_show' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.call_tip_show</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='call_tip_cancel' and $class='no') or ($funcname='call_tip_cancel' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.call_tip_cancel</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='call_tip_active' and $class='no') or ($funcname='call_tip_active' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.call_tip_active</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='call_tip_pos_start' and $class='no') or ($funcname='call_tip_pos_start' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.call_tip_pos_start</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='call_tip_set_hlt' and $class='no') or ($funcname='call_tip_set_hlt' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.call_tip_set_hlt</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='call_tip_set_back' and $class='no') or ($funcname='call_tip_set_back' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.call_tip_set_back</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='visible_from_doc_line' and $class='no') or ($funcname='visible_from_doc_line' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.visible_from_doc_line</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='doc_line_from_visible' and $class='no') or ($funcname='doc_line_from_visible' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.doc_line_from_visible</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='set_fold_level' and $class='no') or ($funcname='set_fold_level' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.set_fold_level</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='get_fold_level' and $class='no') or ($funcname='get_fold_level' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.get_fold_level</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='get_last_child' and $class='no') or ($funcname='get_last_child' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.get_last_child</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='get_fold_parent' and $class='no') or ($funcname='get_fold_parent' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.get_fold_parent</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='show_lines' and $class='no') or ($funcname='show_lines' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.show_lines</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='hide_lines' and $class='no') or ($funcname='hide_lines' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.hide_lines</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='get_line_visible' and $class='no') or ($funcname='get_line_visible' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.get_line_visible</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='set_fold_expanded' and $class='no') or ($funcname='set_fold_expanded' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.set_fold_expanded</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='get_fold_expanded' and $class='no') or ($funcname='get_fold_expanded' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.get_fold_expanded</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='toggle_fold' and $class='no') or ($funcname='toggle_fold' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.toggle_fold</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='ensure_visible' and $class='no') or ($funcname='ensure_visible' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.ensure_visible</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='set_fold_flags' and $class='no') or ($funcname='set_fold_flags' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.set_fold_flags</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='set_tab_indents' and $class='no') or ($funcname='set_tab_indents' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.set_tab_indents</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='get_tab_indents' and $class='no') or ($funcname='get_tab_indents' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.get_tab_indents</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='set_backspace_unindents' and $class='no') or ($funcname='set_backspace_unindents' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.set_backspace_unindents</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='get_backspace_unindents' and $class='no') or ($funcname='get_backspace_unindents' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.get_backspace_unindents</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='line_down' and $class='no') or ($funcname='line_down' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.line_down</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='line_down_extend' and $class='no') or ($funcname='line_down_extend' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.line_down_extend</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='line_up' and $class='no') or ($funcname='line_up' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.line_up</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='line_up_extend' and $class='no') or ($funcname='line_up_extend' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.line_up_extend</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='char_left' and $class='no') or ($funcname='char_left' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.char_left</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='char_left_extend' and $class='no') or ($funcname='char_left_extend' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.char_left_extend</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='char_right' and $class='no') or ($funcname='char_right' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.char_right</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='char_right_extend' and $class='no') or ($funcname='char_right_extend' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.char_right_extend</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='word_left' and $class='no') or ($funcname='word_left' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.word_left</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='word_left_extend' and $class='no') or ($funcname='word_left_extend' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.word_left_extend</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='word_right' and $class='no') or ($funcname='word_right' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.word_right</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='word_right_extend' and $class='no') or ($funcname='word_right_extend' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.word_right_extend</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='home' and $class='no') or ($funcname='home' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.home</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='home_extend' and $class='no') or ($funcname='home_extend' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.home_extend</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='line_end' and $class='no') or ($funcname='line_end' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.line_end</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='line_end_extend' and $class='no') or ($funcname='line_end_extend' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.line_end_extend</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='document_start' and $class='no') or ($funcname='document_start' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.document_start</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='document_start_extend' and $class='no') or ($funcname='document_start_extend' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.document_start_extend</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='document_end' and $class='no') or ($funcname='document_end' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.document_end</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='document_end_extend' and $class='no') or ($funcname='document_end_extend' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.document_end_extend</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='page_up' and $class='no') or ($funcname='page_up' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.page_up</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='page_up_extend' and $class='no') or ($funcname='page_up_extend' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.page_up_extend</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='page_down' and $class='no') or ($funcname='page_down' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.page_down</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='page_down_extend' and $class='no') or ($funcname='page_down_extend' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.page_down_extend</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='edit_toggle_overtype' and $class='no') or ($funcname='edit_toggle_overtype' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.edit_toggle_overtype</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='cancel' and $class='no') or ($funcname='cancel' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.cancel</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='delete_back' and $class='no') or ($funcname='delete_back' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.delete_back</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='tab' and $class='no') or ($funcname='tab' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.tab</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='back_tab' and $class='no') or ($funcname='back_tab' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.back_tab</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='new_line' and $class='no') or ($funcname='new_line' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.new_line</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='form_feed' and $class='no') or ($funcname='form_feed' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.form_feed</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='v_c_home' and $class='no') or ($funcname='v_c_home' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.v_c_home</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='v_c_home_extend' and $class='no') or ($funcname='v_c_home_extend' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.v_c_home_extend</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='zoom_in' and $class='no') or ($funcname='zoom_in' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.zoom_in</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='zoom_out' and $class='no') or ($funcname='zoom_out' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.zoom_out</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='del_word_left' and $class='no') or ($funcname='del_word_left' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.del_word_left</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='del_word_right' and $class='no') or ($funcname='del_word_right' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.del_word_right</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='line_cut' and $class='no') or ($funcname='line_cut' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.line_cut</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='line_delete' and $class='no') or ($funcname='line_delete' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.line_delete</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='line_transpose' and $class='no') or ($funcname='line_transpose' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.line_transpose</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='lower_case' and $class='no') or ($funcname='lower_case' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.lower_case</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='upper_case' and $class='no') or ($funcname='upper_case' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.upper_case</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='line_scroll_down' and $class='no') or ($funcname='line_scroll_down' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.line_scroll_down</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='line_scroll_up' and $class='no') or ($funcname='line_scroll_up' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.line_scroll_up</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='move_caret_inside_view' and $class='no') or ($funcname='move_caret_inside_view' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.move_caret_inside_view</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='line_length' and $class='no') or ($funcname='line_length' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.line_length</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='brace_highlight' and $class='no') or ($funcname='brace_highlight' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.brace_highlight</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='brace_bad_light' and $class='no') or ($funcname='brace_bad_light' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.brace_bad_light</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='brace_match' and $class='no') or ($funcname='brace_match' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.brace_match</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='get_view_eol' and $class='no') or ($funcname='get_view_eol' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.get_view_eol</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='set_view_eol' and $class='no') or ($funcname='set_view_eol' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.set_view_eol</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='get_doc_pointer' and $class='no') or ($funcname='get_doc_pointer' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.get_doc_pointer</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='set_doc_pointer' and $class='no') or ($funcname='set_doc_pointer' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.set_doc_pointer</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='set_mod_event_mask' and $class='no') or ($funcname='set_mod_event_mask' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.set_mod_event_mask</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='get_edge_column' and $class='no') or ($funcname='get_edge_column' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.get_edge_column</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='set_edge_column' and $class='no') or ($funcname='set_edge_column' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.set_edge_column</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='get_edge_mode' and $class='no') or ($funcname='get_edge_mode' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.get_edge_mode</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='set_edge_mode' and $class='no') or ($funcname='set_edge_mode' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.set_edge_mode</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='get_edge_colour' and $class='no') or ($funcname='get_edge_colour' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.get_edge_colour</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='set_edge_colour' and $class='no') or ($funcname='set_edge_colour' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.set_edge_colour</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='search_anchor' and $class='no') or ($funcname='search_anchor' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.search_anchor</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='search_next' and $class='no') or ($funcname='search_next' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.search_next</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='search_prev' and $class='no') or ($funcname='search_prev' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.search_prev</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='set_caret_policy' and $class='no') or ($funcname='set_caret_policy' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.set_caret_policy</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='lines_on_screen' and $class='no') or ($funcname='lines_on_screen' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.lines_on_screen</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='use_pop_up' and $class='no') or ($funcname='use_pop_up' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.use_pop_up</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='selection_is_rectangle' and $class='no') or ($funcname='selection_is_rectangle' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.selection_is_rectangle</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='set_zoom' and $class='no') or ($funcname='set_zoom' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.set_zoom</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='get_zoom' and $class='no') or ($funcname='get_zoom' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.get_zoom</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='create_document' and $class='no') or ($funcname='create_document' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.create_document</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='add_ref_document' and $class='no') or ($funcname='add_ref_document' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.add_ref_document</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='release_document' and $class='no') or ($funcname='release_document' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.release_document</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='get_mod_event_mask' and $class='no') or ($funcname='get_mod_event_mask' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.get_mod_event_mask</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='set_focus' and $class='no') or ($funcname='set_focus' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.set_focus</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='get_focus' and $class='no') or ($funcname='get_focus' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.get_focus</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='set_status' and $class='no') or ($funcname='set_status' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.set_status</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='get_status' and $class='no') or ($funcname='get_status' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.get_status</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='set_mouse_down_captures' and $class='no') or ($funcname='set_mouse_down_captures' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.set_mouse_down_captures</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='get_mouse_down_captures' and $class='no') or ($funcname='get_mouse_down_captures' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.get_mouse_down_captures</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='set_cursor' and $class='no') or ($funcname='set_cursor' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.set_cursor</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='get_cursor' and $class='no') or ($funcname='get_cursor' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.get_cursor</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='word_part_left' and $class='no') or ($funcname='word_part_left' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.word_part_left</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='word_part_left_extend' and $class='no') or ($funcname='word_part_left_extend' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.word_part_left_extend</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='word_part_right' and $class='no') or ($funcname='word_part_right' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.word_part_right</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='word_part_right_extend' and $class='no') or ($funcname='word_part_right_extend' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.word_part_right_extend</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='set_visible_policy' and $class='no') or ($funcname='set_visible_policy' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.set_visible_policy</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='del_line_left' and $class='no') or ($funcname='del_line_left' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.del_line_left</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='del_line_right' and $class='no') or ($funcname='del_line_right' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.del_line_right</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='grab_focus' and $class='no') or ($funcname='grab_focus' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.grab_focus</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='start_record' and $class='no') or ($funcname='start_record' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.start_record</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='stop_record' and $class='no') or ($funcname='stop_record' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.stop_record</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='set_lexer' and $class='no') or ($funcname='set_lexer' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.set_lexer</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='get_lexer' and $class='no') or ($funcname='get_lexer' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.get_lexer</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='colourise' and $class='no') or ($funcname='colourise' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.colourise</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='set_property' and $class='no') or ($funcname='set_property' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.set_property</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='set_keywords' and $class='no') or ($funcname='set_keywords' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.set_keywords</xsl:text>
+</xsl:when>
+<xsl:when test="($funcname='set_lexer_language' and $class='no') or ($funcname='set_lexer_language' and $class='GtkScintilla')">
+<xsl:text>scn.gtkscintilla.method.set_lexer_language</xsl:text>
+</xsl:when>
 <xsl:when test="($funcname='GtkSQPane' and $class='no') or ($funcname='GtkSQPane' and $class='GtkSQPane')">
 <xsl:text>sqp.gtksqpane.constructor</xsl:text>
 </xsl:when>
@@ -3476,6 +4439,219 @@
 <xsl:when test="($propname='start_time' and $class='no') or ($propname='start_time' and $class='GdkDragContext')">
 <xsl:text>gdk.gdkdragcontext.property.start_time</xsl:text>
 </xsl:when>
+<xsl:when test="($propname='type' and $class='no') or ($propname='type' and $class='GdkEventAny')">
+<xsl:text>gdk.gdkeventany.prop.type</xsl:text>
+</xsl:when>
+<xsl:when test="($propname='window' and $class='no') or ($propname='window' and $class='GdkEventAny')">
+<xsl:text>gdk.gdkeventany.prop.window</xsl:text>
+</xsl:when>
+<xsl:when test="($propname='send_event' and $class='no') or ($propname='send_event' and $class='GdkEventAny')">
+<xsl:text>gdk.gdkeventany.prop.send_event</xsl:text>
+</xsl:when>
+<xsl:when test="($propname='time' and $class='no') or ($propname='time' and $class='GdkEventButton')">
+<xsl:text>gdk.gdkeventbutton.prop.time</xsl:text>
+</xsl:when>
+<xsl:when test="($propname='x' and $class='no') or ($propname='x' and $class='GdkEventButton')">
+<xsl:text>gdk.gdkeventbutton.prop.x</xsl:text>
+</xsl:when>
+<xsl:when test="($propname='y' and $class='no') or ($propname='y' and $class='GdkEventButton')">
+<xsl:text>gdk.gdkeventbutton.prop.y</xsl:text>
+</xsl:when>
+<xsl:when test="($propname='pressure' and $class='no') or ($propname='pressure' and $class='GdkEventButton')">
+<xsl:text>gdk.gdkeventbutton.prop.pressure</xsl:text>
+</xsl:when>
+<xsl:when test="($propname='xtilt' and $class='no') or ($propname='xtilt' and $class='GdkEventButton')">
+<xsl:text>gdk.gdkeventbutton.prop.xtilt</xsl:text>
+</xsl:when>
+<xsl:when test="($propname='ytilt' and $class='no') or ($propname='ytilt' and $class='GdkEventButton')">
+<xsl:text>gdk.gdkeventbutton.prop.ytilt</xsl:text>
+</xsl:when>
+<xsl:when test="($propname='state' and $class='no') or ($propname='state' and $class='GdkEventButton')">
+<xsl:text>gdk.gdkeventbutton.prop.state</xsl:text>
+</xsl:when>
+<xsl:when test="($propname='button' and $class='no') or ($propname='button' and $class='GdkEventButton')">
+<xsl:text>gdk.gdkeventbutton.prop.button</xsl:text>
+</xsl:when>
+<xsl:when test="($propname='source' and $class='no') or ($propname='source' and $class='GdkEventButton')">
+<xsl:text>gdk.gdkeventbutton.prop.source</xsl:text>
+</xsl:when>
+<xsl:when test="($propname='deviceid' and $class='no') or ($propname='deviceid' and $class='GdkEventButton')">
+<xsl:text>gdk.gdkeventbutton.prop.deviceid</xsl:text>
+</xsl:when>
+<xsl:when test="($propname='x_root' and $class='no') or ($propname='x_root' and $class='GdkEventButton')">
+<xsl:text>gdk.gdkeventbutton.prop.x_root</xsl:text>
+</xsl:when>
+<xsl:when test="($propname='y_root' and $class='no') or ($propname='y_root' and $class='GdkEventButton')">
+<xsl:text>gdk.gdkeventbutton.prop.y_root</xsl:text>
+</xsl:when>
+<xsl:when test="($propname='message_type' and $class='no') or ($propname='message_type' and $class='GdkEventClient')">
+<xsl:text>gdk.gdkeventclient.prop.message_type</xsl:text>
+</xsl:when>
+<xsl:when test="($propname='data_format' and $class='no') or ($propname='data_format' and $class='GdkEventClient')">
+<xsl:text>gdk.gdkeventclient.prop.data_format</xsl:text>
+</xsl:when>
+<xsl:when test="($propname='data' and $class='no') or ($propname='data' and $class='GdkEventClient')">
+<xsl:text>gdk.gdkeventclient.prop.data</xsl:text>
+</xsl:when>
+<xsl:when test="($propname='x' and $class='no') or ($propname='x' and $class='GdkEventConfigure')">
+<xsl:text>gdk.gdkeventconfigure.prop.x</xsl:text>
+</xsl:when>
+<xsl:when test="($propname='y' and $class='no') or ($propname='y' and $class='GdkEventConfigure')">
+<xsl:text>gdk.gdkeventconfigure.prop.y</xsl:text>
+</xsl:when>
+<xsl:when test="($propname='width' and $class='no') or ($propname='width' and $class='GdkEventConfigure')">
+<xsl:text>gdk.gdkeventconfigure.prop.width</xsl:text>
+</xsl:when>
+<xsl:when test="($propname='height' and $class='no') or ($propname='height' and $class='GdkEventConfigure')">
+<xsl:text>gdk.gdkeventconfigure.prop.height</xsl:text>
+</xsl:when>
+<xsl:when test="($propname='subwindow' and $class='no') or ($propname='subwindow' and $class='GdkEventCrossing')">
+<xsl:text>gdk.gdkeventcrossing.prop.subwindow</xsl:text>
+</xsl:when>
+<xsl:when test="($propname='time' and $class='no') or ($propname='time' and $class='GdkEventCrossing')">
+<xsl:text>gdk.gdkeventcrossing.prop.time</xsl:text>
+</xsl:when>
+<xsl:when test="($propname='x' and $class='no') or ($propname='x' and $class='GdkEventCrossing')">
+<xsl:text>gdk.gdkeventcrossing.prop.x</xsl:text>
+</xsl:when>
+<xsl:when test="($propname='y' and $class='no') or ($propname='y' and $class='GdkEventCrossing')">
+<xsl:text>gdk.gdkeventcrossing.prop.y</xsl:text>
+</xsl:when>
+<xsl:when test="($propname='x_root' and $class='no') or ($propname='x_root' and $class='GdkEventCrossing')">
+<xsl:text>gdk.gdkeventcrossing.prop.x_root</xsl:text>
+</xsl:when>
+<xsl:when test="($propname='y_root' and $class='no') or ($propname='y_root' and $class='GdkEventCrossing')">
+<xsl:text>gdk.gdkeventcrossing.prop.y_root</xsl:text>
+</xsl:when>
+<xsl:when test="($propname='mode' and $class='no') or ($propname='mode' and $class='GdkEventCrossing')">
+<xsl:text>gdk.gdkeventcrossing.prop.mode</xsl:text>
+</xsl:when>
+<xsl:when test="($propname='detail' and $class='no') or ($propname='detail' and $class='GdkEventCrossing')">
+<xsl:text>gdk.gdkeventcrossing.prop.detail</xsl:text>
+</xsl:when>
+<xsl:when test="($propname='focus' and $class='no') or ($propname='focus' and $class='GdkEventCrossing')">
+<xsl:text>gdk.gdkeventcrossing.prop.focus</xsl:text>
+</xsl:when>
+<xsl:when test="($propname='state' and $class='no') or ($propname='state' and $class='GdkEventCrossing')">
+<xsl:text>gdk.gdkeventcrossing.prop.state</xsl:text>
+</xsl:when>
+<xsl:when test="($propname='context' and $class='no') or ($propname='context' and $class='GdkEventDND')">
+<xsl:text>gdk.gdkeventdnd.prop.context</xsl:text>
+</xsl:when>
+<xsl:when test="($propname='time' and $class='no') or ($propname='time' and $class='GdkEventDND')">
+<xsl:text>gdk.gdkeventdnd.prop.time</xsl:text>
+</xsl:when>
+<xsl:when test="($propname='x_root' and $class='no') or ($propname='x_root' and $class='GdkEventDND')">
+<xsl:text>gdk.gdkeventdnd.prop.x_root</xsl:text>
+</xsl:when>
+<xsl:when test="($propname='y_root' and $class='no') or ($propname='y_root' and $class='GdkEventDND')">
+<xsl:text>gdk.gdkeventdnd.prop.y_root</xsl:text>
+</xsl:when>
+<xsl:when test="($propname='area' and $class='no') or ($propname='area' and $class='GdkEventExpose')">
+<xsl:text>gdk.gdkeventexpose.prop.area</xsl:text>
+</xsl:when>
+<xsl:when test="($propname='count' and $class='no') or ($propname='count' and $class='GdkEventExpose')">
+<xsl:text>gdk.gdkeventexpose.prop.count</xsl:text>
+</xsl:when>
+<xsl:when test="($propname='in' and $class='no') or ($propname='in' and $class='GdkEventFocus')">
+<xsl:text>gdk.gdkeventfocus.prop.in</xsl:text>
+</xsl:when>
+<xsl:when test="($propname='time' and $class='no') or ($propname='time' and $class='GdkEventKey')">
+<xsl:text>gdk.gdkeventkey.prop.time</xsl:text>
+</xsl:when>
+<xsl:when test="($propname='state' and $class='no') or ($propname='state' and $class='GdkEventKey')">
+<xsl:text>gdk.gdkeventkey.prop.state</xsl:text>
+</xsl:when>
+<xsl:when test="($propname='keyval' and $class='no') or ($propname='keyval' and $class='GdkEventKey')">
+<xsl:text>gdk.gdkeventkey.prop.keyval</xsl:text>
+</xsl:when>
+<xsl:when test="($propname='length' and $class='no') or ($propname='length' and $class='GdkEventKey')">
+<xsl:text>gdk.gdkeventkey.prop.length</xsl:text>
+</xsl:when>
+<xsl:when test="($propname='string' and $class='no') or ($propname='string' and $class='GdkEventKey')">
+<xsl:text>gdk.gdkeventkey.prop.string</xsl:text>
+</xsl:when>
+<xsl:when test="($propname='time' and $class='no') or ($propname='time' and $class='GdkEventMotion')">
+<xsl:text>gdk.gdkeventmotion.prop.time</xsl:text>
+</xsl:when>
+<xsl:when test="($propname='x' and $class='no') or ($propname='x' and $class='GdkEventMotion')">
+<xsl:text>gdk.gdkeventmotion.prop.x</xsl:text>
+</xsl:when>
+<xsl:when test="($propname='y' and $class='no') or ($propname='y' and $class='GdkEventMotion')">
+<xsl:text>gdk.gdkeventmotion.prop.y</xsl:text>
+</xsl:when>
+<xsl:when test="($propname='pressure' and $class='no') or ($propname='pressure' and $class='GdkEventMotion')">
+<xsl:text>gdk.gdkeventmotion.prop.pressure</xsl:text>
+</xsl:when>
+<xsl:when test="($propname='xtilt' and $class='no') or ($propname='xtilt' and $class='GdkEventMotion')">
+<xsl:text>gdk.gdkeventmotion.prop.xtilt</xsl:text>
+</xsl:when>
+<xsl:when test="($propname='ytilt' and $class='no') or ($propname='ytilt' and $class='GdkEventMotion')">
+<xsl:text>gdk.gdkeventmotion.prop.ytilt</xsl:text>
+</xsl:when>
+<xsl:when test="($propname='state' and $class='no') or ($propname='state' and $class='GdkEventMotion')">
+<xsl:text>gdk.gdkeventmotion.prop.state</xsl:text>
+</xsl:when>
+<xsl:when test="($propname='is_hint' and $class='no') or ($propname='is_hint' and $class='GdkEventMotion')">
+<xsl:text>gdk.gdkeventmotion.prop.is_hint</xsl:text>
+</xsl:when>
+<xsl:when test="($propname='source' and $class='no') or ($propname='source' and $class='GdkEventMotion')">
+<xsl:text>gdk.gdkeventmotion.prop.source</xsl:text>
+</xsl:when>
+<xsl:when test="($propname='deviceid' and $class='no') or ($propname='deviceid' and $class='GdkEventMotion')">
+<xsl:text>gdk.gdkeventmotion.prop.deviceid</xsl:text>
+</xsl:when>
+<xsl:when test="($propname='x_root' and $class='no') or ($propname='x_root' and $class='GdkEventMotion')">
+<xsl:text>gdk.gdkeventmotion.prop.x_root</xsl:text>
+</xsl:when>
+<xsl:when test="($propname='y_root' and $class='no') or ($propname='y_root' and $class='GdkEventMotion')">
+<xsl:text>gdk.gdkeventmotion.prop.y_root</xsl:text>
+</xsl:when>
+<xsl:when test="($propname='type' and $class='no') or ($propname='type' and $class='GdkEventNoExpose')">
+<xsl:text>gdk.gdkeventnoexpose.prop.type</xsl:text>
+</xsl:when>
+<xsl:when test="($propname='window' and $class='no') or ($propname='window' and $class='GdkEventNoExpose')">
+<xsl:text>gdk.gdkeventnoexpose.prop.window</xsl:text>
+</xsl:when>
+<xsl:when test="($propname='send_event' and $class='no') or ($propname='send_event' and $class='GdkEventNoExpose')">
+<xsl:text>gdk.gdkeventnoexpose.prop.send_event</xsl:text>
+</xsl:when>
+<xsl:when test="($propname='atom' and $class='no') or ($propname='atom' and $class='GdkEventProperty')">
+<xsl:text>gdk.gdkeventproperty.prop.atom</xsl:text>
+</xsl:when>
+<xsl:when test="($propname='time' and $class='no') or ($propname='time' and $class='GdkEventProperty')">
+<xsl:text>gdk.gdkeventproperty.prop.time</xsl:text>
+</xsl:when>
+<xsl:when test="($propname='state' and $class='no') or ($propname='state' and $class='GdkEventProperty')">
+<xsl:text>gdk.gdkeventproperty.prop.state</xsl:text>
+</xsl:when>
+<xsl:when test="($propname='time' and $class='no') or ($propname='time' and $class='GdkEventProximity')">
+<xsl:text>gdk.gdkeventproximity.prop.time</xsl:text>
+</xsl:when>
+<xsl:when test="($propname='source' and $class='no') or ($propname='source' and $class='GdkEventProximity')">
+<xsl:text>gdk.gdkeventproximity.prop.source</xsl:text>
+</xsl:when>
+<xsl:when test="($propname='deviceid' and $class='no') or ($propname='deviceid' and $class='GdkEventProximity')">
+<xsl:text>gdk.gdkeventproximity.prop.deviceid</xsl:text>
+</xsl:when>
+<xsl:when test="($propname='selection' and $class='no') or ($propname='selection' and $class='GdkEventSelection')">
+<xsl:text>gdk.gdkeventselection.prop.selection</xsl:text>
+</xsl:when>
+<xsl:when test="($propname='target' and $class='no') or ($propname='target' and $class='GdkEventSelection')">
+<xsl:text>gdk.gdkeventselection.prop.target</xsl:text>
+</xsl:when>
+<xsl:when test="($propname='property' and $class='no') or ($propname='property' and $class='GdkEventSelection')">
+<xsl:text>gdk.gdkeventselection.prop.property</xsl:text>
+</xsl:when>
+<xsl:when test="($propname='requestor' and $class='no') or ($propname='requestor' and $class='GdkEventSelection')">
+<xsl:text>gdk.gdkeventselection.prop.requestor</xsl:text>
+</xsl:when>
+<xsl:when test="($propname='time' and $class='no') or ($propname='time' and $class='GdkEventSelection')">
+<xsl:text>gdk.gdkeventselection.prop.time</xsl:text>
+</xsl:when>
+<xsl:when test="($propname='state' and $class='no') or ($propname='state' and $class='GdkEventVisibility')">
+<xsl:text>gdk.gdkeventvisibility.prop.state</xsl:text>
+</xsl:when>
 <xsl:when test="($propname='type' and $class='no') or ($propname='type' and $class='GdkFont')">
 <xsl:text>gdk.gdkfont.property.type</xsl:text>
 </xsl:when>
@@ -3759,6 +4935,9 @@
 </xsl:when>
 <xsl:when test="$signame='cancel'">
 <xsl:text>gtk.gtkmenushell.signal.cancel</xsl:text>
+</xsl:when>
+<xsl:when test="$signame='destroy'">
+<xsl:text>gtk.gtkobject.signal.destroy</xsl:text>
 </xsl:when>
 <xsl:when test="$signame='text-pushed'">
 <xsl:text>gtk.gtkstatusbar.signal.text-pushed</xsl:text>
