@@ -4,25 +4,40 @@
   <classtitle>GtkTreeItem</classtitle>
   <classparent>GtkItem</classparent>
   <shortdesc>
-
+   One node of a GtkTree widget.
   </shortdesc>
   <desc>
-
+   <simpara>
+    A <classname>GtkTreeItem</classname> is one node of a 
+    <classname>GtkTree</classname>. Each node may itself 
+    contain another tree.  
+   </simpara>
+   <simpara>
+    See also: <classname>GtkTree</classname>
+   </simpara>
   </desc>
  </classmeta>
 
  <constructor id="gtk.gtktreeitem.constructor">
   <funcsynopsis>
    <funcprototype>
-    <funcdef> <function>GtkTreeItem</function></funcdef>
-    <paramdef>XXX</paramdef>
+    <funcdef>
+     <function>GtkTreeItem</function>
+    </funcdef>
+    <paramdef>string
+     <parameter>
+      <option>node_text</option>
+     </parameter>
+    </paramdef>
    </funcprototype>
   </funcsynopsis>
   <shortdesc>
-
+   Creates a new GtkTreeItem with the given text.
   </shortdesc>
   <desc>
-
+   <simpara>
+    Strictly speaking <parameter>node_text</parameter> is optional. That is, you will not get a run time error if you do not supply the text, but if no text is given the node will not display.
+   </simpara>
   </desc>
  </constructor>
 
@@ -31,45 +46,82 @@
   <method id="gtk.gtktreeitem.method.set_subtree">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>void <function>set_subtree</function></funcdef>
-     <paramdef><classname>GtkWidget</classname> <parameter>subtree</parameter></paramdef>
+     <funcdef>void
+      <function>set_subtree</function>
+     </funcdef>
+     <paramdef>
+      <classname>GtkTree</classname>
+      <parameter>subtree</parameter>
+     </paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Adds a tree of children nodes.
    </shortdesc>
    <desc>
+    <simpara>
+     Sets a <classname>GtkTree</classname> as the subtree (or tree of children) for a node. A <classname>GtkTreeItem</classname> may only have one subtree. Attempting to set a second tree will generate a Gtk-Warning. The orginal subtree will not be overwritten or removed.
+    </simpara>
+    <simpara>
+     A node that has a subtree will be shown with a box to the left containing either a plus for a collapsed tree or a minus for an expanded tree.
+    </simpara>
+    <simpara>
+     <example>
+      <title>Adding a subtree</title>
+      <programlisting role="php">
+<![CDATA[
+// Create the top level tree item.
+$treeItem = &new GtkTreeItem('Top Level Item');
 
+// Create the sub tree with one sub tree item.
+$subTree     = &new GtkTree;
+$subTreeItem = &new GtkTreeItem('Sub Level Item');
+
+$subTree->append($subTreeItem);
+
+// Add the sub tree to the top level item.
+$treeItem->set_subtree($subTree);
+]]>
+      </programlisting>
+     </example>
+    </simpara>
+    <simpara>
+     Controlling whether or not the subtree is visible is done using <function class="GtkTreeItem">expand</function> and <function class="GtkTreeItem">collapse</function> functions.
+    </simpara>
    </desc>
   </method>
 
   <method id="gtk.gtktreeitem.method.remove_subtree">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>void <function>remove_subtree</function></funcdef>
+     <funcdef>void
+      <function>remove_subtree</function>
+     </funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Removes a node's subtree.
    </shortdesc>
    <desc>
-
+    Removes the subtree set using <function class="GtkTreeItem">set_subtree</function>. If no subtree has been set a Gtk-CRITICAL message will be issued.
    </desc>
   </method>
 
   <method id="gtk.gtktreeitem.method.select">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>void <function>select</function></funcdef>
+     <funcdef>void
+      <function>select</function>
+     </funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Highlights the node as selected.
    </shortdesc>
    <desc>
-
+    
    </desc>
   </method>
 
