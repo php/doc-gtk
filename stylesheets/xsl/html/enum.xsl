@@ -52,6 +52,18 @@
      </h1>
     </td>
    </tr>
+   <tr>
+    <td>
+     <h2>
+      Symbolic Name
+     </h2>
+    </td>
+    <td>
+     <h2>
+      Description
+     </h2>
+    </td>
+   </tr>
     <xsl:apply-templates select="./enumoption" />
   </table>
  </xsl:template>
