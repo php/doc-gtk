@@ -24,7 +24,21 @@ if ($_SERVER["argc"] < 3) {
 		.'"html" - highlight_string() is applied, "php" - highlight_php() is added' ."\n"
 	);
 }
-set_time_limit(5*60); // can run long, but not more than 5 minutes
+set_time_limit(30*60); // can run long, but not more than 30 minutes
+
+require 'geshi/geshi.php';
+$geshi = new GeSHi($with_tags, 'php', 'geshi/geshi');
+$geshi->set_language_path('../geshi/geshi/');
+$geshi->set_header_type(GESHI_HEADER_DIV);
+$geshi->set_tab_width(2);
+$geshi->set_overall_class('phpcode');
+$geshi->enable_classes();
+$geshi->set_keyword_group_style(1, 'color: #907000; font-weight: bold', true);
+$geshi->set_strings_style('color: green', true);
+$geshi->set_symbols_highlighting(false);
+$geshi->set_numbers_style('color: #aa0000; font-weight: bold', true);
+$geshi->set_methods_style('color: black; font-style: italic', true);
+$geshi->set_regexps_style(0, 'color: #004090', true);
 
 function callback_html_number_entities_decode($matches) {
 	return chr($matches[1]);
@@ -34,7 +48,9 @@ function callback_highlight_php($matches) {
 //	$with_tags = preg_replace_callback("!&#([0-9]+);!", "callback_html_number_entities_decode", $matches[1]);
 	$with_tags	= trim( html_entity_decode( $matches[1]));
 	if ($GLOBALS["TYPE"] == "php") {
-		return "\n<?php\nhighlight_php('". addcslashes($with_tags, "'\\") ."');\n?>\n";
+		global $geshi;
+		$geshi->set_source($with_tags);
+		return $geshi->parse_code();
 	} else { // "html"
 		$bRemoveTags	= false;
 		if( substr( $with_tags, 0, 5) != '<' . '?php') {
