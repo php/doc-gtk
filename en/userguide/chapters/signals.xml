@@ -8,9 +8,9 @@
    <link linkend="gtk.widgets.whatare">widgets</link>.</emphasis>
   </simpara>
   <simpara>
-   When programming Graphical User Interfaces (<acronym>GUI</acronym>)
-   programs, it is often necessary to respond to actions performed by the
-   user or initiated within the program itself.  <acronym>GNOME</acronym> 
+   When programming Graphical User Interfaces (<acronym>GUI</acronym>), 
+   it is often necessary to respond to actions performed by the user or
+   initiated within the program itself.  <acronym>GNOME</acronym> 
    and <acronym>GTK+</acronym> do this via the use of signals.  Signals are
    used to let the program know that something happened. This might be, for
    example, a user clicking on a <classname>GtkButton</classname>,
@@ -18,7 +18,7 @@
   </simpara>
   <simpara>
    A program may, for instance, cause <classname>GtkAdjustment</classname>
-   to emit its <signalname>value-changed</signalname> signal when a program
+   to emit its <signalname>value-changed</signalname> signal when a widget
    changes one of its adjustment values.  This particular signal is used both
    internally and externally in <classname>GtkAdjustment</classname>, so that
    it is not always necessary to write that signal into your code for, say, a
@@ -48,7 +48,7 @@
   </simpara>
   <simpara>
    The callback is also known as the signal handler function.  This can be
-   either the widget&quot;s <literal>default handler</literal> or a 
+   either the widget's <literal>default handler</literal> or a 
    <literal>user-defined handler</literal>, that is, a function written by
    the programmer.
   </simpara>
@@ -57,7 +57,7 @@
  <sect1 id="gtk.signal.inheritance">
   <title>Signal Inheritance</title>
   <simpara>
-   Signals are inherited by objects, just like methods are.  A widget can
+   Signals are inherited by objects, just as methods are.  A widget can
    emit any signals that its ancestor objects have defined, as well as its
    own specific signals.
   </simpara>
@@ -79,7 +79,7 @@
     function for PHP-GTK to call when that signal is emitted.
    </simpara>
    <simpara>
-    Connecting a function to a signal is done by calling the
+    Connecting a function to a signal is achieved by calling the
     <function class="GtkObject">connect()</function> method of the object.
    </simpara>
    <simpara>
@@ -91,13 +91,12 @@
     For example, if you wanted to connect to the
     <signalname>clicked</signalname> signal of an instance of 
     <classname>GtkButton</classname> you should define a function that
-    accepts one parameter, this will be the button that was clicked.
+    accepts one parameter, which will be the button that was clicked.
    </simpara>
     <para>
      The code below shows how you might create a window, add a button to it,
      wait for it to be clicked and then, when it is clicked, open a new
-     <classname>GtkWindow</classname> telling the user they clicked the 
-     button.
+     <classname>GtkWindow</classname> containing a message.
      <example>
       <title>Signals and Callbacks</title>
       <programlisting role="php">
@@ -152,7 +151,7 @@ gtk::main();
    <simpara>
     With PHP-GTK you can register more than one function to be invoked when
     a signal is emitted by a widget.  This allows you to set up a whole set
-    of functions to be called when an event occurs.
+    of functions to be called in response to an expected action.
    </simpara>
    <para>
     When more than one function is connected to a signal, the functions are
@@ -251,11 +250,10 @@ gtk::main();
     </example>
     In the above code you can see that we pass not only the
     <literal>$button</literal> variable, an instance of
-    <classname>GtkButton</classname> to the <signalname>clicked</signalname> 
+    <classname>GtkButton</classname>, to the <signalname>clicked</signalname> 
     callback but also the <literal>$window</literal> variable, an instance
     of the <classname>GtkWindow</classname> class.  This allows us to call
-    <function class="GtkObject">destroy()</function> and shut down the
-    window.
+    the <function class="GtkObject">destroy()</function> method on the window.
    </para>
    <note>
     <simpara>
@@ -269,11 +267,12 @@ gtk::main();
     <classname>GtkButton</classname> on more than one
     <classname>GtkWindow</classname>.  Note that the names given to the
     parameters within the callback are irrelevant outside the callback
-    function; PHP-GTK picks up on the position of the parameters in the
+    function; PHP-GTK picks up on the positions of the parameters in the
     connect* method calls and passes these to the variables listed in the
-    callback declaration, so that any instance of a connection using the same
-    parameter structure can use that same callback.  This is demonstrated in
-    the code below using one custom parameter, but is equally true for more.
+    callback declaration as an array, so that any instance of a connection
+    using the same parameter structure can use that same callback.  This is
+    demonstrated in the code below using a single custom parameter, but is
+    equally true for more than one.
     <example>
      <title>Using the same callback for more than one window</title>
      <programlisting role="php">
@@ -334,7 +333,7 @@ $window-&gt;show();
 gtk::main();
      </programlisting>
     </example>
-    This could be called on any function or method by using the
+    This could be called on any static function or method by using the
     <literal>gtkobject::method</literal> syntax expressed as an array.
    </para>
    <para>
@@ -343,7 +342,7 @@ gtk::main();
     container widgets) a <classname>GtkMenuBar</classname>, a
     <classname>GtkToolbar</classname> and a <classname>GtkButton</classname>. 
     When <literal>Exit</literal> is chosen by the user through any of these
-    widgets, a shutdown function can be invoked by passing the instance of
+    widgets, a shutdown function could be invoked by passing the instance of
     <classname>GtkWindow</classname> as its first parameter, allowing the
     window to be destroyed from any of those connections.  The callback
     function and the connections in this instance would look like this:
@@ -428,34 +427,35 @@ gtk::main();
   </simpara>
   <simpara>
    Events, on the other hand, are a continual stream of impulses
-   communicating messages concerning the environment to the underlying
+   communicating messages concerning environmental changes in the underlying
    windowing system.  The GTK main loop is made up of this stream of events.
   </simpara>
   <note>
    <simpara>
-    It is not possible for the programmer to connect to a 
+    It is not possible to connect a callback function to a 
     <classname>GdkEvent</classname> directly.
    </simpara>
   </note>
   <simpara>
    Any widget having its own <classname>GdkWindow</classname> may capture
    events that are relevant to it.  Widgets lacking a 
-   <classname>GdkWindow</classname> cannot do so, unless they are housed
-   within a <classname>GtkEventBox</classname> - a widget created for this
-   specific purpose.  There are occasions when it is useful to be able to
-   capture events; one obvious example would be the creation of an instance
+   <classname>GdkWindow</classname> - those created with the 
+   <literal>GTK_NO_WINDOW</literal> flag - cannot do so, unless they are
+   housed within a <classname>GtkEventBox</classname> - a widget created for
+   this specific purpose.  There are occasions when it is useful to be able
+   to capture events; one obvious example would be the creation of an instance
    of <classname>GtkToolTips</classname> which is triggered when its subject
    widget captures the <literal>GDK_ENTER_NOTIFY</literal> event and
    destroyed when the same widget captures the
    <literal>GDK_LEAVE_NOTIFY</literal> event.
   </simpara>
   <simpara>
-   Although it is not possible to emit an event in the same way as a signal,
-   there are a series of signals derived from 
-   <classname>GtkWidget</classname> which are known as 
+   Although it is not possible to use an event to trigger a callback in the
+   same way as a signal, there are a series of signals derived from 
+   <classname>GtkWidget</classname> collectively known as 
    <literal>'event' signals</literal>.  These are effectively ways
    of describing an event in terms of a signal, allowing callbacks to be
-   indirectly triggered through an occurrence of most of the 
+   indirectly triggered through a captured occurrence of most of the 
    <enumname>GdkEventTypes</enumname>. The 
    <classname>GtkTooltips</classname>  object itself uses the 
    <function class="GktObject">connect_object()</function> method and the
