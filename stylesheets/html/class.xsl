@@ -327,33 +327,22 @@
      </div>
     </blockquote>
     </p>
-<!--
-    <p>
+
+<!--    <p>
      <h3>
       <xsl:call-template name="gentext">
        <xsl:with-param name="key">directsubclasses</xsl:with-param>
       </xsl:call-template>
      </h3>
      <blockquote>
-     <div class="literallayout">//-->
-<!--      <xsl:choose>
-       <xsl:when test="$phpweb=true()">
-        <xsl:call-template name="phpweb.get_class_hierarchy">
-         <xsl:with-param name="classname">
-          <xsl:value-of select="./classmeta/classtitle"/>
-         </xsl:with-param>
-        </xsl:call-template>
-       </xsl:when>
-      <xsl:otherwise>//-->
-<!--       <xsl:call-template name="get_direct_subclasses">
+      <div class="literallayout">
+       <xsl:call-template name="get_direct_subclasses">
         <xsl:with-param name="classname">
          <xsl:value-of select="./classmeta/classtitle"/>
         </xsl:with-param>
-       </xsl:call-template>//-->
-<!--      </xsl:otherwise>
-     </xsl:choose>//-->
-<!--     </div>
-    </blockquote>
+       </xsl:call-template>
+      </div>
+     </blockquote>
     </p>//-->
 
     <p>
