@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<chapter id="tutorials.pixmaps">
+ <title>How to use pixmaps in php-gtk</title>
+ <simpara>
+  Many applications are using graphical images: A nice splash screen indicating 
+  that the program is loading; the toolbar with new, open and other well-known
+  icons or the nifty about dialog. This HowTo describes what you need to use
+  images in your own php-gtk applications.
+ </simpara>
+<!-- <section>
+  <title>About XPM</title>-->
+  <simpara>
+   The standard way to deal with images and mainly icons in php-gtk is 
+   using XPMs. 
+   XPM is short for <quote>XPixMap</quote> and describes an ASCII image format
+   as well as a C library for dealing with the images. Originally the format
+   was developed because the X libraries just had support for 1 bit depth
+   images, the XBM (X BitMap) which is just not enough for applications on
+   a graphical system. Although it is has not been standardized by the X
+   Consortium, it is the de facto standard for icons in X.
+   In this tutorial we will omit the library because we're programming in 
+   php and not in C.
+  </simpara>
+  <para>
+   The XPM format was designed to fit the special need for icons:
+    <itemizedlist>
+     <listitem>Icons are usually small</listitem>
+     <listitem>Icons may need to be drawn differently depending on whether they are
+      being displayed on color or monochrome screen</listitem>
+     <listitem>Icons may want to define symbolic colors, such as "Foreground" and
+      "Background", that can be changed depending on the context in which the icons
+      are used.</listitem>
+     <listitem>Icons can be of any shape, not just rectangular.</listitem>
+    </itemizedlist>
+  </para>
+<!--  <subtitle>The XPM image format</subtitle>-->
+  <simpara>
+   An icon in XPM format is just an ASCII file which can be edited with
+   a normal text editor. As it was designed to be included in C sources,
+   the only content is a C styled array with the image information. 
+   You can even have comments in the file - it's C source.
+  </simpara>
+  <para>
+   The basic format of a XPM is an array composed as follows:
+   <programlisting role="C">
+<![CDATA[
+/* XPM */
+static char * <pixmap name>[] = {
+"Values-string",
+"Colors-strings",
+"Pixel-strings"
+};]]>
+   </programlisting>
+   Note that the header comment with only the word XPM in it is <emphasis>required</emphasis>.
+   I leave out the <emphasis>Extension strings</emphasis> as we don't need them here.
+  </para>
+  <para>
+   The <literal>Values-string</literal> has to contain four integer values:
+   <orderedlist>
+    <listitem>Width of the image in pixels</listitem>
+    <listitem>Height of the image in pixels</listitem>
+    <listitem>Number of colors in the image</listitem>
+    <listitem>Number of characters per pixel</listitem>
+   </orderedlist>
+   Example: <literal>"16 16 8 1"</literal> defines an icon of size 16x16 pixels with 8
+   colors and 1 char for defining one pixel.
+  </para>
+  <simpara>
+   First it may be strange that one has to define the <emphasis>number of characters per
+   pixel</emphasis>, but this becomes clear if you consider the following:
+   Each pixel is represented by a char, e.g. "b", with "b" having the color blue. Now
+   you want another pixel in red, so you give it the char "r" and define "r" being the
+   red color. The ASCII standard defines 128 chars, and with an extended codepage of 255
+   you would still be limited to somewhat of 250 colors (you can't use quotes and some other
+   chars). To avoid this limitation you can use more than one char to describe a pixel
+   and a color: If you use 2 chars per pixel it is possible to use about 250x250 = 62500 
+   colors by defining pairs of chars to be one color, e.g. "mr" being a medium red and
+   'db' being a dark blue.
+  </simpara>
+  <para>
+   The <literal>Colors-strings</literal> contains as many strings as there are colors.
+   Each string has the following format:
+   <programlisting>
+<![CDATA[
+"chars key value [key value]*" ]]>   
+   </programlisting>
+   The <literal>chars</literal> value is one or more chars (depending on the 
+   <literal>number of characters</literal> setting) which define the "pixel name"
+   of the color. A <literal>key</literal> can have one of the following values:
+   <itemizedlist>
+    <listitem><literal>m</literal> for a monochrome visual</listitem>
+    <listitem><literal>c</literal> for a color visual</listitem>
+    <listitem><literal>g4</literal> for 4-level grayscale</listitem>
+    <listitem><literal>g</literal> for grayscale with more than 4 levels</listitem>
+    <listitem><literal>s</literal> for a symbolic name</listitem>
+   </itemizedlist>
+   The color <literal>value</literal> itself can be the following:
+   <itemizedlist>
+    <listitem>A color name, e.g. "blue"</listitem>
+    <listitem>A hexadecimal RGB code like in HTML, e.h. '#FF8000'</listitem>
+    <listitem>The string "None" which means the transparent color</listitem>
+   </itemizedlist>
+   Different key-value pairs can be concatenated to optimize the image for
+   several visuals
+   <programlisting>
+<![CDATA[
+"r m white c red",
+"b m black c blue" ]]>   
+   </programlisting>
+   The example would define two colors: A color named "r" which is displayed white
+   on a monochrome display and red on a color display. The second is named "b" and
+   is displayed black on a monochrome visual and blue on a color one.
+  </para>
+  <para>
+   The <literal>Pixel-strings</literal> are <literal>height</literal> string of
+   which each is <literal>width * chars per pixel</literal> wide.
+  </para>
+  <example>
+   <title>A small sample XPM</title>
+   <programlisting role="C">
+<![CDATA[
+/* XPM */
+static char * dot[] = {
+"5 5 2 1",
+". c None",
+"X c Red",
+"  X  ",
+" XXX ",
+"XXXXX",
+" XXX ",
+"  X  ",
+};]]>
+   </programlisting>
+  </example>
+  <para>
+   As you probably don't want to create these images by hand, here is a
+   list of programs which support the creation of XPMs:
+   <itemizedlist>
+    <listitem><emphasis>The GIMP</emphasis> which should be on every linux system; it
+     is also available for Windows.</listitem>
+    <listitem><emphasis>ImageMagick</emphasis> is a command line tool which can be used
+     to batch-convert other image formats to xpm. Available for unix and Windows.</listitem>
+   </itemizedlist>
+  </para>
+<!-- </section>-->
+
+
+
+<!-- <section>
+  <title>Image related php-gtk functions</title>-->
+  <simpara>
+   Images are displayed using the <classname>GtkPixmap</classname> widget which has
+   to be invoked with two parameters; a <literal>map</literal> of type 
+   <classname>GdkPixmap</classname> and a <literal>mask</literal> of type
+   <classname>GdkBitmap</classname>. 
+   The map defines all the pixels with its colors, and as the map is not able to
+   contain transparent color information, the mask is a map of 1's and 0's telling
+   which pixel is transparent and which not.
+  </simpara>
+  <para>
+   There are 2 functions dedicated to reading of XPM images:
+   <itemizedlist>
+    <listitem>
+     <link linkend="gdk.method.pixmap_create_from_xpm">gdk::pixmap_create_from_xpm</link> which
+     creates a pixmap and a mask directly from a file.
+    </listitem>
+    <listitem>
+     <link linkend="gdk.method.pixmap_create_from_xpm_d">gdk::pixmap_create_from_xpm_d</link>
+     which creates the pixmap and mask from an array.
+    </listitem>
+   </itemizedlist>
+  </para>
+  <para>
+   As both functions are identical in usage, I will describe <literal>pixmap_create_from_xpm_d</literal>
+   only.
+   <programlisting role="php">
+<![CDATA[
+list( $pixmap, $mask) = gdk::pixmap_create_from_xpm_d( $objWindow->window, $colTransparent, $arImage);
+]]>
+   </programlisting>
+   The function returns an array of size 2: the first is the map with all the pixels and colors,
+   and the second is the mask with transparency information. We store them in two different 
+   variables here, although you can just use an array.
+  </para>
+  <simpara>
+   The first parameter, <literal>$objWindow-&gt;window</literal> is the <classname>GdkWindow</classname>
+   of your application's window. Please make sure that the <classname>GdkWindow</classname>
+   exists by showing the <classname>GtkWindow</classname> or by calling the 
+   <function class="GtkWidget">realize</function> function.
+  </simpara>
+  <para>
+   The second parameter, <literal>$colTransparent</literal> defines the transparent color of
+   the image, additionally to the defined <literal>None</literal> colors in the XPM.
+   <programlisting role="php">
+<![CDATA[
+$colTransparent = &new GdkColor(0, 0, 0);]]>
+   </programlisting>
+  </para>
+  <simpara>
+   The third parameter is the name of the image file (<literal>pixmap_create_from_xpm</literal>), 
+   or a normal php array with the structure as described in the XPM standard
+   (<literal>pixmap_create_from_xpm</literal>).
+  </simpara>
+<!-- </section>-->
+
+<!--
+TODO:
+- example
+- set_icon
+- shaped buttons and windows
+- other xpm functions
+- symbolic names, changing during runtime
+- additional transparency checking
+-->
+
+</chapter>
