@@ -2,7 +2,7 @@
 <chapter id="tutorials.pixmaps">
  <title>Pixmaps</title>
 
- <sect1 id="pixmaps.intro">
+ <sect1 id="tutorials.pixmaps.intro">
   <title>How To Use Pixmaps in PHP-GTK</title>
   <simpara>
    Many applications are using graphical images: A nice splash screen indicating 
@@ -12,7 +12,7 @@
   </simpara>
  </sect1>
 
- <sect1 id="pixmaps.aboutxpm">
+ <sect1 id="tutorials.pixmaps.aboutxpm">
   <title>About XPM</title>
   <simpara>
    The standard way to deal with images and mainly icons in php-gtk is 
@@ -38,7 +38,7 @@
      <listitem>Icons can be of any shape, not just rectangular.</listitem>
     </itemizedlist>
   </para>
- <sect2 id="pixmaps.aboutxpm.format">
+ <sect2 id="tutorials.pixmaps.aboutxpm.format">
  <title>The XPM image format</title>
   <simpara>
    An icon in XPM format is just an ASCII file which can be edited with
@@ -151,7 +151,7 @@ static char * dot[] = {
 </sect2>
 </sect1>
 
-<sect1 id="pixmaps.functions">
+<sect1 id="tutorials.pixmaps.functions">
   <title>Image related php-gtk functions</title>
   <simpara>
    Images are displayed using the <classname>GtkPixmap</classname> widget which has
@@ -163,7 +163,7 @@ static char * dot[] = {
    which pixel is transparent and which not.
   </simpara>
   <para>
-   There are 2 functions dedicated to reading of XPM images:
+   There are two functions dedicated to reading of XPM images:
    <itemizedlist>
     <listitem>
      <link linkend="gdk.method.pixmap_create_from_xpm">gdk::pixmap_create_from_xpm</link> which
@@ -194,23 +194,18 @@ list( $pixmap, $mask) = gdk::pixmap_create_from_xpm_d( $objWindow->window, $colT
    <function class="GtkWidget">realize</function> function.
   </simpara>
   <para>
-   The second parameter, <literal>$colTransparent</literal> defines the transparent color of
-   the image, additionally to the defined <literal>None</literal> colors in the XPM.
-   <programlisting role="php">
-<![CDATA[
-$colTransparent = &new GdkColor(0, 0, 0);]]>
-   </programlisting>
-   It doesn't seem to work with php-gtk, so you have to use the <literal>None</literal> color
-   in the pixmap definition.
+   The second parameter, <literal>$colTransparent</literal> defines which color the 
+   transparent color (color <literal>None</literal>) will get if the pixmask is not
+   used when creating e.g. the GtkPixmap.
   </para>
   <simpara>
    The third parameter is the name of the image file (<literal>pixmap_create_from_xpm</literal>), 
    or a normal php array with the structure as described in the XPM standard
-   (<literal>pixmap_create_from_xpm</literal>).
+   (<literal>pixmap_create_from_xpm_d</literal>).
   </simpara>
 </sect1>
 
-<sect1 id="pixmaps.examples">
+<sect1 id="tutorials.pixmaps.examples">
   <title>Examples</title>
   <simpara>
    The following example shows how to create a pixmap from an array,
@@ -375,8 +370,10 @@ gtk::main();
   </example>
 </sect1>
 
-<sect1 id="pixmaps.other">
-  <title>Other things you can do with pixmaps</title>
+<sect1 id="tutorials.pixmaps.other">
+ <title>Other things you can do with pixmaps</title>
+ <sect2 id="tutorials.pixmaps.other.shapes">
+  <title>Shaping widgets</title>
   <simpara>
    Another nice thing you can do with a pixmap or better a pixmask is 
    defining your own shape for widgets or whole windows. This means you
@@ -385,15 +382,49 @@ gtk::main();
    <link linked="gtk.gtkwidget.method.shape_combine_mask">shape_combine_mask</link>
    method of <classname>GtkWidget</classname>.
   </simpara>
+ </sect2>
+ <sect2 id="tutorials.pixmaps.other.symbolic">
+  <title>Symbolic names</title>
+  <para>
+   The XPM specification allows the use of <emphasis>symbolic color names</emphasis>
+   in the xpm. For example, if your pixmap should display a symbol of a button, the
+   button could have the <emphasis>real</emphasis> button colors: light shadow, dark
+   shadow and the normal flat surface color. The only thing you would have to do
+   is writing something like this:
+   <programlisting role="C">
+<![CDATA[
+/* XPM */
+static char * button[] = {
+"16 16 3 1",
+". s foreground",
+"X s lightshadow",
+"X s darkshadow",
+"...pixels here"
+};]]>
+   </programlisting>
+  </para>
+  <simpara>
+   Unfortunately, the Gtk, unlike CDE, does not support symbolic color names. So
+   you cannot use them unless you define your own names and write a function which
+   replaces the symbolic names by real colors.
+  </simpara>
+ </sect2>
+
+ <sect2 id="tutorials.pixmaps.other.otherformats">
+  <title>Other graphics formats</title>
+  <simpara>
+   Pixmaps are nice, but what if you want to display a <literal>jpg</literal> or
+   <literal>png</literal> image? As the gtk libraries don't support this, you could
+   use the <literal>gd</literal> or <literal>gd2</literal> to transform the image
+   to xpm format and go on with the normal xpm functions.
+  </simpara>
+ </sect2>
 </sect1>
 
 <!--
 TODO:
 - other xpm functions
-- symbolic names, changing during runtime
 - displaying jpg/png/whatever by transforming them before with gd
-
-- additional transparency checking | doesn't seem to work
 -->
 
 </chapter>
