@@ -99,9 +99,6 @@ AC_ARG_WITH(srcdir,
 [
     if test -d "$withval";
     then
-        AC_MSG_RESULT( )
-        AC_MSG_ERROR(Cannot find PHP-GTK source dir)
-    else
         PHPGTK_SRCDIR="$withval"
         if test "$PHP" = "no";
         then
@@ -110,6 +107,9 @@ AC_ARG_WITH(srcdir,
         fi
         AC_MSG_RESULT( $withval )
         AC_SUBST(PHPGTK_SRCDIR)
+    else
+        AC_MSG_RESULT( )
+        AC_MSG_ERROR(Cannot find PHP-GTK source dir)
     fi
 ])
 
