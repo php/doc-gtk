@@ -29,6 +29,7 @@ srcdir=@srcdir@
 #
 SAXON=@SAXON@
 PHP=@PHP@
+UDOCS=scripts/udocs
 
 #
 # Paths
@@ -90,7 +91,7 @@ htmldir: build/html
 phpdir:	build/php
 testdir: build/test
 genchapterents.php:	scripts/genchapterents.php
-updatedocs.php:	scripts/updatedocs.php
+udocs:	scripts/udocs
 name_to_id.xsl:	@STYLESHEET_DIR@/html/name_to_id.xsl
 custom.titlepage.xsl: @STYLESHEET_DIR@/html/custom.titlepage.xsl
 
@@ -136,7 +137,7 @@ chapters.ent:
 manual.xml:	$(XMLFILES)	$(MANUAL_DEPS) .manual.xml
 	CONFIG_FILES=$@	CONFIG_HEADERS=	./config.status
 
-scripts/updatedocs.php:
+scripts/udocs:
 	CONFIG_FILES=$@	CONFIG_HEADERS=	./config.status
 
 scripts/genchapterents.php:
@@ -169,25 +170,18 @@ build/html/index.html: manual.xml $(CHUNK_DEPS)
 build/bigmanual.html: manual.xml $(HTML_DEPS)
 	$(SAXON) manual.xml	$(stylesheet_dir)/html.xsl > $@
 
-#updatexml: updatedocs.php
-#	MODE=$(MODE) STYLESHEET=$(STYLESHEET)
-#	@$(PHP)	-q scripts/updatedocs.php
-
-udocs: ./udocs.in ./config.status 
-    CONFIG_FILES=./scripts/$@ CONFIG_HEADERS= ./config.status
-
 updatexml:
 ifeq "$(mode)" "update"
 ifeq "$(stylesheet)" "phpweb"
-	@./udocs -u -sphpweb
+	@$(UDOCS) -u -sphpweb
 else
-	@./udocs -u -schunk
+	@$(UDOCS) -u -schunk
 endif
 else
 ifeq "$(stylesheet)" "phpweb"
-	@./udocs -sphpweb
+	@$(UDOCS) -sphpweb
 else
-	@./udocs -schunk
+	@$(UDOCS) -schunk
 endif
 	
 endif
@@ -200,25 +194,18 @@ endif
 %.xml: udocs
 ifeq "$(mode)" "update"
 ifeq "$(stylesheet)" "phpweb"
-	@./udocs -u -sphpweb $@
+	@$(UDOCS) -u -sphpweb $@
 else
-	@./udocs -u -schunk $@
+	@$(UDOCS) -u -schunk $@
 endif
 else
 ifeq "$(stylesheet)" "phpweb"
-	@./udocs -sphpweb $@
+	@$(UDOCS) -sphpweb $@
 else
-	@./udocs -schunk $@
+	@$(UDOCS) -schunk $@
 endif
 	
 endif
-
-
-#%.xml: updatedocs.php
-#	MODE=$(MODE) STYLESHEET=$(STYLESHEET)
-#	@$(PHP)	-q scripts/updatedocs.php $@
-
-
 
 #
 # Clean	Rules
@@ -228,11 +215,11 @@ clean:
 	rm -f chapters.ent
 
 distclean: clean
-	rm -f Makefile manual.xml configure	udocs
+	rm -f Makefile manual.xml configure
 	rm -f config.cache config.log config.status	version.ent
 	cd stylesheets/xsl;	rm -f html.xsl common.xsl \
 		chunk.xsl phpweb.xsl update.xsl	temp.xsl
-	cd scripts; rm -f genchapterents.php updatedocs.php
+	cd scripts; rm -f genchapterents.php udocs
 
 cvsclean:
 	@for i in `find	. -name	.cvsignore`; do	\
