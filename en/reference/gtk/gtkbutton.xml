@@ -277,10 +277,10 @@ gtk::main();
      <classname>GtkButton</classname> signal, and holds an advantage over
      the other signals listed here in that it also responds to 
      <literal>enter</literal> or <literal>spacebar</literal> keypresses as
-     though they were mouse-clicks.  Signals that have this property have a
-     direct relationship with <classname>GtkWidget</classname>'s 
-     <signalname class="GtkWidget">activate</signalname> signal; all
-     interactive widgets contain one such method/signal pair.
+     though they were mouse-clicks.  Signals that have this property are
+     wrappers for an internal <classname>GtkWidget</classname> signal
+     named 'activate_signal'; all interactive widgets contain one such
+     method/signal pair, with appropriate keyboard bindings.
     </simpara>
     <simpara>
      Note that the <signalname class="GtkButton">clicked</signalname> 
@@ -316,7 +316,7 @@ gtk::main();
       </programlisting>
      </example>
      For further information about connecting signals, refer to the 
-     <link linkend="gtk.signals.whatare">Signals and Callbacks</link> 
+     <link linkend="signals.whatare">Signals and Callbacks</link> 
      chapter in the <link linkend="userguide">PHP-GTK Userguide</link>.
     </para>
    </desc>
