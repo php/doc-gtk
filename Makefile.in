@@ -1,17 +1,17 @@
 # +----------------------------------------------------------------------+
-# |	PHP	Version	4.0														 |
+# | PHP Version 4.0                                                      |
 # +----------------------------------------------------------------------+
-# |	Copyright (c) 1997-2001	The	PHP	Group								 |
+# | Copyright (c) 1997-2001 The PHP Group                                |
 # +----------------------------------------------------------------------+
-# |	This source	file is	subject	to version 2.02	of the PHP licience,	 |
-# |	that is	bundled	with this package in the file LICENCE and is		 |
-# |	avalible through the world wide	web	at								 |
-# |	http://www.php.net/license/2_02.txt.								 |
-# |	If uou did not receive a copy of the PHP license and are unable	to	 |
-# |	obtain it through the world	wide web, please send a	note to			 |
-# |	license@php.net	so we can mail you a copy immediately				 |
+# | This source file is subject to version 2.02 of the PHP licience,     |
+# | that is bundled with this package in the file LICENCE and is         |
+# | avalible through the world wide web at                               |
+# | http://www.php.net/license/2_02.txt.                                 |
+# | If uou did not receive a copy of the PHP license and are unable to   |
+# | obtain it through the world wide web, please send a note to          |
+# | license@php.net so we can mail you a copy immediately                |
 # +----------------------------------------------------------------------+
-# |	Authors: James Moore <jmoore@php.net>								 |
+# | Authors: James Moore <jmoore@php.net>                                |
 # +----------------------------------------------------------------------+
 
 #
@@ -27,7 +27,7 @@ srcdir=@srcdir@
 #
 # Programs
 #
-SAXON=@SAXON@
+XSLTPROC=@XSLTPROC@
 PHP=@PHP@
 UDOCS=scripts/udocs
 
@@ -35,17 +35,12 @@ UDOCS=scripts/udocs
 # Paths
 #
 PHPGTK_SRCDIR="@PHPGTK_SRCDIR@"
-DOCBOOKXSL=@DOCBOOKXSL@
 stylesheet_dir=@STYLESHEET_DIR@
-html_stylesheet_dir=@STYLESHEET_DIR@/html/
 LANG=@LANG@
 
 #
 # Default Variables
 #
-HTML_STYLESHEET=html.xsl
-CHUNK_STYLESHEET=chunk.xsl
-PHPWEB_STYLESHEET=phpweb.xsl
 MODE="quick"
 UDOCSTYLESHEET:="chunk"
 PREFIX="gtk"
@@ -55,11 +50,11 @@ STYLESHEET=$(CHUNK_STYLESHEET)
 #
 # Dependencies
 #
-COMMON_DEPS=builddir common.xsl
+COMMON_DEPS=builddir
 HTML_DEPS=$(HTML_STYLESHEET) $(COMMON_DEPS)	
-CHUNK_DEPS=$(CHUNK_STYLESHEET) $(COMMON_DEPS) htmldir
-PHPWEB_DEPS=$(PHPWEB_STYLESHEET) $(COMMON_DEPS)	phpdir
-TEST_DEPS=$(CHUNK_STYLESHEET) $(COMMON_DEPS) testdir
+CHUNK_DEPS=$(COMMON_DEPS) htmldir
+PHPWEB_DEPS=$(COMMON_DEPS)	phpdir
+TEST_DEPS=$(COMMON_DEPS) testdir
 MANUAL_DEPS=chapters.ent
 
 #
@@ -158,13 +153,13 @@ build/manual.txt: bigmanual.html
 	lynx -nolist -dump file:`pwd`/build/bigmanual.html > $@
 
 build/php/index.php: manual.xml	$(PHPWEB_DEPS)
-	$(SAXON) manual.xml	$(stylesheet_dir)/phpweb.xsl 
+	$(XSLTPROC) $(stylesheet_dir)/phpweb.xsl manual.xml 
 
 build/html/index.html: manual.xml $(CHUNK_DEPS)
-	$(SAXON) manual.xml	$(stylesheet_dir)/chunk.xsl	
+	$(XSLTPROC) $(stylesheet_dir)/chunk.xsl manual.xml	
 
 build/bigmanual.html: manual.xml $(HTML_DEPS)
-	$(SAXON) manual.xml	$(stylesheet_dir)/html.xsl > $@
+	$(XSLTPROC) $(stylesheet_dir)/html.xsl manual.xml > $@
 
 updatexml:
 ifeq "$(mode)" "update"
