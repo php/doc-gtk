@@ -46,11 +46,14 @@ function gen_dir_ents($path)
 	closedir($dir_handle);
 }
 
-if ((strnatcmp(PHP_VERSION, '4.1.0') >= 0)) {
+if (is_dir("../en")) {
+	gen_dir_ents("../en");
+} else if (is_dir("en")) {
 	gen_dir_ents("en");
 } else {
-	gen_dir_ents("../en");
+	die("\nPlease run configure from the top dir of php-gtk-doc checkout.\n");
 }
+
 sort($entities, SORT_STRING);
 while(list(,$val) = each($entities))
 {
