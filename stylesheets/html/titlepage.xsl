@@ -3,7 +3,7 @@
                 version='1.0'>
 
 <!-- ********************************************************************
-     $Id: titlepage.xsl,v 1.2 2003-06-13 19:53:21 sfox Exp $
+     $Id: titlepage.xsl,v 1.3 2003-08-03 17:54:08 sfox Exp $
      ********************************************************************
 
      This file is part of the XSL DocBook Stylesheet distribution.
@@ -74,17 +74,25 @@
  <xsl:template name="authorgroup-title">
   <xsl:param name="id"></xsl:param>
   <xsl:choose>
-   <xsl:when test="$id='phpgtk.authors'">
-    <xsl:text>PHP-GTK Authors</xsl:text>
+   <xsl:when test="($id='phpgtk.authors') or ($id='credits.phpgtk.authors')">
+      <xsl:call-template name="gentext">
+       <xsl:with-param name="key">PHPGTKauths</xsl:with-param>
+      </xsl:call-template>
    </xsl:when>
-   <xsl:when test="$id='phpgtk.contributors'">
-    <xsl:text>PHP-GTK Contributors</xsl:text>
+   <xsl:when test="($id='phpgtk.contributors') or ($id='credits.phpgtk.contributors')">
+      <xsl:call-template name="gentext">
+       <xsl:with-param name="key">PHPGTKcons</xsl:with-param>
+      </xsl:call-template>
    </xsl:when>
-   <xsl:when test="$id='phpgtk.manual.contributors'">
-    <xsl:text>PHP-GTK Manual Contributors</xsl:text>
+   <xsl:when test="($id='phpgtk.manual.authors') or ($id='credits.phpgtk.manual.authors')">
+      <xsl:call-template name="gentext">
+       <xsl:with-param name="key">PHPGTKmanauths</xsl:with-param>
+      </xsl:call-template>
    </xsl:when>
-   <xsl:when test="$id='phpgtk.manual.authors'">
-    <xsl:text>PHP-GTK Manual</xsl:text>
+   <xsl:when test="($id='phpgtk.manual.contributors') or ('credits.phpgtk.manual.contributors')">
+      <xsl:call-template name="gentext">
+       <xsl:with-param name="key">PHPGTKmancons</xsl:with-param>
+      </xsl:call-template>
    </xsl:when>
    <xsl:otherwise></xsl:otherwise>
   </xsl:choose>

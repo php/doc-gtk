@@ -3,7 +3,7 @@
                 version='1.0'>
 
 <!-- ********************************************************************
-     $Id: autotoc.xsl,v 1.3 2003-06-13 19:53:21 sfox Exp $
+     $Id: autotoc.xsl,v 1.4 2003-08-03 17:54:08 sfox Exp $
      ********************************************************************
 
      This file is part of the XSL DocBook Stylesheet distribution.
@@ -62,7 +62,7 @@
 
 <xsl:template name="division.toc">
   <xsl:if test="$generate.division.toc != 0">
-   <xsl:variable name="nodes" select="part|classset|enums
+   <xsl:variable name="nodes" select="part|classset|enumset
                                        |chapter|appendix
                                        |refentry|bridgehead"/>
     <xsl:if test="$nodes">
@@ -86,7 +86,7 @@
   <xsl:if test="$generate.component.toc != 0">
     <xsl:variable name="nodes" select="section|sect1|sect2|refentry
     				       |classentry[@hide='0']
-    				       |enum[@hide='0']
+    				       |enums/enum[@hide='0']
                            |bridgehead[not(@renderas)]
                            |.//bridgehead[@renderas='sect1']"/>
     <xsl:if test="$nodes">
@@ -148,7 +148,7 @@
   </xsl:if>
 </xsl:template>
 
-<xsl:template match="appendix|chapter|classset|enums|part|sect1" mode="toc">
+<xsl:template match="appendix|chapter|classset|enumset|part|sect1" mode="toc">
   <xsl:variable name="nodes" select="bridgehead"/>
 
   <xsl:variable name="subtoc">

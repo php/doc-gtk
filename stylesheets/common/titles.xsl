@@ -54,7 +54,7 @@ title of the element. This does not include the label.
 
 <xsl:template match="set" mode="title.markup">
   <xsl:param name="allow-anchors" select="'0'"/>
-  <xsl:variable name="title" select="(set/title|title)[1]"/>
+  <xsl:variable name="title" select="./title"/>
   <xsl:apply-templates select="$title" mode="title.markup">
     <xsl:with-param name="allow-anchors" select="$allow-anchors"/>
   </xsl:apply-templates>
@@ -204,7 +204,7 @@ title of the element. This does not include the label.
   </xsl:choose>
 </xsl:template>
 
-<xsl:template match="classset" mode="title.markup">
+<xsl:template match="classset|enumset" mode="title.markup">
  <xsl:param name="text-only" select="'0'"/>
  <xsl:param name="allow-anchors" select="'0'"/>
  <xsl:apply-templates select="(./title)[1]"
@@ -212,6 +212,13 @@ title of the element. This does not include the label.
       <xsl:with-param name="text-only" select="$text-only"/>
 	  <xsl:with-param name="allow-anchors" select="$allow-anchors"/>
  </xsl:apply-templates>
+</xsl:template>
+
+<xsl:template match="enums" mode="title.markup">
+ <xsl:param name="text-only" select="'0'"/>
+ <xsl:param name="allow-anchors" select="'0'"/>
+ <xsl:variable name="enumset" select="ancestor::enumset"/>
+ <xsl:value-of select="$enumset/title"/>
 </xsl:template>
 
 <xsl:template match="classentry" mode="title.markup">

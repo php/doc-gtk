@@ -273,7 +273,7 @@ element label.</para>
   </xsl:choose>
 </xsl:template>
 
-<xsl:template match="enums|classset" mode="label.markup">
+<xsl:template match="enumset|classset" mode="label.markup">
  <xsl:param name="punct">.</xsl:param>
   <xsl:if test="@label">
    <xsl:value-of select="@label"/>
@@ -281,7 +281,7 @@ element label.</para>
   </xsl:if>
 </xsl:template>
 
-<xsl:template match="classentry" mode="label.markup">
+<xsl:template match="classentry|enums" mode="label.markup">
  <xsl:param name="punct">.</xsl:param>
  <xsl:if test="@label">
   <xsl:value-of select="@label"/>

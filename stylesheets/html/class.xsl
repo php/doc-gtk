@@ -29,7 +29,7 @@
   </xsl:choose>
  </xsl:template>
 
- <xsl:template match="enums">
+ <xsl:template match="enumset">
   <xsl:variable name="id">
    <xsl:call-template name="object.id" />
   </xsl:variable>
@@ -42,7 +42,7 @@
       <xsl:apply-templates select="./partintro"/>
       <xsl:call-template name="component.toc"/>
      </div>
-     <xsl:apply-templates select="./enum"/>
+     <xsl:apply-templates select="./enums/enum"/>
     </div>
    </xsl:when>
    <xsl:otherwise>
@@ -50,7 +50,7 @@
      <xsl:apply-templates select="./title"/>
      <xsl:apply-templates select="./partintro"/>
      <xsl:call-template name="component.toc"/>
-     <xsl:apply-templates select="./enum"/>
+     <xsl:apply-templates select="./enums/enum"/>
     </div>
    </xsl:otherwise>
   </xsl:choose>
@@ -169,7 +169,7 @@
   </xsl:choose>
  </xsl:template>
 <!--========================================================================-->
- <xsl:template match="function|constructor">
+ <xsl:template match="function|constructor|cbfunction">
   <xsl:call-template name="func.proto">
    <xsl:with-param name="node" select="."/>
   </xsl:call-template>
@@ -572,11 +572,11 @@
     </b>
   </p>
   <p>
-   <xsl:apply-templates select="./callback" />
+   <xsl:apply-templates select="./funcsynopsis" />
   </p>
  </xsl:template>
 
- <xsl:template match="callback">
+ <xsl:template match="funcsynopsis">
    <xsl:apply-templates select="funcprototype"/>
  </xsl:template>
  

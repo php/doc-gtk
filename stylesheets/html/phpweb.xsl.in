@@ -90,8 +90,8 @@
    </xsl:when>
 
    <xsl:when test="name($node)='enum'">
-    <xsl:variable name="enums" select="ancestor::enums"/>
-    <xsl:for-each select="$enums/enum">
+    <xsl:variable name="enumset" select="ancestor::enumset"/>
+    <xsl:for-each select="$enumset/enums/enum">
      <xsl:call-template name="gen.text.toc.array">
       <xsl:with-param name="node" select="." />
      </xsl:call-template>

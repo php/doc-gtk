@@ -3,7 +3,7 @@
                 version='1.0'>
 
 <!-- ********************************************************************
-     $Id: division.xsl,v 1.4 2003-06-13 19:53:21 sfox Exp $
+     $Id: division.xsl,v 1.5 2003-08-03 17:54:08 sfox Exp $
      ********************************************************************
 
      This file is part of the XSL DocBook Stylesheet distribution.
@@ -136,7 +136,7 @@
   <div class="{name(.)}" dir="rtl">
     <xsl:call-template name="partintro.titlepage"/>
     <xsl:apply-templates/>
-    <xsl:if test="not(ancestor::enums) and not(ancestor::classset) and $generate.part.toc != '0'">
+    <xsl:if test="not(ancestor::enumset) and not(ancestor::classset) and $generate.part.toc != '0'">
       <xsl:apply-templates select="parent::*" mode="make.part.toc"/>
     </xsl:if>
   </div>
@@ -145,7 +145,7 @@
   <div class="{name(.)}">
     <xsl:call-template name="partintro.titlepage"/>
     <xsl:apply-templates/>
-    <xsl:if test="not(ancestor::enums) and not(ancestor::classset) and $generate.part.toc != '0'">
+    <xsl:if test="not(ancestor::enumset) and not(ancestor::classset) and $generate.part.toc != '0'">
       <xsl:apply-templates select="parent::*" mode="make.part.toc"/>
     </xsl:if>
   </div>
