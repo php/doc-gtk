@@ -51,6 +51,38 @@
  </xsl:choose>
 </xsl:template>
 
+
+<!--
+Makes the indent for the class hierarchy
+ depending on the depth
+-->
+<xsl:template name="hierarchy.indent">
+ <xsl:param name="depth" />
+ <xsl:choose>
+  <xsl:when test="$depth=0">
+   <xsl:text></xsl:text>
+  </xsl:when>
+  <xsl:when test="$depth=1">
+   <xsl:text disable-output-escaping="yes">
+   </xsl:text>
+  </xsl:when>
+  <xsl:when test="$depth=2">
+   <xsl:text disable-output-escaping="yes">
+`--
+   </xsl:text>
+  </xsl:when>
+  <xsl:otherwise>
+   <xsl:text disable-output-escaping="yes">
+     &step;
+   </xsl:text>
+   <xsl:call-template name="hierarchy.indent">
+    <xsl:with-param name="depth" select="$depth - 1" />
+   </xsl:call-template>
+  </xsl:otherwise>
+ </xsl:choose>
+</xsl:template>
+
+
 <xsl:template name="get_class_hierarchy">
  <xsl:param name="classname" />
 
@@ -78,80 +110,12 @@
   </xsl:call-template>
  </xsl:if>
 
- <xsl:variable name="bad.hack">
- <xsl:choose>
-  <xsl:when test="$depth=0">
-   <xsl:text></xsl:text>
-  </xsl:when>
-  <xsl:when test="$depth=1">
-   <xsl:text disable-output-escaping="yes">
-   </xsl:text>
-  </xsl:when>
-  <xsl:when test="$depth=2">
-   <xsl:text disable-output-escaping="yes">
-`--
-   </xsl:text>
-  </xsl:when>
-  <xsl:when test="$depth=3">
-   <xsl:text disable-output-escaping="yes">
-&step;`--
-   </xsl:text>
-  </xsl:when>
-  <xsl:when test="$depth=4">
-   <xsl:text disable-output-escaping="yes">
-&step;&step;`--
-   </xsl:text>
-  </xsl:when>
-  <xsl:when test="$depth=5">
-   <xsl:text disable-output-escaping="yes">
-&step;&step;&step;`--
-   </xsl:text>
-  </xsl:when>
-  <xsl:when test="$depth=6">
-   <xsl:text disable-output-escaping="yes">
-&step;&step;&step;&step;`--
-   </xsl:text>
-  </xsl:when>
-  <xsl:when test="$depth=7">
-   <xsl:text disable-output-escaping="yes">
-&step;&step;&step;&step;&step;`--
-   </xsl:text>
-  </xsl:when>
-  <xsl:when test="$depth=8">
-   <xsl:text disable-output-escaping="yes">
-&step;&step;&step;&step;&step;&step;`--
-   </xsl:text>
-  </xsl:when>
-  <xsl:when test="$depth=9">
-   <xsl:text disable-output-escaping="yes">
-&step;&step;&step;&step;&step;&step;&step;`--
-   </xsl:text>
-  </xsl:when>
-  <xsl:when test="$depth=10">
-   <xsl:text disable-output-escaping="yes">
-&step;&step;&step;&step;&step;&step;&step;&step;`--
-   </xsl:text>
-  </xsl:when>
-  <xsl:when test="$depth=11">
-   <xsl:text disable-output-escaping="yes">
-&step;&step;&step;&step;&step;&step;&step;&step;&step;`--
-   </xsl:text>
-  </xsl:when>
-  <xsl:when test="$depth=12">
-   <xsl:text disable-output-escaping="yes">
-&step;&step;&step;&step;&step;&step;&step;&step;&step;&step;`--
-   </xsl:text>
-  </xsl:when>
-  <xsl:otherwise>
-   <xsl:message>
-    <xsl:text>
-     You need to modify hierarchy.xsl to allow for a depth greater than 12
-    </xsl:text>
-   </xsl:message>
-  </xsl:otherwise>
- </xsl:choose>
+ <xsl:variable name="indent">
+  <xsl:call-template name="hierarchy.indent">
+   <xsl:with-param name="depth" select="$depth" />
+  </xsl:call-template>
  </xsl:variable>
-
+ 
  <xsl:choose>
   <xsl:when test="$id!='no'">
    <xsl:variable name="link">
@@ -159,7 +123,7 @@
      <xsl:with-param name="object" select="id($id)"/>
     </xsl:call-template>
    </xsl:variable>
-   <xsl:value-of select="$bad.hack"/>
+   <xsl:value-of select="$indent"/>
    <span dir="ltr">
    <a>
     <xsl:attribute name="href">
@@ -171,7 +135,7 @@
    <br/>
   </xsl:when>
   <xsl:otherwise>
-   <xsl:value-of select="$bad.hack"/>
+   <xsl:value-of select="$indent"/>
    <xsl:value-of select="$classname" />
   </xsl:otherwise>
  </xsl:choose>
