@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="ISO-8859-2" ?>
-<chapter id="gtk.signals">
+<chapter id="signals">
  <title>Signály a volání</title>
 
- <sect1 id="gtk.signals.whatare">
+ <sect1 id="signals.whatare">
   <title>Co jsou signály?</title>
   <simpara>
    <emphasis>Signály jsou upozornění, která vycházející z
-   <link linkend="gtk.widgets.whatare">widgetů</link>.</emphasis>
+   <link linkend="widgets.whatare">widgetů</link>.</emphasis>
   </simpara>
   <simpara>
    Při programování grafických uživatelských rozhraní
@@ -26,24 +26,24 @@
    <classname>GtkProgressBar</classname>. Jasnější situace nastane, když
    uživatel klikne na <classname>GtkButton</classname>, čímž widget vyšle
    signál <signalname>clicked</signalname>. Jako programátor nastavíte
-   <link linkend="gtk.callbacks.whatare">volání</link>, které na tento
+   <link linkend="callbacks.whatare">volání</link>, které na tento
    signál zareaguje.
   </simpara>
  </sect1>
 
- <sect1 id="gtk.callbacks.whatare">
+ <sect1 id="callbacks.whatare">
   <title>Co je volání?</title>
   <simpara>
    <emphasis>
     Volání je funkce aktivovaná 
-    <link linkend="gtk.signals.whatare">signálem</link> nějakého
-    <link linkend="gtk.widgets.whatare">widgetu</link>.
+    <link linkend="signals.whatare">signálem</link> nějakého
+    <link linkend="widgets.whatare">widgetu</link>.
    </emphasis>
   </simpara>
   <simpara>
    Volání je funkce, kterou programátor přiřadí k určitému signálu. Která
    funkce má reagovat na signál, určíte
-   <link linkend="gtk.signals.connection">připojením</link> funkce k
+   <link linkend="signals.connection">připojením</link> funkce k
    signálu.
   </simpara>
   <simpara>
@@ -53,7 +53,7 @@
   </simpara>
  </sect1>
 
- <sect1 id="gtk.signal.inheritance">
+ <sect1 id="signals.inheritance">
   <title>Dědění signálů</title>
   <simpara>
    Objekty dědí signály, stejně jako metody. Widget může vyslat jakýkoli
@@ -66,10 +66,10 @@
   </simpara>
  </sect1>
 
- <sect1 id="gtk.signals.connection">
+ <sect1 id="signals.connection">
   <title>Připojování signálů</title>
 
-  <sect2 id="gtk.signals.connection.simple">
+  <sect2 id="signals.connection.simple">
    <title>Jednoduché připojení</title>
    <simpara>
     Aby se po vyvolání signálu něco stalo, musíte určit, kterou funkci tento
@@ -143,7 +143,7 @@ gtk::main();
    </para>
   </sect2>
 
-  <sect2 id="gtk.signals.connection.multiple">
+  <sect2 id="signals.connection.multiple">
    <title>Vícenásobná připojení</title>
    <simpara>
     V PHP-GTK můžete k signálu zaregistrovat více než jednu funkci. To vám
@@ -197,12 +197,12 @@ Byla zavolána druhá funkce
   </sect2>
  </sect1>
  
- <sect1 id="gtk.signals.custom.params">
+ <sect1 id="signals.custom.params">
   <title>Používání uživatelských parametrů</title>
-  <sect2 id="gtk.signals.custom.data">
+  <sect2 id="signals.custom.data">
    <title>Předávání uživatelských dat jako parametru</title>
    <simpara>
-    Když <link linkend="gtk.signals.connection">připojujete</link> signál,
+    Když <link linkend="signals.connection">připojujete</link> signál,
     můžete přidat volané funkci vlastní parametry navíc. Toto je užitečné,
     potřebujete-li předávat volané funkci objekty ke zpracování.
    </simpara>
@@ -302,7 +302,7 @@ gtk::main();
    </para>
   </sect2>
  
-  <sect2 id="gtk.signals.connect.object">
+  <sect2 id="signals.connect.object">
    <title>Použití metody connect_object*</title>
    <para>
     Jak <function class="GtkObject">connect_object()</function>, tak
@@ -405,7 +405,7 @@ gtk::main();
   </sect2>
  </sect1>
 
- <sect1 id="gtk.signals.events">
+ <sect1 id="signals.events">
   <title>Signály a události</title>
   <simpara>
    <emphasis>GTK Signály, GDK události.</emphasis>
@@ -558,7 +558,7 @@ gtk::main();
   </para>
  </sect1>
 
-</chapter> 
+</chapter>
 
 <!--
  * Local variables:
