@@ -3,9 +3,9 @@
 $lang = 'UTF8dir/@LANG@';
 $entities = array();
 
-if($argv[1])
+if (!empty($argv[1]))
 	$dir = "../$argv[1]";
-	else
+else
 	$dir = "../$lang";
 
 function gen_ent($path, $file, $lang)
