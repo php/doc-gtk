@@ -6,7 +6,26 @@
    A structure containing accelerator key data.
   </shortdesc>
   <desc>
-
+   <simpara>
+    <classname>GtkAccelGroup</classname> is a struct class that is able
+    to hold the accelerator key data for all the menus in a 
+    <classname>GtkWindow</classname>.  It is usually attached to that
+    window to avoid any confusion within an application.  The information
+    is held as a hash table of <literal>GtkAccelEntry</literal> entries, 
+    one of which needs to be created for each accelerator.  In PHP-GTK there
+    is no direct access to these entries.
+   </simpara>
+   <note>
+    <simpara>
+     An accelerator key is the keyboard shortcut for a 
+     <classname>GtkMenuItem</classname>.
+    </simpara>
+   </note>
+   <simpara>
+    See also:  <function class= "GtkWindow">add_accel_group()</function>, 
+    <function class="GtkWidget">add_accelerator()</function>, 
+    <classname>GtkAccelLabel</classname>, <classname>GtkMenuItem</classname>.
+   </simpara>
   </desc>
  </classmeta>
 
@@ -21,7 +40,31 @@
    Provides the structure for a hash table of accelerator key information.
   </shortdesc>
   <desc>
-
+   <para>
+    Although not a part of the GTK object hierarchy, 
+    <classname>GtkAccelGroup</classname> can be constructed in the same way
+    as most GTK classes, i.e.
+    <informalexample>
+     <programlisting role="php">
+$accelgroup = &amp;new GtkAccelGroup();
+     </programlisting>
+    </informalexample>
+   </para>
+   <simpara>
+    In most cases, the newly-constructed <classname>GtkAccelGroup</classname> 
+    would be used by all the menus belonging to that toplevel window, and
+    should be added to it using 
+    <function class="GtkWindow">add_accel_group()</function>.
+   </simpara>
+   <simpara>
+    It is not always necessary to create an accelerator group in this way. 
+    The <classname>GtkMenu</classname> method 
+    <function>ensure_uline_accel_group()</function> calls the 
+    <classname>GtkAccelGroup</classname> used internally by the menu for
+    underline accelerators for the duration of the period that the menu is
+    popped up.  If none is designated, a new accelerator group is created
+    and used.
+   </simpara>
   </desc>
  </constructor>
 
@@ -38,7 +81,16 @@
     Locks accelerator group information.
    </shortdesc>
    <desc>
-
+    <simpara>
+     <function class="GtkAccelGroup">lock()</function> prevents further
+     changes to the accelerator entries in the calling 
+     <classname>GtkAccelGroup</classname>.
+    </simpara>
+    <simpara>
+     To prevent further keys being altered, added to or removed from a
+     single existing <literal>GtkAccelEntry</literal>, use 
+     <function class="GtkWidget">lock_accelerators()</function>.
+    </simpara>
    </desc>
   </method>
 
@@ -53,7 +105,16 @@
     Unlocks accelerator group information.
    </shortdesc>
    <desc>
-
+    <simpara>
+     <function class="GtkAccelGroup">unlock()</function> allows accelerator
+     entries to be altered, added to or removed from a previously locked 
+     <classname>GtkAccelGroup</classname>.
+    </simpara>
+    <simpara>
+     To allow a secondary key in a <literal>GtkAccelEntry</literal> to be
+     designated by the user, use 
+     <function class="GtkWidget">unlock_accelerators()</function>.
+    </simpara>
    </desc>
   </method>
 

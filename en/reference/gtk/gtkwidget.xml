@@ -484,10 +484,51 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Adds accelerator key to a widget.
    </shortdesc>
    <desc>
-
+    <simpara>
+     <function class="GtkWidget">add_accelerator</function> defines and
+     adds a keyboard accelerator to the calling widget, usually a 
+     <classname>GtkMenuItem</classname>.
+    </simpara>
+    <simpara>
+     The first parameter is the name of the signal that you want the widget
+     to emit when the key is pressed.  Generally this will probably be
+     <signalname class="GtkMenuItem">activate</signalname>.
+    </simpara>
+    <simpara>
+     The second parameter is the <classname>GtkAccelGroup</classname> that
+     this <literal>GtkAccelEntry</literal> will belong to when it has been
+     created.  This will generally be an accelerator group that has been
+     newly created and added to the toplevel window.
+    </simpara>
+    <simpara>
+     Thirdly there is the <parameter>accel_key</parameter> parameter.  This
+     can be pulled from the <classname>GtkAccelLabel</classname> using the 
+     <function class="GtkLabel">parse_uline()</function> method if you have
+     an underscore under the appropriate letter, or alternatively you could
+     use the key symbols which have been hard-coded into PHP-GTK.  Usually
+     these would be in the format <literal>GDK_KEY__a</literal> - always in
+     lower case, because the accelerator functions return lower case key
+     values.
+    </simpara>
+    <note>
+     <simpara>
+      The full list of available key symbol hard codings is available in
+      the source code in the file <literal>ext/gtk+/php_gdk.c</literal>.
+     </simpara>
+    </note>
+    <simpara>
+     The fourth and fifth parameters are 
+     <enumname>GdkModifierType</enumname> and 
+     <enumname>GtkAccelFlags</enumname> respectively.  In both cases, 
+     passing <literal>0</literal> is accepted as a null field.
+    </simpara>
+    <simpara>
+     There is no limit on the number of accelerator keys that can be
+     associated with a widget.
+    </simpara>
    </desc>
   </method>
 
@@ -500,14 +541,22 @@
       <parameter>accel_group</parameter>
      </paramdef>
      <paramdef>int <parameter>accel_key</parameter></paramdef>
-     <paramdef>int <parameter>accel_mods</parameter></paramdef>
+     <paramdef>GdkModifierType <parameter>accel_mods</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Removes a single accelerator.
    </shortdesc>
    <desc>
-
+    <simpara>
+     <function class="GtkWidget">remove_accelerator()</function> is a
+     way to remove a single accelerator, defined by its key value and
+     <enumname>GtkModifierType</enumname>.
+    </simpara>
+    <simpara>
+     Note that the accelerator needs to be unlocked before this method
+     will work.
+    </simpara>
    </desc>
   </method>
 
@@ -520,32 +569,27 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Removes all accelerators meeting certain criteria.
    </shortdesc>
    <desc>
-
+    <simpara>
+     <function class="GtkWidget">remove_accelerators()</function> is a way
+     to remove any number of accelerators belonging to the calling widget
+     and causing the given signal to be fired.  The second parameter toggles
+     whether this should include all such accelerators, or only those
+     displayed on the <classname>GtkAccelLabel</classname>.
+    </simpara>
+    <simpara>
+     Note that the accelerators on the widget need to be unlocked before
+     this method will work.
+    </simpara>
    </desc>
   </method>
 
-  <method id="gtk.gtkwidget.method.accelerator_signal">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>int <function>accelerator_signal</function></funcdef>
-     <paramdef>
-      <classname>GtkAccelGroup</classname> 
-      <parameter>accel_group</parameter>
-     </paramdef>
-     <paramdef>int <parameter>accel_key</parameter></paramdef>
-     <paramdef>int <parameter>accel_mods</parameter></paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </method>
+  <!-- DELETED gtk.gtkwidget.method.accelerator_signal - we really don't
+  need this method.  We don't have any functions exposed where the accelerator
+  signal id is needed, and if we did we shouldn't - they're all internal. 
+  - sf jan 02 -->
 
   <method id="gtk.gtkwidget.method.lock_accelerators">
    <funcsynopsis>
@@ -555,10 +599,19 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Locks accelerator key definitions.
    </shortdesc>
    <desc>
-
+    <simpara>
+     <function class="GtkWidget">lock_accelerators()</function> locks
+     any accelerators defined on the calling widget - usually a 
+     <classname>GtkMenuItem</classname> - so that no further keys can
+     be entered or existing keys removed or altered.
+    </simpara>
+    <simpara>
+     Note that if you do not lock your accelerators the end user will
+     be able to define their own, whether any exist on that widget or not.
+    </simpara>
    </desc>
   </method>
 
@@ -570,10 +623,17 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Unlocks accelerators to allow alterations.
    </shortdesc>
    <desc>
-
+    <simpara>
+     <function class="GtkWidget">unlock_accelerators()</function> unlocks
+     the accelerator entries defined in the calling widget, allowing
+     changes or additions to be made to them.
+    </simpara>
+    <simpara>
+     See also: <function class="GtkWidget">accelerators_locked()</function>.
+    </simpara>
    </desc>
   </method>
 
@@ -585,10 +645,14 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Tests accelerator lock status.
    </shortdesc>
    <desc>
-
+    <simpara>
+     <function class="GtkWidget">accelerators_locked()</function> returns 
+     <literal>true</literal> if the accelerators on the calling widget are
+     locked, and <literal>false</literal> if they are not.
+    </simpara>
    </desc>
   </method>
 

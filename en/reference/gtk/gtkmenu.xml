@@ -88,9 +88,9 @@ $menu-&gt;append($separator);
     
 $exit = &amp;new GtkMenuItem(&quot;&quot;);
 $accel_label = $exit-&gt;child;
-$accel_label-&gt;parse_uline(&quot;E_xit&quot;);
-$exit-&gt;add_accelerator('activate_item', $accel, GDK_KEY__x, 
-GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
+$accel_key = $accel_label-&gt;parse_uline(&quot;E_xit&quot;);
+$exit-&gt;add_accelerator('activate', $accel, $accel_key, GDK_CONTROL_MASK, 
+GTK_ACCEL_VISIBLE);
 $exit-&gt;lock_accelerators();
 $exit-&gt;connect_object('activate', array('gtk', 'main_quit'));
 $menu-&gt;append($exit);
@@ -108,8 +108,10 @@ gtk::main();
  </constructor>
 
  <methods>
+
  <!-- DELETED append(), prepend(), insert() as they are already covered in
  GtkMenuShell & are only wrappers here - sf jan 02 -->
+
   <method id="gtk.gtkmenu.method.popup">
    <funcsynopsis>
     <funcprototype>
@@ -269,7 +271,7 @@ $event-&gt;time);
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the <classname>GtkAccelGroup</classname> holding global accelerators.
    </shortdesc>
    <desc>
 
@@ -287,7 +289,8 @@ $event-&gt;time);
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Gets the <classname>GtkAccelGroup</classname> holding global
+    accelerators.
    </shortdesc>
    <desc>
 
@@ -305,7 +308,8 @@ $event-&gt;time);
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Gets the internally-used <classname>GtkAccelGroup</classname>, if there
+    is one.
    </shortdesc>
    <desc>
 
@@ -323,7 +327,8 @@ $event-&gt;time);
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Creates a <classname>GtkAccelGroup</classname> for internal menu use if
+    one does not exist.
    </shortdesc>
    <desc>
 
