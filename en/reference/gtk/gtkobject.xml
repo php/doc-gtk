@@ -687,21 +687,92 @@ $label->set_arg(array('GtkLabel::label'=>'RTFS',
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
+    Disconnects a signal from a function.
    </shortdesc>
    <desc>
+    <simpara>
+     Removes the connection identified by <parameter>handler_id</parameter>.
+     <parameter>handler_id</parameter> is the value returned from <function
+     class="GtkObject">connect</function> or one of its sister functions. When
+     the connection is removed, the function that was passed to <function
+     class="GtkObject">connect</function> will not be called when the signal
+     that was passed is emitted.
+    </simpara>
+    <para>
+     <example>
+      <title>Disconnecting a method</title>
+      <programlisting role="php">
+<![CDATA[
+<?php
+// Say 'hi' on the terminal 
+function sayHi() 
+{
+    echo 'Hi';
+}
+
+// Make a button shut up.
+function beQuiet(&$button, $handler)
+{
+    $button->disconnect($handler);
+}
+
+// Set up the window
+$window =& new GtkWindow;
+$hBox   =& new GtkHBox;
+
+// Make a button that says hi.
+$button1 =& new GtkButton('Say Hi');
+$handler =  $button1->connect('clicked', 'sayHi');
+
+// Make the first button shut up when the second is clicked.
+$button2 =& new GtkButton('Be Quiet!');
+$button2->connect_object('clicked', 'beQuiet', $button1, $handler);
+
+$hBox->pack_start($button1);
+$hBox->pack_start($button2);
+
+$window->add($hBox);
+$window->show_all();
+gtk::main();
+?>
+]]>
+      </programlisting>
+     </example>
+    </para>
+    <simpara>
+     See also: <function class="GtkObject">connect</function>
+    </simpara>
    </desc>
   </method>
 
   <method id="gtk.gtkobject.method.signal_handler_block">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>void <function>signal_handler_block</function></funcdef>
-     <paramdef>int <parameter>handler_id</parameter></paramdef>
+     <funcdef>void
+      <function>signal_handler_block</function>
+     </funcdef>
+     <paramdef>int
+      <parameter>handler_id</parameter>
+     </paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
+    Block a signal handler from being called when a signal is emitted.
    </shortdesc>
    <desc>
+    <simpara>
+     Blocks a signal handler from being called when the connected signal is
+     emitted. <parameter>handler_id</parameter> is the value returned when
+     <function class="GtkObject">connect</function> or one of its sister
+     methods is called. While <parameter>handler_id</parameter> is blocked,
+     the function passed to <function class="GtkObject">connect</function>
+     will not be called when the connected signal is emitted. Calling
+     <function class="GtkObject">signal_handler_unblock</function> will
+     reverse this effect and allow the signal to call the function again.
+    </simpara>
+    <simpara>
+     See also: <function class="GtkObject">signal_handler_unblock</function>
+    </simpara>
    </desc>
   </method>
 
@@ -713,8 +784,21 @@ $label->set_arg(array('GtkLabel::label'=>'RTFS',
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
+    Allow a previously blocked signal hander to be called again.
    </shortdesc>
    <desc>
+    <simpara>
+     Releases a blocked signal handler allowing the function to be called when
+     the signal is emitted. <parameter>handler_id</parameter> is return value
+     from <function class="GtkObject">connect</function> or one of its sister
+     methods. Calling 
+     <function class="GtkObject">signal_handler_unblock</function> on a signal
+     handler that was not previously blocked using <function
+     class="GtkObject">signal_handler_block</function> has no effect.
+    </simpara>
+    <simpara>
+     See also: <function class="GtkObject">signal_handler_block</function>
+    </simpara>
    </desc>
   </method>
 
@@ -764,13 +848,22 @@ $label->set_arg(array('GtkLabel::label'=>'RTFS',
   <method id="gtk.gtkobject.method.signal_handlers_destroy">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>void <function>signal_handlers_destroy</function></funcdef>
+     <funcdef>void
+      <function>signal_handlers_destroy</function></funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
+    Destroy all signal handlers connected to this object.
    </shortdesc>
    <desc>
+    <simpara>
+     Destroys all signal handlers connected to this object. This method will
+     destroy all handlers whether they were connected by default or by calling
+     <function class="GtkObject">connect</function> or one of its sister
+     methods. This method is called automatically when an object is destroyed,
+     it should not normally be called in code.
+    </simpara>
    </desc>
   </method>
 
@@ -793,7 +886,9 @@ $label->set_arg(array('GtkLabel::label'=>'RTFS',
     <simpara>
      The <signalname class="GtkObject">destroy</signalname> signal is
      emitted by an object when it is in the process of being destroyed.
-     The signal connections associated with the object are destroyed
+     This signal is connected to <function
+     class="GtkObject">signal_handlers_desctroy</function> which causes
+     the signal connections associated with the object to be destroyed
      immediately after this emission.
     </simpara>
    </desc>
@@ -802,11 +897,24 @@ $label->set_arg(array('GtkLabel::label'=>'RTFS',
  </signals>
 
 </classentry>
-<!--
- * Local variables:
- * tab-width: 1
- * c-basic-offset: 1
- * End:
- * vim600: et sw=1 ts=1 tw=78 fdm=marker
- * vim<600: et sw=1 ts=1 tw=78
+<!-- Keep this comment at the end of the file
+Local variables:
+auto-fill-function:do-auto-fill
+fill-column:78
+mode: xml
+sgml-omittag:t
+sgml-shorttag:t
+sgml-minimize-attributes:nil
+sgml-always-quote-attributes:t
+sgml-indent-step:1
+sgml-indent-data:t
+indent-tabs-mode:nil
+sgml-parent-document:nil
+sgml-exposed-tags:nil
+sgml-local-catalogs:nil
+sgml-local-ecat-files:nil
+End:
+vim600: syn=xml fen fdm=syntax fdl=2 si
+vim: et tw=78 syn=sgml
+vi: ts=1 sw=1
 -->
