@@ -596,15 +596,13 @@
       </member>
      </simplelist>
     </para>
-    <para>
+    <simpara>
     Una carga de fuente tipica seria algo asi:
-     <informalexample>
-      <programlisting role="php">
-$font = 
+     <literal>
+      $font = 
 gdk::font_load('-unknown-Arial-normal-r-normal--*-120-96-96-p-0-iso8859-1');
-      </programlisting>
-     </informalexample>
-    </para>
+     </literal>
+    </simpara>
     <note>
      <simpara>
       Información de las fuente en el formato <acronym>XLFD</acronym> pueden ser
@@ -644,14 +642,14 @@ gdk::font_load('-unknown-Arial-normal-r-normal--*-120-96-96-p-0-iso8859-1');
     </simpara>
     <simpara>
       Carga exactamente de la misma manera que
-      <function>gdk::font_load()</function>, separando cada fuente potencial
+      <function>gdk::font_load</function>, separando cada fuente potencial
       a ser usada con una coma. El sistema que ejecuta la aplicacion 
       usará la primer fuente del conjunto que logre encontrar.
      </simpara>
     <simpara>
-     En win32, el método <function>fontset_load()</function> se usa
+     En win32, el método <function>fontset_load</function> se usa
      internamente deacuerdo a si esto o  
-     <function>gdk::font_load()</function> fue llamado.
+     <function>gdk::font_load</function> fue llamado.
     </simpara>
    </desc>
   </method>
@@ -740,7 +738,7 @@ gdk::font_load('-unknown-Arial-normal-r-normal--*-120-96-96-p-0-iso8859-1');
    </shortdesc>
    <desc>
     <simpara>
-     <function>gdk::pixmap_create_from_xpm()</function> devuelve un 
+     <function>gdk::pixmap_create_from_xpm</function> devuelve un 
      array que consiste en un <classname>GdkPixmap</classname> y una mascara
      <classname>GdkBitmap</classname>  que han sido creadas desde un archivo.
      xpm especifico.
@@ -752,17 +750,29 @@ gdk::font_load('-unknown-Arial-normal-r-normal--*-120-96-96-p-0-iso8859-1');
      en la pantalla, necesitas usar una de las siguientes instrucciones:
      <informalexample>
       <programlisting role="php">
+<![CDATA[
+<?php
+
 $gdkpixmap = gdk::pixmap_create_from_xpm($main_window-&gt;window, null, 
 'test.xpm');
 $image = &amp;new GtkPixmap($gdkpixmap[0], $gdkpixmap[1]);
+
+?>
+]]>
       </programlisting>
      </informalexample>
      or 
      <informalexample>
       <programlisting role="php">
+<![CDATA[
+<?php
+
 list ($gdkpixmap, $mask) = 
 gdk::pixmap_create_from_xpm($gdkwindow, $transparent_color, 'test.xpm');
 $image = &amp;new GtkPixmap($gdkpixmap, $mask);
+
+?>
+]]>
       </programlisting>
      </informalexample>
     </para>
@@ -789,15 +799,13 @@ $image = &amp;new GtkPixmap($gdkpixmap, $mask);
     Crea un <classname>GdkPixmap</classname> desde inline data.
    </shortdesc>
    <desc>
-    <para>
-     <informalexample>
-      <programlisting role="php">
-$gdkpixmap = gdk::pixmap_create_from_xpm_d($main_window-&gt;window, 
+    <simpara>
+     <literal>
+      $gdkpixmap = gdk::pixmap_create_from_xpm_d($main_window-&gt;window, 
 $transparent_color, $data);
-      </programlisting>
-     </informalexample>
+     </literal>
      <!-- No I am NOT going to leave it like this..   sf mar 02 -->
-    </para>
+    </simpara>
    </desc>
   </method>
 

@@ -30,7 +30,7 @@
    <simpara>
     No hay un constructor directo para <classname>GdkGC</classname>.  Para crear
     uno, necesitas usar el método 
-    <function class="GdkWindow">new_gc()</function> de
+    <function class="GdkWindow">new_gc</function> de
     <classname>GdkWindow</classname> y poner la propiedad en la que estas 
     interesado directamente.
    </simpara>
@@ -73,16 +73,14 @@
     <simpara>
      La forma de arreglarlo es pedir prestado un
      <classname>GdkColormap</classname> existente y poner el color desde ahi.
-     Podes usar <function>gdk::colormap_get_system()</function> para hacer esto,
+     Podes usar <function>gdk::colormap_get_system</function> para hacer esto,
      o podes acceder al colormap en <classname>GdkWindow</classname>.
     </simpara>
     <para>
     La sintaxis es:
-     <informalexample>
-      <programlisting role="php">
-$gc-&gt;foreground = $colormap-&gt;alloc('red');
-      </programlisting>
-     </informalexample>
+     <literal>
+      $gc-&gt;foreground = $colormap-&gt;alloc('red');
+     </literal>
     </para>
     <simpara>
      Como con el constructor de <classname>GdkColor</classname>, podes usar
@@ -106,14 +104,12 @@ $gc-&gt;foreground = $colormap-&gt;alloc('red');
     </simpara>
     <para>
      Necesitaras tomar un  <classname>GdkColormap</classname> que exista,
-     o usarg <function>gdk::colormap_get_system()</function> o acceder
+     o usarg <function>gdk::colormap_get_system</function> o acceder
      a la propiedad del colormap de la existente existente 
      <classname>GdkWindow</classname> que la mayoria de los wiidgets tiene.
-     <informalexample>
-     <programlisting role="php">
-$gc-&gt;background = $colormap-&gt;alloc('lime green');
-      </programlisting>
-     </informalexample>
+     <literal>
+      $gc-&gt;background = $colormap-&gt;alloc('lime green');
+     </literal>
      y el color es puesta de manera inteligente.
     </para>
     <simpara>

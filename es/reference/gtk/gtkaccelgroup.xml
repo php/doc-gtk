@@ -24,8 +24,8 @@
     </simpara>
    </note>
    <simpara>
-    Ver ademas:  <function class= "GtkWindow">add_accel_group()</function>, 
-    <function class="GtkWidget">add_accelerator()</function>, 
+    Ver ademas:  <function class= "GtkWindow">add_accel_group</function>, 
+    <function class="GtkWidget">add_accelerator</function>, 
     <classname>GtkAccelLabel</classname>, <classname>GtkMenuItem</classname>.
    </simpara>
   </desc>
@@ -43,27 +43,23 @@
   acelerada.
   </shortdesc>
   <desc>
-   <para>
+   <simpara>
     Aunque no sea parte de la jerarquia de objetos GTK,
     <classname>GtkAccelGroup</classname> puede contruirse de la misma forma como la
     mayoria de las clases GTK, e.j.
-    <informalexample>
-     <programlisting role="php">
-$accelgroup = &amp;new GtkAccelGroup();
-     </programlisting>
-    </informalexample>
-   </para>
+    <literal>$accelgroup = &amp;new GtkAccelGroup();</literal>
+   </simpara>
   <simpara>
   En la mayoria de los casos, la nueva contruida
  <classname>GtkAccelGroup</classname> 
  seria usada por todos los menus pertenecientes a la ventana prinicpal, y 
  se agregaria usando
-    <function class="GtkWindow">add_accel_group()</function>.
+    <function class="GtkWindow">add_accel_group</function>.
    </simpara>
    <simpara>
    No es siempre necesario crear un grupo acelerador de esta forma.
     El método  <classname>GtkMenu</classname>
-    <function class="GtkMenu">ensure_uline_accel_group()</function> llama
+    <function class="GtkMenu">ensure_uline_accel_group</function> llama
     el <classname>GtkAccelGroup</classname> usada internamente por el menu para
     poner aceleradores por el periodo de tiempo que el menu esta deslegado.
     Si ninguno se designa, un nuevo grupo acelerador se crea y se usa.
@@ -85,14 +81,14 @@ $accelgroup = &amp;new GtkAccelGroup();
    </shortdesc>
    <desc>
     <simpara>
-     <function class="GtkAccelGroup">lock()</function> previene 
+     <function class="GtkAccelGroup">lock</function> previene 
      cambios posteriores a las entradas del acelerador en la llamada a 
      <classname>GtkAccelGroup</classname>.
     </simpara>
     <simpara>
     Para prevenir alteraciones, borrado o agregado  posteriores a las teclas de
     una entrada existente de <literal>GtkAccelEntry</literal>, usa
-     <function class="GtkWidget">lock_accelerators()</function>.
+     <function class="GtkWidget">lock_accelerators</function>.
     </simpara>
    </desc>
   </method>
@@ -109,14 +105,14 @@ $accelgroup = &amp;new GtkAccelGroup();
    </shortdesc>
    <desc>
     <simpara>
-     <function class="GtkAccelGroup">unlock()</function> permite alterar, agregar
+     <function class="GtkAccelGroup">unlock</function> permite alterar, agregar
      o borrar entras del acelerador de un  <classname>GtkAccelGroup</classname> que previamente
      no habiamos dejado modificar.
     </simpara>
     <simpara>
     para permitir a una tecla secundaria en un <literal>GtkAccelEntry</literal> ser designada
     por el usuario, use
-     <function class="GtkWidget">unlock_accelerators()</function>.
+     <function class="GtkWidget">unlock_accelerators</function>.
     </simpara>
    </desc>
   </method>

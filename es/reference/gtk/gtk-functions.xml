@@ -312,14 +312,12 @@
      con <literal>false</literal> utiliza en mismo color que el area de dibujo. 
      Todas las posiciones y tamaños son absolutos en terminos de dibujo.
     </simpara>
-    <para>
-     <informalexample>
-      <programlisting role="php">
-gtk::draw_arrow($style, $gdkwindow, GTK_STATE_NORMAL, GTK_SHADOW_OUT, 
-GTK_ARROW_RIGHT, false, $x, $y, $width, $height);
-      </programlisting>
-     </informalexample>
-    </para>
+    <simpara>
+     <literal>
+      gtk::draw_arrow($style, $gdkwindow, GTK_STATE_NORMAL, GTK_SHADOW_OUT, 
+      GTK_ARROW_RIGHT, false, $x, $y, $width, $height);
+     </literal>
+    </simpara>
    </desc>
   </method>
 
@@ -359,14 +357,12 @@ GTK_ARROW_RIGHT, false, $x, $y, $width, $height);
      <classname>GtkStyle</classname> que es pasado como primer
      parametro.
     </simpara>
-    <para>
-     <informalexample>
-      <programlisting role="php">
-gtk::draw_box($style, $gdkwindow, GTK_STATE_ACTIVE, GTK_SHADOW_IN, $x, $y, 
-$width, $height);
-      </programlisting>
-     </informalexample>
-    </para>
+    <simpara>
+     <literal
+      gtk::draw_box($style, $gdkwindow, GTK_STATE_ACTIVE, GTK_SHADOW_IN,
+      $x, $y, $width, $height);
+     </literal>
+    </simpara>
    </desc>
   </method>
 
@@ -589,7 +585,7 @@ $width, $height);
    </shortdesc>
    <desc>
     <simpara>
-     <function>gtk::events_pending()</function> se utiliza cuando hay una
+     <function>gtk::events_pending</function> se utiliza cuando hay una
      función que necesita ser arrastrada durante largos porcesod de
      ejecución, por ejemplo actualizando una barra de estado durante 
      una consulta SQL.
@@ -598,16 +594,22 @@ $width, $height);
     La formna en la que seria usado en esa situació es teniendo
      <informalexample>
       <programlisting role="php">
+<![CDATA[
+<?php
+
 while(gtk::events_pending()) gtk::main_iteration();
+
+?>
+]]>
       </programlisting>
      </informalexample>
     despueso cada actualización se le hace a la GUI.  Esto causa que el ciclo 
     principal se ejecute cada vez que os enventos sean anticipados.
     </para>
     <simpara>
-     Mira también:  <function>gtk::main_iteration()</function>, 
-     <function>gtk::main_iteration_do()</function>, 
-     <function>gtk::timeout_add()</function>.
+     Mira también:  <function>gtk::main_iteration</function>, 
+     <function>gtk::main_iteration_do</function>, 
+     <function>gtk::timeout_add</function>.
     </simpara>
    </desc>
   </method>
@@ -1362,7 +1364,7 @@ while(gtk::events_pending()) gtk::main_iteration();
     <simpara>
      Ademas del <enumname>GtkShadowType</enumname> detallado aqui, 
      el efecto es similar a la caja dibujada usando
-     <function>gtk::draw_box()</function> y
+     <function>gtk::draw_box</function> y
      <literal>GTK_SHADOW_NONE</literal>.
     </simpara>
     <simpara>
@@ -1411,7 +1413,7 @@ $rectangle, $drawingarea, null, $x, $y, $width, $height);
    </shortdesc>
    <desc>
     <simpara>
-     La función <function>gtk::paint_focus()</function> 
+     La función <function>gtk::paint_focus</function> 
      dibuja una sombra a lo largo de la izquierda y parte de arriba,
      haciendolo parecer a un widget GTK cuando eta en foco.
     </simpara>
@@ -2366,7 +2368,7 @@ $rectangle, $drawingarea, null, $x, $y, $width, $height);
     siendo usado a traves de la aplicacion.
     </simpara>
     <simpara>
-     Usa <function>gtk::widget_set_default_style()</function> para cambiar los aspectos
+     Usa <function>gtk::widget_set_default_style</function> para cambiar los aspectos
      del estilo por defecto.
     </simpara>
    </desc>
