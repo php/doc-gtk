@@ -698,7 +698,11 @@ while(gtk::events_pending()) gtk::main_iteration();
     Returns widget that currently has keyboard grab.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Returns the widget which currently has the keyboard focus.
+     <literal>NULL</literal> is returned if there is no active
+     grab.
+    </simpara>
    </desc>
   </method>
 
@@ -716,7 +720,12 @@ while(gtk::events_pending()) gtk::main_iteration();
     Removes keyboard grab from a widget.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Removes the keyboard focus from the given <parameter>widget</parameter>.
+     You should use <link linked="gtk.method.grab_remove">grab_remove</link>
+     and <link linked="gtk.method.grab_add">grab_add</link> in pairs to avoid
+     undefined states.
+    </simpara>
    </desc>
   </method>
 
@@ -771,10 +780,18 @@ while(gtk::events_pending()) gtk::main_iteration();
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Causes the mainloop to call a function whenever no events are to be processed.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Causes the mainloop to call the given function whenever no events with 
+     higher priority are to be processed.
+    </simpara>
+    <simpara>
+     The returned number is an unique handle which you should keep saved somewhere
+     for the case you want to 
+     <link linked="gtk.method.idle_remove">remove</link> the idle function.
+    </simpara>
    </desc>
   </method>
 
@@ -786,10 +803,14 @@ while(gtk::events_pending()) gtk::main_iteration();
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Removes the idle function with the given id.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Removes the idle function with the given
+     <parameter>idle_handler_id</parameter>. You get this id when
+     <link linked="gtk.method.idle_add">adding</link> an idle function
+    </simpara>
    </desc>
   </method>
 
@@ -976,7 +997,15 @@ while(gtk::events_pending()) gtk::main_iteration();
     Runs the main loop once and then blocks GTK until an event is pending.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Runs the main loop once (e.g. updates the GUI) and blocks until 
+     an event is pending.
+    </simpara>
+    <simpara>
+     This is useful during long-running functions which block the whole
+     application. Have a look at the example at
+     <link linked="gtk.method.events_pending">events_pending</link>.
+    </simpara>
    </desc>
   </method>
 
@@ -993,7 +1022,9 @@ while(gtk::events_pending()) gtk::main_iteration();
     Runs the main loop once, with optional blocking.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Runs the main loop once, with optional blocking.
+    </simpara>
    </desc>
   </method>
 
@@ -2156,10 +2187,18 @@ $rectangle, $drawingarea, null, $x, $y, $width, $height);
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Parse resource information directly from a string.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Parse resource information directly from a string. This can be used
+     to dynamically change colors and background images for whole
+     widgets and widget classes at once.
+    </simpara>
+    <simpara>
+     There is an example at 
+     <link linked="gtk.gtktooltips.method.set_colors">GtkTooltips::set_colors</link>.
+    </simpara>
    </desc>
   </method>
 
@@ -2196,7 +2235,16 @@ $rectangle, $drawingarea, null, $x, $y, $width, $height);
     Sets up a function to be called at regular intervals.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Registers a function to be called periodically. 
+     The function will be called repeatedly after <parameter>interval</parameter>
+     milliseconds until it returns <literal>FALSE</literal> at which point 
+     the timeout is destroyed and will not be called again.
+    </simpara>
+    <simpara>
+     You should save the returned number if you want to
+     <link linked="gtk.method.timeout_remove">remove</link> it.
+    </simpara>
    </desc>
   </method>
 
@@ -2211,7 +2259,14 @@ $rectangle, $drawingarea, null, $x, $y, $width, $height);
     Removes timeout.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Removes the given timeout destroying all information about it.
+    </simpara>
+    <simpara>
+     You get the <parameter>timeout_handler_id</parameter> when
+     <link linked="gtk.method.timeout_add">adding</link> a timeout
+     function.
+    </simpara>
    </desc>
   </method>
 
@@ -2349,7 +2404,9 @@ $rectangle, $drawingarea, null, $x, $y, $width, $height);
     Returns the application's default <classname>GdkColormap</classname>.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Returns the application's default <classname>GdkColormap</classname>.
+    </simpara>
    </desc>
   </method>
 
@@ -2392,7 +2449,9 @@ $rectangle, $drawingarea, null, $x, $y, $width, $height);
     Returns the application's default <classname>GdkVisual</classname>.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Returns the application's default <classname>GdkVisual</classname>.
+    </simpara>
    </desc>
   </method>
 
