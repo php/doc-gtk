@@ -162,20 +162,32 @@
    <td>
     <xsl:call-template name="spaceholder" />
     <xsl:choose>
-     <xsl:when test="../enumname = 'GdkEventType'">
+     <xsl:when test="./value">
+      <!-- we've got an explicitly defined value here, so use it -->
+      <xsl:if test="./value >= 0">
+       <xsl:call-template name="spaceholder" />
+      </xsl:if>
+      <xsl:value-of select="./value" />
+     </xsl:when>
+     <xsl:otherwise> 
+      <!-- automatically numbering -->
       <xsl:choose>
-       <xsl:when test="./optionname = 'GDK_NOTHING'">
-        <xsl:text>-1</xsl:text>
+       <xsl:when test="../enumname = 'GdkEventType'">
+        <xsl:choose>
+         <xsl:when test="./optionname = 'GDK_NOTHING'">
+          <xsl:text>-1</xsl:text>
+         </xsl:when>
+         <xsl:otherwise>
+          <xsl:call-template name="spaceholder" />
+          <xsl:number value="position()-2" format="1" />
+         </xsl:otherwise>
+        </xsl:choose>
        </xsl:when>
        <xsl:otherwise>
         <xsl:call-template name="spaceholder" />
-        <xsl:number value="position()-2" format="1" />
+        <xsl:number value="position()-1" format="1" />
        </xsl:otherwise>
       </xsl:choose>
-     </xsl:when>
-     <xsl:otherwise>
-      <xsl:call-template name="spaceholder" />
-      <xsl:number value="position()-1" format="1" />
      </xsl:otherwise>
     </xsl:choose>
    </td>
