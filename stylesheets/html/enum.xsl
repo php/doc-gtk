@@ -18,6 +18,7 @@
 
     <xsl:choose>
      <xsl:when test="$knownenum='1'">
+	  <span dir="ltr">
       <a>
        <xsl:attribute name="href">
         <xsl:call-template name="gen.enumname.url">
@@ -28,6 +29,7 @@
        </xsl:attribute>
        <xsl:apply-templates />
       </a>
+	  </span>
      </xsl:when>
      <xsl:otherwise>
       <b>
@@ -53,6 +55,7 @@
    <xsl:apply-templates select="./enumname" />
   </h1>
   <p>
+   <span dir="ltr">
    <h3>
     <xsl:choose>
      <xsl:when test="@type='flags'">
@@ -63,6 +66,7 @@
      </xsl:otherwise>
     </xsl:choose>
    </h3>
+	</span>
   </p>
   <p>
    <xsl:apply-templates select="./desc"/>

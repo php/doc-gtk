@@ -160,12 +160,14 @@
     </xsl:call-template>
    </xsl:variable>
    <xsl:value-of select="$bad.hack"/>
+   <span dir="ltr">
    <a>
     <xsl:attribute name="href">
      <xsl:value-of select="$link" />
     </xsl:attribute>
     <xsl:value-of select="$classname" />
    </a>
+   </span>
    <xsl:call-template name="output.br" />
   </xsl:when>
   <xsl:otherwise>

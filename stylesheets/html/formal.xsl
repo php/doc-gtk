@@ -3,7 +3,7 @@
                 version='1.0'>
 
 <!-- ********************************************************************
-     $Id: formal.xsl,v 1.2 2003-06-05 12:57:44 sfox Exp $
+     $Id: formal.xsl,v 1.3 2003-06-10 06:17:36 sfox Exp $
      ********************************************************************
 
      This file is part of the XSL DocBook Stylesheet distribution.
@@ -13,7 +13,7 @@
      ******************************************************************** -->
 
 <xsl:template name="formal.object">
-  <div class="{name(.)}">
+  <div class="{name(.)}" align="left">
     <xsl:call-template name="formal.object.heading">
        <xsl:with-param name="title">
          <xsl:apply-templates select="." mode="title.markup"/>
@@ -36,11 +36,12 @@
 
 <xsl:template name="informal.object">
   <xsl:variable name="id"><xsl:call-template name="object.id"/></xsl:variable>
-
   <div class="{name(.)}" id="{$id}">
     <xsl:if test="$spacing.paras != 0"><p/></xsl:if>
     <a name="{$id}"/>
-    <xsl:apply-templates/>
+    <span dir="ltr">
+     <xsl:apply-templates/>
+    </span>
     <xsl:if test="$spacing.paras != 0"><p/></xsl:if>
   </div>
 </xsl:template>
@@ -60,14 +61,9 @@
   <xsl:call-template name="formal.object"/>
 </xsl:template>
 
-<xsl:template match="equation">
-  <xsl:call-template name="semiformal.object"/>
-</xsl:template>
-
 <xsl:template match="figure/title"></xsl:template>
 <xsl:template match="table/title"></xsl:template>
 <xsl:template match="example/title"></xsl:template>
-<xsl:template match="equation/title"></xsl:template>
 
 <xsl:template match="informalfigure">
   <xsl:call-template name="informal.object"/>
@@ -78,10 +74,6 @@
 </xsl:template>
 
 <xsl:template match="informaltable">
-  <xsl:call-template name="informal.object"/>
-</xsl:template>
-
-<xsl:template match="informalequation">
   <xsl:call-template name="informal.object"/>
 </xsl:template>
 
