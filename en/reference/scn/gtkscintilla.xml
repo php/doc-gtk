@@ -4,10 +4,21 @@
   <classtitle>GtkScintilla</classtitle>
   <classparent>GtkFrame</classparent>
   <shortdesc>
-
+    <classname>GtkScintilla</classname> is an advanced text edition component with
+    code completion, sintax highlight and others.
   </shortdesc>
   <desc>
-
+   <simpara>
+    <classname>GtkScintilla</classname> is an advanced widget for code edition.
+    It's a component with lots of resources that make it a great choice to write code editors.
+    <classname>GtkScintilla</classname> provides advanced features like code completion,
+    sintax highlight, caret lines, line numbers, besides lots of text controls, giving
+    strong powers to the programmer.
+    <classname>GtkScintilla</classname> inherits from <classname>GtkFrame</classname>,
+    so you can embbed <classname>GtkScintilla</classname> object inside another containers
+    like <classname>GtkWindow</classname>, <classname>GtkVBox</classname>, <classname>GtkHBox</classname>,
+    <classname>GtkFrame</classname> and others.
+   </simpara>
   </desc>
  </classmeta>
 
@@ -19,10 +30,19 @@
    </funcprototype>
   </funcsynopsis>
   <shortdesc>
-
+        Creates the <classname>GtkScintilla</classname> text area.
   </shortdesc>
   <desc>
-
+      <simpara>
+          Creates the <classname>GtkScintilla</classname> text area.
+      </simpara>
+     <informalexample>
+         <programlisting>
+<![CDATA[
+    $scintilla = new GtkScintilla;
+]]>
+        </programlisting>
+     </informalexample>
   </desc>
  </constructor>
 
@@ -31,30 +51,65 @@
   <method id="scn.gtkscintilla.method.find_text">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>XXX <function>find_text</function></funcdef>
-     <paramdef>XXX</paramdef>
+    <funcdef>int <function>find_text</function></funcdef>
+    <paramdef>int <parameter>FLAGS</parameter></paramdef>
+    <paramdef>string <parameter>search</parameter></paramdef>
+    <paramdef>int <parameter>start</parameter></paramdef>
+    <paramdef>int <parameter>end</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+	Finds a portion of text in <classname>GtkScintilla</classname>.
    </shortdesc>
    <desc>
+     <simpara>
+        <function class="GtkScintilla">find_text</function>
+        Finds a portion of text in <classname>GtkScintilla</classname>.
+     </simpara>
+     <informalexample>
+         <programlisting>
+<![CDATA[
+$flags = SCINTILLA_FIND_DOWN +
+         SCINTILLA_FIND_WHOLE_WORDS +
+         SCINTILLA_FIND_MATCH_CASE +
+         SCINTILLA_FIND_WHOLE_WORDS +
+         SCINTILLA_FIND_WORD_START +
+         SCINTILLA_FIND_REGEXP;
 
+$what = 'text to find';
+
+// start and end positions...
+$start = 0;
+$end = $scintilla->get_length();
+$result = $scintilla->find_text($flags, $what, $start, $end);
+]]>
+        </programlisting>
+     </informalexample>
    </desc>
   </method>
 
   <method id="scn.gtkscintilla.method.add_text">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>XXX <function>add_text</function></funcdef>
-     <paramdef>XXX</paramdef>
+     <funcdef>void<function>add_text</function></funcdef>
+     <paramdef>string<parameter>text</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+        Add the string at the end of text area.
    </shortdesc>
    <desc>
-
+     <simpara>
+        <function class="GtkScintilla">add_text</function>
+        add the string at the end of text area.
+     </simpara>
+     <informalexample>
+         <programlisting>
+<![CDATA[
+$scintilla->add_text("line with break \n");
+]]>
+        </programlisting>
+     </informalexample>
    </desc>
   </method>
 
@@ -67,10 +122,20 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+	Inserts text in the text area of <classname>GtkScintilla</classname>.
    </shortdesc>
    <desc>
-
+    <simpara>
+        Inserts text in the text area of <classname>GtkScintilla</classname>.
+    </simpara>
+     <informalexample>
+         <programlisting>
+<![CDATA[
+// inserting text at the begin of GtkScintilla
+$scintilla->insert_text(-1, 'inserting text...');
+]]>
+        </programlisting>
+     </informalexample>
    </desc>
   </method>
 
@@ -82,10 +147,20 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+        Clear all text area.
    </shortdesc>
    <desc>
-
+       <simpara>
+           Clear all text area.
+       </simpara>
+     <informalexample>
+         <programlisting>
+<![CDATA[
+// clear all text area...
+$scintilla->clear_all();
+]]>
+        </programlisting>
+     </informalexample>
    </desc>
   </method>
 
@@ -112,25 +187,20 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+        Gets the length of the text inside the text area.
    </shortdesc>
    <desc>
-
-   </desc>
-  </method>
-
-  <method id="scn.gtkscintilla.method.get_char_at">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>int <function>get_char_at</function></funcdef>
-     <paramdef>int <parameter>pos</parameter></paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-   <desc>
-
+       <simpara>
+       Gets the length of the text inside the text area.
+       </simpara>
+     <informalexample>
+         <programlisting>
+<![CDATA[
+// get the text's lenght
+echo $scintilla->get_lenght();
+]]>
+        </programlisting>
+     </informalexample>
    </desc>
   </method>
 
@@ -142,10 +212,46 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+        Gets the current position of cursor. It means the character position inside the text.
    </shortdesc>
    <desc>
+       <simpara>
+           Gets the current position of cursor. It means the character position inside the text.
+       </simpara>
+     <informalexample>
+         <programlisting>
+<![CDATA[
+// echo the current cursor position.
+echo $scintilla->get_current_pos();
+]]>
+        </programlisting>
+     </informalexample>
+   </desc>
+  </method>
 
+  <method id="scn.gtkscintilla.method.get_char_at">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>int <function>get_char_at</function></funcdef>
+     <paramdef>int <parameter>pos</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+        Return the character that is located at the specific position.
+   </shortdesc>
+   <desc>
+       <simpara>
+       Return the character that is located at the specific position.
+       </simpara>
+     <informalexample>
+         <programlisting>
+<![CDATA[
+// echo the current character at the cursor position.
+$position = $scintilla->get_current_pos();
+$character = $scintilla->get_char_at($position);
+]]>
+        </programlisting>
+     </informalexample>
    </desc>
   </method>
 
@@ -187,10 +293,24 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+        Redo is like "redo" action of every text editor.
+        Redo does again some task undone by "Undo" operation.
    </shortdesc>
    <desc>
-
+       <simpara>
+        Redo is like "redo" action of every text editor.
+        Redo does again some task undone by "Undo" operation.
+        You can design a "Edit" menu with many options like that
+        linked with one callback like this one:
+       </simpara>
+     <informalexample>
+         <programlisting>
+<![CDATA[
+// redo
+$scintilla->redo();
+]]>
+        </programlisting>
+     </informalexample>
    </desc>
   </method>
 
@@ -217,10 +337,20 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+        Select all text inside the text area.
    </shortdesc>
    <desc>
-
+       <simpara>
+           Select all text inside the text area.
+       </simpara>
+     <informalexample>
+         <programlisting>
+<![CDATA[
+// select all the text
+$scintilla->select_all();
+]]>
+        </programlisting>
+     </informalexample>
    </desc>
   </method>
 
@@ -228,21 +358,6 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_save_point</function></funcdef>
-     <paramdef>void</paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </method>
-
-  <method id="scn.gtkscintilla.method.can_redo">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>int <function>can_redo</function></funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
@@ -353,10 +468,20 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+        This method set the cursor position to the specific line.
    </shortdesc>
    <desc>
-
+       <simpara>
+        This method set the cursor position to the specific line.
+       </simpara>
+     <informalexample>
+         <programlisting>
+<![CDATA[
+// go to line 20...
+$scintilla->goto_line(20);
+]]>
+        </programlisting>
+     </informalexample>
    </desc>
   </method>
 
@@ -368,10 +493,21 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+        This method set the cursor position to the specific character position.
    </shortdesc>
    <desc>
+       <simpara>
+           This method set the cursor position to the specific character position.
+       </simpara>
 
+     <informalexample>
+         <programlisting>
+<![CDATA[
+// go to 3 positions ahead...
+$scintilla->goto_pos($this->get_current_pos() + 3);
+]]>
+        </programlisting>
+     </informalexample>
    </desc>
   </method>
 
@@ -393,15 +529,35 @@
   <method id="scn.gtkscintilla.method.get_cur_line">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>XXX <function>get_cur_line</function></funcdef>
-     <paramdef>XXX</paramdef>
+     <funcdef>array<function>get_cur_line</function></funcdef>
+     <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+        Returns an array containing the current line string and the current column.
    </shortdesc>
    <desc>
-
+    <simpara>
+        Returns an array containing the current line string and the current column.
+        The position "0" of array contain the entire line.
+        The position "1" of array contain the current column.
+    </simpara>
+     <informalexample>
+         <programlisting>
+<![CDATA[
+$line = $scintilla->get_cur_line();
+var_dump($line);
+/*
+array(2) {
+  [0]=>
+  string(6) "sdfsdf"
+  [1]=>
+  int(3)
+}
+*/
+]]>
+        </programlisting>
+     </informalexample>
    </desc>
   </method>
 
@@ -443,10 +599,19 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+        Return the current End of Line Mode. See <function class="GtkScintilla">set_eol_mode</function>.
    </shortdesc>
    <desc>
-
+   <simpara>
+       Return the current End of Line Mode. See <function class="GtkScintilla">set_eol_mode</function>.
+   </simpara>
+     <informalexample>
+         <programlisting>
+<![CDATA[
+echo $scintilla->get_eol_mode();
+]]>
+        </programlisting>
+     </informalexample>
    </desc>
   </method>
 
@@ -458,10 +623,31 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+        Define the End of Line Mode.
    </shortdesc>
    <desc>
+     <simpara>
+        Define the End of Line Mode.
+        This protocol dates back to the days of teletypewriters. CR stands for "carriage return" - the CR control character returned the print head ("carriage") to column 0 without advancing the paper. LF stands for "linefeed" - the LF control character advanced the paper one line without moving the print head. So if you wanted to return the print head to column zero (ready to print the next line) and advance the paper (so it prints on fresh paper), you need both CR and LF.
+     </simpara>
+     <informalexample>
+         <programlisting>
+<![CDATA[
+// GtkScintillaEolMode
+define(  "SCINTILLA_EOL_CRLF" , 0 ); 
+define(  "SCINTILLA_EOL_CR"   , 1 ); 
+define(  "SCINTILLA_EOL_LF"   , 2 ); 
 
+# CRLF = Carriage return + line feed
+# CR   = Carriage return 
+# LF   = Line feed
+
+# Win32 uses CR+LF, Linux uses LF.
+
+$scintilla->set_eol_mode(SCINTILLA_EOL_CRLF);
+]]>
+        </programlisting>
+     </informalexample>
    </desc>
   </method>
 
@@ -535,10 +721,19 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+        Set the Tab Width.
    </shortdesc>
    <desc>
-
+     <simpara>
+         Set the Tab Width.
+     </simpara>
+     <informalexample>
+         <programlisting>
+<![CDATA[
+$scintilla->set_tab_width(4);
+]]>
+        </programlisting>
+     </informalexample>
    </desc>
   </method>
 
@@ -550,10 +745,19 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+        Gets the Tab Width.
    </shortdesc>
    <desc>
-
+     <simpara>
+       Gets the Tab Width.
+     </simpara>
+     <informalexample>
+         <programlisting>
+<![CDATA[
+echo $scintilla->get_tab_width();
+]]>
+        </programlisting>
+     </informalexample>
    </desc>
   </method>
 
@@ -596,10 +800,36 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+        Define a specific symbol for a marker number.
    </shortdesc>
    <desc>
+     <simpara>
+        Define a specific symbol for a marker number.
+     </simpara>
+     <informalexample>
+         <programlisting>
+<![CDATA[
+# markers table of symbols
+# 0 = little blob
+# 1 = big blob
+# 2 = triangle
+# 3 = recangle (shaped)
+# 4 - arrow 
+# 5 = empty!
+# 6 = triangle down
+# 7 = minus sign
+# 8 = small dot
+# 9 = arrow right
+#10 = arrow right
 
+// defining marker 1...
+$scintilla->marker_define(1,0);
+
+// defining marker 2...
+$scintilla->marker_define(2,2);
+]]>
+        </programlisting>
+     </informalexample>
    </desc>
   </method>
 
@@ -612,10 +842,23 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+        Set the Fore color of a marker, for markers table, see <function class="GtkScintilla">marker_define</function> 
    </shortdesc>
    <desc>
+     <simpara>
+        Set the Fore color of a marker, for markers table, see <function class="GtkScintilla">marker_define</function>  
+     </simpara>
+     <informalexample>
+         <programlisting>
+<![CDATA[
+// defining fore color of marker 1...
+$scintilla->marker_set_fore(1, hexdec('FF0000'));
 
+// defining fore color of marker 2...
+$scintilla->marker_set_fore(1, hexdec('00FF00'));
+]]>
+        </programlisting>
+     </informalexample>
    </desc>
   </method>
 
@@ -628,10 +871,23 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+        Set the Background color of a marker, for markers table, see <function class="GtkScintilla">marker_define</function> 
    </shortdesc>
    <desc>
+     <simpara>
+        Set the Background color of a marker, for markers table, see <function class="GtkScintilla">marker_define</function>  
+     </simpara>
+     <informalexample>
+         <programlisting>
+<![CDATA[
+// defining background color of marker 1...
+$scintilla->marker_set_back(1, hexdec('0000FF'));
 
+// defining background color of marker 2...
+$scintilla->marker_set_back(2, hexdec('0000FF'));
+]]>
+        </programlisting>
+     </informalexample>
    </desc>
   </method>
 
@@ -644,10 +900,20 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+        Add a Marker symbol in front of the line, for markers table, see <function class="GtkScintilla">marker_define</function> 
    </shortdesc>
    <desc>
-
+     <simpara>
+         Add a Marker symbol in front of the line, for markers table, see <function class="GtkScintilla">marker_define</function> 
+     </simpara>
+     <informalexample>
+         <programlisting>
+<![CDATA[
+// add the marker 1 at line 4...
+$scintilla->marker_add(4, 1);
+]]>
+        </programlisting>
+     </informalexample>
    </desc>
   </method>
 
@@ -660,10 +926,21 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+        Deletes a Marker symbol from the line, for markers table, see <function class="GtkScintilla">marker_define</function> 
    </shortdesc>
    <desc>
+     <simpara>
+         Deletes a Marker symbol from the line, for markers table, see <function class="GtkScintilla">marker_define</function>
+     </simpara>
+     <informalexample>
+         <programlisting>
+<![CDATA[
 
+// removes the marker 1 from line 4...
+$scintilla->marker_delete(4, 1);
+]]>
+        </programlisting>
+     </informalexample>
    </desc>
   </method>
 
@@ -675,10 +952,32 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+        Removes all line markers of a specific type, for markers table, see <function class="GtkScintilla">marker_define</function>
    </shortdesc>
    <desc>
+     <simpara>
+        Removes all line markers of a specific type, for markers table, see <function class="GtkScintilla">marker_define</function>
+     </simpara>
+     <informalexample>
+         <programlisting>
+<![CDATA[
+// adding marker 1 at line 4...
+$scintilla->marker_add(4, 1);
 
+// adding marker 1 at line 6...
+$scintilla->marker_add(6, 1);
+
+// adding marker 1 at line 8...
+$scintilla->marker_add(8, 1);
+
+// adding marker 2 at line 5...
+$scintilla->marker_add(5, 2);
+
+// removes all markers "1"...
+$scintilla->marker_delete_all(1);
+]]>
+        </programlisting>
+     </informalexample>
    </desc>
   </method>
 
@@ -877,10 +1176,21 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+        Set the fore color of some style.
    </shortdesc>
    <desc>
-
+     <simpara>
+         Set the fore color of some style.
+     </simpara>
+     <informalexample>
+         <programlisting>
+<![CDATA[
+// GtkScintillaStyle
+define(  "SCINTILLA_STYLE_DEFAULT",   32 );
+$scintilla->style_set_fore(SCINTILLA_STYLE_DEFAULT, 0);
+]]>
+        </programlisting>
+     </informalexample>
    </desc>
   </method>
 
@@ -893,10 +1203,21 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+        Set the background color of some style.
    </shortdesc>
    <desc>
-
+     <simpara>
+        Set the background color of some style.
+     </simpara>
+     <informalexample>
+         <programlisting>
+<![CDATA[
+// GtkScintillaStyle
+define(  "SCINTILLA_STYLE_DEFAULT",   32 );
+$scintilla->style_set_back(SCINTILLA_STYLE_DEFAULT, hexdec('0000FF'));
+]]>
+        </programlisting>
+     </informalexample>
    </desc>
   </method>
 
@@ -909,10 +1230,19 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+        Define some style to be formated as bold.
    </shortdesc>
    <desc>
-
+     <simpara>
+         Define some style to be formated as bold.
+     </simpara>
+     <informalexample>
+         <programlisting>
+<![CDATA[
+$scintilla->style_set_bold(SCINTILLA_STYLE_DEFAULT, 1);
+]]>
+        </programlisting>
+     </informalexample>
    </desc>
   </method>
 
@@ -925,10 +1255,19 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+        Define some style to be formated as italic.
    </shortdesc>
    <desc>
-
+     <simpara>
+         Define some style to be formated as italic.
+     </simpara>
+     <informalexample>
+         <programlisting>
+<![CDATA[
+$scintilla->style_set_italic(SCINTILLA_STYLE_DEFAULT, 1);
+]]>
+        </programlisting>
+     </informalexample>
    </desc>
   </method>
 
@@ -941,10 +1280,19 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+        Define the size of some style
    </shortdesc>
    <desc>
-
+     <simpara>
+         Define the size of some style
+     </simpara>
+     <informalexample>
+         <programlisting>
+<![CDATA[
+$scintilla->style_set_size(SCINTILLA_STYLE_DEFAULT, 20);
+]]>
+        </programlisting>
+     </informalexample>
    </desc>
   </method>
 
@@ -957,10 +1305,21 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+        Set the font of some style.
    </shortdesc>
    <desc>
-
+     <simpara>
+             Set the font of some style.
+     </simpara>
+     <informalexample>
+         <programlisting>
+<![CDATA[
+// GtkScintillaStyle
+define(  "SCINTILLA_STYLE_DEFAULT",   32 ); 
+$scintilla->style_set_font(SCINTILLA_STYLE_DEFAULT, '-*-luxisans-medium-r-normal-*-18-*-*-*-*-*-*');
+]]>
+        </programlisting>
+     </informalexample>
    </desc>
   </method>
 
@@ -1004,10 +1363,19 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+        Define some style to be formated as underlined.
    </shortdesc>
    <desc>
-
+     <simpara>
+         Define some style to be formated as underlined.
+     </simpara>
+     <informalexample>
+         <programlisting>
+<![CDATA[
+$scintilla->style_set_underline(SCINTILLA_STYLE_DEFAULT, 1);
+]]>
+        </programlisting>
+     </informalexample>
    </desc>
   </method>
 
@@ -1020,10 +1388,22 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+        Turn OFF/ON the Case Sensitive of some Style.
    </shortdesc>
    <desc>
-
+     <simpara>
+         Turn OFF/ON the Case Sensitive of some Style.
+     </simpara>
+     <informalexample>
+         <programlisting>
+<![CDATA[
+// TURN ON
+$scintilla->style_set_case(SCINTILLA_STYLE_DEFAULT, 0);
+// TURN OFF
+$scintilla->style_set_case(SCINTILLA_STYLE_DEFAULT, 1);
+]]>
+        </programlisting>
+     </informalexample>
    </desc>
   </method>
 
@@ -1052,10 +1432,19 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+        Set the fore color of the selection.
    </shortdesc>
    <desc>
-
+     <simpara>
+         Set the fore color of the selection.
+     </simpara>
+     <informalexample>
+         <programlisting>
+<![CDATA[
+$scintilla->set_sel_fore(true, hexdec('FF0000'));
+]]>
+        </programlisting>
+     </informalexample>
    </desc>
   </method>
 
@@ -1068,10 +1457,19 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+        Set the back color of the selection.
    </shortdesc>
    <desc>
-
+     <simpara>
+         Set the back color of the selection.
+     </simpara>
+     <informalexample>
+         <programlisting>
+<![CDATA[
+$scintilla->set_sel_back(true, 11250603);
+]]>
+        </programlisting>
+     </informalexample>
    </desc>
   </method>
 
@@ -1080,6 +1478,20 @@
     <funcprototype>
      <funcdef>void <function>set_caret_fore</function></funcdef>
      <paramdef>int <parameter>fore</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="scn.gtkscintilla.method.get_caret_fore">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>int <function>get_caret_fore</function></funcdef>
+     <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -1130,10 +1542,20 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+        Define if some style will be visible or not.
    </shortdesc>
    <desc>
-
+     <simpara>
+        Define if some style will be visible or not.
+     </simpara>
+     <informalexample>
+         <programlisting>
+<![CDATA[
+// defining the style as invisible...
+$scintilla->set_sel_visible(SCINTILLA_STYLE_DEFAULT, 0);
+]]>
+        </programlisting>
+     </informalexample>
    </desc>
   </method>
 
@@ -1190,10 +1612,19 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+        Define when start to store the actions of the user for "Undo Action".
    </shortdesc>
    <desc>
-
+     <simpara>
+         Define when start to store the actions of the user for "Undo Action".
+     </simpara>
+     <informalexample>
+         <programlisting>
+<![CDATA[
+$scintilla->begin_undo_action();
+]]>
+        </programlisting>
+     </informalexample>
    </desc>
   </method>
 
@@ -1205,10 +1636,19 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+        Define when finish to store the actions of the user for "Undo Action".
    </shortdesc>
    <desc>
-
+     <simpara>
+         Define when finish to store the actions of the user for "Undo Action".
+     </simpara>
+     <informalexample>
+         <programlisting>
+<![CDATA[
+$scintilla->end_undo_action();
+]]>
+        </programlisting>
+     </informalexample>
    </desc>
   </method>
 
@@ -1350,21 +1790,6 @@
    </desc>
   </method>
 
-  <method id="scn.gtkscintilla.method.get_caret_line_visible">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>int <function>get_caret_line_visible</function></funcdef>
-     <paramdef>void</paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </method>
-
   <method id="scn.gtkscintilla.method.set_caret_line_visible">
    <funcsynopsis>
     <funcprototype>
@@ -1373,10 +1798,43 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+        Define if the selected line must have the background in another color.
    </shortdesc>
    <desc>
+     <simpara>
+         Define if the selected line must have the background in another color.
+     </simpara>
+     <informalexample>
+         <programlisting>
+<![CDATA[
+$scintilla->set_caret_line_visible(1);
+]]>
+        </programlisting>
+     </informalexample>
+   </desc>
+  </method>
 
+  <method id="scn.gtkscintilla.method.get_caret_line_visible">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>int <function>get_caret_line_visible</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+        Return if caret lines are visible or not.
+   </shortdesc>
+   <desc>
+     <simpara>
+         Return if caret lines are visible or not.
+     </simpara>
+     <informalexample>
+         <programlisting>
+<![CDATA[
+echo $scintilla->get_caret_line_visible();
+]]>
+        </programlisting>
+     </informalexample>
    </desc>
   </method>
 
@@ -1388,10 +1846,19 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+        Get the background color of Caret Lines.
    </shortdesc>
    <desc>
-
+       <simpara>
+           Get the background color of Caret Lines.
+       </simpara>
+        <informalexample>
+         <programlisting>
+<![CDATA[
+echo $scintilla->get_caret_line_back();
+]]>
+        </programlisting>
+     </informalexample>
    </desc>
   </method>
 
@@ -1403,10 +1870,19 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+        Changes the background color of the Caret Lines.
    </shortdesc>
    <desc>
-
+       <simpara>
+           Changes the background color of the Caret Lines.
+       </simpara>
+        <informalexample>
+         <programlisting>
+<![CDATA[
+$scintilla->set_caret_line_back(9999204548);
+]]>
+        </programlisting>
+     </informalexample>
    </desc>
   </method>
 
@@ -1419,10 +1895,21 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+        Show the auto-complation list.
    </shortdesc>
    <desc>
-
+       <simpara>
+           Show the auto-complation list.
+       </simpara>
+        <informalexample>
+         <programlisting>
+<![CDATA[
+$l = trim(implode("",array_unique(array("aaa ", "bbb "))));
+$word='a';
+GtkScintilla::autoc_show(strlen($word), $l);
+]]>
+        </programlisting>
+     </informalexample>
    </desc>
   </method>
 
@@ -1705,10 +2192,19 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+        Set indentation size.
    </shortdesc>
    <desc>
-
+       <simpara>
+           Set indentation size.
+       </simpara>
+        <informalexample>
+         <programlisting>
+<![CDATA[
+$scintilla->set_indent(4);
+]]>
+        </programlisting>
+     </informalexample>
    </desc>
   </method>
 
@@ -1720,10 +2216,12 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+        Get Indentation Size.
    </shortdesc>
    <desc>
-
+       <simpara>
+           Get Indentation Size.
+       </simpara>
    </desc>
   </method>
 
@@ -1735,10 +2233,12 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+        Set if the [TAB] key must use tabs or spaces.
    </shortdesc>
    <desc>
-
+       <simpara>
+           Set if the [TAB] key must use tabs or spaces.
+       </simpara>
    </desc>
   </method>
 
@@ -1750,10 +2250,12 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+        Get if the [TAB] key is using tabs or spaces.
    </shortdesc>
    <desc>
-
+       <simpara>
+           Get if the [TAB] key is using tabs or spaces.
+       </simpara>
    </desc>
   </method>
 
@@ -1766,10 +2268,20 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+        Set the line indentation of some line.
    </shortdesc>
    <desc>
-
+       <simpara>
+           Set the line indentation of some line.
+       </simpara>
+        <informalexample>
+         <programlisting>
+<![CDATA[
+$cur_line = $scintilla->get_cur_line();
+$scintilla->set_line_indentation($cur_line, 8);
+]]>
+        </programlisting>
+     </informalexample>
    </desc>
   </method>
 
@@ -1781,10 +2293,19 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+        Get the Line indentation of some line.
    </shortdesc>
    <desc>
-
+       <simpara>
+           Get the Line indentation of some line.
+       </simpara>
+        <informalexample>
+         <programlisting>
+<![CDATA[
+echo $scintilla->get_line_indentation($cur_line);
+]]>
+        </programlisting>
+     </informalexample>
    </desc>
   </method>
 
@@ -1811,10 +2332,20 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+        Returns the column number of the character position.
    </shortdesc>
    <desc>
-
+       <simpara>
+           Returns the column number of the character position.
+       </simpara>
+        <informalexample>
+         <programlisting>
+<![CDATA[
+// get the column number of position 40...
+echo $scintilla->get_column(40);
+]]>
+        </programlisting>
+     </informalexample>
    </desc>
   </method>
 
@@ -1856,10 +2387,12 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+        Set wheather the indentation guides are visible or not.
    </shortdesc>
    <desc>
-
+       <simpara>
+           Set wheather the indentation guides are visible or not.
+       </simpara>
    </desc>
   </method>
 
@@ -1871,10 +2404,12 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+        Get wheather the indentation guides are visible or not.
    </shortdesc>
    <desc>
-
+       <simpara>
+           Get wheather the indentation guides are visible or not.
+       </simpara>
    </desc>
   </method>
 
@@ -1927,21 +2462,6 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>int <function>get_code_page</function></funcdef>
-     <paramdef>void</paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </method>
-
-  <method id="scn.gtkscintilla.method.get_caret_fore">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>int <function>get_caret_fore</function></funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
@@ -2006,10 +2526,19 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+        Set the start of the selection (character position).
    </shortdesc>
    <desc>
-
+       <simpara>
+           Set the start of the selection (character position).
+       </simpara>
+        <informalexample>
+         <programlisting>
+<![CDATA[
+$scintilla->set_selection_start(100);
+]]>
+        </programlisting>
+     </informalexample>
    </desc>
   </method>
 
@@ -2021,10 +2550,12 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+        Get the begin of the selection (character position).
    </shortdesc>
    <desc>
-
+       <simpara>
+           Get the begin of the selection (character position).
+       </simpara>
    </desc>
   </method>
 
@@ -2036,10 +2567,19 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+        Set the end of the selection (character position).
    </shortdesc>
    <desc>
-
+       <simpara>
+           Set the end of the selection (character position).
+       </simpara>
+        <informalexample>
+         <programlisting>
+<![CDATA[
+$scintilla->set_selection_end(200);
+]]>
+        </programlisting>
+     </informalexample>
    </desc>
   </method>
 
@@ -2051,10 +2591,12 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+        Get the end of the selection (character position).
    </shortdesc>
    <desc>
-
+       <simpara>
+           Get the end of the selection (character position).
+       </simpara>
    </desc>
   </method>
 
@@ -2136,15 +2678,17 @@
   <method id="scn.gtkscintilla.method.get_line">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>XXX <function>get_line</function></funcdef>
-     <paramdef>XXX</paramdef>
+     <funcdef>string <function>get_line</function></funcdef>
+     <paramdef>int <parameter>line</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+        Get the content of some line.
    </shortdesc>
    <desc>
-
+       <simpara>
+           Get the content of some line.
+       </simpara>
    </desc>
   </method>
 
@@ -2156,10 +2700,19 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+        Get the quantity of lines of the text area.
    </shortdesc>
    <desc>
-
+       <simpara>
+           Get the quantity of lines of the text area.
+       </simpara>
+        <informalexample>
+         <programlisting>
+<![CDATA[
+echo $scintilla->get_line_count();
+]]>
+        </programlisting>
+     </informalexample>
    </desc>
   </method>
 
@@ -2257,15 +2810,21 @@
   <method id="scn.gtkscintilla.method.get_sel_text">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>XXX <function>get_sel_text</function></funcdef>
-     <paramdef>XXX</paramdef>
+     <funcdef>string <function>get_sel_text</function></funcdef>
+     <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+        Get the selected text.
    </shortdesc>
    <desc>
-
+        <informalexample>
+         <programlisting>
+<![CDATA[
+echo $scintilla->get_sel_text();
+]]>
+        </programlisting>
+     </informalexample>
    </desc>
   </method>
 
@@ -2322,10 +2881,19 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+        Get the line number from character position.
    </shortdesc>
    <desc>
-
+       <simpara>
+           Get the line number from character position.
+       </simpara>
+        <informalexample>
+         <programlisting>
+<![CDATA[
+$cur_line = $scintilla->line_from_position($scintilla->get_current_pos());
+]]>
+        </programlisting>
+     </informalexample>
    </desc>
   </method>
 
@@ -2337,10 +2905,19 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+        Get the character position from the line number.
    </shortdesc>
    <desc>
-
+       <simpara>
+           Get the character position from the line number.
+       </simpara>
+        <informalexample>
+         <programlisting>
+<![CDATA[
+$pos = $scintilla->position_from_line(10);
+]]>
+        </programlisting>
+     </informalexample>
    </desc>
   </method>
 
@@ -2398,10 +2975,20 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+        Define if the text area may be edited or not.
    </shortdesc>
    <desc>
-
+       <simpara>
+           Define if the text area may be edited or not.
+       </simpara>
+        <informalexample>
+         <programlisting>
+<![CDATA[
+// avoiding the user to edit...
+$scintilla->set_read_only(1);
+]]>
+        </programlisting>
+     </informalexample>
    </desc>
   </method>
 
@@ -2420,6 +3007,33 @@
    </desc>
   </method>
 
+  <method id="scn.gtkscintilla.method.can_redo">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>int <function>can_redo</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+        Can Redo returns wheather "Redo" Operation may be done or not.
+   </shortdesc>
+   <desc>
+       <simpara>
+        Can Redo returns wheather "Redo" Operation may be done or not.
+       </simpara>
+     <informalexample>
+         <programlisting>
+<![CDATA[
+if ($scintilla->can_redo())
+{
+    // there are something to be "redone"...
+}
+]]>
+        </programlisting>
+     </informalexample>
+   </desc>
+  </method>
+
   <method id="scn.gtkscintilla.method.can_paste">
    <funcsynopsis>
     <funcprototype>
@@ -2428,10 +3042,22 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+        Can Paste returns wheather "Paste" Operation may be done or not.
    </shortdesc>
    <desc>
-
+       <simpara>
+        Can Paste returns wheather "Paste" Operation may be done or not.
+       </simpara>
+     <informalexample>
+         <programlisting>
+<![CDATA[
+if ($scintilla->can_paste())
+{
+    // there are something to be "paste"...
+}
+]]>
+        </programlisting>
+     </informalexample>
    </desc>
   </method>
 
@@ -2443,10 +3069,22 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+        Can Undo returns wheather "Undo" Operation may be done or not.
    </shortdesc>
    <desc>
-
+       <simpara>
+        Can Undo returns wheather "Undo" Operation may be done or not.
+       </simpara>
+     <informalexample>
+         <programlisting>
+<![CDATA[
+if ($scintilla->can_undo())
+{
+    // there are something to be "undone"...
+}
+]]>
+        </programlisting>
+     </informalexample>
    </desc>
   </method>
 
@@ -2458,10 +3096,19 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+        Empty the action list for "Undo" Action.
    </shortdesc>
    <desc>
-
+       <simpara>
+           Empty the action list for "Undo" Action.
+       </simpara>
+     <informalexample>
+         <programlisting>
+<![CDATA[
+$scintilla->empty_undo_buffer();
+]]>
+        </programlisting>
+     </informalexample>
    </desc>
   </method>
 
@@ -2473,10 +3120,19 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+        Undo makes the last action undone.
    </shortdesc>
    <desc>
-
+       <simpara>
+           Undo makes the last action undone.
+       </simpara>
+     <informalexample>
+         <programlisting>
+<![CDATA[
+$scintilla->undo();
+]]>
+        </programlisting>
+     </informalexample>
    </desc>
   </method>
 
@@ -2488,10 +3144,19 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+        Cut the selected text and transfer it to the memory.
    </shortdesc>
    <desc>
-
+       <simpara>
+           Cut the selected text and transfer it to the memory.
+       </simpara>
+     <informalexample>
+         <programlisting>
+<![CDATA[
+$scintilla->cut();
+]]>
+        </programlisting>
+     </informalexample>
    </desc>
   </method>
 
@@ -2503,10 +3168,19 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+        Copy the selected text and transfer it to the memory.
    </shortdesc>
    <desc>
-
+       <simpara>
+           Copy the selected text and transfer it to the memory.
+       </simpara>
+     <informalexample>
+         <programlisting>
+<![CDATA[
+$scintilla->copy();
+]]>
+        </programlisting>
+     </informalexample>
    </desc>
   </method>
 
@@ -2518,10 +3192,19 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+        Paste the selected text from the memory to the text area.
    </shortdesc>
    <desc>
-
+       <simpara>
+           Paste the selected text from the memory to the text area.
+       </simpara>
+     <informalexample>
+         <programlisting>
+<![CDATA[
+$scintilla->paste();
+]]>
+        </programlisting>
+     </informalexample>
    </desc>
   </method>
 
@@ -2548,25 +3231,43 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+        Set all the content of Scintilla text area edition with the specified string.
    </shortdesc>
    <desc>
-
+       <simpara>
+           Set all the content of Scintilla text area edition with the specified string.
+       </simpara>
+     <informalexample>
+         <programlisting>
+<![CDATA[
+$scintilla->set_text('my text');
+]]>
+        </programlisting>
+     </informalexample>
    </desc>
   </method>
 
   <method id="scn.gtkscintilla.method.get_text">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>XXX <function>get_text</function></funcdef>
-     <paramdef>XXX</paramdef>
+     <funcdef>string<function>get_text</function></funcdef>
+     <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+        Return all the content of Scintilla text area edition as a string.
    </shortdesc>
    <desc>
-
+       <simpara>
+           Return all the content of Scintilla text area edition as a string.
+       </simpara>
+     <informalexample>
+         <programlisting>
+<![CDATA[
+echo $scintilla->get_text();
+]]>
+        </programlisting>
+     </informalexample>
    </desc>
   </method>
 
@@ -2578,10 +3279,19 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+        Return the length of the text inside scintilla object.
    </shortdesc>
    <desc>
-
+       <simpara>
+           Return the length of the text inside scintilla object.
+       </simpara>
+     <informalexample>
+         <programlisting>
+<![CDATA[
+echo $scintilla->get_text_length();
+]]>
+        </programlisting>
+     </informalexample>
    </desc>
   </method>
 
@@ -2819,10 +3529,19 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+        Show the sintax hint about one function
    </shortdesc>
    <desc>
-
+       <simpara>
+           Show the sintax hint about one function
+       </simpara>
+        <informalexample>
+         <programlisting>
+<![CDATA[
+$scintilla->call_tip_show(10, 'function myfunction ( string name, int position )');
+]]>
+        </programlisting>
+     </informalexample>
    </desc>
   </method>
 
@@ -2941,10 +3660,20 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+        Define the fold level for some line. Fold level means the level of braces {} in the code.
    </shortdesc>
    <desc>
-
+    <simpara>
+    Define the fold level for some line. Fold level means the level of braces {} in the code.
+    </simpara>
+        <informalexample>
+         <programlisting>
+<![CDATA[
+// defining the fold level for line 10...
+$scintilla->set_fold_level(10, SCINTILLA_FOLDLEVELBASE + 1);
+]]>
+        </programlisting>
+     </informalexample>
    </desc>
   </method>
 
@@ -2956,10 +3685,20 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+        Returns the fold level for some line. See <function class="GtkScintilla">set_fold_level</function>
    </shortdesc>
    <desc>
-
+    <simpara>
+        Returns the fold level for some line. See <function class="GtkScintilla">set_fold_level</function>
+    </simpara>
+        <informalexample>
+         <programlisting>
+<![CDATA[
+// getting the fold level of line 10...
+echo $scintilla->get_fold_level(10);
+]]>
+        </programlisting>
+     </informalexample>
    </desc>
   </method>
 
@@ -3003,10 +3742,20 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+        Show the specified lines.
    </shortdesc>
    <desc>
-
+       <simpara>
+           Show the specified lines.
+       </simpara>
+        <informalexample>
+         <programlisting>
+<![CDATA[
+// show all the lines...
+$scintilla->show_lines(0,$scintilla->get_line_count());
+]]>
+        </programlisting>
+     </informalexample>
    </desc>
   </method>
 
@@ -3019,10 +3768,20 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+        Hide the specified lines.
    </shortdesc>
    <desc>
-
+       <simpara>
+           Hide the specified lines.
+       </simpara>
+        <informalexample>
+         <programlisting>
+<![CDATA[
+// hide all the lines...
+$scintilla->hide_lines(0,$scintilla->get_line_count());
+]]>
+        </programlisting>
+     </informalexample>
    </desc>
   </method>
 
@@ -3185,10 +3944,19 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+        Places the cursor one line down.
    </shortdesc>
    <desc>
-
+       <simpara>
+        Places the cursor one line down.
+       </simpara>
+        <informalexample>
+         <programlisting>
+<![CDATA[
+$scintilla->line_down();
+]]>
+        </programlisting>
+     </informalexample>
    </desc>
   </method>
 
@@ -3200,10 +3968,19 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+        Selects one line down.
    </shortdesc>
    <desc>
-
+       <simpara>
+        Selects one line down.
+       </simpara>
+        <informalexample>
+         <programlisting>
+<![CDATA[
+$scintilla->line_down_extend();
+]]>
+        </programlisting>
+     </informalexample>
    </desc>
   </method>
 
@@ -3215,10 +3992,19 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+        Places the cursor one line up.
    </shortdesc>
    <desc>
-
+       <simpara>
+           Places the cursor one line up.
+       </simpara>
+        <informalexample>
+         <programlisting>
+<![CDATA[
+$scintilla->line_up();
+]]>
+        </programlisting>
+     </informalexample>
    </desc>
   </method>
 
@@ -3230,10 +4016,19 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+        Selects one line up.
    </shortdesc>
    <desc>
-
+       <simpara>
+           Selects one line up.
+       </simpara>
+        <informalexample>
+         <programlisting>
+<![CDATA[
+$scintilla->line_up_extend();
+]]>
+        </programlisting>
+     </informalexample>
    </desc>
   </method>
 
@@ -3245,10 +4040,19 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+        Places the cursor one character to the left.
    </shortdesc>
    <desc>
-
+       <simpara>
+           Places the cursor one character to the left.
+       </simpara>
+        <informalexample>
+         <programlisting>
+<![CDATA[
+$scintilla->char_left()
+]]>
+        </programlisting>
+     </informalexample>
    </desc>
   </method>
 
@@ -3260,10 +4064,19 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+        Selects the character at the left side.
    </shortdesc>
    <desc>
-
+       <simpara>
+           Selects the character at the left side.
+       </simpara>
+        <informalexample>
+         <programlisting>
+<![CDATA[
+$scintilla->char_left_extend();
+]]>
+        </programlisting>
+     </informalexample>
    </desc>
   </method>
 
@@ -3275,10 +4088,19 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+        Places the cursor one character to the right.
    </shortdesc>
    <desc>
-
+       <simpara>
+           Places the cursor one character to the right.
+       </simpara>
+        <informalexample>
+         <programlisting>
+<![CDATA[
+$scintilla->char_right();
+]]>
+        </programlisting>
+     </informalexample>
    </desc>
   </method>
 
@@ -3290,10 +4112,19 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+        Selects the character at the right side.
    </shortdesc>
    <desc>
-
+       <simpara>
+           Selects the character at the right side.
+       </simpara>
+        <informalexample>
+         <programlisting>
+<![CDATA[
+$scintilla->char_right_extend();
+]]>
+        </programlisting>
+     </informalexample>
    </desc>
   </method>
 
@@ -3305,10 +4136,19 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+        Places the cursor one word to the left.
    </shortdesc>
    <desc>
-
+       <simpara>
+           Places the cursor one word to the left.
+       </simpara>
+        <informalexample>
+         <programlisting>
+<![CDATA[
+$scintilla->word_left();
+]]>
+        </programlisting>
+     </informalexample>
    </desc>
   </method>
 
@@ -3320,10 +4160,19 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+        Selects the word at the left side.
    </shortdesc>
    <desc>
-
+       <simpara>
+           Selects the word at the left side.
+       </simpara>
+        <informalexample>
+         <programlisting>
+<![CDATA[
+$scintilla->word_left_extend();
+]]>
+        </programlisting>
+     </informalexample>
    </desc>
   </method>
 
@@ -3335,10 +4184,19 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+        Places the cursor one word to the right.
    </shortdesc>
    <desc>
-
+       <simpara>
+           Places the cursor one word to the right.
+       </simpara>
+        <informalexample>
+         <programlisting>
+<![CDATA[
+$scintilla->word_right();
+]]>
+        </programlisting>
+     </informalexample>
    </desc>
   </method>
 
@@ -3350,10 +4208,19 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+        Selects the word at the right side.
    </shortdesc>
    <desc>
-
+       <simpara>
+           Selects the word at the right side.
+       </simpara>
+        <informalexample>
+         <programlisting>
+<![CDATA[
+$scintilla->word_right_extend();
+]]>
+        </programlisting>
+     </informalexample>
    </desc>
   </method>
 
@@ -3365,10 +4232,19 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+        Places the cursor at the begin of the line.
    </shortdesc>
    <desc>
-
+        <simpara>
+            Places the cursor at the begin of the line.
+        </simpara>
+        <informalexample>
+         <programlisting>
+<![CDATA[
+$scintilla->home();
+]]>
+        </programlisting>
+     </informalexample>
    </desc>
   </method>
 
@@ -3380,10 +4256,19 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+        Selects the text untill the home of the line.
    </shortdesc>
    <desc>
-
+        <simpara>
+            Selects the text untill the home of the line.
+        </simpara>
+        <informalexample>
+         <programlisting>
+<![CDATA[
+$scintilla->home_extend();
+]]>
+        </programlisting>
+     </informalexample>
    </desc>
   </method>
 
@@ -3395,10 +4280,19 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+        Places the cursor at the end of the line.
    </shortdesc>
    <desc>
-
+       <simpara>
+           Places the cursor at the end of the line.
+       </simpara>
+        <informalexample>
+         <programlisting>
+<![CDATA[
+$scintilla->line_end();
+]]>
+        </programlisting>
+     </informalexample>
    </desc>
   </method>
 
@@ -3410,10 +4304,19 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+        Selects the text untill the end of the line.
    </shortdesc>
    <desc>
-
+       <simpara>
+           Selects the text untill the end of the line.
+       </simpara>
+        <informalexample>
+         <programlisting>
+<![CDATA[
+$scintilla->line_end_extend();
+]]>
+        </programlisting>
+     </informalexample>
    </desc>
   </method>
 
@@ -3485,10 +4388,19 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+        Goes one page up.
    </shortdesc>
    <desc>
-
+       <simpara>
+           Goes one page up.
+       </simpara>
+        <informalexample>
+         <programlisting>
+<![CDATA[
+$scintilla->page_up();
+]]>
+        </programlisting>
+     </informalexample>
    </desc>
   </method>
 
@@ -3500,10 +4412,19 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+        Selects the text of one page up.
    </shortdesc>
    <desc>
-
+       <simpara>
+           Selects the text of one page up.
+       </simpara>
+        <informalexample>
+         <programlisting>
+<![CDATA[
+$scintilla->page_up_extend();
+]]>
+        </programlisting>
+     </informalexample>
    </desc>
   </method>
 
@@ -3515,10 +4436,19 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+        Goes one page down.
    </shortdesc>
    <desc>
-
+       <simpara>
+           Goes one page down.
+       </simpara>
+        <informalexample>
+         <programlisting>
+<![CDATA[
+$scintilla->page_down();
+]]>
+        </programlisting>
+     </informalexample>
    </desc>
   </method>
 
@@ -3530,10 +4460,19 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+        Selects the text of one page down.
    </shortdesc>
    <desc>
-
+        <simpara>
+            Selects the text of one page down.
+        </simpara>
+        <informalexample>
+         <programlisting>
+<![CDATA[
+$scintilla->page_down_extend();
+]]>
+        </programlisting>
+     </informalexample>
    </desc>
   </method>
 
@@ -3710,10 +4649,19 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+        Delete word of the left side of the cursor.
    </shortdesc>
    <desc>
-
+        <simpara>
+            Delete word of the left side of the cursor.
+        </simpara>
+        <informalexample>
+         <programlisting>
+<![CDATA[
+$scintilla->del_word_left();
+]]>
+        </programlisting>
+     </informalexample>
    </desc>
   </method>
 
@@ -3725,10 +4673,19 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+        Delete word of the right side of the cursor.
    </shortdesc>
    <desc>
-
+        <simpara>
+            Delete word of the right side of the cursor.
+        </simpara>
+        <informalexample>
+         <programlisting>
+<![CDATA[
+$scintilla->del_word_right();
+]]>
+        </programlisting>
+     </informalexample>
    </desc>
   </method>
 
@@ -3740,10 +4697,19 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+        Cuts the current line's content to the memory.
    </shortdesc>
    <desc>
-
+       <simpara>
+           Cuts the current line's content to the memory.
+       </simpara>
+        <informalexample>
+         <programlisting>
+<![CDATA[
+$scintilla->line_cut();
+]]>
+        </programlisting>
+     </informalexample>
    </desc>
   </method>
 
@@ -3755,10 +4721,19 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+        Deletes the current line.
    </shortdesc>
    <desc>
-
+        <simpara>
+            Deletes the current line.
+        </simpara>
+        <informalexample>
+         <programlisting>
+<![CDATA[
+$scintilla->line_delete();
+]]>
+        </programlisting>
+     </informalexample>
    </desc>
   </method>
 
@@ -3860,10 +4835,47 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+        Return the length of some line.
    </shortdesc>
    <desc>
+        <simpara>
+            Return the length of some line.
+        </simpara>
+        <informalexample>
+         <programlisting>
+<![CDATA[
+// the length of line 5...
+echo $scintilla->line_length(5);
+]]>
+        </programlisting>
+     </informalexample>
+   </desc>
+  </method>
 
+  <method id="scn.gtkscintilla.method.brace_match">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>int <function>brace_match</function></funcdef>
+     <paramdef>int <parameter>position</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+        Get the character position of the complement of "{", "[", "("
+   </shortdesc>
+   <desc>
+        <simpara>
+            Get the character position of the complement of "{", "[", "("
+            <informalexample>
+             <programlisting>
+<![CDATA[
+$brace_pos = $scintilla->get_current_pos();
+$char = $scintilla->get_char_at($brace_pos);
+if (($char == '{') or ($char == '}')) // or...
+    $other_pos = $scintilla->brace_match($brace_pos);
+]]>
+            </programlisting>
+         </informalexample>
+        </simpara>
    </desc>
   </method>
 
@@ -3876,10 +4888,25 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+        Set positions inside the text to be showed in brace mode.
    </shortdesc>
    <desc>
+            <simpara>
+                Set positions inside the text to be showed in brace mode.
+                Brace colors and fonts indentify characters like "{", "(" and "["
+            </simpara>
+            <informalexample>
+             <programlisting>
+<![CDATA[
+$brace_pos = $scintilla->get_current_pos();
+$char = $scintilla->get_char_at($brace_pos);
+if (($char == '{') or ($char == '}')) // or...
+    $other_pos = $scintilla->brace_match($brace_pos);
 
+$scintilla->brace_highlight($brace_pos, $other_pos);
+]]>
+            </programlisting>
+         </informalexample>
    </desc>
   </method>
 
@@ -3891,25 +4918,8 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
    </shortdesc>
    <desc>
-
-   </desc>
-  </method>
-
-  <method id="scn.gtkscintilla.method.brace_match">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>int <function>brace_match</function></funcdef>
-     <paramdef>int <parameter>pos</parameter></paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-   <desc>
-
    </desc>
   </method>
 
@@ -3921,10 +4931,19 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+        Get wheather the end of line marks are visible or not.
    </shortdesc>
    <desc>
-
+        <simpara>
+            Get wheather the end of line marks are visible or not.
+        </simpara>
+        <informalexample>
+         <programlisting>
+<![CDATA[
+echo $scintilla->get_view_eol();
+]]>
+        </programlisting>
+     </informalexample>
    </desc>
   </method>
 
@@ -3936,10 +4955,20 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+        Define wheather the end of line marks are visible or not.
    </shortdesc>
    <desc>
-
+        <simpara>
+            Define wheather the end of line marks are visible or not.
+        </simpara>
+        <informalexample>
+         <programlisting>
+<![CDATA[
+// view end of lines...
+$scintilla->set_view_eol(1);
+]]>
+        </programlisting>
+     </informalexample>
    </desc>
   </method>
 
@@ -3996,10 +5025,12 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+        Returns the column number that is used as the edge of text area.
    </shortdesc>
    <desc>
-
+        <simpara>
+            Returns the column number that is used as the edge of text area.
+        </simpara>
    </desc>
   </method>
 
@@ -4011,10 +5042,12 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+        Changes the column number that is used as the edge of the text area.
    </shortdesc>
    <desc>
-
+        <simpara>
+            Changes the column number that is used as the edge of the text area.
+        </simpara>
    </desc>
   </method>
 
@@ -4026,10 +5059,12 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+        Returns the edge mode. See <function class="GtkScintilla">set_edge_mode</function>
    </shortdesc>
    <desc>
-
+        <simpara>
+            Returns the edge mode. See <function class="GtkScintilla">set_edge_mode</function>
+        </simpara>
    </desc>
   </method>
 
@@ -4041,10 +5076,25 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+        Changes the edge mode.
    </shortdesc>
    <desc>
+       <simpara>
+           Changes the edge mode.
+       </simpara>
+        <informalexample>
+         <programlisting>
+<![CDATA[
+// GtkScintillaEdgeMode
+@define(  "SCINTILLA_EDGE_NONE"         ,   0 );
+@define(  "SCINTILLA_EDGE_LINE"         ,   1 );
+@define(  "SCINTILLA_EDGE_BACKGROUND"   ,   2 );
 
+// changing the edge mode...
+$scintilla->set_edge_mode(SCINTILLA_EDGE_NONE);
+]]>
+        </programlisting>
+     </informalexample>
    </desc>
   </method>
 
@@ -4056,10 +5106,19 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+        Gets the background color of text out of the edge.
    </shortdesc>
    <desc>
-
+       <simpara>
+           Gets the background color of text out of the edge.
+       </simpara>
+        <informalexample>
+         <programlisting>
+<![CDATA[
+echo $scintilla->get_edge_colour();
+]]>
+        </programlisting>
+     </informalexample>
    </desc>
   </method>
 
@@ -4071,10 +5130,19 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+        Changes the background color of text out of the edge.
    </shortdesc>
    <desc>
-
+       <simpara>
+           Changes the background color of text out of the edge.
+       </simpara>
+        <informalexample>
+         <programlisting>
+<![CDATA[
+$scintilla->set_edge_colour(hexdec('FF0000'));
+]]>
+        </programlisting>
+     </informalexample>
    </desc>
   </method>
 
@@ -4555,10 +5623,42 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+        Define what kind of lexer language will be used to highlight the code.
    </shortdesc>
    <desc>
+       <simpara>
+           Define what kind of lexer language will be used to highlight the code.
+       </simpara>
+        <informalexample>
+         <programlisting>
+<![CDATA[
+// GtkScintillaLexer
+@define(  "SCINTILLA_LEXER_CONTAINER"               ,   0 ); 
+@define(  "SCINTILLA_LEXER_NULL"                    ,   1 ); 
+@define(  "SCINTILLA_LEXER_PYTHON"                  ,   2 ); 
+@define(  "SCINTILLA_LEXER_CPP"                     ,   3 ); 
+@define(  "SCINTILLA_LEXER_HTML"                    ,   4 ); 
+@define(  "SCINTILLA_LEXER_XML"                     ,   5 ); 
+@define(  "SCINTILLA_LEXER_PERL"                    ,   6 ); 
+@define(  "SCINTILLA_LEXER_SQL"                     ,   7 ); 
+@define(  "SCINTILLA_LEXER_VB"                      ,   8 ); 
+@define(  "SCINTILLA_LEXER_PROPERTIES"              ,   9 ); 
+@define(  "SCINTILLA_LEXER_ERRORLIST"               ,   10 ); 
+@define(  "SCINTILLA_LEXER_MAKEFILE"                ,   11 ); 
+@define(  "SCINTILLA_LEXER_BATCH"                   ,   12 ); 
+@define(  "SCINTILLA_LEXER_XCODE"                   ,   13 ); 
+@define(  "SCINTILLA_LEXER_LATEX"                   ,   14 ); 
+@define(  "SCINTILLA_LEXER_LUA"                     ,   15 ); 
+@define(  "SCINTILLA_LEXER_DIFF"                    ,   16 ); 
+@define(  "SCINTILLA_LEXER_CONF"                    ,   17 ); 
+@define(  "SCINTILLA_LEXER_PASCAL"                  ,   18 ); 
+@define(  "SCINTILLA_LEXER_AVE"                     ,   19 ); 
+@define(  "SCINTILLA_LEXER_ADA"                     ,   20 ); 
 
+$scintilla->set_lexer(SCINTILLA_LEXER_HTML);
+]]>
+        </programlisting>
+     </informalexample>
    </desc>
   </method>
 
@@ -4570,10 +5670,19 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+        Return what kind of lexer language is used to highlight the code. See <function class="GtkScintilla">set_lexer</function>.
    </shortdesc>
    <desc>
-
+       <simpara>
+           Return what kind of lexer language is used to highlight the code. See <function class="GtkScintilla">set_lexer</function>.
+       </simpara>
+        <informalexample>
+         <programlisting>
+<![CDATA[
+echo $scintilla->get_lexer();
+]]>
+        </programlisting>
+     </informalexample>
    </desc>
   </method>
 
@@ -4618,10 +5727,21 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+        Define the keywords list for some keywords set.
    </shortdesc>
    <desc>
-
+       <simpara>
+           Define the keywords list for some keywords set.
+       </simpara>
+        <informalexample>
+         <programlisting>
+<![CDATA[
+$scintilla->set_keywords(0, 'doctype a abbr abbr accept accept-charset accesskey acronym action address align alink alt applet archive area axis b background base basefont bdo bgcolor big blockquote body border br button caption cellpadding cellspacing center char charoff charset checkbox checked cite cite class classid clear code codebase codetype col colgroup color cols colspan compact content coords data datafld dataformatas datapagesize datasrc datetime dd declare defer del dfn dir dir disabled div dl dt em enctype event face fieldset file font for foreach form frame frame frameborder frameset h1 h2 h3 h4 h5 h6 head headers height hidden hr href hreflang hspace html http-equiv i id iframe image img input ins isindex ismap kbd label label lang language leftmargin legend li link link longdesc map marginheight marginwidth maxlength media menu meta method multiple name noframes nohref noresize noscript noshade nowrap object object ol onblur onchange onclick ondblclick onfocus onkeydown onkeypress onkeyup onload onmousedown onmousemove onmouseout onmouseover onmouseup onreset onselect onsubmit onunload optgroup option p param password pre profile prompt public q radio readonly rel reset rev rows rowspan rules s samp scheme scope script select selected shape size small span span src standby start strike strong style style sub submit summary sup tabindex table target tbody td text text textarea tfoot th thead title title topmargin tr tt type u ul usemap valign value valuetype var version vlink vspace width xml xmlns');
+$scintilla->set_keywords(1, 'abstract boolean break byte case catch char class const continue debugger default delete do double else enum export extends final finally float for foreach function goto if implements import in instanceof int interface long native new package private protected public return short static super switch synchronized this throw throws transient try typeof var void volatile while with');
+$scintilla->set_keywords(2, 'None and assert break class continue def del elif else except exec finally for from global if import in is lambda not or pass print raise return try while function include include_once require require_once');
+]]>
+        </programlisting>
+     </informalexample>
    </desc>
   </method>
 
@@ -4633,13 +5753,300 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
    </shortdesc>
    <desc>
-
    </desc>
   </method>
 
  </methods>
 
+ <signals>
+
+  <signal id="scn.gtkscintilla.signal.style_needed">
+   <signalname>style_needed</signalname>
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
+     <paramdef>GtkScintilla <parameter>widget</parameter></paramdef>
+     <paramdef>int <parameter>position</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+   </shortdesc>
+   <desc>
+    <simpara>
+    </simpara>
+   </desc>
+  </signal>
+
+
+  <signal id="scn.gtkscintilla.signal.char_added">
+   <signalname>char_added</signalname>
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
+     <paramdef>GtkScintilla <parameter>widget</parameter></paramdef>
+     <paramdef>int <parameter>character</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+       This signal is emitted when a character is added.
+   </shortdesc>
+   <desc>
+    <simpara>
+        This signal is emitted when a character is added.
+    </simpara>
+   </desc>
+  </signal>
+
+  <signal id="scn.gtkscintilla.signal.save_point_reached">
+   <signalname>save_point_reached</signalname>
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
+     <paramdef>GtkScintilla <parameter>widget</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+       
+   </shortdesc>
+   <desc>
+    <simpara>
+        
+    </simpara>
+   </desc>
+  </signal>
+  
+  <signal id="scn.gtkscintilla.signal.save_point_left">
+   <signalname>save_point_left</signalname>
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
+     <paramdef>GtkScintilla <parameter>widget</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+       
+   </shortdesc>
+   <desc>
+    <simpara>
+        
+    </simpara>
+   </desc>
+  </signal>
+
+
+  <signal id="scn.gtkscintilla.signal.modify_attempt_ro">
+   <signalname>modify_attempt_ro</signalname>
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
+     <paramdef>GtkScintilla <parameter>widget</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+       
+   </shortdesc>
+   <desc>
+    <simpara>
+        
+    </simpara>
+   </desc>
+  </signal>
+  
+  <signal id="scn.gtkscintilla.signal.key">
+   <signalname>key</signalname>
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
+     <paramdef>GtkScintilla <parameter>widget</parameter></paramdef>
+     <paramdef>int <parameter>character</parameter></paramdef>
+     <paramdef>int <parameter>modifiers</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+       
+   </shortdesc>
+   <desc>
+    <simpara>
+        
+    </simpara>
+   </desc>
+  </signal>
+  
+  <signal id="scn.gtkscintilla.signal.double_click">
+   <signalname>double_click</signalname>
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
+     <paramdef>GtkScintilla <parameter>widget</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+       
+   </shortdesc>
+   <desc>
+    <simpara>
+        
+    </simpara>
+   </desc>
+  </signal>
+  
+  <signal id="scn.gtkscintilla.signal.update_ui">
+   <signalname>update_ui</signalname>
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
+     <paramdef>GtkScintilla <parameter>widget</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+        update_ui signal is emitted when the screen needs to be refreshed.
+   </shortdesc>
+   <desc>
+    <simpara>
+        update_ui signal is emitted when the screen needs to be refreshed.
+    </simpara>
+   </desc>
+  </signal>
+
+  <signal id="scn.gtkscintilla.signal.modified">
+   <signalname>modified</signalname>
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
+     <paramdef>GtkScintilla <parameter>widget</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+       modified signal is emitted when the user changes the text inside GtkScintilla text area, by adding or deleting some character.
+   </shortdesc>
+   <desc>
+    <simpara>
+       modified signal is emitted when the user changes the text inside GtkScintilla text area, by adding or deleting some character. 
+    </simpara>
+   </desc>
+  </signal>
+
+  <signal id="scn.gtkscintilla.signal.macro_record">
+   <signalname>macro_record</signalname>
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
+     <paramdef>GtkScintilla <parameter>widget</parameter></paramdef>
+     <paramdef>int <parameter>message</parameter></paramdef>
+     <paramdef>int <parameter>wparam</parameter></paramdef>
+     <paramdef>int <parameter>lparam</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+       
+   </shortdesc>
+   <desc>
+    <simpara>
+        
+    </simpara>
+   </desc>
+  </signal>
+  
+  <signal id="scn.gtkscintilla.signal.margin_click">
+   <signalname>margin_click</signalname>
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
+     <paramdef>GtkScintilla <parameter>widget</parameter></paramdef>
+     <paramdef>int <parameter>modifiers</parameter></paramdef>
+     <paramdef>int <parameter>position</parameter></paramdef>
+     <paramdef>int <parameter>margin</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+        margin_click signal is emitted when the users clicks on the margin of GtkScintilla object.
+   </shortdesc>
+   <desc>
+    <simpara>
+        margin_click signal is emitted when the users clicks on the margin of GtkScintilla object.
+    </simpara>
+   </desc>
+  </signal>
+  
+  <signal id="scn.gtkscintilla.signal.need_shown">
+   <signalname>need_shown</signalname>
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
+     <paramdef>GtkScintilla <parameter>widget</parameter></paramdef>
+     <paramdef>int <parameter>position</parameter></paramdef>
+     <paramdef>int <parameter>lenght</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+       
+   </shortdesc>
+   <desc>
+    <simpara>
+        
+    </simpara>
+   </desc>
+  </signal>
+
+  <signal id="scn.gtkscintilla.signal.painted">
+   <signalname>painted</signalname>
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
+     <paramdef>GtkScintilla <parameter>widget</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+       
+   </shortdesc>
+   <desc>
+    <simpara>
+        
+    </simpara>
+   </desc>
+  </signal>
+
+
+  <signal id="scn.gtkscintilla.signal.user_list_selection">
+   <signalname>user_list_selection</signalname>
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
+     <paramdef>GtkScintilla <parameter>widget</parameter></paramdef>
+     <paramdef>int <parameter>type</parameter></paramdef>
+     <paramdef>char <parameter>text</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+       
+   </shortdesc>
+   <desc>
+    <simpara>
+        
+    </simpara>
+   </desc>
+  </signal>
+  
+  <signal id="scn.gtkscintilla.signal.uri_dropped">
+   <signalname>uri_dropped</signalname>
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
+     <paramdef>GtkScintilla <parameter>widget</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+   </shortdesc>
+   <desc>
+    <simpara>
+        
+    </simpara>
+   </desc>
+  </signal>
+
+ </signals>
+
 </classentry>
+
