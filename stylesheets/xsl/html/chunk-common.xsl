@@ -44,6 +44,7 @@
     <xsl:when test="name($node)='signal'">1</xsl:when>
     <xsl:when test="name($node)='constructor'">1</xsl:when>
     <xsl:when test="name($node)='legalnotice'">1</xsl:when>
+    <xsl:when test="name($node)='enum'">1</xsl:when>
     <xsl:otherwise>0</xsl:otherwise>
   </xsl:choose>
 </xsl:template>
@@ -157,6 +158,7 @@
 	     |preceding::classentry[1]
 	     |preceding::reference[1]
              |preceding::refentry[1]
+             |preceding::enum[1]
              |preceding::colophon[1]
              |preceding::sect1[name(preceding-sibling::*[1]) = 'sect1'][1]
              |preceding::section[name(preceding-sibling::*[1]) = 'section'
@@ -196,6 +198,7 @@
 	     |following::reference[1]
 	     |following::refentry[1]
              |following::colophon[1]
+             |following::enum[1]
              |following::sect1[1]
              |following::section[name(parent::*) != 'section'][1]
              |following::bibliography[1]
@@ -212,6 +215,7 @@
              |descendant::glossary[1]
              |descendant::index[1]
              |descendant::colophon[1]
+             |descendant::enum[1]
              |descendant::setindex[1]
              |descendant::part[1]
      	     |descendant::constructor[1]
@@ -286,7 +290,7 @@
 
 <!-- ==================================================================== -->
 
-<xsl:template match="classset|classentry|method|signal|attribute|constructor">
+<xsl:template match="classset|classentry|method|signal|attribute|constructor|enum">
   <xsl:call-template name="process-chunk-element"/>
 </xsl:template>
 

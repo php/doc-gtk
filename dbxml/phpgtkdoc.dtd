@@ -1,7 +1,8 @@
 <!-- 
    Docbook Customiszation layer of PHP-GTK docs
+   Authors: James Moore <jmoore@php.net>
 
-   $Id: phpgtkdoc.dtd,v 1.1.1.1 2001-06-01 14:33:46 andrei Exp $
+   $Id: phpgtkdoc.dtd,v 1.2 2001-06-09 10:12:40 jmoore Exp $
 
 -->
 
@@ -23,7 +24,7 @@
    - Must contain classmeta
    - Must contain one or more classentry's
 -->
-<!ELEMENT classset ((classsetmeta), (classentry)+)>
+<!ELEMENT classset ((classsetmeta), (classentry, enum)+)>
 <!ATTLIST classset
     %common.attrib;
 >
@@ -248,5 +249,45 @@
 -->
 <!ELEMENT attributename (%docinfo.char.mix;)* >
 <!ATTLIST attributename
+    %common.attrib;
+>
+
+<!--
+
+  - enum: contains enum and flag information
+
+-->
+<!ELEMENT enum ((enumname),(enumoption)+) >
+<!ATTLIST enum
+    %common.attrib;
+>
+
+<!--
+
+  - enumname: contains symbolic name of enum or flag
+
+-->
+<!ELEMENT enumname (%docinfo.char.mix;)* >
+<!ATTLIST enumname
+    %common.attrib;
+>
+
+<!--
+
+  - enumname: contains each option of an enum
+
+-->
+<!ELEMENT enumoption ((optionname),(shortdesc)) >
+<!ATTLIST enumoption
+    %common.attrib;
+>
+
+<!--
+
+  - optionname: contains symbolic name of a flag or enum option.
+
+-->
+<!ELEMENT optionname (%docinfo.char.mix;)* >
+<!ATTLIST optionname
     %common.attrib;
 >

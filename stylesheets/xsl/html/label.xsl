@@ -29,7 +29,7 @@
  </xsl:if>
 </xsl:template>
 
-<xsl:template match="method|signal|attribute|constructor|legalnotice" mode="label.content">
+<xsl:template match="method|signal|attribute|constructor|legalnotice|enum" mode="label.content">
  <xsl:param name="punct">.</xsl:param>
  <xsl:if test="@label">
   <xsl:value-of select="@label"/>

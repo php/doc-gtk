@@ -79,5 +79,11 @@
  <xsl:value-of select="(./funcsynopsis/funcprototype/funcdef/function)[1]"/>
 </xsl:template>
 
+<xsl:template match="enum" mode="title.content" >
+ <xsl:param name="text-only" select="'0'"/>
+ <xsl:param name="allow-anchors" select="'0'"/>
+ <xsl:value-of select="./enumname"/>
+</xsl:template>
+
 
 </xsl:stylesheet>
