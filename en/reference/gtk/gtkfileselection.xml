@@ -36,16 +36,20 @@
    Creates a new <classname>GtkFileSelection</classname> widget.
   </shortdesc>
   <desc>
-   <simpara>
+   <para>
     The syntax to create a <classname>GtkFileSelection</classname> 
     widget is:
-    <literal>
-     $fs = &amp;new GtkFileSelection(&quot;My File Selection&quot;);
-    </literal>
+    <informalexample>
+     <programlisting>
+<![CDATA[
+$fs = &new GtkFileSelection("My File Selection");
+]]>
+     </programlisting>
+    </informalexample>
     Note that if the <parameter>title</parameter> parameter is not
     supplied or is <literal>NULL</literal> the title will be set to
     the name of the file in which the PHP code resides.
-   </simpara>
+   </para>
   </desc>
  </constructor>
 
@@ -67,7 +71,7 @@
     </simpara>
     <simpara>
      <literal>
-      $fs-&gt;set_filename(&quot;/home/user/php/&quot;);
+      $fs->set_filename("/home/user/php/");
      </literal>
     </simpara>
    </desc>
@@ -91,7 +95,7 @@
     </simpara>
     <simpara>
      <literal>
-      $filename = $fs-&gt;get_filename();
+      $filename = $fs->get_filename();
      </literal>
     </simpara>
    </desc>
@@ -125,7 +129,7 @@
     </simpara>
     <simpara>
      <literal>
-      $fs-&gt;complete(&quot;*.php&quot;);
+      $fs->complete("*.php");
      </literal>
     </simpara>
    </desc>
@@ -249,7 +253,7 @@
     <simpara>
      <propname class="GtkFileSelection">selection_text</propname> is a 
      <classname>GtkLabel</classname> that by default contains the string
-     <literal>&quot;Selection:  &quot;</literal> followed by the full path
+     <literal>"Selection:  "</literal> followed by the full path
      of the current selected directory.
     </simpara>
    </desc>

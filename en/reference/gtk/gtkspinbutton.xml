@@ -80,57 +80,57 @@
 dl('php_gtk.' . (strstr(PHP_OS, 'WIN') ? 'dll' : 'so'));
 
 function collect($d, $m, $y) {
-  echo $d-&gt;get_value_as_int(). &quot;-&quot; .$m-&gt;get_value_as_int(). 
-&quot;-&quot; .$y-&gt;get_value_as_int().&quot;\n&quot;;
+  echo $d->get_value_as_int(). "-" .$m->get_value_as_int(). 
+"-" .$y->get_value_as_int()."\n";
   flush();
 }
 
-$window = &amp;new GtkWindow();
-$window-&gt;set_position(GTK_WIN_POS_CENTER);
-$window-&gt;connect_object('destroy', array('gtk', 'main_quit'));
+$window = &new GtkWindow();
+$window->set_position(GTK_WIN_POS_CENTER);
+$window->connect_object('destroy', array('gtk', 'main_quit'));
 
-$vbox = &amp;new GtkVBox(false, 5);
-$window-&gt;add($vbox);
+$vbox = &new GtkVBox(false, 5);
+$window->add($vbox);
 
-$hbox = &amp;new GtkHBox(false, 5);
-$hbox-&gt;set_border_width(5);
-$vbox-&gt;add($hbox);
+$hbox = &new GtkHBox(false, 5);
+$hbox->set_border_width(5);
+$vbox->add($hbox);
 
-$daylabel = &amp;new GtkLabel(&quot;Day:&quot;);
-$hbox-&gt;pack_start($daylabel, false);
+$daylabel = &new GtkLabel("Day:");
+$hbox->pack_start($daylabel, false);
 
-$day = date(&quot;d&quot;);
-$dayadj = &amp;new GtkAdjustment($day, 1.0, 31.0, 1.0, 7.0, 0.0);
-$dayspin = &amp;new GtkSpinButton($dayadj);
-$dayspin-&gt;set_wrap(true);
-$hbox-&gt;pack_start($dayspin, false);
+$day = date("d");
+$dayadj = &new GtkAdjustment($day, 1.0, 31.0, 1.0, 7.0, 0.0);
+$dayspin = &new GtkSpinButton($dayadj);
+$dayspin->set_wrap(true);
+$hbox->pack_start($dayspin, false);
 
-$monthlabel = &amp;new GtkLabel(&quot;Month:&quot;);
-$hbox-&gt;pack_start($monthlabel, false);
+$monthlabel = &new GtkLabel("Month:");
+$hbox->pack_start($monthlabel, false);
 
-$month = date(&quot;m&quot;);
-$monthadj = &amp;new GtkAdjustment($month, 1.0, 12.0, 1.0, 3.0, 0.0);
-$monthspin = &amp;new GtkSpinButton($monthadj);
-$monthspin-&gt;set_wrap(true);
-$hbox-&gt;pack_start($monthspin, false);
+$month = date("m");
+$monthadj = &new GtkAdjustment($month, 1.0, 12.0, 1.0, 3.0, 0.0);
+$monthspin = &new GtkSpinButton($monthadj);
+$monthspin->set_wrap(true);
+$hbox->pack_start($monthspin, false);
 
-$yearlabel = &amp;new GtkLabel(&quot;Year:&quot;);
-$hbox-&gt;pack_start($yearlabel, false);
+$yearlabel = &new GtkLabel("Year:");
+$hbox->pack_start($yearlabel, false);
 
-$year = date(&quot;Y&quot;);
-$yearadj = &amp;new GtkAdjustment($year, $year-90, $year+10, 1.0, 5.0, 0.0);
-$yearspin = &amp;new GtkSpinButton($yearadj);
-$yearspin-&gt;set_usize(55, 0);
-$hbox-&gt;pack_start($yearspin, false);
+$year = date("Y");
+$yearadj = &new GtkAdjustment($year, $year-90, $year+10, 1.0, 5.0, 0.0);
+$yearspin = &new GtkSpinButton($yearadj);
+$yearspin->set_usize(55, 0);
+$hbox->pack_start($yearspin, false);
 
-$button = &amp;new GtkButton(&quot;Collect data&quot;);
-$button-&gt;connect_object('clicked', 'collect', $dayspin, $monthspin, 
+$button = &new GtkButton("Collect data");
+$button->connect_object('clicked', 'collect', $dayspin, $monthspin, 
 $yearspin);
-$vbox-&gt;add($button);
+$vbox->add($button);
 
-$vbox-&gt;show_all();
-$hbox-&gt;show_all();
-$window-&gt;show_all();
+$vbox->show_all();
+$hbox->show_all();
+$window->show_all();
 
 gtk::main();
 
@@ -265,10 +265,10 @@ gtk::main();
 <![CDATA[
 <?php
 
-$adj = &amp;new GtkAdjustment(0.0, 0.0, 1.0, 0.01, 0.1, 0.0);
-$spin = &amp;new GtkSpinButton($adj, 0.0, 2);
+$adj = &new GtkAdjustment(0.0, 0.0, 1.0, 0.01, 0.1, 0.0);
+$spin = &new GtkSpinButton($adj, 0.0, 2);
 
-round($spin-&gt;get_value_as_float(), 2);
+round($spin->get_value_as_float(), 2);
 
 ?>
 ]]>

@@ -41,13 +41,17 @@
    Creates a button that can be toggled between two states.
   </shortdesc>
   <desc>
-   <simpara>
-    <literal>
-     $togglebutton = &amp;new GtkToggleButton(&quot;GtkToggleButton's label&quot;);
-    </literal>
+   <para>
+    <informalexample>
+     <programlisting>
+<![CDATA[
+     $togglebutton = &new GtkToggleButton("GtkToggleButton's label");
+]]>
+     </programlisting>
+    </informalexample>
     creates a <classname>GtkToggleButton</classname> that can be toggled
     between active and normal states.
-   </simpara>
+   </para>
   </desc>
  </constructor>
 
@@ -158,12 +162,12 @@
 
   <signal id="gtk.gtktogglebutton.signal.toggled">
    <signalname>toggled</signalname>
-   <callback>
+   <funcsynopsis>
     <funcprototype>
-     <funcdef>void <function>callback</function></funcdef>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
      <paramdef><classname>GtkToggleButton</classname> togglebutton</paramdef>
     </funcprototype>
-   </callback>
+   </funcsynopsis>
    <shortdesc>
     Emitted when the <function class="GtkToggleButton">toggled</function> 
     method is called.
@@ -205,10 +209,16 @@
      drawn or not.  It is exposed here so that the value of the indicator's
      mode setting can be tested programmatically.
     </simpara>
-    <simpara>
+    <para>
      The property can be accessed using the syntax
-     <literal>$togglebutton-&gt;draw_indicator;</literal>
-    </simpara>
+     <informalexample>
+      <programlisting>
+<![CDATA[
+$togglebutton->draw_indicator;
+]]>
+      </programlisting>
+     </informalexample>
+    </para>
     <simpara>
      The <propname>draw_indicator</propname> property should not be accessed
      directly.  Use <function class="GtkToggleButton">set_mode</function> 

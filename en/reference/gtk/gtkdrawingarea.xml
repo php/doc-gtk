@@ -61,25 +61,25 @@ dl('php_gtk.'.(strstr(PHP_OS, 'WIN') ? 'dll' : 'so'));
 
 function draw_it($drawingarea, $event, $style, $gdkwindow) {
   /* access the GdkWindow's colormap to associate a color with a GdkGC */
-  $colormap = $gdkwindow-&gt;colormap;
-  $yellow = $gdkwindow-&gt;new_gc();
-  $yellow-&gt;foreground = $colormap-&gt;alloc('yellow');
-  $red = $gdkwindow-&gt;new_gc();
-  $red-&gt;foreground = $colormap-&gt;alloc('red');
-  $red-&gt;line_width = 7;
+  $colormap = $gdkwindow->colormap;
+  $yellow = $gdkwindow->new_gc();
+  $yellow->foreground = $colormap->alloc('yellow');
+  $red = $gdkwindow->new_gc();
+  $red->foreground = $colormap->alloc('red');
+  $red->line_width = 7;
 
   /* set up fonts.  The first font here is set as part of the drawingarea's
      style property so that it will be used in gtk::draw_string(). */
   $font = 
   gdk::font_load('-unknown-Arial-bold-r-normal--*-120-*-*-p-0-iso8859-1');
-  $style-&gt;font = $font;
+  $style->font = $font;
   $font2 = 
   gdk::font_load('-unknown-Arial-bold-r-normal--*-720-*-*-p-0-iso8859-1');
 
   /* call the appropriate drawing functions */
-  gdk::draw_rectangle($gdkwindow, $style-&gt;white_gc, true, 0, 0, 200, 220);
+  gdk::draw_rectangle($gdkwindow, $style->white_gc, true, 0, 0, 200, 220);
   gdk::draw_rectangle($gdkwindow, $yellow, true, 50, 50, 100, 100);
-  gdk::draw_string($gdkwindow, $font2, $style-&gt;white_gc, 75, 130, '?');
+  gdk::draw_string($gdkwindow, $font2, $style->white_gc, 75, 130, '?');
   gdk::draw_line($gdkwindow, $red, 20, 20, 180, 180);
   gdk::draw_line($gdkwindow, $red, 20, 180, 180, 20);
   gtk::draw_string($style, $gdkwindow, GTK_STATE_NORMAL, 12, 210, 
@@ -89,42 +89,42 @@ function draw_it($drawingarea, $event, $style, $gdkwindow) {
 
 function press_it($drawingarea, $event, $style, $gdkwindow) {
   /* make the drawingarea look like it has been pressed down */
-  $rectangle = &amp;new GdkRectangle(0, 0, 200, 220);
+  $rectangle = &new GdkRectangle(0, 0, 200, 220);
   gtk::paint_focus($style, $gdkwindow, $rectangle, $drawingarea, null, 0, 0, 
                     200, 220);
 }
 
 function redraw_it($drawingarea, $event) {
   /* trigger a new expose event */
-  $drawingarea-&gt;queue_draw();
+  $drawingarea->queue_draw();
 }
 
 /* set up the main window that will hold the drawing area */
-$window = &amp;new GtkWindow();
-$window-&gt;set_position(GTK_WIN_POS_CENTER);
-$window-&gt;connect_object('destroy', array('gtk', 'main_quit'));
+$window = &new GtkWindow();
+$window->set_position(GTK_WIN_POS_CENTER);
+$window->connect_object('destroy', array('gtk', 'main_quit'));
 
 /* set up the drawing area.  Sizing is taken from the parent, unless set. 
    We need to add events so that the drawingarea is sensitive to the mouse,
    using set_events() to do this because the widget is not realized yet. */
-$drawingarea = &amp;new GtkDrawingArea();
-$drawingarea-&gt;size(200, 220);
-$drawingarea-&gt;set_events(GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK);
-$window-&gt;add($drawingarea);
+$drawingarea = &new GtkDrawingArea();
+$drawingarea->size(200, 220);
+$drawingarea->set_events(GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK);
+$window->add($drawingarea);
 
 /* once the drawing area has been added to the window we can realize() it, 
    which means that we can now access its properties */
-$drawingarea-&gt;realize();
-$style = $drawingarea-&gt;style;
-$gdkwindow = $drawingarea-&gt;window;
+$drawingarea->realize();
+$style = $drawingarea->style;
+$gdkwindow = $drawingarea->window;
 
 /* drawing should always follow an expose event */
-$drawingarea-&gt;connect('expose-event', 'draw_it', $style, $gdkwindow);
-$drawingarea-&gt;connect('button-press-event', 'press_it', $style, 
+$drawingarea->connect('expose-event', 'draw_it', $style, $gdkwindow);
+$drawingarea->connect('button-press-event', 'press_it', $style, 
 $gdkwindow);
-$drawingarea-&gt;connect('button-release-event', 'redraw_it');
+$drawingarea->connect('button-release-event', 'redraw_it');
 
-$window-&gt;show_all();
+$window->show_all();
 gtk::main();
 
 ?>

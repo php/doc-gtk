@@ -70,33 +70,33 @@
 dl('php_gtk.'.(strstr(PHP_OS, 'WIN') ? 'dll' : 'so'));
 
 /* set up a window */
-$window = &amp;new GtkWindow();
-$window-&gt;set_position(GTK_WIN_POS_CENTER);
-$window-&gt;connect_object('destroy', array('gtk', 'main_quit'));
+$window = &new GtkWindow();
+$window->set_position(GTK_WIN_POS_CENTER);
+$window->connect_object('destroy', array('gtk', 'main_quit'));
 
 /* set up the scrolled window and add it to the main window,
    sizing it if necessary. */
-$scrolledwindow = &amp;new GtkScrolledWindow();
-$scrolledwindow-&gt;set_usize(150, 150);
-$window-&gt;add($scrolledwindow);
+$scrolledwindow = &new GtkScrolledWindow();
+$scrolledwindow->set_usize(150, 150);
+$window->add($scrolledwindow);
 
 /* create the viewport */
-$viewport = &amp;new GtkViewport();
-$viewport-&gt;set_shadow_type(GTK_SHADOW_ETCHED_OUT);
+$viewport = &new GtkViewport();
+$viewport->set_shadow_type(GTK_SHADOW_ETCHED_OUT);
 
 /* create a box container and add child widget or widgets to it - because
    as with most widgets, a GtkCalendar has no adjustment-friendly focus
    internals, whereas a box container does */
-$box = &amp;new GtkVBox();
-$calendar = &amp;new GtkCalendar();
-$box-&gt;pack_start($calendar, false);
+$box = &new GtkVBox();
+$calendar = &new GtkCalendar();
+$box->pack_start($calendar, false);
 
 /* add the box to the viewport, and the viewport to the scrolled window */
-$viewport-&gt;add($box);
-$scrolledwindow-&gt;add($viewport);
+$viewport->add($box);
+$scrolledwindow->add($viewport);
 
-$box-&gt;show_all();
-$window-&gt;show_all();
+$box->show_all();
+$window->show_all();
 
 gtk::main();
 

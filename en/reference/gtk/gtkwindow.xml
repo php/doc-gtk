@@ -94,17 +94,17 @@
 
 /*load the php_gtk module*/
 dl('php_gtk.' . (strstr(PHP_OS, 'WIN') ? 'dll' : 'so')) ||
-die(&quot;Can't load php_gtk module!\n&quot;);
+die("Can't load php_gtk module!\n");
 
 /*create the main window*/
-$window = &amp;new GtkWindow();
+$window = &new GtkWindow();
 
 /*ensure that the destruction of the main window also kills the main loop*/
-$window-&gt;connect_object('destroy', array('gtk', 'main_quit'));
+$window->connect_object('destroy', array('gtk', 'main_quit'));
 
 /*realize the underlying GdkWindow, flag the GtkWindow's visibility and map
   it onto the screen, all in one simple line*/
-$window-&gt;show();
+$window->show();
 
 /*without the main loop, there is no PHP-GTK script*/
 gtk::main();
@@ -509,9 +509,9 @@ gtk::main();
 
   <signal id="gtk.gtkwindow.signal.set-focus">
    <signalname>set-focus</signalname>
-   <callback>
+   <funcsynopsis>
     <funcprototype>
-     <funcdef>void <function>callback</function></funcdef>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
      <paramdef>
       <classname>GtkWindow</classname> 
       <parameter>window</parameter>
@@ -521,7 +521,7 @@ gtk::main();
       <parameter>child_widget</parameter>
      </paramdef>
     </funcprototype>
-   </callback>
+   </funcsynopsis>
    <shortdesc>
     Emitted when <function classname="GtkWindow">set_focus</function>
     is called.

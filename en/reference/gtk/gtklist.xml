@@ -63,50 +63,50 @@ dl('php_gtk.' . (strstr(PHP_OS, 'WIN') ? 'dll' : 'so'));
 
 function echo_it($list, $listitem) {
 /* collect the text from the selected list item's label */
-  $listlabel = $listitem-&gt;child;
+  $listlabel = $listitem->child;
 /* filter list items according to child object type */
-  if($listlabel-&gt;get_name() == 'GtkLabel') {
-    $name = $listlabel-&gt;get();
-    $label = &amp;new GtkLabel(&quot;You chose $name just now&quot;);
+  if($listlabel->get_name() == 'GtkLabel') {
+    $name = $listlabel->get();
+    $label = &new GtkLabel("You chose $name just now");
 /* create a popup window and display a message relevant to selected item */
-    $popup = &amp;new GtkWindow(GTK_WINDOW_POPUP);
-    $popup-&gt;set_uposition((gdk::screen_width()/2)+50, 
+    $popup = &new GtkWindow(GTK_WINDOW_POPUP);
+    $popup->set_uposition((gdk::screen_width()/2)+50, 
 (gdk::screen_height()/3));
-    $popup-&gt;add($label);
-    $popup-&gt;show_all();
+    $popup->add($label);
+    $popup->show_all();
 /* connect the list item's own deselect signal (not the list's) */
-    $listitem-&gt;connect_object('deselect', create_function('$popup', 
-'$popup-&gt;destroy();'), $popup);
+    $listitem->connect_object('deselect', create_function('$popup', 
+'$popup->destroy();'), $popup);
   }
   else gtk::main_quit();
 }
 
-$window = &amp;new GtkWindow(GTK_WINDOW_DIALOG);
-$window-&gt;set_position(GTK_WIN_POS_CENTER);
-$window-&gt;connect_object('destroy', array('gtk', 'main_quit'));
+$window = &new GtkWindow(GTK_WINDOW_DIALOG);
+$window->set_position(GTK_WIN_POS_CENTER);
+$window->connect_object('destroy', array('gtk', 'main_quit'));
 
-$list = &amp;new GtkList();
+$list = &new GtkList();
 /* the contents of this array will populate the list */
 $fill = array('Angela', 'Belinda', 'Carolyn', 'Danike', 'Etha', 'Fiona', 
 'Gertraud', 'Heidi', 'Jessica', 'Kirstin', 'Lorinda', 'Marianne');
 
 foreach(range(0, count($fill)-1) as $i) 
-  $listitem[] = &amp;new GtkListItem($fill[$i]);
+  $listitem[] = &new GtkListItem($fill[$i]);
 
-$list-&gt;append_items($listitem);
+$list->append_items($listitem);
 
-$enditem = &amp;new GtkListItem();
+$enditem = &new GtkListItem();
 /* a list item is also a container */
-$button = &amp;new GtkButton('Close');
-$enditem-&gt;add($button);
+$button = &new GtkButton('Close');
+$enditem->add($button);
 /* there is no way to append() a single item - but GtkList is a container
 widget, so it's okay to use add() */
-$list-&gt;add($enditem);
-$list-&gt;connect('select-child', 'echo_it');
-$list-&gt;show_all();
+$list->add($enditem);
+$list->connect('select-child', 'echo_it');
+$list->show_all();
 
-$window-&gt;add($list);
-$window-&gt;show_all();
+$window->add($list);
+$window->show_all();
 
 gtk::main();
 
@@ -664,12 +664,12 @@ gtk::main();
 
   <signal id="gtk.gtklist.signal.selection-changed">
    <signalname>selection-changed</signalname>
-   <callback>
+   <funcsynopsis>
     <funcprototype>
-     <funcdef>void <function>callback</function></funcdef>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
      <paramdef><classname>GtkList</classname> list</paramdef>
     </funcprototype>
-   </callback>
+   </funcsynopsis>
    <shortdesc>
     Emitted when the selection property is changed.
    </shortdesc>
@@ -685,13 +685,13 @@ gtk::main();
 
   <signal id="gtk.gtklist.signal.select-child">
    <signalname>select-child</signalname>
-   <callback>
+   <funcsynopsis>
     <funcprototype>
-     <funcdef>void <function>callback</function></funcdef>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
      <paramdef><classname>GtkList</classname> list</paramdef>
      <paramdef><classname>GtkWidget</classname> child</paramdef>
     </funcprototype>
-   </callback>
+   </funcsynopsis>
    <shortdesc>
     Emitted when a list item is selected.
    </shortdesc>
@@ -713,13 +713,13 @@ gtk::main();
 
   <signal id="gtk.gtklist.signal.unselect-child">
    <signalname>unselect-child</signalname>
-   <callback>
+   <funcsynopsis>
     <funcprototype>
-     <funcdef>void <function>callback</function></funcdef>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
      <paramdef><classname>GtkList</classname> list</paramdef>
      <paramdef><classname>GtkWidget</classname> child</paramdef>
     </funcprototype>
-   </callback>
+   </funcsynopsis>
    <shortdesc>
     Emitted when a list item is deselected.
    </shortdesc>
@@ -750,16 +750,22 @@ gtk::main();
     Array containing current selection information.
    </shortdesc>
    <desc>
-    <simpara>
+    <para>
      The <propname class="GtkList">selection</propname> property is an
      array that contains any currently selected items.  If there is no current
      selection, the array will be empty.  If the selection mode does not allow
      multiple selection, 
-     <literal>$list-&gt;selection[0];</literal> will
+     <informalexample>
+      <programlisting>
+<![CDATA[
+$list->selection[0];
+]]>
+      </programlisting>
+     </informalexample> will
      return the selected item.  If the selection mode allows multiple
      selection, there will be as many elements in the array as there are
      currently-selected objects.
-    </simpara>
+    </para>
     <simpara>
      See also:  <function class="GtkContainer">children</function>.
     </simpara>

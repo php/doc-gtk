@@ -31,14 +31,20 @@
    Creates the basis for a horizontal dual-paned container.
   </shortdesc>
   <desc>
-   <simpara>
+   <para>
     The <classname>GtkHPaned</classname> widget should be thought of in
     terms of an arrangement of two child widgets, rather than as an object
     in its own right.  The construct
-     <literal>$hbox = &amp;new GtkHBox();</literal>
+    <informalexample>
+     <programlisting>
+<![CDATA[
+$hpaned = &new GtkHPaned();
+]]>
+     </programlisting>
+    </informalexample>
     needs to be within a containing <classname>GtkWindow</classname> 
     and to contain two child widgets of its own in order to work.
-   </simpara>
+   </para>
    <para>
     <example>
      <title>Constructing a <classname>GtkHPaned widget</classname></title>
@@ -46,25 +52,25 @@
 <![CDATA[
 <?php
 
-$window = &amp;new GtkWindow();
-$window-&gt;set_title(&quot;GtkHPaned&quot;);
-$window-&gt;connect_object(&quot;destroy&quot;, array(&quot;gtk&quot;, 
-&quot;main_quit&quot;));
+$window = &new GtkWindow();
+$window->set_title("GtkHPaned");
+$window->connect_object("destroy", array("gtk", 
+"main_quit"));
 
-$hpaned = &amp;new GtkHPaned();
-$window-&gt;add($hpaned);
-$hpaned-&gt;show();
+$hpaned = &new GtkHPaned();
+$window->add($hpaned);
+$hpaned->show();
 
-$button = &amp;new GtkButton(&quot;Widget child1&quot;);
-$hpaned-&gt;pack1($button, false, false);
-$button-&gt;show();
+$button = &new GtkButton("Widget child1");
+$hpaned->pack1($button, false, false);
+$button->show();
 
-$label = &amp;new GtkLabel();
-$label-&gt;set_text(&quot;Widget child2&quot;);
-$hpaned-&gt;pack2($label, true, true);
-$label-&gt;show();
+$label = &new GtkLabel();
+$label->set_text("Widget child2");
+$hpaned->pack2($label, true, true);
+$label->show();
 
-$window-&gt;show_all();
+$window->show_all();
 
 gtk::main();
 

@@ -71,35 +71,35 @@ dl('php_gtk.'.(strstr(PHP_OS, 'WIN') ? 'dll' : 'so'));
 
 /* set up a function to collect the input from the entry and print it */
 function get_input($entry) {
-  $input=$entry-&gt;get_text();
-  echo &quot;$input\n&quot;;
-  $entry-&gt;grab_focus();
-  $entry-&gt;set_text(&quot;&quot;);
+  $input=$entry->get_text();
+  echo "$input\n";
+  $entry->grab_focus();
+  $entry->set_text("");
 }
 
 /* set up the window */
-$window = &amp;new GtkWindow();
-$window-&gt;set_position(GTK_WIN_POS_MOUSE);
-$window-&gt;connect_object('destroy', array('gtk', 'main_quit'));
+$window = &new GtkWindow();
+$window->set_position(GTK_WIN_POS_MOUSE);
+$window->connect_object('destroy', array('gtk', 'main_quit'));
 
 /* add a box container to the window to allow more than one child widget */
-$box = &amp;new GtkVBox();
-$window-&gt;add($box);
+$box = &new GtkVBox();
+$window->add($box);
 
 /* add a GtkEntry to the box and connect it to the callback function */
-$entry = &amp;new GtkEntry();
-$entry-&gt;connect('activate', 'get_input');
-$box-&gt;add($entry);
+$entry = &new GtkEntry();
+$entry->connect('activate', 'get_input');
+$box->add($entry);
 
 /* add a GtkButton to the box and use connect_object() so that it
    will pass the GtkEntry to the callback when it is clicked */
-$button = &amp;new GtkButton('Return or click me to echo input');
-$button-&gt;connect_object('clicked', 'get_input', $entry);
-$box-&gt;add($button);
+$button = &new GtkButton('Return or click me to echo input');
+$button->connect_object('clicked', 'get_input', $entry);
+$box->add($button);
 
 /* display everything and set the main loop running */
-$box-&gt;show_all();
-$window-&gt;show_all();
+$box->show_all();
+$window->show_all();
 gtk::main();
 
 ?>
@@ -127,11 +127,15 @@ gtk::main();
      <function class="GtkEntry">set_text</function> sets a string of
      given text in the entry field.
     </simpara>
-    <simpara>
-     <literal>
-      $entry-gt;set_text(&quot;Programmed text entry&quot;);
-     </literal>
-    </simpara>
+    <para>
+     <informalexample>
+      <programlisting>
+<![CDATA[
+$entry-gt;set_text("Programmed text entry");
+]]>
+      </programlisting>
+     </informalexample>
+    </para>
    </desc>
   </method>
 
@@ -150,11 +154,15 @@ gtk::main();
      <function class="GtkEntry">append_text</function> adds the given
      string to the end of any entered text.
     </simpara>
-    <simpara>
-     <literal>
-      $entry-&gt;append_text(&quot;&lt;/END&gt;&quot;);
-     </literal>
-    </simpara>
+    <para>
+     <informalexample>
+      <programlisting>
+<![CDATA[
+$entry->append_text("</END>");
+]]>
+      </programlisting>
+     </informalexample>
+    </para>
    </desc>
   </method>
 
@@ -173,11 +181,15 @@ gtk::main();
      <function class="GtkEntry">prepend_text</function> adds the given
      string to the start of any entered text.
     </simpara>
-    <simpara>
-     <literal>
-      $entry-&gt;prepend_text(&quot;&lt;START&gt;&quot;);
-     </literal>
-    </simpara>
+    <para>
+     <informalexample>
+      <programlisting>
+<![CDATA[
+$entry->prepend_text("<START>");
+]]>
+      </programlisting>
+     </informalexample>
+    </para>
    </desc>
   </method>
 

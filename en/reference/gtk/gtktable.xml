@@ -92,37 +92,37 @@
 <![CDATA[
 <?php
 
-dl(&quot;php_gtk.&quot; . (strstr(PHP_OS, &quot;WIN&quot;) ? &quot;dll&quot; : 
-&quot;so&quot;));
+dl("php_gtk." . (strstr(PHP_OS, "WIN") ? "dll" : 
+"so"));
 
-$window = &amp;new GtkWindow();
-$window-&gt;set_position(GTK_WIN_POS_CENTER);
-$window-&gt;connect_object(&quot;destroy&quot;, array(&quot;gtk&quot;, 
-&quot;main_quit&quot;));
+$window = &new GtkWindow();
+$window->set_position(GTK_WIN_POS_CENTER);
+$window->connect_object("destroy", array("gtk", 
+"main_quit"));
 
-$table = &amp;new GtkTable();
-$table-&gt;set_row_spacings(5);
-$table-&gt;set_col_spacings(5);
-$window-&gt;add($table);
+$table = &new GtkTable();
+$table->set_row_spacings(5);
+$table->set_col_spacings(5);
+$window->add($table);
 
-$text = &amp;new GtkText();
-$table-&gt;attach($text, 1, 4, 1, 3);
+$text = &new GtkText();
+$table->attach($text, 1, 4, 1, 3);
 
-$label = &amp;new GtkLabel('Expand this window to see the difference between 
+$label = &new GtkLabel('Expand this window to see the difference between 
 the GtkAttachOptions settings.');
-$table-&gt;attach($label, 1, 4, 4, 5, GTK_SHRINK, GTK_SHRINK);
+$table->attach($label, 1, 4, 4, 5, GTK_SHRINK, GTK_SHRINK);
 
-$button = &amp;new GtkButton('Button    ');
-$table-&gt;attach($button, 4, 6, 3, 4, GTK_SHRINK, GTK_SHRINK, 3, 3);
+$button = &new GtkButton('Button    ');
+$table->attach($button, 4, 6, 3, 4, GTK_SHRINK, GTK_SHRINK, 3, 3);
 
-$button = &amp;new GtkButton('Button 2 ');
-$table-&gt;attach($button, 4, 6, 4, 5, GTK_FILL, GTK_FILL, 3, 3);
+$button = &new GtkButton('Button 2 ');
+$table->attach($button, 4, 6, 4, 5, GTK_FILL, GTK_FILL, 3, 3);
 
-$button = &amp;new GtkButton('Button 3 ');
-$table-&gt;attach($button, 4, 6, 5, 6, GTK_FILL|GTK_EXPAND, 
+$button = &new GtkButton('Button 3 ');
+$table->attach($button, 4, 6, 5, 6, GTK_FILL|GTK_EXPAND, 
 GTK_FILL|GTK_EXPAND, 3, 3);
 
-$window-&gt;show_all();
+$window->show_all();
 
 gtk::main();
 

@@ -66,27 +66,27 @@ dl('php_gtk.' . (strstr(PHP_OS, 'WIN') ? 'dll' : 'so'));
 
 /* function to clear the entry field and give it keyboard focus */
 function focusback($entry) {
-  $entry-&gt;set_text('');
-  $entry-&gt;grab_focus();
+  $entry->set_text('');
+  $entry->grab_focus();
   }
 
 /* on this occasion, the update function *is* the process */
-function change_status($entry, $event, $status, $stuff, &amp;$i) {
+function change_status($entry, $event, $status, $stuff, &$i) {
   /* pick up the value(s) you are intending to use */
-  $value = $event-&gt;keyval;
-  $string = $event-&gt;string;
+  $value = $event->keyval;
+  $string = $event->string;
   /* prevent the message stack building up */
-  $popcontext = $status-&gt;get_context_id($stuff[$i]);
-  $status-&gt;pop($popcontext);
+  $popcontext = $status->get_context_id($stuff[$i]);
+  $status->pop($popcontext);
   /* sort according to value */
   switch($value) {
-    case ($value &gt;= GDK_KEY__a &amp;&amp; $value &lt;= GDK_KEY__z):
+    case ($value >= GDK_KEY__a && $value <= GDK_KEY__z):
       $i = 1;
       break;
-    case ($value &gt;= GDK_KEY_A &amp;&amp; $value &lt;= GDK_KEY_Z):
+    case ($value >= GDK_KEY_A && $value <= GDK_KEY_Z):
       $i = 2;
       break;
-    case ($value &gt;= GDK_KEY_0 &amp;&amp; $value &lt;= GDK_KEY_9):
+    case ($value >= GDK_KEY_0 && $value <= GDK_KEY_9):
       $i = 3;
       break;
     case GDK_KEY_Return:
@@ -100,44 +100,44 @@ function change_status($entry, $event, $status, $stuff, &amp;$i) {
     }
 
   /* create and push the new message according to the value */
-  $pushcontext = $status-&gt;get_context_id($stuff[$i]);
-  if($string &amp;&amp; $string!==' ') 
-  $status-&gt;push($pushcontext, $string.' is a '.$stuff[$i].' character');
-  else $status-&gt;push($pushcontext, $stuff[$i]);
+  $pushcontext = $status->get_context_id($stuff[$i]);
+  if($string && $string!==' ') 
+  $status->push($pushcontext, $string.' is a '.$stuff[$i].' character');
+  else $status->push($pushcontext, $stuff[$i]);
   /* call any other function the value triggers */
   if($i == 4) focusback($entry);
 }
 
 /* set up the main window */
-$window = &amp;new GtkWindow();
-$window-&gt;set_position(GTK_WIN_POS_CENTER);
-$window-&gt;connect_object('destroy', array('gtk', 'main_quit'));
+$window = &new GtkWindow();
+$window->set_position(GTK_WIN_POS_CENTER);
+$window->connect_object('destroy', array('gtk', 'main_quit'));
 
 /* if you want anything else besides the statusbar, you'll need a box */
-$vbox = &amp;new GtkVBox();
-$window-&gt;add($vbox);
+$vbox = &new GtkVBox();
+$window->add($vbox);
 
 /* add the statusbar first, else connecting other widgets to it is messy */
-$status = &amp;new GtkStatusbar();
+$status = &new GtkStatusbar();
 $stuff = array('Here we go...', 'lower case alpha', 'UPPER CASE ALPHA', 
 'numeric', 'return', 'spacebar', 'non-alphanumeric');
-$status-&gt;push($status-&gt;get_context_id($stuff[0]), $stuff[0]);
-$vbox-&gt;pack_end($status, false);
-$status-&gt;show();
+$status->push($status->get_context_id($stuff[0]), $stuff[0]);
+$vbox->pack_end($status, false);
+$status->show();
 
 /* create, connect and pack your other widget(s) */
-$entry = &amp;new GtkEntry();
-$entry-&gt;set_usize(400,20);
+$entry = &new GtkEntry();
+$entry->set_usize(400,20);
 /* this will usually be connect_object(). $entry is only passed here because
-   it is used as a parameter in a function called from the callback.  &amp;$i
+   it is used as a parameter in a function called from the callback.  &$i
    is passed so that the correct message will get 'popped' from the stack */
 $i = 1;
-$entry-&gt;connect('key-press-event','change_status', $status, $stuff, 
-&amp;$i);
-$vbox-&gt;pack_start($entry, false);
-$entry-&gt;show();
+$entry->connect('key-press-event','change_status', $status, $stuff, 
+&$i);
+$vbox->pack_start($entry, false);
+$entry->show();
 
-$window-&gt;show_all();
+$window->show_all();
 
 focusback($entry);
 gtk::main();
@@ -297,14 +297,14 @@ gtk::main();
 
   <signal id="gtk.gtkstatusbar.signal.text-pushed">
    <signalname>text-pushed</signalname>
-   <callback>
+   <funcsynopsis>
     <funcprototype>
-     <funcdef>void <function>callback</function></funcdef>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
      <paramdef><classname>GtkStatusbar</classname> statusbar</paramdef>
      <paramdef>int context_id</paramdef>
      <paramdef>string text</paramdef>
     </funcprototype>
-   </callback>
+   </funcsynopsis>
    <shortdesc>
     Emitted when a message is prepended to the stack.
    </shortdesc>
@@ -320,14 +320,14 @@ gtk::main();
 
   <signal id="gtk.gtkstatusbar.signal.text-popped">
    <signalname>text-popped</signalname>
-   <callback>
+   <funcsynopsis>
     <funcprototype>
-     <funcdef>void <function>callback</function></funcdef>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
      <paramdef><classname>GtkStatusbar</classname> statusbar</paramdef>
      <paramdef>int context_id</paramdef>
      <paramdef>string text</paramdef>
     </funcprototype>
-   </callback>
+   </funcsynopsis>
    <shortdesc>
     Emitted when a message is popped from the top of the stack.
    </shortdesc>

@@ -66,8 +66,8 @@
 <?php
 
 function exposure($adj, $layout) {
-  $layout-&gt;hide();
-  $layout-&gt;show();
+  $layout->hide();
+  $layout->show();
 }
 
 ?>
@@ -86,49 +86,49 @@ dl('php_gtk.' . (strstr(PHP_OS, 'WIN') ? 'dll' : 'so'));
 
 /* callback that forces a redraw of simple child widgets */
 function exposure($adj, $layout) {
-  $layout-&gt;queue_draw();
+  $layout->queue_draw();
 }
 
 /* set up a window and size it to be smaller than the intended layout */
-$window = &amp;new GtkWindow();
-$window-&gt;set_position(GTK_WIN_POS_CENTER);
-$window-&gt;set_title('Layout');
-$window-&gt;set_usize(200, 200);
-$window-&gt;connect_object('destroy', array('gtk', 'main_quit'));
+$window = &new GtkWindow();
+$window->set_position(GTK_WIN_POS_CENTER);
+$window->set_title('Layout');
+$window->set_usize(200, 200);
+$window->connect_object('destroy', array('gtk', 'main_quit'));
 
 /* create and add the scrolled window to the main window */
-$scrolledwindow = &amp;new GtkScrolledWindow();
-$window-&gt;add($scrolledwindow);
+$scrolledwindow = &new GtkScrolledWindow();
+$window->add($scrolledwindow);
 
 /* create and add the layout widget to the scrolled window */
-$layout = &amp;new GtkLayout(null, null);
-$scrolledwindow-&gt;add($layout);
+$layout = &new GtkLayout(null, null);
+$scrolledwindow->add($layout);
 
 /* set the layout to be bigger than the windows that contain it */
 $x = gdk::screen_width();
 $y = gdk::screen_height();
-$layout-&gt;set_size($x, $y);
+$layout->set_size($x, $y);
 
 /* get the adjustment objects and connect them to the callback.  This
    part should not be necessary under *nix systems */
-$hadj = $scrolledwindow-&gt;get_hadjustment();
-$vadj = $scrolledwindow-&gt;get_vadjustment();
-$hadj-&gt;connect('value-changed', 'exposure', $layout);
-$vadj-&gt;connect('value-changed', 'exposure', $layout);
+$hadj = $scrolledwindow->get_hadjustment();
+$vadj = $scrolledwindow->get_vadjustment();
+$hadj->connect('value-changed', 'exposure', $layout);
+$vadj->connect('value-changed', 'exposure', $layout);
 
 /* populate the layout with a mixture of buttons and labels */
-for ($i=0 ; $i &lt; round($y/100); $i++)  {
-  for ($j=0 ; $j &lt; round($x/100); $j++)  {
+for ($i=0 ; $i < round($y/100); $i++)  {
+  for ($j=0 ; $j < round($x/100); $j++)  {
     $buf =sprintf('Button %d, %d', $i, $j);
-    if (($i + $j) % 2) $button = &amp;new GtkButton($buf);
-    else $button = &amp;new GtkLabel($buf);
-    $layout-&gt;put($button, $j*100, $i*100);
+    if (($i + $j) % 2) $button = &new GtkButton($buf);
+    else $button = &new GtkLabel($buf);
+    $layout->put($button, $j*100, $i*100);
   }
 }
 
 /* display everything and run the main loop */
-$layout-&gt;show_all();
-$window-&gt;show_all();
+$layout->show_all();
+$window->show_all();
 
 gtk::main();
 

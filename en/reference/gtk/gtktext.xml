@@ -136,29 +136,29 @@
 
 dl('php_gtk.'.(strstr(PHP_OS, 'WIN') ? 'dll' : 'so'));
 
-$window = &amp;new GtkWindow();
-$window-&gt;set_position(GTK_WIN_POS_CENTER);
-$window-&gt;connect_object('destroy', array('gtk', 'main_quit'));
+$window = &new GtkWindow();
+$window->set_position(GTK_WIN_POS_CENTER);
+$window->connect_object('destroy', array('gtk', 'main_quit'));
 
-$box = &amp;new GtkHBox();
-$window-&gt;add($box);
+$box = &new GtkHBox();
+$window->add($box);
 
-$text = &amp;new GtkText();
-$text-&gt;set_word_wrap(true);
-$string = &quot;This is a string of text which will be displayed in the 
+$text = &new GtkText();
+$text->set_word_wrap(true);
+$string = "This is a string of text which will be displayed in the 
 GtkText widget.\n\nIt isn't long enough to allow scrolling, so you will 
 probably need to extend it.\n\nOn the other hand, the box isn't sized, so 
 it may just creep over that limit and be a useful demonstration after 
-all.&quot;;
+all.";
 if(strstr(PHP_OS, 'WIN')) $string = wordwrap($string, 26);
-$text-&gt;insert_text($string, 0);
-$box-&gt;pack_start($text);
+$text->insert_text($string, 0);
+$box->pack_start($text);
 
-$adj = $text-&gt;vadj;
-$scrollbar = &amp;new GtkVScrollbar($adj);
-$box-&gt;pack_end($scrollbar, false);
+$adj = $text->vadj;
+$scrollbar = &new GtkVScrollbar($adj);
+$box->pack_end($scrollbar, false);
 
-$window-&gt;show_all();
+$window->show_all();
 
 gtk::main();
 
@@ -461,7 +461,7 @@ gtk::main();
     <simpara>
      You can use the current default style with:
      <literal>
-      $text-&gt;insert(null, null, null, &quot;A string of text.&quot;);
+      $text->insert(null, null, null, "A string of text.");
      </literal>
     </simpara>
    </desc>

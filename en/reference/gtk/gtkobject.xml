@@ -73,7 +73,7 @@
      settings determine the capabilities of a widget; e.g the flag 
      <literal>GTK_NO_WINDOW</literal> is set on certain widgets during
      their creation in the GTK source, reversing the generic widget
-     property of <literal>$widget->window;</literal> - such widgets
+     property of <literal>$widget-&gt;window;</literal> - such widgets
      are not able to respond unilaterally to GDK events.  (Use a 
      <classname>GtkEventBox</classname> to capture events on windowless
      widgets.)
@@ -334,7 +334,7 @@
      object.  For example, in <filename>gtklabel.c</filename> in GTK
      1.2.10 you will see this directly after the includes:
      <informalexample>
-     <programlisting>
+     <programlisting role="php">
 <![CDATA[
 enum {
   ARG_0,
@@ -350,16 +350,24 @@ enum {
      they are added to the widget, in the <literal>class_init</literal>
      function:
      <informalexample>
-     <programlisting>
+     <programlisting role="php">
 <![CDATA[
-gtk_object_add_arg_type (&quot;GtkLabel::label&quot;, GTK_TYPE_STRING, 
-GTK_ARG_READWRITE, ARG_LABEL);
-gtk_object_add_arg_type (&quot;GtkLabel::pattern&quot;, GTK_TYPE_STRING, 
-GTK_ARG_READWRITE, ARG_PATTERN);
-gtk_object_add_arg_type (&quot;GtkLabel::justify&quot;, 
-GTK_TYPE_JUSTIFICATION, GTK_ARG_READWRITE, ARG_JUSTIFY);
-gtk_object_add_arg_type (&quot;GtkLabel::wrap&quot;, GTK_TYPE_BOOL, 
-GTK_ARG_READWRITE, ARG_WRAP);
+gtk_object_add_arg_type ("GtkLabel::label", 
+                                 GTK_TYPE_STRING, 
+                                 GTK_ARG_READWRITE, 
+                                 ARG_LABEL);
+gtk_object_add_arg_type ("GtkLabel::pattern", 
+                                 GTK_TYPE_STRING, 
+                                 GTK_ARG_READWRITE, 
+                                 ARG_PATTERN);
+gtk_object_add_arg_type ("GtkLabel::justify", 
+                                 GTK_TYPE_JUSTIFICATION, 
+                                 GTK_ARG_READWRITE, 
+                                 ARG_JUSTIFY);
+gtk_object_add_arg_type ("GtkLabel::wrap", 
+                                 GTK_TYPE_BOOL, 
+                                 GTK_ARG_READWRITE, 
+                                 ARG_WRAP);
 ]]>
       </programlisting>
      </informalexample>
@@ -385,9 +393,9 @@ GTK_ARG_READWRITE, ARG_WRAP);
 <![CDATA[
 <?php
 
-$label = &amp;new GtkLabel('This is an argumentative label');
-$arg = $label-&gt;get_arg('GtkLabel::label');
-echo $arg.&quot;\n&quot;;
+$label = &new GtkLabel('This is an argumentative label');
+$arg = $label->get_arg('GtkLabel::label');
+echo $arg."\n";
 
 ?>
 ]]>
@@ -424,8 +432,8 @@ echo $arg.&quot;\n&quot;;
 <![CDATA[
 <?php
 
-$label-&gt;set_arg(array('GtkLabel::label'=&gt;'RTFS', 
-'GtkLabel::pattern'=&gt;'____'));
+$label->set_arg(array('GtkLabel::label'=>'RTFS', 
+'GtkLabel::pattern'=>'____'));
 
 ?>
 ]]>
@@ -527,9 +535,9 @@ $label-&gt;set_arg(array('GtkLabel::label'=&gt;'RTFS',
      <funcdef>int <function>connect</function></funcdef>
      <paramdef>string <parameter>signal</parameter></paramdef>
      <paramdef>string <parameter>function</parameter></paramdef>
-     <paramdef>void 
-      <optional><parameter>custom</parameter></optional>
-     </paramdef>     
+     <paramdef>mixed 
+      <parameter><optional>custom_data</optional></parameter>
+     </paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -600,7 +608,7 @@ $label-&gt;set_arg(array('GtkLabel::label'=&gt;'RTFS',
      <funcdef>int <function>connect_object</function></funcdef>
      <paramdef>string <parameter>signal</parameter></paramdef>
      <paramdef>string <parameter>function</parameter></paramdef>
-     <paramdef>Object <parameter>param</parameter></paramdef>
+     <paramdef>object <parameter>param</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -772,12 +780,12 @@ $label-&gt;set_arg(array('GtkLabel::label'=&gt;'RTFS',
 
   <signal id="gtk.gtkobject.signal.destroy">
    <signalname>destroy</signalname>
-   <callback>
+   <funcsynopsis>
     <funcprototype>
-     <funcdef>void <function>callback</function></funcdef>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
      <paramdef><classname>GtkObject</classname> object</paramdef>
     </funcprototype>
-   </callback>
+   </funcsynopsis>
    <shortdesc>
     Emitted when an object is destroyed.
    </shortdesc>

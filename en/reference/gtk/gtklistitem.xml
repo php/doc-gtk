@@ -194,7 +194,7 @@
 <![CDATA[
 <?php
 
-$listitem = &amp;new GtkListItem(&quot;This list item now has a label&quot;);
+$listitem = &new GtkListItem("This list item now has a label");
 
 ?>
 ]]>
@@ -209,9 +209,9 @@ $listitem = &amp;new GtkListItem(&quot;This list item now has a label&quot;);
 <![CDATA[
 <?php
 
-$arrow = &amp;new GtkArrow(GTK_ARROW_RIGHT, GTK_SHADOW_ETCHED_IN);
-$listitem = &amp;new GtkListItem();
-$listitem-&gt;add($arrow);
+$arrow = &new GtkArrow(GTK_ARROW_RIGHT, GTK_SHADOW_ETCHED_IN);
+$listitem = &new GtkListItem();
+$listitem->add($arrow);
 
 ?>
 ]]>
@@ -223,17 +223,17 @@ $listitem-&gt;add($arrow);
 <![CDATA[
 <?php
 
-$box = &amp;new GtkHBox();
-$label = &amp;new GtkLabel(&quot;Here we have multiple objects in a 
-GtkListItem&quot;);
-$arrow = &amp;new GtkArrow(GTK_ARROW_RIGHT, GTK_SHADOW_ETCHED_IN);
+$box = &new GtkHBox();
+$label = &new GtkLabel("Here we have multiple objects in a 
+GtkListItem");
+$arrow = &new GtkArrow(GTK_ARROW_RIGHT, GTK_SHADOW_ETCHED_IN);
 
-$box-&gt;pack_start($label);
-$box-&gt;pack_end($arrow);
-$box-&gt;show_all();
+$box->pack_start($label);
+$box->pack_end($arrow);
+$box->show_all();
 
-$listitem = &amp;new GtkListItem();
-$listitem-&gt;add($box);
+$listitem = &new GtkListItem();
+$listitem->add($box);
 
 ?>
 ]]>

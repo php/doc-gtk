@@ -54,27 +54,27 @@
 
 dl('php_gtk.' . (strstr(PHP_OS, 'WIN') ? 'dll' : 'so'));
 
-$window = &amp;new GtkWindow(GTK_WINDOW_DIALOG);
-$window-&gt;set_position(GTK_WIN_POS_MOUSE);
-$window-&gt;connect_object('destroy', array('gtk', 'main_quit'));
-$window-&gt;realize();
+$window = &new GtkWindow(GTK_WINDOW_DIALOG);
+$window->set_position(GTK_WIN_POS_MOUSE);
+$window->connect_object('destroy', array('gtk', 'main_quit'));
+$window->realize();
 
-list ($gdkpixmap, $mask) = gdk::pixmap_create_from_xpm($window-&gt;window, 
-null, &quot;test.xpm&quot;);
-$pixmap = &amp;new GtkPixmap($gdkpixmap, $mask);
+list ($gdkpixmap, $mask) = gdk::pixmap_create_from_xpm($window->window, 
+null, "test.xpm");
+$pixmap = &new GtkPixmap($gdkpixmap, $mask);
 
-$label = &amp;new GtkLabel(&quot;Open&quot;);
+$label = &new GtkLabel("Open");
 
-$vbox = &amp;new GtkVBox();
-$vbox-&gt;pack_start($pixmap);
-$vbox-&gt;pack_start($label);
+$vbox = &new GtkVBox();
+$vbox->pack_start($pixmap);
+$vbox->pack_start($label);
 
-$button = &amp;new GtkButton();
-$button-&gt;add($vbox);
-$vbox-&gt;show_all();
+$button = &new GtkButton();
+$button->add($vbox);
+$vbox->show_all();
 
-$window-&gt;add($button);
-$window-&gt;show_all();
+$window->add($button);
+$window->show_all();
 
 gtk::main();
 
@@ -227,12 +227,12 @@ gtk::main();
 
   <signal id="gtk.gtkbutton.signal.enter">
    <signalname>enter</signalname>
-   <callback>
+   <funcsynopsis>
     <funcprototype>
-     <funcdef>void <function>callback</function></funcdef>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
      <paramdef><classname>GtkButton</classname> button</paramdef>
     </funcprototype>
-   </callback>
+   </funcsynopsis>
    <shortdesc>
     Emitted when the cursor is over the button.
    </shortdesc>
@@ -247,12 +247,12 @@ gtk::main();
 
   <signal id="gtk.gtkbutton.signal.pressed">
    <signalname>pressed</signalname>
-   <callback>
+   <funcsynopsis>
     <funcprototype>
-     <funcdef>void <function>callback</function></funcdef>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
      <paramdef><classname>GtkButton</classname> button</paramdef>
     </funcprototype>
-   </callback>
+   </funcsynopsis>
    <shortdesc>
     Emitted when the button is initially pressed.
    </shortdesc>
@@ -266,12 +266,12 @@ gtk::main();
 
   <signal id="gtk.gtkbutton.signal.clicked">
    <signalname>clicked</signalname>
-   <callback>
+   <funcsynopsis>
     <funcprototype>
-     <funcdef>void <function>callback</function></funcdef>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
      <paramdef><classname>GtkButton</classname> button</paramdef>
     </funcprototype>
-   </callback>
+   </funcsynopsis>
    <shortdesc>
     Emitted when the button is clicked.
    </shortdesc>
@@ -308,18 +308,18 @@ gtk::main();
 dl('php_gtk.' . (strstr(PHP_OS, 'WIN') ? 'dll' : 'so'));
 
 function my_function() {
-  echo &quot;The button was clicked\n&quot;;
+  echo "The button was clicked\n";
 }
 
-$window = &amp;new GtkWindow();
-$window-&gt;set_position(GTK_WIN_POS_MOUSE);
-$window-&gt;connect_object('destroy', array('gtk', 'main_quit'));
+$window = &new GtkWindow();
+$window->set_position(GTK_WIN_POS_MOUSE);
+$window->connect_object('destroy', array('gtk', 'main_quit'));
 
-$button = &amp;new GtkButton(&quot;Click Me&quot;);
-$button-&gt;connect('clicked', 'my_function');
-$window-&gt;add($button);
+$button = &new GtkButton("Click Me");
+$button->connect('clicked', 'my_function');
+$window->add($button);
 
-$window-&gt;show_all();
+$window->show_all();
 
 gtk::main();
 
@@ -336,12 +336,12 @@ gtk::main();
 
   <signal id="gtk.gtkbutton.signal.released">
    <signalname>released</signalname>
-   <callback>
+   <funcsynopsis>
     <funcprototype>
-     <funcdef>void <function>callback</function></funcdef>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
      <paramdef><classname>GtkButton</classname> button</paramdef>
     </funcprototype>
-   </callback>
+   </funcsynopsis>
    <shortdesc>
     Emitted when the button is released.
    </shortdesc>
@@ -356,12 +356,12 @@ gtk::main();
 
   <signal id="gtk.gtkbutton.signal.leave">
    <signalname>leave</signalname>
-   <callback>
+   <funcsynopsis>
     <funcprototype>
-     <funcdef>void <function>callback</function></funcdef>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
      <paramdef><classname>GtkButton</classname> button</paramdef>
     </funcprototype>
-   </callback>
+   </funcsynopsis>
    <shortdesc>
     Emitted when the cursor leaves the button area.
    </shortdesc>

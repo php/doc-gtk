@@ -51,7 +51,7 @@
 <![CDATA[
 <?php
 
-$menu = &amp;new GtkMenu();
+$menu = &new GtkMenu();
 
 ?>
 ]]>
@@ -75,40 +75,40 @@ $menu = &amp;new GtkMenu();
 dl('php_gtk.' . (strstr(PHP_OS, 'WIN') ? 'dll' : 'so'));
 
 function show_popup($event, $menu) {
-if($event-&gt;button == 3) {
-    $menu-&gt;popup(null, null, null, $event-&gt;button, $event-&gt;time);
+if($event->button == 3) {
+    $menu->popup(null, null, null, $event->button, $event->time);
 }
 
-$window = &amp;new GtkWindow();
-$window-&gt;set_default_size(350, 450);
-$window-&gt;connect_object('destroy', array('gtk', 'main_quit'));
+$window = &new GtkWindow();
+$window->set_default_size(350, 450);
+$window->connect_object('destroy', array('gtk', 'main_quit'));
 
-$menu = &amp;new GtkMenu();
-$accel = $menu-&gt;ensure_uline_accel_group();
+$menu = &new GtkMenu();
+$accel = $menu->ensure_uline_accel_group();
 
-$open = &amp;new GtkMenuItem(&quot;Open&quot;);
-$open-&gt;lock_accelerators();
-$menu-&gt;append($open);
-$save = &amp;new GtkMenuItem(&quot;Save as ...&quot;);
-$save-&gt;lock_accelerators();
-$menu-&gt;append($save); 
-$separator = &amp;new GtkMenuItem();
-$separator-&gt;set_sensitive(false);
-$menu-&gt;append($separator);
+$open = &new GtkMenuItem("Open");
+$open->lock_accelerators();
+$menu->append($open);
+$save = &new GtkMenuItem("Save as ...");
+$save->lock_accelerators();
+$menu->append($save); 
+$separator = &new GtkMenuItem();
+$separator->set_sensitive(false);
+$menu->append($separator);
 
-$exit = &amp;new GtkMenuItem(&quot;&quot;);
-$accel_label = $exit-&gt;child;
-$accel_key = $accel_label-&gt;parse_uline(&quot;E_xit&quot;);
-$exit-&gt;add_accelerator('activate', $accel, $accel_key, GDK_CONTROL_MASK, 
+$exit = &new GtkMenuItem("");
+$accel_label = $exit->child;
+$accel_key = $accel_label->parse_uline("E_xit");
+$exit->add_accelerator('activate', $accel, $accel_key, GDK_CONTROL_MASK, 
 GTK_ACCEL_VISIBLE);
-$exit-&gt;lock_accelerators();
-$exit-&gt;connect_object('activate', array('gtk', 'main_quit'));
-$menu-&gt;append($exit);
-$menu-&gt;show_all();
+$exit->lock_accelerators();
+$exit->connect_object('activate', array('gtk', 'main_quit'));
+$menu->append($exit);
+$menu->show_all();
 
-$window-&gt;add_events(GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK);
-$window-&gt;connect_object('button-press-event', 'show_popup', $menu);
-$window-&gt;show_all();
+$window->add_events(GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK);
+$window->connect_object('button-press-event', 'show_popup', $menu);
+$window->show_all();
 
 gtk::main();
 
@@ -179,8 +179,8 @@ $position = array(300, 200);
 return $position;
 }
 
-$filemenu-&gt;popup(null, null, 'position', $event-&gt;button, 
-$event-&gt;time);
+$filemenu->popup(null, null, 'position', $event->button, 
+$event->time);
 
 ?>
 ]]>
@@ -571,25 +571,25 @@ $event-&gt;time);
 dl('php_gtk.' . (strstr(PHP_OS, 'WIN') ? 'dll' : 'so'));
 
 function exit_activated($menu) {
-$menu-&gt;destroy();
+$menu->destroy();
 }
 
-$menu = &amp;new GtkMenu();
-$window = $filemenu-&gt;parent;
-$window-&gt;ref();
-$window-&gt;set_flags(GTK_HAS_GRAB);
-$menu-&gt;connect_object('destroy', array('gtk', 'main_quit'));
+$menu = &new GtkMenu();
+$window = $filemenu->parent;
+$window->ref();
+$window->set_flags(GTK_HAS_GRAB);
+$menu->connect_object('destroy', array('gtk', 'main_quit'));
 
 /*  Append and connect your menu items here, but note that any exit item
- must call $menu-&gt;destroy() rather than the usual gtk::main_quit(), in
+ must call $menu->destroy() rather than the usual gtk::main_quit(), in
  order to avoid the main loop being quitted twice over  */
 
-$exit = &amp;new GtkMenuItem(&quot;Exit&quot;);
-$exit-&gt;connect_object('activate', 'exit_activated', $menu);
+$exit = &new GtkMenuItem("Exit");
+$exit->connect_object('activate', 'exit_activated', $menu);
 
-$menu-&gt;set_title(&quot;Tested!&quot;);
-$menu-&gt;set_tearoff_state(true);
-$menu-&gt;show_all();
+$menu->set_title("Tested!");
+$menu->set_tearoff_state(true);
+$menu->show_all();
 
 gtk::main();
 

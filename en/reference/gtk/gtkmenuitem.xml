@@ -37,7 +37,7 @@
 <![CDATA[
 <?php
 
-$menuitem = &amp;new GtkMenuItem(&quot;Edit&quot;);
+$menuitem = &new GtkMenuItem("Edit");
 
 ?>
 ]]>
@@ -80,9 +80,9 @@ $menuitem = &amp;new GtkMenuItem(&quot;Edit&quot;);
 <![CDATA[
 <?php
 
-$separatoritem = &amp;new GtkMenuItem();
-$separatoritem-&gt;set_sensitive(false);
-$menu-&gt;append($separatoritem);
+$separatoritem = &new GtkMenuItem();
+$separatoritem->set_sensitive(false);
+$menu->append($separatoritem);
 
 ?>
 ]]>
@@ -296,12 +296,12 @@ $menu-&gt;append($separatoritem);
 
   <signal id="gtk.gtkmenuitem.signal.activate">
    <signalname>activate</signalname>
-   <callback>
+   <funcsynopsis>
     <funcprototype>
-     <funcdef>void <function>callback</function></funcdef>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
      <paramdef><classname>GtkMenuItem</classname> menuitem</paramdef>
     </funcprototype>
-   </callback>
+   </funcsynopsis>
    <shortdesc>
     Emitted when menu item is chosen.
    </shortdesc>
@@ -334,12 +334,12 @@ $menu-&gt;append($separatoritem);
 
   <signal id="gtk.gtkmenuitem.signal.activate-item">
    <signalname>activate-item</signalname>
-   <callback>
+   <funcsynopsis>
     <funcprototype>
-     <funcdef>void <function>callback</function></funcdef>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
      <paramdef><classname>GtkMenuItem</classname> menuitem</paramdef>
     </funcprototype>
-   </callback>
+   </funcsynopsis>
    <shortdesc>
     Fired when <function class="GtkMenuShell">activate_item</function> is
     called.

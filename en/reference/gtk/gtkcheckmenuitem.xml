@@ -31,17 +31,21 @@
    Creates a <classname>GtkMenuItem</classname> with a toggle indicator.
   </shortdesc>
   <desc>
-   <simpara>
-    <literal>
-$checkmenuitem = &amp;new GtkCheckMenuItem(&quot;CheckMenuItem's Label&quot;);
-    </literal>
+   <para>
+    <informalexample>
+     <programlisting>
+<![CDATA[
+$checkmenuitem = &new GtkCheckMenuItem("CheckMenuItem's Label");
+]]>
+     </programlisting>
+    </informalexample>
     is the syntax that will create a new menu item with an indigenous toggle
     indicator placed to the left of any existing text.  The 
     <classname>GtkCheckMenuItem</classname> may be set to the active state - 
     <enumname>GtkStateType</enumname> <literal>GTK_STATE_ACTIVE</literal> - 
     or to the inactive state, <literal>GTK_STATE_NORMAL</literal>.  When it
     is in the inactive state, the toggle indicator need not be displayed.
-   </simpara>
+   </para>
   </desc>
  </constructor>
 
@@ -125,14 +129,14 @@ $checkmenuitem = &amp;new GtkCheckMenuItem(&quot;CheckMenuItem's Label&quot;);
 
   <signal id="gtk.gtkcheckmenuitem.signal.toggled">
    <signalname>toggled</signalname>
-   <callback>
+   <funcsynopsis>
     <funcprototype>
-     <funcdef>void <function>callback</function></funcdef>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
      <paramdef>
       <classname>GtkCheckMenuItem</classname> checkmenuitem
      </paramdef>
     </funcprototype>
-   </callback>
+   </funcsynopsis>
    <shortdesc>
     Emitted when the toggled() method is called.
    </shortdesc>
@@ -180,8 +184,8 @@ $checkmenuitem = &amp;new GtkCheckMenuItem(&quot;CheckMenuItem's Label&quot;);
 <![CDATA[
 <?php
 
-$active_state = $checkmenuitem-&gt;active;
-if($active_state == 1) echo &quot;This GtkCheckMenuItem is active\n&quot;;
+$active_state = $checkmenuitem->active;
+if($active_state == 1) echo "This GtkCheckMenuItem is active\n";
 
 ?>
 ]]>

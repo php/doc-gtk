@@ -68,36 +68,36 @@ dl('php_gtk.' . (strstr(PHP_OS, 'WIN') ? 'dll' : 'so'));
 
 function update_bar() {
   global $progressbar, $value;
-  $progressbar-&gt;set_percentage($value);
+  $progressbar->set_percentage($value);
   start_update();
   }
 
 function start_update() {
   global $value;
-  if($value &lt;= 1.0) {
+  if($value <= 1.0) {
     $value += 0.01;
     gtk::timeout_add(200, 'update_bar');
     }
   else gtk::timeout_add(50, array('gtk', 'main_quit'));
   }
 
-$window = &amp;new GtkWindow();
-$window-&gt;set_uposition(200, 250);
-$window-&gt;set_policy(false, false, true);
-$window-&gt;connect_object('destroy', array('gtk', 'main_quit'));
+$window = &new GtkWindow();
+$window->set_uposition(200, 250);
+$window->set_policy(false, false, true);
+$window->connect_object('destroy', array('gtk', 'main_quit'));
 
 /* These adjustment settings are on the wild side for demo purposes */
-$adjustment = &amp;new GtkAdjustment(0.5, 100.0, 200.0, 0.0, 0.0, 0.0);
-$value = $adjustment-&gt;value;
+$adjustment = &new GtkAdjustment(0.5, 100.0, 200.0, 0.0, 0.0, 0.0);
+$value = $adjustment->value;
 
-$progressbar = &amp;new GtkProgressBar($adjustment);
-$progressbar-&gt;set_show_text(true);
-$progressbar-&gt;set_text_alignment(0.02, 1.0);
-$progressbar-&gt;set_format_string(&quot;%v%% complete&quot;);
-$progressbar-&gt;set_usize(gdk::screen_width()/2, 30);
-$window-&gt;add($progressbar);
+$progressbar = &new GtkProgressBar($adjustment);
+$progressbar->set_show_text(true);
+$progressbar->set_text_alignment(0.02, 1.0);
+$progressbar->set_format_string("%v%% complete");
+$progressbar->set_usize(gdk::screen_width()/2, 30);
+$window->add($progressbar);
 
-$window-&gt;show_all();
+$window->show_all();
 
 start_update();
 gtk::main();
@@ -108,12 +108,30 @@ gtk::main();
     </example>
     To create a progress bar in <literal>activity</literal> mode, delete
     the references to the text string and replace them with
-    <literal>$progressbar-&gt;set_activity_mode(true);</literal>
+    <informalexample>
+     <programlisting>
+<![CDATA[
+$progressbar->set_activity_mode(true);
+]]>
+     </programlisting>
+    </informalexample>
     and any further methods appropriate to an activity indicator.  You will
     also need to replace
-    <literal>$progressbar-&gt;set_percentage($value);</literal>
+    <informalexample>
+     <programlisting>
+<![CDATA[
+$progressbar->set_percentage($value);
+]]>
+     </programlisting>
+    </informalexample>
     in the <literal>update_bar()</literal> function with
-    <literal>$progressbar-&gt;set_value($value);</literal>
+    <informalexample>
+     <programlisting>
+<![CDATA[
+$progressbar->set_value($value);
+]]>
+     </programlisting>
+    </informalexample>
    </para>
    <simpara>
     Note that a progress bar in <literal>activity</literal> mode will not

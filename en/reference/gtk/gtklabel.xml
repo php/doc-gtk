@@ -46,15 +46,15 @@
 
 dl('php_gtk.' . (strstr(PHP_OS, 'WIN') ? 'dll' : 'so'));
 
-$window = &amp;new GtkWindow();
-$window-&gt;set_usize(200, 200);
-$window-&gt;connect_object('destroy', array('gtk', 'main_quit'));
+$window = &new GtkWindow();
+$window->set_usize(200, 200);
+$window->connect_object('destroy', array('gtk', 'main_quit'));
 
 /* Child widgets by default will expand to fill the available space */
-$label = &amp;new GtkLabel(&quot;This is my label&quot;);
-$label-&gt;set_alignment(1.0, 1.0);
-$window-&gt;add($label);
-$window-&gt;show_all();
+$label = &new GtkLabel("This is my label");
+$label->set_alignment(1.0, 1.0);
+$window->add($label);
+$window->show_all();
 
 gtk::main();
 
@@ -97,7 +97,7 @@ gtk::main();
     </simpara>
     <simpara>
      <literal>
-      $label-&gt;set_text(&quot;Whatever text you wish to pass&quot;);
+      $label->set_text("Whatever text you wish to pass");
      </literal>
     </simpara>
    </desc>
@@ -139,8 +139,8 @@ gtk::main();
 <![CDATA[
 <?php
 
-$label-&gt;set_line_wrap(true);
-$label-&gt;set_justify(GTK_JUSTIFY_FILL);
+$label->set_line_wrap(true);
+$label->set_justify(GTK_JUSTIFY_FILL);
 
 ?>
 ]]>
@@ -167,14 +167,14 @@ $label-&gt;set_justify(GTK_JUSTIFY_FILL);
      <function class="GtkLabel">set_pattern</function> is the method
      for underlining text in <classname>GtkLabel</classname>. It needs
      to be defined as a pattern, e.g. if your text consists of 
-     <literal>A B C</literal>, then <literal>&quot;_   _&quot;</literal>
+     <literal>A B C</literal>, then <literal>"_   _"</literal>
      will underline <literal>A</literal> and <literal>C</literal> but
      not <literal>B</literal>, as that is where the space falls. Each
      underscore or space in the pattern maps directly to the character
      position in the label text.
     </simpara>
     <simpara>
-     <literal>$label-&gt;set_pattern(&quot;_   _&quot;);</literal>
+     <literal>$label-&gt;set_pattern("_   _");</literal>
     </simpara>
     <simpara>
      Call this method with no parameters to erase existing underlines.
@@ -249,7 +249,7 @@ $label-&gt;set_justify(GTK_JUSTIFY_FILL);
      the characters following the underscores. It will take the first
      underlined character in a label and return it as a lower-case
      accelerator key, e.g. <literal>_Save</literal> will return the
-     accelerator key value for &quot;s&quot;.
+     accelerator key value for "s".
     </simpara>
     <simpara>
      This method is used internally by Gtk+ for menu items.

@@ -147,56 +147,56 @@
 <![CDATA[
 <?php
 
-dl(&quot;php_gtk.&quot; . (strstr(PHP_OS, &quot;WIN&quot;) ? &quot;dll&quot; : 
-&quot;so&quot;));
+dl("php_gtk." . (strstr(PHP_OS, "WIN") ? "dll" : 
+"so"));
 
 function on_click($item, $event, $i) {
-  echo $item-&gt;get_data($i).&quot;\n&quot;;
+  echo $item->get_data($i)."\n";
   flush();
 }
 
 function on_key($item, $i) {
-  echo $item-&gt;get_data($i).&quot;\n&quot;;
+  echo $item->get_data($i)."\n";
   flush();
 }
 
-$window = &amp;new GtkWindow();
-$window-&gt;set_position(GTK_WIN_POS_CENTER);
-$window-&gt;connect_object(&quot;destroy&quot;, array(&quot;gtk&quot;, 
-&quot;main_quit&quot;));
+$window = &new GtkWindow();
+$window->set_position(GTK_WIN_POS_CENTER);
+$window->connect_object("destroy", array("gtk", 
+"main_quit"));
 
-$combo = &amp;new GtkCombo();
+$combo = &new GtkCombo();
 /* The GtkEntry and GtkList are accessible through the combo's properties */
-$entry = $combo-&gt;entry;
-$entry-&gt;set_text('Choose some fruit');
-$list = $combo-&gt;list;
-$list-&gt;set_selection_mode(GTK_SELECTION_SINGLE);
+$entry = $combo->entry;
+$entry->set_text('Choose some fruit');
+$list = $combo->list;
+$list->set_selection_mode(GTK_SELECTION_SINGLE);
 
 $fruit = array('apples', 'bananas', 'cherries', 'damsons', 'eggplants', 
 'figs', 'grapes');
 
-for($i = 0; $i &lt; count($fruit); $i++) {
-  $item = &amp;new GtkListItem();
+for($i = 0; $i < count($fruit); $i++) {
+  $item = &new GtkListItem();
 /* You can put pretty much anything into a GtkListItem */
-  $box = &amp;new GtkHBox();
-  $arrow = &amp;new GtkArrow(GTK_ARROW_RIGHT, GTK_SHADOW_OUT);
-  $box-&gt;pack_start($arrow, false, false, 5);
-  $label = &amp;new GtkLabel('Item  '.($i+1));
-  $box-&gt;pack_start($label, false, false, 10);
-  $item-&gt;add($box);
-  $combo-&gt;set_item_string($item, &quot;You chose $fruit[$i]&quot;);
+  $box = &new GtkHBox();
+  $arrow = &new GtkArrow(GTK_ARROW_RIGHT, GTK_SHADOW_OUT);
+  $box->pack_start($arrow, false, false, 5);
+  $label = &new GtkLabel('Item  '.($i+1));
+  $box->pack_start($label, false, false, 10);
+  $item->add($box);
+  $combo->set_item_string($item, "You chose $fruit[$i]");
   $data = $fruit[$i];
 /* This data will be carried with the $item.  The key here is $i. */
-  $item-&gt;set_data($i, $data);
+  $item->set_data($i, $data);
 /* Two separate signals to get around the 'select' problem. */
-  $item-&gt;connect('button-press-event', 'on_click', $i);
-  $item-&gt;connect('toggle', 'on_key', $i);
-  $list-&gt;add($item);
-  $item-&gt;show_all();
+  $item->connect('button-press-event', 'on_click', $i);
+  $item->connect('toggle', 'on_key', $i);
+  $list->add($item);
+  $item->show_all();
 }
 
-$window-&gt;add($combo);
-$window-&gt;show_all();
+$window->add($combo);
+$window->show_all();
 
 gtk::main();
 
@@ -362,31 +362,31 @@ gtk::main();
 <![CDATA[
 <?php
 
-dl(&quot;php_gtk.&quot; . (strstr(PHP_OS, &quot;WIN&quot;) ? &quot;dll&quot; : 
-&quot;so&quot;));
+dl("php_gtk." . (strstr(PHP_OS, "WIN") ? "dll" : 
+"so"));
 
 function print_this($list, $item) {
-  $label = $item-&gt;child;
-  echo $label-&gt;get().&quot;\n&quot;;
+  $label = $item->child;
+  echo $label->get()."\n";
   flush();
 }
 
-$window = &amp;new GtkWindow();
-$window-&gt;set_position(GTK_WIN_POS_CENTER);
-$window-&gt;connect_object(&quot;destroy&quot;, array(&quot;gtk&quot;, 
-&quot;main_quit&quot;));
+$window = &new GtkWindow();
+$window->set_position(GTK_WIN_POS_CENTER);
+$window->connect_object("destroy", array("gtk", 
+"main_quit"));
 
-$combo = &amp;new GtkCombo();
+$combo = &new GtkCombo();
 $fruit = array('apples', 'bananas', 'cherries', 'damsons', 'eggplants', 
 'figs', 'grapes');
-$combo-&gt;set_popdown_strings($fruit);
+$combo->set_popdown_strings($fruit);
 /* We don't have handles for these list items, so we connect them through the
 GtkList.  The child is passed to the callback with the select-child signal. */
-$list = $combo-&gt;list;
-$list-&gt;connect('select-child', 'print_this');
+$list = $combo->list;
+$list->connect('select-child', 'print_this');
 
-$window-&gt;add($combo);
-$window-&gt;show_all();
+$window->add($combo);
+$window->show_all();
 
 gtk::main();
 

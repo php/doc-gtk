@@ -56,32 +56,32 @@
 <![CDATA[
 <?php
 
-dl(&quot;php_gtk.&quot; . (strstr(PHP_OS, &quot;WIN&quot;) ? &quot;dll&quot; : 
-&quot;so&quot;));
+dl("php_gtk." . (strstr(PHP_OS, "WIN") ? "dll" : 
+"so"));
 
-$window = &amp;new GtkWindow();
-$window-&gt;set_position(GTK_WIN_POS_CENTER);
-$window-&gt;connect_object(&quot;destroy&quot;, array(&quot;gtk&quot;, 
-&quot;main_quit&quot;));
+$window = &new GtkWindow();
+$window->set_position(GTK_WIN_POS_CENTER);
+$window->connect_object("destroy", array("gtk", 
+"main_quit"));
 
 /* create the calendar and add it to the window. */
-$calendar = &amp;new GtkCalendar();
-$window-&gt;add($calendar);
+$calendar = &new GtkCalendar();
+$window->add($calendar);
 
 /* create a new style for the calendar, based on the old one */
-$oldstyle = $calendar-&gt;style;
-$newstyle = $oldstyle-&gt;copy();
+$oldstyle = $calendar->style;
+$newstyle = $oldstyle->copy();
 $font = 
 gdk::font_load('-unknown-Arial-normal-r-normal--*-160-*-*-p-0-iso8859-1');
-$red = &amp;new GdkColor(255*255, 0, 0);
-$newstyle-&gt;font = $font;
-$newstyle-&gt;fg[GTK_STATE_SELECTED] = $red;
-$calendar-&gt;set_style($newstyle);
+$red = &new GdkColor(255*255, 0, 0);
+$newstyle->font = $font;
+$newstyle->fg[GTK_STATE_SELECTED] = $red;
+$calendar->set_style($newstyle);
 
 /* have today's date highlighted on opening */
-$calendar-&gt;select_day(date('d'));
+$calendar->select_day(date('d'));
 
-$window-&gt;show_all();
+$window->show_all();
 
 gtk::main();
 
@@ -224,25 +224,25 @@ gtk::main();
 <?php
 
 function new_month($calendar) {
-  $calendar-&gt;clear_marks();
-  $selected = $calendar-&gt;get_date();
+  $calendar->clear_marks();
+  $selected = $calendar->get_date();
   $month = ($selected[1]+1);
   $year = $selected[0];
 
-  if(file_exists(&quot;diary/$year/marked_dates_$month.txt&quot;)) {
-    $dates = fopen(&quot;diary/$year/marked_dates_$month.txt&quot;, 'r');
+  if(file_exists("diary/$year/marked_dates_$month.txt")) {
+    $dates = fopen("diary/$year/marked_dates_$month.txt", 'r');
     $string = explode(',', fgets($dates));
-    $calendar-&gt;freeze();
-    for($i = 0; $i &lt; 31; $i++) {
-      if($string[$i]==true) $calendar-&gt;mark_day($i+1);
+    $calendar->freeze();
+    for($i = 0; $i < 31; $i++) {
+      if($string[$i]==true) $calendar->mark_day($i+1);
     }
 
-    $calendar-&gt;thaw();
+    $calendar->thaw();
     fclose($dates);
   }
 }
 
-$calendar-&gt;connect('month-changed', 'new_month');
+$calendar->connect('month-changed', 'new_month');
 
 ?>
 ]]>
@@ -352,12 +352,12 @@ $calendar-&gt;connect('month-changed', 'new_month');
 
   <signal id="gtk.gtkcalendar.signal.month-changed">
    <signalname>month-changed</signalname>
-   <callback>
+   <funcsynopsis>
     <funcprototype>
-     <funcdef>void <function>callback</function></funcdef>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
      <paramdef><classname>GtkCalendar</classname> calendar</paramdef>
     </funcprototype>
-   </callback>
+   </funcsynopsis>
    <shortdesc>
     Emitted whenever the displayed month is changed.
    </shortdesc>
@@ -374,12 +374,12 @@ $calendar-&gt;connect('month-changed', 'new_month');
 
   <signal id="gtk.gtkcalendar.signal.day-selected">
    <signalname>day-selected</signalname>
-   <callback>
+   <funcsynopsis>
     <funcprototype>
-     <funcdef>void <function>callback</function></funcdef>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
      <paramdef><classname>GtkCalendar</classname> calendar</paramdef>
     </funcprototype>
-   </callback>
+   </funcsynopsis>
    <shortdesc>
     Emitted when a day is selected.
    </shortdesc>
@@ -394,12 +394,12 @@ $calendar-&gt;connect('month-changed', 'new_month');
 
   <signal id="gtk.gtkcalendar.signal.day-selected-double-click">
    <signalname>day-selected-double-click</signalname>
-   <callback>
+   <funcsynopsis>
     <funcprototype>
-     <funcdef>void <function>callback</function></funcdef>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
      <paramdef><classname>GtkCalendar</classname> calendar</paramdef>
     </funcprototype>
-   </callback>
+   </funcsynopsis>
    <shortdesc>
     Emitted when the mouse is clicked twice on a day.
    </shortdesc>
@@ -415,12 +415,12 @@ $calendar-&gt;connect('month-changed', 'new_month');
 
   <signal id="gtk.gtkcalendar.signal.prev-month">
    <signalname>prev-month</signalname>
-   <callback>
+   <funcsynopsis>
     <funcprototype>
-     <funcdef>void <function>callback</function></funcdef>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
      <paramdef><classname>GtkCalendar</classname> calendar</paramdef>
     </funcprototype>
-   </callback>
+   </funcsynopsis>
    <shortdesc>
     Emitted when user chooses to go back one month.
    </shortdesc>
@@ -438,12 +438,12 @@ $calendar-&gt;connect('month-changed', 'new_month');
 
   <signal id="gtk.gtkcalendar.signal.next-month">
    <signalname>next-month</signalname>
-   <callback>
+   <funcsynopsis>
     <funcprototype>
-     <funcdef>void <function>callback</function></funcdef>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
      <paramdef><classname>GtkCalendar</classname> calendar</paramdef>
     </funcprototype>
-   </callback>
+   </funcsynopsis>
    <shortdesc>
     Emitted when user chooses to go forward one month.
    </shortdesc>
@@ -461,12 +461,12 @@ $calendar-&gt;connect('month-changed', 'new_month');
 
   <signal id="gtk.gtkcalendar.signal.prev-year">
    <signalname>prev-year</signalname>
-   <callback>
+   <funcsynopsis>
     <funcprototype>
-     <funcdef>void <function>callback</function></funcdef>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
      <paramdef><classname>GtkCalendar</classname> calendar</paramdef>
     </funcprototype>
-   </callback>
+   </funcsynopsis>
    <shortdesc>
     Emitted when user chooses to go back one year.
    </shortdesc>
@@ -485,12 +485,12 @@ $calendar-&gt;connect('month-changed', 'new_month');
 
   <signal id="gtk.gtkcalendar.signal.next-year">
    <signalname>next-year</signalname>
-   <callback>
+   <funcsynopsis>
     <funcprototype>
-     <funcdef>void <function>callback</function></funcdef>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
      <paramdef><classname>GtkCalendar</classname> calendar</paramdef>
     </funcprototype>
-   </callback>
+   </funcsynopsis>
    <shortdesc>
     Emitted when user chooses to go forward one year.
    </shortdesc>

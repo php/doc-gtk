@@ -72,26 +72,26 @@
 <![CDATA[
 <?php
 
-$menu = &amp;new GtkMenu();
+$menu = &new GtkMenu();
 
-$open = &amp;new GtkRadioMenuItem(null, &quot;Open&quot;);
-$open-&gt;connect('button-press-event', 'open_routine');
-$menu-&gt;append($open);
+$open = &new GtkRadioMenuItem(null, "Open");
+$open->connect('button-press-event', 'open_routine');
+$menu->append($open);
 
-$save = &amp;new GtkRadioMenuItem($open, &quot;Save&quot;);
-$save-&gt;connect('button-press-event', 'save_routine');
-$menu-&gt;append($save);
+$save = &new GtkRadioMenuItem($open, "Save");
+$save->connect('button-press-event', 'save_routine');
+$menu->append($save);
 
-$print = &amp;new GtkRadioMenuItem($open, &quot;Print&quot;);
-$print-&gt;connect('button-press-event', 'print_routine');
-$menu-&gt;append($print);
+$print = &new GtkRadioMenuItem($open, "Print");
+$print->connect('button-press-event', 'print_routine');
+$menu->append($print);
 
-$separator = &amp;new GtkMenuItem();
-$menu-&gt;append($separator);
+$separator = &new GtkMenuItem();
+$menu->append($separator);
 
-$exit = &amp;new GtkRadioMenuItem(null, &quot;Exit&quot;);
-$exit-&gt;connect_object('button-press-event','exit_routine', $menu);
-$menu-&gt;append($exit);
+$exit = &new GtkRadioMenuItem(null, "Exit");
+$exit->connect_object('button-press-event','exit_routine', $menu);
+$menu->append($exit);
 
 ?>
 ]]>

@@ -45,31 +45,31 @@
 dl('php_gtk.' . (strstr(PHP_OS, 'WIN') ? 'dll' : 'so'));
 
 function echo_activated($item, $label, $rank, $x) {
-    echo &quot;\$items[$x] ('$label') is the $rank 
-&quot;.$item-&gt;get_name().&quot;.\n&quot;;
+    echo "\$items[$x] ('$label') is the $rank 
+".$item->get_name().".\n";
     flush();
 }
 
-$window = &amp;new GtkWindow();
-$window-&gt;set_position(GTK_WIN_POS_CENTER);
-$window-&gt;connect_object('destroy', array('gtk', 'main_quit'));
+$window = &new GtkWindow();
+$window->set_position(GTK_WIN_POS_CENTER);
+$window->connect_object('destroy', array('gtk', 'main_quit'));
 
-$menu = &amp;new GtkMenu();
+$menu = &new GtkMenu();
 $labels = array('File', 'Edit', 'Save', 'Exit');
 $pos = array('first', 'second', 'third', 'fourth');
-for($i = 0; $i &lt; 4; $i++) {
-$items[$i] = &amp;new GtkMenuItem($labels[$i]);
-$items[$i]-&gt;connect('activate', 'echo_activated', $labels[$i], $pos[$i], 
+for($i = 0; $i < 4; $i++) {
+$items[$i] = &new GtkMenuItem($labels[$i]);
+$items[$i]->connect('activate', 'echo_activated', $labels[$i], $pos[$i], 
 $i);
-$menu-&gt;append($items[$i]);
+$menu->append($items[$i]);
 }
-$menu-&gt;show_all();
+$menu->show_all();
 
-$optionmenu = &amp;new GtkOptionMenu();
-$optionmenu-&gt;set_menu($menu);
-$window-&gt;add($optionmenu);
+$optionmenu = &new GtkOptionMenu();
+$optionmenu->set_menu($menu);
+$window->add($optionmenu);
 
-$window-&gt;show_all();
+$window->show_all();
 gtk::main();
 
 ?>

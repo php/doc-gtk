@@ -49,16 +49,22 @@
     Creates a new vertical box container designed for packing a single
     column of child widgets.
    </simpara>
-   <simpara>
+   <para>
     The first parameter, <parameter>homogeneous</parameter>, is a boolean
     value which, if set to <literal>true</literal>, will set each child
     widget in the <classname>GtkVBox</classname> to the same height as that
     of the largest child widget.  The second parameter, 
     <parameter>spacing</parameter>, sets the minimum spacing between the
     child widgets, in pixels.  Leaving both parameters empty, e.g.
-    <literal>$vbox = &amp;new GtkVBox();</literal>
+    <informalexample>
+     <programlisting>
+<![CDATA[
+$vbox = &new GtkVBox();
+]]>
+     </programlisting>
+    </informalexample>
     will set the default behaviour of individual sizing and zero spacing.
-   </simpara>
+   </para>
    <para>
     <example>
      <title>Packing child widgets using <classname>GtkVBox</classname> and 
@@ -67,38 +73,38 @@
 <![CDATA[
 <?php
 
-$window = &amp;new GtkWindow();
-$window-&gt;set_title(&quot;GtkHBox and GtkVBox packing demonstration&quot;);
-$window-&gt;set_position(GTK_WIN_POS_CENTER);
-$window-&gt;connect_object(&quot;destroy&quot;, array(&quot;gtk&quot;, 
-&quot;main_quit&quot;));
-$window-&gt;show();
+$window = &new GtkWindow();
+$window->set_title("GtkHBox and GtkVBox packing demonstration");
+$window->set_position(GTK_WIN_POS_CENTER);
+$window->connect_object("destroy", array("gtk", 
+"main_quit"));
+$window->show();
 
-$vbox = &amp;new GtkVBox(false, 5);
-$window-&gt;add($vbox);
+$vbox = &new GtkVBox(false, 5);
+$window->add($vbox);
 
-$label = &amp;new GtkLabel();
-$label-&gt;set_text(&quot;This GtkLabel is packed at the start of a GtkVBox. 
+$label = &new GtkLabel();
+$label->set_text("This GtkLabel is packed at the start of a GtkVBox. 
 The GtkCalendar below is\npacked at the start of a GtkHBox, which is in turn 
 packed at the end of the\nGtkVBox. The empty GtkText widget is packed at the 
-end of the GtkHBox.&quot;);
-$label-&gt;set_justify(GTK_JUSTIFY_LEFT);
-$vbox-&gt;pack_start($label, true, true, 5);
-$label-&gt;show();
+end of the GtkHBox.");
+$label->set_justify(GTK_JUSTIFY_LEFT);
+$vbox->pack_start($label, true, true, 5);
+$label->show();
 
-$hbox = &amp;new GtkHBox(true, 0);
-$vbox-&gt;pack_end($hbox);
+$hbox = &new GtkHBox(true, 0);
+$vbox->pack_end($hbox);
 
-$calendar = &amp;new GtkCalendar();
-$hbox-&gt;pack_start($calendar, true, true, 2);
-$calendar-&gt;show();
+$calendar = &new GtkCalendar();
+$hbox->pack_start($calendar, true, true, 2);
+$calendar->show();
 
-$text = &amp;new GtkText();
-$text-&gt;set_editable(true);
-$hbox-&gt;pack_end($text, true, true, 2);
-$text-&gt;show();
+$text = &new GtkText();
+$text->set_editable(true);
+$hbox->pack_end($text, true, true, 2);
+$text->show();
 
-$window-&gt;show_all();
+$window->show_all();
 
 gtk::main();
 

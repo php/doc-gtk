@@ -81,39 +81,39 @@
 dl('php_gtk.'.(strstr(PHP_OS, 'WIN') ? 'dll' : 'so'));
 
 /* set up a window */
-$window = &amp;new GtkWindow();
-$window-&gt;set_position(GTK_WIN_POS_CENTER);
-$window-&gt;connect_object('destroy', array('gtk', 'main_quit'));
+$window = &new GtkWindow();
+$window->set_position(GTK_WIN_POS_CENTER);
+$window->connect_object('destroy', array('gtk', 'main_quit'));
 
 /* set up the main scrolled window and add it to the main window,
    sizing it if necessary. */
-$scrolledwindow = &amp;new GtkScrolledWindow();
-$scrolledwindow-&gt;set_usize(300, 300);
-$scrolledwindow-&gt;set_policy(GTK_POLICY_NEVER, GTK_POLICY_ALWAYS);
-$window-&gt;add($scrolledwindow);
+$scrolledwindow = &new GtkScrolledWindow();
+$scrolledwindow->set_usize(300, 300);
+$scrolledwindow->set_policy(GTK_POLICY_NEVER, GTK_POLICY_ALWAYS);
+$window->add($scrolledwindow);
 
 /* create a box container and add child widgets to it */
-$box = &amp;new GtkVBox();
-$calendar = &amp;new GtkCalendar();
+$box = &new GtkVBox();
+$calendar = &new GtkCalendar();
 /* let's add a scrollable to an internal scrolled window */
-$scrolledwindow2 = &amp;new GtkScrolledWindow();
-$scrolledwindow2-&gt;set_usize(280, 100);
-$scrolledwindow2-&gt;set_policy(GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
-$text = &amp;new GtkText();
-$text-&gt;set_editable(true);
-$scrolledwindow2-&gt;add($text);
-$box-&gt;pack_start($calendar, false, false, 5);
-$box-&gt;pack_start($scrolledwindow2);
+$scrolledwindow2 = &new GtkScrolledWindow();
+$scrolledwindow2->set_usize(280, 100);
+$scrolledwindow2->set_policy(GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
+$text = &new GtkText();
+$text->set_editable(true);
+$scrolledwindow2->add($text);
+$box->pack_start($calendar, false, false, 5);
+$box->pack_start($scrolledwindow2);
 
 /* add the box container to the main scrolled window and link its focus so
    that the cursor position is reflected in the scrollbar's adjustment value. 
    You do not need to do this when adding a scrollable widget directly */
-$scrolledwindow-&gt;add_with_viewport($box);
-$box-&gt;set_focus_vadjustment($scrolledwindow-&gt;get_vadjustment());
+$scrolledwindow->add_with_viewport($box);
+$box->set_focus_vadjustment($scrolledwindow->get_vadjustment());
 
-$scrolledwindow2-&gt;show_all();
-$box-&gt;show_all();
-$window-&gt;show_all();
+$scrolledwindow2->show_all();
+$box->show_all();
+$window->show_all();
 
 gtk::main();
 

@@ -96,22 +96,22 @@
 
 dl('php_gtk.' . (strstr(PHP_OS, 'WIN') ? 'dll' : 'so'));
 
-$window = &amp;new GtkWindow();
-$window-&gt;set_position(GTK_WIN_POS_CENTER);
-$window-&gt;connect_object('destroy', array('gtk', 'main_quit'));
+$window = &new GtkWindow();
+$window->set_position(GTK_WIN_POS_CENTER);
+$window->connect_object('destroy', array('gtk', 'main_quit'));
 
-$eventbox = &amp;new GtkEventBox();
-$label = &amp;new GtkLabel(&quot;This is a normal label.  It cannot capture 
-events.&quot;);
-$eventbox-&gt;add($label);
-$label-&gt;show();
-$window-&gt;add($eventbox);
+$eventbox = &new GtkEventBox();
+$label = &new GtkLabel("This is a normal label.  It cannot capture 
+events.");
+$eventbox->add($label);
+$label->show();
+$window->add($eventbox);
 
-$tooltip = &amp;new GtkTooltips();
-$tooltip-&gt;set_tip($eventbox, &quot;So how did this get here?&quot;, null);
-$tooltip-&gt;enable();
+$tooltip = &new GtkTooltips();
+$tooltip->set_tip($eventbox, "So how did this get here?", null);
+$tooltip->enable();
 
-$window-&gt;show_all();
+$window->show_all();
 
 gtk::main();
 
