@@ -179,8 +179,10 @@
      the screen.
     </simpara>
     <simpara>
-     See also:  <function class="GtkWidget">map</function>, 
-     <function class="GtkWidget">realize</function>.
+     A widget cannot be shown until its containing parent is shown. If <function class="GtkWidget">show</function> is called on a widget whose parent has not been shown, that widget will not be realized or mapped until the show is called by the parent widget.
+    </simpara>
+    <simpara>
+     See also:  <function class="GtkWidget">map</function>, <function class="GtkWidget">realize</function>.
     </simpara>
    </desc>
   </method>
@@ -287,6 +289,9 @@
      be emitted by that widget.  Use this signal to trigger functions
      that rely on the map event having occurred.
     </simpara>
+    <simpara>
+     See also:  <function class="GtkWidget">show</function>, <function class="GtkWidget">realize</function>.
+    </simpara>
    </desc>
   </method>
 
@@ -324,27 +329,48 @@
   <method id="gtk.gtkwidget.method.realize">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>void <function>realize</function></funcdef>
+     <funcdef>void
+      <function>realize</function>
+     </funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
     Instantiates calling widget's <classname>GdkWindow</classname>.
    </shortdesc>
-   <desc></desc>
+   <desc>
+    <simpara>
+     <function class="GtkWidget">realize</function> allocates the GDK resources associated with the calling widget. A widget must be realized before it can be mapped to the screen. This means that when <function class="GtkWidget">show</function> is called, the widget is first realized and then mapped to the screen.  
+    </simpara>
+    <simpara>
+     Before a widget can be realized, its parent and all of its ancestors must be realized. If an ancestor of a widget has not been realized at the time <function class="GtkWidget">realize</function>is called, it will be implicitly realized before the calling widget is realized.
+    </simpara>
+    <simpara>
+     If you want a widget to be displayed on the screen do not use <function class="GtkWidget">realize</function>. Instead use <function class="GtkWidget">show</function>. See the <link linkend="tutorials.pixmaps">pixmap tutorial</link> for an example of when it is appropriate to use <function class="GtkWidget">realize</function>.
+    </simpara>
+    <simpara>
+     See also: <function class="GtkWidget">map</function>, <function class="GtkWidget">realize</function>.
+    </simpara>
+   </desc>
   </method>
 
   <method id="gtk.gtkwidget.method.unrealize">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>void <function>unrealize</function></funcdef>
+     <funcdef>void
+      <function>unrealize</function>
+     </funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
     Removes calling widget's <classname>GdkWindow</classname>.
    </shortdesc>
-   <desc></desc>
+   <desc>
+    <simpara>
+     <function class="GtkWidget">unrealize</function> is the corollary to <function class="GtkWidget">realize</function>. When a widget is unrealized, all of its GDK resources ($widget->window) are released.
+    </simpara>
+   </desc>
   </method>
 
   <method id="gtk.gtkwidget.method.queue_draw">
@@ -378,11 +404,21 @@
   <method id="gtk.gtkwidget.method.queue_draw_area">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>void <function>queue_draw_area</function></funcdef>
-     <paramdef>int <parameter>x</parameter></paramdef>
-     <paramdef>int <parameter>y</parameter></paramdef>
-     <paramdef>int <parameter>width</parameter></paramdef>
-     <paramdef>int <parameter>height</parameter></paramdef>
+     <funcdef>void
+      <function>queue_draw_area</function>
+     </funcdef>
+     <paramdef>int
+      <parameter>x</parameter>
+     </paramdef>
+     <paramdef>int
+      <parameter>y</parameter>
+     </paramdef>
+     <paramdef>int
+      <parameter>width</parameter>
+     </paramdef>
+     <paramdef>int
+      <parameter>height</parameter>
+     </paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -390,10 +426,7 @@
    </shortdesc>
    <desc>
     <simpara>
-     This has exactly the same functionality as 
-     <function class="GtkWidget">queue_draw</function>, with the
-     exception that the area to be redrawn can be defined in the
-     parameters.
+     This has exactly the same functionality as <function class="GtkWidget">queue_draw</function>, with the exception that the area to be redrawn can be defined in the parameters. The upper left corner of the rectangle to be redrawn is given by <parameter>x</parameter> and <parameter>y</parameter>. <parameter>width</parameter> is the width of the rectangle to be redrawn and <parameter>height</parameter> is the height of the rectangle to be redrawn.
     </simpara>
    </desc>
   </method>
@@ -635,6 +668,9 @@
      Note that if you do not lock your accelerators the end user will
      be able to define their own, whether any exist on that widget or not.
     </simpara>
+    <simpara>
+     See also: <function class="GtkWidget">unlock_accelerators</function>, <function class="GtkWidget">accelerators_locked</function>
+    </simpara>
    </desc>
   </method>
 
@@ -655,7 +691,7 @@
      changes or additions to be made to them.
     </simpara>
     <simpara>
-     See also: <function class="GtkWidget">accelerators_locked</function>.
+     See also: <function class="GtkWidget">lock_accelerators</function>, <function class="GtkWidget">accelerators_locked</function>
     </simpara>
    </desc>
   </method>
@@ -676,6 +712,9 @@
      <literal>true</literal> if the accelerators on the calling widget are
      locked, and <literal>false</literal> if they are not.
     </simpara>
+    <simpara>
+     See also: <function class="GtkWidget">lock_accelerators</function>, <function class="GtkWidget">unlock_accelerators</function>
+    </simpara>
    </desc>
   </method>
 
@@ -689,8 +728,17 @@
      </paramdef>
     </funcprototype>
    </funcsynopsis>
-   <shortdesc></shortdesc>
-   <desc></desc>
+   <shortdesc>
+    Triggers an event.
+   </shortdesc>
+   <desc>
+    <simpara>
+     This method causes <parameter>event</parameter> to be triggered. This in turn causes the widget to emit an appropriate signal. 
+    </simpara>
+    <simpara>
+     Note: This is not the recommended method for triggering events. It is better to use <link linked="gtk.method.main_do_event">gtk::main_do_event()</link> because this ensures that the event is entered into the events queue.
+    </simpara>
+   </desc>
   </method>
 
   <method id="gtk.gtkwidget.method.activate">
@@ -712,15 +760,29 @@
   <method id="gtk.gtkwidget.method.reparent">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>void <function>reparent</function></funcdef>
+     <funcdef>void
+      <function>reparent</function>
+     </funcdef>
      <paramdef>
       <classname>GtkWidget</classname> 
       <parameter>new_parent</parameter>
      </paramdef>
     </funcprototype>
    </funcsynopsis>
-   <shortdesc></shortdesc>
-   <desc></desc>
+   <shortdesc>
+    Moves a widget to a new container.
+   </shortdesc>
+   <desc>
+    <simpara>
+     <function class="GtkWidget">reparent</function> removes the calling widget from its current <classname>GtkContainer</classname> to the new <classname>GtkContainer</classname> <parameter>new_parent</parameter>.
+    </simpara>
+    <simpara>
+     When called, <function class="GtkWidget">reparent</function> will cause the <signalname class="GtkWidget">parent-set</signalname> signal to be emitted.
+    </simpara>
+    <simpara>
+     See also: <function class="GtkWidget">reparent</function>
+    </simpara>
+   </desc>
   </method>
 
   <method id="gtk.gtkwidget.method.popup">
@@ -928,12 +990,24 @@
      <funcdef>void <function>set_parent</function></funcdef>
      <paramdef>
       <classname>GtkWidget</classname> 
-      <parameter>parent</parameter>
+      <parameter>container</parameter>
      </paramdef>
     </funcprototype>
    </funcsynopsis>
-   <shortdesc></shortdesc>
-   <desc></desc>
+   <shortdesc>
+    Sets the parent of the widget.
+   </shortdesc>
+   <desc>
+    <simpara>
+     <function class="GtkWidget">set_parent</function> sets <parameter>container</parameter> as the parent of the calling widget. <parameter>container</parameter> should be a subclass of <classname>GtkContainer</classname>.
+    </simpara>
+    <simpara>
+     When called, <function class="GtkWidget">set_parent</function> will cause the <signalname class="GtkWidget">parent-set</signalname> signal to be emitted.
+    </simpara>
+    <simpara>
+     See also: <function class="GtkWidget">reparent</function>
+    </simpara>
+   </desc>
   </method>
 
   <method id="gtk.gtkwidget.method.set_parent_window">
