@@ -2057,15 +2057,38 @@ $rectangle, $drawingarea, null, $x, $y, $width, $height);
   <method id="gtk.method.quit_add">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>XXX <function>gtk::quit_add</function></funcdef>
-     <paramdef>XXX</paramdef>
+     <funcdef>int <function>gtk::quit_add</function></funcdef>
+     <paramdef>int
+      <parameter>level</parameter>
+     </paramdef>
+     <paramdef>string
+      <parameter>callback</parameter>
+     </paramdef>
+     <paramdef>mixed
+      <parameter><optional>data</optional></parameter>
+     </paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Register a function to be called when a main loop level is exited.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Registers the function <parameter>callback</parameter> to be called when
+     main loop level <parameter>level</parameter> exits. If
+     <parameter>data</parameter> is given, it will be passed to
+     <parameter>callback</parameter> when called. Adding a function using
+     <function>gtk::quit_add</function> is similar to connecting a method to the
+     destroy signal for a gtk loop.
+    </simpara>
+    <simpara>
+     <function>gtk::quit_add</function> returns an integer identifier which can be
+     passed to <function>gtk::quit_remove</function> in order to prevent the
+     function from being called.
+    </simpara>
+    <simpara>
+     See also: <function>gtk::quit_remove</function>
+    </simpara>
    </desc>
   </method>
 
@@ -2077,10 +2100,17 @@ $rectangle, $drawingarea, null, $x, $y, $width, $height);
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Unregister a function from being called when a main loop level is exited.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Unregisters a function which was preivously registered by calling
+     <function>gtk::quit_add</function>. <parameter>quit_handler_id</parameter> is
+     the value returned from <function>gtk::quit_add</function>.
+    </simpara>
+    <simpara>
+     See also: <function>quit_add</function>
+    </simpara>
    </desc>
   </method>
 
@@ -2098,15 +2128,16 @@ $rectangle, $drawingarea, null, $x, $y, $width, $height);
     <simpara>
      Adds a file to the list of files to be parsed at the end of gtk_init().
      The default file to be parsed is <literal>~/.gtkrc</literal>. This file
-     does not need to be added using <function>rc_add_default_file</function>
+     does not need to be added using <function>gtk::rc_add_default_file</function>
      in order to be parsed.
     </simpara>
     <simpara>
-     See also: <function>rc_parse</function>
+     See also: <function>gtk::rc_parse</function>
     </simpara>
    </desc>
   </method>
 
+  <!-- The GTK docs say that this method shouldn't be used in applications.
   <method id="gtk.method.rc_find_module_in_path">
    <funcsynopsis>
     <funcprototype>
@@ -2123,7 +2154,8 @@ $rectangle, $drawingarea, null, $x, $y, $width, $height);
 
    </desc>
   </method>
-
+  -->
+  
   <method id="gtk.method.rc_get_module_dir">
    <funcsynopsis>
     <funcprototype>
@@ -2132,10 +2164,13 @@ $rectangle, $drawingarea, null, $x, $y, $width, $height);
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Return the directory that PHP-GTK looks for theme engines in.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Returns the directory that PHP-GTK looks for theme engines in. The
+     default theme directory is <literal>/usr/lib/gtk/themes/engines/</literal>.
+    </simpara>
    </desc>
   </method>
 
@@ -2162,7 +2197,7 @@ $rectangle, $drawingarea, null, $x, $y, $width, $height);
      <parameter>widget</parameter>.
     </simpara>
     <simpara>
-     <function>rc_get_style</function> finds all rc styles that will be
+     <function>gtk::rc_get_style</function> finds all rc styles that will be
      applied to <parameter>widget</parameter> and combines them into one
      <classname>GtkStyle</classname> widget representing the final appearance
      of the <parameter>widget</parameter>.
@@ -2202,6 +2237,7 @@ echo $rcStyle->bg . "\n";  // Will print #ff6060
    </desc>
   </method>
 
+  <!-- I don't think this fucntion really exists.
   <method id="gtk.method.rc_get_theme_dir">
    <funcsynopsis>
     <funcprototype>
@@ -2222,7 +2258,11 @@ echo $rcStyle->bg . "\n";  // Will print #ff6060
     </simpara>
    </desc>
   </method>
+  -->
 
+  <!-- I don't think this one does either. The only place that it is
+  documented is right here. Not in GTK or PyGtk docs and not in gtk.defs or
+  gtk.overrides
   <method id="gtk.method.rc_load_image">
    <funcsynopsis>
     <funcprototype>
@@ -2248,6 +2288,7 @@ echo $rcStyle->bg . "\n";  // Will print #ff6060
 
    </desc>
   </method>
+  -->
 
   <method id="gtk.method.rc_parse">
    <funcsynopsis>
@@ -2275,9 +2316,9 @@ echo $rcStyle->bg . "\n";  // Will print #ff6060
      url="http://www.gtk.org/tutorial/ch-gtkrcfiles.html">http://www.gtk.org/tutorial/ch-gtkrcfiles.html</ulink>
     </simpara>
     <simpara>
-     See also: <function>rc_parse_string</function>,
-     <function>rc_add_default_file</function>,
-     <function>rc_reparse_all</function>
+     See also: <function>gtk::rc_parse_string</function>,
+     <function>gtk::rc_add_default_file</function>,
+     <function>gtk::rc_reparse_all</function>
     </simpara>
    </desc>
   </method>
@@ -2326,7 +2367,7 @@ echo $rcStyle->bg . "\n";  // Will print #ff6060
      If the files were reread, <literal>true</literal> is returned.
     </simpara>
     <simpara>
-     See also: <function>rc_parse</function>
+     See also: <function>gtk::rc_parse</function>
     </simpara>
    </desc>
   </method>
