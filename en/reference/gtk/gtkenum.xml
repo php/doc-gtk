@@ -636,6 +636,179 @@ calendar
 
 </enum>
 
+<enum id="gtk.enum.gtkwidgetflags">
+ <enumname>GtkWidgetFlags</enumname>
+
+ <enumoption>
+  <optionname>GTK_TOPLEVEL</optionname>
+  <shortdesc>
+   Marks a widget as toplevel.  This would generally be used internally
+   by GTK.
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GTK_NO_WINDOW</optionname>
+  <shortdesc>
+   Marks a widget as having no GDK window.  This would generally be used
+   internally by GTK, and indicates that the widget is unable to capture
+   GDK events.  See also:  <classname>GtkEventBox</classname>.
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GTK_REALIZED</optionname>
+  <shortdesc>
+   Marks a widget as having been realized, that is, having its GdkWindow
+   instantiated.
+  </shortdesc>
+ </enumoption>
+
+
+ <enumoption>
+  <optionname>GTK_MAPPED</optionname>
+  <shortdesc>
+   Marks a widget as having been mapped to the screen.  In order to be
+   mapped, a widget must have the <optionname>GTK_VISIBLE</optionname> 
+   flag set.  See also: 
+   <function classname="GtkWidget">realize()</function>, 
+   <function classname="GtkWidget">map</function>, 
+   <function classname="GtkWidget">show()</function>.
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GTK_VISIBLE</optionname>
+  <shortdesc>
+   Marks a widget as visible.
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GTK_SENSITIVE</optionname>
+  <shortdesc>
+   Marks a widget as sensitive.
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GTK_PARENT_SENSITIVE</optionname>
+  <shortdesc>
+   Marks the parent of a widget as sensitive.
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GTK_CAN_FOCUS</optionname>
+  <shortdesc>
+   Marks a widget as able to have focus.
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GTK_HAS_FOCUS</optionname>
+  <shortdesc>
+   Gives a widget focus.
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GTK_CAN_DEFAULT</optionname>
+  <shortdesc>
+   Marks a widget as able to have default status.
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GTK_HAS_DEFAULT</optionname>
+  <shortdesc>
+   Gives a widget default status.
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GTK_HAS_GRAB</optionname>
+  <shortdesc>
+
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GTK_RC_STYLE</optionname>
+  <shortdesc>
+
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GTK_COMPOSITE_CHILD</optionname>
+  <shortdesc>
+
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GTK_NO_REPARENT</optionname>
+  <shortdesc>
+
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GTK_APP_PAINTABLE</optionname>
+  <shortdesc>
+
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GTK_RECEIVES_DEFAULT</optionname>
+  <shortdesc>
+
+  </shortdesc>
+ </enumoption>
+
+</enum>
+
+<enum id="gtk.enum.gtkwindowposition">
+ <enumname>GtkWindowPosition</enumname>
+
+ <enumoption>
+  <optionname>GTK_WIN_POS_NONE</optionname>
+  <shortdesc>
+   Default state.  This setting uses the default window gravity on the
+   underlying windowing system to determine the position of the window. 
+   This generally results in the window being mapped from the top left
+   corner of the screen.
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GTK_WIN_POS_CENTER</optionname>
+  <shortdesc>
+   Places the window over the center of the screen.
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GTK_WIN_POS_MOUSE</optionname>
+  <shortdesc>
+   Draws the window at the point of the mouse cursor.  This is useful
+   for popup menus or similar widgets initiated by a mouse-click.
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GTK_WIN_POS_CENTER_ALWAYS</optionname>
+  <shortdesc>
+   Places the window over the center of the screen and keeps those
+   co-ordinates stored in memory, so that a redraw following a move
+   elsewhere will reposition the window at the center.
+  </shortdesc>
+ </enumoption>
+
+</enum>
+
 <!--
  * Local variables:
  * tab-width: 1
