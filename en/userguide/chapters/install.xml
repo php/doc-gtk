@@ -3,8 +3,8 @@
  <sect1 id="install.get">
   <title>Getting The Latest Version</title>
   <simpara>
-   The source and some binaries for some platforms can be found
-   at <ulink url="&url.phpgtk;">&url.phpgtk;</ulink>. Source users will 
+   The source and the binaries for Windows can be found at 
+   <ulink url="&url.phpgtk;">&url.phpgtk;</ulink>. Source users will
    also need to install the latest version of PHP from CVS 
    <ulink url="&url.php.anoncvs;">&url.php.anoncvs;</ulink>.
   </simpara>
@@ -16,10 +16,9 @@
   <sect2 id="install.win32.binaries">
    <title>Downloading PHP-GTK</title>
    <simpara>
-    Download the latest Win32 Binaries from 
-    <ulink url="&url.phpgtk;">&url.phpgtk;</ulink>.
-    You may also want to check out the latest sources
-    from php.net's CVS server. 
+    Download the latest win32 binaries from 
+    <ulink url="&url.phpgtk;">&url.phpgtk;</ulink>.  You may also want
+    to check out the latest sources from php.net's CVS server. 
     See <ulink url="&url.php.anoncvs;">&url.php.anoncvs;</ulink>
     for more information.
    </simpara>
@@ -27,11 +26,11 @@
   <sect2 id="install.win32.binary.package-layout">
    <title>Layout of the Binary Distribution</title>
    <para>
-    The binary distribution for php-gtk contains this structure:
+    The binary distribution of PHP-GTK contains this structure:
     <itemizedlist>
      <listitem>
       <simpara>
-       \php4   -&gt; php and php-gtk binary files
+       \php4   -&gt; PHP and PHP-GTK binary files
       </simpara>
      </listitem>
      <listitem>
@@ -41,17 +40,17 @@
      </listitem>
      <listitem>
       <simpara>
-       \winnt\system32 -&gt; gtk binaries used by the extension
+       \winnt\system32 -&gt; GTK+ binaries used by the extension
       </simpara>
      </listitem>
      <listitem>
       <simpara>
-       \samples -&gt; a few samples to demonstrate the usage
+       \test -&gt; a few samples to demonstrate PHP-GTK usage
       </simpara>
      </listitem>
      <listitem>
       <simpara>
-       README.TXT  
+       README.TXT
       </simpara>
      </listitem>
     </itemizedlist>
@@ -69,23 +68,22 @@
     </listitem>
     <listitem>
      <simpara>
-      Copy \winnt to your winnt directory. On Windows NT and 
-      Windows 2000 that is c:\winnt.  On Windows 95/98 that 
-      is c:\windows. If you have an existing php.ini you dont 
-      need to copy this file.
+      Copy \winnt to your winnt directory.  On Windows NT and Windows 2000
+      that is c:\winnt.  On Windows 95/98 that is c:\windows.  If you have
+      an existing php.ini you don't need to copy this file.
      </simpara>
     </listitem>
     <listitem>
      <simpara>
-      Copy \winnt\system32 to your winnt\system32 directory. 
-      On Windows NT and Windows 2000 that is c:\winnt\system32.  
-      On Windows 95/98 that is c:\windows\system32.
+      Copy \winnt\system32 to your winnt\system32 directory.  On Windows NT
+      and Windows 2000 that is c:\winnt\system32.  On Windows 95/98 that is
+      c:\windows\system32.
      </simpara>
     </listitem>
     <listitem>
      <simpara>
-      Copy \samples to the location where you want to run your 
-      scripts. (eg c:\php4\samples)
+      Copy \test to the location where you want to run your scripts 
+      (e.g. c:\php4\test).
      </simpara>
     </listitem>
    </orderedlist>
@@ -94,7 +92,7 @@
    <title>How to use PHP-GTK</title>
    <simpara>
     PHP-GTK applications can be started from the command line 
-    (or a shortcut) with this syntax:
+    (or a shortcut) with this syntax: 
     <command>c:\php4\php -q c:\path\to\php-gtk\script.php</command>
    </simpara>
   </sect2>
@@ -103,24 +101,33 @@
  <sect1 id="install.unix">
   <title>Installing PHP-GTK Under Unix</title>
   <para>
-   We suggest you get the latest source from <ulink url="&url.phpgtk;">&url.phpgtk;</ulink> 
-   or from anonymous cvs <ulink url="&url.php.anoncvs;">&url.php.anoncvs;</ulink>. You will need the php-gtk module and php4-0-5 (currently in development), which needs to be installed first.
+   We suggest you get the latest source from 
+   <ulink url="&url.phpgtk;">&url.phpgtk;</ulink> or from anonymous CVS 
+   <ulink url="&url.php.anoncvs;">&url.php.anoncvs;</ulink>.  You will
+   need the PHP-GTK module and the current CVS version of PHP, which needs
+   to be installed first.
   </para>
   <para>
-   Run the phpize script which is installed with php. This will set up     the necessary files and create the 'configure' script. Next, run    <command>./configure</command>. It will check that you 
-   have the proper version of GTK+ (available from 
-   <ulink url="&url.gtk;">&url.gtk;</ulink> and other files required for 
+   Run the <command>phpize</command> script that is installed with PHP. 
+   This will set up the necessary files and create the 'configure' script. 
+   Next, run <command>./configure</command>.  This will check that you
+   have a correct version of GTK+ 1.2.x (1.2.6 or above, available from 
+   <ulink url="&url.gtk;">&url.gtk;</ulink> and other files required for
    compilation, and create the needed Makefiles.
   </para>
   <simpara>
-   Finally, run <command>make</command> to compile the extension. Some source files
-   are generated from .defs files by the code generator. If you see messages like &quot;Could 
-   not write...&quot;, it means that the listed GTK+ objects or features are not yet supported.  If the compilation is successful, run <command>make install</command> to install
-   the extension into your default PHP extension directory (usually
+   Finally, run <command>make</command> to compile the extension. Some
+   source files are generated from .defs files by the code generator. If
+   you see messages like &quot;Could not write...&quot;, it means that the
+   listed GTK+ objects or features are not yet supported.  If the
+   compilation is successful, run <command>make install</command> to install
+   the extension into your default PHP extension directory (usually 
    <filename>/usr/local/lib/php/extensions</filename>).
   </simpara>
   <simpara>
-   To test the extension, try running the example scripts in the test/ directory.  These also provide demonstrations of some of the ways in which the extension can be used. 
+   To test the extension, try running the example scripts in the test/ 
+   directory.  These also provide demonstrations of some of the ways in
+   which the extension can be used.
   </simpara>
  </sect1>
 </chapter>
