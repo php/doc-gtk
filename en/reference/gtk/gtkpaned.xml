@@ -16,8 +16,8 @@
     the size requests of the child widgets.
    </simpara>
    <simpara>
-    Note that the panes are defined through their child widgets, and do
-    not exist as widgets in their own right.
+    Note that the panes are defined through their child widgets, i.e. they
+    have an initial size of zero.
    </simpara>
    <simpara>
     <classname>GtkPaned</classname> is an abstract base class and cannot
@@ -52,8 +52,8 @@
      and <function class="GtkPaned">pack1()</function> is that the packing
      parameters are not visible to the programmer where 
      <function class="GtkPaned">add1()</function> is used, and so cannot
-     easily be altered.  The default settings are identical to those of 
-     <function class="GtkPaned">pack1()</function>.
+     easily be altered.  The settings are identical to the 
+     <function class="GtkPaned">pack1()</function> defaults.
     </simpara>
    </desc>
   </method>
@@ -82,8 +82,8 @@
      and <function class="GtkPaned">pack2()</function> is that the packing
      parameters are not visible to the programmer where 
      <function class="GtkPaned">add2()</function> is used, and so cannot
-     easily be altered.  The default settings are identical to those of 
-     <function class="GtkPaned">pack2()</function>.
+     easily be altered.  The settings are identical to the 
+     <function class="GtkPaned">pack2()</function> defaults.
     </simpara>
    </desc>
   </method>
@@ -240,11 +240,13 @@
      1.2.* series of GTK+.  In GTK2 the size of the handle will be set at
      5 pixels, across both platforms.
     </simpara>
-    <simpara>
-     Please note that both this function and the 
-     <propname class="GtkPaned">handle_size</propname> property are
-     deprecated in GTK2, and so should not be used.
-    </simpara>
+    <note>
+     <simpara>
+      Please note that both this function and the 
+      <propname class="GtkPaned">handle_size</propname> property are
+      deprecated in GTK2, and so should not be used.
+     </simpara>
+    </note>
    </desc>
   </method>
 
@@ -265,35 +267,13 @@
      dividing handle is based, only where the 1.2.* series of GTK+ is being
      used to compile PHP-GTK.  It does nothing in the win32 version.
     </simpara>
-    <simpara>
-     Please note that this function is more than deprecated in GTK2; the
-     <propname class="GtkPaned">gutter_size</propname> property does not
-     exist in later releases.  Do not use this function.
-    </simpara>
-   </desc>
-  </method>
-
-  <method id="gtk.gtkpaned.method.compute_position">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>void <function>compute_position</function></funcdef>
-     <paramdef>int <parameter>allocation</parameter></paramdef>
-     <paramdef>int <parameter>child1_req</parameter></paramdef>
-     <paramdef>int <parameter>child2_req</parameter></paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-    Computes position of dividing handle (internal function).
-   </shortdesc>
-   <desc>
-    <simpara>
-     <function class="GtkPaned">compute_position()</function> is the means
-     by which <classname>GtkPaned</classname>-derived widgets compute the
-     relative sizing and positioning information pertaining to the child
-     widgets, prior to redrawing the panes.  It is entirely an internal
-     function, and should not be used by the programmer.
-    </simpara>
-    <!-- TODO  Convince Andrei to get shot of it ;)  - sf -->
+    <note>
+     <simpara>
+      Please note that this function is more than deprecated in GTK2; the
+      <propname class="GtkPaned">gutter_size</propname> property does not
+      exist in later releases.  Do not use this function.
+     </simpara>
+    </note>
    </desc>
   </method>
 
@@ -301,7 +281,7 @@
 
  <properties>
 
-  <property id="gtk.gtkpaned.property.child1">
+  <property id="gtk.gtkpaned.property.child1" type="rw">
    <propname>child1</propname>
    <proptype>GtkWidget</proptype>
    <shortdesc>
@@ -309,14 +289,14 @@
    </shortdesc>
    <desc>
     <simpara>
-     The <propname class="GtkPaned">child1</propname> property is the
-     internal name for the child widget in the first pane of a
+     <propname class="GtkPaned">child1</propname> is the internal name
+     for the child widget in the first pane of a 
      <classname>GtkPaned</classname>-derived widget.
     </simpara>
    </desc>
   </property>
 
-  <property id="gtk.gtkpaned.property.child2">
+  <property id="gtk.gtkpaned.property.child2" type="rw">
    <propname>child2</propname>
    <proptype>GtkWidget</proptype>
    <shortdesc>
@@ -324,14 +304,14 @@
    </shortdesc>
    <desc>
     <simpara>
-     The <propname class="GtkPaned">child2</propname> property is the
-     internal name for the child widget in the second pane of a
+     <propname class="GtkPaned">child2</propname> is the internal name
+     for the child widget in the second pane of a 
      <classname>GtkPaned</classname>-derived widget.
     </simpara>
    </desc>
   </property>
 
-  <property id="gtk.gtkpaned.property.handle_size">
+  <property id="gtk.gtkpaned.property.handle_size" type="ro">
    <propname>handle_size</propname>
    <proptype>int</proptype>
    <shortdesc>
@@ -339,18 +319,20 @@
    </shortdesc>
    <desc>
     <simpara>
-     The <propname class="GtkPaned">handle_size</propname> property is
-     an integer describing the width or height (as appropriate) of the
-     separating handle in a <classname>GtkPaned</classname>-derived widget.
+     <propname class="GtkPaned">handle_size</propname> is an integer
+     describing the width or height (as appropriate) of the separating
+     handle in a <classname>GtkPaned</classname>-derived widget.
     </simpara>
-    <simpara>
-     Please note that in future releases of GTK+ there is no such property. 
-     It will be replaced internally by private fields.
-    </simpara>
+    <note>
+     <simpara>
+      Please note that in future releases of GTK+ there is no such property. 
+      It will be replaced internally by private fields.
+     </simpara>
+    </note>
    </desc>
   </property>
 
-  <property id="gtk.gtkpaned.property.gutter_size">
+  <property id="gtk.gtkpaned.property.gutter_size" type="ro">
    <propname>gutter_size</propname>
    <proptype>int</proptype>
    <shortdesc>
@@ -358,17 +340,18 @@
    </shortdesc>
    <desc>
     <simpara>
-     The <propname class="GtkPaned">gutter_size</propname> property is
-     an integer describing the width or height (as appropriate) of the
-     gutter which is the base for the separating handle of a 
-     <classname>GtkPaned</classname>-derived widget, in pre-GTK2 releases
-     only.
+     <propname class="GtkPaned">gutter_size</propname> is an integer
+     describing the width or height (as appropriate) of the gutter which
+     provides the base for the separating handle of a 
+     <classname>GtkPaned</classname>-derived widget.
     </simpara>
-    <simpara>
-     Please note that in later releases of GTK+ - including that currently
-     used by the PHP-GTK win32 binary - there is no such property.  The 
-     gutter itself has been deprecated.
-    </simpara>
+    <note>
+     <simpara>
+      Please note that in later releases of GTK+ - including that currently
+      used by the PHP-GTK win32 binary - there is no such property.  The 
+      gutter itself has been deprecated.
+     </simpara>
+    </note>
    </desc>
   </property>
 
@@ -380,11 +363,11 @@
    </shortdesc>
    <desc>
     <simpara>
-     <propname class="GtkPaned">child1_resize</propname> is a read-only
-     property describing the current status of the
-     <parameter>resize</parameter> parameter relating to the child that
-     is packed in the first pane.  This is useful where the end user needs
-     to be given control over the <parameter>resize</parameter> setting.
+     <propname class="GtkPaned">child1_resize</propname> describes the
+     current status of the <parameter>resize</parameter> parameter relating
+     to the child that is packed in the first pane.  This is useful where
+     the end user needs to be given control over the 
+     <parameter>resize</parameter> setting.
     </simpara>
    </desc>
   </property>
@@ -397,11 +380,11 @@
    </shortdesc>
    <desc>
     <simpara>
-     <propname class="GtkPaned">child1_shrink</propname> is a read-only
-     property describing the current status of the 
-     <parameter>shrink</parameter> parameter relating to the child that
-     is packed in the first pane.  This is useful where the end user needs
-     to be given control over the <parameter>shrink</parameter> setting.
+     <propname class="GtkPaned">child1_shrink</propname> describes the
+     current status of the <parameter>shrink</parameter> parameter relating
+     to the child that is packed in the first pane.  This is useful where
+     the end user needs to be given control over the 
+     <parameter>shrink</parameter> setting.
     </simpara>
    </desc>
   </property>
@@ -414,11 +397,11 @@
    </shortdesc>
    <desc>
     <simpara>
-     <propname class="GtkPaned">child2_resize</propname> is a read-only
-     property describing the current status of the
-     <parameter>resize</parameter> parameter relating to the child that
-     is packed in the second pane.  This is useful where the end user needs
-     to be given control over the <parameter>resize</parameter> setting.
+     <propname class="GtkPaned">child2_resize</propname> describes the
+     current status of the <parameter>resize</parameter> parameter relating
+     to the child that is packed in the second pane.  This is useful where
+     the end user needs to be given control over the 
+     <parameter>resize</parameter> setting.
     </simpara>
    </desc>
   </property>
@@ -431,11 +414,11 @@
    </shortdesc>
    <desc>
     <simpara>
-     <propname class="GtkPaned">child2_shrink</propname> is a read-only
-     property describing the current status of the
-     <parameter>shrink</parameter> parameter relating to the child that
-     is packed in the second pane.  This is useful where the end user needs
-     to be given control over the <parameter>shrink</parameter> setting.
+     <propname class="GtkPaned">child2_shrink</propname> describes the
+     current status of the <parameter>shrink</parameter> parameter relating
+     to the child that is packed in the second pane.  This is useful where
+     the end user needs to be given control over the 
+     <parameter>shrink</parameter> setting.
     </simpara>
    </desc>
   </property>

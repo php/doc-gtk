@@ -13,12 +13,14 @@
     <classname>GtkHButtonBox</classname> and
     <classname>GtkVButtonBox</classname> container widgets.
    </simpara>
-   <simpara>
-    Please note that in GTK+ 2.0 all reference to <literal>spacing</literal> 
-    will be completely removed; this is because these values are always
-    relative in <classname>GtkButtonBox</classname> classes, and should be
-    adjusted internally.
-   </simpara>
+   <note>
+    <simpara>
+     Please note that in GTK+ 2.0 all reference to <literal>spacing</literal> 
+     will be completely removed; this is because these values are always
+     relative in <classname>GtkButtonBox</classname> classes, and should be
+     adjusted internally.
+    </simpara>
+   </note>
   </desc>
  </classmeta>
 
@@ -32,7 +34,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Returns integer value of spacing between buttons.  *deprecated in GTK2*
+    Returns spacing between buttons.  *deprecated in GTK2*
    </shortdesc>
    <desc>
     <simpara>
@@ -40,10 +42,12 @@
      integer value representing the spacing in pixels between the buttons
      contained in a <classname>GtkButtonBox</classname>.
     </simpara>
-    <simpara>
-     Note that this method is deprecated in GTK+ 2.0 and should not be used
-     where forward compatibility is an issue.
-    </simpara>
+    <note>
+     <simpara>
+      Note that this method is deprecated in GTK+ 2.0 and should not be used
+      where forward compatibility is an issue.
+     </simpara>
+    </note>
    </desc>
   </method>
 
@@ -90,11 +94,13 @@ ref="functions">vbutton_box_set_spacing_default()</function>
      for <classname>GtkVButtonBox</classname>, or <literal>30</literal> for 
      <classname>GtkHButtonBox</classname>.
     </simpara>
-    <simpara>
-     Note that this method is deprecated in GTK+ 2.0.  Where forward
-     compatibility is an issue, use 
-     <function class="GtkButtonBox">set_layout()</function> instead.
-    </simpara>
+    <note>
+     <simpara>
+      Note that this method is deprecated in GTK+ 2.0.  Where forward
+      compatibility is an issue, use 
+      <function class="GtkButtonBox">set_layout()</function> instead.
+     </simpara>
+    </note>
    </desc>
   </method>
 
@@ -147,10 +153,14 @@ ref="functions">vbutton_box_set_layout_default()</function>.
      widget, in pixels.
     </simpara>
     <simpara>
-     The default setting is <literal>(85, 27)</literal>.  This is not due
-     to change; however, the method itself is deprecated and minimum sizing
-     will be set internally in future versions of GTK+.
+     The default setting is <literal>(85, 27)</literal>.
     </simpara>
+    <note>
+     <simpara>
+      Note that this method is deprecated, and that minimum sizing
+      will be set internally in future versions of GTK+.
+     </simpara>
+    </note>
    </desc>
   </method>
 
@@ -172,11 +182,14 @@ ref="functions">vbutton_box_set_layout_default()</function>.
      by the buttons.
     </simpara>
     <simpara>
-     The default settings are currently <literal>(7, 0)</literal> and are
-     likely to change only in a minor way.  Note that the method itself is,
-     however, deprecated, and that internal padding will be set by the widget
-     itself in future versions of GTK+.
+     The default settings are currently <literal>(7, 0)</literal>.
     </simpara>
+    <note>
+     <simpara>
+      Note that this method is deprecated, and that internal padding will
+      be set by the widget itself in future versions of GTK+.
+     </simpara>
+    </note>
    </desc>
   </method>
 

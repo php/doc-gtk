@@ -293,7 +293,7 @@ $box-&gt;pack_end($child);
 
  <properties>
 
-  <property id="gtk.gtkbox.property.children">
+  <property id="gtk.gtkbox.property.children" type="ro">
    <propname>children</propname>
    <proptype>array</proptype>
    <shortdesc>
@@ -308,7 +308,7 @@ $box-&gt;pack_end($child);
    </desc>
   </property>
 
-  <property id="gtk.gtkbox.property.spacing">
+  <property id="gtk.gtkbox.property.spacing" type="ro">
    <propname>spacing</propname>
    <proptype>int</proptype>
    <shortdesc>
@@ -331,7 +331,7 @@ $box-&gt;pack_end($child);
    </desc>
   </property>
 
-  <property id="gtk.gtkbox.property.homogeneous">
+  <property id="gtk.gtkbox.property.homogeneous" type="ro">
    <propname>homogeneous</propname>
    <proptype>bool</proptype>
    <shortdesc>
@@ -344,9 +344,13 @@ $box-&gt;pack_end($child);
      all child widgets in the container the same size as the largest child.
     </simpara>
     <simpara>
-     Note that this property only affects one dimension, as the children
-     will always fit the height of a row, or the width of a column, regardless
-     of settings.
+     Use <function class="GtkBox">set_homogeneous()</function> to set
+     the value.
+    </simpara>
+    <simpara>
+     Note that the value of this property only affects one dimension, as
+     the children will always fit the height of a row, or the width of a
+     column, regardless of settings.
     </simpara>
    </desc>
   </property>
