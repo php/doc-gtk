@@ -1,0 +1,531 @@
+<classentry id="gtk.gtkwindow">
+ <classmeta>
+  <classtitle>GtkWindow</classtitle>
+  <classparent>GtkBin</classparent>
+  <shortdesc>
+   Ein Widget welches Fenster f&uuml;r eine Anwendung zur Verf&uuml;gung stellt.
+  </shortdesc>
+  <desc>
+   <simpara>
+    <classname>GtkWindow</classname> ist das Widget welches die Fenster f&uuml;r
+    eine Anwendung zur Verf&uuml;gung stellt. Es gibt drei verschiedene Typen,
+    die vom Entwickler w&auml;hrend Konstruktion definiert werden -
+    Toplevel, Dialog und Popup.
+   </simpara>
+   <simpara>
+    Toplevel Fenster sind mit den &uuml;blichen Schaltfl&auml;chen
+    <literal>Minimieren</literal>, <literal>Maximieren</literal> und
+    <literal>Schliessen</literal>. Die ersten beiden zeigen das erwartete
+    Verhalten; dies ist in den GDK Quellen vorgegeben und kann zum jetzigen
+    Zeitpunkt nicht von PHP-Gtk ver&auml;ndert werden
+    Der <literal>Schliessen</literal> Button ist nicht auf diese Art und Weise
+    vordefiniert, so dass das Aussenden des
+    <signalname class="GtkObject">destroy</signalname> Signals &uuml;berschrieben
+    werden kann, indem man eine Funktion mit dem
+    <signalname class="GtkWidget">delete-event</signalname> Signal des Fensters
+    verbindet und diese <literal>true</literal> zur&uuml;ckgeben l&auml;sst.
+    Beachten Sie, dass das <signalname class="GtkObject">destroy</signalname> Signal
+    des Hauptfensters direkt oder indirekt mit einer Funktion verbunden werden sollte,
+    welche die GTK Hauptschleife beendet!
+   </simpara>
+   <simpara>
+    A dialog window is not the same thing as a 
+    <classname>GtkDialog</classname>, but is simply a normal toplevel
+    window with the <literal>maximize</literal> function disabled.  Both
+    dialog and popup windows are designed to be used when a message to the
+    user requires a response, and should be used in conjunction with the 
+    <function class="GtkWindow">set_transient_for()</function> and 
+    <function class="GtkWindow">set_modal()</function> methods.
+   </simpara> 
+   <simpara>
+    A popup window lacks any window decoration, so needs an
+    alternative means of closure.  This could triggered by a timer, an
+    event, or a widget capable of user interaction.
+   </simpara>
+   <simpara>
+    Note that both the window decorations and the associated functions
+    described above are provided by the underlying system's window manager, 
+    and could possibly vary or be absent.
+   </simpara>
+  </desc>
+ </classmeta>
+
+ <constructor id="gtk.gtkwindow.constructor">
+  <funcsynopsis>
+   <funcprototype>
+    <funcdef> <function>GtkWindow</function></funcdef>
+    <paramdef>
+     <enumname>GtkWindowType</enumname> 
+     <parameter><optional>type = GTK_WINDOW_TOPLEVEL</optional></parameter>
+    </paramdef>
+   </funcprototype>
+  </funcsynopsis>
+  <shortdesc>
+   Creates a new <classname>GtkWindow</classname>.
+  </shortdesc>
+  <desc>
+   <simpara>
+    Creates a new <classname>GtkWindow</classname> which is toplevel by
+    default.  Most of the other widgets in PHP-GTK need to have a window
+    constructed and to be added to that window (or a container within that
+    window) before they can be instantiated.  There are exceptions, such as 
+    <classname>GtkDialog</classname> and 
+    <classname>GtkColorSelectionDialog</classname>; these are compound
+    widgets which are already based upon their own internal instance of a
+    <classname>GtkWindow</classname>.
+   </simpara>
+   <para>
+    As the <classname>GtkWindow</classname> is such a fundamental object
+    in the design of windowed applications, there follows a brief code
+    sample to reiterate the essential basic steps in creating any PHP-GTK
+    script:
+    <informalexample>
+     <programlisting role="php">
+/*load the php_gtk module*/
+dl('php_gtk.' . (strstr(PHP_OS, 'WIN') ? 'dll' : 'so')) ||
+die(&quot;Can't load php_gtk module!\n&quot;);
+    
+/*create the main window*/
+$window = &amp;new GtkWindow();
+    
+/*ensure that the destruction of the main window also kills the main loop*/
+$window-&gt;connect_object('destroy', array('gtk', 'main_quit'));
+    
+/*realize the underlying GdkWindow, flag the GtkWindow's visibility and map
+  it onto the screen, all in one simple line*/
+$window-&gt;show();
+    
+/*without the main loop, there is no PHP-GTK script*/
+gtk::main();
+     </programlisting>
+    </informalexample>
+   </para>
+  </desc>
+ </constructor>
+
+ <methods>
+
+  <method id="gtk.gtkwindow.method.set_title">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_title</function></funcdef>
+     <paramdef>string <parameter>title</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Sets window title.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Sets the title shown in the window's title bar, and also in the
+     task bar icon for the window when it is minimized.  The text is
+     truncated to the width of the window.
+    </simpara>
+    <simpara>
+     Either single or double quotation marks may be used to contain the
+     string.  Note that any apostrophes will need to be escaped with a
+     backslash if single quotation marks are used.
+    </simpara>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkwindow.method.set_wmclass">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_wmclass</function></funcdef>
+     <paramdef>string <parameter>wmclass_name</parameter></paramdef>
+     <paramdef>string <parameter>wmclass_class</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Sets window manager class and name.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Sets the window manager name and class across an application.  However, 
+     given that the window manager class is already set in precisely this way
+     by GTK, and that there are no functions in PHP-GTK where we might need
+     this information, this method is best left untouched.
+    </simpara>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkwindow.method.set_policy">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_policy</function></funcdef>
+     <paramdef>int <parameter>allow_shrink</parameter></paramdef>
+     <paramdef>int <parameter>allow_grow</parameter></paramdef>
+     <paramdef>int <parameter>auto_shrink</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Sets window resizing policy.  *deprecated in GTK2*
+   </shortdesc>
+   <desc>
+    <simpara>
+     The default policy on a <classname>GtkWindow</classname> is 
+     <literal>false, true, false</literal>, which retains the default size
+     of the window on opening and allows the user to resize it thereafter.
+    </simpara>
+    <simpara>
+     <parameter>allow_shrink</parameter> when set to <literal>true</literal> 
+     allows the window to be smaller than its child's size requisition, which
+     has the effect of truncating the child.  For this reason, it should
+     always be set to <literal>false</literal>.
+    </simpara>
+    <simpara>
+     <parameter>allow_grow</parameter> when set to <literal>true</literal> 
+     allows the window to be expanded beyond its initial size.  The default
+     behaviour of the child is to expand with the window, in most cases. 
+     Setting the <parameter>allow_grow</parameter> parameter to 
+     <literal>false</literal> prevents such resizing, taking the requisition
+     size of the window's child as the window's base size.
+    </simpara>
+    <simpara>
+     <parameter>auto_shrink</parameter> when set to <literal>true</literal> 
+     overrides the window's default size setting, and shrinks or expands
+     the window to fit the child's requisition size if the second parameter
+     hasn't already done so.
+    </simpara>
+    <simpara>
+     Basically the only reason to use this method is likely to be when you
+     don't want the window to be user-resizable.  In this case, the setting
+     you should use is <literal>false, false, true</literal>, or 
+     alternatively <literal>false, false, false</literal> which will have
+     the same effect due to the redundancy of the third parameter here.
+    </simpara>
+    <simpara>
+     This method has been deprecated in GTK 2.0 in favour of a new and more
+     efficient method.  It would be wise to bear this in mind and use 
+     <function class="GtkWindow">set_policy()</function> sparingly.
+    </simpara>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkwindow.method.add_accel_group">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>add_accel_group</function></funcdef>
+     <paramdef>
+      <classname>GtkAccelGroup</classname> 
+      <parameter>accel_group</parameter>
+     </paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Associates accelerator group with window.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Adds an existing <classname>GtkAccelGroup</classname> to the window, 
+     allowing keyboard shortcuts to be created - usually for menus.
+    </simpara>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkwindow.method.remove_accel_group">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>remove_accel_group</function></funcdef>
+     <paramdef>
+      <classname>GtkAccelGroup</classname> 
+      <parameter>accel_group</parameter>
+     </paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Removes associated accelerator group from window.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Removes the named accelerator group from the window.
+    </simpara>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkwindow.method.set_position">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_position</function></funcdef>
+     <paramdef>
+      <enumname>GtkWindowPosition</enumname> 
+      <parameter>position</parameter>
+     </paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Sets screen position of window.
+   </shortdesc>
+   <desc>
+    <simpara>
+     <function class="GtkWindow">set_position()</function> sets the
+     position of the window on opening to one of four possible
+     <enumname>GtkWindowPosition</enumname> values.
+    </simpara>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkwindow.method.activate_focus">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>int <function>activate_focus</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Activates child that currently has focus.
+   </shortdesc>
+   <desc>
+    <simpara>
+     <function class="GtkWindow">activate_focus()</function> is a method
+     that will emit the activate signal from the child widget having
+     focus at the point that the method is called.  In GTK+, each widget
+     has one signal which has activate signal status; the signal with this
+     status has the ability to respond to events generated from the keyboard. 
+     If you do not have that widget-specific activate signal connected to
+     the widget with focus, nothing will be fired.
+    </simpara>
+    <simpara>
+     The widget that is most likely to be used in this situation is probably
+     <classname>GtkButton</classname>, which has  
+     <signalname class="GtkButton">clicked</signalname> as its activate
+     signal.
+    </simpara>
+    <note>
+     <simpara>
+      If this method is part of a callback called from another widget, that
+      widget will have focus at the time that the callback is run and PHP
+      will - understandably - crash.  It needs to be called from an event
+      signal in order to work.
+     </simpara>
+    </note>
+    <para>
+     See also:  <link linkend="gtk.signals.events">Signals and Events</link> 
+     in the PHP-GTK userguide, 
+     <function class="GtkWindow">activate_default()</function>, 
+     <function class="GtkWindow">set_focus()</function>, 
+     <signalname class="GtkWidget">activate</signalname>.
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkwindow.method.activate_default">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>int <function>activate_default</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Activates child currently set as default.
+   </shortdesc>
+   <desc>
+    <simpara>
+     As with <function class="GtkWindow">activate_focus()</function>, the
+     <function class="GtkWindow">activate_default()</function> method causes
+     the widget-specific activate signal to be emitted by the targeted child.
+    </simpara>
+    <simpara>
+     See also:  <function class="GtkWindow">activate_focus()</function>, 
+     <function class="GtkWindow">set_default()</function>,
+     <signalname class="GtkWidget">activate</signalname>.
+    </simpara>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkwindow.method.set_transient_for">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_transient_for</function></funcdef>
+     <paramdef>
+      <classname>GtkWindow</classname> 
+      <parameter>parent</parameter>
+     </paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Sets window as transient for the given parent.
+   </shortdesc>
+   <desc>
+    <simpara>
+     <function class="GtkWindow">set_transient_for()</function> is used to
+     set a dialog or popup window as a temporary child of the toplevel
+     window it is associated with.  This prevents there being an additional
+     icon for the transient message in the taskbar, and also allows the
+     transient window to take on the behaviour of the parent window, e.g. if
+     the parent is minimized the child will minimize along with it.
+    </simpara>
+    <simpara>
+     This method does not work in the win32 version of GTK+ currently used
+     by PHP-GTK, but as the bug causing the problem has now been fixed in
+     Gnome CVS it would be sensible to use it.
+    </simpara>
+    <simpara>
+     Attempting to delete the parent window before destroying the transient
+     window produces a gdk warning on win32.  To avoid this, always
+     use <function class="GtkWindow">set_modal()</function> where you have
+     used <function class="GtkWindow">set_transient_for()</function>.
+    </simpara>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkwindow.method.set_default_size">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_default_size</function></funcdef>
+     <paramdef>int <parameter>width</parameter></paramdef>
+     <paramdef>int <parameter>height</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Sets default window size.
+   </shortdesc>
+   <desc>
+    <simpara>
+     <function class="GtkWindow">set_default_size()</function> sets the
+     default opening size of a window, in pixels.  This can be overridden
+     by size requests from the window's child widget exceeding the default
+     size of the window, or by actively setting the resizing policy of the
+     window so that the window always shrink-wraps its child.
+    </simpara>
+    <simpara>
+     Note that a smaller child widget whose size has not been set or
+     otherwise restricted by the programmer will generally expand to fit
+     the default size of the parent window.
+    </simpara>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkwindow.method.set_modal">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_modal</function></funcdef>
+     <paramdef>bool <parameter>modal</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Toggles window modality.
+   </shortdesc>
+   <desc>
+    <simpara>
+     <function class="GtkWindow">set_modal()</function> is used to prevent
+     the other windows in an application from reacting to user activity
+     until the modal window has had an appropriate user response.  It is
+     usually used where dialog or popup windows are acting as message boxes.
+    </simpara>
+    <simpara>
+     A similar effect can be achieved with most widgets by using the 
+     GTK function <function classname="gtk-functions">grab_add()</function>; 
+     however note that <function class="GtkWindow">set_modal()</function> 
+     is a slightly more complex method and is equipped to deal more fully
+     with the scenarios likely to arise when using modal windows.
+    </simpara>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkwindow.method.set_focus">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_focus</function></funcdef>
+     <paramdef>
+      <classname>GtkWidget</classname> 
+      <parameter>focus</parameter>
+     </paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Gives child widget focus.
+   </shortdesc>
+   <desc>
+    <simpara>
+     <function class="GtkWindow">set_focus()</function> sets the focus to
+     the child widget passed as the parameter.  The child must have the
+     flag <literal>GTK_CAN_FOCUS</literal> set in order to be allowed
+     focus.  Some widgets are created with this flag already set (including
+     the <classname>GtkButton</classname> widget), others are not.
+    </simpara>
+    <simpara>
+     See also:  <enumname>GtkWidgetFlags</enumname>, 
+     <classname>GtkWidget</classname>, 
+     <function class="GtkObject">set_flags()</function>.
+    </simpara>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkwindow.method.set_default">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_default</function></funcdef>
+     <paramdef>
+      <classname>GtkWidget</classname> 
+      <parameter>defaultw</parameter>
+     </paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Sets child widget as default.
+   </shortdesc>
+   <desc>
+    <simpara>
+     <function class="GtkWindow">set_default()</function> sets the child
+     widget passed to it as the default child.  (This will usually be a 
+     <classname>GtkButton</classname>.)  The child must have the flag 
+     <literal>GTK_CAN_DEFAULT</literal> set in order to be allowed
+     focus.  Some widgets are created with this flag already set;
+     <classname>GtkButton</classname> is not one of those widgets, and needs
+     to be flagged.
+    </simpara>
+    <simpara>
+     Child widgets that are set as default are marked as such in a way that
+     will be familiar to users.  For instance, a button set as default has a
+     decorative frame and shadow around it.
+    </simpara>
+    <simpara>
+     See also:  <enumname>GtkWidgetFlags</enumname>, 
+     <classname>GtkWidget</classname>, 
+     <function class="GtkObject">set_flags()</function>.
+    </simpara>
+   </desc>
+  </method>
+
+ </methods>
+
+ <signals>
+
+  <signal id="gtk.gtkwindow.signal.set-focus">
+   <signalname>set-focus</signalname>
+   <callback>
+    <funcprototype>
+     <funcdef>void <function>callback</function></funcdef>
+     <paramdef>
+      <classname>GtkWindow</classname> 
+      <parameter>window</parameter>
+     </paramdef>
+     <paramdef>
+      <classname>GtkWidget</classname> 
+      <parameter>child_widget</parameter>
+     </paramdef>
+    </funcprototype>
+   </callback>
+   <shortdesc>
+    Emitted when <function classname="GtkWindow">set_focus()</function>
+    is called.
+   </shortdesc>
+   <desc>
+    <simpara>
+     The <signalname class="GtkWindow">set-focus</signalname> signal is
+     emitted by the <classname>GtkWindow</classname> in response to a 
+     <function classname="GtkWindow">set_focus()</function> method call,
+     which is triggered each time the child having focus within that window
+     changes, that is, every time the user chooses a different child widget.
+    </simpara>
+    <simpara>
+     The signal is primarily for internal GTK use.
+    </simpara>
+   </desc>
+  </signal>
+
+ </signals>
+
+</classentry>
