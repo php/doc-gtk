@@ -773,9 +773,13 @@ $image = &new GtkPixmap($gdkpixmap, $mask);
      </informalexample>
     </para>
     <simpara>
-     The <parameter>transparent_color</parameter> can be <literal>null</literal>,
-     but then there won't be any transparency in the picture except the
-     color <literal>None</literal> in the pixmap definition.
+     The <parameter>transparent_color</parameter> determines what color
+     the <literal>None</literal> pixels will get if you don't
+     use the pixmask.
+    </simpara>
+    <simpara>
+     See the <link linkend="tutorials.pixmaps">tutorial</link> for more details
+     and some examples.
     </simpara>
    </desc>
   </method>
@@ -801,12 +805,31 @@ $image = &new GtkPixmap($gdkpixmap, $mask);
    </shortdesc>
    <desc>
     <simpara>
+     <function>gdk::pixmap_create_from_xpm</function> returns a 
+     array consisting of a <classname>GdkPixmap</classname> and a
+     <classname>GdkBitmap</classname> mask that has been created from the
+     specified pixmap data given by the array.
+    </simpara>
+    <simpara>
+     The array has to have the same structure like the "normal" C-array
+     in an xpm file.
+    </simpara>
+    <simpara>
      <literal>
       $gdkpixmap = 
       gdk::pixmap_create_from_xpm_d($main_window->window, 
       $transparent_color, $data);
      </literal>
      <!-- No I am NOT going to leave it like this..   sf mar 02 -->
+    </simpara>
+    <simpara>
+     The <parameter>transparent_color</parameter> determines what color
+     the <literal>None</literal> pixels will get if you don't
+     use the pixmask.
+    </simpara>
+    <simpara>
+     See the <link linkend="tutorials.pixmaps">tutorial</link> for more details
+     and some examples.
     </simpara>
    </desc>
   </method>
