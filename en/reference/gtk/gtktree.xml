@@ -284,7 +284,7 @@ echo $tree->child_position($treeItem); // Outputs 0
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Selects a node of the tree.
+    Selects a node of the tree by position.
    </shortdesc>
    <desc>
     <simpara>
@@ -330,16 +330,19 @@ $tree->select_item(0); // itemDeselected() will be called.
       <function>unselect_item</function>
      </funcdef>
      <paramdef>int
-      <parameter>item</parameter>
+      <parameter>position</parameter>
      </paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Unselects a node of the tree.
+    Unselects a node of the tree by position.
    </shortdesc>
    <desc>
     <simpara>
-     Unhighlights and unselects a previously selected node.
+     Unselects the node in <parameter>position</parameter>. Unselecting a node causes the node to emit the <signalname class="GtkTree">deselect</signalname> signal. Unselecting a node that is not selected will select the node.
+    </simpara>
+    <simpara>
+     Node positions are indexed begining with zero. The fourth node is in position three.
     </simpara>
    </desc>
   </method>
@@ -347,30 +350,44 @@ $tree->select_item(0); // itemDeselected() will be called.
   <method id="gtk.gtktree.method.select_child">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>void <function>select_child</function></funcdef>
-     <paramdef><classname>GtkWidget</classname> <parameter>tree_item</parameter></paramdef>
+     <funcdef>void
+      <function>select_child</function>
+     </funcdef>
+     <paramdef>
+      <classname>GtkWidget</classname>
+      <parameter>tree_item</parameter>
+     </paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Selects a node of a tree by object.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Selects the node <parameter>tree_item</parameter>. Selecting a node causes the <signalname class="GtkTreeItem">select</signalname> signal to be emitted.
+    </simpara>
    </desc>
   </method>
 
   <method id="gtk.gtktree.method.unselect_child">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>void <function>unselect_child</function></funcdef>
-     <paramdef><classname>GtkWidget</classname> <parameter>tree_item</parameter></paramdef>
+     <funcdef>void
+      <function>unselect_child</function>
+     </funcdef>
+     <paramdef>
+      <classname>GtkWidget</classname>
+      <parameter>tree_item</parameter>
+     </paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Unselects a node of a tree by object.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Unselects <parameter>tree_item</parameter>. Unselecting a node causes the <signalname class="GtkTreeItem">deselect</signalname> signal to be emitted.
+    </simpara>
    </desc>
   </method>
 
@@ -402,45 +419,74 @@ $tree->select_item(0); // itemDeselected() will be called.
   <method id="gtk.gtktree.method.set_selection_mode">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>void <function>set_selection_mode</function></funcdef>
-     <paramdef><enumname>GtkSelectionMode</enumname> <parameter>mode</parameter></paramdef>
+     <funcdef>void
+      <function>set_selection_mode</function>
+     </funcdef>
+     <paramdef>
+      <enumname>GtkSelectionMode</enumname>
+      <parameter>mode</parameter>
+     </paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the tree's selection mode.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Sets the selection mode to <parameter>mode</parameter>. <literal>GTK_SELECTION_SINGLE</literal> is the default.
+    </simpara>
+    <simpara>
+     The selection mode determines how many nodes may/must be selected at one time.
+    </simpara>
+    <simpara>
+     See also: <enumname>GtkSelectionMode</enumname>
+    </simpara>
    </desc>
   </method>
 
   <method id="gtk.gtktree.method.set_view_mode">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>void <function>set_view_mode</function></funcdef>
-     <paramdef><enumname>GtkTreeViewMode</enumname> <parameter>mode</parameter></paramdef>
+     <funcdef>void
+      <function>set_view_mode</function>
+     </funcdef>
+     <paramdef>
+      <enumname>GtkTreeViewMode</enumname>
+      <parameter>mode</parameter>
+     </paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the tree's view mode.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Sets the tree's view mode to <parameter>mode</parameter>. The view mode defines how the tree looks when items are selected. The default mode is <literal>GTK_TREE_VIEW_ITEM</literal>.
+    </simpara>
+    <simpara>
+     See also: <enumname>GtkTreeViewMode</enumname>
+    </simpara>
    </desc>
   </method>
 
   <method id="gtk.gtktree.method.set_view_lines">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>void <function>set_view_lines</function></funcdef>
-     <paramdef>int <parameter>flag</parameter></paramdef>
+     <funcdef>void
+      <function>set_view_lines</function>
+     </funcdef>
+     <paramdef>int
+      <parameter>flag</parameter>
+     </paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets how lines between nodes and children are to be drawn.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Sets whether or not lines between nodes and children should be drawn. If <parameter>flag</parameter> evaluates to <literal>true</literal> (<parameter>flag</parameter> &gt; 0) connecting lines between nodes and children will be drawn. If <parameter>flag</parameter> evaluates to <literal>false</literal> (<parameter>flag</parameter> &lt;= 0) connecting lines between nodes and children will not be drawn. By default tree's begin with view lines set to one.
+    </simpara>
    </desc>
   </method>
 
