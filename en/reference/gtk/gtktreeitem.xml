@@ -84,17 +84,19 @@
       <title>Adding a subtree</title>
       <programlisting role="php">
 <![CDATA[
+<?php
 // Create the top level tree item.
-$treeItem = &new GtkTreeItem('Top Level Item');
+$treeItem =& new GtkTreeItem('Top Level Item');
 
 // Create the sub tree with one sub tree item.
-$subTree     = &new GtkTree;
-$subTreeItem = &new GtkTreeItem('Sub Level Item');
+$subTree     =& new GtkTree;
+$subTreeItem =& new GtkTreeItem('Sub Level Item');
 
 $subTree->append($subTreeItem);
 
 // Add the sub tree to the top level item.
 $treeItem->set_subtree($subTree);
+?>
 ]]>
       </programlisting>
      </example>
@@ -153,9 +155,9 @@ function treeItemSelected() {
 }
 
 // Create a new button.
-$button = &new GtkButton('Press Me');
+$button =& new GtkButton('Press Me');
 // Create a new tree item
-$treeItem = &new GtkTreeItem('I\'ll get selected.');
+$treeItem =& new GtkTreeItem('I\'ll get selected.');
 
 // Have the treeItemSelected function called when
 // the tree item is selected.
@@ -165,6 +167,7 @@ $treeItem->connect('select', 'treeItemSelected');
 // function will be called and a message will be 
 // printed to the terminal.
 $button->connect('clicked', array(&$treeItem, 'select'));
+?>
 ]]>
       </programlisting>
      </example>

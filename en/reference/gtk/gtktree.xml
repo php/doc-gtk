@@ -50,7 +50,7 @@ dl('php_gtk.' . (strstr(PHP_OS, 'WIN') ? 'dll' : 'so'));
 function &createTreeFromDirectory($dir)
 {
   // Create a new tree
-  $tree = &new GtkTree;
+  $tree =& new GtkTree;
 
   // Make sure dir is a directory
   if (is_dir($dir)) {
@@ -78,10 +78,10 @@ function &createTreeFromDirectory($dir)
 $directory = '/path/to/some/directory';
 
 // Create a window to display the file structure
-$window = &new GtkWindow;
+$window =& new GtkWindow;
 
 // Add a frame
-$frame = &new GtkFrame($directory);
+$frame =& new GtkFrame($directory);
 $window->add($frame);
 
 // Add the tree
@@ -124,14 +124,16 @@ gtk::main();
       <title>Appending nodes to a tree</title>
       <programlisting role="php">
 <![CDATA[
-$tree = &new GtkTree;
-$nodes = array('These nodes', 'were added', 'in this order');
+<?php
+$tree  =& new GtkTree;
+$nodes =  array('These nodes', 'were added', 'in this order');
 
 // Add the nodes.  When displayed they will be in readable order.
 foreach ($nodes as $node) {
-  $item = &new GtkTreeItem($node);
+  $item =& new GtkTreeItem($node);
   $tree->append($item);
 }
+?>
 ]]>
       </programlisting>
      </example>
@@ -205,10 +207,10 @@ foreach ($nodes as $node) {
 dl('php_gtk.' . (strstr(PHP_OS, 'WIN') ? 'dll' : 'so'));
 
 // Create a tree
-$tree = &new GtkTree;
+$tree =& new GtkTree;
 
 // Create a tree item
-$treeItem = &new GtkTreeItem('A tree item');
+$treeItem =& new GtkTreeItem('A tree item');
 
 // Insert the tree item into the 100th position.
 $tree->insert($treeItem, 100);
@@ -314,21 +316,24 @@ echo $tree->child_position($treeItem); // Outputs 0
       <title>Selecting a node twice</title>
       <programlisting role="php">
 <![CDATA[
+<?php
 // Call back function to notify when an item is deselected
-function itemDeselected() {
+function itemDeselected()
+{
   echo 'A tree item was deselected!';
 }
 
 // Create a tree
-$tree = &new GtkTree;
+$tree =& new GtkTree;
 
 // Create an item and add it to the tree
-$treeItem = &new GtkTreeItem('Select me twice');
+$treeItem =& new GtkTreeItem('Select me twice');
 $tree->append($treeItem);
 
 // Select the item twice and see what happens
 $tree->select_item(0);
 $tree->select_item(0); // itemDeselected() will be called.
+?>
 ]]>
       </programlisting>
      </example>

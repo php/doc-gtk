@@ -2151,22 +2151,22 @@ gtk::main();
       <programlisting role="php">
 <![CDATA[
 <?php
-
-function on_click($widget, $event, $data) {
-switch($event->button) {
-case 1:
-/* do something appropriate to a left click */
-break;
-case 2:
-/* do something appropriate to a middle click */
-break;
-case 3:
-/* do something appropriate to a right click */
-break;
-}}
+function on_click($widget, $event, $data)
+{
+    switch($event->button) {
+    case 1:
+        /* do something appropriate to a left click */
+        break;
+    case 2:
+        /* do something appropriate to a middle click */
+        break;
+    case 3:
+        /* do something appropriate to a right click */
+    break;
+    }
+}
 
 $widget->connect('button-press-event', 'on_click', $data);
-
 ?>
 ]]>
       </programlisting>
@@ -2362,17 +2362,15 @@ $widget->connect('button-press-event', 'on_click', $data);
       <programlisting role="php">
 <![CDATA[
 <?php
-
-function on_click($widget, $event, $data) {
-if($event->keyval==GDK_KEY_Return) {
-/*do something appropriate for the return key being pressed*/
-  }
-elseif($event->keyval > GDK_KEY__a) {
-/*we can reach the character strings, too*/
-  echo $event->string."\n";
-  }
+function on_click($widget, $event, $data)
+{
+    if($event->keyval==GDK_KEY_Return) {
+        /*do something appropriate for the return key being pressed*/
+    } elseif($event->keyval > GDK_KEY__a) {
+        /*we can reach the character strings, too*/
+        echo $event->string."\n";
+    }
 }
-
 ?>
 ]]>
       </programlisting>
