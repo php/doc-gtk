@@ -6,7 +6,29 @@
    Horizontal box container.
   </shortdesc>
   <desc>
-
+   <simpara>
+    <classname>GtkHBox</classname> is a box container that packs child
+    widgets in a single row, using the packing methods inherited from 
+    <classname>GtkBox</classname>.  <classname>GtkHBox</classname> and
+    <classname>GtkVBox</classname> in combination are the most commonly
+    used packing widgets.  See <classname>GtkVBox</classname> for a 
+    working example.
+    <!--TODO This is a temporary measure, example will eventually be in 
+    the userguide but I think we need one available *now*.  -sf -->
+   </simpara>
+   <simpara>
+    Note that all children in a <classname>GtkHBox</classname> are allocated
+    the same height, regardless of settings and child requisition size. 
+    Widgets taking up less than the allocated height are by default centered
+    within the available area in that dimension.
+   </simpara>
+   <simpara>
+    See also: <classname>GtkContainer</classname>, 
+<classname>GtkBox</classname>, <classname>GtkVBox</classname>, 
+<classname>GtkButtonBox</classname>, <classname>GtkLayout</classname>, 
+<classname>GtkTable</classname>.
+    <!-- I would include GtkPacker here, but apparently it's dead.  sf -->
+   </simpara>
   </desc>
  </classmeta>
 
@@ -14,15 +36,35 @@
   <funcsynopsis>
    <funcprototype>
     <funcdef> <function>GtkHBox</function></funcdef>
-    <paramdef>bool <parameter><optional>homogeneous = FALSE</optional></parameter></paramdef>
-    <paramdef>int <parameter><optional>spacing = 0</optional></parameter></paramdef>
+    <paramdef>bool 
+     <parameter><optional>homogeneous = FALSE</optional></parameter>
+    </paramdef>
+    <paramdef>int 
+     <parameter><optional>spacing = 0</optional></parameter>
+    </paramdef>
    </funcprototype>
   </funcsynopsis>
   <shortdesc>
-
+   Creates a container for a single row of child widgets.
   </shortdesc>
   <desc>
-
+   <simpara>
+    Creates a new horizontal box container designed for packing a single
+    row of child widgets.
+   </simpara>
+   <para>
+    The first parameter, <parameter>homogeneous</parameter>, is a boolean
+    value which, if set to <literal>true</literal>, will set each child
+    widget in the <classname>GtkHBox</classname> to the same width as that
+    of the largest child widget.  The second parameter, 
+    <parameter>spacing</parameter>, sets the minimum spacing between the
+    child widgets along the width of the container, in pixels.  Leaving both
+    parameters empty, e.g.
+    <informalexample>
+     <programlisting role="php">$hbox = &amp;new GtkHBox();</programlisting>
+    </informalexample>
+    will set the default behaviour of individual sizing and zero spacing.
+   </para>
   </desc>
  </constructor>
 
