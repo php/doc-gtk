@@ -21,82 +21,38 @@
 AC_INIT(global.ent)
 
 AC_PATH_PROG(XSLTPROC, xsltproc, no)
-if test "$XSLTPROC" = "no"
+AC_PATH_PROG(PHP, php, no)
+
+if test "$XSLTPROC" = "no";
 then
-    AC_PATH_PROG(SAXON, saxon, no)
-    if test "$SAXON" = "no"; then
-        AC_PATH_PROG(JAVA, java, no)
-        if test "$JAVA" = "no"; then
-            AC_MSG_ERROR(unable to locate either Saxon or Java)
-        else
-            AC_MSG_CHECKING(for Saxon.jar)
-            if echo $CLASSPATH | grep "saxon.jar" > /dev/null; then
-                AC_MSG_RESULT("yes")
-                SAXON="$JAVA com.icl.saxon.StyleSheet"
-                AC_SUBST(SAXON)
-		ENDTEXT="Please ensure you have copied Makefile.saxon to Makefile.in and rerun configure to build with saxon"
-            else
-	        AC_MSG_ERROR(unable to locate saxon.jar in your classpath)
-            fi
-        fi
-    fi
+    AC_MSG_ERROR(cannot find xsltproc)
 fi
 
-AC_PATH_PROG(PHP, php, no)
 if test "$PHP" = "no";
 then
     AC_MSG_ERROR(unable to locate php exectuable)
 fi
+AC_MSG_CHECKING(for the stylesheets)
+if test ! -d "stylesheets";
+then
+    AC_MSG_RESULT(not found)
+    AC_MSG_ERROR(- 
+    *******************************************
+    *    Please get the stylesheets from      *
+    *  http://www.phpuk.org/~james/gtkss.zip  *
+    * and extract them in the php-gtk-doc dir *
+    *******************************************)
+fi
+AC_MSG_RESULT(found)
 
 DOCBOOK_DOCTYPE="-//PHP Group//DTD DocBk XML V3.1.7-Based Extension//EN"
 AC_SUBST(DOCBOOK_DOCTYPE)
 
-STYLESHEET_DIR="stylesheets/xsl"
+STYLESHEET_DIR="stylesheets"
 AC_SUBST(STYLESHEET_DIR)
 
 PHP_GTK_DOC_BUILD_DATE=`date`
 AC_SUBST(PHP_GTK_DOC_BUILD_DATE)
-
-AC_MSG_CHECKING(for docbook.xsl)
-AC_ARG_WITH(xsl,
-[  --with-xsl=[URI]        Look for XSL stylesheets at the specified URI],
-[
-    DOCBOOKXSL_BIGHTML=$withval/html/docbook.xsl
-    DOCBOOKXSL_HTML=$withval/html/docbook.xsl
-    DOCBOOKXSL_CHUNK=$withval/html/chunk.xsl
-    DOCBOOKXSL_HTMLHELP=$withval/contrib/htmlhelp/htmlhelp.xsl
-    DOCBOOKXSL_PRINT=$withval/fo/docbook.xsl
-    AC_MSG_RESULT(in $withval)
-],[
-    for dir in stylesheets/xsl/docbook \
-               /usr/lib/xml/docbook \
-	       /usr/share/doc/docbook \
-	       /usr/local/xsl/stylesheets;
-    do
-    	if test -d "$dir"; then
-            if test "$dir" = "stylesheets/xsl/docbook"; then
-                DOCBOOKXSL_HTML="docbook/html/docbook.xsl"
-                DOCBOOKXSL_CHUNK="docbook/html/chunk.xsl"
-                DOCBOOKXSL="$STYLESHEET_DIR/docbook"
-            else
-                DOCBOOKXSL_HTML="$dir/html/docbook.xsl"
-                DOCBOOKXSL_CHUNK="$dir/html/chunk.xsl"
-                DOCBOOKXSL="$dir"
-            fi
-            AC_MSG_RESULT(in $dir)
-	        break
-	    fi
-	done
-])
-
-if test -z "$DOCBOOKXSL_HTML"; then
-    AC_MSG_RESULT( )
-    AC_MSG_ERROR(Please specify where the Docbook XSL stylesheets are)
-fi
-
-AC_SUBST(DOCBOOKXSL_CHUNK)
-AC_SUBST(DOCBOOKXSL_HTML)
-AC_SUBST(DOCBOOKXSL)
 
 AC_MSG_CHECKING(for php-gtk source)
 AC_ARG_WITH(srcdir,
@@ -113,10 +69,12 @@ AC_ARG_WITH(srcdir,
         AC_MSG_RESULT( $withval )
         AC_SUBST(PHPGTK_SRCDIR)
     else
-        AC_MSG_RESULT( )
+        AC_MSG_RESULT(no)
         AC_MSG_ERROR(Cannot find PHP-GTK source dir)
     fi
-])
+],
+[
+AC_MSG_RESULT(not found)])
 
 AC_MSG_CHECKING(for language)
 AC_ARG_WITH(lang,
@@ -154,8 +112,11 @@ AC_OUTPUT(\
 Makefile \
 manual.xml \
 scripts/udocs \
-scripts/genchapterents.php \
-stylesheets/xsl/locale.xsl )
+scripts/genchapterents.php )
+
+echo creating chapters.ent
+$PHP -q scripts/genchapterents.php > chapters.ent
+echo creating name_to_id.xsl
+$XSLTPROC gen_name_to_id.xsl manual.xml > stylesheets/html/name_to_id.xsl
 
 chmod +x scripts/genchapterents.php
-echo $ENDTEXT
