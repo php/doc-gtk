@@ -181,7 +181,7 @@ case "$ENCODING" in
 			if test $oldfilepath -nt $xmlfilepath
 			then
 				echo Updating "$xmlfile"...
-				(echo "<?xml version='1.0' ?>"; iconv -s -f $ENCODING -t UTF-8 $oldfilepath | tail +2 ) > $xmlfilepath
+				(echo "<?xml version='1.0' encoding='utf-8' ?>"; iconv -s -f $ENCODING -t UTF-8 $oldfilepath | tail +2 ) > $xmlfilepath
 			fi
 		fi
 	done;;
