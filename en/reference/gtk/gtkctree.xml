@@ -150,8 +150,9 @@ gtk::main();
    <funcsynopsis>
     <funcprototype>
      <funcdef><classname>GtkCTreeNode</classname> <function>insert_node</function></funcdef>
+     <paramdef><classname>GtkCTreeNode</classname> <parameter>parent</parameter></paramdef>
      <paramdef><classname>GtkCTreeNode</classname> <parameter>sibling</parameter></paramdef>
-     <paramdef>Array <parameter>contents</parameter></paramdef>
+     <paramdef>Array <parameter>labels</parameter></paramdef>
      <paramdef>int <parameter>pixmap_spacing</parameter></paramdef>
      <paramdef><classname>GdkPixmap</classname> <parameter>pixmap_closed</parameter></paramdef>
      <paramdef><classname>GdkBitmap</classname> <parameter>mask_closed</parameter></paramdef>
@@ -167,7 +168,7 @@ gtk::main();
    <desc>
     <simpara>
      This function creates a new node and inserts it into the tree. The first parameter
-     is the parent node; if it's NULL the node will be the root. The "contents" parameter
+     is the parent node; if it's NULL the node will be the root. The "labels" parameter
      is an array of strings which are shown in the tree, for each column one. pixmap_spacing 
      is the spacing between the pixmap and the text.
     </simpara>
