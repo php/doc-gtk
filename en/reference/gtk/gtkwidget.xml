@@ -187,7 +187,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Disassociates widget from current parent.
+    Dissociates widget from current parent.
    </shortdesc>
    <desc>
     <simpara>
@@ -399,10 +399,23 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Queues widget's redraw requests.
+    Queues widget's redraw requests, for the whole widget.
    </shortdesc>
    <desc>
-
+    <simpara>
+     This method is the one to use if you need to force a widget to
+     redraw itself.  Put it into a callback function and determine
+     an appropriate signal to trigger the redraws. 
+     <function class="GtkWidget">queue_draw()</function> creates an expose
+     event, in most situations.
+    </simpara>
+    <simpara>
+     In the event that this method does not have the desired effect, try
+     calling <function class="GtkWidget">queue_resize()</function> instead. 
+     If that also fails, you will need to resort to calling 
+     <function class="GtkWidget">hide()</function> followed immediately by 
+     <function class="GtkWidget">show()</function> in the callback.
+    </simpara>
    </desc>
   </method>
 
@@ -417,10 +430,15 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Queues widget's redraw requests, for any area within the widget.
    </shortdesc>
    <desc>
-
+    <simpara>
+     This has exactly the same functionality as 
+     <function class="GtkWidget">queue_draw()</function>, with the
+     exception that the area to be redrawn can be defined in the
+     parameters.
+    </simpara>
    </desc>
   </method>
 
@@ -473,8 +491,15 @@
      <classname>GtkScale</classname> for a working example.
     </simpara>
     <simpara>
-     <function class="GtkWidget">queue_resize()</function> is used
-     extensively within GTK+ internals.
+     <function class="GtkWidget">queue_resize()</function> is useful
+     in conjunction with a <classname>GtkDrawingArea</classname>, where
+     the widget creates synthetic configure events in response to the
+     resizing.  It can also trigger expose events in some situations where
+     the <function class="GtkWidget">queue_draw()</function> has proved
+     ineffective in doing same.
+    </simpara>
+    <simpara>
+     This method is used extensively within GTK+ internals.
     </simpara>
    </desc>
   </method>
@@ -934,6 +959,9 @@
      A widget's current state can be queried using the 
      <propname class="GtkWidget">state</propname> property.
     </simpara>
+    <simpara>
+     See also:  <classname>GtkStyle</classname>.
+    </simpara>
    </desc>
   </method>
 
@@ -1079,7 +1107,8 @@
     </simpara>
     <simpara>
      See also:  <classname>GtkAlignment</classname>, and the packing methods
-     supplied by <classname>GtkBox</classname>.
+     supplied by <classname>GtkBox</classname> and 
+     <classname>GtkTable</classname>.
     </simpara>
    </desc>
   </method>
@@ -1212,7 +1241,7 @@ $widget-&gt;add_events(GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK);
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the <classname>GdkColormap</classname> object used by the widget.
    </shortdesc>
    <desc>
 
@@ -1230,7 +1259,7 @@ $widget-&gt;add_events(GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK);
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the <classname>GdkVisual</classname> object used by the widget.
    </shortdesc>
    <desc>
 
@@ -1341,10 +1370,20 @@ $widget-&gt;add_events(GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK);
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets a widget's <propname class="GtkWidget">style</propname> property.
    </shortdesc>
    <desc>
-
+    <simpara>
+     <function class="GtkWidget">set_style()</function> is used when some
+     or all of the elements that make up an individual widget's default
+     <propname class="GtkWidget">style</propname> property are being
+     overwritten by a different instance of a 
+     <classname>GtkStyle</classname> object.
+    </simpara>
+    <simpara>
+     See also:  <classname>GtkStyle</classname>, 
+     <function class="GtkStyle">copy()</function>.
+    </simpara>
    </desc>
   </method>
 
@@ -1389,7 +1428,7 @@ $widget-&gt;add_events(GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK);
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the <classname>GtkStyle</classname> object used by the widget.
    </shortdesc>
    <desc>
 
