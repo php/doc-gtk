@@ -28,13 +28,17 @@
   </shortdesc>
   <desc>
    <simpara>
-    The label in the <classname>GtkFrame</classname> is only present if
-    the label's text is passed as the parameter during the construction of
-    the widget.  Including a label will therefore expand the height of the
-    area along the top of the frame to accommodate the internal 
-    <classname>GtkLabel</classname> widget.  It is possible to pass the 
-    <parameter>label</parameter> parameter as <literal>NULL</literal> in
-    order to retain the height of that area.
+    The label in the <classname>GtkFrame</classname> is only given physical
+    space if a text string is passed as the parameter during the construction
+    of the widget.  Including this parameter will therefore expand the height
+    of the area along the top of the frame to accommodate the size of the
+    current font in the internal <classname>GtkLabel</classname> widget.  It
+    is possible to pass the <parameter>label</parameter> parameter as an
+    empty text string in order to retain the height of that area.
+   </simpara>
+   <simpara>
+    Note that the <literal>NULL</literal> default does not refer to the
+    value of the text string, but to its absence.
    </simpara>
   </desc>
  </constructor>
@@ -55,14 +59,15 @@
     <simpara>
      <function class="GtkFrame">set_label()</function> sets the label
      text programmatically.  If you intend using this method, please
-     bear in mind that you will need to create a <literal>NULL</literal> 
-     <classname>GtkLabel</classname> at the outset in order to prevent the
-     entire widget from redrawing and the label area from resizing.
+     bear in mind that you will need to create a
+     <classname>GtkLabel</classname> with an empty text string at the
+     outset, in order to prevent the entire widget from redrawing and
+     the label area from resizing when the text content is set.
     </simpara>
     <para>
      <informalexample>
       <programlisting role="php">
-$frame = &amp;new GtkFrame(NULL);
+$frame = &amp;new GtkFrame('');
       </programlisting>
      </informalexample>
     </para>
