@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<chapter id="installunix">
+ <title>UNIX環境でPHP-GTKをインストールする</title>
+ <para>
+  Debianユーザは、PHP-GTKバイナリを
+  <ulink url="&url.debian;">&url.debian;</ulink>からダウンロードでき
+  ます。
+ </para>
+ <para>
+  PHP GTKは多くのパッケージに依存しています。これらは、PHP-GTKをイン
+  ストールする前にインストールしておく必要があります。
+  <itemizedlist>
+   <listitem>
+    <para>
+     PHPバージョン&version.php;以降
+    </para>
+   </listitem>
+   <listitem>
+    <para>
+     GTK+ライブラリ。これは、
+     <ulink url="&url.gtk.download;">&url.gtk.download;</ulink>で入
+     手可能です。または、使用するシステム用のパッケージされたバージョ
+     ン、例えば、<literal>gtk</literal>および<literal>gtk-devel</literal>
+     を使用することもできます。
+    </para>
+   </listitem>
+   <listitem>
+    <simpara>
+     libtool, automakeとautoconf。 libtool 1.4.2, automake 1.4と
+     autoconf 2.13の組み合わせは動作することが知られています。
+     他のバージョンの組み合わせについては状況が異なる可能性がありま
+     す。
+    </simpara>
+   </listitem>
+   <listitem>
+    <para>
+     オプションのその他の要素については、
+     <ulink url="&url.gtkhtml;">GtkHTMLライブラリ</ulink>,
+     <ulink url="&url.scintilla;">GtkScintillaライブラリ</ulink>,
+     <ulink url="&url.pixbuf;">Gdk-Pixbufライブラリ</ulink>をダウン
+     ロードして下さい。前と同様に、これらは使用するシステム用にパッ
+     ケージされている可能性がありますので、開発版をイsヌとーるする前
+     に確認して下さい。GtkHTMLは、更に<literal>GAL</literal>のような
+     ものに依存しており、これは、
+     <ulink url="&url.gnome.ftp;">Gnome ftpサイト</ulink>からダウン
+     ロードできます。
+    </para>
+   </listitem>
+  </itemizedlist>
+ </para>
+ <para>
+  最新のソースを
+  <ulink url="&url.phpgtk;">&url.phpgtk;</ulink>または
+  anonymous CVS 
+  <ulink url="&url.php.anoncvs;">&url.php.anoncvs;</ulink>から入手す
+  ることをお薦めします。
+ </para>
+ <para>
+  Run the <command>./buildconf</command> script that is inside the 
+  distribution.  This will set up the necessary files and create the
+  <literal>configure</literal> script.  Next, run 
+  <command>./configure</command>.  This will check that you have a correct
+  version of GTK+ 1.2.x (1.2.6 or above, available from 
+  <ulink url="&url.gtk.download;">&url.gtk.download;</ulink>) and other files
+  required for compilation, and will then create the needed Makefiles.
+ </para>
+ <simpara>
+  <command>./configure</command> can also be used to build the extra 
+  widgets, e.g.
+  <command>./configure --enable-scintilla --enable-gtkhtml</command>.  To
+  list all the available options use <command>./configure --help</command>.  
+  Remember that each extra widget may have a number of dependencies
+  that need to be available for the build to be successful.
+ </simpara>
+ <simpara>
+  Finally, run <command>make</command> to compile the extension.  Some
+  source files are generated from .defs files by the code generator.  If
+  you see messages like <literal>&quot;Could not write...&quot;</literal>, 
+  it means that the listed GTK+ objects or features are not yet supported. 
+  If the compilation is successful, run <command>make install</command> to
+  install the extension into your default PHP extension directory (usually 
+  <filename>/usr/local/lib/php/extensions</filename>).
+ </simpara>
+ <para>
+  Troubleshooting: common problems from <command>./configure</command> or 
+  <command>make</command>
+  <itemizedlist>
+   <listitem>
+    <simpara>
+     <literal>./ltconfig: ltconfig : No such file or directory, configure: 
+     error: libtool configure failed</literal>  is caused by not having
+     one of libtool, automake or autoconf installed.
+   </simpara>
+  </listitem>
+  <listitem>
+   <simpara>
+    <literal>./aclocal.m4:813: error: m4_defn: undefined: 
+    _m4_divert_diversion</literal>  is caused by an incompatible version
+    of autoconf, see the recommended  versions above.
+   </simpara>
+  </listitem>
+  <listitem>
+   <para>
+    <literal>php_gtk+.c:33: parse error before `TSRMLS_DC'</literal>  is
+    caused by either an old version of php being found by the build system
+    or trying to build php-gtk with an old version of PHP - please upgrade
+    to PHP version &version.php; to fix this.
+   </para>
+  </listitem>
+  <listitem>
+   <simpara>
+    <literal>gen_gtk.c:1: parse error before '&lt;'</literal>  is caused by
+    an error occurring in the generator.  Usually this error is resolved by
+    adding the line 
+    <literal>ini_set(&quot;memory_limit&quot;, &quot;32M&quot;);</literal> 
+    to the first line of <filename>generator/generator.php</filename>.  You
+    will need to remove all the <filename>gen_*</filename> files from all
+    directories after changing this.
+   </simpara>
+  </listitem>
+  <listitem>
+   <simpara>
+    <literal>checking for gnome-config... Unknown library `gtkhtml'</literal>
+    (from <command>./configure</command>)  is due to an old or unavailable
+    development header file - if you installed by rpm or a similar package
+    system you will need the <literal>-devel</literal> packages
+   </simpara>
+  </listitem>
+  <listitem>
+   <simpara>
+    <literal>Unable to find -lgal</literal>  or similar message is caused
+    by a missing <literal>gal-devel</literal> or similar library.  Usually
+    this will be a sub dependancy of some of the more complex widgets, like
+    gtkhtml.
+   </simpara>
+  </listitem>
+ </itemizedlist>
+ </para>
+ <simpara>
+  To test the extension, try running the example scripts in the 
+  <filename>test/</filename> directory.  These also provide demonstrations
+  of some of the ways in which PHP-GTK and its extensions can be used.
+ </simpara>
+</chapter>

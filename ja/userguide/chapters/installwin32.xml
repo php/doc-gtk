@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<chapter id="installwin32">
+ <title>Windows環境でPHP-GTKをインストールする</title>
+ <sect1 id="installwin32.intro"></sect1>
+
+ <sect1 id="install.win32.binaries">
+  <title>PHP-GTKをダウンロードする</title>
+  <para>
+   PHP-GTK &version.phpgtk; win32バイナリを
+   <ulink url="&url.phpgtk;">&url.phpgtk;</ulink>からダウンロードして
+   下さい。php.netのCVSサーバから最新のソースを確認してもよいかもしれ
+   ません。詳細は、
+   <ulink url="&url.php.anoncvs;">&url.php.anoncvs;</ulink>も参照して
+   下さい。
+  </para>
+ </sect1>
+ <sect1 id="install.win32.binary.package-layout">
+  <title>バイナリ配布ファイルの配置</title>
+  <para>
+   PHP-GTKのバイナリ配布版には、以下の構造が含まれています。
+   <itemizedlist>
+    <listitem>
+     <simpara>
+      <filename>\php4</filename> -&gt; PHP devおよびPHP-GTK 
+      &version.phpgtk;バイナリファイル
+     </simpara>
+    </listitem>
+    <listitem>
+     <simpara>
+      <filename>\winnt</filename> -&gt; デフォルトphp.iniファイル
+     </simpara>
+    </listitem>
+    <listitem>
+     <simpara>
+      <filename>\winnt\system32</filename> -&gt; 拡張モジュールにより
+      使用されるGTK+バイナリ
+     </simpara>
+    </listitem>
+    <listitem>
+     <simpara>
+      <filename>\test</filename> -&gt; PHP-GTKの使用方法をデモするた
+      めの小数のサンプル集
+     </simpara>
+    </listitem>
+    <listitem>
+     <simpara>
+      <filename>README.TXT</filename>
+     </simpara>
+    </listitem>
+   </itemizedlist>
+  </para>
+ </sect1>
+ <sect1 id="install.win32.howto">
+  <title>インストール方法</title>
+  <orderedlist>
+   <listitem>
+    <simpara>
+     新規にインストールする際には、<filename>C:\php4</filename>を作
+     成し、このディレクトリへ<filename>\php4</filename>の下のファイ
+     ルをコピーします。
+     既存のPHPインストール(例えば、Apache用の)または他にインストール
+     したい場合、<filename>php.ini</filename>ファイルもここに置く必
+     要があります。デフォルトでこのフォルダの中にあるファイルは、PHP
+     またはPHP-GTKに関連するもので、常に更新する必要があるものはこれ
+     だけです。<filename>C:\php4</filename>はデフォルトのディレクト
+     リで、PHP-GTKを他の場所にインストールした場合、PHPにより使用さ
+     れる<filename>php.ini</filename>のコピーのextension_dirに
+     そのフルパスを指定する必要があります。
+    </simpara>
+   </listitem>
+   <listitem>
+    <simpara>
+     system32ディレクトリに<filename>\winnt\system32</filename>の内
+     容をコピーする必要があります。Windows NTおよびWindows 2000の場
+     合、これは<filename>C:\winnt\system32</filename>となります。
+     Windows 95/98の場合は、<filename>C:\Windows\system</filename>ま
+     たは<filename>C:\Windows\system32</filename>となります。
+     このファイルのグループはGTKに関連し、PHP-GTK2がリリースされるま
+     で更新する必要はありません。
+    </simpara>
+   </listitem>
+   <listitem>
+    <simpara>
+     <filename>\test</filename>の中身をスクリプトを実行したい場所(例
+     えば、<filename>C:\php4\test</filename>).にコピーして下さい。
+    </simpara>
+   </listitem>
+  </orderedlist>
+ </sect1>
+</chapter>
