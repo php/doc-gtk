@@ -324,60 +324,150 @@
   <method id="gtk.gtkobject.method.connect">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>XXX <function>connect</function></funcdef>
-     <paramdef>XXX</paramdef>
+     <funcdef>int <function>connect</function></funcdef>
+     <paramdef>string <parameter>signal</parameter></paramdef>
+     <paramdef>string <parameter>function</parameter></paramdef>
+     <paramdef>void 
+      <optional><parameter>custom</parameter></optional>
+     </paramdef>     
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Connects a signal and a callback.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Connects a function to a signal so it is called when the signal is emitted
+     by a widget.
+    </simpara>
+    <simpara>
+     The function takes two or three arguments. The first parameter,
+     <parameter>signal</parameter> is the textual name of the signal, the
+     second parameter, <parameter>function</parameter> is the name of the
+     function that should be used as a callback. The third parameter,
+     <parameter>custom</parameter> is optional and can be used to pass extra
+     data to the callback. Please see the Userguide section of the manual for
+     more information on this.
+    </simpara>
+    <simpara>
+     See Also: <function class="GtkObject">connect_after</function>,
+     <function class="GtkObject">connect_object</function>, 
+     <function class="GtkObject">connect_object_after</function>
+    </simpara>
    </desc>
   </method>
 
   <method id="gtk.gtkobject.method.connect_after">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>XXX <function>connect_after</function></funcdef>
-     <paramdef>XXX</paramdef>
+     <funcdef>int <function>connect_after</function></funcdef>
+     <paramdef>string <parameter>signal</parameter></paramdef>
+     <paramdef>string <parameter>function</parameter></paramdef>
+     <paramdef>void 
+      <optional><parameter>custom</parameter></optional>
+     </paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Connects a signal and a callback to be called after any others.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Connects a function to a signal so it is called when the signal is emitted
+     by a widget. The callback is guaranteed to be called after the normal and
+     default handlers.
+    </simpara>
+    <simpara>
+     The function takes two or three arguments. The first parameter,
+     <parameter>signal</parameter> is the textual name of the signal, the
+     second parameter, <parameter>function</parameter> is the name of the
+     function that should be used as a callback. The third parameter,
+     <parameter>custom</parameter> is optional and can be used to pass extra
+     data to the callback. Please see the Userguide section of the manual for
+     more information on this.
+    </simpara>
+    <simpara>
+     See Also: <function class="GtkObject">connect</function>,
+     <function class="GtkObject">connect_object</function>, 
+     <function class="GtkObject">connect_object_after</function>
+    </simpara>
    </desc>
   </method>
 
   <method id="gtk.gtkobject.method.connect_object">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>XXX <function>connect_object</function></funcdef>
-     <paramdef>XXX</paramdef>
+     <funcdef>int <function>connect_object</function></funcdef>
+     <paramdef>string <parameter>signal</parameter></paramdef>
+     <paramdef>string <parameter>function</parameter></paramdef>
+     <paramdef>Object <parameter>param</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Pass a different object to the callback.
    </shortdesc>
    <desc>
-
+    <simpara>
+     <function class="GtkObject">connect_object</function> allows the passing
+     of a different object to a callback than the one for emitting the signal
+     in the first place.
+    </simpara>
+    <simpara>
+     The <parameter>signal</parameter> parameter is the
+     textual name of the signal we want to connect to, the
+     <parameter>function</parameter> parameter is the textual name of the
+     function we want to connect to the signal and the
+     <parameter>param</parameter> parameter is the object we want to pass as
+     the first parameter to the callback.
+    </simpara>
+    <simpara>
+     The function returns the signal_id.
+    </simpara>
+    <simpara>
+     See Also: <function class="GtkObject">connect</function>, 
+     <function class="GtkObject">connect_after</function>,
+     <function class="GtkObject">connect_object_after</function>
+    </simpara>
    </desc>
   </method>
 
   <method id="gtk.gtkobject.method.connect_object_after">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>XXX <function>connect_object_after</function></funcdef>
-     <paramdef>XXX</paramdef>
+     <funcdef>int <function>connect_object_after</function></funcdef>
+     <paramdef>string <parameter>signal</parameter></paramdef>
+     <paramdef>string <parameter>function</parameter></paramdef>
+     <paramdef>Object <parameter>param</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Pass a different object to the callback, register the callback last.
    </shortdesc>
    <desc>
-
+    <simpara>
+     <function class="GtkObject">connect_object_after</function> allows the 
+     passing of a different object to a callback than the one for emitting
+     the signal in the first place. By using the 
+     <function class="GtkObject">connect_object_after</function> you can
+     ensure that all normal handlers, and the default handler are called
+     first.
+    </simpara>
+        <simpara>
+     The <parameter>signal</parameter> parameter is the
+     textual name of the signal we want to connect to, the
+     <parameter>function</parameter> parameter is the textual name of the
+     function we want to connect to the signal and the
+     <parameter>param</parameter> parameter is the object we want to pass as
+     the first parameter to the callback.
+    </simpara>
+    <simpara>
+     The function returns the signal_id.
+    </simpara>
+    <simpara>
+     See Also: <function class="GtkObject">connect</function>, 
+     <function class="GtkObject">connect_after</function>,
+     <function class="GtkObject">connect_object</function>
+    </simpara>
    </desc>
   </method>
   
