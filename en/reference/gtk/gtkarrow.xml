@@ -133,6 +133,55 @@ gtk::main();
      callback function where the arrow was required to point in another
      direction, change its appearance and/or vanish.
     </simpara>
+    <example>
+     <title>Setting the direction of a <classname>GtkArrow</classname> dynamically</title>
+     <programlisting role="php">
+<![CDATA[
+<?php
+if( !extension_loaded('gtk')) {	
+	dl( 'php_gtk.' . PHP_SHLIB_SUFFIX); 
+}
+
+$window = &new GtkWindow();
+$window->set_default_size( 150, 150);
+$window->connect_object('destroy', array('gtk', 'main_quit'));
+
+$table	= &new GtkTable( 3, 3);
+
+$arButtons	= array(
+array( 'Up', GTK_ARROW_UP, 1, 0),
+array( 'Left', GTK_ARROW_LEFT, 0, 1),
+array( 'Right', GTK_ARROW_RIGHT, 2, 1),
+array( 'Down', GTK_ARROW_DOWN, 1, 2),
+);
+
+$color = &new GdkColor( '#FF0000');
+
+$arrow = &new GtkArrow( GTK_ARROW_UP, GTK_SHADOW_NONE);
+$table->attach( $arrow, 1, 2, 1, 2, GTK_EXPAND|GTK_FILL, GTK_EXPAND|GTK_FILL);
+
+$style = $arrow->style;
+$style->bg[GTK_STATE_NORMAL] = $color;
+//$arrow->set_style( $style);
+
+function setArrow( $objButton, $objArrow, $nDirection)
+{
+	$objArrow->set( $nDirection, GTK_SHADOW_OUT);
+}
+
+foreach( $arButtons as $arButtonDesc) {
+	$button	= &new GtkButton( $arButtonDesc[0]);
+	$table->attach( $button, $arButtonDesc[2], $arButtonDesc[2]+1, $arButtonDesc[3], $arButtonDesc[3]+1);
+	$button->connect( 'clicked', 'setArrow', $arrow, $arButtonDesc[1]);
+}
+
+$window->add( $table);
+$window->show_all();
+gtk::main();
+?>
+]]>
+     </programlisting>
+    </example>
    </desc>
   </method>
 
