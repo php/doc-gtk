@@ -508,6 +508,10 @@ $newicon,
     The <signalname class="GtkToolbar">orientation-changed</signalname> 
      signal is emitted when this function is called.
     </simpara>
+    <simpara>
+     You can read the current orientation with the 
+     <propname class="GtkToolbar">orientation</propname> property.
+    </simpara>
    </desc>
   </method>
 
@@ -546,6 +550,10 @@ $newicon,
      The <signalname class="GtkToolbar">style-changed</signalname> 
      signal is emitted when this function is called.
     </simpara>
+    <simpara>
+     You can read the current style with the 
+     <propname class="GtkToolbar">style</propname> property.
+    </simpara>
    </desc>
   </method>
 
@@ -565,6 +573,10 @@ $newicon,
      which a spacer takes for display. The width of the line is not affected
      by this setting.
     </simpara>
+    <simpara>
+     You can read the current space size with the 
+     <propname class="GtkToolbar">space_size</propname> property.
+    </simpara>
    </desc>
   </method>
 
@@ -583,6 +595,10 @@ $newicon,
      Sets the style of the spacers: Invisible, with only empty space being
      displayed for the spacer or line, which draws a thin vertical (horizontal
      orientation) or horizontal (vertical orientation) in the center of the spacer.
+    </simpara>
+    <simpara>
+     You can read the current space style with the 
+     <propname class="GtkToolbar">space_style</propname> property.
     </simpara>
    </desc>
   </method>
@@ -693,6 +709,73 @@ $newicon,
 
 </signals> 
  
- 
+
+ <properties>
+
+  <prop id="gtk.gtktoolbar.property.orientation" type="ro">
+   <propname>orientation</propname>
+   <proptype><enumname>GtkOrientation</enumname></proptype>
+   <shortdesc>
+    Returns the orientation (horizontal or vertical) of the toolbar
+   </shortdesc>
+   <desc>
+    <simpara>
+     Returns the orientation (horizontal or vertical) of the toolbar
+    </simpara>
+    <simpara>
+     It can be set with <function class="GtkToolbar">set_orientation</function>.
+    </simpara>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtktoolbar.property.space_size" type="ro">
+   <propname>space_size</propname>
+   <proptype>int</proptype>
+   <shortdesc>
+    Returns the width/height which a space takes.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Returns the width/height which a space takes.
+    </simpara>
+    <simpara>
+     It can be set with <function class="GtkToolbar">set_space_size</function>.
+    </simpara>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtktoolbar.property.space_style" type="ro">
+   <propname>space_style</propname>
+   <proptype><enumname>GtkToolbarSpaceStyle</enumname></proptype>
+   <shortdesc>
+    Returns the current space style of the toolbar.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Returns the current space style of the toolbar (line or invisible).
+    </simpara>
+    <simpara>
+     It can be set with <function class="GtkToolbar">set_space_style</function>.
+    </simpara>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtktoolbar.property.style" type="ro">
+   <propname>style</propname>
+   <proptype><enumname>GtkToolbarStyle</enumname></proptype>
+   <shortdesc>
+    Returns the current toolbar style.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Returns the current toolbar style (icons only, text only, both).
+    </simpara>
+    <simpara>
+     It can be set with <function class="GtkToolbar">set_style</function>.
+    </simpara>
+   </desc>
+  </prop>
+
+ </properties>
 
 </classentry>
