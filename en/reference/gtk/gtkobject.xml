@@ -565,29 +565,87 @@ for ($page =& reset($pages); $page !== false; $page =& next($pages)) {
   </method>
   -->
   
-  <method id="gtk.gtkobject.method.emit_stop">
+  <method id="gtk.gtkobject.method.emit">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>void <function>emit_stop</function></funcdef>
-     <paramdef>int <parameter>signal_id</parameter></paramdef>
+     <funcdef>int
+      <function>emit</function>
+     </funcdef>
+     <paramdef>string
+      <parameter>signal_type</parameter>
+     </paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
+    Emit a signal.
    </shortdesc>
    <desc>
+    <simpara>
+     Emits the signal <parameter>signal_type</parameter>.
+     <parameter>signal_type</parameter> is the name of the signal to emit.
+    </simpara>
+    <simpara>
+     This method is called automatically when an event is triggered. The
+     signal that is emitted is determined by the event that occured.
+    </simpara>
+    <simpara>
+     See also: <function class="GtkObject">emit_stop</function>, <function
+     class="GtkObject">emit_stop_by_name</function>
+    </simpara>
+   </desc>
+  </method>
+  
+  <method id="gtk.gtkobject.method.emit_stop">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void
+      <function>emit_stop</function>
+     </funcdef>
+     <paramdef>int
+      <parameter>signal_id</parameter>
+     </paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Stop a signal from being emitted.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Stops the signal identified by <parameter>signal_id</parameter> from
+     being emitted. The <parameter>signal_id</parameter> is the return value
+     from <function class="GtkObject">emit</function>.
+    </simpara>
+    <simpara>
+     See also: <function class="GtkObject">emit</function>, <function
+     class="GtkObject">emit_stop_by_name</function>
+    </simpara>
    </desc>
   </method>
 
   <method id="gtk.gtkobject.method.emit_stop_by_name">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>void <function>emit_stop_by_name</function></funcdef>
-     <paramdef>string <parameter>name</parameter></paramdef>
+     <funcdef>void
+      <function>emit_stop_by_name</function>
+     </funcdef>
+     <paramdef>string
+      <parameter>signal_name</parameter>
+     </paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
+    Stop a signal with a given name from being emitted.
    </shortdesc>
    <desc>
+    <simpara>
+     Stops the signal <parameter>signal_name</parameter> from being emitted.
+     This will prevent the signal from being emitted and will in turn prevent
+     the methods connected to the signal from being executed.
+    </simpara>
+    <simpara>
+     See also: <function class="GtkObject">emit</function>, <function
+     class="GtkObject">emit_stop</function>
+    </simpara>
    </desc>
   </method>
 
@@ -867,9 +925,15 @@ gtk::main();
   <method id="gtk.gtkobject.method.signal_handler_pending">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>int <function>signal_handler_pending</function></funcdef>
-     <paramdef>int <parameter>signal_id</parameter></paramdef>
-     <paramdef>bool <parameter>may_be_blocked</parameter></paramdef>
+     <funcdef>int
+      <function>signal_handler_pending</function>
+     </funcdef>
+     <paramdef>int
+      <parameter>signal_id</parameter>
+     </paramdef>
+     <paramdef>bool
+      <parameter>may_be_blocked</parameter>
+     </paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -881,9 +945,15 @@ gtk::main();
   <method id="gtk.gtkobject.method.signal_handler_pending_by_id">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>int <function>signal_handler_pending_by_id</function></funcdef>
-     <paramdef>int <parameter>handler_id</parameter></paramdef>
-     <paramdef>bool <parameter>may_be_blocked</parameter></paramdef>
+     <funcdef>int
+      <function>signal_handler_pending_by_id</function>
+     </funcdef>
+     <paramdef>int
+      <parameter>handler_id</parameter>
+     </paramdef>
+     <paramdef>bool
+      <parameter>may_be_blocked</parameter>
+     </paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -892,21 +962,6 @@ gtk::main();
    </desc>
   </method>
 
-  <method id="gtk.gtkobject.method.emit">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>XXX <function>emit</function></funcdef>
-     <paramdef>XXX</paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </method>
-  
   <method id="gtk.gtkobject.method.signal_handlers_destroy">
    <funcsynopsis>
     <funcprototype>
@@ -961,8 +1016,6 @@ gtk::main();
 </classentry>
 <!-- Keep this comment at the end of the file
 Local variables:
-auto-fill-function:do-auto-fill
-fill-column:78
 mode: xml
 sgml-omittag:t
 sgml-shorttag:t
