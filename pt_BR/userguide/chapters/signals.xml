@@ -23,7 +23,7 @@
    muda um de seus valores de ajuste.  Este sinal em particular &eacute; usado tanto
    internamente como externamente no <classname>GtkAdjustment</classname>, Ent&atilde;o
    n&atilde;o &eacute; sempre necess&aacute;rio escrever o sinal no c&oacute;digo-fonte, para dizer a uma
-   <classname>GtkProgressBar</classname>us&aacute;-lo.  Uma situa&ccedil;&atilde;o mais comum pode
+   <classname>GtkProgressBar</classname> us&aacute;-lo.  Uma situa&ccedil;&atilde;o mais comum pode
    acontecer quando um usu&aacute;rio clica em uma inst&acirc;ncia de um
    <classname>GtkButton</classname>, fazendo com que o widget button emita o sinal de
    <signalname>clicked</signalname>. Como programador, voc&ecirc; pode registrar uma
@@ -37,14 +37,14 @@
   <simpara>
    <emphasis>
     Callbacks s&atilde;o fun&ccedil;&otilde;es que s&atilde;o invocadas quando
-    <link linkend="gtk.signals.whatare">signals</link> sinais s&atilde;o emitidos por
+    <link linkend="gtk.signals.whatare">signals</link> (sinais) s&atilde;o emitidos por
     <link linkend="gtk.widgets.whatare">widgets</link>.
    </emphasis>
   </simpara>
   <simpara>
    Callbacks s&atilde;o fun&ccedil;&otilde;es que s&atilde;o registradas pelo programador para reagir a
    sinais emitidos por widgets. Voc&ecirc; especifica qual fun&ccedil;&atilde;o ser&aacute; executada
-   quando<link linkend="gtk.signals.connection">conecta</link> a fun&ccedil;&atilde;o
+   quando <link linkend="gtk.signals.connection">conecta</link> a fun&ccedil;&atilde;o
    ao sinal.
   </simpara>
   <simpara>
@@ -75,7 +75,7 @@
   <sect2 id="gtk.signals.connection.simple">
    <title>Conex&otilde;es Simples</title>
    <simpara>
-    Para um sinal reaja, voc&ecirc; deve conectar a ele uma fun&ccedil;&atilde;o callback
+    Para que um sinal reaja, voc&ecirc; deve conectar ele a uma fun&ccedil;&atilde;o callback
     para que o PHP-GTK chame quando o sinal for emitido.
    </simpara>
    <simpara>
@@ -110,7 +110,7 @@ function shutdown()
 function you_clicked($button) 
 {
     $window = &amp;new GtkWindow();
-    $label = &amp;new GtkLabel(&quot;Voc&ecirc; clicou no bot&atilde;o&quot;);
+    $label = &amp;new GtkLabel(&quot;Você clicou no botão);
     $window-&gt;add($label);
     $window-&gt;connect(&quot;destroy&quot;,&quot;shutdown&quot;);
     $window-&gt;show_all();
@@ -341,7 +341,7 @@ gtk::main();
     Por exemplo; voc&ecirc; pode criar uma janela contendo (dentro dos necess&aacute;rios
     widgets container) um <classname>GtkMenuBar</classname>, um
     <classname>GtkToolbar</classname> e um<classname>GtkButton</classname>. 
-    Quando<literal>Exit</literal> &eacute; escolhido pelo usu&aacute;rio atrav&eacute;s de qualquer
+    Quando <literal>Exit</literal> &eacute; escolhido pelo usu&aacute;rio atrav&eacute;s de qualquer
     destes widgets, uma fun&ccedil;&atilde;o shutdown poderia ser invocada passando uma inst&acirc;ncia de
     <classname>GtkWindow</classname> como primeiro par&acirc;metro, permitindo a
     janela ser destruida de qualquer uma destas conex&otilde;es.  A fun&ccedil;&atilde;o callback

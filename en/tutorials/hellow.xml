@@ -2,71 +2,65 @@
 <chapter id="tutorials.hellow">
  <title>Hello World Tutorial</title>
  <simpara>
-  When you begin to learn a programming language, the first program
-  you often write is a 'hello world' program. So, just to fit in with
-  everyone else, the first tutorial in this manual just happens to 
-  be a 'hello world' tutorial!
+  Quando voc&ecirc; come&ccedil;a a aprender uma linguagem, o primeiro programa
+  que voc&ecirc; &eacute; ensinado &agrave; fazer &eacute; o famoso 'hello world'. 
+  Ent&atilde;o, somente para n&atilde;o ser diferente de ningu&eacute;m, o primeiro 
+  tutorial deste manual ser&aacute; o famoso 'hello world'!
  </simpara>
  <simpara>
-  Throughout the tutorials we expect a reasonable grasp of PHP itself.
-  The tutorials are designed to give the user an idea of how to use
-  PHP-GTK, and the ideas and techniques behind it.
+  Atrav&eacute;s dos tutorias n&oacute;s esperamos que voc&ecirc; j&aacute; tenha um conhecimento razo&aacute;vel
+  do PHP. Os tutoriais s&atilde;o feitos para que o usu&aacute;rio possa ter uma id&eacute;ia
+  do uso do PHP-GTK, e as id&eacute;ias e t&eacute;cnicas por tr&aacute;s dele.
  </simpara>
  <simpara>
-  In this tutorial we will create a simple window with the text "Hello
-  World!" in it.
+  Neste tutorial voc&ecirc; ir&aacute; criar uma simples janela com o texto "Hello
+  World!" escrito nela.
  </simpara>
  <simpara>
-  We will start by listing the program and will then explain each line of
-  the program, giving an overview of a very basic PHP-GTK application.
+  N&oacute;s come&ccedil;aremos mostrando todo o programa e logo ap&oacute;s iremos explicar
+  cada linha do programa, dando uma id&eacute;ia de como &eacute; uma aplica&ccedil;&atilde;o b&aacute;sica
+  feita em PHP-GTK.
  </simpara>
  <para>
   <example>
-   <title>PHP-GTK Hello World Program Listing</title>
+   <title>PHP-GTK Hello World</title>
    <programlisting role="php">
-if (!class_exists('gtk')) {
-    if (strtoupper(substr(PHP_OS, 0,3) == 'WIN'))
-    dl('php_gtk.dll');
-  else
-    dl('php_gtk.so');
-}
-    
-function delete_event()
-{
-    return false;
-}
-    
-function shutdown()
-{
-    print(&quot;Shutting down...\n&quot;);
-    gtk::main_quit();
-}
-    
-function hello()
-{
-    global $window;
-    print &quot;Hello World!\n&quot;;
-    $window-&gt;destroy();
-}
-    
-$window = &amp;new GtkWindow();
-$window-&gt;connect('destroy', 'shutdown');
-$window-&gt;connect('delete-event', 'delete_event');
-$window-&gt;set_border_width(10);
-    
-$button = &amp;new GtkButton('Hello World!');
-$button-&gt;connect('clicked', 'hello');
-$window-&gt;add($button);
-    
-$window-&gt;show_all();
-    
-gtk::main();
+if (!class_exists('gtk')) {    
+	if (strtoupper(substr(PHP_OS, 0,3) == 'WIN'))    
+		dl('php_gtk.dll');  
+	else    
+		dl('php_gtk.so');
+	}    
+	function deleta_evento()
+		{    
+			return false;
+		}    
+	function fechar()
+		{    
+			print("Fechando...\n");    
+			gtk::main_quit();
+		}    
+	function hello()
+	{    
+		global $window;    
+		print "Hello World!\n";    
+		$window->destroy();
+	}    
+	$window = &new GtkWindow();
+	$window->connect('destroy', 'fechar');
+	$window->connect('delete-event', 'deleta_evento');
+	$window->set_border_width(10);    
+	$button = &new GtkButton('Hello World!');
+	$button->connect('clicked', 'hello');
+	$window->add($button);    
+	$window->show_all();    
+	gtk::main();
    </programlisting>
   </example>
  </para>
  <para>
   <example>
-   <title>Loading PHP-GTK</title>
+   <title>Carregando o PHP-GTK</title>
    <programlisting role="php">
 if (!class_exists('gtk')) {
     if (strtoupper(substr(PHP_OS, 0,3) == 'WIN'))
@@ -76,63 +70,63 @@ if (!class_exists('gtk')) {
 }
    </programlisting>
   </example>
-  These first few lines check to see if the PHP-GTK extension is
-  already available, and loads it if it isn't.  This is done by the
-  <literal>dl('php_gtk.dll');</literal> or
-  <literal>dl('php_gtk.so');</literal> statements on Windows and Linux
-  respectively.
+  Estas primeiras linhas checam se a extens&atilde;o do PHP-GTK est&aacute;
+  dispon&iacute;vel, e carrega ela caso n&atilde;o esteja carregada. Isto &eacute; feito
+  pelo uso das fun&ccedil;&otilde;es <literal>dl('php_gtk.dll');</literal> ou
+  <literal>dl('php_gtk.so');</literal> no Windows e Linux
+  respectivamente.
  </para>
  <para>
   <example>
-   <title>The delete_event() function</title>
+   <title>A função deleta_evento()</title>
    <programlisting role="php">
-function delete_event()
+function deleta_evento()
 {
     return false;
 }
    </programlisting>
   </example>
-  The <literal>delete_event()</literal> function is registered as a handler
-  (see below) for the <signalname>delete-event</signalname> signal.  It
-  returns <literal>false</literal>, telling PHP-GTK to fire the
-  event's default signal handler, which in this case is the 
-  <function class="GtkObject">destroy()</function> method.  If the function
-  were to return <literal>true</literal>, PHP-GTK would stop the default
-  signal handler running at this point.  This is useful to know if you need
-  to write a user-defined function in place of 
-  <function class="GtkObject">destroy()</function>  - for example, to
-  produce a dialog box confirming that the user intends to close down the
-  application.
+  A fun&ccedil;&atilde;o <literal>deleta_evento()</literal> &eacute; registrada como um evento
+  (veja abaixo) para o sinal <signalname>delete-event</signalname>. Ela
+  retorna <literal>false</literal>, dizendo ao PHP-GTK para disparar o 
+  evento de sinal padr&atilde;o, que no nosso caso &eacute; o m&eacute;todo
+  <function class="GtkObject">destroy()</function>. Se a fun&ccedil;&atilde;o retornar
+  <literal>true</literal>, o PHP-GTK ir&aacute; parar o evento de sinal padr&atilde;o
+  que estava rodando at&eacute; este ponto. &Eacute; importante saber isto se voc&ecirc;
+  pretende escrever uma fun&ccedil;&atilde;o definida pelo usu&aacute;rio no lugar da fun&ccedil;&atilde;o
+  <function class="GtkObject">destroy()</function> - por exemplo, para
+  produzir uma caixa de di&aacute;logo que confirma se o usu&aacute;rio pretende fechar a
+  janela do aplicativo.
  </para>
  <simpara>
-  It is not strictly necessary to return <literal>false</literal> in order
-  to connect the <signalname>delete-event</signalname> signal to the 
-  <function class="GtkObject">destroy()</function> method, as this
-  particular signal returns <literal>false</literal> by default.  It is
-  possible to not specify any behaviour at all for a window's 
-  <signalname>delete-event</signalname> signal, just so long as the 
-  <signalname>destroy</signalname> signal is handled in the correct way, as
-  it is here.
+  N&atilde;o &eacute; estritamente necess&aacute;rio retornar <literal>false</literal> 
+  It is not strictly necessary to return <literal>false</literal> para conectar
+  o sinal <signalname>delete-event</signalname> com o m&eacute;todo 
+  <function class="GtkObject">destroy()</function>, mas este sinal em particular
+  retornar <literal>false</literal> por padr&atilde;o.  &Eacute; poss&iacute;vel n&atilde;o especificar nenhum
+  comportamento para todos os sinais <signalname>delete-event</signalname> de todas as janelas, 
+  baste ter o sinal de m&eacute;todo <signalname>destroy</signalname> no lugar certo, como
+  ele est&aacute; aqui.
  </simpara>
  <para>
   <example>
-   <title>The shutdown() function</title>
+   <title>A fun&ccedil;&atilde;o fechar()</title>
    <programlisting role="php">
-function shutdown()
-{
-    print(&quot;Shutting down...\n&quot;);
-    gtk::main_quit();
-}
+function fechar()
+{    
+	print(&quot;Fechando...\n&quot;);    
+	gtk::main_quit();
+}    
    </programlisting>
   </example>
-  The <literal>shutdown()</literal> function is registered as a handler for
-  the <signalname>destroy</signalname> signal.  The function prints the text
-  <literal>&quot;Shutting down...\n&quot;</literal> to the console and then
-  calls the static function gtk::<function>main_quit()</function>.
+  A fun&ccedil;&atilde;o <literal>fechar()</literal> &eacute; registrada como um evento para o sinal
+  <signalname>destroy</signalname>.  A fun&ccedil;&atilde;o imprime o texto
+  <literal>&quot;Fechando...\n&quot;</literal> para o console e chama a fun&ccedil;&atilde;o
+  gtk::<function>main_quit()</function>.
  </para>
  <para>
   <example>
-   <title>The hello() function</title>
+   <title>A fun&ccedil;&atilde;o hello()</title>
    <programlisting role="php">
 function hello()
 {
@@ -142,46 +136,43 @@ function hello()
 }
    </programlisting>
   </example>
-  The <literal>hello()</literal> function is registered as a handler for the
-  <signalname>clicked</signalname> signal on the button.  It globalises the
-  <literal>$window</literal> variable so it can access the instance of
-  <classname>GtkWindow</classname> created further down the script.  It then
-  prints the text <literal>&quot;Hello World&quot;</literal> to the console
-  before calling the <function class="GtkObject">destroy()</function> method
-  on the window, which in turn fires the <signalname>destroy</signalname> 
-  signal, which in turn calls the <literal>shutdown()</literal> function.
+  A fun&ccedil;&atilde;o <literal>hello()</literal> &eacute; registrada como um evento para o sinal 
+  <signalname>clicked</signalname> do bot&atilde;o.  Ela globaliza a vari&aacute;vel
+  <literal>$window</literal> para que ela possa ser inst&acirc;nciada pela
+  <classname>GtkWindow</classname> criada para ser usada em todo o script.  Com isto
+  &eacute; poss&iacute;vel imprimir o texto <literal>&quot;Hello World&quot;</literal> para o console
+  antes de chamar o m&eacute;todo <function class="GtkObject">destroy()</function>, que dispara
+  o sinal <signalname>destroy</signalname>, que dispara a fun&ccedil;&atilde;o <literal>fechar()</literal>.
  </para>
  <simpara>
-  Another way that the <literal>hello()</literal> function would be able to
-  access the <literal>$window</literal> variable is if the variable were
-  passed as a 
-  <link linkend="gtk.signals.custom.params">custom parameter</link>.
+  Outra maneira que a fun&ccedil;&atilde;o <literal>hello()</literal> poderia acessar a vari&aacute;vel
+  <literal>$window</literal> era se a vari&aacute;vel fosse passa como um
+  <link linkend="gtk.signals.custom.params">par&acirc;metro customizado</link>.
  </simpara>
  <para>
   <example>
-   <title>Setting up the Window</title>
+   <title>Configurando a Janela</title>
    <programlisting role="php">
 $window = &amp;new GtkWindow();
-$window-&gt;connect('destroy', 'shutdown');
-$window-&gt;connect('delete-event', 'delete_event');
+$window-&gt;connect('destroy', 'fechar');
+$window-&gt;connect('delete-event', 'deleta_evento');
 $window-&gt;set_border_width(10);
    </programlisting>
   </example>
-  The next four lines set up the window itself.  Firstly we create an
-  instance of <classname>GtkWindow</classname>.  Once this has been done
-  successfully, we call the <function class="GtkObject">connect()</function> 
-  method from the window in order to register the 
-  <literal>shutdown()</literal> function as the handler for the 
-  <signalname>destroy</signalname> signal and the 
-  <literal>delete_event()</literal> function as the handler for the
-  <signalname>delete-event</signalname> signal.  Finally, we call the
-  <function class="GtkContainer">set_border_width()</function> function to
-  set a 10-pixel wide border on the instance of 
-  <classname>GtkWindow</classname> that we just created.
+  As pr&oacute;ximas quatro linhas configurando a janela. Prmeiramente n&oacute;s criamos a inst&acirc;ncia
+  <classname>GtkWindow</classname>.  Uma vez criada, ela chama a fun&ccedil;&atilde;o 
+  <function class="GtkObject">connect()</function>  do m&eacute;todo <literal>window</literal> que registra a fun&ccedil;&atilde;o
+  <literal>fechar()</literal> como um m&eacute;todo para o sinal 
+  <signalname>destroy</signalname> e a fun&ccedil;&atilde;o 
+  <literal>deleta_evento()</literal> como um m&eacute;todo para o sinal
+  <signalname>delete-event</signalname>.  Finalmente, n&oacute;s chamamos a fun&ccedil;&atilde;o
+  <function class="GtkContainer">set_border_width()</function> para setar
+  a largura da borda em 10-pixel na inst&acirc;ncia
+  <classname>GtkWindow</classname> que n&oacute;s acabamos de criar.
  </para>
  <para>
   <example>
-   <title>Setting up the Button</title>
+   <title>Configurando o Botão</title>
    <programlisting role="php">      
 $button = &amp;new GtkButton('Hello World!');
 $button-&gt;connect('clicked', 'hello');
@@ -190,36 +181,35 @@ $window-&gt;add($button);
 $window-&gt;show_all();
    </programlisting>
   </example>
-  These three lines of the script create and set up the button.  In the first
-  line of the above code snippet we create a new instance of the
-  <classname>GtkButton</classname> widget.  The argument to the constructor
-  is the text we want the button to display - in this case 
-  <literal>&quot;Hello World!&quot;</literal>.  We then call the 
-  <function class="GtkObject">connect()</function> method to register the
-  <literal>hello()</literal> function we defined earlier, as the handler for
-  the <signalname>clicked</signalname> signal.  Finally we add the button to
-  the window we previously created by calling the 
-  <classname>GtkContainer</classname> method 
-  <function class="GtkContainer">add()</function> from our containing 
-  <literal>$window</literal>, and then display everything contained by 
-  <literal>$window</literal> (and its child widget, 
-  <literal>$button</literal>) by calling the 
-  <function class="GtkWidget">show_all()</function> method, also from our
-  instance of <classname>GtkWindow</classname>.
+  Estas tr&ecirc;s linhas do script criam e configuram o bot&atilde;o. Na primeira
+  linha do c&oacute;digo n&oacute;s criamos o "code snippet" para a nova inst&acirc;ncia
+  <classname>GtkButton</classname>.  O argumento construtor
+  do texto que n&oacute;s queremos mostrar no bot&atilde;o - neste caso
+  <literal>&quot;Hello World!&quot;</literal>.  N&oacute;s ent&atilde;o chamamos o m&eacute;todo
+  <function class="GtkObject">connect()</function> para registrar a fun&ccedil;&atilde;o
+  <literal>hello()</literal> que n&oacute;s hav&iacute;amos definido, como o evento do sinal
+  <signalname>clicked</signalname>.  Finalmente n&oacute;s adicionamos o bot&atilde;o &agrave; janela
+  que n&oacute;s hav&iacute;amos criado anteriormente chamando a fun&ccedil;&atilde;o
+  <function class="GtkContainer">add()</function> do nosso m&eacute;todo
+  <classname>GtkContainer</classname>, a vari&aacute;vel
+  <literal>$window</literal>, ent&atilde;o dispara tudo que cont&eacute;m na vari&aacute;vel
+  <literal>$window</literal> (e o child widget, 
+  <literal>$button</literal>) chamando o m&eacute;todo 
+  <function class="GtkWidget">show_all()</function>, tamb&eacute;m definido na nossa inst&acirc;ncia
+  <classname>GtkWindow</classname>.
  </para>
  <para>
   <example>
-   <title>The call to gtk::main</title>
+   <title>A chamada ao gtk::main</title>
    <programlisting role="php">
 gtk::main();
    </programlisting>
   </example>
-  The final line of the script calls the static 
-  gtk::<function>main()</function> function.  This tells PHP-GTK that we
-  have finished setting up our interface, and that the main loop can begin
-  listening for the events fired by user interaction so that the callback
-  functions we defined earlier can be called and the various actions carried
-  out.
+  A &uacute;ltima linha do script chama a fun&ccedil;&atilde;o est&aacute;tica
+  gtk::<function>main()</function>.  Ela mostra ao PHP-GTK que n&oacute;s
+  acabamos nossa interface, e isto dispara o loop principal que come&ccedil;a
+  a mostrar os eventos disparados pelo usu&aacute;rio interegindo com as fun&ccedil;&otilde;es
+  que n&oacute;s definimos.
  </para>
 </chapter>
 
