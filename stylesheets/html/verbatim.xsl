@@ -7,7 +7,7 @@
                 version='1.0'>
 
 <!-- ********************************************************************
-     $Id: verbatim.xsl,v 1.2 2003-06-10 06:20:25 sfox Exp $
+     $Id: verbatim.xsl,v 1.3 2003-06-17 21:01:42 sfox Exp $
      ********************************************************************
 
      This file is part of the XSL DocBook Stylesheet distribution.
@@ -30,32 +30,7 @@
   </xsl:if>
   <table class="{name(.)}"><tr><td>
   <pre class="{name(.)}">
-   <xsl:choose>
-    <xsl:when test="($phpweb=true()) and (@role='php')">
-     <xsl:variable name="content">
-      <xsl:apply-templates/>
-     </xsl:variable>
-     <!-- 
-
-     I know the following is ugly but its the best way to get round lacking parts of 
-     the XSLT spec which doesnt allow for escaping chars.
-
-     -->
-     <xsl:processing-instruction name="php">
-      <xsl:text>ob_start();</xsl:text>
-     </xsl:processing-instruction>
-     <xsl:apply-templates/>
-     <xsl:processing-instruction name="php">
-      <xsl:text disable-output-escaping="yes">$phpstag = '&lt;?php'."\n"; $phpetag = "\n".'?&gt;';</xsl:text>
-      <xsl:text>$str = ob_get_contents();</xsl:text>
-      <xsl:text>ob_end_clean();</xsl:text>
-      <xsl:text>highlight_string(dehtmlspecialchars($phpstag.$str.$phpetag));</xsl:text>
-     </xsl:processing-instruction>     
-    </xsl:when>
-    <xsl:otherwise>
-     <xsl:apply-templates/>
-    </xsl:otherwise>
-   </xsl:choose>
+   <xsl:apply-templates/>
   </pre>
   </td></tr></table>
   </span>

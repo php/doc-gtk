@@ -3,7 +3,7 @@
                 version='1.0'>
 
 <!-- ********************************************************************
-     $Id: inline.xsl,v 1.4 2003-06-13 19:53:21 sfox Exp $
+     $Id: inline.xsl,v 1.5 2003-06-17 21:01:42 sfox Exp $
      ********************************************************************
 
      This file is part of the XSL DocBook Stylesheet distribution.
@@ -137,10 +137,6 @@
 
 <!-- ===========================coding terms===================== -->
 
-<xsl:template match="classname">
-  <xsl:call-template name="inline.monoseq"/>
-</xsl:template>
-
 <xsl:template match="command">
   <xsl:call-template name="inline.boldseq"/>
 </xsl:template>
@@ -175,26 +171,6 @@
 
 <xsl:template match="filename">
   <xsl:call-template name="inline.monoseq"/>
-</xsl:template>
-
-<xsl:template match="function">
-  <xsl:choose>
-    <xsl:when test="$function.parens != '0'
-                    and (parameter or function or replaceable)">
-      <xsl:variable name="nodes" select="text()|*"/>
-      <xsl:call-template name="inline.monoseq">
-        <xsl:with-param name="content">
-          <xsl:apply-templates select="$nodes[1]"/>
-        </xsl:with-param>
-      </xsl:call-template>
-      <xsl:text>(</xsl:text>
-      <xsl:apply-templates select="$nodes[position()>1]"/>
-      <xsl:text>)</xsl:text>
-    </xsl:when>
-    <xsl:otherwise>
-     <xsl:call-template name="inline.monoseq"/>
-    </xsl:otherwise>
-  </xsl:choose>
 </xsl:template>
 
 <xsl:template match="function/parameter" priority="2">

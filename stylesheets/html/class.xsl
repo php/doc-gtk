@@ -172,33 +172,28 @@
  <xsl:template match="function|constructor">
   <xsl:call-template name="func.proto">
    <xsl:with-param name="node" select="."/>
-   <xsl:with-param name="append.bracket" select="0"/>
   </xsl:call-template>
  </xsl:template>
 
  <xsl:template match="function" mode="synoptic.mode">
-    <xsl:call-template name="func.proto">
-     <xsl:with-param name="node" select="."/>
-     <xsl:with-param name="append.bracket" select="1" />
-     <xsl:with-param name="with-link" select="1"/>
-     <xsl:with-param name="class" select="ancestor-or-self::classentry/classmeta/classtitle"/>
-    </xsl:call-template>
+  <xsl:call-template name="func.proto">
+   <xsl:with-param name="node" select="."/>
+   <xsl:with-param name="append.bracket" select="1"/>
+   <xsl:with-param name="with-link" select="1"/>
+   <xsl:with-param name="class" select="ancestor-or-self::classentry/classmeta/classtitle"/>
+  </xsl:call-template>
  </xsl:template>
 
  <xsl:template name="func.proto">
-  <xsl:param name="append.bracket" select="0" />
   <xsl:param name="node" select="." />
+  <xsl:param name="append.bracket" select="0"/>
   <xsl:param name="with-link" select="0"/>
   <xsl:param name="class" select="@class"/>
-
-  <xsl:variable name="funcname">
-   <xsl:value-of select="translate($node, '()', '')"/>
-  </xsl:variable>
 
   <xsl:variable name="id">
    <xsl:call-template name="get_func_id_from_name">
     <xsl:with-param name="funcname">
-     <xsl:value-of select="$funcname"/>
+     <xsl:value-of select="."/>
     </xsl:with-param>
     <xsl:with-param name="class">
      <xsl:choose>
@@ -226,7 +221,7 @@
        <xsl:value-of select="$link" />
       </xsl:attribute>
       <xsl:value-of select="$node" />
-      <xsl:if test="$append.bracket=1">
+      <xsl:if test="count(ancestor::funcsynopsis)='0' or $append.bracket='1'">
        <xsl:text>()</xsl:text>
       </xsl:if>
      </a>
@@ -262,12 +257,14 @@
      </xsl:call-template>
     </xsl:variable>
     <span dir="ltr">
-     <a>
-      <xsl:attribute name="href">
-       <xsl:value-of select="$link" />
-      </xsl:attribute>
-      <xsl:value-of select="." />
-     </a>
+     <xsl:text>"</xsl:text>
+      <a>
+       <xsl:attribute name="href">
+        <xsl:value-of select="$link" />
+       </xsl:attribute>
+       <xsl:value-of select="." />
+      </a>
+     <xsl:text>"</xsl:text>
     </span>
    </xsl:when>
    <xsl:otherwise>
@@ -477,9 +474,7 @@
 
  <xsl:template match="signal" mode="synoptic.mode">
   <dt>
-    <xsl:text>"</xsl:text>
    <xsl:apply-templates select="./signalname"/>
-    <xsl:text>"</xsl:text>
   </dt>
   <dd>
    <xsl:call-template name="spaceholder"/>
