@@ -4,10 +4,29 @@
   <classtitle>GtkTable</classtitle>
   <classparent>GtkContainer</classparent>
   <shortdesc>
-   Container that packs its children in regular patterns.
+   Container that provides a flexible grid for packing its children.
   </shortdesc>
   <desc>
-
+   <simpara>
+    A <classname>GtkTable</classname> is a very adaptable container widget
+    that is capable of having the layout of its children structured in both
+    directions.  There is a more simplistic version of a similar container
+    in <classname>GtkFixed</classname>, but <classname>GtkTable</classname> 
+    offers the advantage that the child positions can be relative rather than
+    absolute.  The table's stucturing is similar to that of a 
+    <classname>GtkBox</classname>.
+   </simpara>
+   <simpara>
+    As with the box classes, there is an underlying single-child structure
+    containing packing information, which consitutes one element of the array
+    of child data in a <classname>GtkTable</classname>.  This element is known
+    as a <classname>GtkTableChild</classname>, and can be accessed through
+    the <literal>children</literal> property inherited from 
+    <classname>GtkContainer</classname>.  The child objects themselves can
+    also be accessed more directly through the 
+    <function class="GtkContainer">children()</function> method inherited
+    from the same ancestor.
+   </simpara>
   </desc>
  </classmeta>
 
@@ -15,16 +34,97 @@
   <funcsynopsis>
    <funcprototype>
     <funcdef> <function>GtkTable</function></funcdef>
-    <paramdef>int <parameter><optional>rows = 1</optional></parameter></paramdef>
-    <paramdef>int <parameter><optional>columns = 1</optional></parameter></paramdef>
-    <paramdef>bool <parameter><optional>homogeneous = FALSE</optional></parameter></paramdef>
+    <paramdef>int 
+     <parameter><optional>rows = 1</optional></parameter>
+    </paramdef>
+    <paramdef>int 
+     <parameter><optional>columns = 1</optional></parameter>
+    </paramdef>
+    <paramdef>bool 
+     <parameter><optional>homogeneous = FALSE</optional></parameter>
+    </paramdef>
    </funcprototype>
   </funcsynopsis>
   <shortdesc>
-
+   Creates a container whose children are arranged on a grid.
   </shortdesc>
   <desc>
-
+   <simpara>
+    It is not necessary to give the dimensions of a non-homogeneous 
+    <classname>GtkTable</classname> in the constructor, as the table will
+    pick up the layout from the information given as its children are
+    attached to it, and this will override the initial integer settings. 
+    If <parameter>homogeneous</parameter> is set to <literal>true</literal> 
+    the reverse will be the case, and the table's settings take precedence.
+   </simpara>
+   <simpara>
+    You will find that you need to use the 
+    <function class="GtkTable">attach()</function> method throughout, as the
+    way in which the <function class="GtkContainer">add()</function> method
+    generally used in containers is implemented in GTK+ to always position
+    an added child at <literal>0, 1, 0, 1</literal>.  Once a grid square has
+    been filled, the widget taking up that space cannot be overwritten by
+    another widget.  The <function class="GtkContainer">remove()</function> 
+    method is fully operational.
+   </simpara>
+   <note>
+    <simpara>
+     The child widget sizing in a non-homogeneous 
+     <classname>GtkTable</classname> is <emphasis>relative</emphasis>, and
+     will alter if one or more children is removed or resized.  Again, this
+     is not true for the child widgets in a homogeneous table.
+    </simpara>
+   </note>
+   <simpara>
+    There are a lot of parameters in the 
+    <function class="GtkTable">attach()</function> method - nine in total - 
+    four of which are optional.  Basically, if the 
+    <parameter>homogeneous</parameter> parameter in the constructor is set to
+    <literal>true</literal>, there is very little point most of the time in
+    using any of the four optional packing parameters.  These come into their
+    own when the children are not required to take up the same amount of
+    space.
+   </simpara>
+   <para>
+    <example>
+     <title>Packing a GtkTable with differently-sized child widgets</title>
+     <programlisting role="php">
+dl(&quot;php_gtk.&quot; . (strstr(PHP_OS, &quot;WIN&quot;) ? &quot;dll&quot; : 
+&quot;so&quot;));
+    
+$window = &amp;new GtkWindow();
+$window-&gt;set_position(GTK_WIN_POS_CENTER);
+$window-&gt;connect_object(&quot;destroy&quot;, array(&quot;gtk&quot;, 
+&quot;main_quit&quot;));
+    
+$table = &amp;new GtkTable();
+$table-&gt;set_row_spacings(5);
+$table-&gt;set_col_spacings(5);
+$window-&gt;add($table);
+    
+$text = &amp;new GtkText();
+$table-&gt;attach($text, 1, 4, 1, 3);
+    
+$label = &amp;new GtkLabel('Expand this window to see the difference between 
+the GtkAttachOptions settings.');
+$table-&gt;attach($label, 1, 4, 4, 5, GTK_SHRINK, GTK_SHRINK);
+    
+$button = &amp;new GtkButton('Button    ');
+$table-&gt;attach($button, 4, 6, 3, 4, GTK_SHRINK, GTK_SHRINK, 3, 3);
+    
+$button = &amp;new GtkButton('Button 2 ');
+$table-&gt;attach($button, 4, 6, 4, 5, GTK_FILL, GTK_FILL, 3, 3);
+    
+$button = &amp;new GtkButton('Button 3 ');
+$table-&gt;attach($button, 4, 6, 5, 6, GTK_FILL|GTK_EXPAND, 
+GTK_FILL|GTK_EXPAND, 3, 3);
+    
+$window-&gt;show_all();
+    
+gtk::main();
+     </programlisting>
+    </example>
+   </para>
   </desc>
  </constructor>
 
@@ -39,10 +139,20 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Resizes to accommodate changes.
    </shortdesc>
    <desc>
-
+    <simpara>
+     This method is used internally to resize the table and rearrange the
+     child widgets accordingly following a new child's attachment to a
+     non-homogeneous table, or a change in the size of the largest child
+     in a homogeneous table.
+    </simpara>
+    <simpara>
+     It can be used to redraw a homogeneous table with a new number of
+     rows and columns, all of which will have the same size as existing
+     rows and columns.  It has no external use in a non-homogeneous table.
+    </simpara>
    </desc>
   </method>
 
@@ -50,22 +160,92 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>attach</function></funcdef>
-     <paramdef><classname>GtkWidget</classname> <parameter>child</parameter></paramdef>
+     <paramdef>
+      <classname>GtkWidget</classname> 
+      <parameter>child</parameter>
+     </paramdef>
      <paramdef>int <parameter>left_attach</parameter></paramdef>
      <paramdef>int <parameter>right_attach</parameter></paramdef>
      <paramdef>int <parameter>top_attach</parameter></paramdef>
      <paramdef>int <parameter>bottom_attach</parameter></paramdef>
-     <paramdef><enumname>GtkAttachOptions</enumname> <parameter><optional>xoptions = GTK_EXPAND|GTK_FILL</optional></parameter></paramdef>
-     <paramdef><enumname>GtkAttachOptions</enumname> <parameter><optional>yoptions = GTK_EXPAND|GTK_FILL</optional></parameter></paramdef>
-     <paramdef>int <parameter><optional>xpadding = 0</optional></parameter></paramdef>
-     <paramdef>int <parameter><optional>ypadding = 0</optional></parameter></paramdef>
+     <paramdef>
+      <enumname>GtkAttachOptions</enumname> 
+      <parameter>
+       <optional>xoptions = GTK_EXPAND|GTK_FILL</optional>
+      </parameter>
+     </paramdef>
+     <paramdef>
+      <enumname>GtkAttachOptions</enumname> 
+      <parameter>
+       <optional>yoptions = GTK_EXPAND|GTK_FILL</optional>
+      </parameter>
+     </paramdef>
+     <paramdef>int 
+      <parameter><optional>xpadding = 0</optional></parameter>
+     </paramdef>
+     <paramdef>int 
+      <parameter><optional>ypadding = 0</optional></parameter>
+     </paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Means of arranging child widgets in a <classname>GtkTable</classname>.
    </shortdesc>
    <desc>
-
+    <simpara>
+     <function class="GtkTable">attach()</function> is the method used to
+     pack child widgets in a <classname>GtkTable</classname>.  Of the nine
+     parameters delineated, five are absolutely needed.
+    </simpara>
+    <simpara>
+     The first parameter refers to the child widget that is to be attached.
+    </simpara>
+    <simpara>
+     The following pair of parameters denote the starting point that the
+     child will be drawn from, at the left hand side, and the end point that
+     the child will be drawn to, to the right.  These parameters are given in
+     terms of columns, with the start point being <literal>0</literal>.
+    </simpara>
+    <simpara>
+     The pair after this denote the starting point that the child will be
+     drawn from, at the top, and the end point that the child will be drawn
+     to, at the bottom.  These parameters are given in terms of rows, with
+     the start point again being <literal>0</literal>.
+    </simpara>
+    <note>
+     <simpara>
+      It is possible for a single child widget to span several rows or
+      columns.
+     </simpara>
+    </note>
+    <simpara>
+     As with all container widgets, the container itself takes up no screen
+     space until it contains a child widget or child widgets.  If you attach
+     only one child with parameters that should set it in the bottom right
+     corner and set <parameter>homogeneous</parameter> to 
+     <literal>false</literal>, the resulting effect will not be that of a
+     table with only one entry in the bottom right corner, but of a container
+     with a single widget in it - regardless of the number of columns and
+     rows specified in the table's constructor.  Child settings always take
+     precedence in a non-homogeneous table, and so all table attachments are
+     relative to the other child widgets.  This is in line with the behaviour
+     of other multiple-child capable containers where the child widget can
+     have its own packing parameters set.
+    </simpara>
+    <simpara>
+     The behaviour is very different when a regular grid is in position, which
+     happens when the <classname>GtkTable</classname> has its 
+     <parameter>homogeneous</parameter> parameter set to 
+     <literal>true</literal>.  The table can work out the dimensions of the
+     grid from the the largest child widget's size request, and positions
+     its children accordingly.
+    </simpara>
+    <simpara>
+     The final four optional parameters determine the way in which the child
+     widget will respond to the area available to it (expand, shrink, fill) 
+     in each direction, and the padding between the child and its nearest
+     border, in each direction.
+    </simpara>
    </desc>
   </method>
 
@@ -73,7 +253,10 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>attach_defaults</function></funcdef>
-     <paramdef><classname>GtkWidget</classname> <parameter>widget</parameter></paramdef>
+     <paramdef>
+      <classname>GtkWidget</classname> 
+      <parameter>widget</parameter>
+     </paramdef>
      <paramdef>int <parameter>left_attach</parameter></paramdef>
      <paramdef>int <parameter>right_attach</parameter></paramdef>
      <paramdef>int <parameter>top_attach</parameter></paramdef>
@@ -81,10 +264,14 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Packing defaults.
    </shortdesc>
    <desc>
-
+    <simpara>
+     The extra four parameters in 
+     <function class="GtkTable">attach()</function> are all optional in
+     PHP-GTK, rendering this method unnecessary.
+    </simpara>
    </desc>
   </method>
 
@@ -97,10 +284,17 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Determines the space below a given row.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Use this method to set the spacing below a given row, in pixels. 
+     Note that it only works when the row below the given row is
+     populated and contains a child's upper edge.
+    </simpara>
+    <simpara>
+     The row count begins at <literal>0</literal>.
+    </simpara>
    </desc>
   </method>
 
@@ -113,10 +307,17 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Determines the space to the right of a given column.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Use this method to set the spacing to the right of a given column, in
+     pixels.  Note that it only works when the column to the right of the
+     given column is populated and contains a child's leftmost edge.
+    </simpara>
+    <simpara>
+     The column count begins at <literal>0</literal>.
+    </simpara>
    </desc>
   </method>
 
@@ -128,10 +329,15 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Determines the spacing between all rows.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Use this method to set the spacing between all rows, in pixels.
+    </simpara>
+    <simpara>
+     The default setting is <literal>0</literal>.
+    </simpara>
    </desc>
   </method>
 
@@ -143,10 +349,15 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Determines the spacing between all columns.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Use this method to set the spacing between all columns, in pixels.
+    </simpara>
+    <simpara>
+     The default setting is <literal>0</literal>.
+    </simpara>
    </desc>
   </method>
 
@@ -158,13 +369,120 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets all child allocations to size of largest request.
    </shortdesc>
    <desc>
-
+    <simpara>
+     <function class="GtkTable">set_homogeneous()</function> when set
+     to <literal>true</literal> makes all child widgets' allocated areas
+     the same size as that of the child requesting the most space.
+    </simpara>
+    <simpara>
+     In most cases, this would be better set at the point of construction.
+    </simpara>
    </desc>
   </method>
 
  </methods>
+
+ <properties>
+
+  <property id="gtk.gtktable.property.children" type="ro">
+   <propname>children</propname>
+   <proptype>array</proptype>
+   <shortdesc>
+    Array of <classname>GtkTableChild</classname> elements.
+   </shortdesc>
+   <desc>
+    <simpara>
+     The <propname class="GtkTable">children</propname> property consists
+     of an array of <classname>GtkTableChild</classname> elements.  If you
+     need to access a widget, e.g. to change the text in a label, use the 
+     <classname>GtkContainer</classname> method 
+     <function class="GtkContainer">children()</function>, which separates
+     the widget element out of this property.
+    </simpara>
+   </desc>
+  </property>
+
+  <property id="gtk.gtktable.property.nrows" type="ro">
+   <propname>nrows</propname>
+   <proptype>int</proptype>
+   <shortdesc>
+    Number of rows.
+   </shortdesc>
+   <desc>
+    <simpara>
+     The <propname class="GtkTable">nrows</propname> property consists
+     of the number of rows currently contained in a 
+     <classname>GtkTable</classname>.
+    </simpara>
+   </desc>
+  </property>
+
+  <property id="gtk.gtktable.property.ncols" type="ro">
+   <propname>ncols</propname>
+   <proptype>int</proptype>
+   <shortdesc>
+    Number of columns.
+   </shortdesc>
+   <desc>
+    <simpara>
+     The <propname class="GtkTable">ncols</propname> property consists
+     of the number of columns currently contained in a 
+     <classname>GtkTable</classname>.
+    </simpara>
+   </desc>
+  </property>
+
+  <property id="gtk.gtktable.property.column_spacing" type="ro">
+   <propname>column_spacing</propname>
+   <proptype>int</proptype>
+   <shortdesc>
+    Spacing between columns.
+   </shortdesc>
+   <desc>
+    <simpara>
+     <propname class="GtkTable">column_spacing</propname> returns the
+     column spacing that has been set for the entire table using 
+     <function class="GtkTable">set_col_spacings()</function>, or 
+     <literal>0</literal> if none has been set.
+    </simpara>
+   </desc>
+  </property>
+
+  <property id="gtk.gtktable.property.row_spacing" type="ro">
+   <propname>row_spacing</propname>
+   <proptype>int</proptype>
+   <shortdesc>
+    Spacing between rows.
+   </shortdesc>
+   <desc>
+    <simpara>
+     <propname class="GtkTable">row_spacing</propname> returns the row
+     spacing that has been set for the entire table using 
+     <function class="GtkTable">set_row_spacings()</function>, or 
+     <literal>0</literal> if none has been set.
+    </simpara>
+   </desc>
+  </property>
+
+  <property id="gtk.gtktable.property.homogeneous" type="ro">
+   <propname>homogeneous</propname>
+   <proptype>bool</proptype>
+   <shortdesc>
+    Determines whether child sizing is homogeneous.
+   </shortdesc>
+   <desc>
+    <simpara>
+     <propname class="GtkTable">homogeneous</propname> when queried returns 
+     <literal>1</literal> (<literal>true</literal>) if the table is
+     homogeneous, or <literal>0</literal> (<literal>false</literal>) if
+     it is not.
+    </simpara>
+   </desc>
+  </property>
+
+ </properties>
 
 </classentry>

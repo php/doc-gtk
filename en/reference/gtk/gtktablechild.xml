@@ -7,7 +7,32 @@
    Helper class for <classname>GtkTable</classname>.
   </shortdesc>
   <desc>
-
+   <simpara>
+    A <classname>GtkTableChild</classname> is an array of information
+    about a <classname>GtkTable</classname>'s child, which is itself
+    stacked in the array that makes up the table's 
+    <propname class="GtkTable">children</propname> property.
+   </simpara>
+   <para>
+    Accessing these properties is therefore a two-tiered process:
+    <informalexample>
+     <programlisting role="php">
+$children = $table-&gt;children;
+/*returns an array of GtkTableChild elements*/
+    
+for($i = 0; $i &lt; count($children); $i++) {
+$child = $children[$i];
+/*returns the individual GtkTableChild element from the $children array's 
+current pointer position*/
+    
+$widget = $child-&gt;widget;
+/*returns the widget property of the GtkTableChild*/
+    
+echo $widget-&gt;get_name().&quot;\n&quot;;
+}
+     </programlisting>
+    </informalexample>
+   </para>
   </desc>
  </classmeta>
 
@@ -17,11 +42,12 @@
    <propname>widget</propname>
    <proptype>GtkObject</proptype>
    <shortdesc>
-
+    The child widget.
    </shortdesc>
    <desc>
     <simpara>
-     
+     The <propname class="GtkTableChild">widget</propname> property returns
+     the child widget.
     </simpara>
    </desc>
   </property>
@@ -30,11 +56,13 @@
    <propname>left_attach</propname>
    <proptype>int</proptype>
    <shortdesc>
-
+    Leftmost anchor.
    </shortdesc>
    <desc>
     <simpara>
-     
+     The <propname class="GtkTableChild">left_attach</propname> property
+     returns the number of the column that the child widget is attached to
+     on the leftmost side.  The column count begins at <literal>0</literal>.
     </simpara>
    </desc>
   </property>
@@ -43,11 +71,13 @@
    <propname>right_attach</propname>
    <proptype>int</proptype>
    <shortdesc>
-
+    Rightmost anchor.
    </shortdesc>
    <desc>
     <simpara>
-     
+     The <propname class="GtkTableChild">right_attach</propname> property
+     returns the number of the column that the child widget is attached to
+     on the rightmost side.  The column count begins at <literal>0</literal>.
     </simpara>
    </desc>
   </property>
@@ -56,11 +86,13 @@
    <propname>top_attach</propname>
    <proptype>int</proptype>
    <shortdesc>
-
+    Upper anchor.
    </shortdesc>
    <desc>
     <simpara>
-     
+     The <propname class="GtkTableChild">top_attach</propname> property
+     returns the number of the row that the child widget is attached to
+     on the upper side.  The row count begins at <literal>0</literal>.
     </simpara>
    </desc>
   </property>
@@ -69,11 +101,13 @@
    <propname>bottom_attach</propname>
    <proptype>int</proptype>
    <shortdesc>
-
+    Base anchor.
    </shortdesc>
    <desc>
     <simpara>
-     
+     The <propname class="GtkTableChild">bottom_attach</propname> property
+     returns the number of the row that the child widget is attached to
+     at the base.  The row count begins at <literal>0</literal>.
     </simpara>
    </desc>
   </property>
@@ -82,11 +116,13 @@
    <propname>xpadding</propname>
    <proptype>int</proptype>
    <shortdesc>
-
+    Padding to left and right.
    </shortdesc>
    <desc>
     <simpara>
-     
+     The <propname class="GtkTableChild">xpadding</propname> property
+     returns the integer value in pixels of the padding between the widget
+     and the left and right edges of its allocated area.
     </simpara>
    </desc>
   </property>
@@ -95,24 +131,27 @@
    <propname>ypadding</propname>
    <proptype>int</proptype>
    <shortdesc>
-
+    Padding to top and bottom.
    </shortdesc>
    <desc>
     <simpara>
-     
+     The <propname class="GtkTableChild">ypadding</propname> property
+     returns the integer value in pixels of the padding between the widget
+     and the top and bottom edges of its allocated area.
     </simpara>
    </desc>
   </property>
 
   <property id="gtk.gtktablechild.property.xexpand" type="ro">
    <propname>xexpand</propname>
-   <proptype>int</proptype>
+   <proptype>bool</proptype>
    <shortdesc>
-
+    Child expansion left to right.
    </shortdesc>
    <desc>
     <simpara>
-     
+     Returns <literal>true</literal> if the <literal>GTK_EXPAND</literal> 
+     flag is set on the <literal>x</literal> axis.
     </simpara>
    </desc>
   </property>
@@ -121,11 +160,12 @@
    <propname>yexpand</propname>
    <proptype>int</proptype>
    <shortdesc>
-
+    Child expansion top to bottom.
    </shortdesc>
    <desc>
     <simpara>
-     
+     Returns <literal>true</literal> if the <literal>GTK_EXPAND</literal> 
+     flag is set on the <literal>y</literal> axis.
     </simpara>
    </desc>
   </property>
@@ -134,11 +174,12 @@
    <propname>xshrink</propname>
    <proptype>int</proptype>
    <shortdesc>
-
+    Child shrink left to right.
    </shortdesc>
    <desc>
     <simpara>
-     
+     Returns <literal>true</literal> if the <literal>GTK_SHRINK</literal> 
+     flag is set on the <literal>x</literal> axis.
     </simpara>
    </desc>
   </property>
@@ -147,11 +188,12 @@
    <propname>yshrink</propname>
    <proptype>int</proptype>
    <shortdesc>
-
+    Child shrink top to bottom.
    </shortdesc>
    <desc>
     <simpara>
-     
+     Returns <literal>true</literal> if the <literal>GTK_SHRINK</literal> 
+     flag is set on the <literal>y</literal> axis.
     </simpara>
    </desc>
   </property>
@@ -160,11 +202,12 @@
    <propname>xfill</propname>
    <proptype>int</proptype>
    <shortdesc>
-
+    Child fill left to right.
    </shortdesc>
    <desc>
     <simpara>
-     
+     Returns <literal>true</literal> if the <literal>GTK_FILL</literal> 
+     flag is set on the <literal>x</literal> axis.
     </simpara>
    </desc>
   </property>
@@ -173,11 +216,12 @@
    <propname>yfill</propname>
    <proptype>int</proptype>
    <shortdesc>
-
+    Child fill top to bottom.
    </shortdesc>
    <desc>
     <simpara>
-     
+     Returns <literal>true</literal> if the <literal>GTK_FILL</literal> 
+     flag is set on the <literal>y</literal> axis.
     </simpara>
    </desc>
   </property>
