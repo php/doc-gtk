@@ -6,7 +6,20 @@
    Base class for <classname>GtkProgressBar</classname>.
   </shortdesc>
   <desc>
-
+   <simpara>
+    <classname>GtkProgress</classname> is a base class providing methods
+    and properties for widgets implementing progress bar style
+    functionality. The only built-in widget using
+    <classname>GtkProgress</classname> is
+    <classname>GtkProgressBar</classname>.
+   </simpara>
+   <simpara>
+    Note that <classname>GtkProgress</classname> is an abstract class
+    and cannot be constructed directly.
+   </simpara>
+   <simpara>
+    See also: <classname>GtkProgressBar</classname>.
+   </simpara>
   </desc>
  </classmeta>
 
@@ -16,14 +29,17 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_show_text</function></funcdef>
-     <paramdef>int <parameter>show_text</parameter></paramdef>
+     <paramdef>bool <parameter>show_text</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Controls progress text display.
    </shortdesc>
    <desc>
-
+    <simpara>
+     The <parameter>show_text</parameter> parameter controls whether the
+     progress text is shown or not.
+    </simpara>
    </desc>
   </method>
 
@@ -36,10 +52,17 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets progress text alignment.
    </shortdesc>
    <desc>
-
+    <simpara>
+     The alignment of the text within the progress area can be modified
+     using this method. The <parameter>x_align</parameter> and
+     <parameter>y_align</parameter> parameters control the horizontal and
+     vertical alignment of the text, respectively. Their range can be
+     from <literal>0.0</literal> to <literal>1.0</literal> (meaning from
+     one side of progress area to another).
+    </simpara>
    </desc>
   </method>
 
@@ -51,10 +74,37 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets progress text formatting.
    </shortdesc>
    <desc>
-
+    <para>
+     The format of the progress text can be modified with the
+     <parameter>format</parameter> string. It can contain the following
+     format characters:
+     <itemizedlist>
+      <listitem>
+       <simpara>
+        <emphasis>%v</emphasis> - the current progress value.
+       </simpara>
+      </listitem>
+      <listitem>
+       <simpara>
+        <emphasis>%l</emphasis> - the lower bound of the progress value.
+       </simpara>
+      </listitem>
+      <listitem>
+       <simpara>
+        <emphasis>%u</emphasis> - the upper bound of the progress value.
+       </simpara>
+      </listitem>
+      <listitem>
+       <simpara>
+        <emphasis>%p</emphasis> - the current progress percentage.
+       </simpara>
+      </listitem>
+     </itemizedlist>
+     The <literal>%</literal> character itself can be specified as <literal>%%</literal>.
+    </para>
    </desc>
   </method>
 
@@ -66,10 +116,15 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the progress adjustment object.
    </shortdesc>
    <desc>
-
+    <simpara>
+     A progress has an associated <classname>GtkAdjustment</classname>
+     object which specifies the bounds and the step increment of the
+     value the progress of which is being displayed. This method
+     associates an adjustment object with the progress.
+    </simpara>
    </desc>
   </method>
 
@@ -83,10 +138,13 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the progress value parameters.
    </shortdesc>
    <desc>
-
+    <simpara>
+     This method provides a way to directly control the current value
+     and the bounds of a <classname>GtkProgress</classname>.
+    </simpara>
    </desc>
   </method>
 
@@ -98,10 +156,14 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the current progress percentage.
    </shortdesc>
    <desc>
-
+    <simpara>
+     This method sets the current percentage for
+     <classname>GtkProgress</classname>. Its value must be between
+     <literal>0.0</literal> to <literal>1.0</literal>.
+    </simpara>
    </desc>
   </method>
 
@@ -113,10 +175,14 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the current progress value.
    </shortdesc>
    <desc>
-
+    <simpara>
+     The progress value can be set directly with this method. The value
+     must be within the range of an underlying
+     <classname>GtkAdjustment</classname>.
+    </simpara>
    </desc>
   </method>
 
@@ -128,10 +194,10 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Gets the current progress value.
    </shortdesc>
    <desc>
-
+    Returns the current progress value.
    </desc>
   </method>
 
@@ -139,14 +205,23 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_activity_mode</function></funcdef>
-     <paramdef>int <parameter>activity_mode</parameter></paramdef>
+     <paramdef>bool <parameter>activity_mode</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Controls progress mode.
    </shortdesc>
    <desc>
-
+    <simpara>
+     <classname>GtkProgress</classname> can be either in percentage mode
+     (when the total amount of work is known and progress can be
+     calculated) or activity mode (when there is no way to estimate
+     total amount of work and only progress must be indicated somehow). 
+    </simpara>
+    <simpara>
+     If <parameter>activity_mode</parameter> is <literal>true</literal>,
+     the activity mode is turned on, otherwise - the percentage mode.
+    </simpara>
    </desc>
   </method>
 
@@ -158,10 +233,15 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Gets the current progress text.
    </shortdesc>
    <desc>
-
+    <simpara>
+     The text indicating the amount of progress can be retrieved with
+     this method. Before the text is returned, it is formatted with the
+     currently set progress format (see <function
+      class="GtkProgress">set_format_string</function>).
+    </simpara>
    </desc>
   </method>
 
@@ -173,10 +253,14 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Gets progress text based on value.
    </shortdesc>
    <desc>
-
+    <simpara>
+     If you wish to retrieve formatted progress text based on some value
+     other than current, then this method should be used. The current
+     progress value will not be changed.
+    </simpara>
    </desc>
   </method>
 
@@ -188,10 +272,13 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Gets current progress percentage.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Returns the current progress percentage as a number between
+     <literal>0.0</literal> and <literal>1.0</literal>.
+    </simpara>
    </desc>
   </method>
 
@@ -203,10 +290,15 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Gets progress percentage based on value.
    </shortdesc>
    <desc>
-
+    <simpara>
+     If you wish to retrieve the progress percentage based on some value
+     other than the current one, then this method should be used. It
+     returns the desired percentage as a number between
+     <literal>0.0</literal> and <literal>1.0</literal>.
+    </simpara>
    </desc>
   </method>
 
