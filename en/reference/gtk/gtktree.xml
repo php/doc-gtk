@@ -8,7 +8,11 @@
   </shortdesc>
   <desc>
    <simpara>
-    A <classname>GtkTree</classname> is a structure for displaying hierchical information. A tree may contain one or more nodes which themselves may contain other trees, thus creating levels or groups of nodes. A tree can be used to display information such as a map of a website or the files and folders of a directory.
+    A <classname>GtkTree</classname> is a structure for displaying hierchical
+    information. A tree may contain one or more nodes which themselves may
+    contain other trees, thus creating levels or groups of nodes. A tree can be
+    used to display information such as a map of a website or the files and
+    folders of a directory.
    </simpara>
   </desc>
  </classmeta>
@@ -30,7 +34,9 @@
     Creates a new instance of a <classname>GtkTree</classname>.
    </simpara>
    <simpara>
-    Because <classname>GtkTree</classname> extends <classname>GtkContainer</classname>, it may contain one or more children. These children should be <classname>GtkTreeItem</classname> widgets. 
+    Because <classname>GtkTree</classname> extends 
+    <classname>GtkContainer</classname>, it may contain one or more children. 
+    These children should be <classname>GtkTreeItem</classname> widgets. 
    </simpara>
    <para>
     <example>
@@ -131,7 +137,8 @@ foreach ($nodes as $node) {
      </example>
     </para>
     <simpara>
-     See also: <function class="GtkTree">prepend</function>, <function class="GtkTree">insert</function>
+     See also: <function class="GtkTree">prepend</function>,
+               <function class="GtkTree">insert</function>
     </simpara>
    </desc>
   </method>
@@ -153,10 +160,12 @@ foreach ($nodes as $node) {
    </shortdesc>
    <desc>
     <simpara>
-     Adds <parameter>tree_item</parameter> to the begining of the tree. The first node of the tree is in position zero.
+     Adds <parameter>tree_item</parameter> to the begining of the tree. The first
+     node of the tree is in position zero.
     </simpara>
     <simpara>
-     See also: <function class="GtkTree">append</function>, <function class="GtkTree">insert</function>
+     See also: <function class="GtkTree">append</function>,
+               <function class="GtkTree">insert</function>
     </simpara>
    </desc>
   </method>
@@ -181,10 +190,13 @@ foreach ($nodes as $node) {
    </shortdesc>
    <desc>
     <simpara>
-     Adds <parameter>tree_item</parameter> to the tree at <parameter>position</parameter>. The first node of the tree is in position zero.
+     Adds <parameter>tree_item</parameter> to the tree at
+     <parameter>position</parameter>. The first node of the tree is in position
+     zero.
     </simpara>
     <para>
-     If <parameter>position</parameter> is greater than the first empty position, <parameter>tree_item</parameter> is put in the first empty position.
+     If <parameter>position</parameter> is greater than the first empty position,
+     <parameter>tree_item</parameter> is put in the first empty position.
      <example>
       <title>Inserting a tree item</title>
       <programlisting role="php">
@@ -209,7 +221,8 @@ echo $tree->child_position($treeItem); // Outputs 0
      </example>
     </para>
     <simpara>
-     See also: <function class="GtkTree">append</function>, <function class="GtkTree">prepend</function>
+     See also: <function class="GtkTree">append</function>,
+               <function class="GtkTree">prepend</function>
     </simpara>
    </desc>
   </method>
@@ -234,7 +247,8 @@ echo $tree->child_position($treeItem); // Outputs 0
      Removes <parameter>child</parameter> from the tree.
     </simpara>
     <simpara>
-     If <parameter>child</parameter> is not a node of the tree, a Gtk-CRITICAL warning will be issued.
+     If <parameter>child</parameter> is not a node of the tree, a Gtk-CRITICAL
+     warning will be issued.
     </simpara>
    </desc>
   </method>
@@ -258,10 +272,12 @@ echo $tree->child_position($treeItem); // Outputs 0
    </shortdesc>
    <desc>
     <simpara>
-     Removes nodes from <parameter>start</parameter> to <parameter>end</parameter> inclusive.
+     Removes nodes from <parameter>start</parameter> to <parameter>end</parameter>
+     inclusive.
     </simpara>
     <simpara>
-     If <parameter>end</parameter> is greater than the number of nodes, all nodes from <parameter>start</parameter> to the end of the tree will be removed.
+     If <parameter>end</parameter> is greater than the number of nodes, all nodes
+     from <parameter>start</parameter> to the end of the tree will be removed.
     </simpara>
     <simpara>
      Unlike gtk, nodes that are removed from the tree are not destroyed.
@@ -288,7 +304,10 @@ echo $tree->child_position($treeItem); // Outputs 0
    </shortdesc>
    <desc>
     <simpara>
-     Highlights the node in <parameter>position</parameter> as selected.  This will cause the node to emit the <signalname class="GtkTreeItem">select</signalname> signal. Selecting a node which is already selected will unselect that node.
+     Highlights the node in <parameter>position</parameter> as selected. This will
+     cause the node to emit the
+     <signalname class="GtkTreeItem">select</signalname> signal. Selecting a node
+     which is already selected will unselect that node.
     </simpara>
     <para>
      <example>
@@ -315,10 +334,13 @@ $tree->select_item(0); // itemDeselected() will be called.
      </example>
     </para>
     <simpara>
-     Node positions are indexed begining with zero.  The fourth node in a tree is in position three.
+     Node positions are indexed begining with zero.  The fourth node in a tree is
+     in position three.
     </simpara>
     <simpara>
-     See also: <function class="GtkTree">unselect_item</function>, <function class="GtkTree">select_child</function>, <function class="GtkTree">unselect_child</function>
+     See also: <function class="GtkTree">unselect_item</function>,
+               <function class="GtkTree">select_child</function>,
+               <function class="GtkTree">unselect_child</function>.
     </simpara>
    </desc>
   </method>
@@ -339,10 +361,13 @@ $tree->select_item(0); // itemDeselected() will be called.
    </shortdesc>
    <desc>
     <simpara>
-     Unselects the node in <parameter>position</parameter>. Unselecting a node causes the node to emit the <signalname class="GtkTree">deselect</signalname> signal. Unselecting a node that is not selected will select the node.
+     Unselects the node in <parameter>position</parameter>. Unselecting a node
+     causes the node to emit the <signalname class="GtkTree">deselect</signalname>
+     signal. Unselecting a node that is not selected will select the node.
     </simpara>
     <simpara>
-     Node positions are indexed begining with zero. The fourth node is in position three.
+     Node positions are indexed begining with zero. The fourth node is in position
+     three.
     </simpara>
    </desc>
   </method>
@@ -364,7 +389,8 @@ $tree->select_item(0); // itemDeselected() will be called.
    </shortdesc>
    <desc>
     <simpara>
-     Selects the node <parameter>tree_item</parameter>. Selecting a node causes the <signalname class="GtkTreeItem">select</signalname> signal to be emitted.
+     Selects the node <parameter>tree_item</parameter>. Selecting a node causes
+     the <signalname class="GtkTreeItem">select</signalname> signal to be emitted.
     </simpara>
    </desc>
   </method>
@@ -386,7 +412,8 @@ $tree->select_item(0); // itemDeselected() will be called.
    </shortdesc>
    <desc>
     <simpara>
-     Unselects <parameter>tree_item</parameter>. Unselecting a node causes the <signalname class="GtkTreeItem">deselect</signalname> signal to be emitted.
+     Unselects <parameter>tree_item</parameter>. Unselecting a node causes the
+     <signalname class="GtkTreeItem">deselect</signalname> signal to be emitted.
     </simpara>
    </desc>
   </method>
@@ -408,7 +435,8 @@ $tree->select_item(0); // itemDeselected() will be called.
    </shortdesc>
    <desc>
     <simpara>
-     Returns the position of <parameter>child</parameter>. The first node of a tree is in position zero.
+     Returns the position of <parameter>child</parameter>. The first node of a
+     tree is in position zero.
     </simpara>
     <simpara>
      If <parameter>child</parameter> is not a node of the tree, -1 is returned.
@@ -436,7 +464,8 @@ $tree->select_item(0); // itemDeselected() will be called.
      Sets the selection mode to <parameter>mode</parameter>. <literal>GTK_SELECTION_SINGLE</literal> is the default.
     </simpara>
     <simpara>
-     The selection mode determines how many nodes may/must be selected at one time.
+     The selection mode determines how many nodes may/must be selected at one
+     time.
     </simpara>
     <simpara>
      See also: <enumname>GtkSelectionMode</enumname>
@@ -461,7 +490,9 @@ $tree->select_item(0); // itemDeselected() will be called.
    </shortdesc>
    <desc>
     <simpara>
-     Sets the tree's view mode to <parameter>mode</parameter>. The view mode defines how the tree looks when items are selected. The default mode is <literal>GTK_TREE_VIEW_ITEM</literal>.
+     Sets the tree's view mode to <parameter>mode</parameter>. The view mode
+     defines how the tree looks when items are selected. The default mode is
+     <literal>GTK_TREE_VIEW_ITEM</literal>.
     </simpara>
     <simpara>
      See also: <enumname>GtkTreeViewMode</enumname>
@@ -485,7 +516,13 @@ $tree->select_item(0); // itemDeselected() will be called.
    </shortdesc>
    <desc>
     <simpara>
-     Sets whether or not lines between nodes and children should be drawn. If <parameter>flag</parameter> evaluates to <literal>true</literal> (<parameter>flag</parameter> &gt; 0) connecting lines between nodes and children will be drawn. If <parameter>flag</parameter> evaluates to <literal>false</literal> (<parameter>flag</parameter> &lt;= 0) connecting lines between nodes and children will not be drawn. By default tree's begin with view lines set to one.
+     Sets whether or not lines between nodes and children should be drawn. If
+     <parameter>flag</parameter> evaluates to <literal>true</literal>
+     (<parameter>flag</parameter> &gt; 0) connecting lines between nodes and
+     children will be drawn. If <parameter>flag</parameter> evaluates to
+     <literal>false</literal> (<parameter>flag</parameter> &lt;= 0) connecting
+     lines between nodes and children will not be drawn. By default tree's begin
+     with view lines set to one.
     </simpara>
    </desc>
   </method>
