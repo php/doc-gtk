@@ -672,7 +672,7 @@ calendar
    mapped, a widget must have the <optionname>GTK_VISIBLE</optionname> 
    flag set.  See also: 
    <function classname="GtkWidget">realize()</function>, 
-   <function classname="GtkWidget">map</function>, 
+   <function classname="GtkWidget">map()</function>, 
    <function classname="GtkWidget">show()</function>.
   </shortdesc>
  </enumoption>
@@ -717,7 +717,7 @@ calendar
   <optionname>GTK_CAN_DEFAULT</optionname>
   <shortdesc>
    Marks a widget as able to have default status.  This also has the effect
-   of drawing the widget with enough space around it to display the default
+   of drawing the widget with enough space around it to display its default
    style.
   </shortdesc>
  </enumoption>
@@ -735,12 +735,14 @@ calendar
   <optionname>GTK_HAS_GRAB</optionname>
   <shortdesc>
    Mostly used internally, to ensure that the widget currently having focus
-   is able to grab events.  Note that flagging a widget in this way requires
-   that the widget is also flagged as sensitive and has its reference count
-   increased.  Flagging the widget does not in itself have any bearing on
-   the widget's relationship with other widgets; if you want modality, use
-   <literal>gtkwindow::set_modal()</literal> or 
-   <literal>gtk::grab_add()</literal> as appropriate.
+   is able to grab events relevant to it.  Note that flagging a widget in
+   this way requires that the widget is also flagged as sensitive and has
+   its reference count increased.  Flagging the widget does not in itself
+   have any bearing on the widget's relationship with other widgets; if
+   you want modality, use <classname>GtkWindow</classname>'s 
+   <function class="GtkWindow">set_modal()</function> method or the GTK
+   function <function class="gtk-functions">grab_add()</function> as
+   appropriate.
   </shortdesc>
  </enumoption>
 
