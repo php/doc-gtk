@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<classentry id="gtk.gtkaccelgroup">
+ <classmeta>
+  <classtitle>GtkAccelGroup</classtitle>
+  <classparent></classparent>
+  <shortdesc>
+   Uma estrutura que contém dados da chave do acelerador.
+  </shortdesc>
+  <desc>
+   <simpara>
+    <classname>GtkAccelGroup</classname> é uma classe que guarda 
+	os dados da chave do acelerador para todos os menus em uma 
+	<classname>GtkWindow</classname>. Ela é geralmente colocada na 
+	janela para evitar confusões no aplicativo. A informação é guardada 
+	em uma tabela hash das entradas <literal>GtkAccelEntry</literal>, 
+	cada uma delas precisa ser criada para cada acelerador. No PHP-GTK 
+	não há acesso direto à essas entradas.
+   </simpara>
+   <note>
+    <simpara>
+	 Uma chave do acelerador é o mesmo que um atalho do teclado para um 
+     <classname>GtkMenuItem</classname>.
+    </simpara>
+   </note>
+   <simpara>
+    Veja também:  <function class= "GtkWindow">add_accel_group</function>, 
+    <function class="GtkWidget">add_accelerator</function>, 
+    <classname>GtkAccelLabel</classname>, <classname>GtkMenuItem</classname>.
+   </simpara>
+  </desc>
+ </classmeta>
+
+ <constructor id="gtk.gtkaccelgroup.constructor">
+  <funcsynopsis>
+   <funcprototype>
+    <funcdef> <function>GtkAccelGroup</function></funcdef>
+    <paramdef></paramdef>
+   </funcprototype>
+  </funcsynopsis>
+  <shortdesc>
+   Fornece a estrutura necessária para guardar informações sobre uma tabela hash da chave do acelerador.
+  </shortdesc>
+  <desc>
+   <para>
+    Embora não faça parte da hierarquia dos objetos do GTK, a 
+	classe <classname>GtkAccelGroup</classname> pode ser construída 
+	da mesma maneira que a maioria das classes GTK, ex:
+    <informalexample>
+     <programlisting>
+<![CDATA[
+$accelgroup = &new GtkAccelGroup();
+]]>
+     </programlisting>
+    </informalexample>
+   </para>
+   <simpara>
+    Na maioria dos casos, <classname>GtkAccelGroup</classname> contruído poderia 
+	ser usado por todos os menus pertencentes à janela de primeir nível(toplevel), e 
+	poderia ser adicionado usando a função <function class="GtkWindow">add_accel_group</function>.
+   </simpara>
+   <simpara>
+    Não é sempre necessário criar um grupo de aceleradores desta menira. O método 
+	<classname>GtkMenu</classname> chama a função <function class="GtkMenu">ensure_uline_accel_group</function> 
+	da classe <classname>GtkAccelGroup</classname> usado internamente pelo menu 
+	para sublinhar os aceleradores (atalhos) pelo período de duração no qual o menu aparece. 
+	Se nenhum acelerador (atalho) for designiado, um novo grupo de aceleradores é criado e 
+	usado.
+   </simpara>
+  </desc>
+ </constructor>
+
+ <methods>
+
+  <method id="gtk.gtkaccelgroup.method.lock">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>lock</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Trava a informação do grupo do accelerator.
+<!--     Locks accelerator group information. -->
+   </shortdesc>
+   <desc>
+    <simpara>
+     <function class="GtkAccelGroup">lock</function> impede futuras 
+	 alterações nas entradas dos aceleradores nas chamadas à classe   
+     <classname>GtkAccelGroup</classname>.
+    </simpara>
+    <simpara>
+	 Para impedir que as chaves sejam alteradas, adicionadas ou removidas de 
+	 uma única entrada <literal>GtkAccelEntry</literal>, use a função 
+	 <function class="GtkWidget">lock_accelerators</function>.
+    </simpara>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkaccelgroup.method.unlock">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>unlock</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Destrava a informação do grupo do accelerator.
+   </shortdesc>
+   <desc>
+    <simpara>
+	 A função <function class="GtkAccelGroup">unlock</function> permite 
+	 que as entradas dos aceleradores sejam alteradas, adicionadas ou removidas 
+	 de um <classname>GtkAccelGroup</classname> previamente travado.
+    </simpara>
+    <simpara>
+	 Para permitir que uma chave secundária em uma lista <literal>GtkAccelEntry</literal> 
+	 seja designada pelo usuário, use <function class="GtkWidget">unlock_accelerators</function>.
+    </simpara>
+   </desc>
+  </method>
+
+ </methods>
+
+</classentry>
