@@ -592,6 +592,10 @@
   signal id is needed, and if we did we shouldn't - they're all internal. 
   - sf jan 02 -->
 
+  <!-- DELETED ref(), unref(), destroy() - already covered in GtkObject. 
+  - sf jan 02 -->
+  <!-- DELETED reset_shapes() - internal function (marked) - sf 20/12/01 -->
+
   <method id="gtk.gtkwidget.method.lock_accelerators">
    <funcsynopsis>
     <funcprototype>
@@ -932,10 +936,15 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets widget's position relative to its container.
    </shortdesc>
    <desc>
-
+    <simpara>
+     <function class="GtkWidget">set_uposition()</function> sets the
+     position of a child widget in pixels relative to the top left corner
+     of its container or, if the widget is a toplevel window, relative to
+     the top left corner of the screen.
+    </simpara>
    </desc>
   </method>
 
@@ -948,10 +957,21 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets widget's size in pixels.
    </shortdesc>
    <desc>
-
+    <simpara>
+     <function class="GtkWidget">set_usize()</function> sets a widget's
+     size in pixels.  Sizing methods should only be called at one level of
+     the packing hierarchy; you may need to size either the container
+     or its children, but doing both will create conflicts in the size
+     requests made by child widgets internally, which in turn can lead
+     to unexpected results.
+    </simpara>
+    <simpara>
+     See also:  <classname>GtkAlignment</classname>, and the packing methods
+     supplied by <classname>GtkBox</classname>.
+    </simpara>
    </desc>
   </method>
 

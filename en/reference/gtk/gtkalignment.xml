@@ -4,10 +4,27 @@
   <classtitle>GtkAlignment</classtitle>
   <classparent>GtkBin</classparent>
   <shortdesc>
-   A widget that controls the alignment and size of its child.
+   A container that controls the alignment and scale of its child.
   </shortdesc>
   <desc>
-
+   <simpara>
+    <classname>GtkAlignment</classname> is a container class that controls
+    the alignment and scale of its child widget, relative to its own
+    dimensions.
+   </simpara>
+   <simpara>
+    Where the child widget has sizing responsibilites to a child or children
+    of its own, these are fulfilled as a priority.  For example, a 
+    <classname>GtkButton</classname> with a label will never be scaled down
+    to the minimal size that the same widget with no label can; the label
+    is the button's child, and the button must honour its size request.
+   </simpara>
+   <simpara>
+    See also:  <classname>GtkAspectFrame</classname>, 
+    <classname>GtkContainer</classname>, 
+    <function class="GtkWidget">set_uposition()</function>, 
+    <function class="GtkWidget">set_usize()</function>.
+   </simpara>
   </desc>
  </classmeta>
 
@@ -22,10 +39,31 @@
    </funcprototype>
   </funcsynopsis>
   <shortdesc>
-
+   Creates a container that determines its child's alignment and scale.
   </shortdesc>
   <desc>
-
+   <simpara>
+    A <classname>GtkAlignment</classname> object has control over its
+    child widget's relative position and size.  Each parameter is a
+    double, with the minimum value being <literal>0.0</literal> and the
+    maximum value being <literal>1.0</literal>.
+   </simpara>
+   <simpara>
+    The first two parameters describe the positioning of the child widget, 
+    with <literal>0.0</literal> being the left or top of the containing 
+    <classname>GtkAlignment</classname> and <literal>1.0</literal> being
+    the right or bottom.  A child with the setting 
+    <literal>0.5, 0.5</literal> as the first two parameters is fully
+    centred, with scale being taken into consideration throughout.
+   </simpara>
+   <simpara>
+    The second pair of parameters determine the scale of the child widget, 
+    with the setting <literal>1.0, 1.0</literal> having the child widget fill
+    the available area and the setting <literal>0.0, 0.0</literal> shrinking
+    the child to its minimum possible size.  If the widget has no children of
+    its own, that can be just a couple of pixels in each direction - but it
+    must obey the size requests made by any such children.
+   </simpara>
   </desc>
  </constructor>
 
@@ -42,10 +80,47 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets new parameter values for an existing 
+    <classname>GtkAlignment</classname>.
    </shortdesc>
    <desc>
-
+    <para>
+     This method sets new values for a <classname>GtkAdjustment</classname>'s 
+     parameters.
+     <example>
+      <title>
+       Resetting <classname>GtkAdjustment</classname> parameters.
+      </title>
+      <programlisting role="php">
+dl('php_gtk.' . (strstr(PHP_OS, 'WIN') ? 'dll' : 'so'));
+    
+function change_it($align, &amp;$i) {
+  if($i%2) $align-&gt;set(1.0, 1.0, 0.4, 0.3);
+  elseif($i%3) $align-&gt;set(0.0, 0.0, 0.6, 0.2);
+  else $align-&gt;set(0.0, 1.0, 0.1, 0.2);
+  $i++;
+  }
+    
+$window = &amp;new GtkWindow();
+$window-&gt;set_position(GTK_WIN_POS_CENTER);
+$window-&gt;set_default_size((gdk::screen_width()-10), 
+(gdk::screen_height()-30));
+$window-&gt;connect_object('destroy', array('gtk', 'main_quit'));
+    
+$align = &amp;new GtkAlignment(0.5, 0.5, 1.0, 1.0);
+$button = &amp;new GtkButton(&quot;Click Here&quot;);
+$i = 0;
+$button-&gt;connect_object('enter', 'change_it', $align, &amp;$i);
+$align-&gt;add($button);
+$align-&gt;show_all();
+    
+$window-&gt;add($align);
+$window-&gt;show_all();
+    
+gtk::main();
+      </programlisting>
+     </example>
+    </para>
    </desc>
   </method>
 

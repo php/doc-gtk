@@ -4,10 +4,18 @@
   <classtitle>GtkArrow</classtitle>
   <classparent>GtkMisc</classparent>
   <shortdesc>
-   Displays an arrow pointing in one of the four cardinal directions.
+   An arrow pointing in one of the four cardinal directions.
   </shortdesc>
   <desc>
-
+   <simpara>
+    The <classname>GtkArrow</classname> widget is a representation of an
+    isosceles triangle with its &quot;nose&quot; pointing in the specified
+    direction.  The look of the arrow is varied through the choice
+    of <enumname>GtkShadowType</enumname>, and it inherits from the 
+    <classname>GtkMisc</classname> class the ability to have its own
+    padding and alignment properties altered directly, both of which
+    can also have a surprisingly big impact on the arrow's appearance.
+   </simpara>
   </desc>
  </classmeta>
 
@@ -15,15 +23,42 @@
   <funcsynopsis>
    <funcprototype>
     <funcdef> <function>GtkArrow</function></funcdef>
-    <paramdef><enumname>GtkArrowType</enumname> <parameter>arrow_type</parameter></paramdef>
-    <paramdef><enumname>GtkShadowType</enumname> <parameter>shadow_type</parameter></paramdef>
+    <paramdef>
+     <enumname>GtkArrowType</enumname> 
+     <parameter>arrow_type</parameter>
+    </paramdef>
+    <paramdef>
+     <enumname>GtkShadowType</enumname> 
+     <parameter>shadow_type</parameter>
+    </paramdef>
    </funcprototype>
   </funcsynopsis>
   <shortdesc>
-
+   Displays an arrow pointing in one of the four cardinal directions.
   </shortdesc>
   <desc>
-
+   <simpara>
+    For a simple widget, there are a lot of options in the construction
+    of the <classname>GtkArrow</classname> - twenty different combinations
+    in all.
+   </simpara>
+   <simpara>
+    It may not be immediately obvious that the 
+    <classname>GtkArrow</classname> is made up entirely of lines of shadow. 
+    As a result of this, the <enumname>GtkShadowType</enumname> option 
+    <literal>GTK_SHADOW_NONE</literal> actually creates an invisible arrow - 
+    a potentially useful option to have, given that the parameters of the
+    arrow can be redefined at any point using the
+    <function class="GtkArrow">set()</function> method.
+   </simpara>
+   <para>
+    The syntax to create a right-pointing, etched arrow would be:
+    <informalexample>
+     <programlisting role="php">
+$arrow = &amp;new GtkArrow(GTK_ARROW_RIGHT, GTK_SHADOW_ETCHED_IN);
+     </programlisting>
+    </informalexample>
+   </para>
   </desc>
  </constructor>
 
@@ -33,18 +68,63 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set</function></funcdef>
-     <paramdef><enumname>GtkArrowType</enumname> <parameter>arrow_type</parameter></paramdef>
-     <paramdef><enumname>GtkShadowType</enumname> <parameter>shadow_type</parameter></paramdef>
+     <paramdef>
+      <enumname>GtkArrowType</enumname> 
+      <parameter>arrow_type</parameter>
+     </paramdef>
+     <paramdef>
+      <enumname>GtkShadowType</enumname> 
+      <parameter>shadow_type</parameter>
+     </paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets new parameter values for an existing <classname>GtkArrow</classname>.
    </shortdesc>
    <desc>
-
+    <simpara>
+     This method redefines the parameters for an existing 
+     <classname>GtkArrow</classname>.  It would typically be used within a
+     callback function where the arrow was required to point in another
+     direction, change its appearance and/or vanish.
+    </simpara>
    </desc>
   </method>
 
  </methods>
+
+ <properties>
+
+  <property id="gtk.gtkarrow.property.arrow_type" type="ro">
+   <propname>arrow_type</propname>
+   <proptype><enumname>GtkArrowType</enumname></proptype>
+   <shortdesc>
+    Direction of arrow's nose.
+   </shortdesc>
+   <desc>
+    <simpara>
+     The <propname class="GtkArrow">arrow_type</propname> property is a 
+     <enumname>GtkArrowType</enumname> enumerated value which can be
+     queried to test in which direction the arrow is currently pointing.
+    </simpara>
+   </desc>
+  </property>
+
+  <property id="gtk.gtkarrow.property.shadow_type" type="ro">
+   <propname>shadow_type</propname>
+   <proptype><enumname>GtkShadowType</enumname></proptype>
+   <shortdesc>
+    Appearance of arrow.
+   </shortdesc>
+   <desc>
+    <simpara>
+     The <propname class="GtkArrow">shadow_type</propname> property is a 
+     <enumname>GtkShadowType</enumname> enumerated value which can be
+     queried to test the current style of the arrow's appearance.
+    </simpara>
+   </desc>
+  </property>
+
+ </properties>
 
 </classentry>
