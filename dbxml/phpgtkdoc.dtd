@@ -2,7 +2,7 @@
    Docbook Customiszation layer of PHP-GTK docs
    Authors: James Moore <jmoore@php.net>
 
-   $Id: phpgtkdoc.dtd,v 1.4 2001-08-11 11:29:36 jmoore Exp $
+   $Id: phpgtkdoc.dtd,v 1.5 2001-08-17 05:58:55 andrei Exp $
 
 -->
 
@@ -189,11 +189,11 @@
 
   Signal
    - Contains information about signals:
-   - Contains signalname, followed by firedwhen, 
-     follwoed by a shortdesc and a desc.
+   - Contains signalname, followed by an optional callback prototype,
+     a shortdesc and a desc.
 
 -->
-<!ELEMENT signal ((signalname),(firedwhen),(userfunc)?,(shortdesc,desc)) >
+<!ELEMENT signal ((signalname),(callback)?,(shortdesc,desc)) >
 <!ATTLIST signal
      %common.attrib;
 >
@@ -208,18 +208,8 @@
     %common.attrib;
 >
 
-<!--
-
-  - firedwhen contains when the signal is fired..
-
--->
-<!ELEMENT firedwhen (%para.char.mix;)* >
-<!ATTLIST firedwhen
-     %common.attrib;
->
-
-<!ELEMENT userfunc (funcprototype) >
-<!ATTLIST userfunc
+<!ELEMENT callback (funcprototype) >
+<!ATTLIST callback
      %common.attrib;
 >
 <!--
