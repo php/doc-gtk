@@ -29,23 +29,23 @@
     welche die GTK Hauptschleife beendet!
    </simpara>
    <simpara>
-    A dialog window is not the same thing as a 
-    <classname>GtkDialog</classname>, but is simply a normal toplevel
-    window with the <literal>maximize</literal> function disabled.  Both
-    dialog and popup windows are designed to be used when a message to the
-    user requires a response, and should be used in conjunction with the 
-    <function class="GtkWindow">set_transient_for()</function> and 
-    <function class="GtkWindow">set_modal()</function> methods.
-   </simpara> 
+    Ein Dialogfenster ist nicht dasselbe wie ein <classname>GtkDialog</classname>,
+    sondern ist einfach ein normales Toplevel Fenster, bei dem die
+    <literal>maximize</literal> Funktion deaktiviert ist.
+    Sowohl Dialog als auch Popup Fenster sind so gestaltet dass sie benutzt werden
+    k&ouml;nnen, wenn eine Nachricht an den Benutzer eine R&uuml;ckmeldung ben&ouml;tigt,
+    und sollten in Verbindung mit den Methoden
+    <function class="GtkWindow">set_transient_for()</function> und 
+    <function class="GtkWindow">set_modal()</function> verwendet werden.
    <simpara>
-    A popup window lacks any window decoration, so needs an
-    alternative means of closure.  This could triggered by a timer, an
-    event, or a widget capable of user interaction.
+    Ein Popup Fenster hat keinerlei Dekoration und ben&ouml;tigt deshalb einen
+    alternativen Mechanismus zum Schliessen. Dieser kann z.B. durch einen Timer,
+    einen Event, oder ein f&uuml;r den User benutzbares Widget umgesetzt werden.
    </simpara>
    <simpara>
-    Note that both the window decorations and the associated functions
-    described above are provided by the underlying system's window manager, 
-    and could possibly vary or be absent.
+    Bitte beachten Sie dass die Fensterdekorationen und die damit verbundenen
+    Funktionen vom Fenstermanager des zugrundeliegenden Systems bereitgestellt werden
+    und daher variieren oder g&auml;nzlich fehlen k&uoml;nnen.
    </simpara>
   </desc>
  </classmeta>
@@ -61,41 +61,41 @@
    </funcprototype>
   </funcsynopsis>
   <shortdesc>
-   Creates a new <classname>GtkWindow</classname>.
+   Erzeugt ein neues <classname>GtkWindow</classname>.
   </shortdesc>
   <desc>
    <simpara>
-    Creates a new <classname>GtkWindow</classname> which is toplevel by
-    default.  Most of the other widgets in PHP-GTK need to have a window
-    constructed and to be added to that window (or a container within that
-    window) before they can be instantiated.  There are exceptions, such as 
-    <classname>GtkDialog</classname> and 
-    <classname>GtkColorSelectionDialog</classname>; these are compound
-    widgets which are already based upon their own internal instance of a
-    <classname>GtkWindow</classname>.
+    Erzeugt ein neues <classname>GtkWindow</classname> das standardm&auml;ssig
+    ein Toplevel Fenster ist. Die meisten anderen Widgets in PHP-GTK k&ouml;nnen nur
+    in ein bereits erzeugtes Fenster hinzugef&uuml;gt werden (oder in einen Container
+    in diesem Fenster), bevor sie instanziert werden k&ouml;nnen.
+    Es gibt Ausnahmen, wie z.B. <classname>GtkDialog</classname> und
+    <classname>GtkColorSelectionDialog</classname>; diese sind Verbundwidgets
+    die bereits auf ihrer eigenen internen Instanz eines <classname>GtkWindow</classname>
+    aufbauen.
    </simpara>
    <para>
-    As the <classname>GtkWindow</classname> is such a fundamental object
-    in the design of windowed applications, there follows a brief code
-    sample to reiterate the essential basic steps in creating any PHP-GTK
-    script:
+    Da das <classname>GtkWindow</classname> ein solch fundamentales Objekt
+    beim Design von fensterbasierten Anwendungen ist, folgt ein kurzes
+    Codebeispiel, welches die essentiellen Grundschritte zum erzeugen
+    eines jeden PHP-GTK Skripts aufzeigt:
     <informalexample>
      <programlisting role="php">
-/*load the php_gtk module*/
+/* laden des php_gtk moduls */
 dl('php_gtk.' . (strstr(PHP_OS, 'WIN') ? 'dll' : 'so')) ||
 die(&quot;Can't load php_gtk module!\n&quot;);
     
-/*create the main window*/
+/* erzeugen des hauptfensters */
 $window = &amp;new GtkWindow();
     
-/*ensure that the destruction of the main window also kills the main loop*/
+/* sicherstellen dass die zerst&ouml;rung des hauptfensters auch die hauptschleife beendet */
 $window-&gt;connect_object('destroy', array('gtk', 'main_quit'));
     
-/*realize the underlying GdkWindow, flag the GtkWindow's visibility and map
-  it onto the screen, all in one simple line*/
+/* realisieren des zugrundeliegenden GdkWindow, sichtbarkeit des GtkWindow setzen und es
+   auf den bildschirm zeichnen, alles in einer einfachen zeile */
 $window-&gt;show();
     
-/*without the main loop, there is no PHP-GTK script*/
+/* ohne die hauptschleife (main loop) w&auml;re es kein PHP-GTK skript */
 gtk::main();
      </programlisting>
     </informalexample>
@@ -113,18 +113,19 @@ gtk::main();
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Sets window title.
+    Setzt den Fenstertitel.
    </shortdesc>
    <desc>
     <simpara>
-     Sets the title shown in the window's title bar, and also in the
-     task bar icon for the window when it is minimized.  The text is
-     truncated to the width of the window.
+     Setzt den Titel der in der Titelzeile des Fenster angezeigt wird,
+     und auch im Taskbaricon wenn das Fenster minimiert ist. Der Text
+     wird beschnitten auf die Breite des Fensters.
     </simpara>
     <simpara>
-     Either single or double quotation marks may be used to contain the
-     string.  Note that any apostrophes will need to be escaped with a
-     backslash if single quotation marks are used.
+     Sowohl einfache als auch doppelte Anf&uuml;hrungszeichen d&uuml;rfen
+     verwendet werden um den String zu beinhalten. Beachten Sie dass 
+     jegliche Apostrophe mit einem Backslash escaped werden m&uuml;ssen,
+     wenn einfache Anf&uuml;hrungszeichen verwendet werden.
     </simpara>
    </desc>
   </method>
