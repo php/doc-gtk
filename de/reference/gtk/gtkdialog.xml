@@ -9,26 +9,27 @@
   <desc>
    <simpara>
     <classname>GtkDialog</classname> dient dazu ein Popup Fenster zur
-    Pr&auml;sentation und zum anfordern kleiner Datenmengen darzustellen. Es
+    Präsentation und zum anfordern kleiner Datenmengen darzustellen. Es
     ist aus zwei Containern zusammengestellt, die von einem
     <classname>GtkSeparator</classname> getrennt werden. Der obere Container
-    ist eine <classname>GtkVBox</classname> und w&uuml;rde typischerweise
-    <classname>GtkLabel</classname> und <classname>GtkEntry</classname> Widgets
-    enthalten um dem User Informationen anzuzeigen und eine Eingabe zu
-    erlauben. Der untere Container ist eine <classname>GtkHBox</classname> und
-    w&uuml;rde &uuml;blicherweise Dialogbuttons enthalten, zum Beispiel
-    <literal>O.K.</literal>, <literal>Abbrechen</literal>
+    ist eine <classname>GtkVBox</classname> und würde typischerweise
+    <classname>GtkLabel</classname> und <classname>GtkEntry</classname> 
+    Widgets enthalten um dem User Informationen anzuzeigen und eine Eingabe
+    zu erlauben. Der untere Container ist eine <classname>GtkHBox</classname>
+    und würde üblicherweise Dialogbuttons enthalten, zum Beispiel
+    <literal>O.K.</literal>, <literal>Abbrechen</literal>, 
     <literal>Hilfe</literal> und so weiter.
    </simpara>
    <simpara>
     Beachte dass dem <classname>GtkDialog</classname> selbst keine
-    direkten Kinderwidgets hinzugef&uuml;gt werden sollten, sondern den beiden
-    Containern, auf welche man als <propname class="GtkDialog">vbox</propname>
+    direkten Kinderwidgets hinzugefügt werden sollten, sondern den beiden
+    Containern, auf welche man als 
+    <propname class="GtkDialog">vbox</propname>
     und <propname class="GtkDialog">hbox</propname> und 
-    <propname class="GtkDialog">action_area</propname>zugreifen kann.
+    <propname class="GtkDialog">action_area</propname> zugreifen kann.
    </simpara>
    <simpara>
-    Dialoge k&uuml;nnen modal gemacht werden (woraufhin sie die restliche
+    Dialoge künnen modal gemacht werden (woraufhin sie die restliche
     Eingabe der gesamten Applikation einfrieren) indem man die
     <function class="GtkWindow">set_modal()</function> Methode der
     <classname>GtkWidget</classname> Klasse auf das
@@ -40,18 +41,20 @@
     es zusammenkommt - bitte diesen Abschnitt nicht einfach loeschen! sf
     -->
     Beachte dass <classname>GtkDialog</classname> modal zu machen nicht die
-    ausf&uuml;hrung des Codes stoppt der es aufruft. Im untenstehenden
-    Beispiel wird der Aufruf 'echo' immer noch ausgef&uuml;hrt obwohl die
-    Hauptapplikation nicht auf Benutzereingabe antwortet. Um die
-    Ausf&uuml;hrung des Codes zu stoppen muss der 
-    <classname>GtkDialog</classname> einen Aufruf zu einer verschachtelten
-    gtk::<function>main()</function> enthalten. Die Ausf&uuml;hrung wird dann
-    weitergehen wenn die dazugeh&ouml;rige <function>main_quit()</function>
+    ausführung des Codes stoppt der es aufruft.  Im untenstehenden
+    Beispiel wird der Aufruf 'echo' immer noch ausgeführt obwohl die
+    Hauptapplikation nicht auf Benutzereingabe antwortet.  Um die
+    Ausführung des Codes zu stoppen muss der <classname>GtkDialog</classname>
+    einen Aufruf zu einer verschachtelten <function>gtk::main()</function>
+    enthalten.  Die Ausführung wird dann
+    weitergehen wenn die dazugehörige <function>gtk::main_quit()</function>
     Funktion aufgerufen wird.
    </simpara>
    <para>
     <example>
-     <title>Benutzung von <function class="GtkWindow">set_modal()</function></title>
+     <title>
+      Benutzung von <function class="GtkWindow">set_modal()</function>
+     </title>
      <programlisting role="php">
 $dialog = &amp;new GtkDialog(); 
 $dialog-&gt;set_modal(TRUE); 

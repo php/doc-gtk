@@ -4,50 +4,51 @@
   <classtitle>GtkWindow</classtitle>
   <classparent>GtkBin</classparent>
   <shortdesc>
-   Ein Widget welches Fenster f&uuml;r eine Anwendung zur Verf&uuml;gung stellt.
+   Ein Widget welches Fenster für eine Anwendung zur Verfügung stellt.
   </shortdesc>
   <desc>
    <simpara>
-    <classname>GtkWindow</classname> ist das Widget welches die Fenster f&uuml;r
-    eine Anwendung zur Verf&uuml;gung stellt. Es gibt drei verschiedene Typen,
-    die vom Entwickler w&auml;hrend Konstruktion definiert werden -
+    <classname>GtkWindow</classname> ist das Widget welches die Fenster für
+    eine Anwendung zur Verfügung stellt. Es gibt drei verschiedene Typen,
+    die vom Entwickler während Konstruktion definiert werden - 
     Toplevel, Dialog und Popup.
    </simpara>
    <simpara>
-    Toplevel Fenster sind mit den &uuml;blichen Schaltfl&auml;chen
+    Toplevel Fenster sind mit den üblichen Schaltflächen
     <literal>Minimieren</literal>, <literal>Maximieren</literal> und
-    <literal>Schliessen</literal> versehen. Die ersten beiden zeigen das erwartete
-    Verhalten; dies ist in den GDK Quellen vorgegeben und kann zum jetzigen
-    Zeitpunkt nicht von PHP-Gtk ver&auml;ndert werden.
-    Der <literal>Schliessen</literal> Button ist nicht auf diese Art und Weise
+    <literal>Schliessen</literal> versehen. Die ersten beiden zeigen das
+    erwartete Verhalten; dies ist in den GDK Quellen vorgegeben und kann
+    zum jetzigen Zeitpunkt nicht von PHP-Gtk verändert werden.  Der 
+    <literal>Schliessen</literal> Button ist nicht auf diese Art und Weise
     vordefiniert, so dass das Aussenden des
-    <signalname class="GtkObject">destroy</signalname> Signals &uuml;berschrieben
+    <signalname class="GtkObject">destroy</signalname> Signals überschrieben
     werden kann, indem man eine Funktion mit dem
-    <signalname class="GtkWidget">delete-event</signalname> Signal des Fensters
-    verbindet und diese <literal>true</literal> zur&uuml;ckgeben l&auml;sst.
-    Beachten Sie, dass das <signalname class="GtkObject">destroy</signalname> Signal
-    des Hauptfensters direkt oder indirekt mit einer Funktion verbunden werden sollte,
-    welche die GTK Hauptschleife beendet!
+    <signalname class="GtkWidget">delete-event</signalname> Signal des
+    Fensters verbindet und diese <literal>true</literal> zurückgeben lässt. 
+    Beachten Sie, dass das <signalname class="GtkObject">destroy</signalname>
+    Signal des Hauptfensters direkt oder indirekt mit einer Funktion
+    verbunden werden sollte, welche die GTK Hauptschleife beendet!
    </simpara>
    <simpara>
-    Ein Dialogfenster ist nicht dasselbe wie ein <classname>GtkDialog</classname>,
-    sondern ist einfach ein normales Toplevel Fenster, bei dem die
-    <literal>maximize</literal> Funktion deaktiviert ist.
-    Sowohl Dialog als auch Popup Fenster sind so gestaltet dass sie benutzt werden
-    k&ouml;nnen, wenn eine Nachricht an den Benutzer eine R&uuml;ckmeldung ben&ouml;tigt,
-    und sollten in Verbindung mit den Methoden
+    Ein Dialogfenster ist nicht dasselbe wie ein
+    <classname>GtkDialog</classname>, sondern ist einfach ein normales
+    Toplevel Fenster, bei dem die <literal>maximize</literal> Funktion
+    deaktiviert ist.  Sowohl Dialog als auch Popup Fenster sind so gestaltet
+    dass sie benutzt werden können, wenn eine Nachricht an den Benutzer eine
+    Rückmeldung benötigt, und sollten in Verbindung mit den Methoden
     <function class="GtkWindow">set_transient_for()</function> und 
     <function class="GtkWindow">set_modal()</function> verwendet werden.
-   </simpara> 
-   <simpara>
-    Ein Popup Fenster hat keinerlei Dekoration und ben&ouml;tigt deshalb einen
-    alternativen Mechanismus zum Schliessen. Dieser kann z.B. durch einen Timer,
-    einen Event, oder ein f&uuml;r den User benutzbares Widget umgesetzt werden.
    </simpara>
    <simpara>
-    Bitte beachten Sie dass die Fensterdekorationen und die damit verbundenen
-    Funktionen vom Fenstermanager des zugrundeliegenden Systems bereitgestellt werden
-    und daher variieren oder g&auml;nzlich fehlen k&ouml;nnen.
+    Ein Popup Fenster hat keinerlei Dekoration und benötigt deshalb einen
+    alternativen Mechanismus zum Schliessen. Dieser kann z.B. durch einen
+    Timer, einen Event, oder ein für den User benutzbares Widget umgesetzt
+    werden.
+   </simpara>
+   <simpara>
+    Bitte beachten Sie dass die Fensterdekorationen und die damit
+    verbundenen Funktionen vom Fenstermanager des zugrundeliegenden Systems
+    bereitgestellt werden und daher variieren oder gänzlich fehlen können.
    </simpara>
   </desc>
  </classmeta>
@@ -67,14 +68,14 @@
   </shortdesc>
   <desc>
    <simpara>
-    Erzeugt ein neues <classname>GtkWindow</classname> das standardm&auml;ssig
-    ein Toplevel Fenster ist. Die meisten anderen Widgets in PHP-GTK k&ouml;nnen nur
-    in ein bereits erzeugtes Fenster hinzugef&uuml;gt werden (oder in einen Container
-    in diesem Fenster), bevor sie instanziert werden k&ouml;nnen.
-    Es gibt Ausnahmen, wie z.B. <classname>GtkDialog</classname> und
-    <classname>GtkColorSelectionDialog</classname>; diese sind Verbundwidgets
-    die bereits auf ihrer eigenen internen Instanz eines <classname>GtkWindow</classname>
-    aufbauen.
+    Erzeugt ein neues <classname>GtkWindow</classname> das standardmässig
+    ein Toplevel Fenster ist. Die meisten anderen Widgets in PHP-GTK können
+    nur in ein bereits erzeugtes Fenster hinzugefügt werden (oder in einen
+    Container in diesem Fenster), bevor sie instanziert werden können.  Es
+    gibt Ausnahmen, wie z.B. <classname>GtkDialog</classname> und
+    <classname>GtkColorSelectionDialog</classname>; diese sind
+    Verbundwidgets die bereits auf ihrer eigenen internen Instanz eines
+    <classname>GtkWindow</classname> aufbauen.
    </simpara>
    <para>
     Da das <classname>GtkWindow</classname> ein solch fundamentales Objekt
@@ -90,14 +91,14 @@ die(&quot;Can't load php_gtk module!\n&quot;);
 /* erzeugen des hauptfensters */
 $window = &amp;new GtkWindow();
     
-/* sicherstellen dass die zerst&ouml;rung des hauptfensters auch die hauptschleife beendet */
+/* sicherstellen dass die zerstörung des hauptfensters auch die hauptschleife beendet */
 $window-&gt;connect_object('destroy', array('gtk', 'main_quit'));
     
 /* realisieren des zugrundeliegenden GdkWindow, sichtbarkeit des GtkWindow setzen und es
    auf den bildschirm zeichnen, alles in einer einfachen zeile */
 $window-&gt;show();
     
-/* ohne die hauptschleife (main loop) w&auml;re es kein PHP-GTK skript */
+/* ohne die hauptschleife (main loop) wäre es kein PHP-GTK skript */
 gtk::main();
      </programlisting>
     </informalexample>
@@ -124,10 +125,10 @@ gtk::main();
      wird beschnitten auf die Breite des Fensters.
     </simpara>
     <simpara>
-     Sowohl einfache als auch doppelte Anf&uuml;hrungszeichen d&uuml;rfen
-     verwendet werden um den String zu beinhalten. Beachten Sie dass 
-     jegliche Apostrophe mit einem Backslash escaped werden m&uuml;ssen,
-     wenn einfache Anf&uuml;hrungszeichen verwendet werden.
+     Sowohl einfache als auch doppelte Anführungszeichen dürfen verwendet
+     werden um den String zu beinhalten. Beachten Sie dass jegliche
+     Apostrophe mit einem Backslash escaped werden müssen, wenn einfache
+     Anführungszeichen verwendet werden.
     </simpara>
    </desc>
   </method>
@@ -146,10 +147,10 @@ gtk::main();
    <desc>
     <simpara>
      Setzt die Fenstermanagerklasse und deren Namen Applikationsweit.
-     Da allerdings die Fenstermanagerklasse auf genau diese Art und Weise bereits
-     von GTK gesetzt wurde, und da keine Funktionen innerhalb von PHP-GTK existieren,
-     die diese Informationen ben&ouml;tigen, sollte diese Funktion am Besten unber&uuml;hrt
-     bleiben.
+     Da allerdings die Fenstermanagerklasse auf genau diese Art und Weise
+     bereits von GTK gesetzt wurde, und da keine Funktionen innerhalb von
+     PHP-GTK existieren, die diese Informationen benötigen, sollte diese
+     Funktion am Besten unberührt bleiben.
     </simpara>
    </desc>
   </method>
@@ -164,50 +165,53 @@ gtk::main();
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-     Setzt die Verhaltensregeln eines Fensters bez&uuml;glich Gr&ouml;ssen&auml;nderungen.
-     *Als nicht l&auml;nger gew&uuml;nscht (deprecated) markiert in GTK2*
+    Setzt die Verhaltensregeln eines Fensters bezüglich Grössenänderungen.
+    *Als nicht länger gewünscht (deprecated) markiert in GTK2*
    </shortdesc>
    <desc>
     <simpara>
      Das Standardverhalten eines <classname>GtkWindow</classname> ist
      <literal>false, true, false</literal>, das heisst ein Fenster wird mit
-     der Standardgr&ouml;sse ge&ouml;ffnet und kann dann vom Anwender in der
-     Gr&ouml;sse ver&auml;ndert werden.
+     der Standardgrösse geöffnet und kann dann vom Anwender in der
+     Grösse verändert werden.
     </simpara>
     <simpara>
-      Wenn <parameter>allow_shrink</parameter> auf <literal>true</literal> gesetzt
-      wird, kann das Fenster kleiner werden als der von den enthaltenen Elementen
-      ben&ouml;tigte Platz, was dazu f&uuml;hrt dass die enthaltenen Elemente
-      angeschnitten werden. Aus diesem Grund sollte es immer auf
-      <literal>false</literal> gesetzt werden.
+     Wenn <parameter>allow_shrink</parameter> auf <literal>true</literal>
+     gesetzt wird, kann das Fenster kleiner werden als der von den
+     enthaltenen Elementen benötigte Platz, was dazu führt dass die
+     enthaltenen Elemente angeschnitten werden.  Aus diesem Grund sollte
+     es immer auf <literal>false</literal> gesetzt werden.
     </simpara>
     <simpara>
-      Wenn <parameter>allow_grow</parameter> auf <literal>true</literal> gesetzt
-      wird, erlaubt dies dem Fenster, gr&ouml;sser als seine Ursprungsgr&ouml;sse
-      (beim Erzeugen) zu werden. Das Standardverhalten der enthaltenen Elemente
-      ist, in den meisten F&auml;llen, mit dem Fenster mitzuwachsen.
-      Setzt man den <parameter>allow_grow</parameter> auf <literal>false</literal>,
-      kann die Fenstergr&ouml;sse vom Anwender nicht &uuml;ber die Ursprungsgr&ouml;sse
-      hinaus ver&auml;ndert werden.
+     Wenn <parameter>allow_grow</parameter> auf <literal>true</literal>
+     gesetzt wird, erlaubt dies dem Fenster, grösser als seine
+     Ursprungsgrösse (beim Erzeugen) zu werden. Das Standardverhalten der
+     enthaltenen Elemente ist, in den meisten Fällen, mit dem Fenster
+     mitzuwachsen.  Setzt man den <parameter>allow_grow</parameter> auf
+     <literal>false</literal>, kann die Fenstergrösse vom Anwender nicht
+     über die Ursprungsgrösse hinaus verändert werden.
     </simpara>
     <simpara>
-      Wenn <parameter>auto_shrink</parameter> auf <literal>true</literal> gesetzt
-      wird, wird die Standardgr&ouml;ssenvorgabe des Fensters &uuml;berschrieben und
-      und es wird automatisch so vergr&ouml;ssert oder verkleinert, dass die enthaltenen
-      Elemente den ben&ouml;tigten Platz beanspruchen k&ouml;nnen.
+     Wenn <parameter>auto_shrink</parameter> auf <literal>true</literal>
+     gesetzt wird, wird die Standardgrössenvorgabe des Fensters
+     überschrieben und und es wird automatisch so vergrössert oder
+     verkleinert, dass die enthaltenen Elemente den benötigten Platz
+     beanspruchen können.
     </simpara>
     <simpara>
-      Der einzige Grund, diese Funktion verwenden zu wollen, ist der, dem Anwender
-      die M&ouml;glichkeit zu nehmen, die Gr&ouml;sse des Fensters zu ver&auml;ndern.
-      In diesem Fall sollten Sie die Einstellung <literal>false, false, true</literal>
-      verwenden, oder alternativ <literal>false, false, true</literal>, dies hat denselben
-      Effekt da der dritte Parameter in diesem Fall redundant ist.
+     Der einzige Grund, diese Funktion verwenden zu wollen, ist der, dem
+     Anwender die Möglichkeit zu nehmen, die Grösse des Fensters zu
+     verändern.  In diesem Fall sollten Sie die Einstellung 
+     <literal>false, false, true</literal> verwenden, oder alternativ 
+     <literal>false, false, true</literal>, dies hat denselben
+     Effekt da der dritte Parameter in diesem Fall redundant ist.
     </simpara>
     <simpara>
-      Diese Funktion wird in GTK 2.0 nicht mehr verwendet werden, um einer neuen und
-      effizienteren Methode Platz zu machen. Es ist daher sinnvoll dies schon jetzt zu
-      beachten und <function class="GtkWindow">set_policy()</function> nur sp&auml;rlich
-      einzusetzen.
+     Diese Funktion wird in GTK 2.0 nicht mehr verwendet werden, um einer
+     neuen und effizienteren Methode Platz zu machen. Es ist daher sinnvoll
+     dies schon jetzt zu beachten und 
+     <function class="GtkWindow">set_policy()</function> nur spärlich
+     einzusetzen.
     </simpara>
    </desc>
   </method>
@@ -223,13 +227,13 @@ gtk::main();
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-     Verbindet eine Beschleunigergruppe mit einem Fenster.
+    Verbindet eine Beschleunigergruppe mit einem Fenster.
    </shortdesc>
    <desc>
     <simpara>
-     F&uuml;gt dem Fenster eine bestehende <classname>GtkAccelGroup</classname>
-     hinzu, und erlaubt damit die Erzeugung von Tastaturshortcuts - gew&ouml;hnlich
-     f&uuml;r Men&uuml;s.
+     Fügt dem Fenster eine bestehende <classname>GtkAccelGroup</classname>
+     hinzu, und erlaubt damit die Erzeugung von Tastaturshortcuts - 
+     gewöhnlich für Menüs.
     </simpara>
    </desc>
   </method>
@@ -269,9 +273,9 @@ gtk::main();
    </shortdesc>
    <desc>
     <simpara>
-      <function class="GtkWindow">set_position()</function> setzt die Position
-      des Fenster beim &Ouml;ffnen auf einen von vier m&ouml;glichen 
-      <enumname>GtkWindowPosition</enumname> Werten.
+     <function class="GtkWindow">set_position()</function> setzt die
+     Position des Fenster beim &Ouml;ffnen auf einen von vier möglichen 
+     <enumname>GtkWindowPosition</enumname> Werten.
     </simpara>
    </desc>
   </method>
@@ -284,34 +288,37 @@ gtk::main();
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-     Aktiviert das Kindwidget das den momentanen Fokus hat.
+    Aktiviert das Kindwidget das den momentanen Fokus hat.
    </shortdesc>
    <desc>
     <simpara>
-     <function class="GtkWindow">activate_focus()</function> ist eine Methode
-     die das activate Signal des Kindwidgets ausl&ouml;st, dass zum Zeitpunkt
-     des Funktionsaufrufs den Fokus innehat. Bei GTK+ hat jedes Widget ein Signal
-     das activate signal Status hat; das Signal mit diesem Status hat die
-     M&ouml;glichkeit, auf Ereignisse zu reagieren, die von der Tastatur erzeugt
-     wurden. Wenn Sie dieses Widget-spezifische activate Signal nicht mit dem
-     Widget verbunden haben, das den Fokus innehat, wird nichts ausgelöst.
+     <function class="GtkWindow">activate_focus()</function> ist eine
+     Methode die das activate Signal des Kindwidgets auslöst, dass zum
+     Zeitpunkt des Funktionsaufrufs den Fokus innehat. Bei GTK+ hat jedes
+     Widget ein Signal das activate signal Status hat; das Signal mit diesem
+     Status hat die Möglichkeit, auf Ereignisse zu reagieren, die von der
+     Tastatur erzeugt wurden.  Wenn Sie dieses Widget-spezifische activate
+     Signal nicht mit dem Widget verbunden haben, das den Fokus innehat,
+     wird nichts ausgelöst.
     </simpara>
     <simpara>
-      Das Widget welches in dieser Situation wohl am h&auml;figsten Verwendung
-      findet ist wahrscheinlich der <classname>GtkButton</classname>, der das
-      <signalname class="GtkButton">clicked</signalname> Signal als activate
-      Signal gesetzt hat.
+     Das Widget welches in dieser Situation wohl am häfigsten Verwendung
+     findet ist wahrscheinlich der <classname>GtkButton</classname>, der das
+     <signalname class="GtkButton">clicked</signalname> Signal als activate
+     Signal gesetzt hat.
     </simpara>
     <note>
      <simpara>
       Falls diese Methode Teil eines Callbackaufrufs von einem anderen Widget
-      ist, wird dieses Widget zum Zeitpunkt des Callbackdurchlaufs den Fokus haben,
-      und PHP wird - verst&auml;ndlicherweise - abst&uuml;rzen. Die Methode muss von
-      einem Ereignissignal aufgerufen werden um zu funktionieren.
+      ist, wird dieses Widget zum Zeitpunkt des Callbackdurchlaufs den Fokus
+      haben, und PHP wird - verständlicherweise - abstürzen. Die
+      Methode muss von einem Ereignissignal aufgerufen werden um zu
+      funktionieren.
      </simpara>
     </note>
     <para>
-     Siehe auch:  <link linkend="gtk.signals.events">Signale and Ereignisse</link> 
+     Siehe auch: 
+     <link linkend="gtk.signals.events">Signale and Ereignisse</link> 
      im PHP-GTK Userguide, 
      <function class="GtkWindow">activate_default()</function>, 
      <function class="GtkWindow">set_focus()</function>, 
@@ -328,14 +335,15 @@ gtk::main();
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-     Aktiviert das zu diesem Zeitpunkt als Standard gesetzte Kindelement.
+    Aktiviert das zu diesem Zeitpunkt als Standard gesetzte Kindelement.
    </shortdesc>
    <desc>
     <simpara>
-      Wie bei der <function class="GtkWindow">activate_focus()</function>
-      Funktion bewirkt die <function class="GtkWindow">activate_default()</function>
-      Funktion, dass das Widget-spezifische activate Signal vom anvisierten Kindelement
-      ausgesendet wird.
+     Wie bei der <function class="GtkWindow">activate_focus()</function>
+     Funktion bewirkt die 
+     <function class="GtkWindow">activate_default()</function> Funktion, 
+     dass das Widget-spezifische activate Signal vom anvisierten Kindelement
+     ausgesendet wird.
     </simpara>
     <simpara>
      Siehe auch:  <function class="GtkWindow">activate_focus()</function>, 
@@ -356,29 +364,30 @@ gtk::main();
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-     Setzt ein Fenster vor&uuml;bergehendes als Kind des gegebenen Vaterfensters.
-     Sets window as transient for the given parent.
+     Setzt ein Fenster vorübergehendes als Kind des gegebenen Vaterfensters. 
    </shortdesc>
    <desc>
     <simpara>
-      <function class="GtkWindow">set_transient_for()</function> wird benutzt,
-      um ein Fenster vor&uuml;bergehend als Kindfenster des mit ihm verbundenen
-      Toplevel Fensters zu setzen. Dies verhindert dass ein zus&auml;tzliches
-      Icon f&uuml;r dieses Fenster in der Taskbar erscheint, und erlaubt es
-      dem Fenster ausserdem, das Verhalten des Vaterfensters zu imitieren,
-      so dass es mit minimiert wird wenn das Vaterfenster minimiert wird.
+     <function class="GtkWindow">set_transient_for()</function> 
+     wird benutzt, um ein Fenster vorübergehend als Kindfenster des mit ihm
+     verbundenen Toplevel Fensters zu setzen. Dies verhindert dass ein
+     zusätzliches Icon für dieses Fenster in der Taskbar erscheint, und
+     erlaubt es dem Fenster ausserdem, das Verhalten des Vaterfensters zu
+     imitieren, so dass es mit minimiert wird wenn das Vaterfenster minimiert
+     wird.
     </simpara>
     <simpara>
-      Diese Methode funktioniert nicht in der Win32 Version von GTK+ die
-      zur Zeit von PHP-GTK benutzt wird, aber da der verantwortliche Bug
-      im Gnome CVS Repository mittlerweile behoben wurde, ist es durchaus
-      sinnvoll diese Funktion einzusetzen.
+     Diese Methode funktioniert nicht in der Win32 Version von GTK+ die
+     zur Zeit von PHP-GTK benutzt wird, aber da der verantwortliche Bug
+     im Gnome CVS Repository mittlerweile behoben wurde, ist es durchaus
+     sinnvoll diese Funktion einzusetzen.
     </simpara>
     <simpara>
-      Der Versuch, das Vaterfenster zu l&ouml;schen, bevor das Kindfenster
-      zerst&ouml;rt wurde, produziert eine GDK Warnung auf Win32 Systemen. Um dies zu
-      verhindern, benutzen Sie immer <function class="GtkWindow">set_modal()</function>
-      anstelle von <function class="GtkWindow">set_transient_for()</function>.
+     Der Versuch, das Vaterfenster zu löschen, bevor das Kindfenster
+     zerstört wurde, produziert eine GDK Warnung auf Win32 Systemen. Um dies
+     zu verhindern, benutzen Sie immer 
+     <function class="GtkWindow">set_modal()</function> anstelle von 
+     <function class="GtkWindow">set_transient_for()</function>.
     </simpara>
    </desc>
   </method>
@@ -392,23 +401,22 @@ gtk::main();
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-     Setzt die Standardgr&ouml;sse f&uuml;r Fenster.
-     Sets default window size.
+    Setzt die Standardgrösse für Fenster.
+    Sets default window size.
    </shortdesc>
    <desc>
     <simpara>
-      <function class="GtkWindow">set_default_size()</function> setzt die
-      Standardgr&ouml;sse neu anzulegender Fenster, in Pixeln.
-      Dies kann &uuml;berschrieben werden von Gr&ouml;ssenanfragen der im
-      Fenster enthaltenen Elemente f&uuml;r die der vorhandene Platz nicht
-      ausreicht, oder indem man aktiv das Gr&ouml;ssen&auml;nderungsverhalten
-      des Fensters setzt, so dass das Fenster seine enthaltenen Elemente
-      automatisch immer 'zurechtr&uuml;ckt'.
+     <function class="GtkWindow">set_default_size()</function> setzt die
+     Standardgrösse neu anzulegender Fenster, in Pixeln.  Dies kann
+     überschrieben werden von Grössenanfragen der im Fenster enthaltenen
+     Elemente für die der vorhandene Platz nicht ausreicht, oder indem man
+     aktiv das Grössenänderungsverhalten des Fensters setzt, so dass das
+     Fenster seine enthaltenen Elemente automatisch immer 'zurechtrückt'.
     </simpara>
     <simpara>
-      Beachten Sie bitte dass ein kleineres Kindwidget dessen Gr&ouml;sse
-      nicht gesetzt oder anderweitig vom Entwickler eingeschr&auml;nkt
-      wurde, sich normalerweise der Standardgr&ouml;sse des Vaterfensters anpasst.
+     Beachten Sie bitte dass ein kleineres Kindwidget dessen Grösse
+     nicht gesetzt oder anderweitig vom Entwickler eingeschränkt wurde,
+     sich normalerweise der Standardgrösse des Vaterfensters anpasst.
     </simpara>
    </desc>
   </method>
@@ -421,23 +429,24 @@ gtk::main();
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-     Schaltet die Modalit&auml;t eines Fensters um.
+    Schaltet die Modalität eines Fensters um.
    </shortdesc>
    <desc>
     <simpara>
-      <function class="GtkWindow">set_modal()</function> wird benutzt um
-      zu verhindern dass die anderen Fenster einer Anwendung auf Benutzereinwirkung
-      reagieren bevor das modale Fenster nicht eine entsprechende Benutzerreaktion
-      erhalten hat. Dies wird gew&ouml;hnlich dann benutzt wenn Dialog- oder Popupfenster
-      als Hinweisfenster agieren.
+     <function class="GtkWindow">set_modal()</function> wird benutzt um
+     zu verhindern dass die anderen Fenster einer Anwendung auf
+     Benutzereinwirkung reagieren bevor das modale Fenster nicht eine
+     entsprechende Benutzerreaktion erhalten hat.  Dies wird gewöhnlich
+     dann benutzt wenn Dialog- oder Popupfenster als Hinweisfenster agieren.
     </simpara>
     <simpara>
-      Ein &auml;hnlicher Effekt kann mit den meisten Widgets erreicht werden,
-      indem man die GTK Funktion <function classname="gtk-functions">grab_add()</function>
-      verwendet. Beachten Sie allerdings, dass <function class="GtkWindow">set_modal()</function>
-      eine geringf&uuml;gig komplexere Methode ist und besser ausger&uuml;stet um mit
-      den Szenarien umzugehen die gew&ouml;hnlich auftreten, wenn modale Fenster
-      angewendet werden.
+     Ein ähnlicher Effekt kann mit den meisten Widgets erreicht werden,
+     indem man die GTK Funktion <function>gtk::grab_add()</function> 
+     verwendet. Beachten Sie allerdings, dass 
+     <function class="GtkWindow">set_modal()</function> eine geringfügig
+     komplexere Methode ist und besser ausgerüstet um mit den Szenarien
+     umzugehen die gewöhnlich auftreten, wenn modale Fenster angewendet
+     werden.
     </simpara>
    </desc>
   </method>
@@ -457,12 +466,12 @@ gtk::main();
    </shortdesc>
    <desc>
     <simpara>
-      <function class="GtkWindow">set_focus()</function> gibt den Fokus an
-      das als Parameter &uuml;bergebene Kindwidget.
-      Das Kindwidget muss das Flag <literal>GTK_CAN_FOCUS</literal> gesetzt
-      haben, um &uuml;berhaupt Fokus haben zu d&uuml;rfen.
-      Einige Widgets haben dieses Flag bei ihrer Erzeugung schon gesetzt
-      (einschliesslich dem <classname>GtkButton</classname>), andere nicht.
+     <function class="GtkWindow">set_focus()</function> gibt den Fokus an
+     das als Parameter übergebene Kindwidget.  Das Kindwidget muss das Flag
+     <literal>GTK_CAN_FOCUS</literal> gesetzt haben, um überhaupt Fokus
+     haben zu dürfen.  Einige Widgets haben dieses Flag bei ihrer Erzeugung
+     schon gesetzt (einschliesslich dem <classname>GtkButton</classname>), 
+     andere nicht.
     </simpara>
     <simpara>
      Siehe auch:  <enumname>GtkWidgetFlags</enumname>, 
@@ -483,22 +492,21 @@ gtk::main();
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-     Setzt Kinderwidget als Standard.
+    Setzt Kinderwidget als Standard.
    </shortdesc>
    <desc>
     <simpara>
-      <function class="GtkWindow">set_default()</function> setzt
-      das &uuml;bergebene Kindwidget als Standardkind.
-      (Normaleweise ist dies ein <classname>GtkButton</classname>).
-      Das Kindwidget muss das Flag <literal>GTK_CAN_DEFAULT</literal>
-      gesetzt haben. Eine Widgets werden bereits mit diesem Flag
-      erzeugt; <classname>GtkButton</classname> geh&ouml;rt nicht dazu
-      und muss diese Flag erst gesetzt bekommen.
+     <function class="GtkWindow">set_default()</function> setzt das
+     übergebene Kindwidget als Standardkind.  (Normaleweise ist dies ein
+     <classname>GtkButton</classname>.)  Das Kindwidget muss das Flag
+     <literal>GTK_CAN_DEFAULT</literal> gesetzt haben.  Eine Widgets werden
+     bereits mit diesem Flag erzeugt; <classname>GtkButton</classname>
+     gehört nicht dazu und muss diese Flag erst gesetzt bekommen.
     </simpara>
     <simpara>
-      Kindwidgets die als Standard gesetzt sind, sind in der f&uuml;r
-      Anwender gewohnten Weise markiert - zum Beispiel hat ein als Standard
-      gesetzter Button einen dekorativen Rahmen und Schatten.
+     Kindwidgets die als Standard gesetzt sind, sind in der für Anwender
+     gewohnten Weise markiert - zum Beispiel hat ein als Standard gesetzter
+     Button einen dekorativen Rahmen und Schatten.
     </simpara>
     <simpara>
      Siehe auch:  <enumname>GtkWidgetFlags</enumname>, 
@@ -528,20 +536,20 @@ gtk::main();
     </funcprototype>
    </callback>
    <shortdesc>
-     Wird gesendet wenn <function classname="GtkWindow">set_focus()</function>
-     aufgerufen wird.
+    Wird gesendet wenn 
+    <function classname="GtkWindow">set_focus()</function> aufgerufen wird.
    </shortdesc>
    <desc>
     <simpara>
-      Das <signalname class="GtkWindow">set-focus</signalname> Signal
-      wird vom <classname>GtkWindow</classname> ausgesandt als Antwort auf
-      einen <function classname="GtkWindow">set_focus()</function> Aufruf,
-      der jedesmal ausgel&ouml;st wird wenn ein anderes Kindelement des Fensters
-      den Fokus erh&auml;lt - also jedesmal, wenn der Anwender ein anderes
-      Element anw&auml;hlt.
+     Das <signalname class="GtkWindow">set-focus</signalname> Signal wird
+     vom <classname>GtkWindow</classname> ausgesandt als Antwort auf einen
+     <function classname="GtkWindow">set_focus()</function> Aufruf, der
+     jedesmal ausgelöst wird wenn ein anderes Kindelement des Fensters den
+     Fokus erhält - also jedesmal, wenn der Anwender ein anderes Element
+     anwählt.
     </simpara>
     <simpara>
-     Dieses Signal wird haupts&auml;chlich intern von GTK benutzt.
+     Dieses Signal wird hauptsächlich intern von GTK benutzt.
     </simpara>
    </desc>
   </signal>
