@@ -2923,33 +2923,6 @@ function on_click($widget, $event, $data)
    </desc>
   </signal>
 
-  <signal id="gtk.gtkwidget.signal.drag-leave">
-   <signalname>drag-leave</signalname>
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
-     <paramdef><classname>GtkWidget</classname> widget</paramdef>
-     <paramdef> </paramdef>
-     <paramdef> </paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc></shortdesc>
-   <desc>
-    <simpara>
-     
-    </simpara>
-   </desc>
-  </signal>
-<!-- widget_signals[DRAG_LEAVE] =
-    gtk_signal_new ("drag_leave",
-		    GTK_RUN_LAST,
-		    object_class->type,
-		    GTK_SIGNAL_OFFSET (GtkWidgetClass, drag_leave),
-		    gtk_marshal_NONE__POINTER_UINT,
-		    GTK_TYPE_NONE, 2,
-		    GTK_TYPE_GDK_DRAG_CONTEXT,
-		    GTK_TYPE_UINT); -->
-
   <signal id="gtk.gtkwidget.signal.drag-begin">
    <signalname>drag-begin</signalname>
    <funcsynopsis>
@@ -3032,31 +3005,54 @@ function on_click($widget, $event, $data)
    <funcsynopsis>
     <funcprototype>
      <funcdef>bool <cbfunction>callback</cbfunction></funcdef>
-     <paramdef><classname>GtkWidget</classname> widget</paramdef>
-     <paramdef> </paramdef>
-     <paramdef> </paramdef>
-     <paramdef> </paramdef>
-     <paramdef> </paramdef>
+     <paramdef>
+      <classname>GtkWidget</classname>
+      <parameter>widget</parameter>
+     </paramdef>
+     <paramdef>
+      <classname>GdkDragContext</classname>
+      <parameter>context</parameter>
+     </paramdef>
+     <paramdef>int <parameter>x</parameter></paramdef>
+     <paramdef>int <parameter>y</parameter></paramdef>
+     <paramdef>int <parameter>time</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
-   <shortdesc></shortdesc>
+   <shortdesc>The mouse cursor is moved over the drop target</shortdesc>
    <desc>
     <simpara>
-     
+     This signal is emitted when the "loaded" mouse cursor (dragging something)
+     is moved over the widget, which accepts the data the cursor carries.
     </simpara>
    </desc>
   </signal>
-<!-- widget_signals[DRAG_MOTION] =
-    gtk_signal_new ("drag_motion",
-		    GTK_RUN_LAST,
-		    object_class->type,
-		    GTK_SIGNAL_OFFSET (GtkWidgetClass, drag_motion),
-		    gtk_marshal_BOOL__POINTER_INT_INT_UINT,
-		    GTK_TYPE_BOOL, 4,
-		    GTK_TYPE_GDK_DRAG_CONTEXT,
-		    GTK_TYPE_INT,
-		    GTK_TYPE_INT,
-		    GTK_TYPE_UINT); -->
+
+  <signal id="gtk.gtkwidget.signal.drag-leave">
+   <signalname>drag-leave</signalname>
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
+     <paramdef>
+      <classname>GtkWidget</classname>
+      <parameter>widget</parameter>
+     </paramdef>
+     <paramdef>
+      <classname>GdkDragContext</classname>
+      <parameter>context</parameter>
+     </paramdef>
+     <paramdef>int <parameter>time</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>The mouse leaves the drop target</shortdesc>
+   <desc>
+    <simpara>
+     When a "loaded" (dragging) mouse moves away (leaves) the current widget
+     it entered before (signaled by <signalname class="GtkWidget">drag-motion</signalname>),
+     this signal is emitted. It can be used to self-un-highlight 
+     the widget, restoring it to the normal state.
+    </simpara>
+   </desc>
+  </signal>
 
   <signal id="gtk.gtkwidget.signal.drag-drop">
    <signalname>drag-drop</signalname>
@@ -3146,7 +3142,10 @@ function dnd_drag_data_get($widget, $context, $selection_data, $info, $time)
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <cbfunction>callback</cbfunction></funcdef>
-     <paramdef><classname>GtkWidget</classname> widget</paramdef>
+     <paramdef>
+      <classname>GtkWidget</classname> 
+      <parameter>widget</parameter>
+     </paramdef>
      <paramdef>
       <classname>GdkDragContext</classname>
       <parameter>context</parameter>
@@ -3177,8 +3176,14 @@ function dnd_drag_data_get($widget, $context, $selection_data, $info, $time)
    <funcsynopsis>
     <funcprototype>
      <funcdef>bool <cbfunction>callback</cbfunction></funcdef>
-     <paramdef><classname>GtkWidget</classname> widget</paramdef>
-     <paramdef><classname>GdkEvent</classname> visibility_notify</paramdef>
+     <paramdef>
+      <classname>GtkWidget</classname>
+      <parameter>widget</parameter>
+     </paramdef>
+     <paramdef>
+      <classname>GdkEvent</classname>
+      <parameter>visibility_notify</parameter>
+     </paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
