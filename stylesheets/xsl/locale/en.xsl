@@ -1,21 +1,25 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                 version="1.0">
 
-<!-- Locale Text -->
-<xsl:template name="php.gtk.authors.text"> 
- <xsl:text>PHP-GTK Authors</xsl:text>
-</xsl:template>
+<!-- 
+	English Localisation file.
 
-<xsl:template name="php.gtk.contributors.text"> 
- <xsl:text>PHP-GTK Contributors</xsl:text>
-</xsl:template>
+	See: locale.xsl.in for more information.
 
-<xsl:template name="php.gtk.manual.contributors.text"> 
- <xsl:text>PHP-GTK Manual Contributors</xsl:text>
-</xsl:template>
+	$Id: en.xsl,v 1.3 2001-08-11 16:12:23 jmoore Exp $
 
-<xsl:template name="php.gtk.edited.by.text"> 
- <xsl:text>Edited By</xsl:text>
-</xsl:template>
+-->
+		
+		
+ <xsl:template name="get.locale.text">
+  <xsl:param name="text"/>
 
+  <!-- Pass through to default template for english -->
+  <xsl:call-template name="get.default.text">
+   <xsl:with-param name="text" select="$text"/>
+  </xsl:call-template>
+  
+ </xsl:template>
+		
 </xsl:stylesheet>
+
