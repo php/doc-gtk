@@ -170,6 +170,9 @@ gtk::main();
      <programlisting role="php">
 <![CDATA[
 <?php
+if( !extension_loaded('gtk')) {	
+    dl( 'php_gtk.' . PHP_SHLIB_SUFFIX); 
+}
 
 function first($button) 
 {
