@@ -189,7 +189,7 @@ case "$ENCODING" in
 				if [ ! test -d $base ]; then
 					mkdir -p $base
 				fi
-				(echo "<?xml version='1.0' encoding='utf-8' ?>"; iconv -s -f $ENCODING -t UTF-8 $oldfilepath | tail +2 ) > $xmlfilepath
+				(echo "<?xml version='1.0' encoding='utf-8' ?>"; iconv -s -f $ENCODING -t UTF-8 $oldfilepath | tail -n +2 ) > $xmlfilepath
                 updates="$updates $xmlfilepath"
 			fi
 		fi
