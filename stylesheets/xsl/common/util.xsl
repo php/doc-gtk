@@ -2,7 +2,7 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 		version="1.0">
 
-<!-- $Id: util.xsl,v 1.1 2001-08-11 16:10:40 jmoore Exp $ -->
+<!-- $Id: util.xsl,v 1.2 2001-08-12 10:41:08 jmoore Exp $ -->
 		
 <!-- ================== Utility Functions ============================ -->
 
@@ -31,3 +31,5 @@
   <xsl:copy-of select="$root//classentry[classmeta/classtitle = $title]"/>
  
  </xsl:template>
+
+</xsl:stylesheet>
