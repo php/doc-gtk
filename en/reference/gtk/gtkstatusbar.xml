@@ -19,12 +19,18 @@
     the one currently on display.
    </simpara>
    <note>
-    <simpara>
+    <para>
      Where a routine requires a lot of processing, the statusbar may
-     be unable to update during the time taken to do so.  Using 
-     <function>gtk::events_pending()</function> will allow updating
-     throughout.
-    </simpara>
+     be unable to update during the time taken to do so.  You will need to
+     call
+     <informalexample>
+      <programlisting role="php">
+while (gtk::events_pending())
+  gtk::main_iteration();
+      </programlisting>
+     </informalexample>
+     each time the bar has been updated, to allow updating throughout.
+    </para>
     <!-- thanks Markus :) - sf -->
    </note>
   </desc>
@@ -49,16 +55,21 @@
      <programlisting role="php">
 dl('php_gtk.' . (strstr(PHP_OS, 'WIN') ? 'dll' : 'so'));
     
+/* function to clear the entry field and give it keyboard focus */
 function focusback($entry) {
   $entry-&gt;set_text('');
   $entry-&gt;grab_focus();
   }
     
+/* on this occasion, the update function *is* the process */
 function change_status($entry, $event, $status, $stuff, &amp;$i) {
+  /* pick up the value(s) you are intending to use */
   $value = $event-&gt;keyval;
   $string = $event-&gt;string;
+  /* prevent the message stack building up */
   $popcontext = $status-&gt;get_context_id($stuff[$i]);
   $status-&gt;pop($popcontext);
+  /* sort according to value */
   switch($value) {
     case ($value &gt;= GDK_KEY__a &amp;&amp; $value &lt;= GDK_KEY__z):
       $i = 1;
@@ -78,33 +89,39 @@ function change_status($entry, $event, $status, $stuff, &amp;$i) {
     default:
       $i = 6;
     }
+  /* create and push the new message according to the value */
   $pushcontext = $status-&gt;get_context_id($stuff[$i]);
-  if($string &amp;&amp; $string!==' ') {
-  $status-&gt;push($pushcontext, $string.&quot; is a &quot;.$stuff[$i].&quot; 
-character&quot;);
-  }
+  if($string &amp;&amp; $string!==' ') 
+  $status-&gt;push($pushcontext, $string.' is a '.$stuff[$i].' character');
   else $status-&gt;push($pushcontext, $stuff[$i]);
+  /* call any other function the value triggers */
   if($i == 4) focusback($entry);
 }
     
+/* set up the main window */
 $window = &amp;new GtkWindow();
 $window-&gt;set_position(GTK_WIN_POS_CENTER);
 $window-&gt;connect_object('destroy', array('gtk', 'main_quit'));
     
+/* if you want anything else besides the statusbar, you'll need a box */
 $vbox = &amp;new GtkVBox();
 $window-&gt;add($vbox);
     
+/* add the statusbar first, else connecting other widgets to it is messy */
 $status = &amp;new GtkStatusbar();
-$i = 1;
-$stuff = array(&quot;Here we go...&quot;, &quot;lower case alpha&quot;, 
-&quot;UPPER CASE ALPHA&quot;, &quot;numeric&quot;, &quot;return&quot;, 
-&quot;spacebar&quot;, &quot;non-alphanumeric&quot;);
-$status-&gt;push($i, $stuff[0]);
+$stuff = array('Here we go...', 'lower case alpha', 'UPPER CASE ALPHA', 
+'numeric', 'return', 'spacebar', 'non-alphanumeric');
+$status-&gt;push($status-&gt;get_context_id($stuff[0]), $stuff[0]);
 $vbox-&gt;pack_end($status, false);
 $status-&gt;show();
     
+/* create, connect and pack your other widget(s) */
 $entry = &amp;new GtkEntry();
 $entry-&gt;set_usize(400,20);
+/* this will usually be connect_object(). $entry is only passed here because
+   it is used as a parameter in a function called from the callback.  &amp;$i
+   is passed so that the correct message will get 'popped' from the stack */
+$i = 1;
 $entry-&gt;connect('key-press-event','change_status', $status, $stuff, 
 &amp;$i);
 $vbox-&gt;pack_start($entry, false);

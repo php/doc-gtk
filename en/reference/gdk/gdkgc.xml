@@ -4,10 +4,34 @@
   <classtitle>GdkGC</classtitle>
   <classparent></classparent>
   <shortdesc>
-
+   A structure that contains graphics information.
   </shortdesc>
   <desc>
-
+   <simpara>
+    A <classname>GdkGC</classname> is made up of a series of properties, each
+    of which may or may not be set, that describe everything from color to
+    font to line-width.  It forms several of the underlying elements of the
+    style property in widgets, and is used in GDK where 
+    <classname>GtkStyle</classname> would be used at GTK level.  The
+    <literal>GC</literal> part of <classname>GdkGC</classname> stands for
+    <emphasis>graphics context</emphasis>, and every GDK drawing function
+    requires one in much the same way that every GTK drawing function
+    requires a style.
+   </simpara>
+   <simpara>
+    The functions that allow the getting and setting of 
+    <classname>GdkGC</classname> properties are internalised in PHP-GTK.  For
+    the most part, we have writeable properties instead of these methods. 
+    Please note that there is no guarantee that all these properties will
+    be supported by your operating system; win32's 'little black boxes' text
+    issue is there because win32 does not support stippling, for example.
+   </simpara>
+   <simpara>
+    There is no direct constructor for a <classname>GdkGC</classname>.  To
+    create one, you will need to use the <classname>GdkWindow</classname> 
+    method <function class="GdkWindow">new_gc()</function> and set the
+    properties that you are interested in directly.
+   </simpara>
   </desc>
  </classmeta>
 
@@ -17,11 +41,12 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_dashes</function></funcdef>
-     <paramdef>void</paramdef>
+     <paramdef>int <parameter>offset</parameter></paramdef>
+     <paramdef>array <parameter>dash_list</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Configures the appearance of dashed lines.
    </shortdesc>
    <desc>
 
@@ -34,35 +59,77 @@
 
   <property id="gdk.gdkgc.property.foreground" type="rw">
    <propname>foreground</propname>
-   <proptype>GdkColor</proptype>
+   <proptype><classname>GdkColor</classname></proptype>
    <shortdesc>
-
+    The foreground color.
    </shortdesc>
    <desc>
     <simpara>
-     
+     This looks so straightforward, and isn't.  <classname>GdkGC</classname> 
+     objects are so far down in the evolutionary scale that they don't have
+     an associated colormap.  If you try to apply color directly, any color
+     will be returned as a muddy brown.
+    </simpara>
+    <simpara>
+     The way around this is to borrow an existing 
+     <classname>GdkColormap</classname> and allocate a color from there.
+     You can use <function>gdk::colormap_get_system()</function> to do this,
+     or you can access the colormap in a <classname>GdkWindow</classname>.
+    </simpara>
+    <para>
+     The syntax is:
+     <informalexample>
+      <programlisting role="php">
+$gc-&gt;foreground = $colormap-&gt;alloc('red');
+      </programlisting>
+     </informalexample>
+    </para>
+    <simpara>
+     As with the <classname>GdkColor</classname> constructor, you could use
+     <literal>'#FF0000'</literal> or <literal>65535, 0, 0</literal> in place
+     of <literal>'red'</literal>, but not <literal>1.0, 0.0. 0.0</literal>.
     </simpara>
    </desc>
   </property>
 
   <property id="gdk.gdkgc.property.background" type="rw">
    <propname>background</propname>
-   <proptype>GdkColor</proptype>
+   <proptype><classname>GdkColor</classname></proptype>
    <shortdesc>
-
+    The background color.
    </shortdesc>
    <desc>
     <simpara>
-     
+     It is not possible to apply a new or existing 
+     <classname>GdkColor</classname> to a <classname>GdkGC</classname>, 
+     because there is no colormap there for the color to reference.
+    </simpara>
+    <para>
+     You will need to take an existing <classname>GdkColormap</classname>,
+     either by using <function>gdk::colormap_get_system()</function> or by
+     accessing the colormap property in the existing 
+     <classname>GdkWindow</classname> that most widgets have, and give it
+     a handle.  Then you do something like:
+     <informalexample>
+      <programlisting role="php">
+$gc-&gt;background = $colormap-&gt;alloc('lime green');
+      </programlisting>
+     </informalexample>
+     and the color is allocated intelligently.
+    </para>
+    <simpara>
+     The background color fills the areas not taken up by the foreground
+     color, e.g. the gaps in a dashed line will take the background color. 
+     If you don't want this, just don't set this property.
     </simpara>
    </desc>
   </property>
 
   <property id="gdk.gdkgc.property.font" type="rw">
    <propname>font</propname>
-   <proptype>GdkFont</proptype>
+   <proptype><classname>GdkFont</classname></proptype>
    <shortdesc>
-
+    The loaded font.
    </shortdesc>
    <desc>
     <simpara>
@@ -73,9 +140,9 @@
 
   <property id="gdk.gdkgc.property.function" type="rw">
    <propname>function</propname>
-   <proptype>int</proptype>
+   <proptype><enumname>GdkFunction</enumname></proptype>
    <shortdesc>
-
+    Bitwise description of the drawing function.
    </shortdesc>
    <desc>
     <simpara>
@@ -86,9 +153,9 @@
 
   <property id="gdk.gdkgc.property.fill" type="rw">
    <propname>fill</propname>
-   <proptype>int</proptype>
+   <proptype><enumname>GdkFill</enumname></proptype>
    <shortdesc>
-
+    The style of the fill.
    </shortdesc>
    <desc>
     <simpara>
@@ -99,9 +166,9 @@
 
   <property id="gdk.gdkgc.property.tile" type="rw">
    <propname>tile</propname>
-   <proptype>GdkPixmap</proptype>
+   <proptype><classname>GdkPixmap</classname></proptype>
    <shortdesc>
-
+    The pixmap used for tiling.
    </shortdesc>
    <desc>
     <simpara>
@@ -112,9 +179,9 @@
 
   <property id="gdk.gdkgc.property.stipple" type="rw">
    <propname>stipple</propname>
-   <proptype>GdkPixmap</proptype>
+   <proptype><classname>GdkPixmap</classname></proptype>
    <shortdesc>
-
+    The pixmap used for stippling.
    </shortdesc>
    <desc>
     <simpara>
@@ -125,9 +192,9 @@
 
   <property id="gdk.gdkgc.property.clip_mask" type="rw">
    <propname>clip_mask</propname>
-   <proptype>GdkPixmap</proptype>
+   <proptype><classname>GdkBitmap</classname></proptype>
    <shortdesc>
-
+    The clip mask bitmap.
    </shortdesc>
    <desc>
     <simpara>
@@ -138,9 +205,9 @@
 
   <property id="gdk.gdkgc.property.subwindow_mode" type="rw">
    <propname>subwindow_mode</propname>
-   <proptype>int</proptype>
+   <proptype><enumname>GdkSubwindowMode</enumname></proptype>
    <shortdesc>
-
+    The way subwindows are treated.
    </shortdesc>
    <desc>
     <simpara>
@@ -153,7 +220,7 @@
    <propname>ts_x_origin</propname>
    <proptype>int</proptype>
    <shortdesc>
-
+    Tile or stipple's x origin.
    </shortdesc>
    <desc>
     <simpara>
@@ -166,7 +233,7 @@
    <propname>ts_y_origin</propname>
    <proptype>int</proptype>
    <shortdesc>
-
+    Tile or stipple's y origin.
    </shortdesc>
    <desc>
     <simpara>
@@ -179,7 +246,7 @@
    <propname>clip_x_origin</propname>
    <proptype>int</proptype>
    <shortdesc>
-
+    Clip mask's x origin.
    </shortdesc>
    <desc>
     <simpara>
@@ -192,7 +259,7 @@
    <propname>clip_y_origin</propname>
    <proptype>int</proptype>
    <shortdesc>
-
+    Clip mask's y origin.
    </shortdesc>
    <desc>
     <simpara>
@@ -203,9 +270,9 @@
 
   <property id="gdk.gdkgc.property.graphics_exposures" type="rw">
    <propname>graphics_exposures</propname>
-   <proptype>int</proptype>
+   <proptype>bool</proptype>
    <shortdesc>
-
+    Whether expose events are generated during pixmap copies.
    </shortdesc>
    <desc>
     <simpara>
@@ -218,7 +285,7 @@
    <propname>line_width</propname>
    <proptype>int</proptype>
    <shortdesc>
-
+    The pixel width of a drawn line.
    </shortdesc>
    <desc>
     <simpara>
@@ -229,9 +296,9 @@
 
   <property id="gdk.gdkgc.property.line_style" type="rw">
    <propname>line_style</propname>
-   <proptype>int</proptype>
+   <proptype><enumname>GdkLineStyle</enumname></proptype>
    <shortdesc>
-
+    The way a dashed line is drawn.
    </shortdesc>
    <desc>
     <simpara>
@@ -242,9 +309,9 @@
 
   <property id="gdk.gdkgc.property.cap_style" type="rw">
    <propname>cap_style</propname>
-   <proptype>int</proptype>
+   <proptype><enumname>GdkCapStyle</enumname></proptype>
    <shortdesc>
-
+    The way the end of a line is drawn.
    </shortdesc>
    <desc>
     <simpara>
@@ -255,9 +322,9 @@
 
   <property id="gdk.gdkgc.property.join_style" type="rw">
    <propname>join_style</propname>
-   <proptype>int</proptype>
+   <proptype><enumname>GdkJoinStyle</enumname></proptype>
    <shortdesc>
-
+    The way line joins are drawn.
    </shortdesc>
    <desc>
     <simpara>
