@@ -227,28 +227,51 @@
    </xsl:call-template>
   </xsl:if>
 
+<xsl:variable name="rtl" select="ancestor-or-self::classentry[1][@rtl=1]"/>
+
   <xsl:variable name="new.hack">
    <xsl:choose>
     <xsl:when test="$depth=0">
      <xsl:text></xsl:text>
     </xsl:when>
     <xsl:when test="$depth=1">
-     <xsl:text disable-output-escaping="yes">
-     </xsl:text>
+     <xsl:text disable-output-escaping="yes"/>
     </xsl:when>
     <xsl:when test="$depth=2">
-     <xsl:text disable-output-escaping="yes">
+     <xsl:choose>
+      <xsl:when test="$rtl = true()">
+       <xsl:text disable-output-escaping="yes">
+print_image('revhier-arrow.gif');
+       </xsl:text>
+      </xsl:when>
+      <xsl:otherwise>
+       <xsl:text disable-output-escaping="yes">
 print_image('inhier-arrow.gif');
-     </xsl:text>
+       </xsl:text>
+      </xsl:otherwise>
+     </xsl:choose>
     </xsl:when>
     <xsl:otherwise>
-     <xsl:text disable-output-escaping="yes">
+     <xsl:choose>
+      <xsl:when test="$rtl = true()">
+       <xsl:text disable-output-escaping="yes">
 echo str_repeat(make_image('inhier-blank.gif'), 
-     </xsl:text>
-     <xsl:number value="$depth+-2" format="1"/>
-     <xsl:text disable-output-escaping="yes">
+       </xsl:text>
+       <xsl:number value="$depth+-2" format="1"/>
+       <xsl:text disable-output-escaping="yes">
+); print_image('revhier-arrow.gif');
+       </xsl:text>
+      </xsl:when>
+      <xsl:otherwise>
+       <xsl:text disable-output-escaping="yes">
+echo str_repeat(make_image('inhier-blank.gif'), 
+       </xsl:text>
+       <xsl:number value="$depth+-2" format="1"/>
+       <xsl:text disable-output-escaping="yes">
 ); print_image('inhier-arrow.gif');
-     </xsl:text>
+       </xsl:text>
+      </xsl:otherwise>
+     </xsl:choose>
     </xsl:otherwise>
    </xsl:choose>
   </xsl:variable>

@@ -61,19 +61,12 @@ its parent.
 <!-- ==================================================================== -->
 <!-- What's a chunk?
 
-     appendix
-     article
      book
      chapter
-     index         in article or book
      part
-     preface
      refentry
-     reference
      sect1         if position()>1
-     section       if position()>1 && parent != section
      set
-     setindex
                                                                           -->
 <!-- ==================================================================== -->
 
@@ -95,19 +88,11 @@ its parent.
                              and count($node/preceding-sibling::section)))>0">
       <xsl:text>1</xsl:text>
     </xsl:when>
-    <xsl:when test="name($node)='preface'">1</xsl:when>
     <xsl:when test="name($node)='chapter'">1</xsl:when>
-    <xsl:when test="name($node)='appendix'">1</xsl:when>
-    <xsl:when test="name($node)='article'">1</xsl:when>
     <xsl:when test="name($node)='part'">1</xsl:when>
-    <xsl:when test="name($node)='reference'">1</xsl:when>
     <xsl:when test="name($node)='refentry'">1</xsl:when>
-    <xsl:when test="name($node)='index'
-                    and (name($node/parent::*) = 'article'
-                         or name($node/parent::*) = 'book')">1</xsl:when>
     <xsl:when test="name($node)='book'">1</xsl:when>
     <xsl:when test="name($node)='set'">1</xsl:when>
-    <xsl:when test="name($node)='setindex'">1</xsl:when>
     <xsl:when test="name($node)='classset'">1</xsl:when>
     <xsl:when test="name($node)='enums'">1</xsl:when>
     <xsl:when test="name($node)='classentry'">1</xsl:when>
@@ -201,42 +186,7 @@ its parent.
       </xsl:if>
     </xsl:when>
 
-    <xsl:when test="name(.)='article'">
-      <xsl:if test="/set">
-        <!-- in a set, make sure we inherit the right book info... -->
-        <xsl:apply-templates mode="chunk-filename" select="parent::*">
-          <xsl:with-param name="recursive" select="true()"/>
-        </xsl:apply-templates>
-      </xsl:if>
-      <xsl:choose>
-        <xsl:when test="count(parent::*)>0">
-          <!-- if we aren't the root, name them numerically ... -->
-          <xsl:text>ar</xsl:text>
-          <xsl:number level="any" format="01" from="book"/>
-        </xsl:when>
-        <xsl:otherwise>
-	  <xsl:value-of select="$root.filename"/>
-        </xsl:otherwise>
-      </xsl:choose>
-      <xsl:if test="not($recursive)">
-        <xsl:value-of select="$html.ext"/>
-      </xsl:if>
-    </xsl:when>
-
-    <xsl:when test="name(.)='preface'">
-      <xsl:if test="/set">
-        <xsl:apply-templates mode="chunk-filename" select="parent::*">
-          <xsl:with-param name="recursive" select="true()"/>
-        </xsl:apply-templates>
-      </xsl:if>
-      <xsl:text>pr</xsl:text>
-      <xsl:number level="any" format="01" from="book"/>
-      <xsl:if test="not($recursive)">
-        <xsl:value-of select="$html.ext"/>
-      </xsl:if>
-    </xsl:when>
-
-    <xsl:when test="name(.)='chapter'">
+	<xsl:when test="name(.)='chapter'">
       <xsl:if test="/set">
         <xsl:apply-templates mode="chunk-filename" select="parent::*">
           <xsl:with-param name="recursive" select="true()"/>
@@ -249,19 +199,6 @@ its parent.
       </xsl:if>
     </xsl:when>
 
-    <xsl:when test="name(.)='appendix'">
-      <xsl:if test="/set">
-        <xsl:apply-templates mode="chunk-filename" select="parent::*">
-          <xsl:with-param name="recursive" select="true()"/>
-        </xsl:apply-templates>
-      </xsl:if>
-      <xsl:text>ap</xsl:text>
-      <xsl:number level="any" format="a" from="book"/>
-      <xsl:if test="not($recursive)">
-        <xsl:value-of select="$html.ext"/>
-      </xsl:if>
-    </xsl:when>
-
     <xsl:when test="name(.)='part'">
       <xsl:if test="/set">
         <xsl:apply-templates mode="chunk-filename" select="parent::*">
@@ -269,19 +206,6 @@ its parent.
         </xsl:apply-templates>
       </xsl:if>
       <xsl:text>pt</xsl:text>
-      <xsl:number level="any" format="01" from="book"/>
-      <xsl:if test="not($recursive)">
-        <xsl:value-of select="$html.ext"/>
-      </xsl:if>
-    </xsl:when>
-
-    <xsl:when test="name(.)='reference'">
-      <xsl:if test="/set">
-        <xsl:apply-templates mode="chunk-filename" select="parent::*">
-          <xsl:with-param name="recursive" select="true()"/>
-        </xsl:apply-templates>
-      </xsl:if>
-      <xsl:text>rn</xsl:text>
       <xsl:number level="any" format="01" from="book"/>
       <xsl:if test="not($recursive)">
         <xsl:value-of select="$html.ext"/>
@@ -301,33 +225,12 @@ its parent.
       </xsl:if>
     </xsl:when>
 
-    <xsl:when test="name(.)='sect1' or name(.)='section'">
+    <xsl:when test="name(.)='sect1'">
       <xsl:apply-templates mode="chunk-filename" select="parent::*">
         <xsl:with-param name="recursive" select="true()"/>
       </xsl:apply-templates>
       <xsl:text>s</xsl:text>
-      <xsl:number level="any" format="01" from="preface|chapter|appendix"/>
-      <xsl:if test="not($recursive)">
-        <xsl:value-of select="$html.ext"/>
-      </xsl:if>
-    </xsl:when>
-
-    <xsl:when test="name(.)='index'">
-      <xsl:if test="/set">
-        <xsl:apply-templates mode="chunk-filename" select="parent::*">
-          <xsl:with-param name="recursive" select="true()"/>
-        </xsl:apply-templates>
-      </xsl:if>
-      <xsl:text>ix</xsl:text>
-      <xsl:number level="any" format="01" from="book"/>
-      <xsl:if test="not($recursive)">
-        <xsl:value-of select="$html.ext"/>
-      </xsl:if>
-    </xsl:when>
-
-    <xsl:when test="name(.)='setindex'">
-      <xsl:text>si</xsl:text>
-      <xsl:number level="any" format="01" from="set"/>
+      <xsl:number level="any" format="01" from="chapter"/>
       <xsl:if test="not($recursive)">
         <xsl:value-of select="$html.ext"/>
       </xsl:if>
@@ -740,12 +643,6 @@ its parent.
 
 <!-- ==================================================================== -->
 
-<xsl:template match="processing-instruction('dbhtml')">
-  <!-- nop -->
-</xsl:template>
-
-<!-- ==================================================================== -->
-
 <xsl:template name="process-chunk-element">
   <xsl:choose>
     <xsl:when test="$chunk.sections = 0">
@@ -803,88 +700,59 @@ its parent.
 <xsl:template name="chunk-first-section-with-parent">
   <xsl:variable name="prev"
      select="(preceding::book[1]
-             |preceding::preface[1]
              |preceding::chapter[1]
-             |preceding::appendix[1]
              |preceding::part[1]
-	     |preceding::constructor[1]
-	     |preceding::method[1]
-	     |preceding::signal[1]
-	     |preceding::classset[1]
-	     |preceding::enums[1]
-	     |preceding::prop[1]
-	     |preceding::classentry[1]
-	     |preceding::reference[1]
+             |preceding::constructor[1]
+             |preceding::method[1]
+             |preceding::signal[1]
+             |preceding::classset[1]
+             |preceding::enums[1]
+             |preceding::prop[1]
+             |preceding::classentry[1]
              |preceding::refentry[1]
              |preceding::enum[1]
              |preceding::sect1[name(preceding-sibling::*[1]) = 'sect1'][1]
-             |preceding::section[name(preceding-sibling::*[1]) = 'section'
-                                 and name(parent::*) != 'section'][1]
-             |preceding::article[1]
-             |preceding::index[1]
-             |preceding::setindex[1]
              |ancestor::set
              |ancestor::book[1]
-             |ancestor::preface[1]
              |ancestor::chapter[1]
-             |ancestor::appendix[1]
              |ancestor::part[1]
-             |ancestor::reference[1]
-	     |ancestor::constructor[1]
-         |ancestor::method[1]
-	     |ancestor::signal[1]
-	     |ancestor::classset[1]
-	     |ancestor::enums[1]
-	     |ancestor::classentry[1]
-             |ancestor::article[1])[last()]"/>
+             |ancestor::constructor[1]
+             |ancestor::method[1]
+             |ancestor::signal[1]
+             |ancestor::classset[1]
+             |ancestor::enums[1]
+             |ancestor::classentry[1])[last()]"/>
 
   <xsl:variable name="next"
     select="(following::book[1]
-             |following::preface[1]
-	     |following::chapter[1]
-	     |following::classset[1]
-	     |following::enums[1]
-             |following::appendix[1]
+             |following::chapter[1]
+             |following::classset[1]
+             |following::enums[1]
              |following::part[1]
-	     |following::constructor[1]
-	     |following::method[1]
-	     |following::signal[1]
-	     |following::classentry[1]
-	     |following::reference[1]
-	     |following::refentry[1]
+             |following::constructor[1]
+             |following::method[1]
+             |following::signal[1]
+             |following::classentry[1]
+             |following::refentry[1]
              |following::enum[1]
-	     |following::prop[1]
+             |following::prop[1]
              |following::sect1[1]
-             |following::section[name(parent::*) != 'section'][1]
-             |following::index[1]
-             |following::article[1]
-             |following::setindex[1]
              |descendant::book[1]
-             |descendant::preface[1]
              |descendant::chapter[1]
-             |descendant::appendix[1]
              |descendant::article[1]
-             |descendant::index[1]
-             |descendant::setindex[1]
              |descendant::part[1]
-	     |descendant::prop[1]
+             |descendant::prop[1]
              |descendant::enum[1]
-             |descendant::setindex[1]
              |descendant::part[1]
-     	     |descendant::constructor[1]
-	     |descendant::method[1]
-	     |descendant::signal[1]
-	     |descendant::classset[1]
-	     |descendant::enums[1]
-	     |descendant::classentry[1]
+             |descendant::constructor[1]
+             |descendant::method[1]
+             |descendant::signal[1]
+             |descendant::classset[1]
+             |descendant::enums[1]
+             |descendant::classentry[1]
              |descendant::reference[1]
              |descendant::refentry[1]
-             |descendant::setindex[1]
-             |descendant::part[1]
-             |descendant::reference[1]
-             |descendant::refentry[1]
-             |descendant::sect1[2]
-             |descendant::section[name(parent::*) != 'section'][2])[1]"/>
+             |descendant::sect1[name(parent::*) != 'sect1'][2])[1]"/>
 
   <xsl:call-template name="process-chunk">
     <xsl:with-param name="prev" select="$prev"/>
@@ -895,83 +763,57 @@ its parent.
 <xsl:template name="chunk-all-top-level-sections">
   <xsl:variable name="prev"
      select="(preceding::book[1]
-             |preceding::preface[1]
              |preceding::chapter[1]
-             |preceding::appendix[1]
              |preceding::part[1]
-	     |preceding::constructor[1]
-	     |preceding::method[1]
-	     |preceding::signal[1]
-	     |preceding::classset[1]
-	     |preceding::enums[1]
-	     |preceding::prop[1]
-	     |preceding::classentry[1]
-	     |preceding::reference[1]
+             |preceding::constructor[1]
+             |preceding::method[1]
+             |preceding::signal[1]
+             |preceding::classset[1]
+             |preceding::enums[1]
+             |preceding::prop[1]
+             |preceding::classentry[1]
              |preceding::refentry[1]
              |preceding::enum[1]
-	     |preceding::sect1[1]
-             |preceding::section[name(parent::*) != 'section'][1]
-             |preceding::article[1]
-             |preceding::index[1]
-             |preceding::setindex[1]
+             |preceding::sect1[1]
              |ancestor::set
              |ancestor::book[1]
-             |ancestor::preface[1]
              |ancestor::chapter[1]
-             |ancestor::appendix[1]
              |ancestor::part[1]
-             |ancestor::reference[1]
-	     |ancestor::constructor[1]
-     	     |ancestor::method[1]
-	     |ancestor::signal[1]
-	     |ancestor::classset[1]
-	     |ancestor::enums[1]
-	     |ancestor::classentry[1]
-	     |ancestor::article[1])[last()]"/>
+             |ancestor::constructor[1]
+             |ancestor::method[1]
+             |ancestor::signal[1]
+             |ancestor::classset[1]
+             |ancestor::enums[1]
+             |ancestor::classentry[1])[last()]"/>
 
   <xsl:variable name="next"
     select="(following::book[1]
-             |following::preface[1]
-	     |following::chapter[1]
-	     |following::classset[1]
-	     |following::enums[1]
-             |following::appendix[1]
+             |following::chapter[1]
+             |following::classset[1]
+             |following::enums[1]
              |following::part[1]
-	     |following::constructor[1]
-	     |following::method[1]
-	     |following::signal[1]
-	     |following::classentry[1]
-	     |following::reference[1]
-	     |following::refentry[1]
+             |following::constructor[1]
+             |following::method[1]
+             |following::signal[1]
+             |following::classentry[1]
+             |following::refentry[1]
              |following::enum[1]
-	     |following::prop[1]
+             |following::prop[1]
              |following::sect1[1]
-             |following::section[name(parent::*) != 'section'][1]
-             |following::index[1]
-             |following::article[1]
-             |following::setindex[1]
              |descendant::book[1]
-             |descendant::preface[1]
              |descendant::chapter[1]
-             |descendant::appendix[1]
-             |descendant::article[1]
-             |descendant::index[1]
-             |descendant::setindex[1]
              |descendant::part[1]
              |descendant::enum[1]
-	     |descendant::prop[1]
-             |descendant::setindex[1]
+             |descendant::prop[1]
              |descendant::part[1]
-     	     |descendant::constructor[1]
-	     |descendant::method[1]
-	     |descendant::signal[1]
-	     |descendant::classset[1]
-	     |descendant::enums[1]
-	     |descendant::classentry[1]
-             |descendant::reference[1]
+             |descendant::constructor[1]
+             |descendant::method[1]
+             |descendant::signal[1]
+             |descendant::classset[1]
+             |descendant::enums[1]
+             |descendant::classentry[1]
              |descendant::refentry[1]
-             |descendant::sect1[1]
-             |descendant::section[name(parent::*) != 'section'][1])[1]"/>
+             |descendant::sect1[name(parent::*) != 'sect1'][1])[1]"/>
 
   <xsl:call-template name="process-chunk">
     <xsl:with-param name="prev" select="$prev"/>
@@ -982,80 +824,55 @@ its parent.
 <xsl:template name="chunk-no-sections">
   <xsl:variable name="prev"
      select="(preceding::book[1]
-             |preceding::preface[1]
              |preceding::chapter[1]
-             |preceding::appendix[1]
              |preceding::part[1]
-	     |preceding::constructor[1]
-	     |preceding::method[1]
-	     |preceding::signal[1]
-	     |preceding::classset[1]
-	     |preceding::enums[1]
-	     |preceding::prop[1]
-	     |preceding::classentry[1]
-	     |preceding::reference[1]
+             |preceding::constructor[1]
+             |preceding::method[1]
+             |preceding::signal[1]
+             |preceding::classset[1]
+             |preceding::enums[1]
+             |preceding::prop[1]
+             |preceding::classentry[1]
              |preceding::refentry[1]
              |preceding::enum[1]
-             |preceding::article[1]
-             |preceding::index[1]
-             |preceding::setindex[1]
              |ancestor::set
              |ancestor::book[1]
-             |ancestor::preface[1]
              |ancestor::chapter[1]
-             |ancestor::appendix[1]
              |ancestor::part[1]
              |ancestor::reference[1]
-	     |ancestor::constructor[1]
-     	     |ancestor::method[1]
-	     |ancestor::signal[1]
-	     |ancestor::classset[1]
-	     |ancestor::enums[1]
-	     |ancestor::classentry[1]
-             |ancestor::article[1])[last()]"/>
+             |ancestor::constructor[1]
+             |ancestor::method[1]
+             |ancestor::signal[1]
+             |ancestor::classset[1]
+             |ancestor::enums[1]
+             |ancestor::classentry[1])[last()]"/>
 
   <xsl:variable name="next"
     select="(following::book[1]
-             |following::preface[1]
-	     |following::chapter[1]
-	     |following::classset[1]
-	     |following::enums[1]
-             |following::appendix[1]
+             |following::chapter[1]
+             |following::classset[1]
+             |following::enums[1]
              |following::part[1]
-	     |following::constructor[1]
-	     |following::method[1]
-	     |following::signal[1]
-	     |following::classentry[1]
-	     |following::reference[1]
-	     |following::refentry[1]
+             |following::constructor[1]
+             |following::method[1]
+             |following::signal[1]
+             |following::classentry[1]
+             |following::refentry[1]
              |following::enum[1]
-	     |following::prop[1]
-             |following::index[1]
-             |following::article[1]
-             |following::setindex[1]
+             |following::prop[1]
              |descendant::book[1]
-             |descendant::preface[1]
              |descendant::chapter[1]
-             |descendant::appendix[1]
-             |descendant::article[1]
-             |descendant::index[1]
-             |descendant::setindex[1]
              |descendant::part[1]
              |descendant::enum[1]
-	     |descendant::prop[1]
-             |descendant::setindex[1]
-             |descendant::part[1]
-     	     |descendant::constructor[1]
-	     |descendant::method[1]
-	     |descendant::signal[1]
-	     |descendant::enums[1]
-	     |descendant::classset[1]
-	     |descendant::classentry[1]
-             |descendant::reference[1]
+             |descendant::prop[1]
+             |descendant::constructor[1]
+             |descendant::method[1]
+             |descendant::signal[1]
+             |descendant::enums[1]
+             |descendant::classset[1]
+             |descendant::classentry[1]
              |descendant::refentry[1]
-             |descendant::setindex[1]
              |descendant::part[1]
-             |descendant::reference[1]
              |descendant::refentry[1])[1]"/>
 
   <xsl:call-template name="process-chunk">
@@ -1066,7 +883,7 @@ its parent.
 
 <!-- ==================================================================== -->
 
-<xsl:template name="chunk-element-content">
+ <xsl:template name="chunk-element-content">
   <xsl:param name="prev"></xsl:param>
   <xsl:param name="next"></xsl:param>
   <xsl:variable name="rtl" select="ancestor-or-self::classentry[1][@rtl=1]
@@ -1078,85 +895,83 @@ its parent.
 									|ancestor-or-self::enum[1][@rtl=1]"/>
 
   <xsl:choose>
-   <xsl:when  test="$phpweb=true()">
+   <xsl:when  test="$phpweb = true() and $rtl = true()">
+    <xsl:call-template name="phpweb.header.navigation"> 
+     <xsl:with-param name="prev" select="$next"/>
+     <xsl:with-param name="next" select="$prev"/>
+    </xsl:call-template>
+    <xsl:apply-imports/>
+    <xsl:call-template name="phpweb.footer.navigation"> 
+     <xsl:with-param name="prev" select="$next"/>
+     <xsl:with-param name="next" select="$prev"/>
+    </xsl:call-template>
+   </xsl:when>
+
+   <xsl:when  test="$phpweb = true() and $rtl != true()">
     <xsl:call-template name="phpweb.header.navigation"> 
      <xsl:with-param name="prev" select="$prev"/>
      <xsl:with-param name="next" select="$next"/>
     </xsl:call-template>
-    
     <xsl:apply-imports/>
-
     <xsl:call-template name="phpweb.footer.navigation"> 
      <xsl:with-param name="prev" select="$prev"/>
      <xsl:with-param name="next" select="$next"/>
     </xsl:call-template>
    </xsl:when>
    <xsl:otherwise>
-   <xsl:choose>
-   <xsl:when test="$rtl">
-  <html dir="rtl">
-    <xsl:call-template name="html.head">
-      <xsl:with-param name="prev" select="$prev"/>
-      <xsl:with-param name="next" select="$next"/>
-    </xsl:call-template>
+    <xsl:choose>
 
-    <body xsl:use-attribute-sets="body.attrs">
-      <xsl:call-template name="user.header.navigation"/>
-
+     <xsl:when test="$rtl">
+      <html dir="rtl">
+       <xsl:call-template name="html.head">
+        <xsl:with-param name="prev" select="$prev"/>
+        <xsl:with-param name="next" select="$next"/>
+       </xsl:call-template>
+       <body xsl:use-attribute-sets="body.attrs">
+        <xsl:call-template name="user.header.navigation"/>
         <xsl:call-template name="header.navigation"> 
          <xsl:with-param name="prev" select="$prev"/>
          <xsl:with-param name="next" select="$next"/>
         </xsl:call-template>
-
-      <xsl:call-template name="user.header.content"/>
-
-      <xsl:apply-imports/>
-
-      <xsl:call-template name="user.footer.content"/>
-
-	 <xsl:call-template name="footer.navigation"> 
+        <xsl:call-template name="user.header.content"/>
+        <xsl:apply-imports/>
+        <xsl:call-template name="user.footer.content"/>
+        <xsl:call-template name="footer.navigation"> 
          <xsl:with-param name="prev" select="$prev"/>
          <xsl:with-param name="next" select="$next"/>
         </xsl:call-template>
+        <xsl:call-template name="user.footer.navigation"/>
+       </body>
+      </html>
+     </xsl:when>
 
-      <xsl:call-template name="user.footer.navigation"/>
-    </body>
-  </html>
-  </xsl:when>
-  <xsl:otherwise>
-  <html>
-    <xsl:call-template name="html.head">
-      <xsl:with-param name="prev" select="$prev"/>
-      <xsl:with-param name="next" select="$next"/>
-    </xsl:call-template>
-
-    <body xsl:use-attribute-sets="body.attrs">
-      <xsl:call-template name="user.header.navigation"/>
-
+     <xsl:otherwise>
+      <html>
+       <xsl:call-template name="html.head">
+        <xsl:with-param name="prev" select="$prev"/>
+        <xsl:with-param name="next" select="$next"/>
+       </xsl:call-template>
+       <body xsl:use-attribute-sets="body.attrs">
+        <xsl:call-template name="user.header.navigation"/>
         <xsl:call-template name="header.navigation"> 
          <xsl:with-param name="prev" select="$prev"/>
          <xsl:with-param name="next" select="$next"/>
         </xsl:call-template>
-
-      <xsl:call-template name="user.header.content"/>
-
-      <xsl:apply-imports/>
-
-      <xsl:call-template name="user.footer.content"/>
-
-	 <xsl:call-template name="footer.navigation"> 
+        <xsl:call-template name="user.header.content"/>
+        <xsl:apply-imports/>
+        <xsl:call-template name="user.footer.content"/>
+        <xsl:call-template name="footer.navigation"> 
          <xsl:with-param name="prev" select="$prev"/>
          <xsl:with-param name="next" select="$next"/>
         </xsl:call-template>
-
-      <xsl:call-template name="user.footer.navigation"/>
-    </body>
-  </html>
-  </xsl:otherwise>
+       <xsl:call-template name="user.footer.navigation"/>
+      </body>
+     </html>
+    </xsl:otherwise>
+   </xsl:choose>
+   </xsl:otherwise>
   </xsl:choose>
-  </xsl:otherwise>
-  </xsl:choose>
-</xsl:template>
+ </xsl:template>
 
 <!-- ==================================================================== -->
 
@@ -1182,23 +997,11 @@ its parent.
   </xsl:choose>
 </xsl:template>
 
-<xsl:template match="set|book|part|chapter|appendix
-                     |reference|refentry">
+<xsl:template match="set|book|part|chapter|refentry">
   <xsl:call-template name="process-chunk-element"/>
 </xsl:template>
 
 <xsl:template match="sect1|section[local-name(parent::*) != 'section']">
-<!--
-  <xsl:message>
-    <xsl:text>cs: </xsl:text>
-    <xsl:value-of select="$chunk.sections"/>
-    <xsl:text> cfs: </xsl:text>
-    <xsl:value-of select="$chunk.first.sections"/>
-    <xsl:text> pos: </xsl:text>
-    <xsl:value-of select="position()"/>
-  </xsl:message>
--->
-
   <xsl:choose>
     <xsl:when test="$chunk.sections = 0">
       <xsl:apply-imports/>
@@ -1220,18 +1023,7 @@ its parent.
   </xsl:choose>
 </xsl:template>
 
-<xsl:template match="setindex
-                     |book/index
-                     |article/index">
-  <!-- some implementations use completely empty index tags to indicate -->
-  <!-- where an automatically generated index should be inserted. so -->
-  <!-- if the index is completely empty, skip it. -->
-  <xsl:if test="count(*)>0 or $generate.index != '0'">
-    <xsl:call-template name="process-chunk-element"/>
-  </xsl:if>
-</xsl:template>
-
-<xsl:template match="enums|classset|classentry|method|signal|prop|argument|constructor|enum">
+<xsl:template match="enums|classset|classentry|method|signal|prop|constructor|enum">
   <xsl:call-template name="process-chunk-element"/>
  </xsl:template>
 
@@ -1251,19 +1043,6 @@ its parent.
     </xsl:call-template>
   </xsl:variable>
 
-<!--
-  <xsl:message>
-    <xsl:text>in.other.chunk: </xsl:text>
-    <xsl:value-of select="name($chunk)"/>
-    <xsl:text> </xsl:text>
-    <xsl:value-of select="name($node)"/>
-    <xsl:text> </xsl:text>
-    <xsl:value-of select="$chunk = $node"/>
-    <xsl:text> </xsl:text>
-    <xsl:value-of select="$is.chunk"/>
-  </xsl:message>
--->
-
   <xsl:choose>
     <xsl:when test="$chunk = $node">0</xsl:when>
     <xsl:when test="$is.chunk = 1">1</xsl:when>
@@ -1275,146 +1054,10 @@ its parent.
       </xsl:call-template>
     </xsl:otherwise>
   </xsl:choose>
-</xsl:template>
+ </xsl:template>
 
-<xsl:template name="count.footnotes.in.this.chunk">
-  <xsl:param name="node" select="."/>
-  <xsl:param name="footnotes" select="$node//footnote"/>
-  <xsl:param name="count" select="0"/>
-
-<!--
-  <xsl:message>
-    <xsl:text>count.footnotes.in.this.chunk: </xsl:text>
-    <xsl:value-of select="name($node)"/>
-  </xsl:message>
--->
-
-  <xsl:variable name="in.other.chunk">
-    <xsl:call-template name="in.other.chunk">
-      <xsl:with-param name="chunk" select="$node"/>
-      <xsl:with-param name="node" select="$footnotes[1]"/>
-    </xsl:call-template>
-  </xsl:variable>
-
-  <xsl:choose>
-    <xsl:when test="count($footnotes) = 0">
-      <xsl:value-of select="$count"/>
-    </xsl:when>
-    <xsl:otherwise>
-      <xsl:choose>
-        <xsl:when test="$in.other.chunk != 0">
-          <xsl:call-template name="count.footnotes.in.this.chunk">
-            <xsl:with-param name="node" select="$node"/>
-            <xsl:with-param name="footnotes"
-                            select="$footnotes[position() &gt; 1]"/>
-            <xsl:with-param name="count" select="$count"/>
-          </xsl:call-template>
-        </xsl:when>
-        <xsl:when test="$footnotes[1]/ancestor::table
-                        |$footnotes[1]/ancestor::informaltable">
-          <xsl:call-template name="count.footnotes.in.this.chunk">
-            <xsl:with-param name="node" select="$node"/>
-            <xsl:with-param name="footnotes"
-                            select="$footnotes[position() &gt; 1]"/>
-            <xsl:with-param name="count" select="$count"/>
-          </xsl:call-template>
-        </xsl:when>
-        <xsl:otherwise>
-          <xsl:call-template name="count.footnotes.in.this.chunk">
-            <xsl:with-param name="node" select="$node"/>
-            <xsl:with-param name="footnotes"
-                            select="$footnotes[position() &gt; 1]"/>
-            <xsl:with-param name="count" select="$count + 1"/>
-          </xsl:call-template>
-        </xsl:otherwise>
-      </xsl:choose>
-    </xsl:otherwise>
-  </xsl:choose>
-</xsl:template>
-
-<xsl:template name="process.footnotes.in.this.chunk">
-  <xsl:param name="node" select="."/>
-  <xsl:param name="footnotes" select="$node//footnote"/>
-
-<!--
-  <xsl:message>process.footnotes.in.this.chunk</xsl:message>
--->
-
-  <xsl:variable name="in.other.chunk">
-    <xsl:call-template name="in.other.chunk">
-      <xsl:with-param name="chunk" select="$node"/>
-      <xsl:with-param name="node" select="$footnotes[1]"/>
-    </xsl:call-template>
-  </xsl:variable>
-
-  <xsl:choose>
-    <xsl:when test="count($footnotes) = 0">
-      <!-- nop -->
-    </xsl:when>
-    <xsl:otherwise>
-      <xsl:choose>
-        <xsl:when test="$in.other.chunk != 0">
-          <xsl:call-template name="process.footnotes.in.this.chunk">
-            <xsl:with-param name="node" select="$node"/>
-            <xsl:with-param name="footnotes"
-                            select="$footnotes[position() &gt; 1]"/>
-          </xsl:call-template>
-        </xsl:when>
-        <xsl:when test="$footnotes[1]/ancestor::table
-                        |$footnotes[1]/ancestor::informaltable">
-          <xsl:call-template name="process.footnotes.in.this.chunk">
-            <xsl:with-param name="node" select="$node"/>
-            <xsl:with-param name="footnotes"
-                            select="$footnotes[position() &gt; 1]"/>
-          </xsl:call-template>
-        </xsl:when>
-        <xsl:otherwise>
-          <xsl:apply-templates select="$footnotes[1]"
-                               mode="process.footnote.mode"/>
-          <xsl:call-template name="process.footnotes.in.this.chunk">
-            <xsl:with-param name="node" select="$node"/>
-            <xsl:with-param name="footnotes"
-                            select="$footnotes[position() &gt; 1]"/>
-          </xsl:call-template>
-        </xsl:otherwise>
-      </xsl:choose>
-    </xsl:otherwise>
-  </xsl:choose>
-</xsl:template>
-
-<xsl:template name="process.footnotes">
-  <xsl:variable name="footnotes" select=".//footnote"/>
-  <xsl:variable name="fcount">
-    <xsl:call-template name="count.footnotes.in.this.chunk">
-      <xsl:with-param name="node" select="."/>
-      <xsl:with-param name="footnotes" select="$footnotes"/>
-    </xsl:call-template>
-  </xsl:variable>
-
-  <!-- Only bother to do this if there's at least one non-table footnote -->
-  <xsl:if test="$fcount &gt; 0">
-    <div class="footnotes">
-      <xsl:call-template name="output.br" />
-      <hr width="100" align="left"/>
-      <xsl:call-template name="process.footnotes.in.this.chunk">
-        <xsl:with-param name="node" select="."/>
-        <xsl:with-param name="footnotes" select="$footnotes"/>
-      </xsl:call-template>
-    </div>
-  </xsl:if>
-</xsl:template>
-
-<xsl:template name="process.chunk.footnotes">
-  <xsl:variable name="is.chunk">
-    <xsl:call-template name="chunk"/>
-  </xsl:variable>
-  <xsl:if test="$is.chunk = 1">
-    <xsl:call-template name="process.footnotes"/>
-  </xsl:if>
-</xsl:template>
-
-<xsl:template match="legalnotice" mode="titlepage.mode">
+ <xsl:template match="legalnotice" mode="titlepage.mode">
   <xsl:call-template name="process-chunk-element"/>
-</xsl:template>
+ </xsl:template>
 
 </xsl:stylesheet>
