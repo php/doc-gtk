@@ -3,10 +3,28 @@
   <classtitle>GtkProgressBar</classtitle>
   <classparent>GtkProgress</classparent>
   <shortdesc>
-   Widget which indicates progress of an operation visually.
+   Widget that provides a visual indication of an operation's progress.
   </shortdesc>
   <desc>
-
+   <simpara>
+    The purpose of <classname>GtkProgressBar</classname> is to show user the progress of a
+    long-running operation. It can be used in two modes: a percentage
+    mode and an activity mode.
+   </simpara>
+   <simpara>
+    The percentage mode should be used when the application can in
+    advance determine the total amount of work that will be done. As the
+    operation progresses the application should update the bar widget
+    with the amount of work completed so far. The widget will reflect
+    this by displaying a growing percentage bar.
+   </simpara>
+   <simpara>
+    The activity mode is useful when the application cannot determine
+    the total amount of work and instead simply wishes to provide an
+    indication that an operation is in progress. In this mode, the
+    widget will display a block moving back and forth in the progress
+    area.
+   </simpara>
   </desc>
  </classmeta>
 
@@ -18,10 +36,15 @@
    </funcprototype>
   </funcsynopsis>
   <shortdesc>
-
+   Creates a progress bar widget.
   </shortdesc>
   <desc>
-
+   <simpara>
+    When constructing a progress bar, you may specify an optional
+    associated <classname>GtkAdjustment</classname> that will be used to
+    configure the progress bar, including lower and upper bounds of its
+    values.
+   </simpara>
   </desc>
  </constructor>
 
@@ -35,10 +58,15 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the progress bar style.
    </shortdesc>
    <desc>
-
+    <simpara>
+     The default style of progress bar upon creation is
+     GTK_PROGRESS_CONTINUOUS. This method may be used to change it to
+     a style specified by <parameter>style</parameter> parameter
+     (GTK_PROGRESS_CONTINUOUS or GTK_PROGRESS_DISCRETE).
+    </simpara>
    </desc>
   </method>
 
@@ -50,10 +78,14 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the number of discrete blocks.
    </shortdesc>
    <desc>
-
+    <simpara>
+     When the progress bar has discrete style, it is divided into a
+     number of blocks. This method can be used to change the number of
+     these blocks.
+    </simpara>
    </desc>
   </method>
 
@@ -65,10 +97,14 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the step value in activity mode.
    </shortdesc>
    <desc>
-
+    <simpara>
+     When the progress bar is in the activity mode, this method can be
+     used to set the step value by which the progress bar will be updated
+     on each iteration.
+    </simpara>
    </desc>
   </method>
 
@@ -80,10 +116,14 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the number of blocks in activity mode.
    </shortdesc>
    <desc>
-
+    <simpara>
+     When the progress bar is in the activity mode, this method can be
+     used to set the number of blocks that make it up, with larger
+     numbers making the blocks look smaller.
+    </simpara>
    </desc>
   </method>
 
@@ -95,25 +135,15 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the orientation of the bar.
    </shortdesc>
    <desc>
-
-   </desc>
-  </method>
-
-  <method id="gtk.gtkprogressbar.method.update">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>void <function>update</function></funcdef>
-     <paramdef>double <parameter>percentage</parameter></paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-   <desc>
-
+    <simpara>
+     This method can be used to change the orientation of the progress
+     bar. The <parameter>orientation</parameter> controls whether the bar
+     is vertical or horizontal and in what direction it grows as the
+     operation progresses.
+    </simpara>
    </desc>
   </method>
 
