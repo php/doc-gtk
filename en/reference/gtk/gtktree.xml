@@ -7,22 +7,88 @@
    Widget for displaying hierarchical information.
   </shortdesc>
   <desc>
-
+   <simpara>
+    A <classname>GtkTree</classname> is a structure for displaying hierchical information. A tree may contain one or more nodes which themselves may contain other trees, thus creating levels or groups of nodes. A tree can be used to display information such as a map of a website or the files and folders of a directory.
+   </simpara>
   </desc>
  </classmeta>
 
  <constructor id="gtk.gtktree.constructor">
   <funcsynopsis>
    <funcprototype>
-    <funcdef> <function>GtkTree</function></funcdef>
+    <funcdef>
+     <function>GtkTree</function>
+    </funcdef>
     <paramdef>void</paramdef>
    </funcprototype>
   </funcsynopsis>
   <shortdesc>
-
+   Creates a new GtkTree.
   </shortdesc>
   <desc>
+   <simpara>
+    Creates a new instance of a <classname>GtkTree</classname>.
+   </simpara>
+   <simpara>
+    Because <classname>GtkTree</classname> extends <classname>GtkContainer</classname>, it may contain one or more children. These children should be <classname>GtkTreeItem</classname> widgets. 
+   </simpara>
+   <para>
+    <example>
+     <title>Building a tree of a file structure.</title>
+     <programlisting role="php">
+<![CDATA[
+<?php
+dl('php_gtk.' . (strstr(PHP_OS, 'WIN') ? 'dll' : 'so'));
 
+// Creates a tree representing a directory.
+function &createTreeFromDirectory($dir)
+{
+  // Create a new tree
+  $tree = &new GtkTree;
+
+  // Make sure dir is a directory
+  if (is_dir($dir)) {
+    // Open directory and read in file names
+    $dir_handle = opendir($dir);
+    while (($file = readdir($dir_handle)) !== false) {
+      // Create a new tree item for each file
+      $treeItem = &new GtkTreeItem($file);
+      $treeItem->show();
+      // Add the tree item to the tree
+      $tree->append($treeItem);
+      // If the file is a directory and not . or .. call
+      // this function recursively
+      if (is_dir($dir . '/' . $file) && strpos($file, '.') !== 0) {
+	$treeItem->set_subtree(createTreeFromDirectory($dir . '/' . $file));
+      } 
+    }
+    // Close the directory
+    closedir($dir_handle);
+  }
+  // Return the tree
+  return $tree;
+}
+// The directory to display
+$directory = '/path/to/some/directory';
+
+// Create a window to display the file structure
+$window = &new GtkWindow;
+
+// Add a frame
+$frame = &new GtkFrame($directory);
+$window->add($frame);
+
+// Add the tree
+$tree = createTreeFromDirectory($directory);
+$frame->add($tree);
+
+$window->show_all();
+gtk::main();
+?>
+]]>
+     </programlisting>
+    </example>
+   </para>
   </desc>
  </constructor>
 
@@ -31,46 +97,89 @@
   <method id="gtk.gtktree.method.append">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>void <function>append</function></funcdef>
-     <paramdef><classname>GtkWidget</classname> <parameter>tree_item</parameter></paramdef>
+     <funcdef>void
+      <function>append</function>
+     </funcdef>
+     <paramdef>
+      <classname>GtkWidget</classname>
+      <parameter>tree_item</parameter>
+     </paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Adds a node to the end of the tree.
    </shortdesc>
    <desc>
+    <simpara>
+     Adds <parameter>tree_item</parameter> to the end of the tree.
+    </simpara>
+    <para>
+     <example>
+      <title>Appending nodes to a tree</title>
+      <programlisting role="php">
+<![CDATA[
+$tree = &new GtkTree;
+$nodes = array('These nodes', 'were added', 'in this order');
 
+// Add the nodes.  When displayed they will be in readable order.
+foreach ($nodes as $node) {
+  $item = &new GtkTreeItem($node);
+  $tree->append($item);
+}
+]]>
+      </programlisting>
+     </example>
+    </para>
+    <simpara>
+     See also: <function class="GtkTree">prepend</function>, <function class="GtkTree">insert</function>
+    </simpara>
    </desc>
   </method>
 
   <method id="gtk.gtktree.method.prepend">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>void <function>prepend</function></funcdef>
-     <paramdef><classname>GtkWidget</classname> <parameter>tree_item</parameter></paramdef>
+     <funcdef>void
+      <function>prepend</function>
+     </funcdef>
+     <paramdef>
+      <classname>GtkWidget</classname>
+      <parameter>tree_item</parameter>
+     </paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Adds a node to the begining of the tree.
    </shortdesc>
    <desc>
-
+    <simpara>
+     See also: <function class="GtkTree">append</function>, <function class="GtkTree">insert</function>
+    </simpara>
    </desc>
   </method>
 
   <method id="gtk.gtktree.method.insert">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>void <function>insert</function></funcdef>
-     <paramdef><classname>GtkWidget</classname> <parameter>tree_item</parameter></paramdef>
-     <paramdef>int <parameter>position</parameter></paramdef>
+     <funcdef>void
+      <function>insert</function>
+     </funcdef>
+     <paramdef>
+      <classname>GtkWidget</classname>
+      <parameter>tree_item</parameter>
+     </paramdef>
+     <paramdef>int
+      <parameter>position</parameter>
+     </paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Adds a node to the tree in the given position
    </shortdesc>
    <desc>
-
+    <simpara>
+     See also: <function class="GtkTree">append</function>, <function class="GtkTree">prepend</function>
+    </simpara>
    </desc>
   </method>
 
