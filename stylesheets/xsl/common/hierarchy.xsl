@@ -2,7 +2,7 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 		version="1.0">
 
-<!-- $Id: hierarchy.xsl,v 1.3 2001-08-10 10:40:51 jmoore Exp $ -->
+<!-- $Id: hierarchy.xsl,v 1.4 2001-08-10 15:09:10 jmoore Exp $ -->
 		
 <!-- ================== Common Hierarchy Functions ============================ -->
 
@@ -92,7 +92,7 @@
   *		[root - The root node to start searching from. Default is top node]
   * Returns:  	the signals' id.
 -->
-  <xsl:template name="get.class.id.from.name">
+ <xsl:template name="get.class.id.from.name">
   <xsl:param name="signalname" />
   <xsl:param name="root" select="no" />
 
@@ -106,6 +106,32 @@
    <xsl:value-of select="$signal/attribute::id" />
  </xsl:template>
 
- <!-- ========================================================================== -->
+<!-- 
+  * Function:	find.function.in.hierarchy
+  * Params:	functionname - The functions name
+  *             classentry - the current class entry we are in
+  * Returns:	The function that is closest to this one in the heirarchy.
+-->
+ <xsl:template name="find.function.in.hierarchy">
+  <xsl:param name="functionname"/>
+  <xsl:param name="classentry"/>
+
+  <xsl:variable name="classhierarchy">
+   <xsl:call-template name="get.class.hierarchy.as.nodes">
+    <xsl:with-param name="classentry" select="$classentry"/>
+   </xsl:call-template>
+  </xsl:variable>
+
+  <xsl:variable name="allinhierarchy">
+   <xsl:for-each select="$classhierarchy">
+    <xsl:if test="(count(.//*[funcsynopsis/funcprototype/funcdef/function=$functionname]) != 0)">
+     <xsl:copy-of select=".//*[funcsynopsis/funcprototype/funcdef/function=$functionname"/>
+    </xsl:if>   
+   </xsl:template>
+  </xsl:variable>
+
+  <xsl:copy-of select="$allinhierarchy[position() = 1]"/>
+ </xsl:template>
+<!-- ========================================================================== -->
  
 </xsl:stylesheet>
