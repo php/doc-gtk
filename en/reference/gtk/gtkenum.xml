@@ -810,6 +810,42 @@ calendar
 
 </enum>
 
+<enum id="gtk.enum.gtkwindowtype">
+ <enumname>GtkWindowType</enumname>
+
+ <enumoption>
+  <optionname>GTK_WINDOW_TOPLEVEL</optionname>
+  <shortdesc>
+   The default window type, describing a toplevel window with a title bar,
+   <literal>minimize</literal>, <literal>maximize</literal> and 
+   <literal>close</literal> buttons.  Note that these window decorations
+   are provided by the window manager and may vary in appearance or even
+   not exist on some operating systems.
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GTK_WINDOW_DIALOG</optionname>
+  <shortdesc>
+   A window type that is intended for messages requiring a user response. 
+   If a <literal>maximize</literal> button is displayed, it is greyed
+   out and the maximize function disabled on a dialog window.
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GTK_WINDOW_POPUP</optionname>
+  <shortdesc>
+   A window type with no window decorations or associated functions. 
+   Do not use this to create popup menus; refer instead to the
+   <function classname="GtkMenu">popup()</function> method in 
+   <classname>GtkMenu</classname>, which provides its own internal
+   popup window.
+  </shortdesc>
+ </enumoption>
+
+</enum>
+
 <!--
  * Local variables:
  * tab-width: 1
