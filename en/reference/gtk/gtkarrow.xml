@@ -61,6 +61,49 @@ $arrow = &new GtkArrow(GTK_ARROW_RIGHT, GTK_SHADOW_ETCHED_IN);
      </programlisting>
     </informalexample>
    </para>
+   <example>
+    <title>A list of <classname>GtkArrow</classname>s</title>
+    <programlisting role="php">
+<![CDATA[
+<?php
+if( !extension_loaded('gtk')) {	
+	dl( 'php_gtk.' . PHP_SHLIB_SUFFIX); 
+}
+
+$window = &new GtkWindow();
+$window->set_default_size( 600, 500);
+$window->connect_object('destroy', array('gtk', 'main_quit'));
+
+$table	= &new GtkTable( 5, 6);
+
+$color = &new GdkColor( '#FF0000');
+
+$arTxtArrowTypes = array( 'GTK_ARROW_UP', 'GTK_ARROW_DOWN', 'GTK_ARROW_LEFT', 'GTK_ARROW_RIGHT');
+$arTxtShadowTypes = array( '', 'GTK_SHADOW_NONE', 'GTK_SHADOW_IN', 'GTK_SHADOW_OUT', 'GTK_SHADOW_ETCHED_IN', 'GTK_SHADOW_ETCHED_OUT');
+for( $nA = 0; $nA < 6; $nA++) {
+	$label	= &new GtkLabel( $arTxtShadowTypes[$nA]);
+	$table->attach( $label, 0, 1, $nA, $nA+1);
+	
+    for( $nB = 0; $nB < 5; $nB++) {
+		if( $nA == 0) {
+			$widget	= &new GtkLabel( $arTxtArrowTypes[$nB]);
+		} else {
+			$widget = &new GtkArrow( $nB, $nA-1);
+			$style = $widget->style;
+			$style->bg[GTK_STATE_NORMAL] = $color;
+//			$widget->set_style( $style);
+		}
+		$table->attach( $widget, $nB+1, $nB+2, $nA, $nA+1, GTK_EXPAND|GTK_FILL, GTK_EXPAND|GTK_FILL);
+	}
+}
+
+$window->add( $table);
+$window->show_all();
+gtk::main();
+?>
+]]>
+    </programlisting>
+   </example>
   </desc>
  </constructor>
 
