@@ -3,10 +3,28 @@
   <classtitle>GtkRadioButton</classtitle>
   <classparent>GtkCheckButton</classparent>
   <shortdesc>
-   Widget providing radio button functionality.
+   Button that is part of a group, only one of which may be selected.
   </shortdesc>
   <desc>
-
+   <simpara>
+    A <classname>GtkRadioButton</classname> is one of a group of similar
+    widgets, only one of which may be selected at any one time.
+   </simpara>
+   <simpara>
+    In the version of GTK+ currently used by PHP-GTK there is an issue with
+    the <signalname class="GtkWidget">activate</signalname> signal where it
+    is used alongside toggle switches in arrays.  In this particular widget, 
+    the <signalname class="GtkButton">clicked</signalname> signal is the
+    activating signal, and repeats itself as a result of this.
+   </simpara>
+   <simpara>
+    One way around this is to use the 
+    <signalname class="GtkButton">pressed</signalname> signal.  Another would
+    be to set up a count for each individual function and test that the count
+    is divisible by 2.  Or, depending on the kind of function you are calling,
+    you could simply allow <signalname class="GtkButton">clicked</signalname> 
+    to be fired twice.
+   </simpara>
   </desc>
  </classmeta>
 
@@ -14,19 +32,67 @@
   <funcsynopsis>
    <funcprototype>
     <funcdef> <function>GtkRadioButton</function></funcdef>
-    <paramdef>XXX</paramdef>
+    <paramdef>
+     <classname>GtkRadioButton</classname> 
+     <parameter>group</parameter>
+    </paramdef>
+    <paramdef>string <parameter>label</parameter></paramdef>
    </funcprototype>
   </funcsynopsis>
   <shortdesc>
-
+   Creates one of a group of <classname>GtkRadioButton</classname> widgets.
   </shortdesc>
   <desc>
-
+   <simpara>
+    The first <classname>GtkRadioButton</classname> in a group should have
+    the first parameter set to <literal>null</literal>.  This 'group leader' 
+    is not attached to anything; there is not at present such a thing as a
+    GtkGroup widget of any kind.
+   </simpara>
+   <simpara>
+    All subsequent <classname>GtkRadioButton</classname> widgets belonging to
+    the same group should have the variable representing that group leader as
+    the first parameter.
+   </simpara>
+   <para>
+    <example>
+     <title>Constructing a group of radio buttons</title>
+     <programlisting role="php">
+dl('php_gtk.' . (strstr(PHP_OS, 'WIN') ? 'dll' : 'so'));
+    
+function here_goes($button) {
+  $child = $button-&gt;child;
+  echo $child-&gt;get().&quot;\n&quot;;
+}
+    
+$window = &amp;new GtkWindow();
+$window-&gt;connect_object('destroy', array('gtk', 'main_quit'));
+$window-&gt;set_title('GtkRadioButton demo');
+    
+$box = &amp;new GtkVBox();
+$window-&gt;add($box);
+    
+$button1 = &amp;new GtkRadioButton(null, 'button 1');
+$button1-&gt;connect('pressed', 'here_goes');
+$box-&gt;pack_start($button1);
+    
+for ($i = 2; $i &lt;= 4; $i++) {
+  $button = &amp;new GtkRadioButton($button1, 'button ' . $i);
+  $button-&gt;connect('pressed', 'here_goes');
+  $box-&gt;pack_start($button);
+}
+    
+$button_end = &amp;new GtkButton('Exit');
+$button_end-&gt;connect_object('clicked', array('gtk', 'main_quit'));
+$box-&gt;pack_end($button_end);
+    
+$window-&gt;show_all();
+    
+gtk::main();
+     </programlisting>
+    </example>
+   </para>
   </desc>
  </constructor>
-
- <methods>
-
- </methods>
 
 </classentry>

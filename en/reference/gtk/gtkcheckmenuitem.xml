@@ -3,10 +3,17 @@
   <classtitle>GtkCheckMenuItem</classtitle>
   <classparent>GtkMenuItem</classparent>
   <shortdesc>
-   Menu item with a check box.
+   Menu item with a toggle indicator.
   </shortdesc>
   <desc>
-
+   <simpara>
+    A <classname>GtkCheckMenuItem</classname> is a normal 
+    <classname>GtkMenuItem</classname> that contains a toggle indicator
+    positioned to the left of any <classname>GtkAccelLabel</classname> text. 
+    The indicator does not necessarily have to be displayed during the
+    time that the menu item is set to its inactive state, but is always
+    displayed when the state is set as active.
+   </simpara>
   </desc>
  </classmeta>
 
@@ -14,14 +21,28 @@
   <funcsynopsis>
    <funcprototype>
     <funcdef> <function>GtkCheckMenuItem</function></funcdef>
-    <paramdef>XXX</paramdef>
+    <paramdef>string 
+     <parameter><optional>label</optional></parameter>
+    </paramdef>
    </funcprototype>
   </funcsynopsis>
   <shortdesc>
-
+   Creates a <classname>GtkMenuItem</classname> with a toggle indicator.
   </shortdesc>
   <desc>
-
+   <para>
+    <informalexample>
+     <programlisting role="php">
+$checkmenuitem = &amp;new GtkCheckMenuItem(&quot;CheckMenuItem's Label&quot;);
+     </programlisting>
+    </informalexample>
+    is the syntax that will create a new menu item with an indigenous toggle
+    indicator placed to the left of any existing text.  The 
+    <classname>GtkCheckMenuItem</classname> may be set to the active state - 
+    <enumname>GtkStateType</enumname> <literal>GTK_STATE_ACTIVE</literal> - 
+    or to the inactive state, <literal>GTK_STATE_NORMAL</literal>.  When it
+    is in the inactive state, the toggle indicator need not be displayed.
+   </para>
   </desc>
  </constructor>
 
@@ -35,10 +56,29 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Toggles the active state.
    </shortdesc>
    <desc>
-
+    <simpara>
+     <function class="GtkCheckMenuItem">set_active()</function> sets
+     the state of the calling <classname>GtkCheckMenuItem</classname> 
+     to either the <literal>GTK_STATE_ACTIVE</literal> or the 
+     <literal>GTK_STATE_NORMAL</literal> <enumname>GtkStateType</enumname>. 
+     When the menu item is in its active state, the toggle indicator is
+     always displayed.
+    </simpara>
+    <para>
+     <informalexample>
+      <programlisting role="php">
+$checkmenuitem-&gt;set_active(true);
+      </programlisting>
+     </informalexample>
+     will set the <classname>GtkCheckMenuItem</classname>'s state to
+     <literal>active</literal>.
+    </para>
+    <simpara>
+     The default setting is <literal>false</literal>.
+    </simpara>
    </desc>
   </method>
 
@@ -50,10 +90,17 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Determines whether toggle indicator should be displayed.
    </shortdesc>
    <desc>
-
+    <simpara>
+     <function class="GtkCheckMenuItem">set_show_toggle()</function> 
+     determines whether the toggle indicator should be visible at all
+     times, or only when the menu item is active.
+    </simpara>
+    <simpara>
+     The default setting is <literal>false</literal>.
+    </simpara>
    </desc>
   </method>
 
@@ -65,13 +112,84 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Emits the <signalname class="GtkCheckMenuItem">toggled</signalname> 
+    signal.
    </shortdesc>
    <desc>
-
+    <simpara>
+     <function class="GtkCheckMenuItem">toggled()</function> causes the
+     calling <classname>GtkCheckMenuItem</classname> to emit the 
+     <signalname class="GtkCheckMenuItem">toggled</signalname> signal.
+    </simpara>
    </desc>
   </method>
 
  </methods>
+
+ <signals>
+
+  <signal id="gtk.gtkcheckmenuitem.signal.toggled">
+   <signalname>toggled</signalname>
+   <callback>
+    <funcprototype>
+     <funcdef>void <function>callback</function></funcdef>
+     <paramdef>
+      <classname>GtkCheckMenuItem</classname> checkmenuitem
+     </paramdef>
+    </funcprototype>
+   </callback>
+   <shortdesc>
+    Emitted when the toggled() method is called.
+   </shortdesc>
+   <desc>
+    <simpara>
+     The <signalname class="GtkCheckMenuItem">toggled</signalname> signal is
+     emitted when the <function class="GtkCheckMenuItem">toggled()</function> 
+     method is called.  This is called internally when the 
+     <classname>GtkCheckMenuItem</classname>'s 
+     <signalname class="GtkMenuItem">activate</signalname> is emitted - that
+     is, when a user clicks on the menu item or presses the
+     <literal>Enter</literal> or <literal>Space</literal> key while the item
+     is selected.  It is also emitted when calling the
+     <function class="GtkCheckMenuItem">set_active()</function> method.
+    </simpara>
+    <simpara>
+     Note that the state-switching triggered by activation is not 
+     directly related to the 
+     <signalname class="GtkCheckMenuItem">toggled</signalname> signal.
+    </simpara>
+   </desc>
+  </signal>
+
+ </signals>
+
+ <properties>
+
+  <property id="gtk.gtkcheckmenuitem.property.active" type="ro">
+   <propname>active</propname>
+   <proptype>bool</proptype>
+   <shortdesc>
+    'Active' toggle.
+   </shortdesc>
+   <desc>
+    <simpara>
+     The <propname class="GtkCheckMenuItem">active</propname> property 
+     provides a means of testing whether the 
+     <classname>GtkCheckMenuItem</classname> is currently in the 
+     <literal>active</literal> state - in which case the returned value will
+     be <literal>true</literal> - or otherwise.
+    </simpara>
+    <para>
+     <informalexample>
+      <programlisting role="php">
+$active_state = $checkmenuitem-&gt;active;
+if($active_state == 1) echo &quot;This GtkCheckMenuItem is active\n&quot;;
+      </programlisting>
+     </informalexample>
+    </para>
+   </desc>
+  </property>
+
+ </properties>
 
 </classentry>
