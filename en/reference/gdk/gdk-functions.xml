@@ -749,9 +749,9 @@ gdk::font_load('-unknown-Arial-normal-r-normal--*-120-96-96-p-0-iso8859-1');
 <![CDATA[
 <?php
 
-$gdkpixmap = gdk::pixmap_create_from_xpm($main_window-&gt;window, null, 
+$gdkpixmap = gdk::pixmap_create_from_xpm($main_window->window, null, 
 'test.xpm');
-$image = &amp;new GtkPixmap($gdkpixmap[0], $gdkpixmap[1]);
+$image = &new GtkPixmap($gdkpixmap[0], $gdkpixmap[1]);
 
 ?>
 ]]>
@@ -765,7 +765,7 @@ $image = &amp;new GtkPixmap($gdkpixmap[0], $gdkpixmap[1]);
 <?php
 list ($gdkpixmap, $mask) = 
 gdk::pixmap_create_from_xpm($gdkwindow, $transparent_color, 'test.xpm');
-$image = &amp;new GtkPixmap($gdkpixmap, $mask);
+$image = &new GtkPixmap($gdkpixmap, $mask);
 
 ?>
 ]]>
@@ -798,7 +798,7 @@ $image = &amp;new GtkPixmap($gdkpixmap, $mask);
     <simpara>
      <literal>
       $gdkpixmap = 
-      gdk::pixmap_create_from_xpm_d($main_window-&gt;window, 
+      gdk::pixmap_create_from_xpm_d($main_window->window, 
       $transparent_color, $data);
      </literal>
      <!-- No I am NOT going to leave it like this..   sf mar 02 -->
