@@ -15,7 +15,7 @@
  <xsl:template name="get_func_id_from_name">
   <xsl:param name="funcname" />
 
-  <xsl:variable name="method" select="//method[funcsynopsis/funcprototype/funcdef/function=$funcname]"/>
+  <xsl:variable name="method" select="//*[funcsynopsis/funcprototype/funcdef/function=$funcname]"/>
   <xsl:value-of select="$method/attribute::id" />
  </xsl:template>
  
