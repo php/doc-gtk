@@ -1,0 +1,151 @@
+<classentry id="gtk.gtkboxchild">
+ <classmeta>
+  <classtitle>GtkBoxChild</classtitle>
+  <shortdesc>
+   Hilfsklasse f&uuml;r <classname>GtkBox</classname>
+  </shortdesc>
+  <desc>
+   <simpara>
+    <classname>GtkBox</classname> ist eine Basisklasse die Box Containern
+    Eigenschaften und Methoden zur Ver&uuml;gung stellt um mehrere
+    Kinderwidgets einzupacken.
+   </simpara>
+   <simpara>
+    <classname>GtkBoxChild</classname> ist eine Hilfsklasse die Zugriff zu dem
+    Widget und den Packinformationen f&uuml;r jedes individuelle Kind erlaubt.
+    Die <propname class="GtkBox">children</propname> Eigenschaft in
+    <classname>GtkBox</classname> ist ein Array von
+    <classname>GtkBoxChild</classname> Objekten die den gepackten
+    Kinderwidgets entspricht.
+   </simpara>
+   <simpara>
+    Beachte dass weder <classname>GtkBox</classname> noch
+    <classname>GtkBoxChild</classname> direkt konstruiert werden k&ouml;nnen.
+   </simpara>
+  </desc>
+ </classmeta>
+ 
+ <properties>
+ 
+  <property id="gtk.gtkboxchild.property.widget" type="ro">
+   <propname>widget</propname>
+   <proptype>GtkWidget</proptype>
+   <shortdesc>
+    Kinderwidget
+   </shortdesc>
+   <desc>
+    <simpara>
+     Die <propname class="GtkBoxChild">widget</propname> Eigenschaft stellt
+     den Zugriff auf das Kinderwidget Objekt zur Ver&uuml;gung.
+    </simpara>
+    <para>
+     Es ist m&ouml;glich auf die Methoden, Eigenschaften und Signale von
+     <propname class="GtkBoxChild">widget</propname> geh&ouml;ren zuzugreifen
+     wie bei jedem anderen <classname>GtkWidget</classname> desselben Typs.
+     <informalexample>
+      <programlisting role="php">
+$button = $vbox-&gt;children[5]-&gt;widget;
+$label = $button->&gt;child
+$label->&gt;set_text(&quot;New Button Label&quot;);
+      </programlisting>
+     </informalexample>
+    </para>
+   </desc>
+  </property>
+   
+  <property id="gtk.gtkboxchild.property.padding" type="ro">
+   <propname>padding</propname>
+   <proptype>int</proptype>
+   <shortdesc>
+   Mindestabstand des Kindes.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Die <propname class="GtkBoxChild">padding</propname> Eigenschaft ist ein
+     Ganzzahlenwert der den Mindestabstand um das 
+     <propname class="GtkBoxChild">widget</propname> in Pixeln anzeigt.
+    </simpara>
+    <simpara>
+     Die Voreinstellung von <propname class="GtkBoxChild">padding</propname>
+     ist <literal>0</literal>.
+    </simpara>
+   </desc>
+  </property>
+  
+  <property id="gtk.gtkboxchild.property.expand" type="ro">
+   <propname>expand</propname>
+   <proptype>bool</proptype>
+   <shortdesc>
+    Schalter f&uuml;r Ausdehnung des Kindes
+   </shortdesc>
+   <desc>
+    <simpara>
+     <propname class="GtkBoxChild">expand</propname> ist eine Eigenschaft
+     die beschreibt ob der Freiraum um das 
+     <propname class="GtkBoxChild">widget</propname> sich ausdehnen darf wenn
+     die Gr&ouml;sse des Elterncontainers ver&auml;ndert wird.
+    </simpara>
+    <simpara>
+     Das Kinderwidget ist in dem Ihm zur Verf&uml;gun stehenden Platz
+     mittig ausgerichtet.
+    </simpara>
+    <simpara>
+     Die Voreinstellung f&uml;r 
+     <propname class="GtkBoxChild">expand</propname> ist
+     <literal>true</literal>.
+    </simpara>
+   </desc>
+  </property>
+  
+  <property id="gtk.gtkboxchild.property.fill" type="ro">
+   <propname>fill</propname>
+   <proptype>bool</proptype>
+   <shortdesc>
+    Schalter f&uuml; Ausf&uuml;llung des Kindes
+   </shortdesc>
+   <desc>
+    <simpara>
+     <propname class="GtkBoxChild">fill</propname> ist ein bool'scher Wert
+     der beschreibt ob das <propname class="GtkBoxChild">widget</propname>
+     den ihm zur Verf&uml;gungstehenden Platz ausf&uuml;llen darf.
+    </simpara>
+    <simpara>
+     Wenn die <propname class="GtkBoxChild">expand</propname> Eigenschaft
+     <literal>false</literal> ist und die 
+     <propname class="GtkBoxChild">fill</propname> Eigenschaft
+     <literal>true</literal> wird das Kinderwidget so nah an die Kante des,
+     durch seinen <propname class="GtkBoxChild">pack</propname> Wert
+     bestimmten, ihm zur Verf&uuml;gung stehenden Platzes gepackt wie sein
+     <propname class="GtkBoxChild">padding</propname> Wert es erlaubt.
+    </simpara>
+   </desc>
+  </property>
+  
+  <property id="gtkgtkboxchild.property.pack" type="ro">
+   <propname>pack</propname>
+   <proptype><enumname>GtkPackType</enumname></proptype>
+   <shortdesc>
+    Kinderpacktyp
+   </shortdesc>
+   <desc>
+    <simpara>
+     <propname class="GtkBoxChild">pack</propname> ist ein
+     <enumname>GtkPackType</enumname> Aufz&auml;hlungstyp der anzeigt wo das
+     Kinderwidget in Bezug auf das Elternwidget gepackt wird - Anfang oder
+     Ende.
+    </simpara>
+   </desc>
+  </property>
+ 
+ </properties>
+
+</classentry> 
+
+<!--
+ * Local variables:
+ * tab-width: 1
+ * c-basic-offset: 1
+ * End:
+ * vim600: et sw=1 ts=1 tw=78 fdm=marker
+ * vim<600: et sw=1 ts=1 tw=78
+-->

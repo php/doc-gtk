@@ -1,0 +1,363 @@
+<classentry id="gtk.gtkbutton">
+ <classmeta>
+  <classtitle>GtkButton</classtitle>
+  <classparent>GtkBin</classparent>
+  <shortdesc>
+   Ein Containerwidget das ein Signal emittiert wenn es angeklickt wird
+  </shortdesc>
+  <desc>
+   <simpara>
+    Das <classname>GtkButton</classname> Widget ist ein Containerwidget das 
+    jedes von <classname>GtkWidget</classname> abgeleitete g&uuml;ltige 
+    Kinderwidget enthalten kann. Das am h&auml;ufigsten gebrauchte
+    Kinderwidget ist <classname>GtkLabel</classname>. Deswegen ist es als
+    optionaler Parameter in den
+    <link linked="gtk.gtkbutton.constructor">constructor</link> eingebaut.
+   </simpara>
+   <simpara>
+    Das <classname>GtkButton</classname> Widget wird haupts&auml;chlich
+    benutzt um irgendeine Funktion aufzurufen wenn der Knopf gedr&uuml;ckt
+    wird
+   </simpara>
+  </desc>
+ </classmeta>
+ 
+
+ <constructor id="gtk.gtkbutton.constructor">
+  <funcsynopsis>
+   <funcdef> <function>GtkButton</function></funcdef>
+   <paramdef>string
+    <parameter><optional>label</optional></parameter>
+   </paramdef>
+  </funcsynopsis> 
+  <shortdesc>
+   Erstellt einen Knopf
+  </shortdesc>
+  <desc>
+   <simpara>
+    Diese Funktion erstellt ein <classname>GtkButton</classname> Widget und
+    gibt auch ein solches als R&uuml;ckgabewert zur&uuml;ck.
+    Wenn der optionale Parameter <parameter>label</parameter> mitgegeben
+    wurde, enth&auml;lt der Knopf ein <classname>GtkLabel</classname> Widget
+    mit dem gegeben Text. Wenn der Parameter leer ist wird es kein
+    Kinderwidget geben.
+   </simpara>
+   <para>
+    Beachte dass <classname>GtkButton</classname>, weil es von
+    <classname>GtkBin</classname> abgeleitet ist, nur ein Kind enhalten kann.
+    <example>
+     <title>
+      Mehr als ein Widget zu einem <classname>GtkButton</classname>
+      hinzuf&uuml;gen.
+     </title>
+     <programlisting role="php">
+$window = &amp;new GtkWindow(GTK_WINDOW_DIALOG);
+$window-&gt;set_postion(GTK_WIN_POS_MOUSE);
+$window-&gt;connect_object(&quot;destroy&quot;, array(&quot;gtk&quot;, &quot;main_quit&quot;));
+       
+       
+$window-&gt;realize();
+list($gdkpixmap, $mask) = gdk::pixmap_create_from_xpm ($window-&gt;window, null, &quot;test.xpm&quot;);
+$pixmap = &amp;new GdkPixmap($gdkpixmap, $mask);
+
+$label = &amp;new GtkLabel(&quot;Open&quot;);
+
+$vbox = &amp;new GtkVbox();
+$vbox-&gt;pack_start($pixmap);
+$vbox-&gt;pack_start($label);
+
+$button = &amp;new GtkButton;
+$button-&gt;add($vbox);
+$vbox-&gt;show_all();
+
+$window-&gt;add($button);
+$window-&gt;show_all();
+
+gtk::main();
+     </programlisting>
+    </example>
+   </para>
+  </desc>
+ </constructor>
+
+ <methods>
+  <method id="gtk.gtkbutton.method.pressed">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void<function>pressed</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Sendet das <signalname>pressed</signalname> Signal aus.
+   </shortdesc>
+   <desc>
+    Veranlasst den Button dazu das <signalname>pressed</signalname> Signal
+    auszusenden.
+   </desc>
+  </method>
+
+  <method id="gtk.gtkbutton.method.released">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>released</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Sendet das <signalname>released</signalname> Signal aus.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Veranlasst den Button dazu das <signalname>released</signalname> Signal
+     auszusenden.
+    </simpara>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkbutton.method.clicked">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>clicked</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Sendet ein <signalname>clicked</signalname> Signal aus.
+   </shortdesc>
+   <desc>
+    veranlasst den Button dazu ein <signalname>clicked</signalname> Signal
+    auszusenden.
+   </desc>
+  </method>
+
+  <method id="gtk.gtkbutton.method.enter">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>enter</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Sendet das <signalname>enter</signalname> Signal aus.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Veranlasst den Button dazu das <signalname>enter</signalname> Signal
+     auszusenden.
+    </simpara>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkbutton.method.leave">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>leave</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Sendet das <signalname>leave</signalname> Signal aus.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Veranlasst den Button dazu das <signalname>leave</signalname> Signal
+     auszusenden.
+    </simpara>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkbutton.method.set_relief">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_relief</function></funcdef>
+     <paramdef>
+      <enumname>GtkReliefStyle</enumname>
+      <parameter>newstyle</parameter>
+     </paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Stellt den Button Relief Stil ein.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Stellt den Relief Stil des Button Widgets auf eine der drei
+     <enumname>GtkReliefStyle</enumname> Einstellungen ein.
+     Der voreingestellte Relief Stil ist
+     <literal>GTK_RELIEF_NORMAL</literal>.
+    </simpara>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkbutton.method.get_relief">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>
+      <enumname>GtkReliefStyle</enumname>
+      <function>get_relief</function>
+     </funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Ermittelt den <enumname>GtkReliefstyle</enumname>
+   </shortdesc>
+   <desc>
+    <simpara>
+     Gibt die augenblickliche <enumname>GtkReliefStyle</enumname> Einstellung
+     des Buttons zur&uuml;ck.
+    </simpara>
+   </desc>
+  </method>
+      
+ </methods>
+
+ <signals>
+  <signal id="gtk.gtkbutton.signal.enter">
+   <signalname>enter</signalname>
+   <callback>
+    <funcprototype>
+     <funcdef>void <function>callback</function></funcdef>
+     <paramdef><classname>GtkButton</classname> button</paramdef>
+    </funcprototype>
+   </callback>
+   <shortdesc>
+    Wird ausgesendet wenn der Cursor sich &uuml;ber dem Button befindet.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Das <signalname>enter</signalname> Signal wird ausgesendet wenn der
+     Cursor in den Bereich des Bildschirm eintritt wo sich der Button
+     befindet.
+    </simpara>
+   </desc>
+  </signal>
+
+  <signal id="gtk.gtkbutton.signal.pressed">
+   <signalname>pressed</signalname>
+   <callback>
+    <funcprototype>
+     <funcdef>void <function>callback</function></funcdef>
+     <paramdef><classname>GtkButton</classname> button</paramdef>
+    </funcprototype>
+   </callback>
+   <shortdesc>
+    Wird ausgesendet wenn der Button anf&auml;nglich ged&uuml;ckt wird
+   </shortdesc>
+   <desc>
+    <simpara>
+     Das <signalname>pressed</signalname> Signal wird ausgesendet wenn der
+     Benutzer den Mouse-Button dr&uuml;ckt und der Cursor sich &uuml;ber dem
+     Button Widegt befindet.
+    </simpara>
+   </desc>
+  </signal>
+
+
+  <signal id="gtk.gtkbutton.signal.clicked">
+   <signalname>clicked</signalname>
+   <callback>
+    <funcprototype>
+     <funcdef>void <function>callback</function></funcdef>
+     <paramdef><classname>GtkButton</classname></paramdef>
+    </funcprototype>
+   </callback>
+   <shortdesc>
+    Wird ausgesendet wenn der Button angeklickt wird
+   </shortdesc>
+   <desc>
+    <simpara>
+     Das <signalname>clicked</signalname> Signal wird genau im Mittelpunkt
+     zwischen dr&uuml;cken und loslassen des Buttons ausgesendet. Dies ist
+     das am h&auml;figsten benutzte <classname>GtkButton</classname> Signal
+     und hat insofern einen Vorzug gegen&uuml;ber den anderen Signalen als
+     dass es per Voreinstellung auch auf <literal>enter</literal> oder
+     <literal>spacebar</literal> Tastendruck reagiert als ob sie Mausklicks
+     w&auml;ren. Beachte auf jeden Fall dass das
+     <signalname>clicked</signalname> Signal nicht ausgesendet wird wenn der
+     Benutzer die Maus aus dem Bereich des Button Widgets bewegt bevor er den
+     Mausknopf losl&auml;sst.
+    </simpara>
+    <para>
+     Benutze eine der <function class="GtkObject">connect()</function>
+     Funktionen um das Signal auszugeben und mit Deiner Funktion zu
+     verkn&uml;pfen. Die verkn&uuml;pfte Funktion wird
+     <literal>callback</literal> oder <literal>signal-handler</literal>
+     Funktion genannt: 
+     <example>
+      <title>Eine einfache Verkn&uuml;pfung herstellen</title>
+      <programlisting role="php">
+function meine_funktion(){
+ echo &quot;Der Button wurde angeklickt!&quot;;
+}
+
+$window = &amp;new GtkWindow;
+$window-&gt;set_position(GTK_WIN_POS_MOUSE);
+$window-&gt;connect_object(&quot;destroy&quot;, array(&quot;gtk&quot;, &quot;main_quit()&quot;));
+
+
+$button = &amp;new GtkButton(&quot;Klick Mich&quot;);
+$button-&gt;connect(&quot;clicked&quot;, &quot;meine_funktion&quot;
+$window-&gt;add($button);
+
+$window-&gt;show_all();
+
+gtk::main();
+      </programlisting>
+     </example>
+     Weitere Informationen zu Signalen gibt es im 
+     <link linked="gtk.signal.whatare">Signale und Callbacks</link> Kapitel
+     des <link linked="userguide">PHP-GTK-Benutzerhandbuches</link>. 
+    </para>
+   </desc>
+  </signal>
+
+  <signal id="gtk.gtkbutton.signal.released">
+   <signalname>released</signalname>
+   <callback>
+    <funcprototype> 
+     <funcdef>void <function>callback</function></funcdef>
+     <paramdef><classname>GtkButton</classname></paramdef>
+    </funcprototype>
+   </callback>
+   <shortdesc>
+    Wird ausgesendet wenn der Button losgelassen wird
+   </shortdesc>
+   <desc>
+    <simpara>
+     Das <signalname>released</signalname> Signal wird ausgesendet wenn der
+     Mausknopf nach einem Klick auf den Button losgelassen wird, ungeachtet
+     der aktuellen Cursorposition.
+    </simpara>
+   </desc>
+  </signal>
+
+  <signal id="gtk.gtkbutton.signal.leave">
+   <signalname>leave</signalname>
+   <callback>
+    <funcprototype>
+     <funcdef>void <function>callback</function></funcdef>
+     <paramdef><classname>GtkButton</classname></paramdef>
+    </funcprototype>
+   </callback>
+   <shortdesc>
+    Wird ausgesendet wenn der Cursor die Bereich des Buttons verl&auml;sst
+   </shortdesc>
+   <desc>
+    das <signalname>leave</signalname> Signal wird asugesendet wenn der
+    Cursor den Bildschirmbereich verl&auml;sst wo sich der Button befindet.
+   </desc>
+  </signal>
+ </signals>
+
+</classentry>
+
+<!--
+ * Local variables:
+ * tab-width: 1
+ * c-basic-offset: 1
+ * End:
+ * vim600: et sw=1 ts=1 tw=78 fdm=marker
+ * vim<600: et sw=1 ts=1 tw=78
+-->

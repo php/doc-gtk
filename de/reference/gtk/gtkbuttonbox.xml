@@ -1,0 +1,213 @@
+<classentry id="gtk.gtkbuttonbox">
+ <classmeta>
+  <classtitle>GtkButtonBox</classtitle>
+  <classparent>GtkBox</classparent>
+  <shortdesc>
+   Basisklasse f&uuml;r <classname>GtkHButtonBox</classname> und
+   <classname>GtkVbuttonBox</classname>.
+  </shortdesc>
+  <desc>
+   <simpara>
+    <classname>GtkButtonBox</classname> ist eine Basisklasse die f&uuml;r
+    Buttons, die in <classname>GtkHButtonBox</classname> und
+    <classname>GtkVButtonBox</classname> Container Widgets gepackt sind, eine
+    Reihe von Layoutoptionen zur Verf&uuml;gung stellt.
+   </simpara>
+   <note>
+    <simpara>
+     Bitte beachte dass in GTK+ 2.0 alle Referenzen zu
+     <literal>spacing</literal> komplett wegfallen; das liegt darin weil diese
+     Werte in <classname>GtkButtonBox</classname> immer relativ sind und daher
+     intern eingestellt werden sollten.
+    </simpara>
+   </note>
+  </desc>
+ </classmeta>
+
+ <methods>
+
+  <method id="gtk.gtkbuttonbox.method.get_spacing">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>int <function>get_spacing</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Gibt den Abstand zwischen Button zur&uuml;ck. *veraltet in GTK2*
+   </shortdesc>
+   <desc>
+    <simpara>
+     <function class="GtkButtonBox">get_spacing</function> gibt Ganzzahlenwert
+     zur&uuml;ck der den Abstand zwischen den Buttons in einer
+     <classname>GtkButtonBox</classname> beschreibt.
+    </simpara>
+    <note>
+     <simpara>
+      Beachte dass diese Methode in GTK+ 2.0 veraltet ist und nicht benutzt
+      werden sollte in Programmen bei denen auf
+      Vorw&auml;rtskompatibilit&auml;t geachtet wird.
+     </simpara>
+    </note>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkbuttonbox.method.get_layout">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>
+      <enumname>GtkButtonBoxStyle</enumname> 
+      <function>get_layout</function>
+     </funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Feststellen der Layoutstil Einstellung.
+   </shortdesc>
+   <desc>
+    <simpara>
+     <function class="GtkButtonBox">get_layout()</function> dient dazu die
+     Aktuelle Einstellung des Layoutstiles einer
+     <classname>GtkButtonBox</classname> herauszufinden.
+    </simpara>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkbuttonbox.method.set_spacing">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_spacing</function></funcdef>
+     <paramdef>int <parameter>spacing</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Setzt den Abstand zwischen den Buttons. *in GTK2 veraltet*
+   </shortdesc>
+   <desc>
+    <simpara>
+     <function class="GtkButtonBox">set_spacing()</function> setzt den Abstand
+     ziwschen den Buttons in Pixeln fest. Siehe auch gtk::
+     <function ref="functions">hbutton_box_set_spacing_default()</function>
+     oder gtk::
+     <function ref="functions">vbutton_box_det_spacing_default()</function> Um
+     die Voreinstellung des Abstandes innerhalb der gesamten Anwendung
+     einzustellen. Wenn dies nicht ver&auml;ndert wird ist die Voreinstellung
+     zurzeit <literal>10</literal> Pixel f&uml;r
+     <classname>GtkVButtonBox</classname> und <literal>30</literal> f&uuml;r
+     <classname>GtkHButtonBox</classname>.
+    </simpara>
+    <note>
+     <simpara>
+      Beachte dass diese Methode in GTK+ 2.0 veraltet ist. Wenn auf
+      Vorw&auml;rtskompatibilit&auml;t geachtet wird sollte statt dessen
+      <function class="GtkButtonBox">set_layout()</function> benutzt werden.
+     </simpara>
+    </note>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkbuttonbox.method.set_layout">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_layout</function></funcdef>
+     <paramdef>
+      <enumname>GtkButtonBoxStyle</enumname> 
+      <parameter>layout_style</parameter>
+     </paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Setzt den Button Layout Stil fest.
+   </shortdesc>
+   <desc>
+    <simpara>
+     <function class="GtkButtonBox">set_layout()</function> setzt die
+     Abstandseinstellungen der Buttons nach Massgabe einer der f&uuml;nf
+     <enumname>GtkButtonStyle</enumname> Einstellungen.
+    </simpara>
+    <simpara>
+     Die Voreinstellung ist immer der
+     <optionname>GTK_BUTTONBOX_DEFAULT_STYLE</optionname>, welcher selbst
+     wiederum nach <optionname>GTK_BUTTONBOX_EDGE</optionname> voreingestellt
+     ist. Dies kann &uuml;ber gtk::
+     <function ref="functions">hbutton_box_set_layout_default()</function>
+     und gtk::
+     <function ref="function">vbotton_box_set_layout_default()</function> 
+     f&uuml;r eine komplette Applikation eingestellt werden.
+    </simpara>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkbuttonbox.method.set_child_size">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_child_size</function></funcdef>
+     <paramdef>int <parameter>min_width</parameter></paramdef>
+     <paramdef>int <parameter>min_height</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Setzt die Minimale Kindergr&ouml;sse. *veraltet in GTK2*
+   </shortdesc>
+   <desc>
+    <simpara>
+     <function class="GtkButtonBox">set_child_size()</function> setzt die
+     minimale Kindergr&ouml;sse f&uuml;r jedes Kinderwidget in der
+     <classname>GtkButtonBox</classname> in Pixeln.
+    </simpara>
+    <simpara>
+     Die Voreinstellung ist <literal>(85, 27)</literal>.
+    </simpara>
+    <note>
+     <simpara>
+      Beachte dass diese Methode veraltet ist und dass die minimale
+      Gr&ouml;sse in zuk&uml;nftigen Versionen von GTK+ intern eingestellt
+      werden wird.
+     </simpara>
+    </note>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkbuttonbox.method.set_child_ipadding">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_child_ipadding</function></funcdef>
+     <paramdef>int <parameter>ipad_x</parameter></paramdef>
+     <paramdef>int <parameter>ipad_y</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Setzt die interne Polsterung des Kindes. *veraltet in GTK2*
+   </shortdesc>
+   <desc>
+    <simpara>
+     <function class="GtkButtonBox">set_child_ipadding()</function> setzt den
+     Betrag um den die Breite und H&ouml;he das Raumes, der von den Buttons
+     angefordert wird, erh&ouml;ht wird.
+    </simpara>
+    <simpara>
+     Die Voreinstellung ist zurzeit <literal>(7, 0)</literal>.
+    </simpara>
+    <note>
+     <simpara>
+      Beachte dass diese Methode veraltet ist und dass die interne Polsterung
+      in zuk&uml;nftigen Versionen von GTK+ von dem Widget selbst eingestellt
+      wird.
+     </simpara>
+    </note>
+   </desc>
+  </method>
+
+ </methods>
+
+</classentry>
+
+<!--
+ * Local variables:
+ * tab-width: 1
+ * c-basic-offset: 1
+ * End:
+ * vim600: et sw=1 ts=1 tw=78 fdm=marker
+ * vim<600: et sw=1 ts=1 tw=78
+-->
