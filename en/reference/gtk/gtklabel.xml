@@ -43,21 +43,34 @@
      <programlisting role="php">
 <![CDATA[
 <?php
-
-dl('php_gtk.' . (strstr(PHP_OS, 'WIN') ? 'dll' : 'so'));
+if( !extension_loaded('gtk')) {	
+	dl( 'php_gtk.' . PHP_SHLIB_SUFFIX); 
+}
 
 $window = &new GtkWindow();
-$window->set_usize(200, 200);
+$window->set_default_size(300, 70);
 $window->connect_object('destroy', array('gtk', 'main_quit'));
 
-/* Child widgets by default will expand to fill the available space */
 $label = &new GtkLabel("This is my label");
+//move it to the lower right
 $label->set_alignment(1.0, 1.0);
+
+//give it a nice font and color
+$style = $label->get_style();
+$style->font = gdk::font_load( '-*-Arial-bold-r-normal-*-24-*-*-*-*-*-*-*');
+$orange = &new GdkColor( '#FF8000');;
+$style->fg[GTK_STATE_NORMAL] = $orange;
+$label->set_style( $style);
+
+//you can't set the background color of a label, use the parent widget instead
+$wstyle = $window->get_style();
+$wstyle->bg[GTK_STATE_NORMAL] = $wstyle->black;
+$window->set_style( $wstyle);
+
 $window->add($label);
 $window->show_all();
 
 gtk::main();
-
 ?>
 ]]>
      </programlisting>
