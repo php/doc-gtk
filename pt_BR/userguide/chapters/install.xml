@@ -1,0 +1,134 @@
+<chapter id="installation">
+ <title>Installation</title>
+ <sect1 id="install.get">
+  <title>Obtendo a &Uacute;ltima Vers&atilde;o</title>
+  <!-- TODO  Make sure to keep the next paragraph updated - sf -->
+  <simpara>
+   O c&oacute;digo e os bin&aacute;rios para Windows podem ser encontrados
+   em <ulink url="&url.phpgtk;">&url.phpgtk;</ulink>.
+   Para usu&aacute;rios do fonte tamb&eacute;m ser&aacute; necess&aacute;rio instalar a &uacute;ltima vers&atilde;o do PHP do
+   CVS <ulink url="&url.php.anoncvs;">&url.php.anoncvs;</ulink>.
+  </simpara>
+ </sect1>
+
+ <sect1 id="install.win32">
+  <title>Instalando PHP-GTK sob Windows</title>
+
+  <sect2 id="install.win32.binaries">
+   <title>O Donwload do PHP-GTK</title>
+   <simpara>
+    Baixe os &uacute;ltimos bin&aacute;rios de 
+    <ulink url="&url.phpgtk;">&url.phpgtk;</ulink>.
+    Voc&ecirc; pode tamb&eacute;m querer baixar os &uacute;ltimos fontes do
+    servidor CVS do php.net
+    Veja <ulink url="&url.php.anoncvs;">&url.php.anoncvs;</ulink>
+    para mais informa&ccedil;&otilde;es.
+   </simpara>
+  </sect2>
+  <sect2 id="install.win32.binary.package-layout">
+   <title>Layout da Distribui&ccedil;&atilde;o dos Binarios</title>
+   <para>
+    A distribui&ccedil;&atilde;o dos bin&aacute;rios do PHP-GTK cont&eacute;m esta estrutura:
+    <itemizedlist>
+     <listitem>
+      <simpara>
+       \php4   -&gt; PHP e arquivos bin&aacute;rios do PHP-GTK
+      </simpara>
+     </listitem>
+     <listitem>
+      <simpara>
+       \winnt  -&gt; arquivo default do php.ini
+      </simpara>
+     </listitem>
+     <listitem>
+      <simpara>
+       \winnt\system32 -&gt; bin&aacute;rios GTK+ usados pela extens&atilde;o
+      </simpara>
+     </listitem>
+     <listitem>
+      <simpara>
+       \test -&gt; v&aacute;rios exemplos para demonstrar o uso do PHP-GTK.
+      </simpara>
+     </listitem>
+     <listitem>
+      <simpara>
+       README.TXT
+      </simpara>
+     </listitem>
+    </itemizedlist>
+   </para>
+  </sect2>
+  <sect2 id="install.win32.howto">
+   <title>Como instalar</title>
+   <orderedlist>
+    <listitem>
+     <simpara>
+      Copie \php4 para o seu diret&oacute;rio php j&aacute; existente. Se esta &eacute; uma nova
+      instala&ccedil;&atilde;o voc&ecirc; poder&aacute; criar c:\php4 e copiar os arquivos para o diret&oacute;rio.
+     </simpara>
+    </listitem>
+    <listitem>
+     <simpara>
+      Copie \winnt para seu diret&oacute;rio winnt. No Windows NT e Windows 2000
+      que &eacute; c:\winnt. No Windows 95/98 que &eacute; is c:\windows.  Se voc&ecirc; tem um
+      arquivo php.ini j&aacute;, n&atilde;o precisa copiar este arquivo.
+     </simpara>
+    </listitem>
+    <listitem>
+     <simpara>
+      Copie \winnt\system32 para o diret&oacute;rio winnt\system32. No Windows NT
+      e Windows 2000 que &eacute; c:\winnt\system32. No Windows 95/98 que &eacute;
+      c:\windows\system32.
+     </simpara>
+    </listitem>
+    <listitem>
+     <simpara>
+      Copie \test para o local onde voc&ecirc; quer rodar seus scripts
+      (e.g. c:\php4\test).
+     </simpara>
+    </listitem>
+   </orderedlist>
+  </sect2>
+  <sect2 id="install.win32.usage">
+   <title>Como usar PHP-GTK</title>
+   <simpara>
+    Aplica&ccedil;&otilde;es podem ser inicializadas da linha de comando
+    (ou atalho) com a sintaxe:
+    <command>c:\php4\php -q c:\path\to\php-gtk\script.php</command>
+   </simpara>
+  </sect2>
+ </sect1>
+
+ <sect1 id="install.unix">
+  <title>Instalando PHP-GTK Sobr Unix</title>
+  <!-- TODO  Make sure to keep the next paragraph updated - sf -->
+  <para>
+   N&oacute;s sugerimos que voc&ecirc; obtenha o &uacute;ltimo fonte de <ulink url="&url.phpgtk;">&url.phpgtk;</ulink>
+   ou do CVS an&ocirc;nimo <ulink url="&url.php.anoncvs;">&url.php.anoncvs;</ulink>. 
+   Voc&ecirc; precisar&aacute; do m&oacute;dulo PHP-GTK e da atual vers&atilde;o CVS do PHP, que precisa ser
+   instalada primeiro.
+  </para>
+  <para>
+   Rode o comando <command>phpize</command> que &eacute; um script instalado com o PHP. 
+   Isto ir&aacute; ajustar os arquivos necess&aacute;rios e criar o script 'configure'.
+   Depois, rode <command>./configure</command>.  Isto ir&aacute; verificar se voc&ecirc; tem
+   a vers&atilde;o atual do GTK+ 1.2.x (1.2.6 ou maior, dispon&iacute;vel em 
+   <ulink url="&url.gtk;">&url.gtk;</ulink>) e outros arquivos requiridos para
+   compila&ccedil;&atilde;o, e cria os Makefiles necess&aacute;rios.
+  </para>
+  <simpara>
+   Finalmente, rode <command>make</command> para compilar a extensao.
+   Alguns arquivos fontes s&atilde;o gerados de arquivos .def pelo gerador de c&oacute;digo.
+   Se voc&ecirc; vir mensagens como &quot;Could not write...&quot;, significa que
+   objetos GTK+ ou caracter&iacute;sticas ainda n&atilde;o s&atilde;o suportados.
+   Se a compila&ccedil;&atilde;o for um sucesso, rode <command>make install</command> para
+   instalar a extens&atilde;o no diret&oacute;rio default para extens&otilde;es do PHP
+   (geralmente <filename>/usr/local/lib/php/extensions</filename>).
+  </simpara>
+  <simpara>
+   Para testar a exens&atilde;o, tente rodar o script de exemplo no diret&oacute;rio
+   test/. Estes tamb&eacute;m prov&ecirc; demonstra&ccedil;&otilde;es de alguns dos modos nos quais
+   a aplica&ccedil;&atilde;o pode ser usada.
+  </simpara>
+ </sect1>
+</chapter>

@@ -1,0 +1,88 @@
+<chapter id="gtk.widgets">
+ <title>Widgets and Containers</title>
+
+ <sect1 id="gtk.widgets.intro">
+  <title>Introdu&ccedil;&atilde;o</title>
+  <simpara>
+   Este cap&iacute;tulo explicar&aacute; alguns conceitos por tr&aacute;s do GTK+ e como voc&ecirc; pode us&aacute;-los.
+   can use them.
+  </simpara>
+ </sect1>
+
+ <sect1 id="gtk.widgets.whatare">
+  <title>O que s&atilde;o Widgets?</title>
+  <simpara>
+   <literal>widget</literal> &eacute; um termo usado no mundo do X para qualquer interface
+   gr&aacute;fica. Um widget pode ser uma caixa de texto, label, frame, window ou qualquer
+   outro componente GUI. Widgets GTK s&atilde;o todos derivados da base abstrata de classes
+   <classname>GtkWidget</classname>, e seus m&eacute;todos, sinais e propriedades implementados.
+  </simpara>
+  <simpara>
+   Do ponto de vista da programa&ccedil;&atilde;o um widget tem cinco partes para seu ciclo de vida:
+  </simpara>
+  <para>
+   <orderedlist>
+    <listitem>
+     <simpara>Cria&ccedil;&atilde;o</simpara>
+     <simpara>
+      Em PHP-GTK isto &eacute; feito pela cria&ccedil;&atilde;o de um objeto, e.g.
+      <literal>$window = &amp;new GtkWindow();</literal>
+     </simpara>
+    </listitem>
+    <listitem>
+     <simpara>Coloca&ccedil;&atilde;o</simpara>
+     <simpara>
+      Esta &eacute; a etapa de adicionar um widget em um
+      <link linkend="gtk.containers.whatare">container</link>.
+      Isto &eacute; alcan&ccedil;ado no PHP-GTK usando a sintaxe
+      <literal>$container-&gt;add($widget);</literal>
+     </simpara>
+    </listitem>
+    <listitem>
+     <simpara>Conex&atilde;o de sinal</simpara>
+     <simpara>
+      Esta &eacute; a etapa de registrar callback functions para o uso. Um exemplo
+      disto pode ser
+      <literal>
+       $widget-&gt;connect(&quot;event&quot;, &quot;my_focus_func&quot;);
+      </literal>,
+      onde &quot;event&quot; &eacute; um estado predefinido como um 
+      <signalname>clicked</signalname> and &quot;my_focus_func&quot; e a subrotina
+      chamada.
+     </simpara>
+    </listitem>
+    <listitem>
+     <simpara>Exibir</simpara>
+     <simpara>
+      Isto define se o widget est&aacute; em exibi&ccedil;&atilde;o para o usu&aacute;rio.
+      Isso come&ccedil;a chamando
+      <literal>$widget-&gt;show();</literal> and finished by
+      <literal>$widget-&gt;hide();</literal>.
+     </simpara>
+    </listitem>
+    <listitem>
+     <simpara>Destrui&ccedil;&atilde;o</simpara>
+     <simpara>
+      Isto ocorre quando a fun&ccedil;&otilde;a <literal>gtk::main_quit()</literal>
+      &eacute; chamada. Todas a&ccedil;&otilde;es que s&atilde;o necess&aacute;rias aqui s&atilde;o manipuladas internamente.
+     </simpara>
+    </listitem>
+   </orderedlist>
+  </para>
+ </sect1>
+
+ <sect1 id="gtk.containers.whatare">
+  <title>O que s&atilde;o Containers?</title>
+  <simpara>
+   Um container &eacute; simplesmente um <link linkend="gtk.widgets.whatare">widget</link>
+   que est&aacute; apto a conter outro widget.  A maioria dos widgets cai nesta classe;
+   obviamente exemplos como <classname>GtkWindow</classname>, 
+   <classname>GtkTable</classname> e <classname>GtkBox</classname>.  Suas propriedades
+   s&atilde;o exatamente as mesmas do que qualquer outro widget, e podem ser adicionadas
+   a outros containers t&atilde;o bem como suportar seus pr&oacute;prios widgets filhos.
+   Eles s&atilde;o derivados da classe <classname>GtkContainer</classname>
+   que por si &eacute; derivada da classe <classname>GtkWidget</classname>.
+  </simpara>
+ </sect1>
+
+</chapter>

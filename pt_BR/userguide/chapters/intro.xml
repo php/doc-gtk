@@ -1,0 +1,195 @@
+<chapter id="intro">
+ <title>Introdu&ccedil;&atilde;o ao PHP-GTK</title>
+
+ <sect1 id="intro.intro">
+  <title>Introdu&ccedil;&atilde;o</title>
+  <simpara>
+   Esta se&ccedil;&atilde;o do manual ir&aacute; levar voc&ecirc; as id&eacute;ias e as tecnologias
+   atr&aacute;s do PHP-GTK t&atilde;o bem como us&aacute;-las.
+  </simpara>
+ </sect1>
+
+ <sect1 id="intro.whatis.phpgtk">
+  <title>O que &eacute; o PHP-GTK?</title>
+  <simpara>
+   PHP-GTK &eacute; uma <ulink url="&url.php;">PHP</ulink> extens&atilde;o que permite
+   voc&ecirc; escrever aplica&ccedil;&otilde;es GUI client-side, cross-platform.
+   Esta &eacute; a primeira extens&atilde;o para o <ulink url="&url.php;">PHP</ulink>
+   deste tipo, e foi escrita em parte para provar que o <ulink url="&url.php;">PHP</ulink>
+   &eacute; uma linguagem de prop&oacute;sitos gerais capaz, e completa que assegura mais
+   do que somente a escrita de aplica&ccedil;&otilde;es no ambiente web.
+  </simpara>
+  <simpara>
+   Esta extens&atilde;o <emphasis>n&atilde;o</emphasis> permite voc&ecirc; exibir aplica&ccedil;&otilde;es GTK+ 
+   no browser web. A pretens&atilde;o &eacute; criar aplica&ccedil;&otilde;es GUI standalone.
+  </simpara>
+ </sect1>
+
+ <sect1 id="intro.whatis.gtk">
+  <title>What is GTK+?</title>
+  <sect2 id="intro.whatis.gtk.history">
+   <title>A Hist&oacute;ria do GTK+</title>
+   <para>
+    GTK+ foi originalmente desenvolvido para o<ulink url="&url.gimp;">GIMP</ulink>, 
+    o <ulink url="&url.gnu;">GNU</ulink> Image Manipulation Program. 
+    GTK+ &eacute; conhecido como GIMP Tool Kit.  GTK+ cresceu daquele prop&oacute;sito
+    inicial &eacute; hoje &eacute; usado como parte central do <ulink url="&url.gnome;">Gnome</ulink>,
+    o ambiente de projetos para Desktop GNU.  GTK+ tamb&eacute;m tem sido portado para o 
+    BeOS e Win32, fazendo da linguagem a escolha perfeita para se usar como
+    base para extens&atilde;o do PHP, mantendo o PHP como cross-platform dentro do poss&iacute;vel
+    e permitindo a cria&ccedil;&atilde;o de aplica&ccedil;&otilde;es "windowned" em PHP para Linux, BeOS e Windows.
+   </para>
+  </sect2>
+  <sect2 id="intro.whatis.gtk.whatitdoes">
+   <title>O que o GTK+ faz?</title>
+   <simpara>
+    GTK+ &eacute; um conjunto de bibliotecas escritas em C para criar interfaces
+    gr&aacute;ficas.  Tem uma arquitetura orientada a objetos desenvolvida em
+    tr&ecirc;s bibliotecas:
+   </simpara>
+   <para>
+    <itemizedlist>
+     <listitem>
+      <simpara>
+       <emphasis>GLib</emphasis>
+      </simpara>
+      <simpara>
+       Prov&ecirc; v&aacute;rias ferramentas para se usar quando se programa com GTK+.
+      </simpara>
+     </listitem>
+     <listitem>
+      <simpara>
+       <emphasis>GDK</emphasis>
+      </simpara>
+      <simpara>
+       Fun&ccedil;&otilde;es para constru&ccedil;&atilde;o de janelas em baixo n&iacute;vel.
+      </simpara>
+     </listitem>
+     <listitem>
+      <simpara>
+       <emphasis>GTK</emphasis>
+      </simpara>
+      <simpara>
+       Conjuntos de widgets para se usar quando se cria uma GUI.
+      </simpara>
+     </listitem>
+    </itemizedlist>
+   </para>
+  </sect2>
+ </sect1>
+
+ <sect1 id="intro.whatis.php">
+  <title>What is PHP?</title>
+  <sect2 id="intro.whatis.php.history">
+   <title>A Hist&oacute;ria do PHP</title>
+   <simpara>
+    <ulink url="&url.php;">PHP</ulink> Come&ccedil;ou e ainda &eacute; usado  
+    principalmente como uma linguagem de script server-side embutida em HTML.
+   </simpara>
+   <simpara>
+    PHP, conhecido originalmente como Personal Home Pages, foi primeiramente
+    concebido no outono de 1994 por Rasmus Lerdorf.  Ele a escreveu como
+    um modo de rastrear os visitantes de seu CV online.  A primeira vers&atilde;o teve release
+    no in&iacute;cio de 1995, &eacute;poca na qual Rasmus achou que fazendo seu projeto
+    open-source, pessoas corrigiriam seus bugs. A primeira vers&atilde;o foi muito
+    "straightforward" e tinha um parser simples que reconhecia algumas macros
+    especiais e provia algumas utilidades que eram comumente usadas em 
+    homepages.
+   </simpara>
+   <simpara>
+    O parser foi reescrito em meados de 1995 e renomeado para PHP/FI version 2. 
+    O "FI" desta vers&atilde;o significava Form Interpreter, Rasmus
+    tinha adicionado ao PHP uma s&eacute;rie de necessidades crescentes para webpages.
+    Suporte ao mSQL foi tamb&eacute;m adicionado nesta &eacute;poca. PHP/FI estava sobre crescimento massivo,
+    e outras pessoas come&ccedil;aram a contribuir com c&oacute;digo regularmente.
+   </simpara>
+   <simpara>
+    Em meados de 1997 Zeev Suraski and Andi Gutmans reescreveram o parser principal, e
+    PHP deixou de estar sob a tutela de Rasmus' para estar sob a orienta&ccedil;&atilde;o de um grupo
+    Isto formou as bases para o PHP3, agora chamado de PHP: Hypertext Preprocessor 
+    - um acronimo recursivo.
+   </simpara>
+   <simpara>
+    a &uacute;ltima vers&atilde;o, o PHP4, &eacute; outra reescrita por Suraski and Gutmans and
+    &eacute; baseada no mecanismo (tecnologia) <ulink url="&url.zend;">Zend</ulink>.
+    PHP tem mais de duzentos contribuintes regulares trabalhando em v&aacute;rias
+    partes do projeto. Tem uma quantidade gigantesca de extens&otilde;es secund&aacute;rias,
+    m&oacute;dulos, suport todo tipo de servidores populares nativamente, e tem 
+    embutido suporte para MySql e ODBC.
+   </simpara>
+   <simpara>
+    A &uacute;ltima estat&iacute;stica mostra que o PHP agora &eacute; usado por mais de 5,5 milh&otilde;es
+    de dom&iacute;nios, e tem tido uma taxa de uso crescente ano p&oacute;s ano. 
+    Isto est&aacute; longe de ser simplesmente o m&oacute;dulo mais popular do Apache;
+    Para se ter uma id&eacute;ia, o Apache atualmente est&aacute; perto de 60% dos servidores
+    de internet do mercado, enquanto que servidores IIS (que nativamente
+    suportam ASP) est&atilde;o presente em menos que a metade desta propor&ccedil;&atilde;o.
+    (Obtidos de <ulink url="&url.stats;">&url.stats;</ulink>
+    Mar&ccedil;o 2001.)
+   </simpara>
+  </sect2>
+  <sect2 id="intro.whatis.php.whatdoes">
+   <title>O que PHP faz?</title>
+   <simpara>
+    PHP &eacute; uma linguagem para prop&oacute;sitos gerais. &Eacute; normalmente usada
+    como linguagem de script embutida em html para se usar na web,
+    mas tamb&eacute;m pode ser usada como linguagem de script shell ou mesmo
+    como uma linguagem para escrever aplica&ccedil;&otilde;es "windowned", como em PHP-GTK.
+   </simpara>
+   <simpara>
+    Devido a natureza open-source do PHP, se h&aacute; algo atualmente que voc&ecirc; n&atilde;o
+    consegue fazer em PHP, n&atilde;o h&aacute; nada que impessa voc&ecirc; de escrever um m&oacute;dulo
+    ou extens&atilde;o em c&oacute;digo C para estender suas funcionalidades, ent&atilde;o, voc&ecirc;
+    pode fazer o que voc&ecirc; quizer com PHP, voc&ecirc; mesmo. Isto &eacute; poss&iacute;vel atrav&eacute;s
+    da documenta&ccedil;&atilde;o da API bem feita, que est&aacute; dispon&iacute;vel para todos.
+   </simpara>
+   <para>
+    PHP4 tem duas partes principais para isto:
+    <itemizedlist>
+     <listitem>
+      <simpara>
+       <emphasis>O mecanismo (tecnologia) Zend</emphasis>
+      </simpara>
+      <simpara>
+       &Eacute; parte do pacote PHP que mant&eacute;m o registro de requisi&ccedil;&otilde;es,
+       processa arquivos scripts, e manipula vari&aacute;veis e recursos.
+       Sua homepage pode ser acessada em <ulink url="&url.zend;">&url.zend;</ulink>.
+      </simpara>
+     </listitem>
+     <listitem>
+      <simpara>
+       <emphasis>PHP</emphasis>
+      </simpara>
+      <simpara>
+       Implementa 90% das funcionalidades vistas pelo usu&aacute;rio final
+       Prov&ecirc; um extenso conjunto de m&oacute;dulos como MySQL, ODBC e suporte XML.
+      </simpara>
+     </listitem>
+    </itemizedlist>
+   </para>
+  </sect2>
+ </sect1>
+
+ <sect1 id="intro.acknowledgements">
+  <title>Agradecimentos PHP-GTK</title>
+  <simpara>
+   A pessoa que eu gostaria de agradecer mais &eacute;
+   James Henstridge <ulink url="mailto:&email.james.henstridge;">
+    <email>&email.james.henstridge;</email></ulink>, o autor do PyGTK 
+   (Python GTK+ Bindings).  Sua ajuda e conselho n&atilde;o tem pre&ccedil;o e tem ajudado
+   o desenvolvimento desta extens&atilde;o, e muito c&oacute;digo-fonte &eacute; baseado ou inspirado
+   pelo que ele tem feito desenvolvendo para o PyGTK.
+  </simpara>
+  <simpara>
+   Eu tamb&eacute;m gostaria de agradecer ao time PHP por fazer
+   esta grande linguagem, e o time GTK+ por desenvolver
+   o que tende a ser o melhor toolkit GUI baseado em C.
+  </simpara>
+  <simpara>
+   <author>
+    <firstname>Andrei</firstname><surname>Zmievski</surname>
+   </author>
+   - <literal>Feb 2001</literal>
+  </simpara>
+ </sect1>
+</chapter>
