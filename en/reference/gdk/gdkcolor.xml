@@ -92,4 +92,89 @@ $cyan = &new GdkColor('cyan');
   </desc>
  </constructor>
 
+ 
+ 
+ 
+ <properties>
+
+  <prop id="gdk.gdkcolor.property.red" type="rw">
+   <propname>red</propname>
+   <proptype>int</proptype>
+   <shortdesc>
+    The red part of the color
+   </shortdesc>
+   <desc>
+    <simpara>
+     Returns the red part of the color in the range from 0 to 65536. If you
+     convert it to hexadecimal via <literal>dechex</literal>, you will see
+     that only the first 2 values are used, the last 2 are zero. So if you
+     want to convert it to a nice html-like hexadecimal value like
+     <literal>AF</literal>, you've got to shift it bitwise.
+    </simpara>
+    <programlisting role="php">
+<![CDATA[
+$orange = &new GdkColor('#FF8000');
+echo dechex( $orange->red >> 8);
+]]>    
+    </programlisting>
+    <simpara>
+     You can use the property to set the red part of the color as well.
+    </simpara>
+   </desc>
+  </prop>
+
+  <prop id="gdk.gdkcolor.property.green" type="rw">
+   <propname>green</propname>
+   <proptype>int</proptype>
+   <shortdesc>
+    The green part of the color
+   </shortdesc>
+   <desc>
+    <simpara>
+     Returns the green part of the color in the range from 0 to 65536. If you
+     convert it to hexadecimal via <literal>dechex</literal>, you will see
+     that only the first 2 values are used, the last 2 are zero. So if you
+     want to convert it to a nice html-like hexadecimal value like
+     <literal>AF</literal>, you've got to shift it bitwise.
+    </simpara>
+    <programlisting role="php">
+<![CDATA[
+$orange = &new GdkColor('#FF8000');
+echo dechex( $orange->green >> 8);
+]]>    
+    </programlisting>
+    <simpara>
+     You can use the property to set the green part of the color as well.
+    </simpara>
+   </desc>
+  </prop>
+
+  <prop id="gdk.gdkcolor.property.blue" type="rw">
+   <propname>blue</propname>
+   <proptype>int</proptype>
+   <shortdesc>
+    The blue part of the color
+   </shortdesc>
+   <desc>
+    <simpara>
+     Returns the blue part of the color in the range from 0 to 65536. If you
+     convert it to hexadecimal via <literal>dechex</literal>, you will see
+     that only the first 2 values are used, the last 2 are zero. So if you
+     want to convert it to a nice html-like hexadecimal value like
+     <literal>AF</literal>, you've got to shift it bitwise.
+    </simpara>
+    <programlisting role="php">
+<![CDATA[
+$orange = &new GdkColor('#FF8000');
+echo dechex( $orange->blue >> 8);
+]]>    
+    </programlisting>
+    <simpara>
+     You can use the property to set the blue part of the color as well.
+    </simpara>
+   </desc>
+  </prop>
+
+ </properties>
+ 
 </classentry>

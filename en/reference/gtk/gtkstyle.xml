@@ -16,9 +16,7 @@
      <programlisting role="php">
 <![CDATA[
 <?php
-
 $style = $widget->style;
-
 ?>
 ]]>
      </programlisting>
@@ -29,9 +27,7 @@ $style = $widget->style;
      <programlisting role="php">
 <![CDATA[
 <?php
-
 $style = &new GtkStyle();
-
 ?>
 ]]>
      </programlisting>
@@ -41,9 +37,7 @@ $style = &new GtkStyle();
      <programlisting role="php">
 <![CDATA[
 <?php
-
 $style = gtk::widget_get_default_style();
-
 ?>
 ]]>
      </programlisting>
@@ -93,8 +87,9 @@ $style = gtk::widget_get_default_style();
      <programlisting role="php">
 <![CDATA[
 <?php
-
-dl('php_gtk.'.(strstr(PHP_OS, 'WIN') ? 'dll' : 'so'));
+if( !extension_loaded('gtk')) {	
+	dl( 'php_gtk.' . PHP_SHLIB_SUFFIX); 
+}
 
 $window = &new GtkWindow();
 $window->set_position(GTK_WIN_POS_CENTER);
@@ -136,7 +131,6 @@ $label->set_style($newstyle2);
 $window->show_all();
 
 gtk::main();
-
 ?>
 ]]>
      </programlisting>
@@ -172,111 +166,160 @@ gtk::main();
 
   <prop id="gtk.gtkstyle.property.black" type="rw">
    <propname>black</propname>
-   <proptype>GdkColor</proptype>
+   <proptype><classname>GdkColor</classname></proptype>
    <shortdesc>
     The color being used as black.
    </shortdesc>
    <desc>
     <simpara>
-     
+     Returns the a <classname>GdkColor</classname> object representing the
+     black color.
     </simpara>
+    <programlisting role="php">
+<![CDATA[
+$style	= &new GtkStyle;
+$style->bg[GTK_STATE_NORMAL]	= $style->black;
+]]>
+    </programlisting>
+    <para>
+     You can even overwrite the color with your own:
+     <programlisting role="php">
+<![CDATA[
+$style	= &new GtkStyle;
+$red	= &new GdkColor('#FF0000');
+$style->white	= $red;
+]]>
+     </programlisting>
+    </para>
    </desc>
   </prop>
 
   <prop id="gtk.gtkstyle.property.white" type="rw">
    <propname>white</propname>
-   <proptype>GdkColor</proptype>
+   <proptype><classname>GdkColor</classname></proptype>
    <shortdesc>
     The color being used as white.
    </shortdesc>
    <desc>
     <simpara>
-     
+     Returns the a <classname>GdkColor</classname> object representing the
+     white color.
     </simpara>
+    <programlisting role="php">
+<![CDATA[
+$style	= &new GtkStyle();
+$style->fg[GTK_STATE_NORMAL]	= $style->white;
+]]>
+    </programlisting>
    </desc>
   </prop>
 
   <prop id="gtk.gtkstyle.property.font" type="rw">
    <propname>font</propname>
-   <proptype>GdkFont</proptype>
+   <proptype><classname>GdkFont</classname></proptype>
    <shortdesc>
     The font.
    </shortdesc>
    <desc>
     <simpara>
-     The current font.
+     Returns or sets the current font of the style.
     </simpara>
+    <programlisting role="php">
+<![CDATA[
+$style	= &new GtkStyle();
+$style->font = gdk::font_load( '-bitsteam-bitstream vera sans mono-bold-r-normal-*-24-*-*-*-*-*-*-*');
+]]>
+    </programlisting>
    </desc>
   </prop>
 
   <prop id="gtk.gtkstyle.property.black_gc" type="rw">
    <propname>black_gc</propname>
-   <proptype>GdkGC</proptype>
+   <proptype><classname>GdkGC</classname></proptype>
    <shortdesc>
-
+    Graphics information for the black color.
    </shortdesc>
    <desc>
     <simpara>
-     
+     The <classname>GdkGC</classname> object for the 
+     <propname class="GtkStyle">black</propname> color.
     </simpara>
    </desc>
   </prop>
 
   <prop id="gtk.gtkstyle.property.white_gc" type="rw">
    <propname>white_gc</propname>
-   <proptype>GdkGC</proptype>
+   <proptype><classname>GdkGC</classname></proptype>
    <shortdesc>
-
+    Graphics information for the white color.
    </shortdesc>
    <desc>
     <simpara>
-     
+     The <classname>GdkGC</classname> object for the 
+     <propname class="GtkStyle">white</propname> color.
     </simpara>
    </desc>
   </prop>
 
   <prop id="gtk.gtkstyle.property.colormap" type="rw">
    <propname>colormap</propname>
-   <proptype>GdkColormap</proptype>
+   <proptype><classname>GdkColormap</classname></proptype>
    <shortdesc>
     The colormap currently being used.
    </shortdesc>
    <desc>
     <simpara>
-     
+     Sets or returns the <classname>GdkColormap</classname> used by this style.
     </simpara>
    </desc>
   </prop>
 
   <prop id="gtk.gtkstyle.property.fg" type="rw">
    <propname>fg</propname>
-   <proptype>array</proptype>
+   <proptype>Array</proptype>
    <shortdesc>
-    Foreground.
+    Foreground colors.
    </shortdesc>
    <desc>
     <simpara>
-     
+     Returns an array of 5 foreground <classname>GdkColor</classname>s used for the 
+     <link linkend="gtk.enum.gtkstatetype">different states</link>
+     a widget can reach. 
     </simpara>
+    <programlisting role="php">
+<![CDATA[
+$newstyle = &new GtkStyle();
+$cyan = &new GdkColor('#00FFFF');
+$newstyle->fg[GTK_STATE_PRELIGHT] = $cyan;
+]]>
+    </programlisting>
    </desc>
   </prop>
 
   <prop id="gtk.gtkstyle.property.bg" type="rw">
    <propname>bg</propname>
-   <proptype>array</proptype>
+   <proptype>Array</proptype>
    <shortdesc>
-    Background.
+    Background colors.
    </shortdesc>
    <desc>
     <simpara>
-     
+     Returns an array of 5 background <classname>GdkColor</classname>s used for the 
+     <link linkend="gtk.enum.gtkstatetype">different states</link>
+     a widget can reach. 
     </simpara>
+    <programlisting role="php">
+<![CDATA[
+$newstyle = &new GtkStyle();
+$newstyle->bg[GTK_STATE_PRELIGHT] = $newstyle->white;
+]]>
+    </programlisting>
    </desc>
   </prop>
 
   <prop id="gtk.gtkstyle.property.light" type="rw">
    <propname>light</propname>
-   <proptype>array</proptype>
+   <proptype>Array</proptype>
    <shortdesc>
 
    </shortdesc>
@@ -289,7 +332,7 @@ gtk::main();
 
   <prop id="gtk.gtkstyle.property.dark" type="rw">
    <propname>dark</propname>
-   <proptype>array</proptype>
+   <proptype>Array</proptype>
    <shortdesc>
 
    </shortdesc>
@@ -302,7 +345,7 @@ gtk::main();
 
   <prop id="gtk.gtkstyle.property.mid" type="rw">
    <propname>mid</propname>
-   <proptype>array</proptype>
+   <proptype>Array</proptype>
    <shortdesc>
     Midway between light and dark.
    </shortdesc>
@@ -315,59 +358,67 @@ gtk::main();
 
   <prop id="gtk.gtkstyle.property.text" type="rw">
    <propname>text</propname>
-   <proptype>array</proptype>
+   <proptype>Array</proptype>
    <shortdesc>
-    Text in a text widget.
+    Colors for a text widget.
    </shortdesc>
    <desc>
     <simpara>
-     
+     Returns an array of 5 text <classname>GdkColor</classname>s used for the 
+     <link linkend="gtk.enum.gtkstatetype">different states</link>
+     a widget can reach. 
     </simpara>
    </desc>
   </prop>
 
   <prop id="gtk.gtkstyle.property.base" type="rw">
    <propname>base</propname>
-   <proptype>array</proptype>
+   <proptype>Array</proptype>
    <shortdesc>
     Text background.
    </shortdesc>
    <desc>
     <simpara>
-     
+     Returns an array of 5 text background <classname>GdkColor</classname>s used for the 
+     <link linkend="gtk.enum.gtkstatetype">different states</link>
+     a widget can reach. 
     </simpara>
    </desc>
   </prop>
 
   <prop id="gtk.gtkstyle.property.fg_gc" type="rw">
    <propname>fg_gc</propname>
-   <proptype>array</proptype>
+   <proptype>Array</proptype>
    <shortdesc>
-
+    Graphics information for the foreground colors.
    </shortdesc>
    <desc>
     <simpara>
-     
+     Returns an array of 5 foreground <classname>GdkGC</classname> objects,
+     one for each <link linkend="gtk.enum.gtkstatetype">state</link> a
+     widget can reach. 
     </simpara>
    </desc>
   </prop>
 
   <prop id="gtk.gtkstyle.property.bg_gc" type="rw">
    <propname>bg_gc</propname>
-   <proptype>array</proptype>
+   <proptype>Array</proptype>
    <shortdesc>
-
+    Graphics information for the background colors.
    </shortdesc>
    <desc>
     <simpara>
-     
+     Returns an array of 5 background <classname>GdkGC</classname> objects,
+     one for each <link linkend="gtk.enum.gtkstatetype">state</link> a
+     widget can reach. 
     </simpara>
    </desc>
   </prop>
 
   <prop id="gtk.gtkstyle.property.light_gc" type="rw">
    <propname>light_gc</propname>
-   <proptype>array</proptype>
+   <proptype>Array</proptype>
    <shortdesc>
 
    </shortdesc>
@@ -380,7 +431,7 @@ gtk::main();
 
   <prop id="gtk.gtkstyle.property.dark_gc" type="rw">
    <propname>dark_gc</propname>
-   <proptype>array</proptype>
+   <proptype>Array</proptype>
    <shortdesc>
 
    </shortdesc>
@@ -393,7 +444,7 @@ gtk::main();
 
   <prop id="gtk.gtkstyle.property.mid_gc" type="rw">
    <propname>mid_gc</propname>
-   <proptype>array</proptype>
+   <proptype>Array</proptype>
    <shortdesc>
 
    </shortdesc>
@@ -406,40 +457,61 @@ gtk::main();
 
   <prop id="gtk.gtkstyle.property.text_gc" type="rw">
    <propname>text_gc</propname>
-   <proptype>array</proptype>
+   <proptype>Array</proptype>
    <shortdesc>
-
+    Graphics information for the text foreground colors.
    </shortdesc>
    <desc>
     <simpara>
-     
+     Returns an array of 5 text foreground <classname>GdkGC</classname> objects,
+     one for each <link linkend="gtk.enum.gtkstatetype">state</link> a
+     widget can reach. 
     </simpara>
    </desc>
   </prop>
 
   <prop id="gtk.gtkstyle.property.base_gc" type="rw">
    <propname>base_gc</propname>
-   <proptype>array</proptype>
+   <proptype>Array</proptype>
    <shortdesc>
-
+    Graphics information for the text background colors.
    </shortdesc>
    <desc>
     <simpara>
-     
+     Returns an array of 5 text background <classname>GdkGC</classname> objects,
+     one for each <link linkend="gtk.enum.gtkstatetype">state</link> a
+     widget can reach. 
     </simpara>
    </desc>
   </prop>
 
   <prop id="gtk.gtkstyle.property.bg_pixmap" type="rw">
    <propname>bg_pixmap</propname>
-   <proptype>array</proptype>
+   <proptype>Array</proptype>
    <shortdesc>
-    Background pixmap.
+    Background pixmaps.
    </shortdesc>
    <desc>
     <simpara>
-     
+     Returns an array of 5 pixmaps, one for each 
+     <link linkend="gtk.enum.gtkstatetype">state</link> a
+     widget can reach. You can set it the following way:
     </simpara>
+    <programlisting role="php">
+<![CDATA[
+$bookicon = array("16 16 6 1",
+"       c None s None",".      c black","X      c red","o      c yellow","O      c #808080",
+"#      c white","                ","       ..       ","     ..XX.      ","   ..XXXXX.     ",
+" ..XXXXXXXX.    ",".ooXXXXXXXXX.   ","..ooXXXXXXXXX.  ",".X.ooXXXXXXXXX. ",".XX.ooXXXXXX..  ",
+" .XX.ooXXX..#O  ","  .XX.oo..##OO. ","   .XX..##OO..  ","    .X.#OO..    ","     ..O..      ",
+"      ..        ","                ");
+$transparent = &new GdkColor(0, 0, 0);
+list( $pixmap, $mask) = Gdk::pixmap_create_from_xpm_d($window->window, $transparent, $bookicon);
+
+$style	= &new GtkStyle;
+$style->bg_pixmap[GTK_STATE_NORMAL]	= $pixmap;
+]]>
+    </programlisting>
    </desc>
   </prop>
 
