@@ -117,6 +117,7 @@ scripts/genchapterents.php )
 echo creating chapters.ent
 $PHP -q scripts/genchapterents.php > chapters.ent
 echo creating name_to_id.xsl
+mkdir -p stylesheets/html
 $XSLTPROC gen_name_to_id.xsl manual.xml > stylesheets/html/name_to_id.xsl
 
 chmod +x scripts/genchapterents.php
