@@ -452,27 +452,52 @@ $label->set_arg(array('GtkLabel::label'=>'RTFS',
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Associates data with an object as a key/values pair.
+    Associate data with an object as a key/values pair.
    </shortdesc>
    <desc>
+    <simpara>
+     Associates <parameter>value</parameter> with the calling object.
+     <parameter>value</parameter> can be retireved by passing
+     <parameter>key</parameter> when calling <function
+     class="GtkObject">get_data</function>.
+    </simpara>
+    <para>
+     <example>
+      <title>Tagging objects</title>
+      <programlisting role="php">
+<![CDATA[
+<?php
+// Create a GtkNotebook with several pages out of order.
+$notebook =& new GtkNotebook;
 
+for ($i = 0; $i < 6; $i++) {
+    $frame =& new GtkFrame('Page ' . $i);
+    $frame->set_data('intended_position', $i);
+    
+    // Add the pages out of order.
+    if ($i % 2) {
+        $notebook->prepend_page($frame, new GtkLabel('Tab ' . $i));
+    }
+}
+
+// Reorder the pages.
+$pages =& $notebook->children();
+// Can't use foreach because it makes a copy.
+for ($page =& reset($pages); $page !== false; $page =& next($pages)) {
+    $notebook->reorder_child($page, $page->get_data('intended_position');
+}
+?>
+]]>
+      </programlisting>
+     </example>
+    </para>
+    <simpara>
+     See also: <function class="GtkObject">get_data</function>, <function
+     class="GtkObject">remove_data</function>
+    </simpara>
    </desc>
   </method>
   
-  <method id="gtk.gtkobject.method.remove_data">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>void <function>remove_data</function></funcdef>
-     <paramdef>string <parameter>key</parameter></paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-    Removes data from the objects data associations.
-   </shortdesc>
-   <desc>
-   </desc>
-  </method>
-
   <method id="gtk.gtkobject.method.get_data">
    <funcsynopsis>
     <funcprototype>
@@ -481,14 +506,50 @@ $label->set_arg(array('GtkLabel::label'=>'RTFS',
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Returns data from the objects data associations.
+    Return data from the objects data associations.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Returns the value assigned to <parameter>key</parameter> when <function
+     class="GtkObject">set_data</function> was called.
+    </simpara>
+    <simpara>
+     See also: <function class="GtkObject">set_data</function>, <function
+     class="GtkObject">remove_data</function>
+    </simpara>
    </desc>
   </method>
-  
 
+  <method id="gtk.gtkobject.method.remove_data">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>remove_data</function></funcdef>
+     <paramdef>string <parameter>key</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Remove data from the objects data associations.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Removes the data association with key <parameter>key</parameter>.
+    </simpara>
+    <simpara>
+     See also: <function class="GtkObject">set_data</function>, <function
+     class="GtkObject">get_data</function>
+    </simpara>
+   </desc>
+  </method>
+
+  <!--
+   Commenting out this function because I don't think it can be used. The GTK+
+   docs say that if you use gtkobject_set_data_full() you can specify a
+   destroy handler for the data association and that this method will not
+   destroy the data when it is removed. But there is no set_data_full() for
+   PHP-GTK. Therefore I don't think this method is useful. If I am wrong
+   please feel free to uncomment and document this method more fully.
+   -Scott
+   
   <method id="gtk.gtkobject.method.remove_no_notify">
    <funcsynopsis>
     <funcprototype>
@@ -502,7 +563,8 @@ $label->set_arg(array('GtkLabel::label'=>'RTFS',
    <desc>
    </desc>
   </method>
-
+  -->
+  
   <method id="gtk.gtkobject.method.emit_stop">
    <funcsynopsis>
     <funcprototype>
