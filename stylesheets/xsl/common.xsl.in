@@ -1,0 +1,36 @@
+<!--
+
+  Implements Common Named Templates
+
+  $Id$
+
+ -->
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+       version="1.0">
+
+<xsl:include href="locale/@LANG@.xsl" />
+
+ <xsl:template name="authorgroup-title">
+  <xsl:param name="id"></xsl:param>
+  <xsl:choose>
+   <xsl:when test="$id='phpgtk.authors'">
+    <xsl:call-template name="php.gtk.authors.text"/>
+   </xsl:when>
+   <xsl:when test="$id='phpgtk.contributors'">
+    <xsl:call-template name="php.gtk.contributors.text"/>
+   </xsl:when>
+   <xsl:when test="$id='phpgtk.manual.contributors'">
+    <xsl:call-template name="php.gtk.manual.contributors.text"/>
+   </xsl:when>
+   <xsl:otherwise></xsl:otherwise>
+  </xsl:choose>
+ </xsl:template>
+
+ <xsl:template name="author-email-link">
+  <xsl:if test="name(.)='author' or name(.)='editor'">
+   <xsl:text>mailto:</xsl:text><xsl:value-of select="./authoremail" />
+  </xsl:if>
+ </xsl:template>
+  
+
+</xsl:stylesheet>

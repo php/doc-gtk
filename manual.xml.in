@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='@ENCODING@' ?>
+<!DOCTYPE book PUBLIC "@DOCBOOK_DOCTYPE@"
+          "@srcdir@/dbxml/phpgtkdoc.dtd" [
+
+<!ENTITY phpgtk.build-date "@PHP_GTK_DOC_BUILD_DATE@">
+<!ENTITY % language-defs    SYSTEM "@srcdir@/@LANGDIR@/language-defs.ent">
+
+%language-defs;
+
+<!-- Defaults for entities that should be defined in language-defs -->
+<!ENTITY % global.entities  SYSTEM "@srcdir@/global.ent">
+
+<!-- These are language independent -->
+<!ENTITY % global.chapters  SYSTEM "chapters.ent">
+
+%global.entities;
+%global.chapters;
+
+]>
+
+<set id="phpgtk.docs" lang="@LANG@">
+ <title>&PHPGTKDocs;</title>
+ &bookinfo;
+ &preface;
+ &userguide;
+ &reference;
+ &license;
+
+</set>

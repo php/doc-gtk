@@ -1,0 +1,161 @@
+# +----------------------------------------------------------------------+
+# | PHP Version 4.0                                                      |
+# +----------------------------------------------------------------------+
+# | Copyright (c) 1997-2001 The PHP Group                                |
+# +----------------------------------------------------------------------+
+# | This source file is subject to version 2.02 of the PHP licience,     |
+# | that is bundled with this package in the file LICENCE and is         |
+# | avalible through the world wide web at                               |
+# | http://www.php.net/license/2_02.txt.                                 |
+# | If uou did not receive a copy of the PHP license and are unable to   |
+# | obtain it through the world wide web, please send a note to          |
+# | license@php.net so we can mail you a copy immediately                |
+# +----------------------------------------------------------------------+
+# | Authors: James Moore <jmoore@php.net>                                |
+# +----------------------------------------------------------------------+
+
+#
+# $Id$
+#
+
+AC_INIT(global.ent)
+
+AC_PATH_PROG(SAXON, saxon, no)
+if test "$SAXON" = "no";
+then
+    AC_PATH_PROG(JAVA, java, no)
+    if test "$JAVA" = "no"; then
+        AC_MSG_ERROR(unable to locate either Saxon or Java)
+    else
+        AC_MSG_CHECKING(for Saxon.jar)
+        if echo $CLASSPATH | grep "saxon.jar" > /dev/null; then
+            AC_MSG_RESULT("yes")
+            SAXON="$JAVA com.icl.saxon.StyleSheet"
+            AC_SUBST(SAXON)
+        else
+            AC_MSG_ERROR(unable to locate saxon.jar in your classpath)
+        fi
+    fi
+fi
+
+AC_PATH_PROG(PHP, php, no)
+if test "$PHP" = "no";
+then
+    AC_MSG_ERROR(unable to locate php exectuable)
+fi
+
+DOCBOOK_DOCTYPE="-//PHP Group//DTD DocBk XML V3.1.7-Based Extension//EN"
+AC_SUBST(DOCBOOK_DOCTYPE)
+
+STYLESHEET_DIR="stylesheets/xsl"
+AC_SUBST(STYLESHEET_DIR)
+
+PHP_GTK_DOC_BUILD_DATE=`date`
+AC_SUBST(PHP_GTK_DOC_BUILD_DATE)
+
+AC_MSG_CHECKING(for docbook.xsl)
+AC_ARG_WITH(xsl,
+[  --with-xsl=[URI]        Look for XSL stylesheets at the specified URI],
+[
+    DOCBOOKXSL_BIGHTML=$withval/html/docbook.xsl
+    DOCBOOKXSL_HTML=$withval/html/docbook.xsl
+    DOCBOOKXSL_CHUNK=$withval/html/chunk.xsl
+    DOCBOOKXSL_HTMLHELP=$withval/contrib/htmlhelp/htmlhelp.xsl
+    DOCBOOKXSL_PRINT=$withval/fo/docbook.xsl
+    AC_MSG_RESULT(in $withval)
+],[
+    for dir in stylesheets/xsl/docbook \
+               /usr/lib/xml/docbook \
+			   /usr/share/doc/docbook;
+    do
+    	if test -d "$dir"; then
+            if test "$dir" = "stylesheets/xsl/docbook"; then
+                DOCBOOKXSL_HTML="docbook/html/docbook.xsl"
+                DOCBOOKXSL_CHUNK="docbook/html/chunk.xsl"
+                DOCBOOKXSL="$STYLESHEET_DIR/docbook"
+            else
+                DOCBOOKXSL_HTML="$dir/html/docbook.xsl"
+                DOCBOOKXSL_CHUNK="$dir/html/chunk.xsl"
+                DOCBOOKXSL="$dir"
+            fi
+            AC_MSG_RESULT(in $dir)
+	        break
+	    fi
+	done
+])
+
+if test -z "$DOCBOOKXSL_HTML"; then
+    AC_MSG_RESULT( )
+    AC_MSG_ERROR(Please specify where the Docbook XSL stylesheets are)
+fi
+
+AC_SUBST(DOCBOOKXSL_CHUNK)
+AC_SUBST(DOCBOOKXSL_HTML)
+AC_SUBST(DOCBOOKXSL)
+
+AC_MSG_CHECKING(for php-gtk source)
+AC_ARG_WITH(srcdir,
+[  --with-srcdir=SRCDIR    PHP-GTK Source directory],
+[
+    if test -d "$withval";
+    then
+        AC_MSG_RESULT( )
+        AC_MSG_ERROR(Cannot find PHP-GTK source dir)
+    else
+        PHPGTK_SRCDIR="$withval"
+        if test "$PHP" = "no";
+        then
+            AC_MSG_RESULT("no")
+            AC_MSG_ERROR(PHP required to merge docs)
+        fi
+        AC_MSG_RESULT( $withval )
+        AC_SUBST(PHPGTK_SRCDIR)
+    fi
+])
+
+AC_MSG_CHECKING(for language)
+AC_ARG_WITH(lang,
+[  --with-lang=LANG        Choose a language to work with],
+[
+    if test "$withval" = "yes"; 
+    then
+	    LANG=en
+    	AC_MSG_RESULT([en (default)])
+    else
+        if test ! -d "$srcdir/$withval"; then
+    	    AC_MSG_RESULT()
+	        AC_MSG_ERROR(Language \"$withval\" not supported!)
+	    fi
+       
+        AC_MSG_RESULT( $withval )
+    fi
+],[
+    LANG=en
+    LANGDIR=en
+    AC_MSG_RESULT([en (default)])
+])
+
+AC_SUBST(LANG)
+AC_SUBST(LANGDIR)
+
+case "$LANG" in
+  ja|tw|ko) ENCODING="UTF-8";;
+  cs|hu) ENCODING="ISO-8859-2";;
+  *) ENCODING="ISO-8859-1";;
+esac
+AC_SUBST(ENCODING)
+
+AC_OUTPUT(\
+Makefile \
+manual.xml \
+udocs \
+scripts/updatedocs.php \
+scripts/genchapterents.php \
+stylesheets/xsl/chunk.xsl \
+stylesheets/xsl/html.xsl \
+stylesheets/xsl/phpweb.xsl \
+stylesheets/xsl/common.xsl \
+stylesheets/xsl/update.xsl)
+
+chmod +x scripts/updatedocs.php
+chmod +x scripts/genchapterents.php

@@ -1,0 +1,252 @@
+<!-- 
+   Docbook Customiszation layer of PHP-GTK docs
+
+   $Id: phpgtkdoc.dtd,v 1.1.1.1 2001-06-01 14:33:46 andrei Exp $
+
+-->
+
+<!ENTITY % local.person.ident.mix "|authoremail">
+<!ENTITY % local.chapter.class "|classset">
+<!-- Load Docbook -->
+<!ENTITY % DocBookDTD PUBLIC "-//Norman Walsh//DTD DocBk XML V3.1.7//EN" "./docbookx.dtd">
+%DocBookDTD;
+
+<!ELEMENT authoremail (%docinfo.char.mix;)*  >
+<!ATTLIST authoremail
+    %common.attrib;
+>
+
+<!-- 
+   Classentry's should be in a classset, this will hold all the entry's
+   for gtk or glade etc..
+
+   - Must contain classmeta
+   - Must contain one or more classentry's
+-->
+<!ELEMENT classset ((classsetmeta), (classentry)+)>
+<!ATTLIST classset
+    %common.attrib;
+>
+
+<!--
+
+   classsetmeta: holds information about the classset.
+   -Must contain classsettitle, shortdesc and longdesc.
+
+-->
+<!ELEMENT classsetmeta (classsettitle,shortdesc,desc)>
+<!ATTLIST classsetmeta
+    %common.attrib;
+>
+
+<!-- 
+
+   Holds the classset's title.
+
+-->
+<!ELEMENT classsettitle (%docinfo.char.mix;)* >
+<!ATTLIST classsettitle
+    %common.attrib;
+>
+
+<!--
+
+   shortdesc is a CNAME for simpara 
+
+-->
+<!ELEMENT shortdesc (%para.char.mix;)*>
+<!ATTLIST shortdesc
+    %common.attrib;
+	%simpara.role.attrib;
+	%local.simpara.attrib;
+>
+
+<!--
+
+  desc is a CNAME for para
+
+ -->
+<!ELEMENT desc (%para.char.mix; | %para.mix; |  para | simpara)*>
+<!ATTLIST desc
+    %common.attrib;
+	%para.role.attrib;
+	%local.para.attrib;
+>
+<!--
+
+  classentry is a wrapper for a class.
+  It should contain
+  - One classmeta element.
+  - Optionall it should contain
+    A Constuctor
+	Followed by:
+  - A methods entry, A signals entry and a attributes entry 
+    (any of these three may be ommited).
+
+-->
+<!ELEMENT classentry 
+          ((classmeta),(constructor)?,(methods?,signals?,attributes?))>
+<!ATTLIST classentry
+    %common.attrib;
+	%refentry.role.attrib;
+	%local.refentry.attrib;
+>
+
+<!-- 
+
+   Classmeta
+   - Contains classtitle followed by an optional classparent. 
+   It should only be omitted if the class is a base class.
+
+-->
+<!ELEMENT classmeta ((classtitle),(classparent)?,(shortdesc,desc)) >
+<!ATTLIST classmeta 
+    %common.attrib;
+>
+
+<!-- 
+
+   Classtitle
+   -Contains the classes title 
+
+-->
+<!ELEMENT classtitle (%docinfo.char.mix;)*>
+<!ATTLIST classtitle
+   %common.attrib;
+>
+
+<!--
+
+   Classparent
+   -Contains the parent classes title
+
+-->
+<!ELEMENT classparent (%docinfo.char.mix;)*>
+<!ATTLIST classparent
+   %common.attrib;
+>
+
+<!--
+
+   Entity for constructor and methods 
+
+-->
+<!ENTITY % method.class "(funcsynopsis),(shortdesc,desc)">
+
+<!-- 
+
+   Constructor
+   - contains info about the classes constructor.
+     should contain a funcsynopsis followed by a 
+	 shortdesc followed by a desc.
+
+-->
+<!ELEMENT constructor (%method.class;)>
+<!ATTLIST constructor
+   %common.attrib;
+>
+
+<!--
+
+   Methods
+   - Simple wrapper around all the method entries
+     (not 100% necessary but makes sure they are all
+	  grouped together and makes my life simpler)
+  
+  Should contain one or more method entry's
+
+-->
+<!ELEMENT methods (method)+ >
+<!ATTLIST methods
+   %common.attrib;
+>
+
+<!--
+
+  Method
+  - Holds same data as constructor
+
+-->
+<!ELEMENT method (%method.class;)>
+<!ATTLIST method
+    %common.attrib;
+>
+
+<!--
+
+  Signals
+  - Wrapper for signal entries.. see methods
+
+-->
+<!ELEMENT signals (signal)+ >
+<!ATTLIST signals
+    %common.attrib;
+>
+
+<!--
+
+  Signal
+   - Contains information about signals:
+   - Contains signalname, followed by firedwhen, 
+     follwoed by a shortdesc and a desc.
+
+-->
+<!ELEMENT signal ((signalname),(firedwhen),(userfunc)?,(shortdesc,desc)) >
+<!ATTLIST signal
+     %common.attrib;
+>
+
+<!-- 
+
+   - signalname contains the name of the signal.. suprisingly
+
+-->
+<!ELEMENT signalname (%docinfo.char.mix;)* >
+<!ATTLIST signalname
+    %common.attrib;
+>
+
+<!--
+
+  - firedwhen contains when the signal is fired..
+
+-->
+<!ELEMENT firedwhen (%para.char.mix;)* >
+<!ATTLIST firedwhen
+     %common.attrib;
+>
+
+<!ELEMENT userfunc (funcprototype) >
+<!ATTLIST userfunc
+     %common.attrib;
+>
+<!--
+ 
+   attributes: wrapper for attribute entries
+
+-->
+<!ELEMENT attributes (attribute)+ >
+<!ATTLIST attributes
+     %common.attrib;
+>
+
+
+<!--
+
+  - attribute: contains attributename followed by shortdesc and a desc.
+
+-->
+<!ELEMENT attribute ((attributename),(shortdesc,desc)) >
+<!ATTLIST attribute
+    %common.attrib;
+>
+
+<!-- 
+
+  - attributename: contains the name of the attribute
+
+-->
+<!ELEMENT attributename (%docinfo.char.mix;)* >
+<!ATTLIST attributename
+    %common.attrib;
+>

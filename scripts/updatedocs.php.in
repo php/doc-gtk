@@ -1,0 +1,72 @@
+<?php
+
+/* -*- Variables From Configure -*- */ 
+$saxon="@SAXON@";
+$srcdir="@srcdir@";
+$langdir="@LANGDIR@";
+$lang="@LANG@";
+$builddir="build";
+$chunkdir="$builddir/html";
+$phpwebdir="$builddir/php";
+$testdir="$builddir/test";
+$stylesheetdir="$srcdir/stylesheets/xsl";
+
+
+require_once "Getopt.php";
+
+$mode=q;
+$stylesheet=update.xsl;
+
+$result = Console_Getopt::getopt($argv, 'us:');
+if (!$result || count($result[1]) < 2)
+    die(
+"Usage: php -q updatedocs.php [OPTIONS] files
+
+  -s <phpweb|chunk> Use specified stylesheet
+  -u                Update existing docs
+");
+
+list($opts, $argv) = $result;
+
+foreach ($opts as $opt) {
+    list($opt_spec, $opt_arg) = $opt;
+    switch($opt_spec)
+    {
+        case s:
+            switch ($opt_arg)
+            {
+                case phpweb:
+                    $stylesheet="phpweb.xsl";
+                    $fileext = ".php";
+                    break;
+                default:
+                    $stylesheet="chunk.xsl";
+                    $fileext = ".html";
+                    break;
+            }
+            break;
+        case u:
+            $mode=u;
+    }
+}
+
+array_shift($argv);
+$files = $argv;
+
+if(sizeof($files) == 0)
+{
+    echo "No files specified, defaulting to update mode..." 
+    $mode="u";
+    $dir = getcwd()."/$langdir";
+    update_dir($dir);
+
+}
+else
+{
+
+
+
+}
+                   
+
+?>
