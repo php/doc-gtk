@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
-<chapter id="gtk.signals">
+<chapter id="signals">
  <title>Signals and Callbacks</title>
+ <sect1 id="signals.intro"></sect1>
 
- <sect1 id="gtk.signals.whatare">
+ <sect1 id="signals.whatare">
   <title>¿ Qué son las Señales?</title>
   <simpara>
    <emphasis>Las señales son notificaciones emitidas a los
-   <link linkend="gtk.widgets.whatare">widgets</link>.</emphasis>
+   <link linkend="widgets.whatare">widgets</link>.</emphasis>
   </simpara>
   <simpara>
    Cuando uno porgrama interfases graficas de usuario
@@ -28,25 +29,25 @@
    mas obvia ocurre cuando un usuario presiona sobre una instancia de
    <classname>GtkButton</classname>, causando que el widget del boton emita
    la señal de <signalname>clicked</signalname>.  Como programdador,
-   podes utilizar <link linkend="gtk.callbacks.whatare">callbacks</link> para
+   podes utilizar <link linkend="callbacks.whatare">callbacks</link> para
    hacer algo a cada señal emitada por un widget.
   </simpara>
  </sect1>
 
- <sect1 id="gtk.callbacks.whatare">
+ <sect1 id="callbacks.whatare">
   <title>¿ Qué son Callbacks?</title>
   <simpara>
    <emphasis>
     Callbacks son funciones que son invocadas cuando las
-    <link linkend="gtk.signals.whatare">señales</link> se emiten por
-    los <link linkend="gtk.widgets.whatare">widgets</link>.
+    <link linkend="signals.whatare">señales</link> se emiten por
+    los <link linkend="widgets.whatare">widgets</link>.
    </emphasis>
   </simpara>
   <simpara>
    Callbacks son funciones que son creadas por los programadores para
    reaccionar a las señales emitadas por los widgets.  Vos
    especificas la función que deberia llamarse para
-   <link linkend="gtk.signals.connection">conectar</link> la fucnión
+   <link linkend="signals.connection">conectar</link> la fucnión
    a la señal.
   </simpara>
   <simpara>
@@ -57,7 +58,7 @@
   </simpara>
  </sect1>
 
- <sect1 id="gtk.signal.inheritance">
+ <sect1 id="signal.inheritance">
   <title>Herencia de señales</title>
   <simpara>
    Las señales son heredadas por los objetos, como los son los
@@ -72,10 +73,10 @@
   </simpara>
  </sect1>
 
- <sect1 id="gtk.signals.connection">
+ <sect1 id="signals.connection">
   <title>Conectando Señales</title>
 
-  <sect1 id="gtk.signals.connection.simple">
+  <sect2 id="signals.connection.simple">
    <title>Conecciones simples</title>
    <simpara>
     Para reaccionar a una señal debes conectarla especificando una
@@ -149,9 +150,9 @@ gtk::main();
     manejador de la señal <signalname>destroy</signalname> para ambas
     ventanas asi podemos cerrar la aplicación correctamente.
    </para>
-  </sect1>
+  </sect2>
 
-  <sect1 id="gtk.signals.connection.multiple">
+  <sect2 id="signals.connection.multiple">
    <title>Multiples coneccciones</title>
    <simpara>
     Con PHP-GTK podes registar mas deuna función para ser invocada
@@ -206,15 +207,15 @@ First function has been called.
 Second function has been called.
     </programlisting>
    </para>
-  </sect1>
+  </sect2>
  </sect1>
  
- <sect1 id="gtk.signals.custom.params">
+ <sect1 id="signals.custom.params">
   <title>Usandon parametros personalizados</title>
-  <sect1 id="gtk.signals.custom.data">
+  <sect2 id="signals.custom.data">
    <title>Pasando datos personalizados como parametro</title>
    <simpara>
-    Caundo <link linkend="gtk.signals.connection">conectamos</link> las
+    Caundo <link linkend="signals.connection">conectamos</link> las
     señales, esposibe sumar un parametro extra personalizado a callback. 
     Esto es muy beneficioso para pasar el objeto que quieres para ejecutar
     una acción a la función  callback.
@@ -317,9 +318,9 @@ gtk::main();
      </programlisting>
     </example>
    </para>
-  </sect1>
+  </sect2>
  
-  <sect1 id="gtk.signals.connect.object">
+  <sect2 id="signals.connect.object">
    <title>Usando los métodos connect_object*</title>
    <para>
     Ambos <function class="GtkObject">connect_object()</function> y 
@@ -423,10 +424,10 @@ gtk::main();
     <function class="GtkObject">connect_object()</function> y
     <function class="GtkObject">connect_object_after()</function>.
    </simpara>
-  </sect1>
+  </sect2>
  </sect1>
 
- <sect1 id="gtk.signals.events">
+ <sect1 id="signals.events">
   <title>Señales y Eventos</title>
   <simpara>
    <emphasis>Señales GTK, Eventos GDK.</emphasis>
