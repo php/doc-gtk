@@ -3,10 +3,25 @@
   <classtitle>GtkFixed</classtitle>
   <classparent>GtkContainer</classparent>
   <shortdesc>
-   Container that supports fixed sizes and positions of its children.
+   Container that retains the sizes and positions of its children.
   </shortdesc>
   <desc>
-
+   <simpara>
+    <classname>GtkFixed</classname> is a container widget that retains the
+    original sizes and positions of its children regardless of any top-level
+    resizing.
+    </simpara>
+    <simpara>
+    Note that there is no padding or spacing implicit in this method of
+    container packing.  The arrangement of the children is based purely on
+    the co-ordinate values given in the 
+    <function class="GtkFixed">put()</function> and 
+    <function class="GtkFixed">move()</function> method parameters.  For
+    this reason it is inadvisable to use 
+    <function class="GtkContainer">add()</function> when utilising
+    <classname>GtkFixed</classname>, as widgets that have been added in
+    this way can and will be overwritten by any fixed-position widgets.
+   </simpara>
   </desc>
  </classmeta>
 
@@ -18,10 +33,13 @@
    </funcprototype>
   </funcsynopsis>
   <shortdesc>
-
+   Creates a <classname>GtkFixed</classname> container.
   </shortdesc>
   <desc>
-
+   <simpara>
+    This function creates and returns a <classname>GtkFixed</classname> 
+    widget.
+   </simpara>
   </desc>
  </constructor>
 
@@ -31,16 +49,29 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>put</function></funcdef>
-     <paramdef><classname>GtkWidget</classname> <parameter>widget</parameter></paramdef>
+     <paramdef>
+      <classname>GtkWidget</classname> <parameter>widget</parameter>
+     </paramdef>
      <paramdef>int <parameter>x</parameter></paramdef>
      <paramdef>int <parameter>y</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets initial position of child.
    </shortdesc>
    <desc>
-
+    <simpara>
+     <function class="GtkFixed">put()</function> sets the initial position
+     of the child widget(s) in a <classname>GtkFixed</classname> container.
+     This information is held in the 
+     <propname class="GtkFixed">children</propname> property as an array
+     of <classname>GtkFixedChild</classname> objects.
+    </simpara>
+    <simpara>
+     The parameters are the <literal>x</literal> and <literal>y</literal> 
+     co-ordinates of the top left-hand corner of the child widget, measured
+     in pixels from the top left-hand corner of the container.
+    </simpara>
    </desc>
   </method>
 
@@ -48,19 +79,48 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>move</function></funcdef>
-     <paramdef><classname>GtkWidget</classname> <parameter>widget</parameter></paramdef>
+     <paramdef>
+      <classname>GtkWidget</classname> <parameter>widget</parameter>
+     </paramdef>
      <paramdef>int <parameter>x</parameter></paramdef>
      <paramdef>int <parameter>y</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Moves child to new position.
    </shortdesc>
    <desc>
-
+    <simpara>
+     <function class="GtkFixed">move()</function> sets a new position
+     for a child widget in a <classname>GtkFixed</classname> container.
+    </simpara>
+    <simpara>
+     The parameters are the <literal>x</literal> and <literal>y</literal> 
+     co-ordinates of the top left-hand corner of the child widget, measured
+     in pixels from the top left-hand corner of the container.
+    </simpara>
    </desc>
   </method>
 
  </methods>
+
+ <properties>
+
+  <property id="gtk.gtkfixed.property.children" type="ro">
+   <propname>children</propname>
+   <proptype>array</proptype>
+   <shortdesc>
+    Array of child positioning information.
+   </shortdesc>
+   <desc>
+    <simpara>
+     The positioning information for the individual child widgets is stored
+     in <propname class="GtkFixed">children</propname> as an array of 
+     <classname>GtkFixedChild</classname> objects.
+    </simpara>
+   </desc>
+  </property>
+
+ </properties>
 
 </classentry>
