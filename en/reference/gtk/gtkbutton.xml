@@ -10,7 +10,9 @@
     The <classname>GtkButton</classname> widget is a container widget
     that can hold any valid child widget derived from 
     <classname>GtkWidget</classname>. The most commonly used child
-    widget is a <classname>GtkLabel</classname>.
+    widget is a <classname>GtkLabel</classname>.  This is therefore built
+    into the <constructor class="GtkButton">constructor</constructor> as
+    an optional parameter.
    </para>
    <para>
     The <classname>GtkButton</classname> widget is mainly used to call
@@ -32,12 +34,47 @@
    Creates a button.
   </shortdesc>
   <desc>
-   <para>
+   <simpara>
     This function creates and returns a <classname>GtkButton</classname>
-    widget; if optional <parameter>label</parameter> is passed the button
-    will contain a <classname>GtkLabel</classname> widget with the given
-    text.
-   </para>
+    widget.  If the optional <parameter>label</parameter> is passed, the
+    button will contain a <classname>GtkLabel</classname> widget with the
+    given text.  If the parameter is left empty, there will be no child
+    widget.
+   </simpara>
+   <para>
+    Note that, as <classname>GtkButton</classname> is descended from
+    <classname>GtkBin</classname>, it may contain only one child.
+    <example>
+     <title>Adding more than one widget to a 
+<classname>GtkButton</classname></title>
+      <programlisting role="php">
+$window = &amp;new GtkWindow(GTK_WINDOW_DIALOG);
+$window-&gt;set_position(GTK_WIN_POS_MOUSE);
+$window-&gt;connect_object(&quot;destroy&quot;, array(&quot;gtk&quot;, 
+&quot;main_quit&quot;));
+$window-&gt;realize();
+
+list ($gdkpixmap, $mask) = gdk::pixmap_create_from_xpm($window-&gt;window, 
+null, &quot;test.xpm&quot;);
+$pixmap = &amp;new GtkPixmap($gdkpixmap, $mask);
+
+$label = &amp;new GtkLabel(&quot;Open&quot;);
+
+$vbox = &amp;new GtkVBox();
+$vbox-&gt;pack_start($pixmap);
+$vbox-&gt;pack_start($label);
+
+$button = &amp;new GtkButton();
+$button-&gt;add($vbox);
+$vbox-&gt;show_all();
+
+$window-&gt;add($button);
+$window-&gt;show_all();
+
+gtk::main();
+      </programlisting>
+     </example>
+    </para>
   </desc>
  </constructor>
 
@@ -54,9 +91,9 @@
     Emits <signalname>pressed</signalname> signal.
    </shortdesc>
    <desc>
-    <para>
+    <simpara>
      Makes the button emit the <signalname>pressed</signalname> signal.
-    </para>
+    </simpara>
    </desc>
   </method>
 
@@ -71,9 +108,9 @@
     Emits <signalname>released</signalname> signal.
    </shortdesc>
    <desc>
-    <para>
+    <simpara>
      Makes the button emit the <signalname>released</signalname> signal.
-    </para>
+    </simpara>
    </desc>
   </method>
 
@@ -88,9 +125,9 @@
     Emits <signalname>clicked</signalname> signal.
    </shortdesc>
    <desc>
-    <para>
+    <simpara>
      Makes the button emit the <signalname>clicked</signalname> signal.
-    </para>
+    </simpara>
    </desc>
   </method>
 
@@ -105,9 +142,9 @@
     Emits <signalname>enter</signalname> signal.
    </shortdesc>
    <desc>
-    <para>
+    <simpara>
      Makes the button emit the <signalname>enter</signalname> signal.
-    </para>
+    </simpara>
    </desc>
   </method>
 
@@ -122,9 +159,9 @@
     Emits <signalname>leave</signalname> signal.
    </shortdesc>
    <desc>
-    <para>
+    <simpara>
      Makes the button emit the <signalname>leave</signalname> signal.
-    </para>
+    </simpara>
    </desc>
   </method>
 
@@ -142,13 +179,11 @@
     Sets the button relief style.
    </shortdesc>
    <desc>
-    <para>
-     Sets the relief style of the button widget edges. The available
-     styles are <literal>GTK_RELIEF_NORMAL</literal>,
-     <literal>GTK_RELIEF_HALF</literal>, and 
-     <literal>GTK_RELIEF_NONE</literal>.  The default relief style is 
-     <literal>GTK_RELIEF_NORMAL</literal>.
-    </para>
+    <simpara>
+     Sets the relief style of the button widget edges using one of the
+     three <enumname>GtkReliefStyle</enumname> settings.  The default
+     relief style is <literal>GTK_RELIEF_NORMAL</literal>.
+    </simpara>
    </desc>
   </method>
 
@@ -166,9 +201,10 @@
     Gets the button relief style.
    </shortdesc>
    <desc>
-    <para>
-     Returns the current relief style of the button.
-    </para>
+    <simpara>
+     Returns the current <enumname>GtkReliefStyle</enumname> setting for
+     the button.
+    </simpara>
    </desc>
   </method>
 
@@ -188,10 +224,11 @@
     Emitted when the cursor is over the button.
    </shortdesc>
    <desc>
-    <para>
-     The <signalname>enter</signalname> signal is emitted when the
-     cursor enters the area of the screen where the button is positioned.
-    </para>
+    <simpara>
+     The <signalname class="GtkButton">enter</signalname> signal is emitted
+     when the cursor enters the area of the screen where the button is
+     positioned.
+    </simpara>
    </desc>
   </signal>
 
@@ -207,11 +244,10 @@
     Emitted when the button is initially pressed.
    </shortdesc>
    <desc>
-    <para>
-     The <signalname>pressed</signalname> signal is emitted when the
-     user presses down the mouse-button and the cursor is over the 
-     widget.
-    </para>
+    <simpara>
+     The <signalname>pressed</signalname> signal is emitted when the user
+     presses down the mouse-button and the cursor is over the widget.
+    </simpara>
    </desc>
   </signal>
 
@@ -227,7 +263,7 @@
     Emitted when the button is clicked.
    </shortdesc>
    <desc>
-    <para>
+    <simpara>
      The <signalname>clicked</signalname> signal is emitted at the
      midpoint between pressing and releasing the mouse-button.  This
      is the most commonly used <classname>GtkButton</classname> signal,
@@ -238,6 +274,36 @@
      <signalname>clicked</signalname> signal will not fire when the
      user releases the mouse-button after the cursor has left the
      widget's region.
+    </simpara>
+    <para>
+     Use one of the <function class="GtkObject">connect()</function> 
+     methods in order to emit the signal and connect it to your function. 
+     The connected function is known as the <literal>callback</literal> or 
+     <literal>signal-handler</literal> function:
+     <example>
+      <title>Making a simple connection</title>
+      <programlisting role="php">
+function my_function() {
+	echo &quot;The button was clicked\n&quot;;
+}
+
+$window = &amp;new GtkWindow();
+$window-&gt;set_position(GTK_WIN_POS_MOUSE);
+$window-&gt;connect_object(&quot;destroy&quot;, array(&quot;gtk&quot;, 
+&quot;main_quit&quot;));
+
+$button = &amp;new GtkButton(&quot;Click Me&quot;);
+$button-&gt;connect(&quot;clicked&quot;, &quot;my_function&quot;);
+$window-&gt;add($button);
+
+$window-&gt;show_all();
+
+gtk::main();
+      </programlisting>
+     </example>
+     For further information about connecting signals, refer to the 
+     <link linkend="gtk.signals.whatare">Signals and Callbacks</link> 
+     chapter in the <link linkend="userguide">PHP-GTK Userguide</link>.
     </para>
    </desc>
   </signal>
@@ -254,10 +320,10 @@
     Emitted when the button is released.
    </shortdesc>
    <desc>
-    <para>
+    <simpara>
      The <signalname>released</signalname> signal is emitted when the
      user releases the mouse-button, regardless of cursor position.
-    </para>
+    </simpara>
    </desc>
   </signal>
 
@@ -273,10 +339,10 @@
     Emitted when the cursor leaves the button area.
    </shortdesc>
    <desc>
-    <para>
+    <simpara>
      The <signalname>leave</signalname> signal is emitted when the cursor
      leaves the area of the screen where the button is positioned.
-    </para>
+    </simpara>
    </desc>
   </signal>
  </signals>

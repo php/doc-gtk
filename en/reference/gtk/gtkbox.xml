@@ -55,8 +55,8 @@
      is resized.  The second parameter <parameter>fill</parameter> is
      also a boolean value, and determines whether the child should fill
      the space available to it.  The third parameter 
-     <parameter>padding</parameter> is an integer setting the padding around
-     the child widget, in pixels.  The default values are 
+     <parameter>padding</parameter> is an integer describing the padding
+     around the child widget, in pixels.  The default values are 
      <literal>true</literal>, <literal>true</literal>, <literal>0</literal>.
     </simpara>
     <simpara>
@@ -98,8 +98,8 @@
      is resized.  The second parameter <parameter>fill</parameter> is
      also a boolean value, and determines whether the child should fill
      the space available to it.  The third parameter 
-     <parameter>padding</parameter> is an integer setting the padding around
-     the child widget, in pixels.  The default values are 
+     <parameter>padding</parameter> is an integer descrbing the padding
+     around the child widget, in pixels.  The default values are 
      <literal>true</literal>, <literal>true</literal>, <literal>0</literal>.
     </simpara>
     <simpara>
@@ -126,9 +126,18 @@
     <simpara>
      <function class="GtkBox">pack_start_defaults()</function> packs
      the given child widget from the top or from the left of the box
-     container using the default settings given in 
-     <function class="GtkBox">pack_start()</function>.
+     container using the default parameter values <literal>true</literal>, 
+     <literal>true</literal>, <literal>0</literal>.
     </simpara>
+    <para>
+     The same result can be achieved by using
+     <informalexample>
+      <programlisting role="php">
+$box-&gt;pack_start($child);
+      </programlisting>
+     </informalexample>
+     without specifying any further parameters.
+    </para>
    </desc>
   </method>
 
@@ -148,9 +157,18 @@
     <simpara>
      <function class="GtkBox">pack_end_defaults()</function> packs
      the given child widget from the bottom or from the right of the box
-     container using the default settings given in 
-     <function class="GtkBox">pack_end()</function>.
+     container using the default parameter values <literal>true</literal>, 
+     <literal>true</literal>, <literal>0</literal>.
     </simpara>
+    <para>
+     The same result can be achieved by using
+     <informalexample>
+      <programlisting role="php">
+$box-&gt;pack_end($child);
+      </programlisting>
+     </informalexample>
+     without specifying any further parameters.
+    </para>
    </desc>
   </method>
 
@@ -285,7 +303,7 @@
     <simpara>
      The packing information for the individual child widgets is stored in 
      <propname class="GtkBox">children</propname> as an array of 
-     <classname>GtkBoxChild</classname> properties.
+     <classname>GtkBoxChild</classname> objects.
     </simpara>
    </desc>
   </property>
