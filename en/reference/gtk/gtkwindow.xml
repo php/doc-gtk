@@ -409,9 +409,15 @@ gtk::main();
     <simpara>
      <function class="GtkWindow">set_modal()</function> is used to prevent
      the other windows in an application from reacting to user activity
-     until the modal window has had an appropriate user response, and sets
-     the focus onto the modal window.  It is usually used where dialog or
-     popup windows are acting as message boxes.
+     until the modal window has had an appropriate user response.  It is
+     usually used where dialog or popup windows are acting as message boxes.
+    </simpara>
+    <simpara>
+     A similar effect can be achieved with most widgets by using the 
+     GTK function <function classname="gtk-functions">grab_add()</function>; 
+     however note that <function class="GtkWindow">set_modal()</function> 
+     is a slightly more complex method and is equipped to deal more fully
+     with the scenarios likely to arise when using modal windows.
     </simpara>
    </desc>
   </method>
@@ -440,7 +446,7 @@ gtk::main();
     <simpara>
      See also:  <enumname>GtkWidgetFlags</enumname>, 
      <classname>GtkWidget</classname>, 
-     <function class="GtkWidget">set_flags()</function>.
+     <function class="GtkObject">set_flags()</function>.
     </simpara>
    </desc>
   </method>
@@ -476,7 +482,7 @@ gtk::main();
     <simpara>
      See also:  <enumname>GtkWidgetFlags</enumname>, 
      <classname>GtkWidget</classname>, 
-     <function class="GtkWidget">set_flags()</function>.
+     <function class="GtkObject">set_flags()</function>.
     </simpara>
    </desc>
   </method>
@@ -505,10 +511,16 @@ gtk::main();
     is called.
    </shortdesc>
    <desc>
-    The <signalname class="GtkWindow">set-focus</signalname> signal is
-    emitted whenever there is a configure event on the window during which
-    the <function classname="GtkWindow">set_focus()</function> method is
-    invoked.  It is primarily for internal GTK use.
+    <simpara>
+     The <signalname class="GtkWindow">set-focus</signalname> signal is
+     emitted by the <classname>GtkWindow</classname> in response to a 
+     <function classname="GtkWindow">set_focus()</function> method call,
+     which is triggered each time the child having focus within that window
+     changes, that is, every time the user chooses a different child widget.
+    </simpara>
+    <simpara>
+     The signal is primarily for internal GTK use.
+    </simpara>
    </desc>
   </signal>
 
