@@ -55,6 +55,14 @@
      <classname>GtkBox</classname>.
     </simpara>
    </note>
+   <para>
+    There is no clean way to maximize a window in php-gtk 1. You only can use the following workaround:
+    <programlisting role="php">
+<![CDATA[
+$window->set_usize(gdk::screen_width(),gdk::screen_height());
+]]>
+    </programlisting>
+   </para>
   </desc>
  </classmeta>
 

@@ -62,14 +62,31 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_cursor</function></funcdef>
-     <paramdef>void</paramdef>
+     <paramdef>
+      <classname>GdkCursor</classname> 
+      <parameter>cursor</parameter>
+     </paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the mouse cursor used in that window.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Sets the mouse cursor used in that window. If you omit the parameter, the cursor is reset to the default one.
+    </simpara>
+    <para>
+     <example>
+      <title>Setting the cursor</title>
+      <programlisting role="php">
+<![CDATA[
+$cursor = gdk::cursor_new(150); //GDK_WATCH
+$window = $mainWindow->window; //GdkWindow
+$window->set_cursor($cursor);
+]]>
+      </programlisting>    
+     </example>
+    </para> 
    </desc>
   </method>
 
@@ -316,7 +333,7 @@
    </shortdesc>
    <desc>
     <simpara>
-     
+     This property is not available on the Windows operating system.
     </simpara>
    </desc>
   </prop>

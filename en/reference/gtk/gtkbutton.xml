@@ -19,6 +19,18 @@
     The <classname>GtkButton</classname> widget is mainly used to call
     some function when the button is pressed.
    </simpara>
+   <para>
+    To change the label after the button is created, you can use the 
+    <link linkend="gtk.gtkcontainer.method.children">children()</link> function
+    of the container class:
+    <programlisting role="php">
+<![CDATA[
+//$obj is the button object
+$childs = $obj->children();
+$childs[0]->set_text('new button title');
+]]>
+    </programlisting>
+   </para>
   </desc>
  </classmeta>
 
