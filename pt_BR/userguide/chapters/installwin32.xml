@@ -4,43 +4,42 @@
  <sect1 id="installwin32.intro"></sect1>
 
  <sect1 id="install.win32.binaries">
-  <title>O download do PHP-GTK</title>
-  <simpara>
-   Baixe os binários do PHP-GTK &version.phpgtk; de
-   <ulink url="&url.phpgtk;">&url.phpgtk;</ulink>. Você
-   talvez queira baixar os últimos fontes do servidor
-   CVS. Veja <ulink url="&url.php.anoncvs;">&url.php.anoncvs;</ulink> 
-   para mais informações.
-  </simpara>
+  <title>Baixando o PHP-GTK</title>
+  <para>
+   Baixe os binários do PHP-GTK &version.phpgtk; para win32 em 
+   <ulink url="&url.phpgtk;">&url.phpgtk;</ulink>. Você talvez queira 
+   verificar se tem tem a última versão dos fontes do servidor CVS do php.net. Veja 
+   <ulink url="&url.php.anoncvs;">&url.php.anoncvs;</ulink> para mais informações.
+  </para>
  </sect1>
  <sect1 id="install.win32.binary.package-layout">
   <title>Layout da Distribuição dos Binários</title>
   <para>
-   A distribuição dos binários do PHP-GTK contém a seguinte estrutura:
+   A distribuição binária do PHP-GTK contém a seguinte estrutura:
    <itemizedlist>
     <listitem>
+     <para>
+      <filename>\php4</filename> &#187; arquivos binários do PHP e do PHP-GTK &version.phpgtk;
+     </para>
+    </listitem>
+    <listitem>
      <simpara>
-      \php4   -&gt; PHP e arquivos binários do PHP-GTK
+      <filename>\winnt</filename> &#187; o arquivo padrão php.ini
      </simpara>
     </listitem>
     <listitem>
      <simpara>
-      \winnt  -&gt; arquivo default do php.ini
+      <filename>\winnt\system32</filename> &#187; binários do GTK+ usados pela extensão
      </simpara>
     </listitem>
     <listitem>
      <simpara>
-      \winnt\system32 -&gt; binários GTK+ usados pela extensão
+      <filename>\test</filename> &#187; alguns exemplos demonstrando o uso do PHP-GTK
      </simpara>
     </listitem>
     <listitem>
      <simpara>
-      \test -&gt; vários exemplos para demonstrar o uso do PHP-GTK.
-     </simpara>
-    </listitem>
-    <listitem>
-     <simpara>
-      README.TXT
+      <filename>README.TXT</filename>
      </simpara>
     </listitem>
    </itemizedlist>
@@ -51,34 +50,34 @@
   <orderedlist>
    <listitem>
     <simpara>
-     Copie <filename>\php4</filename> para seu diretório existente. 
-     Se esta é uma nova instalação você deve criar 
-     <filename>c:\php4</filename> e copiar os arquivos para este diretório.
+	 Se esta é uma nova instalação você deve criar um diretório chamado 
+	 <filename>C:\php4</filename> e copiar os arquivos da pasta <filename>\php4</filename> 
+	 para este diretório. Se você já tem uma instalação do PHP (por exemplo, com Apache) ou 
+	 pretende ter uma, você irá precisar por seu arquivo <filename>php.ini</filename> lá também. 
+	 Os arquivos que estão nesta pasta pasta, por padrão, são relacionados ao PHP ou PHP-GTK e 
+	 irão todos precisar ser atualizads de tempos em tempos. Note que <filename>C:\php4</filename> 
+	 é o diretório padrão e se você instalar o PHP-GTK em outro lugar, você precisará especificar o 
+	 caminho completo na diretiva "extension_dir" na cópia do arquivo <filename>php.ini</filename> que 
+	 será usado pelo PHP.
     </simpara>
    </listitem>
    <listitem>
     <simpara>
-     Copie <filename>\winnt</filename> para seu diretório do windows. No
-     Windows NT, Windows 2000 e XP geralmente <filename>c:\winnt</filename>. 
-     No Windows 95/98/ME geralmente <filename>c:\windows</filename>. Se você
-     já possui um arquivo <filename>php.ini</filename> existente você não
-     precisa copiar este arquivo.
+	 Copie o conteúdo da pasta <filename>\winnt\system32</filename> para o seu diretório 
+	 system32. No Windows NT e Windows 2000 o diretório é <filename>C:\winnt\system32</filename>. 
+	 No Windows 95/98 ele pode ser <filename>C:\Windows\system</filename> ou 
+	 <filename>C:\Windows\system32</filename>, escolha o seu. Este grupo de arquivos 
+	 é relacionado ao GTK e não é estritamente necessária atualizá-los até que o PHP-GTK2 
+	 seja lançado.
     </simpara>
    </listitem>
    <listitem>
     <simpara>
-     Copie <filename>\winnt\system32</filename> para seu diretório do
-     sistema.  No Windows NT, Windows 2000 e XP geralmente 
-     <filename>c:\winnt\system32</filename>.  No Windows 95/98/ME geralmente 
-     <filename>c:\windows\system32</filename>.
-    </simpara>
-   </listitem>
-   <listitem>
-    <simpara>
-     Copie <filename>\test</filename> para o local onde você quer rodar
-     seus scripts (ex: <filename>c:\php4\test</filename>).
+	 Copie o conteúdo de <filename>\test</filename> para o local onde você quer 
+	 rodar seus scripts (ex: <filename>C:\php4\test</filename>).
     </simpara>
    </listitem>
   </orderedlist>
  </sect1>
+
 </chapter>
