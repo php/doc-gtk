@@ -31,7 +31,7 @@ function gen_dir_ents($path)
             {
                 if(substr($file, -4) == ".xml")
                 {
-                    if(($lang != "en") and (file_exists(str_replace("/en/", "/".$lang."/", $path)."/".$file)))
+                    if(($lang != "en") and (file_exists(preg_replace("%/en(/|$)%", "/".$lang."\\1", $path)."/".$file)))
                     { 
                             $entities[] = gen_ent($path, $file, $lang);
                     }
