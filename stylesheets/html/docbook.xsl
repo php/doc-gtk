@@ -9,7 +9,7 @@
             indent="no"/>
 
 <!-- ********************************************************************
-     $Id: docbook.xsl,v 1.2 2003-06-05 12:57:44 sfox Exp $
+     $Id: docbook.xsl,v 1.3 2003-06-10 06:16:23 sfox Exp $
      ********************************************************************
 
      This file is part of the XSL DocBook Stylesheet distribution.
@@ -81,7 +81,7 @@
 
 <xsl:template name="head.content">
   <xsl:param name="node" select="."/>
-
+  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
   <title>
     <xsl:apply-templates select="$node" mode="object.title.markup.textonly"/>
   </title>

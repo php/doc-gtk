@@ -3,7 +3,7 @@
                 version='1.0'>
 
 <!-- ********************************************************************
-     $Id: division.xsl,v 1.2 2003-06-05 12:57:44 sfox Exp $
+     $Id: division.xsl,v 1.3 2003-06-10 06:16:23 sfox Exp $
      ********************************************************************
 
      This file is part of the XSL DocBook Stylesheet distribution.
@@ -37,7 +37,6 @@
   <xsl:variable name="id">
     <xsl:call-template name="object.id"/>
   </xsl:variable>
-
   <div class="{name(.)}" id="{$id}">
     <xsl:call-template name="book.titlepage"/>
     <xsl:apply-templates select="dedication" mode="dedication"/>
