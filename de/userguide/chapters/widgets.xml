@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
-<chapter id="gtk.widgets">
+<chapter id="widgets">
  <title>Widgets und Container</title>
 
- <sect1 id="gtk.widgets.intro">
+ <sect1 id="widgets.intro">
   <title>Einleitung</title>
   <simpara>
-   Dieses Kapitel wird einige der Konzepte hinter GTK+ erkl&auml;ren,
+   Dieses Kapitel wird einige der Konzepte hinter GTK+ erklären,
    und wie man diese benutzen kann.
   </simpara>
  </sect1>
 
- <sect1 id="gtk.widgets.whatare">
+ <sect1 id="widgets.whatare">
   <title>Was sind Widgets?</title>
   <simpara>
-   <literal>Widget</literal> ist ein Begriff der in der X-Window Welt f&uuml;r
+   <literal>Widget</literal> ist ein Begriff der in der X-Window Welt für
     jegliche Benutzerschnittstelle gebraucht wird.
-    Ein Widget kann eine Textbox sein, eine Beschriftung, ein Rahmen, ein 
+    Ein Widget kann eine Textbox sein, eine Beschriftung, ein Rahmen, ein
     Fenster oder irgendein anderer GUI Bestandteil.
     Alle GTK Widgets sind von der allgemeinen Basisklasse 
     <classname>GtkWidget</classname> abgeleitet und erben so
     die Methoden, Signale und Eigenschaften die dort implementiert sind.
   </simpara>
   <simpara>
-   Aus der Perspektive des Programmierens hat ein Widget einen f&uuml;nfstufigen
+   Aus der Perspektive des Programmierens hat ein Widget einen fünfstufigen
    Lebenszyklus:
   </simpara>
   <para>
@@ -30,24 +30,24 @@
     <listitem>
      <simpara>Erstellung</simpara>
      <simpara>
-      In PHP-GTK geschieht dies durch die Erschaffung eines Objektes, zum Beispiel
-      <literal>$window = &amp;new GtkWindow();</literal>
+      In PHP-GTK geschieht dies durch die Erschaffung eines Objektes, zum
+       Beispiel <literal>$window = &amp;new GtkWindow();</literal>
      </simpara>
-    </listitem>   
+    </listitem>
     <listitem>
      <simpara>Platzierung</simpara>
      <simpara>
       In diesem Schritt wird ein Widget zu einem 
-      <link linked="gtk.containers.whatare">Container</link> hinzugef&uuml;gt.
+      <link linked="containers.whatare">Container</link> hinzugefügt. 
       Dies geschieht in PHP-GTK am einfachsten durch Benutzung der Syntax
       <literal>$container-&gt;add($widget);</literal>
-     </simpara>  
-    </listitem> 
+     </simpara>
+    </listitem>
     <listitem>
-     <simpara>Signalverkn&uuml;pfung</simpara>
+     <simpara>Signalverknüpfung</simpara>
      <simpara>
-      Bei diesem Schritt werden R&uuml;ckmeldungsfunktionen festgelegt.
-      Ein Beispiel hierf&uuml;r w&auml;re:
+      Bei diesem Schritt werden Rückmeldungsfunktionen festgelegt.  Ein
+      Beispiel hierfür wäre: 
       <literal>
        $widget-&gt;connect(&quot;event&quot;, &quot;my_focus_func&quot;);
       </literal>
@@ -59,14 +59,13 @@
     <listitem>
      <simpara>Anzeige</simpara>
      <simpara>
-      Dies bedeutet dass das Widget f&uuml;r den Benutzer angezeigt wird.
-      Dieser Schritt beginnt mit
-      <literal>$widget-&gt;show()</literal> und endet mit
-      <literal>$widget-&gt;hide()</literal>.
+      Dies bedeutet dass das Widget für den Benutzer angezeigt wird.  Dieser
+      Schritt beginnt mit <literal>$widget-&gt;show()</literal> und endet
+      mit <literal>$widget-&gt;hide()</literal>.
      </simpara>
     </listitem>
     <listitem>
-     <simpara>Zerst&ouml;rung</simpara>
+     <simpara>Zerstörung</simpara>
      <simpara>
       Dies geschieht wenn die Funktion 
       <literal>gtk::main_quit()</literal> aufgerufen wird. Alle Aktionen
@@ -77,17 +76,17 @@
    </para>
   </sect1>
  
- <sect1 id="gtk.containers.whatare">
+ <sect1 id="containers.whatare">
   <title>Was sind Container?</title>
   <simpara>
    Ein Container ist einfach ein
-   <link linked="gtk.widgets.whatare">Widget</link> das wiederum
+   <link linked="widgets.whatare">Widget</link> das wiederum
    ein anderes Widget enthalten kann. Die grosse Mehrzahl der Widgets
-   f&auml;llt in diese Klasse; offensichtliche Beispiele sind 
+   fällt in diese Klasse; offensichtliche Beispiele sind 
    <classname>GtkWindow</classname>, <classname>GtkTable</classname>,
    und <classname>GtkBox</classname>. Abgesehen von dieser Eigenschaft
-   sind sie genau dasselbe wie jedes andere Widget, sie k&ouml;nnen
-   sowohl einem anderen Container hinzugef&uuml;gt werden als auch
+   sind sie genau dasselbe wie jedes andere Widget, sie können
+   sowohl einem anderen Container hinzugefügt werden als auch
    selbst Kinderwidgets haben.
   </simpara> 
  </sect1>

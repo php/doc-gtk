@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<chapter id="installwin32">
+ <title>PHP-GTK unter Windows installieren</title>
+ <sect1 id="installwin32.intro"></sect1>
+
+ <sect1 id="install.win32.binaries">
+  <title>PHP-GTK herunterladen</title>
+  <simpara>
+   Laden Sie die aktuellen Win32 Binärpakete von
+   <ulink url="&url.phpgtk;">&url.phpgtk;</ulink> herunter. Eventuell
+   möchten Sie auch die aktuellen Quellpakete vom php.net CVS Server
+   auschecken.  Klicken Sie dazu hier für mehr Informationen: 
+   <ulink url="&url.php.anoncvs;">&url.php.anoncvs;</ulink>.
+  </simpara>
+ </sect1>
+ <sect1 id="install.win32.binary.package-layout">
+  <title>Aufbau der Binärdistribution</title>
+  <para>
+   Die Binärdistribution von PHP-GTK hat folgenden Aufbau:
+   <itemizedlist>
+    <listitem>
+     <simpara>
+      \php4   -&gt; PHP und PHP-GTK Binärdateien
+     </simpara>
+    </listitem>
+    <listitem>
+     <simpara>
+      \winnt  -&gt; die standardmässige php.ini Datei
+     </simpara>
+    </listitem>
+    <listitem>
+     <simpara>
+      \winnt\system32 -&gt; GTK Binärdateien die von dieser Erweiterung
+      benutzt werden
+     </simpara>
+    </listitem>
+    <listitem>
+     <simpara>
+      \samples -&gt; Ein paar Beispiele die die Anwendung von PHP-GTK
+      veranschaulichen
+     </simpara>
+    </listitem>
+    <listitem>
+     <simpara>
+      README.TXT  
+     </simpara>
+    </listitem>
+   </itemizedlist>
+  </para>
+ </sect1>
+ <sect1 id="install.win32.howto">
+  <title>Vorgehensweise zur Installation</title>
+  <orderedlist>
+   <listitem>
+    <simpara>
+     Kopieren Sie den Inhalt von \php4 in Ihr bestehendes PHP Verzeichnis.
+     Falls dies eine Erstinstallation ist, sollten Sie das Verzeichnis
+     C:\php4 anlegen und die Dateien dann dorthin kopieren.
+    </simpara>
+   </listitem>
+   <listitem>
+    <simpara>
+     Kopieren Sie den Inhalt von \winnt in Ihr Windows Verzeichnis. Unter
+     Windows NT und Windows 2000 ist das c:\winnt. Unter Windows 95/98 ist
+     das C:\Windows.  Falls bereits eine php.ini Datei existiert, müssen
+     Sie diese nicht kopieren.
+    </simpara>
+   </listitem>
+   <listitem>
+    <simpara>
+     Kopieren Sie den Inhalt von \winnt\system32 in das system32 Verzeichnis
+     unterhalb ihres Windows Verzeichnisses.  Unter Windows NT und Windows
+     2000 ist das C:\winnt\system32, unter Windows 95/98 ist dies
+     C:\Windows\system32.
+    </simpara>
+   </listitem>
+   <listitem>
+    <simpara>
+     Kopieren Sie den Inhalt von \samples in einen Ordner, in dem Sie ihre
+     Skripte laufen lassen wollen (z.B. C:\php4\samples).
+    </simpara>
+   </listitem>
+  </orderedlist>
+ </sect1>
+</chapter>
