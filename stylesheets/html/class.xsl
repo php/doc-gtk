@@ -244,18 +244,20 @@
     <a>
      <xsl:attribute name="name"><xsl:value-of select="@id"/></xsl:attribute>
     </a>
-    <h1 class="title">
+    <h2 class="title">
      <xsl:apply-templates select="./classmeta/classtitle"/>
-    </h1>
+    </h2>
     <p>
      <blockquote>
       <xsl:apply-templates select="./classmeta/shortdesc"/>
      </blockquote>
     </p>
     <p>
-    <h3>
-     Object Hierarchy
-    </h3>
+     <h3>
+      <xsl:call-template name="gentext">
+       <xsl:with-param name="key">objecthierarchy</xsl:with-param>
+      </xsl:call-template>
+     </h3>
      <blockquote>
      <div class="literallayout">
       <xsl:choose>
@@ -278,7 +280,11 @@
     </blockquote>
     </p>
     <p>
-     <h3>Description</h3>
+     <h3>
+      <xsl:call-template name="gentext">
+       <xsl:with-param name="key">description</xsl:with-param>
+      </xsl:call-template>
+     </h3>
      <blockquote>
       <xsl:apply-templates select="./classmeta/desc"/>
      </blockquote>
@@ -322,7 +328,11 @@
    <xsl:attribute name="name">
     <xsl:value-of select="@id"/>
    </xsl:attribute>
-   <h3>Constructor</h3>
+  <h3>
+   <xsl:call-template name="gentext">
+    <xsl:with-param name="key">constructor</xsl:with-param>
+   </xsl:call-template>
+  </h3>
     <blockquote>
      <xsl:apply-templates select="./funcsynopsis"/>
      <xsl:text> &#8212;</xsl:text>
@@ -333,7 +343,11 @@
 
  <xsl:template match="methods" mode="synoptic.mode">
   <div>
-  <h3>Methods</h3>
+  <h3>
+   <xsl:call-template name="gentext">
+    <xsl:with-param name="key">methods</xsl:with-param>
+   </xsl:call-template>
+  </h3>
   <blockquote>
    <xsl:apply-templates select="./method" mode="synoptic.mode"/>
   </blockquote>
@@ -351,7 +365,11 @@
  </xsl:template>
 
  <xsl:template match="signals" mode="synoptic.mode">
-  <h3>Signals</h3>
+  <h3>
+   <xsl:call-template name="gentext">
+    <xsl:with-param name="key">signals</xsl:with-param>
+   </xsl:call-template>
+  </h3>
   <blockquote>
   <xsl:apply-templates select="./signal" mode="synoptic.mode"/>
   </blockquote>
@@ -370,7 +388,11 @@
  </xsl:template>
 
  <xsl:template match="properties" mode="synoptic.mode">
-  <h3>Properties</h3>
+  <h3>
+   <xsl:call-template name="gentext">
+    <xsl:with-param name="key">properties</xsl:with-param>
+   </xsl:call-template>
+  </h3>
   <blockquote>
    <xsl:apply-templates select="./prop" mode="synoptic.mode"/>
   </blockquote>
@@ -404,9 +426,9 @@
   <a>
    <xsl:attribute name="name"><xsl:value-of select="@id"/></xsl:attribute>
   </a>
-  <h1>
+  <h2>
    <xsl:apply-templates select="." mode="title.markup"/>
-  </h1>
+  </h2>
   <xsl:apply-templates select="./funcsynopsis|./desc"/>
  </xsl:template>
 
@@ -414,9 +436,9 @@
   <a>
    <xsl:attribute name="name"><xsl:value-of select="@id"/></xsl:attribute>
   </a>
-  <h1>
+  <h2>
    <xsl:apply-templates select="." mode="title.markup"/>
-  </h1>
+  </h2>
   <p>
    <xsl:apply-templates select="./desc"/>
   </p>
@@ -438,9 +460,9 @@
   <a>
    <xsl:attribute name="name"><xsl:value-of select="@id"/></xsl:attribute>
   </a>
-  <h1>
+  <h2>
    <xsl:apply-templates select="." mode="title.markup"/>
-  </h1>
+  </h2>
   <p>
    <xsl:text>Access: </xsl:text>
    <xsl:choose>

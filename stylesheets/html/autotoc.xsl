@@ -3,7 +3,7 @@
                 version='1.0'>
 
 <!-- ********************************************************************
-     $Id: autotoc.xsl,v 1.1 2003-05-02 17:18:13 sfox Exp $
+     $Id: autotoc.xsl,v 1.2 2003-06-05 12:57:44 sfox Exp $
      ********************************************************************
 
      This file is part of the XSL DocBook Stylesheet distribution.
@@ -49,7 +49,7 @@
       <p>
         <b>
           <xsl:call-template name="gentext">
-            <xsl:with-param name="key">TableofContents</xsl:with-param>
+            <xsl:with-param name="key">tableofcontents</xsl:with-param>
           </xsl:call-template>
         </b>
       </p>
@@ -70,7 +70,7 @@
         <p>
           <b>
            <xsl:call-template name="gentext">
-             <xsl:with-param name="key">TableofContents</xsl:with-param>
+             <xsl:with-param name="key">tableofcontents</xsl:with-param>
            </xsl:call-template>
           </b>
         </p>
@@ -94,7 +94,7 @@
         <p>
           <b>
            <xsl:call-template name="gentext">
-             <xsl:with-param name="key">TableofContents</xsl:with-param>
+             <xsl:with-param name="key">tableofcontents</xsl:with-param>
            </xsl:call-template>
           </b>
         </p>

@@ -229,7 +229,10 @@ title of the element. This does not include the label.
  <xsl:param name="allow-anchors" select="'0'"/>
  <xsl:variable name="classentry" select="ancestor::classentry"/>
  <xsl:value-of select="$classentry/classmeta/classtitle"/>
- <xsl:text> Constructor</xsl:text>
+ <xsl:text> </xsl:text>
+ <xsl:call-template name="gentext">
+  <xsl:with-param name="key">constructor</xsl:with-param>
+ </xsl:call-template>
 </xsl:template>
 
 <xsl:template match="methods" mode="title.markup">

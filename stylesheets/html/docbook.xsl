@@ -9,7 +9,7 @@
             indent="no"/>
 
 <!-- ********************************************************************
-     $Id: docbook.xsl,v 1.1 2003-05-02 17:18:13 sfox Exp $
+     $Id: docbook.xsl,v 1.2 2003-06-05 12:57:44 sfox Exp $
      ********************************************************************
 
      This file is part of the XSL DocBook Stylesheet distribution.

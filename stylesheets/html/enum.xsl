@@ -41,56 +41,58 @@
  </xsl:template>
 
  <xsl:template match="enum">
-  <div class="enum">
-   <a>
-    <xsl:attribute name="class">
-     <xsl:value-of select="name(.)" />
-    </xsl:attribute>
-    <xsl:attribute name="name">
-     <xsl:value-of select="@id"/>
-    </xsl:attribute>
-   </a>
-   <h1 class="title">
-    <xsl:apply-templates select="./enumname" />
-   </h1>
-   <p>
-    <h3>
-     <xsl:choose>
-      <xsl:when test="@type='flags'">
-       <xsl:text>Flags</xsl:text>
-      </xsl:when>
-      <xsl:otherwise>
-       <xsl:text>Enums</xsl:text>
-      </xsl:otherwise>
-     </xsl:choose>
-    </h3>
-   </p>
-   <p>
-    <blockquote>
-     <xsl:apply-templates select="./desc"/>
-    </blockquote>
-   </p>
-   <table cellpadding="2" cellspacing="2">
-    <tr>
-     <td width="5%">
-      <h3>
-       Value
-      </h3>
-     </td>
-     <td width="40%">
-      <h3>
-       Symbolic Name
-      </h3>
-     </td>
-     <td width="54%">
-      <h3>
-       Description
-      </h3>
-     </td>
-     </tr>
-     <xsl:apply-templates select="./enumoption" />
-   </table>
-  </div>
+  <a>
+   <xsl:attribute name="class">
+    <xsl:value-of select="name(.)" />
+   </xsl:attribute>
+   <xsl:attribute name="name">
+    <xsl:value-of select="@id"/>
+   </xsl:attribute>
+  </a>
+  <h1 class="title">
+   <xsl:apply-templates select="./enumname" />
+  </h1>
+  <p>
+   <h3>
+    <xsl:choose>
+     <xsl:when test="@type='flags'">
+      <xsl:text>Flags</xsl:text>
+     </xsl:when>
+     <xsl:otherwise>
+      <xsl:text>Enums</xsl:text>
+     </xsl:otherwise>
+    </xsl:choose>
+   </h3>
+  </p>
+  <p>
+   <xsl:apply-templates select="./desc"/>
+  </p>
+  <table width="100%" cellpadding="2" cellspacing="1">
+   <tr>
+    <td width="7%">
+     <h3>
+      <xsl:call-template name="gentext">
+       <xsl:with-param name="key">value</xsl:with-param>
+      </xsl:call-template>
+     </h3>
+    </td>
+    <td width="40%">
+     <h3>
+      <xsl:call-template name="gentext">
+       <xsl:with-param name="key">symbolicname</xsl:with-param>
+      </xsl:call-template>
+     </h3>
+    </td>
+    <td width="52%">
+     <h3>
+      <xsl:call-template name="gentext">
+       <xsl:with-param name="key">description</xsl:with-param>
+      </xsl:call-template>
+     </h3>
+    </td>
+   </tr>
+   <xsl:apply-templates select="./enumoption" />
+  </table>
  </xsl:template>
 
  <xsl:template match="enumoption">

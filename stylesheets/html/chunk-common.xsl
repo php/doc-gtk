@@ -468,7 +468,12 @@ its parent.
       <table width="100%" summary="Navigation header">
         <tr>
           <th colspan="3" align="center">
-            <xsl:apply-templates select="." mode="object.title.markup"/>
+            <xsl:choose>
+              <xsl:when test="count($up) > 0 and $up != $home">
+                <xsl:apply-templates select="$up" mode="object.title.markup"/>
+              </xsl:when>
+              <xsl:otherwise>&#160;</xsl:otherwise>
+            </xsl:choose>
           </th>
         </tr>
         <tr>
@@ -488,12 +493,7 @@ its parent.
             <xsl:text>&#160;</xsl:text>
           </td>
           <th width="60%" align="center">
-            <xsl:choose>
-              <xsl:when test="count($up) > 0 and $up != $home">
-                <xsl:apply-templates select="$up" mode="object.title.markup"/>
-              </xsl:when>
-              <xsl:otherwise>&#160;</xsl:otherwise>
-            </xsl:choose>
+            <xsl:apply-templates select="." mode="object.title.markup"/>
           </th>
           <td width="20%" align="right">
             <xsl:text>&#160;</xsl:text>
@@ -1223,14 +1223,6 @@ its parent.
     </xsl:call-template>
   </xsl:variable>
 
-<!--
-  <xsl:message>
-    <xsl:value-of select="name(.)"/>
-    <xsl:text> fcount: </xsl:text>
-    <xsl:value-of select="$fcount"/>
-  </xsl:message>
--->
-
   <!-- Only bother to do this if there's at least one non-table footnote -->
   <xsl:if test="$fcount &gt; 0">
     <div class="footnotes">
@@ -1256,7 +1248,5 @@ its parent.
 <xsl:template match="legalnotice" mode="titlepage.mode">
   <xsl:call-template name="process-chunk-element"/>
 </xsl:template>
-
-<!-- ==================================================================== -->
 
 </xsl:stylesheet>
