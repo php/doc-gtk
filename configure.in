@@ -21,8 +21,7 @@
 AC_INIT(global.ent)
 
 AC_PATH_PROG(SAXON, saxon, no)
-if test "$SAXON" = "no";
-then
+if test "$SAXON" = "no"; then
     AC_PATH_PROG(JAVA, java, no)
     if test "$JAVA" = "no"; then
         AC_MSG_ERROR(unable to locate either Saxon or Java)
