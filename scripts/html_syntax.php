@@ -49,7 +49,7 @@ function callback_highlight_php($matches) {
 	if ($GLOBALS["TYPE"] == "php") {
 		global $geshi;
 		$geshi->set_source($with_tags);
-		var_dump($geshi->parse_code()); exit;
+		return $geshi->parse_code();
 	} else { // "html"
 		$bRemoveTags	= false;
 		if( substr( $with_tags, 0, 5) != '<' . '?php') {
