@@ -102,12 +102,14 @@
   <xsl:call-template name="func.proto">
    <xsl:with-param name="node" select="."/>
    <xsl:with-param name="append.bracket" select="1"/>
+   <xsl:with-param name="with-link" select="1"/>
   </xsl:call-template>
  </xsl:template>
 
  <xsl:template name="func.proto">
   <xsl:param name="append.bracket" select="0" />
   <xsl:param name="node" select="." />
+  <xsl:param name="with-link" select="0"/>
   <xsl:variable name="funcname">
    <xsl:value-of select="$node"/>
   </xsl:variable>
@@ -121,7 +123,7 @@
   </xsl:variable>
   
   <xsl:choose>
-   <xsl:when test="$id!='no'">
+   <xsl:when test="$id!='no' and ((count(parent::funcdef)='0' or count(ancestor::constructor)!='0') or $with-link='1')">
     <xsl:variable name="link">
      <xsl:call-template name="href.target">
       <xsl:with-param name="object" select="id($id)"/>
@@ -293,7 +295,6 @@
 
  <xsl:template match="funcprototype" mode="synoptic.mode">
       <xsl:apply-templates mode="synoptic.mode"/>
-   
  </xsl:template>
 
 
