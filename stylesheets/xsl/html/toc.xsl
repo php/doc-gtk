@@ -3,7 +3,7 @@
                 version='1.0'>
 
 <!-- ********************************************************************
-     $Id: toc.xsl,v 1.2 2001-06-02 17:57:09 jmoore Exp $
+     $Id: toc.xsl,v 1.3 2001-06-09 13:20:36 jmoore Exp $
      ********************************************************************
 -->
 
@@ -32,7 +32,7 @@
 
 <xsl:template name="component.toc">
   <xsl:if test="$generate.component.toc != 0">
-    <xsl:variable name="nodes" select="section|sect1|refentry|classentry"/>
+    <xsl:variable name="nodes" select="section|sect1|refentry|classentry|enum"/>
     <xsl:if test="$nodes">
       <div class="toc">
         <p>
@@ -51,7 +51,7 @@
 </xsl:template>
 
 <xsl:template name="section.toc">
-  <xsl:variable name="nodes" select="section|sect1|sect2|sect3|sect4|sect5|refentry|classentry"/>
+  <xsl:variable name="nodes" select="section|sect1|sect2|sect3|sect4|sect5|refentry|classentry|enum"/>
   <xsl:if test="$nodes">
     <div class="toc">
       <p>
@@ -220,5 +220,16 @@
     - <xsl:apply-templates select="$shortdesc"/>
   </xsl:element>
 </xsl:template>
+
+<xsl:template match="enum" mode="toc">
+ <br />
+ <a>
+  <xsl:attribute name="href">
+   <xsl:call-template name="href.target"/>
+  </xsl:attribute>
+  <xsl:apply-templates select="./enumname" />
+ </a>
+</xsl:template>
+
 </xsl:stylesheet>
 

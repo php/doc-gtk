@@ -155,8 +155,17 @@
     </xsl:for-each>
    </xsl:when>
 
+   <xsl:when test="name($node)='enum'">
+    <xsl:variable name="classset" select="ancestor::classset"/>
+    <xsl:for-each select="$classset/classentry|$classset/enum">
+     <xsl:call-template name="gen.text.toc.array">
+      <xsl:with-param name="node" select="." />
+     </xsl:call-template>
+    </xsl:for-each>
+   </xsl:when>
+
    <xsl:when test="name($node)='classentry'">
-    <xsl:for-each select="preceding-sibling::classentry|self::*|following-sibling::classentry">
+    <xsl:for-each select="preceding-sibling::classentry|self::*|following-sibling::classentry|preceding-sibling::enum|following-sibling::enum">
      <xsl:call-template name="gen.text.toc.array">
       <xsl:with-param name="node" select="." />
      </xsl:call-template>
@@ -208,6 +217,9 @@
     </xsl:when>
     <xsl:when test="name($node)='signal'">
      <xsl:text>NAV_SIGNAL</xsl:text>
+    </xsl:when>
+    <xsl:when test="name($node)='enum'">
+     <xsl:text>NAV_ENUM</xsl:text>
     </xsl:when>
     <xsl:otherwise>
      <xsl:text>NAV_NONE</xsl:text>

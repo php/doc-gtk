@@ -2,8 +2,9 @@
 		version="1.0">
 
  <xsl:template match="enumname">
+  <xsl:param name="with-link" select="0" />
   <xsl:choose>
-   <xsl:when test="name(parent::node())='enum'">
+   <xsl:when test="name(parent::node())='enum' and $with-link='0'">
     <xsl:apply-templates />
    </xsl:when>
    <xsl:otherwise>
@@ -74,7 +75,7 @@
  <xsl:template name="gen.enumname.url">
   <xsl:param name="enumname" />
 
-  <xsl:variable name="enumnode" select="//enum[enumname='$enumname']" />
+  <xsl:variable name="enumnode" select="//enum[enumname[self::node()=$enumname]]" />
 
   <xsl:call-template name="href.target">
    <xsl:with-param name="object" select="$enumnode"/>
