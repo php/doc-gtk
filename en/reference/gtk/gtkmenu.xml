@@ -71,12 +71,14 @@ $menu = &new GtkMenu();
      <programlisting role="php">
 <![CDATA[
 <?php
-
-dl('php_gtk.' . (strstr(PHP_OS, 'WIN') ? 'dll' : 'so'));
+if( !extension_loaded('gtk')) {	
+    dl( 'php_gtk.' . PHP_SHLIB_SUFFIX); 
+}
 
 function show_popup($event, $menu) {
-if($event->button == 3) {
-    $menu->popup(null, null, null, $event->button, $event->time);
+    if($event->button == 3) {
+        $menu->popup(null, null, null, $event->button, $event->time);
+    }
 }
 
 $window = &new GtkWindow();
@@ -105,6 +107,9 @@ $exit->lock_accelerators();
 $exit->connect_object('activate', array('gtk', 'main_quit'));
 $menu->append($exit);
 $menu->show_all();
+
+$label = &new GtkLabel( 'Right-click here to see the menu');
+$window->add( $label);
 
 $window->add_events(GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK);
 $window->connect_object('button-press-event', 'show_popup', $menu);

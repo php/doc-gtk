@@ -28,6 +28,10 @@
     method's parameters, should you need to connect to them.
    </simpara>
    <simpara>
+    If you need a list with multiple columns and/or titles with sorting
+    support, <classname>GtkCList</classname> is the right class for you.
+   </simpara>
+   <simpara>
     See also: <classname>GtkCList</classname>, 
     <classname>GtkCombo</classname>, 
     <classname>GtkListItem</classname>.
@@ -58,8 +62,9 @@
      <programlisting role="php">
 <![CDATA[
 <?php
-
-dl('php_gtk.' . (strstr(PHP_OS, 'WIN') ? 'dll' : 'so'));
+if( !extension_loaded('gtk')) {	
+	dl( 'php_gtk.' . PHP_SHLIB_SUFFIX); 
+}
 
 function echo_it($list, $listitem) {
 /* collect the text from the selected list item's label */
@@ -109,7 +114,6 @@ $window->add($list);
 $window->show_all();
 
 gtk::main();
-
 ?>
 ]]>
      </programlisting>
@@ -124,7 +128,7 @@ gtk::main();
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>append_items</function></funcdef>
-     <paramdef>array</paramdef>
+     <paramdef>Array <parameter>listItems</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -164,7 +168,7 @@ gtk::main();
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>select_item</function></funcdef>
-     <paramdef>int <parameter>item</parameter></paramdef>
+     <paramdef>int <parameter>row</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -190,7 +194,7 @@ gtk::main();
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>unselect_item</function></funcdef>
-     <paramdef>int <parameter>item</parameter></paramdef>
+     <paramdef>int <parameter>row</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -286,8 +290,8 @@ gtk::main();
    <desc>
     <simpara>
      <function class="GtkList">child_position</function> returns the
-    .list position currently holding the widget that was passed as the
-     argument.  The widget needs to be passed by reference, i.e. using the
+     list position currently holding the widget that was passed as the
+     argument. The widget needs to be passed by reference, i.e. using the
      form <literal>$widget</literal>.
     </simpara>
    </desc>
@@ -679,6 +683,11 @@ gtk::main();
      is emitted whenever there is a change in the list's 
      <propname class="GtkList">selection</propname> property, regardless of
      whether that change empties the array.
+    </simpara>
+    <simpara>
+     As there is no way to track back which particular item has been selected
+     or unselected, you should use the <signalname class="GtkList">select-child</signalname>
+     if you need that piece of information.
     </simpara>
    </desc>
   </signal>
