@@ -1092,10 +1092,31 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Extends capturable events prior to realization.
    </shortdesc>
    <desc>
-
+    <simpara>
+     This method is used to set the <enumname>GdkEventMask</enumname> 
+     flags on a widget, extending the type of event that the widget
+     can capture from its default capabilities.  You may need to do this,
+     for instance, to capture a key press event on a widget that does not
+     normally capture such events.
+    </simpara>
+    <simpara>
+     <function class="GtkWidget">set_events()</function> can be used
+     at any point in the widget's life-cycle.
+    </simpara>
+    <para>
+     Staying with the key-press example, the syntax would be:
+     <informalexample>
+      <programlisting role="php">
+$widget-&gt;set_events(GDK_KEY_PRESS_MASK | GDK_KEY_RELEASE_MASK);
+      </programlisting>
+     </informalexample>
+     This would enable a previously keyboard-insensitive widget to emit 
+     <signalname class="GtkWidget">key-press-event</signalname> and 
+     <signalname class="GtkWidget">key-release-event</signalname> signals.
+    </para>
    </desc>
   </method>
 
@@ -1107,10 +1128,34 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Extends capturable events after realization.
    </shortdesc>
    <desc>
-
+    <simpara>
+     This method is used to set the <enumname>GdkEventMask</enumname> 
+     flags on a widget, extending the type of event that the widget
+     can capture from its default capabilities.  You may need to do this,
+     for instance, to capture a button press event on a widget that does
+     not normally capture such events.
+    </simpara>
+    <simpara>
+     <function class="GtkWidget">add_events()</function> can only be used
+     after a widget has had <function class="GtkWidget">realize()</function> 
+     called on it.  Note that realization is a part of the 
+     <function class="GtkWidget">show()</function> routine as well as being
+     a method/signal pair in its own right.
+    </simpara>
+    <para>
+     Staying with the button-press example, the syntax would be:
+     <informalexample>
+      <programlisting role="php">
+$widget-&gt;add_events(GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK);
+      </programlisting>
+     </informalexample>
+     This would enable a previously mouse-insensitive widget to emit 
+     <signalname class="GtkWidget">button-press-event</signalname> and 
+     <signalname class="GtkWidget">button-release-event</signalname> signals.
+    </para>
    </desc>
   </method>
 
