@@ -5,7 +5,7 @@
                 version='1.0'>
 
 <!-- ********************************************************************
-     $Id: common.xsl,v 1.1 2003-05-02 17:18:13 sfox Exp $
+     $Id: common.xsl,v 1.2 2003-06-13 19:29:13 sfox Exp $
      ********************************************************************
 
      This file is part of the XSL DocBook Stylesheet distribution.
@@ -19,7 +19,7 @@
 <doc:reference xmlns="">
 <referenceinfo>
 <releaseinfo role="meta">
-$Id: common.xsl,v 1.1 2003-05-02 17:18:13 sfox Exp $
+$Id: common.xsl,v 1.2 2003-06-13 19:29:13 sfox Exp $
 </releaseinfo>
 <author><surname>Walsh</surname>
 <firstname>Norman</firstname></author>
@@ -54,44 +54,24 @@ to be incomplete. Don't forget to read the source, too :-)</para>
 <xsl:preserve-space elements="*"/>
 
 <xsl:strip-space elements="
-abstract affiliation anchor answer appendix area areaset areaspec
-artheader article audiodata audioobject author authorblurb authorgroup
-beginpage bibliodiv biblioentry bibliography biblioset blockquote book
-bookbiblio bookinfo callout calloutlist caption caution chapter
-citerefentry cmdsynopsis co collab colophon colspec confgroup
-copyright dedication docinfo editor entry entrytbl epigraph equation
-example figure footnote footnoteref formalpara funcprototype
-funcsynopsis glossary glossdef glossdiv glossentry glosslist graphicco
-group highlights imagedata imageobject imageobjectco important index
-indexdiv indexentry indexterm informalequation informalexample
-informalfigure informaltable inlineequation inlinemediaobject
-itemizedlist itermset keycombo keywordset legalnotice listitem lot
-mediaobject mediaobjectco menuchoice msg msgentry msgexplan msginfo
-msgmain msgrel msgset msgsub msgtext note objectinfo
-orderedlist othercredit part partintro preface printhistory procedure
-programlistingco publisher qandadiv qandaentry qandaset question
-refentry reference refmeta refnamediv refsect1 refsect1info refsect2
-refsect2info refsect3 refsect3info refsynopsisdiv refsynopsisdivinfo
-revhistory revision row sbr screenco screenshot sect1 sect1info sect2
-sect2info sect3 sect3info sect4 sect4info sect5 sect5info section
-sectioninfo seglistitem segmentedlist seriesinfo set setindex setinfo
-shortcut sidebar simplelist simplesect spanspec step subject
-subjectset substeps synopfragment table tbody textobject tfoot tgroup
-thead tip toc tocchap toclevel1 toclevel2 toclevel3 toclevel4
-toclevel5 tocpart varargs variablelist varlistentry videodata
-videoobject void warning subjectset
-
-classsynopsis
-constructorsynopsis
-destructorsynopsis
-fieldsynopsis
-methodparam
-methodsynopsis
-ooclass
-ooexception
-oointerface
-simplemsgentry
-"/>
+anchor author authorblurb authorgroup
+blockquote book bookinfo
+caption chaptery colspec copyright
+editor entry example
+figure funcprototype funcsynopsis
+graphicco group
+imagedata imageobject imageobjectco informalexample informalfigure informaltable
+inlinemediaobject itemizedlist
+keycombo keywordset
+legalnotice listitem
+mediaobject mediaobjectco msg
+note
+orderedlist
+part partintro programlisting
+refentry refmeta row
+screenshot sect1 sect2 set setinfo simplelist spanspec step
+table tbody tfoot tgroup thead tip toc tocchap toclevel1 toclevel2 tocpart
+void"/>
 
 <!-- ====================================================================== -->
 
@@ -162,16 +142,8 @@ simplemsgentry
 <xsl:template name="is.section">
   <xsl:param name="node" select="."/>
   <xsl:choose>
-    <xsl:when test="local-name($node) = 'section'
-                    or local-name($node) = 'sect1'
-                    or local-name($node) = 'sect2'
-                    or local-name($node) = 'sect3'
-                    or local-name($node) = 'sect4'
-                    or local-name($node) = 'sect5'
-                    or local-name($node) = 'refsect1'
-                    or local-name($node) = 'refsect2'
-                    or local-name($node) = 'refsect3'
-                    or local-name($node) = 'simplesect'">1</xsl:when>
+    <xsl:when test="local-name($node) = 'sect1'
+                    or local-name($node) = 'sect2'">1</xsl:when>
     <xsl:otherwise>0</xsl:otherwise>
   </xsl:choose>
 </xsl:template>
@@ -212,181 +184,11 @@ Defaults to the context node.</para>
   <xsl:choose>
     <xsl:when test="name($node)='sect1'">2</xsl:when>
     <xsl:when test="name($node)='sect2'">3</xsl:when>
-    <xsl:when test="name($node)='section'">
-      <xsl:choose>
-        <xsl:when test="$node/../../section">3</xsl:when>
-        <xsl:otherwise>2</xsl:otherwise>
-      </xsl:choose>
-    </xsl:when>
-    <xsl:when test="name($node)='refsect1'">2</xsl:when>
-    <xsl:when test="name($node)='refsect2'">3</xsl:when>
-    <xsl:when test="name($node)='refsect3'">4</xsl:when>
-    <xsl:when test="name($node)='simplesect'">
-      <xsl:choose>
-        <xsl:when test="$node/../../sect1">3</xsl:when>
-        <xsl:when test="$node/../../sect2">4</xsl:when>
-        <xsl:when test="$node/../../section">
-          <xsl:choose>
-            <xsl:when test="$node/../../../../../section">6</xsl:when>
-            <xsl:when test="$node/../../../../section">5</xsl:when>
-            <xsl:when test="$node/../../../section">4</xsl:when>
-            <xsl:otherwise>3</xsl:otherwise>
-          </xsl:choose>
-        </xsl:when>
-        <xsl:otherwise>2</xsl:otherwise>
-      </xsl:choose>
-    </xsl:when>
     <xsl:otherwise>2</xsl:otherwise>
   </xsl:choose>
 </xsl:template><!-- section.level -->
 
-<doc:template name="qanda.section.level" xmlns="">
-<refpurpose>Returns the hierarchical level of a QandASet.</refpurpose>
-
-<refdescription>
-<para>This template calculates the hierarchical level of a QandASet.
-</para>
-</refdescription>
-
-<refreturn>
-<para>The level, <quote>1</quote>, <quote>2</quote>, etc.
-</para>
-</refreturn>
-</doc:template>
-
-<xsl:template name="qanda.section.level">
-  <xsl:variable name="section"
-                select="(ancestor::section
-                         |ancestor::simplesect
-                         |ancestor::sect5
-                         |ancestor::sect4
-                         |ancestor::sect3
-                         |ancestor::sect2
-                         |ancestor::sect1
-                         |ancestor::refsect3
-                         |ancestor::refsect2
-                         |ancestor::refsect1)[last()]"/>
-  <xsl:choose>
-    <xsl:when test="count($section) = '0'">1</xsl:when>
-    <xsl:otherwise>
-      <xsl:call-template name="section.level">
-        <xsl:with-param name="node" select="$section"/>
-      </xsl:call-template>
-    </xsl:otherwise>
-  </xsl:choose>
-</xsl:template>
-
-<xsl:template name="qandadiv.section.level">
-  <xsl:variable name="section.level">
-    <xsl:call-template name="qanda.section.level"/>
-  </xsl:variable>
-  <xsl:variable name="anc.divs" select="ancestor::qandadiv"/>
-
-  <xsl:value-of select="count($anc.divs) + number($section.level)"/>
-</xsl:template>
-
-<xsl:template name="question.answer.label">
-  <xsl:variable name="deflabel">
-    <xsl:choose>
-      <xsl:when test="ancestor-or-self::*[@defaultlabel]">
-        <xsl:value-of select="(ancestor-or-self::*[@defaultlabel])[last()]
-                              /@defaultlabel"/>
-      </xsl:when>
-      <xsl:otherwise>
-        <xsl:value-of select="qanda.defaultlabel"/>
-      </xsl:otherwise>
-    </xsl:choose>
-  </xsl:variable>
-
   <xsl:variable name="label" select="@label"/>
-
-<!--
-	 (hnr      (hierarchical-number-recursive (normalize "qandadiv")
-						  node))
-
-	 (parsect  (ancestor-member node (section-element-list)))
-
-	 (defnum   (if (and %qanda-inherit-numeration% 
-			    %section-autolabel%)
-		       (if (node-list-empty? parsect)
-			   (section-autolabel-prefix node)
-			   (section-autolabel parsect))
-		       ""))
-
-	 (hnumber  (let loop ((numlist hnr) (number defnum) 
-			      (sep (if (equal? defnum "") "" ".")))
-		     (if (null? numlist)
-			 number
-			 (loop (cdr numlist) 
-			       (string-append number
-					      sep
-					      (number->string (car numlist)))
-			       "."))))
-	 (cnumber  (child-number (parent node)))
-	 (number   (string-append hnumber 
-				  (if (equal? hnumber "")
-				      ""
-				      ".")
-				  (number->string cnumber))))
--->
-
-  <xsl:choose>
-    <xsl:when test="$deflabel = 'qanda'">
-      <xsl:call-template name="gentext">
-        <xsl:with-param name="key">
-          <xsl:choose>
-            <xsl:when test="local-name(.) = 'question'">Question</xsl:when>
-            <xsl:when test="local-name(.) = 'question'">Answer</xsl:when>
-            <xsl:when test="local-name(.) = 'qandadiv'">QandADiv</xsl:when>
-            <xsl:otherwise>QandASet</xsl:otherwise>
-          </xsl:choose>
-        </xsl:with-param>
-      </xsl:call-template>
-    </xsl:when>
-    <xsl:when test="$deflabel = 'label'">
-      <xsl:value-of select="$label"/>
-    </xsl:when>
-    <xsl:when test="$deflabel = 'number'
-                    and local-name(.) = 'question'">
-      <xsl:apply-templates select="ancestor::qandaset[1]"
-                           mode="number"/>
-      <xsl:choose>
-        <xsl:when test="ancestor::qandadiv">
-          <xsl:apply-templates select="ancestor::qandadiv[1]"
-                               mode="number"/>
-          <xsl:apply-templates select="ancestor::qandaentry"
-                               mode="number"/>
-        </xsl:when>
-        <xsl:otherwise>
-          <xsl:apply-templates select="ancestor::qandaentry"
-                               mode="number"/>
-        </xsl:otherwise>
-      </xsl:choose>
-    </xsl:when>
-    <xsl:otherwise>
-      <!-- nothing -->
-    </xsl:otherwise>
-  </xsl:choose>
-</xsl:template>
-
-<xsl:template match="qandaset" mode="number">
-  <!-- FIXME: -->
-</xsl:template>
-
-<xsl:template match="qandadiv" mode="number">
-  <xsl:number level="multiple" from="qandaset" format="1."/>
-</xsl:template>
-
-<xsl:template match="qandaentry" mode="number">
-  <xsl:choose>
-    <xsl:when test="ancestor::qandadiv">
-      <xsl:number level="single" from="qandadiv" format="1."/>
-    </xsl:when>
-    <xsl:otherwise>
-      <xsl:number level="single" from="qandaset" format="1."/>
-    </xsl:otherwise>
-  </xsl:choose>
-</xsl:template>
 
 <!-- ====================================================================== -->
 
@@ -531,103 +333,6 @@ Defaults to the context node.</para>
 <xsl:variable name="arg.rep.def.str"></xsl:variable>
 <xsl:variable name="arg.or.sep"> | </xsl:variable>
 <xsl:variable name="cmdsynopsis.hanging.indent">4pi</xsl:variable>
-
-<!-- ====================================================================== -->
-
-<!--
-<xsl:template name="xref.g.subst">
-  <xsl:param name="string"></xsl:param>
-  <xsl:param name="target" select="."/>
-  <xsl:variable name="subst">%g</xsl:variable>
-
-  <xsl:choose>
-    <xsl:when test="contains($string, $subst)">
-      <xsl:value-of select="substring-before($string, $subst)"/>
-      <xsl:call-template name="gentext.element.name">
-        <xsl:with-param name="element.name" select="name($target)"/>
-      </xsl:call-template>
-      <xsl:call-template name="xref.g.subst">
-        <xsl:with-param name="string"
-                        select="substring-after($string, $subst)"/>
-        <xsl:with-param name="target" select="$target"/>
-      </xsl:call-template>
-    </xsl:when>
-    <xsl:otherwise>
-      <xsl:value-of select="$string"/>
-    </xsl:otherwise>
-  </xsl:choose>
-</xsl:template>
-
-<xsl:template name="xref.t.subst">
-  <xsl:param name="string"></xsl:param>
-  <xsl:param name="target" select="."/>
-  <xsl:variable name="subst">%t</xsl:variable>
-
-  <xsl:choose>
-    <xsl:when test="contains($string, $subst)">
-      <xsl:call-template name="xref.g.subst">
-        <xsl:with-param name="string"
-                        select="substring-before($string, $subst)"/>
-        <xsl:with-param name="target" select="$target"/>
-      </xsl:call-template>
-      <xsl:call-template name="title.xref">
-        <xsl:with-param name="target" select="$target"/>
-      </xsl:call-template>
-      <xsl:call-template name="xref.t.subst">
-        <xsl:with-param name="string"
-                        select="substring-after($string, $subst)"/>
-        <xsl:with-param name="target" select="$target"/>
-      </xsl:call-template>
-    </xsl:when>
-    <xsl:otherwise>
-      <xsl:call-template name="xref.g.subst">
-        <xsl:with-param name="string" select="$string"/>
-        <xsl:with-param name="target" select="$target"/>
-      </xsl:call-template>
-    </xsl:otherwise>
-  </xsl:choose>
-</xsl:template>
-
-<xsl:template name="xref.n.subst">
-  <xsl:param name="string"></xsl:param>
-  <xsl:param name="target" select="."/>
-  <xsl:variable name="subst">%n</xsl:variable>
-
-  <xsl:choose>
-    <xsl:when test="contains($string, $subst)">
-      <xsl:call-template name="xref.t.subst">
-        <xsl:with-param name="string"
-                        select="substring-before($string, $subst)"/>
-        <xsl:with-param name="target" select="$target"/>
-      </xsl:call-template>
-      <xsl:call-template name="number.xref">
-        <xsl:with-param name="target" select="$target"/>
-      </xsl:call-template>
-      <xsl:call-template name="xref.t.subst">
-        <xsl:with-param name="string"
-                        select="substring-after($string, $subst)"/>
-        <xsl:with-param name="target" select="$target"/>
-      </xsl:call-template>
-    </xsl:when>
-    <xsl:otherwise>
-      <xsl:call-template name="xref.t.subst">
-        <xsl:with-param name="string" select="$string"/>
-        <xsl:with-param name="target" select="$target"/>
-      </xsl:call-template>
-    </xsl:otherwise>
-  </xsl:choose>
-</xsl:template>
-
-<xsl:template name="subst.xref.text">
-  <xsl:param name="xref.text"></xsl:param>
-  <xsl:param name="target" select="."/>
-
-  <xsl:call-template name="xref.n.subst">
-    <xsl:with-param name="string" select="$xref.text"/>
-    <xsl:with-param name="target" select="$target"/>
-  </xsl:call-template>
-</xsl:template>
--->
 
 <!-- ====================================================================== -->
 

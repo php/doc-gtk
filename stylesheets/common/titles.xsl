@@ -308,10 +308,6 @@ title of the element. This does not include the label.
   <xsl:apply-templates select="."/>
 </xsl:template>
 
-<xsl:template match="footnote" mode="no.anchor.mode">
-  <!-- nop, suppressed -->
-</xsl:template>
-
 <xsl:template match="anchor" mode="no.anchor.mode">
   <!-- nop, suppressed -->
 </xsl:template>
