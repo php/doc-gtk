@@ -2092,10 +2092,18 @@ $rectangle, $drawingarea, null, $x, $y, $width, $height);
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Add a file to the list of files to be parsed at the end of gtk_init().
    </shortdesc>
    <desc>
-
+    <simpara>
+     Adds a file to the list of files to be parsed at the end of gtk_init().
+     The default file to be parsed is <literal>~/.gtkrc</literal>. This file
+     does not need to be added using <function>rc_add_default_file</function>
+     in order to be parsed.
+    </simpara>
+    <simpara>
+     See also: <function>rc_parse</function>
+    </simpara>
    </desc>
   </method>
 
@@ -2145,10 +2153,52 @@ $rectangle, $drawingarea, null, $x, $y, $width, $height);
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Return the <classname>GtkStyle</classname> that will be applied to the
+    widget.
    </shortdesc>
    <desc>
+    <simpara>
+     Returns the <classname>GtkStyle</classname> that will be applied to
+     <parameter>widget</parameter>.
+    </simpara>
+    <simpara>
+     <function>rc_get_style</function> finds all rc styles that will be
+     applied to <parameter>widget</parameter> and combines them into one
+     <classname>GtkStyle</classname> widget representing the final appearance
+     of the <parameter>widget</parameter>.
+    </simpara>
+    <para>
+     <example>
+      <title>Getting the rc style for a widget</title>
+      <programlisting role="php">
+<![CDATA[
+<?php
 
+// Create a backgound style to apply to buttons only.
+$style = 'style "button" { bg[NORMAL] = "#ff6060" }';
+gtk::rc_parse_string($style);
+
+// Create a foreground style that applies to the entire application.
+$style = 'style "window" { fg[NORMAL] = "#ffffff" }';
+gtk::rc_parse_string($style);
+
+// Create a window and add a button.
+$window =& new GtkWindow();
+$button =& new GtkButton('Example');
+$window->add($button);
+
+// Get the rc style
+$rcStyle = gtk::rc_get_style($button);
+
+// Output the style properties.
+echo $rcStyle->fg . "\n";  // Will print #ffffff
+echo $rcStyle->bg . "\n";  // Will print #ff6060
+
+?>
+]]>
+      </programlisting>
+     </example>
+    </para> 
    </desc>
   </method>
 
@@ -2160,10 +2210,16 @@ $rectangle, $drawingarea, null, $x, $y, $width, $height);
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Return the directory that PHP-GTK looks for theme engines in.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Returns the directory that PHP-GTK looks for theme engines in. The default
+     theme directory is XXXX.
+    </simpara>
+    <simpara>
+     See also: <function>rc_get_module_dir</function>
+    </simpara>
    </desc>
   </method>
 
@@ -2204,7 +2260,25 @@ $rectangle, $drawingarea, null, $x, $y, $width, $height);
     Parses an application's rc file(s).
    </shortdesc>
    <desc>
-
+    <simpara>
+     Parses an application's rc file(s). <parameter>filename</parameter> is the
+     name of the rc file to parse.
+    </simpara>
+    <simpara>
+     RC files are PHP-GTK's method for setting the default look and feel for
+     and application, class of widgets, or an individaul widget. When an
+     application loads you can tell it to parse an rc file that acts similar
+     to a style sheet for GTK objects. It defines how widgets should appear in
+     their default state (before any user code alters their appearance). For 
+     more details about rc files, including their format, see
+     <ulink
+     url="http://www.gtk.org/tutorial/ch-gtkrcfiles.html">http://www.gtk.org/tutorial/ch-gtkrcfiles.html</ulink>
+    </simpara>
+    <simpara>
+     See also: <function>rc_parse_string</function>,
+     <function>rc_add_default_file</function>,
+     <function>rc_reparse_all</function>
+    </simpara>
    </desc>
   </method>
 
@@ -2239,10 +2313,21 @@ $rectangle, $drawingarea, null, $x, $y, $width, $height);
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Reparse all of an application's rc files.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Reparses all of an application's rc files if the modification time of any
+     of the previously parse files has changed. This will reset the look and
+     feel of the application to its original state. Any changes that were made
+     to an individual widget's style will be lost.
+    </simpara>
+    <simpara>
+     If the files were reread, <literal>true</literal> is returned.
+    </simpara>
+    <simpara>
+     See also: <function>rc_parse</function>
+    </simpara>
    </desc>
   </method>
 
