@@ -97,9 +97,9 @@ $newstyle-&gt;fg[GTK_STATE_PRELIGHT] = $cyan;
 $label = $button[5]-&gt;child;
 $label-&gt;set_style($newstyle);
     
-/* gdk::color_parse() uses the colors that are already defined on your system
-   to fill a GdkColor structure invisibly.  'ivory' may not be a color on
-   your system.  Try a more universal color, like 'red', if it fails. */
+/* gdk::color_parse() uses a color that is defined on your system to fill
+   a GdkColor structure.  It can be more convenient than manually creating
+   a new GdkColor, particularly if you're only assigning the color once. */
 $newstyle-&gt;bg[GTK_STATE_NORMAL] = gdk::color_parse('ivory');
 $button[5]-&gt;set_style($newstyle);
     

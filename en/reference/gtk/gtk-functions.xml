@@ -431,7 +431,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Not implemented.
    </shortdesc>
    <desc>
 
@@ -1338,10 +1338,27 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    A quick way to draw focus-like shadow around a given rectangle.
    </shortdesc>
    <desc>
-
+    <simpara>
+     <function>gtk::paint_focus()</function> is a convenience function
+     that draws a dark shadow along the left and top sides of the given
+     rectangle, making it appear as GTK widgets generally do when they
+     have focus.
+    </simpara>
+    <simpara>
+     This is the only function that uses the <parameter>detail</parameter> 
+     parameter at all now; if you pass <literal>'set-mode'</literal> as
+     that parameter, the shadow will appear as long dashes rather than as
+     a continuous line.  Any other string is regarded the same as if it
+     were <literal>null</literal>.
+    </simpara>
+    <simpara>
+     The other parameters are on the whole self-explanatory.  The 
+     <parameter>widget</parameter> parameter refers to the widget that is
+     being drawn upon (usually a <classname>GtkDrawingArea</classname>).
+    </simpara>
    </desc>
   </method>
 
