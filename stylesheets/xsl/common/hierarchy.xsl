@@ -1,8 +1,8 @@
-<?xml version='1.0' encoding='ISO-8859-1' ?>
+y<?xml version='1.0' encoding='ISO-8859-1' ?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 		version="1.0">
 
-<!-- $Id: hierarchy.xsl,v 1.4 2001-08-10 15:09:10 jmoore Exp $ -->
+<!-- $Id: hierarchy.xsl,v 1.5 2001-08-11 16:10:40 jmoore Exp $ -->
 		
 <!-- ================== Common Hierarchy Functions ============================ -->
 
@@ -74,16 +74,17 @@
 -->
  <xsl:template name="get.class.id.from.name">
   <xsl:param name="classname" />
-  <xsl:param name="root" select="no" />
-
-  <xsl:choose>
-   <xsl:when test="$root='no'">
-    <xsl:variable name="classentry" select="//classentry[classmeta/classtitle=$classname]" />
-   </xsl:when>
-   <xsl:otherwise>
-    <xsl:variable name="classentry" select="$root//classentry[classmeta/classtitle=$classname]" />
-   </xsl:otherwise>
-   <xsl:value-of select="$classentry/attribute::id" />
+  <xsl:param name="root" select="/" >
+	  
+  <xsl:variable name="classentry">
+   <xsl:call-template name="get.classentry.from.title">
+    <xsl:with-param name="title" select="$classname"/>
+    <xsl:with-param name="root" select="$root"/>
+   </xsl:call-template>
+  </xsl:variable>
+ 
+  <xsl:value-of select="$classentry/attribute::id" />
+  
  </xsl:template>
  
 <!--
@@ -92,18 +93,12 @@
   *		[root - The root node to start searching from. Default is top node]
   * Returns:  	the signals' id.
 -->
- <xsl:template name="get.class.id.from.name">
+ <xsl:template name="get.signal.id.from.name">
   <xsl:param name="signalname" />
-  <xsl:param name="root" select="no" />
+  <xsl:param name="root" select="/" />
 
-  <xsl:choose>
-   <xsl:when test="$root='no'">
-   <xsl:variable name="signal" select="//signal[signalname=$signame]"/>
-   </xsl:when>
-   <xsl:otherwise>
-    <xsl:variable name="signal" select="$root//signal[signalname=$signame]"/>
-   </xsl:otherwise>
-   <xsl:value-of select="$signal/attribute::id" />
+  <xsl:variable name="signal" select="$root//signal[signalname=$signame]"/>
+  <xsl:value-of select="$signal/attribute::id" />
  </xsl:template>
 
 <!-- 
