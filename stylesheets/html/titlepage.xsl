@@ -3,7 +3,7 @@
                 version='1.0'>
 
 <!-- ********************************************************************
-     $Id: titlepage.xsl,v 1.4 2003-09-06 20:05:19 sfox Exp $
+     $Id: titlepage.xsl,v 1.5 2003-11-28 19:34:24 sfox Exp $
      ********************************************************************
 
      This file is part of the XSL DocBook Stylesheet distribution.
@@ -35,15 +35,11 @@
 <xsl:attribute-set name="appendix.titlepage.recto.style"/>
 <xsl:attribute-set name="appendix.titlepage.verso.style"/>
 
-<xsl:attribute-set name="sect1.titlepage.recto.style"
-                   use-attribute-sets="sect1.titlepage.recto.style"/>
-<xsl:attribute-set name="sect1.titlepage.verso.style"
-                   use-attribute-sets="sect1.titlepage.verso.style"/>
+<xsl:attribute-set name="sect1.titlepage.recto.style"/>
+<xsl:attribute-set name="sect1.titlepage.verso.style"/>
 
-<xsl:attribute-set name="sect2.titlepage.recto.style"
-                   use-attribute-sets="sect2.titlepage.recto.style"/>
-<xsl:attribute-set name="sect2.titlepage.verso.style"
-                   use-attribute-sets="sect2.titlepage.verso.style"/>
+<xsl:attribute-set name="sect2.titlepage.recto.style"/>
+<xsl:attribute-set name="sect2.titlepage.verso.style"/>
 
 <xsl:attribute-set name="table.of.contents.titlepage.recto.style"/>
 <xsl:attribute-set name="table.of.contents.titlepage.verso.style"/>
