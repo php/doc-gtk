@@ -5,19 +5,20 @@
  <sect1 id="gtk.widgets.intro">
   <title>Introduction</title>
   <simpara>
-   Ce chapitre explique les pincipaux concepts de la librairie GTK+ et la facon 
-   de les utiliser.
+   Ce chapitre explique les pincipaux concepts de la librairie GTK+ et la
+   facon de les utiliser.
   </simpara>
  </sect1>
 
  <sect1 id="gtk.widgets.whatare">
   <title>Qu'est qu'un Widgets?</title>
   <simpara>
-   <literal>widget</literal> est un terme utilis&eacute; dans le monde de programmation
-   d'interface graphique. Un widget peut &ecirc;tre un champ de saisie de texte, un 
-   label, un cadre, une fen&ecirc;tre ou tout autre composant graphique. Les widgets 
-   de GTK h&eacute;rite de l'objet <classname>GtkWidget</classname>, et donc ainsi de 
-   ses m&eacute;thodes, signaux et propri&eacute;t&eacute;s.
+   <literal>widget</literal> est un terme utilis&eacute; dans le monde de
+   programmation d'interface graphique.  Un widget peut &ecirc;tre un champ
+   de saisie de texte, un label, un cadre, une fen&ecirc;tre ou tout autre
+   composant graphique.  Les widgets de GTK h&eacute;rite de l'objet 
+   <classname>GtkWidget</classname>, et donc ainsi de ses m&eacute;thodes, 
+   signaux et propri&eacute;t&eacute;s.
   </simpara>
   <simpara>
    Le cycle de vie d'un widget contient 5 parties:
@@ -27,7 +28,8 @@
     <listitem>
      <simpara>Cr&eacute;ation</simpara>
      <simpara>
-      La cr&eacute;ation d'un widget correspond &agrave; la cr&eacute;ation d'un objet. 
+      La cr&eacute;ation d'un widget correspond &agrave; la cr&eacute;ation
+      d'un objet. 
       <literal>$window = &amp;new GtkWindow();</literal>
      </simpara>
     </listitem>
@@ -35,22 +37,24 @@
      <simpara>Positionnement</simpara>
      <simpara>
       Le positionnement consiste a accrocher un widget &agrave; un conteneur 
-      <link linkend="gtk.containers.whatare">conteneur</link>. La syntaxe pour
-			positionn&eacute; un widget sur un conteneur est le suivante 
+      <link linkend="gtk.containers.whatare">conteneur</link>. La syntaxe
+      pour positionn&eacute; un widget sur un conteneur est le suivante 
       <literal>$container-&gt;add($widget);</literal>
      </simpara>
     </listitem>
     <listitem>
      <simpara>Gestion des Signaux</simpara>
      <simpara>
-      Cette partie consiste &agrave; associer une fonction PHP &agrave; un signal/&eacute;v&eacute;nement, 
-      cette fonction sera appel&eacute; par la suite lorsque l'&eacute;v&eacute;nement sera relev&eacute; 
-      sur le widget. Par exemple:
+      Cette partie consiste &agrave; associer une fonction PHP &agrave; un
+      signal &eacute;v&eacute;nement, cette fonction sera appel&eacute; par
+      la suite lorsque l'&eacute;v&eacute;nement sera relev&eacute; sur le
+      widget. Par exemple:
       <literal>
        $widget-&gt;connect(&quot;event&quot;, &quot;my_focus_func&quot;);
       </literal>,
-      Dans ce cas &quot;event&quot; est d&eacute;finie par d&eacute;faut comme &eacute;tant un 
-      <signalname>clic</signalname> and &quot;my_focus_func&quot; est la 
+      Dans ce cas &quot;event&quot; est d&eacute;finie par d&eacute;faut
+      comme &eacute;tant un 
+      <signalname>clicked</signalname> and &quot;my_focus_func&quot; est la
       fonction sera appel&eacute; quand vous clickerais sur ce Widget.
      </simpara>
     </listitem>
@@ -59,17 +63,18 @@
      <simpara>
       Le widget peut &ecirc;tre cach&eacute; ou visible pour l'utilisateur.
       Par exemple, vous pouvez afficher le widget en faisant : 
-      <literal>$widget-&gt;show();</literal> et par la suite le cacher
+      <literal>$widget-&gt;show();</literal> et par la suite le cacher 
       <literal>$widget-&gt;hide();</literal>.
      </simpara>
     </listitem>
     <listitem>
      <simpara>Destruction</simpara>
      <simpara>
-      La destruction se produit durant l'appel &agrave; la fonction
-      <literal>gtk::main_quit()</literal>. Toutes les autres actions n&eacute;cessaires
-      a la destruction de tous les widgets ont &eacute;t&eacute; implement en interne, vous 
-      n'avez pas a vous en soucier.
+      La destruction se produit durant l'appel &agrave; la fonction 
+      <literal>gtk::main_quit()</literal>.  Toutes les autres actions
+      n&eacute;cessaires a la destruction de tous les widgets ont
+      &eacute;t&eacute; implement en interne, vous n'avez pas a vous en
+      soucier.
      </simpara>
     </listitem>
    </orderedlist>
@@ -79,14 +84,16 @@
  <sect1 id="gtk.containers.whatare">
   <title>Qu'est ce qu'un Conteneur ?</title>
   <simpara>
-   Un Conteneur est simplement un <link linkend="gtk.widgets.whatare">widget</link>
-   qui est capable de contenir d'autres widgets. La plupart des widgets sont 
-   aussi des conteneurs; par exemple <classname>GtkWindow</classname>, 
-   <classname>GtkTable</classname> et <classname>GtkBox</classname>. Mise &agrave; part
-   cette propri&eacute;t&eacute;s les Conteneurs sont avant tout des widgets, et ils peuvent
-   aussi &ecirc;tre attach&eacute; &agrave; d'autres conteneurs. Les Conteneurs h&eacute;rite de l'objet
-	 <classname>GtkContainer</classname> , qui lui-m&ecirc;me h&eacute;rite de l'objet
-   <classname>GtkWidget</classname>.
+   Un Conteneur est simplement un 
+   <link linkend="gtk.widgets.whatare">widget</link> qui est capable de
+   contenir d'autres widgets. La plupart des widgets sont aussi des
+   conteneurs; par exemple <classname>GtkWindow</classname>, 
+   <classname>GtkTable</classname> et <classname>GtkBox</classname>. Mise
+   &agrave; part cette propri&eacute;t&eacute;s les Conteneurs sont avant
+   tout des widgets, et ils peuvent aussi &ecirc;tre attach&eacute; &agrave;
+   d'autres conteneurs. Les Conteneurs h&eacute;rite de l'objet 
+   <classname>GtkContainer</classname> , qui lui-m&ecirc;me h&eacute;rite de
+   l'objet <classname>GtkWidget</classname>.
   </simpara>
  </sect1>
 
