@@ -1,13 +1,12 @@
 # +----------------------------------------------------------------------+
 # | PHP Version 4.0                                                      |
 # +----------------------------------------------------------------------+
-# | Copyright (c) 1997-2001 The PHP Group                                |
+# | Copyright (c) 1999-2003 The PHP Group                                |
 # +----------------------------------------------------------------------+
-# | This source file is subject to version 2.02 of the PHP licience,     |
-# | that is bundled with this package in the file LICENCE and is         |
-# | avalible through the world wide web at                               |
-# | http://www.php.net/license/2_02.txt.                                 |
-# | If uou did not receive a copy of the PHP license and are unable to   |
+# | This source file is subject to version 3.0 of the PHP license,       |
+# | that is bundled with this package in the file LICENSE and is         |
+# | available online at http://www.php.net/license/3_0.txt.              |
+# | If you did not receive a copy of the PHP license and are unable to   |
 # | obtain it through the world wide web, please send a note to          |
 # | license@php.net so we can mail you a copy immediately                |
 # +----------------------------------------------------------------------+
@@ -19,7 +18,7 @@
 #
 
 #
-#  Makefile	Variables
+# Makefile Variables
 #
 VPATH=@srcdir@
 srcdir=@srcdir@
@@ -30,6 +29,7 @@ LANG=@LANG@
 #
 STYLESHEET_DIR=@STYLESHEET_DIR@
 BUILD=build/@LANG@
+BUILD_SEARCHABLE=htdocs
 
 #
 # Programs
@@ -63,14 +63,16 @@ MANUAL_DEPS=chapters.ent
 all: html
 
 #
-# Build	Aliases
+# Build Aliases
 #
-bigmanual.html:	$(BUILD)/bigmanual.html
+bigmanual.html: $(BUILD)/bigmanual.html
 dist: $(BUILD)/manual-snapshot.tar.gz
-genchapterents.php:	scripts/genchapterents.php
+searchable_zip: $(BUILD)/searchable_manual_$(LANG).zip
+searchable_tar: $(BUILD)/searchable_manual_$(LANG).tar.gz
+genchapterents.php: scripts/genchapterents.php
 html: $(BUILD)/html/index.html
 nochunk: bigmanual.html
-phpweb:	$(BUILD)/php/index.php
+phpweb: $(BUILD)/php/index.php
 text: $(BUILD)/manual.txt
 util: custom.titlepage.xsl
 
@@ -85,26 +87,26 @@ mirror-files: $(BUILD)/php_gtk_manual_$(LANG).tar.gz \
 #
 html.xsl: $(STYLESHEET_DIR)/html.xsl
 chunk.xsl: $(STYLESHEET_DIR)/chunk.xsl
-phpweb.xsl:	$(STYLESHEET_DIR)/phpweb.xsl
-common.xsl:	$(STYLESHEET_DIR)/common.xsl
-genchapterents.php:	scripts/genchapterents.php
-udocs:	scripts/udocs
+phpweb.xsl: $(STYLESHEET_DIR)/phpweb.xsl
+common.xsl: $(STYLESHEET_DIR)/common.xsl
+genchapterents.php: scripts/genchapterents.php
+udocs: scripts/udocs
 custom.titlepage.xsl: $(STYLESHEET_DIR)/html/custom.titlepage.xsl
 
 #
 # Dependency Rules
 #
-$(STYLESHEET_DIR)/html.xsl:	@STYLESHEET_DIR@/html.xsl.in ./config.status
+$(STYLESHEET_DIR)/html.xsl: @STYLESHEET_DIR@/html.xsl.in ./config.status
+	CONFIG_FILES=$@ CONFIG_HEADERS= ./config.status
+
+$(STYLESHEET_DIR)/chunk.xsl: @STYLESHEET_DIR@/chunk.xsl.in ./config.status
 	CONFIG_FILES=$@	CONFIG_HEADERS=	./config.status
 
-$(STYLESHEET_DIR)/chunk.xsl:	 @STYLESHEET_DIR@/chunk.xsl.in ./config.status
-	CONFIG_FILES=$@	CONFIG_HEADERS=	./config.status
+$(STYLESHEET_DIR)/phpweb.xsl: @STYLESHEET_DIR@/phpweb.xsl.in ./config.status
+	CONFIG_FILES=$@	CONFIG_HEADERS= ./config.status
 
-$(STYLESHEET_DIR)/phpweb.xsl:  @STYLESHEET_DIR@/phpweb.xsl.in	./config.status
-	CONFIG_FILES=$@	CONFIG_HEADERS=	./config.status
-
-$(STYLESHEET_DIR)/common.xsl:  @STYLESHEET_DIR@/common.xsl.in	./config.status
-	CONFIG_FILES=$@	CONFIG_HEADERS=	./config.status
+$(STYLESHEET_DIR)/common.xsl: @STYLESHEET_DIR@/common.xsl.in ./config.status
+	CONFIG_FILES=$@ CONFIG_HEADERS= ./config.status
 
 chapters.ent:
 	@$(PHP) -q scripts/genchapterents.php > $@
@@ -119,16 +121,16 @@ chapters.ent:
 # Utility Rules
 #
 manual.xml: .manual.xml
-	CONFIG_FILES=$@	CONFIG_HEADERS=	./config.status
+	CONFIG_FILES=$@ CONFIG_HEADERS= ./config.status
 
 scripts/udocs:
-	CONFIG_FILES=$@	CONFIG_HEADERS=	./config.status
+	CONFIG_FILES=$@ CONFIG_HEADERS= ./config.status
 
 scripts/genchapterents.php:
-	CONFIG_FILES=$@	CONFIG_HEADERS=	./config.status
+	CONFIG_FILES=$@ CONFIG_HEADERS= ./config.status
 
-Makefile: $(srcdir)/Makefile.in	./config.status
-	CONFIG_FILES=$@	CONFIG_HEADERS=	./config.status
+Makefile: $(srcdir)/Makefile.in ./config.status
+	CONFIG_FILES=$@ CONFIG_HEADERS= ./config.status
 
 FORCE:
 
@@ -136,20 +138,35 @@ FORCE:
 # Make Rules
 #
 
-$(STYLESHEET_DIR)/html/custom.titlepage.xsl:	manual.xml
-	$(SAXON) $(STYLESHEET_DIR)/html/custom.titlepage.xml	$(DOCBOOKXSL)/template/titlepage.xsl > $@
+$(STYLESHEET_DIR)/html/custom.titlepage.xsl: manual.xml
+	$(SAXON) $(STYLESHEET_DIR)/html/custom.titlepage.xml $(DOCBOOKXSL)/template/titlepage.xsl > $@
 
 $(BUILD)/manual.txt: bigmanual.html
 	@mkdir -p $(BUILD)
 	lynx -nolist -dump file:`pwd`/$(BUILD)/bigmanual.html > $@
 
-$(BUILD)/php/index.php: manual.xml	$(PHPWEB_DEPS)
+$(BUILD)/php/index.php: manual.xml $(PHPWEB_DEPS)
 	@mkdir -p $(BUILD)/php
 	$(XSLTPROC) --param base.dir "'$(BUILD)/php/'" $(STYLESHEET_DIR)/phpweb.xsl manual.xml 
 
+$(BUILD_SEARCHABLE)/manual/index.php: manual.xml $(PHPWEB_DEPS)
+	@mkdir -p $(BUILD_SEARCHABLE)/manual
+	$(XSLTPROC) --param base.dir "'$(BUILD_SEARCHABLE)/manual/'" $(STYLESHEET_DIR)/phpweb.xsl manual.xml
+
+$(BUILD)/searchable_manual_$(LANG).zip: $(BUILD_SEARCHABLE)/manual/index.php
+	@mkdir -p $(BUILD)
+	cp -r search/include search/gifs search/manual search/*.php $(BUILD_SEARCHABLE)
+	zip -qrm -9 $@ $(BUILD_SEARCHABLE)
+
+$(BUILD)/searchable_manual_$(LANG).tar.gz: $(BUILD_SEARCHABLE)/manual/index.php
+	@mkdir -p $(BUILD)
+	cp -r search/include search/gifs search/manual search/*.* $(BUILD_SEARCHABLE)
+	tar -cf - $(BUILD_SEARCHABLE)/ | gzip -9 > $@
+	rm -rf $(BUILD_SEARCHABLE)/
+
 $(BUILD)/html/index.html: manual.xml $(CHUNK_DEPS)
 	@mkdir -p $(BUILD)/html
-	$(XSLTPROC) --param base.dir "'$(BUILD)/html/'" $(STYLESHEET_DIR)/chunk.xsl manual.xml	
+	$(XSLTPROC) --param base.dir "'$(BUILD)/html/'" $(STYLESHEET_DIR)/chunk.xsl manual.xml
 
 $(BUILD)/bigmanual.html: manual.xml $(HTML_DEPS)
 	@mkdir -p $(BUILD)
@@ -225,8 +242,8 @@ distclean: clean
 	cd scripts; rm -f genchapterents.php udocs
 
 cvsclean:
-	@for i in `find	. -name	.cvsignore`; do	\
-		(cd	`dirname $$i` 2>/dev/null && rm	-rf	`cat .cvsignore` ||	true); \
+	@for i in `find . -name .cvsignore`; do \
+		(cd `dirname $$i` 2>/dev/null && rm -rf `cat .cvsignore` || true); \
 	done
 
 

@@ -1,13 +1,12 @@
 # +----------------------------------------------------------------------+
 # | PHP Version 4.0                                                      |
 # +----------------------------------------------------------------------+
-# | Copyright (c) 1997-2001 The PHP Group                                |
+# | Copyright (c) 1999-2003 The PHP Group                                |
 # +----------------------------------------------------------------------+
-# | This source file is subject to version 2.02 of the PHP licience,     |
-# | that is bundled with this package in the file LICENCE and is         |
-# | avalible through the world wide web at                               |
-# | http://www.php.net/license/2_02.txt.                                 |
-# | If uou did not receive a copy of the PHP license and are unable to   |
+# | This source file is subject to version 3.0 of the PHP license,       |
+# | that is bundled with this package in the file LICENSE and is         |
+# | available online at http://www.php.net/license/3_0.txt.              |
+# | If you did not receive a copy of the PHP license and are unable to   |
 # | obtain it through the world wide web, please send a note to          |
 # | license@php.net so we can mail you a copy immediately                |
 # +----------------------------------------------------------------------+
@@ -27,7 +26,7 @@ AC_DEFUN(FetchSS, [
 AC_PATH_PROG(WGET, wget, no)
 if test "$WGET" = "no";
 then
-    AC_MSG_ERROR(Cannot find wget - 
+    AC_MSG_ERROR(cannot find wget - 
     **********************************************
     *    Please get the stylesheets from         *
     *  http://www.phpuk.org/~james/gtkss.tar.gz  *
@@ -39,7 +38,7 @@ fi
 AC_PATH_PROG(TAR, tar, no)
 if test "$TAR" = "no";
 then
-    AC_MSG_ERROR(Cannot find tar - 
+    AC_MSG_ERROR(cannot find tar - 
     **********************************************
     *    Please get the stylesheets from         *
     *  http://www.phpuk.org/~james/gtkss.tar.gz  *
@@ -47,28 +46,28 @@ then
     **********************************************)
 fi
 
-AC_MSG_CHECKING(For stylesheets dir)
+AC_MSG_CHECKING(for stylesheets dir)
 if test ! -f "stylesheets/README";
 then
     AC_MSG_RESULT(not found)
 else
     AC_MSG_RESULT(found)
-    echo "Backing up Stylesheet dir"
+    echo "backing up stylesheet dir"
     mv stylesheets stylesheets.old    
 fi
 
 if test -f "gtkss.tar.gz";
 then
-    echo "Backing up gtkss.tar.gz"
+    echo "backing up gtkss.tar.gz"
     mv gtkss.tar.gz gtkss.tar.gz.old
 fi
 
-echo "Downloading Stylesheets"
+echo "downloading stylesheets"
 $WGET http://www.phpuk.org/~james/gtkss.tar.gz
 
 if(test ! -f gtkss.tar.gz)
 then
-    AC_MSG_ERROR(Download failed - 
+    AC_MSG_ERROR(download failed - 
     **********************************************
     *    Please get the stylesheets from         *
     *  http://www.phpuk.org/~james/gtkss.tar.gz  *
@@ -76,7 +75,7 @@ then
     **********************************************)
 fi
 
-echo "Unpacking Stylesheets"
+echo "unpacking stylesheets"
 tar -xvzf gtkss.tar.gz
 ])
 
@@ -98,26 +97,26 @@ then
 fi
 AC_MSG_RESULT(found)
 
-AC_MSG_CHECKING(Stylesheet Version)
+AC_MSG_CHECKING(stylesheet version)
 
 if test ! -f "stylesheets/GTKVERSION";
 then
-    AC_MSG_RESULT(No Version Information)
-    AC_MSG_WARN(No Version information found. 
-    		Persuming old version. 
-		Updating Stylesheets)
+    AC_MSG_RESULT(no version information)
+    AC_MSG_WARN(no version information found - 
+    		presuming old version - 
+		updating stylesheets)
 
     FetchSS()
 fi
 
 if test ! "0.1" = "`cat stylesheets/GTKVERSION`"
 then
-    AC_MSG_RESULT(Incorrect Version)
-    echo "Automatically updating stylesheets"
+    AC_MSG_RESULT(incorrect version)
+    echo "automatically updating stylesheets"
     FetchSS()
 fi
 
-AC_MSG_RESULT(Correct Verison)
+AC_MSG_RESULT(correct version)
 
 DOCBOOK_DOCTYPE="-//PHP Group//DTD DocBk XML V3.1.7-Based Extension//EN"
 AC_SUBST(DOCBOOK_DOCTYPE)
@@ -130,7 +129,7 @@ AC_SUBST(PHP_GTK_DOC_BUILD_DATE)
 
 AC_MSG_CHECKING(for php-gtk source)
 AC_ARG_WITH(srcdir,
-[  --with-srcdir=SRCDIR    PHP-GTK Source directory],
+[  --with-srcdir=SRCDIR    PHP-GTK source directory],
 [
     if test -d "$withval";
     then
@@ -144,7 +143,7 @@ AC_ARG_WITH(srcdir,
         AC_SUBST(PHPGTK_SRCDIR)
     else
         AC_MSG_RESULT(no)
-        AC_MSG_ERROR(Cannot find PHP-GTK source dir)
+        AC_MSG_ERROR(cannot find PHP-GTK source dir)
     fi
 ],
 [
@@ -152,7 +151,7 @@ AC_MSG_RESULT(not found)])
 
 AC_MSG_CHECKING(for language)
 AC_ARG_WITH(lang,
-[  --with-lang=LANG        Choose a language to work with],
+[  --with-lang=LANG        choose a language to work with],
 [
     if test "$withval" = "yes"; 
     then
