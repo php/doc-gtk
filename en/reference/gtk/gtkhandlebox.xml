@@ -7,7 +7,23 @@
    Widget for detachable window portions.
   </shortdesc>
   <desc>
-
+   <simpara>
+    <classname>GtkHandleBox</classname> allows for widgets to be "torn out" of
+    a window and to become their own floating window. The
+    <classname>GtkHandleBox</classname> displays its child along with a handle
+    that the user can drag to tear the widget out of its containing window and
+    into its own float window. When the widget is torn out of the original
+    window, its place is held by a thin ghost widget. By draging the float
+    window back to the ghost widget and aligning the snap edge, the float
+    window can be reattached.
+   </simpara>
+   <simpara>
+    <classname>GtkHandleBox</classname> is a decendant of
+    <classname>GtkBin</classname>, which means that it may container only one
+    child. If you would like to have more than one widget in the same float
+    window, you must first add those widgets to a container capable of holding
+    more than one child, such as a <classname>GtkVBox</classname>.
+   </simpara>
   </desc>
  </classmeta>
 
@@ -19,7 +35,7 @@
    </funcprototype>
   </funcsynopsis>
   <shortdesc>
-
+   Create a widget capable of being "torn out" of a window.
   </shortdesc>
   <desc>
 
@@ -36,7 +52,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Set the shadow type that the float window will cast.
    </shortdesc>
    <desc>
 
@@ -51,7 +67,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Set the edge on which the handle will be shown.
    </shortdesc>
    <desc>
 
@@ -66,13 +82,54 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Set the edge which must be aligned to reattach the float window.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Sets the edge which must be aligned to reattach the float window. When
+     <parameter>edge</parameter> on both the float window and the ghost widget
+     are aligned the float window will be reattached to its original window.
+    </simpara>
+    <simpara>
+     If the snap edge is not explicitly set using <function
+     class="GtkHandleBox">set_snap_edge</function>, the snap edge will be
+     determined automatically by the placement of the handle.
+    </simpara>
+    <simpara>
+     To make detaching and reattaching the handlebox as minimally confusing as
+     possible to the user, it is important to set the snap edge so that the snap
+     edge does not move when the handlebox is deattached. For instance, if the
+     handlebox is packed at the bottom of a <classname>GtkVBox</classname>, then
+     when the handlebox is detached, the bottom edge of the handlebox's 
+     allocation will remain fixed as the height of the handlebox shrinks, so the
+     snap edge should be set to <literal>GTK_POS_BOTTOM</literal>.
+    </simpara>
+    <simpara>
+     See also: <function
+     classname="GtkHandleBox">set_handle_position</function>
+    </simpara>
    </desc>
   </method>
 
  </methods>
 
 </classentry>
+<!-- Keep this comment at the end of the file
+Local variables:
+mode: xml
+sgml-omittag:t
+sgml-shorttag:t
+sgml-minimize-attributes:nil
+sgml-always-quote-attributes:t
+sgml-indent-step:1
+sgml-indent-data:t
+indent-tabs-mode:nil
+sgml-parent-document:nil
+sgml-exposed-tags:nil
+sgml-local-catalogs:nil
+sgml-local-ecat-files:nil
+End:
+vim600: syn=xml fen fdm=syntax fdl=2 si
+vim: et tw=78 syn=sgml
+vi: ts=1 sw=1
+-->
