@@ -19,12 +19,8 @@
 	<xsl:param name="nodes"/>
 	<xsl:param name="titlename"/>
 	<xsl:for-each select="$nodes">
-		<li>
-			<xsl:variable name="id"><xsl:value-of select="@id"/></xsl:variable>
-			<a href="http://gtk.php.net/manual/en/{$id}.php"><xsl:value-of select="descendant::*[name()=$titlename]"/></a>
-		</li>
-<xsl:text>
-</xsl:text>
+		<xsl:variable name="id"><xsl:value-of select="@id"/></xsl:variable>
+  * <a href="http://gtk.php.net/manual/en/{$id}.php"><xsl:value-of select="descendant::*[name()=$titlename]"/><xsl:if test="contains(@id, 'tutorial')"> (tutorial)</xsl:if></a>
 	</xsl:for-each>
 </xsl:template>
 
@@ -32,7 +28,6 @@
 <xsl:text>
 </xsl:text>
 <p>
-	<ul>
 		<xsl:call-template name="last">
 			<xsl:with-param name="nodes" select="./classset/classentry"/>
 			<xsl:with-param name="titlename">classtitle</xsl:with-param>
@@ -49,7 +44,8 @@
 			<xsl:with-param name="nodes" select="//appendix"/>
 			<xsl:with-param name="titlename">title</xsl:with-param>
 		</xsl:call-template>
-	</ul>
+<xsl:text>
+</xsl:text>
 </p>
 </xsl:template>
 
