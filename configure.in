@@ -33,7 +33,7 @@ then
     AC_MSG_ERROR(unable to locate php exectuable)
 fi
 AC_MSG_CHECKING(for the stylesheets)
-if test ! -d "stylesheets";
+if test ! -f "stylesheets/README";
 then
     AC_MSG_RESULT(not found)
     AC_MSG_ERROR(- 
@@ -120,7 +120,6 @@ scripts/genchapterents.php )
 echo creating chapters.ent
 $PHP -q scripts/genchapterents.php > chapters.ent
 echo creating name_to_id.xsl
-mkdir -p stylesheets/html
 $XSLTPROC gen_name_to_id.xsl manual.xml > stylesheets/html/name_to_id.xsl
 
 chmod +x scripts/genchapterents.php
