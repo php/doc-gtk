@@ -716,21 +716,31 @@ calendar
  <enumoption>
   <optionname>GTK_CAN_DEFAULT</optionname>
   <shortdesc>
-   Marks a widget as able to have default status.
+   Marks a widget as able to have default status.  This also has the effect
+   of drawing the widget with enough space around it to display the default
+   style.
   </shortdesc>
  </enumoption>
 
  <enumoption>
   <optionname>GTK_HAS_DEFAULT</optionname>
   <shortdesc>
-   Gives a widget default status.
+   Gives a widget default status.  The widget will respond directly to
+   keyboard events, and will be drawn in such a way as to make this
+   apparent to the user.
   </shortdesc>
  </enumoption>
 
  <enumoption>
   <optionname>GTK_HAS_GRAB</optionname>
   <shortdesc>
-
+   Mostly used internally, to ensure that the widget currently having focus
+   is able to grab events.  Note that flagging a widget in this way requires
+   that the widget is also flagged as sensitive and has its reference count
+   increased.  Flagging the widget does not in itself have any bearing on
+   the widget's relationship with other widgets; if you want modality, use
+   <literal>gtkwindow::set_modal()</literal> or 
+   <literal>gtk::grab_add()</literal> as appropriate.
   </shortdesc>
  </enumoption>
 
@@ -765,7 +775,9 @@ calendar
  <enumoption>
   <optionname>GTK_RECEIVES_DEFAULT</optionname>
   <shortdesc>
-
+   A widget flagged in this way will receive the default action and have
+   <literal>GTK_HAS_DEFAULT</literal> set when it is focused, even if
+   there is a different widget set as default.
   </shortdesc>
  </enumoption>
 
