@@ -719,16 +719,16 @@ gdk::font_load('-unknown-Arial-normal-r-normal--*-120-96-96-p-0-iso8859-1');
   <method id="gdk.method.pixmap_create_from_xpm">
    <funcsynopsis>
     <funcprototype>
-     <funcdef><classname>GdkPixmap</classname> 
+     <funcdef><classname>array</classname> 
       <function>gdk::pixmap_create_from_xpm</function>
      </funcdef>
      <paramdef><classname>GdkWindow</classname> 
       <parameter>window</parameter>
      </paramdef>
      <paramdef><classname>GdkColor</classname> 
-      <parameter><optional>transparent_color</optional></parameter>
+      <parameter>transparent_color</parameter>
      </paramdef>
-     <paramdef>resource <parameter>filename</parameter></paramdef>
+     <paramdef>string <parameter>filename</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -737,8 +737,9 @@ gdk::font_load('-unknown-Arial-normal-r-normal--*-120-96-96-p-0-iso8859-1');
    <desc>
     <simpara>
      <function>gdk::pixmap_create_from_xpm()</function> returns a 
-     <classname>GdkPixmap</classname> that has been created from an
-     existing .xpm file.
+     array consisting of a <classname>GdkPixmap</classname> and a
+     <classname>GdkBitmap</classname> mask that has been created from the
+     specified .xpm file.
     </simpara>
     <para>
      The <classname>GdkPixmap</classname> is the underlying 
