@@ -75,10 +75,10 @@ if (!class_exists('gtk')) {
    </programlisting>
 		</example>
 		These first few lines check to see if the PHP-GTK extension is
-		already avalible, if it isnt it loads it. This is done by the
+		already available, if it isn't it loads it. This is done by the
 		<literal>dl('php_gtk.dll');</literal> or
 		<literal>dl('php_gtk.so');</literal> statements on Windows and Linux
-		respecitvely.
+		respectively.
 	</para>
 	<para>
 		<example>
@@ -93,7 +93,7 @@ function delete_event()
 		The <literal>delete_event()</literal> function is registered as a handler
 		(see below) for the <signalname>delete-event</signalname> signal. It returns
 		<literal>false</literal> telling PHP-GTK to continue with the event's
-		occurance. If the function was to return <literal>true</literal> PHP-GTK
+		occurrence. If the function were to return <literal>true</literal> PHP-GTK
 		would stop the events handling there.
 	</para>
 	<para>
@@ -129,7 +129,7 @@ function hello()
 		<literal>$window</literal> variable so it can access the instance of
 		<classname>GtkWindow</classname> created further down the script. It then
 		prints the text "<literal>Hello World</literal>" to the console, it then
-		destroy's the window, this fires the <signalname>destory</signalname> 
+		destroys the window, this fires the <signalname>destory</signalname> 
 		signal.
 	</para>
  <para>
@@ -164,14 +164,14 @@ $window->add($button);
 $window->show_all();
    </programlisting>
 		</example>
-		These three lines of the script create and setup the button. In the first
+		These three lines of the script create and set up the button. In the first
 		line of the above code snippet we create a new instance of the
 		<classname>GtkButton</classname> class, the argument to the constructor is
 		the text we want the button to display, in our case, 
 		"<literal>Hello World!</literal>". We then call the 
 		<function class="GtkObject">connect</function> function to register the
 		<literal>hello</literal> function we defined earlier as the handler for
-		the <signalname>clicked</signalname> signal. FInally we add the button to
+		the <signalname>clicked</signalname> signal. Finally we add the button to
 		the window we previously created by calling
 		<classname>GtkWindow</classname>'s 
 		<function class="GtkContainer">add</function> function and then display the
