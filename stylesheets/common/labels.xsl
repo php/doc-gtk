@@ -242,7 +242,7 @@ element label.</para>
   </xsl:choose>
 </xsl:template>
 
-<xsl:template match="figure|table|example|equation" mode="label.markup">
+<xsl:template match="figure|table|example" mode="label.markup">
   <xsl:variable name="pchap"
                 select="ancestor::chapter|ancestor::appendix"/>
 

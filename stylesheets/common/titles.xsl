@@ -152,7 +152,7 @@ title of the element. This does not include the label.
   </xsl:apply-templates>
 </xsl:template>
 
-<xsl:template match="figure|table|example|equation" mode="title.markup">
+<xsl:template match="figure|table|example" mode="title.markup">
   <xsl:param name="allow-anchors" select="'0'"/>
   <xsl:apply-templates select="title" mode="title.markup">
     <xsl:with-param name="allow-anchors" select="$allow-anchors"/>
@@ -217,18 +217,22 @@ title of the element. This does not include the label.
 <xsl:template match="classentry" mode="title.markup">
  <xsl:param name="text-only" select="'0'"/>
  <xsl:param name="allow-anchors" select="'0'"/>
+ <span dir="ltr">
  <xsl:apply-templates select="(./classmeta/classtitle)[1]"
                       mode="title.content">
     <xsl:with-param name="text-only" select="$text-only"/>
 	<xsl:with-param name="allow-anchors" select="$allow-anchors"/>
  </xsl:apply-templates>
+ </span>
 </xsl:template>
 
 <xsl:template match="constructor" mode="title.markup">
  <xsl:param name="text-only" select="'0'"/>
  <xsl:param name="allow-anchors" select="'0'"/>
  <xsl:variable name="classentry" select="ancestor::classentry"/>
+ <span dir="ltr">
  <xsl:value-of select="$classentry/classmeta/classtitle"/>
+ </span>
  <xsl:text> </xsl:text>
  <xsl:call-template name="gentext">
   <xsl:with-param name="key">constructor</xsl:with-param>
@@ -246,11 +250,13 @@ title of the element. This does not include the label.
  <xsl:param name="text-only" select="'0'"/>
  <xsl:param name="allow-anchors" select="'0'"/>
  <xsl:variable name="classentry" select="ancestor::classentry"/>
+ <span dir="ltr">
  <xsl:value-of select="$classentry/classmeta/classtitle"/>
  <xsl:if test="count($classentry)>0">
   <xsl:text>::</xsl:text>
  </xsl:if>
  <xsl:value-of select="(./funcsynopsis/funcprototype/funcdef/function)[1]" />
+ </span>
 </xsl:template>
 
 <xsl:template match="signals" mode="title.markup">
@@ -263,7 +269,9 @@ title of the element. This does not include the label.
 <xsl:template match="signal" mode="title.markup">
  <xsl:param name="text-only" select="'0'"/>
  <xsl:param name="allow-anchors" select="'0'"/>
+ <span dir="ltr">
  <xsl:value-of select="(./signalname)[1]" />
+ </span>
 </xsl:template>
 
 <xsl:template match="properties" mode="title.markup">
@@ -277,17 +285,21 @@ title of the element. This does not include the label.
  <xsl:param name="text-only" select="'0'"/>
  <xsl:param name="allow-anchors" select="'0'"/>
  <xsl:variable name="classentry" select="ancestor::classentry"/>
+ <span dir="ltr">
  <xsl:value-of select="$classentry/classmeta/classtitle"/>
  <xsl:if test="count($classentry)>0">
   <xsl:text>::</xsl:text>
  </xsl:if>
  <xsl:value-of select="(./propname)" />
+ </span>
 </xsl:template>
 
 <xsl:template match="enum" mode="title.markup" >
  <xsl:param name="text-only" select="'0'"/>
  <xsl:param name="allow-anchors" select="'0'"/>
+ <span dir="ltr">
  <xsl:value-of select="./enumname"/>
+ </span>
 </xsl:template>
 
 <!-- ============================================================ -->
