@@ -14,7 +14,7 @@
   | obtain it through the world-wide-web, please send a note to          |
   | license@php.net so we can mail you a copy immediately.               |
   +----------------------------------------------------------------------+
-  | Authors:    Jakub Vr�a <vrana@php.net>                              |
+  | Authors:    Jakub Vrana <vrana@php.net>                              |
   +----------------------------------------------------------------------+
 */
 
@@ -26,7 +26,7 @@ if ($_SERVER["argc"] < 3) {
 }
 set_time_limit(5*60); // can run long, but not more than 5 minutes
 
-require 'geshi/geshi.php';
+require dirname(__FILE__).'/geshi/geshi.php';
 $geshi = new GeSHi($with_tags, 'php', dirname(__FILE__).'/geshi/geshi');
 $geshi->set_tab_width(4);
 $geshi->enable_classes();
