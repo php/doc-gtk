@@ -21,6 +21,22 @@
   <xsl:text disable-output-escaping="yes">&lt;/xsl:text&gt;&#xA;&lt;/xsl:when&gt;&#xA;</xsl:text>
 </xsl:template>
 
+<xsl:template match="property">
+  <xsl:variable name="id" select="@id"/>
+  <xsl:variable name="propname" >
+    <xsl:value-of select="./propname"/>
+  </xsl:variable>
+  <xsl:text disable-output-escaping="yes">&lt;xsl:when test="($propname='</xsl:text>
+  <xsl:value-of select="$propname"/>
+  <xsl:text disable-output-escaping="yes">' and $class='no') or ($propname='</xsl:text>
+  <xsl:value-of select="$propname"/>
+  <xsl:text disable-output-escaping="yes">' and $class='</xsl:text>
+  <xsl:value-of select="ancestor-or-self::classentry/classmeta/classtitle"/>
+  <xsl:text disable-output-escaping="yes">')"&gt;&#xA;&lt;xsl:text&gt;</xsl:text>
+  <xsl:value-of select="$id" />
+  <xsl:text disable-output-escaping="yes">&lt;/xsl:text&gt;&#xA;&lt;/xsl:when&gt;&#xA;</xsl:text>
+</xsl:template>
+
 <xsl:template match="method|constructor">
   <xsl:variable name="id" select="@id"/>
   <xsl:variable name="funcname" >
@@ -96,13 +112,14 @@
   &lt;/xsl:template&gt;&#xA;
  </xsl:text>
 
-  <xsl:if test="count(.//attribute)>0">
+  <xsl:if test="count(.//property)>0">
   <xsl:text disable-output-escaping="yes">
-  &lt;xsl:template name="get_attr_id_from_name"&gt;&#xA;
-  &lt;xsl:param name="attrname" /&gt;&#xA;
+  &lt;xsl:template name="get_prop_id_from_name"&gt;&#xA;
+  &lt;xsl:param name="propname" /&gt;&#xA;
+  &lt;xsl:param name="class" select="no" /&gt;&#xA;
   &lt;xsl:choose&gt;&#xA;
  </xsl:text>
- <xsl:apply-templates select=".//attribute" />
+ <xsl:apply-templates select=".//property" />
  <xsl:text disable-output-escaping="yes">&#xA;
   &lt;xsl:otherwise&gt;&#xA;
    &lt;xsl:text&gt;no&lt;/xsl:text&gt;&#xA;
