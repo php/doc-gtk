@@ -93,7 +93,7 @@ while (($file = array_shift($files)) !== null) {
 			fwrite($fp, $highlighted);
 			fclose($fp);
 		}
-		echo "done highlighting.\n";
 	}
+	echo "done highlighting.\n";
 }
 ?>
