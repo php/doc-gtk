@@ -108,29 +108,29 @@
 
 function shutdown() 
 {
-    print(&quot;Caindo fora...\n&quot;);
+    print("Caindo fora...\n");
     gtk::main_quit();
 }
 
 function you_clicked($button) 
 {
-    $window = &amp;new GtkWindow();
-    $label = &amp;new GtkLabel(&quot;Você clicou no botão);
-    $window-&gt;add($label);
-    $window-&gt;connect(&quot;destroy&quot;,&quot;shutdown&quot;);
-    $window-&gt;show_all();
+    $window = &new GtkWindow();
+    $label = &new GtkLabel("Você clicou no botão");
+    $window->add($label);
+    $window->connect("destroy","shutdown");
+    $window->show_all();
     return false;
 }
 
-$window = &amp;new GtkWindow();
-$window-&gt;connect(&quot;destroy&quot;, &quot;shutdown&quot;);
-$window-&gt;set_border_width(10);
+$window = &new GtkWindow();
+$window->connect("destroy", "shutdown");
+$window->set_border_width(10);
 
-$button = &amp;new GtkButton(&quot;Click Me!!&quot;);
-$button-&gt;connect(&quot;clicked&quot;, &quot;you_clicked&quot;);
-$window-&gt;add($button);
+$button = &new GtkButton("Click Me!!");
+$button->connect("clicked", "you_clicked");
+$window->add($button);
 
-$window-&gt;show_all();
+$window->show_all();
 
 gtk::main();
 
@@ -172,24 +172,24 @@ gtk::main();
 
 function first($button) 
 {
-    print &quot;Primeira função foi chamada\n&quot;;
+    print "Primeira função foi chamada\n";
 }
 
 function second($button) 
 {
-    print &quot;Segunda função foi chamada\n&quot;;
+    print "Segunda função foi chamada\n";
 }
 
-$window = &amp;new GtkWindow();
-$window-&gt;connect_object(&quot;destroy&quot;, array(&quot;gtk&quot;, 
-&quot;main_quit&quot;));
+$window = &new GtkWindow();
+$window->connect_object("destroy", array("gtk", 
+"main_quit"));
 
-$button = &amp;new GtkButton(&quot;Click Me!!&quot;);
-$button-&gt;connect(&quot;clicked&quot;,&quot;first&quot;);
-$button-&gt;connect(&quot;clicked&quot;,&quot;second&quot;);
-$window-&gt;add($button);
+$button = &new GtkButton("Click Me!!");
+$button->connect("clicked","first");
+$button->connect("clicked","second");
+$window->add($button);
 
-$window-&gt;show_all();
+$window->show_all();
 
 gtk::main();
 
@@ -247,17 +247,17 @@ Segunda função foi chamada.
 
 function button_clicked($button, $window) 
 {
-    $window-&gt;destroy();
+    $window->destroy();
     gtk::main_quit();
 }
 
-$window = &amp;new GtkWindow();
+$window = &new GtkWindow();
 
-$button = &amp;new GtkButton(&quot;exit&quot;);
-$button-&gt;connect(&quot;clicked&quot;,&quot;button_clicked&quot;, $window);
+$button = &new GtkButton("exit");
+$button->connect("clicked","button_clicked", $window);
 
-$window-&gt;add($button);
-$window-&gt;show_all();
+$window->add($button);
+$window->show_all();
 
 gtk::main();
 
@@ -299,29 +299,29 @@ gtk::main();
 
 function button_clicked($button, $window)
 {
-    $window->set_title(&quot;titled&quot;);
+    $window->set_title("titled");
 }
 
-$window1 = &amp;new GtkWindow();
-$window1-&gt;connect_object(&quot;destroy&quot;, array(&quot;gtk&quot;, 
-&quot;main_quit&quot;));
-$window2 = &amp;new GtkWindow();
-$window2-&gt;connect_object(&quot;destroy&quot;, array(&quot;gtk&quot;, 
-&quot;main_quit&quot;));
+$window1 = &new GtkWindow();
+$window1->connect_object("destroy", array("gtk", 
+"main_quit"));
+$window2 = &new GtkWindow();
+$window2->connect_object("destroy", array("gtk", 
+"main_quit"));
 
-$button1 = &amp;new GtkButton(&quot;click me&quot;);
-$button2 = &amp;new GtkButton(&quot;or me&quot;);
+$button1 = &new GtkButton("click me");
+$button2 = &new GtkButton("or me");
 
-$button1-&gt;connect(&quot;clicked&quot;, &quot;button_clicked&quot;, 
+$button1->connect("clicked", "button_clicked", 
 $window1);
-$button2-&gt;connect(&quot;clicked&quot;, &quot;button_clicked&quot;, 
+$button2->connect("clicked", "button_clicked", 
 $window2);
 
-$window1-&gt;add($button1);
-$window2-&gt;add($button2);
+$window1->add($button1);
+$window2->add($button2);
 
-$window1-&gt;show_all();
-$window2-&gt;show_all();
+$window1->show_all();
+$window2->show_all();
 
 gtk::main();
 
@@ -351,10 +351,10 @@ gtk::main();
 <![CDATA[
 <?php
 
-$window = &amp;new GtkWindow();
-$window-&gt;connect_object(&quot;destroy&quot;, array(&quot;gtk&quot;, 
-&quot;main_quit&quot;));
-$window-&gt;show();
+$window = &new GtkWindow();
+$window->connect_object("destroy", array("gtk", 
+"main_quit"));
+$window->show();
 
 gtk::main();
 
@@ -388,12 +388,12 @@ gtk::main();
 
 function destroy_window($window)
 {
-    $window-&gt;destroy();
+    $window->destroy();
     gtk::main_quit();
 }
 
-$exit_button-&gt;connect_object(&quot;clicked&quot;, 
-&quot;destroy_window&quot;, $window);
+$exit_button->connect_object("clicked", 
+"destroy_window", $window);
 
 ?>
 ]]>
@@ -402,7 +402,7 @@ $exit_button-&gt;connect_object(&quot;clicked&quot;,
    </para>
    <para>
     O método connect_after* permite callbacks serem 
-    &quot;rodadas depois&quot; do manipulador padrão para o sinal.  Isto pode
+    "rodadas depois" do manipulador padrão para o sinal.  Isto pode
     ser útil em algumas situações; por exemplo, você quer destruir apenas uma
     de diversas janelas em um certo momento. De qualquer forma, o método
     connect_after* irá funcionar apenas quando o sinal estiver sendo criado
@@ -422,20 +422,20 @@ $exit_button-&gt;connect_object(&quot;clicked&quot;,
 
 function quit_routine($window) 
 {
-    print(&quot;Caindo fora...\n&quot;);
+    print("Caindo fora...\n");
     gtk::main_quit();
 }
 
-$window1 = &amp;new GtkWindow();
-$window1->set_title(&quot;Saindo do loop principal&quot;);
-$window1-&gt;connect(&quot;destroy&quot;, &quot;quit_routine&quot;);
+$window1 = &new GtkWindow();
+$window1->set_title("Saindo do loop principal");
+$window1->connect("destroy", "quit_routine");
 
-$window2 = &amp;new GtkWindow();
-$window2->set_title(&quot;Destroi esta janela&quot;);
-$window2-&gt;connect_after(&quot;destroy&quot;, &quot;quit_routine&quot;);
+$window2 = &new GtkWindow();
+$window2->set_title("Destroi esta janela");
+$window2->connect_after("destroy", "quit_routine");
 
-$window1-&gt;show();
-$window2-&gt;show();
+$window1->show();
+$window2->show();
 
 gtk::main();
 
@@ -514,53 +514,53 @@ gtk::main();
 <![CDATA[
 <?php
 
-dl(&quot;php_gtk.&quot; . (strstr(PHP_OS, &quot;WIN&quot;) ? &quot;dll&quot; : 
-&quot;so&quot;)) ||
-die(&quot;Can't load php_gtk module!\n&quot;);
+dl("php_gtk." . (strstr(PHP_OS, "WIN") ? "dll" : 
+"so")) ||
+die("Can't load php_gtk module!\n");
 
 function show_event_type($button, $event, $text) 
 {
-    $event_type = $event-&gt;type;
+    $event_type = $event->type;
     $insert = $text->get_length();
-    $text-&gt;freeze();
+    $text->freeze();
     switch($event_type) {
       case 2:
-        $text-&gt;insert_text(&quot;GDK_EXPOSE\n&quot;, $insert);
+        $text->insert_text("GDK_EXPOSE\n", $insert);
       break;
       case 3:
-        $text-&gt;insert_text(&quot;GDK_MOTION_NOTIFY\n&quot;, $insert);
+        $text->insert_text("GDK_MOTION_NOTIFY\n", $insert);
       break;
       case 4:
-        $text-&gt;insert_text(&quot;GDK_BUTTON_PRESS\n&quot;, $insert);
+        $text->insert_text("GDK_BUTTON_PRESS\n", $insert);
       break;
       case 5:
-        $text-&gt;insert_text(&quot;GDK_2BUTTON_PRESS\n&quot;, $insert);
-        $button-&gt;hide();
+        $text->insert_text("GDK_2BUTTON_PRESS\n", $insert);
+        $button->hide();
       break;
       case 7:
-        $text-&gt;insert_text(&quot;GDK_BUTTON_RELEASE\n&quot;, $insert);
+        $text->insert_text("GDK_BUTTON_RELEASE\n", $insert);
       break;
       case 8:
-        $text-&gt;insert_text(&quot;GDK_KEY_PRESS\n&quot;, $insert);
+        $text->insert_text("GDK_KEY_PRESS\n", $insert);
       break;
       case 9:
-        $text-&gt;insert_text(&quot;GDK_KEY_RELEASE\n&quot;, $insert);
+        $text->insert_text("GDK_KEY_RELEASE\n", $insert);
       break;
       case 10:
-        $text-&gt;insert_text(&quot;GDK_ENTER_NOTIFY\n&quot;, $insert);
+        $text->insert_text("GDK_ENTER_NOTIFY\n", $insert);
       break;
       case 11:
-        $text-&gt;insert_text(&quot;GDK_LEAVE_NOTIFY\n&quot;, $insert);
+        $text->insert_text("GDK_LEAVE_NOTIFY\n", $insert);
       break;
       case 12:
-        $text-&gt;insert_text(&quot;GDK_FOCUS_CHANGE\n&quot;, $insert); 
+        $text->insert_text("GDK_FOCUS_CHANGE\n", $insert); 
       break;
       case 14:
-        $text-&gt;insert_text(&quot;GDK_MAP\n&quot;, $insert);
+        $text->insert_text("GDK_MAP\n", $insert);
       break;
       case 15:
-        $text-&gt;insert_text(&quot;GDK_UNMAP\n&quot;, $insert);
-        $button-&gt;destroy();
+        $text->insert_text("GDK_UNMAP\n", $insert);
+        $button->destroy();
         $text->insert_text(
 "\n* GDK EVENTS AND GTK SIGNALS - background stream vs foreground messaging *
 \n
@@ -581,31 +581,31 @@ function show_event_type($button, $event, $text)
 \n", 0);
       break;
     }
-    $text-&gt;thaw();
+    $text->thaw();
     return false;
 }
 
-$window = &amp;new GtkWindow();
-$window-&gt;set_position(GTK_WIN_POS_CENTER);
-$window-&gt;set_default_size((gdk::screen_width()/1.5), 
+$window = &new GtkWindow();
+$window->set_position(GTK_WIN_POS_CENTER);
+$window->set_default_size((gdk::screen_width()/1.5), 
 (gdk::screen_height()-20));
-$window-&gt;connect_object(&quot;destroy&quot;, array(&quot;gtk&quot;, 
-&quot;main_quit&quot;));
-$window-&gt;realize();
+$window->connect_object("destroy", array("gtk", 
+"main_quit"));
+$window->realize();
 
-$box = &amp;new GtkVBox(false, 5);
-$window-&gt;add($box);
-$scrlwin = &amp;new GtkScrolledWindow();
-$box-&gt;pack_start($scrlwin, true, true, 0);
-$text = &amp;new GtkText();
-$scrlwin-&gt;add($text);
+$box = &new GtkVBox(false, 5);
+$window->add($box);
+$scrlwin = &new GtkScrolledWindow();
+$box->pack_start($scrlwin, true, true, 0);
+$text = &new GtkText();
+$scrlwin->add($text);
 
-$button = &amp;new GtkButton(&quot;Double-click here for information..&quot;);
-$button-&gt;add_events(GDK_ALL_EVENTS_MASK);
-$button-&gt;connect(&quot;event&quot;, &quot;show_event_type&quot;, $text);
-$box-&gt;pack_end($button, false, false, 5);
+$button = &new GtkButton("Double-click here for information..");
+$button->add_events(GDK_ALL_EVENTS_MASK);
+$button->connect("event", "show_event_type", $text);
+$box->pack_end($button, false, false, 5);
 
-$window-&gt;show_all();
+$window->show_all();
 
 gtk::main();
 
