@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<classentry id="gtk.gtkvscrollbar">
+ <classmeta>
+  <classtitle>GtkVScrollbar</classtitle>
+  <classparent>GtkScrollbar</classparent>
+  <shortdesc>
+   Vertical scrollbar.
+  </shortdesc>
+  <desc>
+   <simpara>
+    A <classname>GtkVScrollbar</classname> is a vertical scrollbar.
+   </simpara>
+   <para>
+    <table>
+     <title>Key bindings for <classname>GtkVScrollbar</classname></title>
+     <tgroup cols="2">
+      <thead>
+       <row>
+        <entry>Key combination</entry>
+        <entry>Scroll function</entry>
+       </row>
+      </thead>
+      <tbody>
+       <row>
+        <entry>Up arrow</entry>
+        <entry>Move up one step increment</entry>
+       </row>
+       <row>
+        <entry>Down arrow</entry>
+        <entry>Move down one step increment</entry>
+       </row>
+       <row>
+        <entry>Page Up</entry>
+        <entry>Move up one page increment</entry>
+       </row>
+       <row>
+        <entry>Page Down</entry>
+        <entry>Move down one page increment</entry>
+       </row>
+       <row>
+        <entry>Control + Page Up</entry>
+        <entry>Move to top of scroll</entry>
+       </row>
+       <row>
+        <entry>Control + Page Down</entry>
+        <entry>Move to bottom of scroll</entry>
+       </row>
+      </tbody>
+     </tgroup>
+    </table>
+   </para>
+  </desc>
+ </classmeta>
+
+ <constructor id="gtk.gtkvscrollbar.constructor">
+  <funcsynopsis>
+   <funcprototype>
+    <funcdef> <function>GtkVScrollbar</function></funcdef>
+    <paramdef>
+     <classname>GtkAdjustment</classname> 
+     <parameter><optional>adjustment = NULL</optional></parameter>
+    </paramdef>
+   </funcprototype>
+  </funcsynopsis>
+  <shortdesc>
+   Creates a vertical scrollbar.
+  </shortdesc>
+  <desc>
+   <simpara>
+    A scrollbar needs a <classname>GtkAdjustment</classname> in order to
+    operate.  The values that you give to the adjustment object will depend
+    on the situation where the scrollbar is intended to be used.
+   </simpara>
+   <simpara>
+    All scrollable widgets have their own adjustment object(s), and in all
+    instances where you are most likely to need a vertical scrollbar it is
+    possible to create a handle for the widget's vertical 
+    <classname>GtkAdjustment</classname> and assign that as the new
+    scrollbar's adjustment object.
+   </simpara>
+   <para>
+    For example:
+    <informalexample>
+     <programlisting role="php">
+$text = &amp;new GtkText();
+$adjustment = $text-&gt;vadj;
+$scrollbar = &amp;new GtkVScrollbar($adjustment);
+     </programlisting>
+    </informalexample>
+   </para>
+  </desc>
+ </constructor>
+
+</classentry>

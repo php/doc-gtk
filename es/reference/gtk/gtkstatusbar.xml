@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<classentry id="gtk.gtkstatusbar">
+ <classmeta>
+  <classtitle>GtkStatusbar</classtitle>
+  <classparent>GtkHBox</classparent>
+  <shortdesc>
+   Widget that provides a way to report messages of minor importance.
+  </shortdesc>
+  <desc>
+   <simpara>
+    A <classname>GtkStatusbar</classname> is a framed label, usually added
+    to the bottom of a window, that provides a way to report messages of
+    minor importance.  It is usually updated fairly frequently.
+   </simpara>
+   <simpara>
+    There are two indices in the structure of a statusbar; one is an
+    associative array of message information, and the other is a stack of
+    uniquely-indexed message arrays.  The message at the top of the stack is
+    the one currently on display.
+   </simpara>
+   <note>
+    <para>
+     Where a routine requires a lot of processing, the statusbar may
+     be unable to update during the time taken to do so.  You will need to
+     call
+     <informalexample>
+      <programlisting role="php">
+while (gtk::events_pending())
+  gtk::main_iteration();
+      </programlisting>
+     </informalexample>
+     each time the bar has been updated, to allow updating throughout.
+    </para>
+    <!-- thanks Markus :) - sf -->
+   </note>
+  </desc>
+ </classmeta>
+
+ <constructor id="gtk.gtkstatusbar.constructor">
+  <funcsynopsis>
+   <funcprototype>
+    <funcdef> <function>GtkStatusbar</function></funcdef>
+    <paramdef>void</paramdef>
+   </funcprototype>
+  </funcsynopsis>
+  <shortdesc>
+   Creates a status bar.
+  </shortdesc>
+  <desc>
+   <para>
+    Creating a status bar is very straightforward; creating and updating
+    messages marginally less so.
+    <example>
+     <title>Setting up a status bar.</title>
+     <programlisting role="php">
+dl('php_gtk.' . (strstr(PHP_OS, 'WIN') ? 'dll' : 'so'));
+    
+/* function to clear the entry field and give it keyboard focus */
+function focusback($entry) {
+  $entry-&gt;set_text('');
+  $entry-&gt;grab_focus();
+  }
+    
+/* on this occasion, the update function *is* the process */
+function change_status($entry, $event, $status, $stuff, &amp;$i) {
+  /* pick up the value(s) you are intending to use */
+  $value = $event-&gt;keyval;
+  $string = $event-&gt;string;
+  /* prevent the message stack building up */
+  $popcontext = $status-&gt;get_context_id($stuff[$i]);
+  $status-&gt;pop($popcontext);
+  /* sort according to value */
+  switch($value) {
+    case ($value &gt;= GDK_KEY__a &amp;&amp; $value &lt;= GDK_KEY__z):
+      $i = 1;
+      break;
+    case ($value &gt;= GDK_KEY_A &amp;&amp; $value &lt;= GDK_KEY_Z):
+      $i = 2;
+      break;
+    case ($value &gt;= GDK_KEY_0 &amp;&amp; $value &lt;= GDK_KEY_9):
+      $i = 3;
+      break;
+    case GDK_KEY_Return:
+      $i = 4;
+      break;
+    case GDK_KEY_space:
+      $i = 5;
+      break;
+    default:
+      $i = 6;
+    }
+  /* create and push the new message according to the value */
+  $pushcontext = $status-&gt;get_context_id($stuff[$i]);
+  if($string &amp;&amp; $string!==' ') 
+  $status-&gt;push($pushcontext, $string.' is a '.$stuff[$i].' character');
+  else $status-&gt;push($pushcontext, $stuff[$i]);
+  /* call any other function the value triggers */
+  if($i == 4) focusback($entry);
+}
+    
+/* set up the main window */
+$window = &amp;new GtkWindow();
+$window-&gt;set_position(GTK_WIN_POS_CENTER);
+$window-&gt;connect_object('destroy', array('gtk', 'main_quit'));
+    
+/* if you want anything else besides the statusbar, you'll need a box */
+$vbox = &amp;new GtkVBox();
+$window-&gt;add($vbox);
+    
+/* add the statusbar first, else connecting other widgets to it is messy */
+$status = &amp;new GtkStatusbar();
+$stuff = array('Here we go...', 'lower case alpha', 'UPPER CASE ALPHA', 
+'numeric', 'return', 'spacebar', 'non-alphanumeric');
+$status-&gt;push($status-&gt;get_context_id($stuff[0]), $stuff[0]);
+$vbox-&gt;pack_end($status, false);
+$status-&gt;show();
+    
+/* create, connect and pack your other widget(s) */
+$entry = &amp;new GtkEntry();
+$entry-&gt;set_usize(400,20);
+/* this will usually be connect_object(). $entry is only passed here because
+   it is used as a parameter in a function called from the callback.  &amp;$i
+   is passed so that the correct message will get 'popped' from the stack */
+$i = 1;
+$entry-&gt;connect('key-press-event','change_status', $status, $stuff, 
+&amp;$i);
+$vbox-&gt;pack_start($entry, false);
+$entry-&gt;show();
+    
+$window-&gt;show_all();
+    
+focusback($entry);
+gtk::main();
+     </programlisting>
+    </example>
+   </para>
+  </desc>
+ </constructor>
+
+ <methods>
+
+  <method id="gtk.gtkstatusbar.method.get_context_id">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>int <function>get_context_id</function></funcdef>
+     <paramdef>string <parameter>context_description</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Returns the context id from the description.
+   </shortdesc>
+   <desc>
+    <simpara>
+     The <classname>GtkStatusbar</classname> sets up an internal array of
+     the messages that have been used, as they are being called.  The
+     <literal>context_id</literal> is the array index position that a
+     given message holds.
+    </simpara>
+    <simpara>
+     As the message array is created on the fly, it is never the same
+     twice running.  The messages that are displayed most frequently during
+     the status bar's lifetime will have low numbers, and a message that is
+     never called will not be added to the array.  It is far more efficient
+     to use <function class="GtkStatusbar">get_context_id()</function> to
+     generate a context id for a message than it is to allocate your own
+     integer value.
+    </simpara>
+    <simpara>
+     The <parameter>context_description</parameter> is actually the text
+     string used in the statusbar label.
+    </simpara>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkstatusbar.method.push">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>int <function>push</function></funcdef>
+     <paramdef>int <parameter>context_id</parameter></paramdef>
+     <paramdef>string <parameter>text</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Adds message to top of stack.
+   </shortdesc>
+   <desc>
+    <simpara>
+     <function class="GtkStatusbar">push()</function> prepends the given
+     message to an internal stack in the statusbar, along with its 
+     associated <parameter>context_id</parameter>.  It is best to allow
+     the statusbar to generate the <parameter>context_id</parameter> for
+     itself, as the value can then change from one run to another to respond
+     to the user's pattern of interaction with the application.  Use 
+     <function class="GtkStatusbar">get_context_id()</function> to do this.
+    </simpara>
+    <simpara>
+     The returned value is a unique <literal>message_id</literal>, which is
+     needed as a parameter in the 
+     <function class="GtkStatusbar">remove()</function> method.  This is
+     simply an incremented value, beginning at <literal>1</literal>.
+    </simpara>
+    <simpara>
+     This method causes the 
+     <signalname class="GtkStatusbar">text-pushed</signalname> signal to be
+     emitted.
+    </simpara>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkstatusbar.method.pop">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>pop</function></funcdef>
+     <paramdef>int <parameter>context_id</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Removes message from top of stack.
+   </shortdesc>
+   <desc>
+    <simpara>
+     <function class="GtkStatusbar">pop()</function> removes the message
+     that is currently at the top of the statusbar's stack, using the
+     <parameter>context_id</parameter> to identify the message.
+    </simpara>
+    <simpara>
+     When a message is removed from the stack, the memory that was allocated
+     to it is freed.  Given that all messages are generated uniquely, it is
+     good practice to <function class="GtkStatusbar">pop()</function> the
+     current message before appending the next.  Allowing the stack to build
+     up can add considerably to processing time.
+    </simpara>
+    <simpara>
+     This method causes the 
+     <signalname class="GtkStatusbar">text-popped</signalname> signal to be
+     emitted.
+    </simpara>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkstatusbar.method.remove">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>remove</function></funcdef>
+     <paramdef>int <parameter>context_id</parameter></paramdef>
+     <paramdef>int <parameter>message_id</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Removes designated message from stack.
+   </shortdesc>
+   <desc>
+    <simpara>
+     This method removes a targeted message from anywhere in the stack.
+    </simpara>
+    <simpara>
+     Both the <parameter>context_id</parameter> and the 
+     <parameter>message_id</parameter> can be generated by the statusbar 
+     comfortably here as elsewhere in the <classname>GtkStatusbar</classname> 
+     methods.
+    </simpara>
+    <simpara>
+     If you use this simply to replace a working 
+     <function class="GtkStatusbar">pop()</function> function you should see
+     no difference in behaviour; the 
+     <function class="GtkStatusbar">remove()</function> method even
+     causes the <signalname class="GtkStatusbar">text-popped</signalname> 
+     signal to be emitted when it removes a message from the top of the stack. 
+     Note that no signal is emitted when messages are taken from elsewhere in
+     the stack.
+    </simpara>
+    <simpara>
+     As there is no way to add a message anywhere other than the top of
+     the statusbar's stack - thereby immediately displaying it - this method
+     is basically a way of preventing a stack build-up where the pop/push
+     procedure has proved inappropriate.
+    </simpara>
+   </desc>
+  </method>
+
+ </methods>
+
+ <signals>
+
+  <signal id="gtk.gtkstatusbar.signal.text-pushed">
+   <signalname>text-pushed</signalname>
+   <callback>
+    <funcprototype>
+     <funcdef>void <function>callback</function></funcdef>
+     <paramdef><classname>GtkStatusbar</classname> statusbar</paramdef>
+     <paramdef>int context_id</paramdef>
+     <paramdef>string text</paramdef>
+    </funcprototype>
+   </callback>
+   <shortdesc>
+    Emitted when a message is prepended to the stack.
+   </shortdesc>
+   <desc>
+    <simpara>
+     This signal is fired by a <classname>GtkStatusbar</classname> when the
+     <function class="GtkStatusbar">push()</function> method is called.  It
+     carries with it the <literal>context_id</literal> and the text content
+     of the message.
+    </simpara>
+   </desc>
+  </signal>
+
+  <signal id="gtk.gtkstatusbar.signal.text-popped">
+   <signalname>text-popped</signalname>
+   <callback>
+    <funcprototype>
+     <funcdef>void <function>callback</function></funcdef>
+     <paramdef><classname>GtkStatusbar</classname> statusbar</paramdef>
+     <paramdef>int context_id</paramdef>
+     <paramdef>string text</paramdef>
+    </funcprototype>
+   </callback>
+   <shortdesc>
+    Emitted when a message is popped from the top of the stack.
+   </shortdesc>
+   <desc>
+    <simpara>
+     This signal is fired by a <classname>GtkStatusbar</classname> when the
+     <function class="GtkStatusbar">pop()</function> method is called, and
+     also when when the topmost message in the stack is removed using the 
+     <function class="GtkStatusbar">remove()</function> method .  The signal
+     carries with it the <literal>context_id</literal> and the text content
+     of the message.
+    </simpara>
+   </desc>
+  </signal>
+
+ </signals>
+
+</classentry>

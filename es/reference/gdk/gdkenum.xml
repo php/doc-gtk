@@ -1,0 +1,1046 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<enum id="gdk.enum.gdkcapstyle">
+ <enumname>GdkCapStyle</enumname>
+  <shortdesc>
+   Probando la teoria.
+  </shortdesc>
+
+ <enumoption>
+  <optionname>GDK_CAP_NOT_LAST</optionname>
+  <shortdesc>
+
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GDK_CAP_BUTT</optionname>
+  <shortdesc>
+
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GDK_CAP_ROUND</optionname>
+  <shortdesc>
+
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GDK_CAP_PROJECTING</optionname>
+  <shortdesc>
+
+  </shortdesc>
+ </enumoption>
+
+</enum>
+
+<enum id="gdk.enum.gdkcursortype">
+ <enumname>GdkCursorType</enumname>
+  <shortdesc>
+   Probando la teoria.
+  </shortdesc>
+
+ <enumoption>
+  <optionname>GDK_CURSOR_IS_PIXMAP</optionname>
+  <shortdesc>
+
+  </shortdesc>
+ </enumoption>
+
+</enum>
+
+<enum id="gdk.enum.gdkdragaction">
+ <enumname>GdkDragAction</enumname>
+
+ <enumoption>
+  <optionname>GDK_ACTION_DEFAULT</optionname>
+  <shortdesc>
+
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GDK_ACTION_COPY</optionname>
+  <shortdesc>
+
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GDK_ACTION_MOVE</optionname>
+  <shortdesc>
+
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GDK_ACTION_LINK</optionname>
+  <shortdesc>
+
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GDK_ACTION_PRIVATE</optionname>
+  <shortdesc>
+
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GDK_ACTION_ASK</optionname>
+  <shortdesc>
+
+  </shortdesc>
+ </enumoption>
+
+</enum>
+
+<enum id="gdk.enum.gdkeventmask">
+ <enumname>GdkEventMask</enumname>
+  <shortdesc>
+   Probando la teoria.
+  </shortdesc>
+
+ <enumoption>
+  <optionname>GDK_EXPOSURE_MASK</optionname>
+  <shortdesc>
+   Poniendo este flag permite el evento <literal>GDK_EXPOSE</literal> sea
+   capturado por un widget de <classname>GdkWindow</classname>. 
+   Esto causa que el widget emita la señal  
+   <signalname class="GtkWidget">expose-event</signalname>.
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GDK_POINTER_MOTION_MASK</optionname>
+  <shortdesc>
+   Poniendo este flag permite el evento <literal>GDK_MOTION_NOTIFY</literal> sea
+   capturado por un widget de <classname>GdkWindow</classname>. 
+   Esto causa que el widget emita la señal  
+   <signalname class="GtkWidget">motion-notify-event</signalname>.
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GDK_POINTER_MOTION_HINT_MASK</optionname>
+  <shortdesc>
+   Este es un flag especial que permite una funcionalidad menos intensiva de 
+   <literal>GDK_POINTER_MOTION_MASK</literal>.  Esto puede ser necesario
+   para evitar un proceso de restraso de tiempo causado por el volumen sheer
+   del evento  <literal>GDK_MOTION_NOTIFY</literal> producido por
+   el movimiento del mouse, cada uno de los cuales causa que una señal
+   <signalname class="GtkWidget">motion-notify-event</signalname> 
+   sea desechada por el widget.
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GDK_BUTTON_MOTION_MASK</optionname>
+  <shortdesc>
+   Permite que el evento <literal>GDK_MOTION_NOTIFY</literal> sea tomado por el
+   widget <classname>GdkWindow</classname> solamente mientras cualquier boton 
+   del mouse esta siendo presionado. Esto es una forma de limitar la emision de
+   la señal <signalname class="GtkWidget">motion-notify-event</signalname> del
+   widget.
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GDK_BUTTON1_MOTION_MASK</optionname>
+  <shortdesc>
+   Permite que el evento <literal>GDK_MOTION_NOTIFY</literal>  sea tomado por 
+   el widgets <classname>GdkWindow</classname> solamente mientras el boton del
+   mouse <literal>1</literal> esta siendo presionado. Esto es una forma de 
+   limitar la emision de la señal 
+   <signalname class="GtkWidget">motion-notify-event</signalname> del widget.
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GDK_BUTTON2_MOTION_MASK</optionname>
+  <shortdesc>
+   Permite que el evento <literal>GDK_MOTION_NOTIFY</literal>  sea tomado por el
+   widgets <classname>GdkWindow</classname> solamente mientras el boton del mouse
+   <literal>2</literal> 
+   esta siendo presionado. Esto es una forma de limitar la emision de la señal
+   <signalname class="GtkWidget">motion-notify-event</signalname> del widget.
+  </shortdesc>
+ </enumoption>
+
+
+ <enumoption>
+  <optionname>GDK_BUTTON3_MOTION_MASK</optionname>
+  <shortdesc>
+   Permite que el evento <literal>GDK_MOTION_NOTIFY</literal>  sea tomado por el
+   widgets <classname>GdkWindow</classname> solamente mientras el boton del mouse
+   <literal>3</literal> 
+   esta siendo presionado. Esto es una forma de limitar la emision de la señal
+   <signalname class="GtkWidget">motion-notify-event</signalname> del widget.
+  </shortdesc>
+ </enumoption>
+
+
+ <enumoption>
+  <optionname>GDK_BUTTON_PRESS_MASK</optionname>
+  <shortdesc>
+   Poniendo este flag permite que el evento <literal>GDK_BUTTON_PRESS</literal> 
+   sea capturado por el widget <classname>GdkWindow</classname>. 
+   Esto hace que el widget emita la señal 
+   <signalname class="GtkWidget">button-press-event</signalname>.
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GDK_BUTTON_RELEASE_MASK</optionname>
+  <shortdesc>
+   Poniendo este flag permite que el evento <literal>GDK_BUTTON_RELEASE</literal> 
+   sea capturado por el widget <classname>GdkWindow</classname>. 
+   Esto hace que el widget emita la señal 
+   <signalname class="GtkWidget">button-release-event</signalname>.
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GDK_KEY_PRESS_MASK</optionname>
+  <shortdesc>
+   Poniendo este flag permite que el evento  <literal>GDK_KEY_PRESS</literal> 
+   sea capturado por el widget <classname>GdkWindow</classname>. 
+   Esto hace que el widget emita la señal
+   <signalname class="GtkWidget">key-press-event</signalname>.
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GDK_KEY_RELEASE_MASK</optionname>
+  <shortdesc>
+   Poniendo este flag permite que el evento <literal>GDK_KEY_RELEASE</literal> 
+   sea capturado por el widget  <classname>GdkWindow</classname>. 
+   Esto hace que el widget emita la señal  
+   <signalname class="GtkWidget">key-release-event</signalname>.
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GDK_ENTER_NOTIFY_MASK</optionname>
+  <shortdesc>
+   Poniendo este flag permite que el evento <literal>GDK_ENTER_NOTIFY</literal> 
+   sea capturado por el widget <classname>GdkWindow</classname>. 
+   Esto hace que el widget emita la señal 
+   <signalname class="GtkWidget">enter-notify-event</signalname>.
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GDK_LEAVE_NOTIFY_MASK</optionname>
+  <shortdesc>
+   Poniendo este flag permite que el evento  <literal>GDK_LEAVE_NOTIFY</literal> 
+   sea capturado por el widget <classname>GdkWindow</classname>. 
+   Esto hace que el widget emita la señal 
+   <signalname class="GtkWidget">leave-notify-event</signalname>.
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GDK_FOCUS_CHANGE_MASK</optionname>
+  <shortdesc>
+   Poniendo este flag permite que el evento <literal>GDK_FOCUS_CHANGE</literal> 
+   sea capturado por el widget <classname>GdkWindow</classname>. 
+   Esto hace que el widget emita la señal   
+   <signalname class="GtkWidget">focus-in-event</signalname> o 
+   <signalname class="GtkWidget">focus-out-event</signalname> como apropiada.
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GDK_STRUCTURE_MASK</optionname>
+  <shortdesc>
+   Este flag se pone en todas las nuevas instancias de 
+   <classname>GdkWindow</classname>. Permite que los  eventos map, unmap,
+   destroy y configure events sean capturados, causando que las señales 
+   <signalname class="GtkWidget">map-event</signalname>, 
+   <signalname class="GtkWidget">unmap-event</signalname>, 
+   <signalname class="GtkWidget">destroy-event</signalname> y
+   <signalname class="GtkWidget">configure-event</signalname> sean emitidas
+   desde todos los widgets en la ventana.
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GDK_PROPERTY_CHANGE_MASK</optionname>
+  <shortdesc>
+   Poniendo este flag permite que el evento <literal>GDK_PROPERTY_NOTIFY</literal> 
+   sea capturado por el widget <classname>GdkWindow</classname>. 
+   Esto hace que el widget emita la señal 
+   <signalname class="GtkWidget">property-notify-event</signalname>.
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GDK_VISIBILITY_NOTIFY_MASK</optionname>
+  <shortdesc>
+   Poniendo este flag permite que el evento <literal>GDK_VISIBILITY_NOTIFY</literal> 
+   sea capturado por el widget  <classname>GdkWindow</classname>. 
+   Esto hace que el widget emita la señal 
+   <signalname class="GtkWidget">visibility-notify-event</signalname>.
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GDK_PROXIMITY_IN_MASK</optionname>
+  <shortdesc>
+   Poniendo este flag permite que el evento <literal>GDK_PROXIMITY_IN</literal> 
+   sea capturado por el widget <classname>GdkWindow</classname>. 
+   Esto hace que el widget emita la señal 
+  <signalname class="GtkWidget">proximity-in-event</signalname>.
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GDK_PROXIMITY_OUT_MASK</optionname>
+  <shortdesc>
+   Poniendo este flag permite que el evento <literal>GDK_PROXIMITY_OUT</literal> 
+   sea capturado por el widget <classname>GdkWindow</classname>. 
+   Esto hace que el widget emita la señal  
+   <signalname class="GtkWidget">proximity-out-event</signalname>.
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GDK_SUBSTRUCTURE_MASK</optionname>
+  <shortdesc>
+   Habilita al widget <classname>GdkWindow</classname> capturar el evento
+   <literal>GDK_STRUCTURE_MASK</literal> en cualquier ventana hija.
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GDK_ALL_EVENTS_MASK</optionname>
+  <shortdesc>
+   Poniendo este flag permite que cualquier <classname>GdkEvent</classname> sea
+   capturado por el widget <classname>GdkWindow</classname>.
+  </shortdesc>
+ </enumoption>
+
+</enum>
+
+<enum id="gdk.enum.gdkeventtype">
+ <enumname>GdkEventType</enumname>
+
+ <enumoption>
+  <optionname>GDK_NOTHING</optionname>
+  <shortdesc>
+   Un evento nulo.
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GDK_DELETE</optionname>
+  <shortdesc>
+   Este evento se dispara cuando el usario presiona el boton X en la ventana.
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GDK_DESTROY</optionname>
+  <shortdesc>
+   Este evento se dispara cuando un widget esta siendo destruido.
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GDK_EXPOSE</optionname>
+  <shortdesc>
+   Este evento se dispara siempre y cuando un widget esta siendo mostrado. Incluye
+   redibujar, todo o parcial.
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GDK_MOTION_NOTIFY</optionname>
+  <shortdesc>
+   Este evento se dispara cuando se mueve el mouse.
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GDK_BUTTON_PRESS</optionname>
+  <shortdesc>
+   Este evento se dispara cuando cualquier boton del mouse se presiona.
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GDK_2BUTTON_PRESS</optionname>
+  <shortdesc>
+   Este evento se dispara cuando hay se preciona dos veces el boton del mouse
+   rapidamente - un doble click. Es precedido por un segundo evento 
+   <literal>GDK_BUTTON_PRESS</literal> y su evento resultado un
+   <literal>GDK_BUTTON_RELEASE</literal>.
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GDK_3BUTTON_PRESS</optionname>
+  <shortdesc>
+   Este evento se dispara cuando hay se preciona tres veces el boton del mouse
+   rapidamente - un triple click. Es precedido por dos eventos
+   <literal>GDK_BUTTON_PRESS</literal> y 
+   <literal>GDK_2BUTTON_PRESS</literal> ,y sus eventos asociados
+   <literal>GDK_BUTTON_RELEASE</literal>.
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GDK_BUTTON_RELEASE</optionname>
+  <shortdesc>
+   Este evento se dispara cuando cualquier boton del mouse se suelta.
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GDK_KEY_PRESS</optionname>
+  <shortdesc>
+   Este evento se dispara cuando una tecla se presiona.
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GDK_KEY_RELEASE</optionname>
+  <shortdesc>
+   Este evento se dispara cuando cualquier tecla se suelta.   
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GDK_ENTER_NOTIFY</optionname>
+  <shortdesc>
+   Este evento se dispara cuando el cursor entra en el area del widget.
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GDK_LEAVE_NOTIFY</optionname>
+  <shortdesc>
+   Este evento se dispara cuando el cursor deja en el area del widget.
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GDK_FOCUS_CHANGE</optionname>
+  <shortdesc>
+   Este evento se dispara siempre y cuando haya un cambio en el foco del teclado. 
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GDK_CONFIGURE</optionname>
+  <shortdesc>
+   Este evento se dispara siempre y cuando un widget se dibuje, esto es, en la primera
+   vez que se muestre y su subsecuentes redibujados causados por el movimiento o
+   la modificaion de tamaño.
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GDK_MAP</optionname>
+  <shortdesc>
+   Este evento se dispara durante el proceso de
+   <function class="GtkWidget">show()</function>, mientras qu eel widget esta siendo mapeado a la
+   pantalla.
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GDK_UNMAP</optionname>
+  <shortdesc>
+   Este evento se dispara durante el proceso de 
+   <function class="GtkWidget">hide()</function>,mientras que el widget es borrado de la pantalla.
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GDK_PROPERTY_NOTIFY</optionname>
+  <shortdesc>
+
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GDK_SELECTION_CLEAR</optionname>
+  <shortdesc>
+
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GDK_SELECTION_REQUEST</optionname>
+  <shortdesc>
+
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GDK_SELECTION_NOTIFY</optionname>
+  <shortdesc>
+
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GDK_PROXIMITY_IN</optionname>
+  <shortdesc>
+
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GDK_PROXIMITY_OUT</optionname>
+  <shortdesc>
+
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GDK_DRAG_ENTER</optionname>
+  <shortdesc>
+
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GDK_DRAG_LEAVE</optionname>
+  <shortdesc>
+
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GDK_DRAG_MOTION</optionname>
+  <shortdesc>
+
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GDK_DRAG_STATUS</optionname>
+  <shortdesc>
+
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GDK_DROP_START</optionname>
+  <shortdesc>
+
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GDK_DROP_FINISHED</optionname>
+  <shortdesc>
+
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GDK_CLIENT_EVENT</optionname>
+  <shortdesc>
+
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GDK_VISIBILITY_NOTIFY</optionname>
+  <shortdesc>
+
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GDK_NO_EXPOSE</optionname>
+  <shortdesc>
+
+  </shortdesc>
+ </enumoption>
+
+</enum>
+
+<enum id="gdk.enum.gdkfill">
+ <enumname>GdkFill</enumname>
+
+ <enumoption>
+  <optionname>GDK_SOLID</optionname>
+  <shortdesc>
+
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GDK_TILED</optionname>
+  <shortdesc>
+
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GDK_STIPPLED</optionname>
+  <shortdesc>
+
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GDK_OPAQUE_STIPPLED</optionname>
+  <shortdesc>
+
+  </shortdesc>
+ </enumoption>
+
+</enum>
+
+<enum id="gdk.enum.gdkfonttype">
+ <enumname>GdkFontType</enumname>
+
+ <enumoption>
+  <optionname>GDK_FONT_FONT</optionname>
+  <shortdesc>
+   Un contructor interno que denota que solo una fuente ha sido 
+   cargada en la estructura <classname>GdkFont</classname>.
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GDK_FONT_FONTSET</optionname>
+  <shortdesc>
+   Un constructor interno que denota que alguna fuentes alternativas han sido
+   cargadas en la estructura <classname>GdkFont</classname>.  En win32,
+   todas las consultas de tipo de <classname>GdkFont</classname> devuelveb este tipo.
+  </shortdesc>
+ </enumoption>
+
+</enum>
+
+<enum id="gdk.enum.gdkfunction">
+ <enumname>GdkFunction</enumname>
+
+ <enumoption>
+  <optionname>GDK_COPY</optionname>
+  <shortdesc>
+
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GDK_INVERT</optionname>
+  <shortdesc>
+
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GDK_XOR</optionname>
+  <shortdesc>
+
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GDK_CLEAR</optionname>
+  <shortdesc>
+
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GDK_AND</optionname>
+  <shortdesc>
+
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GDK_AND_REVERSE</optionname>
+  <shortdesc>
+
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GDK_AND_INVERT</optionname>
+  <shortdesc>
+
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GDK_NOOP</optionname>
+  <shortdesc>
+
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GDK_OR</optionname>
+  <shortdesc>
+
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GDK_INVERT</optionname>
+  <shortdesc>
+
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GDK_XOR</optionname>
+  <shortdesc>
+
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GDK_EQUIV</optionname>
+  <shortdesc>
+
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GDK_OR_REVERSE</optionname>
+  <shortdesc>
+
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GDK_COPY_INVERT</optionname>
+  <shortdesc>
+
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GDK_OR_INVERT</optionname>
+  <shortdesc>
+
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GDK_NAND</optionname>
+  <shortdesc>
+
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GDK_SET</optionname>
+  <shortdesc>
+
+  </shortdesc>
+ </enumoption>
+
+</enum>
+
+<enum id="gdk.enum.gdkinputcondition">
+ <enumname>GdkInputCondition</enumname>
+
+ <enumoption>
+  <optionname>GDK_INPUT_READ</optionname>
+  <shortdesc>
+
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GDK_INPUT_WRITE</optionname>
+  <shortdesc>
+
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GDK_INPUT_EXCEPTION</optionname>
+  <shortdesc>
+
+  </shortdesc>
+ </enumoption>
+
+</enum>
+
+<enum id="gdk.enum.gdkjoinstyle">
+ <enumname>GdkJoinStyle</enumname>
+
+ <enumoption>
+  <optionname>GDK_JOIN_MITER</optionname>
+  <shortdesc>
+
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GDK_JOIN_ROUND</optionname>
+  <shortdesc>
+
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GDK_JOIN_BEVEL</optionname>
+  <shortdesc>
+
+  </shortdesc>
+ </enumoption>
+
+</enum>
+
+<enum id="gdk.enum.gdklinestyle">
+ <enumname>GdkLineStyle</enumname>
+
+ <enumoption>
+  <optionname>GDK_LINE_SOLID</optionname>
+  <shortdesc>
+
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GDK_LINE_ON_OFF_DASH</optionname>
+  <shortdesc>
+
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GDK_LINE_DOUBLE_DASH</optionname>
+  <shortdesc>
+
+  </shortdesc>
+ </enumoption>
+
+</enum>
+
+<enum id="gdk.enum.gdkmodifiertype">
+ <enumname>GdkModifierType</enumname>
+
+ <enumoption>
+  <optionname>GDK_SHIFT_MASK</optionname>
+  <shortdesc>
+   Se utiliza como modificador la tecla shift.  Una tecla dedicada o
+   un boton del mouse no se convertira en activo hasta que la tecla
+   <literal>Shift</literal> sea presionada.
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GDK_LOCK_MASK</optionname>
+  <shortdesc>
+   Se utiliza como modificador la tecla <literal>Caps Lock</literal>.  Fijese
+   que el modificador es ilegal para el uso con teclas aceleradoras, y no funcionara.
+  </shortdesc>
+ </enumoption>
+ 
+ <enumoption>
+  <optionname>GDK_CONTROL_MASK</optionname>
+  <shortdesc>
+   Se utiliza como modificador la tecla control. Una tecla
+   dedicada o un boton de moues no se convertira en activo hasta que
+   la  <literal>Control</literal> tecla control sea presionada.
+  </shortdesc>
+ </enumoption>
+ 
+ <enumoption>
+  <optionname>GDK_MOD1_MASK</optionname>
+  <shortdesc>
+   Se utiliza como modificador la tecla alt.
+   Una tecla dedicada o un boton del mouse no se convertira activa
+   hasta que no se presione la tecla  <literal>Alt</literal> .
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GDK_MOD2_MASK</optionname>
+  <shortdesc>
+
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GDK_MOD3_MASK</optionname>
+  <shortdesc>
+
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GDK_MOD4_MASK</optionname>
+  <shortdesc>
+
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GDK_MOD5_MASK</optionname>
+  <shortdesc>
+
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GDK_BUTTON1_MASK</optionname>
+  <shortdesc>
+
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GDK_BUTTON2_MASK</optionname>
+  <shortdesc>
+
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GDK_BUTTON3_MASK</optionname>
+  <shortdesc>
+
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GDK_BUTTON4_MASK</optionname>
+  <shortdesc>
+
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GDK_BUTTON5_MASK</optionname>
+  <shortdesc>
+
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GDK_RELEASE_MASK</optionname>
+  <shortdesc>
+   Se usa acto de soltar el boton como un modificador.
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GDK_MODIFIER_MASK</optionname>
+  <shortdesc>
+   Devuelve todos los modificadores que son posibles en el contexto
+   actual.
+  </shortdesc>
+ </enumoption>
+</enum>
+
+<enum id="gdk.enum.gdkrgbdither">
+ <enumname>GdkRgbDither</enumname>
+
+ <enumoption>
+  <optionname>GDK_RGB_DITHER_NONE</optionname>
+  <shortdesc>
+
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GDK_RGB_DITHER_NORMAL</optionname>
+  <shortdesc>
+
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GDK_RGB_DITHER_MAX</optionname>
+  <shortdesc>
+
+  </shortdesc>
+ </enumoption>
+
+</enum>
+
+<enum id="gdk.enum.gdksubwindowmode">
+ <enumname>GdkSubwindowMode</enumname>
+
+ <enumoption>
+  <optionname>GDK_CLIP_BY_CHILDREN</optionname>
+  <shortdesc>
+
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GDK_INCLUDE_INFERIORS</optionname>
+  <shortdesc>
+
+  </shortdesc>
+ </enumoption>
+
+</enum>
+
+<enum id="gdk.enum.gdkvisualtype">
+ <enumname>GdkVisualType</enumname>
+
+ <enumoption>
+  <optionname>GDK_VISUAL_STATIC_GRAY</optionname>
+  <shortdesc>
+
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GDK_VISUAL_GRAYSCALE</optionname>
+  <shortdesc>
+
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GDK_VISUAL_STATIC_COLOR</optionname>
+  <shortdesc>
+
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GDK_VISUAL_PSEUDO_COLOR</optionname>
+  <shortdesc>
+
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GDK_VISUAL_TRUE_COLOR</optionname>
+  <shortdesc>
+
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GDK_VISUAL_DIRECT_COLOR</optionname>
+  <shortdesc>
+
+  </shortdesc>
+ </enumoption>
+
+</enum>
+
+
+<!--
+ * Local variables:
+ * tab-width: 1
+ * c-basic-offset: 1
+ * End:
+ * vim600: et sw=1 ts=1 tw=78 fdm=marker
+ * vim<600: et sw=1 ts=1 tw=78
+-->
+

@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<classentry id="gtk.gtkadjustment">
+ <classmeta>
+  <classtitle>GtkAdjustment</classtitle>
+  <classparent>GtkData</classparent>
+  <shortdesc>
+  Representa un valor ajustable.
+  </shortdesc>
+  <desc>
+   <simpara>
+   Cualquier widget que tiene (moving part) tiene <classname>GtkAdjustment</classname> 
+   Este es usado para limitar el rango de valores usados para (moving part) y tambien, en algunos widhets, sirve para
+   determinar el tamaño de los pasos por los que los valores deben ser incrementados o decrementados.
+   </simpara>
+  </desc>
+ </classmeta>
+
+ <constructor id="gtk.gtkadjustment.constructor">
+  <funcsynopsis>
+   <funcprototype>
+    <funcdef> <function>GtkAdjustment</function></funcdef>
+    <paramdef>double <parameter>value</parameter></paramdef>
+    <paramdef>double <parameter>lower</parameter></paramdef>
+    <paramdef>double <parameter>upper</parameter></paramdef>
+    <paramdef>double <parameter>step_increment</parameter></paramdef>
+    <paramdef>double <parameter>page_increment</parameter></paramdef>
+    <paramdef>double <parameter>page_size</parameter></paramdef>
+   </funcprototype>
+  </funcsynopsis>
+  <shortdesc>
+  Crea la base para un widget ajustable.
+  </shortdesc>
+  <desc>
+   <simpara>
+   No todos los widget con objetos ajustables usan las sies propiedades
+   disponibles. Donde esto ocurre, el  <literal>null</literal> 
+    <emphasis>no</emphasis> es un parametro valido; todos los parametros de ajustes
+    son valores <literal>double</literal>, y  podes necesitar ponerles
+   <literal>0.0</literal> donde no se necesiten.
+   </simpara>
+   <simpara>
+   El primer parametro, <parameter>value</parameter>, se usa para que cada
+   widget con parte ajustable. Representa el
+    value  <emphasis>actual</emphasis>, y debes poner el valor que queres que se
+    muestre cuando se abra.
+
+    Ese valor sera mayormentee
+    <literal>0.0</literal> para valores basados en porcentajes (e.j. en  
+    <classname>GtkProgressBar</classname> o en  
+    <classname>GtkScrollbar</classname>), o <literal>1.0</literal> para
+    valores literales (e.j. en <classname>GtkSpinButton</classname>.
+   </simpara>
+   <simpara>
+    <parameter>lower</parameter> y <parameter>upper</parameter> son los proximos dos
+    parametros.  Estos representan las limitaciones en el cambio del valor; 
+    ¿ cual es el valor mas bajo posible y cual es mayor?    
+    habitualmente, el primer <parameter>value</parameter> esta al comienzo de la
+    escala, y en este caso seria igual a el parametro <parameter>lower</parameter>.
+    La forma en que elijas expresar el <parameter>upper</parameter> dependera de
+    <literal>step_increment</literal>, que esta definido en el cuarto parametro
+    cuando se usan todos. A lo mejor, tenes que poner el limite superiorr
+    en <literal>100.0</literal> y incrementar el valor en pasos de
+    <literal>1.0</literal>, o ponerlo en <literal>1.0</literal> y
+    incrementar el valor en pasos de <literal>0.01</literal>, dependeindo de que
+    estas midiendo o de tu humor. Igualmente se utiliza la misma distancia.
+   </simpara>
+   <simpara>
+   Los dos parametros finales sone <parameter>page_increment</parameter> y
+    <parameter>page_size</parameter>. Cuando estos se usan, el 
+    <parameter>page_increment</parameter> deberia tener un 90% del valor de 
+    <parameter>page_size</parameter>.  Si pones en el tamaño de pagina el
+    mismo valor como <parameter>upper</parameter>, una  <classname>GtkScrollbar</classname> 
+    usnaod estos valores serian extendidos y no podrian ser visto.
+    Esto seria una forma de probar si los valores estan puestos.    
+    En algunos widgets - <classname>GtkCList</classname>, 
+    <classname>GtkLayout</classname>, <classname>GtkText</classname> y
+    <classname>GtkViewport</classname> - el valor de ajuste  puede ser internamente
+    puesto por el scrolling-aware container widgets, y estos sobreescribirian los valores
+    puestos manualmente.  <classname>GtkScrollbar</classname>, 
+     no tiene valores de ajuste hasta que no se ponen los valores.  Caveat: si una
+    scrollbar comparte el objeto <classname>GtkAdjustment</classname> con un
+    widget que sobreescribe los valores anteriormentepuestos, la scrollbar compartiria los
+    valores puestos de ajustes de widgets como parte del proceso de convertirse en asociado
+    con ese widget.
+   </simpara>
+   <simpara>
+    Ver ademas: <classname>GtkCList</classname>, 
+    <classname>GtkLayout</classname>, <classname>GtkProgressBar</classname>, 
+    <classname>GtkRange</classname>, <classname>GtkScale</classname>, 
+    <classname>GtkScrollbar</classname>, 
+    <classname>GtkScrolledWindow</classname>, 
+    <classname>GtkSpinButton</classname>, <classname>GtkText</classname>, 
+    <classname>GtkViewport</classname>, 
+    <function class="GtkContainer">set_focus_hadjustment()</function>, 
+    <function class="GtkContainer">set_focus_vadjustment()</function>.
+   </simpara>
+  </desc>
+ </constructor>
+
+ <methods>
+
+  <method id="gtk.gtkadjustment.method.changed">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>changed</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Emite la señal <signalname class="GtkAdjustment">changed</signalname>.
+   </shortdesc>
+   <desc>
+    <simpara>
+     El m&eacute;todo <function class="GtkAdjustment">changed()</function> hace
+     que el objeto de ajuste dispare el  <signalname class="GtkAdjustment">changed</signalname> de señal.  
+     Este m&eacute;todo se llama internamente cuando hay un cambio en alguna propiedad de
+     <classname>GtkAdjustment</classname>.
+    </simpara>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkadjustment.method.value_changed">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>value_changed</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Emits <signalname class="GtkAdjustment">value-changed</signalname> signal.
+   </shortdesc>
+   <desc>
+    <simpara>
+     El m&eacute;todo  <function class="GtkAdjustment">value_changed()</function> 
+     se llama internamente cuando la señal de emisi&oacute;n se necesita.
+     Causa que la señal
+     <signalname class="GtkAdjustment">value-changed</signalname> sea emitido.
+    </simpara>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkadjustment.method.clamp_page">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>clamp_page</function></funcdef>
+     <paramdef>double <parameter>lower</parameter></paramdef>
+     <paramdef>double <parameter>upper</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+   Previente el exeder los limites.
+   </shortdesc>
+   <desc>
+    <simpara>
+     <function class="GtkAdjustment">clamp_page()</function> se usa
+     internamente para asegurar que si una pagina esta siendo  scrolled down, 
+     el valor incremental no es agregado a el final de la paagina en terminos 
+     de espacio extra en el boton. Compara el valor del limite y el tamaño de 
+     la pagina con el valor actual de ajuste y previene que suman mas que la suma
+     de sus partes.
+    </simpara>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkadjustment.method.set_value">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_value</function></funcdef>
+     <paramdef>double <parameter>value</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+   Pone en valor de ajuste.
+   </shortdesc>
+   <desc>
+    <simpara>
+     This method sets the adjustment <parameter>value</parameter> to a
+     new level.  It doesn't work where that value has already been set
+     by a widget or widgets; widget settings always take precedence over
+     manual settings.  Where it is allowed, it causes a 
+     <signalname class="GtkAdjustment">value-changed</signalname> signal
+     to be emitted, if the value is within the adjustment range.
+    </simpara>
+    <note>
+     <simpara>
+      Adjustable widgets generally have their own wrapper method for setting
+      the adjustment value, which should be used in preference where it
+      exists.
+     </simpara>
+    </note>
+   </desc>
+  </method>
+
+ </methods>
+
+ <signals>
+
+  <signal id="gtk.gtkadjustment.signal.changed">
+   <signalname>changed</signalname>
+   <callback>
+    <funcprototype>
+     <funcdef>void <function>callback</function></funcdef>
+     <paramdef><classname>GtkAdjustment</classname> button</paramdef>
+    </funcprototype>
+   </callback>
+   <shortdesc>
+    Emitted when a property other than <parameter>value</parameter> changes.
+   </shortdesc>
+   <desc>
+    <simpara>
+     The <signalname class="GtkAdjustment">changed</signalname> signal
+     is emitted when any of the properties other than the 
+     <parameter>value</parameter> is altered in a 
+     <classname>GtkAdjustment</classname>.  This happens when the adjustment
+     object has its values initialised or unset, or when a widget-owned
+     scrollable object is resized, or when the adjustable widget has a
+     <literal>configure()</literal> method and calls it.
+    </simpara>
+    <simpara>
+     Note that a 
+     <signalname class="GtkAdjustment">value-changed</signalname> signal
+     is also emitted under the same circumstances, regardless of whether
+     the <parameter>value</parameter> itself has been changed.
+    </simpara>
+   </desc>
+  </signal>
+
+  <signal id="gtk.gtkadjustment.signal.value_changed">
+   <signalname>value_changed</signalname>
+   <callback>
+    <funcprototype>
+     <funcdef>void <function>callback</function></funcdef>
+     <paramdef><classname>GtkAdjustment</classname> button</paramdef>
+    </funcprototype>
+   </callback>
+   <shortdesc>
+    Emitted when
+   </shortdesc>
+   <desc>
+    <simpara>
+     The <signalname class="GtkAdjustment">value-changed</signalname> signal
+     is emitted when there is a change to any of the values in a 
+     <classname>GtkAdjustment</classname>.  If the signal is accompanied by
+     a <signalname class="GtkAdjustment">changed</signalname> emission, the
+     altered property was something other than <parameter>value</parameter>.
+    </simpara>
+   </desc>
+  </signal>
+
+ </signals>
+
+ <properties>
+
+  <prop id="gtk.gtkadjustment.property.value" type="ro">
+   <propname>value</propname>
+   <proptype>double</proptype>
+   <shortdesc>
+    Current value.
+   </shortdesc>
+   <desc>
+    <simpara>
+     The <propname class="GtkAdjustment">value</propname> property
+     represents the current value of a <classname>GtkAdjustment</classname>. 
+     This may be initialized manually or, in some instances, by a
+     scrolling-aware parent widget.  Anything descended from
+     <classname>GtkContainer</classname> falls into the latter category.
+    </simpara>
+    <simpara>
+     In most cases, the <propname>value</propname> does not need any more
+     attention after it has been set, and will be incremented or decremented
+     purely through <classname>GdkEvent</classname>s initiated by the user
+     and controlled by the other adjustment settings.  This property gives
+     a means of accessing that information across all adjustable widgets.
+    </simpara>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtkadjustment.property.lower" type="ro">
+   <propname>lower</propname>
+   <proptype>double</proptype>
+   <shortdesc>
+    Lower bound.
+   </shortdesc>
+   <desc>
+    <simpara>
+     <propname class="GtkAdjustment">lower</propname> is the lowest value
+     that will be accepted by the <classname>GtkAdjustment</classname>.
+    </simpara>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtkadjustment.property.upper" type="ro">
+   <propname>upper</propname>
+   <proptype>double</proptype>
+   <shortdesc>
+    Upper bound.
+   </shortdesc>
+   <desc>
+    <simpara>
+     <propname class="GtkAdjustment">upper</propname> is the highest value
+     that will be accepted by the <classname>GtkAdjustment</classname>.
+    </simpara>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtkadjustment.property.step_increment" type="ro">
+   <propname>step_increment</propname>
+   <proptype>double</proptype>
+   <shortdesc>
+    Smaller incremental step value.
+   </shortdesc>
+   <desc>
+    <simpara>
+     The <propname class="GtkAdjustment">step_increment</propname> is the
+     smaller of the two incremental values, made manifest as a left click
+     on a <classname>GtkSpinButton</classname> or 
+     <classname>GtkScrollbar</classname> arrow.  This property is not used
+     across the full range of adjustable widgets, and should return 
+     <literal>0</literal> when queried where this is the case.
+    </simpara>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtkadjustment.property.page_increment" type="ro">
+   <propname>page_increment</propname>
+   <proptype>double</proptype>
+   <shortdesc>
+    Larger incremental step value.
+   </shortdesc>
+   <desc>
+    <simpara>
+     The <propname class="GtkAdjustment">page_increment</propname> is the
+     larger of the two incremental values, responding to a right click on
+     a <classname>GtkSpinButton</classname> arrow or as a click in the trough
+     belonging to a <classname>GtkScrollbar</classname>.  This property is
+     not used across the full range of adjustable widgets, and should return 
+     <literal>0</literal> when queried where this is the case.
+    </simpara>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtkadjustment.property.page_size" type="ro">
+   <propname>page_size</propname>
+   <proptype>double</proptype>
+   <shortdesc>
+    Displayed area.
+   </shortdesc>
+   <desc>
+    <simpara>
+     The <propname class="GtkAdjustment">page_size</propname> is the area
+     of (for instance) text that is displayed at any given time.  This
+     property is not used across the full range of adjustable widgets, and
+     should return <literal>0</literal> when queried where this is the case.
+    </simpara>
+   </desc>
+  </prop>
+
+ </properties>
+
+</classentry>

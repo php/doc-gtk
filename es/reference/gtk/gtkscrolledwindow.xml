@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<classentry id="gtk.gtkscrolledwindow">
+ <classmeta>
+  <classtitle>GtkScrolledWindow</classtitle>
+  <classparent>GtkBin</classparent>
+  <shortdesc>
+   Adds scrollbars to its child widget.
+  </shortdesc>
+  <desc>
+   <simpara>
+    A <classname>GtkScrolledWindow</classname> is a window that can supply a
+    scrollable child widget with scrollbars.
+   </simpara>
+   <simpara>
+    The scrollbars take their adjustment settings from the child widget and
+    do not need adjustment configuration.  Children that are not scrollable
+    therefore need to be packed into a widget that has scrolling awareness. 
+    <classname>GtkViewport</classname> is one such widget, and can be added
+    and configured automatically using the convenience method 
+    <function class="GtkScrolledWindow">add_with_viewport()</function>.  The
+    other widget that can be used for this purpose is 
+    <classname>GtkLayout</classname>, which allows multiple children to be
+    given fixed positions and provides scrollbars.
+   </simpara>
+   <simpara>
+    The scrolling-aware widgets are:  <classname>GtkCList</classname>, 
+    <classname>GtkCTree</classname>, <classname>GtkLayout</classname>, 
+    <classname>GtkScrolledWindow</classname>, <classname>GtkText</classname> 
+    and the catch-all <classname>GtkViewport</classname>.
+   </simpara>
+   <simpara>
+    Note that any scroll key bindings are taken from the child widget
+    in the <classname>GtkScrolledWindow</classname>, and not from the
+    scrollbars themselves.
+   </simpara>
+  </desc>
+ </classmeta>
+
+ <constructor id="gtk.gtkscrolledwindow.constructor">
+  <funcsynopsis>
+   <funcprototype>
+    <funcdef> <function>GtkScrolledWindow</function></funcdef>
+    <paramdef>
+     <classname>GtkAdjustment</classname> 
+     <parameter><optional>hadjustment = NULL</optional></parameter>
+    </paramdef>
+    <paramdef>
+     <classname>GtkAdjustment</classname> 
+     <parameter><optional>vadjustment = NULL</optional></parameter>
+    </paramdef>
+   </funcprototype>
+  </funcsynopsis>
+  <shortdesc>
+   Creates a scrolling window.
+  </shortdesc>
+  <desc>
+   <simpara>
+    The <classname>GtkScrolledWindow</classname> widget is derived from 
+    <classname>GtkBin</classname>, and is designed to only have one direct
+    child.  One way around this is to add the children to a parent container,
+    make that parent the only child of the window, and bind the container's
+    focus to align with the scrollbars.  Alternatively, you could use 
+    <classname>GtkLayout</classname>, which has no such restriction.
+   </simpara>
+   <note>
+    <simpara>
+     You do not need to explicitly add a child widget to a 
+     <classname>GtkViewport</classname> if you are using the 
+     <function class="GtkScrolledWindow">add_with_viewport()</function>
+     method.  You may, however, find that the scrollbars are unresponsive
+     anyway unless you add the child to a box container first.
+    </simpara>
+   </note>
+   <para>
+    <example>
+     <title>Setting up a <classname>GtkScrolledWindow</classname></title>
+     <programlisting role="php">
+dl('php_gtk.'.(strstr(PHP_OS, 'WIN') ? 'dll' : 'so'));
+    
+/* set up a window */
+$window = &amp;new GtkWindow();
+$window-&gt;set_position(GTK_WIN_POS_CENTER);
+$window-&gt;connect_object('destroy', array('gtk', 'main_quit'));
+    
+/* set up the main scrolled window and add it to the main window,
+   sizing it if necessary. */
+$scrolledwindow = &amp;new GtkScrolledWindow();
+$scrolledwindow-&gt;set_usize(300, 300);
+$scrolledwindow-&gt;set_policy(GTK_POLICY_NEVER, GTK_POLICY_ALWAYS);
+$window-&gt;add($scrolledwindow);
+    
+/* create a box container and add child widgets to it */
+$box = &amp;new GtkVBox();
+$calendar = &amp;new GtkCalendar();
+/* let's add a scrollable to an internal scrolled window */
+$scrolledwindow2 = &amp;new GtkScrolledWindow();
+$scrolledwindow2-&gt;set_usize(280, 100);
+$scrolledwindow2-&gt;set_policy(GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
+$text = &amp;new GtkText();
+$text-&gt;set_editable(true);
+$scrolledwindow2-&gt;add($text);
+$box-&gt;pack_start($calendar, false, false, 5);
+$box-&gt;pack_start($scrolledwindow2);
+    
+/* add the box container to the main scrolled window and link its focus so
+   that the cursor position is reflected in the scrollbar's adjustment value. 
+   You do not need to do this when adding a scrollable widget directly */
+$scrolledwindow-&gt;add_with_viewport($box);
+$box-&gt;set_focus_vadjustment($scrolledwindow-&gt;get_vadjustment());
+    
+$scrolledwindow2-&gt;show_all();
+$box-&gt;show_all();
+$window-&gt;show_all();
+    
+gtk::main();
+     </programlisting>
+    </example>
+   </para>
+  </desc>
+ </constructor>
+
+ <methods>
+  <!-- 
+   DELETED set_hadjustment(), set_vadjustment().  These methods are
+   used internally in GtkScrolledWindow and are not capable of being 
+   overridden in any meaningful way.  sf mar 02 
+  -->
+
+  <method id="gtk.gtkscrolledwindow.method.get_hadjustment">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>
+      <classname>GtkAdjustment</classname> 
+      <function>get_hadjustment</function>
+     </funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Returns the horizontal adjustment object.
+   </shortdesc>
+   <desc>
+    <simpara>
+     <function class="GtkScrolledWindow">get_hadjustment()</function> 
+     returns the <classname>GtkAdjustment</classname> object that is
+     used in the horizontal scrollbar.  The most likely use for this is
+     in combination with 
+     <function class="GtkContainer">set_focus_hadjustment()</function>, 
+     where it is needed as a parameter.
+    </simpara>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkscrolledwindow.method.get_vadjustment">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>
+      <classname>GtkAdjustment</classname> 
+      <function>get_vadjustment</function>
+     </funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Returns the vertical adjustment object.
+   </shortdesc>
+   <desc>
+    <simpara>
+     <function class="GtkScrolledWindow">get_vadjustment()</function> 
+     returns the <classname>GtkAdjustment</classname> object that is
+     used in the vertical scrollbar.  The most likely use for this is
+     in combination with 
+     <function class="GtkContainer">set_focus_vadjustment()</function>, 
+     where it is needed as a parameter.
+    </simpara>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkscrolledwindow.method.set_policy">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_policy</function></funcdef>
+     <paramdef>
+      <enumname>GtkPolicyType</enumname> 
+      <parameter>hscrollbar_policy</parameter>
+     </paramdef>
+     <paramdef>
+      <enumname>GtkPolicyType</enumname> 
+      <parameter>vscrollbar_policy</parameter>
+     </paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Sets scrollbar visibility policies.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Sets the visibility policy for the scrollbars in a 
+     <classname>GtkScrolledWindow</classname> to one of three possible
+     <enumname>GtkPolicyType</enumname> values.
+    </simpara>
+    <simpara>
+     The default setting is 
+     <literal>GTK_POLICY_ALWAYS, GTK_POLICY_ALWAYS</literal>, which
+     displays both scrollbars regardless of the relative size of the
+     child widget.
+    </simpara>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkscrolledwindow.method.set_placement">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_placement</function></funcdef>
+     <paramdef>
+      <enumname>GtkCornerType</enumname> 
+      <parameter>window_placement</parameter>
+     </paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Sets scrollbar positions.
+   </shortdesc>
+   <desc>
+    <simpara>
+     This method sets the positions of the scrollbars in a 
+     <classname>GtkScrolledWindow</classname> to one of four possible 
+     <enumname>GtkCornerType</enumname> values.
+    </simpara>
+    <simpara>
+     These values are a little counter-intuitive because they describe
+     the position of the child, rather than the position of the scrollbars
+     themselves.
+    </simpara>
+    <simpara>
+     The default setting is <literal>GTK_CORNER_TOP_LEFT</literal>, which
+     causes the child to be placed above and to the left of the scrollbars - 
+     i.e., the scrollbars are at the bottom and to the right of the child.
+    </simpara>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkscrolledwindow.method.add_with_viewport">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>add_with_viewport</function></funcdef>
+     <paramdef>
+      <classname>GtkWidget</classname> 
+      <parameter>child</parameter>
+     </paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Convenience method for adding non-scrolling widgets.
+   </shortdesc>
+   <desc>
+    <simpara>
+     <function class="GtkScrolledWindow">add_with_viewport()</function> 
+     is a convenience function that invisibly adds the child widget to a
+     <classname>GtkViewport</classname> before adding the viewport to the
+     <classname>GtkScrolledWindow</classname>.
+    </simpara>
+    <simpara>
+     The <classname>GtkViewport</classname> is a scrolling-aware container
+     that provides its child widget with that characteristic.
+   </simpara>
+   </desc>
+  </method>
+
+ </methods>
+
+</classentry>

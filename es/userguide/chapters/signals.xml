@@ -1,0 +1,601 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<chapter id="gtk.signals">
+ <title>Signals and Callbacks</title>
+
+ <sect1 id="gtk.signals.whatare">
+  <title>¿ Qu&eacute; son las Se&ntilde;ales?</title>
+  <simpara>
+   <emphasis>Las se&ntilde;ales son notificaciones emitidas a los
+   <link linkend="gtk.widgets.whatare">widgets</link>.</emphasis>
+  </simpara>
+  <simpara>
+   Cuando uno porgrama interfases graficas de usuario
+   (<acronym>GUI</acronym>),
+   usualmente es necesario responder a acciones que genera el usuario o el
+   programa por si solo.  <acronym>GNOME</acronym> y <acronym>GTK+</acronym> 
+   hacen esto por medio del uso de se&ntilde;ales.  Las se&ntilde;ales se
+   usan para permitir a el programa conocer que algo ocurrio. Esto puede ser,
+   por ejemplo, un usuario presionando un <classname>GtkButton</classname>,
+   o un cambio hecho a un valor de <classname>GtkAdjustment</classname>.
+  </simpara>
+  <simpara>
+   Un programa, causa a <classname>GtkAdjustment</classname> emitir su
+   se&ntilde;al de <signalname>value-changed</signalname> cuando un widget
+   cambia uno de sus valores de ajuste. Esta se&ntilde;al en particular es
+   usada interna y externamente en <classname>GtkAdjustment</classname>, por
+   eso no es siempre necesario escribir que esa se&ntilde;al en el codigo
+   diga que <classname>GtkProgressBar</classname> la use.  Una situaci&oacute;
+   mas obvia ocurre cuando un usuario presiona sobre una instancia de
+   <classname>GtkButton</classname>, causando que el widget del boton emita
+   la se&ntilde;al de <signalname>clicked</signalname>.  Como programdador,
+   podes utilizar <link linkend="gtk.callbacks.whatare">callbacks</link> para
+   hacer algo a cada se&ntilde;al emitada por un widget.
+  </simpara>
+ </sect1>
+
+ <sect1 id="gtk.callbacks.whatare">
+  <title>¿ Qu&eacute; son Callbacks?</title>
+  <simpara>
+   <emphasis>
+    Callbacks son funciones que son invocadas cuando las
+    <link linkend="gtk.signals.whatare">se&ntilde;ales</link> se emiten por
+    los <link linkend="gtk.widgets.whatare">widgets</link>.
+   </emphasis>
+  </simpara>
+  <simpara>
+   Callbacks son funciones que son creadas por los programadores para
+   reaccionar a las se&ntilde;ales emitadas por los widgets.  Vos
+   especificas la funci&oacute;n que deberia llamarse para
+   <link linkend="gtk.signals.connection">conectar</link> la fucni&oacute;n
+   a la se&ntilde;al.
+  </simpara>
+  <simpara>
+   Callback tambi&eacute;n se conoce como el manejador de la se&ntilde;al. 
+   Esto puede ser el <literal>manejador por defecto</literal> de un widget
+   o un <literal>manejador definido porel usuario</literal>, que es, una
+   funci&oacute;n escrita por el programador.
+  </simpara>
+ </sect1>
+
+ <sect1 id="gtk.signal.inheritance">
+  <title>Herencia de se&ntilde;ales</title>
+  <simpara>
+   Las se&ntilde;ales son heredadas por los objetos, como los son los
+   m&eacute;todos.  Un widget puede emitir alguna se&ntilde;al que su objeto
+   ancestro tiene definida, comotamb&eacute;n sus propias especificas.
+  </simpara>
+  <simpara>
+   Hay casos donde las se&ntilde;ales no son relevantes a los widgets, no
+   existir&aacute; ningun mesaje de error cuando la se&ntilde;al se llame -
+   pero igualmente no habr&aacute; una significado obvio para el widget al
+   emitir esa se&ntilde;al en particular.
+  </simpara>
+ </sect1>
+
+ <sect1 id="gtk.signals.connection">
+  <title>Conectando Se&ntilde;ales</title>
+
+  <sect1 id="gtk.signals.connection.simple">
+   <title>Conecciones simples</title>
+   <simpara>
+    Para reaccionar a una señal debes conectarla especificando una
+    funci&oacute;n callback para que PHP-GTK la llame cuando la señal se
+    emita.
+   </simpara>
+   <simpara>
+    Al conectar una funci&oacute;n a una señal se logra llamar el metodo
+    <function class="GtkObject">connect()</function> del objeto.
+   </simpara>
+   <simpara>
+    La funci&oacute;n que pones como callback para una señal debe tener su
+    prototipo correcto.  Podes encontrar el prototipo que deberia tener en
+    las secci&oacute;n de <link linkend="reference">referencia</link> de
+    este manual.
+   </simpara>
+   <simpara>
+    Por ejemplo, si yo quisiera conectar  una señal 
+    <signalname>clicked</signalname>  de una instancia de 
+    <classname>GtkButton</classname> deberia definir una funci&oacute;n que
+    acepte un parametro, el cual sera el boton que se presiono.
+   </simpara>
+   <para>
+    El codigo debajo muetsra como se crea una ventana, se agrega un boton
+    a ella y se espera por si se presiona. Cuando se presiona el boton, se
+    abre una nueva <classname>GtkWindow</classname> conteniendo un mensaje.
+    <example>
+     <title>Señales y Callbacks</title>
+     <programlisting role="php">
+    
+function shutdown() 
+{
+    print(&quot;Shutting down...\n&quot;);
+    gtk::main_quit();
+}
+    
+function you_clicked($button) 
+{
+    $window = &amp;new GtkWindow();
+    $label = &amp;new GtkLabel(&quot;You clicked the button&quot;);
+    $window-&gt;add($label);
+    $window-&gt;connect(&quot;destroy&quot;,&quot;shutdown&quot;);
+    $window-&gt;show_all();
+    return false;
+}
+    
+$window = &amp;new GtkWindow();
+$window-&gt;connect(&quot;destroy&quot;, &quot;shutdown&quot;);
+$window-&gt;set_border_width(10);
+    
+$button = &amp;new GtkButton(&quot;Click Me!!&quot;);
+$button-&gt;connect(&quot;clicked&quot;, &quot;you_clicked&quot;);
+$window-&gt;add($button);
+    
+$window-&gt;show_all();
+    
+gtk::main();
+     </programlisting>
+    </example>
+   </para>
+   <para>
+    La parte importante aqui es donde llamamos
+    <informalexample>
+     <programlisting role="php">$button-&gt;connect();</programlisting>
+    </informalexample>
+    El metodo de conecci&oacute;n aqyi registra la funci&oacute;n
+    <literal>you_clicked()</literal> como el callback que ser&aacute; 
+    invocado cuando la señal <signalname>clicked</signalname> sea emitida
+    por el widget <classname>GtkButton</classname>.  Nosotros ademas
+    registramos la funci&oacute;n <literal>shutdown()</literal> como
+    manejador de la señal <signalname>destroy</signalname> para ambas
+    ventanas asi podemos cerrar la aplicaci&oacute;n correctamente.
+   </para>
+  </sect1>
+
+  <sect1 id="gtk.signals.connection.multiple">
+   <title>Multiples coneccciones</title>
+   <simpara>
+    Con PHP-GTK podes registar mas deuna funci&oacute;n para ser invocada
+    cuando una señal sea emitida por un widget. Esto te permite poner un
+    conjunto de funciones para ser llamadas en respuesta un acci&oacute;n
+    esperada.
+   </simpara>
+   <para>
+    Cuando mas de una funci&oacute;n se conecta a una señal, las funciones
+    son llamadas en el orden en que fueron registradas cuando la señal sea
+    emitida.
+    <example>
+     <title>Ordenes Callback de señales</title>
+     <programlisting role="php">
+    
+function first($button) 
+{
+    print &quot;First function has been called\n&quot;;
+}
+    
+function second($button) 
+{
+    print &quot;Second function has been called\n&quot;;
+}
+    
+$window = &amp;new GtkWindow();
+$window-&gt;connect_object(&quot;destroy&quot;, array(&quot;gtk&quot;, 
+&quot;main_quit&quot;));
+    
+$button = &amp;new GtkButton(&quot;Click Me!!&quot;);
+$button-&gt;connect(&quot;clicked&quot;,&quot;first&quot;);
+$button-&gt;connect(&quot;clicked&quot;,&quot;second&quot;);
+$window-&gt;add($button);
+    
+$window-&gt;show_all();
+    
+gtk::main();
+     </programlisting>
+    </example>
+    En el ejemplo de arriba conectamos dos funciones a una señal 
+    <signalname>clicked</signalname> de un boton.  La primera llamada al
+    m&eacute;todo <function class="GtkObject">connect()</function> conecta
+    la señal <signalname>clicked</signalname> a la funci&oacute;n 
+    <literal>first()</literal>, la segunda llamada conecta la señal 
+    <signalname>clicked</signalname> a la funci&oacute;n 
+    <literal>second()</literal>.
+   </para>
+   <para>
+    La saluda de este programa seria:
+    <programlisting>
+First function has been called.
+Second function has been called.
+    </programlisting>
+   </para>
+  </sect1>
+ </sect1>
+ 
+ <sect1 id="gtk.signals.custom.params">
+  <title>Usandon parametros personalizados</title>
+  <sect1 id="gtk.signals.custom.data">
+   <title>Pasando datos personalizados como parametro</title>
+   <simpara>
+    Caundo <link linkend="gtk.signals.connection">conectamos</link> las
+    señales, esposibe sumar un parametro extra personalizado a callback. 
+    Esto es muy beneficioso para pasar el objeto que quieres para ejecutar
+    una acci&oacute;n a la funci&oacute;n  callback.
+   </simpara>
+   <simpara>
+    Por ejemplo, cuando un boton se presiona querriamos destruir la instancia
+    padre de <classname>GtkWindow</classname>  que la instancia de 
+    <classname>GtkButton</classname> habia 
+    <function class="gtkcontainer">sumado</function>.
+   </simpara>
+   <simpara>
+    Podes hacer esto incluyendo un tercer parametro opcional a llamada a 
+    <function class="GtkObject">connect()</function>. ESto sera pasado a la
+    funcion que maneja la señal como el parametro final del callback.
+   </simpara>
+   <para>
+    <example>
+     <title>
+      Usando	parametros personalizados con el m&eacute;todo
+      <function class="GtkObject">connect()</function>.
+     </title>
+     <programlisting role="php">
+    
+function button_clicked($button, $window) 
+{
+    $window-&gt;destroy();
+    gtk::main_quit();
+}
+    
+$window = &amp;new GtkWindow();
+    
+$button = &amp;new GtkButton(&quot;exit&quot;);
+$button-&gt;connect(&quot;clicked&quot;,&quot;button_clicked&quot;, $window);
+    
+$window-&gt;add($button);
+$window-&gt;show_all();
+    
+gtk::main();
+     </programlisting>
+    </example>
+    En el ejemplo anterior podes ver que no solo pasamos la variable 
+    <literal>$button</literal> , una instancia de 
+    <classname>GtkButton</classname>, a el callback 
+    <signalname>clicked</signalname> pero ademas pasamos la variable 
+    <literal>$window</literal>, una instancia de la clase 
+    <classname>GtkWindow</classname>.  Esto nos permite llamar a el
+    m&eacute;todo <function class="GtkObject">destroy()</function> en la
+    ventana.
+   </para>
+   <note>
+    <simpara>
+     Podes tener tantos parametros personalizados como quieras.
+    </simpara>
+   </note>
+   <para>
+    Si se pasa la variablee <literal>$button</literal> como nuestro
+    parametro objeto llamador y la variable <literal>$window</literal> 
+    como nuestro parametro personalizado, podemos entonces utilizar la
+    misma callback para mas de un <classname>GtkButton</classname> o mas
+    de una <classname>GtkWindow</classname>.  Fijese que los nombres dados
+    a los parametros dentro de callback son irrelevantes fuera de la
+    funci&oacute;n de callback; PHP-GTK se fija la posici&oacute;n de los
+    parametros en el m&eacute;todo connect*, luego llama y pasa estos
+    parametros a las variables listadas en la declaraci&oacute;n del
+    callback como un array, por eso cada instancia de la conecci&oacute;n
+    usando la misma estructura de parametros puedes usar el mismo callback. 
+    Esto se demuestra en el codigo abajo usando solo un parametro
+    personalizado, pero es igualmente cierto para mas de uno.
+    <example>
+     <title>Usando el mismo callback para mas de una ventana</title>
+     <programlisting role="php">
+    
+function button_clicked($button, $window)
+{
+    $window->set_title(&quot;titled&quot;);
+}
+    
+$window1 = &amp;new GtkWindow();
+$window1-&gt;connect_object(&quot;destroy&quot;, array(&quot;gtk&quot;, 
+&quot;main_quit&quot;));
+$window2 = &amp;new GtkWindow();
+$window2-&gt;connect_object(&quot;destroy&quot;, array(&quot;gtk&quot;, 
+&quot;main_quit&quot;));
+    
+$button1 = &amp;new GtkButton(&quot;click me&quot;);
+$button2 = &amp;new GtkButton(&quot;or me&quot;);
+    
+$button1-&gt;connect(&quot;clicked&quot;, &quot;button_clicked&quot;, 
+$window1);
+$button2-&gt;connect(&quot;clicked&quot;, &quot;button_clicked&quot;, 
+$window2);
+    
+$window1-&gt;add($button1);
+$window2-&gt;add($button2);
+    
+$window1-&gt;show_all();
+$window2-&gt;show_all();
+    
+gtk::main();
+     </programlisting>
+    </example>
+   </para>
+  </sect1>
+ 
+  <sect1 id="gtk.signals.connect.object">
+   <title>Usando los m&eacute;todos connect_object*</title>
+   <para>
+    Ambos <function class="GtkObject">connect_object()</function> y 
+    <function class="GtkObject">connect_object_after()</function> permiten
+    pasar un objeto distinto a el objeto que llama como primer parametro
+    enviado a la funci&oacute;n callback.  Esto es principalmente usado
+    llamando funciones estaticas de PHP-GTK, como en (por ejemplo) la
+    funci&oacute;n <function>gtk::main_quit()</function>:
+    <example>
+     <title>
+      Usando el m&eacute;todo 
+      <function class="GtkObject">connect_object()</function> 
+      para especificar la funci&oacute;n como callback.
+     </title>
+     <programlisting role="php">
+    
+$window = &amp;new GtkWindow();
+$window-&gt;connect_object(&quot;destroy&quot;, array(&quot;gtk&quot;, 
+&quot;main_quit&quot;));
+$window-&gt;show();
+    
+gtk::main();
+     </programlisting>
+    </example>
+    Podria ser llamado con una funcion estatca o un metodo usando la
+    sintaxis <literal>gtkobject::method</literal> expresada como un array.
+   </para>
+   <para>
+    Tambien quiere decir que puede tener una sola callback para multiple
+    señales. Por ejemplo, podrias crear una ventan que contenga (dentro de
+    los widgets necesarios) una <classname>GtkMenuBar</classname>, una
+    <classname>GtkToolbar</classname> y un <classname>GtkButton</classname>. 
+    Cuando elije <literal>Exit</literal>  el usuario de cualquier de esos
+    widgets una funci&oacute;n de shutdown podria invorcarse pasandolo la
+    instancia de  <classname>GtkWindow</classname> como primer parametro,
+    permitiendo asi que la ventana sea destruida desde cualquiera de sus
+    conecciones. La funci&oacute;n callback y sus conecciones en esta
+    instancia se verian de la siguiente manera:
+    <example>
+     <title>
+      Usando el m&eacute;todo 
+      <function class="GtkObject">connect_object()</function> 
+      para pasar otro objeto como primer parametro.
+     </title>
+     <programlisting role="php">
+    
+function destroy_window($window)
+{
+    $window-&gt;destroy();
+    gtk::main_quit();
+}
+    
+$exit_button-&gt;connect_object(&quot;clicked&quot;, 
+&quot;destroy_window&quot;, $window);
+    
+     </programlisting>
+    </example>
+   </para>
+   <para>
+    El m&eacute;todo connect_after* permite a las funciones ser
+    &quot;ejecutadas luego&quot; de la señal por defecto para esa señal. 
+    Esto puede ser muy bueno en algunas situaciones; por ejemplo, donde uno
+    quiere destruir solamente una de tantas ventanas en una cirscunstancia
+    dada.  De todas formas, los m&eacute;todos connect_after* solo
+    funcionar&aacute;n cuando una señal ha sido creada en el codigo GTK con
+    un flag <literal>GTK_RUN_LAST</literal>.  La señal 
+    <signalname>destroy</signalname> y todas sus señales 
+    <literal>'event'</literal>  tienen este flag; mas alla de esto,
+    la &uacute;nica manera de saberlo es testeando la señal dentro de
+    PHP-GTK o leyendo el codigo GTK.
+    <example>
+     <title>Usando elm&eacute;todo 
+      <function class="GtkObject">connect_after()</function>
+     </title>
+     <programlisting role="php">
+    
+function quit_routine($window) 
+{
+    print(&quot;Shutting down...\n&quot;);
+    gtk::main_quit();
+}
+    
+$window1 = &amp;new GtkWindow();
+$window1->set_title(&quot;Quit the main loop&quot;);
+$window1-&gt;connect(&quot;destroy&quot;, &quot;quit_routine&quot;);
+    
+$window2 = &amp;new GtkWindow();
+$window2->set_title(&quot;Destroy this window&quot;);
+$window2-&gt;connect_after(&quot;destroy&quot;, &quot;quit_routine&quot;);
+    
+$window1-&gt;show();
+$window2-&gt;show();
+    
+gtk::main();
+     </programlisting>
+    </example>
+   </para>
+   <simpara>
+    Ver tambi&eacute;n: <classname>GtkObject</classname>, 
+    <function class="GtkObject">connect_after()</function>
+    <function class="GtkObject">connect_object()</function> y
+    <function class="GtkObject">connect_object_after()</function>.
+   </simpara>
+  </sect1>
+ </sect1>
+
+ <sect1 id="gtk.signals.events">
+  <title>Señales y Eventos</title>
+  <simpara>
+   <emphasis>Señales GTK, Eventos GDK.</emphasis>
+  </simpara>
+  <simpara>
+   Las señales no son eventos, y los eventos no son señales.  Una señal es
+   un mensaje emitido por una instancia de <classname>GtkObject</classname> 
+   en respuesta a algun elemento predeterminado de su ambiente, e.j. una
+   acci&oacute;n generada por el usuario final, o una instrucci&oacute;n
+   generada desde una funci&oacute;n o m&eacute;todo.  Las señales son
+   siempre programadas en en codigo, o internamente dentro de GTK o
+   externamente por el programador PHP-GTK.
+  </simpara>
+  <simpara>
+   Los eventos, por otro lado, son un continuo flujo de impulsos de
+   comunaci&oacute;n de mensajes que dejan ver cambios en el ambiente en
+   el sistema de ventanas. El ciclo pricipal de PHP-GTK esta hecho de estos
+   flujos de eventos entre otras cosas.
+  </simpara>
+  <note>
+   <simpara>
+    No es posible conectar  una funci&oacute;n callback a un 
+    <classname>GdkEvent</classname> directamente.
+   </simpara>
+  </note>
+  <simpara>
+   Cualquier widget que tiene su <classname>GdkWindow</classname> puede
+   capturar eventos que son reelevantes para el. Los Widgets que carecen de
+   una <classname>GdkWindow</classname> - esos que son creados con el flag 
+   <literal>GTK_NO_WINDOW</literal> - no pueden hacer eso, a menos que sean
+   contenidos dentro de un <classname>GtkEventBox</classname> - un widget
+   creado con proposito especifico. Hay ocaciones cuando es muy favorable
+   permitir la captura de eventos; un ejemplo obvio seria la creaci&oacute;n
+   de una instancia de <classname>GtkToolTips</classname> la cual se dispara
+   cuando su subject widget captura el evento 
+   <literal>GDK_ENTER_NOTIFY</literal> y destruido cuando el mismo widget
+   captura el evento <literal>GDK_LEAVE_NOTIFY</literal>.
+  </simpara>
+  <simpara>
+   Aunque no es posible usa run evento como disparador de un callback de la
+   misma forma que una señal, hay una serie de señales que derivan de 
+   <classname>GtkWidget</classname> colectivamente conocidos como 
+   <literal>'event' signals</literal>.  Estos son formas efectivamente de
+   descriibir un evento en terminos de una señal, permitiendo a las
+   callbacks ser indirectamente disparadas por medio de la captura de la
+   ocurrencia de las mayoria de los   <enumname>GdkEventTypes</enumname>. 
+   El objeto  <classname>GtkTooltips</classname> por si mismo utiliza el
+   m&eacute;todo <function class="GktObject">connect_object()</function> y
+   la señal generica <signalname>event</signalname> para monitorear su
+   subject widget.
+  </simpara>
+  <para>
+   El concepto de events no es f&acute;cil de entender. Por favor copie,
+   pegue y ejecute el siguiente script para ver como se muestran los eventos
+   sobre la acci&oacute;n de los widgets.
+   <example>
+    <title>Demonstraci&oacute;n del flujo de los eventos de un
+     <classname>GtkButton</classname>
+    </title>
+    <programlisting role="php">
+    
+dl(&quot;php_gtk.&quot; . (strstr(PHP_OS, &quot;WIN&quot;) ? &quot;dll&quot; : 
+&quot;so&quot;)) ||
+die(&quot;Can't load php_gtk module!\n&quot;);
+    
+function show_event_type($button, $event, $text) 
+{
+    $event_type = $event-&gt;type;
+    $insert = $text->get_length();
+    $text-&gt;freeze();
+    switch($event_type) {
+      case 2:
+        $text-&gt;insert_text(&quot;GDK_EXPOSE\n&quot;, $insert);
+      break;
+      case 3:
+        $text-&gt;insert_text(&quot;GDK_MOTION_NOTIFY\n&quot;, $insert);
+      break;
+      case 4:
+        $text-&gt;insert_text(&quot;GDK_BUTTON_PRESS\n&quot;, $insert);
+      break;
+      case 5:
+        $text-&gt;insert_text(&quot;GDK_2BUTTON_PRESS\n&quot;, $insert);
+        $button-&gt;hide();
+      break;
+      case 7:
+        $text-&gt;insert_text(&quot;GDK_BUTTON_RELEASE\n&quot;, $insert);
+      break;
+      case 8:
+        $text-&gt;insert_text(&quot;GDK_KEY_PRESS\n&quot;, $insert);
+      break;
+      case 9:
+        $text-&gt;insert_text(&quot;GDK_KEY_RELEASE\n&quot;, $insert);
+      break;
+      case 10:
+        $text-&gt;insert_text(&quot;GDK_ENTER_NOTIFY\n&quot;, $insert);
+      break;
+      case 11:
+        $text-&gt;insert_text(&quot;GDK_LEAVE_NOTIFY\n&quot;, $insert);
+      break;
+      case 12:
+        $text-&gt;insert_text(&quot;GDK_FOCUS_CHANGE\n&quot;, $insert); 
+      break;
+      case 14:
+        $text-&gt;insert_text(&quot;GDK_MAP\n&quot;, $insert);
+      break;
+      case 15:
+        $text-&gt;insert_text(&quot;GDK_UNMAP\n&quot;, $insert);
+        $button-&gt;destroy();
+        $text->insert_text(
+&quot;\n* GDK EVENTS AND GTK SIGNALS - background stream vs foreground 
+messaging *
+\n
+* Most GdkEventTypes have counterpart GTK signals, known as 'event'
+  signals, implemented in GtkWidget.  The types on your screen are there
+  because the GtkButton was programmed to emit the generic 'event' signal
+  each time it captured one of the stream of GDK events that makes up the
+  GTK main loop.  In each case, the captured GdkEvent was passed as a
+  callback parameter so that its enumerated type value could be determined
+  within the signal handler function.  Scroll down to see the series of event
+  values captured during your recent interaction with the GtkButton widget. *
+\n
+* Please note that the majority of GTK signals do NOT correspond to GDK
+  events in this or any other way!  For example, the signal connection
+                      \$button->connect('pressed', 'whatever');
+  has no relationship to the GDK_BUTTON_PRESS event it generates, which
+  refers to mouse-button activity and not to the GtkButton 'pressed' signal. *
+\n&quot;, 0);
+      break;
+    }
+    $text-&gt;thaw();
+    return false;
+}
+    
+$window = &amp;new GtkWindow();
+$window-&gt;set_position(GTK_WIN_POS_CENTER);
+$window-&gt;set_default_size((gdk::screen_width()/1.5), 
+(gdk::screen_height()-20));
+$window-&gt;connect_object(&quot;destroy&quot;, array(&quot;gtk&quot;, 
+&quot;main_quit&quot;));
+$window-&gt;realize();
+    
+$box = &amp;new GtkVBox(false, 5);
+$window-&gt;add($box);
+$scrlwin = &amp;new GtkScrolledWindow();
+$box-&gt;pack_start($scrlwin, true, true, 0);
+$text = &amp;new GtkText();
+$scrlwin-&gt;add($text);
+    
+$button = &amp;new GtkButton(&quot;Double-click here for information..&quot;);
+$button-&gt;add_events(GDK_ALL_EVENTS_MASK);
+$button-&gt;connect(&quot;event&quot;, &quot;show_event_type&quot;, $text);
+$box-&gt;pack_end($button, false, false, 5);
+    
+$window-&gt;show_all();
+    
+gtk::main();
+    </programlisting>
+   </example>
+  </para>
+ </sect1>
+
+</chapter> 
+
+<!--
+ * Local variables:
+ * tab-width: 1
+ * c-basic-offset: 1
+ * fileformat=unix
+ * End:
+ * vim600: et sw=1 ts=1 tw=78 fdm=indent
+ * vim<600: et sw=1 ts=1 tw=78
+-->

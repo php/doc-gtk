@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<classentry id="gtk.gtkcheckbutton">
+ <classmeta>
+  <classtitle>GtkCheckButton</classtitle>
+  <classparent>GtkToggleButton</classparent>
+  <shortdesc>
+   Button that displays a discrete toggle indicator.
+  </shortdesc>
+  <desc>
+   <simpara>
+    The <classname>GtkCheckButton</classname> widget is basically a different
+    style of <classname>GtkToggleButton</classname>.  Instead of the entire
+    button acting as the toggle indicator, a small button to the left of the
+    text position appears 'pressed in' when the toggle is in the 
+    <literal>GTK_STATE_ACTIVE</literal> state.
+   </simpara>
+   <simpara>
+    See also:  <classname>GtkRadioButton</classname>, 
+    <enumname>GtkStateType</enumname>, <classname>GtkToggleButton</classname>.
+   </simpara>
+  </desc>
+ </classmeta>
+
+ <constructor id="gtk.gtkcheckbutton.constructor">
+  <funcsynopsis>
+   <funcprototype>
+    <funcdef> <function>GtkCheckButton</function></funcdef>
+    <paramdef>string 
+     <parameter><optional>label</optional></parameter>
+    </paramdef>
+   </funcprototype>
+  </funcsynopsis>
+  <shortdesc>
+   Creates a button with a small toggle indicator.
+  </shortdesc>
+  <desc>
+   <para>
+    <informalexample>
+     <programlisting role="php">
+$checkbutton = &amp;new GtkCheckButton(&quot;GtkCheckButton label&quot;);
+     </programlisting>
+    </informalexample>
+    instantiates a normal-sized <classname>GtkButton</classname> with a
+    small draw_indicator toggle to the left of the button's label area.  The
+    indicator displays the <enumname>GtkShadowType</enumname> 
+    <literal>GTK_SHADOW_IN</literal> when the check button's
+    <enumname>GtkStateType</enumname> is set as 
+    <literal>GTK_STATE_ACTIVE</literal>.
+   </para>
+   <simpara>
+    See also:  <classname>GtkButton</classname>, 
+    <classname>GtkCheckMenuItem</classname>, 
+    <classname>GtkToggleButton</classname>.
+   </simpara>
+  </desc>
+ </constructor>
+
+</classentry>

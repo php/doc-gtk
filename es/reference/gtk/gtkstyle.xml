@@ -1,0 +1,424 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<classentry id="gtk.gtkstyle">
+ <classmeta>
+  <classtitle>GtkStyle</classtitle>
+  <classparent></classparent>
+  <shortdesc>
+   A class that determines the appearance of widgets.
+  </shortdesc>
+  <desc>
+   <para>
+    <classname>GtkStyle</classname> is a structure that is used to define
+    the colors displayed in any widget, or across an application.  Being a 
+    <classname>GtkWidget</classname> property, it is accessible through all
+    objects that take up screen space, using the syntax:
+    <informalexample>
+     <programlisting role="php">
+$style = $widget-&gt;style;
+     </programlisting>
+    </informalexample>
+    It is also possible to create a new GtkStyle object in the normal way,
+    e.g.
+    <informalexample>
+     <programlisting role="php">
+$style = &amp;new GtkStyle();
+     </programlisting>
+    </informalexample>
+    or to take the default application style:
+    <informalexample>
+     <programlisting role="php">
+$style = gtk::widget_get_default_style();
+     </programlisting>
+    </informalexample>
+    in order to change the style across an application.
+   </para>
+   <simpara>
+    Setting a style across an application can also be achieved by using
+    rc files.  There are two in the PHP-GTK test directory which are used
+    in <filename>gtk.php</filename>.
+   </simpara>
+   <!--TODO - write userguide chapter on rc files -sf mar 02 -->
+   <simpara>
+    The style functions are generally not buggy, the only known exception
+    being where the <propname class="GtkStyle">text</propname> and 
+    <propname class="GtkStyle">base</propname> properties are intended to
+    describe text and its normally-white background.  In some cases this
+    has not worked, and you may find that you need to use 
+    <propname class="GtkStyle">fg</propname> to color the text.
+   </simpara>
+   <note>
+    <simpara>
+     In all cases where the property type is given as 
+     <literal>array</literal>, what is being referred to is an array
+     consisting of the five <enumname>GtkStateType</enumname> states.
+    </simpara>
+   </note>
+  </desc>
+ </classmeta>
+
+ <constructor id="gtk.gtkstyle.constructor">
+  <funcsynopsis>
+   <funcprototype>
+    <funcdef> <function>GtkStyle</function></funcdef>
+    <paramdef>void</paramdef>
+   </funcprototype>
+  </funcsynopsis>
+  <shortdesc>
+   Creates a new style for a widget.
+  </shortdesc>
+  <desc>
+   <para>
+    There are several ways to define the style across an application, but
+    only two ways to directly set the style on a given widget.
+    <example>
+     <title>Writing to a widget's style property.</title>
+     <programlisting role="php">
+dl('php_gtk.'.(strstr(PHP_OS, 'WIN') ? 'dll' : 'so'));
+    
+$window = &amp;new GtkWindow();
+$window-&gt;set_position(GTK_WIN_POS_CENTER);
+$window-&gt;connect_object('destroy', array('gtk', 'main_quit'));
+    
+/* set up a few buttons just to prove we're only changing one of them */
+$bbox = &amp;new GtkVButtonBox();
+$window-&gt;add($bbox);
+    
+for($i = 0; $i &lt; 8; $i++) {
+  $button[$i] = &amp;new GtkButton(&quot;This is Button $i&quot;);
+  $bbox-&gt;pack_start($button[$i], false);
+  $button[$i]-&gt;show();
+}
+    
+/* method 1 : set up a new style and define the parts you want to define. 
+   The remaining style elements retain the application's default settings. */
+$newstyle = &amp;new GtkStyle();
+$cyan = &amp;new GdkColor('#00FFFF');
+$newstyle-&gt;fg[GTK_STATE_PRELIGHT] = $cyan;
+$label = $button[5]-&gt;child;
+$label-&gt;set_style($newstyle);
+    
+/* gdk::color_parse() uses a color that is defined on your system to fill
+   a GdkColor structure.  It can be more convenient than manually creating
+   a new GdkColor, particularly if you're only assigning the color once. */
+$newstyle-&gt;bg[GTK_STATE_NORMAL] = gdk::color_parse('ivory');
+$button[5]-&gt;set_style($newstyle);
+    
+/* method 2 : copy the existing style from a widget and alter it.  Defining
+   a new style would overwrite the existing non-default style settings. */
+$style2 = $label-&gt;style;
+$newstyle2 = $style2-&gt;copy();
+$font = 
+gdk::font_load('-unknown-Arial-bold-r-normal--*-160-*-*-p-0-iso8859-1');
+$newstyle2-&gt;font = $font;
+$label-&gt;set_style($newstyle2);
+    
+$window-&gt;show_all();
+    
+gtk::main();
+     </programlisting>
+    </example>
+   </para>
+  </desc>
+ </constructor>
+
+ <methods>
+
+  <method id="gtk.gtkstyle.method.copy">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>GtkStyle <function>copy</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Copies an existing style.
+   </shortdesc>
+   <desc>
+    <simpara>
+     <function class="GtkStyle">copy()</function> takes an existing style
+     and copies it wholesale, including any prior modifications that have
+     been made to it.
+    </simpara>
+   </desc>
+  </method>
+
+ </methods>
+
+ <properties>
+
+  <prop id="gtk.gtkstyle.property.black" type="rw">
+   <propname>black</propname>
+   <proptype>GdkColor</proptype>
+   <shortdesc>
+    The color being used as black.
+   </shortdesc>
+   <desc>
+    <simpara>
+     
+    </simpara>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtkstyle.property.white" type="rw">
+   <propname>white</propname>
+   <proptype>GdkColor</proptype>
+   <shortdesc>
+    The color being used as white.
+   </shortdesc>
+   <desc>
+    <simpara>
+     
+    </simpara>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtkstyle.property.font" type="rw">
+   <propname>font</propname>
+   <proptype>GdkFont</proptype>
+   <shortdesc>
+    The font.
+   </shortdesc>
+   <desc>
+    <simpara>
+     The current font.
+    </simpara>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtkstyle.property.black_gc" type="rw">
+   <propname>black_gc</propname>
+   <proptype>GdkGC</proptype>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+    <simpara>
+     
+    </simpara>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtkstyle.property.white_gc" type="rw">
+   <propname>white_gc</propname>
+   <proptype>GdkGC</proptype>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+    <simpara>
+     
+    </simpara>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtkstyle.property.colormap" type="rw">
+   <propname>colormap</propname>
+   <proptype>GdkColormap</proptype>
+   <shortdesc>
+    The colormap currently being used.
+   </shortdesc>
+   <desc>
+    <simpara>
+     
+    </simpara>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtkstyle.property.fg" type="rw">
+   <propname>fg</propname>
+   <proptype>array</proptype>
+   <shortdesc>
+    Foreground.
+   </shortdesc>
+   <desc>
+    <simpara>
+     
+    </simpara>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtkstyle.property.bg" type="rw">
+   <propname>bg</propname>
+   <proptype>array</proptype>
+   <shortdesc>
+    Background.
+   </shortdesc>
+   <desc>
+    <simpara>
+     
+    </simpara>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtkstyle.property.light" type="rw">
+   <propname>light</propname>
+   <proptype>array</proptype>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+    <simpara>
+     
+    </simpara>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtkstyle.property.dark" type="rw">
+   <propname>dark</propname>
+   <proptype>array</proptype>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+    <simpara>
+     
+    </simpara>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtkstyle.property.mid" type="rw">
+   <propname>mid</propname>
+   <proptype>array</proptype>
+   <shortdesc>
+    Midway between light and dark.
+   </shortdesc>
+   <desc>
+    <simpara>
+     
+    </simpara>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtkstyle.property.text" type="rw">
+   <propname>text</propname>
+   <proptype>array</proptype>
+   <shortdesc>
+    Text in a text widget.
+   </shortdesc>
+   <desc>
+    <simpara>
+     
+    </simpara>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtkstyle.property.base" type="rw">
+   <propname>base</propname>
+   <proptype>array</proptype>
+   <shortdesc>
+    Text background.
+   </shortdesc>
+   <desc>
+    <simpara>
+     
+    </simpara>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtkstyle.property.fg_gc" type="rw">
+   <propname>fg_gc</propname>
+   <proptype>array</proptype>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+    <simpara>
+     
+    </simpara>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtkstyle.property.bg_gc" type="rw">
+   <propname>bg_gc</propname>
+   <proptype>array</proptype>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+    <simpara>
+     
+    </simpara>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtkstyle.property.light_gc" type="rw">
+   <propname>light_gc</propname>
+   <proptype>array</proptype>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+    <simpara>
+     
+    </simpara>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtkstyle.property.dark_gc" type="rw">
+   <propname>dark_gc</propname>
+   <proptype>array</proptype>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+    <simpara>
+     
+    </simpara>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtkstyle.property.mid_gc" type="rw">
+   <propname>mid_gc</propname>
+   <proptype>array</proptype>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+    <simpara>
+     
+    </simpara>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtkstyle.property.text_gc" type="rw">
+   <propname>text_gc</propname>
+   <proptype>array</proptype>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+    <simpara>
+     
+    </simpara>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtkstyle.property.base_gc" type="rw">
+   <propname>base_gc</propname>
+   <proptype>array</proptype>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+    <simpara>
+     
+    </simpara>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtkstyle.property.bg_pixmap" type="rw">
+   <propname>bg_pixmap</propname>
+   <proptype>array</proptype>
+   <shortdesc>
+    Background pixmap.
+   </shortdesc>
+   <desc>
+    <simpara>
+     
+    </simpara>
+   </desc>
+  </prop>
+
+ </properties>
+
+</classentry>

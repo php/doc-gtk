@@ -1,0 +1,1114 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<refentry id="gdk.functions">
+ <refmeta>
+  <refentrytitle>Funciones Miscelaneas GDK</refentrytitle>
+  <shortdesc>
+  Funcioens estacticas GDK.
+  </shortdesc>
+ </refmeta>
+
+  <method id="gdk.method.atom_intern">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>GdkAtom <function>gdk::atom_intern</function></funcdef>
+     <paramdef>string <parameter>atom_name</parameter></paramdef>
+     <paramdef>int 
+      <parameter><optional>only_if_exists = FALSE</optional></parameter>
+     </paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gdk.method.beep">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>gdk::beep</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+   Emite un sonido.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Esta funci&oacute;n causa la emisi&ocaute;n de un sonido de advertencia.
+     La naturaleza precisa del sonido son dependientes del sistema y como este
+     configurado.
+    </simpara>
+   </desc>
+  </method>
+
+  <method id="gdk.method.colormap_new">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>
+      <classname>GdkColormap</classname> 
+      <function>gdk::colormap_new</function>
+     </funcdef>
+     <paramdef>
+      <classname>GdkVisual</classname> 
+      <parameter>visual</parameter>
+     </paramdef>
+     <paramdef>bool <parameter>allocate</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Crea un nuevo <classname>GdkColormap</classname>.
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gdk.method.colormap_get_system">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>
+      <classname>GdkColormap</classname> 
+      <function>gdk::colormap_get_system</function>
+     </funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+   Devuelve un system colormap.
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gdk.method.colormap_get_system_size">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>int <function>gdk::colormap_get_system_size</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Devuelve el tamaño de un system colormap.
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gdk.method.color_parse">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>GdkColor <function>gdk::color_parse</function></funcdef>
+     <paramdef>string <parameter>color_spec</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Crea un <classname>GdkColor</classname> de una especificaci&ocacute; de 
+    color.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Esta funci&oacute; crea una nueva estructura <classname>GdkColor</classname>
+     y la llena deacuerdo a el color nombrado en  el parametro 
+     <parameter>color_spec</parameter>. La cadena que es pasada como parametro
+     puede ser un conjunto de de tres n&uacute;meros hexadecimales indicando el
+     color, e.j. <literal>'#FF0000'</literal>, o su nombre de color equivalente
+     en <filename>rgb.txt</filename>, e.j. <literal>'red'</literal>.
+    </simpara>
+    <para>
+     Los usuarios de Win32 no podr&aacute;n encontrar este archivo, porque esta
+     compilado. Hay una buena referencia de <filename>rgb.txt</filename> en
+     <ulink url="&url.rgbtxt;">Aqu&iacute;</ulink>.
+    </para>
+   </desc>
+  </method>
+
+  <method id="gdk.method.cursor_new">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>
+      <classname>GdkCursor</classname> 
+      <function>gdk::cursor_new</function>
+     </funcdef>
+     <paramdef>
+      <enumname>GdkCursorType</enumname> 
+      <parameter>cursor_type</parameter>
+     </paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Crea un nuevo <classname>GdkCursor</classname>.
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gdk.method.cursor_new_from_pixmap">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>
+      <classname>GdkCursor</classname> 
+      <function>gdk::cursor_new_from_pixmap</function>
+     </funcdef>
+     <paramdef>
+      <classname>GdkPixmap</classname> 
+      <parameter>source</parameter>
+     </paramdef>
+     <paramdef>
+      <classname>GdkPixmap</classname> 
+      <parameter>mask</parameter>
+     </paramdef>
+     <paramdef>
+      <classname>GdkColor</classname> 
+      <parameter>fg</parameter>
+     </paramdef>
+     <paramdef>
+      <classname>GdkColor</classname> 
+      <parameter>bg</parameter>
+     </paramdef>
+     <paramdef>int <parameter>x</parameter></paramdef>
+     <paramdef>int <parameter>y</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Crea un nuevo <classname>GdkCursor</classname> using a pixmap.
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gdk.method.drag_status">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>gdk::drag_status</function></funcdef>
+     <paramdef>
+      <classname>GdkDragContext</classname> 
+      <parameter>context</parameter>
+     </paramdef>
+     <paramdef>
+      <enumname>GdkDragAction</enumname> 
+      <parameter>action</parameter>
+     </paramdef>
+     <paramdef>int <parameter>time</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gdk.method.draw_arc">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>gdk::draw_arc</function></funcdef>
+     <paramdef>GdkWindow <parameter>drawable</parameter></paramdef>
+     <paramdef>
+      <classname>GdkGC</classname> 
+      <parameter>gc</parameter>
+     </paramdef>
+     <paramdef>int <parameter>filled</parameter></paramdef>
+     <paramdef>int <parameter>x</parameter></paramdef>
+     <paramdef>int <parameter>y</parameter></paramdef>
+     <paramdef>int <parameter>width</parameter></paramdef>
+     <paramdef>int <parameter>height</parameter></paramdef>
+     <paramdef>int <parameter>angle1</parameter></paramdef>
+     <paramdef>int <parameter>angle2</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Dibujo un arco.
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gdk.method.draw_gray_image">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>gdk::draw_gray_image</function></funcdef>
+     <paramdef>GdkWindow <parameter>drawable</parameter></paramdef>
+     <paramdef>
+      <classname>GdkGC</classname> 
+      <parameter>gc</parameter>
+     </paramdef>
+     <paramdef>int <parameter>x</parameter></paramdef>
+     <paramdef>int <parameter>y</parameter></paramdef>
+     <paramdef>int <parameter>width</parameter></paramdef>
+     <paramdef>int <parameter>height</parameter></paramdef>
+     <paramdef>
+      <enumname>GdkRgbDither</enumname> 
+      <parameter>dith</parameter>
+     </paramdef>
+     <paramdef>string <parameter>buf</parameter></paramdef>
+     <paramdef>int <parameter>rowstride</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gdk.method.draw_line">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>gdk::draw_line</function></funcdef>
+     <paramdef>GdkWindow <parameter>drawable</parameter></paramdef>
+     <paramdef>
+      <classname>GdkGC</classname> 
+      <parameter>gc</parameter>
+     </paramdef>
+     <paramdef>int <parameter>x1</parameter></paramdef>
+     <paramdef>int <parameter>y1</parameter></paramdef>
+     <paramdef>int <parameter>x2</parameter></paramdef>
+     <paramdef>int <parameter>y2</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+   Dibuja una linea.
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gdk.method.draw_pixmap">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>gdk::draw_pixmap</function></funcdef>
+     <paramdef>GdkWindow <parameter>drawable</parameter></paramdef>
+     <paramdef>
+      <classname>GdkGC</classname> 
+      <parameter>gc</parameter>
+     </paramdef>
+     <paramdef>GdkWindow <parameter>src</parameter></paramdef>
+     <paramdef>int <parameter>xsrc</parameter></paramdef>
+     <paramdef>int <parameter>ysrc</parameter></paramdef>
+     <paramdef>int <parameter>xdest</parameter></paramdef>
+     <paramdef>int <parameter>ydest</parameter></paramdef>
+     <paramdef>int <parameter>width</parameter></paramdef>
+     <paramdef>int <parameter>height</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gdk.method.draw_point">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>gdk::draw_point</function></funcdef>
+     <paramdef>GdkWindow <parameter>drawable</parameter></paramdef>
+     <paramdef>
+      <classname>GdkGC</classname> 
+      <parameter>gc</parameter>
+     </paramdef>
+     <paramdef>int <parameter>x</parameter></paramdef>
+     <paramdef>int <parameter>y</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gdk.method.draw_rectangle">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>gdk::draw_rectangle</function></funcdef>
+     <paramdef>GdkWindow <parameter>drawable</parameter></paramdef>
+     <paramdef>
+      <classname>GdkGC</classname> 
+      <parameter>gc</parameter>
+     </paramdef>
+     <paramdef>int <parameter>filled</parameter></paramdef>
+     <paramdef>int <parameter>x</parameter></paramdef>
+     <paramdef>int <parameter>y</parameter></paramdef>
+     <paramdef>int <parameter>width</parameter></paramdef>
+     <paramdef>int <parameter>height</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+   Dibuja un rectangulo.
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gdk.method.draw_rgb_32_image">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>gdk::draw_rgb_32_image</function></funcdef>
+     <paramdef>GdkWindow <parameter>drawable</parameter></paramdef>
+     <paramdef>
+      <classname>GdkGC</classname> 
+      <parameter>gc</parameter>
+     </paramdef>
+     <paramdef>int <parameter>x</parameter></paramdef>
+     <paramdef>int <parameter>y</parameter></paramdef>
+     <paramdef>int <parameter>width</parameter></paramdef>
+     <paramdef>int <parameter>height</parameter></paramdef>
+     <paramdef>
+      <enumname>GdkRgbDither</enumname> 
+      <parameter>dith</parameter>
+     </paramdef>
+     <paramdef>string <parameter>buf</parameter></paramdef>
+     <paramdef>int <parameter>rowstride</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gdk.method.draw_rgb_image">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>gdk::draw_rgb_image</function></funcdef>
+     <paramdef>GdkWindow <parameter>drawable</parameter></paramdef>
+     <paramdef>
+      <classname>GdkGC</classname> 
+      <parameter>gc</parameter>
+     </paramdef>
+     <paramdef>int <parameter>x</parameter></paramdef>
+     <paramdef>int <parameter>y</parameter></paramdef>
+     <paramdef>int <parameter>width</parameter></paramdef>
+     <paramdef>int <parameter>height</parameter></paramdef>
+     <paramdef>
+      <enumname>GdkRgbDither</enumname> 
+      <parameter>dith</parameter>
+     </paramdef>
+     <paramdef>string <parameter>rgb_buf</parameter></paramdef>
+     <paramdef>int <parameter>rowstride</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gdk.method.draw_rgb_image_dithalign">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void 
+      <function>gdk::draw_rgb_image_dithalign</function>
+     </funcdef>
+     <paramdef>GdkWindow <parameter>drawable</parameter></paramdef>
+     <paramdef>
+      <classname>GdkGC</classname> 
+      <parameter>gc</parameter>
+     </paramdef>
+     <paramdef>int <parameter>x</parameter></paramdef>
+     <paramdef>int <parameter>y</parameter></paramdef>
+     <paramdef>int <parameter>width</parameter></paramdef>
+     <paramdef>int <parameter>height</parameter></paramdef>
+     <paramdef>
+      <enumname>GdkRgbDither</enumname> 
+      <parameter>dith</parameter>
+     </paramdef>
+     <paramdef>string <parameter>rgb_buf</parameter></paramdef>
+     <paramdef>int <parameter>rowstride</parameter></paramdef>
+     <paramdef>int <parameter>xdith</parameter></paramdef>
+     <paramdef>int <parameter>ydith</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gdk.method.draw_string">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>gdk::draw_string</function></funcdef>
+     <paramdef>GdkWindow <parameter>drawable</parameter></paramdef>
+     <paramdef>
+      <classname>GdkFont</classname> 
+      <parameter>font</parameter>
+     </paramdef>
+     <paramdef>
+      <classname>GdkGC</classname> 
+      <parameter>gc</parameter>
+     </paramdef>
+     <paramdef>int <parameter>x</parameter></paramdef>
+     <paramdef>int <parameter>y</parameter></paramdef>
+     <paramdef>string <parameter>string</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+   Dibuja un cadena de texto.
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gdk.method.draw_text">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>gdk::draw_text</function></funcdef>
+     <paramdef>GdkWindow <parameter>drawable</parameter></paramdef>
+     <paramdef>
+      <classname>GdkFont</classname> 
+      <parameter>font</parameter>
+     </paramdef>
+     <paramdef>
+      <classname>GdkGC</classname> 
+      <parameter>gc</parameter>
+     </paramdef>
+     <paramdef>int <parameter>x</parameter></paramdef>
+     <paramdef>int <parameter>y</parameter></paramdef>
+     <paramdef>string <parameter>text</parameter></paramdef>
+     <paramdef>int <parameter>text_length</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gdk.method.flush">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>gdk::flush</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gdk.method.font_load">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>
+      <classname>GdkFont</classname> 
+      <function>gdk::font_load</function>
+     </funcdef>
+     <paramdef>string <parameter>font_name</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+   Carga la fuente dada.
+   </shortdesc>
+   <desc>
+    <simpara>
+    Este m&eacute;todo carga un nombre de fuente, el cual debe ser dado de la forma
+     <emphasis>X Logical Font Description</emphasis> 
+     (<acronym>XLFD</acronym>).
+    </simpara>
+    <simpara>
+     <acronym>XLFD</acronym> es una forma de describir una fuente que es 
+     competamente independiente del sistema. Contiene 14 campos, la mayoria de
+     los cuales pueden representar con un comodin * para permitir flexibilidad 
+     cuando se hace una busqueda - las excepciones son 
+     <literal>addedstyle</literal>, que no necesita, y 
+     <literal>registry</literal>, que es un campo obligatorio. 
+     La descripci&oacute;n comienza con un gui&oacute;n, <literal>-</literal>,
+     y cada campo es tambi&eacute;n separado por un gui&oacute;n.
+    </simpara>
+    <simpara>
+     Si necesitas mas informaci&oacute;n sobre fuentes que el dado aqu&iacute;,
+     la completa definici&oacute;n esta disponible en linea a traves de
+     <ulink url="&url.xlfd;">XWindows documentation</ulink>.
+    </simpara>
+    <para>
+     <simplelist>
+      <member>
+       foundry xxx (where the font was created.  'unknown' is okay)
+      </member>
+      <member>
+       family xxx (e.g. Arial)
+      </member>
+      <member>
+       weight xxx (e.g. bold, medium)
+      </member>
+      <member>
+       slant x (r - roman, i = italic, o = oblique)
+      </member>
+      <member>
+       setwidth xxx (e.g. normal, condensed)
+      </member>
+      <member>
+       addedstyle xxx (e.g. serif, sans.  Leave blank for none)
+      </member>
+      <member>
+       pixelsize N (set either this or pointsize, not both)
+      </member>
+      <member>
+       pointsize N (point size, e.g. 120)
+      </member>
+      <member>
+       resx N (x res the font was created for, in dots per inch)
+      </member>
+      <member>
+       resy N (y res the font was created for, in dots per inch)
+      </member>
+      <member>
+       space x (m = monospaced, p = proportional, c = cell)
+      </member>
+      <member>
+       averagewidth N (average character width in pixels.  0 if unknown)
+      </member>
+      <member>
+       registry xxx (e.g. utf, iso8859 or adobe)
+      </member>
+      <member>
+       encoding xxx (e.g. 1 or 2 (for iso8859) or fontspecific)
+      </member>
+     </simplelist>
+    </para>
+    <para>
+    Una carga de fuente tipica seria algo asi:
+     <informalexample>
+      <programlisting role="php">
+$font = 
+gdk::font_load('-unknown-Arial-normal-r-normal--*-120-96-96-p-0-iso8859-1');
+      </programlisting>
+     </informalexample>
+    </para>
+    <note>
+     <simpara>
+      Informaci&oacute;n de las fuente en el formato <acronym>XLFD</acronym> pueden ser
+      vistas en cualquier sistema que utilice los widgets 
+      <classname>GtkFontSelection</classname> o 
+      <classname>GtkFontSelectionDialog</classname>.
+     </simpara>
+    </note>
+    <simpara>
+     Note that there are sizing issues in <classname>GdkFont</classname> in
+     the version of GTK+ currently used in PHP-GTK under win32.  As a result, 
+     <emphasis>the point size should always be set in win32</emphasis> - 
+     using the pixel size may give unexpected results.
+    </simpara>
+   </desc>
+  </method>
+
+  <method id="gdk.method.fontset_load">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>
+      <classname>GdkFont</classname> 
+      <function>gdk::fontset_load</function>
+     </funcdef>
+     <paramdef>string <parameter>fontset_name</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+  <shortdesc>
+  Carga una selecci&ocaute;n de fuentes descriptas como un conjunto de fuentes.  
+   </shortdesc>
+   <desc>
+    <simpara>
+     Este m&eacute;todo se usa cuando cualquier rango de fuentes podria ser 
+     aceptable. Habitualmente esto seria cuando la internacionalizaci&oacute;n
+     es algo a tener en cuenta. Ademas podria ser beneficio en donde se 
+     necesite flexibilidad por encima de la elecci&oacute;n de la fuente.
+    </simpara>
+    <simpara>
+      Carga exactamente de la misma manera que
+      <function>gdk::font_load()</function>, separando cada fuente potencial
+      a ser usada con una coma. El sistema que ejecuta la aplicacion 
+      usar&aacute; la primer fuente del conjunto que logre encontrar.
+     </simpara>
+    <simpara>
+     En win32, el m&eacute;todo <function>fontset_load()</function> se usa
+     internamente deacuerdo a si esto o  
+     <function>gdk::font_load()</function> fue llamado.
+    </simpara>
+   </desc>
+  </method>
+
+  <method id="gdk.method.get_display">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>string <function>gdk::get_display</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+   Devuelve el nombre del sistema.
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gdk.method.input_remove">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>gdk::input_remove</function></funcdef>
+     <paramdef>int <parameter>tag</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gdk.method.pixmap_colormap_create_from_xpm">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>XXX 
+      <function>gdk::pixmap_colormap_create_from_xpm</function>
+     </funcdef>
+     <paramdef>XXX</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gdk.method.pixmap_colormap_create_from_xpm_d">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>XXX 
+      <function>gdk::pixmap_colormap_create_from_xpm_d</function>
+     </funcdef>
+     <paramdef>XXX</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gdk.method.pixmap_create_from_xpm">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef><classname>array</classname> 
+      <function>gdk::pixmap_create_from_xpm</function>
+     </funcdef>
+     <paramdef><classname>GdkWindow</classname> 
+      <parameter>window</parameter>
+     </paramdef>
+     <paramdef><classname>GdkColor</classname> 
+      <parameter>transparent_color</parameter>
+     </paramdef>
+     <paramdef>string <parameter>filename</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Crea un <classname>GdkPixmap</classname> desde un archivo xpm.
+   </shortdesc>
+   <desc>
+    <simpara>
+     <function>gdk::pixmap_create_from_xpm()</function> devuelve un 
+     array que consiste en un <classname>GdkPixmap</classname> y una mascara
+     <classname>GdkBitmap</classname>  que han sido creadas desde un archivo.
+     xpm especifico.
+    </simpara>
+    <para>
+     <classname>GdkPixmap</classname> es la estrutura que 
+     mantiene la imagen lista para sermostrada en un
+     <classname>GtkPixmap</classname>.  Para hacer que la imagen aparezca 
+     en la pantalla, necesitas usar una de las siguientes instrucciones:
+     <informalexample>
+      <programlisting role="php">
+$gdkpixmap = gdk::pixmap_create_from_xpm($main_window-&gt;window, null, 
+'test.xpm');
+$image = &amp;new GtkPixmap($gdkpixmap[0], $gdkpixmap[1]);
+      </programlisting>
+     </informalexample>
+     or 
+     <informalexample>
+      <programlisting role="php">
+list ($gdkpixmap, $mask) = 
+gdk::pixmap_create_from_xpm($gdkwindow, $transparent_color, 'test.xpm');
+$image = &amp;new GtkPixmap($gdkpixmap, $mask);
+      </programlisting>
+     </informalexample>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gdk.method.pixmap_create_from_xpm_d">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>
+      <classname>array</classname> 
+      <function>gdk::pixmap_create_from_xpm_d</function>
+     </funcdef>
+     <paramdef><classname>GdkWindow</classname> 
+      <parameter>window</parameter>
+     </paramdef>
+     <paramdef><classname>GdkColor</classname> 
+      <parameter>transparent_color</parameter>
+     </paramdef>
+     <paramdef>array <parameter>data</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Crea un <classname>GdkPixmap</classname> desde inline data.
+   </shortdesc>
+   <desc>
+    <para>
+     <informalexample>
+      <programlisting role="php">
+$gdkpixmap = gdk::pixmap_create_from_xpm_d($main_window-&gt;window, 
+$transparent_color, $data);
+      </programlisting>
+     </informalexample>
+     <!-- No I am NOT going to leave it like this..   sf mar 02 -->
+    </para>
+   </desc>
+  </method>
+
+  <method id="gdk.method.pointer_is_grabbed">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>bool <function>gdk::pointer_is_grabbed</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gdk.method.rgb_gc_set_background">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>gdk::rgb_gc_set_background</function></funcdef>
+     <paramdef>
+      <classname>GdkGC</classname> 
+      <parameter>gc</parameter>
+     </paramdef>
+     <paramdef>int <parameter>rgb</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gdk.method.rgb_gc_set_foreground">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>gdk::rgb_gc_set_foreground</function></funcdef>
+     <paramdef>
+      <classname>GdkGC</classname> 
+      <parameter>gc</parameter>
+     </paramdef>
+     <paramdef>int <parameter>rgb</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gdk.method.rgb_get_cmap">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>
+      <classname>GdkColormap</classname> 
+      <function>gdk::rgb_get_cmap</function>
+     </funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gdk.method.rgb_get_visual">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>
+      <classname>GdkVisual</classname> 
+      <function>gdk::rgb_get_visual</function>
+     </funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gdk.method.rgb_xpixel_from_rgb">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>int <function>gdk::rgb_xpixel_from_rgb</function></funcdef>
+     <paramdef>int <parameter>rgb</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gdk.method.screen_height">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>int <function>gdk::screen_height</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+   Devuelve el alto de la pantalla en pixels.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Esta funci&oacute;n devuelve el alto de la pantalla en pixels.
+     Esto puede ser usado en m&eacute;todos para poner el alto y asegurar
+     que los contenedores sean agrandados relativamente a la resoluci&oacute;n
+     de la pantalla. 
+    </simpara>
+   </desc>
+  </method>
+
+  <method id="gdk.method.screen_height_mm">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>int <function>gdk::screen_height_mm</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+   Devuelve la altera en mm.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Esta funci&oacute;n devuelve la altura en milimetros de la pantalla.
+     Este puede usarse como un m&eacute;todo para asegurar que los contenedores
+     sean agrandados relativamente al tamaño de pantalla que esta siendo usado.
+    </simpara>
+   </desc>
+  </method>
+
+  <method id="gdk.method.screen_width">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>int <function>gdk::screen_width</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+   Devuelve el ancho de la pantalla en pixels.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Esta funci&oacute;n devuelve el ancho de la pantalla en pixels.
+     Esto puede ser usado en m&eacute;todos para poner el ancho y asegurar
+     que los contenedores sean agrandados relativamente a la resoluci&oacute;n
+     de la pantalla. 
+    </simpara>
+   </desc>
+  </method>
+
+  <method id="gdk.method.screen_width_mm">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>int <function>gdk::screen_width_mm</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Devuelve el ancho en mm. de la pantalla.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Esta funci&oacute;n devuelve el ancho en milimetros de la pantalla.
+     Este puede usarse como un m&eacute;todo para asegurar que los contenedores
+     sean agrandados relativamente al tamaño de pantalla que esta siendo usado.
+    </simpara>
+   </desc>
+  </method>
+
+  <method id="gdk.method.threads_enter">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>gdk::threads_enter</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gdk.method.threads_leave">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>gdk::threads_leave</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gdk.method.visual_get_best">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>
+      <classname>GdkVisual</classname> 
+      <function>gdk::visual_get_best</function>
+     </funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gdk.method.visual_get_best_with_both">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>
+      <classname>GdkVisual</classname> 
+      <function>gdk::visual_get_best_with_both</function>
+     </funcdef>
+     <paramdef>int <parameter>depth</parameter></paramdef>
+     <paramdef>
+      <enumname>GdkVisualType</enumname> 
+      <parameter>visual_type</parameter>
+     </paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gdk.method.visual_get_best_with_depth">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>
+      <classname>GdkVisual</classname> 
+      <function>gdk::visual_get_best_with_depth</function>
+     </funcdef>
+     <paramdef>int <parameter>depth</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gdk.method.visual_get_best_with_type">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>
+      <classname>GdkVisual</classname> 
+      <function>gdk::visual_get_best_with_type</function>
+     </funcdef>
+     <paramdef>
+      <enumname>GdkVisualType</enumname> 
+      <parameter>visual_type</parameter>
+     </paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gdk.method.visual_get_system">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>
+      <classname>GdkVisual</classname> 
+      <function>gdk::visual_get_system</function>
+     </funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+   Devuelve el sistema visual.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Esta funci&ocaute;n devuelve la clase <classname>GdkVisual</classname> que 
+     se esta usando actualmente el sistema.
+    </simpara>
+   </desc>
+  </method>
+
+</refentry>

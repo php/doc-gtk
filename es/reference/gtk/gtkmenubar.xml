@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<classentry id="gtk.gtkmenubar">
+ <classmeta>
+  <classtitle>GtkMenuBar</classtitle>
+  <classparent>GtkMenuShell</classparent>
+  <shortdesc>
+   Horizontal container for menu items.
+  </shortdesc>
+  <desc>
+   <simpara>
+    A <classname>GtkMenuBar</classname> is a container that exclusively holds
+    <classname>GtkMenuItem</classname> widgets, and displays them from left
+    to right.
+   </simpara>
+   <simpara>
+    It has key bindings which allow the <literal>Up</literal>, 
+    <literal>Down</literal>, <literal>Left</literal> 
+    and <literal>Right</literal> arrow keys to be used for menubar
+    navigation.   Note that these do not work in the win32 version of
+    GTK+ used by PHP-GTK.
+   </simpara>
+  </desc>
+ </classmeta>
+
+ <constructor id="gtk.gtkmenubar.constructor">
+  <funcsynopsis>
+   <funcprototype>
+    <funcdef> <function>GtkMenuBar</function></funcdef>
+    <paramdef>void</paramdef>
+   </funcprototype>
+  </funcsynopsis>
+  <shortdesc>
+   Constructs a horizontal menu bar.
+  </shortdesc>
+  <desc>
+   <simpara>
+    A <classname>GtkMenuBar</classname> should normally be packed into a
+    <classname>GtkVBox</classname>, and the parent window size and position
+    set as appropriate.  As with all containers, the menu bar itself takes
+    up no screen area until its child widgets are in place.
+   </simpara>
+   <para>
+    <example>
+     <title>Creating a Menu Bar</title>
+     <programlisting role="php">
+dl('php_gtk.' . (strstr(PHP_OS, 'WIN') ? 'dll' : 'so'));
+    
+$window = &amp;new GtkWindow();
+$window-&gt;set_uposition(10, 10);
+$window-&gt;set_usize((gdk::screen_width()-20), (gdk::screen_height()-30));
+$window-&gt;connect_object('destroy', array('gtk', 'main_quit'));
+    
+$box = &amp;new GtkVBox();
+$window-&gt;add($box);
+....
+$menubar = &amp;new GtkMenuBar();
+$box-&gt;pack_start($menubar, false, false, 0);
+    
+$header1 = &amp;new GtkMenuItem(&quot;File&quot;);
+$menubar-&gt;append($header1);
+$header2 = &amp;new GtkMenuItem(&quot;Edit&quot;);
+$menubar-&gt;append($header2);
+....
+$filemenu = &amp;new GtkMenu();
+$open = &amp;new GtkMenuItem(&quot;Open&quot;);
+$filemenu-&gt;append($open); 
+$save = &amp;new GtkMenuItem(&quot;Save&quot;);
+$filemenu-&gt;append($save); 
+$separator = &amp;new GtkMenuItem();
+$separator-&gt;set_sensitive(false);
+$filemenu-&gt;append($separator);
+$exit = &amp;new GtkMenuItem(&quot;Exit&quot;);
+$exit-&gt;connect_object(&quot;activate&quot;, array(&quot;gtk&quot;, 
+&quot;main_quit&quot;));
+$filemenu-&gt;append($exit);
+    
+$header1-&gt;set_submenu($filemenu);
+....
+$window-&gt;show_all();
+gtk::main();
+     </programlisting>
+    </example>
+   </para>
+  </desc>
+ </constructor>
+
+ <methods>
+ <!-- DELETED append(), prepend(), insert() as they are already covered in
+ GtkMenuShell & are only wrappers here - sf jan 02 -->
+  <method id="gtk.gtkmenubar.method.set_shadow_type">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_shadow_type</function></funcdef>
+     <paramdef>
+      <enumname>GtkShadowType</enumname> <parameter>type</parameter>
+     </paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Alters appearance of menu bar.
+   </shortdesc>
+   <desc>
+    <simpara>
+     <function class="GtkMenuBar">set_shadow_type()</function> alters the
+     appearance of a <classname>GtkMenuBar</classname> according to the
+     <enumname>GtkShadowType</enumname> option set.
+    </simpara>
+    <simpara>
+     The default setting is <literal>GTK_SHADOW_OUT</literal>.
+    </simpara>
+   </desc>
+  </method>
+
+ </methods>
+
+</classentry>

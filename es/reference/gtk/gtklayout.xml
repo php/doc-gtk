@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<classentry id="gtk.gtklayout">
+ <classmeta>
+  <classtitle>GtkLayout</classtitle>
+  <classparent>GtkContainer</classparent>
+  <shortdesc>
+   Scrollable widget allowing multiple children in fixed positions.
+  </shortdesc>
+  <desc>
+   <simpara>
+    A <classname>GtkLayout</classname> is a scrollable widget that provides
+    a scrolling-aware backdrop for a child or children having fixed
+    positions.  It should be added directly to a 
+    <classname>GtkScrolledWindow</classname>.
+   </simpara>
+   <simpara>
+    Note that the scrolling does not work on win32 unless you program it
+    to do so.  There have been no such problems reported on other systems. 
+    The workaround under win32 is to connect the 
+    <classname>GtkScrolledWindow</classname> scrollbar adjustments' 
+    <signalname class="GtkAdjustment">value-changed</signalname> signals
+    to a function that will force the <classname>GtkLayout</classname> to
+    be redrawn.  This can be 
+    <function class="GtkWidget">queue_draw()</function> in most situations,
+    but the more complex child widgets will not respond to this alone and
+    will need to have <function class="GtkWidget">hide()</function> and
+    then <function class="GtkWidget">show()</function> called on the 
+    <classname>GtkLayout</classname> during the callback.
+   </simpara>
+   <simpara>
+    Note that GtkHtml is based on the <classname>GtkLayout</classname> 
+    class, and that similar redraw issues are seen with that widget.
+   </simpara>
+  </desc>
+ </classmeta>
+
+ <constructor id="gtk.gtklayout.constructor">
+  <funcsynopsis>
+   <funcprototype>
+    <funcdef> <function>GtkLayout</function></funcdef>
+    <paramdef>
+     <classname>GtkAdjustment</classname> 
+     <parameter>hadjustment</parameter>
+    </paramdef>
+    <paramdef>
+     <classname>GtkAdjustment</classname> 
+     <parameter>vadjustment</parameter>
+    </paramdef>
+   </funcprototype>
+  </funcsynopsis>
+  <shortdesc>
+   Creates a scrollable backdrop whose children retain their positions.
+  </shortdesc>
+  <desc>
+   <para>
+    The following example is based on the GTK+ test file 
+    <filename>testgtk.c</filename>.  Unix users will not need to use
+    the callback function in order to achieve scrolling, but it shouldn't
+    do any harm to run it as it stands.  Win32 users will find that the 
+    labels are redrawn and the buttons are not, giving a somewhat
+    psychedelic effect.  To redraw both types of object under win32, 
+    replace the callback function with:
+    <informalexample>
+     <programlisting role="php">
+function exposure($adj, $layout) {
+  $layout-&gt;hide();
+  $layout-&gt;show();
+}
+     </programlisting>
+    </informalexample>
+   </para>
+   <para>
+    <example>
+     <title>Forcing a <classname>GtkLayout</classname> to redraw</title>
+     <programlisting role="php">
+dl('php_gtk.' . (strstr(PHP_OS, 'WIN') ? 'dll' : 'so'));
+    
+/* callback that forces a redraw of simple child widgets */
+function exposure($adj, $layout) {
+  $layout-&gt;queue_draw();
+}
+    
+/* set up a window and size it to be smaller than the intended layout */
+$window = &amp;new GtkWindow();
+$window-&gt;set_position(GTK_WIN_POS_CENTER);
+$window-&gt;set_title('Layout');
+$window-&gt;set_usize(200, 200);
+$window-&gt;connect_object('destroy', array('gtk', 'main_quit'));
+    
+/* create and add the scrolled window to the main window */
+$scrolledwindow = &amp;new GtkScrolledWindow();
+$window-&gt;add($scrolledwindow);
+    
+/* create and add the layout widget to the scrolled window */
+$layout = &amp;new GtkLayout(null, null);
+$scrolledwindow-&gt;add($layout);
+    
+/* set the layout to be bigger than the windows that contain it */
+$x = gdk::screen_width();
+$y = gdk::screen_height();
+$layout-&gt;set_size($x, $y);
+    
+/* get the adjustment objects and connect them to the callback.  This
+   part should not be necessary under *nix systems */
+$hadj = $scrolledwindow-&gt;get_hadjustment();
+$vadj = $scrolledwindow-&gt;get_vadjustment();
+$hadj-&gt;connect('value-changed', 'exposure', $layout);
+$vadj-&gt;connect('value-changed', 'exposure', $layout);
+    
+/* populate the layout with a mixture of buttons and labels */
+for ($i=0 ; $i &lt; round($y/100); $i++)  {
+  for ($j=0 ; $j &lt; round($x/100); $j++)  {
+    $buf =sprintf('Button %d, %d', $i, $j);
+    if (($i + $j) % 2) $button = &amp;new GtkButton($buf);
+    else $button = &amp;new GtkLabel($buf);
+    $layout-&gt;put($button, $j*100, $i*100);
+  }
+}
+    
+/* display everything and run the main loop */
+$layout-&gt;show_all();
+$window-&gt;show_all();
+    
+gtk::main();
+     </programlisting>
+    </example>
+   </para>
+  </desc>
+ </constructor>
+
+ <methods>
+
+  <method id="gtk.gtklayout.method.put">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>put</function></funcdef>
+     <paramdef>
+      <classname>GtkWidget</classname> 
+      <parameter>widget</parameter>
+     </paramdef>
+     <paramdef>int <parameter>x</parameter></paramdef>
+     <paramdef>int <parameter>y</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Fixes a child widget at the given position.
+   </shortdesc>
+   <desc>
+    <simpara>
+     This method adds a child widget to the layout.  The top left
+     corner of the child widget will be positioned at the co-ordinates
+     passed in the <literal>x, y</literal> parameters.
+    </simpara>
+   </desc>
+  </method>
+
+  <method id="gtk.gtklayout.method.move">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>move</function></funcdef>
+     <paramdef>
+      <classname>GtkWidget</classname> 
+      <parameter>widget</parameter>
+     </paramdef>
+     <paramdef>int <parameter>x</parameter></paramdef>
+     <paramdef>int <parameter>y</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Moves a child widget to a new position.
+   </shortdesc>
+   <desc>
+    <simpara>
+     This method takes a child widget that has already been added to
+     the <classname>GtkLayout</classname> and moves it to a new position
+     reflecting the co-ordinates passed in the parameters.
+    </simpara>
+   </desc>
+  </method>
+
+  <method id="gtk.gtklayout.method.set_size">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_size</function></funcdef>
+     <paramdef>int <parameter>width</parameter></paramdef>
+     <paramdef>int <parameter>height</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Sets the size of the layout.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Sets the size of the <classname>GtkLayout</classname>.  If you do
+     not call this method the layout will size itself according to the
+     size allocation given it by the parent window, rather than the size
+     requisition of the layout's child widgets.
+    </simpara>
+   </desc>
+  </method>
+
+  <method id="gtk.gtklayout.method.get_hadjustment">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>
+      <classname>GtkAdjustment</classname> 
+      <function>get_hadjustment</function>
+     </funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Returns the horizontal adjustment object.
+   </shortdesc>
+   <desc>
+    <simpara>
+     This method is used internally to set the horizontal scrollbar
+     adjustment in the <classname>GtkScrolledWindow</classname> holding
+     the <classname>GtkLayout</classname>.  These sets of adjustment
+     objects are interchangeable, i.e. they share the same values.
+    </simpara>
+   </desc>
+  </method>
+
+  <method id="gtk.gtklayout.method.get_vadjustment">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>
+      <classname>GtkAdjustment</classname> 
+      <function>get_vadjustment</function>
+     </funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Returns the vertical adjustment object.
+   </shortdesc>
+   <desc>
+    <simpara>
+     This method is used internally to set the vertical scrollbar
+     adjustment in the <classname>GtkScrolledWindow</classname> holding
+     the <classname>GtkLayout</classname>.  These sets of adjustment
+     objects are interchangeable, i.e. they share the same values.
+    </simpara>
+   </desc>
+  </method>
+
+  <!-- DELETED set_hadjustment(), set_vadjustment() - these adjustments
+  are set internally and cannot be altered.  -sf mar 02 -->
+
+  <method id="gtk.gtklayout.method.freeze">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>freeze</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Freezes the display during an update.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Use <function class="GtkLayout">freeze()</function> when you are
+     updating a large amount of data, e.g. a large pixmap or series
+     of pixmaps.  Calling this method prior to the update will speed up
+     the process and reduce flicker.
+    </simpara>
+    <simpara>
+     See also:  <function class="GtkLayout">thaw()</function>.
+    </simpara>
+   </desc>
+  </method>
+
+  <method id="gtk.gtklayout.method.thaw">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>thaw</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Allows the display to be updated.
+   </shortdesc>
+   <desc>
+    <simpara>
+     <function class="GtkLayout">thaw()</function> is the corollary of
+     <function class="GtkLayout">freeze()</function>.  It allows the
+     display to be redrawn after the new data is fully assimilated.
+    </simpara>
+   </desc>
+  </method>
+
+ </methods>
+
+</classentry>

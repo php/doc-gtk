@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<classentry id="gtk.gtkhpaned">
+ <classmeta>
+  <classtitle>GtkHPaned</classtitle>
+  <classparent>GtkPaned</classparent>
+  <shortdesc>
+   Container with two panes arranged horizontally.
+  </shortdesc>
+  <desc>
+   <simpara>
+    <classname>GtkHPaned</classname> is a widget derived from 
+    <classname>GtkPaned</classname>, consisting of two panes arranged
+    horizontally and separated by a dividing handle.  The handle can be
+    adjusted by the end user to alter the relative sizes of the pane contents.
+   </simpara>
+   <simpara>
+    See also: <classname>GtkPaned</classname>, 
+    <classname>GtkVPaned</classname>.
+   </simpara>
+  </desc>
+ </classmeta>
+
+ <constructor id="gtk.gtkhpaned.constructor">
+  <funcsynopsis>
+   <funcprototype>
+    <funcdef> <function>GtkHPaned</function></funcdef>
+    <paramdef>void</paramdef>
+   </funcprototype>
+  </funcsynopsis>
+  <shortdesc>
+   Creates the basis for a horizontal dual-paned container.
+  </shortdesc>
+  <desc>
+   <para>
+    The <classname>GtkHPaned</classname> widget should be thought of in
+    terms of an arrangement of two child widgets, rather than as an object
+    in its own right.  The construct
+     <informalexample>
+      <programlisting role="php">$hbox = &amp;new GtkHBox();</programlisting>
+     </informalexample>
+    needs to be within a containing <classname>GtkWindow</classname> 
+    and to contain two child widgets of its own in order to work.
+   </para>
+   <para>
+    <example>
+     <title>Constructing a <classname>GtkHPaned widget</classname></title>
+     <programlisting role="php">
+$window = &amp;new GtkWindow();
+$window-&gt;set_title(&quot;GtkHPaned&quot;);
+$window-&gt;connect_object(&quot;destroy&quot;, array(&quot;gtk&quot;, 
+&quot;main_quit&quot;));
+    
+$hpaned = &amp;new GtkHPaned();
+$window-&gt;add($hpaned);
+$hpaned-&gt;show();
+    
+$button = &amp;new GtkButton(&quot;Widget child1&quot;);
+$hpaned-&gt;pack1($button, false, false);
+$button-&gt;show();
+    
+$label = &amp;new GtkLabel();
+$label-&gt;set_text(&quot;Widget child2&quot;);
+$hpaned-&gt;pack2($label, true, true);
+$label-&gt;show();
+    
+$window-&gt;show_all();
+    
+gtk::main();
+     </programlisting>
+    </example>
+    Note that setting the <parameter>resize</parameter> parameter when packing
+    <classname>GtkHPaned</classname> child widgets will not prevent them 
+    from resizing vertically when the top-level window is maximised.
+   </para>
+  </desc>
+ </constructor>
+
+</classentry>

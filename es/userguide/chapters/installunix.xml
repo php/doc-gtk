@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<chapter id="installunix">
+ <title>Instalando PHP-GTK bajo Unix</title>
+  <para>
+   Los usuarios de Debian pueden descargar un binario de PHP-GTK desde
+   <ulink url="&url.debian;">&url.debian;</ulink>.
+  </para>
+  <para>
+   PHP GTK depende varios paquetes, los cuales necesitan esta instalados
+   antes de comenzar con lainstalaci&oacute;n de PHP-GTK:
+   <itemizedlist>
+    <listitem>
+     <para>
+      PHP version &version.php; o posterior
+     </para>
+    </listitem>
+    <listitem>
+     <para>
+      Las bibliotecas  GTK+, disponibles en 
+      <ulink url="&url.gtk.download;">&url.gtk.download;</ulink>, o puedes
+      descargar un versi&oacute; empaquetada de nuestros sistemas, e.j. 
+      <literal>gtk</literal> 
+      y <literal>gtk-devel</literal>
+     </para>
+    </listitem>
+    <listitem>
+     <simpara>
+      libtool, automake and autoconf.  The combination of libtool 1.4.2, 
+      automake 1.4 and autoconf 2.13 is known to work; mileage may vary
+      with other version combinations.
+     </simpara>
+    </listitem>
+    <listitem>
+     <para>
+      Para extras adicionales, descarga 
+      <ulink url="&url.gtkhtml;">bibliotecas GtkHTML</ulink>,
+      <ulink url="&url.scintilla;">bibiotecas GtkScintilla</ulink> and
+      <ulink url="&url.pixbuf;">bibliotecas Gdk-Pixbuf</ulink>.  Nuevamente,
+      estas estan disponibles empaquetadas en nuestro sistema, solo asegurate
+      de que hallas instalado en paquete de desarrollo.
+      GtkHTML, notablemente, tiene un n&uacute;mero de sub-dependencia, e.j.
+      <literal>GAL</literal>, que tambi&eacute;n puede
+      serobtenido desde <ulink url="&url.gnome.ftp;">sitio ftp de Gnome</ulink>.
+     </para>
+    </listitem>
+   </itemizedlist>
+  </para>
+  <para>
+  Nosotros sugerimos que tomes el &uacute;ltimo c&oacute;digo de
+   <ulink url="&url.phpgtk;">&url.phpgtk;</ulink> o desde un CSV  anonimo 
+   <ulink url="&url.php.anoncvs;">&url.php.anoncvs;</ulink>.
+  </para>
+  <para>
+   Ejecuta el script <command>./buildconf</command> que esta dentro de la
+   distribuci&oacute;n. Esto har&aacute; la instalaci&oacute;n necesaria de
+   archivos y creara el script <literal>configure</literal>.  Luego, ejecuta 
+   <command>./configure</command>.  Este se fijar&aacute; si tenes las 
+   versions correctas de GTK+ 1.2.x (1.2.6 o superior, disponible de 
+   <ulink url="&url.gtk.download;">&url.gtk.download;</ulink>) y otros 
+   archivos requeridos para la compilaci&oacute;n, y asi crear&aacute; 
+   los Makefiles necesarios.
+  </para>
+  <simpara>
+   <command>./configure</command> puede ser usado tambi&eacute;n para 
+   construir widgets extras, e.jg.
+   <command>./configure --enable-scintilla --enable-gtkhtml</command>. 
+   Para listar todas las opciones disponibles usa 
+   <command>./configure --help</command>.  
+   Recorda que cada widget extra tiene varias dependencias que son 
+   necesarias para que la contrucci&oacute;n sea exitosa.
+  </simpara>
+  <simpara>
+   Finalmente, ejecuta <command>make</command> para compilar la 
+   extensi&oacute;n.  Algunos archivos fuentes son generados desde archivos
+   .defs por el generador de codigo. Si ves mensajes como 
+   <literal>&quot;Could not write...&quot;</literal>, quiere decir que los 
+   objetos GTK+ litados o sus caracteristicas todabia no son soportadas.
+   Si la compilaci&oacute;n es exitosa,ejecuta 
+   <command>make install</command> para instalar
+   la extensi&oacute;n en tu directorios por defecto de extensiones PHP 
+   (habitualmente <filename>/usr/local/lib/php/extensions</filename>).
+  </simpara>
+  <para>
+   Errores: problemas comunes de <command>./configure</command> o 
+   <command>make</command>
+   <itemizedlist>
+    <listitem>
+     <simpara>
+      <literal>./ltconfig: ltconfig : No such file or directory, configure: 
+      error: libtool configure failed</literal>  es causado por no tener 
+      libtool, automake o autoconf instalado.
+    </simpara>
+   </listitem>
+   <listitem>
+    <simpara>
+     <literal>./aclocal.m4:813: error: m4_defn: undefined: 
+     _m4_divert_diversion</literal>  es causado por una incompatibilidad de
+     versiones de  autoconf, mira las versiones recomendadas arriba.
+    </simpara>
+   </listitem>
+   <listitem>
+    <para>
+     <literal>php_gtk+.c:33: parse error before `TSRMLS_DC'</literal>  es
+     causado ya sea por una versi&oacute;n vieja de PHP tratando de ser 
+     encontrada por el sistema de contrucci&oacute;n o tratando de construir
+     php-gtk con una version antigua de PHP - por favor actualize la 
+     versi&oacute;n de PHP &version.php; para arreglarlo.
+    </para>
+   </listitem>
+   <listitem>
+    <simpara>
+     <literal>gen_gtk.c:1: parse error before '&lt;'</literal>  es causado
+     por un error que ocurre en el generador. Habitualmente este error
+     se resuelve agregando una linea 
+     <literal>ini_set(&quot;memory_limit&quot;, &quot;32M&quot;);</literal> 
+     a la primera linea de <filename>generator/generator.php</filename>.  
+     Vos necesitas borrar todos los archivos <filename>gen_*</filename>
+     de todos los directorios despues de cambiar esto.
+    </simpara>
+   </listitem>
+   <listitem>
+    <simpara>
+     <literal>checking for gnome-config... Unknown library `gtkhtml'</literal>
+     (from <command>./configure</command>)  e debido a un viejo y no disponible
+     archivo header de desarrollo - Si instalas desde un rpm o un paquete similar
+     necesitaras los paquetese <literal>-devel</literal>
+    </simpara>
+   </listitem>
+   <listitem>
+    <simpara>
+     <literal>Unable to find -lgal</literal>  o mensaje similar es causado
+     por no tener la <literal>gal-devel</literal> o una biblioteca similar.
+     Habitualmente esto se debe a las sub dependencias de algunos widgets 
+     mas complejos, como gtkhtml.
+    </simpara>
+   </listitem>
+  </itemizedlist>
+  </para>
+  <simpara>
+   Para probar la extensi&oacute;n, tenes que ejecutar los ejemplos de scripts
+   en el directorio <filename>test/</filename>. Estos sirven de demostraciones
+   de algunas de las formas de que la extensi&oacute;n PHP-GTK puede usarse.
+  </simpara>
+</chapter>

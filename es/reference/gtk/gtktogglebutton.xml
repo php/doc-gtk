@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<classentry id="gtk.gtktogglebutton">
+ <classmeta>
+  <classtitle>GtkToggleButton</classtitle>
+  <classparent>GtkButton</classparent>
+  <shortdesc>
+   Button that retains its state.
+  </shortdesc>
+  <desc>
+   <simpara>
+    A <classname>GtkToggleButton</classname> is a button that will retain
+    its state following activation.  This can be either the active state, 
+    <enumname>GtkStateType</enumname> <literal>GTK_STATE_ACTIVE</literal>, 
+    or the normal state, <literal>GTK_STATE_NORMAL</literal>.  The active
+    state has the appearance of a button that has been pressed down and not
+    released.
+   </simpara>
+   <simpara>
+    The <signalname class="GtkToggleButton">toggled</signalname> signal is
+    emitted as part of the process when the button is activated.  Activation
+    also triggers a change from the current state to its opposite value.
+   </simpara>
+   <simpara>
+    <classname>GtkToggleButton</classname> also provides some base elements
+    for <classname>GtkCheckButton</classname> and
+    <classname>GtkRadioButton</classname> widgets.
+   </simpara>
+  </desc>
+ </classmeta>
+
+ <constructor id="gtk.gtktogglebutton.constructor">
+  <funcsynopsis>
+   <funcprototype>
+    <funcdef> <function>GtkToggleButton</function></funcdef>
+    <paramdef>string 
+     <parameter><optional>label</optional></parameter>
+    </paramdef>
+   </funcprototype>
+  </funcsynopsis>
+  <shortdesc>
+   Creates a button that can be toggled between two states.
+  </shortdesc>
+  <desc>
+   <para>
+    <informalexample>
+     <programlisting role="php">
+$togglebutton = &amp;new GtkToggleButton(&quot;GtkToggleButton's label&quot;);
+     </programlisting>
+    </informalexample>
+    creates a <classname>GtkToggleButton</classname> that can be toggled
+    between active and normal states.
+   </para>
+  </desc>
+ </constructor>
+
+ <methods>
+
+  <method id="gtk.gtktogglebutton.method.set_mode">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_mode</function></funcdef>
+     <paramdef>bool <parameter>draw_indicator</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Toggles indicator mode.
+   </shortdesc>
+   <desc>
+    <simpara>
+     <function class="GtkToggleButton">set_mode()</function> is used
+     internally to set the indicator mode for the different varieties of
+     toggle button.  There is no reason to use it unless you are creating
+     your own widget.
+    </simpara>
+    <simpara>
+     This method toggles whether the toggle indicator is drawn or not.  In
+     <classname>GtkToggleButton</classname> itself, the indicator happens
+     to take up the entire surface of the button, so that if the 
+     <parameter>draw_indicator</parameter> parameter is set to 
+     <literal>true</literal> the button itself vanishes.  In the classes
+     that inherit the <classname>GtkToggleButton</classname> methods
+     the indicator takes up a very small area of the button, and setting
+     the mode as <literal>false</literal> in those classes removes the
+     indicator from the button, leaving only a 
+     <classname>GtkToggleButton</classname> with an offset label.
+    </simpara>
+   </desc>
+  </method>
+
+  <method id="gtk.gtktogglebutton.method.set_active">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_active</function></funcdef>
+     <paramdef>bool <parameter>is_active</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Sets state.
+   </shortdesc>
+   <desc>
+    <simpara>
+     <function class="GtkToggleButton">set_active()</function> determines
+     whether the <classname>GtkToggleButton</classname>'s initial state is 
+     <literal>GTK_STATE_ACTIVE</literal> or otherwise.
+    </simpara>
+    <simpara>
+     The default setting is <literal>false</literal>.
+    </simpara>
+   </desc>
+  </method>
+
+  <method id="gtk.gtktogglebutton.method.get_active">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>bool <function>get_active</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Returns true if active.
+   </shortdesc>
+   <desc>
+    <simpara>
+     <function class="GtkToggleButton">get_active()</function> returns 
+     <literal>true</literal> if the calling 
+     <classname>GtkToggleButton</classname>'s current state is 
+     <literal>GTK_STATE_ACTIVE</literal>.
+    </simpara>
+   </desc>
+  </method>
+
+  <method id="gtk.gtktogglebutton.method.toggled">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>toggled</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Causes the <signalname class="GtkToggleButton">toggled</signalname> 
+    signal to be emitted.
+   </shortdesc>
+   <desc>
+    <simpara>
+     <function class="GtkToggleButton">toggled()</function> makes the
+     calling <classname>GtkToggleButton</classname> emit the 
+     <signalname class="GtkToggleButton">toggled</signalname> signal.  This
+     method is called internally when the 
+     <signalname class="GtkButton">clicked</signalname> signal is fired, 
+     that is, when the user either clicks the mouse over the button or
+     presses the <literal>Enter</literal> or <literal>Space</literal> key
+     while the button is selected.
+    </simpara>
+   </desc>
+  </method>
+
+ </methods>
+
+ <signals>
+
+  <signal id="gtk.gtktogglebutton.signal.toggled">
+   <signalname>toggled</signalname>
+   <callback>
+    <funcprototype>
+     <funcdef>void <function>callback</function></funcdef>
+     <paramdef><classname>GtkToggleButton</classname> togglebutton</paramdef>
+    </funcprototype>
+   </callback>
+   <shortdesc>
+    Emitted when the <function class="GtkToggleButton">toggled()</function> 
+    method is called.
+   </shortdesc>
+   <desc>
+    <simpara>
+     The <signalname class="GtkToggleButton">toggled</signalname> signal is
+     emitted when the <function class="GtkToggleButton">toggled()</function> 
+     method is called.  This happens whenever the button is activated.  As
+     part of the response to the button classes' activating signal
+     <signalname class="GtkButton">clicked</signalname>, the state of the
+     toggle indicator is switched from <literal>GTK_STATE_ACTIVE</literal> 
+     to <literal>GTK_STATE_NORMAL</literal> or vice versa.  Note that this
+     state-switching has no relationship with the 
+     <signalname class="GtkToggleButton">toggled</signalname> signal itself.
+    </simpara>
+   </desc>
+  </signal>
+
+ </signals>
+
+ <properties>
+
+ <!-- 
+  Andrei, is there any reason on earth for this property's exposure?! 
+  -sf jan 02
+ -->
+
+  <prop id="gtk.gtktogglebutton.property.draw_indicator" type="ro">
+   <propname>draw_indicator</propname>
+   <proptype>bool</proptype>
+   <shortdesc>
+    Toggle indicator display.
+   </shortdesc>
+   <desc>
+    <simpara>
+     The <propname class="GtkToggleButton">draw_indicator</propname> 
+     property is the setting that denotes whether the toggle indicator is
+     drawn or not.  It is exposed here so that the value of the indicator's
+     mode setting can be tested programmatically.
+    </simpara>
+    <para>
+     The property can be accessed using the syntax
+     <informalexample>
+      <programlisting role="php">
+$togglebutton-&gt;draw_indicator;
+      </programlisting>
+     </informalexample>
+    </para>
+    <simpara>
+     The <propname>draw_indicator</propname> property should not be accessed
+     directly.  Use <function class="GtkToggleButton">set_mode()</function> 
+     where the value needs to be changed.
+    </simpara>
+   </desc>
+  </prop>
+
+ </properties>
+
+</classentry>
