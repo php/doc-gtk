@@ -21,10 +21,10 @@
     <signalname class="GtkAdjustment">value-changed</signalname> signals
     to a function that will force the <classname>GtkLayout</classname> to
     be redrawn.  This can be 
-    <function class="GtkWidget">queue_draw()</function> in most situations,
+    <function class="GtkWidget">queue_draw</function> in most situations,
     but the more complex child widgets will not respond to this alone and
-    will need to have <function class="GtkWidget">hide()</function> and
-    then <function class="GtkWidget">show()</function> called on the 
+    will need to have <function class="GtkWidget">hide</function> and
+    then <function class="GtkWidget">show</function> called on the 
     <classname>GtkLayout</classname> during the callback.
    </simpara>
    <simpara>
@@ -62,10 +62,16 @@
     replace the callback function with:
     <informalexample>
      <programlisting role="php">
+<![CDATA[
+<?php
+
 function exposure($adj, $layout) {
   $layout-&gt;hide();
   $layout-&gt;show();
 }
+
+?>
+]]>
      </programlisting>
     </informalexample>
    </para>
@@ -73,40 +79,43 @@ function exposure($adj, $layout) {
     <example>
      <title>Forcing a <classname>GtkLayout</classname> to redraw</title>
      <programlisting role="php">
+<![CDATA[
+<?php
+
 dl('php_gtk.' . (strstr(PHP_OS, 'WIN') ? 'dll' : 'so'));
-    
+
 /* callback that forces a redraw of simple child widgets */
 function exposure($adj, $layout) {
   $layout-&gt;queue_draw();
 }
-    
+
 /* set up a window and size it to be smaller than the intended layout */
 $window = &amp;new GtkWindow();
 $window-&gt;set_position(GTK_WIN_POS_CENTER);
 $window-&gt;set_title('Layout');
 $window-&gt;set_usize(200, 200);
 $window-&gt;connect_object('destroy', array('gtk', 'main_quit'));
-    
+
 /* create and add the scrolled window to the main window */
 $scrolledwindow = &amp;new GtkScrolledWindow();
 $window-&gt;add($scrolledwindow);
-    
+
 /* create and add the layout widget to the scrolled window */
 $layout = &amp;new GtkLayout(null, null);
 $scrolledwindow-&gt;add($layout);
-    
+
 /* set the layout to be bigger than the windows that contain it */
 $x = gdk::screen_width();
 $y = gdk::screen_height();
 $layout-&gt;set_size($x, $y);
-    
+
 /* get the adjustment objects and connect them to the callback.  This
    part should not be necessary under *nix systems */
 $hadj = $scrolledwindow-&gt;get_hadjustment();
 $vadj = $scrolledwindow-&gt;get_vadjustment();
 $hadj-&gt;connect('value-changed', 'exposure', $layout);
 $vadj-&gt;connect('value-changed', 'exposure', $layout);
-    
+
 /* populate the layout with a mixture of buttons and labels */
 for ($i=0 ; $i &lt; round($y/100); $i++)  {
   for ($j=0 ; $j &lt; round($x/100); $j++)  {
@@ -116,12 +125,15 @@ for ($i=0 ; $i &lt; round($y/100); $i++)  {
     $layout-&gt;put($button, $j*100, $i*100);
   }
 }
-    
+
 /* display everything and run the main loop */
 $layout-&gt;show_all();
 $window-&gt;show_all();
-    
+
 gtk::main();
+
+?>
+]]>
      </programlisting>
     </example>
    </para>
@@ -260,13 +272,13 @@ gtk::main();
    </shortdesc>
    <desc>
     <simpara>
-     Use <function class="GtkLayout">freeze()</function> when you are
+     Use <function class="GtkLayout">freeze</function> when you are
      updating a large amount of data, e.g. a large pixmap or series
      of pixmaps.  Calling this method prior to the update will speed up
      the process and reduce flicker.
     </simpara>
     <simpara>
-     See also:  <function class="GtkLayout">thaw()</function>.
+     See also:  <function class="GtkLayout">thaw</function>.
     </simpara>
    </desc>
   </method>
@@ -283,8 +295,8 @@ gtk::main();
    </shortdesc>
    <desc>
     <simpara>
-     <function class="GtkLayout">thaw()</function> is the corollary of
-     <function class="GtkLayout">freeze()</function>.  It allows the
+     <function class="GtkLayout">thaw</function> is the corollary of
+     <function class="GtkLayout">freeze</function>.  It allows the
      display to be redrawn after the new data is fully assimilated.
     </simpara>
    </desc>

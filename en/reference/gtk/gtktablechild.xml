@@ -17,19 +17,25 @@
     Accessing these properties is therefore a two-tiered process:
     <informalexample>
      <programlisting role="php">
+<![CDATA[
+<?php
+
 $children = $table-&gt;children;
 /*returns an array of GtkTableChild elements*/
-    
+
 for($i = 0; $i &lt; count($children); $i++) {
 $child = $children[$i];
 /*returns the individual GtkTableChild element from the $children array's 
 current pointer position*/
-    
+
 $widget = $child-&gt;widget;
 /*returns the widget property of the GtkTableChild*/
-    
+
 echo $widget-&gt;get_name().&quot;\n&quot;;
 }
+
+?>
+]]>
      </programlisting>
     </informalexample>
    </para>

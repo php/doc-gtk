@@ -11,8 +11,8 @@
     <classname>GtkVBox</classname> is a box container that packs child
     widgets in a single column, using the packing methods inherited from 
     <classname>GtkBox</classname>, such as 
-    <function class="GtkBox">pack_start()</function>, as well as the less
-    flexible <function class="GtkContainer">add()</function> method available
+    <function class="GtkBox">pack_start</function>, as well as the less
+    flexible <function class="GtkContainer">add</function> method available
     to most container widgets.
    </simpara>
    <simpara>
@@ -57,7 +57,15 @@
     <parameter>spacing</parameter>, sets the minimum spacing between the
     child widgets, in pixels.  Leaving both parameters empty, e.g.
     <informalexample>
-     <programlisting role="php">$vbox = &amp;new GtkVBox();</programlisting>
+     <programlisting role="php">
+<![CDATA[
+<?php
+
+$vbox = &amp;new GtkVBox();
+
+?>
+]]>
+     </programlisting>
     </informalexample>
     will set the default behaviour of individual sizing and zero spacing.
    </para>
@@ -66,6 +74,9 @@
      <title>Packing child widgets using <classname>GtkVBox</classname> and 
 <classname>GtkHBox</classname></title>
      <programlisting role="php">
+<![CDATA[
+<?php
+
 $window = &amp;new GtkWindow();
 $window-&gt;set_title(&quot;GtkHBox and GtkVBox packing demonstration&quot;);
 $window-&gt;set_position(GTK_WIN_POS_CENTER);
@@ -99,7 +110,10 @@ $text-&gt;show();
 
 $window-&gt;show_all();
 
-Gtk::main();
+gtk::main();
+
+?>
+]]>
      </programlisting>
     </example>
    </para>

@@ -119,7 +119,7 @@
    </shortdesc>
    <desc>
     <simpara>
-     <function class="GtkEditable">select_region()</function> selects
+     <function class="GtkEditable">select_region</function> selects
      an area of text programmatically.  The <parameter>start</parameter> 
      and <parameter>end</parameter> parameters can be 
      <literal>0, -1</literal> if the full text string is required.
@@ -127,7 +127,7 @@
     <simpara>
      Note that the editable widget needs to be realized prior to this method
      being called on it.  See 
-     <function class="GtkEditable">claim_selection()</function>.
+     <function class="GtkEditable">claim_selection</function>.
     </simpara>
    </desc>
   </method>
@@ -145,20 +145,20 @@
    </shortdesc>
    <desc>
     <simpara>
-     <function class="GtkEditable">insert_text()</function> is the simplest
+     <function class="GtkEditable">insert_text</function> is the simplest
      way of putting text into an editable widget. 
      <classname>GtkText</classname> has an alternative method, 
-     <function class="GtkText">insert()</function>, which gives greater
+     <function class="GtkText">insert</function>, which gives greater
      control over the appearance of the text, amongst other things.
     </simpara>
     <note>
      <simpara>
       This method does not support internationalization under win32.  Use
-      <function class="GtkText">insert()</function>.
+      <function class="GtkText">insert</function>.
      </simpara>
     </note>
     <simpara>
-     The <function class="GtkEditable">insert_text()</function> method also
+     The <function class="GtkEditable">insert_text</function> method also
      causes the signal of the same name to be emitted.
     </simpara>
    </desc>
@@ -184,7 +184,7 @@
      of the string, and <literal>-1</literal> the end position.
     </simpara>
     <simpara>
-     <function class="GtkEditable">delete_text()</function> also causes
+     <function class="GtkEditable">delete_text</function> also causes
      the signal of the same name to be emitted.
     </simpara>
    </desc>
@@ -222,7 +222,7 @@
    </shortdesc>
    <desc>
     <simpara>
-     <function class="GtkEditable">cut_clipboard()</function> copies the
+     <function class="GtkEditable">cut_clipboard</function> copies the
      current selection to the clipboard.  It then deletes the original text
      using the position parameters of the selection.
     </simpara>
@@ -246,7 +246,7 @@
    </shortdesc>
    <desc>
     <simpara>
-     <function class="GtkEditable">copy_clipboard()</function> copies the
+     <function class="GtkEditable">copy_clipboard</function> copies the
      current selection to the clipboard.
     </simpara>
     <simpara>
@@ -269,7 +269,7 @@
    </shortdesc>
    <desc>
     <simpara>
-     <function class="GtkEditable">paste_clipboard()</function> pastes the
+     <function class="GtkEditable">paste_clipboard</function> pastes the
      current clipboard contents at the cursor position.
     </simpara>
     <simpara>
@@ -296,7 +296,7 @@
    <desc>
     <simpara>
      This method is used internally as a way to provide 
-     <function class="GtkEditable">select_region()</function> with all the
+     <function class="GtkEditable">select_region</function> with all the
      data it needs in order to work, including the underlying 
      <classname>GdkWindow</classname> that the 
      <classname>GtkSelectionData</classname> requires.  It's not very useful
@@ -321,10 +321,10 @@
      This method deletes the information held in the clipboard as
      well as the text to which it relates.  It is used internally to
      differentiate between a full text delete and the deletion used
-     in <function class="GtkEditable">cut_clipboard()</function>.
+     in <function class="GtkEditable">cut_clipboard</function>.
     </simpara>
     <simpara>
-     Generally, use <function class="GtkEditable">delete_text()</function> 
+     Generally, use <function class="GtkEditable">delete_text</function> 
      instead.
     </simpara>
    </desc>
@@ -401,7 +401,7 @@
    </shortdesc>
    <desc>
     <simpara>
-     <function class="GtkEditable">set_editable()</function>, when set to
+     <function class="GtkEditable">set_editable</function>, when set to
      <literal>true</literal>, sets the widget to be editable by the user.
     </simpara>
     <simpara>
@@ -445,13 +445,13 @@
     </funcprototype>
    </callback>
    <shortdesc>
-    Emitted when <function class="GtkEditable">insert_text()</function> is
+    Emitted when <function class="GtkEditable">insert_text</function> is
     called.
    </shortdesc>
    <desc>
     <simpara>
      This signal is emitted when the 
-     <function class="GtkEditable">insert_text()</function> method is called, 
+     <function class="GtkEditable">insert_text</function> method is called, 
      which happens internally every time the text is added to by the end
      user, at every key press.
     </simpara>
@@ -486,7 +486,7 @@
    <desc>
     <simpara>
      This signal is emitted when the 
-    <function class="GtkEditable">delete_text()</function> method is called, 
+    <function class="GtkEditable">delete_text</function> method is called, 
     which happens internally when the user presses the delete button and text
     is currently selected.
     </simpara>
@@ -530,13 +530,13 @@
     </funcprototype>
    </callback>
    <shortdesc>
-    Emitted when the <function class="GtkEditable">set_editable()</function> 
+    Emitted when the <function class="GtkEditable">set_editable</function> 
     method is called.
    </shortdesc>
    <desc>
     <simpara>
      This signal is emitted when the 
-     <function class="GtkEditable">set_editable()</function> is called.  It
+     <function class="GtkEditable">set_editable</function> is called.  It
      carries a boolean value which determines in which direction the switch
      has been made.
     </simpara>
@@ -552,13 +552,13 @@
     </funcprototype>
    </callback>
    <shortdesc>
-    Emitted when <function class="GtkEditable">cut_clipboard()</function> 
+    Emitted when <function class="GtkEditable">cut_clipboard</function> 
     is called.
    </shortdesc>
    <desc>
     <simpara>
      This signal is emitted when the 
-     <function class="GtkEditable">cut_clipboard()</function> method is
+     <function class="GtkEditable">cut_clipboard</function> method is
      called.  This happens internally when the user presses the 
      <literal>Control</literal> and <literal>x</literal> keys silmultaneously.
     </simpara>
@@ -574,13 +574,13 @@
     </funcprototype>
    </callback>
    <shortdesc>
-    Emitted when <function class="GtkEditable">copy_clipboard()</function> 
+    Emitted when <function class="GtkEditable">copy_clipboard</function> 
     is called.
    </shortdesc>
    <desc>
     <simpara>
      This signal is emitted when the 
-     <function class="GtkEditable">copy_clipboard()</function> method is
+     <function class="GtkEditable">copy_clipboard</function> method is
      called.  This happens internally when the user presses the 
      <literal>Control</literal> and <literal>c</literal> keys silmultaneously.
     </simpara>
@@ -596,13 +596,13 @@
     </funcprototype>
    </callback>
    <shortdesc>
-    Emitted when <function class="GtkEditable">paste_clipboard()</function> 
+    Emitted when <function class="GtkEditable">paste_clipboard</function> 
     is called.
    </shortdesc>
    <desc>
     <simpara>
      This signal is emitted when the 
-     <function class="GtkEditable">paste_clipboard()</function> method is
+     <function class="GtkEditable">paste_clipboard</function> method is
      called.  This happens internally when the user presses the 
      <literal>Control</literal> and <literal>v</literal> keys silmultaneously.
     </simpara>

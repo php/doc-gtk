@@ -28,7 +28,7 @@
    <simpara>
     In most circumstances, it is easier to construct the viewport object by
     using the convenience method 
-    <function class="GtkScrolledWindow">add_with_viewport()</function> 
+    <function class="GtkScrolledWindow">add_with_viewport</function> 
     rather than by using its own constructor.
    </simpara>
   </desc>
@@ -57,45 +57,51 @@
     directly, as its main use is where a 
     <classname>GtkScrolledWindow</classname> needs a scrollable widget as its
     child - which situation is catered for with the method 
-    <function class="GtkScrolledWindow">add_with_viewport()</function>, 
+    <function class="GtkScrolledWindow">add_with_viewport</function>, 
     saving three or four coding lines.
    </simpara>
    <para>
     <example>
      <title>Creating a <classname>GtkViewport</classname> the hard way</title>
      <programlisting role="php">
+<![CDATA[
+<?php
+
 dl('php_gtk.'.(strstr(PHP_OS, 'WIN') ? 'dll' : 'so'));
-    
+
 /* set up a window */
 $window = &amp;new GtkWindow();
 $window-&gt;set_position(GTK_WIN_POS_CENTER);
 $window-&gt;connect_object('destroy', array('gtk', 'main_quit'));
-    
+
 /* set up the scrolled window and add it to the main window,
    sizing it if necessary. */
 $scrolledwindow = &amp;new GtkScrolledWindow();
 $scrolledwindow-&gt;set_usize(150, 150);
 $window-&gt;add($scrolledwindow);
-    
+
 /* create the viewport */
 $viewport = &amp;new GtkViewport();
 $viewport-&gt;set_shadow_type(GTK_SHADOW_ETCHED_OUT);
-    
+
 /* create a box container and add child widget or widgets to it - because
    as with most widgets, a GtkCalendar has no adjustment-friendly focus
    internals, whereas a box container does */
 $box = &amp;new GtkVBox();
 $calendar = &amp;new GtkCalendar();
 $box-&gt;pack_start($calendar, false);
-    
+
 /* add the box to the viewport, and the viewport to the scrolled window */
 $viewport-&gt;add($box);
 $scrolledwindow-&gt;add($viewport);
-    
+
 $box-&gt;show_all();
 $window-&gt;show_all();
-    
+
 gtk::main();
+
+?>
+]]>
      </programlisting>
     </example>
    </para>
@@ -119,7 +125,7 @@ gtk::main();
    </shortdesc>
    <desc>
     <simpara>
-     <function class="GtkViewport">get_hadjustment()</function> 
+     <function class="GtkViewport">get_hadjustment</function> 
      returns the <classname>GtkAdjustment</classname> object that is
      used in horizontal scrolling.
     </simpara>
@@ -141,7 +147,7 @@ gtk::main();
    </shortdesc>
    <desc>
     <simpara>
-     <function class="GtkViewport">get_vadjustment()</function> 
+     <function class="GtkViewport">get_vadjustment</function> 
      returns the <classname>GtkAdjustment</classname> object that is
      used in vertical scrolling.
     </simpara>

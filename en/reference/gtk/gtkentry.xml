@@ -55,7 +55,7 @@
   <desc>
    <simpara>
     Creates a widget that will hold a single line of text, either set
-    programmatically through <function class="GtkEntry">set_text()</function> 
+    programmatically through <function class="GtkEntry">set_text</function> 
     or entered by the user.
    </simpara>
    <para>
@@ -64,8 +64,11 @@
       Retrieving text from a <classname>GtkEntry</classname> widget
      </title>
      <programlisting role="php">
+<![CDATA[
+<?php
+
 dl('php_gtk.'.(strstr(PHP_OS, 'WIN') ? 'dll' : 'so'));
-    
+
 /* set up a function to collect the input from the entry and print it */
 function get_input($entry) {
   $input=$entry-&gt;get_text();
@@ -73,31 +76,34 @@ function get_input($entry) {
   $entry-&gt;grab_focus();
   $entry-&gt;set_text(&quot;&quot;);
 }
-    
+
 /* set up the window */
 $window = &amp;new GtkWindow();
 $window-&gt;set_position(GTK_WIN_POS_MOUSE);
 $window-&gt;connect_object('destroy', array('gtk', 'main_quit'));
-    
+
 /* add a box container to the window to allow more than one child widget */
 $box = &amp;new GtkVBox();
 $window-&gt;add($box);
-   
+
 /* add a GtkEntry to the box and connect it to the callback function */
 $entry = &amp;new GtkEntry();
 $entry-&gt;connect('activate', 'get_input');
 $box-&gt;add($entry);
-    
+
 /* add a GtkButton to the box and use connect_object() so that it
    will pass the GtkEntry to the callback when it is clicked */
 $button = &amp;new GtkButton('Return or click me to echo input');
 $button-&gt;connect_object('clicked', 'get_input', $entry);
 $box-&gt;add($button);
-    
+
 /* display everything and set the main loop running */
 $box-&gt;show_all();
 $window-&gt;show_all();
 gtk::main();
+
+?>
+]]>
      </programlisting>
     </example>
    </para>
@@ -118,7 +124,7 @@ gtk::main();
    </shortdesc>
    <desc>
     <simpara>
-     <function class="GtkEntry">set_text()</function> sets a string of
+     <function class="GtkEntry">set_text</function> sets a string of
      given text in the entry field.
     </simpara>
     <para>
@@ -143,7 +149,7 @@ $entry-gt;set_text(&quot;Programmed text entry&quot;);
    </shortdesc>
    <desc>
     <simpara>
-     <function class="GtkEntry">append_text()</function> adds the given
+     <function class="GtkEntry">append_text</function> adds the given
      string to the end of any entered text.
     </simpara>
     <para>
@@ -168,7 +174,7 @@ $entry-&gt;append_text(&quot;&lt;/END&gt;&quot;);
    </shortdesc>
    <desc>
     <simpara>
-     <function class="GtkEntry">prepend_text()</function> adds the given
+     <function class="GtkEntry">prepend_text</function> adds the given
      string to the start of any entered text.
     </simpara>
     <para>
@@ -193,7 +199,7 @@ $entry-&gt;prepend_text(&quot;&lt;START&gt;&quot;);
    </shortdesc>
    <desc>
     <simpara>
-     <function class="GtkEntry">set_position()</function> sets the
+     <function class="GtkEntry">set_position</function> sets the
      cursor at the given character position within existing text in
      the entry field.  Use <literal>0</literal> to set the cursor at
      the beginning of the text, and <literal>-1</literal> to set it at
@@ -214,7 +220,7 @@ $entry-&gt;prepend_text(&quot;&lt;START&gt;&quot;);
    </shortdesc>
    <desc>
     <simpara>
-     <function class="GtkEntry">get_text()</function> retrieves the text
+     <function class="GtkEntry">get_text</function> retrieves the text
      entered into the <classname>GtkEntry</classname> widget, and also any
      appended or prepended text that may have been set but not displayed.
     </simpara>
@@ -241,7 +247,7 @@ $entry-&gt;prepend_text(&quot;&lt;START&gt;&quot;);
    </shortdesc>
    <desc>
     <simpara>
-     <function class="GtkEntry">select_region()</function> is used to
+     <function class="GtkEntry">select_region</function> is used to
      select a region of existing text, generally for using with the cut,
      copy and paste methods found in <classname>GtkEditable</classname>.
     </simpara>
@@ -264,7 +270,7 @@ $entry-&gt;prepend_text(&quot;&lt;START&gt;&quot;);
    </shortdesc>
    <desc>
     <simpara>
-     <function class="GtkEntry">set_visibility()</function>, when set
+     <function class="GtkEntry">set_visibility</function>, when set
      to <literal>false</literal>, provides a means of hiding sensitive
      input information on screen.  It replaces each character with a star.
     </simpara>
@@ -286,14 +292,14 @@ $entry-&gt;prepend_text(&quot;&lt;START&gt;&quot;);
    </shortdesc>
    <desc>
     <simpara>
-     <function class="GtkEntry">set_editable()</function> sets the
+     <function class="GtkEntry">set_editable</function> sets the
      entry field to be editable by the user, or otherwise.
     </simpara>
     <simpara>
      The default setting is <literal>true</literal>.  
     </simpara>
     <simpara>
-     Note that setting <function class="GtkEntry">set_editable()</function> 
+     Note that setting <function class="GtkEntry">set_editable</function> 
      to <literal>true</literal> on top of the default setting can lead to
      some unexpected effects. 
     </simpara>
@@ -312,11 +318,11 @@ $entry-&gt;prepend_text(&quot;&lt;START&gt;&quot;);
    </shortdesc>
    <desc>
     <simpara>
-     <function class="GtkEntry">set_max_length()</function> sets the
+     <function class="GtkEntry">set_max_length</function> sets the
      maximum number of characters that will be accepted in a text entry.
      Any further characters entered will not be displayed in the entry
      field, nor will they be capable of being retrieved with the 
-     <function class="GtkEntry">get_text()</function> function.
+     <function class="GtkEntry">get_text</function> function.
     </simpara>
    </desc>
   </method>

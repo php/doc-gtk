@@ -60,37 +60,43 @@
     <example>
      <title>Constructing a group of radio buttons</title>
      <programlisting role="php">
+<![CDATA[
+<?php
+
 dl('php_gtk.' . (strstr(PHP_OS, 'WIN') ? 'dll' : 'so'));
-    
+
 function here_goes($button) {
   $child = $button-&gt;child;
   echo $child-&gt;get().&quot;\n&quot;;
 }
-    
+
 $window = &amp;new GtkWindow();
 $window-&gt;connect_object('destroy', array('gtk', 'main_quit'));
 $window-&gt;set_title('GtkRadioButton demo');
-    
+
 $box = &amp;new GtkVBox();
 $window-&gt;add($box);
-    
+
 $button1 = &amp;new GtkRadioButton(null, 'button 1');
 $button1-&gt;connect('pressed', 'here_goes');
 $box-&gt;pack_start($button1);
-    
+
 for ($i = 2; $i &lt;= 4; $i++) {
   $button = &amp;new GtkRadioButton($button1, 'button ' . $i);
   $button-&gt;connect('pressed', 'here_goes');
   $box-&gt;pack_start($button);
 }
-    
+
 $button_end = &amp;new GtkButton('Exit');
 $button_end-&gt;connect_object('clicked', array('gtk', 'main_quit'));
 $box-&gt;pack_end($button_end);
-    
+
 $window-&gt;show_all();
-    
+
 gtk::main();
+
+?>
+]]>
      </programlisting>
     </example>
    </para>

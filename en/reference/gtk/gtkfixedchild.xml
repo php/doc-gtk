@@ -17,7 +17,7 @@
     <propname class="GtkFixed">children</propname> property in
     <classname>GtkFixed</classname> is an array of
     <classname>GtkFixedChild</classname> objects corresponding to the child
-    widgets that have been <function class="GtkFixed">put()</function> into
+    widgets that have been <function class="GtkFixed">put</function> into
     a <classname>GtkFixed</classname> object.
    </simpara>
    <simpara>
@@ -46,9 +46,15 @@
      <classname>GtkWidget</classname> of the same type.
       <informalexample>
        <programlisting role="php">
+<![CDATA[
+<?php
+
 $button = $fixed-&gt;children[5]-&gt;widget;
 $label = $button-&gt;child;
 $label-&gt;set_text(&quot;New Button Label&quot;);
+
+?>
+]]>
        </programlisting>
       </informalexample>
      </para>

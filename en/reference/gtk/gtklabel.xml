@@ -41,6 +41,9 @@
     <example>
      <title>Aligning the text in a <classname>GtkLabel</classname></title>
      <programlisting role="php">
+<![CDATA[
+<?php
+
 dl('php_gtk.' . (strstr(PHP_OS, 'WIN') ? 'dll' : 'so'));
 
 $window = &amp;new GtkWindow();
@@ -54,11 +57,14 @@ $window-&gt;add($label);
 $window-&gt;show_all();
 
 gtk::main();
+
+?>
+]]>
      </programlisting>
     </example>
    </para>
    <simpara>
-    The <function class="GtkMisc">set_alignment()</function> method
+    The <function class="GtkMisc">set_alignment</function> method
     is inherited from <classname>GtkMisc</classname>.
    </simpara>
   </desc>
@@ -86,13 +92,19 @@ gtk::main();
     <simpara>
      Note that any existing underlines are not overwritten in the
      same way that text is; use 
-     <function class="GtkLabel">set_pattern()</function> with no
+     <function class="GtkLabel">set_pattern</function> with no
      parameters to erase these.
     </simpara>
     <para>
      <informalexample>
       <programlisting role="php">
+<![CDATA[
+<?php
+
 $label-&gt;set_text(&quot;Whatever text you wish to pass&quot;);
+
+?>
+]]>
       </programlisting>
      </informalexample>
     </para>
@@ -114,7 +126,7 @@ $label-&gt;set_text(&quot;Whatever text you wish to pass&quot;);
    </shortdesc>
    <desc>
     <simpara>
-     <function class="GtkLabel">set_justify()</function> is the method
+     <function class="GtkLabel">set_justify</function> is the method
      for justifying text in <classname>GtkLabel</classname>.  The
      options are <enumname>GtkJustification</enumname> enumerated flags, 
      the default setting being <literal>GTK_JUSTIFY_CENTER</literal>.
@@ -122,18 +134,24 @@ $label-&gt;set_text(&quot;Whatever text you wish to pass&quot;);
     <simpara>
      Justification is relative to existing lines of text, and should be
      used in combination with 
-     <function class="GtkLabel">set_line_wrap()</function>.  It is
+     <function class="GtkLabel">set_line_wrap</function>.  It is
      irrelevant where there is only one line.  If you need to set the
      text alignment in a single-line label, use 
-     <function class="GtkMisc">set_alignment()</function>.  There is a
+     <function class="GtkMisc">set_alignment</function>.  There is a
      working example of this method on the 
      <link linkend="gtk.gtklabel.constructor">constructor</link> page.
     </simpara>
     <para>
      <informalexample>
       <programlisting role="php">
+<![CDATA[
+<?php
+
 $label-&gt;set_line_wrap(true);
 $label-&gt;set_justify(GTK_JUSTIFY_FILL);
+
+?>
+]]>
       </programlisting>
      </informalexample>
     </para>
@@ -154,7 +172,7 @@ $label-&gt;set_justify(GTK_JUSTIFY_FILL);
    </shortdesc>
    <desc>
     <simpara>
-     <function class="GtkLabel">set_pattern()</function> is the method
+     <function class="GtkLabel">set_pattern</function> is the method
      for underlining text in <classname>GtkLabel</classname>. It needs
      to be defined as a pattern, e.g. if your text consists of 
      <literal>A B C</literal>, then <literal>&quot;_   _&quot;</literal>
@@ -166,7 +184,13 @@ $label-&gt;set_justify(GTK_JUSTIFY_FILL);
     <para>
      <informalexample>
       <programlisting role="php">
+<![CDATA[
+<?php
+
 $label-&gt;set_pattern(&quot;_   _&quot;);
+
+?>
+]]>
       </programlisting>
      </informalexample>
     </para>
@@ -197,7 +221,13 @@ $label-&gt;set_pattern(&quot;_   _&quot;);
     <para>
      <informalexample>
       <programlisting role="php">
+<![CDATA[
+<?php
+
 $label-&gt;set_line_wrap(true);
+
+?>
+]]>
       </programlisting>
      </informalexample>
     </para>
@@ -227,7 +257,13 @@ $label-&gt;set_line_wrap(true);
     <para>
      <informalexample>
       <programlisting role="php">
+<![CDATA[
+<?php
+
 $label-&gt;get();
+
+?>
+]]>
       </programlisting>
      </informalexample>
     </para>
@@ -246,7 +282,7 @@ $label-&gt;get();
    </shortdesc>
    <desc>
     <simpara>
-     <function class="GtkLabel">parse_uline()</function> checks the
+     <function class="GtkLabel">parse_uline</function> checks the
      string passed as the parameter for underscores, and then underlines
      the characters following the underscores. It will take the first
      underlined character in a label and return it as a lower-case
@@ -264,7 +300,13 @@ $label-&gt;get();
     <para>
      <informalexample>
       <programlisting role="php">
+<![CDATA[
+<?php
+
 $label-&gt;parse_uline(&quot;_File&quot;);
+
+?>
+]]>
       </programlisting>
      </informalexample>
     </para>

@@ -49,31 +49,37 @@
      <title>Adding more than one widget to a 
 <classname>GtkButton</classname></title>
       <programlisting role="php">
+<![CDATA[
+<?php
+
 dl('php_gtk.' . (strstr(PHP_OS, 'WIN') ? 'dll' : 'so'));
-    
+
 $window = &amp;new GtkWindow(GTK_WINDOW_DIALOG);
 $window-&gt;set_position(GTK_WIN_POS_MOUSE);
 $window-&gt;connect_object('destroy', array('gtk', 'main_quit'));
 $window-&gt;realize();
-    
+
 list ($gdkpixmap, $mask) = gdk::pixmap_create_from_xpm($window-&gt;window, 
 null, &quot;test.xpm&quot;);
 $pixmap = &amp;new GtkPixmap($gdkpixmap, $mask);
-    
+
 $label = &amp;new GtkLabel(&quot;Open&quot;);
-    
+
 $vbox = &amp;new GtkVBox();
 $vbox-&gt;pack_start($pixmap);
 $vbox-&gt;pack_start($label);
-    
+
 $button = &amp;new GtkButton();
 $button-&gt;add($vbox);
 $vbox-&gt;show_all();
-    
+
 $window-&gt;add($button);
 $window-&gt;show_all();
-    
+
 gtk::main();
+
+?>
+]]>
       </programlisting>
      </example>
     </para>
@@ -289,30 +295,36 @@ gtk::main();
      signals are by nature region-specific.
     </simpara>
     <para>
-     Use one of the <function class="GtkObject">connect()</function> 
+     Use one of the <function class="GtkObject">connect</function> 
      methods in order to emit the signal and connect it to your function. 
      The connected function is known as the <literal>callback</literal> or 
      <literal>signal-handler</literal> function:
      <example>
       <title>Making a simple connection</title>
       <programlisting role="php">
+<![CDATA[
+<?php
+
 dl('php_gtk.' . (strstr(PHP_OS, 'WIN') ? 'dll' : 'so'));
-    
+
 function my_function() {
   echo &quot;The button was clicked\n&quot;;
 }
-    
+
 $window = &amp;new GtkWindow();
 $window-&gt;set_position(GTK_WIN_POS_MOUSE);
 $window-&gt;connect_object('destroy', array('gtk', 'main_quit'));
-    
+
 $button = &amp;new GtkButton(&quot;Click Me&quot;);
 $button-&gt;connect('clicked', 'my_function');
 $window-&gt;add($button);
-    
+
 $window-&gt;show_all();
-    
+
 gtk::main();
+
+?>
+]]>
       </programlisting>
      </example>
      For further information about connecting signals, refer to the 

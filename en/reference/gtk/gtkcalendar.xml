@@ -53,18 +53,21 @@
     <example>
      <title>Changing the style of a GtkCalendar</title>
      <programlisting role="php">
+<![CDATA[
+<?php
+
 dl(&quot;php_gtk.&quot; . (strstr(PHP_OS, &quot;WIN&quot;) ? &quot;dll&quot; : 
 &quot;so&quot;));
-    
+
 $window = &amp;new GtkWindow();
 $window-&gt;set_position(GTK_WIN_POS_CENTER);
 $window-&gt;connect_object(&quot;destroy&quot;, array(&quot;gtk&quot;, 
 &quot;main_quit&quot;));
-    
+
 /* create the calendar and add it to the window. */
 $calendar = &amp;new GtkCalendar();
 $window-&gt;add($calendar);
-    
+
 /* create a new style for the calendar, based on the old one */
 $oldstyle = $calendar-&gt;style;
 $newstyle = $oldstyle-&gt;copy();
@@ -74,13 +77,16 @@ $red = &amp;new GdkColor(255*255, 0, 0);
 $newstyle-&gt;font = $font;
 $newstyle-&gt;fg[GTK_STATE_SELECTED] = $red;
 $calendar-&gt;set_style($newstyle);
-    
+
 /* have today's date highlighted on opening */
 $calendar-&gt;select_day(date('d'));
-    
+
 $window-&gt;show_all();
-    
+
 gtk::main();
+
+?>
+]]>
      </programlisting>
     </example>
    </para>
@@ -132,7 +138,7 @@ gtk::main();
    </shortdesc>
    <desc>
     <simpara>
-     <function class="GtkCalendar">select_day()</function> specifies the
+     <function class="GtkCalendar">select_day</function> specifies the
      day number that will be selected (i.e. highlighted).
     </simpara>
     <simpara>
@@ -214,11 +220,15 @@ gtk::main();
      month is changed.  These are best stored in a file or files, e.g.
      <informalexample>
       <programlisting code="php">
+<![CDATA[
+<?php
+
 function new_month($calendar) {
   $calendar-&gt;clear_marks();
   $selected = $calendar-&gt;get_date();
   $month = ($selected[1]+1);
   $year = $selected[0];
+
   if(file_exists(&quot;diary/$year/marked_dates_$month.txt&quot;)) {
     $dates = fopen(&quot;diary/$year/marked_dates_$month.txt&quot;, 'r');
     $string = explode(',', fgets($dates));
@@ -226,12 +236,16 @@ function new_month($calendar) {
     for($i = 0; $i &lt; 31; $i++) {
       if($string[$i]==true) $calendar-&gt;mark_day($i+1);
     }
+
     $calendar-&gt;thaw();
     fclose($dates);
   }
 }
-    
+
 $calendar-&gt;connect('month-changed', 'new_month');
+
+?>
+]]>
       </programlisting>
      </informalexample>
     </para>
@@ -253,7 +267,7 @@ $calendar-&gt;connect('month-changed', 'new_month');
    </shortdesc>
    <desc>
     <simpara>
-     Use <function class="GtkCalendar">display_options()</function> to
+     Use <function class="GtkCalendar">display_options</function> to
      choose which elements of the calendar should be displayed via
      <enumname>GtkCalendarDisplayOptions</enumname>.
     </simpara>
@@ -276,7 +290,7 @@ $calendar-&gt;connect('month-changed', 'new_month');
    </shortdesc>
    <desc>
     <simpara>
-     <function class="GtkCalendar">get_date()</function> returns the
+     <function class="GtkCalendar">get_date</function> returns the
      currently selected calendar date as an array.  The contents are the year
      (e.g. 2002), the month (1 - 12), and the day (1 - 31), in that order.
     </simpara>
@@ -284,7 +298,7 @@ $calendar-&gt;connect('month-changed', 'new_month');
      <simpara>
       The range for the month is <literal>1 - 12</literal> here, but 
       <literal>0 - 11</literal> in the 
-      <function class="GtkCalendar">select_month()</function> method.  Marked
+      <function class="GtkCalendar">select_month</function> method.  Marked
       dates also run from <literal>0</literal>.  Beware!
      </simpara>
     </note>
@@ -303,12 +317,12 @@ $calendar-&gt;connect('month-changed', 'new_month');
    </shortdesc>
    <desc>
     <simpara>
-     <function class="GtkCalendar">freeze()</function> is used to prevent the
+     <function class="GtkCalendar">freeze</function> is used to prevent the
      screen flickering during an update as each string in the monthly array
      is evaluated and redrawn.  Place it before an update loop.
     </simpara>
     <simpara>
-     See also: <function classname="GtkCalendar">thaw()</function>.
+     See also: <function classname="GtkCalendar">thaw</function>.
     </simpara>
    </desc>
   </method>
@@ -325,8 +339,8 @@ $calendar-&gt;connect('month-changed', 'new_month');
    </shortdesc>
    <desc>
     <simpara>
-     <function class="GtkCalendar">thaw()</function> is the corollary to 
-     <function class="GtkCalendar">freeze()</function>, and is placed after
+     <function class="GtkCalendar">thaw</function> is the corollary to 
+     <function class="GtkCalendar">freeze</function>, and is placed after
      an update routine.
     </simpara>
    </desc>

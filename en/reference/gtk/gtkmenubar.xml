@@ -43,24 +43,27 @@
     <example>
      <title>Creating a Menu Bar</title>
      <programlisting role="php">
+<![CDATA[
+<?php
+
 dl('php_gtk.' . (strstr(PHP_OS, 'WIN') ? 'dll' : 'so'));
-    
+
 $window = &amp;new GtkWindow();
 $window-&gt;set_uposition(10, 10);
 $window-&gt;set_usize((gdk::screen_width()-20), (gdk::screen_height()-30));
 $window-&gt;connect_object('destroy', array('gtk', 'main_quit'));
-    
+
 $box = &amp;new GtkVBox();
 $window-&gt;add($box);
-....
+
 $menubar = &amp;new GtkMenuBar();
 $box-&gt;pack_start($menubar, false, false, 0);
-    
+
 $header1 = &amp;new GtkMenuItem(&quot;File&quot;);
 $menubar-&gt;append($header1);
 $header2 = &amp;new GtkMenuItem(&quot;Edit&quot;);
 $menubar-&gt;append($header2);
-....
+
 $filemenu = &amp;new GtkMenu();
 $open = &amp;new GtkMenuItem(&quot;Open&quot;);
 $filemenu-&gt;append($open); 
@@ -73,11 +76,14 @@ $exit = &amp;new GtkMenuItem(&quot;Exit&quot;);
 $exit-&gt;connect_object(&quot;activate&quot;, array(&quot;gtk&quot;, 
 &quot;main_quit&quot;));
 $filemenu-&gt;append($exit);
-    
+
 $header1-&gt;set_submenu($filemenu);
-....
+
 $window-&gt;show_all();
 gtk::main();
+
+?>
+]]>
      </programlisting>
     </example>
    </para>
@@ -101,7 +107,7 @@ gtk::main();
    </shortdesc>
    <desc>
     <simpara>
-     <function class="GtkMenuBar">set_shadow_type()</function> alters the
+     <function class="GtkMenuBar">set_shadow_type</function> alters the
      appearance of a <classname>GtkMenuBar</classname> according to the
      <enumname>GtkShadowType</enumname> option set.
     </simpara>

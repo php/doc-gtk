@@ -29,7 +29,7 @@
    <simpara>
     There is no direct constructor for a <classname>GdkGC</classname>.  To
     create one, you will need to use the <classname>GdkWindow</classname> 
-    method <function class="GdkWindow">new_gc()</function> and set the
+    method <function class="GdkWindow">new_gc</function> and set the
     properties that you are interested in directly.
    </simpara>
   </desc>
@@ -73,14 +73,20 @@
     <simpara>
      The way around this is to borrow an existing 
      <classname>GdkColormap</classname> and allocate a color from there.
-     You can use <function>gdk::colormap_get_system()</function> to do this,
+     You can use <function>gdk::colormap_get_system</function> to do this,
      or you can access the colormap in a <classname>GdkWindow</classname>.
     </simpara>
     <para>
      The syntax is:
      <informalexample>
       <programlisting role="php">
+<![CDATA[
+<?php
+
 $gc-&gt;foreground = $colormap-&gt;alloc('red');
+
+?>
+]]>
       </programlisting>
      </informalexample>
     </para>
@@ -106,13 +112,19 @@ $gc-&gt;foreground = $colormap-&gt;alloc('red');
     </simpara>
     <para>
      You will need to take an existing <classname>GdkColormap</classname>,
-     either by using <function>gdk::colormap_get_system()</function> or by
+     either by using <function>gdk::colormap_get_system</function> or by
      accessing the colormap property in the existing 
      <classname>GdkWindow</classname> that most widgets have, and give it
      a handle.  Then you do something like:
      <informalexample>
       <programlisting role="php">
+<![CDATA[
+<?php
+
 $gc-&gt;background = $colormap-&gt;alloc('lime green');
+
+?>
+]]>
       </programlisting>
      </informalexample>
      and the color is allocated intelligently.

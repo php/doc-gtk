@@ -61,7 +61,7 @@ $checkmenuitem = &amp;new GtkCheckMenuItem(&quot;CheckMenuItem's Label&quot;);
    </shortdesc>
    <desc>
     <simpara>
-     <function class="GtkCheckMenuItem">set_active()</function> sets
+     <function class="GtkCheckMenuItem">set_active</function> sets
      the state of the calling <classname>GtkCheckMenuItem</classname> 
      to either the <literal>GTK_STATE_ACTIVE</literal> or the 
      <literal>GTK_STATE_NORMAL</literal> <enumname>GtkStateType</enumname>. 
@@ -95,7 +95,7 @@ $checkmenuitem-&gt;set_active(true);
    </shortdesc>
    <desc>
     <simpara>
-     <function class="GtkCheckMenuItem">set_show_toggle()</function> 
+     <function class="GtkCheckMenuItem">set_show_toggle</function> 
      determines whether the toggle indicator should be visible at all
      times, or only when the menu item is active.
     </simpara>
@@ -118,7 +118,7 @@ $checkmenuitem-&gt;set_active(true);
    </shortdesc>
    <desc>
     <simpara>
-     <function class="GtkCheckMenuItem">toggled()</function> causes the
+     <function class="GtkCheckMenuItem">toggled</function> causes the
      calling <classname>GtkCheckMenuItem</classname> to emit the 
      <signalname class="GtkCheckMenuItem">toggled</signalname> signal.
     </simpara>
@@ -145,14 +145,14 @@ $checkmenuitem-&gt;set_active(true);
    <desc>
     <simpara>
      The <signalname class="GtkCheckMenuItem">toggled</signalname> signal is
-     emitted when the <function class="GtkCheckMenuItem">toggled()</function> 
+     emitted when the <function class="GtkCheckMenuItem">toggled</function> 
      method is called.  This is called internally when the 
      <classname>GtkCheckMenuItem</classname>'s 
      <signalname class="GtkMenuItem">activate</signalname> signal is emitted 
      -  that is, when a user clicks on the menu item or presses the
      <literal>Enter</literal> or <literal>Space</literal> key while the item
      is selected.  The signal is also emitted when calling the
-     <function class="GtkCheckMenuItem">set_active()</function> method.
+     <function class="GtkCheckMenuItem">set_active</function> method.
     </simpara>
     <simpara>
      Note that the state-switching triggered by activation is not 
@@ -183,8 +183,14 @@ $checkmenuitem-&gt;set_active(true);
     <para>
      <informalexample>
       <programlisting role="php">
+<![CDATA[
+<?php
+
 $active_state = $checkmenuitem-&gt;active;
 if($active_state == 1) echo &quot;This GtkCheckMenuItem is active\n&quot;;
+
+?>
+]]>
       </programlisting>
      </informalexample>
     </para>

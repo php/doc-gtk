@@ -48,7 +48,13 @@
    <para>
     <informalexample>
      <programlisting role="php">
+<![CDATA[
+<?php
+
 $menu = &amp;new GtkMenu();
+
+?>
+]]>
      </programlisting>
     </informalexample>
     creates an empty popup container widget that will exclusively hold 
@@ -63,20 +69,23 @@ $menu = &amp;new GtkMenu();
     <example>
      <title>Creating a right-click popup menu</title>
      <programlisting role="php">
+<![CDATA[
+<?php
+
 dl('php_gtk.' . (strstr(PHP_OS, 'WIN') ? 'dll' : 'so'));
-    
+
 function show_popup($event, $menu) {
 if($event-&gt;button == 3) {
     $menu-&gt;popup(null, null, null, $event-&gt;button, $event-&gt;time);
 }
-    
+
 $window = &amp;new GtkWindow();
 $window-&gt;set_default_size(350, 450);
 $window-&gt;connect_object('destroy', array('gtk', 'main_quit'));
-    
+
 $menu = &amp;new GtkMenu();
 $accel = $menu-&gt;ensure_uline_accel_group();
-    
+
 $open = &amp;new GtkMenuItem(&quot;Open&quot;);
 $open-&gt;lock_accelerators();
 $menu-&gt;append($open);
@@ -86,7 +95,7 @@ $menu-&gt;append($save);
 $separator = &amp;new GtkMenuItem();
 $separator-&gt;set_sensitive(false);
 $menu-&gt;append($separator);
-    
+
 $exit = &amp;new GtkMenuItem(&quot;&quot;);
 $accel_label = $exit-&gt;child;
 $accel_key = $accel_label-&gt;parse_uline(&quot;E_xit&quot;);
@@ -102,6 +111,9 @@ $window-&gt;connect_object('button-press-event', 'show_popup', $menu);
 $window-&gt;show_all();
 
 gtk::main();
+
+?>
+]]>
      </programlisting>
     </example>
    </para>
@@ -138,7 +150,7 @@ gtk::main();
    </shortdesc>
    <desc>
     <simpara>
-     The <function class="GtkMenu">popup()</function> method looks fairly
+     The <function class="GtkMenu">popup</function> method looks fairly
      intimidating at the outset, but is actually quite straightforward to
      use.
     </simpara>
@@ -159,13 +171,19 @@ gtk::main();
      <parameter>pos_function</parameter> parameter.
      <informalexample>
       <programlisting role="php">
+<![CDATA[
+<?php
+
 function position() {
 $position = array(300, 200);
 return $position;
 }
-    
+
 $filemenu-&gt;popup(null, null, 'position', $event-&gt;button, 
 $event-&gt;time);
+
+?>
+]]>
       </programlisting>
      </informalexample>
     </para>
@@ -190,7 +208,17 @@ $event-&gt;time);
      the same valid integer value, then setting the timer to 
      <literal>0</literal> will make the menu disappear as soon as the user
      releases the mouse-button that triggered it.  The safest setting for
-     this parameter is <programlisting>$event-&gt;time</programlisting> - 
+     this parameter is 
+     <programlisting>
+<![CDATA[
+<?php
+
+$event-&gt;time
+
+?>
+]]>
+
+     </programlisting> - 
      this being a setting that all <classname>GdkEvent</classname> 
      structures share; it causes the popup menu to react as you'd expect it
      to, and won't spring any surprises if you duplicate or otherwise adapt
@@ -211,10 +239,10 @@ $event-&gt;time);
    </shortdesc>
    <desc>
     <simpara>
-     <function class="GtkMenu">reposition()</function> is used internally
+     <function class="GtkMenu">reposition</function> is used internally
      to reposition a <classname>GtkMenuItem</classname>'s submenu according
      to the results of the position function called in the 
-     <function class="GtkMenu">popup()</function> method.
+     <function class="GtkMenu">popup</function> method.
     </simpara>
    </desc>
   </method>
@@ -231,7 +259,7 @@ $event-&gt;time);
    </shortdesc>
    <desc>
     <simpara>
-     <function class="GtkMenu">popdown()</function> is used internally to
+     <function class="GtkMenu">popdown</function> is used internally to
      de-reference a popup menu.  It is one of the methods that is called
      when a menu emits the 
      <signalname class="GtkMenuShell">deactivate</signalname> signal.
@@ -253,7 +281,7 @@ $event-&gt;time);
    </shortdesc>
    <desc>
     <simpara>
-     <function class="GtkMenu">get_active()</function> can be used to
+     <function class="GtkMenu">get_active</function> can be used to
      retrieve the currently selected <classname>GtkMenuItem</classname> 
      object through the menu.  Note that this method returns the menu item
      object itself, and is really only useful for comparison against a set
@@ -262,9 +290,9 @@ $event-&gt;time);
      <signalname class="GtkMenuItem">activate</signalname> signal.
     </simpara>
     <simpara>
-     The <function class="GtkMenu">get_active()</function> method is used
+     The <function class="GtkMenu">get_active</function> method is used
      internally in <classname>GtkOptionMenu</classname>'s 
-     <function class="GtkOptionMenu">set_history()</function> to compare
+     <function class="GtkOptionMenu">set_history</function> to compare
      the menu item currently selected by the user against that previously
      displayed.
     </simpara>
@@ -283,16 +311,16 @@ $event-&gt;time);
    </shortdesc>
    <desc>
     <simpara>
-     <function class="GtkMenu">set_active()</function> sets the 'active'
+     <function class="GtkMenu">set_active</function> sets the 'active'
      <classname>GtkMenuItem</classname> in a <classname>GtkMenu</classname>. 
      Note that this is not the same thing as calling the 
-     <function class="GtkItem">select()</function> from the menu item, but is
+     <function class="GtkItem">select</function> from the menu item, but is
      a way of adding to the given item's reference count from the menu.
     </simpara>
     <simpara>
-     The <function class="GtkMenu">set_active()</function> method is mainly
+     The <function class="GtkMenu">set_active</function> method is mainly
      used internally in GTK, as part of <classname>GtkOptionMenu</classname>'s 
-     <function class="GtkOptionMenu">set_history()</function> method.
+     <function class="GtkOptionMenu">set_history</function> method.
     </simpara>
    </desc>
   </method>
@@ -312,11 +340,11 @@ $event-&gt;time);
    </shortdesc>
    <desc>
     <simpara>
-     <function class="GtkMenu">set_accel_group()</function> sets the global
+     <function class="GtkMenu">set_accel_group</function> sets the global
      accelerator group for a <classname>GtkMenu</classname>.  A 
      <classname>GtkAccelGroup</classname> set in this way should also be
      designated as toplevel.  This is achieved by calling 
-     <function class="GtkWindow">add_accel_group()</function> from the
+     <function class="GtkWindow">add_accel_group</function> from the
      corresponding toplevel <classname>GtkWindow</classname>.
     </simpara>
     <simpara>
@@ -347,7 +375,7 @@ $event-&gt;time);
    </shortdesc>
    <desc>
     <simpara>
-     <function class="GtkMenu">get_accel_group()</function> returns the
+     <function class="GtkMenu">get_accel_group</function> returns the
      global accelerator group that is used in the calling 
      <classname>GtkMenu</classname>.
     </simpara>
@@ -377,7 +405,7 @@ $event-&gt;time);
    </shortdesc>
    <desc>
     <simpara>
-     <function class="GtkMenu">get_uline_accel_group()</function> returns
+     <function class="GtkMenu">get_uline_accel_group</function> returns
      the <classname>GtkAccelGroup</classname> used by GTK during the time
      that the <classname>GtkMenu</classname> is popped up.  It is used
      internally to allow the user to modify the key accelerators where
@@ -410,7 +438,7 @@ $event-&gt;time);
    </shortdesc>
    <desc>
     <simpara>
-     <function class="GtkMenu">ensure_uline_accel_group()</function> returns
+     <function class="GtkMenu">ensure_uline_accel_group</function> returns
      the <classname>GtkAccelGroup</classname> used by GTK during the time
      that the calling <classname>GtkMenu</classname> is popped up, if one
      exists, and creates one for internal use if there is none.
@@ -441,18 +469,18 @@ $event-&gt;time);
    </shortdesc>
    <desc>
     <simpara>
-     <function class="GtkMenu">attach_to_widget()</function> is mostly used
+     <function class="GtkMenu">attach_to_widget</function> is mostly used
      internally to set up the relationship between the 'parent' - usually a 
      <classname>GtkMenuItem</classname> - and the 
      <classname>GtkMenu</classname> that is calling the method.
     </simpara>
     <simpara>
      This is not the same thing as setting a submenu for a menu item (use 
-     <function class="GtkMenuItem">set_submenu()</function> for that), but
+     <function class="GtkMenuItem">set_submenu</function> for that), but
      creates an underlying relationship that subsumes the reference count
      on the menu to that of the <parameter>attach_widget</parameter>.  The
      <classname>GtkWidget</classname> method 
-     <function class="GtkWidget">set_parent()</function> has very similar
+     <function class="GtkWidget">set_parent</function> has very similar
      functionality, but is not appropriate here because the menu is itself
      a toplevel widget.
     </simpara>
@@ -471,17 +499,17 @@ $event-&gt;time);
    </shortdesc>
    <desc>
     <simpara>
-     <function class="GtkMenu">detach()</function> detaches the calling 
+     <function class="GtkMenu">detach</function> detaches the calling 
      <classname>GtkMenu</classname> from its current parent widget.  This
      method is used internally when the menu is being destroyed.
     </simpara>
     <simpara>
-     Calling the <function class="GtkMenu">detach()</function> method after
+     Calling the <function class="GtkMenu">detach</function> method after
      the menu has been set as a submenu, unsets that relationship in exactly
-     the same way as <function class="GtkMenuItem">remove_submenu()</function> 
+     the same way as <function class="GtkMenuItem">remove_submenu</function> 
      would.  The difference is that the attached widget does not necessarily
      need to be a <classname>GtkMenuItem</classname> for 
-     <function class="GtkMenu">detach()</function> to work.
+     <function class="GtkMenu">detach</function> to work.
     </simpara>
    </desc>
   </method>
@@ -501,9 +529,9 @@ $event-&gt;time);
    </shortdesc>
    <desc>
     <simpara>
-     <function class="GtkMenu">get_attach_widget()</function> returns the
+     <function class="GtkMenu">get_attach_widget</function> returns the
      object to which the calling <classname>GtkMenu</classname> is currently
-     attached.  Use <function class="GtkWidget">get_name()</function> to
+     attached.  Use <function class="GtkWidget">get_name</function> to
      further identify the returned object, or else compare it with likely
      candidates.
     </simpara>
@@ -522,7 +550,7 @@ $event-&gt;time);
    </shortdesc>
    <desc>
     <simpara>
-     <function class="GtkMenu">set_tearoff_state()</function> when set to
+     <function class="GtkMenu">set_tearoff_state</function> when set to
      <literal>true</literal> creates a non-resizeable, decorated, top-level
      window, sized to fit the menu contents and iconized in the task bar. 
      The torn-off menu does not need a further parent window, and can act as
@@ -546,30 +574,36 @@ $event-&gt;time);
      this:
      <informalexample>
       <programlisting role="php">
+<![CDATA[
+<?php
+
 dl('php_gtk.' . (strstr(PHP_OS, 'WIN') ? 'dll' : 'so'));
-    
+
 function exit_activated($menu) {
 $menu-&gt;destroy();
 }
-    
+
 $menu = &amp;new GtkMenu();
 $window = $filemenu-&gt;parent;
 $window-&gt;ref();
 $window-&gt;set_flags(GTK_HAS_GRAB);
 $menu-&gt;connect_object('destroy', array('gtk', 'main_quit'));
-....
+
 /*  Append and connect your menu items here, but note that any exit item
  must call $menu-&gt;destroy() rather than the usual gtk::main_quit(), in
  order to avoid the main loop being quitted twice over  */
-....
+
 $exit = &amp;new GtkMenuItem(&quot;Exit&quot;);
 $exit-&gt;connect_object('activate', 'exit_activated', $menu);
-    
+
 $menu-&gt;set_title(&quot;Tested!&quot;);
 $menu-&gt;set_tearoff_state(true);
 $menu-&gt;show_all();
 
 gtk::main();
+
+?>
+]]>
       </programlisting>
      </informalexample>
      Notice that the <signalname class="GtkObject">destroy</signalname> 
@@ -599,10 +633,10 @@ gtk::main();
    </shortdesc>
    <desc>
     <simpara>
-     <function class="GtkMenu">set_title()</function> sets the window title
+     <function class="GtkMenu">set_title</function> sets the window title
      for a menu that has been detached from its parent through either a 
      <classname>GtkTearoffMenuItem</classname> widget or the 
-     <function class="GtkMenu">set_tearoff_state()</function> method.  As with
+     <function class="GtkMenu">set_tearoff_state</function> method.  As with
      all window titles, the text will be truncated to fit the area available.
     </simpara>
     <simpara>
@@ -632,7 +666,7 @@ gtk::main();
    </shortdesc>
    <desc>
     <simpara>
-     <function class="GtkMenu">reorder_child()</function> moves the specified
+     <function class="GtkMenu">reorder_child</function> moves the specified
      <classname>GtkMenuItem</classname> from its current position in the 
      <classname>GtkMenu</classname> to the position given.  All items prior
      to the new position remain unchanged, and the later items all move on

@@ -18,7 +18,7 @@
     object currently provides the only built-in means of masking input in
     GTK+.  If you want to restrict the user to the values displayed rather
     than allowing keyboard input, call 
-    <function class="GtkEntry">set_editable()</function> from the spinbutton.
+    <function class="GtkEntry">set_editable</function> from the spinbutton.
    </simpara>
    <simpara>
     See also:  <classname>GtkAdjustment</classname>, 
@@ -54,8 +54,8 @@
     appropriately defined <classname>GtkAdjustment</classname>, as the
     first five parameters of the adjustment need to be set for the spinbutton
     widget to operate.  You may either associate the adjustment at this point,
-    or use the <function class="GtkSpinButton">set_adjustment()</function> 
-    or <function class="GtkSpinButton">configure()</function> method at a
+    or use the <function class="GtkSpinButton">set_adjustment</function> 
+    or <function class="GtkSpinButton">configure</function> method at a
     later point in your script.
    </simpara>
    <simpara>
@@ -74,62 +74,68 @@
     <example>
      <title>Creating a <classname>GtkSpinButton</classname> calendar.</title>
      <programlisting role="php">
+<![CDATA[
+<?php
+
 dl('php_gtk.' . (strstr(PHP_OS, 'WIN') ? 'dll' : 'so'));
-    
+
 function collect($d, $m, $y) {
   echo $d-&gt;get_value_as_int(). &quot;-&quot; .$m-&gt;get_value_as_int(). 
 &quot;-&quot; .$y-&gt;get_value_as_int().&quot;\n&quot;;
   flush();
 }
-    
+
 $window = &amp;new GtkWindow();
 $window-&gt;set_position(GTK_WIN_POS_CENTER);
 $window-&gt;connect_object('destroy', array('gtk', 'main_quit'));
-    
+
 $vbox = &amp;new GtkVBox(false, 5);
 $window-&gt;add($vbox);
-    
+
 $hbox = &amp;new GtkHBox(false, 5);
 $hbox-&gt;set_border_width(5);
 $vbox-&gt;add($hbox);
-    
+
 $daylabel = &amp;new GtkLabel(&quot;Day:&quot;);
 $hbox-&gt;pack_start($daylabel, false);
-    
+
 $day = date(&quot;d&quot;);
 $dayadj = &amp;new GtkAdjustment($day, 1.0, 31.0, 1.0, 7.0, 0.0);
 $dayspin = &amp;new GtkSpinButton($dayadj);
 $dayspin-&gt;set_wrap(true);
 $hbox-&gt;pack_start($dayspin, false);
-    
+
 $monthlabel = &amp;new GtkLabel(&quot;Month:&quot;);
 $hbox-&gt;pack_start($monthlabel, false);
-    
+
 $month = date(&quot;m&quot;);
 $monthadj = &amp;new GtkAdjustment($month, 1.0, 12.0, 1.0, 3.0, 0.0);
 $monthspin = &amp;new GtkSpinButton($monthadj);
 $monthspin-&gt;set_wrap(true);
 $hbox-&gt;pack_start($monthspin, false);
-    
+
 $yearlabel = &amp;new GtkLabel(&quot;Year:&quot;);
 $hbox-&gt;pack_start($yearlabel, false);
-    
+
 $year = date(&quot;Y&quot;);
 $yearadj = &amp;new GtkAdjustment($year, $year-90, $year+10, 1.0, 5.0, 0.0);
 $yearspin = &amp;new GtkSpinButton($yearadj);
 $yearspin-&gt;set_usize(55, 0);
 $hbox-&gt;pack_start($yearspin, false);
-    
+
 $button = &amp;new GtkButton(&quot;Collect data&quot;);
 $button-&gt;connect_object('clicked', 'collect', $dayspin, $monthspin, 
 $yearspin);
 $vbox-&gt;add($button);
-    
+
 $vbox-&gt;show_all();
 $hbox-&gt;show_all();
 $window-&gt;show_all();
-    
+
 gtk::main();
+
+?>
+]]>
      </programlisting>
     </example>
     See also:  <classname>GtkAdjustment</classname>'s 
@@ -183,9 +189,9 @@ gtk::main();
    </shortdesc>
    <desc>
     <simpara>
-     Call <function class="GtkSpinButton">set_adjustment()</function> when
+     Call <function class="GtkSpinButton">set_adjustment</function> when
      you only need to attach an adjustment object to a spinbutton.  Otherwise, 
-     use <function class="GtkSpinButton">configure()</function>.
+     use <function class="GtkSpinButton">configure</function>.
     </simpara>
     <simpara>
      An adjustment associated with a spinbutton in this way will overwrite
@@ -209,7 +215,7 @@ gtk::main();
    </shortdesc>
    <desc>
     <simpara>
-     <function class="GtkSpinButton">get_adjustment()</function> returns the
+     <function class="GtkSpinButton">get_adjustment</function> returns the
      <classname>GtkAdjustment</classname> object currently associated with
      the calling spinbutton.
     </simpara>
@@ -228,7 +234,7 @@ gtk::main();
    </shortdesc>
    <desc>
     <simpara>
-     <function class="GtkSpinButton">set_digits()</function> sets the
+     <function class="GtkSpinButton">set_digits</function> sets the
      number of digits displayed after the decimal point in the spinbutton's
      entry field.  User input is limited to the constraints of the displayed
      decimal places.
@@ -256,10 +262,16 @@ gtk::main();
     <para>
      <informalexample>
       <programlisting role="php">
+<![CDATA[
+<?php
+
 $adj = &amp;new GtkAdjustment(0.0, 0.0, 1.0, 0.01, 0.1, 0.0);
 $spin = &amp;new GtkSpinButton($adj, 0.0, 2);
-    
+
 round($spin-&gt;get_value_as_float(), 2);
+
+?>
+]]>
       </programlisting>
      </informalexample>
     </para>
@@ -297,7 +309,7 @@ round($spin-&gt;get_value_as_float(), 2);
    </shortdesc>
    <desc>
     <simpara>
-     <function class="GtkSpinButton">set_value()</function> sets the
+     <function class="GtkSpinButton">set_value</function> sets the
      value displayed in the spinbutton's entry field, which is
      equivalent to the <literal>value</literal> field in the
      spinbutton's associated <classname>GtkAdjustment</classname>.
@@ -337,7 +349,7 @@ round($spin-&gt;get_value_as_float(), 2);
      the value of the nearest range boundary.
     </simpara>
     <simpara>
-     Note that <function classname="GtkSpinButton">set_value()</function>.
+     Note that <function classname="GtkSpinButton">set_value</function>.
      overrides the update policy setting.
     </simpara>
    </desc>
@@ -355,7 +367,7 @@ round($spin-&gt;get_value_as_float(), 2);
    </shortdesc>
    <desc>
     <simpara>
-     <function class="GtkSpinButton">set_numeric()</function>, when set
+     <function class="GtkSpinButton">set_numeric</function>, when set
      to <literal>true</literal>, prevents non-numeric characters other
      than the decimal point and positive/negative signs from being
      displayed in the spinbutton's <classname>GtkEntry</classname> at
@@ -408,7 +420,7 @@ round($spin-&gt;get_value_as_float(), 2);
    </shortdesc>
    <desc>
     <simpara>
-     Where <function class="GtkSpinButton">set_wrap()</function> is set to
+     Where <function class="GtkSpinButton">set_wrap</function> is set to
      <literal>true</literal>, the spinbutton having displayed the upper
      bound of its value range will return to the lower bound on the next
      step increment.  In other words, if the range is 1 to 10, 1 will follow
@@ -457,7 +469,7 @@ round($spin-&gt;get_value_as_float(), 2);
    </shortdesc>
    <desc>
     <simpara>
-     <function class="GtkSpinButton">set_snap_to_ticks()</function>, if set
+     <function class="GtkSpinButton">set_snap_to_ticks</function>, if set
      to <literal>true</literal>, will restrict input values to the order of
      the step increment, taking the nearest value to the increment as the
      input value.  For example, if you have set the step increment to 
@@ -471,7 +483,7 @@ round($spin-&gt;get_value_as_float(), 2);
      to key in anything within range to the given number of decimal points.
     </simpara>
     <simpara>
-     See also:  <function class="GtkSpinButton">set_digits()</function>.
+     See also:  <function class="GtkSpinButton">set_digits</function>.
     </simpara>
    </desc>
   </method>
@@ -488,7 +500,7 @@ round($spin-&gt;get_value_as_float(), 2);
    </shortdesc>
    <desc>
     <simpara>
-     The <function class="GtkSpinButton">update()</function> method is used
+     The <function class="GtkSpinButton">update</function> method is used
      internally to update the <literal>value</literal> field in the
      underlying <classname>GtkAdjustment</classname> according to the
      update policy, digits and snap settings.

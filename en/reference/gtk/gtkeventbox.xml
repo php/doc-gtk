@@ -91,26 +91,32 @@
     <example>
      <title>Giving a <classname>GtkLabel</classname> a tooltip.</title>
      <programlisting role="php">
+<![CDATA[
+<?php
+
 dl('php_gtk.' . (strstr(PHP_OS, 'WIN') ? 'dll' : 'so'));
-    
+
 $window = &amp;new GtkWindow();
 $window-&gt;set_position(GTK_WIN_POS_CENTER);
 $window-&gt;connect_object('destroy', array('gtk', 'main_quit'));
-    
+
 $eventbox = &amp;new GtkEventBox();
 $label = &amp;new GtkLabel(&quot;This is a normal label.  It cannot capture 
 events.&quot;);
 $eventbox-&gt;add($label);
 $label-&gt;show();
 $window-&gt;add($eventbox);
-    
+
 $tooltip = &amp;new GtkTooltips();
 $tooltip-&gt;set_tip($eventbox, &quot;So how did this get here?&quot;, null);
 $tooltip-&gt;enable();
-    
+
 $window-&gt;show_all();
-    
+
 gtk::main();
+
+?>
+]]>
      </programlisting>
     </example>
    </para>

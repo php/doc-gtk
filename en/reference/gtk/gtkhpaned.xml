@@ -45,27 +45,33 @@
     <example>
      <title>Constructing a <classname>GtkHPaned widget</classname></title>
      <programlisting role="php">
+<![CDATA[
+<?php
+
 $window = &amp;new GtkWindow();
 $window-&gt;set_title(&quot;GtkHPaned&quot;);
 $window-&gt;connect_object(&quot;destroy&quot;, array(&quot;gtk&quot;, 
 &quot;main_quit&quot;));
-    
+
 $hpaned = &amp;new GtkHPaned();
 $window-&gt;add($hpaned);
 $hpaned-&gt;show();
-    
+
 $button = &amp;new GtkButton(&quot;Widget child1&quot;);
 $hpaned-&gt;pack1($button, false, false);
 $button-&gt;show();
-    
+
 $label = &amp;new GtkLabel();
 $label-&gt;set_text(&quot;Widget child2&quot;);
 $hpaned-&gt;pack2($label, true, true);
 $label-&gt;show();
-    
+
 $window-&gt;show_all();
-    
+
 gtk::main();
+
+?>
+]]>
      </programlisting>
     </example>
     Note that setting the <parameter>resize</parameter> parameter when packing

@@ -18,9 +18,9 @@
     loaded and queried.
    </simpara>
    <simpara>
-    To load a font, use <function>gdk::font_load()</function>.  To load a
+    To load a font, use <function>gdk::font_load</function>.  To load a
     fontset - a range of different fonts - use 
-    <function>gdk::fontset_load()</function>.  Either function will return
+    <function>gdk::fontset_load</function>.  Either function will return
     a single <classname>GdkFont</classname>.
    </simpara>
    <note>
@@ -46,7 +46,7 @@
    </shortdesc>
    <desc>
     <simpara>
-     <function class="GdkFont">extents()</function> returns an array
+     <function class="GdkFont">extents</function> returns an array
      of five integers representing the left bearing, right bearing, width,
      ascent and descent of the string using the font, or the font itself, 
      as appropriate.
@@ -91,14 +91,14 @@
    <desc>
     <simpara>
      The return from this method is the equivalent of the right bearing
-     returned by <function class="GdkFont">extents()</function>.  It is the
+     returned by <function class="GdkFont">extents</function>.  It is the
      size in pixels of the width of the string, to the point where the final
      part of the final character in the string is drawn.
     </simpara>
     <simpara>
      If you need the logical width of the string - that is, to the point
      where the next character should be inserted - use 
-     <function class="GdkFont">width()</function> instead.
+     <function class="GdkFont">width</function> instead.
     </simpara>
    </desc>
   </method>
@@ -115,10 +115,10 @@
    </shortdesc>
    <desc>
     <simpara>
-     The return value of <function class="GdkFont">height()</function> is
+     The return value of <function class="GdkFont">height</function> is
      arrived at by summing the values of <parameter>ascent</parameter> and
      <parameter>descent</parameter> returned by 
-     <function class="GdkFont">extents()</function> and relating to the
+     <function class="GdkFont">extents</function> and relating to the
      current string.
     </simpara>
     <simpara>
@@ -149,7 +149,7 @@
    </shortdesc>
    <desc>
     <simpara>
-     <function class="GdkFont">width()</function> returns the logical width
+     <function class="GdkFont">width</function> returns the logical width
      of the text string, measured in pixels.  The logical width includes the
      area up to where the next character should be drawn.
     </simpara>

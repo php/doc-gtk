@@ -11,8 +11,8 @@
     <classname>GtkHBox</classname> is a box container that packs child
     widgets in a single row, using the packing methods inherited from 
     <classname>GtkBox</classname>, such as 
-    <function class="GtkBox">pack_start()</function>, as well as the less
-    flexible <function class="GtkContainer">add()</function> method available
+    <function class="GtkBox">pack_start</function>, as well as the less
+    flexible <function class="GtkContainer">add</function> method available
     to most container widgets.  <classname>GtkHBox</classname> and
     <classname>GtkVBox</classname> in combination are the most commonly
     used packing widgets.  See the <classname>GtkVBox</classname> constructor
@@ -62,7 +62,15 @@
     child widgets along the width of the container, in pixels.  Leaving both
     parameters empty, e.g.
     <informalexample>
-     <programlisting role="php">$hbox = &amp;new GtkHBox();</programlisting>
+     <programlisting role="php">
+<![CDATA[
+<?php
+
+$hbox = &amp;new GtkHBox();
+
+?>
+]]>
+     </programlisting>
     </informalexample>
     will set the default behaviour of individual sizing and zero spacing.
    </para>

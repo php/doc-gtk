@@ -22,8 +22,8 @@
    <simpara>
     See also:  <classname>GtkAspectFrame</classname>, 
     <classname>GtkContainer</classname>, 
-    <function class="GtkWidget">set_uposition()</function>, 
-    <function class="GtkWidget">set_usize()</function>.
+    <function class="GtkWidget">set_uposition</function>, 
+    <function class="GtkWidget">set_usize</function>.
    </simpara>
   </desc>
  </classmeta>
@@ -92,32 +92,38 @@
        Resetting <classname>GtkAlignment</classname> parameters.
       </title>
       <programlisting role="php">
+<![CDATA[
+<?php
+
 dl('php_gtk.' . (strstr(PHP_OS, 'WIN') ? 'dll' : 'so'));
-    
+
 function change_it($align, &amp;$i) {
   if($i%2) $align-&gt;set(1.0, 1.0, 0.4, 0.3);
   elseif($i%3) $align-&gt;set(0.0, 0.0, 0.6, 0.2);
   else $align-&gt;set(0.0, 1.0, 0.1, 0.2);
   $i++;
   }
-    
+
 $window = &amp;new GtkWindow();
 $window-&gt;set_position(GTK_WIN_POS_CENTER);
 $window-&gt;set_default_size((gdk::screen_width()-10), 
 (gdk::screen_height()-30));
 $window-&gt;connect_object('destroy', array('gtk', 'main_quit'));
-    
+
 $align = &amp;new GtkAlignment(0.5, 0.5, 1.0, 1.0);
 $button = &amp;new GtkButton(&quot;Click Here&quot;);
 $i = 0;
 $button-&gt;connect_object('enter', 'change_it', $align, &amp;$i);
 $align-&gt;add($button);
 $align-&gt;show_all();
-    
+
 $window-&gt;add($align);
 $window-&gt;show_all();
-    
+
 gtk::main();
+
+?>
+]]>
       </programlisting>
      </example>
     </para>

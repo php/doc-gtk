@@ -23,8 +23,8 @@
     </simpara>
    </note>
    <simpara>
-    See also:  <function class= "GtkWindow">add_accel_group()</function>, 
-    <function class="GtkWidget">add_accelerator()</function>, 
+    See also:  <function class= "GtkWindow">add_accel_group</function>, 
+    <function class="GtkWidget">add_accelerator</function>, 
     <classname>GtkAccelLabel</classname>, <classname>GtkMenuItem</classname>.
    </simpara>
   </desc>
@@ -55,12 +55,12 @@ $accelgroup = &amp;new GtkAccelGroup();
     In most cases, the newly-constructed <classname>GtkAccelGroup</classname> 
     would be used by all the menus belonging to that toplevel window, and
     should be added to it using 
-    <function class="GtkWindow">add_accel_group()</function>.
+    <function class="GtkWindow">add_accel_group</function>.
    </simpara>
    <simpara>
     It is not always necessary to create an accelerator group in this way. 
     The <classname>GtkMenu</classname> method 
-    <function class="GtkMenu">ensure_uline_accel_group()</function> calls
+    <function class="GtkMenu">ensure_uline_accel_group</function> calls
     the <classname>GtkAccelGroup</classname> used internally by the menu for
     underline accelerators for the duration of the period that the menu is
     popped up.  If none is designated, a new accelerator group is created
@@ -83,14 +83,14 @@ $accelgroup = &amp;new GtkAccelGroup();
    </shortdesc>
    <desc>
     <simpara>
-     <function class="GtkAccelGroup">lock()</function> prevents further
+     <function class="GtkAccelGroup">lock</function> prevents further
      changes to the accelerator entries in the calling 
      <classname>GtkAccelGroup</classname>.
     </simpara>
     <simpara>
      To prevent further keys being altered, added to or removed from a
      single existing <literal>GtkAccelEntry</literal>, use 
-     <function class="GtkWidget">lock_accelerators()</function>.
+     <function class="GtkWidget">lock_accelerators</function>.
     </simpara>
    </desc>
   </method>
@@ -107,14 +107,14 @@ $accelgroup = &amp;new GtkAccelGroup();
    </shortdesc>
    <desc>
     <simpara>
-     <function class="GtkAccelGroup">unlock()</function> allows accelerator
+     <function class="GtkAccelGroup">unlock</function> allows accelerator
      entries to be altered, added to or removed from a previously locked 
      <classname>GtkAccelGroup</classname>.
     </simpara>
     <simpara>
      To allow a secondary key in a <literal>GtkAccelEntry</literal> to be
      designated by the user, use 
-     <function class="GtkWidget">unlock_accelerators()</function>.
+     <function class="GtkWidget">unlock_accelerators</function>.
     </simpara>
    </desc>
   </method>

@@ -56,8 +56,11 @@
     <example>
      <title>Constructing a GtkList</title>
      <programlisting role="php">
+<![CDATA[
+<?php
+
 dl('php_gtk.' . (strstr(PHP_OS, 'WIN') ? 'dll' : 'so'));
-    
+
 function echo_it($list, $listitem) {
 /* collect the text from the selected list item's label */
   $listlabel = $listitem-&gt;child;
@@ -77,21 +80,21 @@ function echo_it($list, $listitem) {
   }
   else gtk::main_quit();
 }
-    
+
 $window = &amp;new GtkWindow(GTK_WINDOW_DIALOG);
 $window-&gt;set_position(GTK_WIN_POS_CENTER);
 $window-&gt;connect_object('destroy', array('gtk', 'main_quit'));
-    
+
 $list = &amp;new GtkList();
 /* the contents of this array will populate the list */
 $fill = array('Angela', 'Belinda', 'Carolyn', 'Danike', 'Etha', 'Fiona', 
 'Gertraud', 'Heidi', 'Jessica', 'Kirstin', 'Lorinda', 'Marianne');
-    
+
 foreach(range(0, count($fill)-1) as $i) 
   $listitem[] = &amp;new GtkListItem($fill[$i]);
-    
+
 $list-&gt;append_items($listitem);
-    
+
 $enditem = &amp;new GtkListItem();
 /* a list item is also a container */
 $button = &amp;new GtkButton('Close');
@@ -101,11 +104,14 @@ widget, so it's okay to use add() */
 $list-&gt;add($enditem);
 $list-&gt;connect('select-child', 'echo_it');
 $list-&gt;show_all();
-    
+
 $window-&gt;add($list);
 $window-&gt;show_all();
-    
+
 gtk::main();
+
+?>
+]]>
      </programlisting>
     </example>
    </para>
@@ -168,8 +174,8 @@ gtk::main();
    <desc>
     <simpara>
      The only difference between 
-     <function class="GtkList">select_item()</function> and 
-     <function class="GtkList">select_child()</function> is that the former
+     <function class="GtkList">select_item</function> and 
+     <function class="GtkList">select_child</function> is that the former
      takes the item's list position as a parameter rather than the 
      <classname>GtkListItem</classname> object itself.  In either case, the
      signal that is actually emitted is the list item's 
@@ -194,8 +200,8 @@ gtk::main();
    <desc>
     <simpara>
      The only difference between 
-     <function class="GtkList">unselect_item()</function> and 
-     <function class="GtkList">unselect_child()</function> is that the former
+     <function class="GtkList">unselect_item</function> and 
+     <function class="GtkList">unselect_child</function> is that the former
      takes the item's list position as a parameter rather than the 
      <classname>GtkListItem</classname> object itself.  In either case, the
      signal that is actually emitted is the list item's 
@@ -223,8 +229,8 @@ gtk::main();
    <desc>
     <simpara>
      The only difference between 
-     <function class="GtkList">select_item()</function> and 
-     <function class="GtkList">select_child()</function> is that the former
+     <function class="GtkList">select_item</function> and 
+     <function class="GtkList">select_child</function> is that the former
      takes the item's list position as a parameter rather than the 
      <classname>GtkListItem</classname> object itself.  In either case, the
      signal that is actually emitted is the list item's 
@@ -252,8 +258,8 @@ gtk::main();
    <desc>
     <simpara>
      The only difference between 
-     <function class="GtkList">unselect_item()</function> and 
-     <function class="GtkList">unselect_child()</function> is that the former
+     <function class="GtkList">unselect_item</function> and 
+     <function class="GtkList">unselect_child</function> is that the former
      takes the item's list position as a parameter rather than the 
      <classname>GtkListItem</classname> object itself.  In either case, the
      signal that is actually emitted is the list item's 
@@ -279,7 +285,7 @@ gtk::main();
    </shortdesc>
    <desc>
     <simpara>
-     <function class="GtkList">child_position()</function> returns the
+     <function class="GtkList">child_position</function> returns the
     .list position currently holding the widget that was passed as the
      argument.  The widget needs to be passed by reference, i.e. using the
      form <literal>$widget</literal>.
@@ -338,19 +344,19 @@ gtk::main();
     </simpara>
     <simpara>
      Selection of all the items in the highlighted range requires that 
-     <function class="GtkList">scroll_vertical()</function> is also set
+     <function class="GtkList">scroll_vertical</function> is also set
      appropriately.
     </simpara>
     <simpara>
      In general, calling the 
-     <function class="GtkList">extend_selection()</function> method
+     <function class="GtkList">extend_selection</function> method
      will only select the last row with focus.  It needs to have 
-     <function class="GtkList">toggle_add_mode()</function> set in order to
-     do this when <function class="GtkList">scroll_vertical()</function> is
+     <function class="GtkList">toggle_add_mode</function> set in order to
+     do this when <function class="GtkList">scroll_vertical</function> is
      set after the list widget has grab.
     </simpara>
     <simpara>
-     As with <function class="GtkList">scroll_vertical()</function>, this
+     As with <function class="GtkList">scroll_vertical</function>, this
      method's <parameter>position</parameter> parameter is used only when
      the <enumname>GtkScrollType</enumname> value is set to 
      <literal>GTK_SCROLL_JUMP</literal>, and represents a percentage of the
@@ -372,7 +378,7 @@ gtk::main();
    </shortdesc>
    <desc>
     <simpara>
-     <function class="GtkList">start_selection()</function> selects the range
+     <function class="GtkList">start_selection</function> selects the range
      between the anchor item - <literal>0</literal> on first
      opening or the most recent selection thereafter - and the next selection
      that is made.  For instance, if you were to select item 4 on opening, the
@@ -386,8 +392,8 @@ gtk::main();
      set to <literal>GTK_SELECTION_EXTENDED</literal>.
     </simpara>
     <simpara>
-     See also:  <function class="GtkList">end_selection()</function>, 
-     <function class="GtkList">end_drag_selection()</function>.
+     See also:  <function class="GtkList">end_selection</function>, 
+     <function class="GtkList">end_drag_selection</function>.
     </simpara>
    </desc>
   </method>
@@ -401,13 +407,13 @@ gtk::main();
    </funcsynopsis>
    <shortdesc>
     Curtails selection set with 
-    <function class="GtkList">start_selection()</function>.
+    <function class="GtkList">start_selection</function>.
    </shortdesc>
    <desc>
     <simpara>
-     <function class="GtkList">end_selection()</function> ends a selection
+     <function class="GtkList">end_selection</function> ends a selection
      as it would be if made using 
-     <function class="GtkList">start_selection()</function>.  It curtails
+     <function class="GtkList">start_selection</function>.  It curtails
      the selection so that only the anchor and the item selected return
      a <signalname class="GtkListItem">select</signalname> signal.
     </simpara>
@@ -430,10 +436,10 @@ gtk::main();
    </shortdesc>
    <desc>
     <simpara>
-     <function class="GtkList">select_all()</function> selects all the
+     <function class="GtkList">select_all</function> selects all the
      list items in a <classname>GtkList</classname>.  Note that there
      needs to be the possibility of multiple selection for this method to
-     work; see <function class="GtkList">set_selection_mode()</function>.
+     work; see <function class="GtkList">set_selection_mode</function>.
     </simpara>
    </desc>
   </method>
@@ -450,7 +456,7 @@ gtk::main();
    </shortdesc>
    <desc>
     <simpara>
-     The corollary to <function class="GtkList">select_all()</function>, this
+     The corollary to <function class="GtkList">select_all</function>, this
      method can also be used to clear the initial focus when the selection
      mode has been set to <literal>GTK_SELECTION_BROWSE</literal>.
     </simpara>
@@ -474,7 +480,7 @@ gtk::main();
    <desc>
     <simpara>
      This method needs 
-     <function class="GtkContainer">set_focus_hadjustment()</function> to be
+     <function class="GtkContainer">set_focus_hadjustment</function> to be
      called on the appropriate scrollbar from the 
      <classname>GtkList</classname> in order for it to work.  It scrolls the
      list horizontally to a predetermined position according to the 
@@ -513,7 +519,7 @@ gtk::main();
    <desc>
     <simpara>
      This method needs 
-     <function class="GtkContainer">set_focus_vadjustment()</function> to be
+     <function class="GtkContainer">set_focus_vadjustment</function> to be
      called on the appropriate scrollbar from the 
      <classname>GtkList</classname> in order for it to work.  It scrolls the
      list to a predetermined position according to the 
@@ -550,7 +556,7 @@ gtk::main();
    </shortdesc>
    <desc>
     <simpara>
-     When <function class="GtkList">toggle_add_mode()</function> has been
+     When <function class="GtkList">toggle_add_mode</function> has been
      called, the grab in a <literal>GTK_SELECTION_EXTENDED</literal> mode
      list will remain with the anchor item at the start of the selection, 
      regardless of where the focus falls, until another item is actually
@@ -578,7 +584,7 @@ gtk::main();
    <desc>
     <simpara>
      If the row having current focus is marked as selected, calling 
-     <function class="GtkList">toggle_focus_row()</function> will unselect
+     <function class="GtkList">toggle_focus_row</function> will unselect
      it, and vice versa.  In both cases the appropriate signal is fired.
     </simpara>
     <simpara>
@@ -604,7 +610,7 @@ gtk::main();
    <desc>
     <simpara>
      If the item specified in the parameter is marked as selected, calling 
-     <function class="GtkList">toggle_row()</function> will unselect
+     <function class="GtkList">toggle_row</function> will unselect
      it, and vice versa.  In both cases the appropriate signal is fired.
     </simpara>
     <simpara>
@@ -749,13 +755,19 @@ gtk::main();
      array that contains any currently selected items.  If there is no current
      selection, the array will be empty.  If the selection mode does not allow
      multiple selection, 
-     <programlisting role="php">$list-&gt;selection[0];</programlisting> will
+     <programlisting role="php">
+<![CDATA[
+<?php
+$list-&gt;selection[0];
+?>
+]]>
+     </programlisting> will
      return the selected item.  If the selection mode allows multiple
      selection, there will be as many elements in the array as there are
      currently-selected objects.
     </simpara>
     <simpara>
-     See also:  <function class="GtkContainer">children()</function>.
+     See also:  <function class="GtkContainer">children</function>.
     </simpara>
    </desc>
   </prop>

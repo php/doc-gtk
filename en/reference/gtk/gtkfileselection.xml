@@ -10,7 +10,7 @@
     directories requested by the end user.  The widget contains a directory
     list and a file list which will correspond to the default directory,
     that is, either the current working directory or one determined using 
-    <function class="GtkFileSelection">set_filename()</function>.
+    <function class="GtkFileSelection">set_filename</function>.
    </simpara>
    <simpara>
     The filesystem can be navigated using either the directory tree or
@@ -41,7 +41,13 @@
     widget is:
     <informalexample>
      <programlisting role="php">
+<![CDATA[
+<?php
+
 $fs = &amp;new GtkFileSelection(&quot;My File Selection&quot;);
+
+?>
+]]>
      </programlisting>
     </informalexample>
     Note that if the <parameter>title</parameter> parameter is not
@@ -70,7 +76,13 @@ $fs = &amp;new GtkFileSelection(&quot;My File Selection&quot;);
     <para>
      <informalexample>
       <programlisting role = "php">
+<![CDATA[
+<?php
+
 $fs-&gt;set_filename(&quot;/home/user/php/&quot;);
+
+?>
+]]>
       </programlisting>
      </informalexample>
     </para>
@@ -96,7 +108,13 @@ $fs-&gt;set_filename(&quot;/home/user/php/&quot;);
     <para>
      <informalexample>
       <programlisting role="php">
+<![CDATA[
+<?php
+
 $filename = $fs-&gt;get_filename();
+
+?>
+]]>
       </programlisting>
      </informalexample>
     </para>
@@ -115,7 +133,7 @@ $filename = $fs-&gt;get_filename();
    </shortdesc>
    <desc>
     <simpara>
-     <function class="GtkFileSelection">complete()</function> will try
+     <function class="GtkFileSelection">complete</function> will try
      to match the pattern given by the programmer to a valid file name
      in the current directory, or to a valid directory name on the
      current drive.  This is useful when, for example, wishing to
@@ -132,7 +150,13 @@ $filename = $fs-&gt;get_filename();
     <para>
      <informalexample>
       <programlisting role="php">
+<![CDATA[
+<?php
+
 $fs-&gt;complete(&quot;*.php&quot;);
+
+?>
+]]>
       </programlisting>
      </informalexample>
     </para>
@@ -154,9 +178,9 @@ $fs-&gt;complete(&quot;*.php&quot;);
      Shows the file operation buttons <literal>Create Dir</literal>, 
      <literal>Delete File</literal> and <literal>Rename File</literal>. 
      This is their default state, so that 
-     <function class="GtkFileSelection">show_fileop_buttons()</function> 
+     <function class="GtkFileSelection">show_fileop_buttons</function> 
      would only be used following a call to 
-     <function class="GtkFileSelection">hide_fileop_buttons()</function>. 
+     <function class="GtkFileSelection">hide_fileop_buttons</function>. 
      The rest of the widgets in the dialog will be automatically resized
      to accommodate the status of the file operation buttons.  These
      buttons do not need any programming in order to carry out their
@@ -165,7 +189,13 @@ $fs-&gt;complete(&quot;*.php&quot;);
     <para>
      <informalexample>
       <programlisting role="php">
+<![CDATA[
+<?php
+
 $fs-&gt;show_fileop_buttons();
+
+?>
+]]>
       </programlisting>
      </informalexample>
     </para>
@@ -188,14 +218,20 @@ $fs-&gt;show_fileop_buttons();
      <literal>Delete File</literal> and <literal>Rename File</literal> 
      which by default appear at the top of a 
      <classname>GtkFileSelection</classname>. 
-     <function class="GtkFileSelection">hide_fileop_buttons()</function> 
+     <function class="GtkFileSelection">hide_fileop_buttons</function> 
      is useful where the programmer would prefer the end user not to have
      easy access to these file operations.
     </simpara>
     <para>
      <informalexample>
       <programlisting role="php">
+<![CDATA[
+<?php
+
 $fs-&gt;hide_fileop_buttons();
+
+?>
+]]>
       </programlisting>
      </informalexample>
     </para>

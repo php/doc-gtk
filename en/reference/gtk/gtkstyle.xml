@@ -14,20 +14,38 @@
     objects that take up screen space, using the syntax:
     <informalexample>
      <programlisting role="php">
+<![CDATA[
+<?php
+
 $style = $widget-&gt;style;
+
+?>
+]]>
      </programlisting>
     </informalexample>
     It is also possible to create a new GtkStyle object in the normal way,
     e.g.
     <informalexample>
      <programlisting role="php">
+<![CDATA[
+<?php
+
 $style = &amp;new GtkStyle();
+
+?>
+]]>
      </programlisting>
     </informalexample>
     or to take the default application style:
     <informalexample>
      <programlisting role="php">
+<![CDATA[
+<?php
+
 $style = gtk::widget_get_default_style();
+
+?>
+]]>
      </programlisting>
     </informalexample>
     in order to change the style across an application.
@@ -73,22 +91,25 @@ $style = gtk::widget_get_default_style();
     <example>
      <title>Writing to a widget's style property.</title>
      <programlisting role="php">
+<![CDATA[
+<?php
+
 dl('php_gtk.'.(strstr(PHP_OS, 'WIN') ? 'dll' : 'so'));
-    
+
 $window = &amp;new GtkWindow();
 $window-&gt;set_position(GTK_WIN_POS_CENTER);
 $window-&gt;connect_object('destroy', array('gtk', 'main_quit'));
-    
+
 /* set up a few buttons just to prove we're only changing one of them */
 $bbox = &amp;new GtkVButtonBox();
 $window-&gt;add($bbox);
-    
+
 for($i = 0; $i &lt; 8; $i++) {
   $button[$i] = &amp;new GtkButton(&quot;This is Button $i&quot;);
   $bbox-&gt;pack_start($button[$i], false);
   $button[$i]-&gt;show();
 }
-    
+
 /* method 1 : set up a new style and define the parts you want to define. 
    The remaining style elements retain the application's default settings. */
 $newstyle = &amp;new GtkStyle();
@@ -96,13 +117,13 @@ $cyan = &amp;new GdkColor('#00FFFF');
 $newstyle-&gt;fg[GTK_STATE_PRELIGHT] = $cyan;
 $label = $button[5]-&gt;child;
 $label-&gt;set_style($newstyle);
-    
+
 /* gdk::color_parse() uses a color that is defined on your system to fill
    a GdkColor structure.  It can be more convenient than manually creating
    a new GdkColor, particularly if you're only assigning the color once. */
 $newstyle-&gt;bg[GTK_STATE_NORMAL] = gdk::color_parse('ivory');
 $button[5]-&gt;set_style($newstyle);
-    
+
 /* method 2 : copy the existing style from a widget and alter it.  Defining
    a new style would overwrite the existing non-default style settings. */
 $style2 = $label-&gt;style;
@@ -111,10 +132,13 @@ $font =
 gdk::font_load('-unknown-Arial-bold-r-normal--*-160-*-*-p-0-iso8859-1');
 $newstyle2-&gt;font = $font;
 $label-&gt;set_style($newstyle2);
-    
+
 $window-&gt;show_all();
-    
+
 gtk::main();
+
+?>
+]]>
      </programlisting>
     </example>
    </para>
@@ -135,7 +159,7 @@ gtk::main();
    </shortdesc>
    <desc>
     <simpara>
-     <function class="GtkStyle">copy()</function> takes an existing style
+     <function class="GtkStyle">copy</function> takes an existing style
      and copies it wholesale, including any prior modifications that have
      been made to it.
     </simpara>

@@ -24,43 +24,49 @@
   <example>
    <title>PHP-GTK Hello World Program Listing</title>
    <programlisting role="php">
+<![CDATA[
+<?php
+
 if (!class_exists('gtk')) {
     if (strtoupper(substr(PHP_OS, 0,3) == 'WIN'))
     dl('php_gtk.dll');
   else
     dl('php_gtk.so');
 }
-    
+
 function delete_event()
 {
     return false;
 }
-    
+
 function shutdown()
 {
     print(&quot;Shutting down...\n&quot;);
     gtk::main_quit();
 }
-    
+
 function hello()
 {
     global $window;
     print &quot;Hello World!\n&quot;;
     $window-&gt;destroy();
 }
-    
+
 $window = &amp;new GtkWindow();
 $window-&gt;connect('destroy', 'shutdown');
 $window-&gt;connect('delete-event', 'delete_event');
 $window-&gt;set_border_width(10);
-    
+
 $button = &amp;new GtkButton('Hello World!');
 $button-&gt;connect('clicked', 'hello');
 $window-&gt;add($button);
-    
+
 $window-&gt;show_all();
-    
+
 gtk::main();
+
+?>
+]]>
    </programlisting>
   </example>
  </para>
@@ -68,12 +74,18 @@ gtk::main();
   <example>
    <title>Loading PHP-GTK</title>
    <programlisting role="php">
+<![CDATA[
+<?php
+
 if (!class_exists('gtk')) {
     if (strtoupper(substr(PHP_OS, 0,3) == 'WIN'))
     dl('php_gtk.dll');
  else
     dl('php_gtk.so');
 }
+
+?>
+]]>
    </programlisting>
   </example>
   These first few lines check to see if the PHP-GTK extension is
@@ -86,28 +98,34 @@ if (!class_exists('gtk')) {
   <example>
    <title>The delete_event() function</title>
    <programlisting role="php">
+<![CDATA[
+<?php
+
 function delete_event()
 {
     return false;
 }
+
+?>
+]]>
    </programlisting>
   </example>
   The <literal>delete_event()</literal> function is registered as a handler
   (see below) for the <signalname>delete-event</signalname> signal.  It
   returns <literal>false</literal>, telling PHP-GTK to fire the
   event's default signal handler, which in this case is the 
-  <function class="GtkObject">destroy()</function> method.  If the function
+  <function class="GtkObject">destroy</function> method.  If the function
   were to return <literal>true</literal>, PHP-GTK would stop the default
   signal handler running at this point.  This is useful to know if you need
   to write a user-defined function in place of 
-  <function class="GtkObject">destroy()</function>  - for example, to
+  <function class="GtkObject">destroy</function>  - for example, to
   produce a dialog box confirming that the user intends to close down the
   application.
  </para>
  <simpara>
   It is not strictly necessary to return <literal>false</literal> in order
   to connect the <signalname>delete-event</signalname> signal to the 
-  <function class="GtkObject">destroy()</function> method, as this
+  <function class="GtkObject">destroy</function> method, as this
   particular signal returns <literal>false</literal> by default.  It is
   possible to not specify any behaviour at all for a window's 
   <signalname>delete-event</signalname> signal, just so long as the 
@@ -118,28 +136,40 @@ function delete_event()
   <example>
    <title>The shutdown() function</title>
    <programlisting role="php">
+<![CDATA[
+<?php
+
 function shutdown()
 {
     print(&quot;Shutting down...\n&quot;);
     gtk::main_quit();
 }
+
+?>
+]]>
    </programlisting>
   </example>
   The <literal>shutdown()</literal> function is registered as a handler for
   the <signalname>destroy</signalname> signal.  The function prints the text
   <literal>&quot;Shutting down...\n&quot;</literal> to the console and then
-  calls the static function <function>gtk::main_quit()</function>.
+  calls the static function <function>gtk::main_quit</function>.
  </para>
  <para>
   <example>
    <title>The hello() function</title>
    <programlisting role="php">
+<![CDATA[
+<?php
+
 function hello()
 {
     global $window;
     print &quot;Hello World!\n&quot;;
     $window-&gt;destroy();
 }
+
+?>
+]]>
    </programlisting>
   </example>
   The <literal>hello()</literal> function is registered as a handler for the
@@ -147,7 +177,7 @@ function hello()
   <literal>$window</literal> variable so it can access the instance of
   <classname>GtkWindow</classname> created further down the script.  It then
   prints the text <literal>&quot;Hello World&quot;</literal> to the console
-  before calling the <function class="GtkObject">destroy()</function> method
+  before calling the <function class="GtkObject">destroy</function> method
   on the window, which in turn fires the <signalname>destroy</signalname> 
   signal, which in turn calls the <literal>shutdown()</literal> function.
  </para>
@@ -161,33 +191,45 @@ function hello()
   <example>
    <title>Setting up the Window</title>
    <programlisting role="php">
+<![CDATA[
+<?php
+
 $window = &amp;new GtkWindow();
 $window-&gt;connect('destroy', 'shutdown');
 $window-&gt;connect('delete-event', 'delete_event');
 $window-&gt;set_border_width(10);
+
+?>
+]]>
    </programlisting>
   </example>
   The next four lines set up the window itself.  Firstly we create an
   instance of <classname>GtkWindow</classname>.  Once this has been done
-  successfully, we call the <function class="GtkObject">connect()</function> 
+  successfully, we call the <function class="GtkObject">connect</function> 
   method from the window in order to register the 
   <literal>shutdown()</literal> function as the handler for the 
   <signalname>destroy</signalname> signal and the 
   <literal>delete_event()</literal> function as the handler for the
   <signalname>delete-event</signalname> signal.  Finally, we call the
-  <function class="GtkContainer">set_border_width()</function> function to
+  <function class="GtkContainer">set_border_width</function> function to
   set a 10-pixel wide border on the instance of 
   <classname>GtkWindow</classname> that we just created.
  </para>
  <para>
   <example>
    <title>Setting up the Button</title>
-   <programlisting role="php">      
+   <programlisting role="php">
+<![CDATA[
+<?php
+
 $button = &amp;new GtkButton('Hello World!');
 $button-&gt;connect('clicked', 'hello');
 $window-&gt;add($button);
 
 $window-&gt;show_all();
+
+?>
+]]>
    </programlisting>
   </example>
   These three lines of the script create and set up the button.  In the first
@@ -195,41 +237,36 @@ $window-&gt;show_all();
   <classname>GtkButton</classname> widget.  The argument to the constructor
   is the text we want the button to display - in this case 
   <literal>&quot;Hello World!&quot;</literal>.  We then call the 
-  <function class="GtkObject">connect()</function> method to register the
+  <function class="GtkObject">connect</function> method to register the
   <literal>hello()</literal> function we defined earlier, as the handler for
   the <signalname>clicked</signalname> signal.  Finally we add the button to
   the window we previously created by calling the 
   <classname>GtkContainer</classname> method 
-  <function class="GtkContainer">add()</function> from our containing 
+  <function class="GtkContainer">add</function> from our containing 
   <literal>$window</literal>, and then display everything contained by 
   <literal>$window</literal> (and its child widget, 
   <literal>$button</literal>) by calling the 
-  <function class="GtkWidget">show_all()</function> method, also from our
+  <function class="GtkWidget">show_all</function> method, also from our
   instance of <classname>GtkWindow</classname>.
  </para>
  <para>
   <example>
    <title>The call to gtk::main</title>
    <programlisting role="php">
+<![CDATA[
+<?php
+
 gtk::main();
+
+?>
+]]>
    </programlisting>
   </example>
   The final line of the script calls the static 
-  gtk::<function>main()</function> function.  This tells PHP-GTK that we
+  gtk::<function>main</function> function.  This tells PHP-GTK that we
   have finished setting up our interface, and that the main loop can begin
   listening for the events fired by user interaction so that the callback
   functions we defined earlier can be called and the various actions carried
   out.
  </para>
 </chapter>
-
-<!--
-
- * Local variables:
- * tab-width: 1
- * c-basic-offset: 1
- * End:
- * vim600: et sw=1 ts=1 tw=78 fdm=marker
- * vim<600: et sw=1 ts=1 tw=78
--->
-

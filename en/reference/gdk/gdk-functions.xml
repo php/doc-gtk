@@ -596,8 +596,12 @@
      A typical font-load would look something like this:
      <informalexample>
       <programlisting role="php">
+<![CDATA[
+<?php
 $font = 
 gdk::font_load('-unknown-Arial-normal-r-normal--*-120-96-96-p-0-iso8859-1');
+?>
+]]>
       </programlisting>
      </informalexample>
     </para>
@@ -640,14 +644,14 @@ gdk::font_load('-unknown-Arial-normal-r-normal--*-120-96-96-p-0-iso8859-1');
     </simpara>
     <simpara>
      Load in exactly the same way as with 
-     <function>gdk::font_load()</function>, separating each of the potential
+     <function>gdk::font_load</function>, separating each of the potential
      fonts to be used with a comma.  The system running the application will
      use the first font in the set that achieves a match.
     </simpara>
     <simpara>
-     In win32, the <function>fontset_load()</function> method is used
+     In win32, the <function>fontset_load</function> method is used
      internally regardless of whether this or 
-     <function>gdk::font_load()</function> is called.
+     <function>gdk::font_load</function> is called.
     </simpara>
    </desc>
   </method>
@@ -736,7 +740,7 @@ gdk::font_load('-unknown-Arial-normal-r-normal--*-120-96-96-p-0-iso8859-1');
    </shortdesc>
    <desc>
     <simpara>
-     <function>gdk::pixmap_create_from_xpm()</function> returns a 
+     <function>gdk::pixmap_create_from_xpm</function> returns a 
      array consisting of a <classname>GdkPixmap</classname> and a
      <classname>GdkBitmap</classname> mask that has been created from the
      specified .xpm file.
@@ -748,17 +752,25 @@ gdk::font_load('-unknown-Arial-normal-r-normal--*-120-96-96-p-0-iso8859-1');
      on the screen, you will need to use one of the following constructs:
      <informalexample>
       <programlisting role="php">
+<![CDATA[
+<?php
 $gdkpixmap = gdk::pixmap_create_from_xpm($main_window-&gt;window, null, 
 'test.xpm');
 $image = &amp;new GtkPixmap($gdkpixmap[0], $gdkpixmap[1]);
+?>
+]]>
       </programlisting>
      </informalexample>
      or 
      <informalexample>
       <programlisting role="php">
+<![CDATA[
+<?php
 list ($gdkpixmap, $mask) = 
 gdk::pixmap_create_from_xpm($gdkwindow, $transparent_color, 'test.xpm');
 $image = &amp;new GtkPixmap($gdkpixmap, $mask);
+?>
+]]>
       </programlisting>
      </informalexample>
     </para>
@@ -788,8 +800,12 @@ $image = &amp;new GtkPixmap($gdkpixmap, $mask);
     <para>
      <informalexample>
       <programlisting role="php">
+<![CDATA[
+<?php
 $gdkpixmap = gdk::pixmap_create_from_xpm_d($main_window-&gt;window, 
 $transparent_color, $data);
+?>
+]]>
       </programlisting>
      </informalexample>
      <!-- No I am NOT going to leave it like this..   sf mar 02 -->

@@ -15,9 +15,9 @@
     this one will do without a little programming.  Luckily, there are a trio
     of invaluable <classname>GtkObject</classname> methods that will do just
     that, with any object and with any form of data.  These are 
-    <function class="GtkObject">get_data()</function>, 
-    <function class="GtkObject">set_data()</function> and 
-    <function class="GtkObject">remove_data()</function>.  See the sample
+    <function class="GtkObject">get_data</function>, 
+    <function class="GtkObject">set_data</function> and 
+    <function class="GtkObject">remove_data</function>.  See the sample
     under <classname>GtkCombo</classname>'s 
     <link linkend="gtk.gtkcombo.constructor">constructor</link> to get an
     idea of their usage.
@@ -133,7 +133,7 @@
     <signalname class="GtkList">select-child</signalname> and 
     <signalname class="GtkListItem">select</signalname> signals, as the
     deselection allows the item to be selected again - which it is, when
-    <function class="GtkList">select_child()</function> is called immediately
+    <function class="GtkList">select_child</function> is called immediately
     afterwards.
    </simpara>
    <simpara>
@@ -144,34 +144,37 @@
     <example>
      <title>Associating data with a GtkListItem</title>
      <programlisting role="php">
+<![CDATA[
+<?php
+
 dl(&quot;php_gtk.&quot; . (strstr(PHP_OS, &quot;WIN&quot;) ? &quot;dll&quot; : 
 &quot;so&quot;));
-    
+
 function on_click($item, $event, $i) {
   echo $item-&gt;get_data($i).&quot;\n&quot;;
   flush();
 }
-    
+
 function on_key($item, $i) {
   echo $item-&gt;get_data($i).&quot;\n&quot;;
   flush();
 }
-    
+
 $window = &amp;new GtkWindow();
 $window-&gt;set_position(GTK_WIN_POS_CENTER);
 $window-&gt;connect_object(&quot;destroy&quot;, array(&quot;gtk&quot;, 
 &quot;main_quit&quot;));
-    
+
 $combo = &amp;new GtkCombo();
 /* The GtkEntry and GtkList are accessible through the combo's properties */
 $entry = $combo-&gt;entry;
 $entry-&gt;set_text('Choose some fruit');
 $list = $combo-&gt;list;
 $list-&gt;set_selection_mode(GTK_SELECTION_SINGLE);
-    
+
 $fruit = array('apples', 'bananas', 'cherries', 'damsons', 'eggplants', 
 'figs', 'grapes');
-    
+
 for($i = 0; $i &lt; count($fruit); $i++) {
   $item = &amp;new GtkListItem();
 /* You can put pretty much anything into a GtkListItem */
@@ -191,11 +194,14 @@ for($i = 0; $i &lt; count($fruit); $i++) {
   $list-&gt;add($item);
   $item-&gt;show_all();
 }
-    
+
 $window-&gt;add($combo);
 $window-&gt;show_all();
-    
+
 gtk::main();
+
+?>
+]]>
      </programlisting>
     </example>
    </para>
@@ -237,7 +243,7 @@ gtk::main();
    </shortdesc>
    <desc>
     <simpara>
-     <function class="GtkCombo">set_use_arrows()</function>, when set to
+     <function class="GtkCombo">set_use_arrows</function>, when set to
      <literal>false</literal> prevents the <literal>Up</literal> and 
      <literal>Down</literal> arrow keys from being used to scroll the list
      within the combo's entry box.
@@ -263,7 +269,7 @@ gtk::main();
    <desc>
     <simpara>
      This method is the adult version of 
-     <function class="GtkCombo">set_use_arrows()</function>.  The chief
+     <function class="GtkCombo">set_use_arrows</function>.  The chief
      difference is that the entry box text does not need to match the
      text string in a list item in order for the arrows to be used.  The
      secondary difference is that the scrolling loops back to the start of
@@ -284,7 +290,7 @@ gtk::main();
    </shortdesc>
    <desc>
     <simpara>
-     <function class="GtkCombo">set_case_sensitve()</function>, if set
+     <function class="GtkCombo">set_case_sensitve</function>, if set
      to <literal>true</literal>, will not match items that are dissimilar
      with regard to case -in other words, <literal>Cat</literal> is not
      the same thing as <literal>cat</literal>.
@@ -320,7 +326,7 @@ gtk::main();
      the string data type is allowed.
     </simpara>
     <simpara>
-     <function class="GtkCombo">set_item_string()</function> can be set
+     <function class="GtkCombo">set_item_string</function> can be set
      regardless of whether there is already text in the list item, and
      in either case will provide the string that is compared against the
      entry's text content during search routines.
@@ -353,20 +359,23 @@ gtk::main();
      <example>
       <title>The easy way to fill a GtkCombo's list</title>
       <programlisting role="php">
+<![CDATA[
+<?php
+
 dl(&quot;php_gtk.&quot; . (strstr(PHP_OS, &quot;WIN&quot;) ? &quot;dll&quot; : 
 &quot;so&quot;));
-    
+
 function print_this($list, $item) {
   $label = $item-&gt;child;
   echo $label-&gt;get().&quot;\n&quot;;
   flush();
 }
-    
+
 $window = &amp;new GtkWindow();
 $window-&gt;set_position(GTK_WIN_POS_CENTER);
 $window-&gt;connect_object(&quot;destroy&quot;, array(&quot;gtk&quot;, 
 &quot;main_quit&quot;));
-    
+
 $combo = &amp;new GtkCombo();
 $fruit = array('apples', 'bananas', 'cherries', 'damsons', 'eggplants', 
 'figs', 'grapes');
@@ -375,11 +384,14 @@ $combo-&gt;set_popdown_strings($fruit);
 GtkList.  The child is passed to the callback with the select-child signal. */
 $list = $combo-&gt;list;
 $list-&gt;connect('select-child', 'print_this');
-    
+
 $window-&gt;add($combo);
 $window-&gt;show_all();
-    
+
 gtk::main();
+
+?>
+]]>
       </programlisting>
      </example>
     </para>
@@ -404,7 +416,7 @@ gtk::main();
      emission results in the dropdown list being exposed.
     </simpara>
     <simpara>
-     <function class="GtkCombo">disable_activate()</function> simply
+     <function class="GtkCombo">disable_activate</function> simply
      disconnects the <signalname class="GtkEditable">activate</signalname> 
      signal when it is set.
     </simpara>

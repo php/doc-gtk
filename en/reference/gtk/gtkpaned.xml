@@ -44,17 +44,17 @@
    </shortdesc>
    <desc>
     <simpara>
-     <function class="GtkPaned">add1()</function> adds the child widget
+     <function class="GtkPaned">add1</function> adds the child widget
      specified to the top or left pane of a 
      <classname>GtkPaned</classname>-based widget.
     </simpara>
     <simpara>
-     The only difference between <function class="GtkPaned">add1()</function> 
-     and <function class="GtkPaned">pack1()</function> is that the packing
+     The only difference between <function class="GtkPaned">add1</function> 
+     and <function class="GtkPaned">pack1</function> is that the packing
      parameters are not visible to the programmer where 
-     <function class="GtkPaned">add1()</function> is used, and so cannot
+     <function class="GtkPaned">add1</function> is used, and so cannot
      easily be altered.  The settings are identical to the 
-     <function class="GtkPaned">pack1()</function> defaults.
+     <function class="GtkPaned">pack1</function> defaults.
     </simpara>
    </desc>
   </method>
@@ -74,17 +74,17 @@
    </shortdesc>
    <desc>
     <simpara>
-     <function class="GtkPaned">add2()</function> adds the child widget
+     <function class="GtkPaned">add2</function> adds the child widget
      specified to the bottom or right pane of a 
      <classname>GtkPaned</classname>-based widget.
     </simpara>
     <simpara>
-     The only difference between <function class="GtkPaned">add2()</function> 
-     and <function class="GtkPaned">pack2()</function> is that the packing
+     The only difference between <function class="GtkPaned">add2</function> 
+     and <function class="GtkPaned">pack2</function> is that the packing
      parameters are not visible to the programmer where 
-     <function class="GtkPaned">add2()</function> is used, and so cannot
+     <function class="GtkPaned">add2</function> is used, and so cannot
      easily be altered.  The settings are identical to the 
-     <function class="GtkPaned">pack2()</function> defaults.
+     <function class="GtkPaned">pack2</function> defaults.
     </simpara>
    </desc>
   </method>
@@ -110,7 +110,7 @@
    </shortdesc>
    <desc>
     <simpara>
-     <function class="GtkPaned">pack1()</function> packs the child widget
+     <function class="GtkPaned">pack1</function> packs the child widget
      specified into the top or left pane of a 
      <classname>GtkPaned</classname>-based widget.
     </simpara>
@@ -159,7 +159,7 @@
    </shortdesc>
    <desc>
     <simpara>
-     <function class="GtkPaned">pack2()</function> packs the child widget
+     <function class="GtkPaned">pack2</function> packs the child widget
      specified into the bottom or right pane of a 
      <classname>GtkPaned</classname>-based widget.
     </simpara>
@@ -169,7 +169,7 @@
      to fill the area between the dividing handle and the edge of the
      container when the toplevel window is maximised, in the direction of
      the pane arrangement.  The position of the dividing handle can be set
-     using <function class="GtkPaned">set_position()</function>, or by
+     using <function class="GtkPaned">set_position</function>, or by
      default is set at the size requested by the child belonging to the
      opposite pane, where its <parameter>resize</parameter> parameter has
      been set to <literal>false</literal>.
@@ -206,7 +206,7 @@
    </shortdesc>
    <desc>
     <simpara>
-     <function class="GtkPaned">set_position()</function> sets the
+     <function class="GtkPaned">set_position</function> sets the
      position of the dividing handle at the specified number of pixels
      from the edge of the widget, in the direction of the pane arrangement,
      without regard to the size requests of the child widgets in the panes. 
@@ -215,7 +215,15 @@
     <para>
      To unset the position of the dividing handle, use 
      <informalexample>
-      <programlisting role="php">$paned-&gt;set_position(-1);</programlisting>
+      <programlisting role="php">
+<![CDATA[
+<?php
+
+$paned-&gt;set_position(-1);
+
+?>
+]]>
+      </programlisting>
      </informalexample>
     </para>
    </desc>
@@ -235,7 +243,7 @@
    </shortdesc>
    <desc>
     <simpara>
-     <function class="GtkPaned">set_handle_size()</function> can currently
+     <function class="GtkPaned">set_handle_size</function> can currently
      be used to set the width or height of the handle in pixels.  The
      default setting is 5 pixels in the win32 binary, or 10 pixels in the
      1.2.* series of GTK+.  In GTK2 the size of the handle will be set at
@@ -263,7 +271,7 @@
    </shortdesc>
    <desc>
     <simpara>
-     <function class="GtkPaned">set_gutter_size()</function> can currently
+     <function class="GtkPaned">set_gutter_size</function> can currently
      be used to set the width or height in pixels of the gutter where the
      dividing handle is based, only where the 1.2.* series of GTK+ is being
      used to compile PHP-GTK.  It does nothing in the win32 version.

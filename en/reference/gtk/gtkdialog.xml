@@ -27,7 +27,7 @@
    <simpara>
     Dialogs can be made modal (in effect freezing input to the rest of
     the application) by calling the <classname>GtkWindow</classname> 
-    method <function class="GtkWindow">set_modal()</function> on the 
+    method <function class="GtkWindow">set_modal</function> on the 
     <classname>GtkDialog</classname> object.
    </simpara>
    <simpara>
@@ -40,17 +40,23 @@
     call to 'echo' will still get executed even though the main application
     may not respond to user input.  To stop execution of the code the 
     <classname>GtkDialog</classname> must contain a call to a nested
-    <function>gtk::main()</function> function.  Execution will then
-    continue when the corresponding <function>gtk::main_quit()</function>
+    <function>gtk::main</function> function.  Execution will then
+    continue when the corresponding <function>gtk::main_quit</function>
     function is called.
    </simpara>
    <para>
     <example>
-     <title>Using <function class="GtkWindow">set_modal()</function></title>
+     <title>Using <function class="GtkWindow">set_modal</function></title>
      <programlisting role="php">
+<![CDATA[
+<?php
+
 $dialog = &amp;new GtkDialog(); 
 $dialog-&gt;set_modal(TRUE); 
 echo &quot;This message will still be printed \n&quot;;
+
+?>
+]]>
      </programlisting>
     </example>
    </para>
@@ -73,6 +79,9 @@ echo &quot;This message will still be printed \n&quot;;
     <example>
      <title>Creating a dialog window</title>
      <programlisting role="php">
+<![CDATA[
+<?php
+
 $dialog = &amp;new GtkDialog();
 $dialog-&gt;set_policy(true, false, false);
 $dialog-&gt;set_position(GTK_WIN_POS_CENTER);
@@ -89,6 +98,9 @@ $ok_button = &amp;new GtkButton(&quot;OK&quot;);
 $dialog_action_area-&gt;pack_start($ok_button);
 
 gtk::main();
+
+?>
+]]>
      </programlisting>
     </example>
    </para>

@@ -48,7 +48,7 @@
     <literal>0.0</literal> for percentage-based values (e.g. in a 
     <classname>GtkProgressBar</classname> or in a 
     <classname>GtkScrollbar</classname>), or <literal>1.0</literal> for
-    literal values (e.g. in <classname>GtkSpinButton</classname>.
+    literal values (e.g. in a <classname>GtkSpinButton</classname>).
    </simpara>
    <simpara>
     <parameter>lower</parameter> and <parameter>upper</parameter> are the
@@ -93,8 +93,8 @@
     <classname>GtkScrolledWindow</classname>, 
     <classname>GtkSpinButton</classname>, <classname>GtkText</classname>, 
     <classname>GtkViewport</classname>, 
-    <function class="GtkContainer">set_focus_hadjustment()</function>, 
-    <function class="GtkContainer">set_focus_vadjustment()</function>.
+    <function class="GtkContainer">set_focus_hadjustment</function>, 
+    <function class="GtkContainer">set_focus_vadjustment</function>.
    </simpara>
   </desc>
  </constructor>
@@ -113,7 +113,7 @@
    </shortdesc>
    <desc>
     <simpara>
-     The <function class="GtkAdjustment">changed()</function> method makes
+     The <function class="GtkAdjustment">changed</function> method makes
      the adjustment object fire the 
      <signalname class="GtkAdjustment">changed</signalname> signal.  This
      method is called internally whenever there is a change to any of the
@@ -122,7 +122,7 @@
    </desc>
   </method>
 
-  <method id="gtk.gtkadjustment.method.value_changed">
+  <method id="gtk.gtkadjustment.method.value-changed">
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>value_changed</function></funcdef>
@@ -134,7 +134,7 @@
    </shortdesc>
    <desc>
     <simpara>
-     The <function class="GtkAdjustment">value_changed()</function> method
+     The <function class="GtkAdjustment">value_changed</function> method
      is called internally whereever a signal emission is needed.  It causes
      the <signalname class="GtkAdjustment">value-changed</signalname> signal
      to be emitted.
@@ -155,7 +155,7 @@
    </shortdesc>
    <desc>
     <simpara>
-     <function class="GtkAdjustment">clamp_page()</function> is used
+     <function class="GtkAdjustment">clamp_page</function> is used
      internally to ensure that, if a page is being scrolled down, the
      incremental value is not added to the end of the page in terms of
      extra space at the bottom.  It compares the set bounds and the page
@@ -228,8 +228,8 @@
    </desc>
   </signal>
 
-  <signal id="gtk.gtkadjustment.signal.value_changed">
-   <signalname>value_changed</signalname>
+  <signal id="gtk.gtkadjustment.signal.value-changed">
+   <signalname>value-changed</signalname>
    <callback>
     <funcprototype>
      <funcdef>void <function>callback</function></funcdef>
@@ -237,7 +237,7 @@
     </funcprototype>
    </callback>
    <shortdesc>
-    Emitted when
+    Emitted when the value of any property is changed.
    </shortdesc>
    <desc>
     <simpara>

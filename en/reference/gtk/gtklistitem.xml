@@ -16,9 +16,9 @@
    <simpara>
     <classname>GtkListItem</classname>s are not equipped to carry data,
     unless you make it so.  Using the <classname>GtkObject</classname> 
-    methods <function class="GtkObject">get_data()</function>, 
-    <function class="GtkObject">remove_data()</function> and 
-    <function class="GtkObject">set_data()</function> is the usual way to
+    methods <function class="GtkObject">get_data</function>, 
+    <function class="GtkObject">remove_data</function> and 
+    <function class="GtkObject">set_data</function> is the usual way to
     achieve this.  See <classname>GtkCombo</classname> for a working example.
    </simpara>
    <simpara>
@@ -191,7 +191,13 @@
     construction, e.g.
     <informalexample>
      <programlisting role="php">
+<![CDATA[
+<?php
+
 $listitem = &amp;new GtkListItem(&quot;This list item now has a label&quot;);
+
+?>
+]]>
      </programlisting>
     </informalexample>
    </para>
@@ -200,23 +206,37 @@ $listitem = &amp;new GtkListItem(&quot;This list item now has a label&quot;);
     omit the parameter and add the required widget:
     <informalexample>
      <programlisting role="php">
+<![CDATA[
+<?php
+
 $arrow = &amp;new GtkArrow(GTK_ARROW_RIGHT, GTK_SHADOW_ETCHED_IN);
 $listitem = &amp;new GtkListItem();
 $listitem-&gt;add($arrow);
+
+?>
+]]>
      </programlisting>
     </informalexample>
     or, if you wanted perhaps a label plus some other item:
     <informalexample>
      <programlisting role="php">
+<![CDATA[
+<?php
+
 $box = &amp;new GtkHBox();
 $label = &amp;new GtkLabel(&quot;Here we have multiple objects in a 
 GtkListItem&quot;);
 $arrow = &amp;new GtkArrow(GTK_ARROW_RIGHT, GTK_SHADOW_ETCHED_IN);
+
 $box-&gt;pack_start($label);
 $box-&gt;pack_end($arrow);
 $box-&gt;show_all();
+
 $listitem = &amp;new GtkListItem();
 $listitem-&gt;add($box);
+
+?>
+]]>
      </programlisting>
     </informalexample>
    </para>
@@ -250,7 +270,7 @@ $listitem-&gt;add($box);
    <desc>
     <simpara>
      The <classname>GtkListItem</classname> method 
-     <function class="GtkListItem">select()</function> causes the list item
+     <function class="GtkListItem">select</function> causes the list item
      to emit the <classname>GtkItem</classname> signal 
      <signalname class="GtkItem">select</signalname>.  This is then bound
      recursively to the <classname>GtkListItem</classname> implementation of
@@ -259,7 +279,7 @@ $listitem-&gt;add($box);
     <simpara>
      The same sequence of events is produced by calling the 
      <classname>GtkList</classname> method 
-     <function class="GtkList">select_child()</function>.
+     <function class="GtkList">select_child</function>.
     </simpara>
     <simpara>
      The easy part:  it sets the <enumname>GtkStateType</enumname> of the
@@ -267,7 +287,7 @@ $listitem-&gt;add($box);
     </simpara>
     <simpara>
      Note that this state can also be achieved programmatically by calling 
-     <function class="GtkItem">toggle()</function> from a list item that
+     <function class="GtkItem">toggle</function> from a list item that
      is currently unselected.
     </simpara>
    </desc>
@@ -287,7 +307,7 @@ $listitem-&gt;add($box);
    <desc>
     <simpara>
      The <classname>GtkListItem</classname> method 
-     <function class="GtkListItem">deselect()</function> causes the list item
+     <function class="GtkListItem">deselect</function> causes the list item
      to emit the <classname>GtkItem</classname> signal 
      <signalname class="GtkItem">deselect</signalname>.  This is then bound
      recursively to the <classname>GtkListItem</classname> implementation of
@@ -296,7 +316,7 @@ $listitem-&gt;add($box);
     <simpara>
      The same sequence of events is produced by calling the 
      <classname>GtkList</classname> method 
-     <function class="GtkList">unselect_child()</function>.
+     <function class="GtkList">unselect_child</function>.
     </simpara>
     <simpara>
      The easy part:  it sets the <enumname>GtkStateType</enumname> of the
@@ -304,7 +324,7 @@ $listitem-&gt;add($box);
     </simpara>
     <simpara>
      Note that this state can also be achieved programmatically by calling 
-     <function class="GtkItem">toggle()</function> from a list item that
+     <function class="GtkItem">toggle</function> from a list item that
      is currently selected.
     </simpara>
    </desc>

@@ -34,7 +34,13 @@
     The syntax
     <informalexample>
      <programlisting role="php">
+<![CDATA[
+<?php
+
 $menuitem = &amp;new GtkMenuItem(&quot;Edit&quot;);
+
+?>
+]]>
      </programlisting>
     </informalexample>
     will create a single item in a menu with the label 
@@ -45,7 +51,7 @@ $menuitem = &amp;new GtkMenuItem(&quot;Edit&quot;);
    </para>
    <para>
     For more information on setting up accelerator display in this way,
-    see <function class="GtkWidget">add_accelerator()</function>.  There is
+    see <function class="GtkWidget">add_accelerator</function>.  There is
     also a working example in the 
     <link linkend="gtk.gtkmenu.constructor">GtkMenu constructor</link> 
     section of this manual.
@@ -53,7 +59,7 @@ $menuitem = &amp;new GtkMenuItem(&quot;Edit&quot;);
    <simpara>
     Underlining an accelerator key within the label text is a separate issue, 
     and can be achieved by calling the <classname>GtkLabel</classname> method 
-    <function class="GtkLabel">parse_uline()</function> from the accelerator
+    <function class="GtkLabel">parse_uline</function> from the accelerator
     label.  A string passed using this method will overwrite any existing
     text in the label.
    </simpara>
@@ -71,9 +77,15 @@ $menuitem = &amp;new GtkMenuItem(&quot;Edit&quot;);
     end user:
     <informalexample>
      <programlisting role="php">
+<![CDATA[
+<?php
+
 $separatoritem = &amp;new GtkMenuItem();
 $separatoritem-&gt;set_sensitive(false);
 $menu-&gt;append($separatoritem);
+
+?>
+]]>
      </programlisting>
     </informalexample>
    </para>
@@ -96,7 +108,7 @@ $menu-&gt;append($separatoritem);
    </shortdesc>
    <desc>
     <simpara>
-     <function class="GtkMenuItem">set_submenu()</function> sets the
+     <function class="GtkMenuItem">set_submenu</function> sets the
      instance of <classname>GtkMenu</classname> passed as the parameter to
      be a submenu for the calling <classname>GtkMenuItem</classname>.
     </simpara>
@@ -119,9 +131,9 @@ $menu-&gt;append($separatoritem);
    </shortdesc>
    <desc>
     <simpara>
-     <function class="GtkMenuItem">remove_submenu()</function> is the 
+     <function class="GtkMenuItem">remove_submenu</function> is the 
      <classname>GtkMenuItem</classname>-specific version of the 
-     <function class="GtkContainer">remove()</function> found in 
+     <function class="GtkContainer">remove</function> found in 
      <classname>GtkContainer</classname>.  It is useful where a submenu
      needs to be removed or altered under given conditions within a script.
     </simpara>
@@ -143,7 +155,7 @@ $menu-&gt;append($separatoritem);
    </shortdesc>
    <desc>
     <simpara>
-     <function class="GtkMenuItem">set_placement()</function> toggles the
+     <function class="GtkMenuItem">set_placement</function> toggles the
      placement of the submenu relative to its parent.  This method is used
      internally to ensure that the submenu is always displayed within the
      visible screen area when it is activated.
@@ -164,7 +176,7 @@ $menu-&gt;append($separatoritem);
    </shortdesc>
    <desc>
     <simpara>
-     <function class="GtkMenuItem">configure()</function> is intended to
+     <function class="GtkMenuItem">configure</function> is intended to
      set the visibility of both the toggle and submenu indicator.  However
      these are set internally in GTK+ to be <literal>true</literal> when
      appropriate and cannot be overridden, and although not marked as such
@@ -186,7 +198,7 @@ $menu-&gt;append($separatoritem);
    </shortdesc>
    <desc>
     <simpara>
-     <function class="GtkMenuItem">select()</function> makes the calling 
+     <function class="GtkMenuItem">select</function> makes the calling 
      <classname>GtkMenuItem</classname> emit the 
      <signalname class="GtkItem">select</signalname> signal inherited from 
      <classname>GtkItem</classname>.
@@ -218,7 +230,7 @@ $menu-&gt;append($separatoritem);
    </shortdesc>
    <desc>
     <simpara>
-     <function class="GtkMenuItem">deselect()</function> makes the calling 
+     <function class="GtkMenuItem">deselect</function> makes the calling 
      <classname>GtkMenuItem</classname> emit the 
      <signalname class="GtkItem">deselect</signalname> signal inherited from 
      <classname>GtkItem</classname>.
@@ -249,7 +261,7 @@ $menu-&gt;append($separatoritem);
    </shortdesc>
    <desc>
     <simpara>
-     <function class="GtkMenuItem">activate()</function> causes the calling
+     <function class="GtkMenuItem">activate</function> causes the calling
      <classname>GtkMenuItem</classname> to emit the 
      <signalname class="GtkMenuItem">activate</signalname> signal as if the
      user had clicked on it.
@@ -269,7 +281,7 @@ $menu-&gt;append($separatoritem);
    </shortdesc>
    <desc>
     <simpara>
-     <function class="GtkMenuItem">right_justify()</function> sets a
+     <function class="GtkMenuItem">right_justify</function> sets a
      <classname>GtkMenuItem</classname> to the right of the
      <classname>GtkMenuBar</classname> it is appended to.  It has no
      effect in any other situation, and can only be used on the menu item
@@ -299,9 +311,9 @@ $menu-&gt;append($separatoritem);
      emitted when the user presses a mouse button while the cursor is over
      the widget, or hits the <literal>Enter</literal> key or 
      <literal>spacebar</literal> while the widget is selected, or if the
-     <function class="GtkMenuItem">activate()</function> method has been
+     <function class="GtkMenuItem">activate</function> method has been
      called from within the program by the widget, or if the 
-     <function class="GtkMenuShell">activate_item()</function> method has
+     <function class="GtkMenuShell">activate_item</function> method has
      been called from within the program by the widget's parent.
     </simpara>
     <simpara>
@@ -329,21 +341,21 @@ $menu-&gt;append($separatoritem);
     </funcprototype>
    </callback>
    <shortdesc>
-    Fired when <function class="GtkMenuShell">activate_item()</function> is
+    Fired when <function class="GtkMenuShell">activate_item</function> is
     called.
    </shortdesc>
    <desc>
     <simpara>
      The <signalname class="GtkMenuItem">activate-item</signalname> signal is
-     fired when <function class="GtkMenuShell">activate_item()</function> is
+     fired when <function class="GtkMenuShell">activate_item</function> is
      called from a <classname>GtkMenuShell</classname> object.  It is used
      internally in order to provide an indirect means of firing the 
      <signalname class="GtkMenuItem">activate</signalname> signal.
     </simpara>
     <simpara>
      If you have called the 
-     <function class="GtkMenuShell">activate_item()</function> method, you
-     will need to <function class="GtkObject">connect()</function> the
+     <function class="GtkMenuShell">activate_item</function> method, you
+     will need to <function class="GtkObject">connect</function> the
      appropriate <classname>GtkMenuItem</classname> to the 
      <signalname class="GtkMenuItem">activate</signalname> signal.
     </simpara>

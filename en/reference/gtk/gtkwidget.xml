@@ -174,13 +174,13 @@
    </shortdesc>
    <desc>
     <simpara>
-     <function class="GtkWidget">show()</function> is a commonly-used method
+     <function class="GtkWidget">show</function> is a commonly-used method
      that combines a series of other methods in order to display a widget on
      the screen.
     </simpara>
     <simpara>
-     See also:  <function class="GtkWidget">map()</function>, 
-     <function class="GtkWidget">realize()</function>.
+     See also:  <function class="GtkWidget">map</function>, 
+     <function class="GtkWidget">realize</function>.
     </simpara>
    </desc>
   </method>
@@ -208,8 +208,8 @@
    </shortdesc>
    <desc>
     <simpara>
-     <function class="GtkWidget">hide()</function> is the corollary to the
-     <function class="GtkWidget">show()</function> method.  It combines
+     <function class="GtkWidget">hide</function> is the corollary to the
+     <function class="GtkWidget">show</function> method.  It combines
      other methods in order to hide the calling widget from display.
     </simpara>
    </desc>
@@ -230,9 +230,9 @@
      This method is used to display the calling widget and its children. 
      The extent to which it 'sees' children is system-dependant; some
      systems will not display children belonging to a child widget when
-     <function class="GtkWidget">show_all()</function> is called from a
+     <function class="GtkWidget">show_all</function> is called from a
      top-level container.  You may find that you still need to 
-     <function class="GtkWidget">show()</function> the children individually
+     <function class="GtkWidget">show</function> the children individually
      in order to display them, and it is good practice to do so
      consistently.
     </simpara>
@@ -251,10 +251,10 @@
    </shortdesc>
    <desc>
     <simpara>
-     <function class="GtkWidget">hide_all()</function> is the corollary to
-     <function class="GtkWidget">show_all()</function>, and the same
+     <function class="GtkWidget">hide_all</function> is the corollary to
+     <function class="GtkWidget">show_all</function>, and the same
      reservations regards the levels of children that will respond to this
-     call, apply.  If in doubt, <function class="GtkWidget">hide()</function> 
+     call, apply.  If in doubt, <function class="GtkWidget">hide</function> 
      the child widgets individually.
     </simpara>
    </desc>
@@ -274,7 +274,7 @@
     <simpara>
      This method maps a widget to the screen area it will take.  It is
      mostly used internally, being one of the methods that is called as
-     part of the <function class="GtkWidget">show()</function> routine. 
+     part of the <function class="GtkWidget">show</function> routine. 
      It causes the <signalname class="GtkWidget">map</signalname> signal to
      be emitted by the widget, which in turn switches a flag causing the
      widget to be mapped.
@@ -305,7 +305,7 @@
      This method destroys information regards the dimensions of the screen
      area where the widget is displayed .  It is mostly used internally, 
      being one of the methods that is called as part of the 
-     <function class="GtkWidget">hide()</function> routine.  It causes
+     <function class="GtkWidget">hide</function> routine.  It causes
      the <signalname class="GtkWidget">unmap</signalname> signal to be
      emitted by the widget, which in turn switches a flag causing the
      widget to be unmapped.
@@ -362,15 +362,15 @@
      This method is the one to use if you need to force a widget to
      redraw itself.  Put it into a callback function and determine
      an appropriate signal to trigger the redraws. 
-     <function class="GtkWidget">queue_draw()</function> creates an expose
+     <function class="GtkWidget">queue_draw</function> creates an expose
      event, in most situations.
     </simpara>
     <simpara>
      In the event that this method does not have the desired effect, try
-     calling <function class="GtkWidget">queue_resize()</function> instead. 
+     calling <function class="GtkWidget">queue_resize</function> instead. 
      If that also fails, you will need to resort to calling 
-     <function class="GtkWidget">hide()</function> followed immediately by 
-     <function class="GtkWidget">show()</function> in the callback.
+     <function class="GtkWidget">hide</function> followed immediately by 
+     <function class="GtkWidget">show</function> in the callback.
     </simpara>
    </desc>
   </method>
@@ -391,7 +391,7 @@
    <desc>
     <simpara>
      This has exactly the same functionality as 
-     <function class="GtkWidget">queue_draw()</function>, with the
+     <function class="GtkWidget">queue_draw</function>, with the
      exception that the area to be redrawn can be defined in the
      parameters.
     </simpara>
@@ -439,11 +439,11 @@
      <classname>GtkScale</classname> for a working example.
     </simpara>
     <simpara>
-     <function class="GtkWidget">queue_resize()</function> is useful
+     <function class="GtkWidget">queue_resize</function> is useful
      in conjunction with a <classname>GtkDrawingArea</classname>, where
      the widget creates synthetic configure events in response to the
      resizing.  It can also trigger expose events in some situations where
-     the <function class="GtkWidget">queue_draw()</function> has proved
+     the <function class="GtkWidget">queue_draw</function> has proved
      ineffective in doing same.
     </simpara>
     <simpara>
@@ -507,7 +507,7 @@
    </shortdesc>
    <desc>
     <simpara>
-     <function class="GtkWidget">add_accelerator()</function> defines and
+     <function class="GtkWidget">add_accelerator</function> defines and
      adds a keyboard accelerator to the calling widget, usually a 
      <classname>GtkMenuItem</classname>.
     </simpara>
@@ -525,7 +525,7 @@
     <simpara>
      Thirdly there is the <parameter>accel_key</parameter> parameter.  This
      can be pulled from the <classname>GtkAccelLabel</classname> using the 
-     <function class="GtkLabel">parse_uline()</function> method if you have
+     <function class="GtkLabel">parse_uline</function> method if you have
      an underscore under the appropriate letter, or alternatively you could
      use the key symbols which have been hard-coded into PHP-GTK.  Usually
      these would be in the format <literal>GDK_KEY__a</literal> - always in
@@ -568,7 +568,7 @@
    </shortdesc>
    <desc>
     <simpara>
-     <function class="GtkWidget">remove_accelerator()</function> is a
+     <function class="GtkWidget">remove_accelerator</function> is a
      way to remove a single accelerator, defined by its key value and
      <enumname>GtkModifierType</enumname>.
     </simpara>
@@ -592,7 +592,7 @@
    </shortdesc>
    <desc>
     <simpara>
-     <function class="GtkWidget">remove_accelerators()</function> is a way
+     <function class="GtkWidget">remove_accelerators</function> is a way
      to remove any number of accelerators belonging to the calling widget
      and causing the given signal to be fired.  The second parameter toggles
      whether this should include all such accelerators, or only those
@@ -626,7 +626,7 @@
    </shortdesc>
    <desc>
     <simpara>
-     <function class="GtkWidget">lock_accelerators()</function> locks
+     <function class="GtkWidget">lock_accelerators</function> locks
      any accelerators defined on the calling widget - usually a 
      <classname>GtkMenuItem</classname> - so that no further keys can
      be entered or existing keys removed or altered.
@@ -650,12 +650,12 @@
    </shortdesc>
    <desc>
     <simpara>
-     <function class="GtkWidget">unlock_accelerators()</function> unlocks
+     <function class="GtkWidget">unlock_accelerators</function> unlocks
      the accelerator entries defined in the calling widget, allowing
      changes or additions to be made to them.
     </simpara>
     <simpara>
-     See also: <function class="GtkWidget">accelerators_locked()</function>.
+     See also: <function class="GtkWidget">accelerators_locked</function>.
     </simpara>
    </desc>
   </method>
@@ -672,7 +672,7 @@
    </shortdesc>
    <desc>
     <simpara>
-     <function class="GtkWidget">accelerators_locked()</function> returns 
+     <function class="GtkWidget">accelerators_locked</function> returns 
      <literal>true</literal> if the accelerators on the calling widget are
      locked, and <literal>false</literal> if they are not.
     </simpara>
@@ -763,11 +763,11 @@
      any keyboard events would be picked up immediately by the text widget.
     </simpara>
     <simpara>
-     <function class="GtkWidget">grab_focus()</function> can only be called
+     <function class="GtkWidget">grab_focus</function> can only be called
      when the widget in question has the <literal>GTK_CAN_FOCUS</literal> 
      flag set.  Some will have this set at source, others will not, and will
      generate an error message to that effect when the method is called. 
-     Use <function class="GtkObject">set_flags()</function> to override the
+     Use <function class="GtkObject">set_flags</function> to override the
      source settings.
     </simpara>
    </desc>
@@ -796,7 +796,7 @@
     <simpara>
      In order to make this possible, you will need to set the 
      <literal>GTK_CAN_DEFAULT</literal> widget flag on the button.  See
-     also:  <function class="GtkObject">set_flags()</function>.
+     also:  <function class="GtkObject">set_flags</function>.
     </simpara>
    </desc>
   </method>
@@ -819,7 +819,7 @@
      buttons is going to be queried at a later point in the script.
     </simpara>
     <simpara>
-     See also:  <function class="GtkWidget">get_name()</function>.
+     See also:  <function class="GtkWidget">get_name</function>.
     </simpara>
    </desc>
   </method>
@@ -841,13 +841,13 @@
      <literal>GtkWidget</literal>.
     </simpara>
     <simpara>
-     <function class="GtkWidget">get_name()</function> is very useful
+     <function class="GtkWidget">get_name</function> is very useful
      where the widget could be one of many, e.g. in a callback that is
      used by several different widgets.
     </simpara>
     <simpara>
-     See also:  <function class="GtkObject">get_type()</function>, 
-     <function class="GtkWidget">set_name()</function>.
+     See also:  <function class="GtkObject">get_type</function>, 
+     <function class="GtkWidget">set_name</function>.
     </simpara>
    </desc>
   </method>
@@ -977,7 +977,7 @@
    </shortdesc>
    <desc>
     <simpara>
-     <function class="GtkWidget">set_uposition()</function> sets the
+     <function class="GtkWidget">set_uposition</function> sets the
      position of a child widget in pixels relative to the top left corner
      of its container or, if the widget is a toplevel window, relative to
      the top left corner of the screen.
@@ -998,7 +998,7 @@
    </shortdesc>
    <desc>
     <simpara>
-     <function class="GtkWidget">set_usize()</function> sets a widget's
+     <function class="GtkWidget">set_usize</function> sets a widget's
      size in pixels.  Sizing methods should only be called at one level of
      the packing hierarchy; you may need to size either the container
      or its children, but doing both will create conflicts in the size
@@ -1038,14 +1038,20 @@
      normally capture such events.
     </simpara>
     <simpara>
-     <function class="GtkWidget">set_events()</function> can be used
+     <function class="GtkWidget">set_events</function> can be used
      at any point in the widget's life-cycle.
     </simpara>
     <para>
      Staying with the key-press example, the syntax would be:
      <informalexample>
       <programlisting role="php">
+<![CDATA[
+<?php
+
 $widget-&gt;set_events(GDK_KEY_PRESS_MASK | GDK_KEY_RELEASE_MASK);
+
+?>
+]]>
       </programlisting>
      </informalexample>
      This would enable a previously keyboard-insensitive widget to emit 
@@ -1077,17 +1083,23 @@ $widget-&gt;set_events(GDK_KEY_PRESS_MASK | GDK_KEY_RELEASE_MASK);
      not normally capture such events.
     </simpara>
     <simpara>
-     <function class="GtkWidget">add_events()</function> can only be used
-     after a widget has had <function class="GtkWidget">realize()</function> 
+     <function class="GtkWidget">add_events</function> can only be used
+     after a widget has had <function class="GtkWidget">realize</function> 
      called on it.  Note that realization is a part of the 
-     <function class="GtkWidget">show()</function> routine as well as being
+     <function class="GtkWidget">show</function> routine as well as being
      a method/signal pair in its own right.
     </simpara>
     <para>
      Staying with the button-press example, the syntax would be:
      <informalexample>
       <programlisting role="php">
+<![CDATA[
+<?php
+
 $widget-&gt;add_events(GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK);
+
+?>
+]]>
       </programlisting>
      </informalexample>
      This would enable a previously mouse-insensitive widget to emit 
@@ -1211,7 +1223,7 @@ $widget-&gt;add_events(GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK);
    </shortdesc>
    <desc>
     <simpara>
-     <function class="GtkWidget">is_ancestor()</function> tests whether the
+     <function class="GtkWidget">is_ancestor</function> tests whether the
       widget named in the <parameter>ancestor</parameter> parameter is an
       ancestor of the calling widget, in the packing hierarchy rather than
       in the GTK object hierarchy.
@@ -1249,7 +1261,7 @@ $widget-&gt;add_events(GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK);
    </shortdesc>
    <desc>
     <simpara>
-     <function class="GtkWidget">set_style()</function> is used when some
+     <function class="GtkWidget">set_style</function> is used when some
      or all of the elements that make up an individual widget's default
      <propname class="GtkWidget">style</propname> property are being
      overwritten by a different instance of a 
@@ -1257,7 +1269,7 @@ $widget-&gt;add_events(GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK);
     </simpara>
     <simpara>
      See also:  <classname>GtkStyle</classname>, 
-     <function class="GtkStyle">copy()</function>.
+     <function class="GtkStyle">copy</function>.
     </simpara>
    </desc>
   </method>
@@ -1763,8 +1775,8 @@ $widget-&gt;add_events(GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK);
     <simpara>
      You can limit or extend the events that are captured by a windowed widget
      by setting one or more <enumname>GdkEventMask</enumname> flags for the
-     widget.  See <function class="GtkWidget">add_events()</function>, and
-     <function class="GtkWidget">set_events()</function>.
+     widget.  See <function class="GtkWidget">add_events</function>, and
+     <function class="GtkWidget">set_events</function>.
     </simpara>
    </desc>
   </signal>
@@ -1790,6 +1802,9 @@ $widget-&gt;add_events(GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK);
      <literal>if</literal> or <literal>switch</literal> statement:
      <informalexample>
       <programlisting role="php">
+<![CDATA[
+<?php
+
 function on_click($widget, $event, $data) {
 switch($event-&gt;button) {
 case 1:
@@ -1802,8 +1817,11 @@ case 3:
 /* do something appropriate to a right click */
 break;
 }}
-    
+
 $widget-&gt;connect('button-press-event', 'on_click', $data);
+
+?>
+]]>
       </programlisting>
      </informalexample>
     </para>
@@ -1897,7 +1915,7 @@ $widget-&gt;connect('button-press-event', 'on_click', $data);
      <signalname class="GtkWindow">delete-event</signalname> signal will do
      just that.  Allowing it to return <literal>false</literal> - which it
      does by default - will cause its default handler to be called.  This
-     happens to be the <function class="GtkObject">destroy()</function> 
+     happens to be the <function class="GtkObject">destroy</function> 
      method, which in turns fires the 
      <signalname class="GtkObject">destroy</signalname> signal.  In most
      cases, it's simpler to connect directly to the latter.
@@ -1995,6 +2013,9 @@ $widget-&gt;connect('button-press-event', 'on_click', $data);
      <literal>if</literal> or <literal>switch</literal> statement:
      <informalexample>
       <programlisting role="php">
+<![CDATA[
+<?php
+
 function on_click($widget, $event, $data) {
 if($event-&gt;keyval==GDK_KEY_Return) {
 /*do something appropriate for the return key being pressed*/
@@ -2003,6 +2024,9 @@ elseif($event-&gt;keyval > GDK_KEY__a) {
 /*we can reach the character strings, too*/
 echo $event-&gt;string.&quot;\n&quot;;
 }}
+
+?>
+]]>
       </programlisting>
      </informalexample>
     </para>

@@ -43,8 +43,8 @@
      destroyed.
     </simpara>
     <simpara>
-     See also: <function class="GtkObject">set_flags()</function>, 
-     <function class="GtkObject">unset_flags()</function>.
+     See also: <function class="GtkObject">set_flags</function>, 
+     <function class="GtkObject">unset_flags</function>.
     </simpara>
    </desc>
   </method>
@@ -79,7 +79,7 @@
      widgets.)
     </simpara>
     <simpara>
-     You would use <function class="GtkObject">set_flags()</function> 
+     You would use <function class="GtkObject">set_flags</function> 
      in a situation where the widget needs capabilities it does not
      have at base; setting for instance 
      <literal>GTK_CAN_DEFAULT</literal> on a 
@@ -96,13 +96,13 @@
      displaying its current text.
     </simpara>
     <simpara>
-     See also: <function class="GtkObject">flags()</function>, 
-     <function class="GtkObject">unset_flags()</function>, and a whole
+     See also: <function class="GtkObject">flags</function>, 
+     <function class="GtkObject">unset_flags</function>, and a whole
      host of <classname>GtkWidget</classname> methods such as 
-     <function classname="GtkWidget">set_sensitive()</function> and 
-     <function classname="GtkWidget">grab_default()</function> which
+     <function classname="GtkWidget">set_sensitive</function> and 
+     <function classname="GtkWidget">grab_default</function> which
      either act as wrappers for the 
-     <function class="GtkObject">set_flags()</function> function or
+     <function class="GtkObject">set_flags</function> function or
      need to work in tandem with <enumname>GtkWidgetFlags</enumname> 
      values set in this way.
     </simpara>
@@ -136,8 +136,8 @@
      widget flags determine the nature of that object.
     </simpara>
     <simpara>
-     See also: <function class="GtkObject">flags()</function>, 
-     <function class="GtkObject">set_flags()</function>.
+     See also: <function class="GtkObject">flags</function>, 
+     <function class="GtkObject">set_flags</function>.
     </simpara>
    </desc>
   </method>
@@ -175,12 +175,12 @@
    </shortdesc>
    <desc>
     <simpara>
-     <function class="GtkObject">constructed()</function> is a wrapper
+     <function class="GtkObject">constructed</function> is a wrapper
      method providing a way to switch the 
      <enumname>GtkObjectFlaga</enumname> value 
      <literal>GTK_CONSTRUCTED</literal>.  It may be called internally
      in GTK+ during the construction of a new object, as a fallback
-     when <function class="GtkObject">default_construct()</function> 
+     when <function class="GtkObject">default_construct</function> 
      fails.
     </simpara>
     <simpara>
@@ -203,18 +203,18 @@
    <desc>
     <simpara>
      This method might be used when a newly-created object has not been
-     assigned a parent.  <function class="GtkObject">sink()</function> 
+     assigned a parent.  <function class="GtkObject">sink</function> 
      is called internally when the object is assigned a parent.  The
      object is assigned a reference count of <literal>1</literal> at
      that point, and is kept alive only through its association with
      the parent.
     </simpara>
     <simpara>
-     <function class="GtkObject">sink()</function> would be called by a
+     <function class="GtkObject">sink</function> would be called by a
      PHP-GTK programmer in a situation where the object needed to be
      fully referenced, for example after calling 
-     <function class="GtkObject">ref()</function> and prior to calling 
-     <function class="GtkObject">unref()</function> on an object, where
+     <function class="GtkObject">ref</function> and prior to calling 
+     <function class="GtkObject">unref</function> on an object, where
      the object has no reference-giving parent.  It's basically a
      wrapper method that provides access to the 
      <enumname>GtkObjectFlags</enumname> value 
@@ -243,9 +243,9 @@
     </simpara>
     <simpara>
      If you are planning to 
-     <function class="GtkContainer">remove()</function> a child from
+     <function class="GtkContainer">remove</function> a child from
      its parent container, you will therefore need to call 
-     <function class="GtkObject">ref()</function> on that child first,
+     <function class="GtkObject">ref</function> on that child first,
      in order to maintain its life away from the parent.
     </simpara>
    </desc>
@@ -269,7 +269,7 @@
     <note>
      <simpara>
       If the reference count reaches <literal>1</literal> then 
-      <function class="GtkObject">destroy()</function> will be called
+      <function class="GtkObject">destroy</function> will be called
       on the object from source.
      </simpara>
     </note>
@@ -288,7 +288,7 @@
    </shortdesc>
    <desc>
     <simpara>
-     <function class="GtkObject">destroy()</function> causes an object
+     <function class="GtkObject">destroy</function> causes an object
      and all its signal connections to be destroyed.  During this
      process the <signalname class="GtkObject">destroy</signalname> 
      signal is emitted.
@@ -296,13 +296,13 @@
     <simpara>
      Note that the object's memory is currently not freed at the point
      of destruction, as the reference count is maintained by both the 
-     <function class="GtkObject">destroy()</function> method within
+     <function class="GtkObject">destroy</function> method within
      GTK, and the Zend registry within PHP.  In both cases, this way of
      coping with object destruction has either changed or is about to
      change in the near future.
     </simpara>
     <simpara>
-     See also: <function class="GtkObject">unref()</function>.
+     See also: <function class="GtkObject">unref</function>.
     </simpara>
    </desc>
   </method>
@@ -322,7 +322,7 @@
      In most cases where you are likely to need to know the content of
      an argument, there will be a <literal>get</literal> method in
      place which is basically a wrapper for 
-     <function class="GtkObject">get_arg()</function>.  This is good, 
+     <function class="GtkObject">get_arg</function>.  This is good, 
      because there is, unfortunately, no way to know for certain the
      name of the argument to pass to this function without looking at
      GTK+ source.  A brief tutorial on making sense of what you see
@@ -367,20 +367,26 @@ GTK_ARG_READWRITE, ARG_WRAP);
      value to bind this information to.
     </simpara>
     <simpara>
-     For <function class="GtkObject">get_arg()</function>, all you
+     For <function class="GtkObject">get_arg</function>, all you
      really need is the part that is in quotes, which can be surmised
      by looking at the initial enums.  The datatype may, however, be
      useful information if you need to set an argument and have no
      other means of doing so than 
-     <function class="GtkObject">set_arg()</function>.
+     <function class="GtkObject">set_arg</function>.
     </simpara>
     <para>
      The way you would access this is as follows:
      <informalexample>
       <programlisting role="php">
+<![CDATA[
+<?php
+
 $label = &amp;new GtkLabel('This is an argumentative label');
 $arg = $label-&gt;get_arg('GtkLabel::label');
 echo $arg.&quot;\n&quot;;
+
+?>
+]]>
       </programlisting>
      </informalexample>
     </para>
@@ -401,18 +407,24 @@ echo $arg.&quot;\n&quot;;
     <simpara>
      In most cases, you will find that there is a 
      <literal>set</literal> method in place that is a wrapper function
-     for <function class="GtkObject">set_arg()</function>.  In the rare
+     for <function class="GtkObject">set_arg</function>.  In the rare
      situation where this is not in place, you will need to refer to
      the GTK source in order to find the argument name expected by this
      method.  There is a short tutorial explaining what to look for, 
-     under <function class="GtkObject">get_arg()</function>.
+     under <function class="GtkObject">get_arg</function>.
     </simpara>
     <para>
      The syntax used in this method is as follows:
      <informalexample>
       <programlisting role="php">
+<![CDATA[
+<?php
+
 $label-&gt;set_arg(array('GtkLabel::label'=&gt;'RTFS', 
 'GtkLabel::pattern'=&gt;'____'));
+
+?>
+]]>
       </programlisting>
      </informalexample>
     </para>

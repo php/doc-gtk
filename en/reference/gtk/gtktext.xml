@@ -131,15 +131,18 @@
       Adding a scrollbar to a <classname>GtkText</classname> widget
      </title>
      <programlisting role="php">
+<![CDATA[
+<?php
+
 dl('php_gtk.'.(strstr(PHP_OS, 'WIN') ? 'dll' : 'so'));
-    
+
 $window = &amp;new GtkWindow();
 $window-&gt;set_position(GTK_WIN_POS_CENTER);
 $window-&gt;connect_object('destroy', array('gtk', 'main_quit'));
-    
+
 $box = &amp;new GtkHBox();
 $window-&gt;add($box);
-    
+
 $text = &amp;new GtkText();
 $text-&gt;set_word_wrap(true);
 $string = &quot;This is a string of text which will be displayed in the 
@@ -150,14 +153,17 @@ all.&quot;;
 if(strstr(PHP_OS, 'WIN')) $string = wordwrap($string, 26);
 $text-&gt;insert_text($string, 0);
 $box-&gt;pack_start($text);
-    
+
 $adj = $text-&gt;vadj;
 $scrollbar = &amp;new GtkVScrollbar($adj);
 $box-&gt;pack_end($scrollbar, false);
-    
+
 $window-&gt;show_all();
-    
+
 gtk::main();
+
+?>
+]]>
      </programlisting>
     </example>
    </para>
@@ -178,7 +184,7 @@ gtk::main();
    </shortdesc>
    <desc>
     <simpara>
-     <function class="GtkText">set_editable()</function>, when set to
+     <function class="GtkText">set_editable</function>, when set to
      <literal>true</literal>, allows the user to write to or manipulate
      existing text displayed in the widget.
     </simpara>
@@ -208,7 +214,7 @@ gtk::main();
      <simpara>
       If you are using the PHP <literal>wordwrap()</literal> function, you
       will need to use it in tandem with the GTK 
-      <function class="GtkText">set_word_wrap()</function> method.
+      <function class="GtkText">set_word_wrap</function> method.
      </simpara>
     </note>
     <simpara>
@@ -229,7 +235,7 @@ gtk::main();
    </shortdesc>
    <desc>
     <simpara>
-     <function class="GtkText">set_line_wrap()</function>, when set to
+     <function class="GtkText">set_line_wrap</function>, when set to
      <literal>true</literal> ensures that the text is sensitive to the
      boundaries of the <classname>GtkText</classname> widget and will wrap
      within them.
@@ -238,7 +244,7 @@ gtk::main();
      The default setting is <literal>true</literal>.
     </simpara>
     <simpara>
-     See also:  <function class="GtkText">set_word_wrap()</function>.
+     See also:  <function class="GtkText">set_word_wrap</function>.
     </simpara>
    </desc>
   </method>
@@ -262,7 +268,7 @@ gtk::main();
    </shortdesc>
    <desc>
     <simpara>
-     In most cases, <function class="GtkText">set_adjustments()</function> is
+     In most cases, <function class="GtkText">set_adjustments</function> is
      a redundant method, as it is already used internally by scrolling-aware
      containers to create appropriate adjustment settings for the size of
      the text widget.  This pre-setting by a container cannot be overridden.
@@ -288,7 +294,7 @@ gtk::main();
    </shortdesc>
    <desc>
     <simpara>
-     <function class="GtkText">set_point()</function> sets the point in
+     <function class="GtkText">set_point</function> sets the point in
      the string index where any extraneous text should be inserted.  This
      means that the initial string has to exist in the first place.
     </simpara>
@@ -358,13 +364,13 @@ gtk::main();
    </shortdesc>
    <desc>
     <simpara>
-     Call the <function class="GtkText">freeze()</function> method prior
+     Call the <function class="GtkText">freeze</function> method prior
      to any text update.  This prevents the display from flickering during
      the time it takes for the update to be made, as the full update is
      only drawn once rather than for every new character.
     </simpara>
     <simpara>
-     See also:  <function class="GtkText">thaw()</function>.
+     See also:  <function class="GtkText">thaw</function>.
     </simpara>
    </desc>
   </method>
@@ -381,8 +387,8 @@ gtk::main();
    </shortdesc>
    <desc>
     <simpara>
-     The <function class="GtkText">thaw()</function> method is the 
-     corollary to the <function class="GtkText">freeze()</function> method,
+     The <function class="GtkText">thaw</function> method is the 
+     corollary to the <function class="GtkText">freeze</function> method,
      and should be used in conjunction with it.  Call this method following
      an update to redraw the display.
     </simpara>
@@ -418,7 +424,7 @@ gtk::main();
     <simpara>
      This is a complex method offering more control over the appearance of
      the text in a <classname>GtkText</classname> widget than the alternative
-     <function class="GtkEditable">insert_text()</function> inherited from
+     <function class="GtkEditable">insert_text</function> inherited from
      <classname>GtkEditable</classname>.  It also has the bonus that it allows
      some support for internationalization on all platforms, although
      multibyte conversion under win32 is not currently included in this.
@@ -432,7 +438,7 @@ gtk::main();
      The first parameter <parameter>font</parameter> is a 
      <classname>GdkFont</classname>.  If you are intending to change fonts,
      you will need to call the static function 
-     <function>gdk::font_load()</function> beforehand in order to define
+     <function>gdk::font_load</function> beforehand in order to define
      your chosen font.
     </simpara>
     <simpara>
@@ -456,7 +462,13 @@ gtk::main();
      You can use the current default style with:
      <informalexample>
       <programlisting role="php">
+<![CDATA[
+<?php
+
 $text-&gt;insert(null, null, null, &quot;A string of text.&quot;);
+
+?>
+]]>
       </programlisting>
      </informalexample>
     </para>

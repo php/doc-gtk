@@ -69,26 +69,32 @@
     of that group, although it is part of the same menu.
     <informalexample>
      <programlisting role="php">
+<![CDATA[
+<?php
+
 $menu = &amp;new GtkMenu();
-    
+
 $open = &amp;new GtkRadioMenuItem(null, &quot;Open&quot;);
 $open-&gt;connect('button-press-event', 'open_routine');
 $menu-&gt;append($open);
-    
+
 $save = &amp;new GtkRadioMenuItem($open, &quot;Save&quot;);
 $save-&gt;connect('button-press-event', 'save_routine');
 $menu-&gt;append($save);
-    
+
 $print = &amp;new GtkRadioMenuItem($open, &quot;Print&quot;);
 $print-&gt;connect('button-press-event', 'print_routine');
 $menu-&gt;append($print);
-    
+
 $separator = &amp;new GtkMenuItem();
 $menu-&gt;append($separator);
-    
+
 $exit = &amp;new GtkRadioMenuItem(null, &quot;Exit&quot;);
 $exit-&gt;connect_object('button-press-event','exit_routine', $menu);
 $menu-&gt;append($exit);
+
+?>
+]]>
      </programlisting>
     </informalexample>
    </para>
