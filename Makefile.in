@@ -135,7 +135,7 @@ $(BUILD)/searchable_manual_$(LANG).tar.gz: $(BUILD_SEARCHABLE)/manual/index.php
 # Clean Rules
 #
 clean:
-	rm -rf $(BUILD) $(BUILD_TEST)
+	rm -rf $(BUILD)
 	rm -f chapters.ent
 	rm -f testmanual.xml testclasses.xml
 
@@ -144,6 +144,7 @@ distclean: clean
 	rm -f config.cache config.log config.status version.ent
 	cd scripts; rm -f genchapterents.php
 	cd stylesheets/html; rm -f phpweb.xsl
+	rm -rf $(BUILD_TEST)
 
 cvsclean:
 	@for i in `find . -name .cvsignore`; do \
