@@ -21,102 +21,38 @@ AC_INIT(global.ent)
 
 AC_PATH_PROG(XSLTPROC, xsltproc, no)
 AC_PATH_PROG(PHP, php, no)
+AC_PATH_PROG(ICONV, iconv, no)
+AC_PATH_PROG(TAIL, tail, no)
 
-AC_DEFUN(FetchSS, [
-AC_PATH_PROG(WGET, wget, no)
-if test "$WGET" = "no";
+if test ! -d "$srcdir/en";
 then
-    AC_MSG_ERROR(cannot find wget - 
-    **********************************************
-    *    Please get the stylesheets from         *
-    *  http://www.phpuk.org/~james/gtkss.tar.gz  *
-    * and extract them in the php-gtk-doc dir    *
-    **********************************************)
-
+	AC_MSG_ERROR(configure failed - 
+  *****************************************************
+  *   Please check out the php-gtk-doc/en directory   *
+  *      and run a default ./configure before         *
+  *     configuring any translated directories        *
+  *****************************************************)
 fi
-
-AC_PATH_PROG(TAR, tar, no)
-if test "$TAR" = "no";
-then
-    AC_MSG_ERROR(cannot find tar - 
-    **********************************************
-    *    Please get the stylesheets from         *
-    *  http://www.phpuk.org/~james/gtkss.tar.gz  *
-    * and extract them in the php-gtk-doc dir    *
-    **********************************************)
-fi
-
-AC_MSG_CHECKING(for stylesheets dir)
-if test ! -f "stylesheets/README";
-then
-    AC_MSG_RESULT(not found)
-else
-    AC_MSG_RESULT(found)
-    echo "backing up stylesheet dir"
-    mv stylesheets stylesheets.old    
-fi
-
-if test -f "gtkss.tar.gz";
-then
-    echo "backing up gtkss.tar.gz"
-    mv gtkss.tar.gz gtkss.tar.gz.old
-fi
-
-echo "downloading stylesheets"
-$WGET http://www.phpuk.org/~james/gtkss.tar.gz
-
-if(test ! -f gtkss.tar.gz)
-then
-    AC_MSG_ERROR(download failed - 
-    **********************************************
-    *    Please get the stylesheets from         *
-    *  http://www.phpuk.org/~james/gtkss.tar.gz  *
-    * and extract them in the php-gtk-doc dir    *
-    **********************************************)
-fi
-
-echo "unpacking stylesheets"
-tar -xvzf gtkss.tar.gz
-])
 
 if test "$XSLTPROC" = "no";
 then
-    AC_MSG_ERROR(cannot find xsltproc)
+	AC_MSG_ERROR(cannot find xsltproc)
 fi
 
 if test "$PHP" = "no";
 then
-    AC_MSG_ERROR(unable to locate php exectuable)
+	AC_MSG_ERROR(unable to locate php exectuable)
 fi
 
-AC_MSG_CHECKING(for the stylesheets)
-if test ! -f "stylesheets/README";
+if test "$ICONV" = "no";
 then
-    AC_MSG_RESULT(not found)
-    FetchSS()
+	AC_MSG_ERROR(unable to locate iconv)
 fi
-AC_MSG_RESULT(found)
 
-AC_MSG_CHECKING(stylesheet version)
-
-if test ! -f "stylesheets/GTKVERSION";
+if test "$TAIL" = "no";
 then
-    AC_MSG_RESULT(no version information)
-    AC_MSG_WARN(no version information found - 
-    		presuming old version - 
-		updating stylesheets)
-
-    FetchSS()
+	AC_MSG_ERROR(unable to locate tail)
 fi
-
-if test ! "0.1" = "`cat stylesheets/GTKVERSION`"
-then
-    AC_MSG_RESULT(incorrect version)
-    echo "automatically updating stylesheets"
-    FetchSS()
-fi
-
-AC_MSG_RESULT(correct version)
 
 DOCBOOK_DOCTYPE="-//PHP Group//DTD DocBk XML V3.1.7-Based Extension//EN"
 AC_SUBST(DOCBOOK_DOCTYPE)
@@ -127,67 +63,133 @@ AC_SUBST(STYLESHEET_DIR)
 PHP_GTK_DOC_BUILD_DATE=`date`
 AC_SUBST(PHP_GTK_DOC_BUILD_DATE)
 
-AC_MSG_CHECKING(for php-gtk source)
-AC_ARG_WITH(srcdir,
-[  --with-srcdir=SRCDIR    PHP-GTK source directory],
-[
-    if test -d "$withval";
-    then
-        PHPGTK_SRCDIR="$withval"
-        if test "$PHP" = "no";
-        then
-            AC_MSG_RESULT("no")
-            AC_MSG_ERROR(PHP required to merge docs)
-        fi
-        AC_MSG_RESULT( $withval )
-        AC_SUBST(PHPGTK_SRCDIR)
-    else
-        AC_MSG_RESULT(no)
-        AC_MSG_ERROR(cannot find PHP-GTK source dir)
-    fi
-],
-[
-AC_MSG_RESULT(not found)])
+UTF8DIR=$srcdir/UTF8dir
+AC_SUBST(UTF8DIR)
 
 AC_MSG_CHECKING(for language)
 AC_ARG_WITH(lang,
 [  --with-lang=LANG        choose a language to work with],
 [
-    if test "$withval" = "yes"; 
-    then
-	LANG=en
-	LANGDIR=en
-	AC_MSG_RESULT([en (default)])
-    else
-	if test ! -d "$srcdir/$withval"; then
-	    AC_MSG_RESULT()
-		AC_MSG_ERROR(Language \"$withval\" not supported!)
-	fi
-
+	if test "$withval"
+	then
+		if test ! -d "$srcdir/$withval";
+		then
+			AC_MSG_RESULT()
+			AC_MSG_ERROR(Language \"$withval\" not supported!)
+		fi
+		if test ! -d "$UTF8DIR/en"
+		then
+			if test ! "$withval" = en;
+			then
+				AC_MSG_RESULT()
+				AC_MSG_ERROR(Please run the default ./configure first!)
+			fi
+		fi
 	LANG=$withval
-	LANGDIR=$withval
-	AC_MSG_RESULT( $withval )
-    fi
+	LANGDIR=$srcdir/$withval
+	AC_MSG_RESULT( $withval)
+	fi
 ],[
-    LANG=en
-    LANGDIR=en
-    AC_MSG_RESULT([en (default)])
+	LANG=en
+	LANGDIR=$srcdir/en
+	AC_MSG_RESULT([en (default)])
 ])
 
 AC_SUBST(LANG)
 AC_SUBST(LANGDIR)
+UTF8LANG=$srcdir/UTF8dir/$LANG
+AC_SUBST(UTF8LANG)
 
-case "$LANG" in
-  ja|tw|ko) ENCODING="UTF-8";;
-  cs|hu) ENCODING="ISO-8859-2";;
-  *) ENCODING="ISO-8859-1";;
+#
+# The ENCODING parameter can only be used locally, as encodings cannot
+# be mixed during a build (there's no way of testing the headers). 
+# It may be useful for checking docs created with a different encoding from
+# the rest of those for a given language (I'm thinking of the Japanese
+# issue here mainly), as the only docs updated are those that have
+# appeared or been changed since the previous ./configure on that
+# language directory.  However, once the originals from CVS have been
+# configured, running
+# ./configure --with-lang=ja -with-encoding=whatever on your new files
+# will produce utf-8 encoded files that you can test-build before copying
+# over to your language directory ready to commit.
+#
+# If anyone wants to change their language's default encoding - just ask :)
+# 
+
+AC_MSG_CHECKING(for encoding)
+AC_ARG_WITH(encoding,
+[  --with-encoding=ENCODING        choose an encoding to work with],
+[
+	if test "$withval";
+	then
+		ENCODING="$withval";
+		 if test ! `iconv -s -f $withval -t UTF-8 $LANGDIR/language-defs.ent > test-defs.ent`
+		 then
+			rm -f test-defs.ent
+			AC_MSG_ERROR(configure failed - 
+  ******************************************************
+  *      See http://www.gnu.org/software/libiconv/     *
+  * for information on supported encoding conversions  *
+  ******************************************************)
+		fi
+		AC_MSG_RESULT( $withval)
+	fi
+],[
+	case "$LANG" in
+		ja|tw|ko) ENCODING="UTF-8";;
+		cs|hu) ENCODING="ISO-8859-2";;
+		*) ENCODING="ISO-8859-1";;
+	esac
+	AC_SUBST(ENCODING)
+	AC_MSG_RESULT([$ENCODING (default)])
+])
+
+mkdir -p $UTF8LANG/reference/gdk
+mkdir -p $UTF8LANG/reference/glade
+mkdir -p $UTF8LANG/reference/gtk
+mkdir -p $UTF8LANG/reference/scn
+mkdir -p $UTF8LANG/reference/sqp
+mkdir -p $UTF8LANG/tutorials
+mkdir -p $UTF8LANG/userguide/chapters
+mkdir -p $UTF8LANG/appendix
+
+case "$ENCODING" in
+	UTF-8) 
+	cp -u $LANGDIR/language-defs.ent $UTF8LANG/language-defs.ent
+	echo copying changed xml files to build directory
+	for xmlfile in `find $LANGDIR -name "*.xml" | sed -e"s%^$LANGDIR\/%%g" | sort`
+	do
+		if test -f $LANGDIR/$xmlfile
+		then
+			oldfilepath=$LANGDIR/$xmlfile
+			xmlfilepath=$UTF8LANG/$xmlfile
+			cp -u $oldfilepath $xmlfilepath
+		fi
+	done;;
+
+	*)
+	echo creating UTF-8 encoded copy of /$LANG directory..
+	iconv -s -f $ENCODING -t UTF-8 $LANGDIR/language-defs.ent > $UTF8LANG/language-defs.ent
+
+	for xmlfile in `find $LANGDIR -name "*.xml" | sed -e"s%^$LANGDIR\/%%g" | sort`
+	do
+		if test -f $LANGDIR/$xmlfile
+		then
+			oldfilepath=$LANGDIR/$xmlfile
+			xmlfilepath=$UTF8LANG/$xmlfile
+			if test $oldfilepath -nt $xmlfilepath
+			then
+				echo Updating "$xmlfile"...
+				(echo "<?xml version='1.0' ?>"; iconv -s -f $ENCODING -t UTF-8 $oldfilepath | tail +2 ) > $xmlfilepath
+			fi
+		fi
+	done;;
 esac
-AC_SUBST(ENCODING)
 
 AC_OUTPUT(\
-Makefile \
+makefile \
 manual.xml \
-scripts/udocs \
+stylesheets/html/phpweb.xsl \
 scripts/genchapterents.php )
 
 echo creating chapters.ent

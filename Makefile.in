@@ -18,44 +18,17 @@
 #
 
 #
-# Makefile Variables
-#
-VPATH=@srcdir@
-srcdir=@srcdir@
-LANG=@LANG@
-
-#
 # Paths
 #
-STYLESHEET_DIR=@STYLESHEET_DIR@
-BUILD=build/@LANG@
-BUILD_SEARCHABLE=htdocs
+STYLESHEET_DIR = @STYLESHEET_DIR@
+BUILD = build/@LANG@
+BUILD_SEARCHABLE = htdocs
 
 #
 # Programs
 #
-XSLTPROC=@XSLTPROC@
-PHP=@PHP@
-UDOCS=scripts/udocs
-
-#
-# Default Variables
-#
-MODE="quick"
-UDOCSTYLESHEET:="chunk"
-PREFIX="gtk"
-XMLFILES=
-STYLESHEET=$(CHUNK_STYLESHEET)
-
-#
-# Dependencies
-#
-COMMON_DEPS=
-HTML_DEPS=$(HTML_STYLESHEET) $(COMMON_DEPS)	
-CHUNK_DEPS=$(COMMON_DEPS)
-PHPWEB_DEPS=$(COMMON_DEPS)
-TEST_DEPS=$(COMMON_DEPS)
-MANUAL_DEPS=chapters.ent
+XSLTPROC = @XSLTPROC@
+PHP = @PHP@
 
 #
 # Default Rule
@@ -66,111 +39,45 @@ all: html
 # Build Aliases
 #
 bigmanual.html: $(BUILD)/bigmanual.html
-dist: $(BUILD)/manual-snapshot.tar.gz
+html: $(BUILD)/html/index.html
+phpweb: $(BUILD)/php/index.php
 searchable_zip: $(BUILD)/searchable_manual_$(LANG).zip
 searchable_tar: $(BUILD)/searchable_manual_$(LANG).tar.gz
-genchapterents.php: scripts/genchapterents.php
-html: $(BUILD)/html/index.html
-nochunk: bigmanual.html
-phpweb: $(BUILD)/php/index.php
 text: $(BUILD)/manual.txt
-util: custom.titlepage.xsl
 
-mirror-files: $(BUILD)/php_gtk_manual_$(LANG).tar.gz \
-	      $(BUILD)/php_gtk_manual_$(LANG).tar.bz2 \
-	      $(BUILD)/php_gtk_manual_$(LANG).zip \
-	      $(BUILD)/php_gtk_manual_$(LANG).html.gz \
-	      $(BUILD)/php_gtk_manual_$(LANG).txt.gz
+mirror-files:	$(BUILD)/php_gtk_manual_$(LANG).tar.gz \
+				$(BUILD)/php_gtk_manual_$(LANG).tar.bz2 \
+				$(BUILD)/php_gtk_manual_$(LANG).zip \
+				$(BUILD)/php_gtk_manual_$(LANG).html.gz \
+				$(BUILD)/php_gtk_manual_$(LANG).txt.gz
 
 #
 # Dependency Aliases
 #
-html.xsl: $(STYLESHEET_DIR)/html.xsl
-chunk.xsl: $(STYLESHEET_DIR)/chunk.xsl
-phpweb.xsl: $(STYLESHEET_DIR)/phpweb.xsl
-common.xsl: $(STYLESHEET_DIR)/common.xsl
-genchapterents.php: scripts/genchapterents.php
-udocs: scripts/udocs
-custom.titlepage.xsl: $(STYLESHEET_DIR)/html/custom.titlepage.xsl
-
-#
-# Dependency Rules
-#
-$(STYLESHEET_DIR)/html.xsl: @STYLESHEET_DIR@/html.xsl.in ./config.status
-	CONFIG_FILES=$@ CONFIG_HEADERS= ./config.status
-
-$(STYLESHEET_DIR)/chunk.xsl: @STYLESHEET_DIR@/chunk.xsl.in ./config.status
-	CONFIG_FILES=$@	CONFIG_HEADERS=	./config.status
-
-$(STYLESHEET_DIR)/phpweb.xsl: @STYLESHEET_DIR@/phpweb.xsl.in ./config.status
-	CONFIG_FILES=$@	CONFIG_HEADERS= ./config.status
-
-$(STYLESHEET_DIR)/common.xsl: @STYLESHEET_DIR@/common.xsl.in ./config.status
-	CONFIG_FILES=$@ CONFIG_HEADERS= ./config.status
-
-chapters.ent:
-	@$(PHP) -q scripts/genchapterents.php > $@
-
-#
-# Forced Rules
-#
-.manual.xml: $(XMLFILES) $(MANUAL_DEPS) 
-	touch .manual.xml
-
-#
-# Utility Rules
-#
-manual.xml: .manual.xml
-	CONFIG_FILES=$@ CONFIG_HEADERS= ./config.status
-
-scripts/udocs:
-	CONFIG_FILES=$@ CONFIG_HEADERS= ./config.status
-
-scripts/genchapterents.php:
-	CONFIG_FILES=$@ CONFIG_HEADERS= ./config.status
-
-Makefile: $(srcdir)/Makefile.in ./config.status
-	CONFIG_FILES=$@ CONFIG_HEADERS= ./config.status
-
-FORCE:
+html = $(STYLESHEET_DIR)/html.xsl
+chunk = $(STYLESHEET_DIR)/chunk.xsl
+phpweb = $(STYLESHEET_DIR)/phpweb.xsl
+common = $(STYLESHEET_DIR)/common.xsl
+docbook = $(STYLESHEET_DIR)/docbook.xsl
 
 #
 # Make Rules
 #
-
-$(STYLESHEET_DIR)/html/custom.titlepage.xsl: manual.xml
-	$(SAXON) $(STYLESHEET_DIR)/html/custom.titlepage.xml $(DOCBOOKXSL)/template/titlepage.xsl > $@
-
 $(BUILD)/manual.txt: bigmanual.html
 	@mkdir -p $(BUILD)
 	lynx -nolist -dump file:`pwd`/$(BUILD)/bigmanual.html > $@
 
-$(BUILD)/php/index.php: manual.xml $(PHPWEB_DEPS)
+$(BUILD)/php/index.php: manual.xml
 	@mkdir -p $(BUILD)/php
-	$(XSLTPROC) --param base.dir "'$(BUILD)/php/'" $(STYLESHEET_DIR)/phpweb.xsl manual.xml 
+	$(XSLTPROC) --param base.dir "'$(BUILD)/php/'" $(phpweb) manual.xml
 
-$(BUILD_SEARCHABLE)/manual/index.php: manual.xml $(PHPWEB_DEPS)
-	@mkdir -p $(BUILD_SEARCHABLE)/manual
-	$(XSLTPROC) --param base.dir "'$(BUILD_SEARCHABLE)/manual/'" $(STYLESHEET_DIR)/phpweb.xsl manual.xml
-
-$(BUILD)/searchable_manual_$(LANG).zip: $(BUILD_SEARCHABLE)/manual/index.php
-	@mkdir -p $(BUILD)
-	cp -r search/include search/gifs search/manual search/*.php $(BUILD_SEARCHABLE)
-	zip -qrm -9 $@ $(BUILD_SEARCHABLE)
-
-$(BUILD)/searchable_manual_$(LANG).tar.gz: $(BUILD_SEARCHABLE)/manual/index.php
-	@mkdir -p $(BUILD)
-	cp -r search/include search/gifs search/manual search/*.* $(BUILD_SEARCHABLE)
-	tar -cf - $(BUILD_SEARCHABLE)/ | gzip -9 > $@
-	rm -rf $(BUILD_SEARCHABLE)/
-
-$(BUILD)/html/index.html: manual.xml $(CHUNK_DEPS)
+$(BUILD)/html/index.html: manual.xml
 	@mkdir -p $(BUILD)/html
-	$(XSLTPROC) --param base.dir "'$(BUILD)/html/'" $(STYLESHEET_DIR)/chunk.xsl manual.xml
+	$(XSLTPROC) --param base.dir "'$(BUILD)/html/'" $(chunk) manual.xml
 
-$(BUILD)/bigmanual.html: manual.xml $(HTML_DEPS)
+$(BUILD)/bigmanual.html: manual.xml
 	@mkdir -p $(BUILD)
-	$(XSLTPROC) $(STYLESHEET_DIR)/docbook.xsl manual.xml > $(BUILD)/bigmanual.html
+	$(XSLTPROC) $(docbook) manual.xml > $(BUILD)/bigmanual.html
 
 $(BUILD)/php_gtk_manual_$(LANG).zip: $(BUILD)/html/index.html
 	@mkdir -p $(BUILD)
@@ -192,45 +99,26 @@ $(BUILD)/php_gtk_manual_$(LANG).txt.gz: $(BUILD)/manual.txt
 	@mkdir -p $(BUILD)
 	gzip -c -9 $< > $@
 
-updatexml:
-ifeq "$(mode)" "update"
-ifeq "$(stylesheet)" "phpweb"
-	@$(UDOCS) -u -sphpweb
-else
-	@$(UDOCS) -u -schunk
-endif
-else
-ifeq "$(stylesheet)" "phpweb"
-	@$(UDOCS) -sphpweb
-else
-	@$(UDOCS) -schunk
-endif
-	
-endif
+#
+# The 'searchable' builds should only ever be created LOCALLY!!!
+#
+$(BUILD_SEARCHABLE)/manual/index.php: manual.xml
+	@mkdir -p $(BUILD_SEARCHABLE)/manual
+	$(XSLTPROC) --param base.dir "'$(BUILD_SEARCHABLE)/manual/'" $(phpweb) manual.xml
+
+$(BUILD)/searchable_manual_$(LANG).zip: $(BUILD_SEARCHABLE)/manual/index.php
+	@mkdir -p $(BUILD)
+	cp -r search/include search/gifs search/manual search/*.php $(BUILD_SEARCHABLE)
+	zip -qrm -9 $@ $(BUILD_SEARCHABLE)
+
+$(BUILD)/searchable_manual_$(LANG).tar.gz: $(BUILD_SEARCHABLE)/manual/index.php
+	@mkdir -p $(BUILD)
+	cp -r search/include search/gifs search/manual search/*.* $(BUILD_SEARCHABLE)
+	tar -cf - $(BUILD_SEARCHABLE)/ | gzip -9 > $@
+	rm -rf $(BUILD_SEARCHABLE)/
 
 #
-# Generic Rules
-#
-.SUFFIXES: .xml
-
-%.xml: udocs
-ifeq "$(mode)" "update"
-ifeq "$(stylesheet)" "phpweb"
-	@$(UDOCS) -u -sphpweb $@
-else
-	@$(UDOCS) -u -schunk $@
-endif
-else
-ifeq "$(stylesheet)" "phpweb"
-	@$(UDOCS) -sphpweb $@
-else
-	@$(UDOCS) -schunk $@
-endif
-	
-endif
-
-#
-# Clean	Rules
+# Clean Rules
 #
 clean:
 	rm -rf $(BUILD)
@@ -239,12 +127,11 @@ clean:
 distclean: clean
 	rm -f Makefile manual.xml configure
 	rm -f config.cache config.log config.status version.ent
-	cd scripts; rm -f genchapterents.php udocs
+	cd scripts; rm -f genchapterents.php
+	cd /stylesheets/html; rm -f phpweb.xsl
 
 cvsclean:
 	@for i in `find . -name .cvsignore`; do \
 		(cd `dirname $$i` 2>/dev/null && rm -rf `cat .cvsignore` || true); \
 	done
-
-
 
