@@ -4,10 +4,15 @@
   <classtitle>GtkRange</classtitle>
   <classparent>GtkWidget</classparent>
   <shortdesc>
-
+   Base class for <classname>GtkScale</classname> and <classname>GtkScrollbar</classname>.
   </shortdesc>
   <desc>
-
+   <simpara>
+    <classname>GtkRange</classname> is the base class for <classname>GtkScale</classname> and <classname>GtkScrollbar</classname>. <classname>GtkRange</classname> provides methods for dealing with the visual display of widgets with sliders.
+   </simpara>
+   <simpara>
+    <classname>GtkRange</classname> is an abstract class and may not be directly instantiated.
+   </simpara>
   </desc>
  </classmeta>
 
@@ -24,10 +29,31 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns a referene to the widget's adjustment child.
    </shortdesc>
    <desc>
+    <simpara>
+     Returns a referene to the widget's adjustment child. 
+    </simpara>
+    <para>
+     <example>
+      <title>Change the current value of an HScale</title>
+      <programlisting role="php">
+<![CDATA[
+<?php
+// Create an hScale object
+$hScale = &new GtkHScale(new GtkAdjustment(.5, 0, 1, .1, .1, .1));
 
+// Get the adjustment from the hScale
+$adj = &$hScale->get_adjustment();
+
+// Set the value to zero
+$adj->set_value(0);
+?>
+]]>
+      </programlisting>
+     </example>
+    </para>
    </desc>
   </method>
 
