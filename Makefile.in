@@ -157,7 +157,7 @@ build/bigmanual.html: manual.xml $(HTML_DEPS)
 
 build/php_gtk_manual_@LANG@.zip: build/html/index.html
 	@mkdir -p build
-	(cd build/html; zip -q -9 ../$@ *.html)
+	(cd build/html; zip -q -9 ../../$@ *.html)
 
 build/php_gtk_manual_@LANG@.tar.gz: build/html/index.html
 	@mkdir -p build
