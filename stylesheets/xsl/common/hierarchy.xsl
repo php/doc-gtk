@@ -1,11 +1,9 @@
 <?xml version='1.0' encoding='ISO-8859-1' ?>
-<!DOCTYPE xsl:stylesheet [
-<!ENTITY step "&#160;&#160;&#160;&#160;&#160;&#160;">
-<!ENTITY nbsp "&#160;">
-]>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 		version="1.0">
 
+<!-- $Id: hierarchy.xsl,v 1.2 2001-08-10 09:58:37 jmoore Exp $ -->
+		
 <!-- ================== Common Hierarchy Functions ============================ -->
 
 <!--
