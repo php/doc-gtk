@@ -1,0 +1,585 @@
+<?xml version="1.0" encoding="ISO-8859-2" ?>
+<chapter id="gtk.signals">
+ <title>Signály a volání</title>
+
+ <sect1 id="gtk.signals.whatare">
+  <title>Co jsou signály?</title>
+  <simpara>
+   <emphasis>Signály jsou upozornění, která vycházející z
+   <link linkend="gtk.widgets.whatare">widgetů</link>.</emphasis>
+  </simpara>
+  <simpara>
+   Při programování grafických uživatelských rozhraní
+   (<acronym>GUI</acronym>) je často nutné reagovat na akce prováděné
+   uživatelem nebo samotným programem. <acronym>GNOME</acronym> a
+   <acronym>GTK+</acronym> to řeší pomocí signálů. Signály programu říkají,
+   že došlo k nějaké události. Kupříkladu když uživatel klikne na
+   <classname>GtkButton</classname> nebo změní hodnotu
+   <classname>GtkAdjustment</classname>.
+  </simpara>
+  <simpara>
+   Program může například zařídit, aby <classname>GtkAdjustment</classname>
+   vyslal signál <signalname>value-changed</signalname>, změní-li se některá
+   z hodnot. Tento konkrétní signál se ve třídě
+   <classname>GtkAdjustment</classname> používá interně i externě, takže
+   není vždy nutné jej zapisovat do programu, chcete-li použít např.
+   <classname>GtkProgressBar</classname>. Jasnější situace nastane, když
+   uživatel klikne na <classname>GtkButton</classname>, čímž widget vyšle
+   signál <signalname>clicked</signalname>. Jako programátor nastavíte
+   <link linkend="gtk.callbacks.whatare">volání</link>, které na tento
+   signál zareaguje.
+  </simpara>
+ </sect1>
+
+ <sect1 id="gtk.callbacks.whatare">
+  <title>Co je volání?</title>
+  <simpara>
+   <emphasis>
+    Volání je funkce aktivovaná 
+    <link linkend="gtk.signals.whatare">signálem</link> nějakého
+    <link linkend="gtk.widgets.whatare">widgetu</link>.
+   </emphasis>
+  </simpara>
+  <simpara>
+   Volání je funkce, kterou programátor přiřadí k určitému signálu. Která
+   funkce má reagovat na signál, určíte
+   <link linkend="gtk.signals.connection">připojením</link> funkce k
+   signálu.
+  </simpara>
+  <simpara>
+   Volání se také nazývá obslužná funkce signálu. Může to být buď
+   <literal>standardní obslužná funkce</literal> nebo <literal>uživatelem
+   definovaná obslužná funkce</literal>, čili funkce napsaná programátorem.
+  </simpara>
+ </sect1>
+
+ <sect1 id="gtk.signal.inheritance">
+  <title>Signal Inheritance</title>
+  <simpara>
+   Signals are inherited by objects, just as methods are.  A widget can
+   emit any signals that its ancestor objects have defined, as well as its
+   own specific signals.
+  </simpara>
+  <simpara>
+   In cases where the signal is not relevant to the widget but is nonetheless
+   inherited by it, there will be no error message when the signal is called 
+   - but equally, there will be no obvious means for the widget to emit that
+   particular signal.
+  </simpara>
+ </sect1>
+
+ <sect1 id="gtk.signals.connection">
+  <title>Connecting Signals</title>
+
+  <sect2 id="gtk.signals.connection.simple">
+   <title>Simple Connections</title>
+   <simpara>
+    To react to a signal you must connect to it by specifying a callback
+    function for PHP-GTK to call when that signal is emitted.
+   </simpara>
+   <simpara>
+    Connecting a function to a signal is achieved by calling the
+    <function class="GtkObject">connect()</function> method of the object.
+   </simpara>
+   <simpara>
+    The function that you register as the callback for a signal must have the
+    correct prototype. You can find what the prototype should be from the
+    <link linkend="reference">reference</link> section of this manual.
+   </simpara>
+   <simpara>
+    For example, if you wanted to connect to the
+    <signalname>clicked</signalname> signal of an instance of 
+    <classname>GtkButton</classname> you should define a function that
+    accepts one parameter, which will be the button that was clicked.
+   </simpara>
+    <para>
+     The code below shows how you might create a window, add a button to it,
+     wait for it to be clicked and then, when it is clicked, open a new
+     <classname>GtkWindow</classname> containing a message.
+     <example>
+      <title>Signals and Callbacks</title>
+      <programlisting role="php">
+    
+function shutdown() 
+{
+    print(&quot;Shutting down...\n&quot;);
+    gtk::main_quit();
+}
+    
+function you_clicked($button) 
+{
+    $window = &amp;new GtkWindow();
+    $label = &amp;new GtkLabel(&quot;You clicked the button&quot;);
+    $window-&gt;add($label);
+    $window-&gt;connect(&quot;destroy&quot;,&quot;shutdown&quot;);
+    $window-&gt;show_all();
+    return false;
+}
+    
+$window = &amp;new GtkWindow();
+$window-&gt;connect(&quot;destroy&quot;, &quot;shutdown&quot;);
+$window-&gt;set_border_width(10);
+    
+$button = &amp;new GtkButton(&quot;Click Me!!&quot;);
+$button-&gt;connect(&quot;clicked&quot;, &quot;you_clicked&quot;);
+$window-&gt;add($button);
+    
+$window-&gt;show_all();
+    
+gtk::main();
+     </programlisting>
+    </example>
+   </para>
+   <para>
+    The important part here is where we call
+    <informalexample>
+     <programlisting role="php">$button-&gt;connect();</programlisting>
+    </informalexample>
+    The connect method here registers the <literal>you_clicked()</literal> 
+    function as the callback that will be invoked when the 
+    <signalname>clicked</signalname> signal is emitted by the 
+    <classname>GtkButton</classname> widget.  We also register the 
+    <literal>shutdown()</literal> function as the handler for the 
+    <signalname>destroy</signalname> signal for both windows so that we
+    can shut down the application properly.
+   </para>
+  </sect2>
+
+  <sect2 id="gtk.signals.connection.multiple">
+   <title>Multiple Connections</title>
+   <simpara>
+    With PHP-GTK you can register more than one function to be invoked when
+    a signal is emitted by a widget.  This allows you to set up a whole set
+    of functions to be called in response to an expected action.
+   </simpara>
+   <para>
+    When more than one function is connected to a signal, the functions are
+    called in the order in which they were registered when that signal is
+    emitted.
+    <example>
+     <title>Signal Callback Order</title>
+     <programlisting role="php">
+    
+function first($button) 
+{
+    print &quot;First function has been called\n&quot;;
+}
+    
+function second($button) 
+{
+    print &quot;Second function has been called\n&quot;;
+}
+    
+$window = &amp;new GtkWindow();
+$window-&gt;connect_object(&quot;destroy&quot;, array(&quot;gtk&quot;, 
+&quot;main_quit&quot;));
+    
+$button = &amp;new GtkButton(&quot;Click Me!!&quot;);
+$button-&gt;connect(&quot;clicked&quot;,&quot;first&quot;);
+$button-&gt;connect(&quot;clicked&quot;,&quot;second&quot;);
+$window-&gt;add($button);
+    
+$window-&gt;show_all();
+    
+gtk::main();
+     </programlisting>
+    </example>
+    In the above example we connect two functions to a button's
+    <signalname>clicked</signalname> signal.  The first call to the
+    <function class="GtkObject">connect()</function> method connects the
+    <signalname>clicked</signalname> signal to the <literal>first()</literal> 
+    function, the second call connects the <signalname>clicked</signalname> 
+    signal to the <literal>second()</literal> function.
+   </para>
+   <para>
+    The output from this program would be:
+    <programlisting>
+First function has been called.
+Second function has been called.
+    </programlisting>
+   </para>
+  </sect2>
+ </sect1>
+ 
+ <sect1 id="gtk.signals.custom.params">
+  <title>Using Custom Parameters</title>
+  <sect2 id="gtk.signals.custom.data">
+   <title>Passing Custom Data as a Parameter</title>
+   <simpara>
+    When <link linkend="gtk.signals.connection">connecting</link> signals,
+    it is possible to add an extra custom parameter to the callback.  This
+    is useful for passing the object you want to perform an action on, to
+    your callback function.
+   </simpara>
+   <simpara>
+    For example, when a button is pressed we might want to destroy the parent
+    instance of <classname>GtkWindow</classname> that that instance of
+    <classname>GtkButton</classname> has been 
+    <function class="gtkcontainer">add</function>ed to.
+   </simpara>
+   <simpara>
+    You can do this by including an optional third parameter to the 
+    <function class="GtkObject">connect()</function> call. This will then be
+    passed to your signal handler function as the final callback parameter.
+   </simpara>
+   <para>
+    <example>
+     <title>
+      Using Custom Parameters with the 
+      <function class="GtkObject">connect()</function> method.
+     </title>
+     <programlisting role="php">
+    
+function button_clicked($button, $window) 
+{
+    $window-&gt;destroy();
+    gtk::main_quit();
+}
+    
+$window = &amp;new GtkWindow();
+    
+$button = &amp;new GtkButton(&quot;exit&quot;);
+$button-&gt;connect(&quot;clicked&quot;,&quot;button_clicked&quot;, $window);
+    
+$window-&gt;add($button);
+$window-&gt;show_all();
+    
+gtk::main();
+     </programlisting>
+    </example>
+    In the above code you can see that we pass not only the
+    <literal>$button</literal> variable, an instance of
+    <classname>GtkButton</classname>, to the <signalname>clicked</signalname> 
+    callback but also the <literal>$window</literal> variable, an instance
+    of the <classname>GtkWindow</classname> class.  This allows us to call
+    the <function class="GtkObject">destroy()</function> method on the window.
+   </para>
+   <note>
+    <simpara>
+     You can have as many custom parameters as you want.
+    </simpara>
+   </note>
+   <para>
+    By passing the <literal>$button</literal> variable as our calling object
+    parameter and the <literal>$window</literal> variable as our custom
+    parameter, we could use this same callback for more than one
+    <classname>GtkButton</classname> on more than one
+    <classname>GtkWindow</classname>.  Note that the names given to the
+    parameters within the callback are irrelevant outside the callback
+    function; PHP-GTK picks up on the positions of the parameters in the
+    connect* method calls and passes these to the variables listed in the
+    callback declaration as an array, so that any instance of a connection
+    using the same parameter structure can use that same callback.  This is
+    demonstrated in the code below using a single custom parameter, but is
+    equally true for more than one.
+    <example>
+     <title>Using the same callback for more than one window</title>
+     <programlisting role="php">
+    
+function button_clicked($button, $window)
+{
+    $window->set_title(&quot;titled&quot;);
+}
+    
+$window1 = &amp;new GtkWindow();
+$window1-&gt;connect_object(&quot;destroy&quot;, array(&quot;gtk&quot;, 
+&quot;main_quit&quot;));
+$window2 = &amp;new GtkWindow();
+$window2-&gt;connect_object(&quot;destroy&quot;, array(&quot;gtk&quot;, 
+&quot;main_quit&quot;));
+    
+$button1 = &amp;new GtkButton(&quot;click me&quot;);
+$button2 = &amp;new GtkButton(&quot;or me&quot;);
+    
+$button1-&gt;connect(&quot;clicked&quot;, &quot;button_clicked&quot;, 
+$window1);
+$button2-&gt;connect(&quot;clicked&quot;, &quot;button_clicked&quot;, 
+$window2);
+    
+$window1-&gt;add($button1);
+$window2-&gt;add($button2);
+    
+$window1-&gt;show_all();
+$window2-&gt;show_all();
+    
+gtk::main();
+     </programlisting>
+    </example>
+   </para>
+  </sect2>
+ 
+  <sect2 id="gtk.signals.connect.object">
+   <title>Using the connect_object* methods</title>
+   <para>
+    Both <function class="GtkObject">connect_object()</function> and 
+    <function class="GtkObject">connect_object_after()</function> allow you
+    to pass an object other than the calling object as the first parameter
+    to your callback function. This is mainly used for calling static
+    PHP-GTK functions, as in (for example) the 
+    <function>gtk::main_quit()</function> function:
+    <example>
+     <title>
+      Using the <function class="GtkObject">connect_object()</function> 
+      method to specify a built-in function as callback.
+     </title>
+     <programlisting role="php">
+    
+$window = &amp;new GtkWindow();
+$window-&gt;connect_object(&quot;destroy&quot;, array(&quot;gtk&quot;, 
+&quot;main_quit&quot;));
+$window-&gt;show();
+    
+gtk::main();
+     </programlisting>
+    </example>
+    This could be called on any static function or method by using the
+    <literal>gtkobject::method</literal> syntax expressed as an array.
+   </para>
+   <para>
+    It also means you can have a single callback for multiple signals.  For
+    example; you might create a window containing (within the necessary
+    container widgets) a <classname>GtkMenuBar</classname>, a
+    <classname>GtkToolbar</classname> and a <classname>GtkButton</classname>. 
+    When <literal>Exit</literal> is chosen by the user through any of these
+    widgets, a shutdown function could be invoked by passing the instance of
+    <classname>GtkWindow</classname> as its first parameter, allowing the
+    window to be destroyed from any of those connections.  The callback
+    function and the connections in this instance would look like this:
+    <example>
+     <title>
+      Using the <function class="GtkObject">connect_object()</function> 
+      method to pass another object as first parameter.
+     </title>
+     <programlisting role="php">
+    
+function destroy_window($window)
+{
+    $window-&gt;destroy();
+    gtk::main_quit();
+}
+    
+$exit_button-&gt;connect_object(&quot;clicked&quot;, 
+&quot;destroy_window&quot;, $window);
+    
+     </programlisting>
+    </example>
+   </para>
+   <para>
+    The connect_after* methods allow callbacks to be &quot;run after&quot;
+    the default signal handler for that signal.  This can be useful
+    in some situations; for example, where you want to destroy only one of
+    several windows in a given circumstance.  However, connect_after* methods
+    will only work when a signal has been created in the GTK source with a 
+    <literal>GTK_RUN_LAST</literal> flag.  The 
+    <signalname>destroy</signalname> signal and all the
+    <literal>'event'</literal> signals have this flag; beyond that,
+    the only way to check is to either test the signal within PHP-GTK or
+    read the GTK source.
+    <example> 
+     <title>Using the 
+      <function class="GtkObject">connect_after()</function> method.
+     </title>
+     <programlisting role="php">
+    
+function quit_routine($window) 
+{
+    print(&quot;Shutting down...\n&quot;);
+    gtk::main_quit();
+}
+    
+$window1 = &amp;new GtkWindow();
+$window1->set_title(&quot;Quit the main loop&quot;);
+$window1-&gt;connect(&quot;destroy&quot;, &quot;quit_routine&quot;);
+    
+$window2 = &amp;new GtkWindow();
+$window2->set_title(&quot;Destroy this window&quot;);
+$window2-&gt;connect_after(&quot;destroy&quot;, &quot;quit_routine&quot;);
+    
+$window1-&gt;show();
+$window2-&gt;show();
+    
+gtk::main();
+     </programlisting>
+    </example>
+   </para>
+   <simpara>
+    See also: <classname>GtkObject</classname>, 
+    <function class="GtkObject">connect_after()</function>
+    <function class="GtkObject">connect_object()</function> and 
+    <function class="GtkObject">connect_object_after()</function>.
+   </simpara>
+  </sect2>
+ </sect1>
+
+ <sect1 id="gtk.signals.events">
+  <title>Signals and Events</title>
+  <simpara>
+   <emphasis>GTK Signals, GDK Events.</emphasis>
+  </simpara>
+  <simpara>
+   Signals are not events, and events are not signals.  A signal is a message
+   emitted by an instance of a <classname>GtkObject</classname> in response
+   to some predetermined element in its environment, e.g. an action by the
+   end user, or an instruction from a function or method.  Signals are always
+   programmed into the code, either internally within GTK or externally by
+   the PHP-GTK programmer.
+  </simpara>
+  <simpara>
+   Events, on the other hand, are a continual stream of impulses
+   communicating messages concerning environmental changes in the underlying
+   windowing system.  The GTK main loop is made up of this stream of events, 
+   among other things.
+  </simpara>
+  <note>
+   <simpara>
+    It is not possible to connect a callback function to a 
+    <classname>GdkEvent</classname> directly.
+   </simpara>
+  </note>
+  <simpara>
+   Any widget having its own <classname>GdkWindow</classname> may capture
+   events that are relevant to it.  Widgets lacking a 
+   <classname>GdkWindow</classname> - those created with the 
+   <literal>GTK_NO_WINDOW</literal> flag - cannot do so, unless they are
+   housed within a <classname>GtkEventBox</classname> - a widget created for
+   this specific purpose.  There are occasions when it is useful to be able
+   to capture events; one obvious example would be the creation of an instance
+   of <classname>GtkToolTips</classname> which is triggered when its subject
+   widget captures the <literal>GDK_ENTER_NOTIFY</literal> event and
+   destroyed when the same widget captures the
+   <literal>GDK_LEAVE_NOTIFY</literal> event.
+  </simpara>
+  <simpara>
+   Although it is not possible to use an event to trigger a callback in the
+   same way as a signal, there are a series of signals derived from 
+   <classname>GtkWidget</classname> collectively known as 
+   <literal>'event' signals</literal>.  These are effectively ways
+   of describing an event in terms of a signal, allowing callbacks to be
+   indirectly triggered through a captured occurrence of most of the 
+   <enumname>GdkEventTypes</enumname>. The 
+   <classname>GtkTooltips</classname>  object itself uses the 
+   <function class="GktObject">connect_object()</function> method and the
+   generic <signalname>event</signalname> signal in order to monitor its
+   subject widget.
+  </simpara>
+  <para>
+   The concept of events is not an easy one to grasp.  Please copy, paste
+   and run the following script in order to see the flow of events over a
+   widget in action.
+   <example>
+    <title>Demonstration of the flow of events across a
+     <classname>GtkButton</classname>
+    </title>
+    <programlisting role="php">
+    
+dl(&quot;php_gtk.&quot; . (strstr(PHP_OS, &quot;WIN&quot;) ? &quot;dll&quot; : 
+&quot;so&quot;)) ||
+die(&quot;Can't load php_gtk module!\n&quot;);
+    
+function show_event_type($button, $event, $text) 
+{
+    $event_type = $event-&gt;type;
+    $insert = $text->get_length();
+    $text-&gt;freeze();
+    switch($event_type) {
+      case 2:
+        $text-&gt;insert_text(&quot;GDK_EXPOSE\n&quot;, $insert);
+      break;
+      case 3:
+        $text-&gt;insert_text(&quot;GDK_MOTION_NOTIFY\n&quot;, $insert);
+      break;
+      case 4:
+        $text-&gt;insert_text(&quot;GDK_BUTTON_PRESS\n&quot;, $insert);
+      break;
+      case 5:
+        $text-&gt;insert_text(&quot;GDK_2BUTTON_PRESS\n&quot;, $insert);
+        $button-&gt;hide();
+      break;
+      case 7:
+        $text-&gt;insert_text(&quot;GDK_BUTTON_RELEASE\n&quot;, $insert);
+      break;
+      case 8:
+        $text-&gt;insert_text(&quot;GDK_KEY_PRESS\n&quot;, $insert);
+      break;
+      case 9:
+        $text-&gt;insert_text(&quot;GDK_KEY_RELEASE\n&quot;, $insert);
+      break;
+      case 10:
+        $text-&gt;insert_text(&quot;GDK_ENTER_NOTIFY\n&quot;, $insert);
+      break;
+      case 11:
+        $text-&gt;insert_text(&quot;GDK_LEAVE_NOTIFY\n&quot;, $insert);
+      break;
+      case 12:
+        $text-&gt;insert_text(&quot;GDK_FOCUS_CHANGE\n&quot;, $insert); 
+      break;
+      case 14:
+        $text-&gt;insert_text(&quot;GDK_MAP\n&quot;, $insert);
+      break;
+      case 15:
+        $text-&gt;insert_text(&quot;GDK_UNMAP\n&quot;, $insert);
+        $button-&gt;destroy();
+        $text->insert_text(
+&quot;\n* GDK EVENTS AND GTK SIGNALS - background stream vs foreground 
+messaging *
+\n
+* Most GdkEventTypes have counterpart GTK signals, known as 'event'
+  signals, implemented in GtkWidget.  The types on your screen are there
+  because the GtkButton was programmed to emit the generic 'event' signal
+  each time it captured one of the stream of GDK events that makes up the
+  GTK main loop.  In each case, the captured GdkEvent was passed as a
+  callback parameter so that its enumerated type value could be determined
+  within the signal handler function.  Scroll down to see the series of event
+  values captured during your recent interaction with the GtkButton widget. *
+\n
+* Please note that the majority of GTK signals do NOT correspond to GDK
+  events in this or any other way!  For example, the signal connection
+                      \$button->connect('pressed', 'whatever');
+  has no relationship to the GDK_BUTTON_PRESS event it generates, which
+  refers to mouse-button activity and not to the GtkButton 'pressed' signal. *
+\n&quot;, 0);
+      break;
+    }
+    $text-&gt;thaw();
+    return false;
+}
+    
+$window = &amp;new GtkWindow();
+$window-&gt;set_position(GTK_WIN_POS_CENTER);
+$window-&gt;set_default_size((gdk::screen_width()/1.5), 
+(gdk::screen_height()-20));
+$window-&gt;connect_object(&quot;destroy&quot;, array(&quot;gtk&quot;, 
+&quot;main_quit&quot;));
+$window-&gt;realize();
+    
+$box = &amp;new GtkVBox(false, 5);
+$window-&gt;add($box);
+$scrlwin = &amp;new GtkScrolledWindow();
+$box-&gt;pack_start($scrlwin, true, true, 0);
+$text = &amp;new GtkText();
+$scrlwin-&gt;add($text);
+    
+$button = &amp;new GtkButton(&quot;Double-click here for information..&quot;);
+$button-&gt;add_events(GDK_ALL_EVENTS_MASK);
+$button-&gt;connect(&quot;event&quot;, &quot;show_event_type&quot;, $text);
+$box-&gt;pack_end($button, false, false, 5);
+    
+$window-&gt;show_all();
+    
+gtk::main();
+    </programlisting>
+   </example>
+  </para>
+ </sect1>
+
+</chapter> 
+
+<!--
+ * Local variables:
+ * tab-width: 1
+ * c-basic-offset: 1
+ * fileformat=unix
+ * End:
+ * vim600: et sw=1 ts=1 tw=78 fdm=indent
+ * vim<600: et sw=1 ts=1 tw=78
+-->
