@@ -20,19 +20,24 @@
 
 AC_INIT(global.ent)
 
-AC_PATH_PROG(SAXON, saxon, no)
-if test "$SAXON" = "no"; then
-    AC_PATH_PROG(JAVA, java, no)
-    if test "$JAVA" = "no"; then
-        AC_MSG_ERROR(unable to locate either Saxon or Java)
-    else
-        AC_MSG_CHECKING(for Saxon.jar)
-        if echo $CLASSPATH | grep "saxon.jar" > /dev/null; then
-            AC_MSG_RESULT("yes")
-            SAXON="$JAVA com.icl.saxon.StyleSheet"
-            AC_SUBST(SAXON)
+AC_PATH_PROG(XSLTPROC, xsltproc, no)
+if test "$XSLTPROC" = "no"
+then
+    AC_PATH_PROG(SAXON, saxon, no)
+    if test "$SAXON" = "no"; then
+        AC_PATH_PROG(JAVA, java, no)
+        if test "$JAVA" = "no"; then
+            AC_MSG_ERROR(unable to locate either Saxon or Java)
         else
-            AC_MSG_ERROR(unable to locate saxon.jar in your classpath)
+            AC_MSG_CHECKING(for Saxon.jar)
+            if echo $CLASSPATH | grep "saxon.jar" > /dev/null; then
+                AC_MSG_RESULT("yes")
+                SAXON="$JAVA com.icl.saxon.StyleSheet"
+                AC_SUBST(SAXON)
+		ENDTEXT="Please ensure you have copied Makefile.saxon to Makefile.in and rerun configure to build with saxon"
+            else
+	        AC_MSG_ERROR(unable to locate saxon.jar in your classpath)
+            fi
         fi
     fi
 fi
@@ -157,3 +162,4 @@ stylesheets/xsl/common.xsl \
 stylesheets/xsl/update.xsl)
 
 chmod +x scripts/genchapterents.php
+echo $ENDTEXT
