@@ -23,45 +23,49 @@
   <para>
    <example>
     <title>PHP-GTK Hello Worldプログラムのリスト</title>
-    <programlisting role="php">
+   <programlisting role="php">
 <![CDATA[
+<?php
+
 if (!class_exists('gtk')) {
     if (strtoupper(substr(PHP_OS, 0,3) == 'WIN'))
     dl('php_gtk.dll');
   else
     dl('php_gtk.so');
 }
-    
+
 function delete_event()
 {
     return false;
 }
-    
+
 function shutdown()
 {
     print("Shutting down...\n");
     gtk::main_quit();
 }
-    
+
 function hello()
 {
     global $window;
     print "Hello World!\n";
     $window->destroy();
 }
-    
+
 $window = &new GtkWindow();
 $window->connect('destroy', 'shutdown');
 $window->connect('delete-event', 'delete_event');
 $window->set_border_width(10);
-    
+
 $button = &new GtkButton('Hello World!');
 $button->connect('clicked', 'hello');
 $window->add($button);
-    
+
 $window->show_all();
-    
+
 gtk::main();
+
+?>
 ]]>
     </programlisting>
    </example>
@@ -71,12 +75,16 @@ gtk::main();
     <title>PHP-GTKをロードする</title>
     <programlisting role="php">
 <![CDATA[
+<?php
+
 if (!class_exists('gtk')) {
     if (strtoupper(substr(PHP_OS, 0,3) == 'WIN'))
     dl('php_gtk.dll');
  else
     dl('php_gtk.so');
 }
+
+?>
 ]]>
     </programlisting>
    </example>
@@ -91,10 +99,14 @@ if (!class_exists('gtk')) {
     <title>delete_event() 関数</title>
     <programlisting role="php">
 <![CDATA[
+<?php
+
 function delete_event()
 {
     return false;
 }
+
+?>
 ]]>
     </programlisting>
    </example>
@@ -123,13 +135,17 @@ function delete_event()
   <para>
    <example>
     <title>shutdown() 関数</title>
-    <programlisting role="php">
+   <programlisting role="php">
 <![CDATA[
+<?php
+
 function shutdown()
 {
     print("Shutting down...\n");
     gtk::main_quit();
 }
+
+?>
 ]]>
     </programlisting>
    </example>
@@ -142,14 +158,18 @@ function shutdown()
   <para>
    <example>
     <title>hello()関数</title>
-    <programlisting role="php">
+   <programlisting role="php">
 <![CDATA[
+<?php
+
 function hello()
 {
     global $window;
     print "Hello World!\n";
     $window->destroy();
 }
+
+?>
 ]]>
     </programlisting>
    </example>
@@ -173,12 +193,16 @@ function hello()
   <para>
    <example>
     <title>ウインドウを設定する</title>
-    <programlisting role="php">
+   <programlisting role="php">
 <![CDATA[
+<?php
+
 $window = &new GtkWindow();
 $window->connect('destroy', 'shutdown');
 $window->connect('delete-event', 'delete_event');
 $window->set_border_width(10);
+
+?>
 ]]>
     </programlisting>
    </example>
@@ -197,13 +221,17 @@ $window->set_border_width(10);
   <para>
    <example>
     <title>ボタンを設定する</title>
-    <programlisting role="php">      
+   <programlisting role="php">
 <![CDATA[
+<?php
+
 $button = &new GtkButton('Hello World!');
 $button->connect('clicked', 'hello');
 $window->add($button);
 
 $window->show_all();
+
+?>
 ]]>
     </programlisting>
    </example>
@@ -228,9 +256,13 @@ $window->show_all();
   <para>
    <example>
     <title>gtk::mainをコールする</title>
-    <programlisting role="php">
+   <programlisting role="php">
 <![CDATA[
+<?php
+
 gtk::main();
+
+?>
 ]]>
     </programlisting>
    </example>

@@ -334,7 +334,8 @@
      object.  For example, in <filename>gtklabel.c</filename> in GTK
      1.2.10 you will see this directly after the includes:
      <informalexample>
-      <programlisting>
+     <programlisting>
+<![CDATA[
 enum {
   ARG_0,
   ARG_LABEL,
@@ -342,13 +343,15 @@ enum {
   ARG_JUSTIFY,
   ARG_WRAP
 };
+]]>
       </programlisting>
      </informalexample>
      Around a hundred lines later, these argument types are defined as
      they are added to the widget, in the <literal>class_init</literal>
      function:
      <informalexample>
-      <programlisting>
+     <programlisting>
+<![CDATA[
 gtk_object_add_arg_type (&quot;GtkLabel::label&quot;, GTK_TYPE_STRING, 
 GTK_ARG_READWRITE, ARG_LABEL);
 gtk_object_add_arg_type (&quot;GtkLabel::pattern&quot;, GTK_TYPE_STRING, 
@@ -357,6 +360,7 @@ gtk_object_add_arg_type (&quot;GtkLabel::justify&quot;,
 GTK_TYPE_JUSTIFICATION, GTK_ARG_READWRITE, ARG_JUSTIFY);
 gtk_object_add_arg_type (&quot;GtkLabel::wrap&quot;, GTK_TYPE_BOOL, 
 GTK_ARG_READWRITE, ARG_WRAP);
+]]>
       </programlisting>
      </informalexample>
     </para>

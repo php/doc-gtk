@@ -71,7 +71,7 @@
    </simpara>
    <simpara>
     Connecting a function to a signal is achieved by calling the
-    <function class="GtkObject">connect()</function> method of the object.
+    <function class="GtkObject">connect</function> method of the object.
    </simpara>
    <simpara>
     The function that you register as the callback for a signal must have
@@ -91,13 +91,15 @@
     <example>
      <title>Signals and Callbacks</title>
      <programlisting role="php">
-    
+<![CDATA[
+<?php
+
 function shutdown() 
 {
     print(&quot;Shutting down...\n&quot;);
     gtk::main_quit();
 }
-    
+
 function you_clicked($button) 
 {
     $window = &amp;new GtkWindow();
@@ -107,7 +109,7 @@ function you_clicked($button)
     $window-&gt;show_all();
     return false;
 }
-    
+
 $window = &amp;new GtkWindow();
 $window-&gt;connect(&quot;destroy&quot;, &quot;shutdown&quot;);
 $window-&gt;set_border_width(10);
@@ -115,18 +117,19 @@ $window-&gt;set_border_width(10);
 $button = &amp;new GtkButton(&quot;Click Me!!&quot;);
 $button-&gt;connect(&quot;clicked&quot;, &quot;you_clicked&quot;);
 $window-&gt;add($button);
-    
+
 $window-&gt;show_all();
-    
+
 gtk::main();
+
+?>
+]]>
      </programlisting>
     </example>
    </para>
    <para>
     The important part here is where we call
-    <informalexample>
-     <programlisting role="php">$button-&gt;connect();</programlisting>
-    </informalexample>
+    <literal>$button-&gt;connect();</literal>
     The connect method here registers the <literal>you_clicked()</literal> 
     function as the callback that will be invoked when the 
     <signalname>clicked</signalname> signal is emitted by the 
@@ -150,8 +153,10 @@ gtk::main();
     emitted.
     <example>
      <title>Signal Callback Order</title>
-     <programlisting role="php">
-    
+      <programlisting role="php">
+<![CDATA[
+<?php
+
 function first($button) 
 {
     print &quot;First function has been called\n&quot;;
@@ -161,44 +166,47 @@ function second($button)
 {
     print &quot;Second function has been called\n&quot;;
 }
-    
+
 $window = &amp;new GtkWindow();
 $window-&gt;connect_object(&quot;destroy&quot;, array(&quot;gtk&quot;, 
 &quot;main_quit&quot;));
-    
+
 $button = &amp;new GtkButton(&quot;Click Me!!&quot;);
 $button-&gt;connect(&quot;clicked&quot;,&quot;first&quot;);
 $button-&gt;connect(&quot;clicked&quot;,&quot;second&quot;);
 $window-&gt;add($button);
-    
+
 $window-&gt;show_all();
-    
+
 gtk::main();
+
+?>
+]]>
      </programlisting>
     </example>
     In the above example we connect two functions to a button's
     <signalname>clicked</signalname> signal.  The first call to the
-    <function class="GtkObject">connect()</function> method connects the
+    <function class="GtkObject">connect</function> method connects the
     <signalname>clicked</signalname> signal to the <literal>first()</literal>
     function, the second call connects the <signalname>clicked</signalname>
     signal to the <literal>second()</literal> function.
    </para>
    <para>
     The output from this program would be:
-    <programlisting>
+    <screen>
 First function has been called.
 Second function has been called.
-    </programlisting>
+    </screen>
    </para>
   </sect2>
  </sect1>
  
- <sect1 id="gtk.signals.custom.params">
+ <sect1 id="signals.custom.params">
   <title>Verwendung von eigenen Parametern</title>
-  <sect2 id="gtk.signals.custom.data">
+  <sect2 id="signals.custom.data">
    <title>Eigene Daten als Parameter übergeben</title>
    <simpara>
-    Beim <link linkend="gtk.signals.connection">verbinden</link> von Signalen
+    Beim <link linkend="signals.connection">verbinden</link> von Signalen
     ist es möglich, einen zusätzlichen eigenen Parameter an den Callback
     zu übergeben. Dies ist oft nützlich um das Objekt auf das man eine
     Aktion anwenden will an den Callback zu übergeben.
@@ -222,22 +230,27 @@ Second function has been called.
       <function class="GtkObject">connect</function>
      </title>
      <programlisting role="php">
-    
+<![CDATA[
+<?php
+
 function button_clicked($button, $window) 
 {
     $window-&gt;destroy();
     gtk::main_quit();
 }
-    
+
 $window = &amp;new GtkWindow();
-    
+
 $button = &amp;new GtkButton(&quot;exit&quot;);
 $button-&gt;connect(&quot;clicked&quot;,&quot;button_clicked&quot;, $window);
-    
+
 $window-&gt;add($button);
 $window-&gt;show_all();
-    
+
 gtk::main();
+
+?>
+]]>
      </programlisting>
     </example>
     Im obigen Code sieht man dass nicht nur die <literal>$button</literal>
@@ -269,34 +282,39 @@ gtk::main();
     <example>
      <title>Using the same callback for more than one window</title>
      <programlisting role="php">
-    
+<![CDATA[
+<?php
+
 function button_clicked($button, $window)
 {
     $window->set_title(&quot;titled&quot;);
 }
-    
+
 $window1 = &amp;new GtkWindow();
 $window1-&gt;connect_object(&quot;destroy&quot;, array(&quot;gtk&quot;, 
 &quot;main_quit&quot;));
 $window2 = &amp;new GtkWindow();
 $window2-&gt;connect_object(&quot;destroy&quot;, array(&quot;gtk&quot;, 
 &quot;main_quit&quot;));
-    
+
 $button1 = &amp;new GtkButton(&quot;click me&quot;);
 $button2 = &amp;new GtkButton(&quot;or me&quot;);
-    
+
 $button1-&gt;connect(&quot;clicked&quot;, &quot;button_clicked&quot;, 
 $window1);
 $button2-&gt;connect(&quot;clicked&quot;, &quot;button_clicked&quot;, 
 $window2);
-    
+
 $window1-&gt;add($button1);
 $window2-&gt;add($button2);
-    
+
 $window1-&gt;show_all();
 $window2-&gt;show_all();
-    
+
 gtk::main();
+
+?>
+]]>
      </programlisting>
     </example>
    </para>
@@ -305,25 +323,30 @@ gtk::main();
   <sect2 id="signals.connect.object">
    <title>Using the connect_object* methods</title>
    <para>
-    Both <function class="GtkObject">connect_object()</function> and 
-    <function class="GtkObject">connect_object_after()</function> allow you
+    Both <function class="GtkObject">connect_object</function> and 
+    <function class="GtkObject">connect_object_after</function> allow you
     to pass an object other than the calling object as the first parameter
     to your callback function. This is mainly used for calling static
     PHP-GTK functions, as in (for example) the 
-    <function>gtk::main_quit()</function> function:
+    <function>gtk::main_quit</function> function:
     <example>
      <title>
-      Using the <function class="GtkObject">connect_object()</function> 
+      Using the <function class="GtkObject">connect_object</function> 
       method to specify a built-in function as callback.
      </title>
      <programlisting role="php">
-    
+<![CDATA[
+<?php
+
 $window = &amp;new GtkWindow();
 $window-&gt;connect_object(&quot;destroy&quot;, array(&quot;gtk&quot;, 
 &quot;main_quit&quot;));
 $window-&gt;show();
-    
+
 gtk::main();
+
+?>
+]]>
      </programlisting>
     </example>
     This could be called on any static function or method by using the
@@ -344,17 +367,21 @@ gtk::main();
       Using the <function class="GtkObject">connect_object</function> 
       method to pass another object as first parameter.
      </title>
-     <programlisting role="php">
-    
+      <programlisting role="php">
+<![CDATA[
+<?php
+
 function destroy_window($window)
 {
     $window-&gt;destroy();
     gtk::main_quit();
 }
-    
+
 $exit_button-&gt;connect_object(&quot;clicked&quot;, 
 &quot;destroy_window&quot;, $window);
-    
+
+?>
+]]>
      </programlisting>
     </example>
    </para>
@@ -371,36 +398,41 @@ $exit_button-&gt;connect_object(&quot;clicked&quot;,
     read the GTK source.
     <example> 
      <title>Using the 
-      <function class="GtkObject">connect_after()</function> method.
+      <function class="GtkObject">connect_after</function> method.
      </title>
      <programlisting role="php">
-    
+<![CDATA[
+<?php
+
 function quit_routine($window) 
 {
     print(&quot;Shutting down...\n&quot;);
     gtk::main_quit();
 }
-    
+
 $window1 = &amp;new GtkWindow();
 $window1->set_title(&quot;Quit the main loop&quot;);
 $window1-&gt;connect(&quot;destroy&quot;, &quot;quit_routine&quot;);
-    
+
 $window2 = &amp;new GtkWindow();
 $window2->set_title(&quot;Destroy this window&quot;);
 $window2-&gt;connect_after(&quot;destroy&quot;, &quot;quit_routine&quot;);
-    
+
 $window1-&gt;show();
 $window2-&gt;show();
-    
+
 gtk::main();
+
+?>
+]]>
      </programlisting>
     </example>
    </para>
    <simpara>
     See also: <classname>GtkObject</classname>, 
-    <function class="GtkObject">connect_after()</function>
-    <function class="GtkObject">connect_object()</function> and 
-    <function class="GtkObject">connect_object_after()</function>.
+    <function class="GtkObject">connect_after</function>
+    <function class="GtkObject">connect_object</function> and 
+    <function class="GtkObject">connect_object_after</function>.
    </simpara>
   </sect2>
  </sect1>
@@ -452,7 +484,7 @@ gtk::main();
    indirectly triggered through a captured occurrence of most of the 
    <enumname>GdkEventTypes</enumname>. The 
    <classname>GtkTooltips</classname>  object itself uses the 
-   <function class="GktObject">connect_object()</function> method and the
+   <function class="GktObject">connect_object</function> method and the
    generic <signalname>event</signalname> signal in order to monitor its
    subject widget.
   </simpara>
@@ -465,11 +497,13 @@ gtk::main();
      <classname>GtkButton</classname>
     </title>
     <programlisting role="php">
-    
+<![CDATA[
+<?php
+
 dl(&quot;php_gtk.&quot; . (strstr(PHP_OS, &quot;WIN&quot;) ? &quot;dll&quot; : 
 &quot;so&quot;)) ||
 die(&quot;Can't load php_gtk module!\n&quot;);
-    
+
 function show_event_type($button, $event, $text) 
 {
     $event_type = $event-&gt;type;
@@ -537,7 +571,7 @@ messaging *
     $text-&gt;thaw();
     return false;
 }
-    
+
 $window = &amp;new GtkWindow();
 $window-&gt;set_position(GTK_WIN_POS_CENTER);
 $window-&gt;set_default_size((gdk::screen_width()/1.5), 
@@ -545,36 +579,28 @@ $window-&gt;set_default_size((gdk::screen_width()/1.5),
 $window-&gt;connect_object(&quot;destroy&quot;, array(&quot;gtk&quot;, 
 &quot;main_quit&quot;));
 $window-&gt;realize();
-    
+
 $box = &amp;new GtkVBox(false, 5);
 $window-&gt;add($box);
 $scrlwin = &amp;new GtkScrolledWindow();
 $box-&gt;pack_start($scrlwin, true, true, 0);
 $text = &amp;new GtkText();
 $scrlwin-&gt;add($text);
-    
+
 $button = &amp;new GtkButton(&quot;Double-click here for information..&quot;);
 $button-&gt;add_events(GDK_ALL_EVENTS_MASK);
 $button-&gt;connect(&quot;event&quot;, &quot;show_event_type&quot;, $text);
 $box-&gt;pack_end($button, false, false, 5);
-    
+
 $window-&gt;show_all();
-    
+
 gtk::main();
+
+?>
+]]>
     </programlisting>
    </example>
   </para>
  </sect1>
 
 </chapter>
-
-
-<!--
- * Local variables:
- * tab-width: 1
- * c-basic-offset: 1
- * fileformat=unix
- * End:
- * vim600: et sw=1 ts=1 tw=78 fdm=indent
- * vim<600: et sw=1 ts=1 tw=78
--->

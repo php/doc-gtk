@@ -77,7 +77,7 @@
    </simpara>
    <simpara>
     Pøipojení funkce k signálu dosáhnete zavoláním metody
-    <function class="GtkObject">connect()</function> objektu.
+    <function class="GtkObject">connect</function> objektu.
    </simpara>
    <simpara>
     Funkce, kterou zaregistrujete jako obslu¾nou pro signál, musí mít
@@ -97,13 +97,15 @@
      <example>
       <title>Signály a volání</title>
       <programlisting role="php">
-    
+<![CDATA[
+<?php
+
 function vypni() 
 {
     print(&quot;Vypínám...\n&quot;);
     gtk::main_quit();
 }
-    
+
 function kliknul_jste($tlacitko) 
 {
     $okno = &amp;new GtkWindow();
@@ -113,26 +115,27 @@ function kliknul_jste($tlacitko)
     $okno-&gt;show_all();
     return false;
 }
-    
+
 $okno = &amp;new GtkWindow();
 $okno-&gt;connect(&quot;destroy&quot;, &quot;vypni&quot;);
 $okno-&gt;set_border_width(10);
-    
+
 $tlacitko = &amp;new GtkButton(&quot;Klikni na mì!!&quot;);
 $tlacitko-&gt;connect(&quot;clicked&quot;, &quot;kliknul_jste&quot;);
 $okno-&gt;add($tlacitko);
-    
+
 $okno-&gt;show_all();
-    
+
 gtk::main();
+
+?>
+]]>
      </programlisting>
     </example>
    </para>
    <para>
     Dùle¾itá èást je volání
-    <informalexample>
-     <programlisting role="php">$tlacitko-&gt;connect();</programlisting>
-    </informalexample>
+    <literal>$tlacitko-&gt;connect();</literal>
     Metoda connect zde registruje funkci <literal>kliknul_jste()</literal>
     jako obslu¾nou funkci, která se spustí po vyvolání signálu
     <signalname>clicked</signalname> widgetu 
@@ -155,44 +158,49 @@ gtk::main();
     <example>
      <title>Poøadí volání funkcí</title>
      <programlisting role="php">
-    
+<![CDATA[
+<?php
+
 function prvni($tlacitko) 
 {
     print &quot;Byla zavolána první funkce\n&quot;;
 }
-    
+
 function druha($tlacitko) 
 {
     print &quot;Byla zavolána druhá funkce\n&quot;;
 }
-    
+
 $okno = &amp;new GtkWindow();
 $okno-&gt;connect_object(&quot;destroy&quot;, array(&quot;gtk&quot;, 
 &quot;main_quit&quot;));
-    
+
 $tlacitko = &amp;new GtkButton(&quot;Klikni na mì!!&quot;);
 $tlacitko-&gt;connect(&quot;clicked&quot;,&quot;prvni&quot;);
 $tlacitko-&gt;connect(&quot;clicked&quot;,&quot;druha&quot;);
 $okno-&gt;add($tlacitko);
-    
+
 $okno-&gt;show_all();
-    
+
 gtk::main();
+
+?>
+]]>
      </programlisting>
     </example>
     V tomto pøíkladu pøipojíme na signál 
     <signalname>clicked</signalname> tlaèítka rovnou dvì funkce. První
-    volání metody <function class="GtkObject">connect()</function> pøipojí k
+    volání metody <function class="GtkObject">connect</function> pøipojí k
     signálu <signalname>clicked</signalname> funkci
     <literal>prvni()</literal> a druhé zavolání pøipojí k signálu
     <signalname>clicked</signalname> funkci <literal>druha()</literal>.
    </para>
    <para>
     Výstup tohoto programu bude vypadat následovnì:
-    <programlisting>
+    <screen>
 Byla zavolána první funkce
 Byla zavolána druhá funkce
-    </programlisting>
+    </screen>
    </para>
   </sect2>
  </sect1>
@@ -212,33 +220,38 @@ Byla zavolána druhá funkce
    </simpara>
    <simpara>
     Toho dosáhnete tak, ¾e k volání
-    <function class="GtkObject">connect()</function> pøidáte tøetí nepovinný
+    <function class="GtkObject">connect</function> pøidáte tøetí nepovinný
     parametr. Tento bude pøedán obslu¾né funkci jako dal¹í parametr.
    </simpara>
    <para>
     <example>
      <title>
       Pou¾ívání u¾ivatelských parametrù s metodou 
-      <function class="GtkObject">connect()</function>.
+      <function class="GtkObject">connect</function>.
      </title>
      <programlisting role="php">
-    
+<![CDATA[
+<?php
+
 function stisknuti_tlacitka($tlacitko, $okno) 
 {
     $okno-&gt;destroy();
     gtk::main_quit();
 }
-    
+
 $okno = &amp;new GtkWindow();
-    
+
 $tlacitko = &amp;new GtkButton(&quot;konec&quot;);
 $tlacitko-&gt;connect(&quot;clicked&quot;,&quot;stisknuti_tlacitka&quot;,
 $okno);
-    
+
 $okno-&gt;add($tlacitko);
 $okno-&gt;show_all();
-    
+
 gtk::main();
+
+?>
+]]>
      </programlisting>
     </example>
     V tomto pøíkladu vidíte, ¾e volané funkci pøedáváme nejen promìnnou
@@ -246,7 +259,7 @@ gtk::main();
     <classname>GtkButton</classname>,
     ale také promìnnou <literal>$okno</literal>, instanci
     tøídy <classname>GtkWindow</classname>. Tak mù¾eme na okno zavolat
-    metodu <function class="GtkObject">destroy()</function>.
+    metodu <function class="GtkObject">destroy</function>.
    </para>
    <note>
     <simpara>
@@ -269,34 +282,39 @@ gtk::main();
     <example>
      <title>Pou¾ití stejné funkce pro více ne¾ jedno okno</title>
      <programlisting role="php">
-    
+<![CDATA[
+<?php
+
 function stisknuti_tlacitka($tlacitko, $okno)
 {
     $okno->set_title(&quot;oznaèeno&quot;);
 }
-    
+
 $okno1 = &amp;new GtkWindow();
 $okno1-&gt;connect_object(&quot;destroy&quot;, array(&quot;gtk&quot;, 
 &quot;main_quit&quot;));
 $okno2 = &amp;new GtkWindow();
 $okno2-&gt;connect_object(&quot;destroy&quot;, array(&quot;gtk&quot;, 
 &quot;main_quit&quot;));
-    
+
 $tlacitko1 = &amp;new GtkButton(&quot;Klikni na mì&quot;);
 $tlacitko2 = &amp;new GtkButton(&quot;Nebo rad¹i na mì&quot;);
-    
+
 $tlacitko1-&gt;connect(&quot;clicked&quot;, &quot;stisknuti_tlacitka&quot;, 
 $okno1);
 $tlacitko2-&gt;connect(&quot;clicked&quot;, &quot;stisknuti_tlacitka&quot;, 
 $okno2);
-    
+
 $okno1-&gt;add($tlacitko1);
 $okno2-&gt;add($tlacitko2);
-    
+
 $okno1-&gt;show_all();
 $okno2-&gt;show_all();
-    
+
 gtk::main();
+
+?>
+]]>
      </programlisting>
     </example>
    </para>
@@ -305,25 +323,30 @@ gtk::main();
   <sect2 id="signals.connect.object">
    <title>Pou¾ití metody connect_object*</title>
    <para>
-    Jak <function class="GtkObject">connect_object()</function>, tak
-    <function class="GtkObject">connect_object_after()</function> umo¾òují
+    Jak <function class="GtkObject">connect_object</function>, tak
+    <function class="GtkObject">connect_object_after</function> umo¾òují
     pøedat obslu¾né funkci jako první parametr jiný objekt ne¾ volající
     objekt. Pou¾ívá se to hlavnì pøi volání statických PHP-GTK funkcí, jako
-    napøíklad funkce <function>gtk::main_quit()</function>:
+    napøíklad funkce <function>gtk::main_quit</function>:
     <example>
      <title>
       Pou¾ití metody
-      <function class="GtkObject">connect_object()</function> 
+      <function class="GtkObject">connect_object</function> 
       k urèení vestavìné funkce jako obslu¾né.
      </title>
      <programlisting role="php">
-    
+<![CDATA[
+<?php
+
 $okno = &amp;new GtkWindow();
 $okno-&gt;connect_object(&quot;destroy&quot;, array(&quot;gtk&quot;, 
 &quot;main_quit&quot;));
 $okno-&gt;show();
-    
+
 gtk::main();
+
+?>
+]]>
      </programlisting>
     </example>
     Takto mù¾ete registrovat jakoukoli statickou funkci nebo metodu
@@ -342,20 +365,24 @@ gtk::main();
     <example>
      <title>
       Pou¾ití metody
-      <function class="GtkObject">connect_object()</function> k pøedání
+      <function class="GtkObject">connect_object</function> k pøedání
       jiného objektu jako prvního parametru.
      </title>
      <programlisting role="php">
-    
+<![CDATA[
+<?php
+
 function vypni($okno)
 {
     $okno-&gt;destroy();
     gtk::main_quit();
 }
-    
+
 $ukoncovaci_tlacitko-&gt;connect_object(&quot;clicked&quot;, 
 &quot;vypni&quot;, $okno);
-    
+
+?>
+]]>
      </programlisting>
     </example>
    </para>
@@ -371,36 +398,41 @@ $ukoncovaci_tlacitko-&gt;connect_object(&quot;clicked&quot;,
     buï otestovat signál v PHP-GTK nebo prozkoumat zdrojové soubory GTK.
     <example> 
      <title>Pou¾ití metody 
-      <function class="GtkObject">connect_after()</function>.
+      <function class="GtkObject">connect_after</function>.
      </title>
      <programlisting role="php">
-    
+<![CDATA[
+<?php
+
 function ukoncovaci_rutina($okno) 
 {
     print(&quot;Vypínám...\n&quot;);
     gtk::main_quit();
 }
-    
+
 $okno1 = &amp;new GtkWindow();
 $okno1->set_title(&quot;Ukonèí hlavní smyèku&quot;);
 $okno1-&gt;connect(&quot;destroy&quot;, &quot;ukoncovaci_rutina&quot;);
-    
+
 $okno2 = &amp;new GtkWindow();
 $okno2->set_title(&quot;Zavøe toto okno&quot;);
 $okno2-&gt;connect_after(&quot;destroy&quot;, &quot;ukoncovaci_rutina&quot;);
-    
+
 $okno1-&gt;show();
 $okno2-&gt;show();
-    
+
 gtk::main();
+
+?>
+]]>
      </programlisting>
     </example>
    </para>
    <simpara>
     Viz také: <classname>GtkObject</classname>, 
-    <function class="GtkObject">connect_after()</function>
-    <function class="GtkObject">connect_object()</function> a
-    <function class="GtkObject">connect_object_after()</function>.
+    <function class="GtkObject">connect_after</function>
+    <function class="GtkObject">connect_object</function> a
+    <function class="GtkObject">connect_object_after</function>.
    </simpara>
   </sect2>
  </sect1>
@@ -447,7 +479,7 @@ gtk::main();
    události jako signály a spou¹tìt obslu¾né funkce pøi zachycení vìt¹iny
    <enumname>GdkEventTypes</enumname>. Samotný objekt 
    <classname>GtkTooltips</classname> pou¾ívá ke sledování svého widgetu
-   metodu <function class="GktObject">connect_object()</function> a v¹eobecný
+   metodu <function class="GktObject">connect_object</function> a v¹eobecný
    <signalname>event</signalname> signál.
   </simpara>
   <para>
@@ -458,11 +490,13 @@ gtk::main();
      <classname>GtkButton</classname>
     </title>
     <programlisting role="php">
-    
+<![CDATA[
+<?php
+
 dl(&quot;php_gtk.&quot; . (strstr(PHP_OS, &quot;WIN&quot;) ? &quot;dll&quot; : 
 &quot;so&quot;)) ||
 die(&quot;Nelze nahrát PHP-GTK modul!\n&quot;);
-    
+
 function ukaz_typ_udalosti($tlacitko, $udalost, $text) 
 {
     $typ_udalosti = $udalost-&gt;type;
@@ -529,7 +563,7 @@ function ukaz_typ_udalosti($tlacitko, $udalost, $text)
     $text-&gt;thaw();
     return false;
 }
-    
+
 $okno = &amp;new GtkWindow();
 $okno-&gt;set_position(GTK_WIN_POS_CENTER);
 $okno-&gt;set_default_size((gdk::screen_width()/1.5), 
@@ -537,35 +571,28 @@ $okno-&gt;set_default_size((gdk::screen_width()/1.5),
 $okno-&gt;connect_object(&quot;destroy&quot;, array(&quot;gtk&quot;, 
 &quot;main_quit&quot;));
 $okno-&gt;realize();
-    
+
 $box = &amp;new GtkVBox(false, 5);
 $okno-&gt;add($box);
 $scrlwin = &amp;new GtkScrolledWindow();
 $box-&gt;pack_start($scrlwin, true, true, 0);
 $text = &amp;new GtkText();
 $scrlwin-&gt;add($text);
-    
+
 $tlacitko = &amp;new GtkButton(&quot;2x kliknìte zde a dozvíte se více&quot;);
 $tlacitko-&gt;add_events(GDK_ALL_EVENTS_MASK);
 $tlacitko-&gt;connect(&quot;event&quot;, &quot;ukaz_typ_udalosti&quot;, $text);
 $box-&gt;pack_end($tlacitko, false, false, 5);
-    
+
 $okno-&gt;show_all();
-    
+
 gtk::main();
+
+?>
+]]>
     </programlisting>
    </example>
   </para>
  </sect1>
 
 </chapter>
-
-<!--
- * Local variables:
- * tab-width: 1
- * c-basic-offset: 1
- * fileformat=unix
- * End:
- * vim600: et sw=1 ts=1 tw=78 fdm=indent
- * vim<600: et sw=1 ts=1 tw=78
--->

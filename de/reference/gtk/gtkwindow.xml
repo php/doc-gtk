@@ -36,8 +36,8 @@
     deaktiviert ist.  Sowohl Dialog als auch Popup Fenster sind so gestaltet
     dass sie benutzt werden können, wenn eine Nachricht an den Benutzer eine
     Rückmeldung benötigt, und sollten in Verbindung mit den Methoden
-    <function class="GtkWindow">set_transient_for()</function> und 
-    <function class="GtkWindow">set_modal()</function> verwendet werden.
+    <function class="GtkWindow">set_transient_for</function> und 
+    <function class="GtkWindow">set_modal</function> verwendet werden.
    </simpara>
    <simpara>
     Ein Popup Fenster hat keinerlei Dekoration und benötigt deshalb einen
@@ -84,22 +84,28 @@
     eines jeden PHP-GTK Skripts aufzeigt:
     <informalexample>
      <programlisting role="php">
+<![CDATA[
+<?php
+
 /* laden des php_gtk moduls */
 dl('php_gtk.' . (strstr(PHP_OS, 'WIN') ? 'dll' : 'so')) ||
 die(&quot;Can't load php_gtk module!\n&quot;);
-    
+
 /* erzeugen des hauptfensters */
 $window = &amp;new GtkWindow();
-    
+
 /* sicherstellen dass die zerstörung des hauptfensters auch die hauptschleife beendet */
 $window-&gt;connect_object('destroy', array('gtk', 'main_quit'));
-    
+
 /* realisieren des zugrundeliegenden GdkWindow, sichtbarkeit des GtkWindow setzen und es
    auf den bildschirm zeichnen, alles in einer einfachen zeile */
 $window-&gt;show();
-    
+
 /* ohne die hauptschleife (main loop) wäre es kein PHP-GTK skript */
 gtk::main();
+
+?>
+]]>
      </programlisting>
     </informalexample>
    </para>
@@ -210,7 +216,7 @@ gtk::main();
      Diese Funktion wird in GTK 2.0 nicht mehr verwendet werden, um einer
      neuen und effizienteren Methode Platz zu machen. Es ist daher sinnvoll
      dies schon jetzt zu beachten und 
-     <function class="GtkWindow">set_policy()</function> nur spärlich
+     <function class="GtkWindow">set_policy</function> nur spärlich
      einzusetzen.
     </simpara>
    </desc>
@@ -273,7 +279,7 @@ gtk::main();
    </shortdesc>
    <desc>
     <simpara>
-     <function class="GtkWindow">set_position()</function> setzt die
+     <function class="GtkWindow">set_position</function> setzt die
      Position des Fenster beim &Ouml;ffnen auf einen von vier möglichen 
      <enumname>GtkWindowPosition</enumname> Werten.
     </simpara>
@@ -292,7 +298,7 @@ gtk::main();
    </shortdesc>
    <desc>
     <simpara>
-     <function class="GtkWindow">activate_focus()</function> ist eine
+     <function class="GtkWindow">activate_focus</function> ist eine
      Methode die das activate Signal des Kindwidgets auslöst, dass zum
      Zeitpunkt des Funktionsaufrufs den Fokus innehat. Bei GTK+ hat jedes
      Widget ein Signal das activate signal Status hat; das Signal mit diesem
@@ -320,8 +326,8 @@ gtk::main();
      Siehe auch: 
      <link linkend="gtk.signals.events">Signale and Ereignisse</link> 
      im PHP-GTK Userguide, 
-     <function class="GtkWindow">activate_default()</function>, 
-     <function class="GtkWindow">set_focus()</function>, 
+     <function class="GtkWindow">activate_default</function>, 
+     <function class="GtkWindow">set_focus</function>, 
      <signalname class="GtkWidget">activate</signalname>.
     </para>
    </desc>
@@ -339,15 +345,15 @@ gtk::main();
    </shortdesc>
    <desc>
     <simpara>
-     Wie bei der <function class="GtkWindow">activate_focus()</function>
+     Wie bei der <function class="GtkWindow">activate_focus</function>
      Funktion bewirkt die 
-     <function class="GtkWindow">activate_default()</function> Funktion, 
+     <function class="GtkWindow">activate_default</function> Funktion, 
      dass das Widget-spezifische activate Signal vom anvisierten Kindelement
      ausgesendet wird.
     </simpara>
     <simpara>
-     Siehe auch:  <function class="GtkWindow">activate_focus()</function>, 
-     <function class="GtkWindow">set_default()</function>,
+     Siehe auch:  <function class="GtkWindow">activate_focus</function>, 
+     <function class="GtkWindow">set_default</function>,
      <signalname class="GtkWidget">activate</signalname>.
     </simpara>
    </desc>
@@ -368,7 +374,7 @@ gtk::main();
    </shortdesc>
    <desc>
     <simpara>
-     <function class="GtkWindow">set_transient_for()</function> 
+     <function class="GtkWindow">set_transient_for</function> 
      wird benutzt, um ein Fenster vorübergehend als Kindfenster des mit ihm
      verbundenen Toplevel Fensters zu setzen. Dies verhindert dass ein
      zusätzliches Icon für dieses Fenster in der Taskbar erscheint, und
@@ -386,8 +392,8 @@ gtk::main();
      Der Versuch, das Vaterfenster zu löschen, bevor das Kindfenster
      zerstört wurde, produziert eine GDK Warnung auf Win32 Systemen. Um dies
      zu verhindern, benutzen Sie immer 
-     <function class="GtkWindow">set_modal()</function> anstelle von 
-     <function class="GtkWindow">set_transient_for()</function>.
+     <function class="GtkWindow">set_modal</function> anstelle von 
+     <function class="GtkWindow">set_transient_for</function>.
     </simpara>
    </desc>
   </method>
@@ -406,7 +412,7 @@ gtk::main();
    </shortdesc>
    <desc>
     <simpara>
-     <function class="GtkWindow">set_default_size()</function> setzt die
+     <function class="GtkWindow">set_default_size</function> setzt die
      Standardgrösse neu anzulegender Fenster, in Pixeln.  Dies kann
      überschrieben werden von Grössenanfragen der im Fenster enthaltenen
      Elemente für die der vorhandene Platz nicht ausreicht, oder indem man
@@ -433,7 +439,7 @@ gtk::main();
    </shortdesc>
    <desc>
     <simpara>
-     <function class="GtkWindow">set_modal()</function> wird benutzt um
+     <function class="GtkWindow">set_modal</function> wird benutzt um
      zu verhindern dass die anderen Fenster einer Anwendung auf
      Benutzereinwirkung reagieren bevor das modale Fenster nicht eine
      entsprechende Benutzerreaktion erhalten hat.  Dies wird gewöhnlich
@@ -441,9 +447,9 @@ gtk::main();
     </simpara>
     <simpara>
      Ein ähnlicher Effekt kann mit den meisten Widgets erreicht werden,
-     indem man die GTK Funktion <function>gtk::grab_add()</function> 
+     indem man die GTK Funktion <function>gtk::grab_add</function> 
      verwendet. Beachten Sie allerdings, dass 
-     <function class="GtkWindow">set_modal()</function> eine geringfügig
+     <function class="GtkWindow">set_modal</function> eine geringfügig
      komplexere Methode ist und besser ausgerüstet um mit den Szenarien
      umzugehen die gewöhnlich auftreten, wenn modale Fenster angewendet
      werden.
@@ -466,7 +472,7 @@ gtk::main();
    </shortdesc>
    <desc>
     <simpara>
-     <function class="GtkWindow">set_focus()</function> gibt den Fokus an
+     <function class="GtkWindow">set_focus</function> gibt den Fokus an
      das als Parameter übergebene Kindwidget.  Das Kindwidget muss das Flag
      <literal>GTK_CAN_FOCUS</literal> gesetzt haben, um überhaupt Fokus
      haben zu dürfen.  Einige Widgets haben dieses Flag bei ihrer Erzeugung
@@ -476,7 +482,7 @@ gtk::main();
     <simpara>
      Siehe auch:  <enumname>GtkWidgetFlags</enumname>, 
      <classname>GtkWidget</classname>, 
-     <function class="GtkObject">set_flags()</function>.
+     <function class="GtkObject">set_flags</function>.
     </simpara>
    </desc>
   </method>
@@ -496,7 +502,7 @@ gtk::main();
    </shortdesc>
    <desc>
     <simpara>
-     <function class="GtkWindow">set_default()</function> setzt das
+     <function class="GtkWindow">set_default</function> setzt das
      übergebene Kindwidget als Standardkind.  (Normaleweise ist dies ein
      <classname>GtkButton</classname>.)  Das Kindwidget muss das Flag
      <literal>GTK_CAN_DEFAULT</literal> gesetzt haben.  Eine Widgets werden
@@ -511,7 +517,7 @@ gtk::main();
     <simpara>
      Siehe auch:  <enumname>GtkWidgetFlags</enumname>, 
      <classname>GtkWidget</classname>, 
-     <function class="GtkObject">set_flags()</function>.
+     <function class="GtkObject">set_flags</function>.
     </simpara>
    </desc>
   </method>
@@ -537,13 +543,13 @@ gtk::main();
    </callback>
    <shortdesc>
     Wird gesendet wenn 
-    <function classname="GtkWindow">set_focus()</function> aufgerufen wird.
+    <function classname="GtkWindow">set_focus</function> aufgerufen wird.
    </shortdesc>
    <desc>
     <simpara>
      Das <signalname class="GtkWindow">set-focus</signalname> Signal wird
      vom <classname>GtkWindow</classname> ausgesandt als Antwort auf einen
-     <function classname="GtkWindow">set_focus()</function> Aufruf, der
+     <function classname="GtkWindow">set_focus</function> Aufruf, der
      jedesmal ausgelöst wird wenn ein anderes Kindelement des Fensters den
      Fokus erhält - also jedesmal, wenn der Anwender ein anderes Element
      anwählt.

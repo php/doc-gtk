@@ -36,24 +36,16 @@
    Creates a new <classname>GtkFileSelection</classname> widget.
   </shortdesc>
   <desc>
-   <para>
+   <simpara>
     The syntax to create a <classname>GtkFileSelection</classname> 
     widget is:
-    <informalexample>
-     <programlisting role="php">
-<![CDATA[
-<?php
-
-$fs = &amp;new GtkFileSelection(&quot;My File Selection&quot;);
-
-?>
-]]>
-     </programlisting>
-    </informalexample>
+    <literal>
+     $fs = &amp;new GtkFileSelection(&quot;My File Selection&quot;);
+    </literal>
     Note that if the <parameter>title</parameter> parameter is not
     supplied or is <literal>NULL</literal> the title will be set to
     the name of the file in which the PHP code resides.
-   </para>
+   </simpara>
   </desc>
  </constructor>
 
@@ -73,19 +65,11 @@ $fs = &amp;new GtkFileSelection(&quot;My File Selection&quot;);
     <simpara>
      Sets the default path for the directory and/or file name.
     </simpara>
-    <para>
-     <informalexample>
-      <programlisting role = "php">
-<![CDATA[
-<?php
-
-$fs-&gt;set_filename(&quot;/home/user/php/&quot;);
-
-?>
-]]>
-      </programlisting>
-     </informalexample>
-    </para>
+    <simpara>
+     <literal>
+      $fs-&gt;set_filename(&quot;/home/user/php/&quot;);
+     </literal>
+    </simpara>
    </desc>
   </method>
 
@@ -105,19 +89,11 @@ $fs-&gt;set_filename(&quot;/home/user/php/&quot;);
      selector.  If no directory or file has been selected then the
      current path is returned.
     </simpara>
-    <para>
-     <informalexample>
-      <programlisting role="php">
-<![CDATA[
-<?php
-
-$filename = $fs-&gt;get_filename();
-
-?>
-]]>
-      </programlisting>
-     </informalexample>
-    </para>
+    <simpara>
+     <literal>
+      $filename = $fs-&gt;get_filename();
+     </literal>
+    </simpara>
    </desc>
   </method>
 
@@ -147,19 +123,11 @@ $filename = $fs-&gt;get_filename();
     <simpara>
      Note that only a single wildcard field is effective here.
     </simpara>
-    <para>
-     <informalexample>
-      <programlisting role="php">
-<![CDATA[
-<?php
-
-$fs-&gt;complete(&quot;*.php&quot;);
-
-?>
-]]>
-      </programlisting>
-     </informalexample>
-    </para>
+    <simpara>
+     <literal>
+      $fs-&gt;complete(&quot;*.php&quot;);
+     </literal>
+    </simpara>
    </desc>
   </method>
 
@@ -186,19 +154,9 @@ $fs-&gt;complete(&quot;*.php&quot;);
      buttons do not need any programming in order to carry out their
      respective functions, as these are already hard-coded into GTK+.
     </simpara>
-    <para>
-     <informalexample>
-      <programlisting role="php">
-<![CDATA[
-<?php
-
-$fs-&gt;show_fileop_buttons();
-
-?>
-]]>
-      </programlisting>
-     </informalexample>
-    </para>
+    <simpara>
+     <literal>$fs-&gt;show_fileop_buttons();</literal>
+    </simpara>
    </desc>
   </method>
 
@@ -222,19 +180,9 @@ $fs-&gt;show_fileop_buttons();
      is useful where the programmer would prefer the end user not to have
      easy access to these file operations.
     </simpara>
-    <para>
-     <informalexample>
-      <programlisting role="php">
-<![CDATA[
-<?php
-
-$fs-&gt;hide_fileop_buttons();
-
-?>
-]]>
-      </programlisting>
-     </informalexample>
-    </para>
+    <simpara>
+     <literal>$fs-&gt;hide_fileop_buttons();</literal>
+    </simpara>
    </desc>
   </method>
 

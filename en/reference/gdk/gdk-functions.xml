@@ -592,19 +592,13 @@
       </member>
      </simplelist>
     </para>
-    <para>
+    <simpara>
      A typical font-load would look something like this:
-     <informalexample>
-      <programlisting role="php">
-<![CDATA[
-<?php
-$font = 
+     <literal>
+      $font = 
 gdk::font_load('-unknown-Arial-normal-r-normal--*-120-96-96-p-0-iso8859-1');
-?>
-]]>
-      </programlisting>
-     </informalexample>
-    </para>
+     </literal>
+    </simpara>
     <note>
      <simpara>
       Font information in the <acronym>XLFD</acronym> format can be
@@ -754,9 +748,11 @@ gdk::font_load('-unknown-Arial-normal-r-normal--*-120-96-96-p-0-iso8859-1');
       <programlisting role="php">
 <![CDATA[
 <?php
+
 $gdkpixmap = gdk::pixmap_create_from_xpm($main_window-&gt;window, null, 
 'test.xpm');
 $image = &amp;new GtkPixmap($gdkpixmap[0], $gdkpixmap[1]);
+
 ?>
 ]]>
       </programlisting>
@@ -765,10 +761,12 @@ $image = &amp;new GtkPixmap($gdkpixmap[0], $gdkpixmap[1]);
      <informalexample>
       <programlisting role="php">
 <![CDATA[
+
 <?php
 list ($gdkpixmap, $mask) = 
 gdk::pixmap_create_from_xpm($gdkwindow, $transparent_color, 'test.xpm');
 $image = &amp;new GtkPixmap($gdkpixmap, $mask);
+
 ?>
 ]]>
       </programlisting>
@@ -797,19 +795,14 @@ $image = &amp;new GtkPixmap($gdkpixmap, $mask);
     Creates a <classname>GdkPixmap</classname> from inline data.
    </shortdesc>
    <desc>
-    <para>
-     <informalexample>
-      <programlisting role="php">
-<![CDATA[
-<?php
-$gdkpixmap = gdk::pixmap_create_from_xpm_d($main_window-&gt;window, 
-$transparent_color, $data);
-?>
-]]>
-      </programlisting>
-     </informalexample>
+    <simpara>
+     <literal>
+      $gdkpixmap = 
+      gdk::pixmap_create_from_xpm_d($main_window-&gt;window, 
+      $transparent_color, $data);
+     </literal>
      <!-- No I am NOT going to leave it like this..   sf mar 02 -->
-    </para>
+    </simpara>
    </desc>
   </method>
 

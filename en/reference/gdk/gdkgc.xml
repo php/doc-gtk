@@ -76,20 +76,12 @@
      You can use <function>gdk::colormap_get_system</function> to do this,
      or you can access the colormap in a <classname>GdkWindow</classname>.
     </simpara>
-    <para>
+    <simpara>
      The syntax is:
-     <informalexample>
-      <programlisting role="php">
-<![CDATA[
-<?php
-
-$gc-&gt;foreground = $colormap-&gt;alloc('red');
-
-?>
-]]>
-      </programlisting>
-     </informalexample>
-    </para>
+     <literal>
+      $gc-&gt;foreground = $colormap-&gt;alloc('red');
+     </literal>
+    </simpara>
     <simpara>
      As with the <classname>GdkColor</classname> constructor, you could use
      <literal>'#FF0000'</literal> or <literal>65535, 0, 0</literal> in place
@@ -110,25 +102,17 @@ $gc-&gt;foreground = $colormap-&gt;alloc('red');
      <classname>GdkColor</classname> to a <classname>GdkGC</classname>, 
      because there is no colormap there for the color to reference.
     </simpara>
-    <para>
+    <simpara>
      You will need to take an existing <classname>GdkColormap</classname>,
      either by using <function>gdk::colormap_get_system</function> or by
      accessing the colormap property in the existing 
      <classname>GdkWindow</classname> that most widgets have, and give it
      a handle.  Then you do something like:
-     <informalexample>
-      <programlisting role="php">
-<![CDATA[
-<?php
-
-$gc-&gt;background = $colormap-&gt;alloc('lime green');
-
-?>
-]]>
-      </programlisting>
-     </informalexample>
+     <literal>
+      $gc-&gt;background = $colormap-&gt;alloc('lime green');
+     </literal>
      and the color is allocated intelligently.
-    </para>
+    </simpara>
     <simpara>
      The background color fills the areas not taken up by the foreground
      color, e.g. the gaps in a dashed line will take the background color. 

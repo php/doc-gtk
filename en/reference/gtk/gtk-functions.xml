@@ -312,14 +312,12 @@
      color as the area it is drawn onto.  All positions and sizes are 
      absolute in terms of the underlying drawable.
     </simpara>
-    <para>
-     <informalexample>
-      <programlisting role="php">
-gtk::draw_arrow($style, $gdkwindow, GTK_STATE_NORMAL, GTK_SHADOW_OUT, 
-GTK_ARROW_RIGHT, false, $x, $y, $width, $height);
-      </programlisting>
-     </informalexample>
-    </para>
+    <simpara>
+     <literal>
+      gtk::draw_arrow($style, $gdkwindow, GTK_STATE_NORMAL, GTK_SHADOW_OUT, 
+      GTK_ARROW_RIGHT, false, $x, $y, $width, $height);
+     </literal>
+    </simpara>
    </desc>
   </method>
 
@@ -358,14 +356,12 @@ GTK_ARROW_RIGHT, false, $x, $y, $width, $height);
      Any coloring is completely dependant on the 
      <classname>GtkStyle</classname> that is passed as the first parameter. 
     </simpara>
-    <para>
-     <informalexample>
-      <programlisting role="php">
-gtk::draw_box($style, $gdkwindow, GTK_STATE_ACTIVE, GTK_SHADOW_IN, $x, $y, 
-$width, $height);
-      </programlisting>
-     </informalexample>
-    </para>
+    <simpara>
+     <literal>
+      gtk::draw_box($style, $gdkwindow, GTK_STATE_ACTIVE, GTK_SHADOW_IN, 
+      $x, $y, $width, $height);
+     </literal>
+    </simpara>
    </desc>
   </method>
 
@@ -596,7 +592,13 @@ $width, $height);
      The way it would be used in such a situation is to have
      <informalexample>
       <programlisting role="php">
+<![CDATA[
+<?php
+
 while(gtk::events_pending()) gtk::main_iteration();
+
+?>
+]]>
       </programlisting>
      </informalexample>
      after every update that is made to the GUI.  This causes the main loop

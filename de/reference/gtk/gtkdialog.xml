@@ -31,7 +31,7 @@
    <simpara>
     Dialoge künnen modal gemacht werden (woraufhin sie die restliche
     Eingabe der gesamten Applikation einfrieren) indem man die
-    <function class="GtkWindow">set_modal()</function> Methode der
+    <function class="GtkWindow">set_modal</function> Methode der
     <classname>GtkWidget</classname> Klasse auf das
     <classname>GtkDialog</classname> Objekt anwendet.
    </simpara>
@@ -45,20 +45,26 @@
     Beispiel wird der Aufruf 'echo' immer noch ausgeführt obwohl die
     Hauptapplikation nicht auf Benutzereingabe antwortet.  Um die
     Ausführung des Codes zu stoppen muss der <classname>GtkDialog</classname>
-    einen Aufruf zu einer verschachtelten <function>gtk::main()</function>
+    einen Aufruf zu einer verschachtelten <function>gtk::main</function>
     enthalten.  Die Ausführung wird dann
-    weitergehen wenn die dazugehörige <function>gtk::main_quit()</function>
+    weitergehen wenn die dazugehörige <function>gtk::main_quit</function>
     Funktion aufgerufen wird.
    </simpara>
    <para>
     <example>
      <title>
-      Benutzung von <function class="GtkWindow">set_modal()</function>
+      Benutzung von <function class="GtkWindow">set_modal</function>
      </title>
      <programlisting role="php">
+<![CDATA[
+<?php
+
 $dialog = &amp;new GtkDialog(); 
 $dialog-&gt;set_modal(TRUE); 
 echo &quot;Diese Nachricht wird trotzdem noch ausgegeben! \n&quot;;
+
+?>
+]]>
      </programlisting>
     </example>
    </para>
@@ -81,6 +87,9 @@ echo &quot;Diese Nachricht wird trotzdem noch ausgegeben! \n&quot;;
     <example>
      <title>Erstellen eines Dialogfensters</title>
      <programlisting role="php">
+<![CDATA[
+<?php
+
 $dialog = &amp;new GtkDialog();
 $dialog-&gt;set_policy(true, false, false);
 $dialog-&gt;set_position(GTK_WIN_POS_CENTER);
@@ -97,6 +106,9 @@ $ok_button = &amp;new GtkButton(&quot;OK&quot;);
 $dialog_action_area-&gt;pack_start($ok_button);
 
 gtk::main();
+
+?>
+]]>
      </programlisting>
     </example>
    </para>

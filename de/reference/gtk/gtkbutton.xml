@@ -53,29 +53,34 @@
       hinzufügen.
      </title>
      <programlisting role="php">
+<![CDATA[
+<?php
+
 $window = &amp;new GtkWindow(GTK_WINDOW_DIALOG);
 $window-&gt;set_postion(GTK_WIN_POS_MOUSE);
 $window-&gt;connect_object(&quot;destroy&quot;, array(&quot;gtk&quot;, &quot;main_quit&quot;));
-    
-    
+
 $window-&gt;realize();
 list($gdkpixmap, $mask) = gdk::pixmap_create_from_xpm ($window-&gt;window, null, &quot;test.xpm&quot;);
 $pixmap = &amp;new GdkPixmap($gdkpixmap, $mask);
-    
+
 $label = &amp;new GtkLabel(&quot;Open&quot;);
-    
+
 $vbox = &amp;new GtkVbox();
 $vbox-&gt;pack_start($pixmap);
 $vbox-&gt;pack_start($label);
-    
+
 $button = &amp;new GtkButton;
 $button-&gt;add($vbox);
 $vbox-&gt;show_all();
-    
+
 $window-&gt;add($button);
 $window-&gt;show_all();
-    
+
 gtk::main();
+
+?>
+]]>
      </programlisting>
     </example>
    </para>
@@ -285,7 +290,7 @@ gtk::main();
      des Button Widgets bewegt bevor er den Mausknopf loslässt.
     </simpara>
     <para>
-     Benutze eine der <function class="GtkObject">connect()</function>
+     Benutze eine der <function class="GtkObject">connect</function>
      Funktionen um das Signal auszugeben und mit Deiner Funktion zu
      verknüpfen.  Die verknüpfte Funktion wird
      <literal>callback</literal> oder <literal>signal-handler</literal>
@@ -293,21 +298,27 @@ gtk::main();
      <example>
       <title>Eine einfache Verknüpfung herstellen</title>
       <programlisting role="php">
+<![CDATA[
+<?php
+
 function meine_funktion(){
  echo &quot;Der Button wurde angeklickt!&quot;;
 }
-    
+
 $window = &amp;new GtkWindow;
 $window-&gt;set_position(GTK_WIN_POS_MOUSE);
 $window-&gt;connect_object(&quot;destroy&quot;, array(&quot;gtk&quot;, &quot;main_quit()&quot;));
-    
+
 $button = &amp;new GtkButton(&quot;Klick Mich&quot;);
 $button-&gt;connect(&quot;clicked&quot;, &quot;meine_funktion&quot;
 $window-&gt;add($button);
-    
+
 $window-&gt;show_all();
-    
+
 gtk::main();
+
+?>
+]]>
       </programlisting>
      </example>
      Weitere Informationen zu Signalen gibt es im 

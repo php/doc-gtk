@@ -1041,23 +1041,15 @@
      <function class="GtkWidget">set_events</function> can be used
      at any point in the widget's life-cycle.
     </simpara>
-    <para>
+    <simpara>
      Staying with the key-press example, the syntax would be:
-     <informalexample>
-      <programlisting role="php">
-<![CDATA[
-<?php
-
-$widget-&gt;set_events(GDK_KEY_PRESS_MASK | GDK_KEY_RELEASE_MASK);
-
-?>
-]]>
-      </programlisting>
-     </informalexample>
+     <literal>
+      $widget-&gt;set_events(GDK_KEY_PRESS_MASK | GDK_KEY_RELEASE_MASK);
+     </literal>
      This would enable a previously keyboard-insensitive widget to emit 
      <signalname class="GtkWidget">key-press-event</signalname> and 
      <signalname class="GtkWidget">key-release-event</signalname> signals.
-    </para>
+    </simpara>
    </desc>
   </method>
 
@@ -1089,23 +1081,15 @@ $widget-&gt;set_events(GDK_KEY_PRESS_MASK | GDK_KEY_RELEASE_MASK);
      <function class="GtkWidget">show</function> routine as well as being
      a method/signal pair in its own right.
     </simpara>
-    <para>
+    <simpara>
      Staying with the button-press example, the syntax would be:
-     <informalexample>
-      <programlisting role="php">
-<![CDATA[
-<?php
-
-$widget-&gt;add_events(GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK);
-
-?>
-]]>
-      </programlisting>
-     </informalexample>
+     <literal>
+      $widget-&gt;add_events(GDK_BUTTON_PRESS_MASK|GDK_BUTTON_RELEASE_MASK);
+     </literal>
      This would enable a previously mouse-insensitive widget to emit 
      <signalname class="GtkWidget">button-press-event</signalname> and 
      <signalname class="GtkWidget">button-release-event</signalname> signals.
-    </para>
+    </simpara>
    </desc>
   </method>
 
@@ -2019,11 +2003,12 @@ $widget-&gt;connect('button-press-event', 'on_click', $data);
 function on_click($widget, $event, $data) {
 if($event-&gt;keyval==GDK_KEY_Return) {
 /*do something appropriate for the return key being pressed*/
-}
+  }
 elseif($event-&gt;keyval > GDK_KEY__a) {
 /*we can reach the character strings, too*/
-echo $event-&gt;string.&quot;\n&quot;;
-}}
+  echo $event-&gt;string.&quot;\n&quot;;
+  }
+}
 
 ?>
 ]]>

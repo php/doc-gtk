@@ -60,8 +60,7 @@
    <para>
     <example>
      <title>Setting up a Progress Bar</title>
-      <programlisting role="php">
-
+     <programlisting role="php">
 <![CDATA[
 <?php
 
@@ -109,36 +108,12 @@ gtk::main();
     </example>
     To create a progress bar in <literal>activity</literal> mode, delete
     the references to the text string and replace them with
-    <programlisting role="php">
-<![CDATA[
-<?php
-
-$progressbar-&gt;set_activity_mode(true);
-
-?>
-]]>
-    </programlisting>
+    <literal>$progressbar-&gt;set_activity_mode(true);</literal>
     and any further methods appropriate to an activity indicator.  You will
     also need to replace
-    <programlisting role="php">
-<![CDATA[
-<?php
-
-$progressbar-&gt;set_percentage($value);
-
-?>
-]]>
-    </programlisting>
+    <literal>$progressbar-&gt;set_percentage($value);</literal>
     in the <literal>update_bar()</literal> function with
-    <programlisting role="php">
-<![CDATA[
-<?php
-
-$progressbar-&gt;set_value($value);
-
-?>
-]]>
-    </programlisting>
+    <literal>$progressbar-&gt;set_value($value);</literal>
    </para>
    <simpara>
     Note that a progress bar in <literal>activity</literal> mode will not
