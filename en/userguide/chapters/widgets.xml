@@ -4,21 +4,22 @@
  <sect1 id="gtk.widgets.intro">
   <title>Introduction</title>
   <simpara>
-   This chapter will explain some of the concepts behind GTK and
-   how you can use them. 
+   This chapter will explain some of the concepts behind GTK+ and how you
+   can use them. 
   </simpara>
  </sect1>
 
  <sect1 id="gtk.widgets.whatare">
-  <title>What are Widgets</title>
+  <title>What are Widgets?</title>
   <simpara>
-   A Widget is a term used in the world of X for any user interface.
-   A Widget can be a text box, label, frames, windows or any GUI component. GTK Widgets are all derived from the base 
-   class <literal>GtkWidget</literal>.   
+   <literal>widget</literal> is a term used in the world of X for any user
+   interface.  A widget can be a text box, label, frame, window or any other
+   GUI component.  GTK widgets are all derived from the abstract base class
+   <link linkend "gtk.gtkwidget">GtkWidget</link>, and inherit the methods, 
+   signals and properties implemented there.
   </simpara>
   <simpara>
-   From a programming point of view a widget has five parts to
-   its life cycle:
+   From a programming point of view a widget has five parts to its life cycle:
   </simpara>
   <para>
    <orderedlist>
@@ -26,26 +27,29 @@
      <simpara>Creation</simpara>
      <simpara>
       In PHP-GTK this is done by creating an object, e.g. 
-      <literal>$window = &amp;new GtkWindow;</literal>
+      <literal>$window = &amp;new GtkWindow();</literal>
      </simpara>
     </listitem>
     <listitem>
      <simpara>Placement</simpara>
      <simpara>
       This is the step of adding a widget to a 
-      <link linkend="gtk.containers.whatare">container</link>.
-      This is achived in PHP-GTK by using the syntax
+      <link linkend="gtk.containers.whatare">container</link>. This is
+      achieved most straightforwardly in PHP-GTK by using the syntax 
       <literal>$container-&gt;add($widget);</literal>
      </simpara>
     </listitem>
     <listitem>
      <simpara>Signal Connection</simpara>
      <simpara>
-      This is the step of setting up call back functions for use.  
-      An example of this might be <literal>
-       $widget-&gt;connect("event","my_focus_func");</literal>
-      where 'event' is a predefined state such as 'clicked'
-      and 'my_focus_func' is the called subroutine. 
+      This is the step of setting up callback functions for use. An example
+      of this might be 
+      <literal>
+       $widget-&gt;connect(&quot;event&quot;, &quot;my_focus_func&quot;);
+      </literal>,
+      where &quot;event&quot; is a predefined state such as
+      <signalname>clicked</signalname> and &quot;my_focus_func&quot; is the
+      called subroutine.
      </simpara>
     </listitem>
     <listitem>
@@ -60,8 +64,8 @@
     <listitem>
      <simpara>Destruction</simpara>
      <simpara>
-      This occurs when the shutdown routine is called. 
-      All actions that are necessary here are handled by PHP-GTK itself. 
+      This occurs when the <literal>gtk::main_quit()</literal> function is
+      called.  All actions that are necessary here are handled internally.
      </simpara>
     </listitem>
    </orderedlist>
@@ -69,16 +73,16 @@
  </sect1>
 
  <sect1 id="gtk.containers.whatare">
-  <title>What are Containers</title>
+  <title>What are Containers?</title>
   <simpara>
-   A container is simply a 
-   <link linkend="gtk.widgets.whatare">widget</link>
-   that can contain another widget.  Examples of these are
-   <literal>GtkWindow</literal>, <literal>GtkTable</literal>
-   and <literal>GtkBox</literal>.  Other than this property they are
-   exactly the same as widgets. They are derived from the 
-   <literal>GtkContainer</literal> base class, which itself is 
-   derived from the <literal>GtkWidget</literal> class.
+   A container is simply a <link linkend="gtk.widgets.whatare">widget</link>
+   that is able to contain another widget.  The vast majority of widgets fall
+   into this class; obvious examples include <literal>GtkWindow</literal>, 
+   <literal>GtkTable</literal> and <literal>GtkBox</literal>.  Other than
+   this property they are exactly the same as any other widget, and may be
+   added to other containers as well as supporting child widgets of their
+   own.  They are derived from the <literal>GtkContainer</literal> base
+   class, which is itself derived from the <literal>GtkWidget</literal> class.
   </simpara>
  </sect1>
 
