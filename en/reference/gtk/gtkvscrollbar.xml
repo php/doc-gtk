@@ -7,7 +7,9 @@
    Vertical scrollbar.
   </shortdesc>
   <desc>
-
+   <simpara>
+    A <classname>GtkVScrollbar</classname> is a vertical scrollbar.
+   </simpara>
   </desc>
  </classmeta>
 
@@ -15,14 +17,38 @@
   <funcsynopsis>
    <funcprototype>
     <funcdef> <function>GtkVScrollbar</function></funcdef>
-    <paramdef><classname>GtkAdjustment</classname> <parameter><optional>adjustment = NULL</optional></parameter></paramdef>
+    <paramdef>
+     <classname>GtkAdjustment</classname> 
+     <parameter><optional>adjustment = NULL</optional></parameter>
+    </paramdef>
    </funcprototype>
   </funcsynopsis>
   <shortdesc>
-
+   Creates a vertical scrollbar.
   </shortdesc>
   <desc>
-
+   <simpara>
+    A scrollbar needs a <classname>GtkAdjustment</classname> in order to
+    operate.  The values that you give to the adjustment object will depend
+    on the situation where the scrollbar is intended to be used.
+   </simpara>
+   <simpara>
+    All scrollable widgets have their own adjustment object(s), and in all
+    instances where you are most likely to need a vertical scrollbar it is
+    possible to create a handle for the widget's vertical 
+    <classname>GtkAdjustment</classname> and assign that as the new
+    scrollbar's adjustment object.
+   </simpara>
+   <para>
+    For example:
+    <informalexample>
+     <programlisting role="php">
+$text = &amp;new GtkText();
+$adjustment = $text-&gt;vadj;
+$scrollbar = &amp;new GtkVScrollbar($adjustment);
+     </programlisting>
+    </informalexample>
+   </para>
   </desc>
  </constructor>
 
