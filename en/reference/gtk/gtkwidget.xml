@@ -6,7 +6,22 @@
    Base class for user interface elements.
   </shortdesc>
   <desc>
-
+   <simpara>
+    <classname>GtkWidget</classname> is an abstract base class providing
+    its descendants with properties, methods and signals pertinent to
+    displayable user interface elements.  The only objects that do not
+    inherit <classname>GtkWidget</classname> characteristics are 
+    <classname>GtkTooltips</classname>, <classname>GtkAdjustment</classname> 
+    and <classname>GtkItemFactory</classname> - all of which are relatively
+    abstract concepts.  Everything else that is a member of the object
+    hierarchy is a descendant of the <classname>GtkWidget</classname> 
+    class, takes up screen space, and may be referred to as a 
+    <literal>widget</literal>.
+   </simpara>
+   <simpara>
+    Note that <classname>GtkWidget</classname> cannot be constructed
+    directly.
+   </simpara>
   </desc>
  </classmeta>
 
@@ -76,12 +91,18 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>drag_source_set_icon</function></funcdef>
-     <paramdef><classname>GdkColormap</classname> 
-<parameter>colormap</parameter></paramdef>
-     <paramdef><classname>GdkPixmap</classname> 
-<parameter>pixmap</parameter></paramdef>
-     <paramdef><classname>GdkBitmap</classname> 
-<parameter>mask</parameter></paramdef>
+     <paramdef>
+      <classname>GdkColormap</classname> 
+      <parameter>colormap</parameter>
+     </paramdef>
+     <paramdef>
+      <classname>GdkPixmap</classname> 
+      <parameter>pixmap</parameter>
+     </paramdef>
+     <paramdef>
+      <classname>GdkBitmap</classname> 
+      <parameter>mask</parameter>
+     </paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -157,51 +178,6 @@
    </desc>
   </method>
 
-  <method id="gtk.gtkwidget.method.ref">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>void <function>ref</function></funcdef>
-     <paramdef>void</paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </method>
-
-  <method id="gtk.gtkwidget.method.unref">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>void <function>unref</function></funcdef>
-     <paramdef>void</paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </method>
-
-  <method id="gtk.gtkwidget.method.destroy">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>void <function>destroy</function></funcdef>
-     <paramdef>void</paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </method>
-
   <method id="gtk.gtkwidget.method.unparent">
    <funcsynopsis>
     <funcprototype>
@@ -225,10 +201,18 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Displays the calling widget.
    </shortdesc>
    <desc>
-
+    <simpara>
+     <function class="GtkWidget">show()</function> is a commonly-used method
+     that combines a series of other methods in order to display a widget on
+     the screen.
+    </simpara>
+    <simpara>
+     See also:  <function class="GtkWidget">map()</function>, 
+     <function class="GtkWidget">realize()</function>.
+    </simpara>
    </desc>
   </method>
 
@@ -255,10 +239,14 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Hides the calling widget.
    </shortdesc>
    <desc>
-
+    <simpara>
+     <function class="GtkWidget">hide()</function> is the corollary to the
+     <function class="GtkWidget">show()</function> method.  It combines
+     other methods in order to hide the calling widget from display.
+    </simpara>
    </desc>
   </method>
 
@@ -270,7 +258,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Displays calling widget and its children.
    </shortdesc>
    <desc>
 
@@ -285,7 +273,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Hides calling widget and its children.
    </shortdesc>
    <desc>
 
@@ -300,7 +288,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Maps calling widget to the screen.
    </shortdesc>
    <desc>
 
@@ -315,7 +303,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Unmaps calling widget from the screen.
    </shortdesc>
    <desc>
 
@@ -330,7 +318,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Instantiates calling widget's <classname>GdkWindow</classname>.
    </shortdesc>
    <desc>
 
@@ -345,7 +333,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Removes calling widget's <classname>GdkWindow</classname>.
    </shortdesc>
    <desc>
 
@@ -360,7 +348,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Queues widget's redraw requests.
    </shortdesc>
    <desc>
 
@@ -426,7 +414,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Queues widget's resize requests.
    </shortdesc>
    <desc>
 
@@ -483,12 +471,16 @@
     <funcprototype>
      <funcdef>void <function>add_accelerator</function></funcdef>
      <paramdef>string <parameter>accel_signal</parameter></paramdef>
-     <paramdef><classname>GtkAccelGroup</classname> 
-<parameter>accel_group</parameter></paramdef>
+     <paramdef>
+      <classname>GtkAccelGroup</classname> 
+      <parameter>accel_group</parameter>
+     </paramdef>
      <paramdef>int <parameter>accel_key</parameter></paramdef>
-     <paramdef>int <parameter>accel_mods</parameter></paramdef>
-     <paramdef><enumname>GtkAccelFlags</enumname> 
-<parameter>accel_flags</parameter></paramdef>
+     <paramdef>GdkModifierType <parameter>accel_mods</parameter></paramdef>
+     <paramdef>
+      <enumname>GtkAccelFlags</enumname> 
+      <parameter>accel_flags</parameter>
+     </paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -503,8 +495,10 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>remove_accelerator</function></funcdef>
-     <paramdef><classname>GtkAccelGroup</classname> 
-<parameter>accel_group</parameter></paramdef>
+     <paramdef>
+      <classname>GtkAccelGroup</classname> 
+      <parameter>accel_group</parameter>
+     </paramdef>
      <paramdef>int <parameter>accel_key</parameter></paramdef>
      <paramdef>int <parameter>accel_mods</parameter></paramdef>
     </funcprototype>
@@ -537,8 +531,10 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>int <function>accelerator_signal</function></funcdef>
-     <paramdef><classname>GtkAccelGroup</classname> 
-<parameter>accel_group</parameter></paramdef>
+     <paramdef>
+      <classname>GtkAccelGroup</classname> 
+      <parameter>accel_group</parameter>
+     </paramdef>
      <paramdef>int <parameter>accel_key</parameter></paramdef>
      <paramdef>int <parameter>accel_mods</parameter></paramdef>
     </funcprototype>
@@ -600,8 +596,10 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>int <function>event</function></funcdef>
-     <paramdef><classname>GdkEvent</classname> 
-<parameter>event</parameter></paramdef>
+     <paramdef>
+      <classname>GdkEvent</classname> 
+      <parameter>event</parameter>
+     </paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -631,10 +629,14 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>bool <function>set_scroll_adjustments</function></funcdef>
-     <paramdef><classname>GtkAdjustment</classname> 
-<parameter>hadjustment</parameter></paramdef>
-     <paramdef><classname>GtkAdjustment</classname> 
-<parameter>vadjustment</parameter></paramdef>
+     <paramdef>
+      <classname>GtkAdjustment</classname> 
+      <parameter>hadjustment</parameter>
+     </paramdef>
+     <paramdef>
+      <classname>GtkAdjustment</classname> 
+      <parameter>vadjustment</parameter>
+     </paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -649,8 +651,10 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>reparent</function></funcdef>
-     <paramdef><classname>GtkWidget</classname> 
-<parameter>new_parent</parameter></paramdef>
+     <paramdef>
+      <classname>GtkWidget</classname> 
+      <parameter>new_parent</parameter>
+     </paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -756,8 +760,10 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_state</function></funcdef>
-     <paramdef><enumname>GtkStateType</enumname> 
-<parameter>state</parameter></paramdef>
+     <paramdef>
+      <enumname>GtkStateType</enumname> 
+      <parameter>state</parameter>
+     </paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -802,8 +808,10 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_parent</function></funcdef>
-     <paramdef><classname>GtkWidget</classname> 
-<parameter>parent</parameter></paramdef>
+     <paramdef>
+      <classname>GtkWidget</classname> 
+      <parameter>parent</parameter>
+     </paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -818,8 +826,10 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_parent_window</function></funcdef>
-     <paramdef><classname>GdkWindow</classname> 
-<parameter>parent_window</parameter></paramdef>
+     <paramdef>
+      <classname>GdkWindow</classname> 
+      <parameter>parent_window</parameter>
+     </paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -833,8 +843,10 @@
   <method id="gtk.gtkwidget.method.get_parent_window">
    <funcsynopsis>
     <funcprototype>
-     <funcdef><classname>GdkWindow</classname> 
-<function>get_parent_window</function></funcdef>
+     <funcdef>
+      <classname>GdkWindow</classname> 
+      <function>get_parent_window</function>
+     </funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
@@ -911,8 +923,10 @@
   <method id="gtk.gtkwidget.method.get_toplevel">
    <funcsynopsis>
     <funcprototype>
-     <funcdef><classname>GtkWidget</classname> 
-<function>get_toplevel</function></funcdef>
+     <funcdef>
+      <classname>GtkWidget</classname> 
+      <function>get_toplevel</function>
+     </funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
@@ -927,8 +941,10 @@
   <method id="gtk.gtkwidget.method.get_ancestor">
    <funcsynopsis>
     <funcprototype>
-     <funcdef><classname>GtkWidget</classname> 
-<function>get_ancestor</function></funcdef>
+     <funcdef>
+      <classname>GtkWidget</classname> 
+      <function>get_ancestor</function>
+     </funcdef>
      <paramdef>int <parameter>widget_type</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
@@ -943,8 +959,10 @@
   <method id="gtk.gtkwidget.method.get_colormap">
    <funcsynopsis>
     <funcprototype>
-     <funcdef><classname>GdkColormap</classname> 
-<function>get_colormap</function></funcdef>
+     <funcdef>
+      <classname>GdkColormap</classname> 
+      <function>get_colormap</function>
+     </funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
@@ -959,8 +977,10 @@
   <method id="gtk.gtkwidget.method.get_visual">
    <funcsynopsis>
     <funcprototype>
-     <funcdef><classname>GdkVisual</classname> 
-<function>get_visual</function></funcdef>
+     <funcdef>
+      <classname>GdkVisual</classname> 
+      <function>get_visual</function>
+     </funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
@@ -976,8 +996,10 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_colormap</function></funcdef>
-     <paramdef><classname>GdkColormap</classname> 
-<parameter>colormap</parameter></paramdef>
+     <paramdef>
+      <classname>GdkColormap</classname> 
+      <parameter>colormap</parameter>
+     </paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -992,8 +1014,10 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_visual</function></funcdef>
-     <paramdef><classname>GdkVisual</classname> 
-<parameter>visual</parameter></paramdef>
+     <paramdef>
+      <classname>GdkVisual</classname> 
+      <parameter>visual</parameter>
+     </paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -1023,8 +1047,10 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>int <function>is_ancestor</function></funcdef>
-     <paramdef><classname>GtkWidget</classname> 
-<parameter>ancestor</parameter></paramdef>
+     <paramdef>
+      <classname>GtkWidget</classname> 
+      <parameter>ancestor</parameter>
+     </paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -1054,8 +1080,10 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_style</function></funcdef>
-     <paramdef><classname>GtkStyle</classname> 
-<parameter>style</parameter></paramdef>
+     <paramdef>
+      <classname>GtkStyle</classname> 
+      <parameter>style</parameter>
+     </paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -1099,8 +1127,10 @@
   <method id="gtk.gtkwidget.method.get_style">
    <funcsynopsis>
     <funcprototype>
-     <funcdef><classname>GtkStyle</classname> 
-<function>get_style</function></funcdef>
+     <funcdef>
+      <classname>GtkStyle</classname> 
+      <function>get_style</function>
+     </funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
@@ -1176,8 +1206,10 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>shape_combine_mask</function></funcdef>
-     <paramdef><classname>GdkBitmap</classname> 
-<parameter>shape_mask</parameter></paramdef>
+     <paramdef>
+      <classname>GdkBitmap</classname> 
+      <parameter>shape_mask</parameter>
+     </paramdef>
      <paramdef>int <parameter>offset_x</parameter></paramdef>
      <paramdef>int <parameter>offset_y</parameter></paramdef>
     </funcprototype>
@@ -1191,5 +1223,1444 @@
   </method>
 
  </methods>
+
+ <signals>
+
+  <signal id="gtk.gtkwidget.signal.show">
+   <signalname>show</signalname>
+   <callback>
+    <funcprototype>
+     <funcdef>void <function>callback</function></funcdef>
+     <paramdef><classname>GtkWidget</classname> widget</paramdef>
+    </funcprototype>
+   </callback>
+   <shortdesc>
+    
+   </shortdesc>
+   <desc>
+    <simpara>
+     
+    </simpara>
+   </desc>
+  </signal>
+
+  <signal id="gtk.gtkwidget.signal.hide">
+   <signalname>hide</signalname>
+   <callback>
+    <funcprototype>
+     <funcdef>void <function>callback</function></funcdef>
+     <paramdef><classname>GtkWidget</classname> widget</paramdef>
+    </funcprototype>
+   </callback>
+   <shortdesc>
+    
+   </shortdesc>
+   <desc>
+    <simpara>
+     
+    </simpara>
+   </desc>
+  </signal>
+
+  <signal id="gtk.gtkwidget.signal.map">
+   <signalname>map</signalname>
+   <callback>
+    <funcprototype>
+     <funcdef>void <function>callback</function></funcdef>
+     <paramdef><classname>GtkWidget</classname> widget</paramdef>
+    </funcprototype>
+   </callback>
+   <shortdesc>
+    
+   </shortdesc>
+   <desc>
+    <simpara>
+     
+    </simpara>
+   </desc>
+  </signal>
+
+  <signal id="gtk.gtkwidget.signal.unmap">
+   <signalname>unmap</signalname>
+   <callback>
+    <funcprototype>
+     <funcdef>void <function>callback</function></funcdef>
+     <paramdef><classname>GtkWidget</classname> widget</paramdef>
+    </funcprototype>
+   </callback>
+   <shortdesc>
+    
+   </shortdesc>
+   <desc>
+    <simpara>
+     
+    </simpara>
+   </desc>
+  </signal>
+
+  <signal id="gtk.gtkwidget.signal.realize">
+   <signalname>realize</signalname>
+   <callback>
+    <funcprototype>
+     <funcdef>void <function>callback</function></funcdef>
+     <paramdef><classname>GtkWidget</classname> widget</paramdef>
+    </funcprototype>
+   </callback>
+   <shortdesc>
+    
+   </shortdesc>
+   <desc>
+    <simpara>
+     
+    </simpara>
+   </desc>
+  </signal>
+
+  <signal id="gtk.gtkwidget.signal.unrealize">
+   <signalname>unrealize</signalname>
+   <callback>
+    <funcprototype>
+     <funcdef>void <function>callback</function></funcdef>
+     <paramdef><classname>GtkWidget</classname> widget</paramdef>
+    </funcprototype>
+   </callback>
+   <shortdesc>
+    
+   </shortdesc>
+   <desc>
+    <simpara>
+     
+    </simpara>
+   </desc>
+  </signal>
+
+  <signal id="gtk.gtkwidget.signal.draw">
+   <signalname>draw</signalname>
+   <callback>
+    <funcprototype>
+     <funcdef>void <function>callback</function></funcdef>
+     <paramdef><classname>GtkWidget</classname> widget</paramdef>
+     <paramdef> </paramdef>
+    </funcprototype>
+   </callback>
+   <shortdesc>
+    
+   </shortdesc>
+   <desc>
+    <simpara>
+     
+    </simpara>
+   </desc>
+  </signal>
+<!-- widget_signals[DRAW] =
+    gtk_signal_new ("draw",
+		    GTK_RUN_FIRST,
+		    object_class->type,
+		    GTK_SIGNAL_OFFSET (GtkWidgetClass, draw),
+		    gtk_marshal_NONE__POINTER,
+		    GTK_TYPE_NONE, 1,
+		    GTK_TYPE_POINTER); -->
+
+  <signal id="gtk.gtkwidget.signal.draw-focus">
+   <signalname>draw-focus</signalname>
+   <callback>
+    <funcprototype>
+     <funcdef>void <function>callback</function></funcdef>
+     <paramdef><classname>GtkWidget</classname> widget</paramdef>
+    </funcprototype>
+   </callback>
+   <shortdesc>
+    
+   </shortdesc>
+   <desc>
+    <simpara>
+     
+    </simpara>
+   </desc>
+  </signal>
+
+  <signal id="gtk.gtkwidget.signal.draw-default">
+   <signalname>draw-default</signalname>
+   <callback>
+    <funcprototype>
+     <funcdef>void <function>callback</function></funcdef>
+     <paramdef><classname>GtkWidget</classname> widget</paramdef>
+    </funcprototype>
+   </callback>
+   <shortdesc>
+    
+   </shortdesc>
+   <desc>
+    <simpara>
+     
+    </simpara>
+   </desc>
+  </signal>
+
+  <signal id="gtk.gtkwidget.signal.size-request">
+   <signalname>size-request</signalname>
+   <callback>
+    <funcprototype>
+     <funcdef>void <function>callback</function></funcdef>
+     <paramdef><classname>GtkWidget</classname> widget</paramdef>
+     <paramdef> </paramdef>
+    </funcprototype>
+   </callback>
+   <shortdesc>
+    
+   </shortdesc>
+   <desc>
+    <simpara>
+     
+    </simpara>
+   </desc>
+  </signal>
+<!-- widget_signals[SIZE_REQUEST] =
+    gtk_signal_new ("size_request",
+		    GTK_RUN_FIRST,
+		    object_class->type,
+		    GTK_SIGNAL_OFFSET (GtkWidgetClass, size_request),
+		    gtk_marshal_NONE__POINTER,
+		    GTK_TYPE_NONE, 1,
+		    GTK_TYPE_POINTER); -->
+
+  <signal id="gtk.gtkwidget.signal.size-allocate">
+   <signalname>size-allocate</signalname>
+   <callback>
+    <funcprototype>
+     <funcdef>void <function>callback</function></funcdef>
+     <paramdef><classname>GtkWidget</classname> widget</paramdef>
+     <paramdef> </paramdef>
+    </funcprototype>
+   </callback>
+   <shortdesc>
+    
+   </shortdesc>
+   <desc>
+    <simpara>
+     
+    </simpara>
+   </desc>
+  </signal>
+<!-- widget_signals[SIZE_ALLOCATE] =
+    gtk_signal_new ("size_allocate",
+		    GTK_RUN_FIRST,
+		    object_class->type,
+		    GTK_SIGNAL_OFFSET (GtkWidgetClass, size_allocate),
+		    gtk_marshal_NONE__POINTER,
+		    GTK_TYPE_NONE, 1,
+		    GTK_TYPE_POINTER); -->
+
+  <signal id="gtk.gtkwidget.signal.state-changed">
+   <signalname>state-changed</signalname>
+   <callback>
+    <funcprototype>
+     <funcdef>void <function>callback</function></funcdef>
+     <paramdef><classname>GtkWidget</classname> widget</paramdef>
+     <paramdef> </paramdef>
+    </funcprototype>
+   </callback>
+   <shortdesc>
+    
+   </shortdesc>
+   <desc>
+    <simpara>
+     
+    </simpara>
+   </desc>
+  </signal>
+<!-- widget_signals[STATE_CHANGED] =
+    gtk_signal_new ("state_changed",
+		    GTK_RUN_FIRST,
+		    object_class->type,
+		    GTK_SIGNAL_OFFSET (GtkWidgetClass, state_changed),
+		    gtk_marshal_NONE__UINT,
+		    GTK_TYPE_NONE, 1,
+		    GTK_TYPE_STATE_TYPE); -->
+
+  <signal id="gtk.gtkwidget.signal.parent-set">
+   <signalname>parent-set</signalname>
+   <callback>
+    <funcprototype>
+     <funcdef>void <function>callback</function></funcdef>
+     <paramdef><classname>GtkWidget</classname> widget</paramdef>
+     <paramdef><classname>GtkWidget</classname> parent</paramdef>
+    </funcprototype>
+   </callback>
+   <shortdesc>
+    
+   </shortdesc>
+   <desc>
+    <simpara>
+     
+    </simpara>
+   </desc>
+  </signal>
+
+  <signal id="gtk.gtkwidget.signal.style-set">
+   <signalname>style-set</signalname>
+   <callback>
+    <funcprototype>
+     <funcdef>void <function>callback</function></funcdef>
+     <paramdef><classname>GtkWidget</classname> widget</paramdef>
+     <paramdef> </paramdef>
+    </funcprototype>
+   </callback>
+   <shortdesc>
+    
+   </shortdesc>
+   <desc>
+    <simpara>
+     
+    </simpara>
+   </desc>
+  </signal>
+<!-- widget_signals[STYLE_SET] =
+    gtk_signal_new ("style_set",
+		    GTK_RUN_FIRST,
+		    object_class->type,
+		    GTK_SIGNAL_OFFSET (GtkWidgetClass, style_set),
+		    gtk_marshal_NONE__POINTER,
+		    GTK_TYPE_NONE, 1,
+		    GTK_TYPE_STYLE); -->
+
+  <signal id="gtk.gtkwidget.signal.add-accelerator">
+   <signalname>add-accelerator</signalname>
+   <callback>
+    <funcprototype>
+     <funcdef>void <function>callback</function></funcdef>
+     <paramdef><classname>GtkWidget</classname> widget</paramdef>
+    </funcprototype>
+   </callback>
+   <shortdesc>
+    
+   </shortdesc>
+   <desc>
+    <simpara>
+     
+    </simpara>
+   </desc>
+  </signal>
+<!-- widget_signals[ADD_ACCELERATOR] =
+    gtk_accel_group_create_add (object_class->type, GTK_RUN_LAST,
+				GTK_SIGNAL_OFFSET (GtkWidgetClass, add_accelerator)); -->
+
+  <signal id="gtk.gtkwidget.signal.remove-accelerator">
+   <signalname>remove-accelerator</signalname>
+   <callback>
+    <funcprototype>
+     <funcdef>void <function>callback</function></funcdef>
+     <paramdef><classname>GtkWidget</classname> widget</paramdef>
+    </funcprototype>
+   </callback>
+   <shortdesc>
+    
+   </shortdesc>
+   <desc>
+    <simpara>
+     
+    </simpara>
+   </desc>
+  </signal>
+<!-- widget_signals[REMOVE_ACCELERATOR] =
+    gtk_accel_group_create_remove (object_class->type, GTK_RUN_LAST,
+				   GTK_SIGNAL_OFFSET (GtkWidgetClass, remove_accelerator)); -->
+
+  <signal id="gtk.gtkwidget.signal.grab-focus">
+   <signalname>grab-focus</signalname>
+   <callback>
+    <funcprototype>
+     <funcdef>void <function>callback</function></funcdef>
+     <paramdef><classname>GtkWidget</classname> widget</paramdef>
+    </funcprototype>
+   </callback>
+   <shortdesc>
+    
+   </shortdesc>
+   <desc>
+    <simpara>
+     
+    </simpara>
+   </desc>
+  </signal>
+
+  <signal id="gtk.gtkwidget.signal.event">
+   <signalname>event</signalname>
+   <callback>
+    <funcprototype>
+     <funcdef>bool <function>callback</function></funcdef>
+     <paramdef><classname>GtkWidget</classname> widget</paramdef>
+     <paramdef> </paramdef>
+    </funcprototype>
+   </callback>
+   <shortdesc>
+    
+   </shortdesc>
+   <desc>
+    <simpara>
+     
+    </simpara>
+   </desc>
+  </signal>
+<!-- widget_signals[EVENT] =
+    gtk_signal_new ("event",
+		    GTK_RUN_LAST,
+		    object_class->type,
+		    GTK_SIGNAL_OFFSET (GtkWidgetClass, event),
+		    gtk_marshal_BOOL__POINTER,
+		    GTK_TYPE_BOOL, 1,
+		    GTK_TYPE_GDK_EVENT); -->
+
+  <signal id="gtk.gtkwidget.signal.button-press-event">
+   <signalname>button-press-event</signalname>
+   <callback>
+    <funcprototype>
+     <funcdef>bool <function>callback</function></funcdef>
+     <paramdef><classname>GtkWidget</classname> widget</paramdef>
+     <paramdef> </paramdef>
+    </funcprototype>
+   </callback>
+   <shortdesc>
+    
+   </shortdesc>
+   <desc>
+    <simpara>
+     
+    </simpara>
+   </desc>
+  </signal>
+<!-- widget_signals[BUTTON_PRESS_EVENT] =
+    gtk_signal_new ("button_press_event",
+		    GTK_RUN_LAST,
+		    object_class->type,
+		    GTK_SIGNAL_OFFSET (GtkWidgetClass, button_press_event),
+		    gtk_marshal_BOOL__POINTER,
+		    GTK_TYPE_BOOL, 1,
+		    GTK_TYPE_GDK_EVENT); -->
+
+  <signal id="gtk.gtkwidget.signal.button-release-event">
+   <signalname>button-release-event</signalname>
+   <callback>
+    <funcprototype>
+     <funcdef>bool <function>callback</function></funcdef>
+     <paramdef><classname>GtkWidget</classname> widget</paramdef>
+     <paramdef> </paramdef>
+    </funcprototype>
+   </callback>
+   <shortdesc>
+    
+   </shortdesc>
+   <desc>
+    <simpara>
+     
+    </simpara>
+   </desc>
+  </signal>
+<!-- widget_signals[BUTTON_RELEASE_EVENT] =
+    gtk_signal_new ("button_release_event",
+		    GTK_RUN_LAST,
+		    object_class->type,
+		    GTK_SIGNAL_OFFSET (GtkWidgetClass, button_release_event),
+		    gtk_marshal_BOOL__POINTER,
+		    GTK_TYPE_BOOL, 1,
+		    GTK_TYPE_GDK_EVENT); -->
+
+  <signal id="gtk.gtkwidget.signal.motion-notify-event">
+   <signalname>motion-notify-event</signalname>
+   <callback>
+    <funcprototype>
+     <funcdef>bool <function>callback</function></funcdef>
+     <paramdef><classname>GtkWidget</classname> widget</paramdef>
+     <paramdef> </paramdef>
+    </funcprototype>
+   </callback>
+   <shortdesc>
+    
+   </shortdesc>
+   <desc>
+    <simpara>
+     
+    </simpara>
+   </desc>
+  </signal>
+<!-- widget_signals[MOTION_NOTIFY_EVENT] =
+    gtk_signal_new ("motion_notify_event",
+		    GTK_RUN_LAST,
+		    object_class->type,
+		    GTK_SIGNAL_OFFSET (GtkWidgetClass, motion_notify_event),
+		    gtk_marshal_BOOL__POINTER,
+		    GTK_TYPE_BOOL, 1,
+		    GTK_TYPE_GDK_EVENT); -->
+
+  <signal id="gtk.gtkwidget.signal.delete-event">
+   <signalname>delete-event</signalname>
+   <callback>
+    <funcprototype>
+     <funcdef>bool <function>callback</function></funcdef>
+     <paramdef><classname>GtkWidget</classname> widget</paramdef>
+     <paramdef> </paramdef>
+    </funcprototype>
+   </callback>
+   <shortdesc>
+    
+   </shortdesc>
+   <desc>
+    <simpara>
+     
+    </simpara>
+   </desc>
+  </signal>
+<!-- widget_signals[DELETE_EVENT] =
+    gtk_signal_new ("delete_event",
+		    GTK_RUN_LAST,
+		    object_class->type,
+		    GTK_SIGNAL_OFFSET (GtkWidgetClass, delete_event),
+		    gtk_marshal_BOOL__POINTER,
+		    GTK_TYPE_BOOL, 1,
+		    GTK_TYPE_GDK_EVENT); -->
+
+  <signal id="gtk.gtkwidget.signal.destroy-event">
+   <signalname>destroy-event</signalname>
+   <callback>
+    <funcprototype>
+     <funcdef>bool <function>callback</function></funcdef>
+     <paramdef><classname>GtkWidget</classname> widget</paramdef>
+     <paramdef> </paramdef>
+    </funcprototype>
+   </callback>
+   <shortdesc>
+    
+   </shortdesc>
+   <desc>
+    <simpara>
+     
+    </simpara>
+   </desc>
+  </signal>
+<!-- widget_signals[DESTROY_EVENT] =
+    gtk_signal_new ("destroy_event",
+		    GTK_RUN_LAST,
+		    object_class->type,
+		    GTK_SIGNAL_OFFSET (GtkWidgetClass, destroy_event),
+		    gtk_marshal_BOOL__POINTER,
+		    GTK_TYPE_BOOL, 1,
+		    GTK_TYPE_GDK_EVENT); -->
+
+  <signal id="gtk.gtkwidget.signal.expose-event">
+   <signalname>expose-event</signalname>
+   <callback>
+    <funcprototype>
+     <funcdef>bool <function>callback</function></funcdef>
+     <paramdef><classname>GtkWidget</classname> widget</paramdef>
+     <paramdef> </paramdef>
+    </funcprototype>
+   </callback>
+   <shortdesc>
+    
+   </shortdesc>
+   <desc>
+    <simpara>
+     
+    </simpara>
+   </desc>
+  </signal>
+<!-- widget_signals[EXPOSE_EVENT] =
+    gtk_signal_new ("expose_event",
+		    GTK_RUN_LAST,
+		    object_class->type,
+		    GTK_SIGNAL_OFFSET (GtkWidgetClass, expose_event),
+		    gtk_marshal_BOOL__POINTER,
+		    GTK_TYPE_BOOL, 1,
+		    GTK_TYPE_GDK_EVENT); -->
+
+  <signal id="gtk.gtkwidget.signal.key-press-event">
+   <signalname>key-press-event</signalname>
+   <callback>
+    <funcprototype>
+     <funcdef>bool <function>callback</function></funcdef>
+     <paramdef><classname>GtkWidget</classname> widget</paramdef>
+     <paramdef> </paramdef>
+    </funcprototype>
+   </callback>
+   <shortdesc>
+    
+   </shortdesc>
+   <desc>
+    <simpara>
+     
+    </simpara>
+   </desc>
+  </signal>
+<!-- widget_signals[KEY_PRESS_EVENT] =
+    gtk_signal_new ("key_press_event",
+		    GTK_RUN_LAST,
+		    object_class->type,
+		    GTK_SIGNAL_OFFSET (GtkWidgetClass, key_press_event),
+		    gtk_marshal_BOOL__POINTER,
+		    GTK_TYPE_BOOL, 1,
+		    GTK_TYPE_GDK_EVENT); -->
+
+  <signal id="gtk.gtkwidget.signal.key-release-event">
+   <signalname>key-release-event</signalname>
+   <callback>
+    <funcprototype>
+     <funcdef>bool <function>callback</function></funcdef>
+     <paramdef><classname>GtkWidget</classname> widget</paramdef>
+     <paramdef> </paramdef>
+    </funcprototype>
+   </callback>
+   <shortdesc>
+    
+   </shortdesc>
+   <desc>
+    <simpara>
+     
+    </simpara>
+   </desc>
+  </signal>
+<!-- widget_signals[KEY_RELEASE_EVENT] =
+    gtk_signal_new ("key_release_event",
+		    GTK_RUN_LAST,
+		    object_class->type,
+		    GTK_SIGNAL_OFFSET (GtkWidgetClass, key_release_event),
+		    gtk_marshal_BOOL__POINTER,
+		    GTK_TYPE_BOOL, 1,
+		    GTK_TYPE_GDK_EVENT); -->
+
+  <signal id="gtk.gtkwidget.signal.enter-notify-event">
+   <signalname>enter-notify-event</signalname>
+   <callback>
+    <funcprototype>
+     <funcdef>bool <function>callback</function></funcdef>
+     <paramdef><classname>GtkWidget</classname> widget</paramdef>
+     <paramdef> </paramdef>
+    </funcprototype>
+   </callback>
+   <shortdesc>
+    
+   </shortdesc>
+   <desc>
+    <simpara>
+     
+    </simpara>
+   </desc>
+  </signal>
+<!-- widget_signals[ENTER_NOTIFY_EVENT] =
+    gtk_signal_new ("enter_notify_event",
+		    GTK_RUN_LAST,
+		    object_class->type,
+		    GTK_SIGNAL_OFFSET (GtkWidgetClass, enter_notify_event),
+		    gtk_marshal_BOOL__POINTER,
+		    GTK_TYPE_BOOL, 1,
+		    GTK_TYPE_GDK_EVENT); -->
+
+  <signal id="gtk.gtkwidget.signal.leave-notify-event">
+   <signalname>leave-notify-event</signalname>
+   <callback>
+    <funcprototype>
+     <funcdef>bool <function>callback</function></funcdef>
+     <paramdef><classname>GtkWidget</classname> widget</paramdef>
+     <paramdef> </paramdef>
+    </funcprototype>
+   </callback>
+   <shortdesc>
+    
+   </shortdesc>
+   <desc>
+    <simpara>
+     
+    </simpara>
+   </desc>
+  </signal>
+<!-- widget_signals[LEAVE_NOTIFY_EVENT] =
+    gtk_signal_new ("leave_notify_event",
+		    GTK_RUN_LAST,
+		    object_class->type,
+		    GTK_SIGNAL_OFFSET (GtkWidgetClass, leave_notify_event),
+		    gtk_marshal_BOOL__POINTER,
+		    GTK_TYPE_BOOL, 1,
+		    GTK_TYPE_GDK_EVENT); -->
+
+  <signal id="gtk.gtkwidget.signal.configure-event">
+   <signalname>configure-event</signalname>
+   <callback>
+    <funcprototype>
+     <funcdef>bool <function>callback</function></funcdef>
+     <paramdef><classname>GtkWidget</classname> widget</paramdef>
+     <paramdef> </paramdef>
+    </funcprototype>
+   </callback>
+   <shortdesc>
+    
+   </shortdesc>
+   <desc>
+    <simpara>
+     
+    </simpara>
+   </desc>
+  </signal>
+<!-- widget_signals[CONFIGURE_EVENT] =
+    gtk_signal_new ("configure_event",
+		    GTK_RUN_LAST,
+		    object_class->type,
+		    GTK_SIGNAL_OFFSET (GtkWidgetClass, configure_event),
+		    gtk_marshal_BOOL__POINTER,
+		    GTK_TYPE_BOOL, 1,
+		    GTK_TYPE_GDK_EVENT); -->
+
+  <signal id="gtk.gtkwidget.signal.focus-in-event">
+   <signalname>focus-in-event</signalname>
+   <callback>
+    <funcprototype>
+     <funcdef>bool <function>callback</function></funcdef>
+     <paramdef><classname>GtkWidget</classname> widget</paramdef>
+     <paramdef> </paramdef>
+    </funcprototype>
+   </callback>
+   <shortdesc>
+    
+   </shortdesc>
+   <desc>
+    <simpara>
+     
+    </simpara>
+   </desc>
+  </signal>
+<!-- widget_signals[FOCUS_IN_EVENT] =
+    gtk_signal_new ("focus_in_event",
+		    GTK_RUN_LAST,
+		    object_class->type,
+		    GTK_SIGNAL_OFFSET (GtkWidgetClass, focus_in_event),
+		    gtk_marshal_BOOL__POINTER,
+		    GTK_TYPE_BOOL, 1,
+		    GTK_TYPE_GDK_EVENT); -->
+
+  <signal id="gtk.gtkwidget.signal.focus-out-event">
+   <signalname>focus-out-event</signalname>
+   <callback>
+    <funcprototype>
+     <funcdef>bool <function>callback</function></funcdef>
+     <paramdef><classname>GtkWidget</classname> widget</paramdef>
+     <paramdef> </paramdef>
+    </funcprototype>
+   </callback>
+   <shortdesc>
+    
+   </shortdesc>
+   <desc>
+    <simpara>
+     
+    </simpara>
+   </desc>
+  </signal>
+<!-- widget_signals[FOCUS_OUT_EVENT] =
+    gtk_signal_new ("focus_out_event",
+		    GTK_RUN_LAST,
+		    object_class->type,
+		    GTK_SIGNAL_OFFSET (GtkWidgetClass, focus_out_event),
+		    gtk_marshal_BOOL__POINTER,
+		    GTK_TYPE_BOOL, 1,
+		    GTK_TYPE_GDK_EVENT); -->
+
+  <signal id="gtk.gtkwidget.signal.map-event">
+   <signalname>map-event</signalname>
+   <callback>
+    <funcprototype>
+     <funcdef>bool <function>callback</function></funcdef>
+     <paramdef><classname>GtkWidget</classname> widget</paramdef>
+     <paramdef> </paramdef>
+    </funcprototype>
+   </callback>
+   <shortdesc>
+    
+   </shortdesc>
+   <desc>
+    <simpara>
+     
+    </simpara>
+   </desc>
+  </signal>
+<!-- widget_signals[MAP_EVENT] =
+    gtk_signal_new ("map_event",
+		    GTK_RUN_LAST,
+		    object_class->type,
+		    GTK_SIGNAL_OFFSET (GtkWidgetClass, map_event),
+		    gtk_marshal_BOOL__POINTER,
+		    GTK_TYPE_BOOL, 1,
+		    GTK_TYPE_GDK_EVENT); -->
+
+  <signal id="gtk.gtkwidget.signal.unmap-event">
+   <signalname>unmap-event</signalname>
+   <callback>
+    <funcprototype>
+     <funcdef>bool <function>callback</function></funcdef>
+     <paramdef><classname>GtkWidget</classname> widget</paramdef>
+     <paramdef> </paramdef>
+    </funcprototype>
+   </callback>
+   <shortdesc>
+    
+   </shortdesc>
+   <desc>
+    <simpara>
+     
+    </simpara>
+   </desc>
+  </signal>
+<!-- widget_signals[UNMAP_EVENT] =
+    gtk_signal_new ("unmap_event",
+		    GTK_RUN_LAST,
+		    object_class->type,
+		    GTK_SIGNAL_OFFSET (GtkWidgetClass, unmap_event),
+		    gtk_marshal_BOOL__POINTER,
+		    GTK_TYPE_BOOL, 1,
+		    GTK_TYPE_GDK_EVENT); -->
+
+  <signal id="gtk.gtkwidget.signal.property-notify-event">
+   <signalname>property-notify-event</signalname>
+   <callback>
+    <funcprototype>
+     <funcdef>bool <function>callback</function></funcdef>
+     <paramdef><classname>GtkWidget</classname> widget</paramdef>
+     <paramdef> </paramdef>
+    </funcprototype>
+   </callback>
+   <shortdesc>
+    
+   </shortdesc>
+   <desc>
+    <simpara>
+     
+    </simpara>
+   </desc>
+  </signal>
+<!-- widget_signals[PROPERTY_NOTIFY_EVENT] =
+    gtk_signal_new ("property_notify_event",
+		    GTK_RUN_LAST,
+		    object_class->type,
+		    GTK_SIGNAL_OFFSET (GtkWidgetClass, property_notify_event),
+		    gtk_marshal_BOOL__POINTER,
+		    GTK_TYPE_BOOL, 1,
+		    GTK_TYPE_GDK_EVENT); -->
+
+  <signal id="gtk.gtkwidget.signal.selection-clear-event">
+   <signalname>selection-clear-event</signalname>
+   <callback>
+    <funcprototype>
+     <funcdef>bool <function>callback</function></funcdef>
+     <paramdef><classname>GtkWidget</classname> widget</paramdef>
+     <paramdef> </paramdef>
+    </funcprototype>
+   </callback>
+   <shortdesc>
+    
+   </shortdesc>
+   <desc>
+    <simpara>
+     
+    </simpara>
+   </desc>
+  </signal>
+<!-- widget_signals[SELECTION_CLEAR_EVENT] =
+    gtk_signal_new ("selection_clear_event",
+		    GTK_RUN_LAST,
+		    object_class->type,
+		    GTK_SIGNAL_OFFSET (GtkWidgetClass, selection_clear_event),
+		    gtk_marshal_BOOL__POINTER,
+		    GTK_TYPE_BOOL, 1,
+		    GTK_TYPE_GDK_EVENT); -->
+
+  <signal id="gtk.gtkwidget.signal.selection-request-event">
+   <signalname>selection-request-event</signalname>
+   <callback>
+    <funcprototype>
+     <funcdef>bool <function>callback</function></funcdef>
+     <paramdef><classname>GtkWidget</classname> widget</paramdef>
+     <paramdef> </paramdef>
+    </funcprototype>
+   </callback>
+   <shortdesc>
+    
+   </shortdesc>
+   <desc>
+    <simpara>
+     
+    </simpara>
+   </desc>
+  </signal>
+<!-- widget_signals[SELECTION_REQUEST_EVENT] =
+    gtk_signal_new ("selection_request_event",
+		    GTK_RUN_LAST,
+		    object_class->type,
+		    GTK_SIGNAL_OFFSET (GtkWidgetClass, selection_request_event),
+		    gtk_marshal_BOOL__POINTER,
+		    GTK_TYPE_BOOL, 1,
+		    GTK_TYPE_GDK_EVENT); -->
+
+  <signal id="gtk.gtkwidget.signal.selection-notify-event">
+   <signalname>selection-notify-event</signalname>
+   <callback>
+    <funcprototype>
+     <funcdef>bool <function>callback</function></funcdef>
+     <paramdef><classname>GtkWidget</classname> widget</paramdef>
+     <paramdef> </paramdef>
+    </funcprototype>
+   </callback>
+   <shortdesc>
+    
+   </shortdesc>
+   <desc>
+    <simpara>
+     
+    </simpara>
+   </desc>
+  </signal>
+<!-- widget_signals[SELECTION_NOTIFY_EVENT] =
+    gtk_signal_new ("selection_notify_event",
+		    GTK_RUN_LAST,
+		    object_class->type,
+		    GTK_SIGNAL_OFFSET (GtkWidgetClass, selection_notify_event),
+		    gtk_marshal_BOOL__POINTER,
+		    GTK_TYPE_BOOL, 1,
+		    GTK_TYPE_GDK_EVENT); -->
+
+  <signal id="gtk.gtkwidget.signal.selection-received">
+   <signalname>selection-received</signalname>
+   <callback>
+    <funcprototype>
+     <funcdef>void <function>callback</function></funcdef>
+     <paramdef><classname>GtkWidget</classname> widget</paramdef>
+     <paramdef> </paramdef>
+     <paramdef> </paramdef>
+    </funcprototype>
+   </callback>
+   <shortdesc>
+    
+   </shortdesc>
+   <desc>
+    <simpara>
+     
+    </simpara>
+   </desc>
+  </signal>
+<!-- widget_signals[SELECTION_RECEIVED] =
+    gtk_signal_new ("selection_received",
+		    GTK_RUN_LAST,
+		    object_class->type,
+		    GTK_SIGNAL_OFFSET (GtkWidgetClass, selection_received),
+		    gtk_marshal_NONE__POINTER_UINT,
+		    GTK_TYPE_NONE, 2,
+		    GTK_TYPE_SELECTION_DATA,
+		    GTK_TYPE_UINT); -->
+
+  <signal id="gtk.gtkwidget.signal.selection-get">
+   <signalname>selection-get</signalname>
+   <callback>
+    <funcprototype>
+     <funcdef>void <function>callback</function></funcdef>
+     <paramdef><classname>GtkWidget</classname> widget</paramdef>
+     <paramdef> </paramdef>
+     <paramdef> </paramdef>
+     <paramdef> </paramdef>
+    </funcprototype>
+   </callback>
+   <shortdesc>
+    
+   </shortdesc>
+   <desc>
+    <simpara>
+     
+    </simpara>
+   </desc>
+  </signal>
+<!-- widget_signals[SELECTION_GET] =
+    gtk_signal_new ("selection_get",
+		    GTK_RUN_LAST,
+		    object_class->type,
+		    GTK_SIGNAL_OFFSET (GtkWidgetClass, selection_get),
+		    gtk_marshal_NONE__POINTER_UINT_UINT,
+		    GTK_TYPE_NONE, 3,
+		    GTK_TYPE_SELECTION_DATA,
+		    GTK_TYPE_UINT,
+		    GTK_TYPE_UINT); -->
+
+  <signal id="gtk.gtkwidget.signal.proximity-in-event">
+   <signalname>proximity-in-event</signalname>
+   <callback>
+    <funcprototype>
+     <funcdef>bool <function>callback</function></funcdef>
+     <paramdef><classname>GtkWidget</classname> widget</paramdef>
+     <paramdef> </paramdef>
+    </funcprototype>
+   </callback>
+   <shortdesc>
+    
+   </shortdesc>
+   <desc>
+    <simpara>
+     
+    </simpara>
+   </desc>
+  </signal>
+<!-- widget_signals[PROXIMITY_IN_EVENT] =
+    gtk_signal_new ("proximity_in_event",
+		    GTK_RUN_LAST,
+		    object_class->type,
+		    GTK_SIGNAL_OFFSET (GtkWidgetClass, proximity_in_event),
+		    gtk_marshal_BOOL__POINTER,
+		    GTK_TYPE_BOOL, 1,
+		    GTK_TYPE_GDK_EVENT); -->
+
+  <signal id="gtk.gtkwidget.signal.proximity-out-event">
+   <signalname>proximity-out-event</signalname>
+   <callback>
+    <funcprototype>
+     <funcdef>bool <function>callback</function></funcdef>
+     <paramdef><classname>GtkWidget</classname> widget</paramdef>
+     <paramdef> </paramdef>
+    </funcprototype>
+   </callback>
+   <shortdesc>
+    
+   </shortdesc>
+   <desc>
+    <simpara>
+     
+    </simpara>
+   </desc>
+  </signal>
+<!-- widget_signals[PROXIMITY_OUT_EVENT] =
+    gtk_signal_new ("proximity_out_event",
+		    GTK_RUN_LAST,
+		    object_class->type,
+		    GTK_SIGNAL_OFFSET (GtkWidgetClass, proximity_out_event),
+		    gtk_marshal_BOOL__POINTER,
+		    GTK_TYPE_BOOL, 1,
+		    GTK_TYPE_GDK_EVENT); -->
+
+  <signal id="gtk.gtkwidget.signal.drag-leave">
+   <signalname>drag-leave</signalname>
+   <callback>
+    <funcprototype>
+     <funcdef>void <function>callback</function></funcdef>
+     <paramdef><classname>GtkWidget</classname> widget</paramdef>
+     <paramdef> </paramdef>
+     <paramdef> </paramdef>
+    </funcprototype>
+   </callback>
+   <shortdesc>
+    
+   </shortdesc>
+   <desc>
+    <simpara>
+     
+    </simpara>
+   </desc>
+  </signal>
+<!-- widget_signals[DRAG_LEAVE] =
+    gtk_signal_new ("drag_leave",
+		    GTK_RUN_LAST,
+		    object_class->type,
+		    GTK_SIGNAL_OFFSET (GtkWidgetClass, drag_leave),
+		    gtk_marshal_NONE__POINTER_UINT,
+		    GTK_TYPE_NONE, 2,
+		    GTK_TYPE_GDK_DRAG_CONTEXT,
+		    GTK_TYPE_UINT); -->
+
+  <signal id="gtk.gtkwidget.signal.drag-begin">
+   <signalname>drag-begin</signalname>
+   <callback>
+    <funcprototype>
+     <funcdef>void <function>callback</function></funcdef>
+     <paramdef><classname>GtkWidget</classname> widget</paramdef>
+     <paramdef> </paramdef>
+    </funcprototype>
+   </callback>
+   <shortdesc>
+    
+   </shortdesc>
+   <desc>
+    <simpara>
+     
+    </simpara>
+   </desc>
+  </signal>
+<!-- widget_signals[DRAG_BEGIN] =
+    gtk_signal_new ("drag_begin",
+		    GTK_RUN_LAST,
+		    object_class->type,
+		    GTK_SIGNAL_OFFSET (GtkWidgetClass, drag_begin),
+		    gtk_marshal_NONE__POINTER,
+		    GTK_TYPE_NONE, 1,
+		    GTK_TYPE_GDK_DRAG_CONTEXT); -->
+
+  <signal id="gtk.gtkwidget.signal.drag-end">
+   <signalname>drag-end</signalname>
+   <callback>
+    <funcprototype>
+     <funcdef>void <function>callback</function></funcdef>
+     <paramdef><classname>GtkWidget</classname> widget</paramdef>
+     <paramdef> </paramdef>
+    </funcprototype>
+   </callback>
+   <shortdesc>
+    
+   </shortdesc>
+   <desc>
+    <simpara>
+     
+    </simpara>
+   </desc>
+  </signal>
+<!-- widget_signals[DRAG_END] =
+    gtk_signal_new ("drag_end",
+		    GTK_RUN_LAST,
+		    object_class->type,
+		    GTK_SIGNAL_OFFSET (GtkWidgetClass, drag_end),
+		    gtk_marshal_NONE__POINTER,
+		    GTK_TYPE_NONE, 1,
+		    GTK_TYPE_GDK_DRAG_CONTEXT); -->
+
+  <signal id="gtk.gtkwidget.signal.drag-data-delete">
+   <signalname>drag-data-delete</signalname>
+   <callback>
+    <funcprototype>
+     <funcdef>void <function>callback</function></funcdef>
+     <paramdef><classname>GtkWidget</classname> widget</paramdef>
+     <paramdef> </paramdef>
+    </funcprototype>
+   </callback>
+   <shortdesc>
+    
+   </shortdesc>
+   <desc>
+    <simpara>
+     
+    </simpara>
+   </desc>
+  </signal>
+<!-- widget_signals[DRAG_DATA_DELETE] =
+    gtk_signal_new ("drag_data_delete",
+		    GTK_RUN_LAST,
+		    object_class->type,
+		    GTK_SIGNAL_OFFSET (GtkWidgetClass, drag_data_delete),
+		    gtk_marshal_NONE__POINTER,
+		    GTK_TYPE_NONE, 1,
+		    GTK_TYPE_GDK_DRAG_CONTEXT); -->
+
+  <signal id="gtk.gtkwidget.signal.drag-motion">
+   <signalname>drag-motion</signalname>
+   <callback>
+    <funcprototype>
+     <funcdef>bool <function>callback</function></funcdef>
+     <paramdef><classname>GtkWidget</classname> widget</paramdef>
+     <paramdef> </paramdef>
+     <paramdef> </paramdef>
+     <paramdef> </paramdef>
+     <paramdef> </paramdef>
+    </funcprototype>
+   </callback>
+   <shortdesc>
+    
+   </shortdesc>
+   <desc>
+    <simpara>
+     
+    </simpara>
+   </desc>
+  </signal>
+<!-- widget_signals[DRAG_MOTION] =
+    gtk_signal_new ("drag_motion",
+		    GTK_RUN_LAST,
+		    object_class->type,
+		    GTK_SIGNAL_OFFSET (GtkWidgetClass, drag_motion),
+		    gtk_marshal_BOOL__POINTER_INT_INT_UINT,
+		    GTK_TYPE_BOOL, 4,
+		    GTK_TYPE_GDK_DRAG_CONTEXT,
+		    GTK_TYPE_INT,
+		    GTK_TYPE_INT,
+		    GTK_TYPE_UINT); -->
+
+  <signal id="gtk.gtkwidget.signal.drag-drop">
+   <signalname>drag-drop</signalname>
+   <callback>
+    <funcprototype>
+     <funcdef>bool <function>callback</function></funcdef>
+     <paramdef><classname>GtkWidget</classname> widget</paramdef>
+     <paramdef> </paramdef>
+     <paramdef> </paramdef>
+     <paramdef> </paramdef>
+     <paramdef> </paramdef>
+    </funcprototype>
+   </callback>
+   <shortdesc>
+    
+   </shortdesc>
+   <desc>
+    <simpara>
+     
+    </simpara>
+   </desc>
+  </signal>
+<!-- widget_signals[DRAG_DROP] =
+    gtk_signal_new ("drag_drop",
+		    GTK_RUN_LAST,
+		    object_class->type,
+		    GTK_SIGNAL_OFFSET (GtkWidgetClass, drag_drop),
+		    gtk_marshal_BOOL__POINTER_INT_INT_UINT,
+		    GTK_TYPE_BOOL, 4,
+		    GTK_TYPE_GDK_DRAG_CONTEXT,
+		    GTK_TYPE_INT,
+		    GTK_TYPE_INT,
+		    GTK_TYPE_UINT); -->
+
+  <signal id="gtk.gtkwidget.signal.drag-data-get">
+   <signalname>drag-data-get</signalname>
+   <callback>
+    <funcprototype>
+     <funcdef>void <function>callback</function></funcdef>
+     <paramdef><classname>GtkWidget</classname> widget</paramdef>
+     <paramdef> </paramdef>
+     <paramdef> </paramdef>
+     <paramdef> </paramdef>
+     <paramdef> </paramdef>
+    </funcprototype>
+   </callback>
+   <shortdesc>
+    
+   </shortdesc>
+   <desc>
+    <simpara>
+     
+    </simpara>
+   </desc>
+  </signal>
+<!-- widget_signals[DRAG_DATA_GET] =
+    gtk_signal_new ("drag_data_get",
+		    GTK_RUN_LAST,
+		    object_class->type,
+		    GTK_SIGNAL_OFFSET (GtkWidgetClass, drag_data_get),
+		    gtk_marshal_NONE__POINTER_POINTER_UINT_UINT,
+		    GTK_TYPE_NONE, 4,
+		    GTK_TYPE_GDK_DRAG_CONTEXT,
+		    GTK_TYPE_SELECTION_DATA,
+		    GTK_TYPE_UINT,
+		    GTK_TYPE_UINT); -->
+
+  <signal id="gtk.gtkwidget.signal.drag-data-received">
+   <signalname>drag-data-received</signalname>
+   <callback>
+    <funcprototype>
+     <funcdef>void <function>callback</function></funcdef>
+     <paramdef><classname>GtkWidget</classname> widget</paramdef>
+     <paramdef> </paramdef>
+     <paramdef> </paramdef>
+     <paramdef> </paramdef>
+     <paramdef> </paramdef>
+     <paramdef> </paramdef>
+     <paramdef> </paramdef>
+    </funcprototype>
+   </callback>
+   <shortdesc>
+    
+   </shortdesc>
+   <desc>
+    <simpara>
+     
+    </simpara>
+   </desc>
+  </signal>
+<!-- widget_signals[DRAG_DATA_RECEIVED] =
+    gtk_signal_new ("drag_data_received",
+		    GTK_RUN_LAST,
+		    object_class->type,
+		    GTK_SIGNAL_OFFSET (GtkWidgetClass, drag_data_received),
+		    gtk_marshal_NONE__POINTER_INT_INT_POINTER_UINT_UINT,
+		    GTK_TYPE_NONE, 6,
+		    GTK_TYPE_GDK_DRAG_CONTEXT,
+		    GTK_TYPE_INT,
+		    GTK_TYPE_INT,
+		    GTK_TYPE_SELECTION_DATA,
+		    GTK_TYPE_UINT,
+		    GTK_TYPE_UINT); -->
+
+  <signal id="gtk.gtkwidget.signal.visibility-notify-event">
+   <signalname>visibility-notify-event</signalname>
+   <callback>
+    <funcprototype>
+     <funcdef>bool <function>callback</function></funcdef>
+     <paramdef><classname>GtkWidget</classname> widget</paramdef>
+     <paramdef> </paramdef>
+    </funcprototype>
+   </callback>
+   <shortdesc>
+    
+   </shortdesc>
+   <desc>
+    <simpara>
+     
+    </simpara>
+   </desc>
+  </signal>
+<!-- widget_signals[VISIBILITY_NOTIFY_EVENT] =
+    gtk_signal_new ("visibility_notify_event",
+		    GTK_RUN_LAST,
+		    object_class->type,
+		    GTK_SIGNAL_OFFSET (GtkWidgetClass, visibility_notify_event),
+		    gtk_marshal_BOOL__POINTER,
+		    GTK_TYPE_BOOL, 1,
+		    GTK_TYPE_GDK_EVENT); -->
+
+  <signal id="gtk.gtkwidget.signal.client-event">
+   <signalname>client-event</signalname>
+   <callback>
+    <funcprototype>
+     <funcdef>bool <function>callback</function></funcdef>
+     <paramdef><classname>GtkWidget</classname> widget</paramdef>
+     <paramdef> </paramdef>
+    </funcprototype>
+   </callback>
+   <shortdesc>
+    
+   </shortdesc>
+   <desc>
+    <simpara>
+     
+    </simpara>
+   </desc>
+  </signal>
+<!-- widget_signals[CLIENT_EVENT] =
+    gtk_signal_new ("client_event",
+		    GTK_RUN_LAST,
+		    object_class->type,
+		    GTK_SIGNAL_OFFSET (GtkWidgetClass, client_event),
+		    gtk_marshal_BOOL__POINTER,
+		    GTK_TYPE_BOOL, 1,
+		    GTK_TYPE_GDK_EVENT); -->
+
+  <signal id="gtk.gtkwidget.signal.no-expose-event">
+   <signalname>no-expose-event</signalname>
+   <callback>
+    <funcprototype>
+     <funcdef>bool <function>callback</function></funcdef>
+     <paramdef><classname>GtkWidget</classname> widget</paramdef>
+     <paramdef> </paramdef>
+    </funcprototype>
+   </callback>
+   <shortdesc>
+    
+   </shortdesc>
+   <desc>
+    <simpara>
+     
+    </simpara>
+   </desc>
+  </signal>
+<!-- widget_signals[NO_EXPOSE_EVENT] =
+    gtk_signal_new ("no_expose_event",
+		    GTK_RUN_LAST,
+		    object_class->type,
+		    GTK_SIGNAL_OFFSET (GtkWidgetClass, no_expose_event),
+		    gtk_marshal_BOOL__POINTER,
+		    GTK_TYPE_BOOL, 1,
+		    GTK_TYPE_GDK_EVENT); -->
+
+  <signal id="gtk.gtkwidget.signal.debug-msg">
+   <signalname>debug-msg</signalname>
+   <callback>
+    <funcprototype>
+     <funcdef>void <function>callback</function></funcdef>
+     <paramdef><classname>GtkWidget</classname> widget</paramdef>
+     <paramdef> </paramdef>
+    </funcprototype>
+   </callback>
+   <shortdesc>
+    
+   </shortdesc>
+   <desc>
+    <simpara>
+     
+    </simpara>
+   </desc>
+  </signal>
+<!-- widget_signals[DEBUG_MSG] =
+    gtk_signal_new ("debug_msg",
+		    GTK_RUN_LAST | GTK_RUN_ACTION,
+		    object_class->type,
+		    GTK_SIGNAL_OFFSET (GtkWidgetClass, debug_msg),
+		    gtk_marshal_NONE__STRING,
+		    GTK_TYPE_NONE, 1,
+		    GTK_TYPE_STRING); -->
+ </signals>
+
+ <properties>
+
+  <property id="gtk.gtkwidget.property.style" type="ro">
+   <propname>style</propname>
+   <proptype>GtkStyle</proptype>
+   <shortdesc>
+    Style associated with a widget's 
+    <propname class="GtkWidget">window</propname>.
+   </shortdesc>
+   <desc>
+    <simpara>
+     
+    </simpara>
+   </desc>
+  </property>
+
+  <property id="gtk.gtkwidget.property.window" type="ro">
+   <propname>window</propname>
+   <proptype>GdkWindow</proptype>
+   <shortdesc>
+    Underlying GdkWindow that captures events on a widget.
+   </shortdesc>
+   <desc>
+    <simpara>
+     
+    </simpara>
+   </desc>
+  </property>
+
+  <property id="gtk.gtkwidget.property.allocation" type="ro">
+   <propname>allocation</propname>
+   <proptype>GtkAllocation</proptype>
+   <shortdesc>
+    Size and position allocated to a widget.
+   </shortdesc>
+   <desc>
+    <simpara>
+     
+    </simpara>
+   </desc>
+  </property>
+
+  <property id="gtk.gtkwidget.property.state" type="ro">
+   <propname>state</propname>
+   <proptype>GtkStateType</proptype>
+   <shortdesc>
+    Degree of response to events.
+   </shortdesc>
+   <desc>
+    <simpara>
+     
+    </simpara>
+   </desc>
+  </property>
+
+  <property id="gtk.gtkwidget.property.parent" type="ro">
+   <propname>parent</propname>
+   <proptype>GtkWidget</proptype>
+   <shortdesc>
+    A widget's parent.
+   </shortdesc>
+   <desc>
+    <simpara>
+     
+    </simpara>
+   </desc>
+  </property>
+
+ </properties>
 
 </classentry>

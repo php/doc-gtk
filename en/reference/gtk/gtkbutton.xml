@@ -53,24 +53,24 @@ $window-&gt;set_position(GTK_WIN_POS_MOUSE);
 $window-&gt;connect_object(&quot;destroy&quot;, array(&quot;gtk&quot;, 
 &quot;main_quit&quot;));
 $window-&gt;realize();
-
+    
 list ($gdkpixmap, $mask) = gdk::pixmap_create_from_xpm($window-&gt;window, 
 null, &quot;test.xpm&quot;);
 $pixmap = &amp;new GtkPixmap($gdkpixmap, $mask);
-
+    
 $label = &amp;new GtkLabel(&quot;Open&quot;);
-
+    
 $vbox = &amp;new GtkVBox();
 $vbox-&gt;pack_start($pixmap);
 $vbox-&gt;pack_start($label);
-
+    
 $button = &amp;new GtkButton();
 $button-&gt;add($vbox);
 $vbox-&gt;show_all();
-
+    
 $window-&gt;add($button);
 $window-&gt;show_all();
-
+    
 gtk::main();
       </programlisting>
      </example>

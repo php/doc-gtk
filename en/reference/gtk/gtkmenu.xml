@@ -3,10 +3,33 @@
   <classtitle>GtkMenu</classtitle>
   <classparent>GtkMenuShell</classparent>
   <shortdesc>
-   Drop down menu widget.
+   Popup container for menu items.
   </shortdesc>
   <desc>
-
+   <simpara>
+    <classname>GtkMenu</classname> is a menushell widget, designed
+    to exclusively hold <classname>GtkMenuItem</classname>s.  It may be a
+    standalone popup widget, or may be associated either with a higher-level 
+    <classname>GtkMenuItem</classname> within a 
+    <classname>GtkMenuBar</classname>, or with a 
+    <classname>GtkOptionMenu</classname>.
+   </simpara>
+   <simpara>
+    Note that a <classname>GtkMenu</classname> in any form is effectively a
+    modal popup widget.  There are keybindings in place here specifically to
+    counteract this apparent isolation, by allowing the 
+    <literal>Up</literal>, <literal>Down</literal>, <literal>Left</literal> 
+    and <literal>Right</literal> arrow keys to navigate multiple menus with
+    regard to the relationships between those menus (i.e. parent and child, 
+    next and previous).  These are fairly rudimentary in the current version
+    of GTK+ used in PHP-GTK, but have been improved recently.
+   </simpara>
+   <simpara>
+    See also: 
+    <classname>GtkCombo</classname>, <classname>GtkCTree</classname>, 
+    <classname>GtkList</classname>, <classname>GtkRadioButton</classname>, 
+    <classname>GtkToolbar</classname>.
+   </simpara>
   </desc>
  </classmeta>
 
@@ -18,73 +41,158 @@
    </funcprototype>
   </funcsynopsis>
   <shortdesc>
-
+   Creates the structure to hold a menu's content.
   </shortdesc>
   <desc>
+   <para>
+    <informalexample>
+     <programlisting role="php">
+$menu = &amp;new GtkMenu();
+     </programlisting>
+    </informalexample>
+    creates an empty popup container widget that will exclusively hold 
+    <classname>GtkMenuItem</classname>s.  It may be instantiated alone as an
+    event-driven popup menu (see the example below) or it can be associated
+    with a higher-level <classname>GtkMenuItem</classname> as a submenu, or
+    a <classname>GtkOptionMenu</classname> as a menu.  When it is associated
+    with an object in this way, the menu will pop up in response to the
+    object's activation.
+   </para>
+   <para>
+    <example>
+     <title>Creating a right-click popup menu</title>
+     <programlisting role="php">
+dl('php_gtk.' . (strstr(PHP_OS, 'WIN') ? 'dll' : 'so'));
+    
+function show_popup($event, $menu) {
+if($event-&gt;button == 3) {
+    $menu-&gt;popup(null, null, null, $event-&gt;button, $event-&gt;time);
+}
+    
+$window = &amp;new GtkWindow();
+$window-&gt;set_default_size(350, 450);
+$window-&gt;connect_object('destroy', array('gtk', 'main_quit'));
+    
+$menu = &amp;new GtkMenu();
+$accel = $menu-&gt;ensure_uline_accel_group();
+    
+$open = &amp;new GtkMenuItem(&quot;Open&quot;);
+$open-&gt;lock_accelerators();
+$menu-&gt;append($open);
+$save = &amp;new GtkMenuItem(&quot;Save as ...&quot;);
+$save-&gt;lock_accelerators();
+$menu-&gt;append($save); 
+$separator = &amp;new GtkMenuItem();
+$separator-&gt;set_sensitive(false);
+$menu-&gt;append($separator);
+    
+$exit = &amp;new GtkMenuItem(&quot;&quot;);
+$accel_label = $exit-&gt;child;
+$accel_label-&gt;parse_uline(&quot;E_xit&quot;);
+$exit-&gt;add_accelerator('activate_item', $accel, GDK_KEY__x, 
+GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
+$exit-&gt;lock_accelerators();
+$exit-&gt;connect_object('activate', array('gtk', 'main_quit'));
+$menu-&gt;append($exit);
+$menu-&gt;show_all();
 
+$window-&gt;add_events(GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK);
+$window-&gt;connect_object('button-press-event', 'show_popup', $menu);
+$window-&gt;show_all();
+
+gtk::main();
+     </programlisting>
+    </example>
+   </para>
   </desc>
  </constructor>
 
  <methods>
-
-  <method id="gtk.gtkmenu.method.append">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>void <function>append</function></funcdef>
-     <paramdef><classname>GtkWidget</classname> <parameter>child</parameter></paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </method>
-
-  <method id="gtk.gtkmenu.method.prepend">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>void <function>prepend</function></funcdef>
-     <paramdef><classname>GtkWidget</classname> <parameter>child</parameter></paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </method>
-
-  <method id="gtk.gtkmenu.method.insert">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>void <function>insert</function></funcdef>
-     <paramdef><classname>GtkWidget</classname> <parameter>child</parameter></paramdef>
-     <paramdef>int <parameter>position</parameter></paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </method>
-
+ <!-- DELETED append(), prepend(), insert() as they are already covered in
+ GtkMenuShell & are only wrappers here - sf jan 02 -->
   <method id="gtk.gtkmenu.method.popup">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>XXX <function>popup</function></funcdef>
-     <paramdef>XXX</paramdef>
+     <funcdef>void <function>popup</function></funcdef>
+     <paramdef>
+      <classname>GtkWidget</classname> 
+      <parameter><optional>parent_menu_shell</optional></parameter>
+     </paramdef>
+     <paramdef>
+      <classname>GtkWidget</classname> 
+      <parameter><optional>parent_menu_item</optional></parameter>
+     </paramdef>
+     <paramdef>
+      <literal>GtkMenuPositionFunc</literal> 
+      <parameter><optional>pos_function</optional></parameter>
+     </paramdef>
+     <paramdef>int <parameter>button</parameter></paramdef>
+     <paramdef>int <parameter>activate_time</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Pops up a menu.
    </shortdesc>
    <desc>
-
+    <simpara>
+     The <function class="GtkMenu">popup()</function> method looks fairly
+     intimidating at the outset, but is actually quite straightforward to
+     use.
+    </simpara>
+    <simpara>
+     The first thing to be aware of is that the 
+     <parameter>parent_menu_shell</parameter> and
+     <parameter>parent_menu_item</parameter> parameters would generally
+     only be used internally, to associate the popped-up menu with a given
+     <classname>GtkMenuShell</classname> descendant, or 
+     <classname>GtkMenuItem</classname>, or both.  In a freestanding popup
+     menu, both parameters should be passed as <literal>null</literal>.
+    </simpara>
+    <para>
+     The third parameter concerns the positioning of the popup menu, and
+     has as its default the position of the mouse pointer.  In order to
+     set a different position, you will need to set up a function that will
+     return an array of the co-ordinates, and call it from the 
+     <parameter>pos_function</parameter> parameter.
+     <informalexample>
+      <programlisting role="php">
+function position() {
+$position = array(300, 200);
+return $position;
+}
+    
+$filemenu-&gt;popup(null, null, 'position', $event-&gt;button, 
+$event-&gt;time);
+      </programlisting>
+     </informalexample>
+    </para>
+    <simpara>
+     The fourth parameter refers to the mouse button emitting the
+     <signalname class="GtkWidget">button-release-event</signalname> that
+     will be compared with the button emitting the 
+     <signalname class="GtkWidget">button-press-event</signalname> in
+     order to set the timer in the final parameter.  This only works if
+     you happen to be triggering the popup function with a button press,
+     and the button pressed and button released are the same - in all other
+     situations, the time element is ignored.  However, setting the 
+     <parameter>button</parameter> parameter to <literal>1</literal> or 
+     <literal>3</literal> will speed up the deactivation when the left or
+     right mouse button is released respectively, regardless of the callback
+     event.
+    </simpara>
+    <simpara>
+     The final parameter, <parameter>activate_time</parameter>, sets the
+     time conditions for the menu's deactivation.  If you have used a button
+     press event and ensured that the initial press and later release have
+     the same valid integer value, then setting the timer to 
+     <literal>0</literal> will make the menu disappear as soon as the user
+     releases the mouse-button that triggered it.  The safest setting for
+     this parameter is <programlisting>$event-&gt;time</programlisting> - 
+     this being a setting that all <classname>GdkEvent</classname> 
+     structures share; it causes the popup menu to react as you'd expect it
+     to, and won't spring any surprises if you duplicate or otherwise adapt
+     the original callback event.
+    </simpara>
    </desc>
   </method>
 
@@ -121,7 +229,9 @@
   <method id="gtk.gtkmenu.method.get_active">
    <funcsynopsis>
     <funcprototype>
-     <funcdef><classname>GtkWidget</classname> <function>get_active</function></funcdef>
+     <funcdef>
+      <classname>GtkWidget</classname> <function>get_active</function>
+     </funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
@@ -152,7 +262,10 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_accel_group</function></funcdef>
-     <paramdef><classname>GtkAccelGroup</classname> <parameter>accel_group</parameter></paramdef>
+     <paramdef>
+      <classname>GtkAccelGroup</classname> 
+      <parameter>accel_group</parameter>
+     </paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -166,7 +279,10 @@
   <method id="gtk.gtkmenu.method.get_accel_group">
    <funcsynopsis>
     <funcprototype>
-     <funcdef><classname>GtkAccelGroup</classname> <function>get_accel_group</function></funcdef>
+     <funcdef>
+      <classname>GtkAccelGroup</classname> 
+      <function>get_accel_group</function>
+     </funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
@@ -181,7 +297,10 @@
   <method id="gtk.gtkmenu.method.get_uline_accel_group">
    <funcsynopsis>
     <funcprototype>
-     <funcdef><classname>GtkAccelGroup</classname> <function>get_uline_accel_group</function></funcdef>
+     <funcdef>
+      <classname>GtkAccelGroup</classname> 
+      <function>get_uline_accel_group</function>
+     </funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
@@ -196,7 +315,10 @@
   <method id="gtk.gtkmenu.method.ensure_uline_accel_group">
    <funcsynopsis>
     <funcprototype>
-     <funcdef><classname>GtkAccelGroup</classname> <function>ensure_uline_accel_group</function></funcdef>
+     <funcdef>
+      <classname>GtkAccelGroup</classname> 
+      <function>ensure_uline_accel_group</function>
+     </funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
@@ -241,7 +363,10 @@
   <method id="gtk.gtkmenu.method.get_attach_widget">
    <funcsynopsis>
     <funcprototype>
-     <funcdef><classname>GtkWidget</classname> <function>get_attach_widget</function></funcdef>
+     <funcdef>
+      <classname>GtkWidget</classname> 
+      <function>get_attach_widget</function>
+     </funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
@@ -287,7 +412,9 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>reorder_child</function></funcdef>
-     <paramdef><classname>GtkWidget</classname> <parameter>child</parameter></paramdef>
+     <paramdef>
+      <classname>GtkWidget</classname> <parameter>child</parameter>
+     </paramdef>
      <paramdef>int <parameter>position</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>

@@ -1,3 +1,49 @@
+<enum id="gtk.enum.gtkaccelflags">
+ <enumname>GtkAccelFlags</enumname>
+
+ <enumoption>
+  <optionname>GTK_ACCEL_VISIBLE</optionname>
+  <shortdesc>
+   Denotes that the accelerator key along with any associated modifiers 
+   should be displayed to the right of any text in a 
+   <classname>GtkAccelLabel</classname>.  Note that this will always be
+   displayed as upper case, whereas a lower case key value is actually
+   being returned.  Use a shift modifier if this is likely to cause a
+   problem for your users.  (See also: <enumname>GdkModifierTypes</enumname>.)
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GTK_ACCEL_SIGNAL_VISIBLE</optionname>
+  <shortdesc>
+   This flag does not work, and has been eliminated completely in later
+   versions of GTK+.  Use <literal>GTK_ACCEL_MASK</literal> to achieve
+   the desired effect.
+  </shortdesc>
+ </enumoption>
+ 
+ <enumoption>
+  <optionname>GTK_ACCEL_LOCKED</optionname>
+  <shortdesc>
+   Denotes that the accelerator entry is locked.  However, this does not seem
+   to work everywhere in the current version of GTK+.  Call the GtkWidget
+   method <function class="GtkWidget">lock_accelerators()</function> on the
+   target widget - usually a <classname>GtkMenuItem</classname> - in order
+   to ensure accelerator entry locking.
+  </shortdesc>
+ </enumoption>
+ 
+ <enumoption>
+  <optionname>GTK_ACCEL_MASK</optionname>
+  <shortdesc>
+   Returns full information for a GtkAccelGroupEntry (the individual element
+   in a <classname>GtkAccelGroup</classname> array), displaying any
+   modifiers,  the accelerator key and the name of the associated signal to
+   the right of any existing <classname>GtkAccelLabel</classname> text.
+  </shortdesc>
+ </enumoption>
+</enum>
+
 <enum id="gtk.enum.gtkbuttonaction">
  <enumname>GtkButtonAction</enumname>
 
@@ -480,44 +526,6 @@ calendar
 
 </enum>
 
-<enum id="gtk.enum.gtkmenudirectiontype">
- <enumname>GtkMenuDirectionType</enumname>
-
- <enumoption>
-  <optionname>GTK_MENU_DIR_PARENT</optionname>
-  <shortdesc>
-   Denotes that the directional movement within the menu should be to the
-   parent menu shell.
-  </shortdesc>
- </enumoption>
-
- <enumoption>
-  <optionname>GTK_MENU_DIR_CHILD</optionname>
-  <shortdesc>
-   Denotes that the directional movement within the menu should be to the
-   submenu of this item, if there is one available.
-  </shortdesc>
- </enumoption>
-
- <enumoption>
-  <optionname>GTK_MENU_DIR_NEXT</optionname>
-  <shortdesc>
-   Denotes that the directional movement within the menu should be to the
-   next menu item.
-  </shortdesc>
- </enumoption>
- 
- <enumoption>
-  <optionname>GTK_MENU_DIR_PREV</optionname>
-  <shortdesc>
-   Denotes that the directional movement within the menu should be to the
-   previous menu item.
-  </shortdesc>
- </enumoption>
-
-</enum>
-
-
 <enum id="gtk.enum.gtkobjectflags">
  <enumname>GtkObjectFlags</enumname>
 
@@ -743,8 +751,8 @@ calendar
  <enumoption>
   <optionname>GTK_REALIZED</optionname>
   <shortdesc>
-   Marks a widget as having been realized, that is, having its GdkWindow
-   instantiated.
+   Marks a widget as having been realized, that is, having its 
+   <classname>GdkWindow</classname> instantiated.
   </shortdesc>
  </enumoption>
 

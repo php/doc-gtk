@@ -3,10 +3,33 @@
   <classtitle>GtkAccelLabel</classtitle>
   <classparent>GtkLabel</classparent>
   <shortdesc>
-   A label that displays an accelerator key next to the text.
+   A label that can display an accelerator key next to the text.
   </shortdesc>
   <desc>
-
+   <simpara>
+    A <classname>GtkAccelLabel</classname> is a label capable of displaying
+    any accelerator, modifier keys and signal set on a 
+    <classname>GtkMenuItem</classname> or similar widget.
+   </simpara>
+   <simpara>
+    In PHP-GTK this is effectively an internal widget, as an accelerator
+    label is created the moment a text string is passed to a menu item.  It
+    is therefore unlikely that you will ever need to use the constructor, or
+    any of the methods that this class directly provides.  However, you may
+    need to access it, for instance to parse an underline in a label's text
+    string or to retrieve a menu's textual content.
+   </simpara>
+   <para>
+    To access the <classname>GtkAccelLabel</classname> within an existing
+    menu item, use the following code:
+    <informalexample>
+     <programlisting role="php">
+$accel_label = $menu_item-&gt;child;
+     </programlisting>
+    </informalexample>
+    You will then be able to call most of the methods available to a new
+    instance of a <classname>GtkAccelLabel</classname>.
+   </para>
   </desc>
  </classmeta>
 
@@ -18,10 +41,19 @@
    </funcprototype>
   </funcsynopsis>
   <shortdesc>
-
+   Constructs a label for displaying accelerator information.
   </shortdesc>
   <desc>
-
+   <simpara>
+    This is effectively an internal construct in PHP-GTK, and there should
+    be no reason to use it unless you are writing an original widget.
+   </simpara>
+   <simpara>
+    See instead:  <classname>GtkAccelLabel</classname> description, 
+    <classname>GtkLabel</classname>, 
+    <function class="GtkWidget">add_accelerator()</function>, 
+    <function class="GtkLabel">parse_uline()</function>.
+   </simpara>
   </desc>
  </constructor>
 
@@ -35,10 +67,18 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets width to accommodate accelerator information.
    </shortdesc>
    <desc>
-
+    <simpara>
+     <function class="GtkAccelLabel">get_accel_width()</function> is used
+     within GTK+ in order to find the width needed by the target menu item
+     to accommodate any accelerator information displayed on the label.
+    </simpara>
+    <simpara>
+     There should be no reason to call this method unless you are writing
+     an original widget.
+    </simpara>
    </desc>
   </method>
 
@@ -46,14 +86,25 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_accel_widget</function></funcdef>
-     <paramdef><classname>GtkWidget</classname> <parameter>accel_widget</parameter></paramdef>
+     <paramdef>
+      <classname>GtkWidget</classname> 
+      <parameter>accel_widget</parameter>
+     </paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Associates accelerator label with specified widget.
    </shortdesc>
    <desc>
-
+    <simpara>
+     <function class="GtkAccelLabel">set_accel_widget()</function> is called
+     within GTK+ at the point where a <classname>GtkAccelLabel</classname> is
+     added to a menu item.
+    </simpara>
+    <simpara>
+     There should be no reason to call this method unless you are writing
+     an original widget.
+    </simpara>
    </desc>
   </method>
 
@@ -65,10 +116,19 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Recreates accelerator information.
    </shortdesc>
    <desc>
-
+    <simpara>
+     <function class="GtkAccelLabel">refetch()</function> is called within
+     GTK+ in order to create new accelerator information on a 
+     <classname>GtkAccelLabel</classname> following changes made to that
+     information.
+    </simpara>
+    <simpara>
+     There should be no reason to call this method unless you are writing
+     an original widget.
+    </simpara>
    </desc>
   </method>
 
