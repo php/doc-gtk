@@ -49,30 +49,30 @@ dl('php_gtk.' . (strstr(PHP_OS, 'WIN') ? 'dll' : 'so'));
 // Creates a tree representing a directory.
 function &createTreeFromDirectory($dir)
 {
-  // Create a new tree
-  $tree =& new GtkTree;
+    // Create a new tree
+    $tree =& new GtkTree;
 
-  // Make sure dir is a directory
-  if (is_dir($dir)) {
-    // Open directory and read in file names
-    $dir_handle = opendir($dir);
-    while (($file = readdir($dir_handle)) !== false) {
-      // Create a new tree item for each file
-      $treeItem = &new GtkTreeItem($file);
-      $treeItem->show();
-      // Add the tree item to the tree
-      $tree->append($treeItem);
-      // If the file is a directory and not . or .. call
-      // this function recursively
-      if (is_dir($dir . '/' . $file) && strpos($file, '.') !== 0) {
-	$treeItem->set_subtree(createTreeFromDirectory($dir . '/' . $file));
-      } 
+    // Make sure dir is a directory
+    if (is_dir($dir)) {
+        // Open directory and read in file names
+        $dir_handle = opendir($dir);
+        while (($file = readdir($dir_handle)) !== false) {
+            // Create a new tree item for each file
+            $treeItem = &new GtkTreeItem($file);
+            $treeItem->show();
+            // Add the tree item to the tree
+            $tree->append($treeItem);
+            // If the file is a directory and not . or .. call
+            // this function recursively
+            if (is_dir($dir . '/' . $file) && strpos($file, '.') !== 0) {
+                $treeItem->set_subtree(createTreeFromDirectory($dir . '/' . $file));
+            }
+        }
+        // Close the directory
+        closedir($dir_handle);
     }
-    // Close the directory
-    closedir($dir_handle);
-  }
-  // Return the tree
-  return $tree;
+    // Return the tree
+    return $tree;
 }
 // The directory to display
 $directory = '/path/to/some/directory';
@@ -130,8 +130,8 @@ $nodes =  array('These nodes', 'were added', 'in this order');
 
 // Add the nodes.  When displayed they will be in readable order.
 foreach ($nodes as $node) {
-  $item =& new GtkTreeItem($node);
-  $tree->append($item);
+    $item =& new GtkTreeItem($node);
+    $tree->append($item);
 }
 ?>
 ]]>
@@ -320,7 +320,7 @@ echo $tree->child_position($treeItem); // Outputs 0
 // Call back function to notify when an item is deselected
 function itemDeselected()
 {
-  echo 'A tree item was deselected!';
+    echo 'A tree item was deselected!';
 }
 
 // Create a tree
