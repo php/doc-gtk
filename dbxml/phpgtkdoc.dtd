@@ -2,12 +2,12 @@
    Docbook Customiszation layer of PHP-GTK docs
    Authors: James Moore <jmoore@php.net>
 
-   $Id: phpgtkdoc.dtd,v 1.6 2001-08-19 10:57:50 jmoore Exp $
+   $Id: phpgtkdoc.dtd,v 1.7 2001-08-20 16:59:02 jmoore Exp $
 
 -->
 
 <!ENTITY % local.person.ident.mix "|authoremail">
-<!ENTITY % local.chapter.class "|classset">
+<!ENTITY % local.chapter.class "|classset|enums">
 <!ENTITY % local.function.attrib "class CDATA #IMPLIED">
 <!-- Load Docbook -->
 <!ENTITY % DocBookDTD PUBLIC "-//Norman Walsh//DTD DocBk XML V3.1.7//EN" "./docbookx.dtd">
@@ -25,8 +25,13 @@
    - Must contain classmeta
    - Must contain one or more classentry's
 -->
-<!ELEMENT classset ((classsetmeta), (classentry, enum)+)>
+<!ELEMENT classset ((classsetmeta), (classentry)+)>
 <!ATTLIST classset
+    %common.attrib;
+>
+
+<!ELEMENT enums ((title),(enum)+)>
+<!ATTLIST enums
     %common.attrib;
 >
 
