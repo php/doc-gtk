@@ -7,7 +7,7 @@
                 version='1.0'>
 
 <!-- ********************************************************************
-     $Id: synop.xsl,v 1.1 2003-05-02 17:18:13 sfox Exp $
+     $Id: synop.xsl,v 1.2 2003-06-10 06:20:25 sfox Exp $
      ********************************************************************
 
      This file is part of the XSL DocBook Stylesheet distribution.
@@ -64,6 +64,10 @@
  </xsl:template>
 
  <xsl:template match="desc|shortdesc" mode="func.prototype">
+  <xsl:apply-templates />
+ </xsl:template>
+
+  <xsl:template match="shortdesc" mode="synoptic.mode">
   <xsl:apply-templates />
  </xsl:template>
 
