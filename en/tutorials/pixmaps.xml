@@ -1,18 +1,23 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 <chapter id="tutorials.pixmaps">
- <title>How to use pixmaps in php-gtk</title>
- <simpara>
-  Many applications are using graphical images: A nice splash screen indicating 
-  that the program is loading; the toolbar with new, open and other well-known
-  icons or the nifty about dialog. This HowTo describes what you need to use
-  images in your own php-gtk applications.
- </simpara>
-<!-- <section>
-  <title>About XPM</title>-->
+ <title>Pixmaps</title>
+
+ <sect1 id="pixmaps.intro">
+  <title>How to use pixmaps in php-gtk</title>
+  <simpara>
+   Many applications are using graphical images: A nice splash screen indicating 
+   that the program is loading; the toolbar with new, open and other well-known
+   icons or the nifty about dialog. This HowTo describes what you need to use
+   images in your own php-gtk applications.
+  </simpara>
+ </sect1>
+
+ <sect1 id="pixmaps.aboutxpm">
+  <title>About XPM</title>
   <simpara>
    The standard way to deal with images and mainly icons in php-gtk is 
    using XPMs. 
-   XPM is short for <quote>XPixMap</quote> and describes an ASCII image format
+   XPM is short for <literal>XPixMap</literal> and describes an ASCII image format
    as well as a C library for dealing with the images. Originally the format
    was developed because the X libraries just had support for 1 bit depth
    images, the XBM (X BitMap) which is just not enough for applications on
@@ -33,7 +38,8 @@
      <listitem>Icons can be of any shape, not just rectangular.</listitem>
     </itemizedlist>
   </para>
-<!--  <subtitle>The XPM image format</subtitle>-->
+ <sect2 id="pixmaps.aboutxpm.format">
+ <title>The XPM image format</title>
   <simpara>
    An icon in XPM format is just an ASCII file which can be edited with
    a normal text editor. As it was designed to be included in C sources,
@@ -142,12 +148,11 @@ static char * dot[] = {
      to batch-convert other image formats to xpm. Available for unix and Windows.</listitem>
    </itemizedlist>
   </para>
-<!-- </section>-->
+</sect2>
+</sect1>
 
-
-
-<!-- <section>
-  <title>Image related php-gtk functions</title>-->
+<sect1 id="pixmaps.functions">
+  <title>Image related php-gtk functions</title>
   <simpara>
    Images are displayed using the <classname>GtkPixmap</classname> widget which has
    to be invoked with two parameters; a <literal>map</literal> of type 
@@ -203,12 +208,10 @@ $colTransparent = &new GdkColor(0, 0, 0);]]>
    or a normal php array with the structure as described in the XPM standard
    (<literal>pixmap_create_from_xpm</literal>).
   </simpara>
-<!-- </section>-->
- 
- 
- 
-<!-- <section>
-  <title>Examples</title>-->
+</sect1>
+
+<sect1 id="pixmaps.examples">
+  <title>Examples</title>
   <simpara>
    The following example shows how to create a pixmap from an array,
    creating a button and attaching the pixmap along with the label
@@ -370,12 +373,10 @@ gtk::main();
 ]]>
    </programlisting> 
   </example>
-<!-- </section>-->
+</sect1>
 
-
-
-<!-- <section>
-  <title>Other things you can do with pixmaps</title>-->
+<sect1 id="pixmaps.other">
+  <title>Other things you can do with pixmaps</title>
   <simpara>
    Another nice thing you can do with a pixmap or better a pixmask is 
    defining your own shape for widgets or whole windows. This means you
@@ -384,9 +385,7 @@ gtk::main();
    <link linked="gtk.gtkwidget.method.shape_combine_mask">shape_combine_mask</link>
    method of <classname>GtkWidget</classname>.
   </simpara>
-  
-
-<!-- </section>-->
+</sect1>
 
 <!--
 TODO:
