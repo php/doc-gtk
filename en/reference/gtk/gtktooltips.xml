@@ -26,6 +26,12 @@
     Other widgets, e.g. <classname>GtkLabel</classname>s can be added to an
     <classname>GtkEventBox</classname> to benefit from tooltips.
    </simpara>
+   <simpara>
+    A widget which wants to use a tooltip needs to expose GDK_ENTER_NOTIFY_MASK and
+    GDK_LEAVE_NOTIFY_MASK which can be set via the 
+    <function class="GtkWidget">add_events</function> function. Most widgets do this
+    automatically, but e.g. a <classname>GtkDrawingArea</classname> does not.
+   </simpara>
   </desc>
  </classmeta>
 
@@ -179,7 +185,7 @@ gtk::main();
      The <parameter>tip_private</parameter> should be a longer description
      of the function the widget has and can be made visible via
      a <classname>GtkTipsQuery</classname> object 
-     (&quot;What's this&quot; function).
+     ("What's this" function).
     </simpara>
    </desc>
   </method>
