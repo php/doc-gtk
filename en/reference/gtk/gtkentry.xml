@@ -29,7 +29,7 @@
      deprecated in later GTK+ releases.  Please be aware that all editable
      classes are undergoing radical changes, and that deprecated methods may
      or may not be supportable in the future.  It would therefore be wise to
-     avoid deprecated methods as far as is possible.
+     avoid methods marked as deprecated, as far as is possible.
     </simpara>
    </note>
    <simpara>
@@ -125,7 +125,7 @@ $entry-gt;set_text(&quot;Programmed text entry&quot;);
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Adds text to the end of entered text.  *deprecated in GTK2*
+    Adds text to the end of entered text.  *Deprecated in GTK2*
    </shortdesc>
    <desc>
     <simpara>
@@ -255,7 +255,7 @@ $entry-&gt;prepend_text(&quot;&lt;START&gt;&quot;);
      input information on screen.  It replaces each character with a star.
     </simpara>
     <simpara>
-     This function is mainly utilised for password entry.
+     This function is mainly used for password entry.
     </simpara>
    </desc>
   </method>
@@ -273,14 +273,15 @@ $entry-&gt;prepend_text(&quot;&lt;START&gt;&quot;);
    <desc>
     <simpara>
      <function class="GtkEntry">set_editable()</function> sets the
-     entry field to be editable by the user, or not.
+     entry field to be editable by the user, or otherwise.
     </simpara>
     <simpara>
      The default setting is <literal>true</literal>.  
     </simpara>
     <simpara>
-     Note that setting this function to <literal>true</literal> on top
-     of that default setting can lead to some unexpected effects. 
+     Note that setting <function class="GtkEntry">set_editable()</function> 
+     to <literal>true</literal> on top of the default setting can lead to
+     some unexpected effects. 
     </simpara>
    </desc>
   </method>
