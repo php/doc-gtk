@@ -82,15 +82,18 @@ AC_ARG_WITH(lang,
 [
     if test "$withval" = "yes"; 
     then
-	    LANG=en
-    	AC_MSG_RESULT([en (default)])
+	LANG=en
+	LANGDIR=en
+	AC_MSG_RESULT([en (default)])
     else
-        if test ! -d "$srcdir/$withval"; then
-    	    AC_MSG_RESULT()
-	        AC_MSG_ERROR(Language \"$withval\" not supported!)
-	    fi
-       
-        AC_MSG_RESULT( $withval )
+	if test ! -d "$srcdir/$withval"; then
+	    AC_MSG_RESULT()
+		AC_MSG_ERROR(Language \"$withval\" not supported!)
+	fi
+
+	LANG=$withval
+	LANGDIR=$withval
+	AC_MSG_RESULT( $withval )
     fi
 ],[
     LANG=en
