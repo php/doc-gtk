@@ -11,16 +11,16 @@
 	Eigenschaften und Methoden zur Verf&uuml;gung stellt um eine beliebige
    </simpara>
    <simpara>
-    Note that <classname>GtkBox</classname> is an abstract class
-    and cannot be constructed directly.
-   </simpara>
+    Beachte dass <classname>GtkBox</classname> eine abstrakte Klasse ist die
+	nicht direkt konstruiert werden kann.
+   </simpara>	
    <simpara>
-    See also:  <classname>GtkContainer</classname>, 
-    <classname>GtkBin</classname>, <classname>GtkBoxChild</classname>.
+    Siehe auch: <classname>GtkContainer</classname>,
+	<classname>GtkBin</classname>, <classname>GtkBoxChild</classname>.
    </simpara>
   </desc>
  </classmeta>
-
+	
  <methods>
 
 
@@ -43,29 +43,29 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Packs from top or left of box container.
+    Packt von von oben oder links des Box Containers>
    </shortdesc>
    <desc>
     <simpara>
-     <function class="GtkBox">pack_start()</function> packs the child
-     widget from the top or left of the box container.  The
-     <parameter>expand</parameter> parameter is a boolean value that
-     determines whether the child can expand when the parent container
-     is resized.  The second parameter <parameter>fill</parameter> is
-     also a boolean value, and determines whether the child should fill
-     the space available to it.  The third parameter 
-     <parameter>padding</parameter> is an integer describing the padding
-     around the child widget, in pixels.  The default values are 
-     <literal>true</literal>, <literal>true</literal>, <literal>0</literal>.
-    </simpara>
-    <simpara>
-     Calls to <function class="GtkBox">pack_start()</function> can be mixed
-     with calls to <function class="GtkBox">pack_end()</function> or even
-     <function class="GtkContainer">add()</function>, within the same box
-     container.
-    </simpara>
+	 <function class="GtkBox">pack_start()</function> packt das Kinderwidget
+	 von oben oder links in den Box Container. Der
+	 <parameter>expand</parameter> ist ein boolscher Wert der bestimmt ob das
+	 Kind sich expandieren kann wenn sich die G&ouml;sse des Elterncontainers
+	 ver&auml;ndert. Der zweite Parameter <parameter>fill</parameter> ist auch
+	 ein boolscher Wert und bestimmt ob das Kind den ihmzur Verf&uuml;gung
+	 stehenden Platz f&uuml;llen soll. Der dritte Parameter
+	 <parameter>padding</parameter> ist ein Integer Wert der die Polsterung um
+	 das Kinderwidget in Pixeln angibt. Die Vorgabewerte sind
+	 <literal>true</literal>, <literal>true</literal>, <literal>0</literal>.
+	</simpara>
+	<simpara>
+	 Aufrufe von <function class="GtkBox">pack_start()</function> k&ouml;nnen
+	 mit Aufrufen von <function class="GtkBox">pack_end()</function> und sogar
+	 <function class="GtkContainer">add()</function> innerhalb desselben Box
+	 Containers vermischt werden.
+	</simpara>
    </desc>
-  </method>
+  </method> 	 
 
   <method id="gtk.gtkbox.method.pack_end">
    <funcsynopsis>
@@ -86,29 +86,30 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Packs from bottom or right of box container.
+    Packt vom Boden aus oder von links in den Box Container.
    </shortdesc>
    <desc>
     <simpara>
-     <function class="GtkBox">pack_end()</function> packs the child
-     widget from the bottom or right of the box container.  The
-     <parameter>expand</parameter> parameter is a boolean value that
-     determines whether the child can expand when the parent container
-     is resized.  The second parameter <parameter>fill</parameter> is
-     also a boolean value, and determines whether the child should fill
-     the space available to it.  The third parameter 
-     <parameter>padding</parameter> is an integer descrbing the padding
-     around the child widget, in pixels.  The default values are 
-     <literal>true</literal>, <literal>true</literal>, <literal>0</literal>.
-    </simpara>
-    <simpara>
-     <function class="GtkBox">pack_end()</function> calls may be interspersed
-     with <function class="GtkBox">pack_start()</function> calls within the
-     same box container widget.
-    </simpara>
+	 <function class="GtkBox">pack_end()</function> packt das Kinderwidget
+	 vom Boden oder von links in den Box Container. der
+	 <parameter>expand</parameter> Parameter ist ein boolscher Wert 
+	 der bestimmt ob das Kind sich asuweiten darf wenn der Elterncontainer
+	 seine Gr&ouml;sse ver&auml;ndert. Der zweite Parameter
+	 <parameter>fill</parameter> ist auch ein boolscher Wert der bestimmt ob
+	 das Kind den gesamten Platz der ihm zur Verf&uuml;gung steht f&uuml;llen
+	 soll. Der dritte Parameter, <parameter>padding</parameter>, ist ein
+	 Integer Wert der die Polsterung um das Kinderwidget in Pixeln angibt. Die
+	 Vorgabewerte sind <literal>true</literal>, <literal>true</literal>,
+	 <literal>0</literal>.
+	</simpara>
+	<simpara>
+	 Aufrufe von <function class="GtkBox">pack_end()</function> k&ouml;nnen
+	 innerhalb desselben Box Container Widgets mit Aufrufen zu 
+	 <function class="GtkBox">pack_start()</function> vermischt werden.
+	</simpara>
    </desc>
-  </method>
-
+  </method> 	 
+	 
   <method id="gtk.gtkbox.method.pack_start_defaults">
    <funcsynopsis>
     <funcprototype>
@@ -119,26 +120,27 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Packs from top or right using default settings.
+    Packt etwas von oben oder links in einen Box Container, mit den
+	vorgegebenen Werten.
    </shortdesc>
    <desc>
     <simpara>
-     <function class="GtkBox">pack_start_defaults()</function> packs
-     the given child widget from the top or from the left of the box
-     container using the default parameter values <literal>true</literal>, 
-     <literal>true</literal>, <literal>0</literal>.
-    </simpara>
-    <para>
-     The same result can be achieved by using
-     <informalexample>
-      <programlisting role="php">
+	 <function class="GtkBox">pack_start_defaults()</function> packt das
+	 gegebene Kinderwidget mit den Vorgabewerten <literal>true</literal>,
+	 <literal>true</literal>, <literal>0</literal> von oben oder links in den
+	 Box Container.
+	</simpara>
+	<para>
+	 Dasselbe Ergebnis kann erzielt werden in dem man einfach
+	 <informalexample>
+	  <programlisting role="php">
 $box-&gt;pack_start($child);
-      </programlisting>
-     </informalexample>
-     without specifying any further parameters.
-    </para>
+	  </programlisting>
+	 </informalexample> 
+	 benutzt ohne die Werte der Parameter anzugeben.
+	</para>
    </desc>
-  </method>
+  </method> 	 
 
   <method id="gtk.gtkbox.method.pack_end_defaults">
    <funcsynopsis>
@@ -150,92 +152,91 @@ $box-&gt;pack_start($child);
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Packs from bottom or left using default settings.
+    Packt etwas vom Boden oder von links mit den Vorgabwerten der Parameter.
    </shortdesc>
    <desc>
     <simpara>
-     <function class="GtkBox">pack_end_defaults()</function> packs
-     the given child widget from the bottom or from the right of the box
-     container using the default parameter values <literal>true</literal>, 
-     <literal>true</literal>, <literal>0</literal>.
-    </simpara>
-    <para>
-     The same result can be achieved by using
-     <informalexample>
-      <programlisting role="php">
+	 <function class="GtkBox">pack_end_defaults()</function> packt das
+	 angegebene Kinderwidget von unten oder links in den Box Container unter
+	 Benutzung der Vorgabewerte <literal>true</literal>,
+	 <literal>true</literal>, <literal>0</literal> f&uuml;r die Parameter.
+	</simpara>
+	<para>
+	 Dasselbe Ergebnis kann erzielt werden indem man
+	 <informalexample>
+	  <programlisting role="php">
 $box-&gt;pack_end($child);
-      </programlisting>
-     </informalexample>
-     without specifying any further parameters.
-    </para>
+	  </programlisting>
+	 </informalexample>
+	</para>  
    </desc>
   </method>
-
-  <method id="gtk.gtkbox.method.set_homogeneous">
+  <method id="gtk.gtkbox.method.set_homgeneous">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>void <function>set_homogeneous</function></funcdef>
-     <paramdef>bool <parameter>homogeneous</parameter></paramdef>
-    </funcprototype>
+	 <funcdef>void <function>set_homogeneous</function></funcdef>
+	 <paramdef>bool <parameter>homogeneous</parameter></paramdef>
+	</funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Toggles equality of child sizing.
+    Schaltet Gr&ouml;sseneinstellung der Kinder gleich.
    </shortdesc>
    <desc>
     <simpara>
-     <function class="GtkBox">set_homogeneous()</function> sizes all
-     the child widgets in the container to the dimensions of the largest
-     child widget if set to <literal>true</literal>.  The default setting
-     is <literal>false</literal>.
-    </simpara>
-    <simpara>
-     Note that the <propname class="GtkBox">homogeneous</propname> property
-     corresponding to this function refers to the child sizing in only one
-     dimension, that is, the width in a row or the height in a column.
-    </simpara>
+	 <function class="GtkBox">set_homogeneous()</function> setzt alle
+	 Kinderwidgets in einem Container auf die Gr&ouml;sse des gr&ouml;ssten
+	 Kinderwidgets wenn auf <literal>true</literal> gesetzt. Der Vorgabewert
+	 ist <literal>false</literal>.
+	</simpara>
+	<simpara>
+	 Beachte dass die <propname class="GtkBox">homgeneous</propname>
+	 Eigenschaft die mit dieser Funktion korrespondiert sich nur auf die
+	 Gr&ouml;sseneinteilung eines Kinderwidgets in einer Dimension bezieht,
+	 also die Breite einer Zeile oder die H&ouml;he einer Spalte.
+	</simpara>
    </desc>
   </method>
 
   <method id="gtk.gtkbox.method.set_spacing">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>void <function>set_spacing</function></funcdef>
-     <paramdef>int <parameter>spacing</parameter></paramdef>
-    </funcprototype>
+	 <funcdef>void <parameter>spacing</parameter></funcdef>
+	</funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Sets spacing between children.
+    Setzt den Abstand zwischen Kindern.
    </shortdesc>
    <desc>
     <simpara>
-     <function class="GtkBox">set_spacing()</function> is used to set the
-     universal minimum spacing between the child widgets, in pixels.
-    </simpara>
-    <simpara>
-     The default setting is <literal>0</literal>.
-    </simpara>
+	 <function class="GtkBox">set_spacing()</function> wird benutzt um einen
+	 universellen Mindestabstand zwischen den Kinderwidgets in Pixeln zu
+	 setzen.
+	</simpara>
+	<simpara>
+	 Die Voreinstellung ist <literal>0</literal>
+	</simpara>
    </desc>
   </method>
 
   <method id="gtk.gtkbox.method.reorder_child">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>void <function>reorder_child</function></funcdef>
-     <paramdef>
-      <classname>GtkWidget</classname> <parameter>child</parameter>
-     </paramdef>
-     <paramdef>int <parameter>position</parameter></paramdef>
-    </funcprototype>
+	 <funcdef>void <function>reorder_child</function></funcdef>
+	 <paramdef>
+	  <classname>GtkWidget</classname> <parameter>child</parameter>
+	 </paramdef> 
+	 <paramdef>int <parameter>position></parameter></paramdef>
+	</funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Sets new position for child.
+    Setzt das Kind auf eine neue Position.
    </shortdesc>
    <desc>
     <simpara>
-     <function class="GtkBox">reorder_child()</function> moves the
-     child's position in the <propname class="GtkBox">children</propname> 
-     array to the position given as the second parameter.
-    </simpara>
+	 <function class="GtkBox">reorder_child()</function> setzt die Postion des
+	 Kindes im <propname class="GtkBox">children</propname> Array auf die als
+	 zweiten Parameter gegebene Position.
+	</simpara>
    </desc>
   </method>
 
@@ -255,13 +256,13 @@ $box-&gt;pack_end($child);
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Sets packing parameters for child.
+    Setzt die Packparameter f&uuml;r ein Kind.
    </shortdesc>
    <desc>
     <simpara>
-     <function class="GtkBox">set_child_packing()</function> sets the 
-     <classname>GtkBoxChild</classname> parameters for the child widget.
-    </simpara>
+     <function class="GtkBox">set_child_packing()</function> setzt die
+	 <classname>GtkBoxChild</classname> Parameter f&uuml;r ein Kinderwidget.
+	</simpara> 
    </desc>
   </method>
 
@@ -275,19 +276,18 @@ $box-&gt;pack_end($child);
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Queries packing parameters for child.
+    Fragt die Pack Parameter f&uuml;r ein Kind ab.
    </shortdesc>
    <desc>
     <simpara>
-     <function class="GtkBox">query_child_packing</function> is a way to
-     query the <classname>GtkBoxChild</classname> parameters 
-     <parameter>expand</parameter>, <parameter>fill</parameter>, 
-     <parameter>padding</parameter> and <parameter>pack_type</parameter> 
-     for an individual child widget.
+     <function class="GtkBox">query_children_packing()</function> ist ein Weg
+	 die <classname>GtkBoxChild</classname> Parameter
+	 <parameter>expand</parameter>, <parameter>fill</parameter>,
+	 <parameter>padding</parameter> und <parameter>pack_type</parameter>
+	 f&uuml;r ein individuelles Kind abzufragen.
     </simpara>
    </desc>
   </method>
-
  </methods>
 
  <properties>
@@ -296,13 +296,13 @@ $box-&gt;pack_end($child);
    <propname>children</propname>
    <proptype>array</proptype>
    <shortdesc>
-    Array of child packing information.
+    Array mit Packinformationen der Kinder.
    </shortdesc>
    <desc>
     <simpara>
-     The packing information for the individual child widgets is stored in 
-     <propname class="GtkBox">children</propname> as an array of 
-     <classname>GtkBoxChild</classname> objects.
+	 Die Packinformationen f&uuml; die einzelnen Kinderwidgets ist in
+	 <propname class="GtkBox">children</propname> als ein Array von
+	 <classname>GtkBoxChild</classname> Objekten abgelegt.
     </simpara>
    </desc>
   </property>
@@ -311,21 +311,22 @@ $box-&gt;pack_end($child);
    <propname>spacing</propname>
    <proptype>int</proptype>
    <shortdesc>
-    Universal spacing policy.
+    Universelle Abstandspolitik.
    </shortdesc>
    <desc>
     <simpara>
-     The <propname class="GtkBox">spacing</propname> property represents
-     the minimum amount of space between the child widgets, in pixels.  This
-     setting is universal across the box container.
+	 Die <propname class="GtkBox">spacing</propname> Eigenschaft
+	 repr&auml;sentiert den Minimalen Abstand zwischen den Kinderwidgets in
+	 Pixeln. Diese Einstellung gilt universell f&uuml;r den gesamten Box
+	 Container.
     </simpara>
     <simpara>
-     To set the spacing for an individual child widget, use 
-     <function class="GtkBox">pack_start()</function>, 
-     <function class="GtkBox">pack_end()</function>, 
-     <function class="GtkBox">set_child_packing()</function>, or the 
-     <propname class="GtkBoxChild">padding</propname> property in 
-     <classname>GtkBoxChild</classname>.
+	 Um den Abstand f&uuml;r ein individuelles Kinderwidget zu setzen, benutzt
+	 man <function class="GtkBox">pack_start()</function>,
+	 <function class="GtkBox">pack_end()</function>,
+	 <function class="GtkBox">set_child_packing()</function>, oder die
+	 <propname class="GtkBoxChild">padding</propname> Eigenschaft von
+	 <classname>GtkBoxChild</classname>.
     </simpara>
    </desc>
   </property>
@@ -334,22 +335,23 @@ $box-&gt;pack_end($child);
    <propname>homogeneous</propname>
    <proptype>bool</proptype>
    <shortdesc>
-    Universal sizing policy.
+    Universelle Gr&ouml;seneinstellungspolitik.
    </shortdesc>
    <desc>
     <simpara>
-     The <propname class="GtkBox">homogeneous</propname> property is a
-     boolean value which, when set to <literal>true</literal>, will make
-     all child widgets in the container the same size as the largest child.
+	 Die <propname class="GtkBox">homgeneous</propname> Eigenschaft ist ein
+	 boolscher Wert der, wenn auf <literal>true</literal> gesetzt, alle
+	 Kinderwidgets in dem Container auf die gleiche Gr&ouml;sse setzt wie das
+	 gr&ouml;sste Kind.
     </simpara>
     <simpara>
-     Use <function class="GtkBox">set_homogeneous()</function> to set
-     the value.
-    </simpara>
+	 Benutze die <function class="GtkBox">set_homgeneous()</function> um
+	 diesen Wert zu setzen.
+	</simpara> 
     <simpara>
-     Note that the value of this property only affects one dimension, as
-     the children will always fit the height of a row, or the width of a
-     column, regardless of settings.
+     Beachte dass der Wert dieser Eigenschaft nur eine Dimension beeinflusst,
+	 und zwar die H&ouml;he einer Zeile oder die Breite einer Spalte,
+	 ungeachtet der Einstellungen.
     </simpara>
    </desc>
   </property>
