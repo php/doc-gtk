@@ -7,7 +7,69 @@
    Container for widgets from other processes.
   </shortdesc>
   <desc>
-
+   <simpara>
+    By creating a <classname>GtkSocket</classname>,
+    an entirely different Gtk application may embed itself into your 
+    application.
+   </simpara>
+   <note>
+    <classname>GtkSocket</classname> has nothing to do with network sockets. 
+    You can't use it to communicate between different computers.
+   </note>
+   <note>
+    <classname>GtkPlug</classname> and <classname>GtkSocket</classname> don't work on the
+    Windows operating system.
+   </note>
+   <para>
+    The play between <classname>GtkSocket</classname> and <classname>GtkPlug</classname>
+    is the following:
+    <itemizedlist>
+     <listitem>
+      Create a <classname>GtkSocket</classname> and attach it to a 
+      <classname>GtkContainer</classname>, e.g. a <classname>GtkWindow</classname>.
+     </listitem>
+     <listitem>
+      <link linkend="gtk.gtkwidget.method.realize">Realize</link> the socket 
+      (after adding it to the container).
+      Now you can access the socket id via
+      <literal>$socket-&gt;window-&gt;xid</literal>.
+     </listitem>
+     <listitem>
+      Create the <classname>GtkPlug</classname> with the socket id as parameter.
+     </listitem>
+     <listitem>
+      Add whatever you want to the plug - it will appear in the first container.
+     </listitem>
+    </itemizedlist>
+   </para>
+   <simpara>
+    Note that when a <classname>GtkSocket</classname> is destroyed, the plugged-in
+    <classname>GtkPlug</classname> application will be destroyed as well.
+   </simpara>
+   <simpara>
+    As soon the <classname>GtkPlug</classname> unplugs from the socket, 
+    the GtkSocket can't really be used any more. One could re-realize it,
+    but there will be errors and the socket won't be visible.
+   </simpara>
+   <simpara>
+    You can catch the unplugging-event by connecting to the 
+    <signalname class="GtkWidget">unrealize</signalname> signal of the
+    socket. Note that you also will be notified if you application is
+    being destroyed. There is no other way to do this since the 
+    <literal>plug-added</literal> and <literal>plug-removed</literal>
+    signals exist in gtk2 only.
+   </simpara>
+   <para>
+    A use for this widget is that you could write your own editor based on
+    <literal>vim</literal> by letting it plug into the socket
+    provided by your app:
+     <command>
+<![CDATA[
+gvim --socketid <id of your socket>
+]]>     
+     </command>
+    Note that you need to have the gtk version of gvim for this purpose.
+   </para>
   </desc>
  </classmeta>
 
@@ -19,10 +81,82 @@
    </funcprototype>
   </funcsynopsis>
   <shortdesc>
-
+   Creates a new socket instance.
   </shortdesc>
   <desc>
+   <simpara>
+    Creates a new socket instance. Note that you have to realize the
+    socket <emphasis>after</emphasis> you have added the widget to
+    a parent container.
+   </simpara>
+   <simpara>
+    The other part of the example can be found at the
+    constructor of the <classname>GtkPlug</classname> widget.
+   </simpara>
+   <example>
+    <title>How to use a <classname>GtkSocket</classname></title>
+    <programlisting role="php">
+<![CDATA[
+<?php
+if( !extension_loaded('gtk')) {	
+	dl( 'php_gtk.' . PHP_SHLIB_SUFFIX); 
+}
 
+function checkSocketState( $objButton, $objSocket, $lblStatus)
+{
+	if( $objSocket->window == null) {
+		$lblStatus->set_text( 'The plug has disconnected');
+	} else if( count( $objSocket->window->children) > 0) {
+		$lblStatus->set_text( 'The plug has plugged in');
+	} else {
+		$lblStatus->set_text( 'Nobody plugged in');
+	}
+}
+
+$objSocket		= &new GtkSocket();
+
+$window	= &new GtkWindow();
+$window->set_title( 'socket window');
+$window->set_default_size( 300, 300);
+$window->connect_object('destroy', array('gtk', 'main_quit'));
+
+$vbox = &new GtkVBox();
+$vbox->pack_start_defaults( $objSocket);
+
+$lblStatus = &new GtkLabel( 'status messages go here');
+$vbox->pack_start_defaults( $lblStatus);
+
+$btnCheck = &new GtkButton( 'check socket state');
+$btnCheck->connect( 'clicked', 'checkSocketState', $objSocket, $lblStatus);
+$vbox->pack_start_defaults( $btnCheck);
+
+$window->add( $vbox);
+$window->show_all();
+
+function unrealized( $objSocket, $btnCheck, $lblStatus) {
+	echo 'The plug has disconnected' . "\r\n";
+	checkSocketState( $btnCheck, $objSocket, $lblStatus);
+}
+$objSocket->connect( 'unrealize', 'unrealized', $btnCheck, $lblStatus);
+
+//realize *after* adding it to a box or window
+$objSocket->realize();
+
+$socketid = $objSocket->window->xid;
+echo 'socket id to use: ' . $socketid . "\r\n";
+
+if( $GLOBALS['argc'] == 2) {
+	//steal the given window
+	$objSocket->steal( $GLOBALS['argv'][1]);
+}
+
+checkSocketState( null, $objSocket, $lblStatus);
+
+gtk::main();
+?>
+]]>    
+    </programlisting>
+   </example>
   </desc>
  </constructor>
 
@@ -36,10 +170,54 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Re-parents an existing window in the socket
    </shortdesc>
    <desc>
+    <simpara>
+     This function takes the xid of an existing window and reparents
+     the window into itself, so that the former window acts as 
+     a child of the socket.
+    </simpara>
+    <note>
+     <simpara>
+      This method is deprecated and does not fully work. 
+      Avoid to use it.
+     </simpara>
+    </note>
+    <simpara>
+     The following example creates a normal <classname>GtkWindow</classname> 
+     and echoes the xid of its <classname>GdkWindow</classname>. Pass this
+     id to the example application of the <classname>GtkSocket</classname>
+     <function class="GtkSocket">constructor</function> and try to resize
+     this window.
+    </simpara>
+    <example>
+     <title>Stealing a window</title>
+     <programlisting role="php">
+<![CDATA[
+<?php
+if( !extension_loaded('gtk')) {	
+	dl( 'php_gtk.' . PHP_SHLIB_SUFFIX); 
+}
 
+$label	= &new GtkLabel( 'I\'m an innocent window');
+
+$window	= &new GtkWindow();
+$window->set_title( 'this window will be stolen');
+$window->set_default_size( 200, 100);
+$window->connect_object('destroy', array('gtk', 'main_quit'));
+$vbox = &new GtkVBox();
+
+$window->add( $label);
+$window->show_all();
+
+echo 'window xid: ' . $window->window->xid . "\r\n";
+
+gtk::main();
+?>
+]]>     
+     </programlisting>
+    </example>
    </desc>
   </method>
 

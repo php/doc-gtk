@@ -7,7 +7,23 @@
    Toplevel widget for embedding into other processes.
   </shortdesc>
   <desc>
-
+   <simpara>
+    This widget can be used to write plugins for other
+    applications. It takes the id of an existing <classname>GtkSocket</classname>
+    and will embed itself into it and so into the other application.
+    The <classname>GtkPlug</classname> can be filled with widgets 
+    like any other window, except that it is visible inside another
+    application.
+   </simpara>
+   <simpara>
+    Please have a look at the <classname>GtkSocket</classname> 
+    documentation, as the plug can only be used together with
+    a socket.
+   </simpara>
+   <simpara>
+    Note that if the application with the socket is quit, the
+    program with the plugged-in plug will exit as well.
+   </simpara>
   </desc>
  </classmeta>
 
@@ -19,30 +35,74 @@
    </funcprototype>
   </funcsynopsis>
   <shortdesc>
-
+   Creates a new plug instance.
   </shortdesc>
   <desc>
+   <simpara>
+    Creates a new plug which will be connected to the socket
+    specified by the <parameter>socket_id</parameter>.
+   </simpara>
+   <simpara>
+    You should make sure that the socket exists when connecting
+    the plug to it. If it does not, the results are undefined.
+    Probably a new <classname>GtkWindow</classname> will be created
+    and the plug embedded in this window, but you shouldn't rely
+    on that behavior.
+   </simpara>
+   <simpara>
+    The following example creates a plug which connects to the
+    socket created in the constructor
+    example of <classname>GtkSocket</classname>.
+   </simpara>
+   <example>
+    <title>Plugging into a socket</title>
+    <programlisting role="php">
+<![CDATA[
+<?php
+if( !extension_loaded('gtk')) {	
+	dl( 'php_gtk.' . PHP_SHLIB_SUFFIX); 
+}
 
+if( $GLOBALS['argc'] != 2) {
+	die( 'Please pass the socket id as parameter!' . "\r\n");
+}
+
+$socketid	= $GLOBALS['argv'][1];
+
+$plug = &new GtkPlug( $socketid);
+$plug->set_default_size( 300, 300);
+$plug->connect_object('destroy', array('gtk', 'main_quit'));
+$plug->set_title( 'plug');
+
+$label	= &new GtkLabel( 'hello from outer space');
+$plug->add( $label);
+$plug->show_all();
+
+function changeLabel( $objButton, $objLabel, $strLabel) {
+	$objLabel->set_text( $strLabel);
+}
+
+$window	= &new GtkWindow();
+$window->set_title( 'plug controller');
+$window->set_default_size( 200, 300);
+$window->connect_object('destroy', array('gtk', 'main_quit'));
+$vbox = &new GtkVBox();
+
+$arLabels	= array( 'Hello!', 'Yes, I can control you', 'Don\'t believe it, heh?');
+foreach( $arLabels as $strLabel) {
+	$btn	= &new GtkButton( $strLabel);
+	$btn->connect( 'clicked', 'changeLabel', $label, $strLabel);
+	$vbox->pack_start_defaults( $btn);
+}
+$window->add( $vbox);
+$window->show_all();
+
+gtk::main();
+?>
+]]>
+    </programlisting>
+   </example>
   </desc>
  </constructor>
-
- <methods>
-
-  <method id="gtk.gtkplug.method.construct">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>void <function>construct</function></funcdef>
-     <paramdef>int <parameter>socket_id</parameter></paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </method>
-
- </methods>
 
 </classentry>
