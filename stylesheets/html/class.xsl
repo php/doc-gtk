@@ -13,7 +13,7 @@
      <div dir="rtl">
      <xsl:apply-templates select="./title"/>
      <xsl:apply-templates select="./partintro"/>
-     <xsl:apply-templates select="./classtree" />
+<!--     <xsl:apply-templates select="./classtree" />-->
      <xsl:call-template name="component.toc"/>
      </div>
      <xsl:apply-templates select="./classentry|./refentry"/>
@@ -23,7 +23,7 @@
     <div class="{name(.)}" id="{$id}">
      <xsl:apply-templates select="./title"/>
      <xsl:apply-templates select="./partintro"/>
-     <xsl:apply-templates select="./classtree" />
+<!--      <xsl:apply-templates select="./classtree" /> //-->
      <xsl:call-template name="component.toc"/>
      <xsl:apply-templates select="./classentry|./refentry"/>
     </div>
@@ -64,7 +64,7 @@
   </h1>
  </xsl:template>
  
- <xsl:template match="classtree">
+<!-- <xsl:template match="classtree">
   <h2>
    <xsl:copy-of select="title/node()" />  
   </h2>
@@ -73,7 +73,7 @@
     <xsl:with-param name="classid"><xsl:value-of select="topclass" /></xsl:with-param>
    </xsl:call-template>
   </pre>
- </xsl:template>
+ </xsl:template>//-->
 
 <!--========================================================================-->
 
@@ -327,7 +327,7 @@
      </div>
     </blockquote>
     </p>
-
+<!--
     <p>
      <h3>
       <xsl:call-template name="gentext">
@@ -335,7 +335,7 @@
       </xsl:call-template>
      </h3>
      <blockquote>
-     <div class="literallayout">
+     <div class="literallayout">//-->
 <!--      <xsl:choose>
        <xsl:when test="$phpweb=true()">
         <xsl:call-template name="phpweb.get_class_hierarchy">
@@ -345,16 +345,16 @@
         </xsl:call-template>
        </xsl:when>
       <xsl:otherwise>//-->
-       <xsl:call-template name="get_direct_subclasses">
+<!--       <xsl:call-template name="get_direct_subclasses">
         <xsl:with-param name="classname">
          <xsl:value-of select="./classmeta/classtitle"/>
         </xsl:with-param>
-       </xsl:call-template>
+       </xsl:call-template>//-->
 <!--      </xsl:otherwise>
      </xsl:choose>//-->
-     </div>
+<!--     </div>
     </blockquote>
-    </p>
+    </p>//-->
 
     <p>
      <h3>
@@ -417,14 +417,14 @@
     </blockquote>
     </p>
     
-    <p>
+<!--    <p>
      <h3>
       <xsl:call-template name="gentext">
        <xsl:with-param name="key">directsubclasses</xsl:with-param>
       </xsl:call-template>
      </h3>
      <blockquote>
-     <div class="literallayout">
+     <div class="literallayout">//-->
 <!--      <xsl:choose>
        <xsl:when test="$phpweb=true()">
         <xsl:call-template name="phpweb.get_class_hierarchy">
@@ -434,16 +434,16 @@
         </xsl:call-template>
        </xsl:when>
       <xsl:otherwise>//-->
-       <xsl:call-template name="get_direct_subclasses">
+<!--       <xsl:call-template name="get_direct_subclasses">
         <xsl:with-param name="classname">
          <xsl:value-of select="./classmeta/classtitle"/>
         </xsl:with-param>
-       </xsl:call-template>
+       </xsl:call-template>//-->
 <!--      </xsl:otherwise>
      </xsl:choose>//-->
-     </div>
+<!--     </div>
     </blockquote>
-    </p>
+    </p>//-->
 
     <p>
      <h3>
