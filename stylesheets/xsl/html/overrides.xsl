@@ -30,12 +30,13 @@
     <xsl:apply-templates/>
    </xsl:otherwise>
   </xsl:choose>
-  <xsl:if test="$optional&gt;0">]</xsl:if>
   <xsl:choose>
    <xsl:when test="following-sibling::paramdef">
     <xsl:text>, </xsl:text>
    </xsl:when>
    <xsl:otherwise>
+    <xsl:variable name="optionals" select="preceding-sibling::paramdef/*/optional"/>
+    <xsl:for-each select="$optionals">]</xsl:for-each>
     <xsl:text>);</xsl:text> 
    </xsl:otherwise>
   </xsl:choose>
