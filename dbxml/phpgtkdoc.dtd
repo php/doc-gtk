@@ -1,13 +1,12 @@
 <!-- 
-   Docbook Customiszation layer of PHP-GTK docs
+   Docbook Customization layer of PHP-GTK docs
    Authors: James Moore <jmoore@php.net>
 
-   $Id: phpgtkdoc.dtd,v 1.9 2002-08-31 08:23:07 jmoore Exp $
+   $Id: phpgtkdoc.dtd,v 1.10 2003-05-02 17:30:56 sfox Exp $
 
 -->
 
 <!ENTITY % local.person.ident.mix "|authoremail">
-<!ENTITY % local.chapter.class "|classset|enums">
 <!ENTITY % local.function.attrib "class CDATA #IMPLIED">
 <!-- Load Docbook -->
 <!ENTITY % DocBookDTD PUBLIC "-//Norman Walsh//DTD DocBk XML V3.1.7//EN" "./docbookx.dtd">
@@ -22,39 +21,18 @@
    Classentry's should be in a classset, this will hold all the entry's
    for gtk or glade etc..
 
-   - Must contain classmeta
    - Must contain one or more classentry's
 -->
-<!ELEMENT classset ((classsetmeta), (classentry)+)>
+<!ELEMENT classset ((title), (partintro), (classentry)+)>
 <!ATTLIST classset
     %common.attrib;
 >
 
-<!ELEMENT enums ((title),(enum)+)>
+<!ELEMENT enums ((title), (partintro), (enum)+)>
 <!ATTLIST enums
     %common.attrib;
 >
 
-<!--
-
-   classsetmeta: holds information about the classset.
-   -Must contain classsettitle, shortdesc and longdesc.
-
--->
-<!ELEMENT classsetmeta (classsettitle,shortdesc,desc)>
-<!ATTLIST classsetmeta
-    %common.attrib;
->
-
-<!-- 
-
-   Holds the classset's title.
-
--->
-<!ELEMENT classsettitle (%docinfo.char.mix;)* >
-<!ATTLIST classsettitle
-    %common.attrib;
->
 
 <!--
 
@@ -84,11 +62,11 @@
   classentry is a wrapper for a class.
   It should contain
   - One classmeta element.
-  - Optionall it should contain
-    A Constuctor
+  - Optionally it should contain
+    A constructor
 	Followed by:
-  - A methods entry, A signals entry and a attributes entry 
-    (any of these three may be ommited).
+  - A methods entry, a signals entry and an attributes entry 
+    (any of these three may be omitted).
 
 -->
 <!ELEMENT classentry 
@@ -161,7 +139,7 @@
      (not 100% necessary but makes sure they are all
 	  grouped together and makes my life simpler)
   
-  Should contain one or more method entry's
+  Should contain one or more method entry/ies
 
 -->
 <!ELEMENT methods (method)+ >
@@ -206,7 +184,7 @@
 
 <!-- 
 
-   - signalname contains the name of the signal.. suprisingly
+   - signalname contains the name of the signal.. surprisingly
 
 -->
 <!ELEMENT signalname (%docinfo.char.mix;)* >
@@ -371,5 +349,4 @@
 <!ATTLIST proptype
     %common.attrib;
 >
-
 
