@@ -1,0 +1,45 @@
+-------------------[ Q & A ]-----------------------
+
+Q: I have changed something. How do I compile the manual that I can see how it looks now?
+A: When you do a first-time compile, you have to do a
+   $ autoconf
+   Now everytime you've changed something, do the following: 
+   $ ./configure
+   $ make
+   which compiles the complete manual.
+   The "make" creates by default the normal chunked html manual. If you want to have another
+    output format, try the following targets:
+    - bigmanual.html
+    - html
+    - phpweb
+    - searchable_zip
+    - searchable_tar
+    - text
+    - mirror-files
+
+Q: I just want to compile one small file... how to stop compiling _all_?
+A: There is now real solution... it seems that the *whole* manual has to be compiled
+   - deleting just some output files doesn't help
+   - removing the html directory in build/en/ causes _all_ files to be rebuilt...
+
+Q: For what is UTF8-dir?
+A: All the xml files are converted to utf-8 when doing a ./configure and saved under the
+    special "UTF8dir" directory. You have to redo a ./configure if you've changed something,
+    because the manual is compiled from the "UTF8dir" folder
+
+Q: For what is chapters.ent?
+A: Seems to be a list with all chapters to compile....
+    It is created when runnning ./configure from a the scripts/genchapterents.php.in
+
+Q: How can I add my widget to the list of used widgets
+A: The reference.xml in the main dir plays a role...
+    Just add your class to this file
+
+Q: How do I put an example into the manual?
+A: See the files
+   - en/tutorials/hellow.xml
+   - en/reference/gdk/gdkwindow.xml at the function gdk.gdkwindow.method.set_cursor
+
+Q: What is the difference between "<filename>" and "<filename>.in"?
+A: The "<filename>.in" files are templates for the real files. The .in-files are converted
+    to the normal files when doing a ./configure
