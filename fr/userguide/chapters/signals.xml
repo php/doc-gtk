@@ -21,7 +21,8 @@
    Une interface contenant un objet <classname>GtkAdjustment</classname>
    qui enverra un signal <signalname>value-changed</signalname> quand une des 
    valeurs d'ajustement du widget changera. Ce signal particulier est utilisé
-   à l'intéreur et à l'extérieur de l'objet <classname>GtkAdjustment</classname>,
+   à l'intéreur et à l'extérieur de l'objet 
+<classname>GtkAdjustment</classname>,
 	 donc il n'est pas nécessaire de réécrire cette fonction dans la partie de 
    votre programme qui gère un objet de type 
    <classname>GtkProgressBar</classname> (La classe 
@@ -45,14 +46,17 @@
    </emphasis>
   </simpara>
   <simpara>
-   Les rappels sont les fonctions définis par le développeur et qui réagisse aux
+   Les rappels sont les fonctions définis par le développeur et qui réagisse 
+aux
    événements emis par le widget.  Pour définir la fonction qui doit être 
    appelée, il faut définir la 
-   <link linkend="gtk.signals.connection">connexion</link> entre la fonction et 
+   <link linkend="gtk.signals.connection">connexion</link> entre la fonction 
+et 
    le signal.
   </simpara>
   <simpara>
-   Les rappels sont aussi appellés fonction événement. Les rappels peuvent être
+   Les rappels sont aussi appellés fonction événement. Les rappels peuvent 
+être
    soit des <literal>événements par défaut</literal> ou des 
    <literal>évenements définis par l'utilisateur</literal> mais dans tous les 
    cas c'est une fonction standard.
@@ -67,7 +71,8 @@
    était le sien.
   </simpara>
   <simpara>
-   Si le signal n'est pas approprié au widget mais si il en hérite, il n'y aura
+   Si le signal n'est pas approprié au widget mais si il en hérite, il n'y 
+aura
    pas de message d'erreur lors de l'émission du signal car il n'y a pas de 
    moyen que le widget connaisse ce signal.
   </simpara>
@@ -80,7 +85,8 @@
    <title>Une connexion simple</title>
    <simpara>
     Pour que le widget réagisse, vous devez connecter le signal au rappel 
-    correspondant. Cette fonction est appellé par PHP-GTK lorsque le signal est 
+    correspondant. Cette fonction est appellé par PHP-GTK lorsque le signal 
+est 
     émis.
    </simpara>
    <simpara>
@@ -93,13 +99,15 @@
     <link linkend="reference">référence</link> de ce manuel.
    </simpara>
    <simpara>
-    Dans le cas du signal <signalname>clicked</signalname> pour un objet de type
+    Dans le cas du signal <signalname>clicked</signalname> pour un objet de 
+type
     <classname>GtkButton</classname>, vous devez définir une fonction qui
     accepte un paramètre et dans ce cas le paramètre doit être le bouton qui
     sera clické.
    </simpara>
     <para>
-     Le code qui suit montre la méthode pour créer une fenêtre, ajouter un bouton
+     Le code qui suit montre la méthode pour créer une fenêtre, ajouter un 
+bouton
      et lancer la boucle qui va attendre l'émission du signal. Quand le signal
      sera émis, une autre <classname>GtkWindow</classname> s'ouvrira et 
      contiendra un message.
@@ -147,7 +155,8 @@ gtk::main();
     <signalname>clicked</signalname> est émis sur le widget
     <classname>GtkButton</classname>. Il faut également enregister la fonction
     <literal>shutdown()</literal> comme fonction événement pour le signal
-    <signalname>destroy</signalname> des 2 fenêtres pour terminer l'application
+    <signalname>destroy</signalname> des 2 fenêtres pour terminer 
+l'application
     correctement.
    </para>
   </sect2>
@@ -161,7 +170,8 @@ gtk::main();
     même widget.
    </simpara>
    <para>
-    Quand plusieurs fonctions sont connectés à un signal, lors de l'émission du 
+    Quand plusieurs fonctions sont connectés à un signal, lors de l'émission 
+du 
     signal, les méthodes seront appelés dans l'ordre de leur inscription.
     <example>
      <title>Ordre des rappels du signal</title>
@@ -219,8 +229,10 @@ Second appel !
 		paramêtre et ainsi effectuer une action sur celle-ci.
    </simpara>
    <simpara>
-    Par exemple, quand on presse sur un bouton, on aimerait détruire l'instance
-		de la fenetre <classname>GtkWindow</classname> qui contient l'instance du bouton
+    Par exemple, quand on presse sur un bouton, on aimerait détruire 
+l'instance
+		de la fenetre <classname>GtkWindow</classname> qui contient l'instance du 
+bouton
 		<classname>GtkButton</classname>.
    </simpara>
    <simpara>
@@ -256,7 +268,8 @@ gtk::main();
     Dans la portion de code précédente, on passe en paramêtres au signal 
 		<signalname>clicked</signalname> l'objet <literal>$button</literal>, une
 		instance de <classname>GtkButton</classname>, 	mais aussi l'objet 
-		<literal>$window</literal>, une instance de	<classname>GtkWindow</classname>  
+		<literal>$window</literal>, une instance de	<classname>GtkWindow</classname> 
+ 
 		Ceci nous permet de détruire la fenêtre par l'appel de la fonction
     <function class="GtkObject">destroy()</function>.
    </para>
