@@ -94,11 +94,11 @@ function delete_event()
 }
    </programlisting>
   </example> 
-  die <literal>delete_event()</literal> Funktion ist als Handler (siehe
+  Die <literal>delete_event()</literal> Funktion ist als Handler (siehe
   unten) f&uuml;r das <signalname>delete-event</signalname> Signal
-  registriert. Es gibt <literal>false</literal> zur&uuml;ck um PHP-GTK zu
+  registriert. Sie gibt <literal>false</literal> zur&uuml;ck um PHP-GTK zu
   sagen dass es mit dem Erscheinen des Events weitermachen soll. Wenn die
-  Funktion <literal>true</literal> zur&uuml;ckgeben w&uuml;rde w&uuml;rde
+  Funktion <literal>true</literal> zur&uuml;ckgeben w&uuml;rde, w&uuml;rde
   PHP-GTK mit der Ereignisbehandlung hier aufh&ouml;ren.
  </para>
  <para>
@@ -113,7 +113,7 @@ function shutdown()
    </programlisting>
   </example>
   Die <literal>shutdown()</literal> Funktion ist als Handler f&uuml;r das
-  <signalname>shutdown</signalname> signal registriert. Die Funktion gibt
+  <signalname>shutdown</signalname> Signal registriert. Die Funktion gibt
   den Text <literal>"Herunterfahren"</literal> an der Konsole aus und ruft
   dann die statische Funktion Gtk::<function>main_quit</function> auf.
  </para>
@@ -130,7 +130,7 @@ function hello()
    </programlisting>
   </example>
   Die <literal>hello()</literal> Funktion ist als Handler f&uuml;r das
-  <signalname>clicked</signalname> des Buttons registiriert. Sie globalisiert
+  <signalname>clicked</signalname> Signal des Buttons registriert. Sie globalisiert
   die <literal>$window</literal> Variable so dass es auf die Instanz von
   <classname>GtkWindow</classname> weiter unten im Skript zugreifen kann. Sie
   gibt den Text "<literal>Hallo Welt!</literal>" auf der Konsole aus und
@@ -154,7 +154,7 @@ $window->set_border_width(10);
   <literal>shutdown</literal> Funktion als Handler f&uuml;r das
   <signalname>destroy</signalname> Signal zu registrieren und die
   <literal>delete_event</literal> Funktion als Handler f&uuml;r das
-  <signalname>dlete-event</signalname> Signal. zuletzt rufen wir die Funktion
+  <signalname>delete-event</signalname> Signal. Zuletzt rufen wir die Funktion
   <function class="GtkContainer">set_border_width</function> auf um den Rahmen
   um die Instanz der <classname>GtkWindow</classname> Klassse zu setzen die
   wir gerade erstellt haben.
