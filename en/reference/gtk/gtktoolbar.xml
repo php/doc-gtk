@@ -40,6 +40,50 @@
     in a way <classname>GtkItemFactory</classname>
     allows it. In php-gtk, you have to create every single button yourself.
    </simpara>
+   <example>
+    <title>A detachable toolbar</title>
+    <programlisting role="php">
+<![CDATA[
+<?php
+if( !extension_loaded('gtk')) {	
+	dl( 'php_gtk.' . PHP_SHLIB_SUFFIX); 
+}
+
+function toolbarClicked( $objButton, $strType) {
+	echo 'clicked ' . $strType . "\r\n";
+}
+
+$window	= &new GtkWindow();
+$window->set_title( 'plug controller');
+$window->set_default_size( 400, 50);
+$window->connect_object('destroy', array('gtk', 'main_quit'));
+$vbox = &new GtkVBox();
+
+$toolbar	= &new GtkToolbar( GTK_ORIENTATION_HORIZONTAL, GTK_TOOLBAR_BOTH);
+
+$btnNew		= &new GtkButton( 'new');
+$btnOpen	= &new GtkButton( 'open');
+$btnNew->connect( 'clicked', 'toolbarClicked', 'new');
+$btnOpen->connect( 'clicked', 'toolbarClicked', 'open');
+
+$toolbar->append_widget( $btnNew, 'Creates a new document', 'Private new text');
+$toolbar->add( $btnOpen);
+
+$handlebox = &new GtkHandleBox();
+$handlebox->add( $toolbar);
+$vbox->pack_start_defaults( $handlebox);
+
+$label	= &new GtkLabel( 'I should be below the toolbar');
+$vbox->pack_start_defaults( $label);
+
+$window->add( $vbox);
+$window->show_all();
+
+gtk::main();
+?>
+]]>
+    </programlisting>
+   </example>
   </desc>
  </constructor>
 
