@@ -74,6 +74,10 @@ phpweb:	build/php/index.php
 text: build/manual.txt
 util: custom.titlepage.xsl
 
+mirror-files: build/php_gtk_manual_@LANG@.tar.gz \
+	      build/php_gtk_manual_@LANG@.tar.bz2 \
+	      build/php_gtk_manual_@LANG@.zip
+
 #
 # Dependency Aliases
 #
@@ -160,6 +164,15 @@ build/html/index.html: manual.xml $(CHUNK_DEPS)
 
 build/bigmanual.html: manual.xml $(HTML_DEPS)
 	$(XSLTPROC) $(stylesheet_dir)/docbook.xsl manual.xml > $@
+
+build/php_gtk_manual_@LANG@.zip: build/html/index.html
+	(cd build/html; zip -q -9 ../$@)
+
+build/php_gtk_manual_@LANG@.tar.gz: build/html/index.html
+	(cd build/html; tar -cf -) | gzip -9 > $@
+
+build/php_gtk_manual_@LANG@.tar.bz2: build/html/index.html
+	(cd build/html; tar -cf -) | bzip2 -9 > $@
 
 updatexml:
 ifeq "$(mode)" "update"
