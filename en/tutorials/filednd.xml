@@ -1,0 +1,665 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<chapter id="tutorials.filednd">
+ <title>Drag'n'drop with files</title>
+
+ <sect1>
+  <title>About this tutorial</title>
+  <simpara>
+   This tutorial will show you how to use the drag'n'drop functions of
+   PHP-Gtk and go deep into the topic "Files and DnD", as this is not 
+   as trivial as it might look. 
+  </simpara>
+  <simpara>
+   In the tutorial we will exemplarily build an application which has
+   only one widget, a tree. This tree can be filled with branches and
+   leaves by dropping files over it. You will be able to drag those
+   files back to different programs, at least if you are not on Windows.
+   Short: We build a bookmark manager for files.
+  </simpara>
+ </sect1>
+ 
+ <sect1 id="tutorials.filednd.appframe">
+  <title>The application frame</title>
+  <simpara>
+   As the creation of the application's frame is not our topic, here is
+   it:   
+  </simpara>
+  <example>
+   <title>A working application skeleton</title>
+   <programlisting role="php">
+<![CDATA[
+<?php
+if( !extension_loaded('gtk')) {	
+    dl( 'php_gtk.' . PHP_SHLIB_SUFFIX);
+}
+
+$fdnd = new FileDragNDrop();
+$fdnd->buildDialog();
+$fdnd->display();
+
+class FileDragNDrop
+{
+    function buildDialog() {
+        $this->window =& new GtkWindow();
+        $this->window->set_title('FileDropper');
+        $this->window->set_default_size(200, 200);
+        $this->window->connect_object('destroy', array('gtk', 'main_quit'));
+       
+        $scrolledwindow =& new GtkScrolledWindow();
+        $scrolledwindow->set_policy(GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
+        $this->window->add($scrolledwindow); 
+        
+        $this->tree =& new GtkCTree(3, 0, array('title', 'url', 'local path'));
+        $scrolledwindow->add($this->tree);
+        
+        $this->ndToplevel = $this->tree->insert_node(null, null, array('Files', '', ''), 0, null, null, null, null, false, true);
+        
+        $this->tree->connect('key-press-event', array(&$this, 'keyPressedTree'));
+    }
+    
+    
+    function display() {
+        $this->window->show_all();
+        gtk::main();
+    }
+    
+    function keyPressedTree($tree, $objEvent) {
+        if ($objEvent->keyval == GDK_KEY_Delete) {
+            $ar =  $tree->selection;
+            foreach ($ar as $objNode) {
+                $tree->remove_node($objNode);
+            }
+        }
+    }
+}
+?>
+]]>
+   </programlisting>
+  </example>
+  <simpara>
+   The code creates a window with a <classname>GtkCTree</classname>
+   containing the root node. It is possible to delete nodes from the
+   tree by pressing the "delete" key.
+  </simpara>
+ </sect1>
+ 
+ <sect1 id="tutorials.filednd.dropping">
+  <title>Receiving drops</title>
+  <simpara>
+   After you have decided which type of data you want your application
+   or widget to accept, you tell everyone about this decision by calling
+   the <function class="GtkWidget">drag_dest_set</function> function on
+   the target widget. Since we want to accept files, we need the
+   <literal>text/uri-list</literal> target type:
+  </simpara>
+  <example>
+   <title>Accepting files</title>
+   <programlisting role="php">
+<![CDATA[
+//at the end of buildDialog()
+$this->targets = array( array( 'text/uri-list', 0, 0));
+$this->tree->drag_dest_set( GTK_DEST_DEFAULT_ALL, $this->targets, GDK_ACTION_COPY | GDK_ACTION_MOVE);
+]]>
+   </programlisting>
+  </example>
+  <para>
+   Let's analyze the code:
+   <itemizedlist>
+    <listitem>
+     We want to accept files, and files indicated by the 
+     <literal>text/uri-list</literal> target type.
+    </listitem>
+    <listitem>
+     Drags shall be accepted from everywhere, so we give the second
+     parameter a <literal>0</literal> and the third the same, as we
+     don't have to distinguish between different target types.
+    </listitem>
+    <listitem>
+     The tree shall accept both <emphasis>copy</emphasis> and
+     <emphasis>move</emphasis> requests. The move is very important,
+     as all KDE applications (including Konqueror) seem to give their 
+     files to targets only which accept the <emphasis>move</emphasis>
+     action.
+    </listitem>
+   </itemizedlist>
+  </para>
+  <simpara>
+   The Gtk knows now that we accept files, but we didn't say what to
+   do with them. The plan is to add all the dropped files to the tree,
+   as children of the currently selected item.
+  </simpara>
+  <example>
+   <title>Handling the files</title>
+   <programlisting role="php">
+<![CDATA[
+//at the end of buildDialog()
+$this->tree->connect( 'drag-data-received', array( &$this, 'dragDataReceived'));
+
+// a new function
+function dragDataReceived($tree, $context , $x, $y, $data , $info, $time) {
+    if (count($tree->selection) != 1) {
+        $parent = $this->ndToplevel;
+    } else {
+        $parent = $tree->selection[0];
+    }
+
+    $strData    = $data->data;
+    $arData     = explode("\n", $strData);
+    foreach ($arData as $strLine) {
+        $strFile    = trim($strLine);
+        if ($strFile == '') { continue; }
+        $tree->insert_node($parent, null, array(basename(urldecode($strFile)), $strFile, ''), 0, null, null, null, null, false, true);
+    }
+    $tree->columns_autosize();
+}
+]]>
+   </programlisting>
+  </example>
+  <simpara>
+   If you drop some files from your favorite file manager, you will see 
+   that they are added to the list.
+  </simpara>
+ </sect1>
+ 
+ <sect1 id="tutorials.filednd.urilist">
+  <title>The <literal>text/uri-list</literal> format</title>
+  <para>
+   <literal>text/uri-list</literal> is the standard file listing format
+   for drag and drop. It is specified as follows:
+   <itemizedlist>
+    <listitem>
+     A list of files, each file per line.
+    </listitem>
+    <listitem>
+     Each line ends with a <literal>\r\n</literal>, carriage return
+     and newline.
+    </listitem>
+    <listitem>
+     File names have to be valid, url-encoded URIs (Unique resource 
+     identifier).
+    </listitem>
+   </itemizedlist>
+   <example>
+    <title>Example <literal>text/uri-list</literal> string</title>
+    <programlisting>
+<![CDATA[
+file://localhost/usr/bin/opera[\r\n]
+file://localhost/c:/programs/myfile.txt[\r\n]
+file://server/data/software.xml[\r\n]
+http://gtk.php.net/apps/[\r\n]
+]]>
+    </programlisting>
+   </example>
+  </para>
+  <simpara>
+   Now the world would not be the world we know if everyone
+   followed the specs. As written on 
+   <ulink url="http://freedesktop.org/Main/Draganddropwarts">freedesktop.org</ulink>,
+   there are plenty of implementations, and most cook their own soup.
+  </simpara>
+  <simpara>
+   Let it be the <literal>\r\n</literal> at the end of the line; most
+   programs do that right but some just forget the 
+   <literal>\r</literal>. Some forget the terminating characters on the 
+   last line. That is easy to catch when implementing the routine in 
+   php.
+  </simpara>
+  <para>
+   The real problem are the URIs, or what the programmers think URIs are.
+   <itemizedlist>
+    <title>URIs of some programs</title>
+    <listitem>
+     Remember the correct URI: <literal>file://host/path/to/file</literal>
+    </listitem>
+    <listitem>
+     <literal>KDE programs</literal> like <literal>Konqueror</literal>,
+     <literal>Kate</literal> and so pass the following:
+     <literal>file:/path/to/file</literal>. Only one "/", totally 
+     incorrect.
+    </listitem>
+    <listitem>
+     <literal>Nautilus</literal>, gnome's file manager, passes
+     <literal>file:///path/to/file</literal>. Correct protocol 
+     (<literal>file://</literal>), hostname left out (not really correct,
+     but nearly), and the full path with a leading "/".
+    </listitem>
+    <listitem>
+     The <literal>Opera</literal> browser gives you a
+     <literal>file://path/to/file</literal>. What is that? A relative
+     filename?
+    </listitem>
+    <listitem>
+     When dragging links from <literal>Firefox</literal>, you
+     get the same as with <literal>Nautilus</literal>:
+     <literal>file:///path/to/file</literal>, nearly correct.
+     The crux: Firefox doesn't drop files to targets accepting
+     <literal>text/uri-list</literal>, only to 
+     <literal>text/plain</literal> ones.
+    </listitem>
+    <listitem>
+     The Windows' <literal>explorer</literal> is nearly correct
+     like Nautilus and Firefox, giving a
+     <literal>file:///c:/path/to/file</literal>. 
+    </listitem>
+   </itemizedlist>
+   And beside files, there can be real URLs like 
+   <literal>http://gtk.php.net</literal> in the list.
+   What does that tell us? We will have a hard time finding out
+   where the file really is. 
+  </para>
+  <simpara>
+   We need a solution which accepts URIs that follow the standard AND
+   is able to guess what files the source applications mean if the 
+   URI does not conform to the standard. The resulting code seems
+   to be awkward, but that's the price for compatibility:
+  </simpara>
+  <example>
+   <title>Convert a (misformed) URI to a local path</title>
+   <programlisting role="php">
+<![CDATA[
+/**
+*   converts a file path gotten from a text/uri-list
+*   drop to a usable local filepath
+*   @param  string  The line from the uri-list
+*   @return string  The usable local filepath
+*/
+function getPathFromUrilistEntry( $strUriFile)
+{
+    $strUriFile = urldecode($strUriFile);//should be URL-encoded
+    $bUrl = false;
+    if (substr($strUriFile, 0, 5) == 'file:')
+    {   //(maybe buggy) file protocol
+        if (substr($strUriFile, 0, 17) == 'file://localhost/') {
+            //correct implementation
+            $strFile = substr($strUriFile, 16);
+        } else if (substr($strUriFile, 0, 8) == 'file:///') {
+            //no hostname, but three slashes - nearly correct
+            $strFile = substr($strUriFile, 7);
+        } else if ($strUriFile[5] == '/') {
+            //theoretically, the hostname should be the first
+            //but no one implements it
+            $strUriFile = substr($strUriFile, 5);
+            for( $n = 1; $n < 5; $n++) {
+                if ($strUriFile[$n] != '/') { break; }
+            }
+            $strUriFile = substr($strUriFile, $n - 1);
+            if (!file_exists($strUriFile)) {
+                //perhaps a correct implementation with hostname???
+                $strUriFileNoHost = strstr(substr($strUriFile, 1), '/');
+                if (file_exists($strUriFileNoHost)) {
+                    //seems so
+                    $strUriFile = $strUriFileNoHost;
+                }
+            }
+            $strFile = $strUriFile;
+        } else {
+            //NO slash after "file:" - what is that for a crappy program?
+            $strFile = substr ($strUriFile, 5);
+        }
+    } else if (strstr($strUriFile, '://')) {
+        //real protocol, but not file
+        $strFile = $strUriFile;
+        $bUrl    = true;
+    } else {
+        //local file?
+        $strFile = $strUriFile;
+    }
+    if (!$bUrl && $strFile[2] == ':' && $strFile[0] == '/') {
+        //windows file path
+        $strFile = str_replace('/', '\\', substr($strFile, 1));
+    }
+    return $strFile;
+}
+]]>   
+   </programlisting>
+  </example>
+  <para>
+   Now that we have a nice conversion routine, we can extend our source
+   to display the local path in the file tree:
+   <example>
+    <title>Displaying the local file path in the tree</title>
+    <programlisting role="php">
+<![CDATA[
+$tree->insert_node($parent, null, array(basename(urldecode($strFile)), $strFile, $this->getPathFromUrilistEntry($strFile)), 0, null, null, null, null, false, true);
+]]>        
+    </programlisting>
+   </example>
+  </para>
+ </sect1>
+
+ <sect1 id="tutorials.filednd.dragging">
+  <title>Dragging files to other applications</title>
+  <note>
+   <simpara>
+    It seems that Gtk 1.x on windows allows you to receive drops from
+    other windows programs, but not to drag outside the application. 
+    This means you can use DnD inside your PHP-Gtk application, but
+    use drop only when communicating with other programs.
+   </simpara>
+  </note>
+  <simpara>
+   The good news: Unlike the drop problems, all tested programs (Konqueror,
+   Kate, Firefox, Opera, Nautilus) seem to be able to handle correct URIs 
+   dragged to them in the right way. Even Firefox accepts
+   <literal>text/uri-list</literal> data.
+  </simpara>
+  <simpara>
+   The first step is again to tell the widget that it has the ability
+   to act as a source for drag data. Furthermore, we need to provide
+   the data we want to drag, which can be done by connecting the widget
+   to the <signalname class="GtkWidget">drag-data-get</signalname>
+   signal.
+  </simpara>
+  <example>
+   <title>Setting up the drag source</title>
+   <programlisting role="php">
+<![CDATA[
+//at the end of buildDialog()
+$this->tree->drag_source_set(GDK_BUTTON1_MASK, $this->targets, GDK_ACTION_COPY);
+$this->tree->connect('drag-data-get', array(&$this, 'dragDataGet'));
+]]>   
+   </programlisting>
+  </example>
+  <para>
+   We told the widget the following:
+   <itemizedlist>
+    <listitem>
+     Act as a drag source when the user uses the first (mostly left) 
+     mouse button
+    </listitem>
+    <listitem>
+     Provide one format for the dragging data, namely 
+     <literal>text/uri-list</literal>
+    </listitem>
+    <listitem>
+     Require the drop target to copy the file, not to move it.
+    </listitem>
+    <listitem>
+     When the target widget demands for the data, call the 
+     <literal>dragDataGet</literal> function of our class.
+    </listitem>
+   </itemizedlist>
+  </para>
+  <simpara>
+   Next is to provide the data for the drop target in the 
+   <literal>dragDataGet</literal> function:
+  </simpara>
+  <example>
+   <title>Setting the data to drag</title>
+   <programlisting role="php">
+<![CDATA[
+function dragDataGet( $tree, $context, $selection_data, $info, $time) {
+    if( count( $tree->selection) < 1) { return false; }
+    $node = $tree->selection[0];
+    $file = $tree->node_get_text( $node, 2);
+    if( $file == '') { return false; }
+    $selection_data->set($selection_data->target, 8, urlencode($this->getUriFromFile($file)) . "\r\n");
+}
+    
+/**
+*   converts a file name to a URI
+*   useful to convert a file to the text/uri-list compatible format
+*   @param  string  The file
+*   @return string  The URI
+*/
+function getUriFromFile( $strFile) {
+    if (strstr($strFile, '://')) {
+        //real URL
+        $strUri = $strFile;
+    } else {
+        //normal file
+        if (substr($strFile, 1, 2) ==  ':\\') {
+            //windows path c:\programs\bla\blu\file.bli
+            $strUri = 'file://localhost/' . str_replace('\\', '/', $strFile);
+        } else {
+            //should be nice unix file
+            //@fixme: convert relative names to absolute ones?
+            $strUri = 'file://localhost' . realpath($strFile);
+        }
+    }
+    return $strUri;
+}
+]]>
+   </programlisting>
+  </example>
+  <simpara>
+   The data are passed by overwriting the selection data via the 
+   <function class="GtkSelectionData">set</function> method of the
+   <parameter>selection_data</parameter>. As we want to follow the 
+   standards, the file name has to be converted to a full-flagged 
+   url-encoded URI, with the terminating <literal>\r\n</literal> at 
+   the end of the line. When nothing is selected in the tree, we don't
+   change the selection data.
+  </simpara>
+  <simpara>
+   When trying to drag a file to your favorite application, you will
+   note that nothing happens. Why? The URI passed to the program looks
+   like that: <literal>file%3A%2F%2Flocalhost%2Fdata%2Fphp-gtk</literal>.
+   Yes, <literal>urlencode</literal> doesn't take care of the character's
+   meaning in the URI. Now it would cost some effort to make a function
+   which does a correct encoding while taking care of special characters,
+   as http URIs can contain slashes in a parameter which would have to be
+   encoded, but slashes in the filename not. For that reason, only a
+   simple back-translation of some chars is done after urlencoding the
+   string:
+  </simpara>
+  <example>
+   <title>urlencode replacement</title>
+   <programlisting role="php">
+<![CDATA[
+function pathurlencode($uri) {
+    $uri = urlencode($uri);
+    $uri = str_replace('%3A', ':', $uri);
+    $uri = str_replace('%2F', '/', $uri);
+    $uri = str_replace('%26', '&', $uri);
+    $uri = str_replace('%40', '@', $uri);
+    $uri = str_replace('%3A', ':', $uri);
+    $uri = str_replace('%3F', '?', $uri);
+    return $uri;
+}
+]]>   
+   </programlisting>
+  </example>
+  <para>
+   With that, we can change our dragDataGet function:
+   <programlisting role="php">
+<![CDATA[
+$selection_data->set($selection_data->target, 8, $this->pathurlencode($this->getUriFromFile($file)) . "\r\n");
+]]>
+   </programlisting>
+  </para>
+ </sect1>
+ 
+ <sect1 id="tutorials.filednd.finalprog">
+  <title>The final program</title>
+  <programlisting role="php">
+<![CDATA[
+<?php
+if( !extension_loaded('gtk')) {	
+    dl( 'php_gtk.' . PHP_SHLIB_SUFFIX);
+}
+
+$fdnd = new FileDragNDrop();
+$fdnd->buildDialog();
+$fdnd->display();
+
+class FileDragNDrop
+{
+    function buildDialog() {
+        $this->window =& new GtkWindow();
+        $this->window->set_title('FileDropper');
+        $this->window->set_default_size(200, 200);
+        $this->window->connect_object('destroy', array('gtk', 'main_quit'));
+       
+        $scrolledwindow =& new GtkScrolledWindow();
+        $scrolledwindow->set_policy(GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
+        $this->window->add($scrolledwindow); 
+        
+        $this->tree =& new GtkCTree(3, 0, array('title', 'url', 'local path'));
+        $scrolledwindow->add($this->tree);
+        
+        $this->ndToplevel = $this->tree->insert_node(null, null, array('Files', '', ''), 0, null, null, null, null, false, true);
+        
+        $this->tree->connect('key-press-event', array(&$this, 'keyPressedTree'));
+        $this->tree->connect( 'drag-data-received', array( &$this, 'dragDataReceived'));
+        
+        $this->targets = array( array( 'text/uri-list', 0, 0));
+        $this->tree->drag_dest_set( GTK_DEST_DEFAULT_ALL, $this->targets, GDK_ACTION_COPY | GDK_ACTION_MOVE);
+
+        $this->tree->drag_source_set(GDK_BUTTON1_MASK, $this->targets, GDK_ACTION_COPY);
+        $this->tree->connect('drag-data-get', array(&$this, 'dragDataGet'));
+    }
+    
+    
+    function display() {
+        $this->window->show_all();
+        gtk::main();
+    }
+    
+    function keyPressedTree($tree, $objEvent) {
+        if ($objEvent->keyval == GDK_KEY_Delete) {
+            $ar =  $tree->selection;
+            foreach ($ar as $objNode) {
+                $tree->remove_node($objNode);
+            }
+        }
+    }
+        
+    function dragDataReceived($tree, $context , $x, $y, $data , $info, $time) {
+        if (count($tree->selection) != 1) {
+            $parent = $this->ndToplevel;
+        } else {
+            $parent = $tree->selection[0];
+        }
+    
+        $strData    = $data->data;
+        $arData     = explode("\n", $strData);
+        foreach ($arData as $strLine) {
+            $strFile    = trim($strLine);
+            if ($strFile == '') { continue; }
+            $tree->insert_node($parent, null, array(basename(urldecode($strFile)), $strFile, $this->getPathFromUrilistEntry($strFile)), 0, null, null, null, null, false, true);
+        }
+        $tree->columns_autosize();
+    }
+        
+    /**
+    *   converts a file path gotten from a text/uri-list
+    *   drop to a usable local filepath
+    *   @param  string  The line from the uri-list
+    *   @return string  The usable local filepath
+    */
+    function getPathFromUrilistEntry($strUriFile)
+    {
+        $strUriFile = urldecode($strUriFile);//should be URL-encoded
+        $bUrl = false;
+        if (substr($strUriFile, 0, 5) == 'file:')
+        {   //(maybe buggy) file protocol
+            if (substr($strUriFile, 0, 17) == 'file://localhost/') {
+                //correct implementation
+                $strFile = substr($strUriFile, 16);
+            } else if (substr($strUriFile, 0, 8) == 'file:///') {
+                //no hostname, but three slashes - nearly correct
+                $strFile = substr($strUriFile, 7);
+            } else if ($strUriFile[5] == '/') {
+                //theoretically, the hostname should be the first
+                //but no one implements it
+                $strUriFile = substr($strUriFile, 5);
+                for( $n = 1; $n < 5; $n++) {
+                    if ($strUriFile[$n] != '/') { break; }
+                }
+                $strUriFile = substr($strUriFile, $n - 1);
+                if (!file_exists($strUriFile)) {
+                    //perhaps a correct implementation with hostname???
+                    $strUriFileNoHost = strstr(substr($strUriFile, 1), '/');
+                    if (file_exists($strUriFileNoHost)) {
+                        //seems so
+                        $strUriFile = $strUriFileNoHost;
+                    }
+                }
+                $strFile = $strUriFile;
+            } else {
+                //NO slash after "file:" - what is that for a crappy program?
+                $strFile = substr ($strUriFile, 5);
+            }
+        } else if (strstr($strUriFile, '://')) {
+            //real protocol, but not file
+            $strFile = $strUriFile;
+            $bUrl    = true;
+        } else {
+            //local file?
+            $strFile = $strUriFile;
+        }
+        if (!$bUrl && $strFile[2] == ':' && $strFile[0] == '/') {
+            //windows file path
+            $strFile = str_replace('/', '\\', substr($strFile, 1));
+        }
+        return $strFile;
+    }
+    
+    function dragDataGet($tree, $context, $selection_data, $info, $time) {
+        if( count( $tree->selection) < 1) { return false; }
+        $node = $tree->selection[0];
+        $file = $tree->node_get_text( $node, 2);
+        if( $file == '') { return false; }
+        $selection_data->set($selection_data->target, 8, $this->pathurlencode($this->getUriFromFile($file)) . "\r\n");
+    }
+        
+    /**
+    *   converts a file name to a URI
+    *   useful to convert a file to the text/uri-list compatible format
+    *   @param  string  The file
+    *   @return string  The URI
+    */
+    function getUriFromFile($strFile) {
+        if (strstr($strFile, '://')) {
+            //real URL
+            $strUri = $strFile;
+        } else {
+            //normal file
+            if (substr($strFile, 1, 2) ==  ':\\') {
+                //windows path c:\programs\bla\blu\file.bli
+                $strUri = 'file://localhost/' . str_replace('\\', '/', $strFile);
+            } else {
+                //should be nice unix file
+                //@fixme: convert relative names to absolute ones?
+                $strUri = 'file://localhost' . realpath($strFile);
+            }
+        }
+        return $strUri;
+    }
+    
+    
+    function pathurlencode($uri) {
+        $uri = urlencode($uri);
+        $uri = str_replace('%3A', ':', $uri);
+        $uri = str_replace('%2F', '/', $uri);
+        $uri = str_replace('%26', '&', $uri);
+        $uri = str_replace('%40', '@', $uri);
+        $uri = str_replace('%3A', ':', $uri);
+        $uri = str_replace('%3F', '?', $uri);
+        return $uri;
+    }
+}
+?>
+]]>
+  </programlisting>
+ </sect1>
+ 
+ <sect1 id="tutorials.filednd.ideas">
+  <title>Further ideas</title>
+  
+  <simpara>
+   One could extend the application to save and load the tree's 
+   contents. The XBEL (XML Bookmark Exchange Language) would be
+   very ideal for this.
+  </simpara>
+  <simpara>
+   Make your applications user-friendly: Every text field which requires
+   a filename or a path should accept drops from file managers.
+   It is easy to create a class with a 
+   <literal>prepareFileDrops</literal> function, which completely sets
+   up an <classname>GtkEntry</classname> to accepts file drops and
+   changes the field's content in the case of a drop.
+  </simpara>
+ </sect1>
+</chapter>
