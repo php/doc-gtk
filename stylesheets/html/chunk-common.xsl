@@ -7,7 +7,6 @@
             encoding="UTF-8"
             indent="no"/>
 
-
 <doc:param name="html.ext" xmlns="">
 <refpurpose>Extension for chunked files</refpurpose>
 <refdescription>
@@ -81,24 +80,6 @@ its parent.
 <xsl:template name="chunk">
   <xsl:param name="node" select="."/>
   <!-- returns 1 if $node is a chunk -->
-
-<!--
-  <xsl:message>
-    <xsl:text>chunk: </xsl:text>
-    <xsl:value-of select="name($node)"/>
-    <xsl:text>(</xsl:text>
-    <xsl:value-of select="$node/@id"/>
-    <xsl:text>)</xsl:text>
-    <xsl:text> cs: </xsl:text>
-    <xsl:value-of select="$chunk.sections"/>
-    <xsl:text> cfs: </xsl:text>
-    <xsl:value-of select="$chunk.first.sections"/>
-    <xsl:text> ps: </xsl:text>
-    <xsl:value-of select="count($node/parent::section)"/>
-    <xsl:text> prs: </xsl:text>
-    <xsl:value-of select="count($node/preceding-sibling::section)"/>
-  </xsl:message>
--->
 
   <xsl:choose>
     <xsl:when test="$chunk.sections != 0
@@ -462,8 +443,63 @@ its parent.
   <xsl:param name="next" select="/foo"/>
   <xsl:variable name="home" select="/*[1]"/>
   <xsl:variable name="up" select="parent::*"/>
+  <xsl:variable name="lang" select="ancestor-or-self::*/@lang"/>
 
   <xsl:if test="$suppress.navigation = '0'">
+  <xsl:choose>
+   <xsl:when test="$lang='he' or $lang='ar'">
+    <div class="navheader" dir="rtl">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">
+            <xsl:choose>
+              <xsl:when test="count($up) > 0 and $up != $home">
+                <xsl:apply-templates select="$up" mode="object.title.markup"/>
+              </xsl:when>
+              <xsl:otherwise>&#160;</xsl:otherwise>
+            </xsl:choose>
+          </th>
+        </tr>
+        <tr>
+          <td width="20%" align="left">
+            <xsl:if test="count($prev)>0">
+              <a>
+                <xsl:attribute name="href">
+                  <xsl:call-template name="href.target">
+                    <xsl:with-param name="object" select="$prev"/>
+                  </xsl:call-template>
+                </xsl:attribute>
+                <xsl:call-template name="gentext">
+                  <xsl:with-param name="key">nav-prev</xsl:with-param>
+                </xsl:call-template>
+              </a>
+            </xsl:if>
+            <xsl:text>&#160;</xsl:text>
+          </td>
+          <th width="60%" align="center">
+            <xsl:apply-templates select="." mode="object.title.markup"/>
+          </th>
+          <td width="20%" align="right">
+            <xsl:text>&#160;</xsl:text>
+            <xsl:if test="count($next)>0">
+              <a>
+                <xsl:attribute name="href">
+                  <xsl:call-template name="href.target">
+                    <xsl:with-param name="object" select="$next"/>
+                  </xsl:call-template>
+                </xsl:attribute>
+                <xsl:call-template name="gentext">
+                  <xsl:with-param name="key">nav-next</xsl:with-param>
+                </xsl:call-template>
+              </a>
+            </xsl:if>
+          </td>
+        </tr>
+      </table>
+      <hr/>
+    </div>
+   </xsl:when>
+   <xsl:otherwise>
     <div class="navheader">
       <table width="100%" summary="Navigation header">
         <tr>
@@ -514,6 +550,8 @@ its parent.
       </table>
       <hr/>
     </div>
+   </xsl:otherwise>
+   </xsl:choose>
   </xsl:if>
 </xsl:template>
 
@@ -524,8 +562,95 @@ its parent.
   <xsl:param name="next" select="/foo"/>
   <xsl:variable name="home" select="/*[1]"/>
   <xsl:variable name="up" select="parent::*"/>
+  <xsl:variable name="lang" select="ancestor-or-self::*/@lang"/>
 
   <xsl:if test="$suppress.navigation = '0'">
+   <xsl:choose>
+   <xsl:when test="$lang='he' or $lang='ar'">
+    <div class="navfooter" dir="rtl">
+      <hr/>
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left">
+            <xsl:if test="count($prev)>0">
+              <a>
+                <xsl:attribute name="href">
+                  <xsl:call-template name="href.target">
+                    <xsl:with-param name="object" select="$prev"/>
+                  </xsl:call-template>
+                </xsl:attribute>
+                <xsl:call-template name="gentext">
+                  <xsl:with-param name="key">nav-prev</xsl:with-param>
+                </xsl:call-template>
+              </a>
+            </xsl:if>
+            <xsl:text>&#160;</xsl:text>
+          </td>
+          <td width="20%" align="center">
+            <xsl:choose>
+              <xsl:when test="$home != .">
+                <a>
+                  <xsl:attribute name="href">
+                    <xsl:call-template name="href.target">
+                      <xsl:with-param name="object" select="$home"/>
+                    </xsl:call-template>
+                  </xsl:attribute>
+                  <xsl:call-template name="gentext">
+                    <xsl:with-param name="key">nav-home</xsl:with-param>
+                  </xsl:call-template>
+                </a>
+              </xsl:when>
+              <xsl:otherwise>&#160;</xsl:otherwise>
+            </xsl:choose>
+          </td>
+          <td width="40%" align="right">
+            <xsl:text>&#160;</xsl:text>
+            <xsl:if test="count($next)>0">
+              <a>
+                <xsl:attribute name="href">
+                  <xsl:call-template name="href.target">
+                    <xsl:with-param name="object" select="$next"/>
+                  </xsl:call-template>
+                </xsl:attribute>
+                <xsl:call-template name="gentext">
+                  <xsl:with-param name="key">nav-next</xsl:with-param>
+                </xsl:call-template>
+              </a>
+            </xsl:if>
+          </td>
+        </tr>
+
+        <tr>
+          <td width="40%" align="left">
+            <xsl:apply-templates select="$prev" mode="object.title.markup"/>
+            <xsl:text>&#160;</xsl:text>
+          </td>
+          <td width="20%" align="center">
+            <xsl:choose>
+              <xsl:when test="count($up)>0">
+                <a>
+                  <xsl:attribute name="href">
+                    <xsl:call-template name="href.target">
+                      <xsl:with-param name="object" select="$up"/>
+                    </xsl:call-template>
+                  </xsl:attribute>
+                  <xsl:call-template name="gentext">
+                    <xsl:with-param name="key">nav-up</xsl:with-param>
+                  </xsl:call-template>
+                </a>
+              </xsl:when>
+              <xsl:otherwise>&#160;</xsl:otherwise>
+            </xsl:choose>
+          </td>
+          <td width="40%" align="right">
+            <xsl:text>&#160;</xsl:text>
+            <xsl:apply-templates select="$next" mode="object.title.markup"/>
+          </td>
+        </tr>
+      </table>
+    </div>
+   </xsl:when>
+   <xsl:otherwise>
     <div class="navfooter">
       <hr/>
       <table width="100%" summary="Navigation footer">
@@ -608,6 +733,8 @@ its parent.
         </tr>
       </table>
     </div>
+	</xsl:otherwise>
+	</xsl:choose>
   </xsl:if>
 </xsl:template>
 
@@ -942,6 +1069,13 @@ its parent.
 <xsl:template name="chunk-element-content">
   <xsl:param name="prev"></xsl:param>
   <xsl:param name="next"></xsl:param>
+  <xsl:variable name="rtl" select="ancestor-or-self::classentry[1][@rtl=1]
+									|ancestor-or-self::book[1][@rtl=1]
+									|ancestor-or-self::chapter[1][@rtl=1]
+									|ancestor-or-self::setinfo[1][@rtl=1]
+									|ancestor-or-self::appendix[1][@rtl=1]
+									|ancestor-or-self::refentry[1][@rtl=1]
+									|ancestor-or-self::enum[1][@rtl=1]"/>
 
   <xsl:choose>
    <xsl:when  test="$phpweb=true()">
@@ -958,6 +1092,38 @@ its parent.
     </xsl:call-template>
    </xsl:when>
    <xsl:otherwise>
+   <xsl:choose>
+   <xsl:when test="$rtl">
+  <html dir="rtl">
+    <xsl:call-template name="html.head">
+      <xsl:with-param name="prev" select="$prev"/>
+      <xsl:with-param name="next" select="$next"/>
+    </xsl:call-template>
+
+    <body xsl:use-attribute-sets="body.attrs">
+      <xsl:call-template name="user.header.navigation"/>
+
+        <xsl:call-template name="header.navigation"> 
+         <xsl:with-param name="prev" select="$prev"/>
+         <xsl:with-param name="next" select="$next"/>
+        </xsl:call-template>
+
+      <xsl:call-template name="user.header.content"/>
+
+      <xsl:apply-imports/>
+
+      <xsl:call-template name="user.footer.content"/>
+
+	 <xsl:call-template name="footer.navigation"> 
+         <xsl:with-param name="prev" select="$prev"/>
+         <xsl:with-param name="next" select="$next"/>
+        </xsl:call-template>
+
+      <xsl:call-template name="user.footer.navigation"/>
+    </body>
+  </html>
+  </xsl:when>
+  <xsl:otherwise>
   <html>
     <xsl:call-template name="html.head">
       <xsl:with-param name="prev" select="$prev"/>
@@ -986,6 +1152,8 @@ its parent.
       <xsl:call-template name="user.footer.navigation"/>
     </body>
   </html>
+  </xsl:otherwise>
+  </xsl:choose>
   </xsl:otherwise>
   </xsl:choose>
 </xsl:template>

@@ -35,7 +35,9 @@
 <!--========================================================================-->
 
  <xsl:template match="classtitle">
-  <xsl:apply-templates />
+  <span dir="ltr">
+   <xsl:apply-templates />
+  </span>
  </xsl:template>
 
  <xsl:template match="desc|shortdesc">
@@ -68,12 +70,14 @@
       <xsl:with-param name="object" select="id($id)"/>
      </xsl:call-template>
     </xsl:variable>
-    <a>
-     <xsl:attribute name="href">
-      <xsl:value-of select="$link" />
-     </xsl:attribute>
-     <xsl:value-of select="." />
-    </a>
+    <span dir="ltr">
+     <a>
+      <xsl:attribute name="href">
+       <xsl:value-of select="$link" />
+      </xsl:attribute>
+      <xsl:value-of select="." />
+     </a>
+    </span>
    </xsl:when>
    <xsl:otherwise>
     <xsl:apply-templates />
@@ -120,12 +124,14 @@
       <xsl:with-param name="object" select="id($id)"/>
      </xsl:call-template>
     </xsl:variable>
-    <a>
-     <xsl:attribute name="href">
-      <xsl:value-of select="$link" />
-     </xsl:attribute>
-     <xsl:value-of select="$prop" />
-   </a>
+    <span dir="ltr">
+     <a>
+      <xsl:attribute name="href">
+       <xsl:value-of select="$link" />
+      </xsl:attribute>
+      <xsl:value-of select="$prop" />
+    </a>
+    </span>
    </xsl:when>
    <xsl:otherwise>
     <xsl:apply-templates />
@@ -133,7 +139,6 @@
   </xsl:choose>
  </xsl:template>
 <!--========================================================================-->
-
  <xsl:template match="function|constructor">
   <xsl:call-template name="func.proto">
    <xsl:with-param name="node" select="."/>
@@ -142,12 +147,12 @@
  </xsl:template>
 
  <xsl:template match="function" mode="synoptic.mode">
-  <xsl:call-template name="func.proto">
-   <xsl:with-param name="node" select="."/>
-   <xsl:with-param name="append.bracket" select="1"/>
-   <xsl:with-param name="with-link" select="1"/>
-   <xsl:with-param name="class" select="ancestor-or-self::classentry/classmeta/classtitle"/>
-  </xsl:call-template>
+    <xsl:call-template name="func.proto">
+     <xsl:with-param name="node" select="."/>
+     <xsl:with-param name="append.bracket" select="1" />
+     <xsl:with-param name="with-link" select="1"/>
+     <xsl:with-param name="class" select="ancestor-or-self::classentry/classmeta/classtitle"/>
+    </xsl:call-template>
  </xsl:template>
 
  <xsl:template name="func.proto">
@@ -155,9 +160,9 @@
   <xsl:param name="node" select="." />
   <xsl:param name="with-link" select="0"/>
   <xsl:param name="class" select="@class"/>
-  
+
   <xsl:variable name="funcname">
-   <xsl:value-of select="translate($node,'()','')"/>
+   <xsl:value-of select="translate($node, '()', '')"/>
   </xsl:variable>
 
   <xsl:variable name="id">
@@ -177,7 +182,7 @@
     </xsl:with-param>
    </xsl:call-template>
   </xsl:variable>
-  
+
   <xsl:choose>
    <xsl:when test="$id!='no' and ((count(parent::funcdef)='0' or count(ancestor::constructor)!='0') or $with-link='1')">
     <xsl:variable name="link">
@@ -185,16 +190,18 @@
       <xsl:with-param name="object" select="id($id)"/>
      </xsl:call-template>
     </xsl:variable>
-    <a>
-     <xsl:attribute name="href">
-      <xsl:value-of select="$link" />
-     </xsl:attribute>
-     <xsl:value-of select="$node" />
-     <xsl:if test="$append.bracket=1">
-      <xsl:text>()</xsl:text>
-     </xsl:if>
-    </a>
-   <xsl:text> </xsl:text>
+    <span dir="ltr">
+     <a>
+      <xsl:attribute name="href">
+       <xsl:value-of select="$link" />
+      </xsl:attribute>
+      <xsl:value-of select="$node" />
+      <xsl:if test="$append.bracket=1">
+       <xsl:text>()</xsl:text>
+      </xsl:if>
+     </a>
+    </span>
+    <xsl:text> </xsl:text>
    </xsl:when>
    <xsl:otherwise>
     <xsl:apply-templates />
@@ -224,12 +231,14 @@
       <xsl:with-param name="object" select="id($id)"/>
      </xsl:call-template>
     </xsl:variable>
-    <a>
-     <xsl:attribute name="href">
-      <xsl:value-of select="$link" />
-     </xsl:attribute>
-     <xsl:value-of select="." />
-    </a>
+    <span dir="ltr">
+     <a>
+      <xsl:attribute name="href">
+       <xsl:value-of select="$link" />
+      </xsl:attribute>
+      <xsl:value-of select="." />
+     </a>
+    </span>
    </xsl:when>
    <xsl:otherwise>
     <xsl:apply-templates />
@@ -238,10 +247,9 @@
  </xsl:template>
 
 <!--========================================================================-->
-
 <xsl:template match="classentry">
   <div class="classentry">
-    <a>
+   <a>
      <xsl:attribute name="name"><xsl:value-of select="@id"/></xsl:attribute>
     </a>
     <h2 class="title">
@@ -295,7 +303,7 @@
      <xsl:apply-templates select="./signals"  mode="synoptic.mode"/>
      <xsl:apply-templates select="./properties" mode="synoptic.mode"/>
     </p>
-  </div>
+   </div>
   <xsl:apply-templates select="./constructor|./methods|./signals|./properties"/>
  </xsl:template>
 
@@ -335,7 +343,7 @@
   </h3>
     <blockquote>
      <xsl:apply-templates select="./funcsynopsis"/>
-     <xsl:text> &#8212;</xsl:text>
+     <xsl:text disable-output-escaping="yes"> --</xsl:text>
      <xsl:apply-templates select="./shortdesc" />
     </blockquote>
   </div>
@@ -356,13 +364,15 @@
 
  <xsl:template match="method" mode="synoptic.mode">
   <dt>
+  <span dir="ltr">
    <xsl:apply-templates select="./funcsynopsis/funcprototype/funcdef/function" mode="synoptic.mode"/>
+   </span>
   </dt>
   <dd>
      <xsl:call-template name="spaceholder"/>
      <xsl:apply-templates select="./shortdesc" mode="synoptic.mode"/>
   </dd>
- </xsl:template>
+</xsl:template>
 
  <xsl:template match="signals" mode="synoptic.mode">
   <h3>
@@ -400,8 +410,10 @@
 
  <xsl:template match="prop" mode="synoptic.mode">
   <dt>
+  <span dir="ltr">
    <xsl:apply-templates select="./propname" mode="synoptic.mode"/>
    <xsl:text>:</xsl:text>
+   </span>
   </dt>
   <dd>
   <xsl:call-template name="spaceholder"/>
@@ -416,7 +428,6 @@
  <xsl:template match="funcprototype" mode="synoptic.mode">
       <xsl:apply-templates mode="synoptic.mode"/>
  </xsl:template>
-
 
  <xsl:template match="methods|signals|properties">
   <xsl:apply-templates />
@@ -457,6 +468,7 @@
  </xsl:template>
  
  <xsl:template match="prop">
+  <div>
   <a>
    <xsl:attribute name="name"><xsl:value-of select="@id"/></xsl:attribute>
   </a>
@@ -464,6 +476,7 @@
    <xsl:apply-templates select="." mode="title.markup"/>
   </h2>
   <p>
+  <span dir="ltr">
    <xsl:text>Access: </xsl:text>
    <xsl:choose>
     <xsl:when test="@type='rw'">
@@ -479,10 +492,12 @@
    <br/>
    <xsl:text>Type: </xsl:text>
    <xsl:apply-templates select="./proptype"/>
+   </span>
   </p>
   <p>
    <xsl:apply-templates select="./desc"/>
   </p>
+  </div>
  </xsl:template>
  
 </xsl:stylesheet>
