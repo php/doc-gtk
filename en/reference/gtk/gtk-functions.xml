@@ -2391,9 +2391,10 @@ echo $rcStyle->bg . "\n";  // Will print #ff6060
    </shortdesc>
    <desc>
     <simpara>
-     Registers a function to be called periodically. 
+     Registers <parameter>function</parameter> to be called periodically. 
      The function will be called repeatedly after <parameter>interval</parameter>
-     milliseconds until it returns <literal>FALSE</literal> at which point 
+     milliseconds while it returns <literal>TRUE</literal>. When
+     <function>function</function> no longer returns <literal>TRUE</literal> 
      the timeout is destroyed and will not be called again.
     </simpara>
     <simpara>
