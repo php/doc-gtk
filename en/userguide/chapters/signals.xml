@@ -104,6 +104,9 @@
      <programlisting role="php">
 <![CDATA[
 <?php
+if( !extension_loaded('gtk')) {	
+    dl( 'php_gtk.' . PHP_SHLIB_SUFFIX); 
+}
 
 function shutdown() 
 {
@@ -508,10 +511,9 @@ gtk::main();
     <programlisting role="php">
 <![CDATA[
 <?php
-
-dl("php_gtk." . (strstr(PHP_OS, "WIN") ? "dll" : 
-"so")) ||
-die("Can't load php_gtk module!\n");
+if( !extension_loaded('gtk')) {	
+    dl( 'php_gtk.' . PHP_SHLIB_SUFFIX) || die("Can't load php_gtk module!\n"); 
+}
 
 function show_event_type($button, $event, $text) 
 {

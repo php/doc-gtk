@@ -80,6 +80,19 @@
   <itemizedlist>
    <listitem>
     <simpara>
+     If you get a <literal>./configure: line 3027: `PHP_GTK_ARG_ENABLE(debug, 
+     whether to include debugging symbols,'</literal> after doing the 
+     <command>./configure</command>, you just have to do the following:
+   </simpara>
+   <programlisting>
+./buildconf
+aclocal
+./buildconf
+./configure
+   </programlisting>
+  </listitem>
+   <listitem>
+    <simpara>
      <literal>./ltconfig: ltconfig : No such file or directory, configure: 
      error: libtool configure failed</literal>  is caused by not having
      one of libtool, automake or autoconf installed.

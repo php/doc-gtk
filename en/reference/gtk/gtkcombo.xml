@@ -101,6 +101,16 @@
      </tgroup>
     </table>
    </para>
+   <para>
+    The normal but annoying behaviour is that the first entry is selected
+    when you open the dropdown. This can be stopped by doing the following:
+    <programlisting role="php">
+<![CDATA[
+$objList = $objCombobox->list;
+$objList->set_selection_mode( GTK_SELECTION_SINGLE);
+]]>
+    </programlisting>
+   </para>
    <simpara>
     See also:  <classname>GtkEditable</classname>, 
     <classname>GtkEntry</classname>, <classname>GtkItem</classname>, 
@@ -147,8 +157,9 @@
 <![CDATA[
 <?php
 
-dl("php_gtk." . (strstr(PHP_OS, "WIN") ? "dll" : 
-"so"));
+if( !extension_loaded('gtk')) {	
+    dl( 'php_gtk.' . PHP_SHLIB_SUFFIX); 
+}
 
 function on_click($item, $event, $i) {
   echo $item->get_data($i)."\n";

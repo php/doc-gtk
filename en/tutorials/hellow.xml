@@ -27,11 +27,8 @@
 <![CDATA[
 <?php
 
-if (!class_exists('gtk')) {
-    if (strtoupper(substr(PHP_OS, 0,3) == 'WIN'))
-    dl('php_gtk.dll');
-  else
-    dl('php_gtk.so');
+if( !extension_loaded('gtk')) {	
+    dl( 'php_gtk.' . PHP_SHLIB_SUFFIX); 
 }
 
 function delete_event()
@@ -77,11 +74,8 @@ gtk::main();
 <![CDATA[
 <?php
 
-if (!class_exists('gtk')) {
-    if (strtoupper(substr(PHP_OS, 0,3) == 'WIN'))
-    dl('php_gtk.dll');
- else
-    dl('php_gtk.so');
+if( !extension_loaded('gtk')) {	
+    dl( 'php_gtk.' . PHP_SHLIB_SUFFIX); 
 }
 
 ?>
@@ -92,7 +86,8 @@ if (!class_exists('gtk')) {
   already available, and loads it if it isn't.  This is done by the
   <literal>dl('php_gtk.dll');</literal> or
   <literal>dl('php_gtk.so');</literal> statements on Windows and Linux
-  respectively.
+  respectively. The PHP_SHLIB_SUFFIX takes care of the specific extensions
+  used by Windows and Linux.
  </para>
  <para>
   <example>

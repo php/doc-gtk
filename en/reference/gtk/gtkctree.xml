@@ -15,13 +15,21 @@
   <funcsynopsis>
    <funcprototype>
     <funcdef> <function>GtkCTree</function></funcdef>
-    <paramdef>XXX</paramdef>
+    <paramdef>int <parameter>nColumns</parameter></paramdef>
+    <paramdef>int <parameter>nTreeGraphic</parameter></paramdef>
+    <paramdef><optional>Array <parameter>arColTitles</parameter></optional></paramdef>
    </funcprototype>
   </funcsynopsis>
   <shortdesc>
-
+   Creates a new <classname>CtkCTree</classname> object.
   </shortdesc>
   <desc>
+   <simpara>
+    Create a new <classname>CtkCTree</classname> object with a number
+    of columns. The second parameter contains the index of the column
+    in which the tree lines shall be visible (indent and +/-) and the third
+    parameter can be an array with the column titles.
+   </simpara>
    <para>
     Notice how much of the code here is actually the arrays of data needed
     to populate the <classname>GtkCTree</classname>.  It would probably be
@@ -31,8 +39,9 @@
       <programlisting role="php">
 <![CDATA[
 <?php
-
-dl('php_gtk.' . (strstr(PHP_OS, 'WIN') ? 'dll' : 'so'));
+if( !extension_loaded('gtk')) {	
+    dl( 'php_gtk.' . PHP_SHLIB_SUFFIX); 
+}
 
 /* start of data generation arrays */
 $widgets_ = array(
@@ -140,15 +149,33 @@ gtk::main();
   <method id="gtk.gtkctree.method.insert_node">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>XXX <function>insert_node</function></funcdef>
-     <paramdef>XXX</paramdef>
+     <funcdef><classname>GtkCTreeNode</classname> <function>insert_node</function></funcdef>
+     <paramdef><classname>GtkCTreeNode</classname> <parameter>sibling</parameter></paramdef>
+     <paramdef>Array <parameter>contents</parameter></paramdef>
+     <paramdef>int <parameter>pixmap_spacing</parameter></paramdef>
+     <paramdef><classname>GdkPixmap</classname> <parameter>pixmap_closed</parameter></paramdef>
+     <paramdef><classname>GdkBitmap</classname> <parameter>mask_closed</parameter></paramdef>
+     <paramdef><classname>GdkPixmap</classname> <parameter>pixmap_open</parameter></paramdef>
+     <paramdef><classname>GdkBitmap</classname> <parameter>mask_open</parameter></paramdef>
+     <paramdef>boolean <parameter>is_leaf</parameter></paramdef>
+     <paramdef>boolean <parameter>is_expanded</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Inserts a new node in the tree.
    </shortdesc>
    <desc>
-
+    <simpara>
+     This function creates a new node and inserts it into the tree. The first parameter
+     is the parent node; if it's NULL the node will be the root. The "contents" parameter
+     is an array of strings which are shown in the tree, for each column one. pixmap_spacing 
+     is the spacing between the pixmap and the text.
+    </simpara>
+    <simpara>
+     The sibling parameter determines the position of the new node. If it is NULL, 
+     it will be appended to the parents childen as the last element. If the sibling is
+     given, the new node will be inserted just before it.
+    </simpara>
    </desc>
   </method>
 
@@ -163,10 +190,13 @@ gtk::main();
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Removes the given node from the tree
    </shortdesc>
    <desc>
-
+    <simpara>
+     Removes the given node from the tree. Children nodes are appended to the end of the
+     tree if they are not removed explicitly.
+    </simpara>
    </desc>
   </method>
 
