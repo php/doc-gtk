@@ -2,7 +2,7 @@
    Docbook Customiszation layer of PHP-GTK docs
    Authors: James Moore <jmoore@php.net>
 
-   $Id: phpgtkdoc.dtd,v 1.5 2001-08-17 05:58:55 andrei Exp $
+   $Id: phpgtkdoc.dtd,v 1.6 2001-08-19 10:57:50 jmoore Exp $
 
 -->
 
@@ -282,3 +282,87 @@
 <!ATTLIST optionname
     %common.attrib;
 >
+
+<!--
+
+  - arguments: wrapper for individual arguments.
+
+-->
+<!ELEMENT arguments (argument)+ >
+<!ATTLIST arguments
+    %common.attrib;
+>
+
+<!--
+
+  - argument: provides information about an objects arguments
+
+-->
+<!ELEMENT argument ((argname, argtype),(shortdesc,desc))>
+<!ATTLIST argument
+    %common.attrib;
+    type (ro|rw) #REQUIRED
+>
+
+<!--
+
+  - argname: the name of the argument
+
+-->
+<!ELEMENT argname (%docinfo.char.mix;)* >
+<!ATTLIST argname
+    %common.attrib;
+>
+
+<!--
+
+ - argtype: the type of argument (int, char, object etc)
+
+-->
+<!ELEMENT argtype (%docinfo.char.mix;)* >
+<!ATTLIST argtype
+    %common.attrib;
+>
+
+<!--
+
+  - properties: wrapper for individual arguments.
+
+-->
+<!ELEMENT properties (argument)+ >
+<!ATTLIST properties
+    %common.attrib;
+>
+
+<!--
+
+  - property: provides information about an objects properties
+
+-->
+<!ELEMENT property ((argname, argtype),(shortdesc,desc))>
+<!ATTLIST property
+    %common.attrib;
+    type (ro|rw) #REQUIRED
+>
+
+<!--
+
+  - propname: the name of the property
+
+-->
+<!ELEMENT propname (%docinfo.char.mix;)* >
+<!ATTLIST propname
+    %common.attrib;
+>
+
+<!--
+
+ - proptype: the type of property (int, char, object etc)
+
+-->
+<!ELEMENT proptype (%docinfo.char.mix;)* >
+<!ATTLIST proptype
+    %common.attrib;
+>
+
+
