@@ -65,6 +65,12 @@ $notebook->show_all();
      </programlisting>
     </example>
    </para> 
+   <simpara>
+    Tabs are automatically connected to the <signalname
+    class="GtkButton">clicked</signalname> signal. When a tab is clicked the
+    <signalname class="GtkNotebook">switch-page</signalname> signal is
+    emitted which causes that tab's page to be brought to the foreground.
+   </simpara>
   </desc>
  </constructor>
 
@@ -82,7 +88,7 @@ $notebook->show_all();
      </paramdef>
      <paramdef>
       <classname>GtkWidget</classname>
-      <parameter>tab_label</parameter>
+      <parameter><optional>tab_label</optional></parameter>
      </paramdef>
     </funcprototype>
    </funcsynopsis>
@@ -90,6 +96,43 @@ $notebook->show_all();
     Add a page to the back of the note book.
    </shortdesc>
    <desc>
+    <simpara>
+     Adds a new page and tab to the back of the notebook.
+     <parameter>child</parameter> is added as the "page" with
+     <parameter>tab_label</parameter> as the tab. <parameter>child</parameter>
+     can be any widget but it is most useful when <parameter>child</parameter>
+     is descended from <classname>GtkContainer</classname>. The
+     <parameter>tab_label</parameter> is usually a
+     <classname>GtkLabel</classname> but may be any widget.
+    </simpara>
+    <simpara>
+     <parameter>tab_label</parameter> is optional. If it is not supplied the
+     tab will be empty.
+    </simpara>
+    <para>
+     <example>
+      <title>Appending pages to a notebook</title>
+      <programlisting role="php">
+<![CDATA[
+<?php
+$pages = array(1, 2, 3);
+
+$notebook =& new GtkNotebook;
+
+foreach ($pages as $pageNumber) {
+    $frame =& new GtkFrame('Page ' . $pageNumber);
+    $label =& new GtkLabel('Tab '  . $pageNumber);
+    $notebook->append_page($frame, $label);
+}
+?>
+]]>
+      </programlisting>
+     </example>
+    </para>
+    <simpara>
+     See also: <function class="GtkNotebook">prepend_page</function>,
+               <function class="GtkNotebook">insert_page</function>
+    </simpara>
    </desc>
   </method>
 
@@ -122,7 +165,7 @@ $notebook->show_all();
      </paramdef>
      <paramdef>
       <classname>GtkWidget</classname>
-      <parameter>tab_label</parameter>
+      <parameter><optional>tab_label</optional></parameter>
      </paramdef>
     </funcprototype>
    </funcsynopsis>
@@ -130,7 +173,23 @@ $notebook->show_all();
     Add a page to the begining of the note book.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Adds a new page to the begining of the notebook. 
+     <parameter>child</parameter> is added as the "page" with
+     <parameter>tab_label</parameter> as the tab.
+     <parameter>child</parameter> can be any widget but it is most useful when
+     <parameter>child</parameter> is descended from
+     <classname>GtkContainer</classname>. The <parameter>tab_label</parameter>
+     is usually a <classname>GtkLabel</classname> but may be any widget.
+    </simpara>
+    <simpara>
+     <parameter>tab_label</parameter> is optional. If it is not supplied the
+     tab will be empty.
+    </simpara>
+    <simpara>
+     See also: <function class="GtkNotebook">append_page</function>,
+               <function class="GtkNotebook">insert_page</function>
+    </simpara> 
    </desc>
   </method>
 
@@ -163,10 +222,10 @@ $notebook->show_all();
      </paramdef>
      <paramdef>
       <classname>GtkWidget</classname>
-      <parameter>tab_label</parameter>
+      <parameter><optional>tab_label</optional></parameter>
      </paramdef>
      <paramdef>int
-      <parameter>position</parameter>
+      <parameter><optional>position</optional></parameter>
      </paramdef>
     </funcprototype>
    </funcsynopsis>
@@ -174,7 +233,31 @@ $notebook->show_all();
     Add a page to the notebook in the given position.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Adds a new page to the notebook as the <parameter>position</parameter>th page.
+     <parameter>child</parameter> is added as the "page" with
+     <parameter>tab_label</parameter> as the tab.
+     <parameter>child</parameter> can be any widget but it is most useful when
+     <parameter>child</parameter> is descended from
+     <classname>GtkContainer</classname>. The <parameter>tab_label</parameter>
+     is usually a <classname>GtkLabel</classname> but may be any widget. 
+     If <parameter>position</parameter> is <literal>-1</literal> the page will
+     be added as the last page in the notebook. Page positions begin with
+     <literal>0</literal>.
+    </simpara>
+    <simpara>
+     <parameter>tab_label</parameter> is optional. If it is not supplied the
+     tab will be empty.
+    </simpara>
+    <simpara>
+     <parameter>position</parameter> is optional. If it is not supplied it
+     will default to <literal>-1</literal>
+    </simpara>
+    <simpara>
+     See also: <function class="GtkNotebook">append_page</function>,
+               <function class="GtkNotebook">prepend_page</function>,
+               <function class="GtkNotebook">remove_page</function>
+    </simpara>
    </desc>
   </method>
 
@@ -221,10 +304,30 @@ $notebook->show_all();
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Removes the page at the given position from the notebook.
+    Remove the page at the given position from the notebook.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Removes the page with index <parameter>page_num</parameter> or the last
+     page if <parameter>page_num</parameter> is <literal>-1</literal>. Pages
+     are indexed begining with <literal>0</literal>.
+    </simpara>
+    <para>
+     <example>
+      <title>Removing the current page</title>
+      <programlisting role="php">
+<![CDATA[
+<?php
+// Remove the current page.
+$notebook->remove_page($notebook->get_current_page());
+?>
+]]>
+      </programlisting>
+     </example>
+    </para>
+    <simpara>
+     See also: <function class="GtkNotebook">insert_page</function>
+    </simpara>
    </desc>
   </method>
 
@@ -238,10 +341,31 @@ $notebook->show_all();
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Returns the index of the current page.
+    Return the index of the current page.
    </shortdesc>
    <desc>
+    <simpara>
+     Returns the index of the currently selected page.
+    </simpara>
+    <para>
+     <example>
+      <title>Set the current page to 0 if not already</title>
+      <programlisting role="php">
+<![CDATA[
+<?php
+$notebook =& new GtkNotebook;
+for ($i = 0; $i < 10; ++$i) {
+    $notebook->append_page(new GtkFrame('Page ' . $i), new GtkLabel($i));
+}
 
+if ($notebook->get_current_page() != 0) {
+    $notebook->set_current_page(0);
+}
+?>
+]]>
+      </programlisting>
+     </example>
+    </para>
    </desc>
   </method>
 
@@ -361,7 +485,7 @@ $notebook->show_all();
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Set whether or not to show the page tabs.
    </shortdesc>
    <desc>
 
