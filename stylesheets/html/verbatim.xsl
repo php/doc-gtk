@@ -7,7 +7,7 @@
                 version='1.0'>
 
 <!-- ********************************************************************
-     $Id: verbatim.xsl,v 1.3 2003-06-17 21:01:42 sfox Exp $
+     $Id: verbatim.xsl,v 1.4 2004-08-06 07:15:18 cweiske Exp $
      ********************************************************************
 
      This file is part of the XSL DocBook Stylesheet distribution.
@@ -29,9 +29,18 @@
     <a href="{$id}"/>
   </xsl:if>
   <table class="{name(.)}"><tr><td>
-  <pre class="{name(.)}">
-   <xsl:apply-templates/>
-  </pre>
+  <xsl:choose>
+   <xsl:when test="@role='php'">
+    <pre class="phpcode">
+     <xsl:apply-templates/>
+    </pre>
+   </xsl:when>
+   <xsl:otherwise>
+    <pre class="{name(.)}">
+     <xsl:apply-templates/>
+    </pre>
+   </xsl:otherwise>
+  </xsl:choose>
   </td></tr></table>
   </span>
 </xsl:template>
