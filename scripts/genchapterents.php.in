@@ -11,7 +11,7 @@ else
 function gen_ent($path, $file, $lang)
 {
     $ent = preg_replace("%[\\/]%",".", preg_replace("%.*[\\/]en+[\\/]((userguide|reference)[\\/])?(.*)\.xml%",'\\3', $path."/".$file));
-    return "<!ENTITY $ent SYSTEM \"".preg_replace("%(en)+([\\/](userguide|reference)[\\/])%","$lang\\2",preg_replace("%.*[\\/](en+[\\/])%","\\1","$path/$file"))."\">";
+    return "<!ENTITY $ent SYSTEM \"".preg_replace("%^(en)+([\\/](userguide|reference)[\\/])?%","$lang\\2",preg_replace("%.*[\\/](en+[\\/])%","\\1","$path/$file"))."\">";
 
 }
 
