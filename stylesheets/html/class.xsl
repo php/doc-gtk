@@ -328,7 +328,7 @@
     </blockquote>
     </p>
 
-<!--    <p>
+    <p>
      <h3>
       <xsl:call-template name="gentext">
        <xsl:with-param name="key">directsubclasses</xsl:with-param>
@@ -343,7 +343,7 @@
        </xsl:call-template>
       </div>
      </blockquote>
-    </p>//-->
+    </p>
 
     <p>
      <h3>
@@ -406,7 +406,7 @@
     </blockquote>
     </p>
     
-<!--    <p>
+    <p>
      <h3>
       <xsl:call-template name="gentext">
        <xsl:with-param name="key">directsubclasses</xsl:with-param>
@@ -421,7 +421,7 @@
        </xsl:call-template>
       </div>
      </blockquote>
-    </p>//-->
+    </p>
 
     <p>
      <h3>
