@@ -740,6 +740,96 @@ calendar
 
 </enum>
 
+<enum id="gtk.enum.gtkspinbuttonupdatepolicy">
+ <enumname>GtkSpinButtonUpdatePolicy</enumname>
+
+ <enumoption>
+  <optionname>GTK_UPDATE_ALWAYS</optionname>
+  <shortdesc>
+   Always updates the spinbutton value.  If an entry is invalid,
+   the value is updated to the lower or upper bound as appropriate.
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GTK_UPDATE_IF_VALID</optionname>
+  <shortdesc>
+   Prevents the spinbutton's current value from being altered where
+   an entry is invalid.
+  </shortdesc>
+ </enumoption>
+
+</enum>
+
+<enum id="gtk.enum.gtkspintype">
+ <enumname>GtkSpinType</enumname>
+
+ <enumoption>
+  <optionname>GTK_SPIN_STEP_FORWARD</optionname>
+  <shortdesc>
+   Spins forward by the value set in the underlying 
+   <literal>step_increment</literal>.  This value can be overridden
+   by setting the <parameter>increment</parameter> parameter to a value
+   above <literal>0.0</literal>.
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GTK_SPIN_STEP_BACKWARD</optionname>
+  <shortdesc>
+   Spins backward by the value set in the underlying 
+   <literal>step_increment</literal>.  This value can be overridden
+   by setting the <parameter>increment</parameter> parameter to a value
+   above <literal>0.0</literal>.
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GTK_SPIN_PAGE_FORWARD</optionname>
+  <shortdesc>
+   Spins forward by the value set as <literal>page_increment</literal> 
+   in the underlying <classname>GtkAdjustment</classname>.  The value
+   set in the <parameter>increment</parameter> parameter is ignored.
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GTK_SPIN_PAGE_BACKWARD</optionname>
+  <shortdesc>
+   Spins backward by the value set as <literal>page_increment</literal> 
+   in the underlying <classname>GtkAdjustment</classname>.  The value
+   set in the <parameter>increment</parameter> parameter is ignored.
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GTK_SPIN_HOME</optionname>
+  <shortdesc>
+   Spins to value set as <literal>lower</literal> bound.  The value
+   set in the <parameter>increment</parameter> parameter is ignored.
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GTK_SPIN_END</optionname>
+  <shortdesc>
+   Spins to value set as <literal>upper</literal> bound.  The value
+   set in the <parameter>increment</parameter> parameter is ignored.
+  </shortdesc>
+ </enumoption>
+
+ <enumoption>
+  <optionname>GTK_SPIN_USER_DEFINED</optionname>
+  <shortdesc>
+   Used where the amount of spin is not defined anywhere in the
+   underlying <classname>GtkAdjustment</classname>.  Negative or
+   positive values set in the <parameter>increment</parameter> parameter
+   are used to indicate the direction of the spin.
+  </shortdesc>
+ </enumoption>
+
+</enum>
+
 <enum id="gtk.enum.gtkstatetype">
  <enumname>GtkStateType</enumname>
 
