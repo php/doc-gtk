@@ -13,7 +13,9 @@
      <funcdef>GdkAtom <function>gdk::atom_intern</function></funcdef>
      <paramdef>string <parameter>atom_name</parameter></paramdef>
      <paramdef>int 
-      <parameter><optional>only_if_exists = FALSE</optional></parameter>
+      <parameter>
+       <optional>only_if_exists = FALSE</optional>
+      </parameter>
      </paramdef>
     </funcprototype>
    </funcsynopsis>
@@ -37,7 +39,7 @@
    </shortdesc>
    <desc>
     <simpara>
-     Esta funci&oacute;n causa la emisi&ocaute;n de un sonido de advertencia.
+     Esta función causa la emisi&ocaute;n de un sonido de advertencia.
      La naturaleza precisa del sonido son dependientes del sistema y como este
      configurado.
     </simpara>
@@ -107,22 +109,22 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Crea un <classname>GdkColor</classname> de una especificaci&ocacute; de 
+    Crea un <classname>GdkColor</classname> de una especificació de 
     color.
    </shortdesc>
    <desc>
     <simpara>
-     Esta funci&oacute; crea una nueva estructura <classname>GdkColor</classname>
+     Esta funció crea una nueva estructura <classname>GdkColor</classname>
      y la llena deacuerdo a el color nombrado en  el parametro 
      <parameter>color_spec</parameter>. La cadena que es pasada como parametro
-     puede ser un conjunto de de tres n&uacute;meros hexadecimales indicando el
+     puede ser un conjunto de de tres números hexadecimales indicando el
      color, e.j. <literal>'#FF0000'</literal>, o su nombre de color equivalente
      en <filename>rgb.txt</filename>, e.j. <literal>'red'</literal>.
     </simpara>
     <para>
-     Los usuarios de Win32 no podr&aacute;n encontrar este archivo, porque esta
+     Los usuarios de Win32 no podrán encontrar este archivo, porque esta
      compilado. Hay una buena referencia de <filename>rgb.txt</filename> en
-     <ulink url="&url.rgbtxt;">Aqu&iacute;</ulink>.
+     <ulink url="&url.rgbtxt;">Aquí</ulink>.
     </para>
    </desc>
   </method>
@@ -529,7 +531,7 @@
    </shortdesc>
    <desc>
     <simpara>
-    Este m&eacute;todo carga un nombre de fuente, el cual debe ser dado de la forma
+    Este método carga un nombre de fuente, el cual debe ser dado de la forma
      <emphasis>X Logical Font Description</emphasis> 
      (<acronym>XLFD</acronym>).
     </simpara>
@@ -540,12 +542,12 @@
      cuando se hace una busqueda - las excepciones son 
      <literal>addedstyle</literal>, que no necesita, y 
      <literal>registry</literal>, que es un campo obligatorio. 
-     La descripci&oacute;n comienza con un gui&oacute;n, <literal>-</literal>,
-     y cada campo es tambi&eacute;n separado por un gui&oacute;n.
+     La descripción comienza con un guión, <literal>-</literal>,
+     y cada campo es también separado por un guión.
     </simpara>
     <simpara>
-     Si necesitas mas informaci&oacute;n sobre fuentes que el dado aqu&iacute;,
-     la completa definici&oacute;n esta disponible en linea a traves de
+     Si necesitas mas información sobre fuentes que el dado aquí,
+     la completa definición esta disponible en linea a traves de
      <ulink url="&url.xlfd;">XWindows documentation</ulink>.
     </simpara>
     <para>
@@ -605,7 +607,7 @@ gdk::font_load('-unknown-Arial-normal-r-normal--*-120-96-96-p-0-iso8859-1');
     </para>
     <note>
      <simpara>
-      Informaci&oacute;n de las fuente en el formato <acronym>XLFD</acronym> pueden ser
+      Información de las fuente en el formato <acronym>XLFD</acronym> pueden ser
       vistas en cualquier sistema que utilice los widgets 
       <classname>GtkFontSelection</classname> o 
       <classname>GtkFontSelectionDialog</classname>.
@@ -635,19 +637,19 @@ gdk::font_load('-unknown-Arial-normal-r-normal--*-120-96-96-p-0-iso8859-1');
    </shortdesc>
    <desc>
     <simpara>
-     Este m&eacute;todo se usa cuando cualquier rango de fuentes podria ser 
-     aceptable. Habitualmente esto seria cuando la internacionalizaci&oacute;n
+     Este método se usa cuando cualquier rango de fuentes podria ser 
+     aceptable. Habitualmente esto seria cuando la internacionalización
      es algo a tener en cuenta. Ademas podria ser beneficio en donde se 
-     necesite flexibilidad por encima de la elecci&oacute;n de la fuente.
+     necesite flexibilidad por encima de la elección de la fuente.
     </simpara>
     <simpara>
       Carga exactamente de la misma manera que
       <function>gdk::font_load()</function>, separando cada fuente potencial
       a ser usada con una coma. El sistema que ejecuta la aplicacion 
-      usar&aacute; la primer fuente del conjunto que logre encontrar.
+      usará la primer fuente del conjunto que logre encontrar.
      </simpara>
     <simpara>
-     En win32, el m&eacute;todo <function>fontset_load()</function> se usa
+     En win32, el método <function>fontset_load()</function> se usa
      internamente deacuerdo a si esto o  
      <function>gdk::font_load()</function> fue llamado.
     </simpara>
@@ -915,9 +917,9 @@ $transparent_color, $data);
    </shortdesc>
    <desc>
     <simpara>
-     Esta funci&oacute;n devuelve el alto de la pantalla en pixels.
-     Esto puede ser usado en m&eacute;todos para poner el alto y asegurar
-     que los contenedores sean agrandados relativamente a la resoluci&oacute;n
+     Esta función devuelve el alto de la pantalla en pixels.
+     Esto puede ser usado en métodos para poner el alto y asegurar
+     que los contenedores sean agrandados relativamente a la resolución
      de la pantalla. 
     </simpara>
    </desc>
@@ -935,8 +937,8 @@ $transparent_color, $data);
    </shortdesc>
    <desc>
     <simpara>
-     Esta funci&oacute;n devuelve la altura en milimetros de la pantalla.
-     Este puede usarse como un m&eacute;todo para asegurar que los contenedores
+     Esta función devuelve la altura en milimetros de la pantalla.
+     Este puede usarse como un método para asegurar que los contenedores
      sean agrandados relativamente al tamaño de pantalla que esta siendo usado.
     </simpara>
    </desc>
@@ -954,9 +956,9 @@ $transparent_color, $data);
    </shortdesc>
    <desc>
     <simpara>
-     Esta funci&oacute;n devuelve el ancho de la pantalla en pixels.
-     Esto puede ser usado en m&eacute;todos para poner el ancho y asegurar
-     que los contenedores sean agrandados relativamente a la resoluci&oacute;n
+     Esta función devuelve el ancho de la pantalla en pixels.
+     Esto puede ser usado en métodos para poner el ancho y asegurar
+     que los contenedores sean agrandados relativamente a la resolución
      de la pantalla. 
     </simpara>
    </desc>
@@ -974,8 +976,8 @@ $transparent_color, $data);
    </shortdesc>
    <desc>
     <simpara>
-     Esta funci&oacute;n devuelve el ancho en milimetros de la pantalla.
-     Este puede usarse como un m&eacute;todo para asegurar que los contenedores
+     Esta función devuelve el ancho en milimetros de la pantalla.
+     Este puede usarse como un método para asegurar que los contenedores
      sean agrandados relativamente al tamaño de pantalla que esta siendo usado.
     </simpara>
    </desc>
