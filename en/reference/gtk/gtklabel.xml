@@ -119,9 +119,20 @@ $label-&gt;set_text(&quot;Whatever text you wish to pass&quot;);
      options are <enumname>GtkJustification</enumname> enumerated flags, 
      the default setting being <literal>GTK_JUSTIFY_CENTER</literal>.
     </simpara>
+    <simpara>
+     Justification is relative to existing lines of text, and should be
+     used in combination with 
+     <function class="GtkLabel">set_line_wrap()</function>.  It is
+     irrelevant where there is only one line.  If you need to set the
+     text alignment in a single-line label, use 
+     <function class="GtkMisc">set_alignment()</function>.  There is a
+     working example of this method on the 
+     <link linkend="gtk.gtklabel.constructor">constructor</link> page.
+    </simpara>
     <para>
      <informalexample>
       <programlisting role="php">
+$label-&gt;set_line_wrap(true);
 $label-&gt;set_justify(GTK_JUSTIFY_FILL);
       </programlisting>
      </informalexample>
