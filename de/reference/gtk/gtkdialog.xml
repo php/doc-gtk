@@ -59,9 +59,9 @@
 <![CDATA[
 <?php
 
-$dialog = &amp;new GtkDialog(); 
-$dialog-&gt;set_modal(TRUE); 
-echo &quot;Diese Nachricht wird trotzdem noch ausgegeben! \n&quot;;
+$dialog = &new GtkDialog(); 
+$dialog->set_modal(TRUE); 
+echo "Diese Nachricht wird trotzdem noch ausgegeben! \n";
 
 ?>
 ]]>
@@ -90,20 +90,20 @@ echo &quot;Diese Nachricht wird trotzdem noch ausgegeben! \n&quot;;
 <![CDATA[
 <?php
 
-$dialog = &amp;new GtkDialog();
-$dialog-&gt;set_policy(true, false, false);
-$dialog-&gt;set_position(GTK_WIN_POS_CENTER);
-$dialog-&gt;connect_object(&quot;destroy&quot;, array(&quot;gtk&quot;, 
-&quot;main_quit&quot;));
+$dialog = &new GtkDialog();
+$dialog->set_policy(true, false, false);
+$dialog->set_position(GTK_WIN_POS_CENTER);
+$dialog->connect_object("destroy", array("gtk", 
+"main_quit"));
 
-$dialog_vbox = $dialog-&gt;vbox; 
-$dialog_action_area = $dialog-&gt;action_area; 
+$dialog_vbox = $dialog->vbox; 
+$dialog_action_area = $dialog->action_area; 
 
-$user_info_label = &amp;new GtkLabel(&quot;Some Important Information&quot;);
-$dialog_vbox-&gt;pack_start($user_info_label); 
+$user_info_label = &new GtkLabel("Some Important Information");
+$dialog_vbox->pack_start($user_info_label); 
 
-$ok_button = &amp;new GtkButton(&quot;OK&quot;);
-$dialog_action_area-&gt;pack_start($ok_button);
+$ok_button = &new GtkButton("OK");
+$dialog_action_area->pack_start($ok_button);
 
 gtk::main();
 
