@@ -12,13 +12,12 @@
     widgets, only one of which may be selected at any one time.
    </simpara>
    <simpara>
-    In the version of GTK+ currently used by PHP-GTK there is an issue with
-    the <signalname class="GtkWidget">activate</signalname> signal where it
-    is used alongside toggle switches in arrays.  In this particular widget, 
-    the overriding <classname>GtkMenuItem</classname> version of 
-    <signalname class="GtkMenuItem">activate</signalname> is the
-    activating signal, and as a result of this feature repeats itself when
-    another group member is activated.
+    When the <classname>GtkMenuItem</classname> version of the 
+    <signalname class="GtkMenuItem">activate</signalname> signal has been
+    emitted by a <classname>GtkRadioMenuItem</classname>, there is a second
+    emission as the most recently active item is toggled to 
+    <literal>inactive</literal>.  This is dealt with before the original
+    signal is handled.
    </simpara>
    <simpara>
     One way around this would be to use the 
