@@ -106,23 +106,31 @@
   &lt;/xsl:template&gt;&#xA;
  </xsl:text>
  </xsl:if>
-
- <xsl:if test="count(.//signal)>0">
-   <xsl:text disable-output-escaping="yes">
+ 
+  <xsl:text disable-output-escaping="yes">
   &lt;xsl:template name="get_sig_id_from_name"&gt;&#xA;
   &lt;xsl:param name="signame" /&gt;&#xA;
-  &lt;xsl:choose&gt;&#xA;
+  </xsl:text>
+  <xsl:if test="count(.//signal)>0">
+   <xsl:text disable-output-escaping="yes">
+    &lt;xsl:choose&gt;&#xA;
+   </xsl:text>
+  <xsl:apply-templates select=".//signal" />
+  <xsl:text disable-output-escaping="yes">&#xA;
+   &lt;xsl:otherwise&gt;&#xA;
+  </xsl:text>
+ </xsl:if>
+ <xsl:text disable-output-escaping="yes">
+  &lt;xsl:text&gt;no&lt;/xsl:text&gt;&#xA;
  </xsl:text>
- <xsl:apply-templates select=".//signal" />
- <xsl:text disable-output-escaping="yes">&#xA;
-  &lt;xsl:otherwise&gt;&#xA;
-   &lt;xsl:text&gt;no&lt;/xsl:text&gt;&#xA;
+ <xsl:if test="count(.//signal)>0">
+  <xsl:text disable-output-escaping="yes">
   &lt;/xsl:otherwise&gt;&#xA;
-  &lt;/xsl:choose&gt;&#xA;
-  &lt;/xsl:template&gt;&#xA;
+  &lt;/xsl:choose&gt;&#xA; 
  </xsl:text>
  </xsl:if>
  <xsl:text>
+   &lt;/xsl:template&gt;&#xA;
    &lt;/xsl:stylesheet&gt;
  </xsl:text>
 </xsl:template>

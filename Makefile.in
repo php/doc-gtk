@@ -159,7 +159,7 @@ build/html/index.html: manual.xml $(CHUNK_DEPS)
 	$(XSLTPROC) $(stylesheet_dir)/chunk.xsl manual.xml	
 
 build/bigmanual.html: manual.xml $(HTML_DEPS)
-	$(XSLTPROC) $(stylesheet_dir)/html.xsl manual.xml > $@
+	$(XSLTPROC) $(stylesheet_dir)/docbook.xsl manual.xml > $@
 
 updatexml:
 ifeq "$(mode)" "update"
