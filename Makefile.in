@@ -31,6 +31,7 @@ BUILD_TEST = testbuild
 #
 XSLTPROC = @XSLTPROC@
 PHP = @PHP@
+HIGHLIGHT = scripts/html_syntax.php
 
 #
 # Default Rule
@@ -75,6 +76,7 @@ $(BUILD)/manual.txt: bigmanual.html
 $(BUILD)/php/index.php: manual.xml
 	@mkdir -p $(BUILD)/php
 	$(XSLTPROC) --param base.dir "'$(BUILD)/php/'" $(phpweb) manual.xml
+	$(PHP) $(HIGHLIGHT) php $(BUILD)/php
 
 $(BUILD)/html/index.html: manual.xml
 	@mkdir -p $(BUILD)/html
