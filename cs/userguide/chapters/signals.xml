@@ -102,29 +102,29 @@
 
 function vypni() 
 {
-    print(&quot;Vypínám...\n&quot;);
+    print("Vypínám...\n");
     gtk::main_quit();
 }
 
 function kliknul_jste($tlacitko) 
 {
-    $okno = &amp;new GtkWindow();
-    $popisek = &amp;new GtkLabel(&quot;Kliknul jste na tlaèítko&quot;);
-    $okno-&gt;add($popisek);
-    $okno-&gt;connect(&quot;destroy&quot;,&quot;vypni&quot;);
-    $okno-&gt;show_all();
+    $okno = &new GtkWindow();
+    $popisek = &new GtkLabel("Kliknul jste na tlaèítko");
+    $okno->add($popisek);
+    $okno->connect("destroy","vypni");
+    $okno->show_all();
     return false;
 }
 
-$okno = &amp;new GtkWindow();
-$okno-&gt;connect(&quot;destroy&quot;, &quot;vypni&quot;);
-$okno-&gt;set_border_width(10);
+$okno = &new GtkWindow();
+$okno->connect("destroy", "vypni");
+$okno->set_border_width(10);
 
-$tlacitko = &amp;new GtkButton(&quot;Klikni na mì!!&quot;);
-$tlacitko-&gt;connect(&quot;clicked&quot;, &quot;kliknul_jste&quot;);
-$okno-&gt;add($tlacitko);
+$tlacitko = &new GtkButton("Klikni na mì!!");
+$tlacitko->connect("clicked", "kliknul_jste");
+$okno->add($tlacitko);
 
-$okno-&gt;show_all();
+$okno->show_all();
 
 gtk::main();
 
@@ -163,24 +163,24 @@ gtk::main();
 
 function prvni($tlacitko) 
 {
-    print &quot;Byla zavolána první funkce\n&quot;;
+    print "Byla zavolána první funkce\n";
 }
 
 function druha($tlacitko) 
 {
-    print &quot;Byla zavolána druhá funkce\n&quot;;
+    print "Byla zavolána druhá funkce\n";
 }
 
-$okno = &amp;new GtkWindow();
-$okno-&gt;connect_object(&quot;destroy&quot;, array(&quot;gtk&quot;, 
-&quot;main_quit&quot;));
+$okno = &new GtkWindow();
+$okno->connect_object("destroy", array("gtk", 
+"main_quit"));
 
-$tlacitko = &amp;new GtkButton(&quot;Klikni na mì!!&quot;);
-$tlacitko-&gt;connect(&quot;clicked&quot;,&quot;prvni&quot;);
-$tlacitko-&gt;connect(&quot;clicked&quot;,&quot;druha&quot;);
-$okno-&gt;add($tlacitko);
+$tlacitko = &new GtkButton("Klikni na mì!!");
+$tlacitko->connect("clicked","prvni");
+$tlacitko->connect("clicked","druha");
+$okno->add($tlacitko);
 
-$okno-&gt;show_all();
+$okno->show_all();
 
 gtk::main();
 
@@ -235,18 +235,18 @@ Byla zavolána druhá funkce
 
 function stisknuti_tlacitka($tlacitko, $okno) 
 {
-    $okno-&gt;destroy();
+    $okno->destroy();
     gtk::main_quit();
 }
 
-$okno = &amp;new GtkWindow();
+$okno = &new GtkWindow();
 
-$tlacitko = &amp;new GtkButton(&quot;konec&quot;);
-$tlacitko-&gt;connect(&quot;clicked&quot;,&quot;stisknuti_tlacitka&quot;,
+$tlacitko = &new GtkButton("konec");
+$tlacitko->connect("clicked","stisknuti_tlacitka",
 $okno);
 
-$okno-&gt;add($tlacitko);
-$okno-&gt;show_all();
+$okno->add($tlacitko);
+$okno->show_all();
 
 gtk::main();
 
@@ -287,29 +287,29 @@ gtk::main();
 
 function stisknuti_tlacitka($tlacitko, $okno)
 {
-    $okno->set_title(&quot;oznaèeno&quot;);
+    $okno->set_title("oznaèeno");
 }
 
-$okno1 = &amp;new GtkWindow();
-$okno1-&gt;connect_object(&quot;destroy&quot;, array(&quot;gtk&quot;, 
-&quot;main_quit&quot;));
-$okno2 = &amp;new GtkWindow();
-$okno2-&gt;connect_object(&quot;destroy&quot;, array(&quot;gtk&quot;, 
-&quot;main_quit&quot;));
+$okno1 = &new GtkWindow();
+$okno1->connect_object("destroy", array("gtk", 
+"main_quit"));
+$okno2 = &new GtkWindow();
+$okno2->connect_object("destroy", array("gtk", 
+"main_quit"));
 
-$tlacitko1 = &amp;new GtkButton(&quot;Klikni na mì&quot;);
-$tlacitko2 = &amp;new GtkButton(&quot;Nebo rad¹i na mì&quot;);
+$tlacitko1 = &new GtkButton("Klikni na mì");
+$tlacitko2 = &new GtkButton("Nebo rad¹i na mì");
 
-$tlacitko1-&gt;connect(&quot;clicked&quot;, &quot;stisknuti_tlacitka&quot;, 
+$tlacitko1->connect("clicked", "stisknuti_tlacitka", 
 $okno1);
-$tlacitko2-&gt;connect(&quot;clicked&quot;, &quot;stisknuti_tlacitka&quot;, 
+$tlacitko2->connect("clicked", "stisknuti_tlacitka", 
 $okno2);
 
-$okno1-&gt;add($tlacitko1);
-$okno2-&gt;add($tlacitko2);
+$okno1->add($tlacitko1);
+$okno2->add($tlacitko2);
 
-$okno1-&gt;show_all();
-$okno2-&gt;show_all();
+$okno1->show_all();
+$okno2->show_all();
 
 gtk::main();
 
@@ -338,10 +338,10 @@ gtk::main();
 <![CDATA[
 <?php
 
-$okno = &amp;new GtkWindow();
-$okno-&gt;connect_object(&quot;destroy&quot;, array(&quot;gtk&quot;, 
-&quot;main_quit&quot;));
-$okno-&gt;show();
+$okno = &new GtkWindow();
+$okno->connect_object("destroy", array("gtk", 
+"main_quit"));
+$okno->show();
 
 gtk::main();
 
@@ -374,12 +374,12 @@ gtk::main();
 
 function vypni($okno)
 {
-    $okno-&gt;destroy();
+    $okno->destroy();
     gtk::main_quit();
 }
 
-$ukoncovaci_tlacitko-&gt;connect_object(&quot;clicked&quot;, 
-&quot;vypni&quot;, $okno);
+$ukoncovaci_tlacitko->connect_object("clicked", 
+"vypni", $okno);
 
 ?>
 ]]>
@@ -387,15 +387,16 @@ $ukoncovaci_tlacitko-&gt;connect_object(&quot;clicked&quot;,
     </example>
    </para>
    <para>
-    Metoda connect_after* umo¾òuje volat obslu¾nou funkci &quot;po&quot;
+    Metoda connect_after* umo¾òuje volat obslu¾nou funkci "po"
     zavolání standardní obslu¾né funkce pro tento signál. V nìkterých
     situacích se to mù¾e hodit; napø. kdy¾ chcete zavøít jen jedno z
     nìkolika oken. Metoda connect_after* v¹ak bude fungovat, jen pokud je
     signál v zdrojovém souboru GTK aktivován s pøíznakem
     <literal>GTK_RUN_LAST</literal>. Tento pøíznak má nastaven signál
     <signalname>destroy</signalname> a v¹echny
-    <literal>'event'</literal> signály; jediný zpùsob, jak to zjistit, je
-    buï otestovat signál v PHP-GTK nebo prozkoumat zdrojové soubory GTK.
+    <literal>'event'</literal> signály; jediný zpùsob, jak to
+    zjistit, je buï otestovat signál v PHP-GTK nebo prozkoumat zdrojové
+    soubory GTK.
     <example> 
      <title>Pou¾ití metody 
       <function class="GtkObject">connect_after</function>.
@@ -406,20 +407,20 @@ $ukoncovaci_tlacitko-&gt;connect_object(&quot;clicked&quot;,
 
 function ukoncovaci_rutina($okno) 
 {
-    print(&quot;Vypínám...\n&quot;);
+    print("Vypínám...\n");
     gtk::main_quit();
 }
 
-$okno1 = &amp;new GtkWindow();
-$okno1->set_title(&quot;Ukonèí hlavní smyèku&quot;);
-$okno1-&gt;connect(&quot;destroy&quot;, &quot;ukoncovaci_rutina&quot;);
+$okno1 = &new GtkWindow();
+$okno1->set_title("Ukonèí hlavní smyèku");
+$okno1->connect("destroy", "ukoncovaci_rutina");
 
-$okno2 = &amp;new GtkWindow();
-$okno2->set_title(&quot;Zavøe toto okno&quot;);
-$okno2-&gt;connect_after(&quot;destroy&quot;, &quot;ukoncovaci_rutina&quot;);
+$okno2 = &new GtkWindow();
+$okno2->set_title("Zavøe toto okno");
+$okno2->connect_after("destroy", "ukoncovaci_rutina");
 
-$okno1-&gt;show();
-$okno2-&gt;show();
+$okno1->show();
+$okno2->show();
 
 gtk::main();
 
@@ -475,9 +476,9 @@ gtk::main();
    Aèkoli není mo¾no pou¾ít událost ke spu¹tìní funkce stejným zpùsobem,
    jako u signálu, existuje nìkolik signálù vycházejících z
    <classname>GtkWidget</classname>, které jsou dohromady známé jako
-   <literal>'event' signály</literal>.  Takto mù¾ete úèinnì popisovat
-   události jako signály a spou¹tìt obslu¾né funkce pøi zachycení vìt¹iny
-   <enumname>GdkEventTypes</enumname>. Samotný objekt 
+   <literal>'event' signály</literal>.  Takto mù¾ete úèinnì
+   popisovat události jako signály a spou¹tìt obslu¾né funkce pøi zachycení
+   vìt¹iny <enumname>GdkEventTypes</enumname>. Samotný objekt 
    <classname>GtkTooltips</classname> pou¾ívá ke sledování svého widgetu
    metodu <function class="GktObject">connect_object</function> a v¹eobecný
    <signalname>event</signalname> signál.
@@ -493,55 +494,55 @@ gtk::main();
 <![CDATA[
 <?php
 
-dl(&quot;php_gtk.&quot; . (strstr(PHP_OS, &quot;WIN&quot;) ? &quot;dll&quot; : 
-&quot;so&quot;)) ||
-die(&quot;Nelze nahrát PHP-GTK modul!\n&quot;);
+dl("php_gtk." . (strstr(PHP_OS, "WIN") ? "dll" : 
+"so")) ||
+die("Nelze nahrát PHP-GTK modul!\n");
 
 function ukaz_typ_udalosti($tlacitko, $udalost, $text) 
 {
-    $typ_udalosti = $udalost-&gt;type;
+    $typ_udalosti = $udalost->type;
     $insert = $text->get_length();
-    $text-&gt;freeze();
+    $text->freeze();
     switch($type_udalosti) {
       case 2:
-        $text-&gt;insert_text(&quot;GDK_EXPOSE\n&quot;, $insert);
+        $text->insert_text("GDK_EXPOSE\n", $insert);
       break;
       case 3:
-        $text-&gt;insert_text(&quot;GDK_MOTION_NOTIFY\n&quot;, $insert);
+        $text->insert_text("GDK_MOTION_NOTIFY\n", $insert);
       break;
       case 4:
-        $text-&gt;insert_text(&quot;GDK_BUTTON_PRESS\n&quot;, $insert);
+        $text->insert_text("GDK_BUTTON_PRESS\n", $insert);
       break;
       case 5:
-        $text-&gt;insert_text(&quot;GDK_2BUTTON_PRESS\n&quot;, $insert);
-        $tlacitko-&gt;hide();
+        $text->insert_text("GDK_2BUTTON_PRESS\n", $insert);
+        $tlacitko->hide();
       break;
       case 7:
-        $text-&gt;insert_text(&quot;GDK_BUTTON_RELEASE\n&quot;, $insert);
+        $text->insert_text("GDK_BUTTON_RELEASE\n", $insert);
       break;
       case 8:
-        $text-&gt;insert_text(&quot;GDK_KEY_PRESS\n&quot;, $insert);
+        $text->insert_text("GDK_KEY_PRESS\n", $insert);
       break;
       case 9:
-        $text-&gt;insert_text(&quot;GDK_KEY_RELEASE\n&quot;, $insert);
+        $text->insert_text("GDK_KEY_RELEASE\n", $insert);
       break;
       case 10:
-        $text-&gt;insert_text(&quot;GDK_ENTER_NOTIFY\n&quot;, $insert);
+        $text->insert_text("GDK_ENTER_NOTIFY\n", $insert);
       break;
       case 11:
-        $text-&gt;insert_text(&quot;GDK_LEAVE_NOTIFY\n&quot;, $insert);
+        $text->insert_text("GDK_LEAVE_NOTIFY\n", $insert);
       break;
       case 12:
-        $text-&gt;insert_text(&quot;GDK_FOCUS_CHANGE\n&quot;, $insert); 
+        $text->insert_text("GDK_FOCUS_CHANGE\n", $insert); 
       break;
       case 14:
-        $text-&gt;insert_text(&quot;GDK_MAP\n&quot;, $insert);
+        $text->insert_text("GDK_MAP\n", $insert);
       break;
       case 15:
-        $text-&gt;insert_text(&quot;GDK_UNMAP\n&quot;, $insert);
-        $tlacitko-&gt;destroy();
+        $text->insert_text("GDK_UNMAP\n", $insert);
+        $tlacitko->destroy();
         $text->insert_text(
-&quot;\n* GDK UDÁLOSTI A GTK SIGNÁLY - tok na pozadí vs. zprávy na popøedí *
+"\n* GDK UDÁLOSTI A GTK SIGNÁLY - tok na pozadí vs. zprávy na popøedí *
 \n
 * Vìt¹ina GdkEventTypes má protìj¹ek mezi GTK signály, známý jako 'event'
   signál, implementovaný v GtkWidget. Typy na obrazovce uvidíte, proto¾e
@@ -557,34 +558,34 @@ function ukaz_typ_udalosti($tlacitko, $udalost, $text)
                       \$tlacitko->connect('pressed', 'cokoli');
   nemá ¾ádný vztah k události GDK_BUTTON_PRESS, kterou generuje; tato
   událost reaguje na aktivitu tlaèítka my¹i a nikoli na signál 'pressed'. *  
-\n&quot;, 0);
+\n", 0);
       break;
     }
-    $text-&gt;thaw();
+    $text->thaw();
     return false;
 }
 
-$okno = &amp;new GtkWindow();
-$okno-&gt;set_position(GTK_WIN_POS_CENTER);
-$okno-&gt;set_default_size((gdk::screen_width()/1.5), 
+$okno = &new GtkWindow();
+$okno->set_position(GTK_WIN_POS_CENTER);
+$okno->set_default_size((gdk::screen_width()/1.5), 
 (gdk::screen_height()-20));
-$okno-&gt;connect_object(&quot;destroy&quot;, array(&quot;gtk&quot;, 
-&quot;main_quit&quot;));
-$okno-&gt;realize();
+$okno->connect_object("destroy", array("gtk", 
+"main_quit"));
+$okno->realize();
 
-$box = &amp;new GtkVBox(false, 5);
-$okno-&gt;add($box);
-$scrlwin = &amp;new GtkScrolledWindow();
-$box-&gt;pack_start($scrlwin, true, true, 0);
-$text = &amp;new GtkText();
-$scrlwin-&gt;add($text);
+$box = &new GtkVBox(false, 5);
+$okno->add($box);
+$scrlwin = &new GtkScrolledWindow();
+$box->pack_start($scrlwin, true, true, 0);
+$text = &new GtkText();
+$scrlwin->add($text);
 
-$tlacitko = &amp;new GtkButton(&quot;2x kliknìte zde a dozvíte se více&quot;);
-$tlacitko-&gt;add_events(GDK_ALL_EVENTS_MASK);
-$tlacitko-&gt;connect(&quot;event&quot;, &quot;ukaz_typ_udalosti&quot;, $text);
-$box-&gt;pack_end($tlacitko, false, false, 5);
+$tlacitko = &new GtkButton("2x kliknìte zde a dozvíte se více");
+$tlacitko->add_events(GDK_ALL_EVENTS_MASK);
+$tlacitko->connect("event", "ukaz_typ_udalosti", $text);
+$box->pack_end($tlacitko, false, false, 5);
 
-$okno-&gt;show_all();
+$okno->show_all();
 
 gtk::main();
 

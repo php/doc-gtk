@@ -39,27 +39,27 @@ function delete_event()
 
 function vypni()
 {
-    print(&quot;Vypínám...\n&quot;);
+    print("Vypínám...\n");
     gtk::main_quit();
 }
 
 function ahoj()
 {
     global $okno;
-    print &quot;Ahoj, svìte!\n&quot;;
-    $okno-&gt;destroy();
+    print "Ahoj, svìte!\n";
+    $okno->destroy();
 }
 
-$okno = &amp;new GtkWindow();
-$okno-&gt;connect('destroy', 'vypni');
-$okno-&gt;connect('delete-event', 'delete_event');
-$okno-&gt;set_border_width(10);
+$okno = &new GtkWindow();
+$okno->connect('destroy', 'vypni');
+$okno->connect('delete-event', 'delete_event');
+$okno->set_border_width(10);
 
-$tlacitko = &amp;new GtkButton('Ahoj, svìte!');
-$tlacitko-&gt;connect('clicked', 'ahoj');
-$okno-&gt;add($tlacitko);
+$tlacitko = &new GtkButton('Ahoj, svìte!');
+$tlacitko->connect('clicked', 'ahoj');
+$okno->add($tlacitko);
 
-$okno-&gt;show_all();
+$okno->show_all();
 
 gtk::main();
 
@@ -135,7 +135,7 @@ function delete_event()
 
 function shutdown()
 {
-    print(&quot;Vypínám...\n&quot;);
+    print("Vypínám...\n");
     gtk::main_quit();
 }
 
@@ -158,8 +158,8 @@ function shutdown()
 function ahoj()
 {
     global $okno;
-    print &quot;Ahoj, svìte!\n&quot;;
-    $okno-&gt;destroy();
+    print "Ahoj, svìte!\n";
+    $okno->destroy();
 }
 
 ?>
@@ -187,10 +187,10 @@ function ahoj()
 <![CDATA[
 <?php
 
-$okno = &amp;new GtkWindow();
-$okno-&gt;connect('destroy', 'vypni');
-$okno-&gt;connect('delete-event', 'delete_event');
-$okno-&gt;set_border_width(10);
+$okno = &new GtkWindow();
+$okno->connect('destroy', 'vypni');
+$okno->connect('delete-event', 'delete_event');
+$okno->set_border_width(10);
 
 ?>
 ]]>
@@ -214,11 +214,11 @@ $okno-&gt;set_border_width(10);
 <![CDATA[
 <?php
 
-$tlacitko = &amp;new GtkButton('Ahoj, svìte!');
-$tlacitko-&gt;connect('clicked', 'ahoj');
-$ökno -&gt;add($tlacitko);
+$tlacitko = &new GtkButton('Ahoj, svìte!');
+$tlacitko->connect('clicked', 'ahoj');
+$ökno ->add($tlacitko);
 
-$okno-&gt;show_all();
+$okno->show_all();
 
 ?>
 ]]>
