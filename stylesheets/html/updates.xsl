@@ -29,8 +29,6 @@
 </xsl:template>
 
 <xsl:template match="book">
-<div id="docupdates">
-<h3>Latest Docs Updates</h3>
 <xsl:text>
 </xsl:text>
 <p>
@@ -53,7 +51,6 @@
 		</xsl:call-template>
 	</ul>
 </p>
-</div>
 </xsl:template>
 
 </xsl:stylesheet>
