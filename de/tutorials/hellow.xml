@@ -3,7 +3,7 @@
  <title>Übung: Hallo Welt</title>
  <simpara>
   Wenn man eine Programmiersprache zu lernen beginnt ist oft das erste
-  Programm das man schreibt ein &quot;Hallo Welt&quot; Programm.
+  Programm das man schreibt ein "Hallo Welt" Programm.
   Um sich also allen anderen anzupassen, ist die erste Übung in diesem
   Handbuch eine Hallo Welt Übung!
  </simpara>
@@ -55,12 +55,12 @@ function hello()
     $window->destroy();
 }
 
-$window = &amp;new GtkWindow();
+$window = &new GtkWindow();
 $window->connect('destroy', 'shutdown');
 $window->connect('delete-event', 'delete_event');
 $window->set_border_width(10);
 
-$button = &amp;new GtkButton('Hello World!');
+$button = &new GtkButton('Hello World!');
 $button->connect('clicked', 'hello');
 $window->add($button);
 
@@ -139,8 +139,9 @@ function shutdown()
   </example>
   Die <literal>shutdown()</literal> Funktion ist als Handler für das
   <signalname>shutdown</signalname> Signal registriert. Die Funktion gibt
-  den Text <literal>"Herunterfahren"</literal> an der Konsole aus und ruft
-  dann die statische Funktion <function>gtk::main_quit</function> auf.
+  den Text <literal>&quot;Herunterfahren&quot;</literal> an der Konsole
+  aus und ruft dann die statische Funktion 
+  <function>gtk::main_quit</function> auf.
  </para>
  <para>
   <example>
@@ -164,8 +165,9 @@ function hello()
   <signalname>clicked</signalname> Signal des Buttons registriert. Sie
   globalisiert die <literal>$window</literal> Variable so dass es auf die
   Instanz von <classname>GtkWindow</classname> weiter unten im Skript
-  zugreifen kann.  Sie gibt den Text "<literal>Hallo Welt!</literal>" auf
-  der Konsole aus und zerstört dann das Fenster, was wiederum das 
+  zugreifen kann.  Sie gibt den Text 
+  <literal>&quot;Hallo Welt!&quot;</literal> auf der Konsole aus und
+  zerstört dann das Fenster, was wiederum das 
   <signalname>destroy</signalname> Signal auslöst.
  </para>
  <para>
@@ -175,7 +177,7 @@ function hello()
 <![CDATA[
 <?php
 
-$window = &amp;new GtkWindow;
+$window = &new GtkWindow;
 $window->connect('destroy', 'shutdown');
 $window->connect('delete-event', 'delete_event');
 $window->set_border_width(10);
@@ -203,7 +205,7 @@ $window->set_border_width(10);
 <![CDATA[
 <?php
 
-$button = &amp;new GtkButton('Hello World!');
+$button = &new GtkButton('Hello World!');
 $button->connect('clicked', 'hello');
 $window->add($button);
 
