@@ -356,6 +356,26 @@ $glade->signal_connect( 'test', 'tester');
      If you click the close button now, you will see an "test" 
      output line in the shell prompt.
     </para>
+    <para>
+     If you want to connect to a function of an object, you
+     should use the following construct:
+     <programlisting role="php">
+<![CDATA[
+$glade->signal_connect( 'test', array( $obj, 'function'));
+]]>
+     </programlisting>
+     which would cause the 'function' function of the $obj
+     object to be used as the callback for the test handler.
+     Instead of an object you can use a normal string; this
+     means the static function of this class is called:
+     <programlisting role="php">
+<![CDATA[
+$glade->signal_connect( 'test', array( 'gtk', 'main_quit'));
+]]>
+     </programlisting>
+     This would be the same as a call of
+     <command>gtk::main_quit()</command>.
+    </para>
     <simpara>
      You can pass any type and number of additional parameters 
      to the callback function. Note that the first parameter
@@ -390,7 +410,7 @@ $glade->signal_connect( 'test', 'tester');
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>signal_autoconnect</function></funcdef>
-     <paramdef>array <parameter><optional>unknown</optional></parameter></paramdef>
+     <paramdef>array <parameter><optional>handlers</optional></parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -425,6 +445,33 @@ $glade->signal_autoconnect();
      The first parameter passed to the callback will be the
      calling widget.
     </simpara>
+    <simpara>
+     The <parameter>handlers</parameter> parameter can be used to define
+     a whole signal-callback structure and connect them with one call.
+     The array itself contains key-value pairs with the keys being
+     the handlers defined in the glade file (see 
+     <function class="GladeXML">signal_connect</function> for an 
+     explanation of handlers). The values itself have also to be 
+     arrays. This subarrays contain (mostly one) a number of callbacks.
+    </simpara>
+    <example>
+     <title>Using the autoconnect parameter</title>
+     <programlisting role="php">
+<![CDATA[
+$glade->signal_autoconnect( 
+    array( 
+        'test' => array( 'test'),
+        'moved' => array( 'moved')
+    )
+);
+]]>
+     </programlisting>
+    </example>
+    <simpara>
+     Although the subarray needs to be an array, it is 
+     <emphasis>not</emphasis> possible to connect a handler 
+     to several callbacks.
+    </simpara>
    </desc>
   </method>
 
@@ -432,7 +479,7 @@ $glade->signal_autoconnect();
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>signal_autoconnect_object</function></funcdef>
-     <paramdef>array <parameter><optional>unknown</optional></parameter></paramdef>
+     <paramdef>array <parameter><optional>handlers</optional></parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -444,6 +491,10 @@ $glade->signal_autoconnect();
      with the same name as the signal handler.
      Other than <function class="GladeXML">signal_autoconnect</function> the
      calling widget will not be passed as the first parameter (just omitted).
+    </simpara>
+    <simpara>
+     For an explanation of the <parameter>handlers</parameter> parameter
+     see <function class="GladeXML">signal_autoconnect</function>.
     </simpara>
    </desc>
   </method>
