@@ -352,14 +352,15 @@ gtk::main();
     approprié) une <classname>GtkMenuBar</classname>, une 
     <classname>GtkToolbar</classname> et un <classname>GtkButton</classname>. 
     Quant l'utilisateur choisit de <literal>quitter</literal> l'application
-    à partir d'un des widgets, une fonction d'arrêt peut etre appelé en passant
-    une instance d'objet <classname>GtkWindow</classname> comme premier 
-    paramêtre, permettant ainsi de détruire la fenêtre a partir de toutes
-    les connexions. par exemple :
+    à partir d'un des widgets, une fonction d'arrêt peut etre appelé en
+    passant une instance d'objet <classname>GtkWindow</classname> comme
+    premier paramêtre, permettant ainsi de détruire la fenêtre a partir de
+    toutes les connexions.  Par exemple:
     <example>
      <title>
-      Utilisation de la méthode <function class="GtkObject">connect_object()</function> 
-      pour passer un autre objet.
+      Utilisation de la méthode 
+      <function class="GtkObject">connect_object()</function> pour passer un
+      autre objet.
      </title>
      <programlisting role="php">
     
@@ -376,14 +377,14 @@ $exit_button-&gt;connect_object(&quot;clicked&quot;,
     </example>
    </para>
    <para>
-    la méthode connect_after*  permet d'éxécuter le rappel &quot;aprés&quot;
+    La méthode connect_after*  permet d'éxécuter le rappel &quot;aprés&quot;
     le signal par défaut.  Cela peut être utile dans certaines situations
     Par exemple, si vous voulez détruire une seule fenêtre dans une certaine
     circonstance. Cependant, les methodes connect_after* ne marcheront que si
     le signal a été crée avec le flag  <literal>GTK_RUN_LAST</literal>. le 
     signal <signalname>destroy</signalname> ainsi que tous les autres signaux
     <literal>'événement'</literal> possède ce flag; Deux méthodes pour savoir
-    si le signal posséde ce flag : faire un test avec PHP-GTK ou alors lire le 
+    si le signal posséde ce flag : faire un test avec PHP-GTK ou alors lire le
     source de GTK.
     <example> 
      <title>Utiliastion de la méthode 
@@ -424,7 +425,7 @@ gtk::main();
  <sect1 id="gtk.signals.events">
   <title>Signaux et Evénements</title>
   <simpara>
-   <emphasis>Les Signaux GTK, Les événements GDK.</emphasis>
+   <emphasis>Les signaux GTK, les événements GDK.</emphasis>
   </simpara>
   <simpara>
    Un signal n'est pas un événement et inversement. Un signal est un message 
@@ -440,36 +441,37 @@ gtk::main();
   </simpara>
   <note>
    <simpara>
-    il n'est pas possible de connecter directement un rappel à un 
+    Il n'est pas possible de connecter directement un rappel à un 
     événement <classname>GdkEvent</classname>.
    </simpara>
   </note>
   <simpara>
-   Chaque widget possédant un objet <classname>GdkWindow</classname> peut 
-   capturer les événements qui lui sont associés. Les widgets sans  
+   Chaque widget possédant un objet <classname>GdkWindow</classname> peut
+   capturer les événements qui lui sont associés. Les widgets sans 
    <classname>GdkWindow</classname> - ceux créent avec l'option 
    <literal>GTK_NO_WINDOW</literal> - ne peuvent pas recevoir les évenements
-   a moins d'utiliser l'objet <classname>GtkEventBox</classname>- un widget creé
-   a cet effet. Il existe des occasions ou il est très utile de capturer les
-   événements; Par exemple, la création  d'une instance de 
+   a moins d'utiliser l'objet <classname>GtkEventBox</classname>- un widget
+   creé a cet effet.  Il existe des occasions ou il est très utile de
+   capturer les événements; par exemple, la création d'une instance de 
    <classname>GtkToolTips</classname> est déclenché lorsque le widget
    capture l'événement <literal>GDK_ENTER_NOTIFY</literal> et détruit lorqu'il
    recoit l'événement <literal>GDK_LEAVE_NOTIFY</literal>.
   </simpara>
   <simpara>
-   Il est également impossible d'utiliser l'évenement pour déclencher un rappel
-   comme le ferait un signal, il existe une série de signal dérivés de l'objet
-   <classname>GtkWidget</classname>, connu sous le nom de  
+   Il est également impossible d'utiliser l'évenement pour déclencher un
+   rappel comme le ferait un signal, il existe une série de signal dérivés
+   de l'objet <classname>GtkWidget</classname>, connu sous le nom de 
    <literal>signaux événement</literal>.  Il est possible de définir un 
-   événement comme un signal en permettant à un rappel d'être déclenché lors de 
-   la capture de l'événement <enumname>GdkEventTypes</enumname>. l'objet 
-   <classname>GtkTooltips</classname>  utilise la méthode  
+   événement comme un signal en permettant à un rappel d'être déclenché lors
+   de la capture de l'événement <enumname>GdkEventTypes</enumname>.  L'objet 
+   <classname>GtkTooltips</classname> utilise la méthode 
    <function class="GktObject">connect_object()</function> et le signal
    generique <signalname>event</signalname> sur le widget.
   </simpara>
   <para>
-   le concept d'événement n'est pas facile à comprendre. Pour mieux comprendre,
-   éxécuter ce script pour voir les différents événements en action.
+   Le concept d'événement n'est pas facile à comprendre.  Pour mieux
+   comprendre, éxécuter ce script pour voir les différents événements en
+   action.
    <example>
     <title>Démonstration du flux d'événements sur un 
      <classname>GtkButton</classname>
@@ -477,8 +479,7 @@ gtk::main();
     <programlisting role="php">
     
 dl(&quot;php_gtk.&quot; . (strstr(PHP_OS, &quot;WIN&quot;) ? &quot;dll&quot; : 
-&quot;so&quot;)) ||
-die(&quot;Can't load php_gtk module!\n&quot;);
+&quot;so&quot;)) || die(&quot;Can't load php_gtk module!\n&quot;);
     
 function show_event_type($button, $event, $text) 
 {
@@ -524,16 +525,17 @@ function show_event_type($button, $event, $text)
         $text-&gt;insert_text(&quot;GDK_UNMAP\n&quot;, $insert);
         $button-&gt;destroy();
         $text->insert_text(
-"\n* EVENEMENTS GDK ET SIGNAUX SIGNALS - flux vs message *
+&quot;\n* EVENEMENTS GDK ET SIGNAUX SIGNALS - flux vs message *
 \n
-* Le plupart des GdkEventTypes ont un équivalent dans les signaux GTK, les 
-  événements signaux, implémenté dans l'objet GtkWidget. Les types que vous 
-  voyez sont là car l'objet GtkButton a été programmé pour émettre des 
-  signaux événements génériques à chaque fois qu'ils sont capturés sur le flux 
-  des événements GDK events. Dans chacun des cas, l'événement GdkEvent capturé
-  a été passé en paramètre du rappel et ainsi les types enumérés peuvent être 
-  détérminé dans le fonction signal.  Scrollez vers le bas pour voir une série
-  d'événements récents générés pr votre interaction avec le widget GtkButton. *
+* Le plupart des GdkEventTypes ont un équivalent dans les signaux GTK, les
+  événements signaux, implémenté dans l'objet GtkWidget.  Les types que vous
+  voyez sont là car l'objet GtkButton a été programmé pour émettre des
+  signaux événements génériques à chaque fois qu'ils sont capturés sur le flux
+  des événements GDK events.  Dans chacun des cas, l'événement GdkEvent
+  capturé a été passé en paramètre du rappel et ainsi les types enumérés
+  peuvent être détérminé dans le fonction signal.  Scrollez vers le bas pour
+  voir une série d'événements récents générés pr votre interaction avec le
+  widget GtkButton. *
 \n
 * Il faut noter que la majorité des signaux GTK ne correponde pas au événement
   GDK ! Par exemple, la connexion au signal suivante
@@ -541,7 +543,7 @@ function show_event_type($button, $event, $text)
   n'a pas de relation avec l'événement GDK_BUTTON_PRESS, qui fait référence
   au l'action sur le bouton de la souris et non pas au signal 'pressed' sur
   l'objet GtkButton. *
-\n", 0);
+\n&quot;, 0);
       break;
     }
     $text-&gt;thaw();
@@ -563,7 +565,8 @@ $box-&gt;pack_start($scrlwin, true, true, 0);
 $text = &amp;new GtkText();
 $scrlwin-&gt;add($text);
     
-$button = &amp;new GtkButton(&quot;Double Cliquez ici pour plus d'informations..&quot;);
+$button = &amp;new GtkButton(&quot;Double Cliquez ici pour plus 
+d'informations..&quot;);
 $button-&gt;add_events(GDK_ALL_EVENTS_MASK);
 $button-&gt;connect(&quot;event&quot;, &quot;show_event_type&quot;, $text);
 $box-&gt;pack_end($button, false, false, 5);
