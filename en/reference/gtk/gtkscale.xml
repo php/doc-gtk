@@ -8,7 +8,34 @@
    <classname>GtkVScale</classname>.
   </shortdesc>
   <desc>
-
+   <simpara>
+    A <classname>GtkScale</classname> is a widget that looks very like a
+    <classname>GtkScrollbar</classname> without the arrow buttons at either
+    end and with the ability to display the current value as text.
+   </simpara>
+   <simpara>
+    There are some issues with the value display, in that scrolling-aware
+    container widgets will not allow their child's 
+    <classname>GtkAdjustment</classname> to be overwritten, which means that
+    the <classname>GtkScale</classname> cannot have focus unless it takes
+    the values given by the container to the scrollable widget.  This in turn
+    misconfigures the display area, which is calculated with regard to the
+    upper value of the associated adjustment object.  When a container sets
+    an adjustment, each value is <literal>0</literal> at the start, and the
+    later values are calculated on the fly after the widgets have been drawn.
+   </simpara>
+   <simpara>
+    Although it is possible to use the <classname>GtkWidget</classname> method
+    <function class="GtkWidget">queue_resize()</function> to force the text
+    area to resize according to the width of the new adjustment values, the
+    widget does not fully redraw unless it has a configure event - that is,
+    you need to manually resize it and then restore it.
+   </simpara>
+   <simpara>
+    For all these reasons, it is unadvisable to use the draw-value feature
+    where the <classname>GtkScale</classname> is associated with a scrollable
+    widget.
+   </simpara>
   </desc>
  </classmeta>
 
@@ -25,7 +52,13 @@
     Sets number of decimal places.
    </shortdesc>
    <desc>
-
+    <simpara>
+     This method sets the number of places to the right of the decimal
+     point in the displayed value.
+    </simpara>
+    <simpara>
+     The default number of decimal places is <literal>1</literal>.
+    </simpara>
    </desc>
   </method>
 
@@ -37,10 +70,16 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Toggles whether value is displayed.
    </shortdesc>
    <desc>
-
+    <simpara>
+     <function class="GtkScale">set_draw_value()</function> simply
+     toggles whether the value is displayed as text or not.
+    </simpara>
+    <simpara>
+     The default setting is <literal>true</literal>.
+    </simpara>
    </desc>
   </method>
 
@@ -55,10 +94,13 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets position of numeric text.
    </shortdesc>
    <desc>
-
+    <simpara>
+     This method determines the position of the text, when it is displayed. 
+     The default value is <literal>GTK_POS_TOP</literal>.
+    </simpara>
    </desc>
   </method>
 
@@ -70,27 +112,19 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns string width of numeric text.
    </shortdesc>
    <desc>
-
+    <simpara>
+     <function class="GtkScale">get_value_width()</function> returns the
+     width of the numeric text string in a <classname>GtkScale</classname>. 
+     The value is given in pixels.
+    </simpara>
    </desc>
   </method>
 
-  <method id="gtk.gtkscale.method.draw_value">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>void <function>draw_value</function></funcdef>
-     <paramdef>void</paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </method>
+  <!--DELETED draw_value() which is an internal method that generates the
+  draw_value property in the struct - sf feb 02 -->
 
  </methods>
 

@@ -66,7 +66,7 @@
   <shortdesc>
    Setting this flag allows the <literal>GDK_EXPOSE</literal> event
    to be captured by a widget's <classname>GdkWindow</classname>. 
-   This enables the widget to emit the 
+   This causes the widget to emit the 
    <signalname class="GtkWidget">expose-event</signalname> signal.
   </shortdesc>
  </enumoption>
@@ -76,7 +76,7 @@
   <shortdesc>
    Setting this flag allows the <literal>GDK_MOTION_NOTIFY</literal> 
    event to be captured by a widget's <classname>GdkWindow</classname>. 
-   This enables the widget to emit the 
+   This makes the widget emit the 
    <signalname class="GtkWidget">motion-notify-event</signalname> signal.
   </shortdesc>
  </enumoption>
@@ -88,35 +88,56 @@
    <literal>GDK_POINTER_MOTION_MASK</literal> functionality.  This can
    be necessary to avoid a time-lag in processing caused by the sheer
    volume of <literal>GDK_MOTION_NOTIFY</literal> events produced by
-   mouse movement.
+   mouse movement, each once of which causes a 
+   <signalname class="GtkWidget">motion-notify-event</signalname> signal
+   to be fired by the widget.
   </shortdesc>
  </enumoption>
 
  <enumoption>
   <optionname>GDK_BUTTON_MOTION_MASK</optionname>
   <shortdesc>
-
+   Allows the <literal>GDK_MOTION_NOTIFY</literal> events to be picked up
+   by the widget's <classname>GdkWindow</classname> only while a mouse-button
+   (any) is pressed down.  This is a way of limiting the widget's 
+   <signalname class="GtkWidget">motion-notify-event</signalname> signal
+   emissions.
   </shortdesc>
  </enumoption>
 
  <enumoption>
   <optionname>GDK_BUTTON1_MOTION_MASK</optionname>
   <shortdesc>
-
+   Allows the <literal>GDK_MOTION_NOTIFY</literal> events to be picked up
+   by the widget's <classname>GdkWindow</classname> only while mouse-button
+   <literal>1</literal> is pressed down - usually that's the left button. 
+   This is a way of limiting the widget's 
+   <signalname class="GtkWidget">motion-notify-event</signalname> signal
+   emissions.
   </shortdesc>
  </enumoption>
 
  <enumoption>
   <optionname>GDK_BUTTON2_MOTION_MASK</optionname>
   <shortdesc>
-
+   Allows the <literal>GDK_MOTION_NOTIFY</literal> events to be picked up
+   by the widget's <classname>GdkWindow</classname> only while mouse-button
+   <literal>2</literal> is pressed down - usually that's the center button, 
+   where it exists.  This is a way of limiting the widget's 
+   <signalname class="GtkWidget">motion-notify-event</signalname> signal
+   emissions.
   </shortdesc>
  </enumoption>
 
  <enumoption>
   <optionname>GDK_BUTTON3_MOTION_MASK</optionname>
   <shortdesc>
-
+   Allows the <literal>GDK_MOTION_NOTIFY</literal> events to be picked up
+   by the widget's <classname>GdkWindow</classname> only while mouse-button
+   <literal>3</literal> is pressed down - usually that's the right button. 
+   This is a way of limiting the widget's 
+   <signalname class="GtkWidget">motion-notify-event</signalname> signal
+   emissions.
   </shortdesc>
  </enumoption>
 
@@ -125,7 +146,7 @@
   <shortdesc>
    Setting this flag allows the <literal>GDK_BUTTON_PRESS</literal> 
    events to be captured by a widget's <classname>GdkWindow</classname>. 
-   This enables the widget to emit the 
+   This makes the widget emit the 
    <signalname class="GtkWidget">button-press-event</signalname> signal.
   </shortdesc>
  </enumoption>
@@ -135,7 +156,7 @@
   <shortdesc>
    Setting this flag allows the <literal>GDK_BUTTON_RELEASE</literal> 
    event to be captured by a widget's <classname>GdkWindow</classname>. 
-   This enables the widget to emit the 
+   This makes the widget emit the 
    <signalname class="GtkWidget">button-release-event</signalname> signal.
   </shortdesc>
  </enumoption>
@@ -145,7 +166,7 @@
   <shortdesc>
    Setting this flag allows the <literal>GDK_KEY_PRESS</literal> 
    event to be captured by a widget's <classname>GdkWindow</classname>. 
-   This enables the widget to emit the 
+   This makes the widget emit the 
    <signalname class="GtkWidget">key-press-event</signalname> signal.
   </shortdesc>
  </enumoption>
@@ -155,7 +176,7 @@
   <shortdesc>
    Setting this flag allows the <literal>GDK_KEY_RELEASE</literal> 
    event to be captured by a widget's <classname>GdkWindow</classname>. 
-   This enables the widget to emit the 
+   This makes the widget emit the 
    <signalname class="GtkWidget">key-release-event</signalname> signal.
   </shortdesc>
  </enumoption>
@@ -165,7 +186,7 @@
   <shortdesc>
    Setting this flag allows the <literal>GDK_ENTER_NOTIFY</literal> 
    event to be captured by a widget's <classname>GdkWindow</classname>. 
-   This enables the widget to emit the 
+   This causes the widget to emit the 
    <signalname class="GtkWidget">enter-notify-event</signalname> signal.
   </shortdesc>
  </enumoption>
@@ -175,7 +196,7 @@
   <shortdesc>
    Setting this flag allows the <literal>GDK_LEAVE_NOTIFY</literal> 
    event to be captured by a widget's <classname>GdkWindow</classname>. 
-   This enables the widget to emit the 
+   This makes the widget emit the 
    <signalname class="GtkWidget">leave-notify-event</signalname> signal.
   </shortdesc>
  </enumoption>
@@ -185,7 +206,7 @@
   <shortdesc>
    Setting this flag allows the <literal>GDK_FOCUS_CHANGE</literal> 
    event to be captured by a widget's <classname>GdkWindow</classname>. 
-   This enables the widget to emit the 
+   This makes the widget emit the 
    <signalname class="GtkWidget">focus-in-event</signalname> or 
    <signalname class="GtkWidget">focus-out-event</signalname> signal as
    appropriate.
@@ -195,42 +216,61 @@
  <enumoption>
   <optionname>GDK_STRUCTURE_MASK</optionname>
   <shortdesc>
-
+   This flag is set on all new instances of <classname>GdkWindow</classname>. 
+   It allows map, unmap, destroy and configure events to be captured, 
+   causing <signalname class="GtkWidget">map-event</signalname>, 
+   <signalname class="GtkWidget">unmap-event</signalname>, 
+   <signalname class="GtkWidget">destroy-event</signalname> and 
+   <signalname class="GtkWidget">configure-event</signalname> signals to be
+   emitted from all windowed widgets.
   </shortdesc>
  </enumoption>
 
  <enumoption>
   <optionname>GDK_PROPERTY_CHANGE_MASK</optionname>
   <shortdesc>
-
+   Setting this flag allows the <literal>GDK_PROPERTY_NOTIFY</literal> 
+   event to be captured by a widget's <classname>GdkWindow</classname>. 
+   This makes the widget emit the 
+   <signalname class="GtkWidget">property-notify-event</signalname> signal.
   </shortdesc>
  </enumoption>
 
  <enumoption>
   <optionname>GDK_VISIBILITY_NOTIFY_MASK</optionname>
   <shortdesc>
-
+   Setting this flag allows the <literal>GDK_VISIBILITY_NOTIFY</literal> 
+   event to be captured by a widget's <classname>GdkWindow</classname>. 
+   This causes the widget to emit the 
+   <signalname class="GtkWidget">visibility-notify-event</signalname> signal.
   </shortdesc>
  </enumoption>
 
  <enumoption>
   <optionname>GDK_PROXIMITY_IN_MASK</optionname>
   <shortdesc>
-
+   Setting this flag allows the <literal>GDK_PROXIMITY_IN</literal> 
+   event to be captured by a widget's <classname>GdkWindow</classname>. 
+   This causes the widget to emit the 
+   <signalname class="GtkWidget">proximity-in-event</signalname> signal.
   </shortdesc>
  </enumoption>
 
  <enumoption>
   <optionname>GDK_PROXIMITY_OUT_MASK</optionname>
   <shortdesc>
-
+   Setting this flag allows the <literal>GDK_PROXIMITY_OUT</literal> 
+   event to be captured by a widget's <classname>GdkWindow</classname>. 
+   This makes the widget emit the 
+   <signalname class="GtkWidget">proximity-out-event</signalname> signal.
   </shortdesc>
  </enumoption>
 
  <enumoption>
   <optionname>GDK_SUBSTRUCTURE_MASK</optionname>
   <shortdesc>
-
+   Enables the widget's <classname>GdkWindow</classname> to capture 
+   <literal>GDK_STRUCTURE_MASK</literal> events on any child windows.
   </shortdesc>
  </enumoption>
 

@@ -468,7 +468,14 @@
     Queues widget's resize requests.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Use this method to force a widget to resize.  See 
+     <classname>GtkScale</classname> for a working example.
+    </simpara>
+    <simpara>
+     <function class="GtkWidget">queue_resize()</function> is used
+     extensively within GTK+ internals.
+    </simpara>
    </desc>
   </method>
 
@@ -806,10 +813,22 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Gives grab and focus to the calling widget.
    </shortdesc>
    <desc>
-
+    <simpara>
+     This method sets the initial grab and focus on the calling widget so
+     that, for example, if a <classname>GtkText</classname> were to call it,
+     any keyboard events would be picked up immediately by the text widget.
+    </simpara>
+    <simpara>
+     <function class="GtkWidget">grab_focus()</function> can only be called
+     when the widget in question has the <literal>GTK_CAN_FOCUS</literal> 
+     flag set.  Some will have this set at source, others will not, and will
+     generate an error message to that effect when the method is called. 
+     Use <function class="GtkObject">set_flags()</function> to override the
+     source settings.
+    </simpara>
    </desc>
   </method>
 
@@ -821,10 +840,23 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Gives grab and default to the calling widget.
    </shortdesc>
    <desc>
-
+    <simpara>
+     This method sets the keyboard grab and default status on the calling
+     widget.
+    </simpara>
+    <simpara>
+     The single most likely scenario where you might use this would be to
+     set up a <classname>GtkButton</classname> so that the user could
+     activate it by immediately pressing the return key.
+    </simpara>
+    <simpara>
+     In order to make this possible, you will need to set the 
+     <literal>GTK_CAN_DEFAULT</literal> widget flag on the button.  See
+     also:  <function class="GtkObject">set_flags()</function>.
+    </simpara>
    </desc>
   </method>
 
@@ -836,10 +868,18 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets widget name.
    </shortdesc>
    <desc>
-
+    <simpara>
+     You may give a widget a unique name.  This is mainly intended for
+     use when creating a derived object, but it can also be useful for
+     identifying individual widgets, for example, when an array of
+     buttons is going to be queried at a later point in the script.
+    </simpara>
+    <simpara>
+     See also:  <function class="GtkWidget">get_name()</function>.
+    </simpara>
    </desc>
   </method>
 
@@ -851,10 +891,23 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns name of widget.
    </shortdesc>
    <desc>
-
+    <simpara>
+     This method returns the name of the calling widget.  If no name
+     has been set for the widget, this will be in the format 
+     <literal>GtkWidget</literal>.
+    </simpara>
+    <simpara>
+     <function class="GtkWidget">get_name()</function> is very useful
+     where the widget could be one of many, e.g. in a callback that is
+     used by several different widgets.
+    </simpara>
+    <simpara>
+     See also:  <function class="GtkObject">get_type()</function>, 
+     <function class="GtkWidget">set_name()</function>.
+    </simpara>
    </desc>
   </method>
 
@@ -869,10 +922,18 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets widget's state.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Sets the initial <enumname>GtkStateType</enumname> for the calling
+     widget.  Note that this will be overridden when the user interacts
+     with the widget, and is primarily useful for offering visual cues.
+    </simpara>
+    <simpara>
+     A widget's current state can be queried using the 
+     <propname class="GtkWidget">state</propname> property.
+    </simpara>
    </desc>
   </method>
 
@@ -884,10 +945,25 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Toggles sensitivity.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Use this function to toggle whether or not the user can interact
+     with a widget.  Setting it to <literal>false</literal> sets the
+     widget's state to <literal>GTK_STATE_INSENSITIVE</literal>, which
+     'greys out' the widget.
+    </simpara>
+    <simpara>
+     You might use this if, for instance, you wanted to prevent a button
+     from being pressed in certain situations.
+    </simpara>
+    <note>
+     <simpara>
+      Setting a container as 'insensitive' will make all that container's
+      children insensitive too.
+     </simpara>
+    </note>
    </desc>
   </method>
 
@@ -1164,7 +1240,7 @@
   <method id="gtk.gtkwidget.method.is_ancestor">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>int <function>is_ancestor</function></funcdef>
+     <funcdef>bool <function>is_ancestor</function></funcdef>
      <paramdef>
       <classname>GtkWidget</classname> 
       <parameter>ancestor</parameter>
@@ -1172,10 +1248,19 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Tests relationship with other widgets.
    </shortdesc>
    <desc>
-
+    <simpara>
+     <function class="GtkWidget">is_ancestor()</function> tests whether the
+      widget named in the <parameter>ancestor</parameter> parameter is an
+      ancestor of the calling widget, in the packing hierarchy rather than
+      in the GTK object hierarchy.
+    </simpara>
+    <simpara>
+     This method is used extensively in GTK+ internals, but can also be
+     useful in PHP-GTK, particularly for debugging purposes.
+    </simpara>
    </desc>
   </method>
 
@@ -1708,26 +1793,46 @@
     <funcprototype>
      <funcdef>bool <function>callback</function></funcdef>
      <paramdef><classname>GtkWidget</classname> widget</paramdef>
-     <paramdef> </paramdef>
+     <paramdef><classname>GdkEvent</classname> event</paramdef>
     </funcprototype>
    </callback>
    <shortdesc>
-    
+    Emitted when any event is captured.
    </shortdesc>
    <desc>
     <simpara>
-     
+     The <signalname class="GtkWidget">event</signalname> signal is emitted
+     when any <classname>GdkEvent</classname> is captured by the connected
+     widget's underlying <classname>GdkWindow</classname>.
+    </simpara>
+    <simpara>
+     All event signals return <literal>false</literal> until the event has
+     been propagated to the widget that will handle it, at which point they
+     return <literal>true</literal>, the event is no longer propagated and
+     the signal is no longer fired.
+    </simpara>
+    <note>
+     <simpara>
+      Each event causes two signal emissions; the generic event signal
+      described here, and the specific event signal that is being called,
+      such as the <signalname class="GtkWidget">key-press-event</signalname> 
+      signal.  The <signalname class="GtkWidget">event</signalname> signal
+      itself is unlikely to be used directly on its own account very often.
+     </simpara>
+    </note>
+    <simpara>
+     All event signals carry the event that caused the signal to be fired as
+     the first parameter after the connecting widget.  You may add as many
+     parameters as you like that contain data specific to your application.
+    </simpara>
+    <simpara>
+     You can limit or extend the events that are captured by a windowed widget
+     by setting one or more <enumname>GdkEventMask</enumname> flags for the
+     widget.  See <function class="GtkWidget">add_events()</function>, and
+     <function class="GtkWidget">set_events()</function>.
     </simpara>
    </desc>
   </signal>
-<!-- widget_signals[EVENT] =
-    gtk_signal_new ("event",
-		    GTK_RUN_LAST,
-		    object_class->type,
-		    GTK_SIGNAL_OFFSET (GtkWidgetClass, event),
-		    gtk_marshal_BOOL__POINTER,
-		    GTK_TYPE_BOOL, 1,
-		    GTK_TYPE_GDK_EVENT); -->
 
   <signal id="gtk.gtkwidget.signal.button-press-event">
    <signalname>button-press-event</signalname>
@@ -1735,26 +1840,46 @@
     <funcprototype>
      <funcdef>bool <function>callback</function></funcdef>
      <paramdef><classname>GtkWidget</classname> widget</paramdef>
-     <paramdef> </paramdef>
+     <paramdef><classname>GdkEvent</classname> button_press</paramdef>
     </funcprototype>
    </callback>
    <shortdesc>
-    
+    Emitted when a <literal>GDK_BUTTON_PRESS</literal> event is captured.
    </shortdesc>
    <desc>
+    <para>
+     This is an event signal, fired when the connected widget picks up a
+     <literal>GDK_BUTTON_PRESS</literal> event.  Button press events are
+     generated by any of the mouse buttons being pressed.  You can distinguish
+     between the mouse buttons in the callback by using an 
+     <literal>if</literal> or <literal>switch</literal> statement:
+     <informalexample>
+      <programlisting role="php">
+function on_click($widget, $event, $data) {
+switch($event-&gt;button) {
+case 1:
+/* do something appropriate to a left click */
+break;
+case 2:
+/* do something appropriate to a middle click */
+break;
+case 3:
+/* do something appropriate to a right click */
+break;
+}}
+    
+$widget-&gt;connect('button-press-event', 'on_click', $data);
+      </programlisting>
+     </informalexample>
+    </para>
     <simpara>
-     
+     See also:  
+     <signalname class="GtkWidget">button-release-event</signalname>, 
+     <signalname class="GtkWidget">event</signalname>, 
+     <signalname class="GtkWidget">key-press-event</signalname>.
     </simpara>
    </desc>
   </signal>
-<!-- widget_signals[BUTTON_PRESS_EVENT] =
-    gtk_signal_new ("button_press_event",
-		    GTK_RUN_LAST,
-		    object_class->type,
-		    GTK_SIGNAL_OFFSET (GtkWidgetClass, button_press_event),
-		    gtk_marshal_BOOL__POINTER,
-		    GTK_TYPE_BOOL, 1,
-		    GTK_TYPE_GDK_EVENT); -->
 
   <signal id="gtk.gtkwidget.signal.button-release-event">
    <signalname>button-release-event</signalname>
@@ -1762,26 +1887,28 @@
     <funcprototype>
      <funcdef>bool <function>callback</function></funcdef>
      <paramdef><classname>GtkWidget</classname> widget</paramdef>
-     <paramdef> </paramdef>
+     <paramdef><classname>GdkEvent</classname> button_release</paramdef>
     </funcprototype>
    </callback>
    <shortdesc>
-    
+    Emitted when a <literal>GDK_BUTTON_RELEASE</literal> event is captured.
    </shortdesc>
    <desc>
     <simpara>
-     
+     This is an event signal, fired when the connected widget picks up a
+     <literal>GDK_BUTTON_RELEASE</literal> event.  Button release events are
+     generated by any of the mouse buttons being released.  You can
+     distinguish between the mouse buttons in the callback by using 
+     <literal>$event-&gt;button</literal>.
+    </simpara>
+    <simpara>
+     See also:  
+     <signalname class="GtkWidget">button-press-event</signalname>, 
+     <signalname class="GtkWidget">event</signalname>, 
+     <signalname class="GtkWidget">key-press-event</signalname>.
     </simpara>
    </desc>
   </signal>
-<!-- widget_signals[BUTTON_RELEASE_EVENT] =
-    gtk_signal_new ("button_release_event",
-		    GTK_RUN_LAST,
-		    object_class->type,
-		    GTK_SIGNAL_OFFSET (GtkWidgetClass, button_release_event),
-		    gtk_marshal_BOOL__POINTER,
-		    GTK_TYPE_BOOL, 1,
-		    GTK_TYPE_GDK_EVENT); -->
 
   <signal id="gtk.gtkwidget.signal.motion-notify-event">
    <signalname>motion-notify-event</signalname>
@@ -1789,26 +1916,26 @@
     <funcprototype>
      <funcdef>bool <function>callback</function></funcdef>
      <paramdef><classname>GtkWidget</classname> widget</paramdef>
-     <paramdef> </paramdef>
+     <paramdef><classname>GdkEvent</classname> motion_notify</paramdef>
     </funcprototype>
    </callback>
    <shortdesc>
-    
+    Emitted when a <literal>GDK_MOTION_NOTIFY</literal> event is captured.
    </shortdesc>
    <desc>
     <simpara>
-     
+     This is an event signal, fired when the connected widget picks up a
+     <literal>GDK_MOTION_NOTIFY</literal> event.  Motion notify events are
+     triggered when the mouse pointer moves across the screen.  There are
+     a great many of them, which has given rise to several different kinds
+     of <enumname>GdkEventMask</enumname> aiming to minimise the amount
+     that are captured.
+    </simpara>
+    <simpara>
+     See also:  <signalname class="GtkWidget">event</signalname>.
     </simpara>
    </desc>
   </signal>
-<!-- widget_signals[MOTION_NOTIFY_EVENT] =
-    gtk_signal_new ("motion_notify_event",
-		    GTK_RUN_LAST,
-		    object_class->type,
-		    GTK_SIGNAL_OFFSET (GtkWidgetClass, motion_notify_event),
-		    gtk_marshal_BOOL__POINTER,
-		    GTK_TYPE_BOOL, 1,
-		    GTK_TYPE_GDK_EVENT); -->
 
   <signal id="gtk.gtkwidget.signal.delete-event">
    <signalname>delete-event</signalname>
@@ -1816,26 +1943,35 @@
     <funcprototype>
      <funcdef>bool <function>callback</function></funcdef>
      <paramdef><classname>GtkWidget</classname> widget</paramdef>
-     <paramdef> </paramdef>
+     <paramdef><classname>GdkEvent</classname> delete</paramdef>
     </funcprototype>
    </callback>
    <shortdesc>
-    
+    Emitted when a <literal>GDK_DELETE</literal> event is captured.
    </shortdesc>
    <desc>
     <simpara>
-     
+     This is an event signal, fired when the window manager requests that
+     a widget be deleted.  This is generally when a user clicks the
+     <literal>X</literal> close button on a toplevel window.
+    </simpara>
+    <simpara>
+     The delete event is not propagated.  If you want to prevent the
+     end user from using the window decorations to close your application, 
+     returning <literal>true</literal> from the 
+     <signalname class="GtkWindow">delete-event</signalname> signal will do
+     just that.  Allowing it to return <literal>false</literal> - which it
+     does by default - will cause its default handler to be called.  This
+     happens to be the <function class="GtkObject">destroy()</function> 
+     method, which in turns fires the 
+     <signalname class="GtkObject">destroy</signalname> signal.  In most
+     cases, it's simpler to connect directly to the latter.
+    </simpara>
+    <simpara>
+     See also:  <signalname class="GtkWidget">event</signalname>.
     </simpara>
    </desc>
   </signal>
-<!-- widget_signals[DELETE_EVENT] =
-    gtk_signal_new ("delete_event",
-		    GTK_RUN_LAST,
-		    object_class->type,
-		    GTK_SIGNAL_OFFSET (GtkWidgetClass, delete_event),
-		    gtk_marshal_BOOL__POINTER,
-		    GTK_TYPE_BOOL, 1,
-		    GTK_TYPE_GDK_EVENT); -->
 
   <signal id="gtk.gtkwidget.signal.destroy-event">
    <signalname>destroy-event</signalname>
@@ -1843,26 +1979,26 @@
     <funcprototype>
      <funcdef>bool <function>callback</function></funcdef>
      <paramdef><classname>GtkWidget</classname> widget</paramdef>
-     <paramdef> </paramdef>
+     <paramdef><classname>GdkEvent</classname> destroy</paramdef>
     </funcprototype>
    </callback>
    <shortdesc>
-    
+    Emitted when a <literal>GDK_DESTROY</literal> event is captured.
    </shortdesc>
    <desc>
     <simpara>
-     
+     You really shouldn't ever find a widget that emits this signal.  The
+     destroy event is triggered by the destruction of a widget's underlying 
+     <classname>GdkWindow</classname>, so if that widget is still capable of
+     emitting the <signalname class="GtkWidget">destroy-event</signalname> 
+     signal something has gone badly awry.
+    </simpara>
+    <simpara>
+     See also:   <signalname class="GtkWidget">delete-event</signalname>, 
+     <signalname class="GtkWidget">event</signalname>.
     </simpara>
    </desc>
   </signal>
-<!-- widget_signals[DESTROY_EVENT] =
-    gtk_signal_new ("destroy_event",
-		    GTK_RUN_LAST,
-		    object_class->type,
-		    GTK_SIGNAL_OFFSET (GtkWidgetClass, destroy_event),
-		    gtk_marshal_BOOL__POINTER,
-		    GTK_TYPE_BOOL, 1,
-		    GTK_TYPE_GDK_EVENT); -->
 
   <signal id="gtk.gtkwidget.signal.expose-event">
    <signalname>expose-event</signalname>
@@ -1870,26 +2006,38 @@
     <funcprototype>
      <funcdef>bool <function>callback</function></funcdef>
      <paramdef><classname>GtkWidget</classname> widget</paramdef>
-     <paramdef> </paramdef>
+     <paramdef><classname>GdkEvent</classname> expose</paramdef>
     </funcprototype>
    </callback>
    <shortdesc>
-    
+    Emitted when a <literal>GDK_EXPOSE</literal> event is captured.
    </shortdesc>
    <desc>
     <simpara>
-     
+     This is an event signal, initially emitted when the connected widget
+     becomes fully visible on screen.  Every widget can capture expose
+     events; they are even synthesized for widgets that don't have
+     a <classname>GdkWindow</classname>.
+    </simpara>
+    <simpara>
+     Expose events are also generated when a widget has been partially
+     or fully covered by another widget, and is re-exposed.  These events
+     trigger a redraw internally; a <classname>GdkWindow</classname> 
+     that is not currently exposed is not currently drawn, and the same
+     applies to any unexposed area of a window.
+    </simpara>
+    <simpara>
+     Following suit, the most likely reason to connect to an 
+     <signalname class="GtkWidget">expose-event</signalname> signal is
+     that you have a drawing function in the callback.
+    </simpara>
+    <simpara>
+     See also:  <signalname class="GtkWidget">event</signalname>, 
+     <classname>GtkDrawingArea</classname>, <classname>GdkWindow</classname>, 
+     and the numerous GTK and GDK drawing functions filed under 'Misc'.
     </simpara>
    </desc>
   </signal>
-<!-- widget_signals[EXPOSE_EVENT] =
-    gtk_signal_new ("expose_event",
-		    GTK_RUN_LAST,
-		    object_class->type,
-		    GTK_SIGNAL_OFFSET (GtkWidgetClass, expose_event),
-		    gtk_marshal_BOOL__POINTER,
-		    GTK_TYPE_BOOL, 1,
-		    GTK_TYPE_GDK_EVENT); -->
 
   <signal id="gtk.gtkwidget.signal.key-press-event">
    <signalname>key-press-event</signalname>
@@ -1897,26 +2045,41 @@
     <funcprototype>
      <funcdef>bool <function>callback</function></funcdef>
      <paramdef><classname>GtkWidget</classname> widget</paramdef>
-     <paramdef> </paramdef>
+     <paramdef><classname>GdkEvent</classname> key_press</paramdef>
     </funcprototype>
    </callback>
    <shortdesc>
-    
+    Emitted when a <literal>GDK_KEY_PRESS</literal> event is captured.
    </shortdesc>
    <desc>
-    <simpara>
-     
-    </simpara>
+    <para>
+     This is an event signal, fired when the connected widget picks up a
+     <literal>GDK_KEY_PRESS</literal> event.  Key press events are
+     generated by any of the keys on a keyboard being pressed.  You can
+     distinguish between the key values in the callback using an
+     <literal>if</literal> or <literal>switch</literal> statement:
+     <informalexample>
+      <programlisting role="php">
+function on_click($widget, $event, $data) {
+if($event-&gt;keyval==GDK_KEY_Return) {
+/*do something appropriate for the return key being pressed*/
+}
+elseif($event-&gt;keyval > GDK_KEY__a) {
+/*we can reach the character strings, too*/
+echo $event-&gt;string.&quot;\n&quot;;
+}}
+      </programlisting>
+     </informalexample>
+    </para>
+    <note>
+     <simpara>
+      Yes, we have hard-coded keysyms.  The full list of PHP-GTK keysymbol
+      constants is in the source code in the file 
+      <filename>php-gtk/ext/gtk+/php_gdk.c</filename>.
+     </simpara>
+    </note>
    </desc>
   </signal>
-<!-- widget_signals[KEY_PRESS_EVENT] =
-    gtk_signal_new ("key_press_event",
-		    GTK_RUN_LAST,
-		    object_class->type,
-		    GTK_SIGNAL_OFFSET (GtkWidgetClass, key_press_event),
-		    gtk_marshal_BOOL__POINTER,
-		    GTK_TYPE_BOOL, 1,
-		    GTK_TYPE_GDK_EVENT); -->
 
   <signal id="gtk.gtkwidget.signal.key-release-event">
    <signalname>key-release-event</signalname>
@@ -1924,11 +2087,11 @@
     <funcprototype>
      <funcdef>bool <function>callback</function></funcdef>
      <paramdef><classname>GtkWidget</classname> widget</paramdef>
-     <paramdef> </paramdef>
+     <paramdef><classname>GdkEvent</classname> key_release</paramdef>
     </funcprototype>
    </callback>
    <shortdesc>
-    
+    Emitted when a <literal>GDK_KEY_RELEASE</literal> event is captured.
    </shortdesc>
    <desc>
     <simpara>
@@ -1936,14 +2099,6 @@
     </simpara>
    </desc>
   </signal>
-<!-- widget_signals[KEY_RELEASE_EVENT] =
-    gtk_signal_new ("key_release_event",
-		    GTK_RUN_LAST,
-		    object_class->type,
-		    GTK_SIGNAL_OFFSET (GtkWidgetClass, key_release_event),
-		    gtk_marshal_BOOL__POINTER,
-		    GTK_TYPE_BOOL, 1,
-		    GTK_TYPE_GDK_EVENT); -->
 
   <signal id="gtk.gtkwidget.signal.enter-notify-event">
    <signalname>enter-notify-event</signalname>
@@ -1951,11 +2106,11 @@
     <funcprototype>
      <funcdef>bool <function>callback</function></funcdef>
      <paramdef><classname>GtkWidget</classname> widget</paramdef>
-     <paramdef> </paramdef>
+     <paramdef><classname>GdkEvent</classname> enter_notify</paramdef>
     </funcprototype>
    </callback>
    <shortdesc>
-    
+    Emitted when a <literal>GDK_ENTER_NOTIFY</literal> event is captured.
    </shortdesc>
    <desc>
     <simpara>
@@ -1963,14 +2118,6 @@
     </simpara>
    </desc>
   </signal>
-<!-- widget_signals[ENTER_NOTIFY_EVENT] =
-    gtk_signal_new ("enter_notify_event",
-		    GTK_RUN_LAST,
-		    object_class->type,
-		    GTK_SIGNAL_OFFSET (GtkWidgetClass, enter_notify_event),
-		    gtk_marshal_BOOL__POINTER,
-		    GTK_TYPE_BOOL, 1,
-		    GTK_TYPE_GDK_EVENT); -->
 
   <signal id="gtk.gtkwidget.signal.leave-notify-event">
    <signalname>leave-notify-event</signalname>
@@ -1978,11 +2125,11 @@
     <funcprototype>
      <funcdef>bool <function>callback</function></funcdef>
      <paramdef><classname>GtkWidget</classname> widget</paramdef>
-     <paramdef> </paramdef>
+     <paramdef><classname>GdkEvent</classname> leave_notify</paramdef>
     </funcprototype>
    </callback>
    <shortdesc>
-    
+    Emitted when a <literal>GDK_LEAVE_NOTIFY</literal> event is captured.
    </shortdesc>
    <desc>
     <simpara>
@@ -1990,14 +2137,6 @@
     </simpara>
    </desc>
   </signal>
-<!-- widget_signals[LEAVE_NOTIFY_EVENT] =
-    gtk_signal_new ("leave_notify_event",
-		    GTK_RUN_LAST,
-		    object_class->type,
-		    GTK_SIGNAL_OFFSET (GtkWidgetClass, leave_notify_event),
-		    gtk_marshal_BOOL__POINTER,
-		    GTK_TYPE_BOOL, 1,
-		    GTK_TYPE_GDK_EVENT); -->
 
   <signal id="gtk.gtkwidget.signal.configure-event">
    <signalname>configure-event</signalname>
@@ -2005,11 +2144,11 @@
     <funcprototype>
      <funcdef>bool <function>callback</function></funcdef>
      <paramdef><classname>GtkWidget</classname> widget</paramdef>
-     <paramdef> </paramdef>
+     <paramdef><classname>GdkEvent</classname> configure</paramdef>
     </funcprototype>
    </callback>
    <shortdesc>
-    
+    Emitted when a <literal>GDK_CONFIGURE</literal> event is captured.
    </shortdesc>
    <desc>
     <simpara>
@@ -2017,14 +2156,6 @@
     </simpara>
    </desc>
   </signal>
-<!-- widget_signals[CONFIGURE_EVENT] =
-    gtk_signal_new ("configure_event",
-		    GTK_RUN_LAST,
-		    object_class->type,
-		    GTK_SIGNAL_OFFSET (GtkWidgetClass, configure_event),
-		    gtk_marshal_BOOL__POINTER,
-		    GTK_TYPE_BOOL, 1,
-		    GTK_TYPE_GDK_EVENT); -->
 
   <signal id="gtk.gtkwidget.signal.focus-in-event">
    <signalname>focus-in-event</signalname>
@@ -2032,11 +2163,11 @@
     <funcprototype>
      <funcdef>bool <function>callback</function></funcdef>
      <paramdef><classname>GtkWidget</classname> widget</paramdef>
-     <paramdef> </paramdef>
+     <paramdef><classname>GdkEvent</classname> focus_change</paramdef>
     </funcprototype>
    </callback>
    <shortdesc>
-    
+    Emitted when a <literal>GDK_FOCUS_CHANGE</literal> event is captured.
    </shortdesc>
    <desc>
     <simpara>
@@ -2044,14 +2175,6 @@
     </simpara>
    </desc>
   </signal>
-<!-- widget_signals[FOCUS_IN_EVENT] =
-    gtk_signal_new ("focus_in_event",
-		    GTK_RUN_LAST,
-		    object_class->type,
-		    GTK_SIGNAL_OFFSET (GtkWidgetClass, focus_in_event),
-		    gtk_marshal_BOOL__POINTER,
-		    GTK_TYPE_BOOL, 1,
-		    GTK_TYPE_GDK_EVENT); -->
 
   <signal id="gtk.gtkwidget.signal.focus-out-event">
    <signalname>focus-out-event</signalname>
@@ -2059,11 +2182,11 @@
     <funcprototype>
      <funcdef>bool <function>callback</function></funcdef>
      <paramdef><classname>GtkWidget</classname> widget</paramdef>
-     <paramdef> </paramdef>
+     <paramdef><classname>GdkEvent</classname> focus_change</paramdef>
     </funcprototype>
    </callback>
    <shortdesc>
-    
+    Emitted when a <literal>GDK_FOCUS_CHANGE</literal> event is captured.
    </shortdesc>
    <desc>
     <simpara>
@@ -2071,14 +2194,6 @@
     </simpara>
    </desc>
   </signal>
-<!-- widget_signals[FOCUS_OUT_EVENT] =
-    gtk_signal_new ("focus_out_event",
-		    GTK_RUN_LAST,
-		    object_class->type,
-		    GTK_SIGNAL_OFFSET (GtkWidgetClass, focus_out_event),
-		    gtk_marshal_BOOL__POINTER,
-		    GTK_TYPE_BOOL, 1,
-		    GTK_TYPE_GDK_EVENT); -->
 
   <signal id="gtk.gtkwidget.signal.map-event">
    <signalname>map-event</signalname>
@@ -2086,11 +2201,11 @@
     <funcprototype>
      <funcdef>bool <function>callback</function></funcdef>
      <paramdef><classname>GtkWidget</classname> widget</paramdef>
-     <paramdef> </paramdef>
+     <paramdef><classname>GdkEvent</classname> map</paramdef>
     </funcprototype>
    </callback>
    <shortdesc>
-    
+    Emitted when a <literal>GDK_MAP</literal> event is captured.
    </shortdesc>
    <desc>
     <simpara>
@@ -2098,14 +2213,6 @@
     </simpara>
    </desc>
   </signal>
-<!-- widget_signals[MAP_EVENT] =
-    gtk_signal_new ("map_event",
-		    GTK_RUN_LAST,
-		    object_class->type,
-		    GTK_SIGNAL_OFFSET (GtkWidgetClass, map_event),
-		    gtk_marshal_BOOL__POINTER,
-		    GTK_TYPE_BOOL, 1,
-		    GTK_TYPE_GDK_EVENT); -->
 
   <signal id="gtk.gtkwidget.signal.unmap-event">
    <signalname>unmap-event</signalname>
@@ -2113,11 +2220,11 @@
     <funcprototype>
      <funcdef>bool <function>callback</function></funcdef>
      <paramdef><classname>GtkWidget</classname> widget</paramdef>
-     <paramdef> </paramdef>
+     <paramdef><classname>GdkEvent</classname> unmap</paramdef>
     </funcprototype>
    </callback>
    <shortdesc>
-    
+    Emitted when a <literal>GDK_UNMAP</literal> event is captured.
    </shortdesc>
    <desc>
     <simpara>
@@ -2125,14 +2232,6 @@
     </simpara>
    </desc>
   </signal>
-<!-- widget_signals[UNMAP_EVENT] =
-    gtk_signal_new ("unmap_event",
-		    GTK_RUN_LAST,
-		    object_class->type,
-		    GTK_SIGNAL_OFFSET (GtkWidgetClass, unmap_event),
-		    gtk_marshal_BOOL__POINTER,
-		    GTK_TYPE_BOOL, 1,
-		    GTK_TYPE_GDK_EVENT); -->
 
   <signal id="gtk.gtkwidget.signal.property-notify-event">
    <signalname>property-notify-event</signalname>
@@ -2140,11 +2239,11 @@
     <funcprototype>
      <funcdef>bool <function>callback</function></funcdef>
      <paramdef><classname>GtkWidget</classname> widget</paramdef>
-     <paramdef> </paramdef>
+     <paramdef><classname>GdkEvent</classname> property_notify</paramdef>
     </funcprototype>
    </callback>
    <shortdesc>
-    
+    Emitted when a <literal>GDK_PROPERTY_NOTIFY</literal> event is captured.
    </shortdesc>
    <desc>
     <simpara>
@@ -2152,14 +2251,6 @@
     </simpara>
    </desc>
   </signal>
-<!-- widget_signals[PROPERTY_NOTIFY_EVENT] =
-    gtk_signal_new ("property_notify_event",
-		    GTK_RUN_LAST,
-		    object_class->type,
-		    GTK_SIGNAL_OFFSET (GtkWidgetClass, property_notify_event),
-		    gtk_marshal_BOOL__POINTER,
-		    GTK_TYPE_BOOL, 1,
-		    GTK_TYPE_GDK_EVENT); -->
 
   <signal id="gtk.gtkwidget.signal.selection-clear-event">
    <signalname>selection-clear-event</signalname>
@@ -2167,11 +2258,11 @@
     <funcprototype>
      <funcdef>bool <function>callback</function></funcdef>
      <paramdef><classname>GtkWidget</classname> widget</paramdef>
-     <paramdef> </paramdef>
+     <paramdef><classname>GdkEvent</classname> selection_clear</paramdef>
     </funcprototype>
    </callback>
    <shortdesc>
-    
+    Emitted when a <literal>GDK_SELECTION_CLEAR</literal> event is captured.
    </shortdesc>
    <desc>
     <simpara>
@@ -2179,14 +2270,6 @@
     </simpara>
    </desc>
   </signal>
-<!-- widget_signals[SELECTION_CLEAR_EVENT] =
-    gtk_signal_new ("selection_clear_event",
-		    GTK_RUN_LAST,
-		    object_class->type,
-		    GTK_SIGNAL_OFFSET (GtkWidgetClass, selection_clear_event),
-		    gtk_marshal_BOOL__POINTER,
-		    GTK_TYPE_BOOL, 1,
-		    GTK_TYPE_GDK_EVENT); -->
 
   <signal id="gtk.gtkwidget.signal.selection-request-event">
    <signalname>selection-request-event</signalname>
@@ -2194,11 +2277,11 @@
     <funcprototype>
      <funcdef>bool <function>callback</function></funcdef>
      <paramdef><classname>GtkWidget</classname> widget</paramdef>
-     <paramdef> </paramdef>
+     <paramdef><classname>GdkEvent</classname> selection_request</paramdef>
     </funcprototype>
    </callback>
    <shortdesc>
-    
+    Emitted when a <literal>GDK_SELECTION_REQUEST</literal> event is captured.
    </shortdesc>
    <desc>
     <simpara>
@@ -2206,14 +2289,6 @@
     </simpara>
    </desc>
   </signal>
-<!-- widget_signals[SELECTION_REQUEST_EVENT] =
-    gtk_signal_new ("selection_request_event",
-		    GTK_RUN_LAST,
-		    object_class->type,
-		    GTK_SIGNAL_OFFSET (GtkWidgetClass, selection_request_event),
-		    gtk_marshal_BOOL__POINTER,
-		    GTK_TYPE_BOOL, 1,
-		    GTK_TYPE_GDK_EVENT); -->
 
   <signal id="gtk.gtkwidget.signal.selection-notify-event">
    <signalname>selection-notify-event</signalname>
@@ -2221,11 +2296,11 @@
     <funcprototype>
      <funcdef>bool <function>callback</function></funcdef>
      <paramdef><classname>GtkWidget</classname> widget</paramdef>
-     <paramdef> </paramdef>
+     <paramdef><classname>GdkEvent</classname> selection_notify</paramdef>
     </funcprototype>
    </callback>
    <shortdesc>
-    
+    Emitted when a <literal>GDK_SELECTION_NOTIFY</literal> event is captured.
    </shortdesc>
    <desc>
     <simpara>
@@ -2233,14 +2308,6 @@
     </simpara>
    </desc>
   </signal>
-<!-- widget_signals[SELECTION_NOTIFY_EVENT] =
-    gtk_signal_new ("selection_notify_event",
-		    GTK_RUN_LAST,
-		    object_class->type,
-		    GTK_SIGNAL_OFFSET (GtkWidgetClass, selection_notify_event),
-		    gtk_marshal_BOOL__POINTER,
-		    GTK_TYPE_BOOL, 1,
-		    GTK_TYPE_GDK_EVENT); -->
 
   <signal id="gtk.gtkwidget.signal.selection-received">
    <signalname>selection-received</signalname>
@@ -2308,11 +2375,11 @@
     <funcprototype>
      <funcdef>bool <function>callback</function></funcdef>
      <paramdef><classname>GtkWidget</classname> widget</paramdef>
-     <paramdef> </paramdef>
+     <paramdef><classname>GdkEvent</classname> proximity_in</paramdef>
     </funcprototype>
    </callback>
    <shortdesc>
-    
+    Emitted when a <literal>GDK_PROXIMITY_IN</literal> event is captured.
    </shortdesc>
    <desc>
     <simpara>
@@ -2320,14 +2387,6 @@
     </simpara>
    </desc>
   </signal>
-<!-- widget_signals[PROXIMITY_IN_EVENT] =
-    gtk_signal_new ("proximity_in_event",
-		    GTK_RUN_LAST,
-		    object_class->type,
-		    GTK_SIGNAL_OFFSET (GtkWidgetClass, proximity_in_event),
-		    gtk_marshal_BOOL__POINTER,
-		    GTK_TYPE_BOOL, 1,
-		    GTK_TYPE_GDK_EVENT); -->
 
   <signal id="gtk.gtkwidget.signal.proximity-out-event">
    <signalname>proximity-out-event</signalname>
@@ -2335,11 +2394,11 @@
     <funcprototype>
      <funcdef>bool <function>callback</function></funcdef>
      <paramdef><classname>GtkWidget</classname> widget</paramdef>
-     <paramdef> </paramdef>
+     <paramdef><classname>GdkEvent</classname> proximity_out</paramdef>
     </funcprototype>
    </callback>
    <shortdesc>
-    
+    Emitted when a <literal>GDK_PROXIMITY_OUT</literal> event is captured.
    </shortdesc>
    <desc>
     <simpara>
@@ -2347,14 +2406,6 @@
     </simpara>
    </desc>
   </signal>
-<!-- widget_signals[PROXIMITY_OUT_EVENT] =
-    gtk_signal_new ("proximity_out_event",
-		    GTK_RUN_LAST,
-		    object_class->type,
-		    GTK_SIGNAL_OFFSET (GtkWidgetClass, proximity_out_event),
-		    gtk_marshal_BOOL__POINTER,
-		    GTK_TYPE_BOOL, 1,
-		    GTK_TYPE_GDK_EVENT); -->
 
   <signal id="gtk.gtkwidget.signal.drag-leave">
    <signalname>drag-leave</signalname>
@@ -2367,7 +2418,7 @@
     </funcprototype>
    </callback>
    <shortdesc>
-    
+
    </shortdesc>
    <desc>
     <simpara>
@@ -2395,7 +2446,7 @@
     </funcprototype>
    </callback>
    <shortdesc>
-    
+
    </shortdesc>
    <desc>
     <simpara>
@@ -2422,7 +2473,7 @@
     </funcprototype>
    </callback>
    <shortdesc>
-    
+
    </shortdesc>
    <desc>
     <simpara>
@@ -2479,7 +2530,7 @@
     </funcprototype>
    </callback>
    <shortdesc>
-    
+
    </shortdesc>
    <desc>
     <simpara>
@@ -2608,11 +2659,11 @@
     <funcprototype>
      <funcdef>bool <function>callback</function></funcdef>
      <paramdef><classname>GtkWidget</classname> widget</paramdef>
-     <paramdef> </paramdef>
+     <paramdef><classname>GdkEvent</classname> visibility_notify</paramdef>
     </funcprototype>
    </callback>
    <shortdesc>
-    
+    Emitted when a <literal>GDK_VISIBILITY_NOTIFY</literal> event is captured.
    </shortdesc>
    <desc>
     <simpara>
@@ -2620,14 +2671,6 @@
     </simpara>
    </desc>
   </signal>
-<!-- widget_signals[VISIBILITY_NOTIFY_EVENT] =
-    gtk_signal_new ("visibility_notify_event",
-		    GTK_RUN_LAST,
-		    object_class->type,
-		    GTK_SIGNAL_OFFSET (GtkWidgetClass, visibility_notify_event),
-		    gtk_marshal_BOOL__POINTER,
-		    GTK_TYPE_BOOL, 1,
-		    GTK_TYPE_GDK_EVENT); -->
 
   <signal id="gtk.gtkwidget.signal.client-event">
    <signalname>client-event</signalname>
@@ -2635,11 +2678,11 @@
     <funcprototype>
      <funcdef>bool <function>callback</function></funcdef>
      <paramdef><classname>GtkWidget</classname> widget</paramdef>
-     <paramdef> </paramdef>
+     <paramdef><classname>GdkEvent</classname> client_event</paramdef>
     </funcprototype>
    </callback>
    <shortdesc>
-    
+    Emitted when a <literal>GDK_CLIENT_EVENT</literal> event is captured.
    </shortdesc>
    <desc>
     <simpara>
@@ -2647,14 +2690,6 @@
     </simpara>
    </desc>
   </signal>
-<!-- widget_signals[CLIENT_EVENT] =
-    gtk_signal_new ("client_event",
-		    GTK_RUN_LAST,
-		    object_class->type,
-		    GTK_SIGNAL_OFFSET (GtkWidgetClass, client_event),
-		    gtk_marshal_BOOL__POINTER,
-		    GTK_TYPE_BOOL, 1,
-		    GTK_TYPE_GDK_EVENT); -->
 
   <signal id="gtk.gtkwidget.signal.no-expose-event">
    <signalname>no-expose-event</signalname>
@@ -2662,7 +2697,7 @@
     <funcprototype>
      <funcdef>bool <function>callback</function></funcdef>
      <paramdef><classname>GtkWidget</classname> widget</paramdef>
-     <paramdef> </paramdef>
+     <paramdef><classname>GdkEvent</classname> no_expose</paramdef>
     </funcprototype>
    </callback>
    <shortdesc>
@@ -2670,18 +2705,10 @@
    </shortdesc>
    <desc>
     <simpara>
-     
+    Emitted when a <literal>GDK_NO_EXPOSE</literal> event is captured.
     </simpara>
    </desc>
   </signal>
-<!-- widget_signals[NO_EXPOSE_EVENT] =
-    gtk_signal_new ("no_expose_event",
-		    GTK_RUN_LAST,
-		    object_class->type,
-		    GTK_SIGNAL_OFFSET (GtkWidgetClass, no_expose_event),
-		    gtk_marshal_BOOL__POINTER,
-		    GTK_TYPE_BOOL, 1,
-		    GTK_TYPE_GDK_EVENT); -->
 
   <signal id="gtk.gtkwidget.signal.debug-msg">
    <signalname>debug-msg</signalname>
@@ -2717,8 +2744,7 @@
    <propname>style</propname>
    <proptype>GtkStyle</proptype>
    <shortdesc>
-    Style associated with a widget's 
-    <propname class="GtkWidget">window</propname>.
+    Style associated with a widget.
    </shortdesc>
    <desc>
     <simpara>
