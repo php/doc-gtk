@@ -86,7 +86,8 @@
      <paramdef>array
       <parameter>targets</parameter>
      </paramdef>
-     <paramdef>int
+     <paramdef>
+      <enumname>GdkDragAction</enumname>
       <parameter>actions</parameter>
      </paramdef>
     </funcprototype>
@@ -102,32 +103,89 @@
      reacts when the drag is over the widget.
     </simpara>
     <para>
-     <parameter>targets</parameter> is a two dimensional array describing the
-     drop areas of the widget.
+     The <parameter>targets</parameter> parameter defines a list with all
+     data types which can be dropped over the widget. The parameter is an
+     array of arrays of size three:
+     <programlisting role="php">
+<![CDATA[
+$targets = array(
+//array( target, flags, info),
+  array( 'text/plain', GTK_TARGET_SAME_APP, 0),
+  array( 'text/uri-list', 0, 1)
+);
+]]>
+     </programlisting>
+     In our example, the widget would accept textual data and files. The
+     files could be dragged from everywhere (<parameter>flag</parameter> 
+     parameter 0), but the textual data are only accepted if they come 
+     from within our application.
+     <note><simpara>It is <emphasis>not</emphasis> possible to use
+     a "*" mime type in the <parameter>target</parameter>.</simpara>
+     </note>
+    </para>
+    <para>
+     The <parameter>flags</parameter> of the <parameter>targets</parameter>
+     determine from which widget the drag has to come from:
+     <table>
+      <title>Values for <parameter>flags</parameter></title>
+      <tgroup cols="2">
+       <tbody>
+        <row>
+         <entry>0</entry>
+         <entry>Accept drags from everywhere.</entry>
+        </row>
+        <row>
+         <entry>GTK_TARGET_SAME_APP</entry>
+         <entry>Accept drags only from widgets of the same application only.</entry>
+        </row>
+        <row>
+         <entry>GTK_TARGET_SAME_WIDGET</entry>
+         <entry>Accept drags only from the same widget. This is useful for 
+         e.g. moving items up/down in a list by dragging them.</entry>
+        </row>
+       </tbody>
+      </tgroup>
+     </table>
+    </para>
+    <para>
+     <parameter>info</parameter> allows you to pass a number to the 
+     function connected to the 
+     <signalname class="GtkWidget">drag-data-received</signalname>
+     signal. This is useful when e.g. allowing multiple image types to
+     be dropped, as well as some other non-image types: All image types
+     could be assigned "1" as info parameter, all other types "2" or so.
+     In the drag received function could pass the necessary data to 
+     a image open function by checking if the <parameter>info</parameter>
+     parameter is "1", without having to compare the mime type.
+     
      <example>
-      <title>Format of <parameter>targets</parameter></title>
+      <title>Using the <parameter>info</parameter> parameter</title>
       <programlisting role="php">
 <![CDATA[
-array
-(
-    [0] => Array
-        (
-            [target] => target
-            [flags]  => flags
-            [info]   => info
-        )
+define('TYPE_IMAGE', 1);
+define('TYPE_PDF'  , 2);
+define('TYPE_OTHER', 3);
+$targets = array(
+ array( 'image/jpg' , 0, TYPE_IMAGE),
+ array( 'image/jpeg', 0, TYPE_IMAGE),
+ array( 'image/gif' , 0, TYPE_IMAGE),
+ array( 'image/png' , 0, TYPE_IMAGE),
+ array( 'application/pdf', 0, TYPE_PDF),
+ array( 'text/plain'     , 0, TYPE_OTHER)
+);
 
-)
+$list->drag_dest_set(GTK_DEST_DEFAULT_ALL, $targets, GDK_ACTION_COPY | GDK_ACTION_MOVE);
+$list->connect('drag-data-received', 'dnd_drag_data_received');
+
+function dnd_drag_data_received( $widget, $context, $x, $y, $data, $info, $time)
+{
+    if( $info == TYPE_IMAGE) { handle_image( $data); return; }
+    //do different things with pdf and other type here
+}
 ]]>
       </programlisting>
      </example>
     </para>
-    <simpara>
-     <parameter>actions</parameter> is one of six
-     <enumname>GdkDragAction</enumname> values.
-     <parameter>actions</parameter> defines what happens when the drag is
-     completed.
-    </simpara>
     <simpara>
      See also: <function class="GtkWidget">drag_dest_unset</function>
     </simpara>
@@ -158,6 +216,55 @@ array
    </desc>
   </method>
 
+  <method id="gtk.gtkwidget.method.drag_source_set">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>drag_source_set</function></funcdef>
+     <paramdef>
+      <enumname>GdkModifierType</enumname>
+      <parameter>start_button_mask</parameter>
+     </paramdef>
+     <paramdef>
+      array <parameter>targets</parameter>
+     </paramdef>
+     <paramdef>
+      <enumname>GdkDragAction</enumname>
+      <parameter>actions</parameter>
+     </paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>Allows to drag data from the widget.</shortdesc>
+   <desc>
+    <para>
+     Sets the calling widgets as a drag-and-drop source, so that
+     data can be dragged from the widget to a drop target.
+     <example>
+      <title>Using <function class="GtkWidget">drag_source_set</function></title>
+      <programlisting role="php">
+<![CDATA[
+$targets = array( array( 'text/uri-list', 0, 0));
+$list->drag_source_set(GDK_BUTTON1_MASK|GDK_BUTTON3_MASK, $targets, GDK_ACTION_COPY);
+]]>
+      </programlisting>
+     </example>
+    </para>
+    <simpara>
+     The first parameter, <parameter>start_button_mask</parameter>, is a bitmask
+     with all mouse buttons allowed to start the drag.
+    </simpara>
+    <simpara>
+     The <parameter>targets</parameter> is an array of data types provided
+     as drag/drop data. See <function class="GtkWidget">drag_dest_set</function>
+     for a detailed explanation of this topic.
+    </simpara>
+    <simpara>
+     <parameter>actions</parameter> determine which actions will take place
+     if the drop event occurs; a copy/move/delete. See 
+     <enumname>GdkDragAction</enumname> for all possible options.
+    </simpara>
+   </desc>
+  </method>
+
   <method id="gtk.gtkwidget.method.drag_source_unset">
    <funcsynopsis>
     <funcprototype>
@@ -165,8 +272,15 @@ array
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
-   <shortdesc></shortdesc>
-   <desc></desc>
+   <shortdesc>Undo the effects of drag_source_set().</shortdesc>
+   <desc>
+    <simpara>
+     Unregisters the settings which have been done with
+     <function class="GtkWidget">drag_source_set</function>.
+     After calling this function, the widget won't act
+     as a drag source any more.
+    </simpara>
+   </desc>
   </method>
 
   <method id="gtk.gtkwidget.method.drag_source_set_icon">
@@ -2982,33 +3096,50 @@ function on_click($widget, $event, $data)
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <cbfunction>callback</cbfunction></funcdef>
-     <paramdef><classname>GtkWidget</classname> widget</paramdef>
-     <paramdef> </paramdef>
-     <paramdef> </paramdef>
-     <paramdef> </paramdef>
-     <paramdef> </paramdef>
+     <paramdef>
+      <classname>GtkWidget</classname>
+      <parameter>widget</parameter>
+     </paramdef>
+     <paramdef>
+      <classname>GdkDragContext</classname>
+      <parameter>context</parameter>
+     </paramdef>
+     <paramdef>
+      <classname>GtkSelectionData</classname>
+      <parameter>selection_data</parameter>
+     </paramdef>
+     <paramdef>int <parameter>info</parameter></paramdef>
+     <paramdef>int <parameter>time</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    
+    Requests drag'n'drop data.
    </shortdesc>
    <desc>
     <simpara>
-     
+     This signal is emitted when the user has dragged something
+     from one widget and dropped it onto another widget. The data
+     to be transferred from one to another widget is requested 
+     via this signal.
     </simpara>
+    <para>
+     To set the data, use the <function class="GtkSelectionData">set</function>
+     function of the selection.
+     <example>
+      <title>Passing drag data to the drop target</title>
+      <programlisting role="php">
+<![CDATA[
+function dnd_drag_data_get($widget, $context, $selection_data, $info, $time)
+{
+    $dnd_string = "Perl is the only language that looks\nthe same before and after RSA encryption";
+    $selection_data->set($selection_data->target, 8, $dnd_string);
+}
+]]>
+      </programlisting>
+     </example>
+    </para>
    </desc>
   </signal>
-<!-- widget_signals[DRAG_DATA_GET] =
-    gtk_signal_new ("drag_data_get",
-		    GTK_RUN_LAST,
-		    object_class->type,
-		    GTK_SIGNAL_OFFSET (GtkWidgetClass, drag_data_get),
-		    gtk_marshal_NONE__POINTER_POINTER_UINT_UINT,
-		    GTK_TYPE_NONE, 4,
-		    GTK_TYPE_GDK_DRAG_CONTEXT,
-		    GTK_TYPE_SELECTION_DATA,
-		    GTK_TYPE_UINT,
-		    GTK_TYPE_UINT); -->
 
   <signal id="gtk.gtkwidget.signal.drag-data-received">
    <signalname>drag-data-received</signalname>
@@ -3016,36 +3147,30 @@ function on_click($widget, $event, $data)
     <funcprototype>
      <funcdef>void <cbfunction>callback</cbfunction></funcdef>
      <paramdef><classname>GtkWidget</classname> widget</paramdef>
-     <paramdef> </paramdef>
-     <paramdef> </paramdef>
-     <paramdef> </paramdef>
-     <paramdef> </paramdef>
-     <paramdef> </paramdef>
-     <paramdef> </paramdef>
+     <paramdef>
+      <classname>GdkDragContext</classname>
+      <parameter>context</parameter>
+     </paramdef>
+     <paramdef>int <parameter>x</parameter></paramdef>
+     <paramdef>int <parameter>y</parameter></paramdef>
+     <paramdef>
+      <classname>GtkSelectionData</classname>
+      <parameter>data</parameter>
+     </paramdef>
+     <paramdef>int <parameter>info</parameter></paramdef>
+     <paramdef>int <parameter>time</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    
+    Receives data dropped over the widget.
    </shortdesc>
    <desc>
     <simpara>
-     
+     This signal is emitted when the user has dropped drag data
+     over the widget.
     </simpara>
    </desc>
   </signal>
-<!-- widget_signals[DRAG_DATA_RECEIVED] =
-    gtk_signal_new ("drag_data_received",
-		    GTK_RUN_LAST,
-		    object_class->type,
-		    GTK_SIGNAL_OFFSET (GtkWidgetClass, drag_data_received),
-		    gtk_marshal_NONE__POINTER_INT_INT_POINTER_UINT_UINT,
-		    GTK_TYPE_NONE, 6,
-		    GTK_TYPE_GDK_DRAG_CONTEXT,
-		    GTK_TYPE_INT,
-		    GTK_TYPE_INT,
-		    GTK_TYPE_SELECTION_DATA,
-		    GTK_TYPE_UINT,
-		    GTK_TYPE_UINT); -->
 
   <signal id="gtk.gtkwidget.signal.visibility-notify-event">
    <signalname>visibility-notify-event</signalname>
