@@ -211,7 +211,7 @@ do
 	#FIXME: check if $ref is empty
 	refs="$refs \&$ref;"
 done
-#can't I do 2x AC_OUTPUT?
+# can't I do 2x AC_OUTPUT?
 sed "s/@TEST_REFERENCES@/$refs/g" testclasses.xml.in > testclasses.xml
 
 chmod +x scripts/genchapterents.php
