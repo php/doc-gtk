@@ -47,6 +47,10 @@
 			<xsl:with-param name="nodes" select="//chapter"/>
 			<xsl:with-param name="titlename">title</xsl:with-param>
 		</xsl:call-template>
+		<xsl:call-template name="last">
+			<xsl:with-param name="nodes" select="//appendix"/>
+			<xsl:with-param name="titlename">title</xsl:with-param>
+		</xsl:call-template>
 	</ul>
 </p>
 </div>
