@@ -261,6 +261,40 @@ $button->connect('clicked', array(&$treeItem, 'select'));
     </simpara>
    </desc>
   </signal>
+  <signal id="gtk.gtktreeitem.signal.select">
+   <signalname>select</signalname>
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
+     <paramdef><classname>GtkTreeItem</classname> tree_item</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Emitted when the tree item is selected.
+   </shortdesc>
+   <desc>
+    <simpara>
+     The <signalname class="GtkTreeItem">select</signalname> signal is emitted when a tree item is about to be selected.  This occurs when the user clicks on an unseleted item or the item is selected by its parent tree using the <function class="GtkTree">select_item</function> method.
+    </simpara>
+   </desc>
+  </signal>
+  <signal id="gtk.gtktreeitem.signal.deselect">
+   <signalname>deselect</signalname>
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
+     <paramdef><classname>GtkTreeItem</classname> tree_item</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Emitted when the tree item is deselected.
+   </shortdesc>
+   <desc>
+    <simpara>
+     The <signalname class="GtkTreeItem">deselect</signalname> signal is emitted when a tree item is about to be deselected.  This occurs when the user clicks on a selected item or the item is unselected by its parent tree using the <function class="GtkTree">unselect_item</function> method.
+    </simpara>
+   </desc>
+  </signal>
  </signals>
 
 </classentry>
