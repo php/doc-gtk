@@ -4,46 +4,46 @@ $lang = '@LANG@';
 $entities = array();
 
 if($argv[1])
-    $dir = "../$argv[1]";
-else
-    $dir = "../$lang";
+	$dir = "../$argv[1]";
+	else
+	$dir = "../$lang";
 
 function gen_ent($path, $file, $lang)
 {
-    $ent = preg_replace("%[\\/]%",".", preg_replace("%^en[\\/]((userguide|reference)[\\/])?(.*)\.xml$%",'\\3', $path."/".$file));
-	return "<!ENTITY $ent SYSTEM \"".preg_replace('%^en([\\/](userguide|reference)[\\/])?%', "$lang\\1", "$path/$file")."\">";
+	$ent = preg_replace("%[\\/]%",".", preg_replace("%^(?:..[\\/])?en[\\/]((userguide|reference)[\\/])?(.*)\.xml$%",'\\3', $path."/".$file));
+	return "<!ENTITY $ent SYSTEM \"".preg_replace('%^(?:..[\\/])?en([\\/](userguide|reference)[\\/])?%', "$lang\\1", "$path/$file")."\">";
 
 }
 
 function gen_dir_ents($path)
 {
-    global $entities, $lang;
-    $dir_handle = opendir($path);
-    while($file = readdir($dir_handle))
-    {
-        if (($file != "CVS") && ($file != ".cvsignore") && ($file != ".") && ($file != ".."))
-        {
-            if(is_dir($path."/".$file))
-            {
-                gen_dir_ents($path."/".$file);
-            }
-            else
-            {
-                if(substr($file, -4) == ".xml")
-                {
-                    if(($lang != "en") and (file_exists(preg_replace("%^en(/?|$)%", $lang."\\1", $path)."/".$file)))
-                    { 
-                            $entities[] = gen_ent($path, $file, $lang);
-                    }
-                    else
-                    {
-                            $entities[] = gen_ent($path, $file, "en");
-                    }                
-                }
-            }
-        }
-    }
-    closedir($dir_handle);
+	global $entities, $lang;
+	$dir_handle = opendir($path);
+	while($file = readdir($dir_handle))
+	{
+		if (($file != "CVS") && ($file != ".cvsignore") && ($file != ".") && ($file != ".."))
+		{
+			if(is_dir($path."/".$file))
+			{
+				gen_dir_ents($path."/".$file);
+			}
+			else
+			{
+				if(substr($file, -4) == ".xml")
+				{
+					if(($lang != "en") and (file_exists(preg_replace("%^(..[\\/])?en(/?|$)%", "\\1".$lang."\\2", $path)."/".$file)))
+					{
+						$entities[] = gen_ent($path, $file, $lang);
+					}
+					else
+					{
+						$entities[] = gen_ent($path, $file, "en");
+					}
+				}
+			}
+		}
+	}
+	closedir($dir_handle);
 }
 
 if (strnatcmp(PHP_VERSION, '4.1.0') >= 0)
@@ -54,5 +54,7 @@ else
 sort($entities, SORT_STRING);
 while(list(,$val) = each($entities))
 {
-    echo $val."\n";
+	echo $val."\n";
 }
+
+?>
