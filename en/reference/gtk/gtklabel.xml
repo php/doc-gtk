@@ -13,7 +13,7 @@
    </simpara>
    <simpara>
     Note that labels do not generate events. If you want to catch events
-    (e.g. from a button click) you will need to put the label in a
+    (e.g. from a mouse click) you will need to put the label in a
     <classname>GtkEventBox</classname>.
    </simpara>
    <simpara>
@@ -38,13 +38,29 @@
   </shortdesc>
   <desc>
    <para>
-    The syntax to create a new GtkLabel widget is:
-    <informalexample>
+    <example>
+     <title>Aligning the text in a <classname>GtkLabel</classname></title>
      <programlisting role="php">
-$label = &amp;new GtkLabel(&quot;Initial or static label text&quot;);
+dl('php_gtk.' . (strstr(PHP_OS, 'WIN') ? 'dll' : 'so'));
+
+$window = &amp;new GtkWindow();
+$window-&gt;set_usize(200, 200);
+$window-&gt;connect_object('destroy', array('gtk', 'main_quit'));
+
+/* Child widgets by default will expand to fill the available space */
+$label = &amp;new GtkLabel(&quot;This is my label&quot;);
+$label-&gt;set_alignment(1.0, 1.0);
+$window-&gt;add($label);
+$window-&gt;show_all();
+
+gtk::main();
      </programlisting>
-    </informalexample>
+    </example>
    </para>
+   <simpara>
+    The <function class="GtkMisc">set_alignment()</function> method
+    is inherited from <classname>GtkMisc</classname>.
+   </simpara>
   </desc>
  </constructor>
 
