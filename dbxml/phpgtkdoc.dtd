@@ -2,7 +2,7 @@
    Docbook Customiszation layer of PHP-GTK docs
    Authors: James Moore <jmoore@php.net>
 
-   $Id: phpgtkdoc.dtd,v 1.8 2002-03-12 04:42:49 sfox Exp $
+   $Id: phpgtkdoc.dtd,v 1.9 2002-08-31 08:23:07 jmoore Exp $
 
 -->
 
@@ -95,8 +95,9 @@
           ((classmeta),(constructor)?,(methods?,signals?,attributes?))>
 <!ATTLIST classentry
     %common.attrib;
-	%refentry.role.attrib;
-	%local.refentry.attrib;
+    %refentry.role.attrib;
+    %local.refentry.attrib;
+    hide (0|1) '0'
 >
 
 <!-- 
@@ -256,6 +257,7 @@
 <!ELEMENT enum ((enumname),(shortdesc)?,(enumoption)+) >
 <!ATTLIST enum
     %common.attrib;
+    hide (0|1) '0'
 >
 
 <!--
@@ -341,11 +343,11 @@
 
 <!--
 
-  - property: provides information about an objects properties
+  - prop: provides information about an objects properties
 
 -->
-<!ELEMENT property ((argname, argtype),(shortdesc,desc))>
-<!ATTLIST property
+<!ELEMENT prop ((argname, argtype),(shortdesc,desc))>
+<!ATTLIST prop
     %common.attrib;
     type (ro|rw) #REQUIRED
 >
