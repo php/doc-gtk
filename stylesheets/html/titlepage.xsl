@@ -3,7 +3,7 @@
                 version='1.0'>
 
 <!-- ********************************************************************
-     $Id: titlepage.xsl,v 1.3 2003-08-03 17:54:08 sfox Exp $
+     $Id: titlepage.xsl,v 1.4 2003-09-06 20:05:19 sfox Exp $
      ********************************************************************
 
      This file is part of the XSL DocBook Stylesheet distribution.
@@ -36,14 +36,14 @@
 <xsl:attribute-set name="appendix.titlepage.verso.style"/>
 
 <xsl:attribute-set name="sect1.titlepage.recto.style"
-                   use-attribute-sets="section.titlepage.recto.style"/>
+                   use-attribute-sets="sect1.titlepage.recto.style"/>
 <xsl:attribute-set name="sect1.titlepage.verso.style"
-                   use-attribute-sets="section.titlepage.verso.style"/>
+                   use-attribute-sets="sect1.titlepage.verso.style"/>
 
 <xsl:attribute-set name="sect2.titlepage.recto.style"
-                   use-attribute-sets="section.titlepage.recto.style"/>
+                   use-attribute-sets="sect2.titlepage.recto.style"/>
 <xsl:attribute-set name="sect2.titlepage.verso.style"
-                   use-attribute-sets="section.titlepage.verso.style"/>
+                   use-attribute-sets="sect2.titlepage.verso.style"/>
 
 <xsl:attribute-set name="table.of.contents.titlepage.recto.style"/>
 <xsl:attribute-set name="table.of.contents.titlepage.verso.style"/>
@@ -74,22 +74,22 @@
  <xsl:template name="authorgroup-title">
   <xsl:param name="id"></xsl:param>
   <xsl:choose>
-   <xsl:when test="($id='phpgtk.authors') or ($id='credits.phpgtk.authors')">
+   <xsl:when test="$id='credits.phpgtk.authors'">
       <xsl:call-template name="gentext">
        <xsl:with-param name="key">PHPGTKauths</xsl:with-param>
       </xsl:call-template>
    </xsl:when>
-   <xsl:when test="($id='phpgtk.contributors') or ($id='credits.phpgtk.contributors')">
+   <xsl:when test="$id='credits.phpgtk.contributors'">
       <xsl:call-template name="gentext">
        <xsl:with-param name="key">PHPGTKcons</xsl:with-param>
       </xsl:call-template>
    </xsl:when>
-   <xsl:when test="($id='phpgtk.manual.authors') or ($id='credits.phpgtk.manual.authors')">
+   <xsl:when test="$id='credits.phpgtk.manual.authors'">
       <xsl:call-template name="gentext">
        <xsl:with-param name="key">PHPGTKmanauths</xsl:with-param>
       </xsl:call-template>
    </xsl:when>
-   <xsl:when test="($id='phpgtk.manual.contributors') or ('credits.phpgtk.manual.contributors')">
+   <xsl:when test="$id='credits.phpgtk.manual.contributors'">
       <xsl:call-template name="gentext">
        <xsl:with-param name="key">PHPGTKmancons</xsl:with-param>
       </xsl:call-template>
@@ -99,9 +99,12 @@
  </xsl:template>
 
  <xsl:template name="author-email-link">
-  <xsl:if test="name(.)='author' or name(.)='editor'">
-   <xsl:text>mailto:</xsl:text><xsl:value-of select="./authoremail" />
-  </xsl:if>
+  <a>
+   <xsl:attribute name="href">
+    <xsl:text>mailto:</xsl:text><xsl:value-of select="./authoremail" />
+   </xsl:attribute>
+  <xsl:apply-templates select="honorific|firstname|othername|surname|lineage"  mode="titlepage.mode" />
+  </a>
  </xsl:template>
  
 
@@ -114,7 +117,7 @@
    </xsl:call-template>
   </b>
   <xsl:apply-templates mode="titlepage.mode" />
-  <xsl:if test="@id='phpgtk.manual.authors'">
+  <xsl:if test="@id='authors'">
    <div xsl:use-attribute-sets="book.titlepage.recto.style">
     <a>
      <xsl:attribute name="href">
@@ -124,36 +127,38 @@
      </xsl:attribute>
      <xsl:text>et al.</xsl:text>
     </a>
-   </div>   
+   </div>
   </xsl:if>
  </xsl:template>
 
  <xsl:template match="authorgroup">
- <xsl:choose>
-  <xsl:when test="ancestor::appendix[@rtl='1']">
- <div dir="rtl">
-  <b>
-   <xsl:call-template name="authorgroup-title">
-    <xsl:with-param name="id">
-     <xsl:value-of select="@id" />
-    </xsl:with-param>
-   </xsl:call-template>
-  </b>
-  <xsl:apply-templates mode="titlepage.mode" />
-  </div>
-  </xsl:when>
-  <xsl:otherwise>
- <div dir="ltr">
-  <b>
-   <xsl:call-template name="authorgroup-title">
-    <xsl:with-param name="id">
-     <xsl:value-of select="@id" />
-    </xsl:with-param>
-   </xsl:call-template>
-  </b>
-  <xsl:apply-templates mode="titlepage.mode" />
-  </div>
-  </xsl:otherwise>
+  <xsl:choose>
+   <xsl:when test="ancestor::appendix[@rtl='1']">
+    <div dir="rtl">
+     <b>
+      <xsl:call-template name="authorgroup-title">
+       <xsl:with-param name="id">
+        <xsl:value-of select="@id" />
+       </xsl:with-param>
+      </xsl:call-template>
+     </b>
+     <xsl:apply-templates mode="titlepage.mode" />
+     <br />
+    </div>
+   </xsl:when>
+   <xsl:otherwise>
+    <div dir="ltr">
+     <b>
+      <xsl:call-template name="authorgroup-title">
+       <xsl:with-param name="id">
+        <xsl:value-of select="@id" />
+       </xsl:with-param>
+      </xsl:call-template>
+     </b>
+     <xsl:apply-templates mode="titlepage.mode" />
+     <br />
+    </div>
+   </xsl:otherwise>
   </xsl:choose>
  </xsl:template>
  
@@ -242,12 +247,14 @@
 </xsl:template>
 
  <xsl:template name="editor-author-text" >
-  <xsl:element name="A">
-   <xsl:attribute name="HREF">
-    <xsl:call-template name="author-email-link" />
-   </xsl:attribute>
-   <xsl:apply-templates select="honorific|firstname|othername|surname|lineage"  mode="titlepage.mode" />
-  </xsl:element>
+  <xsl:choose>
+   <xsl:when test="./authoremail">
+     <xsl:call-template name="author-email-link" />
+   </xsl:when>
+   <xsl:otherwise>
+  <xsl:apply-templates select="honorific|firstname|othername|surname|lineage"  mode="titlepage.mode" />
+  </xsl:otherwise>
+  </xsl:choose>
   <xsl:if test="count(ancestor::appendix)>0">
    <xsl:apply-templates select="contrib" mode="titlepage.mode" />
   </xsl:if>
@@ -256,10 +263,11 @@
  <xsl:template match="editor" mode="titlepage.mode">
   <div xsl:use-attribute-sets="book.titlepage.recto.style">
    <xsl:if test="count(preceding-sibling::node())=0">
-    <xsl:element name="h4">
-     <xsl:attribute name="class">editedby</xsl:attribute>
-      Edited By
-    </xsl:element>
+    <h2>
+     <xsl:call-template name="gentext">
+      <xsl:with-param name="key">editedby</xsl:with-param>
+     </xsl:call-template>
+    </h2>
    </xsl:if>
    <xsl:call-template name="editor-author-text"  />
   </div>
