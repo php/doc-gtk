@@ -6,24 +6,54 @@
   <xsl:variable name="id">
    <xsl:call-template name="object.id" />
   </xsl:variable>
-  <div class="{name(.)}" id="{$id}">
-    <xsl:apply-templates select="./title"/>
-    <xsl:apply-templates select="./partintro"/>
-    <xsl:call-template name="component.toc"/>
-   <xsl:apply-templates select="./classentry|./refentry"/>
-  </div>
+  <xsl:variable name="lang" select="ancestor-or-self::*/@lang"/>
+  <xsl:choose>
+   <xsl:when test="$lang='he' or $lang='ar'">
+    <div class="{name(.)}" id="{$id}">
+     <div dir="rtl">
+     <xsl:apply-templates select="./title"/>
+     <xsl:apply-templates select="./partintro"/>
+     <xsl:call-template name="component.toc"/>
+     </div>
+     <xsl:apply-templates select="./classentry|./refentry"/>
+    </div>
+   </xsl:when>
+   <xsl:otherwise>
+    <div class="{name(.)}" id="{$id}">
+     <xsl:apply-templates select="./title"/>
+     <xsl:apply-templates select="./partintro"/>
+     <xsl:call-template name="component.toc"/>
+     <xsl:apply-templates select="./classentry|./refentry"/>
+    </div>
+   </xsl:otherwise>
+  </xsl:choose>
  </xsl:template>
 
  <xsl:template match="enums">
-   <xsl:variable name="id">
+  <xsl:variable name="id">
    <xsl:call-template name="object.id" />
   </xsl:variable>
-  <div class="{name(.)}" id="{$id}">
-   <xsl:apply-templates select="./title"/>
-   <xsl:apply-templates select="./partintro"/>
-   <xsl:call-template name="component.toc"/>
-   <xsl:apply-templates select="./enum"/>
-  </div>
+  <xsl:variable name="lang" select="ancestor-or-self::*/@lang"/>
+  <xsl:choose>
+   <xsl:when test="$lang='he' or $lang='ar'">
+    <div class="{name(.)}" id="{$id}">
+     <div dir="rtl">
+      <xsl:apply-templates select="./title"/>
+      <xsl:apply-templates select="./partintro"/>
+      <xsl:call-template name="component.toc"/>
+     </div>
+     <xsl:apply-templates select="./enum"/>
+    </div>
+   </xsl:when>
+   <xsl:otherwise>
+    <div class="{name(.)}" id="{$id}">
+     <xsl:apply-templates select="./title"/>
+     <xsl:apply-templates select="./partintro"/>
+     <xsl:call-template name="component.toc"/>
+     <xsl:apply-templates select="./enum"/>
+    </div>
+   </xsl:otherwise>
+  </xsl:choose>
  </xsl:template>
 
  <xsl:template match="title">
@@ -247,8 +277,68 @@
  </xsl:template>
 
 <!--========================================================================-->
-<xsl:template match="classentry">
+<xsl:template match="classentry[@rtl='0']">
   <div class="classentry">
+   <a>
+     <xsl:attribute name="name"><xsl:value-of select="@id"/></xsl:attribute>
+    </a>
+    <h2 class="title">
+     <xsl:apply-templates select="./classmeta/classtitle"/>
+    </h2>
+    <p>
+     <blockquote>
+      <xsl:apply-templates select="./classmeta/shortdesc"/>
+     </blockquote>
+    </p>
+    <p>
+     <h3>
+      <xsl:call-template name="gentext">
+       <xsl:with-param name="key">objecthierarchy</xsl:with-param>
+      </xsl:call-template>
+     </h3>
+     <blockquote>
+     <div class="literallayout">
+      <xsl:choose>
+       <xsl:when test="$phpweb=true()">
+        <xsl:call-template name="phpweb.get_class_hierarchy">
+         <xsl:with-param name="classname">
+          <xsl:value-of select="./classmeta/classtitle"/>
+         </xsl:with-param>
+        </xsl:call-template>
+       </xsl:when>
+      <xsl:otherwise>
+       <xsl:call-template name="get_class_hierarchy">
+        <xsl:with-param name="classname">
+         <xsl:value-of select="./classmeta/classtitle"/>
+        </xsl:with-param>
+       </xsl:call-template>
+      </xsl:otherwise>
+     </xsl:choose>
+     </div>
+    </blockquote>
+    </p>
+    <p>
+     <h3>
+      <xsl:call-template name="gentext">
+       <xsl:with-param name="key">description</xsl:with-param>
+      </xsl:call-template>
+     </h3>
+     <blockquote>
+      <xsl:apply-templates select="./classmeta/desc"/>
+     </blockquote>
+    </p>
+    <p>
+     <xsl:apply-templates select="./constructor" mode="synoptic.mode"/>
+     <xsl:apply-templates select="./methods"  mode="synoptic.mode"/>
+     <xsl:apply-templates select="./signals"  mode="synoptic.mode"/>
+     <xsl:apply-templates select="./properties" mode="synoptic.mode"/>
+    </p>
+   </div>
+  <xsl:apply-templates select="./constructor|./methods|./signals|./properties"/>
+ </xsl:template>
+
+ <xsl:template match="classentry[@rtl='1']">
+  <div class="classentry" dir="rtl">
    <a>
      <xsl:attribute name="name"><xsl:value-of select="@id"/></xsl:attribute>
     </a>
@@ -430,17 +520,43 @@
  </xsl:template>
 
  <xsl:template match="methods|signals|properties">
-  <xsl:apply-templates />
+  <xsl:choose>
+   <xsl:when test="ancestor::classentry[@rtl='1']">
+    <div dir="rtl">
+     <xsl:apply-templates />
+    </div>
+   </xsl:when>
+   <xsl:otherwise>
+    <xsl:apply-templates />
+   </xsl:otherwise>
+  </xsl:choose>
  </xsl:template>
 
  <xsl:template match="method|constructor">
-  <a>
-   <xsl:attribute name="name"><xsl:value-of select="@id"/></xsl:attribute>
-  </a>
-  <h2>
-   <xsl:apply-templates select="." mode="title.markup"/>
-  </h2>
-  <xsl:apply-templates select="./funcsynopsis|./desc"/>
+  <xsl:choose>
+   <xsl:when test="ancestor::classentry[1][@rtl='1']">
+    <div dir="rtl">
+     <a>
+      <xsl:attribute name="name"><xsl:value-of select="@id"/></xsl:attribute>
+     </a>
+     <h2>
+      <xsl:apply-templates select="." mode="title.markup"/>
+     </h2>
+     <xsl:apply-templates select="./funcsynopsis|./desc"/>
+    </div>
+   </xsl:when>
+   <xsl:otherwise>
+    <div>
+     <a>
+      <xsl:attribute name="name"><xsl:value-of select="@id"/></xsl:attribute>
+     </a>
+     <h2>
+      <xsl:apply-templates select="." mode="title.markup"/>
+     </h2>
+     <xsl:apply-templates select="./funcsynopsis|./desc"/>
+    </div>
+   </xsl:otherwise>
+  </xsl:choose>
  </xsl:template>
 
  <xsl:template match="signal">
@@ -454,9 +570,11 @@
    <xsl:apply-templates select="./desc"/>
   </p>
   <p>
-   <b>
-    Callback function:
-   </b>
+    <b>
+     <xsl:call-template name="gentext">
+      <xsl:with-param name="key">callback</xsl:with-param>
+     </xsl:call-template>
+    </b>
   </p>
   <p>
    <xsl:apply-templates select="./callback" />
