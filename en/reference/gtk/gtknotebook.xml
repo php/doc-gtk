@@ -959,9 +959,62 @@ if ($notebook->get_current_page() != 0) {
 
  </methods>
 
+ <signals>
+
+  <signal id="gtk.gtknotebook.signal.clicked">
+   <signalname>clicked</signalname>
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
+     <paramdef><classname>GtkNotebook</classname> notebook</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Emitted when a tab is clicked by the user.
+   </shortdesc>
+   <desc>
+    <simpara>
+     The <signalname class="GtkNotebook">clicked</signalname> signal is emitted
+     when a user clicks on a page tab. By default this signal is connected to 
+     the <function class="GtkNotebook">set_page</function> method. This
+     has the effect of moving the page associated with the tab to the front of
+     the notebook.
+    </simpara>
+   </desc>
+  </signal>
+
+  <signal id="gtk.notebook.signal.switch-page">
+  
+   <signalname>switch-page</signalname>
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
+     <paramdef><classname>GtkNotebook</classname> notebook</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Emitted when the top page of the notebook is changed.
+   </shortdesc>
+   <desc>
+    <simpara>
+     The <signalname class="GtkNotebook">switch-page</signalname> signal is emitted
+     when the top page of the notebook is changed. This can occur when a user
+     clicks on a page's tab or when the top page is changed by the program.
+    </simpara>
+    <simpara>
+     See also: <function class="GtkNotebook">set_page</function>,
+               <function class="GtkNotebook">next_page</function>, 
+	              <function class="GtkNotebook">prev_page</function>
+    </simpara>
+   </desc>
+  </signal>
+
+ </signals>
 </classentry>
 <!-- Keep this comment at the end of the file
 Local variables:
+auto-fill-function:do-auto-fill
+fill-column:78
 mode: xml
 sgml-omittag:t
 sgml-shorttag:t
@@ -979,4 +1032,3 @@ vim600: syn=xml fen fdm=syntax fdl=2 si
 vim: et tw=78 syn=sgml
 vi: ts=1 sw=1
 -->
-
