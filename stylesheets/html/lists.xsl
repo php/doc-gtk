@@ -1,9 +1,12 @@
 <?xml version='1.0'?>
+<!DOCTYPE xsl:stylesheet [
+<!ENTITY nbsp "&#160;">
+]>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                 version='1.0'>
 
 <!-- ********************************************************************
-     $Id: lists.xsl,v 1.3 2003-06-13 19:53:21 sfox Exp $
+     $Id: lists.xsl,v 1.4 2003-12-30 23:43:45 sfox Exp $
      ********************************************************************
 
      This file is part of the XSL DocBook Stylesheet distribution.
@@ -312,7 +315,7 @@
               <xsl:text>&#160;</xsl:text>
             </xsl:when>
             <xsl:otherwise>
-              <xsl:text disable-output-escaping="yes">&amp;nbsp;</xsl:text>
+              <xsl:text disable-output-escaping="yes">&nbsp;</xsl:text>
             </xsl:otherwise>
           </xsl:choose>
         </xsl:otherwise>
@@ -371,7 +374,7 @@
               <xsl:text>&#160;</xsl:text>
             </xsl:when>
             <xsl:otherwise>
-              <xsl:text disable-output-escaping="yes">&amp;nbsp;</xsl:text>
+              <xsl:text disable-output-escaping="yes">&nbsp;</xsl:text>
             </xsl:otherwise>
           </xsl:choose>
         </xsl:otherwise>

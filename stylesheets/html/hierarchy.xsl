@@ -168,7 +168,7 @@
     <xsl:value-of select="$classname" />
    </a>
    </span>
-   <xsl:call-template name="output.br" />
+   <br/>
   </xsl:when>
   <xsl:otherwise>
    <xsl:value-of select="$bad.hack"/>

@@ -451,9 +451,7 @@
 
  <xsl:template match="method" mode="synoptic.mode">
   <dt>
-  <span dir="ltr">
    <xsl:apply-templates select="./funcsynopsis/funcprototype/funcdef/function" mode="synoptic.mode"/>
-   </span>
   </dt>
   <dd>
      <xsl:call-template name="spaceholder"/>
@@ -495,10 +493,8 @@
 
  <xsl:template match="prop" mode="synoptic.mode">
   <dt>
-  <span dir="ltr">
    <xsl:apply-templates select="./propname" mode="synoptic.mode"/>
    <xsl:text>:</xsl:text>
-   </span>
   </dt>
   <dd>
   <xsl:call-template name="spaceholder"/>

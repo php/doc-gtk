@@ -1,9 +1,12 @@
 <?xml version='1.0'?>
+<!DOCTYPE xsl:stylesheet [
+<!ENTITY nbsp "&#160;">
+]>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                 version='1.0'>
 
 <!-- ********************************************************************
-     $Id: autotoc.xsl,v 1.4 2003-08-03 17:54:08 sfox Exp $
+     $Id: autotoc.xsl,v 1.5 2003-12-30 23:43:45 sfox Exp $
      ********************************************************************
 
      This file is part of the XSL DocBook Stylesheet distribution.
@@ -39,7 +42,7 @@
 </xsl:variable>
 
 <xsl:template name="spaceholder">
-  <xsl:text disable-output-escaping="yes">&amp;nbsp;</xsl:text>
+  <xsl:text disable-output-escaping="yes">&nbsp;</xsl:text>
 </xsl:template>
 
 <xsl:template name="set.toc">

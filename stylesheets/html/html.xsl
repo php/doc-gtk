@@ -3,7 +3,7 @@
                 version='1.0'>
 
 <!-- ********************************************************************
-     $Id: html.xsl,v 1.2 2003-06-05 12:57:44 sfox Exp $
+     $Id: html.xsl,v 1.3 2003-12-30 23:43:45 sfox Exp $
      ********************************************************************
 
      This file is part of the XSL DocBook Stylesheet distribution.
@@ -50,10 +50,6 @@
       <xsl:text>&#x2022;</xsl:text>
     </xsl:otherwise>
   </xsl:choose>
-</xsl:template>
-
-<xsl:template name="output.br">
- <xsl:text disable-output-escaping="yes">&lt;br&gt;</xsl:text>
 </xsl:template>
 
 </xsl:stylesheet>
