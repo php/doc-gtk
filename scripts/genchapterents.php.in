@@ -46,11 +46,15 @@ function gen_dir_ents($path)
 	closedir($dir_handle);
 }
 
-if (strnatcmp(PHP_VERSION, '4.1.0') >= 0)
+if ((strnatcmp(PHP_VERSION, '4.1.0') >= 0) && 
+    !(strnatcmp(PHP_VERSION, '4.2.0') >= 0) )
+{
 	gen_dir_ents("en");
+}
 else
+{
 	gen_dir_ents("../en");
-
+}
 sort($entities, SORT_STRING);
 while(list(,$val) = each($entities))
 {
