@@ -5,32 +5,34 @@
   <shortdesc>Widget that eases creation of popup dialogs.</shortdesc>
   <desc>
    <simpara>
-    GtkDialog is used to create a popup window for presenting or
-    requesting small amounts of information. It is composed of two
-    containers separated by a <classname>GtkHSeparator</classname>. 
-    The top container is a <classname>GtkVBox</classname>, and would
-    typically contain <classname>GtkLabel</classname> and
+    <classname>GtkDialog</classname> is used to create a popup window
+    for presenting or requesting small amounts of information.  It is
+    composed of two containers separated by a 
+    <classname>GtkHSeparator</classname>.  The top container is a 
+    <classname>GtkVBox</classname>, and would typically contain 
+    <classname>GtkLabel</classname> and 
     <classname>GtkEntry</classname> widgets to present the user with
-    information and allow input.  The bottom container is a
+    information and allow input.  The bottom container is a 
     <classname>GtkHBox</classname> and would usually contain dialog
-    buttons (<literal>OK</literal>, <literal>Apply</literal>,
-    <literal>Cancel</literal> etc..).
+    buttons, e.g. <literal>OK</literal>, <literal>Cancel</literal>,
+    <literal>Help</literal> and so on.
    </simpara>
    <simpara>
-    It is the programmer's responsibilty to create the component
-    widgets, add them to the containers and connect their signals
-    (where applicable).
+    It is the programmer's responsibility to create the component
+    widgets, add them to the containers and connect their signals 
+    where relevant.
    </simpara>
    <simpara>
-    Note that widgets should not be added to the GtkDialog itself, but
-    rather to the <classname>GtkVBox</classname> and
-    <classname>GtkHBox</classname>.  These container widgets can be
-    accessed as <propname class="GtkDialog">vbox</propname> and 
-    <propname class="GtkDialog">action_area</propname> respectively. 
+    Note that widgets should not be added to the 
+    <classname>GtkDialog</classname> itself, but rather to the containers
+    <classname>GtkVBox</classname> and <classname>GtkHBox</classname>. 
+    These container widgets can be accessed as 
+    <propname class="GtkDialog">vbox</propname> and 
+    <propname class="GtkDialog">action_area</propname> respectively.
    </simpara>
    <para>
     <example>
-     <title>Adding widgets to GtkDialog</title>
+     <title>Adding widgets to <classname>GtkDialog</classname></title>
      <programlisting role="php">
 $dialog = &amp;new GtkDialog(); 
 $dialog_vbox = $dialog-&gt;vbox; 
@@ -48,16 +50,17 @@ $dialog_action_area-&gt;pack_start($ok_button);
     Dialogs can be made modal (in effect freezing input to the rest of
     the application) by calling the
     <function class="GtkWindow">set_modal()</function> method on the 
-    GtkDialog object.
+    <classname>GtkDialog</classname> object.
    </simpara>
    <simpara>
-    Note that making a GtkDialog modal does not stop execution of the
-    code that calls it. In the example below, the call to 'echo' will
-    still get executed even though the main application may not respond
-    to user input.  To stop execution of the code the GtkDialog must
-    contain a call to a nested Gtk::<function>main()</function> function. 
-    Execution will then continue when the corresponding
-    Gtk::<function>main_quit()</function> function is called.
+    Note that making a <classname>GtkDialog</classname> modal does not
+    stop execution of the code that calls it. In the example below, the
+    call to 'echo' will still get executed even though the main application
+    may not respond to user input.  To stop execution of the code the 
+    <classname>GtkDialog</classname> must contain a call to a nested
+    Gtk::<function>main()</function> function.  Execution will then
+    continue when the corresponding Gtk::<function>main_quit()</function>
+    function is called.
    </simpara>
    <para>
     <example>
@@ -84,7 +87,7 @@ echo &quot;This message will still be printed \n&quot;;
   </shortdesc>
   <desc>
    <para>
-    The syntax to create a GtkDialog widget is:
+    The syntax to create a <classname>GtkDialog</classname> widget is:
     <informalexample>
      <programlisting role="php">
 $dialog = &amp;new GtkDialog();
@@ -100,16 +103,17 @@ $dialog = &amp;new GtkDialog();
    <propname>vbox</propname>
    <proptype>GtkWidget</proptype>
    <shortdesc>
-    Accessible <classname>GtkVBox</classname> within the GtkDialog
-    widget's structure.
+    Accessible <classname>GtkVBox</classname> within the 
+    <classname>GtkDialog</classname> widget's structure.
    </shortdesc>
    <desc>
     <simpara>
-     <propname class="GtkDialog">vbox</propname> is the
-     <classname>GtkVBox</classname> at the top of the GtkDialog
-     widget.  The programmer would typically add widgets such as
-     <classname>GtkLabel</classname> and <classname>GtkEntry</classname>
-     here for the purpose of exchanging information with the end user.
+     <propname class="GtkDialog">vbox</propname> is the 
+     <classname>GtkVBox</classname> at the top of the 
+     <classname>GtkDialog</classname> widget.  The programmer would
+     typically add widgets such as <classname>GtkLabel</classname> and 
+     <classname>GtkEntry</classname> here for the purpose of exchanging
+     information with the end user.
     </simpara>
     <para>
      In order to access <propname class="GtkDialog">vbox</propname>
@@ -129,18 +133,18 @@ $vbox_handle = $dialog-&gt;vbox;
    <propname>action_area</propname>
    <proptype>GtkWidget</proptype>
    <shortdesc>
-    Accessible <classname>GtkHBox</classname> within the GtkDialog
-    widget's structure.
+    Accessible <classname>GtkHBox</classname> within the
+    <classname>GtkDialog</classname> widget's structure.
    </shortdesc>
    <desc>
     <simpara>
      <propname class="GtkDialog">action_area</propname> is the
-     <classname>GtkHBox</classname> at the bottom of the GtkDialog
-     widget, below the <classname>GtkHSeparator</classname>.  This is
-     where the programmer would usually add one or two
-     <classname>GtkButton</classname>s, connecting these to functions
-     that terminate the dialog and/or act upon the information gathered
-     through it.
+     <classname>GtkHBox</classname> at the bottom of the 
+     <classname>GtkDialog</classname> widget, below the 
+     <classname>GtkHSeparator</classname>.  This is where the programmer
+     would usually add one or two <classname>GtkButton</classname>s, 
+     connecting these to functions that terminate the dialog and/or act
+     upon the information gathered through it.
     </simpara>
     <para>
      In order to access 
@@ -151,7 +155,7 @@ $vbox_handle = $dialog-&gt;vbox;
 $action_area_handle = $dialog-&gt;action_area;
        </programlisting>
       </informalexample>
-     It can then be treated as a normal instance of
+     It can then be treated as a normal instance of 
      <classname>GtkHBox</classname>.
     </para>
    </desc>

@@ -7,13 +7,14 @@
   </shortdesc>
   <desc>
    <para>
-    The GtkButton widget is a container widget that can hold any valid child
-    widget derived from <classname>GtkWidget</classname>. The most commonly
-    used child widget is a <classname>GtkLabel</classname>.
+    The <classname>GtkButton</classname> widget is a container widget
+    that can hold any valid child widget derived from 
+    <classname>GtkWidget</classname>. The most commonly used child
+    widget is a <classname>GtkLabel</classname>.
    </para>
    <para>
-    The GtkButton widget is mainly used to call some function when the button
-    is pressed.
+    The <classname>GtkButton</classname> widget is mainly used to call
+    some function when the button is pressed.
    </para>
   </desc>
  </classmeta>
@@ -22,7 +23,9 @@
   <funcsynopsis>
    <funcprototype>
     <funcdef> <function>GtkButton</function></funcdef>
-    <paramdef>string <parameter><optional>label</optional></parameter></paramdef>
+    <paramdef>string 
+     <parameter><optional>label</optional></parameter>
+    </paramdef>
    </funcprototype>
   </funcsynopsis>
   <shortdesc>
@@ -31,8 +34,9 @@
   <desc>
    <para>
     This function creates and returns a <classname>GtkButton</classname>
-    widget; if optional <parameter>label</parameter> is passed the button will
-    contain a <classname>GtkLabel</classname> widget with the given text.
+    widget; if optional <parameter>label</parameter> is passed the button
+    will contain a <classname>GtkLabel</classname> widget with the given
+    text.
    </para>
   </desc>
  </constructor>
@@ -128,7 +132,10 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_relief</function></funcdef>
-     <paramdef><enumname>GtkReliefStyle</enumname> <parameter>newstyle</parameter></paramdef>
+     <paramdef>
+      <enumname>GtkReliefStyle</enumname> 
+      <parameter>newstyle</parameter>
+     </paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -136,9 +143,11 @@
    </shortdesc>
    <desc>
     <para>
-     Sets the relief style of the button widget edges. The available styles are
-     GTK_RELIEF_NORMAL, GTK_RELIEF_HALF, and GTK_RELIEF_NONE. The default
-     relief style is GTK_RELIEF_NORMAL.
+     Sets the relief style of the button widget edges. The available
+     styles are <literal>GTK_RELIEF_NORMAL</literal>,
+     <literal>GTK_RELIEF_HALF</literal>, and 
+     <literal>GTK_RELIEF_NONE</literal>.  The default relief style is 
+     <literal>GTK_RELIEF_NORMAL</literal>.
     </para>
    </desc>
   </method>
@@ -146,7 +155,10 @@
   <method id="gtk.gtkbutton.method.get_relief">
    <funcsynopsis>
     <funcprototype>
-     <funcdef><enumname>GtkReliefStyle</enumname> <function>get_relief</function></funcdef>
+     <funcdef>
+      <enumname>GtkReliefStyle</enumname> 
+      <function>get_relief</function>
+     </funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
@@ -163,6 +175,46 @@
  </methods>
 
  <signals>
+
+  <signal id="gtk.gtkbutton.signal.enter">
+   <signalname>enter</signalname>
+   <callback>
+    <funcprototype>
+     <funcdef>void <function>callback</function></funcdef>
+     <paramdef><classname>GtkButton</classname> button</paramdef>
+    </funcprototype>
+   </callback>
+   <shortdesc>
+    Emitted when the cursor is over the button.
+   </shortdesc>
+   <desc>
+    <para>
+     The <signalname>enter</signalname> signal is emitted when the
+     cursor enters the area of the screen where the button is positioned.
+    </para>
+   </desc>
+  </signal>
+
+  <signal id="gtk.gtkbutton.signal.pressed">
+   <signalname>pressed</signalname>
+   <callback>
+    <funcprototype>
+     <funcdef>void <function>callback</function></funcdef>
+     <paramdef><classname>GtkButton</classname> button</paramdef>
+    </funcprototype>
+   </callback>
+   <shortdesc>
+    Emitted when the button is initially pressed.
+   </shortdesc>
+   <desc>
+    <para>
+     The <signalname>pressed</signalname> signal is emitted when the
+     user presses down the mouse-button and the cursor is over the 
+     widget.
+    </para>
+   </desc>
+  </signal>
+
   <signal id="gtk.gtkbutton.signal.clicked">
    <signalname>clicked</signalname>
    <callback>
@@ -172,11 +224,58 @@
     </funcprototype>
    </callback>
    <shortdesc>
-    Emitted when the button is initally pressed.
+    Emitted when the button is clicked.
    </shortdesc>
    <desc>
     <para>
-     This signal is emitted when the button is initally pressed.
+     The <signalname>clicked</signalname> signal is emitted at the
+     midpoint between pressing and releasing the mouse-button.  This
+     is the most commonly used <classname>GtkButton</classname> signal,
+     and holds an advantage over the other signals listed here in that
+     it also responds to <literal>enter</literal> or 
+     <literal>spacebar</literal> keypresses as though they were
+     mouse-clicks, by default.  However, note that the 
+     <signalname>clicked</signalname> signal will not fire when the
+     user releases the mouse-button after the cursor has left the
+     widget's region.
+    </para>
+   </desc>
+  </signal>
+
+  <signal id="gtk.gtkbutton.signal.released">
+   <signalname>released</signalname>
+   <callback>
+    <funcprototype>
+     <funcdef>void <function>callback</function></funcdef>
+     <paramdef><classname>GtkButton</classname> button</paramdef>
+    </funcprototype>
+   </callback>
+   <shortdesc>
+    Emitted when the button is released.
+   </shortdesc>
+   <desc>
+    <para>
+     The <signalname>released</signalname> signal is emitted when the
+     user releases the mouse-button, regardless of cursor position.
+    </para>
+   </desc>
+  </signal>
+
+  <signal id="gtk.gtkbutton.signal.leave">
+   <signalname>leave</signalname>
+   <callback>
+    <funcprototype>
+     <funcdef>void <function>callback</function></funcdef>
+     <paramdef><classname>GtkButton</classname> button</paramdef>
+    </funcprototype>
+   </callback>
+   <shortdesc>
+    Emitted when the cursor leaves the button area.
+   </shortdesc>
+   <desc>
+    <para>
+     The <signalname>leave</signalname> signal is emitted when the cursor
+     leaves the area of the screen where the button is positioned.
     </para>
    </desc>
   </signal>
