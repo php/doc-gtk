@@ -2,7 +2,7 @@
                 xmlns:doc="http://nwlash.com/xsl/documentation/1.0"
                 version="1.0">
 
-<xsl:output method="html"
+<xsl:output method="text"
             encoding="ISO-8859-1"
             indent="no" 
 	    />
@@ -107,6 +107,7 @@
  </xsl:text>
  </xsl:if>
 
+ <xsl:if test="count(.//signal)>0">
    <xsl:text disable-output-escaping="yes">
   &lt;xsl:template name="get_sig_id_from_name"&gt;&#xA;
   &lt;xsl:param name="signame" /&gt;&#xA;
@@ -121,6 +122,7 @@
   &lt;/xsl:template&gt;&#xA;
   &lt;/xsl:stylesheet&gt;
  </xsl:text>
+ </xsl:if>
 </xsl:template>
 
 </xsl:stylesheet>
