@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="ISO-8859-2" ?>
+<chapter id="installation">
+ <title>Instalace</title>
+ <sect1 id="install.get">
+  <title>Kde získat nejnovější verzi</title>
+  <!-- TODO  Make sure to keep the next paragraph updated - sf -->
+  <simpara>
+   Zdrojové kódy a binární soubory pro Windows naleznete na adrese
+   <ulink url="&url.phpgtk;">&url.phpgtk;</ulink>. Uživatelé, kteří chtějí
+   instalovat ze zdrojových kódů, také potřebují získat nejnovější verzi PHP
+   z CVS <ulink url="&url.php.anoncvs;">&url.php.anoncvs;</ulink>.
+  </simpara>
+ </sect1>
+
+ <sect1 id="install.win32">
+  <title>Instalace PHP-GTK pod Windows</title>
+
+  <sect2 id="install.win32.binaries">
+   <title>Stažení PHP-GTK</title>
+   <simpara>
+    Nejnovější binární soubory pro win32 si stáhněte z
+    <ulink url="&url.phpgtk;">&url.phpgtk;</ulink>. Možná se budete chtít
+    podívat i na nejnovější zdrojové kódy z CVS serveru php.net.
+    Na <ulink url="&url.php.anoncvs;">&url.php.anoncvs;</ulink>
+    najdete podrobnější informace.
+   </simpara>
+  </sect2>
+  <sect2 id="install.win32.binary.package-layout">
+   <title>Struktura distribuce</title>
+   <para>
+    Distribuce binárních souborů PHP-GTK má následující strukturu:
+    <itemizedlist>
+     <listitem>
+      <simpara>
+       \php4   -&gt; PHP a PHP-GTK binární soubory
+      </simpara>
+     </listitem>
+     <listitem>
+      <simpara>
+       \winnt  -&gt; standardní soubor php.ini
+      </simpara>
+     </listitem>
+     <listitem>
+      <simpara>
+       \winnt\system32 -&gt; knihovny GTK+ 
+      </simpara>
+     </listitem>
+     <listitem>
+      <simpara>
+       \test -&gt; několik příkladů použití PHP-GTK
+      </simpara>
+     </listitem>
+     <listitem>
+      <simpara>
+       README.TXT
+      </simpara>
+     </listitem>
+    </itemizedlist>
+   </para>
+  </sect2>
+  <sect2 id="install.win32.howto">
+   <title>Jak nainstalovat</title>
+   <orderedlist>
+    <listitem>
+     <simpara>
+      Nakopírujte \php4 do existujícího adresáře pjp. Pokud je toto nová
+      instalace měli byste vytvořit adresář c:\php4 a zkopírovat soubory
+      do něj.
+     </simpara>
+    </listitem>
+    <listitem>
+     <simpara>
+      Zkopírujte \winnt do adresáře winnt. Na Windows NT a 2000 je to
+      adresář c:\winnt. Na Windows 95/98 je to c:\windows. Pokud již máte
+      php.ini, nemusíte tento soubor kopírovat.
+     </simpara>
+    </listitem>
+    <listitem>
+     <simpara>
+      Zkopírujte \winnt\system32 do adresáře winnt\system32. Na Windows NT
+      a 2000 je to adresář c:\winnt\system32. Na Windows 95/98 je to
+      c:\windows\system32.
+     </simpara>
+    </listitem>
+    <listitem>
+     <simpara>
+      Zkopírujte \test do adresáře, odkud chcete spouštět skripty (např.
+      c:\php4\test).
+     </simpara>
+    </listitem>
+   </orderedlist>
+  </sect2>
+  <sect2 id="install.win32.usage">
+   <title>Jak používat PHP-GTK</title>
+   <simpara>
+    PHP-GTK aplikace spustíte z příkazové řádky (nebo pomocí zástupce)
+    tímto příkazem:
+    <command>c:\php4\php -q c:\cesta\k\php-gtk\skript.php</command>
+   </simpara>
+  </sect2>
+ </sect1>
+
+ <sect1 id="install.unix">
+  <title>Instalace PHP-GTK pod Unixem</title>
+  <!-- TODO  Make sure to keep the next paragraph updated - sf -->
+  <para>
+   Doporučejeme stáhnout nejnovější zdrojové kódy z
+   <ulink url="&url.phpgtk;">&url.phpgtk;</ulink> nebo z anonymního CVS
+   <ulink url="&url.php.anoncvs;">&url.php.anoncvs;</ulink>. Budete
+   potřebovat PHP-GTK modul a aktuální CVS verzi PHP, kterou musíte
+   nainstalovat jako první.
+  </para>
+  <para>
+   Spusťte skript <command>phpize</command>, který se nainstaloval spolu s
+   PHP. Ten nastaví potřebné soubory a vytvoří skript 'configure'. Následně
+   spusťte <command>./configure</command>. Zkontroluje, zda máte správnou
+   verzi GTK+ 1.2.x (1.2.6 nebo novější, lze stáhnout z   
+   <ulink url="&url.gtk;">&url.gtk;</ulink>) a další soubory potřebné pro
+   kompilace, a vytvoří potřebné Makefile.
+  </para>
+  <simpara>
+   Nakonec spusťe <command>make</command>, kterým modul zkompilujete.
+   Některé části zdrojového kódu se generují z .defs souborů. Pokud uvidíte
+   zprávy typu &quot;Could not write...&quot; (Nelze zapsat...), znamená to,
+   že vypsané objekty či vlastnosti GTK+ ještě nejsou podporovány. Je-li
+   kompilace úspěšná, spusťte <command>make install</command>, kterým
+   nainstalujete PHP-GTK do standardního adresáře pro rozšíření PHP (obvykle
+   <filename>/usr/local/lib/php/extensions</filename>).
+  </simpara>
+  <simpara>
+   K ověření PHP-GTK zkuste spustit ukázkové skripty z adresáře test/. V
+   nich také uvidíte, jak lze PHP-GTK využít.
+  </simpara>
+ </sect1>
+</chapter>
