@@ -195,8 +195,7 @@ gtk::main();
    </shortdesc>
    <desc>
     <simpara>
-     Removes the given node from the tree. Children nodes are appended to the end of the
-     tree if they are not removed explicitly.
+     Removes the given node from the tree. Children nodes are removed recursively.
     </simpara>
    </desc>
   </method>
@@ -204,60 +203,123 @@ gtk::main();
   <method id="gtk.gtkctree.method.post_recursive">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>XXX <function>post_recursive</function></funcdef>
-     <paramdef>XXX</paramdef>
+     <funcdef>void <function>post_recursive</function></funcdef>
+     <paramdef><classname>GtkCTreeNode</classname> <parameter>node</parameter></paramdef>
+     <paramdef><classname>String</classname> <parameter>callback</parameter></paramdef>
+     <paramdef><optional>??? <parameter>own_parameter</parameter></optional></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Recursively apply a function to all nodes of the tree at or below a certain node. 
    </shortdesc>
    <desc>
-
+    <simpara>
+     Recursively apply a function to all nodes of the tree at or below a certain node. 
+     The function is called for each node after it has been called for that node's children.
+    </simpara>
+    <para>
+     The callback parameter can be a function name as a string; this function will be called.
+     If you want to use the function of an object, just use
+     <programlisting>array( &amp;$obj, "function")</programlisting>
+    </para>
+    <simpara>
+     The third parameter is optional, it will be passed to the called function. You can
+     have as many own parameters as you like.
+    </simpara>
+    <simpara>
+     The calling function needs to implement at least 2 parameters: The first is the tree
+     object, the second the specific node.
+    </simpara>
    </desc>
   </method>
 
   <method id="gtk.gtkctree.method.post_recursive_to_depth">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>XXX <function>post_recursive_to_depth</function></funcdef>
-     <paramdef>XXX</paramdef>
+     <funcdef>void <function>post_recursive_to_depth</function></funcdef>
+     <paramdef><classname>GtkCTreeNode</classname> <parameter>node</parameter></paramdef>
+     <paramdef>int <parameter>depth</parameter></paramdef>
+     <paramdef><classname>String</classname> <parameter>callback</parameter></paramdef>
+     <paramdef><optional>??? <parameter>own_parameter</parameter></optional></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Recursively apply a function to nodes up to a certain depth 
    </shortdesc>
    <desc>
-
+    <simpara>
+     Recursively apply a function to nodes up to a certain depth. 
+     The function is called for each node after it has been called for that node's children.
+    </simpara>
+    <simpara>
+     The depth parameter determines, how many levels below the given node the function
+     shall be applied. Note that a depth of "0" does nothing, the depth of "1" will
+     apply the function just to the given node. Only "2" will apply the given function
+     to the first level below the node.  If depth is negative, this function just calls 
+     <link linkend="gtk.gtkctree.method.post_recursive">post_recursive</link>.
+    </simpara>
+    <para>
+     The callback parameter can be a function name as a string; this function will be called.
+     If you want to use the function of an object, just use
+     <programlisting>array( &amp;$obj, "function")</programlisting>
+    </para>
+    <simpara>
+     The fourth parameter is optional, it will be passed to the called function. You can
+     have as many own parameters as you like.
+    </simpara>
+    <simpara>
+     The calling function needs to implement at least 3 parameters: The first is the tree
+     object, the second the specific node and the third contains the callback itself (String or
+     array).
+    </simpara>
    </desc>
   </method>
 
   <method id="gtk.gtkctree.method.pre_recursive">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>XXX <function>pre_recursive</function></funcdef>
-     <paramdef>XXX</paramdef>
+     <funcdef>void <function>pre_recursive</function></funcdef>
+     <paramdef><classname>GtkCTreeNode</classname> <parameter>node</parameter></paramdef>
+     <paramdef><classname>String</classname> <parameter>callback</parameter></paramdef>
+     <paramdef><optional>??? <parameter>own_parameter</parameter></optional></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Recursively apply a function to all nodes of the tree at or below a certain node.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Recursively apply a function to all nodes of the tree at or below a certain node. 
+     The function is called for each node after it has been called for its parent.
+    </simpara>
+    <simpara>
+     For a in-detail description, see 
+     <link linkend="gtk.gtkctree.method.post_recursive">post_recursive</link>.
+    </simpara>
    </desc>
   </method>
 
   <method id="gtk.gtkctree.method.pre_recursive_to_depth">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>XXX <function>pre_recursive_to_depth</function></funcdef>
-     <paramdef>XXX</paramdef>
+     <funcdef>void <function>pre_recursive_to_depth</function></funcdef>
+     <paramdef><classname>GtkCTreeNode</classname> <parameter>node</parameter></paramdef>
+     <paramdef>int <parameter>depth</parameter></paramdef>
+     <paramdef><classname>String</classname> <parameter>callback</parameter></paramdef>
+     <paramdef><optional>??? <parameter>own_parameter</parameter></optional></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Recursively apply a function to nodes up to a certain depth.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Recursively apply a function to nodes up to a certain depth. 
+     The function is called for each node after it has been called for that node's children.    </simpara>
+    <simpara>
+     For a in-detail description, see 
+     <link linkend="gtk.gtkctree.method.post_recursive_to_depth">post_recursive_to_depth</link>.
+    </simpara>
    </desc>
   </method>
 
@@ -272,10 +334,13 @@ gtk::main();
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    This function checks whether the given node is viewable i.e. so that all of its parent nodes are expanded.
    </shortdesc>
    <desc>
-
+    <simpara>
+     This function checks whether the given node is viewable i.e. so that all of its parent nodes are expanded. 
+     This is different from being actually visible: the node can be viewable but outside the scrolling area of the window.
+    </simpara>
    </desc>
   </method>
 
@@ -293,10 +358,12 @@ gtk::main();
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the last child of the last child of the last child... of the given node.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Returns the last child of the last child of the last child... of the given node.
+    </simpara>
    </desc>
   </method>
 
@@ -311,10 +378,15 @@ gtk::main();
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the node in row X
    </shortdesc>
    <desc>
-
+    <simpara>
+     Returns the node which is in the given row. Count begins with 0 as usual.
+    </simpara>
+    <note>
+     Only expanded, means <link linkend="gtk.gtkctree.method.is_viewable">viewable</link> nodes are counted!
+    </note>
    </desc>
   </method>
 
@@ -333,10 +405,48 @@ gtk::main();
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Checks if child is on some level a child (grandchild...) of the node.
    </shortdesc>
    <desc>
+    <simpara>
+     Checks if child is on some level a child (grandchild...) of the node.
+    </simpara>
+   </desc>
+  </method>
 
+  <method id="gtk.gtkctree.method.find_by_row_data">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef><classname>GtkCTreeNode</classname> <function>find_by_row_data</function></funcdef>
+     <paramdef>
+      <classname>GtkCTreeNode</classname> 
+      <parameter>node</parameter>
+     </paramdef>
+     <paramdef>??? <parameter>???</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    FIXME
+   </shortdesc>
+   <desc>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkctree.method.find_all_by_row_data">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>Array <function>find_by_row_data</function></funcdef>
+     <paramdef>
+      <classname>GtkCTreeNode</classname> 
+      <parameter>node</parameter>
+     </paramdef>
+     <paramdef>??? <parameter>???</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    FIXME
+   </shortdesc>
+   <desc>
    </desc>
   </method>
 
@@ -355,10 +465,12 @@ gtk::main();
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Checks if node is an ancestor of child.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Checks if node is an ancestor (parent, grandparent, grand...parent) of child.
+    </simpara>
    </desc>
   </method>
 
@@ -371,10 +483,12 @@ gtk::main();
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Checks if the given coordinates lie on an expander button.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Returns true if the given coordinates lie on an expander button.
+    </simpara>
    </desc>
   </method>
 
@@ -397,10 +511,16 @@ gtk::main();
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Move a node in the tree to another location.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Move a node in the tree to another location.
+    </simpara>
+    <simpara>
+     The parent node and the sibling are handled the same way as in
+     <link linkend="gtk.gtkctree.method.insert_node">insert_node</link>
+    </simpara>
    </desc>
   </method>
 
@@ -415,10 +535,12 @@ gtk::main();
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Expand one node.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Expand one node.
+    </simpara>
    </desc>
   </method>
 
@@ -433,10 +555,12 @@ gtk::main();
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Expand one node and all nodes underneath.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Expand one node and all nodes underneath.
+    </simpara>
    </desc>
   </method>
 
@@ -452,10 +576,12 @@ gtk::main();
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Expand a node and its children up to the depth given.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Expand a node and its children up to the depth given.
+    </simpara>
    </desc>
   </method>
 
@@ -470,10 +596,12 @@ gtk::main();
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Collapse one node.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Collapse one node.
+    </simpara>
    </desc>
   </method>
 
@@ -488,10 +616,12 @@ gtk::main();
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Collapse one node and all its subnodes.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Collapse one node and all its subnodes.
+    </simpara>
    </desc>
   </method>
 
@@ -507,10 +637,12 @@ gtk::main();
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Collapse a node and its children up to the depth given.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Collapse a node and its children up to the depth given.
+    </simpara>
    </desc>
   </method>
 
@@ -525,10 +657,12 @@ gtk::main();
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Toggle a node, i.e. if it is collapsed, expand it and vice versa.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Toggle a node, i.e. if it is collapsed, expand it and vice versa.
+    </simpara>
    </desc>
   </method>
 
@@ -543,10 +677,12 @@ gtk::main();
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Toggle the expansion of a node and all its children.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Toggle the expansion of a node and all its children.
+    </simpara>
    </desc>
   </method>
 
@@ -561,10 +697,12 @@ gtk::main();
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Cause the given node to be selected and emit the appropriate signal.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Cause the given node to be selected and emit the appropriate signal.
+    </simpara>
    </desc>
   </method>
 
@@ -579,10 +717,12 @@ gtk::main();
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Cause the given node and its subnodes to be selected and emit the appropriate signal(s).
    </shortdesc>
    <desc>
-
+    <simpara>
+     Cause the given node and its subnodes to be selected and emit the appropriate signal(s).
+    </simpara>
    </desc>
   </method>
 
@@ -597,10 +737,12 @@ gtk::main();
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Unselect the given node and emit the appropriate signal.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Unselect the given node and emit the appropriate signal.
+    </simpara>
    </desc>
   </method>
 
@@ -615,10 +757,12 @@ gtk::main();
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Unselect the given node and its subnodes and emit the appropriate signal(s).
    </shortdesc>
    <desc>
-
+    <simpara>
+     Unselect the given node and its subnodes and emit the appropriate signal(s).
+    </simpara>
    </desc>
   </method>
 
@@ -626,19 +770,24 @@ gtk::main();
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>node_set_text</function></funcdef>
-     <paramdef>
+<!--     <paramdef>
       <classname>GtkCTreeNode</classname> 
       <parameter>node</parameter>
-     </paramdef>
+     </paramdef>-->
+     <paramdef>int <parameter>row</parameter></paramdef>
      <paramdef>int <parameter>column</parameter></paramdef>
      <paramdef>string <parameter>text</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Set the column text of the specific row.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Set the column text of the specific row. The row number begins with
+     0 and counts only <link linkend="gtk.gtkctree.method.is_viewable">viewable</link>
+     rows.
+    </simpara>
    </desc>
   </method>
 
@@ -662,10 +811,23 @@ gtk::main();
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets an icon into a column of the node.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Sets an icon into a column of the node. The normal text in that column
+     is replaced by the icon and not visible anymore. Use the 
+     <link linkend="gtk.gtkctree.method.node_set_pixtext">node_set_pixtext</link>
+     function to add an extra text after that icon.
+    </simpara>
+    <simpara>
+     If you once expand/collapse the node, the icon is gone because the
+     open/closed icons you set at the
+     <link linkend="gtk.gtkctree.method.insert_node">insert_node</link>
+     are used then. To prevent this, use the 
+     <link linkend="gtk.gtkctree.method.set_node_info">set_node_info</link>
+     function.
+    </simpara>
    </desc>
   </method>
 
@@ -691,10 +853,21 @@ gtk::main();
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the pixmap and the corresponding text of a column of a row.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Sets the pixmap and the corresponding text of a column of a row.
+     The pixmap and mask parameters may not be NULL.
+    </simpara>
+    <simpara>
+     If you once expand/collapse the node, the icon is gone because the
+     open/closed icons you set at the
+     <link linkend="gtk.gtkctree.method.insert_node">insert_node</link>
+     are used then. To prevent this, use the 
+     <link linkend="gtk.gtkctree.method.set_node_info">set_node_info</link>
+     function. The text stays visible.
+    </simpara>
    </desc>
   </method>
 
@@ -729,10 +902,12 @@ gtk::main();
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Changes all the values set by the <link linkend="gtk.gtkctree.method.insert_node">insert_node</link> function.
    </shortdesc>
    <desc>
-
+    <simpara>
+    Changes all the values set by the <link linkend="gtk.gtkctree.method.insert_node">insert_node</link> function.
+    </simpara>
    </desc>
   </method>
 
@@ -750,10 +925,21 @@ gtk::main();
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Shift the column of the given cell the given amounts in pixels.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Shift the column of the given cell the given amounts in pixels.
+    </simpara>
+    <simpara>
+     Moves the column display inside the area reserved for the display.
+     E.g. when you set the vertical to 20 and the height of the row is just
+     10, then the cell won't be visible any more.
+    </simpara>
+    <simpara>
+     This function can be used to move the icon or the text a given amount left/right
+     from the +/- symbols (horizontal).
+    </simpara>
    </desc>
   </method>
 
@@ -769,10 +955,14 @@ gtk::main();
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets whether this node can be selected by the user.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Sets whether this node can be selected by the user. This is useful if
+     you have separators in the tree which have no function except that they
+     separate something and shall not be selectable by the user.
+    </simpara>
    </desc>
   </method>
 
@@ -787,10 +977,12 @@ gtk::main();
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Whether this node can be selected by the user.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Whether this node can be selected by the user.
+    </simpara>
    </desc>
   </method>
 
@@ -809,55 +1001,101 @@ gtk::main();
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the type of the given cell.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Returns the type of the given cell.
+    </simpara>
    </desc>
   </method>
 
   <method id="gtk.gtkctree.method.node_get_text">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>XXX <function>node_get_text</function></funcdef>
-     <paramdef>XXX</paramdef>
+     <funcdef>String <function>node_get_text</function></funcdef>
+     <paramdef>
+      <classname>GtkCTreeNode</classname> 
+      <parameter>node</parameter>
+     </paramdef>
+     <paramdef>int <parameter>column</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the column text of a given row.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Returns the column text of a given row.
+    </simpara>
+    <simpara>
+     The column in which the expanders/lines are visible cannot use this 
+     function (nTreeGraphic in the <link linkend="gtk.gtkctree.constructor">Constructor</link>). 
+     You have to use 
+     <link linkend="gtk.gtkctree.method.node_get_pixtext">node_get_pixtext</link>
+     in this case.
+    </simpara>
+    <simpara>
+     Note that this function can also not be used if you used the functions
+     <link linkend="gtk.gtkctree.method.node_set_pixtext">node_set_pixtext</link> or
+     <link linkend="gtk.gtkctree.method.node_set_pixtext">node_set_pixmap</link> to
+     that column. You should use
+     <link linkend="gtk.gtkctree.method.node_get_pixtext">node_get_pixtext</link>
+     instead.
+    </simpara>
    </desc>
   </method>
 
   <method id="gtk.gtkctree.method.node_get_pixtext">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>XXX <function>node_get_pixtext</function></funcdef>
-     <paramdef>XXX</paramdef>
+     <funcdef>Array <function>node_get_pixtext</function></funcdef>
+     <paramdef>
+      <classname>GtkCTreeNode</classname> 
+      <parameter>node</parameter>
+     </paramdef>
+     <paramdef>int <parameter>column</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the column pixtext of a given row.
    </shortdesc>
    <desc>
-
+    <para>
+     Returns the column pixtext of a given row. The array has a length of
+     4 and contains the following values:
+     <itemizedlist>
+      <listitem>0 - String - Pixtext</listitem>
+      <listitem>1 - int - Spacing between icon and text</listitem>
+      <listitem>2 - <classname>GdkPixmap</classname> Pixmap</listitem>
+      <listitem>3 - <classname>GdkBitmap</classname> Pixmask</listitem>
+     </itemizedlist>
+    </para>
    </desc>
   </method>
 
   <method id="gtk.gtkctree.method.get_node_info">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>XXX <function>get_node_info</function></funcdef>
-     <paramdef>XXX</paramdef>
+     <funcdef>Array <function>get_node_info</function></funcdef>
+     <paramdef>
+      <classname>GtkCTreeNode</classname> 
+      <parameter>node</parameter>
+     </paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    GGet information corresponding to a node.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Get information corresponding to a node. Any of the return parameters can be null.
+    </simpara>
+    <simpara>
+     The array has a size of 8 and contains the same values in the same order as you
+     set them with <link linkend="gtk.gtkctree.method.insert_node">insert_node</link> 
+     or <link linkend="gtk.gtkctree.method.set_node_info">set_node_info</link>.
+    </simpara>
    </desc>
   </method>
 
@@ -876,10 +1114,12 @@ gtk::main();
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Set the style of a row.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Set the style of a row.
+    </simpara>
    </desc>
   </method>
 
@@ -897,10 +1137,12 @@ gtk::main();
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Get the style of a row.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Get the style of a row.
+    </simpara>
    </desc>
   </method>
 
@@ -920,10 +1162,12 @@ gtk::main();
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Set the style of an individual cell.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Set the style of an individual cell.
+    </simpara>
    </desc>
   </method>
 
@@ -942,10 +1186,12 @@ gtk::main();
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Get the style of an individual cell.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Get the style of an individual cell.
+    </simpara>
    </desc>
   </method>
 
@@ -964,10 +1210,12 @@ gtk::main();
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Set the foreground color of a row.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Set the foreground (text) color of a row.
+    </simpara>
    </desc>
   </method>
 
@@ -986,40 +1234,64 @@ gtk::main();
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Set the background color of a row.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Set the background color of a row. This is useful in connection with
+     <link linkend="gtk.gtkctree.method.node_set_selectable">node_set_selectable</link>
+     so that the user can distinguish between selectable and not selectable rows. But then 
+     don't forget to change the 
+     <link linkend="gtk.gtkctree.method.node_set_foreground">foreground color</link> to
+     a contrast color.
+    </simpara>
    </desc>
   </method>
 
   <method id="gtk.gtkctree.method.node_set_row_data">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>XXX <function>node_set_row_data</function></funcdef>
-     <paramdef>XXX</paramdef>
+     <funcdef>void <function>node_set_row_data</function></funcdef>     
+     <paramdef>
+      <classname>GtkCTreeNode</classname> 
+      <parameter>node</parameter>
+     </paramdef>
+     <paramdef>Object <parameter>custom</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Associate a custom object with the row.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Associate a custom object with the row.    
+    </simpara>
+    <simpara>
+     If you have e.g. a file tree, then you could add the open file
+     handles to the corresponding node.
+    </simpara>
    </desc>
   </method>
 
   <method id="gtk.gtkctree.method.node_get_row_data">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>XXX <function>node_get_row_data</function></funcdef>
-     <paramdef>XXX</paramdef>
+     <funcdef>Object <function>node_get_row_data</function></funcdef>
+     <paramdef>
+      <classname>GtkCTreeNode</classname> 
+      <parameter>node</parameter>
+     </paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the custom object associated with the node.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Returns the custom object 
+     <link linkend="gtk.gtkctree.method.node_set_row_data">associated</link>
+     with the node.
+    </simpara>
    </desc>
   </method>
 
@@ -1037,10 +1309,12 @@ gtk::main();
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    This function makes the given column of the given node visible by scrolling.
    </shortdesc>
    <desc>
-
+    <simpara>
+     This function makes the given column of the given node visible by scrolling.
+    </simpara>
    </desc>
   </method>
 
@@ -1058,10 +1332,13 @@ gtk::main();
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    True if the node is currently inside the bounds of the window.
    </shortdesc>
    <desc>
-
+    <simpara>
+     True if the node is currently inside the bounds of the window. 
+     Note that this function can return true even if the node is not viewable, if the node's ancestor is visible.
+    </simpara>
    </desc>
   </method>
 
@@ -1073,10 +1350,12 @@ gtk::main();
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the number of pixels to shift the levels of the tree.
    </shortdesc>
    <desc>
-
+    <simpara>
+    Sets the number of pixels to shift the levels of the tree.
+    </simpara>
    </desc>
   </method>
 
@@ -1088,10 +1367,12 @@ gtk::main();
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the spacing between the tree graphic and the actual node content.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Sets the spacing between the tree graphic and the actual node content.
+    </simpara>
    </desc>
   </method>
 
@@ -1103,10 +1384,10 @@ gtk::main();
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    FIXME
    </shortdesc>
    <desc>
-
+    
    </desc>
   </method>
 
@@ -1121,10 +1402,12 @@ gtk::main();
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Set the line style of the tree.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Set the line style of the tree.
+    </simpara>
    </desc>
   </method>
 
@@ -1139,10 +1422,12 @@ gtk::main();
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Set the expander style of the tree.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Set the expander style of the tree.
+    </simpara>
    </desc>
   </method>
 
@@ -1157,10 +1442,16 @@ gtk::main();
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sort the children of a node.
    </shortdesc>
    <desc>
-
+    <para>
+     Sort the children of a node. The details of sorting can be set with
+     the <classname>GtkCList</classname> functions
+     <link linkend="gtk.gtkclist.method.set_sort_column">set_sort_colum</link> 
+     and
+     <link linkend="gtk.gtkclist.method.set_sort_type">set_sort_type</link>.
+    </para>
    </desc>
   </method>
 
@@ -1175,13 +1466,179 @@ gtk::main();
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sort the descendants of a node.
    </shortdesc>
    <desc>
-
+    <para>
+     Sort the descendants of a node. The details of sorting can be set with
+     the <classname>GtkCList</classname> functions
+     <link linkend="gtk.gtkclist.method.set_sort_column">set_sort_colum</link> 
+     and
+     <link linkend="gtk.gtkclist.method.set_sort_type">set_sort_type</link>.
+    </para>
    </desc>
   </method>
 
  </methods>
 
+ 
+ 
+ 
+ <signals>
+
+  <signal id="gtk.gtkctree.signal.tree-select-row">
+   <signalname>tree-select-row</signalname>
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
+     <paramdef><classname>GtkWidget</classname> widget</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Emitted when a row is selected.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Emitted when a row is selected.
+    </simpara>
+   </desc>
+  </signal>
+
+  <signal id="gtk.gtkctree.signal.tree-unselect-row">
+   <signalname>tree-unselect-row</signalname>
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
+     <paramdef><classname>GtkWidget</classname> widget</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Emitted when a node is unselected.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Emitted when a node is unselected.
+    </simpara>
+   </desc>
+  </signal>
+
+  <signal id="gtk.gtkctree.signal.tree-expand">
+   <signalname>tree-expand</signalname>
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
+     <paramdef><classname>GtkWidget</classname> widget</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Emitted when a node is expanded.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Emitted when a node is expanded.
+    </simpara>
+   </desc>
+  </signal>
+
+  <signal id="gtk.gtkctree.signal.tree-collapse">
+   <signalname>tree-collapse</signalname>
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
+     <paramdef><classname>GtkWidget</classname> widget</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Emitted when a node is collapsed.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Emitted when a node is collapsed.
+    </simpara>
+   </desc>
+  </signal>
+
+  <signal id="gtk.gtkctree.signal.tree-move">
+   <signalname>tree-move</signalname>
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
+     <paramdef><classname>GtkWidget</classname> widget</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Emitted when a node is moved.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Emitted when a node is moved.
+    </simpara>
+   </desc>
+  </signal>
+
+  <signal id="gtk.gtkctree.signal.change-focus-row-expansion">
+   <signalname>change-focus-row-expansion</signalname>
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
+     <paramdef><classname>GtkWidget</classname> widget</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    The row which has the focus is either collapsed or expanded or toggled.
+   </shortdesc>
+   <desc>
+    <simpara>
+     The row which has the focus is either collapsed or expanded or toggled.
+    </simpara>
+   </desc>
+  </signal>
+
+ </signals> 
+ 
+ 
+ 
+ 
+ <properties>
+
+  <prop id="gtk.gtkctree.property.clist" type="ro">
+   <propname>clist</propname>
+   <proptype>GtkCTree</proptype>
+   <shortdesc>
+    FIXME
+   </shortdesc>
+   <desc>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtkctree.property.row_list" type="ro">
+   <propname>row_list</propname>
+   <proptype>Array</proptype>
+   <shortdesc>
+    Array of <link linkend="gtk.gtkctree.method.is_viewable">viewable</link> nodes.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Array of <link linkend="gtk.gtkctree.method.is_viewable">viewable</link> nodes. 
+     This means that if a node is not <link linkend="gtk.gtkctree.method.expand">expanded</link>,
+     its children won't occur on that list.
+    </simpara>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtkctree.property.selection" type="ro">
+   <propname>selection</propname>
+   <proptype>Array</proptype>
+   <shortdesc>
+    Array of selected rows (nodes).
+   </shortdesc>
+   <desc>
+    <simpara>
+     Array of selected rows (nodes).
+    </simpara>
+   </desc>
+  </prop>
+  
+ </properties>
+  
 </classentry>
