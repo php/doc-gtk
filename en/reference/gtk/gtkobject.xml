@@ -2,11 +2,14 @@
  <classmeta>
   <classtitle>GtkObject</classtitle>
   <classparent></classparent>
-  <shortdesc>
-
-  </shortdesc>
+  <shortdesc>The base class of the PHP-GTK object hierachy.</shortdesc>
   <desc>
-
+   <para>
+    <classname>GtkObject</classname> is the base class of the PHP-GTK object 
+    hierachy. It implements the functionality that every object below it in 
+    the tree has. This object should not be directly constructed from PHP-GTK
+    but is documented here for reference reasons.
+   </para>
   </desc>
  </classmeta>
 
@@ -20,10 +23,17 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Fetch the current objects flags.
    </shortdesc>
    <desc>
-
+    <para>
+     This method returns the objects flags and defined in the enum 
+     <enumname>GtkObjectFlags</enumname>. The return value can be used 
+     to find information about the objects current state.
+    </para>
+    <simpara>
+     See also: <function>set_flags</function>, <function>unset_flags</function>.
+    </simpara>
    </desc>
   </method>
 
@@ -35,10 +45,17 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets various flags on the object.
    </shortdesc>
    <desc>
-
+    <simpara>
+     This method allows you to set the flags defined in the 
+     <enumname>GtkObjectFlags</enumname> enum. The flags can be
+     set to reflect an objects current state.
+    </simpara>
+    <simpara>
+     See also: <function>flags</function>, <function>unset_flags</function>.
+    </simpara>
    </desc>
   </method>
 
@@ -50,10 +67,17 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Unset certain flags on the object.
    </shortdesc>
    <desc>
-
+    <para>
+     This method allows the programmer to unset various flags, as defined
+     in the <enumname>GtkObjectFlags</enumname> enum. These flags can be 
+     changed to reflect the objects current state.
+    </para>
+    <simpara>
+     See also: <function>flags</function>, <function>set_flags</function>
+    </simpara>
    </desc>
   </method>
 
@@ -65,10 +89,14 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    The default object constructor.
    </shortdesc>
    <desc>
-
+    <simpara>
+     This constructor is called when arguments have the 
+     <optionname>GTK_ARG_CONSTRUCT</optionname> flag set within 
+     <enumname>GtkArgFlags</enumname>.
+    </simpara>
    </desc>
   </method>
 
@@ -80,10 +108,14 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Mark object as constructed.
    </shortdesc>
    <desc>
-
+    <simpara>
+     This method allows precise control over the construction
+     process. It marks an object as being constructed, this
+     stops any further constructors being called on the object.
+    </simpara>
    </desc>
   </method>
 
@@ -95,10 +127,20 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Decrease the initial reference count by 1.
    </shortdesc>
    <desc>
-
+    <simpara>
+     This method allows the programmer to decrease the objects 
+     reference count by 1, this only occurs the first time the
+     sink method is called.
+    </simpara>
+    <simpara>
+     This might be used when an object that is floating is created.
+     When the object is assigned a parent then it is 
+     <function>sunk</function>, but, the parent now also has a reference
+     to the object so its reference count is now <literal>1</literal>.
+    </simpara>
    </desc>
   </method>
 
@@ -110,10 +152,12 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Increase the reference count on an object.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Increase the reference count on an object.
+    </simpara>
    </desc>
   </method>
 
@@ -125,10 +169,18 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Decrease a reference count on an object.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Decrease a reference count on an object.
+    </simpara>
+    <note>
+     <simpara>
+      If you decrease the refcount to <literal>0</literal>
+      then the object will be destroyed.
+     </simpara>
+    </note>
    </desc>
   </method>
 
@@ -140,55 +192,17 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Call an objects shutdown handler.
    </shortdesc>
    <desc>
-
-   </desc>
-  </method>
-
-  <method id="gtk.gtkobject.method.get_arg">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>XXX <function>get_arg</function></funcdef>
-     <paramdef>XXX</paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </method>
-
-  <method id="gtk.gtkobject.method.set_arg">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>XXX <function>set_arg</function></funcdef>
-     <paramdef>XXX</paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </method>
-
-  <method id="gtk.gtkobject.method.set_data">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>XXX <function>set_data</function></funcdef>
-     <paramdef>XXX</paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-   <desc>
-
+    <simpara>
+     This method causes the objects shutdown handler to be called.
+     The objects memory wont be freed though until the object's 
+     reference count is <literal>0</literal>.
+    </simpara>
+    <simpara>
+     See Also: <function>unref</function>
+    </simpara>
    </desc>
   </method>
 
@@ -200,25 +214,9 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Removes data from the objects data associations.
    </shortdesc>
    <desc>
-
-   </desc>
-  </method>
-
-  <method id="gtk.gtkobject.method.get_data">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>XXX <function>get_data</function></funcdef>
-     <paramdef>XXX</paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-   <desc>
-
    </desc>
   </method>
 
@@ -230,10 +228,9 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Remove data without invoking the associations destroy handler.
    </shortdesc>
    <desc>
-
    </desc>
   </method>
 
@@ -245,10 +242,8 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
    </shortdesc>
    <desc>
-
    </desc>
   </method>
 
@@ -260,70 +255,8 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
    </shortdesc>
    <desc>
-
-   </desc>
-  </method>
-
-  <method id="gtk.gtkobject.method.connect">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>XXX <function>connect</function></funcdef>
-     <paramdef>XXX</paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </method>
-
-  <method id="gtk.gtkobject.method.connect_after">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>XXX <function>connect_after</function></funcdef>
-     <paramdef>XXX</paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </method>
-
-  <method id="gtk.gtkobject.method.connect_object">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>XXX <function>connect_object</function></funcdef>
-     <paramdef>XXX</paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </method>
-
-  <method id="gtk.gtkobject.method.connect_object_after">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>XXX <function>connect_object_after</function></funcdef>
-     <paramdef>XXX</paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-   <desc>
-
    </desc>
   </method>
 
@@ -335,10 +268,8 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
    </shortdesc>
    <desc>
-
    </desc>
   </method>
 
@@ -350,10 +281,8 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
    </shortdesc>
    <desc>
-
    </desc>
   </method>
 
@@ -365,10 +294,8 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
    </shortdesc>
    <desc>
-
    </desc>
   </method>
 
@@ -381,10 +308,8 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
    </shortdesc>
    <desc>
-
    </desc>
   </method>
 
@@ -397,25 +322,8 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
    </shortdesc>
    <desc>
-
-   </desc>
-  </method>
-
-  <method id="gtk.gtkobject.method.emit">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>XXX <function>emit</function></funcdef>
-     <paramdef>XXX</paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-   <desc>
-
    </desc>
   </method>
 
@@ -427,10 +335,8 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
    </shortdesc>
    <desc>
-
    </desc>
   </method>
 
