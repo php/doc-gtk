@@ -1,0 +1,422 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<classentry id="gdk.gdkwindow">
+ <classmeta>
+  <classtitle>GdkWindow</classtitle>
+  <classparent></classparent>
+  <shortdesc>
+   Класс, лежащий в основе любого <classname>GtkWidget</classname>.
+  </shortdesc>
+  <desc>
+   <simpara>
+    <classname>GdkWindow</classname> представляет собой класс,
+    лежащий в основе любого <classname>GtkWidget</classname> и
+    соответствующий поверхности экрана, которую занимает
+    соответствующий виджет.
+   </simpara>
+   <simpara>
+    Доступ к нему может быть получен через свойство 
+    <propname class="GtkWidget">window</propname> класса <classname>GtkWidget</classname>.
+   </simpara>
+  </desc>
+ </classmeta>
+
+ <methods>
+
+  <method id="gdk.gdkwindow.method.raise">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>raise</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Поднимает окно на передний план (z-порядка).
+   </shortdesc>
+   <desc>
+    <simpara>
+     Поднимает окно на передний план, так, что 
+     остальные окна, имеющие тоже родительское окно 
+     остаются позади. Если же окно является toplevel, 
+      то оконный менеджер может 
+     отвергнуть запрос на изменение z-порядка. 
+     Поэтому, метод <function class="GdkWindow">raise</function> 
+     только запрашивает изменение порядка, но не гарантирует.
+    </simpara>
+   </desc>
+  </method>
+
+  <method id="gdk.gdkwindow.method.lower">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>lower</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Перемещает окно на задний план (z-порядка).
+   </shortdesc>
+   <desc>
+    <simpara>
+     Перемещает окно на задний план, так, что 
+     остальные окна, имеющие тоже родительское окно 
+     остаются позади. Если же окно является toplevel, 
+      то оконный менеджер может 
+     отвергнуть запрос на изменение z-порядка. 
+     Поэтому, метод <function class="GdkWindow">lower</function> 
+     только запрашивает изменение порядка, но не гарантирует.
+    </simpara>
+    <simpara>
+     Имейте ввиду, что метод <function class="GtkWidget">show</function> 
+     вновь поднимает окно, значит не вызывайте данный метод 
+     перед вызовом show(), чтобы избежать повтора.
+    </simpara>
+   </desc>
+  </method>
+
+  <method id="gdk.gdkwindow.method.get_pointer">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>array <function>get_pointer</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Вовращает массив с информацией о указателе мыши.
+   </shortdesc>
+   <desc>
+    <simpara>
+    Вовращает массив с информацией о указателе мыши.
+    </simpara>
+    <simpara>
+     Первые два значения являются координатами указателя мыши, теретье - кнопка.
+     <propname class="GdkWindow">pointer_state</propname>.
+    </simpara>
+   </desc>
+  </method>
+
+  <method id="gdk.gdkwindow.method.set_cursor">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_cursor</function></funcdef>
+     <paramdef>
+      <classname>GdkCursor</classname> 
+      <parameter><optional>cursor</optional></parameter>
+     </paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Устанавливает используемый в окне курсор.
+   </shortdesc>
+   <desc>
+    <simpara>
+    Устанавливает используемый в окне курсор. Если 
+    пареметр пропущен, то устанавливается указатель по умолчанию.
+    </simpara>
+    <para>
+     <example>
+      <title>Setting the cursor</title>
+      <programlisting role="php">
+<![CDATA[
+$cursor = gdk::cursor_new(150); //GDK_WATCH
+$window = $mainWindow->window; //GdkWindow
+$window->set_cursor($cursor);
+]]>
+      </programlisting>    
+     </example>
+    </para> 
+   </desc>
+  </method>
+
+  <method id="gdk.gdkwindow.method.new_gc">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>new_gc</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gdk.gdkwindow.method.property_get">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>property_get</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gdk.gdkwindow.method.property_change">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>property_change</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gdk.gdkwindow.method.property_delete">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>property_delete</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>void
+
+  <method id="gdk.gdkwindow.method.set_icon">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_icon</function></funcdef>
+     <paramdef><classname>GdkWindow</classname> window</paramdef>
+     <paramdef><classname>GdkPixmap</classname> pixmap</paramdef>
+     <paramdef><classname>GdkBitmap</classname> mask</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Устанваливает пиктограмму (иконку) окна.
+   </shortdesc>
+   <desc>
+    <simpara>
+    Устанваливает пиктограмму (иконку) окна, которая может быть 
+    отображена оконным менеджером в заголовке окна или на панели задач.
+    </simpara>
+    <note>
+     This function does not work on Windows.
+    </note>
+    <programlisting role="php">
+<![CDATA[
+list( $pixmap, $mask) = gdk::pixmap_create_from_xpm($window->window, null, 'window.xpm');
+$gdkwindow = $window->window;
+$gdkwindow->set_icon( $gdkwindow, $pixmap, $mask);
+]]>
+    </programlisting>
+   </desc>
+  </method>
+
+ </methods>
+
+ <properties>
+
+  <prop id="gdk.gdkwindow.property.width" type="ro">
+   <propname>width</propname>
+   <proptype>int</proptype>
+   <shortdesc>
+    Ширина окна в пикселях.
+   </shortdesc>
+   <desc>
+    <simpara>
+    Ширина окна в пикселях.
+    </simpara>
+   </desc>
+  </prop>
+
+  <prop id="gdk.gdkwindow.property.height" type="ro">
+   <propname>height</propname>
+   <proptype>int</proptype>
+   <shortdesc>
+    Высота окна в пикселях.
+   </shortdesc>
+   <desc>
+    <simpara>
+    Высота окна в пикселях.
+    </simpara>
+   </desc>
+  </prop>
+
+  <prop id="gdk.gdkwindow.property.x" type="ro">
+   <propname>x</propname>
+   <proptype>int</proptype>
+   <shortdesc>
+    X координата позиции окна относительно родительского.
+   </shortdesc>
+   <desc>
+    <simpara>
+    X координата позиции окна относительно 
+     <propname class="GdkWindow">parent</propname>.
+    </simpara>
+   </desc>
+  </prop>
+
+  <prop id="gdk.gdkwindow.property.y" type="ro">
+   <propname>y</propname>
+   <proptype>int</proptype>
+   <shortdesc>
+    Y координата позиции окна относительно родительского.
+   </shortdesc>
+   <desc>
+    <simpara>
+    Y координата позиции окна относительно 
+     <propname class="GdkWindow">parent</propname>.
+    </simpara>
+   </desc>
+  </prop>
+
+  <prop id="gdk.gdkwindow.property.colormap" type="ro">
+   <propname>colormap</propname>
+   <proptype><classname>GdkColormap</classname></proptype>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+    <simpara>
+     
+    </simpara>
+   </desc>
+  </prop>
+
+  <prop id="gdk.gdkwindow.property.pointer" type="ro">
+   <propname>pointer</propname>
+   <proptype>array</proptype>
+   <shortdesc>
+    Массив, содержащий текущую позицию курсора мыши.
+   </shortdesc>
+   <desc>
+    <simpara>
+    Массив, содержащий текущую позицию курсора мыши.
+     <literal>pointer[0]</literal> содержит X 
+     и <literal>pointer[1]</literal> 
+     содержит Y. 
+    </simpara>
+   </desc>
+  </prop>
+
+  <prop id="gdk.gdkwindow.property.pointer_state" type="ro">
+   <propname>pointer_state</propname>
+   <proptype>int</proptype>
+   <shortdesc>
+    Текущий статус кнопок мыши.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Возвращает текущий статус кнопок мыши, таким образом 
+     можно определить какя из кнопок нажата.
+    </simpara>
+   </desc>
+  </prop>
+
+  <prop id="gdk.gdkwindow.property.parent" type="ro">
+   <propname>parent</propname>
+   <proptype>GdkWindow</proptype>
+   <shortdesc>
+    Возвращает родительский GdkWindow.
+   </shortdesc>
+   <desc>
+    <simpara>
+    Возвращает родительский <classname>GdkWindow</classname>.
+    </simpara>
+    <simpara>
+     Верхнее окно в иерархии запаковки возвратит 
+     самого себя как родителя. Имейте ввиду, что даже 
+     <classname>GdkWindow</classname> экземпляра 
+     <classname>GtkWindow</classname> имеет родителя. 
+    </simpara>
+    <programlisting role="php">
+<![CDATA[
+$gtk_window =& new GtkWindow();
+$gdk_window = $gtk_window->window;
+var_dump( $gdk_window == $gdk_window->parent);
+]]>
+    </programlisting>
+    <simpara>
+     The example output is false.
+    </simpara>
+   </desc>
+  </prop>
+
+  <prop id="gdk.gdkwindow.property.toplevel" type="ro">
+   <propname>toplevel</propname>
+   <proptype>GdkWindow</proptype>
+   <shortdesc>
+   Возвращает GdkWindow виждета toplevel GtkWindow.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Возвращает <classname>GdkWindow</classname> 
+     виджета верхнего уровня, обычно это <classname>GtkWindow</classname>.
+    </simpara>
+   </desc>
+  </prop>
+
+  <prop id="gdk.gdkwindow.property.children" type="ro">
+   <propname>children</propname>
+   <proptype>array</proptype>
+   <shortdesc>
+    Массив всех непосредственных дочерних виджетов.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Массив содержит все дочерние виджеты, которые были 
+     добавлены в контейнер методом 
+     <function class="GtkContainer">add</function> или другим пакующим методом.
+    </simpara>
+   </desc>
+  </prop>
+
+  <prop id="gdk.gdkwindow.property.type" type="ro">
+   <propname>type</propname>
+   <proptype><enumname>GdkWindowType</enumname></proptype>
+   <shortdesc>
+    Вовращает тип виджета.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Возвращает <enumname>GdkWindowType</enumname> 
+      <classname>GdkWindow</classname> виджета.
+    </simpara>
+   </desc>
+  </prop>
+
+  <prop id="gdk.gdkwindow.property.depth" type="ro">
+   <propname>depth</propname>
+   <proptype>int</proptype>
+   <shortdesc>
+    Возвращает глубину цвета в битах на пикесль.
+   </shortdesc>
+   <desc>
+    <simpara>
+    Возвращает глубину цвета в битах на пикесль, например, 24.
+    </simpara>
+   </desc>
+  </prop>
+
+  <prop id="gdk.gdkwindow.property.xid" type="ro">
+   <propname>xid</propname>
+   <proptype>int</proptype>
+   <shortdesc>
+    Возвращает идентификатор окна в XWindow, но не в Windows.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Данное свойство недоступно в Windows.
+     В *Nix оно возвращает id окна.
+    </simpara>
+   </desc>
+  </prop>
+
+ </properties>
+
+</classentry>

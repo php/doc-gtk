@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<classentry id="gdk.gdkfont">
+ <classmeta>
+  <classtitle>GdkFont</classtitle>
+  <classparent></classparent>
+  <shortdesc>
+   Структура, содержащая информацию о шрифте.
+  </shortdesc>
+  <desc>
+   <simpara>
+    <classname>GdkFont</classname> является структурой данных, содержащей 
+    основную информацию о шрифте, 
+    <propname class="GdkFont">type</propname>, 
+    <propname class="GdkFont">ascent</propname> и 
+    <propname class="GdkFont">descent</propname>.  Не имеет конструктора, так как
+    все доступные шрифты предоставляются системой. 
+    Структура <classname>GdkFont</classname> просто позволяет 
+    загружать и запрашивать новые шрифты.
+   </simpara>
+   <simpara>
+    Для загрузки шрифта необходимо использовать <function>gdk::font_load</function>.  
+    Чтобы загрузить набор шрифтов - диапазон различных шрифтов - используйте 
+    <function>gdk::fontset_load</function>.  Обе функции возвратят <classname>GdkFont</classname>.
+   </simpara>
+   <note>
+    <simpara>
+     В настоящий момент под win32 все шрифты 
+     имеют тип <literal>GDK_FONT_FONTSET</literal>, независимо от метода загрузки.
+    </simpara>
+   </note>
+  </desc>
+ </classmeta>
+
+ <methods>
+
+  <method id="gdk.gdkfont.method.extents">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>array <function>extents</function></funcdef>
+     <paramdef>string <parameter>text_string</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Возвращает массив информации о размере.
+   </shortdesc>
+   <desc>
+    <simpara>
+     <function class="GdkFont">extents</function> возвращает массив 
+     из пяти целых чисел, представляющих левую опору, 
+     правую опору, ширину, подъём и спуск строки, использующей шрифт.
+    </simpara>
+    <simpara>
+     Левая и правая опоры, являются расстояниями от начала прорисовки 
+     до самого и самого правого пределов, изображаемой строки. Измеряются 
+     в пикселях.
+    </simpara>
+    <simpara>
+     Ширина является высотой текущей строки и измеряется в пикселях.
+     Данная величина включает информацию относительно места начала прорисовки 
+     следующей строки. Возвращённое целое число может быть больше или 
+     меньше значения правой опоры.
+    </simpara>
+    <simpara>
+     Подъём и спуск измеряются в пикселях, и являются величинами 
+     текущей строки над и под основной линией.
+    </simpara>
+    <simpara>
+     Если вы работаете с unix, все нижесказанное будет верно. 
+     Если вы используете win32, то левая опора всегда будет равна 
+     <literal>0</literal>, а правая будет соответствовать ширине.
+     В действительности, подъём, это высота линии+1 пиксель, а 
+     спуск - спуск+1 пиксель. Используйте свойства 
+     <classname>GdkFont</classname>, если вам необходимы значения 
+     <propname class="GdkFont">ascent</propname> и 
+     <propname class="GdkFont">descent</propname> под win32.
+    </simpara>
+   </desc>
+  </method>
+
+  <method id="gdk.gdkfont.method.measure">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>int <function>measure</function></funcdef>
+     <paramdef>string <parameter>text_string</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Ширина прорисовки текстовой строки, измеряется в пикселях.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Возвращаемое значение эквивалентно правой опоре, 
+     возвращённой <function class="GdkFont">extents</function>.  Это размер 
+     в пикселях ширины строки.
+    </simpara>
+    <simpara>
+     Если вам необходима логическая ширина строки, 
+     для того, чтобы указать, где будет вставлен следующий символ - 
+     используйте вместо 
+     <function class="GdkFont">width</function>.
+    </simpara>
+   </desc>
+  </method>
+
+  <method id="gdk.gdkfont.method.height">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>int <function>height</function></funcdef>
+     <paramdef>string <parameter>text_string</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Возвращает высоту линии, измеряемую в пикселях.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Значение, возвращаемое <function class="GdkFont">height</function> получается
+      суммированием значений <parameter>ascent</parameter> и 
+     <parameter>descent</parameter>, возвращённых  
+     <function class="GdkFont">extents</function> и соответствующих 
+     текущей строке.
+    </simpara>
+    <simpara>
+     В win32 это значение фальшиво. 
+     Для получения истинного значение получите сумму 
+     свойств <classname>GdkFont</classname>: 
+     <propname class="GdkFont">ascent</propname> и 
+     <propname class="GdkFont">descent</propname>.
+    </simpara>
+    <simpara>
+     Значение высоты дано в пикселях и представляет собой 
+     логическое место, необходимое строке. Если вы используете 
+     эту меру для вычисления размера текстового поля ввода, 
+     то вам будет необходимо добавить 6 пикселей для 
+     бордюров поля ввода.
+    </simpara>
+   </desc>
+  </method>
+
+  <method id="gdk.gdkfont.method.width">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>int <function>width</function></funcdef>
+     <paramdef>string <parameter>text_string</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Логическая ширина строки текста, измеряется в пикселях.
+   </shortdesc>
+   <desc>
+    <simpara>
+     <function class="GdkFont">width</function> возвращает логическую ширину 
+     строки текста, измеренную в пикселях. Логическая ширина 
+     включает площадь до места, где должен быть выведен следующий символ.
+    </simpara>
+    <simpara>
+     Данный метод полностью неработоспосбен в windows и 
+     всегда будет возвращать размер правой опоры.
+    </simpara>
+   </desc>
+  </method>
+
+ </methods>
+
+ <properties>
+
+  <prop id="gdk.gdkfont.property.type" type="ro">
+   <propname>type</propname>
+   <proptype>int</proptype>
+   <shortdesc>
+    Тип шрифта или набора шрифтов.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Возвращённое значение может быть равно <literal>0</literal>, 
+     означая, что шрифт был загружен как одиночный, или 
+     <literal>1</literal>, означая, что шрифт загрузился как часть 
+     набора шрифтов.  Смотрите <enumname>GdkFontType</enumname>.
+    </simpara>
+    <simpara>
+     Имейтте ввиду, что в win32 данное свойство всегда будет принимать значение 
+     <literal>1</literal>, так как шрифты всегда загружаются как наборы, 
+     для поддержки длинных знаков, используемых операционной системой.
+    </simpara>
+   </desc>
+  </prop>
+
+  <prop id="gdk.gdkfont.property.ascent" type="ro">
+   <propname>ascent</propname>
+   <proptype>int</proptype>
+   <shortdesc>
+    Высота логического пространства от основной линии.
+   </shortdesc>
+   <desc>
+    <simpara>
+     <propname class="GdkFont">ascent</propname>  - дистанция между 
+     основной линией шрифта и верхним пределом логического 
+     пространства, занимаемого шрифтом.
+    </simpara>
+    <simpara>
+     Добавьте <propname class="GdkFont">descent</propname> для того, 
+     чтобы получить полную высоту шрифта в пикселях.
+    </simpara>
+   </desc>
+  </prop>
+
+  <prop id="gdk.gdkfont.property.descent" type="ro">
+   <propname>descent</propname>
+   <proptype>int</proptype>
+   <shortdesc>
+    Высота от основной лини до нижнего предела логического 
+    пространства, занимаего шрифтом.
+   </shortdesc>
+   <desc>
+    <simpara>
+     <propname class="GdkFont">descent</propname> - высота
+    от основной лини до нижнего предела логического 
+    пространства, занимаего шрифтом.
+    </simpara>
+   </desc>
+  </prop>
+
+ </properties>
+
+</classentry>

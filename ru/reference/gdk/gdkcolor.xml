@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<classentry id="gdk.gdkcolor">
+ <classmeta>
+  <classtitle>GdkColor</classtitle>
+  <classparent></classparent>
+  <shortdesc>
+   Струтура, содержит определённый цвет.
+  </shortdesc>
+  <desc>
+   <simpara>
+    <classname>GdkColor</classname> предоставляет структуру для хранения
+    информации о определённом цвете.
+   </simpara>
+   <simpara>
+    Это XcmsColor структура, и будет принимать значения, соответствующие
+    любому XcmsColor формату. Возможно, наиболле полезный из этих форматов - 
+    гамма-корретированная XcmsRGB структура, которая лежит в диапазоне
+    от <literal>0</literal> до <literal>65535</literal> на RGB значение, где
+    <literal>0, 0, 0</literal> является черным цветом.  Заданные таким способом RGB значения
+    масштабируются до соответствия диапазону используемого оборудования.
+   </simpara>
+   <simpara>
+    Цвета могут быть назначены посредством RC файлов приложений, где
+    объекты <classname>GdkColor</classname> создаются через палитру приложения,
+    опеределённую в этом файле. Определяемые таким образом цвета
+    могут создаваться используя любые форматы XcmsColor структуры.
+   </simpara>
+   <simpara>
+    Имейте ввиду, что это не то же самое, что прямое назначение цвета
+    <classname>GdkColor</classname>.
+   </simpara>
+  </desc>
+ </classmeta>
+
+ <constructor id="gdk.gdkcolor.constructor">
+  <funcsynopsis>
+   <funcprototype>
+    <funcdef> <function>GdkColor</function></funcdef>
+    <paramdef>int <parameter>red</parameter></paramdef>
+    <paramdef>int <parameter>green</parameter></paramdef>
+    <paramdef>int <parameter>blue</parameter></paramdef>
+   </funcprototype>
+  </funcsynopsis>
+  <shortdesc>
+   Создаёт новый объект цвета, ипсользуя одну из возможных конструкций.
+   <!-- 
+    I've no way to express alternative constructors .. have I? - sf mar 02 
+   -->
+  </shortdesc>
+  <desc>
+   <simpara>
+    При прямом создании <classname>GdkColor</classname> вам необходимо
+    будет использовать системные названия цветов, шестнадцатиричные RGB тройки или XcmsRGB значения. 
+    Попытка использования других форматов здесь не даст сообщения об ошибке,
+    по тому, что структура их сама распознаёт, и соответственно ошибка не отобразится
+    по тому, что функция их совсем не распознаёт.
+   </simpara>
+   <para>
+   Если вы напрямую создаёте цвета, то опции в PHP-GTK будут следющими:
+    <informalexample>
+     <programlisting role="php">
+<![CDATA[
+<?php
+/* XcmsRGB values, expressed as three integers */
+$cyan = &new GdkColor(0, 65535, 65535);
+
+/* hex triples expressed as a single string */
+$cyan = &new GdkColor('#00FFFF');
+
+/* a color name expressed as a single string */
+$cyan = &new GdkColor('cyan');
+?>
+]]>
+     </programlisting>
+    </informalexample>
+    Имена цветов, использованнуе в данной системе опредеоены в файле,
+    названном <filename>rgb.txt</filename>.  Эквивалентный файл в win32 
+    не доступен в человеческой форме. 
+    <ulink url="&url.rgbtxt;">Здесь</ulink> доступно одно из 
+    лучших насегодня описаний стандартных имён цветов,
+    используемых оконными системами.
+   </para>
+   <simpara>
+    See also: <classname>GtkStyle</classname>.
+   </simpara>
+   <!-- 
+    TODO We definitely, definitely need something in the userguide on
+    RC files, soonest - sf mar 02
+   -->
+  </desc>
+ </constructor>
+
+ 
+ 
+ 
+ <properties>
+
+  <prop id="gdk.gdkcolor.property.red" type="rw">
+   <propname>red</propname>
+   <proptype>int</proptype>
+   <shortdesc>
+    Красная составляющая цвета
+   </shortdesc>
+   <desc>
+    <simpara>
+    Возвращает красную составляющую цвета, в диапазоне от 0 до 65535
+    Если вы конвертируете это значение в шестнадцатиричное посредством <literal>dechex</literal>,
+    вы заметите, что используются только первые два значения. Итак, если вы 
+    захотите конвертировать в красивое шестнадцатиричное значение (в html-стиле)
+    например, <literal>AF</literal>, вам необходимо будет совершить побитовый  сдвиг.
+    </simpara>
+    <programlisting role="php">
+<![CDATA[
+$orange = &new GdkColor('#FF8000');
+echo dechex( $orange->red >> 8);
+]]>    
+    </programlisting>
+    <simpara>
+    Также можно использовать данное поле для установки красной составляющей.
+    </simpara>
+   </desc>
+  </prop>
+
+  <prop id="gdk.gdkcolor.property.green" type="rw">
+   <propname>green</propname>
+   <proptype>int</proptype>
+   <shortdesc>
+    Зелёная составляющая цвета.
+   </shortdesc>
+   <desc>
+    <simpara>
+    Возвращает зелёную составляющую цвета, в диапазоне от 0 до 65535
+    Если вы конвертируете это значение в шестнадцатиричное посредством <literal>dechex</literal>,
+    вы заметите, что используются только первые два значения. Итак, если вы 
+    захотите конвертировать в красивое шестнадцатиричное значение (в html-стиле)
+    например, <literal>AF</literal>, вам необходимо будет совершить побитовый  сдвиг.
+    </simpara>
+    <programlisting role="php">
+<![CDATA[
+$orange = &new GdkColor('#FF8000');
+echo dechex( $orange->green >> 8);
+]]>    
+    </programlisting>
+    <simpara>
+    Также можно использовать данное поле для установки зелёной составляющей.
+    </simpara>
+   </desc>
+  </prop>
+
+  <prop id="gdk.gdkcolor.property.blue" type="rw">
+   <propname>blue</propname>
+   <proptype>int</proptype>
+   <shortdesc>
+    Голубая составляющая цвета.
+   </shortdesc>
+   <desc>
+    <simpara>
+    Возвращает голубую составляющую цвета, в диапазоне от 0 до 65535
+    Если вы конвертируете это значение в шестнадцатиричное посредством <literal>dechex</literal>,
+    вы заметите, что используются только первые два значения. Итак, если вы 
+    захотите конвертировать в красивое шестнадцатиричное значение (в html-стиле)
+    например, <literal>AF</literal>, вам необходимо будет совершить побитовый  сдвиг.
+    </simpara>
+    <programlisting role="php">
+<![CDATA[
+$orange = &new GdkColor('#FF8000');
+echo dechex( $orange->blue >> 8);
+]]>    
+    </programlisting>
+    <simpara>
+    Также можно использовать данное поле для установки голубой составляющей.
+    </simpara>
+   </desc>
+  </prop>
+
+ </properties>
+ 
+</classentry>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<classentry id="gdk.gdkcursor">
+ <classmeta>
+  <classtitle>GdkCursor</classtitle>
+  <classparent><!-- no parent --></classparent>
+  <shortdesc>
+   GdkCursor представляет собой предопределённый или определённый пользователем указатель мыши.
+  </shortdesc>
+  <desc>
+   <simpara>
+    GdkCursor является указателем мыши в X11. Существует некоторое количество
+    предопределённых курсоров (смотртите <enumname>GdkCursorType</enumname>),
+    но вы также можете создавать свои собственные монохромные укзатели (2-ух цветные, а не просто черно-белые).
+   </simpara>
+   <simpara>
+    See: 
+    <link linked="gdk.method.cursor_new">cursor_new</link>,
+    <link linked="gdk.method.cursor_new_from_pixmap">cursor_new_from_pixmap</link>,
+    <function class="GdkWindow">set_cursor</function>
+   </simpara>
+  </desc>
+ </classmeta>
+
+ <properties>
+
+  <prop id="gdk.gdkcursor.property.type" type="ro">
+   <propname>type</propname>
+   <proptype>int</proptype>
+   <shortdesc>
+    Номер текущего <enumname>GdkCursorType</enumname>.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Номер текущего <enumname>GdkCursorType</enumname>.
+    </simpara>
+   </desc>
+  </prop>
+
+  <prop id="gdk.gdkcursor.property.name" type="ro">
+   <propname>name</propname>
+   <proptype>string</proptype>
+   <shortdesc>
+    Имя текущего типа курсора.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Имя текущего типа курсора. Имена теже самые, что и 
+     <enumname>GdkCursorType</enumname>-константы, кроме того, что они
+     в нижнем регистре, не начинаются с <literal>GDK_</literal>
+     и вместо подчеркиваний используют тире. Например, 
+     <literal>GDK_IRON_CROSS</literal> имеет имя
+     <literal>iron-cross</literal>.
+    </simpara>
+   </desc>
+  </prop>
+
+ </properties>
+
+</classentry>
