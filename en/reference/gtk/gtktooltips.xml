@@ -7,7 +7,25 @@
    Adds tooltips to other widgets.
   </shortdesc>
   <desc>
-
+   <simpara>
+    Tooltips are the messages that appear next to a widget
+    when the mouse pointer is held over it for a short amount of time.
+    They are set via the <function class="GtkTooltips">set_tip</function>
+    method.
+   </simpara>
+   <simpara>
+    They are especially helpful for adding more verbose 
+    descriptions of things such as buttons in a toolbar.
+   </simpara>
+   <simpara>
+    This widget holds tooltips for other widgets. You should only need one 
+    Tooltip widget for all widgets you wish to add tips to.
+   </simpara>
+   <simpara>
+    Tooltips can only be used on widgets <quote>which have their own x window</quote>.
+    Other widgets, e.g. <classname>GtkLabel</classname>s can be added to an
+    <classname>GtkEventBox</classname> to benefit from tooltips.
+   </simpara>
   </desc>
  </classmeta>
 
@@ -19,10 +37,58 @@
    </funcprototype>
   </funcsynopsis>
   <shortdesc>
-
+   Creates a new tooltips instance.
   </shortdesc>
   <desc>
+   <simpara>
+    Creates a new tooltips instance. You need only <emphasis>one</emphasis>
+    tooltip widget, as it can hold tooltips for several widgets.
+   </simpara>
+    <example>
+     <title>How to use tooltips</title>
+     <programlisting role="php">
+<![CDATA[
+<?php
+if( !extension_loaded('gtk')) {	
+	dl( 'php_gtk.' . PHP_SHLIB_SUFFIX); 
+}
 
+$window	= &new GtkWindow();
+$window->set_title( 'tooltip window');
+$window->set_default_size( 200, 200);
+$window->connect_object('destroy', array('gtk', 'main_quit'));
+$vbox = &new GtkVBox();
+
+$btnSparkum = &new GtkButton( 'OEffnen');
+$btnNaclus = &new GtkButton( 'Speichern');
+
+$label	= &new GtkLabel( 'Normal label');
+$labelEvent = &new GtkLabel( 'Label on EventBox');
+$eventbox = &new GtkEventBox();
+$eventbox->add( $labelEvent);
+
+$vbox->pack_start_defaults( $btnSparkum);
+$vbox->pack_start_defaults( $btnNaclus);
+$vbox->pack_start_defaults( $label);
+$vbox->pack_start_defaults( $eventbox);
+
+$tooltips = &new GtkTooltips();
+$tooltips->set_tip( $btnSparkum, 'OEffnen is german for "Open"', 
+	"OEffnen is german for \"Open\"\r\nSee it as a way to extend\r\nyour knowledge");
+$tooltips->set_tip( $btnNaclus, 'Speichern is german for "Save"', 
+	"Speichern is german for \"Save\"\r\nSee it as a way to extend\r\nyour knowledge");
+$tooltips->set_tip( $label, 'You shouldn\'t see this.', null);
+$tooltips->set_tip( $eventbox, 'A tooltip on a label... magic.', 
+	"No magic!\r\nYou just need to pack the label\r\non an EventBox.");
+
+$window->add( $vbox);
+$window->show_all();
+
+gtk::main();
+?>
+]]>
+     </programlisting>
+    </example>
   </desc>
  </constructor>
 
@@ -36,10 +102,14 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Actives the showing of tooltips.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Activates the tooltips so that they are shown after
+     the specified with the <function class="GtkTooltips">set_delay</function>
+     function if they were <function class="GtkTooltips">disable</function>d before.
+    </simpara>
    </desc>
   </method>
 
@@ -51,10 +121,15 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Disable the showing of tooltips.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Deactivates the tooltips so that they aren't shown any more.
+    </simpara>
+    <simpara>
+     You can re-activate them with <function class="GtkTooltips">enable</function>.
+    </simpara>
    </desc>
   </method>
 
@@ -66,10 +141,16 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Determines the time after which the tooltips are shown
    </shortdesc>
    <desc>
-
+    <simpara>
+     Determines the time in milliseconds which the user has 
+     to wait on the widget until the tooltip is shown.
+    </simpara>
+    <simpara>
+     With a delay of 0, the tooltips are shown immediately.
+    </simpara>
    </desc>
   </method>
 
@@ -86,10 +167,20 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the tooltip for a specific widget
    </shortdesc>
    <desc>
-
+    <simpara>
+     Sets the tooltip for a specific widget. The <parameter>tip_text</parameter>
+     is will be visible when the user hovers the button for a specific
+     delay.
+    </simpara>
+    <simpara>
+     The <parameter>tip_private</parameter> should be a longer description
+     of the function the widget has and can be made visible via
+     a <classname>GtkTipsQuery</classname> object 
+     (&quot;What's this&quot; function).
+    </simpara>
    </desc>
   </method>
 
@@ -108,10 +199,30 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the fore- and background color of the tooltips. Deprecated.
    </shortdesc>
    <desc>
-
+    <note>
+     <simpara>
+      This method is deprecated. Colors can be set via styles.
+     </simpara>
+    </note>
+    <simpara>
+     This method sets the foreground and background colors for 
+     the tooltips.
+    </simpara>
+    <simpara>
+     On linux this method doesn't work. Use the styles instead.
+    </simpara>
+    <example>
+     <title>How to set the color of tooltips</title>
+     <programlisting role="php">
+<![CDATA[
+$style = 'style "tooltips" { bg[NORMAL] = "#ff6060" } widget "gtk-tooltips" style "tooltips"';
+gtk::rc_parse_string( $style);
+]]>
+     </programlisting>
+    </example>
    </desc>
   </method>
 
@@ -123,10 +234,14 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Used internally only.
    </shortdesc>
    <desc>
-
+    <simpara>
+     This function is for internal use only. It forces the creation
+     of the tooltip window if it doesn't exist yet. (Not meaning
+     <emphasis>showing</emphasis>)
+    </simpara>
    </desc>
   </method>
 
