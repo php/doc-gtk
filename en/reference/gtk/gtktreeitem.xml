@@ -8,9 +8,7 @@
   </shortdesc>
   <desc>
    <simpara>
-    A <classname>GtkTreeItem</classname> is one node of a 
-    <classname>GtkTree</classname>. Each node may itself 
-    contain another tree.  
+    A <classname>GtkTreeItem</classname> is one node of a <classname>GtkTree</classname>. Because GtkTreeItem extends <classname>GtkItem</classname>, it may contain one child.  That child should be a <classname>GtkTree</classname>.
    </simpara>
    <simpara>
     See also: <classname>GtkTree</classname>
@@ -35,6 +33,9 @@
    Creates a new GtkTreeItem with the given text.
   </shortdesc>
   <desc>
+   <simpara>
+    Creates a new instance of GtkTreeItem with <parameter>node_text</parameter> as the node label. The new item should be added to a <classname>GtkTree</classname> using <function class="GtkTree">append</function>, <function class="GtkTree">prepend</function>, or <function class="GtkTree">insert</function>.
+   </simpara>
    <simpara>
     Strictly speaking <parameter>node_text</parameter> is optional. That is, you will not get a run time error if you do not supply the text, but if no text is given the node will not display.
    </simpara>
