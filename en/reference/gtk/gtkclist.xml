@@ -15,12 +15,64 @@
   <funcsynopsis>
    <funcprototype>
     <funcdef> <function>GtkCList</function></funcdef>
-    <paramdef>XXX</paramdef>
+    <paramdef>int <parameter>columns</parameter></paramdef>
+    <paramdef><optional>Array <parameter>titles</parameter></optional></paramdef>
    </funcprototype>
   </funcsynopsis>
-  <shortdesc></shortdesc>
+  <shortdesc>
+   Creates a new <classname>GtkCList</classname> object
+  </shortdesc>
   <desc>
+   <simpara>
+    Creates a new <classname>GtkCList</classname> object with the given number of columns.
+    The optional second parameter is an array of strings which are uses as column titles.
+   </simpara>
+   <simpara>
+    The columns can be resized with the 
+    <link linkend="gtk.gtkclist.method.set_column_width">set_column_width</link> function.
+   </simpara>
+   <programlisting role="php">
+<![CDATA[
+<?php
+if( !extension_loaded('gtk')) {	
+	dl( 'php_gtk.' . PHP_SHLIB_SUFFIX); 
+}
 
+$win = &new GtkWindow();
+$win->set_default_size(200,300);
+$win->connect('destroy', 'destroy');
+
+function destroy() {
+	Gtk::main_quit();
+}
+
+$arStatistics	= array(
+ array( 'Paris', 9.1),
+ array( 'Moscow', 9.0),
+ array( 'London', 6.8),
+ array( 'Rome', 3.8),
+ array( 'Berlin', 3.4),
+ array( 'Athena', 3.0)
+);
+
+$scrolled_win = &new GtkScrolledWindow();
+$scrolled_win->set_policy( GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
+
+$list = &new GtkCList( 2, array( "City", "Inhabitants (M)"));
+
+foreach( $arStatistics as $arStat) {
+	$list->insert( 0, $arStat);
+}
+
+$list->set_column_width( 0, 90);
+
+$scrolled_win->add( $list);
+$win->add( $scrolled_win);
+$win->show_all();
+GTK::main();
+?>
+]]>
+   </programlisting>
   </desc>
  </constructor>
 
@@ -33,8 +85,14 @@
      <paramdef><classname>GtkAdjustment</classname> <parameter>adjustment</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
-   <shortdesc></shortdesc>
-   <desc></desc>
+   <shortdesc>
+    Allows you to set the <classname>GtkAdjustment</classname> to be used for the horizontal aspect of the <classname>GtkCList</classname> widget.
+   </shortdesc>
+   <desc>
+    <simpara>
+      Allows you to set the <classname>GtkAdjustment</classname> to be used for the horizontal aspect of the <classname>GtkCList</classname> widget.
+    </simpara>
+   </desc>
   </method>
 
   <method id="gtk.gtkclist.method.set_vadjustment">
@@ -44,8 +102,14 @@
      <paramdef><classname>GtkAdjustment</classname> <parameter>adjustment</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
-   <shortdesc></shortdesc>
-   <desc></desc>
+   <shortdesc>
+    Allows you to set the <classname>GtkAdjustment</classname> to be used for the vertical aspect of the <classname>GtkCList</classname> widget.
+   </shortdesc>
+   <desc>
+    <simpara>
+      Allows you to set the <classname>GtkAdjustment</classname> to be used for the vertical aspect of the <classname>GtkCList</classname> widget.
+    </simpara>
+   </desc>
   </method>
 
   <method id="gtk.gtkclist.method.get_hadjustment">
@@ -55,8 +119,14 @@
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
-   <shortdesc></shortdesc>
-   <desc></desc>
+   <shortdesc>
+    Gets the <classname>GtkAdjustment</classname> currently being used for the horizontal aspect.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Gets the <classname>GtkAdjustment</classname> currently being used for the horizontal aspect.
+    </simpara>
+   </desc>
   </method>
 
   <method id="gtk.gtkclist.method.get_vadjustment">
@@ -66,8 +136,14 @@
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
-   <shortdesc></shortdesc>
-   <desc></desc>
+   <shortdesc>
+    Gets the <classname>GtkAdjustment</classname> currently being used for the vertical aspect.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Gets the <classname>GtkAdjustment</classname> currently being used for the vertical aspect.
+    </simpara>
+   </desc>
   </method>
 
   <method id="gtk.gtkclist.method.set_shadow_type">
@@ -77,8 +153,25 @@
      <paramdef><enumname>GtkShadowType</enumname> <parameter>type</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
-   <shortdesc></shortdesc>
-   <desc></desc>
+   <shortdesc>
+    Set the outer border (shadow) of the widget
+   </shortdesc>
+   <desc>
+    <simpara>
+     Set the outer border (shadow) of the widget. The whole widget is surrounded with a special
+     border, which can look flat, inset or outset.     
+    </simpara>
+    <para>
+     You can best see the effect when you add the following lines to the example given in
+     the <link linkend="gtk.gtkclist.constructor">constructor</link>:
+     <programlisting role="php">
+<![CDATA[
+$scrolled_win->set_border_width( 10);
+$list->set_shadow_type( GTK_SHADOW_ETCHED_OUT);
+]]>
+     </programlisting>
+    </para>
+   </desc>
   </method>
 
   <method id="gtk.gtkclist.method.set_selection_mode">
@@ -88,8 +181,17 @@
      <paramdef><enumname>GtkSelectionMode</enumname> <parameter>mode</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
-   <shortdesc></shortdesc>
-   <desc></desc>
+   <shortdesc>
+    Sets the selection mode for the specified <classname>CList</classname>.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Sets the selection mode for the specified <classname>CList</classname>. 
+     This allows you to set whether only one or more than one item can be selected at a time in the widget. 
+     Note that setting the widget's selection mode to one of GTK_SELECTION_BROWSE or GTK_SELECTION_SINGLE 
+     will cause all the items in the GtkCList to become deselected.
+    </simpara>
+   </desc>
   </method>
 
   <method id="gtk.gtkclist.method.set_reorderable">
@@ -99,8 +201,17 @@
      <paramdef>bool <parameter>reorderable</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
-   <shortdesc></shortdesc>
-   <desc></desc>
+   <shortdesc>
+    Sets whether the CList's rows are re-orderable using drag-and-drop.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Sets whether the CList's rows are re-orderable using drag-and-drop. If it is set to true, 
+     the user can select one with the mouse, hold the left mouse button and move it to another
+     position in the list. The <link linkend="gtk.gtkclist.signal.row-move">row-move</link> 
+     signal is emmited when the user did so.
+    </simpara>
+   </desc>
   </method>
 
   <method id="gtk.gtkclist.method.set_use_drag_icons">
@@ -110,8 +221,19 @@
      <paramdef>bool <parameter>use_icons</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
-   <shortdesc></shortdesc>
-   <desc></desc>
+   <shortdesc>
+    Determines whether the <classname>GtkCList</classname> should use icons when doing drag-and-drop operations.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Determines whether the <classname>GtkCList</classname> should use icons when doing drag-and-drop operations.
+    </simpara>
+    <simpara>
+     In every case the cursor is changed when moving a selected row. The difference is, that a standard cursor
+     is used when the value is set to false, and an icon if it is true. The icon looks nicer, but causes 
+     ugly effects sometimes (UI not fully redrawn).
+    </simpara>
+   </desc>
   </method>
 
   <method id="gtk.gtkclist.method.set_button_actions">
@@ -119,11 +241,19 @@
     <funcprototype>
      <funcdef>void <function>set_button_actions</function></funcdef>
      <paramdef>int <parameter>button</parameter></paramdef>
-     <paramdef>int <parameter>button_actions</parameter></paramdef>
+     <paramdef><enumname>GtkButtonAction</enumname> <parameter>button_actions</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
-   <shortdesc></shortdesc>
-   <desc></desc>
+   <shortdesc>
+    Sets the action(s) that the specified mouse button will have on the list.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Sets the action(s) that the specified mouse button will have on the list.
+     The button_actions can be one or several, logically OR'ed 
+     <link linkend="gtk.enum.gtkbuttonaction">actions</link>.
+    </simpara>
+   </desc>
   </method>
 
   <method id="gtk.gtkclist.method.freeze">
@@ -133,8 +263,19 @@
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
-   <shortdesc></shortdesc>
-   <desc></desc>
+   <shortdesc>
+    Causes the GtkCList to stop updating its visuals.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Causes the GtkCList to stop updating its visuals until a matching call to 
+     <link linkend="gtk.gtkclist.method.thaw">thaw</link> is made. 
+     This function is useful if a lot of changes will be made to the widget that may cause a lot of visual updating to occur. 
+    </simpara>
+    <simpara>
+    Note that calls to gtk_clist_freeze() can be nested.
+    </simpara>
+   </desc>
   </method>
 
   <method id="gtk.gtkclist.method.thaw">
@@ -144,8 +285,15 @@
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
-   <shortdesc></shortdesc>
-   <desc></desc>
+   <shortdesc>
+    Causes the specified GtkCList to allow visual updates.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Causes the specified GtkCList to allow visual updates which were stopped with
+     <link linkend="gtk.gtkclist.method.freeze">freeze</link>.
+    </simpara>
+   </desc>
   </method>
 
   <method id="gtk.gtkclist.method.column_titles_show">
@@ -155,8 +303,14 @@
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
-   <shortdesc></shortdesc>
-   <desc></desc>
+   <shortdesc>
+    Makes the column titles visible.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Makes the column titles visible.
+    </simpara>
+   </desc>
   </method>
 
   <method id="gtk.gtkclist.method.column_titles_hide">
@@ -166,8 +320,14 @@
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
-   <shortdesc></shortdesc>
-   <desc></desc>
+   <shortdesc>
+    Hides the column titles.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Hides the column titles.
+    </simpara>
+   </desc>
   </method>
 
   <method id="gtk.gtkclist.method.column_title_active">
@@ -177,8 +337,21 @@
      <paramdef>int <parameter>column</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
-   <shortdesc></shortdesc>
-   <desc></desc>
+   <shortdesc>
+    Sets the specified column to become selectable. 
+   </shortdesc>
+   <desc>
+    <simpara>
+     Sets the specified column in the <classname>GtkCList</classname> to become selectable. 
+     You can then respond to events from the user 
+     <link linkend="gtk.gtkclist.signal.click-column">clicking on a title button</link>, 
+     and take appropriate action.
+    </simpara>
+    <simpara>
+     You can make all columns titles active by using
+     <link linkend="gtk.gtkclist.method.column_titles_active">column_titles_active</link>.
+    </simpara>
+   </desc>
   </method>
 
   <method id="gtk.gtkclist.method.column_title_passive">
@@ -188,8 +361,19 @@
      <paramdef>int <parameter>column</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
-   <shortdesc></shortdesc>
-   <desc></desc>
+   <shortdesc>
+    Causes the specified column title button to not respond to events.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Causes the specified column title button to become passive, 
+     i.e., does not respond to events, such as the user clicking on it.
+    </simpara>
+    <simpara>
+     You can make all columns titles passive by using
+     <link linkend="gtk.gtkclist.method.column_titles_passive">column_titles_passive</link>.
+    </simpara>
+   </desc>
   </method>
 
   <method id="gtk.gtkclist.method.column_titles_active">
@@ -199,8 +383,16 @@
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
-   <shortdesc></shortdesc>
-   <desc></desc>
+   <shortdesc>
+    Causes all column title buttons to become active.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Causes all column title buttons to become active. The same as calling
+     <link linkend="gtk.gtkclist.method.column_title_active">column_title_active</link> 
+     for each single column.
+    </simpara>
+   </desc>
   </method>
 
   <method id="gtk.gtkclist.method.column_titles_passive">
@@ -210,8 +402,16 @@
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
-   <shortdesc></shortdesc>
-   <desc></desc>
+   <shortdesc>
+    Causes all column title buttons to become passive.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Causes all column title buttons to become passive. The same as calling
+     <link linkend="gtk.gtkclist.method.column_title_passive">column_title_passive</link> 
+     for each single column.
+    </simpara>
+   </desc>
   </method>
 
   <method id="gtk.gtkclist.method.set_column_title">
@@ -222,8 +422,14 @@
      <paramdef>string <parameter>title</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
-   <shortdesc></shortdesc>
-   <desc></desc>
+   <shortdesc>
+    Set the title of the specified column.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Set the title of the specified column.
+    </simpara>
+   </desc>
   </method>
 
   <method id="gtk.gtkclist.method.get_column_title">
@@ -233,8 +439,14 @@
      <paramdef>int <parameter>column</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
-   <shortdesc></shortdesc>
-   <desc></desc>
+   <shortdesc>
+    Returns the title of the specified column.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Returns the title of the specified column.
+    </simpara>
+   </desc>
   </method>
 
   <method id="gtk.gtkclist.method.set_column_widget">
@@ -245,8 +457,92 @@
      <paramdef><classname>GtkWidget</classname> <parameter>widget</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
-   <shortdesc></shortdesc>
-   <desc></desc>
+   <shortdesc>
+    Sets a widget to be used as the specified column's title.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Sets a widget to be used as the specified column's title. 
+     This can be used to place a pixmap or something else as the column title, instead of the standard text.
+    </simpara>
+    <example>
+     <title>Using a custom widget in title of a <classname>GtkCList</classname></title>
+     <programlisting role="php">
+<![CDATA[
+<?php
+if( !extension_loaded('gtk')) {	
+	dl( 'php_gtk.' . PHP_SHLIB_SUFFIX); 
+}
+
+$win = &new GtkWindow();
+$win->set_default_size(250,250);
+$win->connect('destroy', 'destroy');
+
+function destroy() {
+	Gtk::main_quit();
+}
+
+$arStatistics	= array(
+ array( 'Paris', 9.1),
+ array( 'Moscow', 9.0),
+ array( 'London', 6.8),
+ array( 'Rome', 3.8),
+ array( 'Berlin', 3.4),
+ array( 'Athena', 3.0)
+);
+
+$scrolled_win = &new GtkScrolledWindow();
+$scrolled_win->set_policy( GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
+
+$list = &new GtkCList( 2, array( "City", "Inhabitants"));
+
+foreach( $arStatistics as $arStat) {
+	$list->insert( 0, $arStat);
+}
+
+$list->set_column_width( 0, 90);
+
+$list->set_selection_mode( GTK_SELECTION_MULTIPLE);
+
+
+function mnuActivated( $mnuItem, $strLabel) {
+	global $list;
+	$chShow	= $strLabel[0];
+	for( $nA = 0; $nA < count( $list->row_list); $nA++) {
+		$nSize	= $list->get_text( $nA, 1);
+		if( $chShow == 'A' || ( $chShow == '<' && $nSize < 5)
+		 || ( $chShow == '>' && $nSize >= 5)) {
+			$list->select_row( $nA, 0);
+		} else {
+			$list->unselect_row( $nA, 0);
+		}
+	}
+}
+
+$arMenus	= array( 'All', '> 5 million', '< 5 million', 'none');
+
+$mnuSizes	= &new GtkMenu();
+foreach( $arMenus as $strLabel) {
+	$mnu = &new GtkMenuItem( $strLabel);
+	$mnu->connect( 'activate', 'mnuactivated', $strLabel);
+	$mnuSizes->append( $mnu);
+}
+$mnuSizes->show_all();
+
+$om	= &new GtkOptionMenu();
+$om->set_menu( $mnuSizes);
+
+$list->set_column_widget( 1, $om);
+
+$scrolled_win->add( $list);
+$win->add( $scrolled_win);
+$win->show_all();
+GTK::main();
+?>
+]]>
+     </programlisting>
+    </example> 
+   </desc>
   </method>
 
   <method id="gtk.gtkclist.method.get_column_widget">
@@ -256,8 +552,14 @@
      <paramdef>int <parameter>column</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
-   <shortdesc></shortdesc>
-   <desc></desc>
+   <shortdesc>
+    Returns the custom widget for the given column.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Returns the custom widget for the given column.
+    </simpara>
+   </desc>
   </method>
 
   <method id="gtk.gtkclist.method.set_column_justification">
@@ -268,8 +570,14 @@
      <paramdef><enumname>GtkJustification</enumname> <parameter>justification</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
-   <shortdesc></shortdesc>
-   <desc></desc>
+   <shortdesc>
+    Sets the justification to be used for all text in the specified column.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Sets the justification to be used for all text in the specified column.
+    </simpara>
+   </desc>
   </method>
 
   <method id="gtk.gtkclist.method.set_column_visibility">
@@ -280,8 +588,17 @@
      <paramdef>bool <parameter>visible</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
-   <shortdesc></shortdesc>
-   <desc></desc>
+   <shortdesc>
+    Allows you to set whether a specified column in the GtkCList should be hidden or shown.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Allows you to set whether a specified column in the GtkCList should be hidden or shown.
+    </simpara>
+    <note>
+     At least one column must always be showing, so attempting to hide the last visible column will be ignored.
+    </note>
+   </desc>
   </method>
 
   <method id="gtk.gtkclist.method.set_column_resizeable">
@@ -292,8 +609,18 @@
      <paramdef>bool <parameter>resizeable</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
-   <shortdesc></shortdesc>
-   <desc></desc>
+   <shortdesc>
+    Lets you specify whether a specified column should be resizeable by the user.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Lets you specify whether a specified column should be resizeable by the user. 
+     Note that turning on resizeability for the column will automatically shut off 
+     auto-resizing, but turning off resizeability will NOT turn on auto-resizing. 
+     This must be done manually via a call to 
+     <link linkend="gtk.gtkclist.method.set_column_auto_resize">set_column_auto_resize</link>.
+    </simpara>
+   </desc>
   </method>
 
   <method id="gtk.gtkclist.method.set_column_auto_resize">
@@ -304,8 +631,15 @@
      <paramdef>bool <parameter>auto_resize</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
-   <shortdesc></shortdesc>
-   <desc></desc>
+   <shortdesc>
+    Lets you specify whether a column should be automatically resized by the widget when data is added or removed.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Lets you specify whether a column should be automatically resized by the widget when data is added or removed. 
+     Enabling auto-resize on a column explicity disallows user-resizing of the column.
+    </simpara>
+   </desc>
   </method>
 
   <method id="gtk.gtkclist.method.columns_autosize">
@@ -315,8 +649,14 @@
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
-   <shortdesc></shortdesc>
-   <desc></desc>
+   <shortdesc>
+    Auto-sizes all columns in the CList and returns the total width of the CList.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Auto-sizes all columns in the <classname>GtkCList</classname> and returns the total width of the CList.
+    </simpara>
+   </desc>
   </method>
 
   <method id="gtk.gtkclist.method.optimal_column_width">
@@ -326,8 +666,14 @@
      <paramdef>int <parameter>column</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
-   <shortdesc></shortdesc>
-   <desc></desc>
+   <shortdesc>
+    Gets the required width in pixels that is needed to show everything in the specified column.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Gets the required width in pixels that is needed to show everything in the specified column.
+    </simpara>
+   </desc>
   </method>
 
   <method id="gtk.gtkclist.method.set_column_width">
@@ -338,8 +684,15 @@
      <paramdef>int <parameter>width</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
-   <shortdesc></shortdesc>
-   <desc></desc>
+   <shortdesc>
+    Causes the column specified to be set to a specified width.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Causes the column specified for the <classname>GtkCList</classname> 
+     to be set to a specified width.
+    </simpara>
+   </desc>
   </method>
 
   <method id="gtk.gtkclist.method.set_column_min_width">
@@ -350,8 +703,15 @@
      <paramdef>int <parameter>min_width</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
-   <shortdesc></shortdesc>
-   <desc></desc>
+   <shortdesc>
+    Causes the column specified to have a minimum width. 
+   </shortdesc>
+   <desc>
+    <simpara>
+     Causes the column specified to have a minimum width, 
+     preventing the user from resizing it smaller than that specified. 
+    </simpara>
+   </desc>
   </method>
 
   <method id="gtk.gtkclist.method.set_column_max_width">
@@ -362,8 +722,15 @@
      <paramdef>int <parameter>max_width</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
-   <shortdesc></shortdesc>
-   <desc></desc>
+   <shortdesc>
+    Causes the column specified to have a maximum width.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Causes the column specified to have a maximum width, 
+     preventing the user from resizing it larger than that specified.
+    </simpara>
+   </desc>
   </method>
 
   <method id="gtk.gtkclist.method.set_row_height">
@@ -373,8 +740,15 @@
      <paramdef>int <parameter>height</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
-   <shortdesc></shortdesc>
-   <desc></desc>
+   <shortdesc>
+    Causes the GtkCList to have a specified height for its rows.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Causes the <classname>GtkCList</classname> to have a specified height for its rows. 
+     Setting the row height to 0 allows the GtkCList to adjust automatically to data in the row.
+    </simpara>
+   </desc>
   </method>
 
   <method id="gtk.gtkclist.method.moveto">
@@ -387,8 +761,17 @@
      <paramdef>double <parameter>col_align</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
-   <shortdesc></shortdesc>
-   <desc></desc>
+   <shortdesc>
+    Tells the CList widget to visually move to the specified row and column.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Tells the CList widget to visually move to the specified row and column.
+    </simpara>
+    <simpara>
+     FIXME: Example
+    </simpara>
+   </desc>
   </method>
 
   <method id="gtk.gtkclist.method.row_is_visible">
@@ -398,8 +781,14 @@
      <paramdef>int <parameter>row</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
-   <shortdesc></shortdesc>
-   <desc></desc>
+   <shortdesc>
+    Checks how the specified row is visible.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Checks how the specified row is visible.
+    </simpara>
+   </desc>
   </method>
 
   <method id="gtk.gtkclist.method.get_cell_type">
@@ -410,8 +799,14 @@
      <paramdef>int <parameter>column</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
-   <shortdesc></shortdesc>
-   <desc></desc>
+   <shortdesc>
+    Checks the type of cell at the location specified.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Checks the type of cell at the location specified.
+    </simpara>
+   </desc>
   </method>
 
   <method id="gtk.gtkclist.method.set_text">
@@ -423,19 +818,32 @@
      <paramdef>string <parameter>text</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
-   <shortdesc></shortdesc>
-   <desc></desc>
+   <shortdesc>
+    Sets the displayed text in the specified cell.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Sets the displayed text in the specified cell.
+    </simpara>
+   </desc>
   </method>
 
   <method id="gtk.gtkclist.method.get_text">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>XXX <function>get_text</function></funcdef>
-     <paramdef>XXX</paramdef>
+     <funcdef>String <function>get_text</function></funcdef>
+     <paramdef>int <parameter>row</parameter></paramdef>
+     <paramdef>int <parameter>column</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
-   <shortdesc></shortdesc>
-   <desc></desc>
+   <shortdesc>
+    Gets the text for the specified cell.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Gets the text for the specified cell.
+    </simpara>
+   </desc>
   </method>
 
   <method id="gtk.gtkclist.method.set_pixmap">
@@ -448,8 +856,18 @@
      <paramdef><classname>GdkBitmap</classname> <parameter>mask</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
-   <shortdesc></shortdesc>
-   <desc></desc>
+   <shortdesc>
+    Sets a pixmap for the specified cell.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Sets a pixmap for the specified cell.
+    </simpara>
+    <simpara>
+     Note that the normal text is not visible anymore, you have
+     to use <link linkend="gtk.gtkclist.method.set_pixtext">set_pixtext</link> instead.
+    </simpara>
+   </desc>
   </method>
 
   <method id="gtk.gtkclist.method.set_pixtext">
@@ -464,8 +882,15 @@
      <paramdef><classname>GdkBitmap</classname> <parameter>mask</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
-   <shortdesc></shortdesc>
-   <desc></desc>
+   <shortdesc>
+    Sets text and a pixmap/bitmap on the specified cell.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Sets text and a pixmap/bitmap on the specified cell.
+     The spacing parameter is the space between the picture and the pixtext.
+    </simpara>
+   </desc>
   </method>
 
   <method id="gtk.gtkclist.method.set_foreground">
@@ -476,8 +901,14 @@
      <paramdef><classname>GdkColor</classname> <parameter>color</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
-   <shortdesc></shortdesc>
-   <desc></desc>
+   <shortdesc>
+    Sets the foreground color for the specified row.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Sets the foreground color for the specified row.
+    </simpara>
+   </desc>
   </method>
 
   <method id="gtk.gtkclist.method.set_background">
@@ -488,8 +919,14 @@
      <paramdef><classname>GdkColor</classname> <parameter>color</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
-   <shortdesc></shortdesc>
-   <desc></desc>
+   <shortdesc>
+    Sets the background color for the specified row.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Sets the background color for the specified row.
+    </simpara>
+   </desc>
   </method>
 
   <method id="gtk.gtkclist.method.set_cell_style">
@@ -501,8 +938,14 @@
      <paramdef><classname>GtkStyle</classname> <parameter>style</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
-   <shortdesc></shortdesc>
-   <desc></desc>
+   <shortdesc>
+    Sets the style for the specified cell.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Sets the style for the specified cell.
+    </simpara>
+   </desc>
   </method>
 
   <method id="gtk.gtkclist.method.get_cell_style">
@@ -513,8 +956,14 @@
      <paramdef>int <parameter>column</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
-   <shortdesc></shortdesc>
-   <desc></desc>
+   <shortdesc>
+    Gets the current style of the specified cell.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Gets the current style of the specified cell.
+    </simpara>
+   </desc>
   </method>
 
   <method id="gtk.gtkclist.method.set_row_style">
@@ -525,8 +974,14 @@
      <paramdef><classname>GtkStyle</classname> <parameter>style</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
-   <shortdesc></shortdesc>
-   <desc></desc>
+   <shortdesc>
+    Sets the style for all cells in the specified row.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Sets the style for all cells in the specified row.
+    </simpara>
+   </desc>
   </method>
 
   <method id="gtk.gtkclist.method.get_row_style">
@@ -536,8 +991,14 @@
      <paramdef>int <parameter>row</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
-   <shortdesc></shortdesc>
-   <desc></desc>
+   <shortdesc>
+    Gets the style set for the specified row.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Gets the style set for the specified row.
+    </simpara>
+   </desc>
   </method>
 
   <method id="gtk.gtkclist.method.set_shift">
@@ -550,8 +1011,14 @@
      <paramdef>int <parameter>horizontal</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
-   <shortdesc></shortdesc>
-   <desc></desc>
+   <shortdesc>
+    Sets the vertical and horizontal shift of the specified cell.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Sets the vertical and horizontal shift of the specified cell.
+    </simpara>
+   </desc>
   </method>
 
   <method id="gtk.gtkclist.method.set_selectable">
@@ -562,8 +1029,18 @@
      <paramdef>bool <parameter>selectable</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
-   <shortdesc></shortdesc>
-   <desc></desc>
+   <shortdesc>
+    Sets whether the specified row is selectable or not.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Sets whether the specified row is selectable or not. This is useful if you want
+     to separate rows from each other to e.g. categorize them. You should also set
+     the <link linkend="gtk.gtkclist.method.set_background">background color</link>
+     so that the user can distinguish between selectable and not selectable
+     cells.
+    </simpara>
+   </desc>
   </method>
 
   <method id="gtk.gtkclist.method.get_selectable">
@@ -573,41 +1050,68 @@
      <paramdef>int <parameter>row</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
-   <shortdesc></shortdesc>
-   <desc></desc>
+   <shortdesc>
+    Gets whether the specified row is selectable or not.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Gets whether the specified row is selectable or not.
+    </simpara>
+   </desc>
   </method>
 
   <method id="gtk.gtkclist.method.prepend">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>XXX <function>prepend</function></funcdef>
-     <paramdef>XXX</paramdef>
+     <funcdef>void <function>prepend</function></funcdef>
+     <paramdef>Array <parameter>text</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
-   <shortdesc></shortdesc>
-   <desc></desc>
+   <shortdesc>
+    Adds a row to the list at the top.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Adds a row to the list at the top. The parameter is an array
+     of strings, one for each column.
+    </simpara>
+   </desc>
   </method>
 
   <method id="gtk.gtkclist.method.append">
    <funcsynopsis>
     <funcprototype>
      <funcdef>int <function>append</function></funcdef>
-     <paramdef><classname>GtkCList</classname> <parameter>clist</parameter> Array <parameter>array</parameter></paramdef>
+     <paramdef>Array <parameter>text</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
-   <shortdesc></shortdesc>
-   <desc></desc>
+   <shortdesc>
+    Adds a row to the list at the bottom.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Adds a row to the list at the bottom. The parameter is an array
+     of strings, one for each column.
+    </simpara>
+   </desc>
   </method>
 
   <method id="gtk.gtkclist.method.insert">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>XXX <function>insert</function></funcdef>
-     <paramdef>XXX</paramdef>
+     <funcdef>void <function>insert</function></funcdef>
+     <paramdef>Array <parameter>text</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
-   <shortdesc></shortdesc>
-   <desc></desc>
+   <shortdesc>
+    Adds a row of text to the list at the specified position.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Adds a row of text to the list at the specified position. 
+     The parameter is an array of strings, one for each column.
+    </simpara>
+   </desc>
   </method>
 
   <method id="gtk.gtkclist.method.remove">
@@ -617,8 +1121,14 @@
      <paramdef>int <parameter>row</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
-   <shortdesc></shortdesc>
-   <desc></desc>
+   <shortdesc>
+    Removes the specified row from the list.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Removes the specified row from the list.
+    </simpara>
+   </desc>
   </method>
 
   <method id="gtk.gtkclist.method.select_row">
@@ -629,8 +1139,17 @@
      <paramdef>int <parameter>column</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
-   <shortdesc></shortdesc>
-   <desc></desc>
+   <shortdesc>
+    Selects the specified row.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Selects the specified row. 
+     Causes the 
+     "<link linkend="gtk.gtkclist.signal.select-row">select-row</link>"
+     signal to be emitted for the specified row and column.
+    </simpara>
+   </desc>
   </method>
 
   <method id="gtk.gtkclist.method.unselect_row">
@@ -641,8 +1160,17 @@
      <paramdef>int <parameter>column</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
-   <shortdesc></shortdesc>
-   <desc></desc>
+   <shortdesc>
+    Unselects the specified row.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Unselects the specified row. 
+     Causes the 
+     "<link linkend="gtk.gtkclist.signal.select-row">unselect-row</link>" 
+     signal to be emitted for the specified row and column.
+    </simpara>
+   </desc>
   </method>
 
   <method id="gtk.gtkclist.method.undo_selection">
@@ -652,8 +1180,16 @@
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
-   <shortdesc></shortdesc>
-   <desc></desc>
+   <shortdesc>
+    Undoes the last selection for an "extended selection mode" list.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Undoes the last selection for an 
+     "extended <link linkend="gtk.gtkclist.method.set_selection_mode">selection mode</link>"
+     list.
+    </simpara>
+   </desc>
   </method>
 
   <method id="gtk.gtkclist.method.clear">
@@ -663,8 +1199,14 @@
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
-   <shortdesc></shortdesc>
-   <desc></desc>
+   <shortdesc>
+    Removes all the rows.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Removes all the rows from the list.
+    </simpara>
+   </desc>
   </method>
 
   <method id="gtk.gtkclist.method.select_all">
@@ -674,8 +1216,16 @@
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
-   <shortdesc></shortdesc>
-   <desc></desc>
+   <shortdesc>
+    Selects all rows in the CList.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Selects all rows in the CList. 
+     This function has no affect for a list in "single" or "browse" 
+     <link linkend="gtk.gtkclist.method.set_selection_mode">selection mode</link>.
+    </simpara>
+   </desc>
   </method>
 
   <method id="gtk.gtkclist.method.unselect_all">
@@ -685,8 +1235,14 @@
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
-   <shortdesc></shortdesc>
-   <desc></desc>
+   <shortdesc>
+    Unselects all rows in the list.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Unselects all rows in the list.
+    </simpara>
+   </desc>
   </method>
 
   <method id="gtk.gtkclist.method.swap_rows">
@@ -697,8 +1253,14 @@
      <paramdef>int <parameter>row2</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
-   <shortdesc></shortdesc>
-   <desc></desc>
+   <shortdesc>
+    Swaps the two specified rows with each other.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Swaps the two specified rows with each other.
+    </simpara>
+   </desc>
   </method>
 
   <method id="gtk.gtkclist.method.row_move">
@@ -709,8 +1271,14 @@
      <paramdef>int <parameter>dest_row</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
-   <shortdesc></shortdesc>
-   <desc></desc>
+   <shortdesc>
+    Allows you to move a row from one position to another in the list.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Allows you to move a row from one position to another in the list.
+    </simpara>
+   </desc>
   </method>
 
   <method id="gtk.gtkclist.method.set_sort_column">
@@ -720,8 +1288,16 @@
      <paramdef>int <parameter>column</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
-   <shortdesc></shortdesc>
-   <desc></desc>
+   <shortdesc>
+    Sets the sort column of the clist.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Sets the sort column of the clist. 
+     The sort column is used by the default compare function to determine which column to 
+     <link linkend="gtk.gtkclist.method.sort">sort</link>by.
+    </simpara>
+   </desc>
   </method>
 
   <method id="gtk.gtkclist.method.set_sort_type">
@@ -731,8 +1307,16 @@
      <paramdef><enumname>GtkSortType</enumname> <parameter>sort_type</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
-   <shortdesc></shortdesc>
-   <desc></desc>
+   <shortdesc>
+    Sets the sort type of the GtkClist.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Sets the sort type (direction) of the <classname>GtkClist</classname>.
+     This is either GTK_SORT_ASCENDING for ascening sort or GTK_SORT_DESCENDING for descending 
+     <link linkend="gtk.gtkclist.method.sort">sort</link>.
+    </simpara>
+   </desc>
   </method>
 
   <method id="gtk.gtkclist.method.sort">
@@ -742,8 +1326,53 @@
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
-   <shortdesc></shortdesc>
-   <desc></desc>
+   <shortdesc>
+    Sorts the list.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Sorts the GtkClist according to the settings of
+     <link linkend="gtk.gtkclist.method.set_sort_column">sort column</link>
+     and
+     <link linkend="gtk.gtkclist.method.set_sort_type">sort type</link>.
+     The sort function knows to distinguish between 
+     <link linkend="gtk.gtkclist.method.set_text">normal text</link>
+     and 
+     <link linkend="gtk.gtkclist.method.set_pixtext">pixtext</link>,
+     so that a mixture of normal and pixtext will be sorted right.
+    </simpara>
+    <simpara>
+     The items are handled as text when being compared, so numbers will
+     be not in a "natural" order.
+    </simpara>
+    <para>
+     Here is an example how to let the user sort the list by columns when
+     he clicks on a column title. The sort order (type) is changed everytime he clicks
+     on the same column title.
+     <example>
+      <title>Sorting GtkCList rows by clicking the title</title>
+      <programlisting role="php">
+<![CDATA[
+function sortList( $objList, $nColumn)
+{
+	if( $nColumn != $objList->sort_column ) {
+		$objList->set_sort_column( $nColumn);
+		$objList->set_sort_type( GTK_SORT_ASCENDING);
+	} else {
+		if( $objList->sort_type == GTK_SORT_ASCENDING) {
+			$objList->set_sort_type( GTK_SORT_DESCENDING);
+		} else {
+			$objList->set_sort_type( GTK_SORT_ASCENDING);
+		}
+	}
+	$objList->sort();
+}
+$objList->connect( 'click-column', 'sortList');
+]]>
+      </programlisting>
+     </example>
+    </para>
+   </desc>
   </method>
 
   <method id="gtk.gtkclist.method.set_auto_sort">
@@ -753,10 +1382,169 @@
      <paramdef>bool <parameter>auto_sort</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
-   <shortdesc></shortdesc>
-   <desc></desc>
+   <shortdesc>
+    Turns on or off auto sort of the GtkCList.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Turns on or off auto sort of the <classname>GtkCList</classname>.
+     If auto sort is on, then the list will be resorted when a row is inserted into the list.
+    </simpara>
+   </desc>
   </method>
 
  </methods>
+
+ 
+ 
+ 
+ <signals>
+
+  <signal id="gtk.gtkclist.signal.select-row">
+   <signalname>select-row</signalname>
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
+     <paramdef><classname>GtkCList</classname> <parameter>widget</parameter></paramdef>
+     <paramdef>int <parameter>row</parameter></paramdef>
+     <paramdef>int <parameter>column</parameter></paramdef>
+     <paramdef><classname>GdkEvent</classname> <parameter>event</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    This signal is emitted when the user selects a row in the list.
+   </shortdesc>
+   <desc>
+    <simpara>
+     This signal is emitted when the user selects a row in the list. 
+     It is emitted for every row that is selected in a multi-selection or by calling 
+     <link linkend="gtk.gtkclist.method.select_all">select_all</link>.
+    </simpara>
+   </desc>
+  </signal>
+
+  <signal id="gtk.gtkclist.signal.unselect-row">
+   <signalname>unselect-row</signalname>
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
+     <paramdef><classname>GtkCList</classname> <parameter>widget</parameter></paramdef>
+     <paramdef>int <parameter>row</parameter></paramdef>
+     <paramdef>int <parameter>column</parameter></paramdef>
+     <paramdef><classname>GdkEvent</classname> <parameter>event</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    This signal is emitted when the user unselects a row in the list.
+   </shortdesc>
+   <desc>
+    <simpara>
+     This signal is emitted when the user unselects a row in the list. 
+     It is emitted for every row that is unselected in a multi-selection or by calling 
+     <link linkend="gtk.gtkclist.method.unselect_all">unselect_all</link>.
+     It is also emitted for the previously selected row in a "single" or "browse" 
+     <link linkend="gtk.gtkclist.method.set_selection_mode">mode</link> GtkCList.
+    </simpara>
+   </desc>
+  </signal>
+
+  <signal id="gtk.gtkclist.signal.row-move">
+   <signalname>row-move</signalname>
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
+     <paramdef><classname>GtkCList</classname> <parameter>widget</parameter></paramdef>
+     <paramdef>int <parameter>source_row</parameter></paramdef>
+     <paramdef>int <parameter>destination_row</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    This signal is emitted when a row is moved.
+   </shortdesc>
+   <desc>
+    <simpara>
+     This signal is emitted when a row is moved.
+    </simpara>
+   </desc>
+  </signal>
+
+  <signal id="gtk.gtkclist.signal.click-column">
+   <signalname>click-column</signalname>
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
+     <paramdef><classname>GtkCList</classname> <parameter>widget</parameter></paramdef>
+     <paramdef>int <parameter>column</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    This signal is emitted when a column title is clicked.
+   </shortdesc>
+   <desc>
+    <simpara>
+     This signal is emitted when a column title is clicked. Here would be a good
+     starting point if you want to make the list sortable by the user.
+    </simpara>
+   </desc>
+  </signal>
+
+  <signal id="gtk.gtkclist.signal.resize-column">
+   <signalname>resize-column</signalname>
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
+     <paramdef><classname>GtkCList</classname> <parameter>widget</parameter></paramdef>
+     <paramdef>int <parameter>column</parameter></paramdef>
+     <paramdef>int <parameter>size</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    This signal is emitted when a column is resized.
+   </shortdesc>
+   <desc>
+    <simpara>
+     This signal is emitted when a column is resized. It is also 
+     emitted if the size has not changed (but the user tried to).
+    </simpara>
+   </desc>
+  </signal>
+
+ </signals>
+ 
+  
+ 
+ 
+ <properties>
+
+  <prop id="gtk.gtkclist.property.sort_column" type="ro">
+   <propname>sort_column</propname>
+   <proptype>int</proptype>
+   <shortdesc>
+    The current row after which the list shall be sorted.
+   </shortdesc>
+   <desc>
+    <simpara>
+     The current row after which the list shall be 
+     <link linkend="gtk.gtkclist.method.sort">sorted</link>.
+    </simpara>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtkclist.property.sort_type" type="ro">
+   <propname>sort_type</propname>
+   <proptype>int</proptype>
+   <shortdesc>
+    The current sort type (order)
+   </shortdesc>
+   <desc>
+    <simpara>
+     The current sort type (order) after which the list shall be 
+     <link linkend="gtk.gtkclist.method.sort">sorted</link>.
+     Can be one of GTK_SORT_ASCENDING or GTK_SORT_DESCENDING.
+    </simpara>
+   </desc>
+  </prop>
+
+ </properties>
 
 </classentry>

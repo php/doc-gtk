@@ -1448,7 +1448,7 @@ gtk::main();
     <para>
      Sort the children of a node. The details of sorting can be set with
      the <classname>GtkCList</classname> functions
-     <link linkend="gtk.gtkclist.method.set_sort_column">set_sort_colum</link> 
+     <link linkend="gtk.gtkclist.method.set_sort_column">set_sort_column</link> 
      and
      <link linkend="gtk.gtkclist.method.set_sort_type">set_sort_type</link>.
     </para>
@@ -1491,7 +1491,10 @@ gtk::main();
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <cbfunction>callback</cbfunction></funcdef>
-     <paramdef><classname>GtkWidget</classname> widget</paramdef>
+     <paramdef><classname>GtkCTree</classname> <parameter>widget</parameter></paramdef>
+     <paramdef><classname>GtkCTreeNode</classname> <parameter>node</parameter></paramdef>
+     <paramdef>int <parameter>unknown</parameter></paramdef>
+     <paramdef><optional>??? <parameter>userparam1</parameter></optional></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -1501,6 +1504,10 @@ gtk::main();
     <simpara>
      Emitted when a row is selected.
     </simpara>
+    <simpara>
+     The use of the third parameter is not known, only that is has something 
+     to do with the selection mode.
+    </simpara>
    </desc>
   </signal>
 
@@ -1509,7 +1516,10 @@ gtk::main();
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <cbfunction>callback</cbfunction></funcdef>
-     <paramdef><classname>GtkWidget</classname> widget</paramdef>
+     <paramdef><classname>GtkCTree</classname> <parameter>widget</parameter></paramdef>
+     <paramdef><classname>GtkCTreeNode</classname> <parameter>node</parameter></paramdef>
+     <paramdef>int <parameter>unknown</parameter></paramdef>
+     <paramdef><optional>??? <parameter>userparam1</parameter></optional></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -1519,6 +1529,10 @@ gtk::main();
     <simpara>
      Emitted when a node is unselected.
     </simpara>
+    <simpara>
+     The use of the third parameter is not known, only that is has something 
+     to do with the selection mode.
+    </simpara>
    </desc>
   </signal>
 
@@ -1527,7 +1541,9 @@ gtk::main();
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <cbfunction>callback</cbfunction></funcdef>
-     <paramdef><classname>GtkWidget</classname> widget</paramdef>
+     <paramdef><classname>GtkCTree</classname> <parameter>widget</parameter></paramdef>
+     <paramdef><classname>GtkCTreeNode</classname> <parameter>node</parameter></paramdef>
+     <paramdef><optional>??? <parameter>userparam1</parameter></optional></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -1545,7 +1561,9 @@ gtk::main();
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <cbfunction>callback</cbfunction></funcdef>
-     <paramdef><classname>GtkWidget</classname> widget</paramdef>
+     <paramdef><classname>GtkCTree</classname> <parameter>widget</parameter></paramdef>
+     <paramdef><classname>GtkCTreeNode</classname> <parameter>node</parameter></paramdef>
+     <paramdef><optional>??? <parameter>userparam1</parameter></optional></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -1563,7 +1581,11 @@ gtk::main();
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <cbfunction>callback</cbfunction></funcdef>
-     <paramdef><classname>GtkWidget</classname> widget</paramdef>
+     <paramdef><classname>GtkCTree</classname> <parameter>widget</parameter></paramdef>
+     <paramdef><classname>GtkCTreeNode</classname> <parameter>node</parameter></paramdef>
+     <paramdef><classname>GtkCTree</classname> <parameter>new_parent</parameter></paramdef>
+     <paramdef><classname>GtkCTreeNode</classname> <parameter>new_sibling</parameter></paramdef>
+     <paramdef><optional>??? <parameter>userparam1</parameter></optional></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -1572,24 +1594,6 @@ gtk::main();
    <desc>
     <simpara>
      Emitted when a node is moved.
-    </simpara>
-   </desc>
-  </signal>
-
-  <signal id="gtk.gtkctree.signal.change-focus-row-expansion">
-   <signalname>change-focus-row-expansion</signalname>
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
-     <paramdef><classname>GtkWidget</classname> widget</paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-    The row which has the focus is either collapsed or expanded or toggled.
-   </shortdesc>
-   <desc>
-    <simpara>
-     The row which has the focus is either collapsed or expanded or toggled.
     </simpara>
    </desc>
   </signal>
