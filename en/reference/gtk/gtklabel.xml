@@ -4,17 +4,21 @@
   <classparent>GtkMisc</classparent>
   <shortdesc>Widget that displays a small amount of text.</shortdesc>
   <desc>
-   <para>
+   <simpara>
     A very common use of <classname>GtkLabel</classname> is to display
     text that describes or makes some comment about the use of an
     adjacent widget.  If you need to display a great deal of text, use 
     <classname>GtkText</classname> instead.
-   </para>
-   <para>
+   </simpara>
+   <simpara>
     Note that labels do not generate events. If you want to catch events
     (e.g. from a button click) you will need to put the label in a
     <classname>GtkEventBox</classname>.
-   </para>
+   </simpara>
+   <simpara>
+    See also:  <classname>GtkEditable</classname>, 
+    <classname>GtkEventBox</classname>, <classname>GtkText</classname>.
+   </simpara>
   </desc>
  </classmeta>
 
@@ -92,21 +96,16 @@ $label-&gt;set_text(&quot;Whatever text you wish to pass&quot;);
     Sets label justification.
    </shortdesc>
    <desc>
-    <para>
+    <simpara>
      <function class="GtkLabel">set_justify()</function> is the method
      for justifying text in <classname>GtkLabel</classname>.  The
-     options are enumerated flags, giving the choices of:
-     <simplelist>
-      <member>GTK_JUSTIFY_LEFT,</member>
-      <member>GTK_JUSTIFY_RIGHT,</member>
-      <member>GTK_JUSTIFY_CENTER,</member>
-      <member>GTK_JUSTIFY_FILL.</member>
-     </simplelist>
-    </para>
+     options are <enumname>GtkJustification</enumname> enumerated flags, 
+     the default setting being <literal>GTK_JUSTIFY_CENTER</literal>.
+    </simpara>
     <para>
      <informalexample>
       <programlisting role="php">
-$label-&gt;set_justify(GTK_JUSTIFY_CENTER);
+$label-&gt;set_justify(GTK_JUSTIFY_FILL);
       </programlisting>
      </informalexample>
     </para>
@@ -127,7 +126,7 @@ $label-&gt;set_justify(GTK_JUSTIFY_CENTER);
    </shortdesc>
    <desc>
     <simpara>
-     <function class="GtkLabel">set_pattern</function> is the method
+     <function class="GtkLabel">set_pattern()</function> is the method
      for underlining text in <classname>GtkLabel</classname>. It needs
      to be defined as a pattern, e.g. if your text consists of 
      <literal>A B C</literal>, then <literal>&quot;_   _&quot;</literal>
@@ -185,12 +184,18 @@ $label-&gt;set_line_wrap(true);
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Gets label text.
+    Gets label text.  *deprecated in GTK2*
    </shortdesc>
    <desc>
     <simpara>
      Returns the current text content of the label.
     </simpara>
+    <note>
+     <simpara>
+      Note that this method is deprecated in GTK 2.0, and will be replaced
+      by <literal>get_text()</literal>.
+     </simpara>
+    </note>
     <para>
      <informalexample>
       <programlisting role="php">
@@ -209,7 +214,7 @@ $label-&gt;get();
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Parses underscores into underlines.
+    Parses underscores into underlines.  *deprecated in GTK2*
    </shortdesc>
    <desc>
     <simpara>
@@ -223,6 +228,11 @@ $label-&gt;get();
     <simpara>
      This method is used internally by Gtk+ for menu items.
     </simpara>
+    <note>
+     <simpara>
+      Note that this method is deprecated in GTK+ 2.0.
+     </simpara>
+    </note>
     <para>
      <informalexample>
       <programlisting role="php">

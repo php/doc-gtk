@@ -14,9 +14,10 @@
    <simpara>
     The filesystem can be navigated using either the directory tree or
     the dropdown history menu.  Alternatively it is possible to type the
-    directory or file path into the entry field, and also to use the 
-    <literal>TAB</literal> key to autocomplete either the directory name
-    or file name entered in this way.
+    directory or file path into the 
+    <propname class="GtkFileSelection">selection_entry</propname> field, 
+    and also to use the <literal>TAB</literal> key to autocomplete either
+    the directory name or file name entered in this way.
    </simpara>
   </desc>
  </classmeta>
@@ -208,25 +209,15 @@ $fs-&gt;hide_fileop_buttons();
    <propname>dir_list</propname>
    <proptype>GtkWidget</proptype>
    <shortdesc>
-    Accessible <classname>GtkCList</classname> within the
-    <classname>GtkFileSelection</classname> widget's structure.
+    Directory list.
    </shortdesc>
    <desc>
     <simpara>
+     <propname class="GtkFileSelection">dir_list</propname> is a 
      <classname>GtkCList</classname> widget embedded in the
-     <classname>GtkFileSelection</classname> dialog that displays the
+     <classname>GtkFileSelection</classname> object that displays the
      subdirectories available in the current directory.
     </simpara>
-    <para>
-     In order to access 
-     <propname class="GtkFileSelection">dir_list</propname> it is
-     necessary to create a handle for it, e.g.
-     <informalexample>
-      <programlisting role="php">
-$dir_list_handle = $fs-&gt;dir_list;
-      </programlisting>
-     </informalexample>
-    </para>
    </desc>
   </property>
 
@@ -234,25 +225,15 @@ $dir_list_handle = $fs-&gt;dir_list;
    <propname>file_list</propname>
    <proptype>GtkWidget</proptype>
    <shortdesc>
-    Accessible <classname>GtkCList</classname> within the
-    <classname>GtkFileSelection</classname> widget's structure.
+    File list.
    </shortdesc>
    <desc>
     <simpara>
+     <propname class="GtkFileSelection">file_list</propname> is a 
      <classname>GtkCList</classname> widget embedded in the
-     <classname>GtkFileSelection</classname> dialog that displays the
+     <classname>GtkFileSelection</classname> object that displays the
      list of files available in the current directory.
     </simpara>
-    <para>
-     In order to access 
-     <propname class="GtkFileSelection">file_list</propname> it is
-     necessary to create a handle for it, e.g.
-     <informalexample>
-      <programlisting role="php">
-$file_list_handle = $fs-&gt;file_list;
-      </programlisting>
-     </informalexample>
-    </para>
    </desc>
   </property>
 
@@ -260,25 +241,16 @@ $file_list_handle = $fs-&gt;file_list;
    <propname>selection_entry</propname>
    <proptype>GtkWidget</proptype>
    <shortdesc>
-    Accessible <classname>GtkEntry</classname> within the
-    <classname>GtkFileSelection</classname> widget's structure.
+    Entry field.
    </shortdesc>
    <desc>
     <simpara>
-     <classname>GtkEntry</classname> widget at the bottom of the
-     <classname>GtkFileSelection</classname> dialog that displays the
-     current file selection.
+     <propname class="GtkFileSelection">selection_entry</propname> is a 
+     <classname>GtkEntry</classname> widget placed at the bottom of the
+     <classname>GtkFileSelection</classname> object for use in navigation
+     and searching.  It displays the current enquiry or the current
+     selected item.
     </simpara>
-    <para>
-     In order to access 
-     <propname class="GtkFileSelection">selection_entry</propname> it
-     is necessary to create a handle for it, e.g.
-     <informalexample>
-      <programlisting role="php">
-$selection_entry_handle = $fs-&gt;selection_entry;
-      </programlisting>
-     </informalexample>
-    </para>
    </desc>
   </property>
 
@@ -286,26 +258,15 @@ $selection_entry_handle = $fs-&gt;selection_entry;
    <propname>selection_text</propname>
    <proptype>GtkWidget</proptype>
    <shortdesc>
-    Accessible <classname>GtkLabel</classname> within the
-    <classname>GtkFileSelection</classname> widget's structure.
+    Directory selection status.
    </shortdesc>
    <desc>
     <simpara>
-     The <propname class="GtkFileSelection">selection_text</propname> 
-     property is a <classname>GtkLabel</classname> that by default
-     contains the string <literal>Selection: </literal> plus the current
-     directory selected.
+     <propname class="GtkFileSelection">selection_text</propname> is a 
+     <classname>GtkLabel</classname> that by default contains the string
+     <literal>&quot;Selection:  &quot;</literal> followed by the full path
+     of the current selected directory.
     </simpara>
-    <para>
-     In order to access 
-     <propname class="GtkFileSelection">selection_text</propname> it is
-     necessary to create a handle for it, e.g.
-     <informalexample>
-      <programlisting role="php">
-$selection_text_handle = $fs-&gt;selection_text;
-      </programlisting>
-     </informalexample>
-    </para>
    </desc>
   </property>
 
@@ -313,30 +274,14 @@ $selection_text_handle = $fs-&gt;selection_text;
    <propname>main_vbox</propname>
    <proptype>GtkWidget</proptype>
    <shortdesc>
-    Accessible <classname>GtkVBox</classname> within the
-    <classname>GtkFileSelection</classname> widget's structure.
+    Main container.
    </shortdesc>
    <desc>
     <simpara>
-     A <classname>GtkVBox</classname> placed below the two 
-     <classname>GtkCList</classname>s and above the 
-     <propname class="GtkFileSelection">selection_entry</propname>
-     widget.  Additional Gtk widgets can be packed into this container
-     and will appear below the <literal>Create Dir</literal>, 
-     <literal>Delete File</literal> and <literal>Rename File</literal> 
-     buttons that are standard with the 
-     <classname>GtkFileSelection</classname> (if shown).
+     <propname class="GtkFileSelection">main_vbox</propname> is the
+     container holding all the other elements of the 
+     <classname>GtkFileSelection</classname> widget.
     </simpara>
-    <para>
-     In order to access 
-     <propname class="GtkFileSelection">main_vbox</propname> it is
-     necessary to create a handle for it, e.g.
-     <informalexample>
-      <programlisting role="php">
-$main_vbox_handle = $fs-&gt;main_vbox;
-      </programlisting>
-     </informalexample>
-    </para>
    </desc>
   </property>
 
@@ -344,26 +289,16 @@ $main_vbox_handle = $fs-&gt;main_vbox;
    <propname>ok_button</propname>
    <proptype>GtkWidget</proptype>
    <shortdesc>
-    Accessible <classname>GtkButton</classname> within the
-    <classname>GtkFileSelection</classname> widget's structure.
+    Standard button.
    </shortdesc>
    <desc>
     <simpara>
-     <classname>GtkButton</classname> widget at the bottom of the
-     <classname>GtkFileSelection</classname> dialog. It is the
-     programmer's responsibility to listen for signals from this
-     button and take the appropriate action.
+     <propname class="GtkFileSelection">ok_button</propname> is a
+     <classname>GtkButton</classname> placed at the bottom of the
+     <classname>GtkFileSelection</classname> object.  Note that this
+     button is not initially connected and has no default callback
+     function.
     </simpara>
-    <para>
-     In order to access 
-     <propname class="GtkFileSelection">ok_button</propname> it is
-     necessary to create a handle for it, e.g.
-     <informalexample>
-      <programlisting role="php">
-$ok_button_handle = $fs-&gt;ok_button;
-      </programlisting>
-     </informalexample>
-    </para>
    </desc>
   </property>
 
@@ -371,27 +306,17 @@ $ok_button_handle = $fs-&gt;ok_button;
    <propname>cancel_button</propname>
    <proptype>GtkWidget</proptype>
    <shortdesc>
-    Accessible <classname>GtkButton</classname> within the
-    <classname>GtkFileSelection</classname> widget's structure.
+    Standard button.
    </shortdesc>
    <desc>
     <simpara>
-     <classname>GtkButton</classname> widget at the bottom of the
-     <classname>GtkFileSelection</classname> dialog. As with the 
+     <propname class="GtkFileSelection">cancal_button</propname> is a
+     <classname>GtkButton</classname> placed at the bottom of the
+     <classname>GtkFileSelection</classname> object. As with the 
      <propname class="GtkFileSelection">ok_button</propname>,
      it is the programmer's responsibility to listen for signals from
      this button and take the appropriate action.
     </simpara>
-    <para>
-     In order to access 
-     <propname class="GtkFileSelection">cancel_button</propname> it is
-     necessary to create a handle for it, e.g.
-     <informalexample>
-      <programlisting role="php">
-$cancel_button_handle = $fs-&gt;cancel_button;
-      </programlisting>
-     </informalexample>
-    </para>
    </desc>
   </property>
 
@@ -399,26 +324,19 @@ $cancel_button_handle = $fs-&gt;cancel_button;
    <propname>action_area</propname>
    <proptype>GtkWidget</proptype>
    <shortdesc>
-    Accessible <classname>GtkHBox</classname> within the
-    <classname>GtkFileSelection</classname> widget's structure.
+    Container for custom additions.
    </shortdesc>
    <desc>
     <simpara>
-     A <classname>GtkHBox</classname> placed between the 
-     <propname class="GtkFileSelection">main_vbox</propname> mentioned
-     above and the two <classname>GtkCList</classname>s  for the
-     directory and file list.
+     <propname class="GtkFileSelection">action_area</propname> is a
+     <classname>GtkHBox</classname> which is positioned directly below
+     the <propname class="GtkFileSelection">file_list</propname> and 
+     <propname class="GtkFileSelection">dir_list</propname>.
     </simpara>
-    <para>
-     In order to access 
-     <propname class="GtkFileSelection">action_area</propname> it is
-     necessary to create a handle for it, e.g.
-     <informalexample>
-      <programlisting role="php">
-$action_area_handle = $fs-&gt;action_area;
-      </programlisting>
-     </informalexample>
-    </para>
+    <simpara>
+     It would generally be used for displaying custom items such as 
+     additional buttons, labels or text entry boxes.
+    </simpara>
    </desc>
   </property>
 
