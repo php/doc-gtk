@@ -120,9 +120,11 @@
   &lt;/xsl:otherwise&gt;&#xA;
   &lt;/xsl:choose&gt;&#xA;
   &lt;/xsl:template&gt;&#xA;
-  &lt;/xsl:stylesheet&gt;
  </xsl:text>
  </xsl:if>
+ <xsl:text>
+   &lt;/xsl:stylesheet&gt;
+ </xsl:text>
 </xsl:template>
 
 </xsl:stylesheet>
