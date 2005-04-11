@@ -1,0 +1,550 @@
+<classentry id="gdk.gdkpixbuf">
+ <classmeta>
+  <classtitle>GdkPixbuf</classtitle>
+  <classparent>GObject</classparent>
+  <shortdesc>
+
+  </shortdesc>
+  <desc>
+
+  </desc>
+ </classmeta>
+
+ <constructors>
+
+  <constructor id="gdk.gdkpixbuf.constructor">
+   <funcsynopsis>
+    <funcprototype>
+    <funcdef> <function>GdkPixbuf</function></funcdef>
+    <paramdef>GdkColorspace <parameter>colorspace</parameter></paramdef>
+    <paramdef>bool <parameter>has_alpha</parameter></paramdef>
+    <paramdef>int <parameter>bits_per_sample</parameter></paramdef>
+    <paramdef>int <parameter>width</parameter></paramdef>
+    <paramdef>int <parameter>height</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </constructor>
+
+ </constructors>
+
+ <methods>
+
+  <method id="gdk.gdkpixbuf.method.add_alpha">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>GdkPixbuf <function>add_alpha</function></funcdef>
+     <paramdef>bool <parameter>substitute_color</parameter></paramdef>
+     <paramdef>char <parameter>r</parameter></paramdef>
+     <paramdef>char <parameter>g</parameter></paramdef>
+     <paramdef>char <parameter>b</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gdk.gdkpixbuf.method.composite">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>composite</function></funcdef>
+     <paramdef>GdkPixbuf <parameter>dest</parameter></paramdef>
+     <paramdef>int <parameter>dest_x</parameter></paramdef>
+     <paramdef>int <parameter>dest_y</parameter></paramdef>
+     <paramdef>int <parameter>dest_width</parameter></paramdef>
+     <paramdef>int <parameter>dest_height</parameter></paramdef>
+     <paramdef>double <parameter>offset_x</parameter></paramdef>
+     <paramdef>double <parameter>offset_y</parameter></paramdef>
+     <paramdef>double <parameter>scale_x</parameter></paramdef>
+     <paramdef>double <parameter>scale_y</parameter></paramdef>
+     <paramdef>GdkInterpType <parameter>interp_type</parameter></paramdef>
+     <paramdef>int <parameter>overall_alpha</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gdk.gdkpixbuf.method.composite_color">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>composite_color</function></funcdef>
+     <paramdef>GdkPixbuf <parameter>dest</parameter></paramdef>
+     <paramdef>int <parameter>dest_x</parameter></paramdef>
+     <paramdef>int <parameter>dest_y</parameter></paramdef>
+     <paramdef>int <parameter>dest_width</parameter></paramdef>
+     <paramdef>int <parameter>dest_height</parameter></paramdef>
+     <paramdef>double <parameter>offset_x</parameter></paramdef>
+     <paramdef>double <parameter>offset_y</parameter></paramdef>
+     <paramdef>double <parameter>scale_x</parameter></paramdef>
+     <paramdef>double <parameter>scale_y</parameter></paramdef>
+     <paramdef>GdkInterpType <parameter>interp_type</parameter></paramdef>
+     <paramdef>int <parameter>overall_alpha</parameter></paramdef>
+     <paramdef>int <parameter>check_x</parameter></paramdef>
+     <paramdef>int <parameter>check_y</parameter></paramdef>
+     <paramdef>int <parameter>check_size</parameter></paramdef>
+     <paramdef>int <parameter>color1</parameter></paramdef>
+     <paramdef>int <parameter>color2</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gdk.gdkpixbuf.method.composite_color_simple">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>GdkPixbuf <function>composite_color_simple</function></funcdef>
+     <paramdef>int <parameter>dest_width</parameter></paramdef>
+     <paramdef>int <parameter>dest_height</parameter></paramdef>
+     <paramdef>GdkInterpType <parameter>interp_type</parameter></paramdef>
+     <paramdef>int <parameter>overall_alpha</parameter></paramdef>
+     <paramdef>int <parameter>check_size</parameter></paramdef>
+     <paramdef>int <parameter>color1</parameter></paramdef>
+     <paramdef>int <parameter>color2</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gdk.gdkpixbuf.method.copy">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>GdkPixbuf <function>copy</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gdk.gdkpixbuf.method.copy_area">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>copy_area</function></funcdef>
+     <paramdef>int <parameter>src_x</parameter></paramdef>
+     <paramdef>int <parameter>src_y</parameter></paramdef>
+     <paramdef>int <parameter>width</parameter></paramdef>
+     <paramdef>int <parameter>height</parameter></paramdef>
+     <paramdef>GdkPixbuf <parameter>dest_pixbuf</parameter></paramdef>
+     <paramdef>int <parameter>dest_x</parameter></paramdef>
+     <paramdef>int <parameter>dest_y</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gdk.gdkpixbuf.method.fill">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef> <function>fill</function></funcdef>
+     <paramdef>int <parameter>pixel</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gdk.gdkpixbuf.method.get_bits_per_sample">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>int <function>get_bits_per_sample</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gdk.gdkpixbuf.method.get_colorspace">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>GdkColorspace <function>get_colorspace</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gdk.gdkpixbuf.method.get_from_drawable">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>GdkPixbuf <function>get_from_drawable</function></funcdef>
+     <paramdef>GdkWindow <parameter>src</parameter></paramdef>
+     <paramdef>GdkColormap <parameter>cmap</parameter></paramdef>
+     <paramdef>int <parameter>src_x</parameter></paramdef>
+     <paramdef>int <parameter>src_y</parameter></paramdef>
+     <paramdef>int <parameter>dest_x</parameter></paramdef>
+     <paramdef>int <parameter>dest_y</parameter></paramdef>
+     <paramdef>int <parameter>width</parameter></paramdef>
+     <paramdef>int <parameter>height</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gdk.gdkpixbuf.method.get_from_image">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>GdkPixbuf <function>get_from_image</function></funcdef>
+     <paramdef>GdkImage <parameter>src</parameter></paramdef>
+     <paramdef>GdkColormap <parameter>cmap</parameter></paramdef>
+     <paramdef>int <parameter>src_x</parameter></paramdef>
+     <paramdef>int <parameter>src_y</parameter></paramdef>
+     <paramdef>int <parameter>dest_x</parameter></paramdef>
+     <paramdef>int <parameter>dest_y</parameter></paramdef>
+     <paramdef>int <parameter>width</parameter></paramdef>
+     <paramdef>int <parameter>height</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gdk.gdkpixbuf.method.get_has_alpha">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>bool <function>get_has_alpha</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gdk.gdkpixbuf.method.get_height">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>int <function>get_height</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gdk.gdkpixbuf.method.get_n_channels">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>int <function>get_n_channels</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gdk.gdkpixbuf.method.get_option">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>string <function>get_option</function></funcdef>
+     <paramdef>string <parameter>key</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gdk.gdkpixbuf.method.get_pixels">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>string <function>get_pixels</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gdk.gdkpixbuf.method.get_rowstride">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>int <function>get_rowstride</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gdk.gdkpixbuf.method.get_width">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>int <function>get_width</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gdk.gdkpixbuf.method.subpixbuf">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>GdkPixbuf <function>subpixbuf</function></funcdef>
+     <paramdef>int <parameter>src_x</parameter></paramdef>
+     <paramdef>int <parameter>src_y</parameter></paramdef>
+     <paramdef>int <parameter>width</parameter></paramdef>
+     <paramdef>int <parameter>height</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gdk.gdkpixbuf.method.render_pixmap_and_mask">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>render_pixmap_and_mask</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gdk.gdkpixbuf.method.render_to_drawable">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>render_to_drawable</function></funcdef>
+     <paramdef>GdkWindow <parameter>drawable</parameter></paramdef>
+     <paramdef>GdkGC <parameter>gc</parameter></paramdef>
+     <paramdef>int <parameter>src_x</parameter></paramdef>
+     <paramdef>int <parameter>src_y</parameter></paramdef>
+     <paramdef>int <parameter>dest_x</parameter></paramdef>
+     <paramdef>int <parameter>dest_y</parameter></paramdef>
+     <paramdef>int <parameter>width</parameter></paramdef>
+     <paramdef>int <parameter>height</parameter></paramdef>
+     <paramdef>GdkRgbDither <parameter><optional>dither = GDK_RGB_DITHER_NORMAL</optional></parameter></paramdef>
+     <paramdef>int <parameter><optional>x_dither = GDK_RGB_DITHER_NORMAL</optional></parameter></paramdef>
+     <paramdef>int <parameter><optional>y_dither = GDK_RGB_DITHER_NORMAL</optional></parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gdk.gdkpixbuf.method.render_to_drawable_alpha">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>render_to_drawable_alpha</function></funcdef>
+     <paramdef>GdkWindow <parameter>drawable</parameter></paramdef>
+     <paramdef>int <parameter>src_x</parameter></paramdef>
+     <paramdef>int <parameter>src_y</parameter></paramdef>
+     <paramdef>int <parameter>dest_x</parameter></paramdef>
+     <paramdef>int <parameter>dest_y</parameter></paramdef>
+     <paramdef>int <parameter>width</parameter></paramdef>
+     <paramdef>int <parameter>height</parameter></paramdef>
+     <paramdef>GdkPixbufAlphaMode <parameter>alpha_mode</parameter></paramdef>
+     <paramdef>int <parameter>alpha_threshold</parameter></paramdef>
+     <paramdef>GdkRgbDither <parameter><optional>dither = GDK_RGB_DITHER_NORMAL</optional></parameter></paramdef>
+     <paramdef>int <parameter><optional>x_dither = GDK_RGB_DITHER_NORMAL</optional></parameter></paramdef>
+     <paramdef>int <parameter><optional>y_dither = GDK_RGB_DITHER_NORMAL</optional></parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gdk.gdkpixbuf.method.saturate_and_pixelate">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>saturate_and_pixelate</function></funcdef>
+     <paramdef>GdkPixbuf <parameter>dest</parameter></paramdef>
+     <paramdef>double <parameter>saturation</parameter></paramdef>
+     <paramdef>bool <parameter>pixelate</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gdk.gdkpixbuf.method.save">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>bool <function>save</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gdk.gdkpixbuf.method.savev">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>bool <function>savev</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gdk.gdkpixbuf.method.scale">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>scale</function></funcdef>
+     <paramdef>GdkPixbuf <parameter>dest</parameter></paramdef>
+     <paramdef>int <parameter>dest_x</parameter></paramdef>
+     <paramdef>int <parameter>dest_y</parameter></paramdef>
+     <paramdef>int <parameter>dest_width</parameter></paramdef>
+     <paramdef>int <parameter>dest_height</parameter></paramdef>
+     <paramdef>double <parameter>offset_x</parameter></paramdef>
+     <paramdef>double <parameter>offset_y</parameter></paramdef>
+     <paramdef>double <parameter>scale_x</parameter></paramdef>
+     <paramdef>double <parameter>scale_y</parameter></paramdef>
+     <paramdef>GdkInterpType <parameter>interp_type</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gdk.gdkpixbuf.method.scale_simple">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>GdkPixbuf <function>scale_simple</function></funcdef>
+     <paramdef>int <parameter>dest_width</parameter></paramdef>
+     <paramdef>int <parameter>dest_height</parameter></paramdef>
+     <paramdef>GdkInterpType <parameter>interp_type</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+ </methods>
+
+ <properties>
+
+  <property id="gdk.gdkpixbuf.property.pixel_array" type="ro">
+   <propname>pixel_array</propname>
+   <proptype>string</proptype>
+   <shortdesc>
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </property>
+
+ </properties>
+
+</classentry>

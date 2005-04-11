@@ -1,0 +1,1030 @@
+<classentry id="gtk.gtktextbuffer">
+ <classmeta>
+  <classtitle>GtkTextBuffer</classtitle>
+  <classparent>GObject</classparent>
+  <shortdesc>
+
+  </shortdesc>
+  <desc>
+
+  </desc>
+ </classmeta>
+
+ <constructors>
+
+  <constructor id="gtk.gtktextbuffer.constructor">
+   <funcsynopsis>
+    <funcprototype>
+    <funcdef> <function>GtkTextBuffer</function></funcdef>
+    <paramdef>GtkTextTagTable <parameter><optional>tag_table = NULL</optional></parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </constructor>
+
+ </constructors>
+
+ <methods>
+
+  <method id="gtk.gtktextbuffer.method.add_selection_clipboard">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>add_selection_clipboard</function></funcdef>
+     <paramdef>GtkClipboard <parameter>clipboard</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+    <para>
+     See also: 
+     <function class="GtkTextBuffer">remove_selection_clipboard</function>
+    </para>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtktextbuffer.method.apply_tag">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>apply_tag</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+    <para>
+     See also: 
+     <function class="GtkTextBuffer">create_tag</function>, 
+     <function class="GtkTextBuffer">remove_tag</function>
+    </para>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtktextbuffer.method.apply_tag_by_name">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>apply_tag_by_name</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+    <para>
+     See also: 
+     <function class="GtkTextBuffer">remove_tag_by_name</function>
+    </para>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtktextbuffer.method.backspace">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>bool <function>backspace</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtktextbuffer.method.begin_user_action">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>begin_user_action</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+    <para>
+     See also: 
+     <function class="GtkTextBuffer">end_user_action</function>
+    </para>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtktextbuffer.method.copy_clipboard">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>copy_clipboard</function></funcdef>
+     <paramdef>GtkClipboard <parameter>clipboard</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+    <para>
+     See also: 
+     <function class="GtkTextBuffer">cut_clipboard</function>, 
+     <function class="GtkTextBuffer">paste_clipboard</function>
+    </para>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtktextbuffer.method.create_child_anchor">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>GtkTextChildAnchor <function>create_child_anchor</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+    <para>
+     See also: 
+     <function class="GtkTextBuffer">insert_child_anchor</function>
+    </para>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtktextbuffer.method.create_mark">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>GtkTextMark <function>create_mark</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+    <para>
+     See also: 
+     <function class="GtkTextBuffer">delete_mark</function>, 
+     <function class="GtkTextBuffer">get_mark</function>, 
+     <function class="GtkTextBuffer">move_mark</function>
+    </para>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtktextbuffer.method.create_tag">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>GtkTextTag <function>create_tag</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+    <para>
+     See also: 
+     <function class="GtkTextBuffer">apply_tag</function>, 
+     <function class="GtkTextBuffer">remove_tag</function>
+    </para>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtktextbuffer.method.cut_clipboard">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>cut_clipboard</function></funcdef>
+     <paramdef>GtkClipboard <parameter>clipboard</parameter></paramdef>
+     <paramdef>bool <parameter>default_editable</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+    <para>
+     See also: 
+     <function class="GtkTextBuffer">copy_clipboard</function>, 
+     <function class="GtkTextBuffer">paste_clipboard</function>
+    </para>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtktextbuffer.method.delete">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>delete</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtktextbuffer.method.delete_interactive">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>bool <function>delete_interactive</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+    <para>
+     See also: 
+     <function class="GtkTextBuffer">insert_interactive</function>
+    </para>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtktextbuffer.method.delete_mark">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>delete_mark</function></funcdef>
+     <paramdef>GtkTextMark <parameter>mark</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+    <para>
+     See also: 
+     <function class="GtkTextBuffer">create_mark</function>, 
+     <function class="GtkTextBuffer">get_mark</function>, 
+     <function class="GtkTextBuffer">move_mark</function>
+    </para>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtktextbuffer.method.delete_mark_by_name">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>delete_mark_by_name</function></funcdef>
+     <paramdef>string <parameter>name</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+    <para>
+     See also: 
+     <function class="GtkTextBuffer">move_mark_by_name</function>
+    </para>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtktextbuffer.method.delete_selection">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>bool <function>delete_selection</function></funcdef>
+     <paramdef>bool <parameter>interactive</parameter></paramdef>
+     <paramdef>bool <parameter>default_editable</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtktextbuffer.method.end_user_action">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>end_user_action</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+    <para>
+     See also: 
+     <function class="GtkTextBuffer">begin_user_action</function>
+    </para>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtktextbuffer.method.get_bounds">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>get_bounds</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtktextbuffer.method.get_char_count">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>int <function>get_char_count</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtktextbuffer.method.get_end_iter">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>get_end_iter</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtktextbuffer.method.get_insert">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>GtkTextMark <function>get_insert</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtktextbuffer.method.get_iter_at_child_anchor">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>get_iter_at_child_anchor</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtktextbuffer.method.get_iter_at_line">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>get_iter_at_line</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtktextbuffer.method.get_iter_at_line_index">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>get_iter_at_line_index</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtktextbuffer.method.get_iter_at_line_offset">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>get_iter_at_line_offset</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtktextbuffer.method.get_iter_at_mark">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>get_iter_at_mark</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtktextbuffer.method.get_iter_at_offset">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>get_iter_at_offset</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtktextbuffer.method.get_line_count">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>int <function>get_line_count</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtktextbuffer.method.get_mark">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>GtkTextMark <function>get_mark</function></funcdef>
+     <paramdef>string <parameter>name</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+    <para>
+     See also: 
+     <function class="GtkTextBuffer">create_mark</function>, 
+     <function class="GtkTextBuffer">delete_mark</function>, 
+     <function class="GtkTextBuffer">move_mark</function>
+    </para>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtktextbuffer.method.get_modified">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>bool <function>get_modified</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+    <para>
+     See also: 
+     <function class="GtkTextBuffer">set_modified</function>
+    </para>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtktextbuffer.method.get_selection_bound">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>GtkTextMark <function>get_selection_bound</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtktextbuffer.method.get_selection_bounds">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>bool <function>get_selection_bounds</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtktextbuffer.method.get_slice">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>string <function>get_slice</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtktextbuffer.method.get_start_iter">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>get_start_iter</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtktextbuffer.method.get_tag_table">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>GtkTextTagTable <function>get_tag_table</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+    <para>
+     See also: 
+     <propname class="GtkTextBuffer">tag_table</propname>
+    </para>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtktextbuffer.method.get_text">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>string <function>get_text</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+    <para>
+     See also: 
+     <function class="GtkTextBuffer">set_text</function>
+    </para>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtktextbuffer.method.insert">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>insert</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtktextbuffer.method.insert_at_cursor">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>insert_at_cursor</function></funcdef>
+     <paramdef>string <parameter>text</parameter></paramdef>
+     <paramdef>int <parameter><optional>len = -1</optional></parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtktextbuffer.method.insert_child_anchor">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>insert_child_anchor</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+    <para>
+     See also: 
+     <function class="GtkTextBuffer">create_child_anchor</function>
+    </para>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtktextbuffer.method.insert_interactive">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>bool <function>insert_interactive</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+    <para>
+     See also: 
+     <function class="GtkTextBuffer">delete_interactive</function>
+    </para>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtktextbuffer.method.insert_interactive_at_cursor">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>bool <function>insert_interactive_at_cursor</function></funcdef>
+     <paramdef>string <parameter>text</parameter></paramdef>
+     <paramdef>int <parameter>len</parameter></paramdef>
+     <paramdef>bool <parameter>default_editable</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtktextbuffer.method.insert_pixbuf">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>insert_pixbuf</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtktextbuffer.method.insert_range">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>insert_range</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+    <para>
+     See also: 
+     <function class="GtkTextBuffer">select_range</function>
+    </para>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtktextbuffer.method.insert_range_interactive">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>bool <function>insert_range_interactive</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtktextbuffer.method.insert_with_tags">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>insert_with_tags</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtktextbuffer.method.insert_with_tags_by_name">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>insert_with_tags_by_name</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtktextbuffer.method.move_mark">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>move_mark</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+    <para>
+     See also: 
+     <function class="GtkTextBuffer">create_mark</function>, 
+     <function class="GtkTextBuffer">delete_mark</function>, 
+     <function class="GtkTextBuffer">get_mark</function>
+    </para>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtktextbuffer.method.move_mark_by_name">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>move_mark_by_name</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+    <para>
+     See also: 
+     <function class="GtkTextBuffer">delete_mark_by_name</function>
+    </para>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtktextbuffer.method.paste_clipboard">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>paste_clipboard</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+    <para>
+     See also: 
+     <function class="GtkTextBuffer">copy_clipboard</function>, 
+     <function class="GtkTextBuffer">cut_clipboard</function>
+    </para>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtktextbuffer.method.place_cursor">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>place_cursor</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtktextbuffer.method.remove_all_tags">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>remove_all_tags</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtktextbuffer.method.remove_selection_clipboard">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>remove_selection_clipboard</function></funcdef>
+     <paramdef>GtkClipboard <parameter>clipboard</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+    <para>
+     See also: 
+     <function class="GtkTextBuffer">add_selection_clipboard</function>
+    </para>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtktextbuffer.method.remove_tag">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>remove_tag</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+    <para>
+     See also: 
+     <function class="GtkTextBuffer">apply_tag</function>, 
+     <function class="GtkTextBuffer">create_tag</function>
+    </para>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtktextbuffer.method.remove_tag_by_name">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>remove_tag_by_name</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+    <para>
+     See also: 
+     <function class="GtkTextBuffer">apply_tag_by_name</function>
+    </para>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtktextbuffer.method.select_range">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>select_range</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+    <para>
+     See also: 
+     <function class="GtkTextBuffer">insert_range</function>
+    </para>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtktextbuffer.method.set_modified">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_modified</function></funcdef>
+     <paramdef>bool <parameter>setting</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+    <para>
+     See also: 
+     <function class="GtkTextBuffer">get_modified</function>
+    </para>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtktextbuffer.method.set_text">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_text</function></funcdef>
+     <paramdef>string <parameter>text</parameter></paramdef>
+     <paramdef>int <parameter>len</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+    <para>
+     See also: 
+     <function class="GtkTextBuffer">get_text</function>
+    </para>
+
+   </desc>
+  </method>
+
+ </methods>
+
+ <properties>
+
+  <property id="gtk.gtktextbuffer.property.tag_table" type="ro">
+   <propname>tag_table</propname>
+   <proptype>GtkTextTagTable</proptype>
+   <shortdesc>
+   </shortdesc>
+   <desc>
+    <para>
+     See also: 
+     <function class="GtkTextBuffer">get_tag_table</function>
+    </para>
+
+   </desc>
+  </property>
+
+ </properties>
+
+</classentry>
