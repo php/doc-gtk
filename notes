@@ -1,0 +1,55 @@
+
+== File system ==
+/ (root)
+    all the script files required for doc generation
+    - distribute_html.php moves the generated html files in several subdirectories
+       that we don't have 1800+ files in one directory
+    - gen_chapterents.php generates a file called manul/<lang>/chapters.ent 
+      which includes all the .xml files in one big one
+    - gen_docs_from_source.sh uses the php-gtk sources to generate the
+      reference section of the manual with all the functions, properties 
+      and so
+    - gen_manual.sh compiles the html files out of the .xml ones
+    - gen_manualxml.php generates manual/<lang>/manual.xml from the
+      manual/manual.xml.in
+    - check_chapterusage.php: checks if all the xml files in the reference 
+      section are used in the manual
+build/
+    the compiled manual files are stored here
+manual/
+    base manual files 
+    - manual.xml.in -> will be compiled to manual/<lang>/manual.xml
+manual/en/, manual/de/, ..
+    full manual for the language, including:
+    - manual.xml is generated automatically
+    - chapters.ent is generated automatically by gen_chapterents.php from the xml files
+stylesheets/
+    stylesheets which convert the xml manual files to html, phpweb, ...
+
+    
+== Todo ==
+- docgen: generate signals (with phpgtk2 extension installed)
+- check if docmerger works
+
+- livedocs
+- testmanual
+
+- create "how to translate manual" and "doccing FAQ" tutorials
+- automatically link returned classes in functions
+- automatically link classes in function parameters
+
+
+== Done ==
+- return value of functions is void sometimes | that's ok IMO
+- static constructors are linked to themselves | that's because the new "get_func_id_from_name" is too good in guessing the ids
+- static constructors have the same title as normal constructor (<class> Constructor) | how should they be named? they *are* constructors
++ name_to_id: signal names (for that, andrei have to get the generator support signals)
++ functions have no paramdef sometimes
++ docgen:  cross-link properties
++ foo(void) paramdef -> foo()
++ docgen: link from getter to setter and vice versa
++ classtree
++ generate <constructors>
++ multiple constructors in class
++ stylesheets/html/name_to_id.xsl rewrite so that it haven't to be generated from sources
+
