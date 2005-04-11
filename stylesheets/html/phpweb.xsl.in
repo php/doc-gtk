@@ -1,0 +1,310 @@
+<?xml version='1.0' ?>
+<!DOCTYPE xsl:stylesheet [
+<!ENTITY step "&#160;&#160;&#160;&#160;&#160;&#160;">
+<!ENTITY nbsp "&#160;">
+]>
+
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+                xmlns:saxon="http://icl.com/saxon"
+                xmlns:lxslt="http://xml.apache.org/xslt"
+                xmlns:xalanredirect="org.apache.xalan.xslt.extensions.Redirect"
+                xmlns:doc="http://nwalsh.com/xsl/documentation/1.0"
+		version="1.1"
+		exclude-result-prefixes="doc"
+		extension-element-prefixes="saxon xalanredirect lxslt">
+		
+ <xsl:import href="autoidx.xsl"/>
+ <xsl:include href="chunk-common.xsl"/>
+ <xsl:include href="chunker.xsl"/>
+
+ <xsl:param name="base.dir" select="'build/php/'"/>
+ <xsl:param name="root.filename" select="'index'" />
+ <xsl:param name="use.id.as.filename" select="1" />
+ <xsl:param name="phpweb" select="true()"/>
+ <xsl:param name="html.ext" select="'.php'"/>
+ 
+ <xsl:output method="xml" omit-xml-declaration="yes"  /> 
+
+ <xsl:template name="phpweb.header.navigation">
+  <xsl:param name="prev" select="/foo"/>
+  <xsl:param name="next" select="/foo"/>
+  <xsl:param name="up" select="parent::*"/>
+  <xsl:variable name="home" select="/*[1]"/>
+
+  <xsl:processing-instruction name="php">
+   <xsl:text>
+    require('shared-manual.inc');
+    sendManualHeaders('UTF-8', '@LANG@');
+    setupNavigation(array('home' => array("
+   </xsl:text>
+   <xsl:call-template name="href.target">
+    <xsl:with-param name="object" select="$home"/>
+   </xsl:call-template>
+   <xsl:text>", "</xsl:text>
+   <xsl:apply-templates select="$home" mode="title.markup" />
+   <xsl:text>"),'prev' => array("</xsl:text>
+   <xsl:call-template name="href.target">
+    <xsl:with-param name="object" select="$prev"/>
+   </xsl:call-template>
+   <xsl:text>", "</xsl:text>
+   <xsl:apply-templates select="$prev" mode="title.markup" />
+   <xsl:text>"), 'next' => array("</xsl:text>
+   <xsl:call-template name="href.target">
+    <xsl:with-param name="object" select="$next"/>
+   </xsl:call-template>
+   <xsl:text>", "</xsl:text>
+   <xsl:apply-templates select="$next" mode="title.markup" />
+   <xsl:text>"), 'up' => array("</xsl:text>
+   <xsl:call-template name="href.target">
+    <xsl:with-param name="object" select="$up"/>
+   </xsl:call-template>
+   <xsl:text>", "</xsl:text>
+   <xsl:apply-templates select="$up" mode="title.markup"/>
+   <xsl:text>"), 'toc'  => array(</xsl:text>
+   <xsl:call-template name="gen.toc.array">
+    <xsl:with-param name="node" select="." />
+   </xsl:call-template>
+   <xsl:text>)));
+    manualHeader("</xsl:text>
+   <xsl:apply-templates select="." mode="title.markup"/>
+   <xsl:text>","</xsl:text>
+   <xsl:call-template name="href.target">
+    <xsl:with-param name="object" select="."/>
+   </xsl:call-template>
+   <xsl:text>");</xsl:text>
+  </xsl:processing-instruction>
+ </xsl:template>
+
+ <xsl:template name="gen.toc.array">
+  <xsl:param name="node" select="." />
+  <!-- we need a few special cases here so that we can handle constructor, methods, signals and properties.. -->
+
+  <xsl:choose>
+   <xsl:when test="name($node)='constructor' or name($node)='method' or name($node)='signal' or name($node)='property'">
+    <xsl:variable name="classentry" select="(ancestor::classentry|ancestor::refentry)[1]"/>
+    <xsl:for-each select="$classentry/constructor|$classentry/methods/*|$classentry/signals/*|$classentry/properties/*|$classentry/method">
+     <xsl:call-template name="gen.text.toc.array">
+      <xsl:with-param name="node" select="." />
+     </xsl:call-template>
+    </xsl:for-each>
+   </xsl:when>
+
+   <xsl:when test="name($node)='enum'">
+    <xsl:variable name="enumset" select="ancestor::enumset"/>
+    <xsl:for-each select="$enumset/enums/enum">
+     <xsl:call-template name="gen.text.toc.array">
+      <xsl:with-param name="node" select="." />
+     </xsl:call-template>
+    </xsl:for-each>
+   </xsl:when>
+
+   <xsl:when test="name($node)='classentry'">
+    <xsl:for-each select="preceding-sibling::classentry[@hide='0']
+                         |preceding-sibling::refentry
+                         |self::*
+                         |following-sibling::classentry[@hide='0']
+                         |following-sibling::refentry
+                         |preceding-sibling::enum
+                         |following-sibling::enum">
+     <xsl:call-template name="gen.text.toc.array">
+      <xsl:with-param name="node" select="." />
+     </xsl:call-template>
+    </xsl:for-each>
+   </xsl:when>
+
+   <xsl:when test="name($node)='refentry'">
+    <xsl:for-each select="preceding-sibling::classentry[@hide='0']
+                         |preceding-sibling::refentry
+                         |self::*
+                         |following-sibling::classentry[@hide='0']
+                         |following-sibling::refentry
+                         |preceding-sibling::enum
+                         |following-sibling::enum">
+     <xsl:call-template name="gen.text.toc.array">
+      <xsl:with-param name="node" select="." />
+     </xsl:call-template>
+    </xsl:for-each>
+   </xsl:when>
+
+   <xsl:when test="name($node)='sect1'">
+    <xsl:for-each select="preceding-sibling::sect1|self::*|following-sibling::sect1">
+     <xsl:call-template name="gen.text.toc.array">
+      <xsl:with-param name="node" select="." />
+     </xsl:call-template>
+    </xsl:for-each>
+   </xsl:when>
+
+   <xsl:otherwise>
+    <xsl:for-each select="preceding-sibling::node()|self::node()|following-sibling::node()">
+    <xsl:call-template name="gen.text.toc.array">
+     <xsl:with-param name="node" select="." />
+    </xsl:call-template>
+   </xsl:for-each>
+   </xsl:otherwise>
+  </xsl:choose>
+ </xsl:template>
+
+ <xsl:template name="gen.text.toc.array">
+  <xsl:param name="node" select="."/>
+  <xsl:variable name="ischunk">
+   <xsl:call-template name="chunk">
+    <xsl:with-param name="node" select="$node"/>
+   </xsl:call-template>
+  </xsl:variable>
+  <xsl:if test="$ischunk='1'">
+   <xsl:text>array("</xsl:text>
+   <xsl:call-template name="href.target">
+    <xsl:with-param name="object" select="$node"/>
+   </xsl:call-template>
+   <xsl:text>","</xsl:text>
+   <xsl:apply-templates select="$node" mode="title.markup"/>
+   <xsl:text>",</xsl:text>
+   <xsl:choose>
+    <xsl:when test="name($node)='classentry'">
+     <xsl:text>NAV_CLASSENTRY</xsl:text>
+    </xsl:when>
+    <xsl:when test="name($node)='constructor'">
+     <xsl:text>NAV_CONSTRUCTOR</xsl:text>
+    </xsl:when>
+    <xsl:when test="name($node)='method'">
+    <xsl:text>NAV_METHOD</xsl:text>
+    </xsl:when>
+    <xsl:when test="name($node)='signal'">
+     <xsl:text>NAV_SIGNAL</xsl:text>
+    </xsl:when>
+    <xsl:when test="name($node)='enum'">
+     <xsl:text>NAV_ENUM</xsl:text>
+    </xsl:when>
+    <xsl:otherwise>
+     <xsl:text>NAV_NONE</xsl:text>
+    </xsl:otherwise>
+   </xsl:choose>
+   <xsl:text>),</xsl:text>
+  </xsl:if>
+ </xsl:template>
+
+ <xsl:template name="phpweb.footer.navigation">
+  <xsl:param name="prev" select="/foo"/>
+  <xsl:param name="next" select="/foo"/>
+  <xsl:param name="up" select="parent::*"/>
+  <xsl:variable name="home" select="/*[1]"/>
+
+  <xsl:processing-instruction name="php">
+   <xsl:text>manualFooter("</xsl:text>
+   <xsl:apply-templates select="." mode="title.markup"/>
+   <xsl:text>","</xsl:text>
+   <xsl:call-template name="href.target">
+    <xsl:with-param name="object" select="."/>
+   </xsl:call-template>
+   <xsl:text>");</xsl:text>
+  </xsl:processing-instruction>
+ </xsl:template>
+
+ <xsl:template name="phpweb.get_class_hierarchy">
+  <xsl:param name="classname" />
+
+  <xsl:variable name="depth">
+   <xsl:call-template name="current-depth">
+    <xsl:with-param name="classname" select="$classname" />
+   </xsl:call-template>
+  </xsl:variable>
+
+  <xsl:variable name="id">
+   <xsl:call-template name="get_id_from_name">
+    <xsl:with-param name="classname">
+     <xsl:value-of select="$classname"/>
+    </xsl:with-param>
+   </xsl:call-template>
+  </xsl:variable>
+
+  <xsl:if test="$depth>0">
+   <xsl:call-template name="phpweb.get_class_hierarchy">
+    <xsl:with-param name="classname">
+     <xsl:call-template name="get_parent_class">
+      <xsl:with-param name="classname" select="$classname"/>
+     </xsl:call-template>
+    </xsl:with-param>
+   </xsl:call-template>
+  </xsl:if>
+
+<xsl:variable name="rtl" select="ancestor-or-self::classentry[1][@rtl=1]"/>
+
+  <xsl:variable name="new.hack">
+   <xsl:choose>
+    <xsl:when test="$depth=0">
+     <xsl:text></xsl:text>
+    </xsl:when>
+    <xsl:when test="$depth=1">
+     <xsl:text disable-output-escaping="yes"/>
+    </xsl:when>
+    <xsl:when test="$depth=2">
+     <xsl:choose>
+      <xsl:when test="$rtl = true()">
+       <xsl:text disable-output-escaping="yes">
+print_image('revhier-arrow.gif');
+       </xsl:text>
+      </xsl:when>
+      <xsl:otherwise>
+       <xsl:text disable-output-escaping="yes">
+print_image('inhier-arrow.gif');
+       </xsl:text>
+      </xsl:otherwise>
+     </xsl:choose>
+    </xsl:when>
+    <xsl:otherwise>
+     <xsl:choose>
+      <xsl:when test="$rtl = true()">
+       <xsl:text disable-output-escaping="yes">
+echo str_repeat(make_image('inhier-blank.gif'), 
+       </xsl:text>
+       <xsl:number value="$depth+-2" format="1"/>
+       <xsl:text disable-output-escaping="yes">
+); print_image('revhier-arrow.gif');
+       </xsl:text>
+      </xsl:when>
+      <xsl:otherwise>
+       <xsl:text disable-output-escaping="yes">
+echo str_repeat(make_image('inhier-blank.gif'), 
+       </xsl:text>
+       <xsl:number value="$depth+-2" format="1"/>
+       <xsl:text disable-output-escaping="yes">
+); print_image('inhier-arrow.gif');
+       </xsl:text>
+      </xsl:otherwise>
+     </xsl:choose>
+    </xsl:otherwise>
+   </xsl:choose>
+  </xsl:variable>
+
+  <xsl:choose>
+   <xsl:when test="$id!='no'">
+    <xsl:variable name="link">
+     <xsl:call-template name="href.target">
+      <xsl:with-param name="object" select="id($id)"/>
+     </xsl:call-template>
+    </xsl:variable>
+    <xsl:processing-instruction name="php">
+     <xsl:value-of select="$new.hack"/>
+    </xsl:processing-instruction> 
+    &nbsp;
+    <span dir="ltr">
+     <a>
+      <xsl:attribute name="href">
+       <xsl:value-of select="$link" />
+      </xsl:attribute>
+      <xsl:value-of select="$classname" />
+     </a>
+    </span>
+    <br/>
+   </xsl:when>
+   <xsl:otherwise>
+    <xsl:processing-instruction name="php">
+     <xsl:value-of select="$new.hack"/>
+     <xsl:value-of select="$classname" />
+    </xsl:processing-instruction> 
+   </xsl:otherwise>
+  </xsl:choose>
+
+ </xsl:template>
+
+ </xsl:stylesheet>
