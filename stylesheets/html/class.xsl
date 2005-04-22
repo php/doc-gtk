@@ -259,6 +259,7 @@
     <xsl:with-param name="signame">
      <xsl:value-of select="$signame"/>
     </xsl:with-param>
+    <xsl:with-param name="class" select="ancestor-or-self::classentry/classmeta/classtitle"/>
    </xsl:call-template>
   </xsl:variable>
   
