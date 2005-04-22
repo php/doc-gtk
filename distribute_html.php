@@ -13,7 +13,7 @@ if ($GLOBALS['argc'] < 2 || strlen($GLOBALS['argv'][1]) != 2) {
 }
 $lang = $GLOBALS['argv'][1];
 
-chdir(dirname(__FILE) . '/build/' . $lang . '/html');
+chdir(dirname(__FILE__) . '/build/' . $lang . '/html');
 
 //create directories
 foreach ($prefixes as $prefix) {
