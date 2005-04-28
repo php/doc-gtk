@@ -865,13 +865,12 @@
 
  <signals>
 
-  <signal id="gtk.gtknotebook.signal.switch-page">
-   <signalname>switch-page</signalname>
+  <signal id="gtk.gtknotebook.signal.change-current-page">
+   <signalname>change-current-page</signalname>
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <cbfunction>callback</cbfunction></funcdef>
      <paramdef>GtkNotebook <parameter>notebook</parameter></paramdef>
-     <paramdef><!-- was: gpointer -->XXX <parameter>UNKNOWN</parameter></paramdef>
      <paramdef>int <parameter>UNKNOWN</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
@@ -898,6 +897,22 @@
    </desc>
   </signal>
   
+  <signal id="gtk.gtknotebook.signal.move-focus-out">
+   <signalname>move-focus-out</signalname>
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
+     <paramdef>GtkNotebook <parameter>notebook</parameter></paramdef>
+     <paramdef>GtkDirectionType <parameter>UNKNOWN</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </signal>
+  
   <signal id="gtk.gtknotebook.signal.select-page">
    <signalname>select-page</signalname>
    <funcsynopsis>
@@ -914,29 +929,14 @@
    </desc>
   </signal>
   
-  <signal id="gtk.gtknotebook.signal.change-current-page">
-   <signalname>change-current-page</signalname>
+  <signal id="gtk.gtknotebook.signal.switch-page">
+   <signalname>switch-page</signalname>
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <cbfunction>callback</cbfunction></funcdef>
      <paramdef>GtkNotebook <parameter>notebook</parameter></paramdef>
+     <paramdef><!-- was: gpointer -->XXX <parameter>UNKNOWN</parameter></paramdef>
      <paramdef>int <parameter>UNKNOWN</parameter></paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </signal>
-  
-  <signal id="gtk.gtknotebook.signal.move-focus-out">
-   <signalname>move-focus-out</signalname>
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
-     <paramdef>GtkNotebook <parameter>notebook</parameter></paramdef>
-     <paramdef>GtkDirectionType <parameter>UNKNOWN</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>

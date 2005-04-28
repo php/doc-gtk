@@ -1029,13 +1029,75 @@
 
  <signals>
 
-  <signal id="gtk.gtktextview.signal.move-focus">
-   <signalname>move-focus</signalname>
+  <signal id="gtk.gtktextview.signal.backspace">
+   <signalname>backspace</signalname>
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <cbfunction>callback</cbfunction></funcdef>
      <paramdef>GtkTextView <parameter>textview</parameter></paramdef>
-     <paramdef>GtkDirectionType <parameter>UNKNOWN</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </signal>
+  
+  <signal id="gtk.gtktextview.signal.copy-clipboard">
+   <signalname>copy-clipboard</signalname>
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
+     <paramdef>GtkTextView <parameter>textview</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </signal>
+  
+  <signal id="gtk.gtktextview.signal.cut-clipboard">
+   <signalname>cut-clipboard</signalname>
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
+     <paramdef>GtkTextView <parameter>textview</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </signal>
+  
+  <signal id="gtk.gtktextview.signal.delete-from-cursor">
+   <signalname>delete-from-cursor</signalname>
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
+     <paramdef>GtkTextView <parameter>textview</parameter></paramdef>
+     <paramdef>GtkDeleteType <parameter>UNKNOWN</parameter></paramdef>
+     <paramdef>int <parameter>UNKNOWN</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </signal>
+  
+  <signal id="gtk.gtktextview.signal.insert-at-cursor">
+   <signalname>insert-at-cursor</signalname>
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
+     <paramdef>GtkTextView <parameter>textview</parameter></paramdef>
+     <paramdef><!-- was: gchararray -->XXX <parameter>UNKNOWN</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -1063,8 +1125,58 @@
    </desc>
   </signal>
   
-  <signal id="gtk.gtktextview.signal.copy-clipboard">
-   <signalname>copy-clipboard</signalname>
+  <signal id="gtk.gtktextview.signal.move-focus">
+   <signalname>move-focus</signalname>
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
+     <paramdef>GtkTextView <parameter>textview</parameter></paramdef>
+     <paramdef>GtkDirectionType <parameter>UNKNOWN</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </signal>
+  
+  <signal id="gtk.gtktextview.signal.move-viewport">
+   <signalname>move-viewport</signalname>
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
+     <paramdef>GtkTextView <parameter>textview</parameter></paramdef>
+     <paramdef>GtkScrollStep <parameter>UNKNOWN</parameter></paramdef>
+     <paramdef>int <parameter>UNKNOWN</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </signal>
+  
+  <signal id="gtk.gtktextview.signal.page-horizontally">
+   <signalname>page-horizontally</signalname>
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
+     <paramdef>GtkTextView <parameter>textview</parameter></paramdef>
+     <paramdef>int <parameter>UNKNOWN</parameter></paramdef>
+     <paramdef>bool <parameter>UNKNOWN</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </signal>
+  
+  <signal id="gtk.gtktextview.signal.paste-clipboard">
+   <signalname>paste-clipboard</signalname>
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <cbfunction>callback</cbfunction></funcdef>
@@ -1094,6 +1206,37 @@
    </desc>
   </signal>
   
+  <signal id="gtk.gtktextview.signal.select-all">
+   <signalname>select-all</signalname>
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
+     <paramdef>GtkTextView <parameter>textview</parameter></paramdef>
+     <paramdef>bool <parameter>UNKNOWN</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </signal>
+  
+  <signal id="gtk.gtktextview.signal.set-anchor">
+   <signalname>set-anchor</signalname>
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
+     <paramdef>GtkTextView <parameter>textview</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </signal>
+  
   <signal id="gtk.gtktextview.signal.set-scroll-adjustments">
    <signalname>set-scroll-adjustments</signalname>
    <funcsynopsis>
@@ -1111,151 +1254,8 @@
    </desc>
   </signal>
   
-  <signal id="gtk.gtktextview.signal.select-all">
-   <signalname>select-all</signalname>
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
-     <paramdef>GtkTextView <parameter>textview</parameter></paramdef>
-     <paramdef>bool <parameter>UNKNOWN</parameter></paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </signal>
-  
-  <signal id="gtk.gtktextview.signal.insert-at-cursor">
-   <signalname>insert-at-cursor</signalname>
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
-     <paramdef>GtkTextView <parameter>textview</parameter></paramdef>
-     <paramdef><!-- was: gchararray -->XXX <parameter>UNKNOWN</parameter></paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </signal>
-  
-  <signal id="gtk.gtktextview.signal.delete-from-cursor">
-   <signalname>delete-from-cursor</signalname>
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
-     <paramdef>GtkTextView <parameter>textview</parameter></paramdef>
-     <paramdef>GtkDeleteType <parameter>UNKNOWN</parameter></paramdef>
-     <paramdef>int <parameter>UNKNOWN</parameter></paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </signal>
-  
-  <signal id="gtk.gtktextview.signal.backspace">
-   <signalname>backspace</signalname>
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
-     <paramdef>GtkTextView <parameter>textview</parameter></paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </signal>
-  
-  <signal id="gtk.gtktextview.signal.cut-clipboard">
-   <signalname>cut-clipboard</signalname>
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
-     <paramdef>GtkTextView <parameter>textview</parameter></paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </signal>
-  
-  <signal id="gtk.gtktextview.signal.paste-clipboard">
-   <signalname>paste-clipboard</signalname>
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
-     <paramdef>GtkTextView <parameter>textview</parameter></paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </signal>
-  
   <signal id="gtk.gtktextview.signal.toggle-overwrite">
    <signalname>toggle-overwrite</signalname>
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
-     <paramdef>GtkTextView <parameter>textview</parameter></paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </signal>
-  
-  <signal id="gtk.gtktextview.signal.page-horizontally">
-   <signalname>page-horizontally</signalname>
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
-     <paramdef>GtkTextView <parameter>textview</parameter></paramdef>
-     <paramdef>int <parameter>UNKNOWN</parameter></paramdef>
-     <paramdef>bool <parameter>UNKNOWN</parameter></paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </signal>
-  
-  <signal id="gtk.gtktextview.signal.move-viewport">
-   <signalname>move-viewport</signalname>
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
-     <paramdef>GtkTextView <parameter>textview</parameter></paramdef>
-     <paramdef>GtkScrollStep <parameter>UNKNOWN</parameter></paramdef>
-     <paramdef>int <parameter>UNKNOWN</parameter></paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </signal>
-  
-  <signal id="gtk.gtktextview.signal.set-anchor">
-   <signalname>set-anchor</signalname>
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <cbfunction>callback</cbfunction></funcdef>

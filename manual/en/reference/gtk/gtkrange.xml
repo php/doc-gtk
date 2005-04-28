@@ -200,12 +200,13 @@
 
  <signals>
 
-  <signal id="gtk.gtkrange.signal.value-changed">
-   <signalname>value-changed</signalname>
+  <signal id="gtk.gtkrange.signal.adjust-bounds">
+   <signalname>adjust-bounds</signalname>
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <cbfunction>callback</cbfunction></funcdef>
      <paramdef>GtkRange <parameter>range</parameter></paramdef>
+     <paramdef>double <parameter>UNKNOWN</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -215,12 +216,13 @@
    </desc>
   </signal>
   
-  <signal id="gtk.gtkrange.signal.adjust-bounds">
-   <signalname>adjust-bounds</signalname>
+  <signal id="gtk.gtkrange.signal.change-value">
+   <signalname>change-value</signalname>
    <funcsynopsis>
     <funcprototype>
-     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
+     <funcdef>bool <cbfunction>callback</cbfunction></funcdef>
      <paramdef>GtkRange <parameter>range</parameter></paramdef>
+     <paramdef>GtkScrollType <parameter>UNKNOWN</parameter></paramdef>
      <paramdef>double <parameter>UNKNOWN</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
@@ -247,14 +249,12 @@
    </desc>
   </signal>
   
-  <signal id="gtk.gtkrange.signal.change-value">
-   <signalname>change-value</signalname>
+  <signal id="gtk.gtkrange.signal.value-changed">
+   <signalname>value-changed</signalname>
    <funcsynopsis>
     <funcprototype>
-     <funcdef>bool <cbfunction>callback</cbfunction></funcdef>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
      <paramdef>GtkRange <parameter>range</parameter></paramdef>
-     <paramdef>GtkScrollType <parameter>UNKNOWN</parameter></paramdef>
-     <paramdef>double <parameter>UNKNOWN</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>

@@ -12,21 +12,6 @@
 
  <methods>
 
-  <method id="atk.atkstateset.method.is_empty">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>bool <function>is_empty</function></funcdef>
-     <paramdef>void</paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </method>
-
   <method id="atk.atkstateset.method.add_state">
    <funcsynopsis>
     <funcprototype>
@@ -62,6 +47,26 @@
      See also: 
      <function class="AtkStateSet">clear_states</function>, 
      <function class="AtkStateSet">contains_states</function>
+    </para>
+
+   </desc>
+  </method>
+
+  <method id="atk.atkstateset.method.and_sets">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>AtkStateSet <function>and_sets</function></funcdef>
+     <paramdef>AtkStateSet <parameter>compare_set</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+    <para>
+     See also: 
+     <function class="AtkStateSet">or_sets</function>, 
+     <function class="AtkStateSet">xor_sets</function>
     </para>
 
    </desc>
@@ -127,42 +132,17 @@
    </desc>
   </method>
 
-  <method id="atk.atkstateset.method.remove_state">
+  <method id="atk.atkstateset.method.is_empty">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>bool <function>remove_state</function></funcdef>
-     <paramdef>AtkStateType <parameter>type</parameter></paramdef>
+     <funcdef>bool <function>is_empty</function></funcdef>
+     <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
 
    </shortdesc>
    <desc>
-    <para>
-     See also: 
-     <function class="AtkStateSet">add_state</function>, 
-     <function class="AtkStateSet">contains_state</function>
-    </para>
-
-   </desc>
-  </method>
-
-  <method id="atk.atkstateset.method.and_sets">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>AtkStateSet <function>and_sets</function></funcdef>
-     <paramdef>AtkStateSet <parameter>compare_set</parameter></paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-   <desc>
-    <para>
-     See also: 
-     <function class="AtkStateSet">or_sets</function>, 
-     <function class="AtkStateSet">xor_sets</function>
-    </para>
 
    </desc>
   </method>
@@ -182,6 +162,26 @@
      See also: 
      <function class="AtkStateSet">and_sets</function>, 
      <function class="AtkStateSet">xor_sets</function>
+    </para>
+
+   </desc>
+  </method>
+
+  <method id="atk.atkstateset.method.remove_state">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>bool <function>remove_state</function></funcdef>
+     <paramdef>AtkStateType <parameter>type</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+    <para>
+     See also: 
+     <function class="AtkStateSet">add_state</function>, 
+     <function class="AtkStateSet">contains_state</function>
     </para>
 
    </desc>

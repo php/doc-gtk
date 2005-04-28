@@ -211,8 +211,8 @@
 
  <properties>
 
-  <property id="gtk.gtkdialog.property.vbox" type="ro">
-   <propname>vbox</propname>
+  <property id="gtk.gtkdialog.property.action_area" type="ro">
+   <propname>action_area</propname>
    <proptype>GtkWidget</proptype>
    <shortdesc>
    </shortdesc>
@@ -221,8 +221,8 @@
    </desc>
   </property>
 
-  <property id="gtk.gtkdialog.property.action_area" type="ro">
-   <propname>action_area</propname>
+  <property id="gtk.gtkdialog.property.vbox" type="ro">
+   <propname>vbox</propname>
    <proptype>GtkWidget</proptype>
    <shortdesc>
    </shortdesc>
@@ -235,13 +235,12 @@
 
  <signals>
 
-  <signal id="gtk.gtkdialog.signal.response">
-   <signalname>response</signalname>
+  <signal id="gtk.gtkdialog.signal.close">
+   <signalname>close</signalname>
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <cbfunction>callback</cbfunction></funcdef>
      <paramdef>GtkDialog <parameter>dialog</parameter></paramdef>
-     <paramdef>int <parameter>UNKNOWN</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -251,12 +250,13 @@
    </desc>
   </signal>
   
-  <signal id="gtk.gtkdialog.signal.close">
-   <signalname>close</signalname>
+  <signal id="gtk.gtkdialog.signal.response">
+   <signalname>response</signalname>
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <cbfunction>callback</cbfunction></funcdef>
      <paramdef>GtkDialog <parameter>dialog</parameter></paramdef>
+     <paramdef>int <parameter>UNKNOWN</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>

@@ -643,14 +643,12 @@
 
  <signals>
 
-  <signal id="gtk.gtkiconview.signal.move-cursor">
-   <signalname>move-cursor</signalname>
+  <signal id="gtk.gtkiconview.signal.activate-cursor-item">
+   <signalname>activate-cursor-item</signalname>
    <funcsynopsis>
     <funcprototype>
      <funcdef>bool <cbfunction>callback</cbfunction></funcdef>
      <paramdef>GtkIconView <parameter>iconview</parameter></paramdef>
-     <paramdef>GtkMovementStep <parameter>UNKNOWN</parameter></paramdef>
-     <paramdef>int <parameter>UNKNOWN</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -660,14 +658,30 @@
    </desc>
   </signal>
   
-  <signal id="gtk.gtkiconview.signal.set-scroll-adjustments">
-   <signalname>set-scroll-adjustments</signalname>
+  <signal id="gtk.gtkiconview.signal.item-activated">
+   <signalname>item-activated</signalname>
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <cbfunction>callback</cbfunction></funcdef>
      <paramdef>GtkIconView <parameter>iconview</parameter></paramdef>
-     <paramdef>GtkAdjustment <parameter>UNKNOWN</parameter></paramdef>
-     <paramdef>GtkAdjustment <parameter>UNKNOWN</parameter></paramdef>
+     <paramdef><!-- was: GtkTreePath -->XXX <parameter>UNKNOWN</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </signal>
+  
+  <signal id="gtk.gtkiconview.signal.move-cursor">
+   <signalname>move-cursor</signalname>
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>bool <cbfunction>callback</cbfunction></funcdef>
+     <paramdef>GtkIconView <parameter>iconview</parameter></paramdef>
+     <paramdef>GtkMovementStep <parameter>UNKNOWN</parameter></paramdef>
+     <paramdef>int <parameter>UNKNOWN</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -692,8 +706,8 @@
    </desc>
   </signal>
   
-  <signal id="gtk.gtkiconview.signal.unselect-all">
-   <signalname>unselect-all</signalname>
+  <signal id="gtk.gtkiconview.signal.select-cursor-item">
+   <signalname>select-cursor-item</signalname>
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <cbfunction>callback</cbfunction></funcdef>
@@ -722,28 +736,14 @@
    </desc>
   </signal>
   
-  <signal id="gtk.gtkiconview.signal.item-activated">
-   <signalname>item-activated</signalname>
+  <signal id="gtk.gtkiconview.signal.set-scroll-adjustments">
+   <signalname>set-scroll-adjustments</signalname>
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <cbfunction>callback</cbfunction></funcdef>
      <paramdef>GtkIconView <parameter>iconview</parameter></paramdef>
-     <paramdef><!-- was: GtkTreePath -->XXX <parameter>UNKNOWN</parameter></paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </signal>
-  
-  <signal id="gtk.gtkiconview.signal.select-cursor-item">
-   <signalname>select-cursor-item</signalname>
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
-     <paramdef>GtkIconView <parameter>iconview</parameter></paramdef>
+     <paramdef>GtkAdjustment <parameter>UNKNOWN</parameter></paramdef>
+     <paramdef>GtkAdjustment <parameter>UNKNOWN</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -768,11 +768,11 @@
    </desc>
   </signal>
   
-  <signal id="gtk.gtkiconview.signal.activate-cursor-item">
-   <signalname>activate-cursor-item</signalname>
+  <signal id="gtk.gtkiconview.signal.unselect-all">
+   <signalname>unselect-all</signalname>
    <funcsynopsis>
     <funcprototype>
-     <funcdef>bool <cbfunction>callback</cbfunction></funcdef>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
      <paramdef>GtkIconView <parameter>iconview</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>

@@ -548,20 +548,6 @@
 
  <properties>
 
-  <property id="gtk.gtkcontainer.property.focus_child" type="ro">
-   <propname>focus_child</propname>
-   <proptype>GtkWidget</proptype>
-   <shortdesc>
-   </shortdesc>
-   <desc>
-    <para>
-     See also: 
-     <function class="GtkContainer">set_focus_child</function>
-    </para>
-
-   </desc>
-  </property>
-
   <property id="gtk.gtkcontainer.property.border_width" type="ro">
    <propname>border_width</propname>
    <proptype>int</proptype>
@@ -577,8 +563,22 @@
    </desc>
   </property>
 
-  <property id="gtk.gtkcontainer.property.need_resize" type="ro">
-   <propname>need_resize</propname>
+  <property id="gtk.gtkcontainer.property.focus_child" type="ro">
+   <propname>focus_child</propname>
+   <proptype>GtkWidget</proptype>
+   <shortdesc>
+   </shortdesc>
+   <desc>
+    <para>
+     See also: 
+     <function class="GtkContainer">set_focus_child</function>
+    </para>
+
+   </desc>
+  </property>
+
+  <property id="gtk.gtkcontainer.property.has_focus_chain" type="ro">
+   <propname>has_focus_chain</propname>
    <proptype>int</proptype>
    <shortdesc>
    </shortdesc>
@@ -587,17 +587,12 @@
    </desc>
   </property>
 
-  <property id="gtk.gtkcontainer.property.resize_mode" type="ro">
-   <propname>resize_mode</propname>
+  <property id="gtk.gtkcontainer.property.need_resize" type="ro">
+   <propname>need_resize</propname>
    <proptype>int</proptype>
    <shortdesc>
    </shortdesc>
    <desc>
-    <para>
-     See also: 
-     <function class="GtkContainer">get_resize_mode</function>, 
-     <function class="GtkContainer">set_resize_mode</function>
-    </para>
 
    </desc>
   </property>
@@ -616,12 +611,17 @@
    </desc>
   </property>
 
-  <property id="gtk.gtkcontainer.property.has_focus_chain" type="ro">
-   <propname>has_focus_chain</propname>
+  <property id="gtk.gtkcontainer.property.resize_mode" type="ro">
+   <propname>resize_mode</propname>
    <proptype>int</proptype>
    <shortdesc>
    </shortdesc>
    <desc>
+    <para>
+     See also: 
+     <function class="GtkContainer">get_resize_mode</function>, 
+     <function class="GtkContainer">set_resize_mode</function>
+    </para>
 
    </desc>
   </property>
@@ -646,13 +646,12 @@
    </desc>
   </signal>
   
-  <signal id="gtk.gtkcontainer.signal.remove">
-   <signalname>remove</signalname>
+  <signal id="gtk.gtkcontainer.signal.check-resize">
+   <signalname>check-resize</signalname>
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <cbfunction>callback</cbfunction></funcdef>
      <paramdef>GtkContainer <parameter>container</parameter></paramdef>
-     <paramdef>GtkWidget <parameter>UNKNOWN</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -662,12 +661,13 @@
    </desc>
   </signal>
   
-  <signal id="gtk.gtkcontainer.signal.check-resize">
-   <signalname>check-resize</signalname>
+  <signal id="gtk.gtkcontainer.signal.remove">
+   <signalname>remove</signalname>
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <cbfunction>callback</cbfunction></funcdef>
      <paramdef>GtkContainer <parameter>container</parameter></paramdef>
+     <paramdef>GtkWidget <parameter>UNKNOWN</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>

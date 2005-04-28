@@ -80,98 +80,8 @@
 
  <signals>
 
-  <signal id="gtk.gtklistitem.signal.toggle-focus-row">
-   <signalname>toggle-focus-row</signalname>
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
-     <paramdef>GtkListItem <parameter>listitem</parameter></paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </signal>
-  
-  <signal id="gtk.gtklistitem.signal.select-all">
-   <signalname>select-all</signalname>
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
-     <paramdef>GtkListItem <parameter>listitem</parameter></paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </signal>
-  
-  <signal id="gtk.gtklistitem.signal.unselect-all">
-   <signalname>unselect-all</signalname>
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
-     <paramdef>GtkListItem <parameter>listitem</parameter></paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </signal>
-  
-  <signal id="gtk.gtklistitem.signal.undo-selection">
-   <signalname>undo-selection</signalname>
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
-     <paramdef>GtkListItem <parameter>listitem</parameter></paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </signal>
-  
-  <signal id="gtk.gtklistitem.signal.start-selection">
-   <signalname>start-selection</signalname>
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
-     <paramdef>GtkListItem <parameter>listitem</parameter></paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </signal>
-  
   <signal id="gtk.gtklistitem.signal.end-selection">
    <signalname>end-selection</signalname>
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
-     <paramdef>GtkListItem <parameter>listitem</parameter></paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </signal>
-  
-  <signal id="gtk.gtklistitem.signal.toggle-add-mode">
-   <signalname>toggle-add-mode</signalname>
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <cbfunction>callback</cbfunction></funcdef>
@@ -203,6 +113,23 @@
    </desc>
   </signal>
   
+  <signal id="gtk.gtklistitem.signal.scroll-horizontal">
+   <signalname>scroll-horizontal</signalname>
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
+     <paramdef>GtkListItem <parameter>listitem</parameter></paramdef>
+     <paramdef>GtkScrollType <parameter>UNKNOWN</parameter></paramdef>
+     <paramdef>double <parameter>UNKNOWN</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </signal>
+  
   <signal id="gtk.gtklistitem.signal.scroll-vertical">
    <signalname>scroll-vertical</signalname>
    <funcsynopsis>
@@ -220,14 +147,87 @@
    </desc>
   </signal>
   
-  <signal id="gtk.gtklistitem.signal.scroll-horizontal">
-   <signalname>scroll-horizontal</signalname>
+  <signal id="gtk.gtklistitem.signal.select-all">
+   <signalname>select-all</signalname>
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <cbfunction>callback</cbfunction></funcdef>
      <paramdef>GtkListItem <parameter>listitem</parameter></paramdef>
-     <paramdef>GtkScrollType <parameter>UNKNOWN</parameter></paramdef>
-     <paramdef>double <parameter>UNKNOWN</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </signal>
+  
+  <signal id="gtk.gtklistitem.signal.start-selection">
+   <signalname>start-selection</signalname>
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
+     <paramdef>GtkListItem <parameter>listitem</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </signal>
+  
+  <signal id="gtk.gtklistitem.signal.toggle-add-mode">
+   <signalname>toggle-add-mode</signalname>
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
+     <paramdef>GtkListItem <parameter>listitem</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </signal>
+  
+  <signal id="gtk.gtklistitem.signal.toggle-focus-row">
+   <signalname>toggle-focus-row</signalname>
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
+     <paramdef>GtkListItem <parameter>listitem</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </signal>
+  
+  <signal id="gtk.gtklistitem.signal.undo-selection">
+   <signalname>undo-selection</signalname>
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
+     <paramdef>GtkListItem <parameter>listitem</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </signal>
+  
+  <signal id="gtk.gtklistitem.signal.unselect-all">
+   <signalname>unselect-all</signalname>
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
+     <paramdef>GtkListItem <parameter>listitem</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>

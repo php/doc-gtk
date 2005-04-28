@@ -1248,16 +1248,12 @@
 
  <properties>
 
-  <property id="gtk.gtkclist.property.selection" type="ro">
-   <propname>selection</propname>
-   <proptype></proptype>
+  <property id="gtk.gtkclist.property.columns" type="ro">
+   <propname>columns</propname>
+   <proptype>int</proptype>
    <shortdesc>
    </shortdesc>
    <desc>
-    <para>
-     See also: 
-     <function class="GtkCList">undo_selection</function>
-    </para>
 
    </desc>
   </property>
@@ -1286,12 +1282,16 @@
    </desc>
   </property>
 
-  <property id="gtk.gtkclist.property.columns" type="ro">
-   <propname>columns</propname>
-   <proptype>int</proptype>
+  <property id="gtk.gtkclist.property.selection" type="ro">
+   <propname>selection</propname>
+   <proptype></proptype>
    <shortdesc>
    </shortdesc>
    <desc>
+    <para>
+     See also: 
+     <function class="GtkCList">undo_selection</function>
+    </para>
 
    </desc>
   </property>
@@ -1300,67 +1300,12 @@
 
  <signals>
 
-  <signal id="gtk.gtkclist.signal.set-scroll-adjustments">
-   <signalname>set-scroll-adjustments</signalname>
+  <signal id="gtk.gtkclist.signal.abort-column-resize">
+   <signalname>abort-column-resize</signalname>
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <cbfunction>callback</cbfunction></funcdef>
      <paramdef>GtkCList <parameter>clist</parameter></paramdef>
-     <paramdef>GtkAdjustment <parameter>UNKNOWN</parameter></paramdef>
-     <paramdef>GtkAdjustment <parameter>UNKNOWN</parameter></paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </signal>
-  
-  <signal id="gtk.gtkclist.signal.select-row">
-   <signalname>select-row</signalname>
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
-     <paramdef>GtkCList <parameter>clist</parameter></paramdef>
-     <paramdef>int <parameter>UNKNOWN</parameter></paramdef>
-     <paramdef>int <parameter>UNKNOWN</parameter></paramdef>
-     <paramdef><!-- was: GdkEvent -->XXX <parameter>UNKNOWN</parameter></paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </signal>
-  
-  <signal id="gtk.gtkclist.signal.unselect-row">
-   <signalname>unselect-row</signalname>
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
-     <paramdef>GtkCList <parameter>clist</parameter></paramdef>
-     <paramdef>int <parameter>UNKNOWN</parameter></paramdef>
-     <paramdef>int <parameter>UNKNOWN</parameter></paramdef>
-     <paramdef><!-- was: GdkEvent -->XXX <parameter>UNKNOWN</parameter></paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </signal>
-  
-  <signal id="gtk.gtkclist.signal.row-move">
-   <signalname>row-move</signalname>
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
-     <paramdef>GtkCList <parameter>clist</parameter></paramdef>
-     <paramdef>int <parameter>UNKNOWN</parameter></paramdef>
-     <paramdef>int <parameter>UNKNOWN</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -1386,115 +1331,8 @@
    </desc>
   </signal>
   
-  <signal id="gtk.gtkclist.signal.resize-column">
-   <signalname>resize-column</signalname>
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
-     <paramdef>GtkCList <parameter>clist</parameter></paramdef>
-     <paramdef>int <parameter>UNKNOWN</parameter></paramdef>
-     <paramdef>int <parameter>UNKNOWN</parameter></paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </signal>
-  
-  <signal id="gtk.gtkclist.signal.toggle-focus-row">
-   <signalname>toggle-focus-row</signalname>
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
-     <paramdef>GtkCList <parameter>clist</parameter></paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </signal>
-  
-  <signal id="gtk.gtkclist.signal.select-all">
-   <signalname>select-all</signalname>
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
-     <paramdef>GtkCList <parameter>clist</parameter></paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </signal>
-  
-  <signal id="gtk.gtkclist.signal.unselect-all">
-   <signalname>unselect-all</signalname>
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
-     <paramdef>GtkCList <parameter>clist</parameter></paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </signal>
-  
-  <signal id="gtk.gtkclist.signal.undo-selection">
-   <signalname>undo-selection</signalname>
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
-     <paramdef>GtkCList <parameter>clist</parameter></paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </signal>
-  
-  <signal id="gtk.gtkclist.signal.start-selection">
-   <signalname>start-selection</signalname>
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
-     <paramdef>GtkCList <parameter>clist</parameter></paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </signal>
-  
   <signal id="gtk.gtkclist.signal.end-selection">
    <signalname>end-selection</signalname>
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
-     <paramdef>GtkCList <parameter>clist</parameter></paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </signal>
-  
-  <signal id="gtk.gtkclist.signal.toggle-add-mode">
-   <signalname>toggle-add-mode</signalname>
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <cbfunction>callback</cbfunction></funcdef>
@@ -1526,14 +1364,31 @@
    </desc>
   </signal>
   
-  <signal id="gtk.gtkclist.signal.scroll-vertical">
-   <signalname>scroll-vertical</signalname>
+  <signal id="gtk.gtkclist.signal.resize-column">
+   <signalname>resize-column</signalname>
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <cbfunction>callback</cbfunction></funcdef>
      <paramdef>GtkCList <parameter>clist</parameter></paramdef>
-     <paramdef>GtkScrollType <parameter>UNKNOWN</parameter></paramdef>
-     <paramdef>double <parameter>UNKNOWN</parameter></paramdef>
+     <paramdef>int <parameter>UNKNOWN</parameter></paramdef>
+     <paramdef>int <parameter>UNKNOWN</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </signal>
+  
+  <signal id="gtk.gtkclist.signal.row-move">
+   <signalname>row-move</signalname>
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
+     <paramdef>GtkCList <parameter>clist</parameter></paramdef>
+     <paramdef>int <parameter>UNKNOWN</parameter></paramdef>
+     <paramdef>int <parameter>UNKNOWN</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -1560,12 +1415,157 @@
    </desc>
   </signal>
   
-  <signal id="gtk.gtkclist.signal.abort-column-resize">
-   <signalname>abort-column-resize</signalname>
+  <signal id="gtk.gtkclist.signal.scroll-vertical">
+   <signalname>scroll-vertical</signalname>
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <cbfunction>callback</cbfunction></funcdef>
      <paramdef>GtkCList <parameter>clist</parameter></paramdef>
+     <paramdef>GtkScrollType <parameter>UNKNOWN</parameter></paramdef>
+     <paramdef>double <parameter>UNKNOWN</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </signal>
+  
+  <signal id="gtk.gtkclist.signal.select-all">
+   <signalname>select-all</signalname>
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
+     <paramdef>GtkCList <parameter>clist</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </signal>
+  
+  <signal id="gtk.gtkclist.signal.select-row">
+   <signalname>select-row</signalname>
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
+     <paramdef>GtkCList <parameter>clist</parameter></paramdef>
+     <paramdef>int <parameter>UNKNOWN</parameter></paramdef>
+     <paramdef>int <parameter>UNKNOWN</parameter></paramdef>
+     <paramdef><!-- was: GdkEvent -->XXX <parameter>UNKNOWN</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </signal>
+  
+  <signal id="gtk.gtkclist.signal.set-scroll-adjustments">
+   <signalname>set-scroll-adjustments</signalname>
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
+     <paramdef>GtkCList <parameter>clist</parameter></paramdef>
+     <paramdef>GtkAdjustment <parameter>UNKNOWN</parameter></paramdef>
+     <paramdef>GtkAdjustment <parameter>UNKNOWN</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </signal>
+  
+  <signal id="gtk.gtkclist.signal.start-selection">
+   <signalname>start-selection</signalname>
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
+     <paramdef>GtkCList <parameter>clist</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </signal>
+  
+  <signal id="gtk.gtkclist.signal.toggle-add-mode">
+   <signalname>toggle-add-mode</signalname>
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
+     <paramdef>GtkCList <parameter>clist</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </signal>
+  
+  <signal id="gtk.gtkclist.signal.toggle-focus-row">
+   <signalname>toggle-focus-row</signalname>
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
+     <paramdef>GtkCList <parameter>clist</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </signal>
+  
+  <signal id="gtk.gtkclist.signal.undo-selection">
+   <signalname>undo-selection</signalname>
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
+     <paramdef>GtkCList <parameter>clist</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </signal>
+  
+  <signal id="gtk.gtkclist.signal.unselect-all">
+   <signalname>unselect-all</signalname>
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
+     <paramdef>GtkCList <parameter>clist</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </signal>
+  
+  <signal id="gtk.gtkclist.signal.unselect-row">
+   <signalname>unselect-row</signalname>
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
+     <paramdef>GtkCList <parameter>clist</parameter></paramdef>
+     <paramdef>int <parameter>UNKNOWN</parameter></paramdef>
+     <paramdef>int <parameter>UNKNOWN</parameter></paramdef>
+     <paramdef><!-- was: GdkEvent -->XXX <parameter>UNKNOWN</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>

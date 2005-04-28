@@ -179,6 +179,36 @@
 
  <properties>
 
+  <property id="gtk.gtkfileselection.property.action_area" type="ro">
+   <propname>action_area</propname>
+   <proptype>GtkWidget</proptype>
+   <shortdesc>
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </property>
+
+  <property id="gtk.gtkfileselection.property.button_area" type="ro">
+   <propname>button_area</propname>
+   <proptype>GtkWidget</proptype>
+   <shortdesc>
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </property>
+
+  <property id="gtk.gtkfileselection.property.cancel_button" type="ro">
+   <propname>cancel_button</propname>
+   <proptype>GtkWidget</proptype>
+   <shortdesc>
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </property>
+
   <property id="gtk.gtkfileselection.property.dir_list" type="ro">
    <propname>dir_list</propname>
    <proptype>GtkWidget</proptype>
@@ -199,8 +229,8 @@
    </desc>
   </property>
 
-  <property id="gtk.gtkfileselection.property.selection_entry" type="ro">
-   <propname>selection_entry</propname>
+  <property id="gtk.gtkfileselection.property.fileop_c_dir" type="ro">
+   <propname>fileop_c_dir</propname>
    <proptype>GtkWidget</proptype>
    <shortdesc>
    </shortdesc>
@@ -209,68 +239,8 @@
    </desc>
   </property>
 
-  <property id="gtk.gtkfileselection.property.selection_text" type="ro">
-   <propname>selection_text</propname>
-   <proptype>GtkWidget</proptype>
-   <shortdesc>
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </property>
-
-  <property id="gtk.gtkfileselection.property.main_vbox" type="ro">
-   <propname>main_vbox</propname>
-   <proptype>GtkWidget</proptype>
-   <shortdesc>
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </property>
-
-  <property id="gtk.gtkfileselection.property.ok_button" type="ro">
-   <propname>ok_button</propname>
-   <proptype>GtkWidget</proptype>
-   <shortdesc>
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </property>
-
-  <property id="gtk.gtkfileselection.property.cancel_button" type="ro">
-   <propname>cancel_button</propname>
-   <proptype>GtkWidget</proptype>
-   <shortdesc>
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </property>
-
-  <property id="gtk.gtkfileselection.property.help_button" type="ro">
-   <propname>help_button</propname>
-   <proptype>GtkWidget</proptype>
-   <shortdesc>
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </property>
-
-  <property id="gtk.gtkfileselection.property.history_pulldown" type="ro">
-   <propname>history_pulldown</propname>
-   <proptype>GtkWidget</proptype>
-   <shortdesc>
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </property>
-
-  <property id="gtk.gtkfileselection.property.history_menu" type="ro">
-   <propname>history_menu</propname>
+  <property id="gtk.gtkfileselection.property.fileop_del_file" type="ro">
+   <propname>fileop_del_file</propname>
    <proptype>GtkWidget</proptype>
    <shortdesc>
    </shortdesc>
@@ -309,26 +279,6 @@
    </desc>
   </property>
 
-  <property id="gtk.gtkfileselection.property.fileop_c_dir" type="ro">
-   <propname>fileop_c_dir</propname>
-   <proptype>GtkWidget</proptype>
-   <shortdesc>
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </property>
-
-  <property id="gtk.gtkfileselection.property.fileop_del_file" type="ro">
-   <propname>fileop_del_file</propname>
-   <proptype>GtkWidget</proptype>
-   <shortdesc>
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </property>
-
   <property id="gtk.gtkfileselection.property.fileop_ren_file" type="ro">
    <propname>fileop_ren_file</propname>
    <proptype>GtkWidget</proptype>
@@ -339,8 +289,8 @@
    </desc>
   </property>
 
-  <property id="gtk.gtkfileselection.property.button_area" type="ro">
-   <propname>button_area</propname>
+  <property id="gtk.gtkfileselection.property.help_button" type="ro">
+   <propname>help_button</propname>
    <proptype>GtkWidget</proptype>
    <shortdesc>
    </shortdesc>
@@ -349,8 +299,58 @@
    </desc>
   </property>
 
-  <property id="gtk.gtkfileselection.property.action_area" type="ro">
-   <propname>action_area</propname>
+  <property id="gtk.gtkfileselection.property.history_menu" type="ro">
+   <propname>history_menu</propname>
+   <proptype>GtkWidget</proptype>
+   <shortdesc>
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </property>
+
+  <property id="gtk.gtkfileselection.property.history_pulldown" type="ro">
+   <propname>history_pulldown</propname>
+   <proptype>GtkWidget</proptype>
+   <shortdesc>
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </property>
+
+  <property id="gtk.gtkfileselection.property.main_vbox" type="ro">
+   <propname>main_vbox</propname>
+   <proptype>GtkWidget</proptype>
+   <shortdesc>
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </property>
+
+  <property id="gtk.gtkfileselection.property.ok_button" type="ro">
+   <propname>ok_button</propname>
+   <proptype>GtkWidget</proptype>
+   <shortdesc>
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </property>
+
+  <property id="gtk.gtkfileselection.property.selection_entry" type="ro">
+   <propname>selection_entry</propname>
+   <proptype>GtkWidget</proptype>
+   <shortdesc>
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </property>
+
+  <property id="gtk.gtkfileselection.property.selection_text" type="ro">
+   <propname>selection_text</propname>
    <proptype>GtkWidget</proptype>
    <shortdesc>
    </shortdesc>

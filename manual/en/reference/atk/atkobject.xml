@@ -12,10 +12,10 @@
 
  <methods>
 
-  <method id="atk.atkobject.method.get_name">
+  <method id="atk.atkobject.method.connect_property_change_handler">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>string <function>get_name</function></funcdef>
+     <funcdef>int <function>connect_property_change_handler</function></funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
@@ -25,7 +25,7 @@
    <desc>
     <para>
      See also: 
-     <function class="AtkObject">set_name</function>
+     <function class="AtkObject">remove_property_change_handler</function>
     </para>
 
    </desc>
@@ -50,6 +50,85 @@
    </desc>
   </method>
 
+  <method id="atk.atkobject.method.get_index_in_parent">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>int <function>get_index_in_parent</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="atk.atkobject.method.get_layer">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>AtkLayer <function>get_layer</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="atk.atkobject.method.get_mdi_zorder">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>int <function>get_mdi_zorder</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="atk.atkobject.method.get_n_accessible_children">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>int <function>get_n_accessible_children</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="atk.atkobject.method.get_name">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>string <function>get_name</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+    <para>
+     See also: 
+     <function class="AtkObject">set_name</function>
+    </para>
+
+   </desc>
+  </method>
+
   <method id="atk.atkobject.method.get_parent">
    <funcsynopsis>
     <funcprototype>
@@ -69,10 +148,29 @@
    </desc>
   </method>
 
-  <method id="atk.atkobject.method.get_n_accessible_children">
+  <method id="atk.atkobject.method.get_role">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>int <function>get_n_accessible_children</function></funcdef>
+     <funcdef>AtkRole <function>get_role</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+    <para>
+     See also: 
+     <function class="AtkObject">set_role</function>
+    </para>
+
+   </desc>
+  </method>
+
+  <method id="atk.atkobject.method.notify_state_change">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>notify_state_change</function></funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
@@ -114,55 +212,6 @@
    </desc>
   </method>
 
-  <method id="atk.atkobject.method.get_role">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>AtkRole <function>get_role</function></funcdef>
-     <paramdef>void</paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-   <desc>
-    <para>
-     See also: 
-     <function class="AtkObject">set_role</function>
-    </para>
-
-   </desc>
-  </method>
-
-  <method id="atk.atkobject.method.get_layer">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>AtkLayer <function>get_layer</function></funcdef>
-     <paramdef>void</paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </method>
-
-  <method id="atk.atkobject.method.get_mdi_zorder">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>int <function>get_mdi_zorder</function></funcdef>
-     <paramdef>void</paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </method>
-
   <method id="atk.atkobject.method.ref_state_set">
    <funcsynopsis>
     <funcprototype>
@@ -178,26 +227,11 @@
    </desc>
   </method>
 
-  <method id="atk.atkobject.method.get_index_in_parent">
+  <method id="atk.atkobject.method.remove_property_change_handler">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>int <function>get_index_in_parent</function></funcdef>
-     <paramdef>void</paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </method>
-
-  <method id="atk.atkobject.method.set_name">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>void <function>set_name</function></funcdef>
-     <paramdef>string <parameter>name</parameter></paramdef>
+     <funcdef>void <function>remove_property_change_handler</function></funcdef>
+     <paramdef>int <parameter>handler_id</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -206,7 +240,7 @@
    <desc>
     <para>
      See also: 
-     <function class="AtkObject">get_name</function>
+     <function class="AtkObject">connect_property_change_handler</function>
     </para>
 
    </desc>
@@ -226,6 +260,25 @@
     <para>
      See also: 
      <function class="AtkObject">get_description</function>
+    </para>
+
+   </desc>
+  </method>
+
+  <method id="atk.atkobject.method.set_name">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_name</function></funcdef>
+     <paramdef>string <parameter>name</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+    <para>
+     See also: 
+     <function class="AtkObject">get_name</function>
     </para>
 
    </desc>
@@ -269,63 +322,26 @@
    </desc>
   </method>
 
-  <method id="atk.atkobject.method.connect_property_change_handler">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>int <function>connect_property_change_handler</function></funcdef>
-     <paramdef>void</paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-   <desc>
-    <para>
-     See also: 
-     <function class="AtkObject">remove_property_change_handler</function>
-    </para>
-
-   </desc>
-  </method>
-
-  <method id="atk.atkobject.method.remove_property_change_handler">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>void <function>remove_property_change_handler</function></funcdef>
-     <paramdef>int <parameter>handler_id</parameter></paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-   <desc>
-    <para>
-     See also: 
-     <function class="AtkObject">connect_property_change_handler</function>
-    </para>
-
-   </desc>
-  </method>
-
-  <method id="atk.atkobject.method.notify_state_change">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>void <function>notify_state_change</function></funcdef>
-     <paramdef>void</paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </method>
-
  </methods>
 
  <signals>
 
+  <signal id="atk.atkobject.signal.active-descendant-changed">
+   <signalname>active-descendant-changed</signalname>
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
+     <paramdef>AtkObject <parameter>object</parameter></paramdef>
+     <paramdef><!-- was: gpointer -->XXX <parameter>UNKNOWN</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </signal>
+  
   <signal id="atk.atkobject.signal.children-changed">
    <signalname>children-changed</signalname>
    <funcsynopsis>
@@ -398,22 +414,6 @@
     <funcprototype>
      <funcdef>void <cbfunction>callback</cbfunction></funcdef>
      <paramdef>AtkObject <parameter>object</parameter></paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </signal>
-  
-  <signal id="atk.atkobject.signal.active-descendant-changed">
-   <signalname>active-descendant-changed</signalname>
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
-     <paramdef>AtkObject <parameter>object</parameter></paramdef>
-     <paramdef><!-- was: gpointer -->XXX <parameter>UNKNOWN</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>

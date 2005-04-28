@@ -199,8 +199,41 @@
 
  <signals>
 
-  <signal id="gtk.gtkimcontext.signal.preedit-start">
-   <signalname>preedit-start</signalname>
+  <signal id="gtk.gtkimcontext.signal.commit">
+   <signalname>commit</signalname>
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
+     <paramdef>GtkIMContext <parameter>imcontext</parameter></paramdef>
+     <paramdef><!-- was: gchararray -->XXX <parameter>UNKNOWN</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </signal>
+  
+  <signal id="gtk.gtkimcontext.signal.delete-surrounding">
+   <signalname>delete-surrounding</signalname>
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>bool <cbfunction>callback</cbfunction></funcdef>
+     <paramdef>GtkIMContext <parameter>imcontext</parameter></paramdef>
+     <paramdef>int <parameter>UNKNOWN</parameter></paramdef>
+     <paramdef>int <parameter>UNKNOWN</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </signal>
+  
+  <signal id="gtk.gtkimcontext.signal.preedit-changed">
+   <signalname>preedit-changed</signalname>
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <cbfunction>callback</cbfunction></funcdef>
@@ -229,28 +262,12 @@
    </desc>
   </signal>
   
-  <signal id="gtk.gtkimcontext.signal.preedit-changed">
-   <signalname>preedit-changed</signalname>
+  <signal id="gtk.gtkimcontext.signal.preedit-start">
+   <signalname>preedit-start</signalname>
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <cbfunction>callback</cbfunction></funcdef>
      <paramdef>GtkIMContext <parameter>imcontext</parameter></paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </signal>
-  
-  <signal id="gtk.gtkimcontext.signal.commit">
-   <signalname>commit</signalname>
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
-     <paramdef>GtkIMContext <parameter>imcontext</parameter></paramdef>
-     <paramdef><!-- was: gchararray -->XXX <parameter>UNKNOWN</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -266,23 +283,6 @@
     <funcprototype>
      <funcdef>bool <cbfunction>callback</cbfunction></funcdef>
      <paramdef>GtkIMContext <parameter>imcontext</parameter></paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </signal>
-  
-  <signal id="gtk.gtkimcontext.signal.delete-surrounding">
-   <signalname>delete-surrounding</signalname>
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>bool <cbfunction>callback</cbfunction></funcdef>
-     <paramdef>GtkIMContext <parameter>imcontext</parameter></paramdef>
-     <paramdef>int <parameter>UNKNOWN</parameter></paramdef>
-     <paramdef>int <parameter>UNKNOWN</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>

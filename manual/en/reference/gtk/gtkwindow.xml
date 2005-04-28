@@ -31,21 +31,6 @@
 
  <methods>
 
-  <method id="gtk.gtkwindow.method.tooltips_get_info_from_tip_window">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>bool <function>tooltips_get_info_from_tip_window</function></funcdef>
-     <paramdef>void</paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </method>
-
   <method id="gtk.gtkwindow.method.activate_default">
    <funcsynopsis>
     <funcprototype>
@@ -1517,6 +1502,21 @@
    </desc>
   </method>
 
+  <method id="gtk.gtkwindow.method.tooltips_get_info_from_tip_window">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>bool <function>tooltips_get_info_from_tip_window</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
   <method id="gtk.gtkwindow.method.unfullscreen">
    <funcsynopsis>
     <funcprototype>
@@ -1566,103 +1566,8 @@
 
  <properties>
 
-  <property id="gtk.gtkwindow.property.title" type="ro">
-   <propname>title</propname>
-   <proptype>string</proptype>
-   <shortdesc>
-   </shortdesc>
-   <desc>
-    <para>
-     See also: 
-     <function class="GtkWindow">get_title</function>, 
-     <function class="GtkWindow">set_title</function>
-    </para>
-
-   </desc>
-  </property>
-
-  <property id="gtk.gtkwindow.property.wmclass_name" type="ro">
-   <propname>wmclass_name</propname>
-   <proptype>string</proptype>
-   <shortdesc>
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </property>
-
-  <property id="gtk.gtkwindow.property.wmclass_class" type="ro">
-   <propname>wmclass_class</propname>
-   <proptype>string</proptype>
-   <shortdesc>
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </property>
-
-  <property id="gtk.gtkwindow.property.wm_role" type="ro">
-   <propname>wm_role</propname>
-   <proptype>string</proptype>
-   <shortdesc>
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </property>
-
-  <property id="gtk.gtkwindow.property.focus_widget" type="ro">
-   <propname>focus_widget</propname>
-   <proptype>GtkWidget</proptype>
-   <shortdesc>
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </property>
-
-  <property id="gtk.gtkwindow.property.default_widget" type="ro">
-   <propname>default_widget</propname>
-   <proptype>GtkWidget</proptype>
-   <shortdesc>
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </property>
-
-  <property id="gtk.gtkwindow.property.transient_parent" type="ro">
-   <propname>transient_parent</propname>
-   <proptype>GtkWindow</proptype>
-   <shortdesc>
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </property>
-
-  <property id="gtk.gtkwindow.property.frame" type="ro">
-   <propname>frame</propname>
-   <proptype></proptype>
-   <shortdesc>
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </property>
-
-  <property id="gtk.gtkwindow.property.group" type="ro">
-   <propname>group</propname>
-   <proptype>GtkWindowGroup</proptype>
-   <shortdesc>
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </property>
-
-  <property id="gtk.gtkwindow.property.configure_request_count" type="ro">
-   <propname>configure_request_count</propname>
+  <property id="gtk.gtkwindow.property.allow_grow" type="ro">
+   <propname>allow_grow</propname>
    <proptype>int</proptype>
    <shortdesc>
    </shortdesc>
@@ -1681,8 +1586,8 @@
    </desc>
   </property>
 
-  <property id="gtk.gtkwindow.property.allow_grow" type="ro">
-   <propname>allow_grow</propname>
+  <property id="gtk.gtkwindow.property.configure_notify_received" type="ro">
+   <propname>configure_notify_received</propname>
    <proptype>int</proptype>
    <shortdesc>
    </shortdesc>
@@ -1691,12 +1596,232 @@
    </desc>
   </property>
 
-  <property id="gtk.gtkwindow.property.configure_notify_received" type="ro">
-   <propname>configure_notify_received</propname>
+  <property id="gtk.gtkwindow.property.configure_request_count" type="ro">
+   <propname>configure_request_count</propname>
    <proptype>int</proptype>
    <shortdesc>
    </shortdesc>
    <desc>
+
+   </desc>
+  </property>
+
+  <property id="gtk.gtkwindow.property.decorated" type="ro">
+   <propname>decorated</propname>
+   <proptype>int</proptype>
+   <shortdesc>
+   </shortdesc>
+   <desc>
+    <para>
+     See also: 
+     <function class="GtkWindow">get_decorated</function>, 
+     <function class="GtkWindow">set_decorated</function>
+    </para>
+
+   </desc>
+  </property>
+
+  <property id="gtk.gtkwindow.property.default_widget" type="ro">
+   <propname>default_widget</propname>
+   <proptype>GtkWidget</proptype>
+   <shortdesc>
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </property>
+
+  <property id="gtk.gtkwindow.property.destroy_with_parent" type="ro">
+   <propname>destroy_with_parent</propname>
+   <proptype>int</proptype>
+   <shortdesc>
+   </shortdesc>
+   <desc>
+    <para>
+     See also: 
+     <function class="GtkWindow">get_destroy_with_parent</function>, 
+     <function class="GtkWindow">set_destroy_with_parent</function>
+    </para>
+
+   </desc>
+  </property>
+
+  <property id="gtk.gtkwindow.property.focus_widget" type="ro">
+   <propname>focus_widget</propname>
+   <proptype>GtkWidget</proptype>
+   <shortdesc>
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </property>
+
+  <property id="gtk.gtkwindow.property.frame" type="ro">
+   <propname>frame</propname>
+   <proptype></proptype>
+   <shortdesc>
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </property>
+
+  <property id="gtk.gtkwindow.property.frame_bottom" type="ro">
+   <propname>frame_bottom</propname>
+   <proptype>int</proptype>
+   <shortdesc>
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </property>
+
+  <property id="gtk.gtkwindow.property.frame_left" type="ro">
+   <propname>frame_left</propname>
+   <proptype>int</proptype>
+   <shortdesc>
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </property>
+
+  <property id="gtk.gtkwindow.property.frame_right" type="ro">
+   <propname>frame_right</propname>
+   <proptype>int</proptype>
+   <shortdesc>
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </property>
+
+  <property id="gtk.gtkwindow.property.frame_top" type="ro">
+   <propname>frame_top</propname>
+   <proptype>int</proptype>
+   <shortdesc>
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </property>
+
+  <property id="gtk.gtkwindow.property.gravity" type="ro">
+   <propname>gravity</propname>
+   <proptype>int</proptype>
+   <shortdesc>
+   </shortdesc>
+   <desc>
+    <para>
+     See also: 
+     <function class="GtkWindow">get_gravity</function>, 
+     <function class="GtkWindow">set_gravity</function>
+    </para>
+
+   </desc>
+  </property>
+
+  <property id="gtk.gtkwindow.property.group" type="ro">
+   <propname>group</propname>
+   <proptype>GtkWindowGroup</proptype>
+   <shortdesc>
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </property>
+
+  <property id="gtk.gtkwindow.property.has_focus" type="ro">
+   <propname>has_focus</propname>
+   <proptype>int</proptype>
+   <shortdesc>
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </property>
+
+  <property id="gtk.gtkwindow.property.has_frame" type="ro">
+   <propname>has_frame</propname>
+   <proptype>int</proptype>
+   <shortdesc>
+   </shortdesc>
+   <desc>
+    <para>
+     See also: 
+     <function class="GtkWindow">get_has_frame</function>, 
+     <function class="GtkWindow">set_has_frame</function>
+    </para>
+
+   </desc>
+  </property>
+
+  <property id="gtk.gtkwindow.property.has_user_ref_count" type="ro">
+   <propname>has_user_ref_count</propname>
+   <proptype>int</proptype>
+   <shortdesc>
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </property>
+
+  <property id="gtk.gtkwindow.property.iconify_initially" type="ro">
+   <propname>iconify_initially</propname>
+   <proptype>int</proptype>
+   <shortdesc>
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </property>
+
+  <property id="gtk.gtkwindow.property.keys_changed_handler" type="ro">
+   <propname>keys_changed_handler</propname>
+   <proptype>int</proptype>
+   <shortdesc>
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </property>
+
+  <property id="gtk.gtkwindow.property.maximize_initially" type="ro">
+   <propname>maximize_initially</propname>
+   <proptype>int</proptype>
+   <shortdesc>
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </property>
+
+  <property id="gtk.gtkwindow.property.mnemonic_modifier" type="ro">
+   <propname>mnemonic_modifier</propname>
+   <proptype></proptype>
+   <shortdesc>
+   </shortdesc>
+   <desc>
+    <para>
+     See also: 
+     <function class="GtkWindow">get_mnemonic_modifier</function>, 
+     <function class="GtkWindow">set_mnemonic_modifier</function>
+    </para>
+
+   </desc>
+  </property>
+
+  <property id="gtk.gtkwindow.property.modal" type="ro">
+   <propname>modal</propname>
+   <proptype>int</proptype>
+   <shortdesc>
+   </shortdesc>
+   <desc>
+    <para>
+     See also: 
+     <function class="GtkWindow">get_modal</function>, 
+     <function class="GtkWindow">set_modal</function>
+    </para>
 
    </desc>
   </property>
@@ -1736,91 +1861,6 @@
    </desc>
   </property>
 
-  <property id="gtk.gtkwindow.property.type" type="ro">
-   <propname>type</propname>
-   <proptype>int</proptype>
-   <shortdesc>
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </property>
-
-  <property id="gtk.gtkwindow.property.has_user_ref_count" type="ro">
-   <propname>has_user_ref_count</propname>
-   <proptype>int</proptype>
-   <shortdesc>
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </property>
-
-  <property id="gtk.gtkwindow.property.has_focus" type="ro">
-   <propname>has_focus</propname>
-   <proptype>int</proptype>
-   <shortdesc>
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </property>
-
-  <property id="gtk.gtkwindow.property.modal" type="ro">
-   <propname>modal</propname>
-   <proptype>int</proptype>
-   <shortdesc>
-   </shortdesc>
-   <desc>
-    <para>
-     See also: 
-     <function class="GtkWindow">get_modal</function>, 
-     <function class="GtkWindow">set_modal</function>
-    </para>
-
-   </desc>
-  </property>
-
-  <property id="gtk.gtkwindow.property.destroy_with_parent" type="ro">
-   <propname>destroy_with_parent</propname>
-   <proptype>int</proptype>
-   <shortdesc>
-   </shortdesc>
-   <desc>
-    <para>
-     See also: 
-     <function class="GtkWindow">get_destroy_with_parent</function>, 
-     <function class="GtkWindow">set_destroy_with_parent</function>
-    </para>
-
-   </desc>
-  </property>
-
-  <property id="gtk.gtkwindow.property.has_frame" type="ro">
-   <propname>has_frame</propname>
-   <proptype>int</proptype>
-   <shortdesc>
-   </shortdesc>
-   <desc>
-    <para>
-     See also: 
-     <function class="GtkWindow">get_has_frame</function>, 
-     <function class="GtkWindow">set_has_frame</function>
-    </para>
-
-   </desc>
-  </property>
-
-  <property id="gtk.gtkwindow.property.iconify_initially" type="ro">
-   <propname>iconify_initially</propname>
-   <proptype>int</proptype>
-   <shortdesc>
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </property>
-
   <property id="gtk.gtkwindow.property.stick_initially" type="ro">
    <propname>stick_initially</propname>
    <proptype>int</proptype>
@@ -1831,9 +1871,24 @@
    </desc>
   </property>
 
-  <property id="gtk.gtkwindow.property.maximize_initially" type="ro">
-   <propname>maximize_initially</propname>
-   <proptype>int</proptype>
+  <property id="gtk.gtkwindow.property.title" type="ro">
+   <propname>title</propname>
+   <proptype>string</proptype>
+   <shortdesc>
+   </shortdesc>
+   <desc>
+    <para>
+     See also: 
+     <function class="GtkWindow">get_title</function>, 
+     <function class="GtkWindow">set_title</function>
+    </para>
+
+   </desc>
+  </property>
+
+  <property id="gtk.gtkwindow.property.transient_parent" type="ro">
+   <propname>transient_parent</propname>
+   <proptype>GtkWindow</proptype>
    <shortdesc>
    </shortdesc>
    <desc>
@@ -1841,17 +1896,12 @@
    </desc>
   </property>
 
-  <property id="gtk.gtkwindow.property.decorated" type="ro">
-   <propname>decorated</propname>
+  <property id="gtk.gtkwindow.property.type" type="ro">
+   <propname>type</propname>
    <proptype>int</proptype>
    <shortdesc>
    </shortdesc>
    <desc>
-    <para>
-     See also: 
-     <function class="GtkWindow">get_decorated</function>, 
-     <function class="GtkWindow">set_decorated</function>
-    </para>
 
    </desc>
   </property>
@@ -1871,24 +1921,9 @@
    </desc>
   </property>
 
-  <property id="gtk.gtkwindow.property.gravity" type="ro">
-   <propname>gravity</propname>
-   <proptype>int</proptype>
-   <shortdesc>
-   </shortdesc>
-   <desc>
-    <para>
-     See also: 
-     <function class="GtkWindow">get_gravity</function>, 
-     <function class="GtkWindow">set_gravity</function>
-    </para>
-
-   </desc>
-  </property>
-
-  <property id="gtk.gtkwindow.property.frame_left" type="ro">
-   <propname>frame_left</propname>
-   <proptype>int</proptype>
+  <property id="gtk.gtkwindow.property.wm_role" type="ro">
+   <propname>wm_role</propname>
+   <proptype>string</proptype>
    <shortdesc>
    </shortdesc>
    <desc>
@@ -1896,9 +1931,9 @@
    </desc>
   </property>
 
-  <property id="gtk.gtkwindow.property.frame_top" type="ro">
-   <propname>frame_top</propname>
-   <proptype>int</proptype>
+  <property id="gtk.gtkwindow.property.wmclass_class" type="ro">
+   <propname>wmclass_class</propname>
+   <proptype>string</proptype>
    <shortdesc>
    </shortdesc>
    <desc>
@@ -1906,47 +1941,12 @@
    </desc>
   </property>
 
-  <property id="gtk.gtkwindow.property.frame_right" type="ro">
-   <propname>frame_right</propname>
-   <proptype>int</proptype>
+  <property id="gtk.gtkwindow.property.wmclass_name" type="ro">
+   <propname>wmclass_name</propname>
+   <proptype>string</proptype>
    <shortdesc>
    </shortdesc>
    <desc>
-
-   </desc>
-  </property>
-
-  <property id="gtk.gtkwindow.property.frame_bottom" type="ro">
-   <propname>frame_bottom</propname>
-   <proptype>int</proptype>
-   <shortdesc>
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </property>
-
-  <property id="gtk.gtkwindow.property.keys_changed_handler" type="ro">
-   <propname>keys_changed_handler</propname>
-   <proptype>int</proptype>
-   <shortdesc>
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </property>
-
-  <property id="gtk.gtkwindow.property.mnemonic_modifier" type="ro">
-   <propname>mnemonic_modifier</propname>
-   <proptype></proptype>
-   <shortdesc>
-   </shortdesc>
-   <desc>
-    <para>
-     See also: 
-     <function class="GtkWindow">get_mnemonic_modifier</function>, 
-     <function class="GtkWindow">set_mnemonic_modifier</function>
-    </para>
 
    </desc>
   </property>
@@ -1955,13 +1955,27 @@
 
  <signals>
 
-  <signal id="gtk.gtkwindow.signal.set-focus">
-   <signalname>set-focus</signalname>
+  <signal id="gtk.gtkwindow.signal.activate-default">
+   <signalname>activate-default</signalname>
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <cbfunction>callback</cbfunction></funcdef>
      <paramdef>GtkWindow <parameter>window</parameter></paramdef>
-     <paramdef>GtkWidget <parameter>UNKNOWN</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </signal>
+  
+  <signal id="gtk.gtkwindow.signal.activate-focus">
+   <signalname>activate-focus</signalname>
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
+     <paramdef>GtkWindow <parameter>window</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -1987,23 +2001,8 @@
    </desc>
   </signal>
   
-  <signal id="gtk.gtkwindow.signal.activate-focus">
-   <signalname>activate-focus</signalname>
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
-     <paramdef>GtkWindow <parameter>window</parameter></paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </signal>
-  
-  <signal id="gtk.gtkwindow.signal.activate-default">
-   <signalname>activate-default</signalname>
+  <signal id="gtk.gtkwindow.signal.keys-changed">
+   <signalname>keys-changed</signalname>
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <cbfunction>callback</cbfunction></funcdef>
@@ -2033,12 +2032,13 @@
    </desc>
   </signal>
   
-  <signal id="gtk.gtkwindow.signal.keys-changed">
-   <signalname>keys-changed</signalname>
+  <signal id="gtk.gtkwindow.signal.set-focus">
+   <signalname>set-focus</signalname>
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <cbfunction>callback</cbfunction></funcdef>
      <paramdef>GtkWindow <parameter>window</parameter></paramdef>
+     <paramdef>GtkWidget <parameter>UNKNOWN</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
