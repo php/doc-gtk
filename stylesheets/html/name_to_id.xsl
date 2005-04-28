@@ -71,20 +71,20 @@
   <xsl:variable name="classid"><xsl:call-template name="get_id_from_name">
    <xsl:with-param name="classname"><xsl:value-of select="$class"/></xsl:with-param>
   </xsl:call-template></xsl:variable>
-  
-  <!-- static gtk:: or gdk:: or whatever:: function or class object function? -->
+
+  <!-- static class factory method -->
   <xsl:choose>
   
    <xsl:when test="contains($funcname,'::')">
-    <!-- seems to be a static one: static or constructor -->
+    <!-- seems to be a static one: factory method (constructor) -->
     <xsl:variable name="realclassid"><xsl:call-template name="get_id_from_name">
      <xsl:with-param name="classname"><xsl:value-of select="substring-before($funcname,'::')"/></xsl:with-param>
     </xsl:call-template></xsl:variable>
     <xsl:choose>
     
      <xsl:when test="$realclassid='no'">
-      <!-- static, no constructor -->
-      <xsl:value-of select="substring-before($funcname,'::')"/><xsl:text>.method.</xsl:text><xsl:value-of select="substring-after($funcname,'::')"/>
+      <!-- static "gdk::funcname" or "atk::funcname" or such -->
+      <xsl:value-of select="substring-before($funcname,'::')"/>.method.<xsl:value-of select="$funcname"/>
      </xsl:when>
      
      <xsl:otherwise>
@@ -96,19 +96,30 @@
    </xsl:when>
    
    <xsl:otherwise>
-    <!-- object function -->
+    <!-- object function OR static gtk/gdk/atk/pango function -->
+    <xsl:variable name="staticmethodid" select="/descendant::refentry/method[funcsynopsis/funcprototype/funcdef/function=$funcname]/@id"/>
     <xsl:choose>
-     <xsl:when test="$classid='no'">
-      <!-- seems as it is the constructor of a class like "GtkButton" just as function name -->
-      <xsl:variable name="realclassid"><xsl:call-template name="get_id_from_name">
-       <xsl:with-param name="classname"><xsl:value-of select="$funcname"/></xsl:with-param>
-      </xsl:call-template></xsl:variable>
-      <xsl:value-of select="$realclassid"/><xsl:text>.constructor</xsl:text>
+     <xsl:when test="$staticmethodid!=''">
+      <!-- static gtk:: or gdk:: function -->
+      <xsl:value-of select="$staticmethodid"/>
      </xsl:when>
      <xsl:otherwise>
-      <!-- we've got a good class id -->
-      <xsl:value-of select="$classid"/><xsl:text>.method.</xsl:text><xsl:value-of select="$funcname"/>
+      <!-- no gdk:: or gtk:: function but normal class method -->
+      <xsl:choose>
+       <xsl:when test="$classid='no'">
+        <!-- seems as it is the constructor of a class like "GtkButton" just as function name -->
+        <xsl:variable name="realclassid"><xsl:call-template name="get_id_from_name">
+         <xsl:with-param name="classname"><xsl:value-of select="$funcname"/></xsl:with-param>
+         </xsl:call-template></xsl:variable>
+        <xsl:value-of select="$realclassid"/><xsl:text>.constructor</xsl:text>
+       </xsl:when>
+       <xsl:otherwise>
+        <!-- we've got a good class id -->
+        <xsl:value-of select="$classid"/><xsl:text>.method.</xsl:text><xsl:value-of select="$funcname"/>
+       </xsl:otherwise>
+       </xsl:choose>
      </xsl:otherwise>
+     
     </xsl:choose>
    </xsl:otherwise>
   
