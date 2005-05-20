@@ -3,10 +3,16 @@
   <classtitle>GtkLabel</classtitle>
   <classparent>GtkMisc</classparent>
   <shortdesc>
-
+   A widget that displays a small to medium amount of text.
   </shortdesc>
   <desc>
-
+   <para>
+    The GtkLabel widget displays a small amount of text. 
+    As the name implies, most labels are used to label 
+    another widget such as a <classname>GtkButton</classname>, 
+    a <classname>GtkMenuItem</classname>, or a 
+    <classname>GtkOptionMenu</classname>.
+   </para>
   </desc>
  </classmeta>
 
@@ -17,28 +23,48 @@
     <funcprototype>
     <funcdef> <function>GtkLabel</function></funcdef>
     <paramdef>string <parameter><optional>string = NULL</optional></parameter></paramdef>
+    <paramdef>boolean <parameter><optional>parse_mnemonic = FALSE</optional></parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Creates a new <classname>GtkLabel</classname>.
    </shortdesc>
    <desc>
+    <para>
+     Creates a new label with an (optional) text. If you set the <parameter>parse_mnemonic</parameter> to true,
+     the label will set the mnemonic key to the first letter right to the first underscore <literal>_</literal>.
+    </para>
+    <para>
+     <example>
+      <title>Creating a GtkLabel</title>
+      <programlisting role="php">
+<![CDATA[<?php
+function rotate($label) {
+    $label->set_label($label->get_angle() . ' ' . 'label text - this <b>is</b> a' 
+      . '<span foreground="#F00">very long label</span>'
+      . 'so we can see <span background="green" size="larger"'
+      . ' weight="bold">rotation</span> better');
+    $label->set_angle($label->get_angle() + 1);
+    return true;
+}
 
-   </desc>
-  </constructor>
+$wnd = new GtkWindow();
+$wnd->set_default_size(500,500);
+$wnd->set_title('GtkLabel::set_angle');
+$wnd->connect_object('destroy', array('gtk', 'main_quit'));
 
-  <constructor id="gtk.gtklabel.constructor.new_with_mnemonic">
-   <funcsynopsis>
-    <funcprototype>
-    <funcdef> <function>GtkLabel::new_with_mnemonic</function></funcdef>
-    <paramdef>string <parameter><optional>string = NULL</optional></parameter></paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
+$label = new GtkLabel('t_est', true);
+$label->set_use_markup(true);
 
-   </shortdesc>
-   <desc>
+$wnd->add($label);
+$wnd->show_all();
 
+Gtk::timeout_add(50, 'rotate', $label);
+Gtk::main();
+?>
+]]></programlisting>
+     </example>
+    </para>
    </desc>
   </constructor>
 
@@ -54,10 +80,16 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    DEPRECATED. Gets the string of the label.
    </shortdesc>
    <desc>
-
+    <para>
+     DEPRECATED. Gets the string of the label.
+    </para>
+    <para>
+     Use <function class="GtkLabel">get_text</function> or
+     <function class="GtkLabel">get_label</function> instead.
+    </para>
    </desc>
   </method>
 
@@ -69,14 +101,16 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Gets the angle of rotation for the label.
    </shortdesc>
    <desc>
+    <para>
+     Returns the angle of rotation in degrees (0-359).
+    </para>
     <para>
      See also: 
      <function class="GtkLabel">set_angle</function>
     </para>
-
    </desc>
   </method>
 
@@ -102,19 +136,21 @@
   <method id="gtk.gtklabel.method.get_ellipsize">
    <funcsynopsis>
     <funcprototype>
-     <funcdef> <function>get_ellipsize</function></funcdef>
+     <funcdef><classname>PangoEllipsizeMode</classname> <function>get_ellipsize</function></funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the ellipsization mode is used to shorten the text.
    </shortdesc>
    <desc>
+    <para>
+     Returns the ellipsization mode is used to shorten the text.
+    </para>
     <para>
      See also: 
      <function class="GtkLabel">set_ellipsize</function>
     </para>
-
    </desc>
   </method>
 
@@ -126,9 +162,12 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the justification of the label.
    </shortdesc>
    <desc>
+    <simpara>
+     Returns the justification of the label.
+    </simpara>
     <para>
      See also: 
      <function class="GtkLabel">set_justify</function>
@@ -145,29 +184,35 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Fetches the text including any embedded underlines indicating mnemonics and Pango markup.
    </shortdesc>
    <desc>
     <para>
-     See also: 
-     <function class="GtkLabel">set_label</function>
+     Fetches the text from a label widget including any embedded 
+     underlines indicating mnemonics and Pango markup.
     </para>
-
+    <para>
+     See also: 
+     <function class="GtkLabel">set_label</function>,
+     <function class="GtkLabel">set_text</function>
+    </para>
    </desc>
   </method>
 
   <method id="gtk.gtklabel.method.get_layout">
    <funcsynopsis>
     <funcprototype>
-     <funcdef> <function>get_layout</function></funcdef>
+     <funcdef><classname>PangoLayout</classname> <function>get_layout</function></funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Gets the <classname>PangoLayout</classname> used to display the label.
    </shortdesc>
    <desc>
-
+    <para>
+     Gets the <classname>PangoLayout</classname> used to display the label
+    </para>
    </desc>
   </method>
 
@@ -179,10 +224,21 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Obtains the coordinates where the label will draw the <classname>PangoLayout</classname>.
    </shortdesc>
    <desc>
-
+    <para>
+     Obtains the coordinates where the label will draw the <classname>PangoLayout</classname>
+     representing the text in the label; 
+     useful to convert mouse events into coordinates inside the <classname>PangoLayout</classname>, 
+     e.g. to take some action if some part of the label is clicked. 
+    </para>
+    <para>
+     Of course you will need to create a <classname>GtkEventBox</classname> to receive 
+     the events, and pack the label inside it, since labels are a Gtk::NO_WINDOW widget. 
+     Remember when using the <classname>PangoLayout</classname> functions you need to convert 
+     to and from pixels using PANGO_PIXELS() or PANGO_SCALE.
+    </para>
    </desc>
   </method>
 
@@ -194,9 +250,12 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns whether lines in the label are automatically wrapped.
    </shortdesc>
    <desc>
+    <para>
+     Returns whether lines in the label are automatically wrapped.
+    </para>
     <para>
      See also: 
      <function class="GtkLabel">set_line_wrap</function>
@@ -213,9 +272,12 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the maximum width in characters.
    </shortdesc>
    <desc>
+    <para>
+     Returns the maximum width in characters.
+    </para>
     <para>
      See also: 
      <function class="GtkLabel">set_max_width_chars</function>
@@ -232,29 +294,36 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the keyval of the mnemonic key if set.
    </shortdesc>
    <desc>
-
+    <para>
+     If the label has been set so that it has an mnemonic key this 
+     function returns the keyval used for the mnemonic accelerator. 
+     If there is no mnemonic set up it returns 
+     <literal>Gdk::VoidSymbol</literal>.
+    </para>
    </desc>
   </method>
 
   <method id="gtk.gtklabel.method.get_mnemonic_widget">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>GtkWidget <function>get_mnemonic_widget</function></funcdef>
+     <funcdef><classname>GtkWidget</classname> <function>get_mnemonic_widget</function></funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Retrieves the target of the mnemonic (keyboard shortcut) of this label.
    </shortdesc>
    <desc>
+    <para>
+     Retrieves the target of the mnemonic (keyboard shortcut) of this label.
+    </para>
     <para>
      See also: 
      <function class="GtkLabel">set_mnemonic_widget</function>
     </para>
-
    </desc>
   </method>
 
@@ -266,9 +335,12 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Checks it the user can select text in the label.
    </shortdesc>
    <desc>
+    <para>
+     Checks it the user can select text in the label.
+    </para>
     <para>
      See also: 
      <function class="GtkLabel">set_selectable</function>
@@ -280,15 +352,26 @@
   <method id="gtk.gtklabel.method.get_selection_bounds">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>bool <function>get_selection_bounds</function></funcdef>
+     <funcdef>array <function>get_selection_bounds</function></funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Gets the selected range of characters in the label.
    </shortdesc>
    <desc>
-
+    <para>
+     Gets the selected range of characters in the label. The first array value is the
+     start character offset, the second the end offset.
+    </para>
+    <para>
+     So a return array of <literal>array(1,2)</literal> would mean that 1 character
+     (from position 1 to position 2) is selected.
+    </para>
+    <para> 
+     See also:
+     <function class="GtkLabel">select_region</function>
+    </para>
    </desc>
   </method>
 
@@ -300,14 +383,16 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns if the label displays only one line.
    </shortdesc>
    <desc>
+    <para>
+     Returns whether the label is in single line mode.
+    </para>
     <para>
      See also: 
      <function class="GtkLabel">set_single_line_mode</function>
     </para>
-
    </desc>
   </method>
 
@@ -319,11 +404,16 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Fetches the text from a label widget, as displayed on the screen.
    </shortdesc>
    <desc>
+    <simpara>
+     Fetches the text from a label widget, as displayed on the screen.
+     This does not include any embedded underlines indicating mnemonics or Pango markup.
+    </simpara>
     <para>
      See also: 
+     <function class="GtkLabel">get_label</function>,
      <function class="GtkLabel">set_text</function>
     </para>
 
@@ -338,9 +428,12 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns whether the label's text is interpreted as marked up with the Pango text markup language.
    </shortdesc>
    <desc>
+    <para>
+     Returns whether the label's text is interpreted as marked up with the Pango text markup language.
+    </para>
     <para>
      See also: 
      <function class="GtkLabel">set_use_markup</function>
@@ -357,9 +450,12 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns whether an embedded underline in the label indicates a mnemonic.
    </shortdesc>
    <desc>
+    <para>
+     Returns whether an embedded underline in the label indicates a mnemonic.
+    </para>
     <para>
      See also: 
      <function class="GtkLabel">set_use_underline</function>
@@ -376,14 +472,16 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Retrieves the desired width of the label, in characters.
    </shortdesc>
    <desc>
+    <para>
+     Retrieves the desired width of the label, in characters.
+    </para>
     <para>
      See also: 
      <function class="GtkLabel">set_width_chars</function>
     </para>
-
    </desc>
   </method>
 
@@ -395,10 +493,15 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    DEPRECATED. Parses the given string for underscores and converts the next character to an underlined character.
    </shortdesc>
    <desc>
-
+    <para>
+     Parses the given string for underscores and converts the next character to an underlined character. 
+     The last character that was underlined will have its lower-cased accelerator keyval 
+     returned (i.e. "_File" would return the keyval for "f". 
+     This is probably only used within the Gtk+ library itself for menu items and such.
+    </para>
    </desc>
   </method>
 
@@ -411,10 +514,19 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Selects a range of characters in the label, if the label is selectable.
    </shortdesc>
    <desc>
-
+    <para>
+     Selects a range of characters in the label, if the label is selectable.
+     If the label is not selectable, this function has no effect. 
+     If start_offset or end_offset are -1, then the end of the label will be substituted.
+    </para>
+    <para>
+     See also:
+     <function class="GtkLabel">get_selectable</function>,
+     <function class="GtkLabel">get_selection_bounds</function>,
+    </para>
    </desc>
   </method>
 
@@ -426,10 +538,13 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    DEPRECATED. Alias for <function class="GtkLabel">set_text</function>.
    </shortdesc>
    <desc>
-
+    <para>
+     DEPRECATED. Alias for <function class="GtkLabel">set_text</function>.
+     Only for backwards compatibility.
+    </para>
    </desc>
   </method>
 
@@ -441,9 +556,14 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the angle of rotation for the label.
    </shortdesc>
    <desc>
+    <para>
+     Sets the angle of rotation for the label (0-359). 
+     An angle of 90 reads from from bottom to top, an angle of 270, from top to bottom. 
+     The angle setting for the label is ignored if the label is selectable, wrapped, or ellipsized.
+    </para>
     <para>
      See also: 
      <function class="GtkLabel">get_angle</function>
@@ -475,18 +595,31 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_ellipsize</function></funcdef>
-     <paramdef>void</paramdef>
+     <paramdef><classname>PangoEllipsizeMode</classname> <parameter>ellipsizationmode</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the ellipsization mode used to make the text fit the width.
    </shortdesc>
    <desc>
+    <para>
+     Sets the ellipsization mode used to fit the text to a given width. 
+     In the ellipsization process characters are removed from the text in 
+     order to make it fit to a given width and replaced with an ellipsis.
+    </para>
+    <para>
+     If a window is 100px in width, and the text in the <classname>GtkLabel</classname>
+     would need 200px space to display, the window is resized to fit the label 
+     (with <literal>Pango::ELLIPSIZE_NONE</literal>). The modes 
+     <literal>Pango::ELLIPSIZE_START</literal>, <literal>Pango::ELLIPSIZE_MIDDLE</literal> and
+     <literal>Pango::ELLIPSIZE_END</literal> replace some text at the beginning, middle or end
+     with three dots (<literal>...</literal>) to make the needed width smaller and therefore keep the 
+     original width of 100px.
+    </para>
     <para>
      See also: 
      <function class="GtkLabel">get_ellipsize</function>
     </para>
-
    </desc>
   </method>
 
@@ -494,13 +627,23 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_justify</function></funcdef>
-     <paramdef>GtkJustification <parameter>jtype</parameter></paramdef>
+     <paramdef><classname>GtkJustification</classname> <parameter>jtype</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the alignment of the lines in the text of the label relative to each other.
    </shortdesc>
    <desc>
+    <para>
+     Sets the alignment of the lines in the text of the label relative to each other. 
+     <literal>Gtk::JUSTIFY_LEFT</literal> is the default value when the widget is first 
+     created.
+    </para>
+    <para>
+     If you instead want to set the alignment of the label as a whole, 
+     use <function class="GtkMisc">set_alignment</function> instead. 
+     It <emphasis>has no effect</emphasis> on labels containing only a <emphasis>single line</emphasis>.
+    </para>
     <para>
      See also: 
      <function class="GtkLabel">get_justify</function>
@@ -517,12 +660,23 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the text of the label incl. Pango markup.
    </shortdesc>
    <desc>
     <para>
+     Sets the text of the label. 
+     The label is interpreted as including embedded underlines and/or 
+     Pango markup depending on the values of <function class="GtkLabel">set_use_underline</function>
+      and <function class="GtkLabel">set_use_markup</function>
+    </para>
+    <para>
+     By default, <literal>use_markup</literal> is not activated - you've got to enable it before.
+    </para>
+    <para>
      See also: 
-     <function class="GtkLabel">get_label</function>
+     <function class="GtkLabel">get_label</function>,
+     <function class="GtkLabel">set_text</function>,
+     <function class="GtkLabel">set_markup</function>
     </para>
 
    </desc>
@@ -536,14 +690,18 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Toggles line wrapping within the GtkLabel widget.
    </shortdesc>
    <desc>
+    <para>
+     Toggles line wrapping within the GtkLabel widget. 
+     TRUE makes it break lines if text exceeds the widget's size. 
+     FALSE lets the text get cut off by the edge of the widget if it exceeds the widget size.
+    </para>
     <para>
      See also: 
      <function class="GtkLabel">get_line_wrap</function>
     </para>
-
    </desc>
   </method>
 
@@ -555,10 +713,17 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Set the label text with a pango marked up string.
    </shortdesc>
    <desc>
-
+    <para>
+     Parses str which is marked up with the Pango text markup language, 
+     setting the label's text and attribute list based on the parse results. 
+     <!-- FIXME
+     If the str is external data, you may need to escape it with 
+     g_markup_escape_text() or g_markup_printf_escaped():
+     -->
+    </para>
    </desc>
   </method>
 
@@ -570,10 +735,21 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Set the label text and mnemonic with a pango marked up string.
    </shortdesc>
    <desc>
-
+    <para>
+     Parses str which is marked up with the Pango text markup language, 
+     setting the label's text and attribute list based on the parse results. 
+     If characters in str are preceded by an underscore, 
+     they are underlined indicating that they represent a keyboard 
+     accelerator called a mnemonic. 
+    </para>
+    <para>
+     The mnemonic key can be used to activate another widget, 
+     chosen automatically, or explicitly using 
+     <function class="GtkLabel">set_mnemonic_widget</function>.
+    </para>
    </desc>
   </method>
 
@@ -585,9 +761,12 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the desired maximum width in characters.
    </shortdesc>
    <desc>
+    <para>
+     Sets the desired maximum width in characters to <literal>n_chars</literal> chars.
+    </para>
     <para>
      See also: 
      <function class="GtkLabel">get_max_width_chars</function>
@@ -604,9 +783,28 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the widget associated with the mnemonic key.
    </shortdesc>
    <desc>
+    <para>
+     If the label has been set so that it has an mnemonic key (using 
+     <function class="GtkLabel">set_markup_with_mnemonic</function>,
+     <function class="GtkLabel">set_text_with_mnemonic</function> or
+     the constructor)
+     the label can be associated with a widget that is the target of 
+     the mnemonic. When the label is inside a widget 
+     (like a <classname>GtkButton</classname> or a <classname>GtkNotebook</classname>
+     tab) it is automatically associated with the correct widget, but 
+     sometimes (i.e. when the target is a <classname>GtkEntry</classname> 
+     next to the label) you need to set it explicitly using this function.
+    </para>
+    <para>
+     <!-- FIXME: link the mnemonic_activate signal -->
+     The target widget will be accelerated by emitting "mnemonic_activate" 
+     on it. The default handler for this signal will activate the 
+     widget if there are no mnemonic collisions and toggle focus 
+     between the colliding widgets otherwise.
+    </para>
     <para>
      See also: 
      <function class="GtkLabel">get_mnemonic_widget</function>
@@ -623,10 +821,18 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    The pattern of underlines you want under the existing text within the GtkLabel widget.
    </shortdesc>
    <desc>
-
+    <para>
+     The pattern of underlines you want under the existing text 
+     within the GtkLabel widget. 
+    </para>
+    <para>
+     For example if the current text of the label says "FooBarBaz" 
+     passing a pattern of "<literal><![CDATA[___   ___]]></literal>" 
+     will underline "Foo" and "Baz" but not "Bar".
+    </para>
    </desc>
   </method>
 
@@ -638,9 +844,13 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Selectable labels allow the user to select text from the label, for copy-and-paste.
    </shortdesc>
    <desc>
+    <para>
+     Selectable labels allow the user to select text from the label, for copy-and-paste.
+     With this function you can enable and disable it.
+    </para>
     <para>
      See also: 
      <function class="GtkLabel">get_selectable</function>
@@ -657,9 +867,13 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets whether the label is in single line mode.
    </shortdesc>
    <desc>
+    <para>
+     Sets whether the label is in single line mode. If it is in single line
+     mode, the text will not be broken onto several lines.
+    </para>
     <para>
      See also: 
      <function class="GtkLabel">get_single_line_mode</function>
@@ -676,14 +890,24 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the text within the label.
    </shortdesc>
    <desc>
     <para>
-     See also: 
-     <function class="GtkLabel">get_text</function>
+     Sets the text within the label. It overwrites any text that was there before. 
+     Pango markup will not be used; you have to use 
+     <function class="GtkLabel">set_markup</function> for this.
     </para>
-
+    <para>
+     This will also clear any previously set mnemonic accelerators.
+    </para>
+    <para>
+     See also: 
+     <function class="GtkLabel">get_text</function>,
+     <function class="GtkLabel">set_text_with_mnemonic</function>,
+     <function class="GtkLabel">set_label</function>,
+     <function class="GtkLabel">set_markup</function>
+    </para>
    </desc>
   </method>
 
@@ -695,10 +919,24 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the label's text and parses underscores to a mnemonic.
    </shortdesc>
    <desc>
-
+    <para>
+     Sets the label's text from the string str. 
+     If characters in str are preceded by an underscore, 
+     they are underlined indicating that they represent a keyboard 
+     accelerator called a mnemonic. 
+    </para>
+    <para>
+     The mnemonic key can be used to activate another widget, 
+     chosen automatically, or explicitly using 
+     <function class="GtkLabel">set_mnemonic_widget</function>.
+    </para>
+    <para>
+     See also: 
+     <function class="GtkLabel">set_text</function>
+    </para>
    </desc>
   </method>
 
@@ -710,14 +948,19 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets whether the text of the label contains markup in Pango's 
+    text markup language.
    </shortdesc>
    <desc>
     <para>
-     See also: 
-     <function class="GtkLabel">get_use_markup</function>
+     Sets whether the text of the label contains markup in Pango's 
+     text markup language. 
     </para>
-
+    <para>
+     See also:
+     <function class="GtkLabel">get_use_markup</function>,
+     <function class="GtkLabel">set_markup</function>
+    </para>
    </desc>
   </method>
 
@@ -729,14 +972,18 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    If an underline shall be used for the mnemonic accelerator key.
    </shortdesc>
    <desc>
     <para>
-     See also: 
-     <function class="GtkLabel">get_use_underline</function>
+     If true, an underline in the text indicates the next character 
+     should be used for the mnemonic accelerator key.
     </para>
-
+    <para>
+     See also: 
+     <function class="GtkLabel">get_use_underline</function>,
+     <function class="GtkLabel">set_text_with_mnemonic</function>
+    </para>
    </desc>
   </method>
 
@@ -748,14 +995,17 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the desired width of the label, in characters.
    </shortdesc>
    <desc>
     <para>
-     See also: 
-     <function class="GtkLabel">get_width_chars</function>
+     Sets the desired width of the label, in characters.
     </para>
-
+    <para>
+     See also: 
+     <function class="GtkLabel">get_width_chars</function>,
+     <function class="GtkLabel">set_max_width_chars</function>
+    </para>
    </desc>
   </method>
 
@@ -768,7 +1018,7 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <cbfunction>callback</cbfunction></funcdef>
-     <paramdef>GtkLabel <parameter>label</parameter></paramdef>
+     <paramdef><classname>GtkLabel</classname> <parameter>label</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
