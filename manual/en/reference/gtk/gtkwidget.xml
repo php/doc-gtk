@@ -2360,9 +2360,14 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Requests a new size for the widget.
    </shortdesc>
    <desc>
+    <simpara>
+     Requests that the widget's size be changed to 
+     <parameter>width<parameter> pixels wide by 
+     <parameter>height<parameter> pixels high.
+    </simpara>
     <para>
      See also: 
      <function class="GtkWidget">get_size_request</function>
@@ -2437,10 +2442,19 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets a widgets size.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Requests that the widget's size be changed to 
+     <parameter>width<parameter> pixels wide by 
+     <parameter>height<parameter> pixels high.
+    </simpara>
+    <note>
+     This method is DEPRECATED. It should not be used in any newly
+     written code and should be phased out of any existing code.
+     Instead used <function class="GtkWidget">set_size_request</function>.
+    </note>
    </desc>
   </method>
 

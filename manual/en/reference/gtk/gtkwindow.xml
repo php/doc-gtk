@@ -3,10 +3,54 @@
   <classtitle>GtkWindow</classtitle>
   <classparent>GtkBin</classparent>
   <shortdesc>
-
+   A window which will likely contain the rest of the application.
   </shortdesc>
   <desc>
+   <simpara>
+    A window is the framework that contains the application. It 
+    provides a context for the other widgets that make up the
+    application. 
+   </simpara>
+   <simpara>
+    As a subclass of <classname>GtkBin</classname> a window may
+    only have one child. To add more widgets to a window first
+    add a widget which can accept more than one child like a 
+    <classname>GtkHBox</classname> or a <classname>GtkVBox</classname>.
+    Then add the other widgets to the child container. Trying to 
+    add more than one child will produce a warning.
+   </simpara>
+   <para>
+    <example>
+     <title>Adding too many children.</title>
+     <programlisting role="php">
+<![CDATA[
+<?php
+// Make sure the PHP-GTK 2 extension is loaded.
+if (!extension_loaded('php-gtk')) {
+        dl( 'php_gtk2.' . PHP_SHLIB_SUFFIX);
+}
 
+// Create a new window.
+$window = new GtkWindow();
+
+// Add two buttons.
+$window->add(new GtkButton('1'));
+$window->add(new GtkButton('2'));
+
+/*
+Spits out:
+Gtk-WARNING **: Attempting to add a widget with type GtkButton to a GtkWindow, but as a GtkBin subclass a GtkWindow can only contain one widget at a time; it already contains a widget of type GtkButton
+*/
+?>
+]]>
+     </programlisting>
+    </example>
+   </para>
+   <simpara>
+    <classname>GtkWindow</classname> is a top level widget. This 
+    means that it may not be added as a child of another widget.
+    Trying to do so will produce a Gtk-WARNING.
+   </simpara>
   </desc>
  </classmeta>
 
