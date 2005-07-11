@@ -20,10 +20,16 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Adds the given widget to the container.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Adds the given widget to the container.
+    </simpara>
+    <simpara>
+     When a child is added to the container the
+     <signal>add</signal> is emitted.
+    </simpara>
    </desc>
   </method>
 
@@ -636,13 +642,21 @@
     <funcprototype>
      <funcdef>void <cbfunction>callback</cbfunction></funcdef>
      <paramdef>GtkContainer <parameter>container</parameter></paramdef>
-     <paramdef>GtkWidget <parameter>UNKNOWN</parameter></paramdef>
+     <paramdef>GtkWidget <parameter>child</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
+    Emitted when a child is added to the container with the add
+    method.
    </shortdesc>
    <desc>
-
+    Emitted by the container when a child is added with the add
+    method. When this signal is emitted, both the container and
+    child are passed to the callback. The add signal is only 
+    emitted when a child is added to the container using the add
+    method. If a child is added using the box method
+    <function class="GtkBox">pack_start</function>, the add 
+    signal will not be emitted.
    </desc>
   </signal>
   
