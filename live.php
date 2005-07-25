@@ -4,6 +4,9 @@
 *
 *	see liveGen.php for an explanation
 *
+*	you can call the script with a "debug=1" parameter for 
+*	some additional output if you experience problems
+*
 *	@author Christian Weiske <cweiske@cweiske.de>
 */
 
@@ -51,7 +54,10 @@ class PhpGtkLiveDocs
 /*		$hdl = popen('./gen_manual.sh en test ' . $id . ' 2>&1', 'r');
 		var_dump(fread($hdl, 2048));
 		pclose($hdl);*/
-		shell_exec('./gen_manual.sh en test ' . $id . ' 2>&1');
+		$retval = shell_exec('./gen_manual.sh en test ' . $id . ' 2>&1');
+		if (isset($_GET['debug'])) {
+			var_dump($retval);
+		}
 		return true;
 	}//function genManual($id)
 	

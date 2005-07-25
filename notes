@@ -26,7 +26,17 @@ manual/en/, manual/de/, ..
 stylesheets/
     stylesheets which convert the xml manual files to html, phpweb, ...
 
-    
+
+== Small FAQ ==
+Q: The livedocs don't work! Some file couldn't be found.
+A: Call the live.php with "debug=1" as parameter and check the output.
+
+Q: Livedocs give me a "Could not startup" error!
+A: The problem is that the called php tries to load the php-gtk
+    extension, but has no X-Server - so php can't start.
+    Disable the loading of php-gtk.so in the php.ini, and it will work.
+
+
 == Todo ==
 - docgen: generate signals (with phpgtk2 extension installed)
 - check if docmerger works
