@@ -391,6 +391,7 @@ class PhpGtkLiveDocGenerator
             $nMaxId = substr_count(implode("\r\n", $arContents), ' id="');
         }
         
+        $nEmptyLines = 0;
         foreach ($arContents as $strLine) {
             if (!$bWaiting) {
                 //find an id
@@ -409,10 +410,16 @@ class PhpGtkLiveDocGenerator
                         $bWaiting = true;
                     }
                 } else {
-                    //I deactivated this if statement because the programlisting examples wouldn't have empty lines
-                    //if (trim($strLine) != '') {
+                    if (trim($strLine) == '') {
+                        $nEmptyLines++;
+                    } else {
+                        $nEmptyLines = 0;
+                    }
+                    //We can't remove all the empty lines because the programlisting examples wouldn't have empty lines then
+                    //but they won't have more than 3 empty lines in a row, I hope
+                    if ($nEmptyLines < 3) {
                         $strStrippedContents .= $strLine;
-                    //}
+                    }
                 }
             } else {
                 //find closing tag
