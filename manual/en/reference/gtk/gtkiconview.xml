@@ -3,10 +3,20 @@
   <classtitle>GtkIconView</classtitle>
   <classparent>GtkContainer</classparent>
   <shortdesc>
-
+   Displays a list of icons in a grid.
   </shortdesc>
   <desc>
-
+   <para>
+    <classname>GtkIconView</classname> provides an alternative view on a list model: 
+    It displays the model as a grid of icons with labels, the way
+    you will already know it from a file manager.
+   </para>
+   <para>
+    Like <classname>GtkTreeView</classname>, it allows to select one or multiple items (depending 
+    on the selection mode, see <function class="GtkIconView">set_selection_mode</function>).
+    In addition to selection with the arrow keys, <classname>GtkIconView</classname>
+    supports rubberband selection, which is controlled by dragging the pointer.
+   </para>
   </desc>
  </classmeta>
 
@@ -20,10 +30,57 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Creates a new <classname>GtkIconView</classname> instance.
    </shortdesc>
    <desc>
+    <para>
+     Creates a new <classname>GtkIconView</classname> instance. To make it 
+     actually display something, you need to add a data model (e.g. a 
+     <classname>GtkListStore</classname>) and some scroll bars.
+    </para>
+    <example>
+     <title><classname>GtkIconView</classname> filled with stock icons</title>
+     <programlisting role="php">
+      <![CDATA[
+<?php
+//GtkIconView example
+$wnd = new GtkWindow();
+$wnd->set_title('GtkIconView');
+$wnd->set_default_size(400, 400);
+$wnd->connect_object('destroy', array('gtk', 'main_quit'));
 
+$iv = new GtkIconView();
+
+$model = new GtkListStore(GdkPixbuf::gtype, Gtk::TYPE_STRING);
+$iv->set_model($model);
+
+//fill the model with some nice icons
+$ids = Gtk::stock_list_ids();
+sort($ids);
+foreach ($ids as $id) {
+    $pixbuf = $iv->render_icon($id, Gtk::ICON_SIZE_DIALOG);
+    $model->set($model->append(), 0, $pixbuf, 1, $id);
+}
+
+$iv->set_pixbuf_column(0);
+$iv->set_text_column(1);
+
+//number of columns in view, not model
+$iv->set_columns(0);
+$iv->set_item_width(100);
+
+//make it scrollable
+$scrollwin = new GtkScrolledWindow();
+$scrollwin->set_policy(Gtk::POLICY_AUTOMATIC, Gtk::POLICY_AUTOMATIC);
+$scrollwin->add($iv);
+
+$wnd->add($scrollwin);
+$wnd->show_all();
+Gtk::main();
+?>
+      ]]>
+     </programlisting>
+    </example>
    </desc>
   </constructor>
 
@@ -39,14 +96,17 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the space between single columns in pixels.
    </shortdesc>
    <desc>
+    <para>
+     Returns the space between columns in pixels. The number of columns can
+     be set via <function>set_columns</function>.
+    </para>
     <para>
      See also: 
      <function class="GtkIconView">set_column_spacing</function>
     </para>
-
    </desc>
   </method>
 
@@ -58,14 +118,23 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    The number of columns in the view.
    </shortdesc>
    <desc>
+    <para>
+     Returns the number of columns in the view.
+    </para>
+    <para>
+     0 means that the column number is determined automatically, based on the 
+     available space and the maximum width of a single column. Any other number
+     greater than zero is the real used number of columns - independent of
+     the available space. If there is not enough space for all the columns,
+     the view is scrolled.
+    </para>
     <para>
      See also: 
      <function class="GtkIconView">set_columns</function>
     </para>
-
    </desc>
   </method>
 
@@ -77,14 +146,17 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    The width of a single item.
    </shortdesc>
    <desc>
+    <para>
+     Returns the space which a single item can occupy in width.
+     Counting begins at the left side of the icon.
+    </para>
     <para>
      See also: 
      <function class="GtkIconView">set_item_width</function>
     </para>
-
    </desc>
   </method>
 
@@ -96,14 +168,23 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    The empty border around view.
    </shortdesc>
    <desc>
+    <para>
+     The margin of an icon view is an invisible border around the view.
+     Imagine an invisible box in which all items with their icons are
+     packed, and this box inside the icon view widget box. The margin
+     determines the space between the icon view widget box and this box.
+    </para>
+    <para>
+     If you are familiar with CSS: The margin is the same as the equally
+     named box property.
+    </para>
     <para>
      See also: 
      <function class="GtkIconView">set_margin</function>
     </para>
-
    </desc>
   </method>
 
@@ -115,14 +196,20 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Column of the model in which markup is stored.
    </shortdesc>
    <desc>
+    <para>
+     Returns the column number of the list's model containing markup 
+     information to be displayed. The markup column must be of type 
+     string. If this property and the <propname>text-column</propname>
+     property are both set to column numbers, it overrides the text column.
+     If both are set to -1, no texts are displayed.
+    </para>
     <para>
      See also: 
      <function class="GtkIconView">set_markup_column</function>
     </para>
-
    </desc>
   </method>
 
@@ -134,33 +221,40 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    The list's data model.
    </shortdesc>
    <desc>
+    <para>
+     Returns the list's data model in which the actual data are stored.
+    </para>
     <para>
      See also: 
      <function class="GtkIconView">set_model</function>
     </para>
-
    </desc>
   </method>
 
   <method id="gtk.gtkiconview.method.get_orientation">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>GtkOrientation <function>get_orientation</function></funcdef>
+     <funcdef><enumname>GtkOrientation</enumname> <function>get_orientation</function></funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Horizontal or vertical orientation of the icon labels.
    </shortdesc>
    <desc>
+    <para>
+     Returns the orientation of the icon's label: 
+     <literal>Gtk::ORIENTATION_HORIZONTAL</literal> means that the label
+     is left of the icon, and <literal>Gtk::ORIENTATION_VERTICAL</literal>
+     shows the text below the icon.
+    </para>
     <para>
      See also: 
      <function class="GtkIconView">set_orientation</function>
     </para>
-
    </desc>
   </method>
 
@@ -188,14 +282,16 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Model column number containing the pixbufs.
    </shortdesc>
    <desc>
+    <para>
+     Returns the number of the model column containing the pixbufs which are displayed.
+    </para>
     <para>
      See also: 
      <function class="GtkIconView">set_pixbuf_column</function>
     </para>
-
    </desc>
   </method>
 
@@ -207,14 +303,16 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Space in pixels between rows.
    </shortdesc>
    <desc>
+    <para>
+     Returns the space in pixels between single rows.
+    </para>
     <para>
      See also: 
      <function class="GtkIconView">set_row_spacing</function>
     </para>
-
    </desc>
   </method>
 
@@ -226,7 +324,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    FIXME: NOT IMPLEMENTED
    </shortdesc>
    <desc>
 
@@ -236,19 +334,22 @@
   <method id="gtk.gtkiconview.method.get_selection_mode">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>GtkSelectionMode <function>get_selection_mode</function></funcdef>
+     <funcdef><enumname>GtkSelectionMode</enumname> <function>get_selection_mode</function></funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Item selection mode.
    </shortdesc>
    <desc>
+    <para>
+     Returns the selection mode which determines how many items may be selected
+     at a time, and how selection works.
+    </para>
     <para>
      See also: 
      <function class="GtkIconView">set_selection_mode</function>
     </para>
-
    </desc>
   </method>
 
@@ -260,14 +361,17 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Space in pixels between icon and label.
    </shortdesc>
    <desc>
+    <para>
+     Returns the space between icon and label. (Horizontal or vertical
+     depending on the <propname>orientation</propname>.)
+    </para>
     <para>
      See also: 
      <function class="GtkIconView">set_spacing</function>
     </para>
-
    </desc>
   </method>
 
@@ -279,14 +383,17 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Model column number containing the text for the labels.
    </shortdesc>
    <desc>
+    <para>
+     Returns the number of the model column which contains the
+     text to be displayed beside the icon.
+    </para>
     <para>
      See also: 
      <function class="GtkIconView">set_text_column</function>
     </para>
-
    </desc>
   </method>
 
@@ -328,14 +435,17 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Selects all items.
    </shortdesc>
    <desc>
+    <para>
+     Selects all items in the view. Works only if the widget is
+     in the multiple <propname>selection-mode</propname>.
+    </para>
     <para>
      See also: 
      <function class="GtkIconView">unselect_all</function>
     </para>
-
    </desc>
   </method>
 
@@ -381,12 +491,18 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Set the spacing between columns.
    </shortdesc>
    <desc>
     <para>
-     See also: 
-     <function class="GtkIconView">get_column_spacing</function>
+     Set the space in pixels between columns - space between the right edge 
+     of column <literal>n</literal> and the left edge of 
+     column <literal>n+1</literal>.
+    </para>
+    <para>
+     See also:
+     <function class="GtkIconView">get_column_spacing</function>,
+     <function class="GtkIconView">set_row_spacing</function>
     </para>
 
    </desc>
@@ -400,14 +516,18 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Set the number of columns in the list.
    </shortdesc>
    <desc>
+    <para>
+     Sets the numnber of columns in the list. If the column number
+     is set to 0, it is determined automatically according to the width
+     of the widget itself and the column widths.
+    </para>
     <para>
      See also: 
      <function class="GtkIconView">get_columns</function>
     </para>
-
    </desc>
   </method>
 
@@ -419,14 +539,17 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Width of an item.
    </shortdesc>
    <desc>
+    <para>
+     Sets the width of an item. The width of an item is the sum
+     of the icon's width and the label's width.
+    </para>
     <para>
      See also: 
      <function class="GtkIconView">get_item_width</function>
     </para>
-
    </desc>
   </method>
 
@@ -438,9 +561,21 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Margin to the widget's border.
    </shortdesc>
    <desc>
+    <para>
+     Sets the margin of the view. The margin is the space between
+     the icon view's border and an invisible box around the items.
+    </para>
+    <para>
+     You can set the margin to values smaller than 0, but then the items
+     will be partly hidden.
+    </para>
+    <para>
+     If you are familiar with CSS: The margin here is the same as the
+     margin of a box.
+    </para>
     <para>
      See also: 
      <function class="GtkIconView">get_margin</function>
@@ -457,14 +592,25 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Set the model column containing the markup.
    </shortdesc>
    <desc>
     <para>
-     See also: 
-     <function class="GtkIconView">get_markup_column</function>
+     Sets the column number of the <propname>model</propname>
+     which contains the markup data. It overrides the 
+     <propname>text-column</propname>, causing the markup and not the 
+     normal text to be displayed if both are set.
     </para>
-
+    <para>
+     Set it to <literal>-1</literal> to disable it. If both markup and
+     text columns are <literal>-1</literal> (disabled), no label is shown.
+    </para>
+    <para>
+     See also: 
+     <function class="GtkIconView">get_markup_column</function>,
+     <function class="GtkIconView">set_text_column</function>,
+     <function class="GtkIconView">set_pixbuf_column</function>
+    </para>
    </desc>
   </method>
 
@@ -472,18 +618,31 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_model</function></funcdef>
-     <paramdef>void</paramdef>
+     <paramdef><classname>GtkListStore</classname> <parameter>model</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Set the data model.
    </shortdesc>
    <desc>
+    <para>
+     Set the data model containing the actual data. The model would have column
+     0 as pixbuf column and column 1 as text column.
+    </para>
+    <example>
+     <title>Creating a model with pixbufs</title>
+     <programlisting role="php">
+<![CDATA[
+$iv = new GtkIconView();
+$model = new GtkListStore(GdkPixbuf::gtype, Gtk::TYPE_STRING);
+$iv->set_model($model);
+]]>
+     </programlisting>
+    </example>
     <para>
      See also: 
      <function class="GtkIconView">get_model</function>
     </para>
-
    </desc>
   </method>
 
@@ -491,18 +650,24 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_orientation</function></funcdef>
-     <paramdef>GtkOrientation <parameter>orientation</parameter></paramdef>
+     <paramdef><enumname>GtkOrientation</enumname> <parameter>orientation</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Set the orientation of label relative to the icon.
    </shortdesc>
    <desc>
+    <para>
+     Sets the orientation of the label relative to the icon.
+     If it's <literal>Gtk::ORIENTATION_HORIZONTAL</literal>, the label
+     will be placed right of the icon. In the case of
+     <literal>Gtk::ORIENTATION_VERTICAL</literal>, the label text will be
+     below the icon.
+    </para>
     <para>
      See also: 
      <function class="GtkIconView">get_orientation</function>
     </para>
-
    </desc>
   </method>
 
@@ -514,14 +679,20 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Set the model column in which pixbufs are located.
    </shortdesc>
    <desc>
     <para>
-     See also: 
-     <function class="GtkIconView">get_pixbuf_column</function>
+     Sets the column of the model in which pixbufs are located.
+     Set it to <literal>-1</literal> to deactivate it - no icons will
+     be shown then.
     </para>
-
+    <para>
+     See also: 
+     <function class="GtkIconView">get_pixbuf_column</function>,
+     <function class="GtkIconView">set_text_column</function>,
+     <function class="GtkIconView">set_markup_column</function>
+    </para>
    </desc>
   </method>
 
@@ -533,14 +704,17 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Set the spacing between rows.
    </shortdesc>
    <desc>
     <para>
-     See also: 
-     <function class="GtkIconView">get_row_spacing</function>
+     Sets the spacing in pixels between single rows.
     </para>
-
+    <para>
+     See also: 
+     <function class="GtkIconView">get_row_spacing</function>,
+     <function class="GtkIconView">set_column_spacing</function>
+    </para>
    </desc>
   </method>
 
@@ -548,18 +722,26 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_selection_mode</function></funcdef>
-     <paramdef>GtkSelectionMode <parameter>mode</parameter></paramdef>
+     <paramdef><enumname>GtkSelectionMode</enumname> <parameter>mode</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Set mode of selection.
    </shortdesc>
    <desc>
+    <para>
+     Set the selection mode which determines how many items
+     may be selected at once and how the selection is handled.
+    </para>
+    <para>
+     Only <literal>Gtk::SELECTION_MULTIPLE</literal> allows to select
+     multiple icons and activates <emphasis>rubber selection</emphasis>
+     (open a selection rectangle by dragging the mouse).
+    </para>
     <para>
      See also: 
      <function class="GtkIconView">get_selection_mode</function>
     </para>
-
    </desc>
   </method>
 
@@ -571,14 +753,16 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Set the space between icon and label.
    </shortdesc>
    <desc>
+    <para>
+     Sets the space between the icon and the label.
+    </para>
     <para>
      See also: 
      <function class="GtkIconView">get_spacing</function>
     </para>
-
    </desc>
   </method>
 
@@ -590,14 +774,20 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Set model column in which the text is located.
    </shortdesc>
    <desc>
     <para>
-     See also: 
-     <function class="GtkIconView">get_text_column</function>
+     Sets the number of the column in the model which contains
+     the texts for the icon's labels. Set it to <literal>-1</literal>
+     to deactivate text.
     </para>
-
+    <para>
+     See also: 
+     <function class="GtkIconView">get_text_column</function>,
+     <function class="GtkIconView">set_markup_column</function>,
+     <function class="GtkIconView">set_pixbuf_column</function>
+    </para>
    </desc>
   </method>
 
@@ -609,14 +799,16 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Unselects all items.
    </shortdesc>
    <desc>
+    <para>
+     After calling this function, no item is selected.
+    </para>
     <para>
      See also: 
      <function class="GtkIconView">select_all</function>
     </para>
-
    </desc>
   </method>
 
