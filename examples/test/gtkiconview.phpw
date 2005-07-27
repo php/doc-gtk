@@ -1,0 +1,148 @@
+<?php
+//GtkIconView example
+$wnd = new GtkWindow();
+$wnd->set_title('GtkIconView');
+$wnd->set_default_size(400, 400);
+$wnd->connect_object('destroy', array('gtk', 'main_quit'));
+
+$iv = new GtkIconView();
+$iv->set_selection_mode(Gtk::SELECTION_MULTIPLE);
+
+$model = new GtkListStore(GdkPixbuf::gtype, Gtk::TYPE_STRING);
+$iv->set_model($model);
+
+//fill the model with some nice icons
+$ids = Gtk::stock_list_ids();
+sort($ids);
+foreach ($ids as $id) {
+    $pixbuf = $iv->render_icon($id, Gtk::ICON_SIZE_DIALOG);
+    $model->set($model->append(), 0, $pixbuf, 1, $id);
+}
+
+$iv->set_pixbuf_column(0);
+$iv->set_text_column(1);
+
+//number of columns in view, not model
+$iv->set_columns(0);
+$iv->set_item_width(100);
+
+//make it scrollable
+$scrollwin = new GtkScrolledWindow();
+$scrollwin->set_policy(Gtk::POLICY_AUTOMATIC, Gtk::POLICY_AUTOMATIC);
+$scrollwin->add($iv);
+
+$wnd->add($scrollwin);
+$wnd->show_all();
+
+
+function addButton($function, $box, $parameter, $direct = false)
+{
+    $btn = new GtkButton($function);
+    if ($direct) {
+        $btn->connect_object('clicked', array($parameter, $function));
+    } else {
+        $btn->connect_object('clicked', 'dump_' . $function, $parameter);
+    }
+    $box->pack_start($btn);
+}//function addButton($function, $box, $parameter)
+
+function dump_get_path_at_pos($iv)
+{
+    var_dump($iv->get_path_at_pos(1, 1));
+}
+
+function dump_item_activated($iv)
+{
+    var_dump($iv->item_activated('1'));
+    var_dump($iv->item_activated('3'));
+}
+
+function dump_path_is_selected($iv)
+{
+    var_dump($iv->path_is_selected('0'));
+}
+
+function dump_selected_foreach($iv)
+{
+    $iv->selected_foreach('dump_selected_foreach2', 'data');
+}
+
+function dump_selected_foreach2($item, $data)
+{
+    var_dump($item, $data);
+}
+
+function dump_select_path($iv)
+{
+    $items = $iv->get_model()->iter_n_children(null);
+    for ($nA = 0; $nA < $items; $nA = $nA + 2) {
+        $iv->select_path($nA);
+    }
+}
+function dump_set_scroll_adjustments($iv) 
+{
+    $scrollwin = $iv->get_parent();
+    $adj = $scrollwin->get_hadjustment();
+    $adj->set_value(10);
+//    var_dump($adj);
+}
+
+/* signals */
+function activate_cursor_item($obj) {
+    var_dump('activate_cursor_item', $obj);
+}
+function item_activated($obj) {
+    var_dump('item_activated', $obj);
+}
+function move_cursor($movement_step, $obj) {
+    var_dump('move_cursor', $movement_step, $obj);
+}
+function select_all() {
+    var_dump('select_all');
+}
+function select_cursor_item($obj) {
+    var_dump('select_cursor_item', $obj);
+}
+function selection_changed() {
+    var_dump('selection_changed');
+}
+function set_scroll_adjustments($obj) {
+    var_dump('set_scroll_adjustments', $obj);
+}
+function toggle_cursor_item($obj) {
+    var_dump('toggle_cursor_item', $obj);
+}
+function unselect_all() {
+    var_dump('unselect_all');
+}
+
+//extra window
+$wnd2 = new GtkWindow();
+$wnd2->set_title('Extra test');
+$wnd2->set_type_hint(Gdk::WINDOW_TYPE_HINT_UTILITY);
+$box = new GtkVBox();
+
+addButton('get_path_at_pos' , $box, $iv);
+addButton('item_activated'  , $box, $iv);
+addButton('path_is_selected', $box, $iv);
+addButton('selected_foreach', $box, $iv);
+addButton('select_path'     , $box, $iv);
+addButton('select_all'      , $box, $iv, true);
+addButton('unselect_all'    , $box, $iv, true);
+addButton('set_scroll_adjustments', $box, $iv);
+
+$iv->connect_object('activate-cursor-item'  , 'activate_cursor_item');
+$iv->connect_object('item-activated'        , 'item_activated');
+$iv->connect_object('move-cursor'           , 'move_cursor');
+$iv->connect_object('select-all'            , 'select_all');
+$iv->connect_object('select-cursor-item'    , 'select_cursor_item');
+$iv->connect_object('selection-changed'     , 'selection_changed');
+$iv->connect_object('set-scroll-adjustments', 'set_scroll_adjustments');
+$iv->connect_object('toggle-cursor-item'    , 'toggle_cursor_item');
+$iv->connect_object('unselect-all'          , 'unselect_all');
+
+$wnd2->add($box);
+$wnd2->show_all();
+
+Gtk::main();
+?>

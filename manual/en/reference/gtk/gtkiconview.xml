@@ -216,7 +216,7 @@ Gtk::main();
   <method id="gtk.gtkiconview.method.get_model">
    <funcsynopsis>
     <funcprototype>
-     <funcdef> <function>get_model</function></funcdef>
+     <funcdef><classname>GtkTreeStore</classname> <function>get_model</function></funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
@@ -267,7 +267,7 @@ Gtk::main();
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+       FIXME - CAN'T GET WORKING
    </shortdesc>
    <desc>
 
@@ -401,14 +401,27 @@ Gtk::main();
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>item_activated</function></funcdef>
-     <paramdef>void</paramdef>
+     <paramdef>GtkTreePath <parameter>path</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Activates an item.
    </shortdesc>
    <desc>
-
+    <para>
+     Activates the item at the given path. Note that <emphasis>activate</emphasis>
+     does not mean <emphasis>select</emphasis>. Activation is something like an
+     internal, invisible selection.
+     <!-- FIXME: What is activation in reality? -->
+    </para>
+    <para>
+     Causes the <signalname class="GtkIconView">item-activated</signalname> signal
+     to be emitted.
+    </para>
+    <para>
+     See <function class="GtkIconView">select_path</function> if you want
+     to select an item.
+    </para>
    </desc>
   </method>
 
@@ -416,14 +429,28 @@ Gtk::main();
    <funcsynopsis>
     <funcprototype>
      <funcdef>bool <function>path_is_selected</function></funcdef>
-     <paramdef>void</paramdef>
+     <paramdef><!-- FIXME: where is GtkTreePath described? -->GtkTreePath <parameter>path</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Checks if an item is selected.
    </shortdesc>
    <desc>
-
+    <para>
+     Checks if an item with a certain path is selected.
+    </para>
+    <para>
+     A tree path is a string of numbers and colons, e.g. 
+     <literal>0:1:0</literal> which would point to the first child
+     of the second child of the first item in a tree.
+     As we won't have trees here, a simple 
+     <informalexample>
+      <programlisting role="php">
+       <![CDATA[$iconview->path_is_selected(15);]]>
+      </programlisting>
+     </informalexample>
+     is enough to check if the fifteenth item is selected.
+    </para>
    </desc>
   </method>
 
@@ -444,7 +471,8 @@ Gtk::main();
     </para>
     <para>
      See also: 
-     <function class="GtkIconView">unselect_all</function>
+     <function class="GtkIconView">unselect_all</function>,
+     <function class="GtkIconView">select_path</function>
     </para>
    </desc>
   </method>
@@ -453,21 +481,35 @@ Gtk::main();
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>select_path</function></funcdef>
-     <paramdef>void</paramdef>
+     <paramdef><!-- FIXME: link to the path explanation -->GtkTreePath <parameter>path</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Select an item in the view.
    </shortdesc>
    <desc>
     <para>
-     See also: 
-     <function class="GtkIconView">unselect_path</function>
+     Selects the item given in <literal>path</literal>. For example,
+     <informalexample>
+      <programlisting role="php">
+       <![CDATA[$iconview->select_path(23);]]>
+      </programlisting>
+     </informalexample>
+     would select the 23rd item in the list.
     </para>
-
+    <note>
+     <simpara>
+      Counting begins at 0.
+     </simpara>
+    </note>
+    <para>
+     See also: 
+     <function class="GtkIconView">unselect_path</function>,
+     <function class="GtkIconView">select_all</function>
+    </para>
    </desc>
   </method>
-
+<!--
   <method id="gtk.gtkiconview.method.selected_foreach">
    <funcsynopsis>
     <funcprototype>
@@ -476,13 +518,13 @@ Gtk::main();
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    DOES NOT EXIST!
    </shortdesc>
    <desc>
 
    </desc>
   </method>
-
+-->
   <method id="gtk.gtkiconview.method.set_column_spacing">
    <funcsynopsis>
     <funcprototype>
@@ -618,7 +660,7 @@ Gtk::main();
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_model</function></funcdef>
-     <paramdef><classname>GtkListStore</classname> <parameter>model</parameter></paramdef>
+     <paramdef><classname>GtkTreeStore</classname> <parameter>model</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -807,7 +849,8 @@ $iv->set_model($model);
     </para>
     <para>
      See also: 
-     <function class="GtkIconView">select_all</function>
+     <function class="GtkIconView">select_all</function>,
+     <function class="GtkIconView">unselect_path</function>
     </para>
    </desc>
   </method>
@@ -816,18 +859,21 @@ $iv->set_model($model);
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>unselect_path</function></funcdef>
-     <paramdef>void</paramdef>
+     <paramdef>GtkTreePath <parameter>path</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Unselects a single item.
    </shortdesc>
    <desc>
     <para>
-     See also: 
-     <function class="GtkIconView">select_path</function>
+     Sets the selected-state of the given item to unselected.
     </para>
-
+    <para>
+     See also: 
+     <function class="GtkIconView">select_path</function>,
+     <function class="GtkIconView">unselect_all</function>
+    </para>
    </desc>
   </method>
 
@@ -840,13 +886,21 @@ $iv->set_model($model);
    <funcsynopsis>
     <funcprototype>
      <funcdef>bool <cbfunction>callback</cbfunction></funcdef>
-     <paramdef>GtkIconView <parameter>iconview</parameter></paramdef>
+     <paramdef><classname>GtkIconView</classname> <parameter>iconview</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
+    The current cursor item has been activated.
    </shortdesc>
    <desc>
-
+    <para>
+     This signal tells you that the current cursor item has
+     been activated with <function>item_activated</function>.
+    </para>
+    <para>
+     See <signalname class="GtkIconView">move-cursor</signalname> for an
+     explanation of what a <emphasis>cursor</emphasis> is.
+    </para>
    </desc>
   </signal>
   
@@ -855,14 +909,17 @@ $iv->set_model($model);
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <cbfunction>callback</cbfunction></funcdef>
-     <paramdef>GtkIconView <parameter>iconview</parameter></paramdef>
+     <paramdef><classname>GtkIconView</classname> <parameter>iconview</parameter></paramdef>
      <paramdef><!-- was: GtkTreePath -->XXX <parameter>UNKNOWN</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
+    An item has been activated (not selected)
    </shortdesc>
    <desc>
-
+    <para>
+     Emitted when an item has been activated with <function>item_activated</function>.
+    </para>
    </desc>
   </signal>
   
@@ -871,15 +928,33 @@ $iv->set_model($model);
    <funcsynopsis>
     <funcprototype>
      <funcdef>bool <cbfunction>callback</cbfunction></funcdef>
-     <paramdef>GtkIconView <parameter>iconview</parameter></paramdef>
-     <paramdef>GtkMovementStep <parameter>UNKNOWN</parameter></paramdef>
-     <paramdef>int <parameter>UNKNOWN</parameter></paramdef>
+     <paramdef><classname>GtkIconView</classname> <parameter>iconview</parameter></paramdef>
+     <paramdef><enumname>GtkMovementStep</enumname> <parameter>movement</parameter></paramdef>
+     <paramdef>int <parameter>direction<!-- FIXME: is it really the direction? --></parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
+    Cursor (not selection) has moved.
    </shortdesc>
    <desc>
-
+    <para>
+     Emitted when the cursor (not the selection) has moved.
+    </para>
+    <para>
+     You can move the cursor by pressing <literal>Ctrl</literal> and one of the arrow keys:
+     There will be a dotted rectangle around the label of the current "cursor" item.
+     By pressing <literal>space</literal> you can (un)select it.
+    </para>
+    <para>
+     The <literal>movement</literal> parameter will be <literal>1</literal> 
+     (Gtk::MOVEMENT_VISUAL_POSITIONS) when moving the cursor left or right, and
+     <literal>3</literal> (Gtk::MOVEMENT_DISPLAY_LINES) when moving up or down.
+    </para>
+    <para>
+     FIXME: The second parameter seems to be <literal>-1</literal> or 
+     <literal>1</literal> only, depending on the direction
+     (backward or forward) you move.
+    </para>
    </desc>
   </signal>
   
@@ -888,10 +963,11 @@ $iv->set_model($model);
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <cbfunction>callback</cbfunction></funcdef>
-     <paramdef>GtkIconView <parameter>iconview</parameter></paramdef>
+     <paramdef><classname>GtkIconView</classname> <parameter>iconview</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
+    FIXME<!--: When do I get this? There is always a selection-changed but no select-all!-->
    </shortdesc>
    <desc>
 
@@ -903,10 +979,11 @@ $iv->set_model($model);
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <cbfunction>callback</cbfunction></funcdef>
-     <paramdef>GtkIconView <parameter>iconview</parameter></paramdef>
+     <paramdef><classname>GtkIconView</classname> <parameter>iconview</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
+    FIXME
    </shortdesc>
    <desc>
 
@@ -918,13 +995,17 @@ $iv->set_model($model);
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <cbfunction>callback</cbfunction></funcdef>
-     <paramdef>GtkIconView <parameter>iconview</parameter></paramdef>
+     <paramdef><classname>GtkIconView</classname> <parameter>iconview</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
+    Emitted when the selection has changed.
    </shortdesc>
    <desc>
-
+    <para>
+     This signal is emitted when the user (or the program) has changed the
+     selection by selecting or unselecting one or more items.
+    </para>
    </desc>
   </signal>
   
@@ -933,48 +1014,65 @@ $iv->set_model($model);
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <cbfunction>callback</cbfunction></funcdef>
-     <paramdef>GtkIconView <parameter>iconview</parameter></paramdef>
-     <paramdef>GtkAdjustment <parameter>UNKNOWN</parameter></paramdef>
-     <paramdef>GtkAdjustment <parameter>UNKNOWN</parameter></paramdef>
+     <paramdef><classname>GtkIconView</classname> <parameter>iconview</parameter></paramdef>
+     <paramdef><classname>GtkAdjustment</classname> <parameter>UNKNOWN</parameter></paramdef>
+     <paramdef><classname>GtkAdjustment</classname> <parameter>UNKNOWN</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
+    When the widget gets scroll bars.
    </shortdesc>
    <desc>
-
+    <para>
+     The signal is emitted when the view gets scrollbars set.
+    </para>
+    <note>
+     <para>
+      It does <emphasis>not</emphasis> occur when the user scrolls the list.
+     </para>
+    </note>
    </desc>
   </signal>
-  
+
   <signal id="gtk.gtkiconview.signal.toggle-cursor-item">
    <signalname>toggle-cursor-item</signalname>
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <cbfunction>callback</cbfunction></funcdef>
-     <paramdef>GtkIconView <parameter>iconview</parameter></paramdef>
+     <paramdef><classname>GtkIconView</classname> <parameter>iconview</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
+    Current cursor item changes its selection state.
    </shortdesc>
    <desc>
-
+    <para>
+     Emitted when the item of the current cursor changes its selection state
+     (get selected or unselected).
+    </para>
+    <para>
+     See <signalname class="GtkIconView">move-cursor</signalname> for an
+     explanation of what a <emphasis>cursor</emphasis> is.
+    </para>
    </desc>
   </signal>
-  
+
   <signal id="gtk.gtkiconview.signal.unselect-all">
    <signalname>unselect-all</signalname>
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <cbfunction>callback</cbfunction></funcdef>
-     <paramdef>GtkIconView <parameter>iconview</parameter></paramdef>
+     <paramdef><classname>GtkIconView</classname> <parameter>iconview</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
+    FIXME <!--: When do I get this? There is always a selection-changed but no unselect-all!-->
    </shortdesc>
    <desc>
 
    </desc>
   </signal>
-  
+
  </signals>
 
 </classentry>
