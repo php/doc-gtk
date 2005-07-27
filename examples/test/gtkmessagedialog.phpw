@@ -1,0 +1,26 @@
+<?php
+$dialog = new GtkMessageDialog(
+    null,//parent
+    0,
+    Gtk::MESSAGE_QUESTION,
+    Gtk::BUTTONS_YES_NO,
+    'Do you like PHP-Gtk2?'
+);
+$dialog->set_markup('Do <b>you</b> like PHP-Gtk <span foreground="red">2</span>?');
+
+$dialog->image->hide();
+
+//doesn't work as it's read-only
+//$dialog->image = new GtkButton("asd");
+
+$answer = $dialog->run();
+$dialog->destroy();
+
+if ($answer == Gtk::RESPONSE_YES) {
+    echo "You like me! Thanks!\r\n";
+} else if ($answer == Gtk::RESPONSE_NO) {
+    echo "Why not?\r\n";
+} else {
+    echo "Why didn't you press a button?\r\n";
+}
+?>

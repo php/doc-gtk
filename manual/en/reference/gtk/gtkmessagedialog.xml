@@ -3,12 +3,84 @@
   <classtitle>GtkMessageDialog</classtitle>
   <classparent>GtkDialog</classparent>
   <shortdesc>
-
+   A convenient message window
   </shortdesc>
   <desc>
-
+   <para>
+    <classname>GtkMessageDialog</classname> presents a dialog with an image 
+    representing the type of message (Error, Question, etc.) alongside some message 
+    text. It's simply a convenience widget; you could construct 
+    the equivalent of <classname>GtkMessageDialog</classname> from 
+    <classname>GtkDialog</classname> without too much effort, 
+    but <classname>GtkMessageDialog</classname> saves typing.
+   </para>
+   <para>
+    The easiest way to do a modal message dialog is to use 
+    <function class="GtkDialog">run</function>, though you can also pass in the 
+    <literal>Gtk::DIALOG_MODAL</literal> flag, <function class="GtkDialog">run</function>
+    automatically makes the dialog modal and waits for the user to respond to it.
+    <function class="GtkDialog">run</function> returns when any dialog button is clicked.
+   </para>
   </desc>
  </classmeta>
+
+ <constructors>
+  <constructor id="gtk.gtkmessagedialog.constructor">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef> <function>GtkMessageDialog</function></funcdef>
+     <paramdef><classname>GtkWindow</classname> <parameter>parent</parameter></paramdef>
+     <paramdef><enumname>GtkDialogFlags</enumname> <parameter>flags</parameter></paramdef>
+     <paramdef><enumname>GtkMessageType</enumname> <parameter>type</parameter></paramdef>
+     <paramdef><enumname>GtkButtonsType</enumname> <parameter>buttons</parameter></paramdef>
+     <paramdef>string <parameter>message</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Creates a new message dialog
+   </shortdesc>
+   <desc>
+    <para>
+     Creates a new message dialog with icon, text and buttons.
+    </para>
+    <example>
+     <title>A modal <classname>GtkMessageDialog</classname></title>
+     <programlisting role="php">
+      <![CDATA[
+<?php
+$dialog = new GtkMessageDialog(
+    null,//parent
+    Gtk::DIALOG_MODAL,
+    Gtk::MESSAGE_QUESTION,
+    Gtk::BUTTONS_YES_NO,
+    'Do you like PHP-Gtk2?'
+);
+//optional colored text
+$dialog->set_markup('Do <b>you</b> like PHP-Gtk <span foreground="red">2</span>?');
+
+$answer = $dialog->run();
+$dialog->destroy();
+
+if ($answer == Gtk::RESPONSE_YES) {
+    echo "You like me! Thanks!\r\n";
+} else if ($answer == Gtk::RESPONSE_NO) {
+    echo "Why not?\r\n";
+} else {
+    echo "Why didn't you press a button?\r\n";
+}
+?>
+      ]]>
+     </programlisting>
+    </example>
+    <para>
+     The second parameter could be set to <literal>0</literal>, as
+     the <function class="GtkDialog">run</function> method automatically 
+     makes the dialog modal.
+    </para>
+   </desc>
+  </constructor>
+ </constructors>
+
 
  <methods>
 
@@ -20,7 +92,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    FIXME: NOT IMPLEMENTED
    </shortdesc>
    <desc>
 
@@ -35,7 +107,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    FIXME: NOT IMPLEMENTED
    </shortdesc>
    <desc>
 
@@ -50,10 +122,13 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Set pango-marked up text.
    </shortdesc>
    <desc>
-
+    <para>
+     Allows you to override the text with a pango-marked up version
+     which may contain colors and other text attributes.
+    </para>
    </desc>
   </method>
 
@@ -65,9 +140,13 @@
    <propname>image</propname>
    <proptype>GtkWidget</proptype>
    <shortdesc>
+    The image icon widget
    </shortdesc>
    <desc>
-
+    <para>
+     The image icon widget which displays the question/information/whatever
+     symbol.
+    </para>
    </desc>
   </property>
 
@@ -75,9 +154,12 @@
    <propname>label</propname>
    <proptype>GtkWidget</proptype>
    <shortdesc>
+    The label containing the text.
    </shortdesc>
    <desc>
-
+    <para>
+     The label containing the text.
+    </para>
    </desc>
   </property>
 
