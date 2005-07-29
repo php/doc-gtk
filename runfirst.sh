@@ -12,7 +12,7 @@ if [ ! -d ../php-gtk ];  then
     exit 1
 fi
 
-./gen_docs_from_source.sh
+#./gen_docs_from_source.sh
 $php -q gen_chapterents.php $language
 $php -q check_chapterusage.php
 $php -q gen_manualxml.php $language
