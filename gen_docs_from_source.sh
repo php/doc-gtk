@@ -5,6 +5,12 @@
 language=en
 php=php
 
+if [ ! -d ../php-gtk ];  then
+    echo "Please checkout php-gtk first and make sure that"
+    echo "the directory ../php-gtk is reachable"
+    exit 1
+fi
+
 #goto here
 cd "`dirname "$0"`"
 
