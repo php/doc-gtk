@@ -6,11 +6,11 @@ language="en"
 
 cd "`dirname "$0"`"
 
-if [ ! -d ../php-gtk ];  then
-    echo "Please checkout php-gtk first and make sure that"
-    echo "the directory ../php-gtk is reachable"
-    exit 1
-fi
+#if [ ! -d ../php-gtk ];  then
+#    echo "Please checkout php-gtk first and make sure that"
+#    echo "the directory ../php-gtk is reachable"
+#    exit 1
+#fi
 
 #./gen_docs_from_source.sh
 $php -q gen_chapterents.php $language
