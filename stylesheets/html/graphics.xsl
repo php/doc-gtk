@@ -9,7 +9,7 @@
                 version='1.0'>
 
 <!-- ********************************************************************
-     $Id: graphics.xsl,v 1.4 2005-04-11 21:54:44 cweiske Exp $
+     $Id: graphics.xsl,v 1.5 2005-08-02 10:48:31 cweiske Exp $
      ********************************************************************
 
      This file is part of the XSL DocBook Stylesheet distribution.
@@ -76,7 +76,8 @@
   <xsl:variable name="filename">
     <xsl:choose>
       <xsl:when test="local-name(.) = 'graphic'
-                      or local-name(.) = 'inlinegraphic'">
+                      or local-name(.) = 'inlinegraphic'
+                      or local-name(.) = 'classimage'">
         <xsl:choose>
           <xsl:when test="@fileref">
             <xsl:value-of select="@fileref"/>

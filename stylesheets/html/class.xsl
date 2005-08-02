@@ -90,6 +90,15 @@
   <xsl:template match="proptype">
    <xsl:apply-templates />
   </xsl:template>
+  
+  <xsl:template match="classimage">
+   <div style="float:right; border:1px solid #000;">
+    <xsl:if test="@frame='no'">
+     <xsl:attribute name="style">float:right;</xsl:attribute>
+    </xsl:if>
+    <xsl:call-template name="process.image"/>
+   </div>
+  </xsl:template>
 
 <!--========================================================================-->
 
@@ -296,6 +305,7 @@
     <h2 class="title">
      <xsl:apply-templates select="./classmeta/classtitle"/>
     </h2>
+    <xsl:apply-templates select="./classmeta/classimage"/>
     <p>
      <blockquote>
       <xsl:apply-templates select="./classmeta/shortdesc"/>

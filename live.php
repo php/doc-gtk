@@ -56,7 +56,7 @@ class PhpGtkLiveDocs
 		pclose($hdl);*/
 		$retval = shell_exec('./gen_manual.sh en test ' . $id . ' 2>&1');
 		if (isset($_GET['debug'])) {
-			var_dump($retval);
+			var_dump(nl2br($retval));
 		}
 		return true;
 	}//function genManual($id)

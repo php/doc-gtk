@@ -417,7 +417,7 @@ class PhpGtkLiveDocGenerator
                     }
                     //We can't remove all the empty lines because the programlisting examples wouldn't have empty lines then
                     //but they won't have more than 3 empty lines in a row, I hope
-                    if ($nEmptyLines < 3) {
+                    if ($nEmptyLines < 3 && substr($strLine, 0, 5) != '<?xml') {
                         $strStrippedContents .= $strLine;
                     }
                 }
