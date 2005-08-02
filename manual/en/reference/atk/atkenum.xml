@@ -2,32 +2,32 @@
 <enums id="atkenum">
 
 
- <enum id="atk.enum.key">
-  <enumname>AtkKey</enumname>
+ <enum id="atk.enum.keyeventtype">
+  <enumname>AtkKeyEventType</enumname>
   <desc>
    <simpara>
-    
+    Specifies the type of a keyboard event.
    </simpara>
   </desc>
   <enumoption>
    <value>0</value>
    <optionname>Atk::KEY_EVENT_PRESS</optionname>
    <shortdesc>
-    
+    specifies a key press event
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>1</value>
    <optionname>Atk::KEY_EVENT_RELEASE</optionname>
    <shortdesc>
-    
+    specifies a key release event
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>2</value>
    <optionname>Atk::KEY_EVENT_LAST_DEFINED</optionname>
    <shortdesc>
-    
+    Not a valid value; specifies end of enumeration
    </shortdesc>
   </enumoption>
  </enum>
@@ -37,63 +37,68 @@
   <enumname>AtkLayer</enumname>
   <desc>
    <simpara>
-    
+    Describes the layer of a component
+   </simpara>
+   <simpara>
+    These enumerated "layer values" are used when determining which 
+    UI rendering layer a component is drawn into, which can help 
+    in making determinations of when components occlude one another.
    </simpara>
   </desc>
   <enumoption>
    <value>0</value>
    <optionname>Atk::LAYER_INVALID</optionname>
    <shortdesc>
-    
+    The object does not have a layer
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>1</value>
    <optionname>Atk::LAYER_BACKGROUND</optionname>
    <shortdesc>
-    
+    This layer is reserved for the desktop background
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>2</value>
    <optionname>Atk::LAYER_CANVAS</optionname>
    <shortdesc>
-    
+    This layer is used for Canvas components
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>3</value>
    <optionname>Atk::LAYER_WIDGET</optionname>
    <shortdesc>
-    
+    This layer is normally used for components
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>4</value>
    <optionname>Atk::LAYER_MDI</optionname>
    <shortdesc>
-    
+    This layer is used for layered components
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>5</value>
    <optionname>Atk::LAYER_POPUP</optionname>
    <shortdesc>
-    
+    This layer is used for popup components, such as menus
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>6</value>
    <optionname>Atk::LAYER_OVERLAY</optionname>
    <shortdesc>
-    
+    This layer is reserved for future use.
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>7</value>
    <optionname>Atk::LAYER_WINDOW</optionname>
    <shortdesc>
-    
+    This layer is used for toplevel windows.
    </shortdesc>
   </enumoption>
  </enum>
@@ -103,105 +108,112 @@
   <enumname>AtkRelation</enumname>
   <desc>
    <simpara>
-    
+    Describes the type of the relation
    </simpara>
   </desc>
   <enumoption>
    <value>0</value>
    <optionname>Atk::RELATION_NULL</optionname>
    <shortdesc>
-    
+    No relation
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>1</value>
    <optionname>Atk::RELATION_CONTROLLED_BY</optionname>
    <shortdesc>
-    
+    Indicates an object controlled by one or more target objects.
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>2</value>
    <optionname>Atk::RELATION_CONTROLLER_FOR</optionname>
    <shortdesc>
-    
+    Indicates an object is an controller for one or more target objects.
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>3</value>
    <optionname>Atk::RELATION_LABEL_FOR</optionname>
    <shortdesc>
-    
+    Indicates an object is a label for one or more target objects.
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>4</value>
    <optionname>Atk::RELATION_LABELLED_BY</optionname>
    <shortdesc>
-    
+    Indicates an object is labelled by one or more target objects.
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>5</value>
    <optionname>Atk::RELATION_MEMBER_OF</optionname>
    <shortdesc>
-    
+    Indicates an object is a member of a group of one or more target objects.
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>6</value>
    <optionname>Atk::RELATION_NODE_CHILD_OF</optionname>
    <shortdesc>
-    
+    Indicates an object is a cell in a treetable which is 
+    displayed because a cell in the same column is expanded and identifies that cell.
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>7</value>
    <optionname>Atk::RELATION_FLOWS_TO</optionname>
    <shortdesc>
-    
+    Indicates that the object has content that flows logically to 
+    another <classname>AtkObject</classname> in a sequential way, 
+    (for instance text-flow).
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>8</value>
    <optionname>Atk::RELATION_FLOWS_FROM</optionname>
    <shortdesc>
-    
+    Indicates that the object has content that flows logically from another 
+    <classname>AtkObject</classname> in a sequential way, (for instance text-flow).
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>9</value>
    <optionname>Atk::RELATION_SUBWINDOW_OF</optionname>
    <shortdesc>
-    
+    Indicates a subwindow attached to a component but otherwise has 
+    no connection in the UI heirarchy to that component.
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>10</value>
    <optionname>Atk::RELATION_EMBEDS</optionname>
    <shortdesc>
-    
+    Indicates that the object visually embeds another object's content, 
+    i.e. this object's content flows around another's content.
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>11</value>
    <optionname>Atk::RELATION_EMBEDDED_BY</optionname>
    <shortdesc>
-    
+    Inverse of <enumname>Atk::RELATION_EMBEDS</enumname>, indicates that 
+    this object's content is visualy embedded in another object.
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>12</value>
    <optionname>Atk::RELATION_POPUP_FOR</optionname>
    <shortdesc>
-    
+    Indicates that an object is a popup for another object.
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>13</value>
    <optionname>Atk::RELATION_PARENT_WINDOW_OF</optionname>
    <shortdesc>
-    
+    Indicates that an object is a parent window of another object.
    </shortdesc>
   </enumoption>
   <enumoption>
@@ -218,553 +230,593 @@
   <enumname>AtkRole</enumname>
   <desc>
    <simpara>
-    
+    Describes the role of an object.
+   </simpara>
+   <simpara>
+    These are the built-in enumerated roles that UI components 
+    can have in ATK. Other roles may be added at runtime, so 
+    an AtkRole >= <enumname>Atk::ROLE_LAST_DEFINED</enumname>
+    is not necessarily an error.
    </simpara>
   </desc>
   <enumoption>
    <value>0</value>
    <optionname>Atk::ROLE_INVALID</optionname>
    <shortdesc>
-    
+    Invalid role
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>1</value>
    <optionname>Atk::ROLE_ACCEL_LABEL</optionname>
    <shortdesc>
-    
+    A label which represents an accelerator
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>2</value>
    <optionname>Atk::ROLE_ALERT</optionname>
    <shortdesc>
-    
+    An object which is an alert to the user
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>3</value>
    <optionname>Atk::ROLE_ANIMATION</optionname>
    <shortdesc>
-    
+    An object which is an animated image
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>4</value>
    <optionname>Atk::ROLE_ARROW</optionname>
    <shortdesc>
-    
+    An arrow in one of the four cardinal directions
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>5</value>
    <optionname>Atk::ROLE_CALENDAR</optionname>
    <shortdesc>
-    
+    An object that displays a calendar and allows the user to
+    select a date
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>6</value>
    <optionname>Atk::ROLE_CANVAS</optionname>
    <shortdesc>
-    
+    An object that can be drawn into and is used to trap events
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>7</value>
    <optionname>Atk::ROLE_CHECK_BOX</optionname>
    <shortdesc>
-    
+    A choice that can be checked or unchecked and provides a
+    separate indicator for the current state
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>8</value>
    <optionname>Atk::ROLE_CHECK_MENU_ITEM</optionname>
    <shortdesc>
-    
+    A menu item with a check box
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>9</value>
    <optionname>Atk::ROLE_COLOR_CHOOSER</optionname>
    <shortdesc>
-    
+    A specialized dialog that lets the user choose a color
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>10</value>
    <optionname>Atk::ROLE_COLUMN_HEADER</optionname>
    <shortdesc>
-    
+    The header for a column of data
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>11</value>
    <optionname>Atk::ROLE_COMBO_BOX</optionname>
    <shortdesc>
-    
+    A list of choices the user can select from
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>12</value>
    <optionname>Atk::ROLE_DATE_EDITOR</optionname>
    <shortdesc>
-    
+    An object whose purpose is to allow a user to edit a date
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>13</value>
    <optionname>Atk::ROLE_DESKTOP_ICON</optionname>
    <shortdesc>
-    
+    An inconifed internal frame within a DESKTOP_PANE
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>14</value>
    <optionname>Atk::ROLE_DESKTOP_FRAME</optionname>
    <shortdesc>
-    
+    A pane that supports internal frames and iconified versions 
+    of those internal frames
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>15</value>
    <optionname>Atk::ROLE_DIAL</optionname>
    <shortdesc>
-    
+    An object whose purpose is to allow a user to set a value
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>16</value>
    <optionname>Atk::ROLE_DIALOG</optionname>
    <shortdesc>
-    
+    A top level window with title bar and a border
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>17</value>
    <optionname>Atk::ROLE_DIRECTORY_PANE</optionname>
    <shortdesc>
-    
+    A pane that allows the user to navigate through and select 
+    the contents of a directory
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>18</value>
    <optionname>Atk::ROLE_DRAWING_AREA</optionname>
    <shortdesc>
-    
+    An object used for drawing custom user interface elements
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>19</value>
    <optionname>Atk::ROLE_FILE_CHOOSER</optionname>
    <shortdesc>
-    
+    A specialized dialog that lets the user choose a file
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>20</value>
    <optionname>Atk::ROLE_FILLER</optionname>
    <shortdesc>
-    
+    A object that fills up space in a user interface
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>21</value>
    <optionname>Atk::ROLE_FONT_CHOOSER</optionname>
    <shortdesc>
-    
+    A specialized dialog that lets the user choose a font
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>22</value>
    <optionname>Atk::ROLE_FRAME</optionname>
    <shortdesc>
-    
+    A top level window with a title bar, border, menubar, etc.
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>23</value>
    <optionname>Atk::ROLE_GLASS_PANE</optionname>
    <shortdesc>
-    
+    A pane that is guaranteed to be painted on top of all 
+    panes beneath it
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>24</value>
    <optionname>Atk::ROLE_HTML_CONTAINER</optionname>
    <shortdesc>
-    
+    A document container for HTML, whose children represent 
+    the document content
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>25</value>
    <optionname>Atk::ROLE_ICON</optionname>
    <shortdesc>
-    
+    A small fixed size picture, typically used to decorate components
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>26</value>
    <optionname>Atk::ROLE_IMAGE</optionname>
    <shortdesc>
-    
+    An object whose primary purpose is to display an image
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>27</value>
    <optionname>Atk::ROLE_INTERNAL_FRAME</optionname>
    <shortdesc>
-    
+    A frame-like object that is clipped by a desktop pane
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>28</value>
    <optionname>Atk::ROLE_LABEL</optionname>
    <shortdesc>
-    
+    An object used to present an icon or short string in an interface
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>29</value>
    <optionname>Atk::ROLE_LAYERED_PANE</optionname>
    <shortdesc>
-    
+    A specialized pane that allows its children to be drawn in 
+    layers, providing a form of stacking order
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>30</value>
    <optionname>Atk::ROLE_LIST</optionname>
    <shortdesc>
-    
+    An object that presents a list of objects to the user and 
+    allows the user to select one or more of them
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>31</value>
    <optionname>Atk::ROLE_LIST_ITEM</optionname>
    <shortdesc>
-    
+    An object that represents an element of a list
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>32</value>
    <optionname>Atk::ROLE_MENU</optionname>
    <shortdesc>
-    
+    An object usually found inside a menu bar that contains 
+    a list of actions the user can choose from
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>33</value>
    <optionname>Atk::ROLE_MENU_BAR</optionname>
    <shortdesc>
-    
+    An object usually drawn at the top of the primary dialog 
+    box of an application that contains a list of menus the user can choose from
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>34</value>
    <optionname>Atk::ROLE_MENU_ITEM</optionname>
    <shortdesc>
-    
+    An object usually contained in a menu that presents an 
+    action the user can choose
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>35</value>
    <optionname>Atk::ROLE_OPTION_PANE</optionname>
    <shortdesc>
-    
+    A specialized pane whose primary use is inside a DIALOG
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>36</value>
    <optionname>Atk::ROLE_PAGE_TAB</optionname>
    <shortdesc>
-    
+    An object that is a child of a page tab list
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>37</value>
    <optionname>Atk::ROLE_PAGE_TAB_LIST</optionname>
    <shortdesc>
-    
+    An object that presents a series of panels (or page tabs),
+    one at a time, through some mechanism provided by the object
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>38</value>
    <optionname>Atk::ROLE_PANEL</optionname>
    <shortdesc>
-    
+    A generic container that is often used to group objects
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>39</value>
    <optionname>Atk::ROLE_PASSWORD_TEXT</optionname>
    <shortdesc>
-    
+    A text object uses for passwords, or other places where 
+    the text content is not shown visibly to the user
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>40</value>
    <optionname>Atk::ROLE_POPUP_MENU</optionname>
    <shortdesc>
-    
+    A temporary window that is usually used to offer the 
+    user a list of choices, and then hides when the user selects one of those choices
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>41</value>
    <optionname>Atk::ROLE_PROGRESS_BAR</optionname>
    <shortdesc>
-    
+    An object used to indicate how much of a task has been completed
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>42</value>
    <optionname>Atk::ROLE_PUSH_BUTTON</optionname>
    <shortdesc>
-    
+    An object the user can manipulate to tell the application 
+    to do something
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>43</value>
    <optionname>Atk::ROLE_RADIO_BUTTON</optionname>
    <shortdesc>
-    
+    A specialized check box that will cause other radio buttons 
+    in the same group to become unchecked when this one is checked
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>44</value>
    <optionname>Atk::ROLE_RADIO_MENU_ITEM</optionname>
    <shortdesc>
-    
+    A check menu item which belongs to a group. At each instant 
+    exactly one of the radio menu items from a group is selected
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>45</value>
    <optionname>Atk::ROLE_ROOT_PANE</optionname>
    <shortdesc>
-    
+    A specialized pane that has a glass pane and a layered 
+    pane as its children
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>46</value>
    <optionname>Atk::ROLE_ROW_HEADER</optionname>
    <shortdesc>
-    
+    The header for a row of data
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>47</value>
    <optionname>Atk::ROLE_SCROLL_BAR</optionname>
    <shortdesc>
-    
+    An object usually used to allow a user to incrementally view 
+    a large amount of data.
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>48</value>
    <optionname>Atk::ROLE_SCROLL_PANE</optionname>
    <shortdesc>
-    
+    An object that allows a user to incrementally view a large 
+    amount of information
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>49</value>
    <optionname>Atk::ROLE_SEPARATOR</optionname>
    <shortdesc>
-    
+    An object usually contained in a menu to provide a visible and 
+    logical separation of the contents in a menu
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>50</value>
    <optionname>Atk::ROLE_SLIDER</optionname>
    <shortdesc>
-    
+    An object that allows the user to select from a bounded range
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>51</value>
    <optionname>Atk::ROLE_SPLIT_PANE</optionname>
    <shortdesc>
-    
+    A specialized panel that presents two other panels at the same time
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>52</value>
    <optionname>Atk::ROLE_SPIN_BUTTON</optionname>
    <shortdesc>
-    
+    An object used to get an integer or floating point number from the user
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>53</value>
    <optionname>Atk::ROLE_STATUSBAR</optionname>
    <shortdesc>
-    
+    An object which reports messages of minor importance to the user
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>54</value>
    <optionname>Atk::ROLE_TABLE</optionname>
    <shortdesc>
-    
+    An object used to represent information in terms of rows and columns
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>55</value>
    <optionname>Atk::ROLE_TABLE_CELL</optionname>
    <shortdesc>
-    
+    A cell in a table
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>56</value>
    <optionname>Atk::ROLE_TABLE_COLUMN_HEADER</optionname>
    <shortdesc>
-    
+    The header for a column of a table
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>57</value>
    <optionname>Atk::ROLE_TABLE_ROW_HEADER</optionname>
    <shortdesc>
-    
+    The header for a row of a table
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>58</value>
    <optionname>Atk::ROLE_TEAR_OFF_MENU_ITEM</optionname>
    <shortdesc>
-    
+    A menu item used to tear off and reattach its menu
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>59</value>
    <optionname>Atk::ROLE_TERMINAL</optionname>
    <shortdesc>
-    
+    An object that represents an accessible terminal
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>60</value>
    <optionname>Atk::ROLE_TEXT</optionname>
    <shortdesc>
-    
+    An object that presents text to the user
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>61</value>
    <optionname>Atk::ROLE_TOGGLE_BUTTON</optionname>
    <shortdesc>
-    
+    A specialized push button that can be checked or unchecked, 
+    but does not provide a separate indicator for the current state
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>62</value>
    <optionname>Atk::ROLE_TOOL_BAR</optionname>
    <shortdesc>
-    
+    A bar or palette usually composed of push buttons or 
+    toggle buttons
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>63</value>
    <optionname>Atk::ROLE_TOOL_TIP</optionname>
    <shortdesc>
-    
+    An object that provides information about another object
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>64</value>
    <optionname>Atk::ROLE_TREE</optionname>
    <shortdesc>
-    
+    An object used to represent hierarchical information 
+    to the user
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>65</value>
    <optionname>Atk::ROLE_TREE_TABLE</optionname>
    <shortdesc>
-    
+    An object capable of expanding and collapsing rows as well 
+    as showing multiple columns of data
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>66</value>
    <optionname>Atk::ROLE_UNKNOWN</optionname>
    <shortdesc>
-    
+    The object contains some Accessible information, but its 
+    role is not known
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>67</value>
    <optionname>Atk::ROLE_VIEWPORT</optionname>
    <shortdesc>
-    
+    An object usually used in a scroll pane
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>68</value>
    <optionname>Atk::ROLE_WINDOW</optionname>
    <shortdesc>
-    
+    A top level window with no title or border.
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>69</value>
    <optionname>Atk::ROLE_HEADER</optionname>
    <shortdesc>
-    
+    An object that serves as a document header.
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>70</value>
    <optionname>Atk::ROLE_FOOTER</optionname>
    <shortdesc>
-    
+    An object that serves as a document footer.
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>71</value>
    <optionname>Atk::ROLE_PARAGRAPH</optionname>
    <shortdesc>
-    
+    An object which is contains a paragraph of text content.
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>72</value>
    <optionname>Atk::ROLE_RULER</optionname>
    <shortdesc>
-    
+    An object which describes margins and tab stops, etc. 
+    for text objects which it controls 
+    (should have CONTROLLER_FOR relation to such).
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>73</value>
    <optionname>Atk::ROLE_APPLICATION</optionname>
    <shortdesc>
-    
+    The object is an application object, which may contain 
+    <enumname>Atk::ROLE_FRAME</enumname> objects or other types of
+    accessibles.
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>74</value>
    <optionname>Atk::ROLE_AUTOCOMPLETE</optionname>
    <shortdesc>
-    
+    The object is a dialog or list containing items for insertion 
+    into an entry widget, for instance a list of words for 
+    completion of a text entry.
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>75</value>
    <optionname>Atk::ROLE_EDITBAR</optionname>
    <shortdesc>
-    
+    The object is an editable text object in a toolbar
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>76</value>
    <optionname>Atk::ROLE_EMBEDDED</optionname>
    <shortdesc>
-    
+    The object is an embedded container within a document or 
+    panel. This role is a grouping "hint" indicating 
+    that the contained objects share a context.
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>77</value>
    <optionname>Atk::ROLE_LAST_DEFINED</optionname>
    <shortdesc>
-    
+    not a valid role, used for finding end of enumeration
    </shortdesc>
   </enumoption>
  </enum>
@@ -774,248 +826,263 @@
   <enumname>AtkState</enumname>
   <desc>
    <simpara>
-    
+    The possible types of states of an object
    </simpara>
   </desc>
   <enumoption>
    <value>0</value>
    <optionname>Atk::STATE_INVALID</optionname>
    <shortdesc>
-    
+    Indicates an invalid state
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>1</value>
    <optionname>Atk::STATE_ACTIVE</optionname>
    <shortdesc>
-    
+    Indicates a window is currently the active window
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>2</value>
    <optionname>Atk::STATE_ARMED</optionname>
    <shortdesc>
-    
+    Indicates that the object is armed
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>3</value>
    <optionname>Atk::STATE_BUSY</optionname>
    <shortdesc>
-    
+    Indicates the current object is busy
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>4</value>
    <optionname>Atk::STATE_CHECKED</optionname>
    <shortdesc>
-    
+    Indicates this object is currently checked
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>5</value>
    <optionname>Atk::STATE_DEFUNCT</optionname>
    <shortdesc>
-    
+    Indicates the user interface object corresponding to this 
+    object no longer exists
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>6</value>
    <optionname>Atk::STATE_EDITABLE</optionname>
    <shortdesc>
-    
+    Indicates the user can change the contents of this object
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>7</value>
    <optionname>Atk::STATE_ENABLED</optionname>
    <shortdesc>
-    
+    Indicates that this object is enabled. An inconsistent 
+    <classname>GtkToggleButton</classname> is an example of an object which 
+    is sensitive but not enabled.
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>8</value>
    <optionname>Atk::STATE_EXPANDABLE</optionname>
    <shortdesc>
-    
+    Indicates this object allows progressive disclosure of its children
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>9</value>
    <optionname>Atk::STATE_EXPANDED</optionname>
    <shortdesc>
-    
+    Indicates this object its expanded
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>10</value>
    <optionname>Atk::STATE_FOCUSABLE</optionname>
    <shortdesc>
-    
+    Indicates this object can accept keyboard focus, which means all 
+    events resulting from typing on the keyboard will normally be 
+    passed to it when it has focus
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>11</value>
    <optionname>Atk::STATE_FOCUSED</optionname>
    <shortdesc>
-    
+    Indicates this object currently has the keyboard focus
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>12</value>
    <optionname>Atk::STATE_HORIZONTAL</optionname>
    <shortdesc>
-    
+    Indicates the orientation of this object is horizontal
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>13</value>
    <optionname>Atk::STATE_ICONIFIED</optionname>
    <shortdesc>
-    
+    Indicates this object is minimized and is represented only by an icon
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>14</value>
    <optionname>Atk::STATE_MODAL</optionname>
    <shortdesc>
-    
+    Indicates something must be done with this object before 
+    the user can interact with an object in a different window
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>15</value>
    <optionname>Atk::STATE_MULTI_LINE</optionname>
    <shortdesc>
-    
+    Indicates this (text) object can contain multiple lines of text
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>16</value>
    <optionname>Atk::STATE_MULTISELECTABLE</optionname>
    <shortdesc>
-    
+    Indicates this object allows more than one of its children to be selected at the same time
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>17</value>
    <optionname>Atk::STATE_OPAQUE</optionname>
    <shortdesc>
-    
+    Indicates this object paints every pixel within its rectangular region
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>18</value>
    <optionname>Atk::STATE_PRESSED</optionname>
    <shortdesc>
-    
+    Indicates this object is currently pressed
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>19</value>
    <optionname>Atk::STATE_RESIZABLE</optionname>
    <shortdesc>
-    
+    Indicates the size of this object is not fixed
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>20</value>
    <optionname>Atk::STATE_SELECTABLE</optionname>
    <shortdesc>
-    
+    Indicates this object is the child of an object that allows its 
+    children to be selected and that this child is one of those 
+    children that can be selected
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>21</value>
    <optionname>Atk::STATE_SELECTED</optionname>
    <shortdesc>
-    
+    Indicates this object is the child of an object that allows 
+    its children to be selected and that this child is one of 
+    those children that has been selected
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>22</value>
    <optionname>Atk::STATE_SENSITIVE</optionname>
    <shortdesc>
-    
+    Indicates this object is sensitive
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>23</value>
    <optionname>Atk::STATE_SHOWING</optionname>
    <shortdesc>
-    
+    Indicates this object, the object's parent, the object's 
+    parent's parent, and so on, are all visible
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>24</value>
    <optionname>Atk::STATE_SINGLE_LINE</optionname>
    <shortdesc>
-    
+    Indicates this (text) object can contain only a single line of text
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>25</value>
    <optionname>Atk::STATE_STALE</optionname>
    <shortdesc>
-    
+    Indicates that the index associated with this object has changed 
+    since the user accessed the object.
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>26</value>
    <optionname>Atk::STATE_TRANSIENT</optionname>
    <shortdesc>
-    
+    Indicates this object is transient
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>27</value>
    <optionname>Atk::STATE_VERTICAL</optionname>
    <shortdesc>
-    
+    Indicates the orientation of this object is vertical
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>28</value>
    <optionname>Atk::STATE_VISIBLE</optionname>
    <shortdesc>
-    
+    Indicates this object is visible
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>29</value>
    <optionname>Atk::STATE_MANAGES_DESCENDANTS</optionname>
    <shortdesc>
-    
+    Indicates that "active-descendant-changed" event is sent when 
+    children become 'active' (i.e. are selected or navigated to onscreen). 
+    Used to prevent need to enumerate all children in very large containers, 
+    like tables.
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>30</value>
    <optionname>Atk::STATE_INDETERMINATE</optionname>
    <shortdesc>
-    
+    Indicates that a check box is in a state other than checked or not checked.
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>31</value>
    <optionname>Atk::STATE_TRUNCATED</optionname>
    <shortdesc>
-    
+    Indicates that an object is truncated, e.g. a text value in a speradsheet cell.
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>32</value>
    <optionname>Atk::STATE_LAST_DEFINED</optionname>
    <shortdesc>
-    
+    Not a valid state, used for finding end of enumeration
    </shortdesc>
   </enumoption>
  </enum>
 
 
- <enum id="atk.enum.text">
-  <enumname>AtkText</enumname>
+ <enum id="atk.enum.textboundary">
+  <enumname>AtkTextBoundary</enumname>
   <desc>
    <simpara>
-    
+    Text boundary types used for specifying boundaries for regions of text
    </simpara>
   </desc>
   <enumoption>
@@ -1067,183 +1134,289 @@
     
    </shortdesc>
   </enumoption>
+ </enum>
+
+
+ <enum id="atk.enum.textcliptype">
+  <enumname>AtkTextClipType</enumname>
+  <desc>
+   <simpara>
+    Text boundary types used for specifying boundaries for regions of text
+   </simpara>
+  </desc>
+  <enumoption>
+   <value>0</value>
+   <optionname>Atk::TEXT_CLIP_NONE</optionname>
+   <shortdesc>
+    No clipping to be done
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>1</value>
+   <optionname>Atk::TEXT_CLIP_MIN</optionname>
+   <shortdesc>
+    Text clipped by min coordinate is omitted
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>2</value>
+   <optionname>Atk::TEXT_CLIP_MAX</optionname>
+   <shortdesc>
+    Text clipped by max coordinate is omitted
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>3</value>
+   <optionname>Atk::TEXT_CLIP_BOTH</optionname>
+   <shortdesc>
+    Only text fully within mix/max bound is retained
+   </shortdesc>
+  </enumoption>
+ </enum>
+
+
+ <enum id="atk.enum.textattr">
+  <enumname>AtkTextAttr</enumname>
+  <desc>
+   <simpara>
+    Describes the text attributes supported
+   </simpara>
+  </desc>
+  
+  <enumoption>
+      <value>0</value>
+      <optionname>Atk::TEXT_ATTR_INVALID</optionname>
+      <shortdesc>
+       Invalid attribute
+      </shortdesc>
+  </enumoption>
+  <enumoption>
+      <value>1</value>
+      <optionname>Atk::TEXT_ATTR_LEFT_MARGIN</optionname>
+      <shortdesc>
+       The pixel width of the left margin
+      </shortdesc>
+  </enumoption>
+  <enumoption>
+      <value>2</value>
+      <optionname>Atk::TEXT_ATTR_RIGHT_MARGIN</optionname>
+      <shortdesc>
+       The pixel width of the right margin
+      </shortdesc>
+  </enumoption>
+  <enumoption>
+      <value>3</value>
+      <optionname>Atk::TEXT_ATTR_INDENT</optionname>
+      <shortdesc>
+       The number of pixels that the text is indented
+      </shortdesc>
+  </enumoption>
+  <enumoption>
+      <value>4</value>
+      <optionname>Atk::TEXT_ATTR_INVISIBLE</optionname>
+      <shortdesc>
+       Either "true" or "false" indicating whether text is visible or not
+      </shortdesc>
+  </enumoption>
+  <enumoption>
+      <value>5</value>
+      <optionname>Atk::TEXT_ATTR_EDITABLE</optionname>
+      <shortdesc>
+       Either "true" or "false" indicating whether text is editable or not
+      </shortdesc>
+  </enumoption>
+  <enumoption>
+      <value>6</value>
+      <optionname>Atk::TEXT_ATTR_PIXELS_ABOVE_LINES</optionname>
+      <shortdesc>
+       Pixels of blank space to leave above each newline-terminated line.
+      </shortdesc>
+  </enumoption>
   <enumoption>
    <value>7</value>
    <optionname>Atk::TEXT_ATTR_PIXELS_BELOW_LINES</optionname>
    <shortdesc>
-    
+    Pixels of blank space to leave below each newline-terminated line.
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>8</value>
    <optionname>Atk::TEXT_ATTR_PIXELS_INSIDE_WRAP</optionname>
    <shortdesc>
-    
+    Pixels of blank space to leave between wrapped lines inside the same
+    newline-terminated line (paragraph).
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>9</value>
    <optionname>Atk::TEXT_ATTR_BG_FULL_HEIGHT</optionname>
    <shortdesc>
-    
+    "true" or "false" whether to make the background color for each character 
+    the height of the highest font used on the current line, or the height 
+    of the font used for the current character.
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>10</value>
    <optionname>Atk::TEXT_ATTR_RISE</optionname>
    <shortdesc>
-    
+    Number of pixels that the characters are risen above the baseline
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>11</value>
    <optionname>Atk::TEXT_ATTR_UNDERLINE</optionname>
    <shortdesc>
-    
+    "none", "single", "double" or "low"
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>12</value>
    <optionname>Atk::TEXT_ATTR_STRIKETHROUGH</optionname>
    <shortdesc>
-    
+    "true" or "false" whether the text is strikethrough
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>13</value>
    <optionname>Atk::TEXT_ATTR_SIZE</optionname>
    <shortdesc>
-    
+    The size of the characters.
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>14</value>
    <optionname>Atk::TEXT_ATTR_SCALE</optionname>
    <shortdesc>
-    
+    The scale of the characters. The value is a string representation of a double
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>15</value>
    <optionname>Atk::TEXT_ATTR_WEIGHT</optionname>
    <shortdesc>
-    
+    The weight of the characters.
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>16</value>
    <optionname>Atk::TEXT_ATTR_LANGUAGE</optionname>
    <shortdesc>
-    
+    The language used
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>17</value>
    <optionname>Atk::TEXT_ATTR_FAMILY_NAME</optionname>
    <shortdesc>
-    
+    The font family name
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>18</value>
    <optionname>Atk::TEXT_ATTR_BG_COLOR</optionname>
    <shortdesc>
-    
+    The background color. The value is an RGB value of the format "u,u,u"
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>19</value>
    <optionname>Atk::TEXT_ATTR_FG_COLOR</optionname>
    <shortdesc>
-    
+    The foreground color. The value is an RGB value of the format "u,u,u"
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>20</value>
    <optionname>Atk::TEXT_ATTR_BG_STIPPLE</optionname>
    <shortdesc>
-    
+    "true" if a GdkBitmap is set for stippling the background color.
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>21</value>
    <optionname>Atk::TEXT_ATTR_FG_STIPPLE</optionname>
    <shortdesc>
-    
+    "true" if a GdkBitmap is set for stippling the foreground color.
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>22</value>
    <optionname>Atk::TEXT_ATTR_WRAP_MODE</optionname>
    <shortdesc>
-    
+    The wrap mode of the text, if any. Values are "none", "char" or "word"
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>23</value>
    <optionname>Atk::TEXT_ATTR_DIRECTION</optionname>
    <shortdesc>
-    
+    The direction of the text, if set. Values are "none", "ltr" or "rtl"
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>24</value>
    <optionname>Atk::TEXT_ATTR_JUSTIFICATION</optionname>
    <shortdesc>
-    
+    The justification of the text, if set. Values are "left", "right", "center" or "fill"
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>25</value>
    <optionname>Atk::TEXT_ATTR_STRETCH</optionname>
    <shortdesc>
-    
+    The stretch of the text, if set. Values are "ultra_condensed", "extra_condensed", 
+    "condensed", "semi_condensed", "normal", "semi_expanded", "expanded", 
+    "extra_expanded" or "ultra_expanded"
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>26</value>
    <optionname>Atk::TEXT_ATTR_VARIANT</optionname>
    <shortdesc>
-    
+    The capitalization variant of the text, if set. Values are "normal" or "small_caps"
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>27</value>
    <optionname>Atk::TEXT_ATTR_STYLE</optionname>
    <shortdesc>
-    
+    The slant style of the text, if set. Values are "normal", "oblique" or "italic"
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>28</value>
    <optionname>Atk::TEXT_ATTR_LAST_DEFINED</optionname>
    <shortdesc>
-    
+    not a valid text attribute, used for finding end of enumeration
    </shortdesc>
   </enumoption>
  </enum>
 
 
- <enum id="atk.enum.xy">
-  <enumname>AtkXy</enumname>
+ <enum id="atk.enum.coordtype">
+  <enumname>AtkCoordType</enumname>
   <desc>
    <simpara>
-    
+    Specifies how xy coordinates are to be interpreted.
+    Used by functions such as <function class="AtkComponent">get_position</function>
+    and <function class="AtkText">get_character_extents</function>.
    </simpara>
   </desc>
   <enumoption>
    <value>0</value>
    <optionname>Atk::XY_SCREEN</optionname>
    <shortdesc>
-    
+    specifies xy coordinates relative to the screen
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>1</value>
    <optionname>Atk::XY_WINDOW</optionname>
    <shortdesc>
-    
+    specifies xy coordinates relative to the widget's top-level window
    </shortdesc>
   </enumoption>
  </enum>
+
 </enums>
