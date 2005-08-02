@@ -61,14 +61,24 @@ Gtk-WARNING **: Attempting to add a widget with type GtkButton to a GtkWindow, b
    <funcsynopsis>
     <funcprototype>
     <funcdef> <function>GtkWindow</function></funcdef>
-    <paramdef>GtkWindowType <parameter><optional>type = GTK_WINDOW_TOPLEVEL</optional></parameter></paramdef>
+    <paramdef>GtkWindowType <parameter><optional>type = GTK::WINDOW_TOPLEVEL</optional></parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Creates a new GtkWindow instance.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Creates a new instance of GtkWindow of type <parameter>type</parameter>. 
+     If no <parameter>type</parameter> is passed, the window will be created as
+     a <enumname>GTK::WINDOW_TOPLEVEL</enumname>. This means that the window 
+     will have borders and a title bar by default. Windows of type
+     <enumname>GTK::WINDOW_POPUP</enumname> will not have borders or a title
+     bar. Popup windows are used for things such as tooltips and menus. They 
+     should not be used to create regular windows without borders. For that
+     you should use a toplevel window and 
+     <function class="GtkWindow">set_decorated</function>.    
+    </simpara>
    </desc>
   </constructor>
 
@@ -244,7 +254,7 @@ Gtk-WARNING **: Attempting to add a widget with type GtkButton to a GtkWindow, b
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the window to fullscreen mode.
    </shortdesc>
    <desc>
 
@@ -532,7 +542,8 @@ Gtk-WARNING **: Attempting to add a widget with type GtkButton to a GtkWindow, b
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns nothing. This method should probably be removed from the
+    documentation.
    </shortdesc>
    <desc>
     <para>
@@ -980,7 +991,7 @@ Gtk-WARNING **: Attempting to add a widget with type GtkButton to a GtkWindow, b
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Turns the borders and title bar for the window on/off.
    </shortdesc>
    <desc>
     <para>
@@ -1186,7 +1197,7 @@ Gtk-WARNING **: Attempting to add a widget with type GtkButton to a GtkWindow, b
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_icon</function></funcdef>
-     <paramdef>void</paramdef>
+     <paramdef><optional>GdkPixbuf <parameter>icon</parameter></optional></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -1263,10 +1274,13 @@ Gtk-WARNING **: Attempting to add a widget with type GtkButton to a GtkWindow, b
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Forces the window to remain on top of other windows on the screen.
    </shortdesc>
    <desc>
-
+    <simpara>
+     See also: 
+     <function class="GtkWindow">set_keep_below</function>
+    </simpara>
    </desc>
   </method>
 
@@ -1278,10 +1292,13 @@ Gtk-WARNING **: Attempting to add a widget with type GtkButton to a GtkWindow, b
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Forces the window to remain beneath other windows on the screen.
    </shortdesc>
    <desc>
-
+    <simpara>
+     See also: 
+     <function class="GtkWindow">set_keep_above</function>
+    </simpara>
    </desc>
   </method>
 
@@ -1570,7 +1587,7 @@ Gtk-WARNING **: Attempting to add a widget with type GtkButton to a GtkWindow, b
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the window to its original size and location.
    </shortdesc>
    <desc>
 
