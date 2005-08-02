@@ -46,30 +46,10 @@
     <example>
      <title>A modal <classname>GtkMessageDialog</classname></title>
      <programlisting role="php">
-      <![CDATA[
-<?php
-$dialog = new GtkMessageDialog(
-    null,//parent
-    Gtk::DIALOG_MODAL,
-    Gtk::MESSAGE_QUESTION,
-    Gtk::BUTTONS_YES_NO,
-    'Do you like PHP-Gtk2?'
-);
-//optional colored text
-$dialog->set_markup('Do <b>you</b> like PHP-Gtk <span foreground="red">2</span>?');
-
-$answer = $dialog->run();
-$dialog->destroy();
-
-if ($answer == Gtk::RESPONSE_YES) {
-    echo "You like me! Thanks!\r\n";
-} else if ($answer == Gtk::RESPONSE_NO) {
-    echo "Why not?\r\n";
-} else {
-    echo "Why didn't you press a button?\r\n";
-}
-?>
-      ]]>
+      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+                  href="&directory.examples;/reference/gtk/gtkmessagedialog/constructor.phpw" parse="text">
+       <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+      </xi:include>
      </programlisting>
     </example>
     <para>

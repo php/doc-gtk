@@ -70,7 +70,7 @@ else
     rm -R $build_dir/*
 fi
 
-xsltproc --param base.dir "'./$build_dir/'" $xslfile manual/$language/$manualfile
+xsltproc --param base.dir "'./$build_dir/'" --xinclude $xslfile manual/$language/$manualfile
 
 if [ $type == "html" ] && [ $test == "0" ]; then
     $php -q distribute_html.php $language
