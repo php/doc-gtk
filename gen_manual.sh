@@ -77,7 +77,7 @@ xsltproc --param base.dir "'./$build_dir/'" --xinclude $xslfile manual/$language
 # without losing directory structure?
 #cp --target-directory=build/en/test/images/ `grep -oh 'src="[^"]*"' build/en/test/* | sed s/src=\"//g | sed s/\"//g`
 # this one doesn't keep the directories
-cp -R images build/en/test/
+cp -R images build/en/$type/
 
 if [ $type == "html" ] && [ $test == "0" ]; then
     $php -q distribute_html.php $language

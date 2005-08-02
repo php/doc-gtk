@@ -52,8 +52,8 @@ foreach ($basefiles as $file) {
 //prefixed directories
 foreach ($prefixes as $prefix) {
     $basefiles = glob($prefix . '/*.html');
-    $searches       = array('%href="%');
-    $replacements   = array('href="../');
+    $searches       = array('%href="%'  ,'%src="%');
+    $replacements   = array('href="../' ,'src="../');
     foreach ($prefixes as $prefix2) {
         if ($prefix2 != $prefix) {
             $searches[]     = '%href="../' . $prefix2 . '\\.%';
