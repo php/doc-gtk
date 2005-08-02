@@ -2,12 +2,13 @@
    Docbook Customization layer of PHP-GTK docs
    Authors: James Moore <jmoore@php.net>
 
-   $Id: phpgtkdoc.dtd,v 1.15 2005-04-11 21:52:03 cweiske Exp $
+   $Id: phpgtkdoc.dtd,v 1.16 2005-08-02 07:01:10 cweiske Exp $
 
 -->
 
 <!ENTITY % local.person.ident.mix "|authoremail">
 <!ENTITY % local.function.attrib "class CDATA #IMPLIED">
+
 <!-- Load Docbook -->
 <!ENTITY % DocBookDTD PUBLIC "-//Norman Walsh//DTD DocBk XML V3.1.7//EN" "./docbookx.dtd">
 %DocBookDTD;
@@ -17,13 +18,16 @@
     %common.attrib;
 >
 
+<!ENTITY % phpgtkbook.class		"classtree classset enumset">
+
+
 <!-- 
    Classentry's should be in a classset, this will hold all the entry's
    for gtk or glade etc..
 
    - Must contain one or more classentry's
 -->
-<!ELEMENT classset ((title), (partintro), (classentry)+)>
+<!ELEMENT classset ((title), (partintro), (classentry)*)>
 <!ATTLIST classset
     %common.attrib;
 >
@@ -35,6 +39,11 @@
 
 <!ELEMENT enums ((enum)+)>
 <!ATTLIST enums
+    %common.attrib;
+>
+
+<!ELEMENT classtree ((title), (topclass))>
+<!ATTLIST classtree
     %common.attrib;
 >
 
@@ -75,7 +84,7 @@
 
 -->
 <!ELEMENT classentry 
-          ((classmeta),(constructor)?,(methods?,signals?,attributes?))>
+          ((classmeta),(constructors)?,(methods?,signals?,properties?))>
 <!ATTLIST classentry
     %common.attrib;
     %refentry.role.attrib;
@@ -119,11 +128,25 @@
 >
 
 <!--
+    Topclass
+    -The top parent class in a classtree
+-->
+<!ELEMENT topclass (#PCDATA)>
+
+<!--
 
    Entity for constructor and methods 
 
 -->
 <!ENTITY % method.class "(funcsynopsis),(shortdesc,desc)">
+
+<!-- Constructors
+     -multiple or one constructor for a class
+-->
+<!ELEMENT constructors ((constructor)+)>
+<!ATTLIST constructors
+    %common.attrib;
+>
 
 <!-- 
 
@@ -321,7 +344,7 @@
   - properties: wrapper for individual arguments.
 
 -->
-<!ELEMENT properties (argument)+ >
+<!ELEMENT properties (prop)+ >
 <!ATTLIST properties
     %common.attrib;
 >
