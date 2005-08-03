@@ -7,25 +7,25 @@
     A widget used to choose from a list of items.
   </shortdesc>
   <desc>
-The <classname>GtkComboBox </classname> is a replacement for the <classname>GtkOptionMenu</classname>.
-The <classname>GtkComboBox </classname> implements the <classname>GtkCellLayout</classname> 
-interface that provides a number of useful
-methods for managing the contents. A <classname>GtkComboBox</classname> is created with the
-<function class="GtkComboBox">constructor</function> that is associated with the optional
-<classname>GtkTreeModel</classname>. If no <classname>GtkTreeModel</classname> is
-specified it can be added later with the <function class="GtkComboBox">set_model</function>
-method.
-
-Alternatively, the <function class="GtkComboBox">new_text</function> function creates a
-simple <classname>GtkComboBox</classname> and associated <classname>GtkListStore</classname>
-model. A <classname>GtkCellRendererText</classname>
-is also created and packed in the new combo box. In this simple combo box each
-list item is a text string that can be selected. The convenience methods
-<function class="GtkComboBox">append_text()</function>,
-<function class="GtkComboBox">prepend_text()</function>,
-<function class="GtkComboBox">insert_text()</function> and
-<function class="GtkComboBox">remove_text()</function> can be used
-to manage the contents of the <classname>GtkComboBox</classname>.
+    The <classname>GtkComboBox </classname> is a replacement for the <classname>GtkOptionMenu</classname>.
+    The <classname>GtkComboBox </classname> implements the <classname>GtkCellLayout</classname> 
+    interface that provides a number of useful
+    methods for managing the contents. A <classname>GtkComboBox</classname> is created with the
+    <function class="GtkComboBox">constructor</function> that is associated with the optional
+    <classname>GtkTreeModel</classname>. If no <classname>GtkTreeModel</classname> is
+    specified it can be added later with the <function class="GtkComboBox">set_model</function>
+    method.
+    
+    Alternatively, the <function class="GtkComboBox">new_text</function> function creates a
+    simple <classname>GtkComboBox</classname> and associated <classname>GtkListStore</classname>
+    model. A <classname>GtkCellRendererText</classname>
+    is also created and packed in the new combo box. In this simple combo box each
+    list item is a text string that can be selected. The convenience methods
+    <function class="GtkComboBox">append_text</function>,
+    <function class="GtkComboBox">prepend_text</function>,
+    <function class="GtkComboBox">insert_text</function> and
+    <function class="GtkComboBox">remove_text</function> can be used
+    to manage the contents of the <classname>GtkComboBox</classname>.
   </desc>
  </classmeta>
 
@@ -35,14 +35,18 @@ to manage the contents of the <classname>GtkComboBox</classname>.
    <funcsynopsis>
     <funcprototype>
     <funcdef> <function>GtkComboBox</function></funcdef>
-    <paramdef>void</paramdef>
+    <paramdef><enumname>GtkTreeModel</enumname> <parameter>model</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Creates a new <classname>GtkComboBox</classname>
    </shortdesc>
    <desc>
-
+    <para>
+        Creates a new <classname>GtkComboBox</classname> associated with the optional
+        <classname>GtkTreeModel</classname> specified by model.
+        If model is not specified the combo box will not have an associated tree model.
+    </para>
    </desc>
   </constructor>
 
@@ -54,10 +58,19 @@ to manage the contents of the <classname>GtkComboBox</classname>.
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Constructs a new text combo box
    </shortdesc>
    <desc>
-
+    <para>
+        The <function class="GtkComboBox">new_text</function> function is a convenience function that
+        constructs a new text combo box, which is a <classname>GtkComboBox</classname> just displaying
+        strings. If you use this function to create a text combo box, you should only manipulate
+        its data source with the following convenience methods:
+        <function class="GtkComboBox">append_text</function>,
+        <function class="GtkComboBox">prepend_text</function>,
+        <function class="GtkComboBox">insert_text</function> and
+        <function class="GtkComboBox">remove_text</function>
+    </para>
    </desc>
   </constructor>
 
@@ -73,16 +86,21 @@ to manage the contents of the <classname>GtkComboBox</classname>.
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Appends the string specified by text to the list of strings.
    </shortdesc>
    <desc>
+    <para>
+     The <function class="GtkComboBox">append_text</function> method appends the
+     string specified by text to the list of strings stored in the combo box
+     <classname>GtkListStore</classname>. Note that you can only use this method
+     with combo boxes constructed with the <function class="GtkComboBox">new_text</function> function.
+    </para>
     <para>
      See also: 
      <function class="GtkComboBox">insert_text</function>, 
      <function class="GtkComboBox">prepend_text</function>, 
      <function class="GtkComboBox">remove_text</function>
     </para>
-
    </desc>
   </method>
 
@@ -94,9 +112,17 @@ to manage the contents of the <classname>GtkComboBox</classname>.
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the index in the model of the currently active item.
    </shortdesc>
    <desc>
+    <para>
+       Returns an integer which is the model index of the currently active item, or -1 if there's no active item.
+    </para>
+    <para>
+       The <function class="GtkComboBox">get_active</function> method returns the
+       value of the "active" property which is the index in the model of the
+       currently active item, or -1 if there's no active item.
+    </para>
     <para>
      See also: 
      <function class="GtkComboBox">set_active</function>
@@ -113,9 +139,13 @@ to manage the contents of the <classname>GtkComboBox</classname>.
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+        Returns the current item.
    </shortdesc>
    <desc>
+    <para>
+        The <function class="GtkComboBox">get_active_iter</function> method returns a <classname>GtkTreeIter</classname>
+        that points to the current active item or None if there is no active item
+    </para>
     <para>
      See also: 
      <function class="GtkComboBox">set_active_iter</function>
@@ -132,10 +162,15 @@ to manage the contents of the <classname>GtkComboBox</classname>.
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+       Returns the current string.
    </shortdesc>
    <desc>
-
+    <para>
+        The <function class="GtkComboBox">get_active_text</function> method returns
+        the currently active string or None if no entry is selected.
+        Note that you can only use this function with combo boxes constructed
+        with the <function class="GtkComboBox">new_text</function> function.
+    </para>
    </desc>
   </method>
 
@@ -147,9 +182,15 @@ to manage the contents of the <classname>GtkComboBox</classname>.
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+        Returns the value of the "column-span-column" property.
    </shortdesc>
    <desc>
+    <para>
+       The <function class="GtkComboBox">get_column_span_column</function> method returns
+       the value of the "column-span-column" property. The "column-span-column" property
+       indicates the column in the associated <classname>GtkTreeModel</classname> row that
+       contains an integer that indicates how many columns the item should span.
+    </para>
     <para>
      See also: 
      <function class="GtkComboBox">set_column_span_column</function>
@@ -166,9 +207,15 @@ to manage the contents of the <classname>GtkComboBox</classname>.
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+        Returns the value of the "focus-on-click" property.
    </shortdesc>
    <desc>
+    <para>
+    <literal>Returns </literal>: TRUE if the combo box grabs focus when it is clicked with the mouse.
+    </para>
+    <para>
+    The <function class="GtkComboBox">get_focus_on_click</function> method returns the value of the "focus-on-click" property.
+    </para>
     <para>
      See also: 
      <function class="GtkComboBox">set_focus_on_click</function>
@@ -185,9 +232,15 @@ to manage the contents of the <classname>GtkComboBox</classname>.
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+        Returns the value of the "model" property.
    </shortdesc>
    <desc>
+    <para>
+    The <function class="GtkComboBox">get_model</function> method returns the value of
+    the "model" property which contains the <classname>GtkTreeModel</classname> that is
+    acting as data source for the combo_box or None if no <classname>GtkTreeModel</classname> is
+    associated with the combo box.
+    </para>
     <para>
      See also: 
      <function class="GtkComboBox">set_model</function>
@@ -204,9 +257,15 @@ to manage the contents of the <classname>GtkComboBox</classname>.
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+        Gets the object corresponding to the popup.
    </shortdesc>
    <desc>
+    <para>
+        The <function class="GtkComboBox">get_popup_accessible</function> method gets the
+        accessible object corresponding to the popup.
+        This method is mostly intended for use by accessibility technologies;
+        applications should have little use for it.
+    </para>
 
    </desc>
   </method>
@@ -238,10 +297,16 @@ to manage the contents of the <classname>GtkComboBox</classname>.
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+        Returns the value of the "row-span-column" property.
    </shortdesc>
    <desc>
     <para>
+        The <function class="GtkComboBox">get_row_span_column</function> method returns
+        the value of the "row-span-column" property. The "row-span-column" property
+        indicates the column in the associated <classname>GtkTreeModel</classname> row that
+        contains an integer that indicates how many rows the item should span.
+    </para>
+    <para>    
      See also: 
      <function class="GtkComboBox">set_row_span_column</function>
     </para>
@@ -257,9 +322,15 @@ to manage the contents of the <classname>GtkComboBox</classname>.
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+        Returns the value of the "wrap-width" property.
    </shortdesc>
    <desc>
+    <para>
+        The <function class="GtkComboBox">get_wrap_width</function> method returns the
+        value of the "wrap-width" property of the combo box as set by the <function class="GtkComboBox">set_wrap_width</function>
+        method. The wrap width is basically the preferred number of columns to use to lay out the popup i.e.
+        lays out the popup items in a table with width columns.
+    </para>
     <para>
      See also: 
      <function class="GtkComboBox">set_wrap_width</function>
@@ -277,9 +348,22 @@ to manage the contents of the <classname>GtkComboBox</classname>.
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Inserts a string in the combo box.
    </shortdesc>
    <desc>
+    <para>
+        <literal>position</literal> :	A model index where the text should be inserted.
+    </para>
+    <para>
+        <literal>text</literal> :	A string.
+    </para>
+    
+    <para>
+        The <function class="GtkComboBox">insert_text</function> method inserts the string specified by text
+        in the combo box <classname>GtkListStore</classname> at the index specified by position.
+        Note that you can only use this
+        method with combo boxes constructed with the <function class="GtkComboBox">new_text</function> function.
+    </para>
     <para>
      See also: 
      <function class="GtkComboBox">append_text</function>, 
@@ -298,10 +382,14 @@ to manage the contents of the <classname>GtkComboBox</classname>.
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+        Hides the menu or dropdown list of the combo box.
    </shortdesc>
    <desc>
-
+    <para>
+        The <function class="GtkComboBox">popdown</function> method hides the menu or
+        dropdown list of the combo box. This method is mostly intended for use by accessibility
+        technologies; applications should have little use for it.
+    </para>
    </desc>
   </method>
 
@@ -313,10 +401,14 @@ to manage the contents of the <classname>GtkComboBox</classname>.
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+        Pops up the menu or dropdown list.
    </shortdesc>
    <desc>
-
+    <para>
+        The <function class="GtkComboBox">popup</function> method pops up the menu or dropdown list of
+        the combo box. This method is mostly intended for use by accessibility technologies;
+        applications should have little use for it.
+    </para>
    </desc>
   </method>
 
@@ -328,9 +420,19 @@ to manage the contents of the <classname>GtkComboBox</classname>.
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Prepends the string specified by text to the list of strings.
    </shortdesc>
    <desc>
+    <para>
+       <literal>text </literal>:	A string.
+    </para>
+    <para>
+        The <function class="GtkComboBox">prepend_text</function>
+        method prepends the string specified by text to the list of strings stored in the
+        <classname>GtkListStore</classname> associated with the combo_box. Note
+        that you can only use this method with combo boxes constructed with the
+        <function class="GtkComboBox">new_text</function> function.
+    </para>
     <para>
      See also: 
      <function class="GtkComboBox">append_text</function>, 
@@ -349,9 +451,18 @@ to manage the contents of the <classname>GtkComboBox</classname>.
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+        Removes the string at the index.
    </shortdesc>
    <desc>
+    <para>
+       <literal>position </literal>:	Index of the item to remove.
+    </para>
+    <para>
+    The <function class="GtkComboBox">remove_text</function> method
+    removes the string at the index specified by position in the associated 
+    <classname>GtkListStore</classname>. Note that you can only use this function with combo
+    boxes constructed with the <function class="GtkComboBox">new_text</function> function.
+    </para>
     <para>
      See also: 
      <function class="GtkComboBox">append_text</function>, 
@@ -370,9 +481,18 @@ to manage the contents of the <classname>GtkComboBox</classname>.
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the active item of the combo_box.
    </shortdesc>
    <desc>
+    <para>
+        <literal>index</literal>:	An index in the model passed during construction, or -1 to have no active item.
+    </para>
+    <para>
+       The <function class="GtkComboBox">set_active</function> method
+       sets the active item of the combo_box to the item with the
+       model index specified by index. If index is -1 the combo box
+       will have no active item. The "active" property is also set to the value of index.
+    </para>
     <para>
      See also: 
      <function class="GtkComboBox">get_active</function>
@@ -385,13 +505,21 @@ to manage the contents of the <classname>GtkComboBox</classname>.
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_active_iter</function></funcdef>
-     <paramdef>void</paramdef>
+     <paramdef><enumname>GtkTreeIter</enumname> <parameter>iter</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the current active item.
    </shortdesc>
    <desc>
+    <para>
+        <literal>iter</literal>: A valid <classname>GtkTreeIter</classname> pointing at an item in the associated <classname>GtkTreeModel</classname>.
+    </para>
+    <para>
+        The <function class="GtkComboBox">set_active_iter</function> method sets the current
+        active item to be the one referenced by iter in the associated <classname>GtkTreeModel</classname>.
+        iter must correspond to a path of depth one. The "active" property is also set by this method.
+    </para>
     <para>
      See also: 
      <function class="GtkComboBox">get_active_iter</function>
@@ -408,10 +536,16 @@ to manage the contents of the <classname>GtkComboBox</classname>.
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the "add-tearoffs" property.
    </shortdesc>
    <desc>
-
+    <para>
+        <literal>add_tearoffs</literal> :	if TRUE add tearoff menu items
+    </para>
+    <para>
+    The <function class="GtkComboBox">set_add_tearoffs</function> method sets the "add-tearoffs" property
+    to the value of add_tearoffs. If add_tearoffs is TRUE, the popup menu should have a tearoff menu item.
+    </para>
    </desc>
   </method>
 
@@ -423,9 +557,19 @@ to manage the contents of the <classname>GtkComboBox</classname>.
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+        Sets the "column-span-column" property.
    </shortdesc>
    <desc>
+    <para>
+        <literal>column_span </literal>:	A column in the model passed during construction.
+    </para>
+    <para>
+        The <function class="GtkComboBox">set_column_span_column</function> method sets the
+        "column-span-column" property to the value specified by column_span.
+        The "column-span-column" property indicates the column in the associated
+        <classname>GtkTreeModel</classname> row that contains an integer that indicates how many
+        columns the item should span.
+    </para>
     <para>
      See also: 
      <function class="GtkComboBox">get_column_span_column</function>
@@ -442,9 +586,17 @@ to manage the contents of the <classname>GtkComboBox</classname>.
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+        Sets the value of the "focus-on-click" property.
    </shortdesc>
    <desc>
+    <para>
+        <literal>focus_on_click </literal>:	if TRUE the combo box grabs focus when clicked with the mouse.
+    </para>
+    <para>
+        The <function class="GtkComboBox">set_focus_on_click</function> method sets the
+        value of the "focus-on-click" property to the value of focus_on_click.
+        If focus_on_click is TRUE the combo box grabs focus when clicked with the mouse.
+    </para>
     <para>
      See also: 
      <function class="GtkComboBox">get_focus_on_click</function>
@@ -461,9 +613,19 @@ to manage the contents of the <classname>GtkComboBox</classname>.
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+        Sets the model used by the combo box.
    </shortdesc>
    <desc>
+    <para>
+        <literal>model </literal>:	A gtk.TreeModel.
+    </para>
+    <para>
+        The <function class="GtkComboBox">set_model</function> method sets the model used by the
+        combo box to the value specified by model. The "model" property will also be set to
+        the value of model. A previously set model will be unset. If model is None or not specified,
+        the old model will be unset.
+    </para>
+
     <para>
      See also: 
      <function class="GtkComboBox">get_model</function>
@@ -476,13 +638,37 @@ to manage the contents of the <classname>GtkComboBox</classname>.
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_row_separator_func</function></funcdef>
-     <paramdef>void</paramdef>
+     <paramdef>callback <parameter>func</parameter></paramdef>
+     <paramdef>mixed <parameter>data</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+        Sets the row separator function.
    </shortdesc>
    <desc>
+    <para>
+        <literal>func</literal> :	a function or None
+    </para>
+    <para>
+        <literal>data</literal> :	user data to pass to func
+    </para>
+    <para>
+        The <function class="GtkComboBox">set_row_separator_func</function> method sets
+        the row separator function to func, which is used to determine if a row should
+        be drawn as a separator. If func is None, no separators are drawn. This is the default value.
+    </para>
+    <para>
+        The signature of func is:
+    </para>
+    <para>
+        <literal>def func(model, iter, user_data):</literal>
+    </para>
+    <para>
+        where model is the <classname>GtkTreeModel</classname> used by the combo box, iter is a
+        <classname>GtkTreeIter</classname> pointing at a row in model and user_data is data.
+        func returns TRUE if the row is a separator. A common way to implement func is
+        to have a boolean column in model, that indicates if the row is a separator.
+    </para>
     <para>
      See also: 
      <function class="GtkComboBox">get_row_separator_func</function>
@@ -499,9 +685,18 @@ to manage the contents of the <classname>GtkComboBox</classname>.
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+        Sets the "row-span-column" property.
    </shortdesc>
    <desc>
+    <para>
+        <literal>row_span</literal>: A column in the model passed during construction.
+    </para>
+    <para>
+        The <function class="GtkComboBox">set_row_span_column</function> method sets the "row-span-column"
+        property to the value specified by row_span. The "row-span-column" property indicates the column
+        in the associated <classname>GtkTreeModel</classname> row that contains an integer that indicates
+        how many rows the item should span.
+    </para>
     <para>
      See also: 
      <function class="GtkComboBox">get_row_span_column</function>
@@ -518,9 +713,18 @@ to manage the contents of the <classname>GtkComboBox</classname>.
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+        Sets the wrap width property of the combo box.
    </shortdesc>
    <desc>
+    <para>
+        <literal>width </literal>: The preferred number of columns of width.
+    </para>
+    <para>
+        The <function class="GtkComboBox">set_wrap_width</function> method sets the wrap
+        width (and the "wrap-width" property) of the combo box to the value specified by width.
+        The wrap width is basically the preferred number of columns to use to lay out the popup i.e.
+        lays out the popup items in a table with width columns.
+    </para>
     <para>
      See also: 
      <function class="GtkComboBox">get_wrap_width</function>
