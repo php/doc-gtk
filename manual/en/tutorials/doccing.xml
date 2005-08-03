@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<chapter id="tutorials.doccing">
+ <title>PHP-Gtk2 documentation</title>
+
+ <sect1>
+  <title>About this tutorial &amp; the manual</title>
+  <simpara>
+   This tutorial explains how to get, compile and write/extend 
+   the official php-gtk2 documentation - the one you are currently
+   reading.
+  </simpara>
+  <simpara>
+   So if you just want to read the manual, this 
+   shouldn't be of any interest to you.
+  </simpara>
+  
+  <para>
+   This documentation, like the php-gtk2 sources and the official
+   php documentation, resides at the CVS server of the php project
+   at <ulink url="http://cvs.php.net">cvs.php.net</ulink>. It is
+   written in an XML dialect called <emphasis>DocBook</emphasis>,
+   which had been designed for books and (technical) documentation
+   of all kinds.
+  </para>
+  <para>
+   There are several benefits when using docbook: The document (the manual)
+   can be distributed over many files, so that the files are in handy pieces
+   and many people can work concurrently at different parts of it.
+   Further, it can be converted in the many formats: Plain HTML for offline
+   reading, .php code which you can see at the online manual, windows
+   <literal>.chm</literal> files and <literal>.pdf</literal> files.
+  </para>
+  <para>
+   The only disadvantage is that you need to compile it from the sources
+   into the desired format, which can take quite some time. This manual
+   consists of over 500 single files, the compiled html version of more
+   than 3000 files. Compilation takes 10 minutes on a 1.6GHz system,
+   on a 400MHz it's around 40 to 45 minutes.
+  </para>
+ </sect1>
+ 
+ <sect1 id="tutorials.doccing.checkout">
+  <title>Checking out, updating and compiling</title>
+  <sect2>
+   <title>Checking out</title>
+   <para>
+    Before we can start compiling or even changing the manual, we
+    need to get a copy from CVS. To accomplish this, you need a
+    CVS client: On nearly every Linux system, the command line
+    <literal>cvs</literal> tool is installed. On Windows, one could
+    use WinCVS from the corresponding website. The explanation here
+    will concentrate on the <literal>cvs</literal> command line tool.
+   </para>
+   <para>
+   To get a copy of the docs, type:
+    <command>cvs -d :pserver:cvsread@cvs.php.net:/repository co -P php-gtk-doc</command>
+   </para>
+   <para>
+    If you already have a copy, you can update it via:
+    <command>cvs -d :pserver:cvsread@cvs.php.net:/repository update -Pd php-gtk-doc</command>
+    (if you are inside the php-gtk-doc directory, you can (have to) omit the 
+    <literal>php-gtk-doc</literal> part.
+   </para>
+  </sect2>
+  
+  
+  <sect2>
+   <title>Compiling</title>
+   <para>
+    Now we try to compile the manual, just to check if everything works.
+    You need to have <command>xsltproc</command> installed for this.
+    On a Linux system, your can install it with your package manager.
+    If you want to compile it on a Windows system, you'll need the 
+    <emphasis>CygWin</emphasis> environment, which basically gives
+    you a linux shell and many linux tools on windows.
+   </para>
+   <note>
+    <para>
+     There are several other XSLT programs, such as Xalan or Saxon. But
+     they have not been tested, and all the build scripts rely on xsltproc.
+     You might be able to get it working with them, but it won't be easy.
+    </para>
+   </note>
+
+   <para>
+    If not happened yet, change into the doc directory via
+    <command>cd php-gtk-doc</command>. Now set up some basic
+    files: <command>./runfirst.sh</command>. The 
+    <literal>runfirst</literal>-script has only to be called again
+    if totally new (docbook xml) files have been added to the manual,
+    or the build date shall be updated. So if you want to 
+    compile the manual on a daily basis, you should do that every 
+    time again.
+   </para>
+   <para>
+    Let's generate the manual itself: At first you must understand that
+    the php-gtk manual exists in different languages, in addition to
+    the different formats mentioned earlier. So when compiling, you
+    need to know which manual you want to compile. The language is
+    determined as two-letter code, such as <literal>en</literal> for
+    English, <literal>de</literal> for German and so on. The type
+    is one of <literal>html</literal> for the normal html documentation
+    you can download from <ulink url="http://gtk.php.net">gtk.php.net</ulink>,
+    <literal>phpweb</literal> to generate the files like the online docs 
+    at the PHP-Gtk homepage, or <literal>test</literal> if you want
+    to compile a part of the files only.
+   </para>
+   <para>
+    So we call <command>./gen_manual.sh &lt;language&gt; &lt;type&gt;</command>,
+    for example <command>./gen_manual.sh en html</command>. You will see
+    the lines flowing over the terminal; go somewhere and come back in ten
+    minutes - it will take some time. The files will be generated in the
+    build directory <filename>build/&lt;language&gt;/&lt;type&lt;/</filename>,
+    in our case <filename>build/en/html/</filename>
+   </para>
+  </sect2>
+  
+  <sect2>
+   <title>Livedocs</title>
+   <para>
+    If you are an editor and just want to test if the section you currently
+    wrote is correct and renders as intended in html, call
+    <command>./gen_manual.sh &lt;language&gt; test &lt;id&gt;</command>,
+    as in <command>./gen_manual.sh en test gtk.gtkiconview</command>.
+    This will enable a special mode in which the manual will be stripped
+    down to a minimal version containing only the most necessesary things
+    to compile this special page (id). However, the script is not perfect
+    and can (currently) generate reference files only, and in this many
+    links just won't work.
+   </para>
+
+   <para>
+    If you have an Apache webserver with PHP installed, you can use livedocs:
+    Open the <filename>live.php</filename> in your browser (on the webserver,
+    not the local directory itself!) and browse through the manual - the pages
+    are created on demand, most times as fast as 1 to 2 seconds. 
+   </para>
+  </sect2>
+ </sect1>
+
+
+ <sect1 id="tutorials.doccing.translating">
+  <title>Translating the manual</title>
+  <para>TO BE WRITTEN</para>
+ </sect1>
+
+
+ <sect1 id="tutorials.doccing.writing">
+  <title>Writing documentation</title>
+  <para>TO BE WRITTEN</para>
+ </sect1>
+</chapter>
