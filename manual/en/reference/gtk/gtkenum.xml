@@ -2,77 +2,11 @@
 <enums id="gtkenum">
 
 
- <enum id="gtk.enum.">
-  <enumname>Gtk</enumname>
-  <desc>
-   <simpara>
-    
-   </simpara>
-  </desc>
-  <enumoption>
-   <value>0</value>
-   <optionname>Gtk::PIXELS</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
-  <enumoption>
-   <value>1</value>
-   <optionname>Gtk::EXPAND</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
-  <enumoption>
-   <value>4</value>
-   <optionname>Gtk::FILL</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
-  <enumoption>
-   <value>16</value>
-   <optionname>Gtk::TOPLEVEL</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
-  <enumoption>
-   <value>64</value>
-   <optionname>Gtk::REALIZED</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
-  <enumoption>
-   <value>128</value>
-   <optionname>Gtk::MAPPED</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
-  <enumoption>
-   <value>256</value>
-   <optionname>Gtk::VISIBLE</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
-  <enumoption>
-   <value>512</value>
-   <optionname>Gtk::SENSITIVE</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
- </enum>
-
-
  <enum id="gtk.enum.accel">
   <enumname>GtkAccel</enumname>
   <desc>
    <simpara>
-    
+
    </simpara>
   </desc>
   <enumoption>
@@ -266,8 +200,8 @@
    <shortdesc>
     The argument needs construction (and will be set once during object 
     creation), but is otherwise cannot be set. Hence this flag 
-    is not allowed with <enumname>Gtk::ARG_WRITABLE</enumname>, and is redundant 
-    with <enumname>Gtk::ARG_CONSTRUCT</enumname>.
+    is not allowed with <literal>Gtk::ARG_WRITABLE</literal>, and is redundant 
+    with <literal>Gtk::ARG_CONSTRUCT</literal>.
    </shortdesc>
   </enumoption>
   <enumoption>
@@ -415,7 +349,7 @@
   <desc>
    <para>
     Prebuilt sets of buttons for the dialog. If none of these 
-    choices are appropriate, simply use <enumname>Gtk::BUTTONS_NONE</enumname>
+    choices are appropriate, simply use <literal>Gtk::BUTTONS_NONE</literal>
     then call <function class="GtkDialog">add_buttons</function>.
    </para>
   </desc>
@@ -1357,7 +1291,7 @@
     Describes the image data representation used by a <classname>GtkImage</classname>. 
     If you want to get the image from the widget, you can only get the 
     currently-stored representation. e.g. if the <function class="GtkImage">get_storage_type</function>
-    returns <enumname>Gtk::IMAGE_PIXBUF</enumname>, then you can call 
+    returns <literal>Gtk::IMAGE_PIXBUF</literal>, then you can call 
     <function class="GtkImage">get_pixbuf</function> but 
     not <function class="GtkImage">get_stock</function>. 
     For empty images, you can request any storage type 
@@ -2571,7 +2505,8 @@
    <value>-1</value>
    <optionname>Gtk::RESPONSE_NONE</optionname>
    <shortdesc>
-    Returned if an action widget has no response id, or if the dialog gets programmatically hidden or destroyed.
+    Returned if an action widget has no response id, or if the dialog 
+    gets programmatically hidden or destroyed.
    </shortdesc>
   </enumoption>
  </enum>
@@ -2726,7 +2661,7 @@
    <shortdesc>
     Exactly one element is selected. In some circumstances, such as 
     initially or during a search operation, it's possible for no 
-    element to be selected with <enumname>Gtk::SELECTION_BROWSE</enumname>. 
+    element to be selected with <literal>Gtk::SELECTION_BROWSE</literal>.
     What is really enforced is that the user can't deselect a currently 
     selected element except by selecting another element.
    </shortdesc>
@@ -4161,22 +4096,22 @@
    <para>
     A <classname>GtkWindow</classname> can be one of these types. 
     Most things you'd consider a "window" should have type 
-    <enumname>Gtk::WINDOW_TOPLEVEL</enumname>; windows with this 
+    <literal>Gtk::WINDOW_TOPLEVEL</literal>; windows with this 
     type are managed by the window manager and have a frame by default 
     (call <function class="GtkWindow">set_decorated</function> to toggle the frame).
    </para>
    <para>
-    Windows with type <enumname>Gtk::WINDOW_POPUP</enumname> are ignored by the window 
+    Windows with type <literal>Gtk::WINDOW_POPUP</literal> are ignored by the window 
     manager; window manager keybindings won't work on them, the window manager 
     won't decorate the window with a frame, many GTK+ features that rely on the 
     window manager will not work (e.g. resize grips and maximization/minimization). 
-    <enumname>Gtk::WINDOW_POPUP</enumname> is used to implement widgets such as 
+    <literal>Gtk::WINDOW_POPUP</literal> is used to implement widgets such as 
     <classname>GtkMenu</classname> or tooltips that you normally don't think of 
     as windows per se. 
    </para>
    <para>
-    Nearly all windows should be <enumname>Gtk::WINDOW_TOPLEVEL</enumname>. In particular, 
-    do not use <enumname>Gtk::WINDOW_POPUP</enumname> just to turn off the window 
+    Nearly all windows should be <literal>Gtk::WINDOW_TOPLEVEL</literal>. In particular, 
+    do not use <literal>Gtk::WINDOW_POPUP</literal> just to turn off the window 
     borders; use <function class="GtkWindow">set_decorated</function> for that.
    </para>
   </desc>
