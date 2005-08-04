@@ -1,87 +1,271 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <enums id="gdkenum">
 
-
- <enum id="gdk.enum.">
-  <enumname>Gdk</enumname>
+ <enum id="gdk.enum.action">
+  <enumname>GdkAction</enumname>
   <desc>
    <simpara>
-    
+       Used in GdkDragContext to indicate what the
+       destination should do with the dropped data.
    </simpara>
   </desc>
   <enumoption>
-   <value>-1</value>
-   <optionname>Gdk::ERROR</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
-  <enumoption>
-   <value>0</value>
-   <optionname>Gdk::OK</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
-  <enumoption>
    <value>1</value>
-   <optionname>Gdk::INVERT</optionname>
+   <optionname>Gdk::ACTION_DEFAULT</optionname>
    <shortdesc>
     
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>2</value>
-   <optionname>Gdk::XOR</optionname>
+   <optionname>Gdk::ACTION_COPY</optionname>
+   <shortdesc>
+       Copy the data.
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>4</value>
+   <optionname>Gdk::ACTION_MOVE</optionname>
+   <shortdesc>
+       Move the data, i.e. first copy it, then delete it
+       from the source using the DELETE target of the X selection protocol.
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>8</value>
+   <optionname>Gdk::ACTION_LINK</optionname>
+   <shortdesc>
+       Add a link to the data. Note that this is only useful if
+       source and destination agree on what it means.
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>16</value>
+   <optionname>Gdk::ACTION_PRIVATE</optionname>
+   <shortdesc>
+       Special action which tells the source that the destination will 
+       do something that the source doesn't understand.
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>32</value>
+   <optionname>Gdk::ACTION_ASK</optionname>
+   <shortdesc>
+       Ask the user what to do with the data.
+   </shortdesc>
+  </enumoption>
+ </enum>
+
+
+ <enum id="gdk.enum.axisuse">
+  <enumname>GdkAxisUse</enumname>
+  <desc>
+   <simpara>
+    An enumeration describing the way in which a device axis 
+    (valuator) maps onto the predefined valuator types that GTK+ understands.
+   </simpara>
+  </desc>
+  <enumoption>
+   <value>0</value>
+   <optionname>Gdk::AXIS_IGNORE</optionname>
+   <shortdesc>
+       The axis is ignored.
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>1</value>
+   <optionname>Gdk::AXIS_X</optionname>
+   <shortdesc>
+       The axis is used as the x axis.
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>2</value>
+   <optionname>Gdk::AXIS_Y</optionname>
+   <shortdesc>
+       The axis is used as the y axis.
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>3</value>
+   <optionname>Gdk::AXIS_PRESSURE</optionname>
+   <shortdesc>
+       The axis is used for pressure information.
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>4</value>
+   <optionname>Gdk::AXIS_XTILT</optionname>
+   <shortdesc>
+       The axis is used for x tilt information.
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>5</value>
+   <optionname>Gdk::AXIS_YTILT</optionname>
+   <shortdesc>
+       The axis is used for x tilt information.
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>6</value>
+   <optionname>Gdk::AXIS_WHEEL</optionname>
+   <shortdesc>
+       The axis is used for wheel information.
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>7</value>
+   <optionname>Gdk::AXIS_LAST</optionname>
+   <shortdesc>
+       A constant equal to the numerically highest axis value.
+   </shortdesc>
+  </enumoption>
+ </enum>
+
+
+
+ <enum id="gdk.enum.byteorder">
+  <enumname>GdkByteOrder</enumname>
+  <desc>
+   <simpara>
+    A set of values describing the possible byte-orders for storing pixel values in memory.
+   </simpara>
+  </desc>
+  <enumoption>
+   <value>0</value>
+   <optionname>Gdk::LSB_FIRST</optionname>
+   <shortdesc>
+    The values are stored with the least-significant byte first. For instance, 
+    the 32-bit value <literal>0xffeecc</literal> would be stored in memory as 
+    <literal>0xcc</literal>, <literal>0xee</literal>, <literal>0xff</literal>, 
+    <literal>0x00</literal>.
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>1</value>
+   <optionname>Gdk::MSB_FIRST</optionname>
+   <shortdesc>
+    The values are stored with the most-significant byte first. For instance, 
+    the 32-bit value <literal>0xffeecc</literal> would be stored in memory as 
+    <literal>0x00</literal>, <literal>0xcc</literal>, <literal>0xee</literal>,
+    <literal>0xff</literal>.
+   </shortdesc>
+  </enumoption>
+ </enum>
+
+
+ <enum id="gdk.enum.capstyle">
+  <enumname>GdkCapStyle</enumname>
+  <desc>
+   <simpara>
+    Determines how the end of lines are drawn.
+   </simpara>
+  </desc>
+  <enumoption>
+   <value>0</value>
+   <optionname>Gdk::CAP_NOT_LAST</optionname>
+   <shortdesc>
+    The same as <literal>Gdk::CAP_BUTT</literal> for lines of non-zero 
+    width. For zero width lines, the final point on the line will not be drawn.
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>1</value>
+   <optionname>Gdk::CAP_BUTT</optionname>
+   <shortdesc>
+    The ends of the lines are drawn squared off and extending 
+    to the coordinates of the end point.
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>2</value>
+   <optionname>Gdk::CAP_ROUND</optionname>
+   <shortdesc>
+    The ends of the lines are drawn as semicircles with the diameter 
+    equal to the line width and centered at the end point.
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>3</value>
+   <optionname>Gdk::CAP_PROJECTING</optionname>
+   <shortdesc>
+    The ends of the lines are drawn squared off and extending 
+    half the width of the line beyond the end point.
+   </shortdesc>
+  </enumoption>
+ </enum>
+
+
+ <enum id="gdk.enum.crossing">
+  <enumname>GdkCrossing</enumname>
+  <desc>
+   <simpara>
+       Specifies the crossing mode for GdkEventCrossing.
+   </simpara>
+  </desc>
+  <enumoption>
+   <value>0</value>
+   <optionname>Gdk::CROSSING_NORMAL</optionname>
+   <shortdesc>
+       Crossing because of pointer motion.
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>1</value>
+   <optionname>Gdk::CROSSING_GRAB</optionname>
+   <shortdesc>
+       Crossing because a grab is activated.
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>2</value>
+   <optionname>Gdk::CROSSING_UNGRAB</optionname>
+   <shortdesc>
+       Crossing because a grab is deactivated.
+   </shortdesc>
+  </enumoption>
+ </enum>
+
+
+ <enum id="gdk.enum.cursor">
+  <enumname>GdkCursor</enumname>
+  <desc>
+   <simpara>
+    The standard cursors available.
+   </simpara>
+  </desc>
+  <enumoption>
+   <value>0</value>
+   <optionname>Gdk::X_CURSOR</optionname>
    <shortdesc>
     
    </shortdesc>
   </enumoption>
   <enumoption>
-   <value>3</value>
-   <optionname>Gdk::CLEAR</optionname>
+   <value>2</value>
+   <optionname>Gdk::ARROW</optionname>
    <shortdesc>
     
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>4</value>
-   <optionname>Gdk::AND</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
-  <enumoption>
-   <value>5</value>
-   <optionname>Gdk::_2BUTTON_PRESS</optionname>
+   <optionname>Gdk::BASED_ARROW_DOWN</optionname>
    <shortdesc>
     
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>6</value>
-   <optionname>Gdk::_3BUTTON_PRESS</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
-  <enumoption>
-   <value>7</value>
-   <optionname>Gdk::NOOP</optionname>
+   <optionname>Gdk::BASED_ARROW_UP</optionname>
    <shortdesc>
     
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>8</value>
-   <optionname>Gdk::OR</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
-  <enumoption>
-   <value>9</value>
-   <optionname>Gdk::EQUIV</optionname>
+   <optionname>Gdk::BOAT</optionname>
    <shortdesc>
     
    </shortdesc>
@@ -94,22 +278,43 @@
    </shortdesc>
   </enumoption>
   <enumoption>
-   <value>13</value>
-   <optionname>Gdk::NAND</optionname>
+   <value>12</value>
+   <optionname>Gdk::BOTTOM_LEFT_CORNER</optionname>
    <shortdesc>
     
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>14</value>
-   <optionname>Gdk::NOR</optionname>
+   <optionname>Gdk::BOTTOM_RIGHT_CORNER</optionname>
    <shortdesc>
     
    </shortdesc>
   </enumoption>
   <enumoption>
-   <value>15</value>
-   <optionname>Gdk::SET</optionname>
+   <value>16</value>
+   <optionname>Gdk::BOTTOM_SIDE</optionname>
+   <shortdesc>
+    
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>18</value>
+   <optionname>Gdk::BOTTOM_TEE</optionname>
+   <shortdesc>
+    
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>20</value>
+   <optionname>Gdk::BOX_SPIRAL</optionname>
+   <shortdesc>
+    
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>22</value>
+   <optionname>Gdk::CENTER_PTR</optionname>
    <shortdesc>
     
    </shortdesc>
@@ -129,6 +334,13 @@
    </shortdesc>
   </enumoption>
   <enumoption>
+   <value>28</value>
+   <optionname>Gdk::COFFEE_MUG</optionname>
+   <shortdesc>
+    
+   </shortdesc>
+  </enumoption>
+  <enumoption>
    <value>30</value>
    <optionname>Gdk::CROSS</optionname>
    <shortdesc>
@@ -136,15 +348,8 @@
    </shortdesc>
   </enumoption>
   <enumoption>
-   <value>31</value>
-   <optionname>Gdk::SCROLL</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
-  <enumoption>
-   <value>33</value>
-   <optionname>Gdk::SETTING</optionname>
+   <value>32</value>
+   <optionname>Gdk::CROSS_REVERSE</optionname>
    <shortdesc>
     
    </shortdesc>
@@ -152,6 +357,13 @@
   <enumoption>
    <value>34</value>
    <optionname>Gdk::CROSSHAIR</optionname>
+   <shortdesc>
+    
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>36</value>
+   <optionname>Gdk::DIAMOND_CROSS</optionname>
    <shortdesc>
     
    </shortdesc>
@@ -166,6 +378,34 @@
   <enumoption>
    <value>40</value>
    <optionname>Gdk::DOTBOX</optionname>
+   <shortdesc>
+    
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>42</value>
+   <optionname>Gdk::DOUBLE_ARROW</optionname>
+   <shortdesc>
+    
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>44</value>
+   <optionname>Gdk::DRAFT_LARGE</optionname>
+   <shortdesc>
+    
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>46</value>
+   <optionname>Gdk::DRAFT_SMALL</optionname>
+   <shortdesc>
+    
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>48</value>
+   <optionname>Gdk::DRAPED_BOX</optionname>
    <shortdesc>
     
    </shortdesc>
@@ -227,8 +467,50 @@
    </shortdesc>
   </enumoption>
   <enumoption>
+   <value>66</value>
+   <optionname>Gdk::IRON_CROSS</optionname>
+   <shortdesc>
+    
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>68</value>
+   <optionname>Gdk::LEFT_PTR</optionname>
+   <shortdesc>
+    
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>70</value>
+   <optionname>Gdk::LEFT_SIDE</optionname>
+   <shortdesc>
+    
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>72</value>
+   <optionname>Gdk::LEFT_TEE</optionname>
+   <shortdesc>
+    
+   </shortdesc>
+  </enumoption>
+  <enumoption>
    <value>74</value>
    <optionname>Gdk::LEFTBUTTON</optionname>
+   <shortdesc>
+    
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>76</value>
+   <optionname>Gdk::LL_ANGLE</optionname>
+   <shortdesc>
+    
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>78</value>
+   <optionname>Gdk::LR_ANGLE</optionname>
    <shortdesc>
     
    </shortdesc>
@@ -276,6 +558,34 @@
    </shortdesc>
   </enumoption>
   <enumoption>
+   <value>92</value>
+   <optionname>Gdk::QUESTION_ARROW</optionname>
+   <shortdesc>
+    
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>94</value>
+   <optionname>Gdk::RIGHT_PTR</optionname>
+   <shortdesc>
+    
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>96</value>
+   <optionname>Gdk::RIGHT_SIDE</optionname>
+   <shortdesc>
+    
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>98</value>
+   <optionname>Gdk::RIGHT_TEE</optionname>
+   <shortdesc>
+    
+   </shortdesc>
+  </enumoption>
+  <enumoption>
    <value>100</value>
    <optionname>Gdk::RIGHTBUTTON</optionname>
    <shortdesc>
@@ -283,8 +593,57 @@
    </shortdesc>
   </enumoption>
   <enumoption>
+   <value>102</value>
+   <optionname>Gdk::RTL_LOGO</optionname>
+   <shortdesc>
+    
+   </shortdesc>
+  </enumoption>
+  <enumoption>
    <value>104</value>
    <optionname>Gdk::SAILBOAT</optionname>
+   <shortdesc>
+    
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>106</value>
+   <optionname>Gdk::SB_DOWN_ARROW</optionname>
+   <shortdesc>
+    
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>108</value>
+   <optionname>Gdk::SB_H_DOUBLE_ARROW</optionname>
+   <shortdesc>
+    
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>110</value>
+   <optionname>Gdk::SB_LEFT_ARROW</optionname>
+   <shortdesc>
+    
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>112</value>
+   <optionname>Gdk::SB_RIGHT_ARROW</optionname>
+   <shortdesc>
+    
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>114</value>
+   <optionname>Gdk::SB_UP_ARROW</optionname>
+   <shortdesc>
+    
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>116</value>
+   <optionname>Gdk::SB_V_DOUBLE_ARROW</optionname>
    <shortdesc>
     
    </shortdesc>
@@ -339,6 +698,41 @@
    </shortdesc>
   </enumoption>
   <enumoption>
+   <value>132</value>
+   <optionname>Gdk::TOP_LEFT_ARROW</optionname>
+   <shortdesc>
+    
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>134</value>
+   <optionname>Gdk::TOP_LEFT_CORNER</optionname>
+   <shortdesc>
+    
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>136</value>
+   <optionname>Gdk::TOP_RIGHT_CORNER</optionname>
+   <shortdesc>
+    
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>138</value>
+   <optionname>Gdk::TOP_SIDE</optionname>
+   <shortdesc>
+    
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>140</value>
+   <optionname>Gdk::TOP_TEE</optionname>
+   <shortdesc>
+    
+   </shortdesc>
+  </enumoption>
+  <enumoption>
    <value>142</value>
    <optionname>Gdk::TREK</optionname>
    <shortdesc>
@@ -346,8 +740,22 @@
    </shortdesc>
   </enumoption>
   <enumoption>
+   <value>144</value>
+   <optionname>Gdk::UL_ANGLE</optionname>
+   <shortdesc>
+    
+   </shortdesc>
+  </enumoption>
+  <enumoption>
    <value>146</value>
    <optionname>Gdk::UMBRELLA</optionname>
+   <shortdesc>
+    
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>148</value>
+   <optionname>Gdk::UR_ANGLE</optionname>
    <shortdesc>
     
    </shortdesc>
@@ -366,264 +774,110 @@
     
    </shortdesc>
   </enumoption>
- </enum>
-
-
- <enum id="gdk.enum.action">
-  <enumname>GdkAction</enumname>
-  <desc>
-   <simpara>
-    
-   </simpara>
-  </desc>
   <enumoption>
-   <value>1</value>
-   <optionname>Gdk::ACTION_DEFAULT</optionname>
+   <value>153</value>
+   <optionname>Gdk::LAST_CURSOR</optionname>
    <shortdesc>
     
    </shortdesc>
   </enumoption>
   <enumoption>
+   <value></value>
+   <optionname>Gdk::CURSOR_IS_PIXMAP</optionname>
+   <shortdesc>
+    Type of cursors constructed with 
+    <function class="Gdk">cursor_new_from_pixmap</function>.
+   </shortdesc>
+  </enumoption>
+ </enum>
+
+
+ <enum id="gdk.enum.drag">
+  <enumname>GdkDrag</enumname>
+  <desc>
+   <simpara>
+       Used in <classname>GdkDragContext</classname> to indicate 
+       the protocol according to which DND is done.
+   </simpara>
+  </desc>
+  <enumoption>
+   <value>0</value>
+   <optionname>Gdk::DRAG_PROTO_MOTIF</optionname>
+   <shortdesc>
+       The Motif DND protocol.
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>1</value>
+   <optionname>Gdk::DRAG_PROTO_XDND</optionname>
+   <shortdesc>
+       The Xdnd protocol.
+   </shortdesc>
+  </enumoption>
+  <enumoption>
    <value>2</value>
-   <optionname>Gdk::ACTION_COPY</optionname>
+   <optionname>Gdk::DRAG_PROTO_ROOTWIN</optionname>
+   <shortdesc>
+       An extension to the Xdnd protocol for unclaimed root window drops.
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>3</value>
+   <optionname>Gdk::DRAG_PROTO_NONE</optionname>
+   <shortdesc>
+       No protocol.
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>4</value>
+   <optionname>Gdk::DRAG_PROTO_WIN32_DROPFILES</optionname>
+   <shortdesc>
+       The simple WM_DROPFILES protocol.
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>5</value>
+   <optionname>Gdk::DRAG_PROTO_OLE2</optionname>
+   <shortdesc>
+       The complex OLE2 DND protocol (not implemented).
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>6</value>
+   <optionname>Gdk::DRAG_PROTO_LOCAL</optionname>
+   <shortdesc>
+       Intra-application DND.
+   </shortdesc>
+  </enumoption>
+ </enum>
+
+
+ <enum id="gdk.enum.eventmask">
+  <enumname>GdkEventMask</enumname>
+  <desc>
+   <simpara>
+       A set of bit-flags to indicate which events a window is to receive. 
+       Most of these masks map onto one or more of the <enumname>GdkEventType</enumname>
+       event types.
+   </simpara>
+  </desc>
+  <enumoption>
+   <value>2</value>
+   <optionname>Gdk::EXPOSURE_MASK</optionname>
    <shortdesc>
     
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>4</value>
-   <optionname>Gdk::ACTION_MOVE</optionname>
+   <optionname>Gdk::POINTER_MOTION_MASK</optionname>
    <shortdesc>
     
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>8</value>
-   <optionname>Gdk::ACTION_LINK</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
-  <enumoption>
-   <value>16</value>
-   <optionname>Gdk::ACTION_PRIVATE</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
-  <enumoption>
-   <value>32</value>
-   <optionname>Gdk::ACTION_ASK</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
- </enum>
-
-
- <enum id="gdk.enum.all">
-  <enumname>GdkAll</enumname>
-  <desc>
-   <simpara>
-    
-   </simpara>
-  </desc>
-  <enumoption>
-   <value>4194302</value>
-   <optionname>Gdk::ALL_EVENTS_MASK</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
- </enum>
-
-
- <enum id="gdk.enum.and">
-  <enumname>GdkAnd</enumname>
-  <desc>
-   <simpara>
-    
-   </simpara>
-  </desc>
-  <enumoption>
-   <value>5</value>
-   <optionname>Gdk::AND_REVERSE</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
-  <enumoption>
-   <value>6</value>
-   <optionname>Gdk::AND_INVERT</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
- </enum>
-
-
- <enum id="gdk.enum.axis">
-  <enumname>GdkAxis</enumname>
-  <desc>
-   <simpara>
-    
-   </simpara>
-  </desc>
-  <enumoption>
-   <value>0</value>
-   <optionname>Gdk::AXIS_IGNORE</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
-  <enumoption>
-   <value>1</value>
-   <optionname>Gdk::AXIS_X</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
-  <enumoption>
-   <value>2</value>
-   <optionname>Gdk::AXIS_Y</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
-  <enumoption>
-   <value>3</value>
-   <optionname>Gdk::AXIS_PRESSURE</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
-  <enumoption>
-   <value>4</value>
-   <optionname>Gdk::AXIS_XTILT</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
-  <enumoption>
-   <value>5</value>
-   <optionname>Gdk::AXIS_YTILT</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
-  <enumoption>
-   <value>6</value>
-   <optionname>Gdk::AXIS_WHEEL</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
-  <enumoption>
-   <value>7</value>
-   <optionname>Gdk::AXIS_LAST</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
- </enum>
-
-
- <enum id="gdk.enum.based">
-  <enumname>GdkBased</enumname>
-  <desc>
-   <simpara>
-    
-   </simpara>
-  </desc>
-  <enumoption>
-   <value>4</value>
-   <optionname>Gdk::BASED_ARROW_DOWN</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
-  <enumoption>
-   <value>6</value>
-   <optionname>Gdk::BASED_ARROW_UP</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
- </enum>
-
-
- <enum id="gdk.enum.bottom">
-  <enumname>GdkBottom</enumname>
-  <desc>
-   <simpara>
-    
-   </simpara>
-  </desc>
-  <enumoption>
-   <value>12</value>
-   <optionname>Gdk::BOTTOM_LEFT_CORNER</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
-  <enumoption>
-   <value>14</value>
-   <optionname>Gdk::BOTTOM_RIGHT_CORNER</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
-  <enumoption>
-   <value>16</value>
-   <optionname>Gdk::BOTTOM_SIDE</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
-  <enumoption>
-   <value>18</value>
-   <optionname>Gdk::BOTTOM_TEE</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
- </enum>
-
-
- <enum id="gdk.enum.box">
-  <enumname>GdkBox</enumname>
-  <desc>
-   <simpara>
-    
-   </simpara>
-  </desc>
-  <enumoption>
-   <value>20</value>
-   <optionname>Gdk::BOX_SPIRAL</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
- </enum>
-
-
- <enum id="gdk.enum.button">
-  <enumname>GdkButton</enumname>
-  <desc>
-   <simpara>
-    
-   </simpara>
-  </desc>
-  <enumoption>
-   <value>4</value>
-   <optionname>Gdk::BUTTON_PRESS</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
-  <enumoption>
-   <value>7</value>
-   <optionname>Gdk::BUTTON_RELEASE</optionname>
+   <optionname>Gdk::POINTER_MOTION_HINT_MASK</optionname>
    <shortdesc>
     
    </shortdesc>
@@ -631,6 +885,27 @@
   <enumoption>
    <value>16</value>
    <optionname>Gdk::BUTTON_MOTION_MASK</optionname>
+   <shortdesc>
+    
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>32</value>
+   <optionname>Gdk::BUTTON1_MOTION_MASK</optionname>
+   <shortdesc>
+    
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>64</value>
+   <optionname>Gdk::BUTTON2_MOTION_MASK</optionname>
+   <shortdesc>
+    
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>128</value>
+   <optionname>Gdk::BUTTON3_MOTION_MASK</optionname>
    <shortdesc>
     
    </shortdesc>
@@ -649,592 +924,16 @@
     
    </shortdesc>
   </enumoption>
- </enum>
-
-
- <enum id="gdk.enum.button1">
-  <enumname>GdkButton1</enumname>
-  <desc>
-   <simpara>
-    
-   </simpara>
-  </desc>
-  <enumoption>
-   <value>32</value>
-   <optionname>Gdk::BUTTON1_MOTION_MASK</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
-  <enumoption>
-   <value>256</value>
-   <optionname>Gdk::BUTTON1_MASK</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
- </enum>
-
-
- <enum id="gdk.enum.button2">
-  <enumname>GdkButton2</enumname>
-  <desc>
-   <simpara>
-    
-   </simpara>
-  </desc>
-  <enumoption>
-   <value>64</value>
-   <optionname>Gdk::BUTTON2_MOTION_MASK</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
-  <enumoption>
-   <value>512</value>
-   <optionname>Gdk::BUTTON2_MASK</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
- </enum>
-
-
- <enum id="gdk.enum.button3">
-  <enumname>GdkButton3</enumname>
-  <desc>
-   <simpara>
-    
-   </simpara>
-  </desc>
-  <enumoption>
-   <value>128</value>
-   <optionname>Gdk::BUTTON3_MOTION_MASK</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
   <enumoption>
    <value>1024</value>
-   <optionname>Gdk::BUTTON3_MASK</optionname>
+   <optionname>Gdk::KEY_PRESS_MASK</optionname>
    <shortdesc>
     
    </shortdesc>
   </enumoption>
- </enum>
-
-
- <enum id="gdk.enum.button4">
-  <enumname>GdkButton4</enumname>
-  <desc>
-   <simpara>
-    
-   </simpara>
-  </desc>
   <enumoption>
    <value>2048</value>
-   <optionname>Gdk::BUTTON4_MASK</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
- </enum>
-
-
- <enum id="gdk.enum.button5">
-  <enumname>GdkButton5</enumname>
-  <desc>
-   <simpara>
-    
-   </simpara>
-  </desc>
-  <enumoption>
-   <value>4096</value>
-   <optionname>Gdk::BUTTON5_MASK</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
- </enum>
-
-
- <enum id="gdk.enum.cap">
-  <enumname>GdkCap</enumname>
-  <desc>
-   <simpara>
-    
-   </simpara>
-  </desc>
-  <enumoption>
-   <value>0</value>
-   <optionname>Gdk::CAP_NOT_LAST</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
-  <enumoption>
-   <value>1</value>
-   <optionname>Gdk::CAP_BUTT</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
-  <enumoption>
-   <value>2</value>
-   <optionname>Gdk::CAP_ROUND</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
-  <enumoption>
-   <value>3</value>
-   <optionname>Gdk::CAP_PROJECTING</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
- </enum>
-
-
- <enum id="gdk.enum.center">
-  <enumname>GdkCenter</enumname>
-  <desc>
-   <simpara>
-    
-   </simpara>
-  </desc>
-  <enumoption>
-   <value>22</value>
-   <optionname>Gdk::CENTER_PTR</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
- </enum>
-
-
- <enum id="gdk.enum.client">
-  <enumname>GdkClient</enumname>
-  <desc>
-   <simpara>
-    
-   </simpara>
-  </desc>
-  <enumoption>
-   <value>28</value>
-   <optionname>Gdk::CLIENT_EVENT</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
- </enum>
-
-
- <enum id="gdk.enum.clip">
-  <enumname>GdkClip</enumname>
-  <desc>
-   <simpara>
-    
-   </simpara>
-  </desc>
-  <enumoption>
-   <value>0</value>
-   <optionname>Gdk::CLIP_BY_CHILDREN</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
- </enum>
-
-
- <enum id="gdk.enum.coffee">
-  <enumname>GdkCoffee</enumname>
-  <desc>
-   <simpara>
-    
-   </simpara>
-  </desc>
-  <enumoption>
-   <value>28</value>
-   <optionname>Gdk::COFFEE_MUG</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
- </enum>
-
-
- <enum id="gdk.enum.colorspace">
-  <enumname>GdkColorspace</enumname>
-  <desc>
-   <simpara>
-    
-   </simpara>
-  </desc>
-  <enumoption>
-   <value>0</value>
-   <optionname>Gdk::COLORSPACE_RGB</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
- </enum>
-
-
- <enum id="gdk.enum.control">
-  <enumname>GdkControl</enumname>
-  <desc>
-   <simpara>
-    
-   </simpara>
-  </desc>
-  <enumoption>
-   <value>4</value>
-   <optionname>Gdk::CONTROL_MASK</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
- </enum>
-
-
- <enum id="gdk.enum.copy">
-  <enumname>GdkCopy</enumname>
-  <desc>
-   <simpara>
-    
-   </simpara>
-  </desc>
-  <enumoption>
-   <value>11</value>
-   <optionname>Gdk::COPY_INVERT</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
- </enum>
-
-
- <enum id="gdk.enum.cross">
-  <enumname>GdkCross</enumname>
-  <desc>
-   <simpara>
-    
-   </simpara>
-  </desc>
-  <enumoption>
-   <value>32</value>
-   <optionname>Gdk::CROSS_REVERSE</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
- </enum>
-
-
- <enum id="gdk.enum.crossing">
-  <enumname>GdkCrossing</enumname>
-  <desc>
-   <simpara>
-    
-   </simpara>
-  </desc>
-  <enumoption>
-   <value>0</value>
-   <optionname>Gdk::CROSSING_NORMAL</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
-  <enumoption>
-   <value>1</value>
-   <optionname>Gdk::CROSSING_GRAB</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
-  <enumoption>
-   <value>2</value>
-   <optionname>Gdk::CROSSING_UNGRAB</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
- </enum>
-
-
- <enum id="gdk.enum.cursor">
-  <enumname>GdkCursor</enumname>
-  <desc>
-   <simpara>
-    
-   </simpara>
-  </desc>
-  <enumoption>
-   <value>-1</value>
-   <optionname>Gdk::CURSOR_IS_PIXMAP</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
- </enum>
-
-
- <enum id="gdk.enum.decor">
-  <enumname>GdkDecor</enumname>
-  <desc>
-   <simpara>
-    
-   </simpara>
-  </desc>
-  <enumoption>
-   <value>1</value>
-   <optionname>Gdk::DECOR_ALL</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
-  <enumoption>
-   <value>2</value>
-   <optionname>Gdk::DECOR_BORDER</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
-  <enumoption>
-   <value>4</value>
-   <optionname>Gdk::DECOR_RESIZEH</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
-  <enumoption>
-   <value>8</value>
-   <optionname>Gdk::DECOR_TITLE</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
-  <enumoption>
-   <value>16</value>
-   <optionname>Gdk::DECOR_MENU</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
-  <enumoption>
-   <value>32</value>
-   <optionname>Gdk::DECOR_MINIMIZE</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
-  <enumoption>
-   <value>64</value>
-   <optionname>Gdk::DECOR_MAXIMIZE</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
- </enum>
-
-
- <enum id="gdk.enum.diamond">
-  <enumname>GdkDiamond</enumname>
-  <desc>
-   <simpara>
-    
-   </simpara>
-  </desc>
-  <enumoption>
-   <value>36</value>
-   <optionname>Gdk::DIAMOND_CROSS</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
- </enum>
-
-
- <enum id="gdk.enum.double">
-  <enumname>GdkDouble</enumname>
-  <desc>
-   <simpara>
-    
-   </simpara>
-  </desc>
-  <enumoption>
-   <value>42</value>
-   <optionname>Gdk::DOUBLE_ARROW</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
- </enum>
-
-
- <enum id="gdk.enum.draft">
-  <enumname>GdkDraft</enumname>
-  <desc>
-   <simpara>
-    
-   </simpara>
-  </desc>
-  <enumoption>
-   <value>44</value>
-   <optionname>Gdk::DRAFT_LARGE</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
-  <enumoption>
-   <value>46</value>
-   <optionname>Gdk::DRAFT_SMALL</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
- </enum>
-
-
- <enum id="gdk.enum.drag">
-  <enumname>GdkDrag</enumname>
-  <desc>
-   <simpara>
-    
-   </simpara>
-  </desc>
-  <enumoption>
-   <value>0</value>
-   <optionname>Gdk::DRAG_PROTO_MOTIF</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
-  <enumoption>
-   <value>1</value>
-   <optionname>Gdk::DRAG_PROTO_XDND</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
-  <enumoption>
-   <value>2</value>
-   <optionname>Gdk::DRAG_PROTO_ROOTWIN</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
-  <enumoption>
-   <value>3</value>
-   <optionname>Gdk::DRAG_PROTO_NONE</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
-  <enumoption>
-   <value>4</value>
-   <optionname>Gdk::DRAG_PROTO_WIN32_DROPFILES</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
-  <enumoption>
-   <value>5</value>
-   <optionname>Gdk::DRAG_PROTO_OLE2</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
-  <enumoption>
-   <value>6</value>
-   <optionname>Gdk::DRAG_PROTO_LOCAL</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
-  <enumoption>
-   <value>22</value>
-   <optionname>Gdk::DRAG_ENTER</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
-  <enumoption>
-   <value>23</value>
-   <optionname>Gdk::DRAG_LEAVE</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
-  <enumoption>
-   <value>24</value>
-   <optionname>Gdk::DRAG_MOTION</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
-  <enumoption>
-   <value>25</value>
-   <optionname>Gdk::DRAG_STATUS</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
- </enum>
-
-
- <enum id="gdk.enum.draped">
-  <enumname>GdkDraped</enumname>
-  <desc>
-   <simpara>
-    
-   </simpara>
-  </desc>
-  <enumoption>
-   <value>48</value>
-   <optionname>Gdk::DRAPED_BOX</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
- </enum>
-
-
- <enum id="gdk.enum.drop">
-  <enumname>GdkDrop</enumname>
-  <desc>
-   <simpara>
-    
-   </simpara>
-  </desc>
-  <enumoption>
-   <value>26</value>
-   <optionname>Gdk::DROP_START</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
-  <enumoption>
-   <value>27</value>
-   <optionname>Gdk::DROP_FINISHED</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
- </enum>
-
-
- <enum id="gdk.enum.enter">
-  <enumname>GdkEnter</enumname>
-  <desc>
-   <simpara>
-    
-   </simpara>
-  </desc>
-  <enumoption>
-   <value>10</value>
-   <optionname>Gdk::ENTER_NOTIFY</optionname>
+   <optionname>Gdk::KEY_RELEASE_MASK</optionname>
    <shortdesc>
     
    </shortdesc>
@@ -1246,146 +945,9 @@
     
    </shortdesc>
   </enumoption>
- </enum>
-
-
- <enum id="gdk.enum.error">
-  <enumname>GdkError</enumname>
-  <desc>
-   <simpara>
-    
-   </simpara>
-  </desc>
   <enumoption>
-   <value>-4</value>
-   <optionname>Gdk::ERROR_MEM</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
-  <enumoption>
-   <value>-3</value>
-   <optionname>Gdk::ERROR_FILE</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
-  <enumoption>
-   <value>-2</value>
-   <optionname>Gdk::ERROR_PARAM</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
- </enum>
-
-
- <enum id="gdk.enum.even">
-  <enumname>GdkEven</enumname>
-  <desc>
-   <simpara>
-    
-   </simpara>
-  </desc>
-  <enumoption>
-   <value>0</value>
-   <optionname>Gdk::EVEN_ODD_RULE</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
- </enum>
-
-
- <enum id="gdk.enum.exposure">
-  <enumname>GdkExposure</enumname>
-  <desc>
-   <simpara>
-    
-   </simpara>
-  </desc>
-  <enumoption>
-   <value>2</value>
-   <optionname>Gdk::EXPOSURE_MASK</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
- </enum>
-
-
- <enum id="gdk.enum.extension">
-  <enumname>GdkExtension</enumname>
-  <desc>
-   <simpara>
-    
-   </simpara>
-  </desc>
-  <enumoption>
-   <value>0</value>
-   <optionname>Gdk::EXTENSION_EVENTS_NONE</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
-  <enumoption>
-   <value>1</value>
-   <optionname>Gdk::EXTENSION_EVENTS_ALL</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
-  <enumoption>
-   <value>2</value>
-   <optionname>Gdk::EXTENSION_EVENTS_CURSOR</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
- </enum>
-
-
- <enum id="gdk.enum.filter">
-  <enumname>GdkFilter</enumname>
-  <desc>
-   <simpara>
-    
-   </simpara>
-  </desc>
-  <enumoption>
-   <value>0</value>
-   <optionname>Gdk::FILTER_CONTINUE</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
-  <enumoption>
-   <value>1</value>
-   <optionname>Gdk::FILTER_TRANSLATE</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
-  <enumoption>
-   <value>2</value>
-   <optionname>Gdk::FILTER_REMOVE</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
- </enum>
-
-
- <enum id="gdk.enum.focus">
-  <enumname>GdkFocus</enumname>
-  <desc>
-   <simpara>
-    
-   </simpara>
-  </desc>
-  <enumoption>
-   <value>12</value>
-   <optionname>Gdk::FOCUS_CHANGE</optionname>
+   <value>8192</value>
+   <optionname>Gdk::LEAVE_NOTIFY_MASK</optionname>
    <shortdesc>
     
    </shortdesc>
@@ -1397,214 +959,58 @@
     
    </shortdesc>
   </enumoption>
- </enum>
-
-
- <enum id="gdk.enum.font">
-  <enumname>GdkFont</enumname>
-  <desc>
-   <simpara>
-    
-   </simpara>
-  </desc>
-  <enumoption>
-   <value>0</value>
-   <optionname>Gdk::FONT_FONT</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
-  <enumoption>
-   <value>1</value>
-   <optionname>Gdk::FONT_FONTSET</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
- </enum>
-
-
- <enum id="gdk.enum.func">
-  <enumname>GdkFunc</enumname>
-  <desc>
-   <simpara>
-    
-   </simpara>
-  </desc>
-  <enumoption>
-   <value>1</value>
-   <optionname>Gdk::FUNC_ALL</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
-  <enumoption>
-   <value>2</value>
-   <optionname>Gdk::FUNC_RESIZE</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
-  <enumoption>
-   <value>4</value>
-   <optionname>Gdk::FUNC_MOVE</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
-  <enumoption>
-   <value>8</value>
-   <optionname>Gdk::FUNC_MINIMIZE</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
-  <enumoption>
-   <value>16</value>
-   <optionname>Gdk::FUNC_MAXIMIZE</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
-  <enumoption>
-   <value>32</value>
-   <optionname>Gdk::FUNC_CLOSE</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
- </enum>
-
-
- <enum id="gdk.enum.gc">
-  <enumname>GdkGc</enumname>
-  <desc>
-   <simpara>
-    
-   </simpara>
-  </desc>
-  <enumoption>
-   <value>1</value>
-   <optionname>Gdk::GC_FOREGROUND</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
-  <enumoption>
-   <value>2</value>
-   <optionname>Gdk::GC_BACKGROUND</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
-  <enumoption>
-   <value>4</value>
-   <optionname>Gdk::GC_FONT</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
-  <enumoption>
-   <value>8</value>
-   <optionname>Gdk::GC_FUNCTION</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
-  <enumoption>
-   <value>16</value>
-   <optionname>Gdk::GC_FILL</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
-  <enumoption>
-   <value>32</value>
-   <optionname>Gdk::GC_TILE</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
-  <enumoption>
-   <value>64</value>
-   <optionname>Gdk::GC_STIPPLE</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
-  <enumoption>
-   <value>128</value>
-   <optionname>Gdk::GC_CLIP_MASK</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
-  <enumoption>
-   <value>256</value>
-   <optionname>Gdk::GC_SUBWINDOW</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
-  <enumoption>
-   <value>512</value>
-   <optionname>Gdk::GC_TS_X_ORIGIN</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
-  <enumoption>
-   <value>1024</value>
-   <optionname>Gdk::GC_TS_Y_ORIGIN</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
-  <enumoption>
-   <value>2048</value>
-   <optionname>Gdk::GC_CLIP_X_ORIGIN</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
-  <enumoption>
-   <value>4096</value>
-   <optionname>Gdk::GC_CLIP_Y_ORIGIN</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
-  <enumoption>
-   <value>8192</value>
-   <optionname>Gdk::GC_EXPOSURES</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
-  <enumoption>
-   <value>16384</value>
-   <optionname>Gdk::GC_LINE_WIDTH</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
   <enumoption>
    <value>32768</value>
-   <optionname>Gdk::GC_LINE_STYLE</optionname>
+   <optionname>Gdk::STRUCTURE_MASK</optionname>
    <shortdesc>
     
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>65536</value>
-   <optionname>Gdk::GC_CAP_STYLE</optionname>
+   <optionname>Gdk::PROPERTY_CHANGE_MASK</optionname>
    <shortdesc>
     
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>131072</value>
-   <optionname>Gdk::GC_JOIN_STYLE</optionname>
+   <optionname>Gdk::VISIBILITY_NOTIFY_MASK</optionname>
+   <shortdesc>
+    
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>262144</value>
+   <optionname>Gdk::PROXIMITY_IN_MASK</optionname>
+   <shortdesc>
+    
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>524288</value>
+   <optionname>Gdk::PROXIMITY_OUT_MASK</optionname>
+   <shortdesc>
+    
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>1048576</value>
+   <optionname>Gdk::SUBSTRUCTURE_MASK</optionname>
+   <shortdesc>
+    
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>2097152</value>
+   <optionname>Gdk::SCROLL_MASK</optionname>
+   <shortdesc>
+    
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>4194302</value>
+   <optionname>Gdk::ALL_EVENTS_MASK</optionname>
    <shortdesc>
     
    </shortdesc>
@@ -1612,8 +1018,314 @@
  </enum>
 
 
- <enum id="gdk.enum.grab">
-  <enumname>GdkGrab</enumname>
+ <enum id="gdk.enum.eventtype">
+  <enumname>GdkEventType</enumname>
+  <desc>
+   <simpara>
+    Do not confuse these events with the signals that GTK+ widgets emit. 
+    Although many of these events result in corresponding signals being 
+    emitted, the events are often transformed or filtered along the way.
+   </simpara>
+  </desc>
+  <enumoption>
+   <value>-1</value>
+   <optionname>Gdk::NOTHING</optionname>
+   <shortdesc>
+       a special code to indicate a null event.
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>0</value>
+   <optionname>Gdk::DELETE</optionname>
+   <shortdesc>
+       the window manager has requested that the toplevel window be hidden 
+       or destroyed, usually when the user clicks on a special icon in the 
+       title bar.
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>1</value>
+   <optionname>Gdk::DESTROY</optionname>
+   <shortdesc>
+       the window has been destroyed.
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>2</value>
+   <optionname>Gdk::EXPOSE</optionname>
+   <shortdesc>
+       all or part of the window has become visible and needs to be redrawn.
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>3</value>
+   <optionname>Gdk::MOTION_NOTIFY</optionname>
+   <shortdesc>
+       the pointer (usually a mouse) has moved.
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>4</value>
+   <optionname>Gdk::BUTTON_PRESS</optionname>
+   <shortdesc>
+       a mouse button has been pressed.
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>5</value>
+   <optionname>Gdk::_2BUTTON_PRESS</optionname>
+   <shortdesc>
+       a mouse button has been double-clicked (clicked twice 
+       within a short period of time). Note that each click also 
+       generates a <literal>Gdk::BUTTON_PRESS</literal> event.
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>6</value>
+   <optionname>Gdk::_3BUTTON_PRESS</optionname>
+   <shortdesc>
+       a mouse button has been clicked 3 times in a short period of 
+       time. Note that each click also generates a 
+       <literal>Gdk::BUTTON_PRESS</literal> event.
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>7</value>
+   <optionname>Gdk::BUTTON_RELEASE</optionname>
+   <shortdesc>
+       a mouse button has been released.
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>8</value>
+   <optionname>Gdk::KEY_PRESS</optionname>
+   <shortdesc>
+       a key has been pressed.
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>9</value>
+   <optionname>Gdk::KEY_RELEASE</optionname>
+   <shortdesc>
+       a key has been released.
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>10</value>
+   <optionname>Gdk::ENTER_NOTIFY</optionname>
+   <shortdesc>
+       the pointer has entered the window.
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>11</value>
+   <optionname>Gdk::LEAVE_NOTIFY</optionname>
+   <shortdesc>
+       the pointer has left the window.
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>12</value>
+   <optionname>Gdk::FOCUS_CHANGE</optionname>
+   <shortdesc>
+       the keyboard focus has entered or left the window.
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>13</value>
+   <optionname>Gdk::CONFIGURE</optionname>
+   <shortdesc>
+       the size, position or stacking order of the window has changed. 
+       Note that GTK+ discards these events for 
+       <literal>Gdk::WINDOW_CHILD</literal> windows.
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>14</value>
+   <optionname>Gdk::MAP</optionname>
+   <shortdesc>
+       the window has been mapped.
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>15</value>
+   <optionname>Gdk::UNMAP</optionname>
+   <shortdesc>
+       the window has been unmapped.
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>16</value>
+   <optionname>Gdk::PROPERTY_NOTIFY</optionname>
+   <shortdesc>
+       a property on the window has been changed or deleted.
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>17</value>
+   <optionname>Gdk::SELECTION_CLEAR</optionname>
+   <shortdesc>
+       the application has lost ownership of a selection.
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>18</value>
+   <optionname>Gdk::SELECTION_REQUEST</optionname>
+   <shortdesc>
+       another application has requested a selection.
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>19</value>
+   <optionname>Gdk::SELECTION_NOTIFY</optionname>
+   <shortdesc>
+       a selection has been received.
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>20</value>
+   <optionname>Gdk::PROXIMITY_IN</optionname>
+   <shortdesc>
+       an input device has moved into contact with a sensing
+       surface (e.g. a touchscreen or graphics tablet).
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>21</value>
+   <optionname>Gdk::PROXIMITY_OUT</optionname>
+   <shortdesc>
+       an input device has moved out of contact with a sensing surface.
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>22</value>
+   <optionname>Gdk::DRAG_ENTER</optionname>
+   <shortdesc>
+       the mouse has entered the window while a drag is in progress.
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>23</value>
+   <optionname>Gdk::DRAG_LEAVE</optionname>
+   <shortdesc>
+       the mouse has left the window while a drag is in progress.
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>24</value>
+   <optionname>Gdk::DRAG_MOTION</optionname>
+   <shortdesc>
+       the mouse has moved in the window while a drag is in progress.
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>25</value>
+   <optionname>Gdk::DRAG_STATUS</optionname>
+   <shortdesc>
+       the status of the drag operation initiated by the window has changed.
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>26</value>
+   <optionname>Gdk::DROP_START</optionname>
+   <shortdesc>
+       a drop operation onto the window has started.
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>27</value>
+   <optionname>Gdk::DROP_FINISHED</optionname>
+   <shortdesc>
+       the drop operation initiated by the window has completed.
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>28</value>
+   <optionname>Gdk::CLIENT_EVENT</optionname>
+   <shortdesc>
+       a message has been received from another application.
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>29</value>
+   <optionname>Gdk::VISIBILITY_NOTIFY</optionname>
+   <shortdesc>
+       the window visibility status has changed.
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>30</value>
+   <optionname>Gdk::NO_EXPOSE</optionname>
+   <shortdesc>
+       Indicates that the source region was completely available 
+       when parts of a drawable were copied. This is not very useful.
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>31</value>
+   <optionname>Gdk::SCROLL</optionname>
+   <shortdesc>
+    
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>32</value>
+   <optionname>Gdk::WINDOW_STATE</optionname>
+   <shortdesc>
+    
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>33</value>
+   <optionname>Gdk::SETTING</optionname>
+   <shortdesc>
+    
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>34</value>
+   <optionname>Gdk::OWNER_CHANGE</optionname>
+   <shortdesc>
+    
+   </shortdesc>
+  </enumoption>
+ </enum>
+
+
+ <enum id="gdk.enum.extensionmode">
+  <enumname>GdkExtensionMode</enumname>
+  <desc>
+   <simpara>
+    An enumeration used to specify which extension events
+    are desired for a particular widget.
+   </simpara>
+  </desc>
+  <enumoption>
+   <value>0</value>
+   <optionname>Gdk::EXTENSION_EVENTS_NONE</optionname>
+   <shortdesc>
+       No extension events are desired.
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>1</value>
+   <optionname>Gdk::EXTENSION_EVENTS_ALL</optionname>
+   <shortdesc>
+       All extension events are desired.
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>2</value>
+   <optionname>Gdk::EXTENSION_EVENTS_CURSOR</optionname>
+   <shortdesc>
+       Extension events are desired only if a cursor will be displayed for the device.
+   </shortdesc>
+  </enumoption>
+ </enum>
+
+
+ <enum id="gdk.enum.fill">
+  <enumname>GdkFill</enumname>
   <desc>
    <simpara>
     
@@ -1621,37 +1333,408 @@
   </desc>
   <enumoption>
    <value>0</value>
-   <optionname>Gdk::GRAB_SUCCESS</optionname>
+   <optionname>Gdk::SOLID</optionname>
+   <shortdesc>
+     Draw with the foreground color.
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>1</value>
+   <optionname>Gdk::TILED</optionname>
+   <shortdesc>
+    Draw with a tiled pixmap.
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>2</value>
+   <optionname>Gdk::STIPPLED</optionname>
+   <shortdesc>
+    Draw using the stipple bitmap. Pixels corresponding to bits in 
+    the stipple bitmap that are set will be drawn in the foreground 
+    color; pixels corresponding to bits that are not 
+    set will be left untouched.
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>3</value>
+   <optionname>Gdk::OPAQUE_STIPPLED</optionname>
+   <shortdesc>
+    Draw using the stipple bitmap. Pixels corresponding to bits 
+    in the stipple bitmap that are set will be drawn in the foreground 
+    color; pixels corresponding to bits that are not set 
+    will be drawn with the background color.
+   </shortdesc>
+  </enumoption>
+ </enum>
+
+
+ <enum id="gdk.enum.filterreturn">
+  <enumname>GdkFilterReturn</enumname>
+  <desc>
+   <simpara>
+    <!-- we don't have gdkfilterfunc -->
+    Specifies the result of applying a GdkFilterFunc to a native event.
+   </simpara>
+  </desc>
+  <enumoption>
+   <value>0</value>
+   <optionname>Gdk::FILTER_CONTINUE</optionname>
+   <shortdesc>
+    Event not handled, continue processesing.
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>1</value>
+   <optionname>Gdk::FILTER_TRANSLATE</optionname>
+   <shortdesc>
+    Native event translated into a GDK event and stored in 
+    the event structure that was passed in.
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>2</value>
+   <optionname>Gdk::FILTER_REMOVE</optionname>
+   <shortdesc>
+    Event handled, terminate processing.
+   </shortdesc>
+  </enumoption>
+ </enum>
+
+
+ <enum id="gdk.enum.fonttype">
+  <enumname>GdkFontType</enumname>
+  <desc>
+   <simpara>GdkFontType is deprecated and should not be used in newly-written code.</simpara>
+   
+   <simpara>
+    Indicates the type of a font. The possible values are currently:
+   </simpara>
+  </desc>
+  <enumoption>
+   <value>0</value>
+   <optionname>Gdk::FONT_FONT</optionname>
+   <shortdesc>
+    The font is a single font.
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>1</value>
+   <optionname>Gdk::FONT_FONTSET</optionname>
+   <shortdesc>
+    The font is a fontset.
+   </shortdesc>
+  </enumoption>
+ </enum>
+
+
+ <enum id="gdk.enum.function">
+  <enumname>GdkFunction</enumname>
+  <desc>
+   <simpara>
+    Determines how the bit values for the source pixels are combined with 
+    the bit values for destination pixels to produce the final result. 
+    The sixteen values here correspond to the 16 different possible 2x2 
+    truth tables. Only a couple of these values are usually useful; 
+    for colored images, only <literal>GDK_COPY</literal>, 
+    <literal>GDK_XOR</literal> and <literal>GDK_INVERT</literal> are 
+    generally useful. For bitmaps, <literal>GDK_AND</literal> and 
+    <literal>GDK_OR</literal> are also useful.
+   </simpara>
+  </desc>
+  <enumoption>
+   <value>0</value>
+   <optionname>Gdk::COPY</optionname>
    <shortdesc>
     
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>1</value>
-   <optionname>Gdk::GRAB_ALREADY_GRABBED</optionname>
+   <optionname>Gdk::INVERT</optionname>
    <shortdesc>
     
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>2</value>
-   <optionname>Gdk::GRAB_INVALID_TIME</optionname>
+   <optionname>Gdk::XOR</optionname>
    <shortdesc>
     
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>3</value>
-   <optionname>Gdk::GRAB_NOT_VIEWABLE</optionname>
+   <optionname>Gdk::CLEAR</optionname>
    <shortdesc>
     
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>4</value>
-   <optionname>Gdk::GRAB_FROZEN</optionname>
+   <optionname>Gdk::AND</optionname>
    <shortdesc>
     
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>5</value>
+   <optionname>Gdk::AND_REVERSE</optionname>
+   <shortdesc>
+    
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>6</value>
+   <optionname>Gdk::AND_INVERT</optionname>
+   <shortdesc>
+    
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>7</value>
+   <optionname>Gdk::NOOP</optionname>
+   <shortdesc>
+    
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>8</value>
+   <optionname>Gdk::OR</optionname>
+   <shortdesc>
+    
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>9</value>
+   <optionname>Gdk::EQUIV</optionname>
+   <shortdesc>
+    
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>10</value>
+   <optionname>Gdk::OR_REVERSE</optionname>
+   <shortdesc>
+    
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>11</value>
+   <optionname>Gdk::COPY_INVERT</optionname>
+   <shortdesc>
+    
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>12</value>
+   <optionname>Gdk::OR_INVERT</optionname>
+   <shortdesc>
+    
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>13</value>
+   <optionname>Gdk::NAND</optionname>
+   <shortdesc>
+    
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>14</value>
+   <optionname>Gdk::NOR</optionname>
+   <shortdesc>
+    
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>15</value>
+   <optionname>Gdk::SET</optionname>
+   <shortdesc>
+    
+   </shortdesc>
+  </enumoption>
+ </enum>
+
+
+ <enum id="gdk.enum.gcvaluesmask">
+  <enumname>GdkGCValuesMask</enumname>
+  <desc>
+   <simpara>
+    <!-- FIXME: we haven't such a structure -->
+    A set of bit flags used to indicate which fields GdkGCValues structure are set.
+   </simpara>
+  </desc>
+  <enumoption>
+   <value>1</value>
+   <optionname>Gdk::GC_FOREGROUND</optionname>
+   <shortdesc>
+       The foreground is set.
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>2</value>
+   <optionname>Gdk::GC_BACKGROUND</optionname>
+   <shortdesc>
+       The background is set.
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>4</value>
+   <optionname>Gdk::GC_FONT</optionname>
+   <shortdesc>
+       The font is set.
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>8</value>
+   <optionname>Gdk::GC_FUNCTION</optionname>
+   <shortdesc>
+       The function is set.
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>16</value>
+   <optionname>Gdk::GC_FILL</optionname>
+   <shortdesc>
+       The fill is set.
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>32</value>
+   <optionname>Gdk::GC_TILE</optionname>
+   <shortdesc>
+       The tile is set.
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>64</value>
+   <optionname>Gdk::GC_STIPPLE</optionname>
+   <shortdesc>
+       The stipple is set.
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>128</value>
+   <optionname>Gdk::GC_CLIP_MASK</optionname>
+   <shortdesc>
+       The clip_mask is set.
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>256</value>
+   <optionname>Gdk::GC_SUBWINDOW</optionname>
+   <shortdesc>
+       The subwindow_mode is set.
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>512</value>
+   <optionname>Gdk::GC_TS_X_ORIGIN</optionname>
+   <shortdesc>
+       The ts_x_origin is set.
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>1024</value>
+   <optionname>Gdk::GC_TS_Y_ORIGIN</optionname>
+   <shortdesc>
+       The ts_y_origin is set.
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>2048</value>
+   <optionname>Gdk::GC_CLIP_X_ORIGIN</optionname>
+   <shortdesc>
+       The clip_x_origin is set.
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>4096</value>
+   <optionname>Gdk::GC_CLIP_Y_ORIGIN</optionname>
+   <shortdesc>
+       The clip_y_origin is set.
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>8192</value>
+   <optionname>Gdk::GC_EXPOSURES</optionname>
+   <shortdesc>
+       The graphics_exposures is set.
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>16384</value>
+   <optionname>Gdk::GC_LINE_WIDTH</optionname>
+   <shortdesc>
+       The line_width is set.
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>32768</value>
+   <optionname>Gdk::GC_LINE_STYLE</optionname>
+   <shortdesc>
+       The line_style is set.
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>65536</value>
+   <optionname>Gdk::GC_CAP_STYLE</optionname>
+   <shortdesc>
+       The cap_style is set.
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>131072</value>
+   <optionname>Gdk::GC_JOIN_STYLE</optionname>
+   <shortdesc>
+       The join_style is set.
+   </shortdesc>
+  </enumoption>
+ </enum>
+
+
+ <enum id="gdk.enum.grabstatus">
+  <enumname>GdkGrabStatus</enumname>
+  <desc>
+   <simpara>
+    Returned by <function class="Gdk">pointer_grab</function>
+    and <function class="Gdk">keyboard_grab</function> to indicate
+    success or the reason for the failure of the grab attempt.
+   </simpara>
+  </desc>
+  <enumoption>
+   <value>0</value>
+   <optionname>Gdk::GRAB_SUCCESS</optionname>
+   <shortdesc>
+     The resource was successfully grabbed.
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>1</value>
+   <optionname>Gdk::GRAB_ALREADY_GRABBED</optionname>
+   <shortdesc>
+       The resource is actively grabbed by another client.
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>2</value>
+   <optionname>Gdk::GRAB_INVALID_TIME</optionname>
+   <shortdesc>
+       The resource was grabbed more recently than the specified time.
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>3</value>
+   <optionname>Gdk::GRAB_NOT_VIEWABLE</optionname>
+   <shortdesc>
+       The grab window or the confine_to window are not viewable.
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>4</value>
+   <optionname>Gdk::GRAB_FROZEN</optionname>
+   <shortdesc>
+       The resource is frozen by an active grab of another client.
    </shortdesc>
   </enumoption>
  </enum>
@@ -1661,243 +1744,200 @@
   <enumname>GdkGravity</enumname>
   <desc>
    <simpara>
-    
+    Defines the reference point of a window and the meaning 
+    of coordinates passed to <function class="GtkWindow">move</function>. See 
+    <function class="GtkWindow">move</function> and the "implementation notes" 
+    section of the extended window manager hints specification for more details.
    </simpara>
   </desc>
   <enumoption>
    <value>1</value>
    <optionname>Gdk::GRAVITY_NORTH_WEST</optionname>
    <shortdesc>
-    
+       The reference point is at the top left corner.
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>2</value>
    <optionname>Gdk::GRAVITY_NORTH</optionname>
    <shortdesc>
-    
+       The reference point is in the middle of the top edge.
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>3</value>
    <optionname>Gdk::GRAVITY_NORTH_EAST</optionname>
    <shortdesc>
-    
+       The reference point is at the top right corner.
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>4</value>
    <optionname>Gdk::GRAVITY_WEST</optionname>
    <shortdesc>
-    
+       The reference point is at the middle of the left edge.
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>5</value>
    <optionname>Gdk::GRAVITY_CENTER</optionname>
    <shortdesc>
-    
+      The reference point is at the center of the window.
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>6</value>
    <optionname>Gdk::GRAVITY_EAST</optionname>
    <shortdesc>
-    
+       the reference point is at the middle of the right edge.
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>7</value>
    <optionname>Gdk::GRAVITY_SOUTH_WEST</optionname>
    <shortdesc>
-    
+       The reference point is at the lower left corner.
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>8</value>
    <optionname>Gdk::GRAVITY_SOUTH</optionname>
    <shortdesc>
-    
+       The reference point is at the middle of the lower edge.
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>9</value>
    <optionname>Gdk::GRAVITY_SOUTH_EAST</optionname>
    <shortdesc>
-    
+       The reference point is at the lower right corner.
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>10</value>
    <optionname>Gdk::GRAVITY_STATIC</optionname>
    <shortdesc>
-    
+       The reference point is at the top left corner 
+       of the window itself, ignoring window manager decorations.
    </shortdesc>
   </enumoption>
  </enum>
 
 
- <enum id="gdk.enum.hint">
-  <enumname>GdkHint</enumname>
+ <enum id="gdk.enum.imagetype">
+  <enumname>GdkImageType</enumname>
   <desc>
    <simpara>
-    
-   </simpara>
-  </desc>
-  <enumoption>
-   <value>1</value>
-   <optionname>Gdk::HINT_POS</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
-  <enumoption>
-   <value>2</value>
-   <optionname>Gdk::HINT_MIN_SIZE</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
-  <enumoption>
-   <value>4</value>
-   <optionname>Gdk::HINT_MAX_SIZE</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
-  <enumoption>
-   <value>8</value>
-   <optionname>Gdk::HINT_BASE_SIZE</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
-  <enumoption>
-   <value>16</value>
-   <optionname>Gdk::HINT_ASPECT</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
-  <enumoption>
-   <value>32</value>
-   <optionname>Gdk::HINT_RESIZE_INC</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
-  <enumoption>
-   <value>64</value>
-   <optionname>Gdk::HINT_WIN_GRAVITY</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
-  <enumoption>
-   <value>128</value>
-   <optionname>Gdk::HINT_USER_POS</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
-  <enumoption>
-   <value>256</value>
-   <optionname>Gdk::HINT_USER_SIZE</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
- </enum>
-
-
- <enum id="gdk.enum.image">
-  <enumname>GdkImage</enumname>
-  <desc>
-   <simpara>
-    
+    Specifies the type of a GdkImage.
    </simpara>
   </desc>
   <enumoption>
    <value>0</value>
    <optionname>Gdk::IMAGE_NORMAL</optionname>
    <shortdesc>
-    
+    The original X image type, which is quite slow since the 
+    image has to be transferred from the client to the server to display it.
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>1</value>
    <optionname>Gdk::IMAGE_SHARED</optionname>
    <shortdesc>
-    
+    A faster image type, which uses shared memory to transfer the image 
+    data between client and server. However this will only be 
+    available if client and server are on the same machine 
+    and the shared memory extension is supported by the server.
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>2</value>
    <optionname>Gdk::IMAGE_FASTEST</optionname>
    <shortdesc>
-    
+    Specifies that <literal>Gdk::IMAGE_SHARED</literal> should be tried 
+    first, and if that fails then <literal>Gdk::IMAGE_NORMAL</literal> will be used.
    </shortdesc>
   </enumoption>
  </enum>
 
 
- <enum id="gdk.enum.include">
-  <enumname>GdkInclude</enumname>
+ <enum id="gdk.enum.inputcondition">
+  <enumname>GdkInputCondition</enumname>
   <desc>
    <simpara>
-    
-   </simpara>
-  </desc>
-  <enumoption>
-   <value>1</value>
-   <optionname>Gdk::INCLUDE_INFERIORS</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
- </enum>
-
-
- <enum id="gdk.enum.input">
-  <enumname>GdkInput</enumname>
-  <desc>
-   <simpara>
-    
+    A set of bit flags used to specify conditions for which an input 
+    callback will be triggered. The three members of this enumeration 
+    correspond to the readfds, writefds, and exceptfds arguments to 
+    the select system call.
    </simpara>
   </desc>
   <enumoption>
    <value>0</value>
-   <optionname>Gdk::INPUT_OUTPUT</optionname>
+   <optionname>Gdk::INPUT_READ</optionname>
    <shortdesc>
-    
+    The file descriptor has become available for reading. (Or, as is standard 
+    in Unix, a socket or pipe was closed at the other end; this is the case 
+    if a subsequent read on the file descriptor returns a count of zero.)
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>1</value>
-   <optionname>Gdk::INPUT_ONLY</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
-  <enumoption>
-   <value>2</value>
    <optionname>Gdk::INPUT_WRITE</optionname>
    <shortdesc>
-    
+    The file descriptor has become available for writing.
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>4</value>
    <optionname>Gdk::INPUT_EXCEPTION</optionname>
    <shortdesc>
-    
+    An exception was raised on the file descriptor.
    </shortdesc>
   </enumoption>
  </enum>
 
 
- <enum id="gdk.enum.interp">
-  <enumname>GdkInterp</enumname>
+ <enum id="gdk.enum.inputsource">
+  <enumname>GdkinputSource</enumname>
+  <desc>
+   <simpara>
+       An enumeration describing the type of an input device in general terms.
+   </simpara>
+  </desc>
+  <enumoption>
+   <value>0</value>
+   <optionname>Gdk::SOURCE_MOUSE</optionname>
+   <shortdesc>
+    The device is a mouse. (This will be reported for the core pointer, 
+    even if it is something else, such as a trackball.)
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>1</value>
+   <optionname>Gdk::SOURCE_PEN</optionname>
+   <shortdesc>
+    The device is a stylus of a graphics tablet or similar device.
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>2</value>
+   <optionname>Gdk::SOURCE_ERASER</optionname>
+   <shortdesc>
+    The device is an eraser. Typically, this would be the other 
+    end of a stylus on a graphics tablet.
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>3</value>
+   <optionname>Gdk::SOURCE_CURSOR</optionname>
+   <shortdesc>
+    The device is a graphics tablet "puck" or similar device.
+   </shortdesc>
+  </enumoption>
+ </enum>
+
+
+ <enum id="gdk.enum.interpolation">
+  <enumname>GdkInterpolation</enumname>
   <desc>
    <simpara>
     
@@ -1934,386 +1974,189 @@
  </enum>
 
 
- <enum id="gdk.enum.iron">
-  <enumname>GdkIron</enumname>
+ <enum id="gdk.enum.joinstyle">
+  <enumname>GdkJoinStyle</enumname>
   <desc>
    <simpara>
-    
-   </simpara>
-  </desc>
-  <enumoption>
-   <value>66</value>
-   <optionname>Gdk::IRON_CROSS</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
- </enum>
-
-
- <enum id="gdk.enum.join">
-  <enumname>GdkJoin</enumname>
-  <desc>
-   <simpara>
-    
+    Determines how the joins between segments of a polygon are drawn.
    </simpara>
   </desc>
   <enumoption>
    <value>0</value>
    <optionname>Gdk::JOIN_MITER</optionname>
    <shortdesc>
-    
+    The sides of each line are extended to meet at an angle.
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>1</value>
    <optionname>Gdk::JOIN_ROUND</optionname>
    <shortdesc>
-    
+    The sides of the two lines are joined by a circular arc.
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>2</value>
    <optionname>Gdk::JOIN_BEVEL</optionname>
    <shortdesc>
-    
+    The sides of the two lines are joined by a straight line which makes an equal angle with each line.
    </shortdesc>
   </enumoption>
  </enum>
 
 
- <enum id="gdk.enum.key">
-  <enumname>GdkKey</enumname>
+ <enum id="gdk.enum.linestyle">
+  <enumname>GdkLineStyle</enumname>
   <desc>
    <simpara>
-    
-   </simpara>
-  </desc>
-  <enumoption>
-   <value>8</value>
-   <optionname>Gdk::KEY_PRESS</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
-  <enumoption>
-   <value>9</value>
-   <optionname>Gdk::KEY_RELEASE</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
-  <enumoption>
-   <value>1024</value>
-   <optionname>Gdk::KEY_PRESS_MASK</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
-  <enumoption>
-   <value>2048</value>
-   <optionname>Gdk::KEY_RELEASE_MASK</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
- </enum>
-
-
- <enum id="gdk.enum.last">
-  <enumname>GdkLast</enumname>
-  <desc>
-   <simpara>
-    
-   </simpara>
-  </desc>
-  <enumoption>
-   <value>153</value>
-   <optionname>Gdk::LAST_CURSOR</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
- </enum>
-
-
- <enum id="gdk.enum.leave">
-  <enumname>GdkLeave</enumname>
-  <desc>
-   <simpara>
-    
-   </simpara>
-  </desc>
-  <enumoption>
-   <value>11</value>
-   <optionname>Gdk::LEAVE_NOTIFY</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
-  <enumoption>
-   <value>8192</value>
-   <optionname>Gdk::LEAVE_NOTIFY_MASK</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
- </enum>
-
-
- <enum id="gdk.enum.left">
-  <enumname>GdkLeft</enumname>
-  <desc>
-   <simpara>
-    
-   </simpara>
-  </desc>
-  <enumoption>
-   <value>68</value>
-   <optionname>Gdk::LEFT_PTR</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
-  <enumoption>
-   <value>70</value>
-   <optionname>Gdk::LEFT_SIDE</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
-  <enumoption>
-   <value>72</value>
-   <optionname>Gdk::LEFT_TEE</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
- </enum>
-
-
- <enum id="gdk.enum.line">
-  <enumname>GdkLine</enumname>
-  <desc>
-   <simpara>
-    
+    Determines how lines are drawn.
    </simpara>
   </desc>
   <enumoption>
    <value>0</value>
    <optionname>Gdk::LINE_SOLID</optionname>
    <shortdesc>
-    
+    Lines are drawn solid.
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>1</value>
    <optionname>Gdk::LINE_ON_OFF_DASH</optionname>
    <shortdesc>
-    
+    Even segments are drawn; odd segments are not drawn.
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>2</value>
    <optionname>Gdk::LINE_DOUBLE_DASH</optionname>
    <shortdesc>
-    
+    Even segments are normally. Odd segments are drawn in 
+    the background color if the fill style is <literal>Gdk::SOLID</literal>, 
+    or in the background color masked by the stipple 
+    if the fill style is <literal>Gdk::STIPPLED</literal>.
    </shortdesc>
   </enumoption>
  </enum>
 
 
- <enum id="gdk.enum.ll">
-  <enumname>GdkLl</enumname>
+ <enum id="gdk.enum.modifiertype">
+  <enumname>GdkModifierType</enumname>
   <desc>
    <simpara>
-    
+    A set of bit-flags to indicate the state of modifier keys and mouse 
+    buttons in various event types. Typical modifier keys are Shift, 
+    Control, Meta, Super, Hyper, Alt, Compose, Apple, CapsLock or ShiftLock.
+   </simpara>
+   <simpara>
+    Like the X Window System, GDK supports 8 modifier keys and 5 mouse buttons.
    </simpara>
   </desc>
   <enumoption>
-   <value>76</value>
-   <optionname>Gdk::LL_ANGLE</optionname>
+   <value>1</value>
+   <optionname>Gdk::SHIFT_MASK</optionname>
    <shortdesc>
-    
+    The Shift key.
    </shortdesc>
   </enumoption>
- </enum>
-
-
- <enum id="gdk.enum.lock">
-  <enumname>GdkLock</enumname>
-  <desc>
-   <simpara>
-    
-   </simpara>
-  </desc>
   <enumoption>
    <value>2</value>
    <optionname>Gdk::LOCK_MASK</optionname>
    <shortdesc>
-    
+    A Lock key (depending on the modifier mapping of the X server this may 
+    either be CapsLock or ShiftLock).
    </shortdesc>
   </enumoption>
- </enum>
-
-
- <enum id="gdk.enum.lr">
-  <enumname>GdkLr</enumname>
-  <desc>
-   <simpara>
-    
-   </simpara>
-  </desc>
   <enumoption>
-   <value>78</value>
-   <optionname>Gdk::LR_ANGLE</optionname>
+   <value>4</value>
+   <optionname>Gdk::CONTROL_MASK</optionname>
    <shortdesc>
-    
+    The Control key.
    </shortdesc>
   </enumoption>
- </enum>
-
-
- <enum id="gdk.enum.lsb">
-  <enumname>GdkLsb</enumname>
-  <desc>
-   <simpara>
-    
-   </simpara>
-  </desc>
-  <enumoption>
-   <value>0</value>
-   <optionname>Gdk::LSB_FIRST</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
- </enum>
-
-
- <enum id="gdk.enum.mod1">
-  <enumname>GdkMod1</enumname>
-  <desc>
-   <simpara>
-    
-   </simpara>
-  </desc>
   <enumoption>
    <value>8</value>
    <optionname>Gdk::MOD1_MASK</optionname>
    <shortdesc>
-    
+    The fourth modifier key (it depends on the modifier mapping of 
+    the X server which key is interpreted as this modifier, but normally 
+    it is the Alt key).
    </shortdesc>
   </enumoption>
- </enum>
-
-
- <enum id="gdk.enum.mod2">
-  <enumname>GdkMod2</enumname>
-  <desc>
-   <simpara>
-    
-   </simpara>
-  </desc>
   <enumoption>
    <value>16</value>
    <optionname>Gdk::MOD2_MASK</optionname>
    <shortdesc>
-    
+    The fifth modifier key (it depends on the modifier mapping of 
+    the X server which key is interpreted as this modifier).
    </shortdesc>
   </enumoption>
- </enum>
-
-
- <enum id="gdk.enum.mod3">
-  <enumname>GdkMod3</enumname>
-  <desc>
-   <simpara>
-    
-   </simpara>
-  </desc>
   <enumoption>
    <value>32</value>
    <optionname>Gdk::MOD3_MASK</optionname>
    <shortdesc>
-    
+    The sixth modifier key (it depends on the modifier mapping of 
+    the X server which key is interpreted as this modifier).
    </shortdesc>
   </enumoption>
- </enum>
-
-
- <enum id="gdk.enum.mod4">
-  <enumname>GdkMod4</enumname>
-  <desc>
-   <simpara>
-    
-   </simpara>
-  </desc>
   <enumoption>
    <value>64</value>
    <optionname>Gdk::MOD4_MASK</optionname>
    <shortdesc>
-    
+    The seventh modifier key (it depends on the modifier mapping of 
+    the X server which key is interpreted as this modifier).
    </shortdesc>
   </enumoption>
- </enum>
-
-
- <enum id="gdk.enum.mod5">
-  <enumname>GdkMod5</enumname>
-  <desc>
-   <simpara>
-    
-   </simpara>
-  </desc>
   <enumoption>
    <value>128</value>
    <optionname>Gdk::MOD5_MASK</optionname>
    <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
- </enum>
-
-
- <enum id="gdk.enum.mode">
-  <enumname>GdkMode</enumname>
-  <desc>
-   <simpara>
-    
-   </simpara>
-  </desc>
-  <enumoption>
-   <value>0</value>
-   <optionname>Gdk::MODE_DISABLED</optionname>
-   <shortdesc>
-    
+    The eighth modifier key (it depends on the modifier mapping of 
+    the X server which key is interpreted as this modifier).
    </shortdesc>
   </enumoption>
   <enumoption>
-   <value>1</value>
-   <optionname>Gdk::MODE_SCREEN</optionname>
+   <value>256</value>
+   <optionname>Gdk::BUTTON1_MASK</optionname>
    <shortdesc>
-    
+    The first mouse button.
    </shortdesc>
   </enumoption>
   <enumoption>
-   <value>2</value>
-   <optionname>Gdk::MODE_WINDOW</optionname>
+   <value>512</value>
+   <optionname>Gdk::BUTTON2_MASK</optionname>
    <shortdesc>
-    
+    The second mouse button.
    </shortdesc>
   </enumoption>
- </enum>
-
-
- <enum id="gdk.enum.modifier">
-  <enumname>GdkModifier</enumname>
-  <desc>
-   <simpara>
-    
-   </simpara>
-  </desc>
+  <enumoption>
+   <value>1024</value>
+   <optionname>Gdk::BUTTON3_MASK</optionname>
+   <shortdesc>
+    The third mouse button.
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>2048</value>
+   <optionname>Gdk::BUTTON4_MASK</optionname>
+   <shortdesc>
+    The fourth mouse button.
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>4096</value>
+   <optionname>Gdk::BUTTON5_MASK</optionname>
+   <shortdesc>
+    The fifth mouse button.
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>1073741824</value>
+   <optionname>Gdk::RELEASE_MASK</optionname>
+   <shortdesc>
+    Not used in GDK itself. GTK+ uses it to differentiate between 
+    (keyval, modifiers) pairs from key press and release events.
+   </shortdesc>
+  </enumoption>
   <enumoption>
    <value>1073750015</value>
    <optionname>Gdk::MODIFIER_MASK</optionname>
@@ -2324,52 +2167,35 @@
  </enum>
 
 
- <enum id="gdk.enum.motion">
-  <enumname>GdkMotion</enumname>
+ <enum id="gdk.enum.inputmode">
+  <enumname>GdkInputMode</enumname>
   <desc>
    <simpara>
-    
+    An enumeration that describes the mode of an input device.
    </simpara>
   </desc>
   <enumoption>
-   <value>3</value>
-   <optionname>Gdk::MOTION_NOTIFY</optionname>
+   <value>0</value>
+   <optionname>Gdk::MODE_DISABLED</optionname>
    <shortdesc>
-    
+    The device is disabled and will not report any events.
    </shortdesc>
   </enumoption>
- </enum>
-
-
- <enum id="gdk.enum.msb">
-  <enumname>GdkMsb</enumname>
-  <desc>
-   <simpara>
-    
-   </simpara>
-  </desc>
   <enumoption>
    <value>1</value>
-   <optionname>Gdk::MSB_FIRST</optionname>
+   <optionname>Gdk::MODE_SCREEN</optionname>
    <shortdesc>
-    
+    The device is enabled. The device's coordinate space maps to the entire screen.
    </shortdesc>
   </enumoption>
- </enum>
-
-
- <enum id="gdk.enum.no">
-  <enumname>GdkNo</enumname>
-  <desc>
-   <simpara>
-    
-   </simpara>
-  </desc>
   <enumoption>
-   <value>30</value>
-   <optionname>Gdk::NO_EXPOSE</optionname>
+   <value>2</value>
+   <optionname>Gdk::MODE_WINDOW</optionname>
    <shortdesc>
-    
+    The device is enabled. The device's coordinate space is mapped 
+    to a single window. The manner in which this window is chosen 
+    is undefined, but it will typically be the same way in 
+    which the focus window for key events is determined.
    </shortdesc>
   </enumoption>
  </enum>
@@ -2379,42 +2205,46 @@
   <enumname>GdkNotify</enumname>
   <desc>
    <simpara>
-    
+       Specifies the kind of crossing for GdkEventCrossing.
+       See the X11 protocol specification of LeaveNotify for full details of crossing event generation.
    </simpara>
   </desc>
   <enumoption>
    <value>0</value>
    <optionname>Gdk::NOTIFY_ANCESTOR</optionname>
    <shortdesc>
-    
+       The window is entered from an ancestor or left towards an ancestor.
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>1</value>
    <optionname>Gdk::NOTIFY_VIRTUAL</optionname>
    <shortdesc>
-    
+       The pointer moves between an ancestor and an inferior of the window.
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>2</value>
    <optionname>Gdk::NOTIFY_INFERIOR</optionname>
    <shortdesc>
-    
+       The window is entered from an inferior or left towards an inferior.
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>3</value>
    <optionname>Gdk::NOTIFY_NONLINEAR</optionname>
    <shortdesc>
-    
+       The window is entered from or left towards a window which 
+       is neither an ancestor nor an inferior.
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>4</value>
    <optionname>Gdk::NOTIFY_NONLINEAR_VIRTUAL</optionname>
    <shortdesc>
-    
+       The pointer moves between two windows which are not ancestors of 
+       each other and the window is part of the ancestor chain 
+       between one of these windows and their least common ancestor.
    </shortdesc>
   </enumoption>
   <enumoption>
@@ -2425,99 +2255,41 @@
    </shortdesc>
   </enumoption>
  </enum>
+ 
 
-
- <enum id="gdk.enum.opaque">
-  <enumname>GdkOpaque</enumname>
+ <enum id="gdk.enum.overlaptype">
+  <enumname>GdkOverlapType</enumname>
   <desc>
    <simpara>
-    
-   </simpara>
-  </desc>
-  <enumoption>
-   <value>3</value>
-   <optionname>Gdk::OPAQUE_STIPPLED</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
- </enum>
-
-
- <enum id="gdk.enum.or">
-  <enumname>GdkOr</enumname>
-  <desc>
-   <simpara>
-    
-   </simpara>
-  </desc>
-  <enumoption>
-   <value>10</value>
-   <optionname>Gdk::OR_REVERSE</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
-  <enumoption>
-   <value>12</value>
-   <optionname>Gdk::OR_INVERT</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
- </enum>
-
-
- <enum id="gdk.enum.overlap">
-  <enumname>GdkOverlap</enumname>
-  <desc>
-   <simpara>
-    
+    Specifies the possible values returned by <function class="Gdk">region_rect_in</function>.
    </simpara>
   </desc>
   <enumoption>
    <value>0</value>
    <optionname>Gdk::OVERLAP_RECTANGLE_IN</optionname>
    <shortdesc>
-    
+    If the rectangle is inside the region.
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>1</value>
    <optionname>Gdk::OVERLAP_RECTANGLE_OUT</optionname>
    <shortdesc>
-    
+     If the rectangle is outside the region.
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>2</value>
    <optionname>Gdk::OVERLAP_RECTANGLE_PART</optionname>
    <shortdesc>
-    
+    If the rectangle is partly inside the region.
    </shortdesc>
   </enumoption>
  </enum>
 
 
- <enum id="gdk.enum.owner">
-  <enumname>GdkOwner</enumname>
-  <desc>
-   <simpara>
-    
-   </simpara>
-  </desc>
-  <enumoption>
-   <value>34</value>
-   <optionname>Gdk::OWNER_CHANGE</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
- </enum>
-
-
- <enum id="gdk.enum.pixbuf">
-  <enumname>GdkPixbuf</enumname>
+ <enum id="gdk.enum.pixbuferror">
+  <enumname>GdkPixbufError</enumname>
   <desc>
    <simpara>
     
@@ -2568,373 +2340,128 @@
  </enum>
 
 
- <enum id="gdk.enum.pointer">
-  <enumname>GdkPointer</enumname>
+ <enum id="gdk.enum.propmode">
+  <enumname>GdkPropMode</enumname>
   <desc>
    <simpara>
-    
-   </simpara>
-  </desc>
-  <enumoption>
-   <value>4</value>
-   <optionname>Gdk::POINTER_MOTION_MASK</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
-  <enumoption>
-   <value>8</value>
-   <optionname>Gdk::POINTER_MOTION_HINT_MASK</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
- </enum>
-
-
- <enum id="gdk.enum.prop">
-  <enumname>GdkProp</enumname>
-  <desc>
-   <simpara>
-    
+       Describes how existing data is combined with new data when using 
+       <function class="Gdk">property_change</function>.
    </simpara>
   </desc>
   <enumoption>
    <value>0</value>
    <optionname>Gdk::PROP_MODE_REPLACE</optionname>
    <shortdesc>
-    
+       The new data replaces the existing data.
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>1</value>
    <optionname>Gdk::PROP_MODE_PREPEND</optionname>
    <shortdesc>
-    
+       The new data is prepended to the existing data.
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>2</value>
    <optionname>Gdk::PROP_MODE_APPEND</optionname>
    <shortdesc>
-    
+    The new data is appended to the existing data.
    </shortdesc>
   </enumoption>
  </enum>
 
 
- <enum id="gdk.enum.property">
-  <enumname>GdkProperty</enumname>
+ <enum id="gdk.enum.propertystate">
+  <enumname>GdkPropertyState</enumname>
   <desc>
    <simpara>
-    
+       Specifies the type of a property change for a GdkEventProperty.
    </simpara>
   </desc>
   <enumoption>
    <value>0</value>
    <optionname>Gdk::PROPERTY_NEW_VALUE</optionname>
    <shortdesc>
-    
+       The property value was changed.
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>1</value>
    <optionname>Gdk::PROPERTY_DELETE</optionname>
    <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
-  <enumoption>
-   <value>16</value>
-   <optionname>Gdk::PROPERTY_NOTIFY</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
-  <enumoption>
-   <value>65536</value>
-   <optionname>Gdk::PROPERTY_CHANGE_MASK</optionname>
-   <shortdesc>
-    
+       The property was deleted.
    </shortdesc>
   </enumoption>
  </enum>
 
 
- <enum id="gdk.enum.proximity">
-  <enumname>GdkProximity</enumname>
+ <enum id="gdk.enum.rgbdither">
+  <enumname>GdkRgbDither</enumname>
   <desc>
    <simpara>
-    
-   </simpara>
-  </desc>
-  <enumoption>
-   <value>20</value>
-   <optionname>Gdk::PROXIMITY_IN</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
-  <enumoption>
-   <value>21</value>
-   <optionname>Gdk::PROXIMITY_OUT</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
-  <enumoption>
-   <value>262144</value>
-   <optionname>Gdk::PROXIMITY_IN_MASK</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
-  <enumoption>
-   <value>524288</value>
-   <optionname>Gdk::PROXIMITY_OUT_MASK</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
- </enum>
-
-
- <enum id="gdk.enum.question">
-  <enumname>GdkQuestion</enumname>
-  <desc>
-   <simpara>
-    
-   </simpara>
-  </desc>
-  <enumoption>
-   <value>92</value>
-   <optionname>Gdk::QUESTION_ARROW</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
- </enum>
-
-
- <enum id="gdk.enum.release">
-  <enumname>GdkRelease</enumname>
-  <desc>
-   <simpara>
-    
-   </simpara>
-  </desc>
-  <enumoption>
-   <value>1073741824</value>
-   <optionname>Gdk::RELEASE_MASK</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
- </enum>
-
-
- <enum id="gdk.enum.rgb">
-  <enumname>GdkRgb</enumname>
-  <desc>
-   <simpara>
-    
+    Selects whether or not GdkRGB applies dithering to the image on display.
+    Since GdkRGB currently only handles images with 8 bits per component, 
+    dithering on 24 bit per pixel displays is a moot point.
    </simpara>
   </desc>
   <enumoption>
    <value>0</value>
    <optionname>Gdk::RGB_DITHER_NONE</optionname>
    <shortdesc>
-    
+     Never use dithering.
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>1</value>
    <optionname>Gdk::RGB_DITHER_NORMAL</optionname>
    <shortdesc>
-    
+    Use dithering in 8 bits per pixel (and below) only.
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>2</value>
    <optionname>Gdk::RGB_DITHER_MAX</optionname>
    <shortdesc>
-    
+     Use dithering in 16 bits per pixel and below.
    </shortdesc>
   </enumoption>
  </enum>
 
 
- <enum id="gdk.enum.right">
-  <enumname>GdkRight</enumname>
+ <enum id="gdk.enum.scrolldirection">
+  <enumname>GdkScrollDirection</enumname>
   <desc>
    <simpara>
-    
-   </simpara>
-  </desc>
-  <enumoption>
-   <value>94</value>
-   <optionname>Gdk::RIGHT_PTR</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
-  <enumoption>
-   <value>96</value>
-   <optionname>Gdk::RIGHT_SIDE</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
-  <enumoption>
-   <value>98</value>
-   <optionname>Gdk::RIGHT_TEE</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
- </enum>
-
-
- <enum id="gdk.enum.rtl">
-  <enumname>GdkRtl</enumname>
-  <desc>
-   <simpara>
-    
-   </simpara>
-  </desc>
-  <enumoption>
-   <value>102</value>
-   <optionname>Gdk::RTL_LOGO</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
- </enum>
-
-
- <enum id="gdk.enum.sb">
-  <enumname>GdkSb</enumname>
-  <desc>
-   <simpara>
-    
-   </simpara>
-  </desc>
-  <enumoption>
-   <value>106</value>
-   <optionname>Gdk::SB_DOWN_ARROW</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
-  <enumoption>
-   <value>108</value>
-   <optionname>Gdk::SB_H_DOUBLE_ARROW</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
-  <enumoption>
-   <value>110</value>
-   <optionname>Gdk::SB_LEFT_ARROW</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
-  <enumoption>
-   <value>112</value>
-   <optionname>Gdk::SB_RIGHT_ARROW</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
-  <enumoption>
-   <value>114</value>
-   <optionname>Gdk::SB_UP_ARROW</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
-  <enumoption>
-   <value>116</value>
-   <optionname>Gdk::SB_V_DOUBLE_ARROW</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
- </enum>
-
-
- <enum id="gdk.enum.scroll">
-  <enumname>GdkScroll</enumname>
-  <desc>
-   <simpara>
-    
+    Specifies the direction for GdkEventScroll.
    </simpara>
   </desc>
   <enumoption>
    <value>0</value>
    <optionname>Gdk::SCROLL_UP</optionname>
    <shortdesc>
-    
+       The window is scrolled up.
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>1</value>
    <optionname>Gdk::SCROLL_DOWN</optionname>
    <shortdesc>
-    
+       The window is scrolled down.
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>2</value>
    <optionname>Gdk::SCROLL_LEFT</optionname>
    <shortdesc>
-    
+       The window is scrolled to the left.
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>3</value>
    <optionname>Gdk::SCROLL_RIGHT</optionname>
    <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
-  <enumoption>
-   <value>2097152</value>
-   <optionname>Gdk::SCROLL_MASK</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
- </enum>
-
-
- <enum id="gdk.enum.selection">
-  <enumname>GdkSelection</enumname>
-  <desc>
-   <simpara>
-    
-   </simpara>
-  </desc>
-  <enumoption>
-   <value>17</value>
-   <optionname>Gdk::SELECTION_CLEAR</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
-  <enumoption>
-   <value>18</value>
-   <optionname>Gdk::SELECTION_REQUEST</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
-  <enumoption>
-   <value>19</value>
-   <optionname>Gdk::SELECTION_NOTIFY</optionname>
-   <shortdesc>
-    
+       The window is scrolled to the right.
    </shortdesc>
   </enumoption>
  </enum>
@@ -2944,52 +2471,35 @@
   <enumname>GdkSetting</enumname>
   <desc>
    <simpara>
-    
+       Specifies the kind of modification applied to a setting in a GdkEventSetting.
    </simpara>
   </desc>
   <enumoption>
    <value>0</value>
    <optionname>Gdk::SETTING_ACTION_NEW</optionname>
    <shortdesc>
-    
+       A setting was added.
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>1</value>
    <optionname>Gdk::SETTING_ACTION_CHANGED</optionname>
    <shortdesc>
-    
+       A setting was changed.
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>2</value>
    <optionname>Gdk::SETTING_ACTION_DELETED</optionname>
    <shortdesc>
-    
+       A setting was deleted.
    </shortdesc>
   </enumoption>
  </enum>
 
 
- <enum id="gdk.enum.shift">
-  <enumname>GdkShift</enumname>
-  <desc>
-   <simpara>
-    
-   </simpara>
-  </desc>
-  <enumoption>
-   <value>1</value>
-   <optionname>Gdk::SHIFT_MASK</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
- </enum>
-
-
- <enum id="gdk.enum.source">
-  <enumname>GdkSource</enumname>
+ <enum id="gdk.enum.subwindowmode">
+  <enumname>GdkSubwindowMode</enumname>
   <desc>
    <simpara>
     
@@ -2997,435 +2507,589 @@
   </desc>
   <enumoption>
    <value>0</value>
-   <optionname>Gdk::SOURCE_MOUSE</optionname>
+   <optionname>Gdk::CLIP_BY_CHILDREN</optionname>
    <shortdesc>
-    
+    Only draw onto the window itself.
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>1</value>
-   <optionname>Gdk::SOURCE_PEN</optionname>
+   <optionname>Gdk::INCLUDE_INFERIORS</optionname>
    <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
-  <enumoption>
-   <value>2</value>
-   <optionname>Gdk::SOURCE_ERASER</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
-  <enumoption>
-   <value>3</value>
-   <optionname>Gdk::SOURCE_CURSOR</optionname>
-   <shortdesc>
-    
+    Draw onto the window and child windows.
    </shortdesc>
   </enumoption>
  </enum>
 
 
- <enum id="gdk.enum.structure">
-  <enumname>GdkStructure</enumname>
+ <enum id="gdk.enum.visibilitystate">
+  <enumname>GdkVisibilityState</enumname>
   <desc>
    <simpara>
-    
-   </simpara>
-  </desc>
-  <enumoption>
-   <value>32768</value>
-   <optionname>Gdk::STRUCTURE_MASK</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
- </enum>
-
-
- <enum id="gdk.enum.substructure">
-  <enumname>GdkSubstructure</enumname>
-  <desc>
-   <simpara>
-    
-   </simpara>
-  </desc>
-  <enumoption>
-   <value>1048576</value>
-   <optionname>Gdk::SUBSTRUCTURE_MASK</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
- </enum>
-
-
- <enum id="gdk.enum.top">
-  <enumname>GdkTop</enumname>
-  <desc>
-   <simpara>
-    
-   </simpara>
-  </desc>
-  <enumoption>
-   <value>132</value>
-   <optionname>Gdk::TOP_LEFT_ARROW</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
-  <enumoption>
-   <value>134</value>
-   <optionname>Gdk::TOP_LEFT_CORNER</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
-  <enumoption>
-   <value>136</value>
-   <optionname>Gdk::TOP_RIGHT_CORNER</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
-  <enumoption>
-   <value>138</value>
-   <optionname>Gdk::TOP_SIDE</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
-  <enumoption>
-   <value>140</value>
-   <optionname>Gdk::TOP_TEE</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
- </enum>
-
-
- <enum id="gdk.enum.ul">
-  <enumname>GdkUl</enumname>
-  <desc>
-   <simpara>
-    
-   </simpara>
-  </desc>
-  <enumoption>
-   <value>144</value>
-   <optionname>Gdk::UL_ANGLE</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
- </enum>
-
-
- <enum id="gdk.enum.ur">
-  <enumname>GdkUr</enumname>
-  <desc>
-   <simpara>
-    
-   </simpara>
-  </desc>
-  <enumoption>
-   <value>148</value>
-   <optionname>Gdk::UR_ANGLE</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
- </enum>
-
-
- <enum id="gdk.enum.visibility">
-  <enumname>GdkVisibility</enumname>
-  <desc>
-   <simpara>
-    
+       Specifies the visiblity status of a window for a GdkEventVisibility.
    </simpara>
   </desc>
   <enumoption>
    <value>0</value>
    <optionname>Gdk::VISIBILITY_UNOBSCURED</optionname>
    <shortdesc>
-    
+       The window is completely visible.
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>1</value>
    <optionname>Gdk::VISIBILITY_PARTIAL</optionname>
    <shortdesc>
-    
+       The window is partially visible.
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>2</value>
    <optionname>Gdk::VISIBILITY_FULLY_OBSCURED</optionname>
    <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
-  <enumoption>
-   <value>29</value>
-   <optionname>Gdk::VISIBILITY_NOTIFY</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
-  <enumoption>
-   <value>131072</value>
-   <optionname>Gdk::VISIBILITY_NOTIFY_MASK</optionname>
-   <shortdesc>
-    
+       The window is not visible at all.
    </shortdesc>
   </enumoption>
  </enum>
 
 
- <enum id="gdk.enum.visual">
-  <enumname>GdkVisual</enumname>
+ <enum id="gdk.enum.visualtype">
+  <enumname>GdkVisualType</enumname>
   <desc>
    <simpara>
-    
+    A set of values that describe the manner in which the pixel
+    values for a visual are converted into RGB values for display.
    </simpara>
   </desc>
   <enumoption>
    <value>0</value>
    <optionname>Gdk::VISUAL_STATIC_GRAY</optionname>
    <shortdesc>
-    
+    Each pixel value indexes a grayscale value directly.
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>1</value>
    <optionname>Gdk::VISUAL_GRAYSCALE</optionname>
    <shortdesc>
-    
+    Each pixel is an index into a color map that maps pixel values 
+    into grayscale values. The color map can be changed by an application.
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>2</value>
    <optionname>Gdk::VISUAL_STATIC_COLOR</optionname>
    <shortdesc>
-    
+    Each pixel value is an index into a predefined, 
+    unmodifiable color map that maps pixel values into RGB values.
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>3</value>
    <optionname>Gdk::VISUAL_PSEUDO_COLOR</optionname>
    <shortdesc>
-    
+    Each pixel is an index into a color map that maps pixel values 
+    into rgb values. The color map can be changed by an application.
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>4</value>
    <optionname>Gdk::VISUAL_TRUE_COLOR</optionname>
    <shortdesc>
-    
+    Each pixel value directly contains red, green, and blue components. 
+    The <literal>red_mask</literal>, <literal>green_mask</literal>, 
+    and <literal>blue_mask</literal> fields of the visual structure describe 
+    how the components are assembled into a pixel value.
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>5</value>
    <optionname>Gdk::VISUAL_DIRECT_COLOR</optionname>
    <shortdesc>
-    
+    Each pixel value contains red, green, and blue components as for 
+    <literal>Gdk::TRUE_COLOR</literal>, but the components are mapped via a 
+    color table into the final output table instead of being converted directly.
    </shortdesc>
   </enumoption>
  </enum>
 
 
- <enum id="gdk.enum.wa">
-  <enumname>GdkWa</enumname>
+ <enum id="gdk.enum.windowattributestype">
+  <enumname>GdkWindowAttributesType</enumname>
   <desc>
    <simpara>
-    
+    <!-- FIXME: link to constructor, and we don't have the struct -->
+    Used to indicate which fields in the GdkWindowAttr struct should be 
+    honored. For example, if you filled in the "cursor" and "x" 
+    fields of GdkWindowAttr, pass "GDK_WA_X | GDK_WA_CURSOR" to 
+    <function class="GdkWindow">new</function>. Fields in GdkWindowAttr not 
+    covered by a bit in this enum are required; for example, the 
+    width/height, wclass, and window_type fields are required, 
+    they have no corresponding flag in GdkWindowAttributesType.
    </simpara>
   </desc>
   <enumoption>
    <value>2</value>
    <optionname>Gdk::WA_TITLE</optionname>
    <shortdesc>
-    
+    Honor the title field.
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>4</value>
    <optionname>Gdk::WA_X</optionname>
    <shortdesc>
-    
+       Honor the X coordinate field
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>8</value>
    <optionname>Gdk::WA_Y</optionname>
    <shortdesc>
-    
+       Honor the Y coordinate field
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>16</value>
    <optionname>Gdk::WA_CURSOR</optionname>
    <shortdesc>
-    
+       Honor the cursor field
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>32</value>
    <optionname>Gdk::WA_COLORMAP</optionname>
    <shortdesc>
-    
+       Honor the colormap field
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>64</value>
    <optionname>Gdk::WA_VISUAL</optionname>
    <shortdesc>
-    
+       Honor the visual field
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>128</value>
    <optionname>Gdk::WA_WMCLASS</optionname>
    <shortdesc>
-    
+       Honor the wmclass_class and wmclass_name fields
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>256</value>
    <optionname>Gdk::WA_NOREDIR</optionname>
    <shortdesc>
-    
+       Honor the override_redirect field
    </shortdesc>
   </enumoption>
  </enum>
 
 
- <enum id="gdk.enum.winding">
-  <enumname>GdkWinding</enumname>
+ <enum id="gdk.enum.windowclass">
+  <enumname>GdkWindowClass</enumname>
   <desc>
    <simpara>
-    
+    <literal>Gdk::INPUT_OUTPUT</literal> windows are the standard kind 
+    of window you might expect. <literal>Gdk::INPUT_ONLY</literal> windows 
+    are invisible; they are used to trap events, but you can't draw on them.
+   </simpara>
+  </desc>
+  <enumoption>
+   <value>0</value>
+   <optionname>Gdk::INPUT_OUTPUT</optionname>
+   <shortdesc>
+    Window for graphics and events.
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>1</value>
+   <optionname>Gdk::INPUT_ONLY</optionname>
+   <shortdesc>
+    Window for events only.
+   </shortdesc>
+  </enumoption>
+ </enum>
+
+
+ <enum id="gdk.enum.windowhints">
+  <enumname>GdkWindowHints</enumname>
+  <desc>
+   <simpara>
+    Used to indicate which fields of a GdkGeometry struct 
+    should be paid attention to. Also, the presence/absence of 
+    <literal>Gdk::HINT_POS</literal>, <literal>Gdk::HINT_USER_POS</literal>, and 
+    <literal>Gdk::HINT_USER_SIZE</literal> is significant, though they don't 
+    directly refer to GdkGeometry fields. <literal>Gdk::HINT_USER_POS</literal> 
+    will be set automatically by <classname>GtkWindow</classname> if you call 
+    <function class="GtkWindow">move</function>. <literal>Gdk::HINT_USER_POS</literal> 
+    and <literal>Gdk::HINT_USER_SIZE</literal> should be set if the user specified 
+    a size/position using a --geometry command-line argument; 
+    <function class="GtkWindow">parse_geometry</function> automatically sets 
+    these flags.
    </simpara>
   </desc>
   <enumoption>
    <value>1</value>
-   <optionname>Gdk::WINDING_RULE</optionname>
+   <optionname>Gdk::HINT_POS</optionname>
    <shortdesc>
-    
+    Indicates that the program has positioned the window.
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>2</value>
+   <optionname>Gdk::HINT_MIN_SIZE</optionname>
+   <shortdesc>
+    Min size fields are set.
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>4</value>
+   <optionname>Gdk::HINT_MAX_SIZE</optionname>
+   <shortdesc>
+    Max size fields are set.
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>8</value>
+   <optionname>Gdk::HINT_BASE_SIZE</optionname>
+   <shortdesc>
+    Base size fields are set.
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>16</value>
+   <optionname>Gdk::HINT_ASPECT</optionname>
+   <shortdesc>
+    Aspect ratio fields are set.
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>32</value>
+   <optionname>Gdk::HINT_RESIZE_INC</optionname>
+   <shortdesc>
+    Resize increment fields are set.
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>64</value>
+   <optionname>Gdk::HINT_WIN_GRAVITY</optionname>
+   <shortdesc>
+    Window gravity field is set.
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>128</value>
+   <optionname>Gdk::HINT_USER_POS</optionname>
+   <shortdesc>
+    Indicates that the window's position was explicitly set by the user.
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>256</value>
+   <optionname>Gdk::HINT_USER_SIZE</optionname>
+   <shortdesc>
+    Indicates that the window's size was explicitly set by the user.
    </shortdesc>
   </enumoption>
  </enum>
 
 
- <enum id="gdk.enum.window">
-  <enumname>GdkWindow</enumname>
+ <enum id="gdk.enum.wmdecoration">
+  <enumname>GdkWMDecoration</enumname>
   <desc>
    <simpara>
-    
+    These are hints originally defined by the Motif toolkit. The 
+    window manager can use them when determining how to decorate 
+    the window. The hint must be set before mapping the window.
+   </simpara>
+  </desc>
+  <enumoption>
+   <value>1</value>
+   <optionname>Gdk::DECOR_ALL</optionname>
+   <shortdesc>
+    All decorations should be applied.
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>2</value>
+   <optionname>Gdk::DECOR_BORDER</optionname>
+   <shortdesc>
+    A frame should be drawn around the window.
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>4</value>
+   <optionname>Gdk::DECOR_RESIZEH</optionname>
+   <shortdesc>
+    The frame should have resize handles.
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>8</value>
+   <optionname>Gdk::DECOR_TITLE</optionname>
+   <shortdesc>
+    A titlebar should be placed above the window.
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>16</value>
+   <optionname>Gdk::DECOR_MENU</optionname>
+   <shortdesc>
+    A button for opening a menu should be included
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>32</value>
+   <optionname>Gdk::DECOR_MINIMIZE</optionname>
+   <shortdesc>
+    A minimize button should be included.
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>64</value>
+   <optionname>Gdk::DECOR_MAXIMIZE</optionname>
+   <shortdesc>
+    A maximize button should be included.
+   </shortdesc>
+  </enumoption>
+ </enum>
+
+
+ <enum id="gdk.enum.wmfunction">
+  <enumname>GdkWMFunction</enumname>
+  <desc>
+   <simpara>
+    These are hints originally defined by the Motif toolkit. 
+    The window manager can use them when determining the functions 
+    to offer for the window. The hint must be set before mapping the window.
+   </simpara>
+  </desc>
+  <enumoption>
+   <value>1</value>
+   <optionname>Gdk::FUNC_ALL</optionname>
+   <shortdesc>
+    All functions should be offered.
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>2</value>
+   <optionname>Gdk::FUNC_RESIZE</optionname>
+   <shortdesc>
+    The window should be resizable.
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>4</value>
+   <optionname>Gdk::FUNC_MOVE</optionname>
+   <shortdesc>
+    The window should be movable.
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>8</value>
+   <optionname>Gdk::FUNC_MINIMIZE</optionname>
+   <shortdesc>
+    The window should be minimizable.
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>16</value>
+   <optionname>Gdk::FUNC_MAXIMIZE</optionname>
+   <shortdesc>
+    The window should be maximizable.
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>32</value>
+   <optionname>Gdk::FUNC_CLOSE</optionname>
+   <shortdesc>
+    The window should be closable.
+   </shortdesc>
+  </enumoption>
+ </enum>
+
+
+ <enum id="gdk.enum.windowtype">
+  <enumname>GdkWindowType</enumname>
+  <desc>
+   <simpara>
+    Describes the kind of window.
+   </simpara>
+  <enumoption>
+   <value>0</value>
+   <optionname>Gdk::WINDOW_ROOT</optionname>
+   <shortdesc>
+    Root window; this window has no parent, covers the entire 
+    screen, and is created by the window system.
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>1</value>
+   <optionname>Gdk::WINDOW_TOPLEVEL</optionname>
+   <shortdesc>
+    Toplevel window (used to implement <classname>GtkWindow</classname>).
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>2</value>
+   <optionname>Gdk::WINDOW_CHILD</optionname>
+   <shortdesc>
+    Child window (used to implement e.g. <classname>GtkButton</classname>).
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>3</value>
+   <optionname>Gdk::WINDOW_DIALOG</optionname>
+   <shortdesc>
+    Useless/deprecated compatibility type.
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>4</value>
+   <optionname>Gdk::WINDOW_TEMP</optionname>
+   <shortdesc>
+    Override redirect temporary window (used to implement 
+    <classname>GtkMenu</classname>).
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>5</value>
+   <optionname>Gdk::WINDOW_FOREIGN</optionname>
+   <shortdesc>
+    Foreign window (see <function class="Gdk">window_foreign_new</function>).
+   </shortdesc>
+  </enumoption>
+  </desc>
+
+
+ <enum id="gdk.enum.windowedge">
+  <enumname>GdkWindowEdge</enumname>
+  <desc>
+   <simpara>
+       Determines a window edge or corner.
    </simpara>
   </desc>
   <enumoption>
    <value>0</value>
    <optionname>Gdk::WINDOW_EDGE_NORTH_WEST</optionname>
    <shortdesc>
-    
+       the top left corner.
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>1</value>
    <optionname>Gdk::WINDOW_EDGE_NORTH</optionname>
    <shortdesc>
-    
+       the top edge.
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>2</value>
    <optionname>Gdk::WINDOW_EDGE_NORTH_EAST</optionname>
    <shortdesc>
-    
+       the top right corner.
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>3</value>
    <optionname>Gdk::WINDOW_EDGE_WEST</optionname>
    <shortdesc>
-    
+       the left edge.
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>4</value>
    <optionname>Gdk::WINDOW_EDGE_EAST</optionname>
    <shortdesc>
-    
+       the right edge.
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>5</value>
    <optionname>Gdk::WINDOW_EDGE_SOUTH_WEST</optionname>
    <shortdesc>
-    
+       the lower left corner.
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>6</value>
    <optionname>Gdk::WINDOW_EDGE_SOUTH</optionname>
    <shortdesc>
-    
+       the lower edge.
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>7</value>
    <optionname>Gdk::WINDOW_EDGE_SOUTH_EAST</optionname>
    <shortdesc>
-    
+       the lower right corner.
+   </shortdesc>
+  </enumoption>
+ </enum>
+ 
+ 
+
+
+ <enum id="gdk.enum.windowstae">
+  <enumname>GdkWindowState</enumname>
+  <desc>
+   <simpara>
+    Specifies the state of a toplevel window.
+   </simpara>
+  </desc>
+
+  <enumoption>
+   <value>1</value>
+   <optionname>Gdk::STATE_WITHDRAWN</optionname>
+   <shortdesc>
+       The window is not shown.
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>2</value>
+   <optionname>Gdk::STATE_ICONIFIED</optionname>
+   <shortdesc>
+       The window is minimized.
+   </shortdesc>
+  </enumoption>
+  <enumoption>
+   <value>4</value>
+   <optionname>Gdk::STATE_MAXIMIZED</optionname>
+   <shortdesc>
+       The window is maximized.
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>8</value>
    <optionname>Gdk::WINDOW_STATE_STICKY</optionname>
    <shortdesc>
-    
+       The window is sticky.
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>16</value>
    <optionname>Gdk::WINDOW_STATE_FULLSCREEN</optionname>
    <shortdesc>
-    
+       The window is maximized without decorations
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>32</value>
    <optionname>Gdk::WINDOW_STATE_ABOVE</optionname>
    <shortdesc>
-    
+       The window is kept above other windows.
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>64</value>
    <optionname>Gdk::WINDOW_STATE_BELOW</optionname>
    <shortdesc>
-    
+       The window is kept below other windows.
    </shortdesc>
   </enumoption>
  </enum>
 
 
- <enum id="gdk.enum.x">
-  <enumname>GdkX</enumname>
-  <desc>
-   <simpara>
-    
-   </simpara>
-  </desc>
-  <enumoption>
-   <value>0</value>
-   <optionname>Gdk::X_CURSOR</optionname>
-   <shortdesc>
-    
-   </shortdesc>
-  </enumoption>
- </enum>
 </enums>
