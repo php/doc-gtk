@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE book PUBLIC "-//PHP Group//DTD DocBk XML V3.1.7-Based Extension//EN" "../dbxml/phpgtkdoc.dtd">
+<set id="phpgtk.demomanual" lang="en">
+<book id="software">
+ <title>Demo manual book 1: Software</title>
+ <classset id="broclasses">
+  <title>Browsers</title>
+  <partintro>
+   <simpara>A browser is a program you can surf the web with</simpara>
+  </partintro>
+  
+  <classentry id="bro.broopera">
+   <classmeta>
+    <classtitle>BroOpera</classtitle>
+    <classparent>SowProgram</classparent>
+    <shortdesc>
+     The fastest browser on earth
+    </shortdesc>
+    <desc>
+    
+    </desc>
+   </classmeta>
+   
+   <!-- many constructors possible -->
+   <constructors>
+       <constructor id="bro.broopera.constructor">
+     <funcsynopsis>
+      <funcprototype>
+      <funcdef> <function>BroOpera</function></funcdef>
+      <paramdef>void</paramdef>
+      </funcprototype>
+     </funcsynopsis>
+     <shortdesc>
+      Creates a new instance of the program
+     </shortdesc>
+     <desc>
+      <simpara>
+       Creates a new instance of the program.
+      </simpara>
+      <para>
+       If you want to open an URL directly at startup, try the
+       <function class="BroOpera">with_page</function> constructor.
+      </para>
+     </desc>
+    </constructor>
+    <constructor id="bro.broopera.constructor.with_page">
+     <funcsynopsis>
+      <funcprototype>
+      <funcdef> <function>BroOpera::with_page</function></funcdef>
+      <paramdef>string <parameter>url</parameter></paramdef>
+      </funcprototype>
+     </funcsynopsis>
+     <shortdesc>
+      Creates a new instance of the program, opening a page at startup.
+     </shortdesc>
+     <desc>
+      <para>
+       Creates a new instance of the program, opening a page at startup.
+       If you don't want to open an url, try <function>constructor</function>.
+      </para>
+     </desc>
+    </constructor>
+   </constructors>
+
+
+   <!-- many methods -->
+   <methods>
+    <!-- one single function -->
+    <method id="bro.broopera.method.gotoUrl">
+     <funcsynopsis>
+      <funcprototype>
+       <funcdef>void <function>gotoUrl</function></funcdef>
+       <paramdef>string <parameter>url</parameter></paramdef>
+      </funcprototype>
+     </funcsynopsis>
+     <shortdesc>
+      Navigate to a given URL.
+     </shortdesc>
+     <desc>
+      <para>
+       Sets the address bar of the current window to <parameter>URL</parameter>
+       and tries to load this address.
+      </para>
+      <para>
+       If the page has finished loading, the <signalname>pageloaded</signalname>
+       signal is emitted.
+      </para>
+     </desc>
+    </method>
+
+    <!-- another function -->
+    <method id="bro.broopera.method.exit">
+     <funcsynopsis>
+      <funcprototype>
+       <funcdef>void <function>exit</function></funcdef>
+       <paramdef>void</paramdef>
+      </funcprototype>
+     </funcsynopsis>
+     <shortdesc>
+      Closes the program
+     </shortdesc>
+     <desc>
+      <simpara>
+       Closes all open network connections and exits itself.
+      </simpara>
+     </desc>
+    </method>
+   </methods>
+
+
+   <!-- signals emitted by this widget/browser -->
+   <signals>
+
+    <signal id="bro.broopera.signal.pageloaded">
+     <signalname>pageloaded</signalname>
+     <funcsynopsis>
+      <funcprototype>
+       <funcdef>void <cbfunction>callback</cbfunction></funcdef>
+       <paramdef>string <parameter>page</parameter></paramdef>
+      </funcprototype>
+     </funcsynopsis>
+     <shortdesc>
+      Notifies you that a page has finished loading.
+     </shortdesc>
+     <desc>
+      <para>
+       Tells you that a page, loaded with <function>gotoUrl</function>,
+       has finished loading all of its contents.
+      </para>
+      <para>
+       The <parameter>page</parameter> parameter of the callback is the same
+       type as the <propname>currentpage</propname> property.
+      </para>
+     </desc>
+    </signal>
+   </signals>
+
+
+   <!-- class properties -->
+   <properties>
+
+    <property id="bro.broopera.property.version" type="ro">
+     <propname>version</propname>
+     <proptype>string</proptype>
+     <shortdesc>
+      The program version
+     </shortdesc>
+     <desc>
+      <simpara>
+       This property gives you the version of the browser.
+      </simpara>
+     </desc>
+    </property>
+
+    <property id="bro.broopera.property.currentpage" type="rw">
+     <propname>currentpage</propname>
+     <proptype>string</proptype>
+     <shortdesc>
+      The currently active page
+     </shortdesc>
+     <desc>
+      <simpara>
+       The currently active page. Can be set as well
+      </simpara>
+      <para>
+       Backlink to the signal: <signalname>pageloaded</signalname>.
+       Backlink to a function: <function>gotoUrl</function>.
+      </para>
+     </desc>
+    </property>
+   </properties>
+
+  </classentry>
+
+ </classset>
+ 
+</book>
+</set>

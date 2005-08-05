@@ -10,15 +10,13 @@
  <!--
  Checks if a given ID exists in the document
  If yes, it is returned. If no, "no" is returned
- 
- currently unused
  -->
  <xsl:template name="check_if_id_exists">
   <xsl:param name="id"/>
   <xsl:choose>
-   <xsl:when test="name(id('$id'))=''">
+   <xsl:when test="name(id($id))=''">
     <xsl:text>no</xsl:text>
-    <xsl:message>Warning: ID #<xsl:value-of select="$id"/> doesn't exist</xsl:message>
+<!--    <xsl:message>Warning: ID #<xsl:value-of select="$id"/> doesn't exist</xsl:message>-->
    </xsl:when>
    <xsl:otherwise>
     <xsl:value-of select="$id"/>
@@ -48,17 +46,29 @@
     <xsl:value-of select="substring($classname_lowercase,1,5)"/><xsl:text>.</xsl:text><xsl:value-of select="$classname_lowercase"/>
    </xsl:when>
    <xsl:otherwise>
-    <xsl:text>no</xsl:text>
+    <!-- try to guess with 3 letters and check if id exists 
+     So a "preName" goes to "pre.prename"
+    -->
+    <xsl:variable name="full"  ><xsl:value-of select="substring($classname_lowercase,1,3)"/>.<xsl:value-of select="$classname_lowercase"/></xsl:variable>
+    <xsl:variable name="return"><xsl:call-template name="check_if_id_exists"><xsl:with-param name="id"><xsl:value-of select="$full"/></xsl:with-param></xsl:call-template></xsl:variable>
+    <xsl:choose>
+     <xsl:when test="$return='no'">
+      <xsl:text>no</xsl:text>
+     </xsl:when>
+     <xsl:otherwise>
+      <xsl:value-of select="$full"/>
+     </xsl:otherwise>
+    </xsl:choose>
    </xsl:otherwise>
   </xsl:choose>
  </xsl:template><!--xsl:template name="get_id_from_name"-->
 
- 
- 
+
+
  <!--
   returns the id for a given function of a given class
   e.g. gtk.gtkaccelgroup.method.lock for function "lock" and class "GtkAccelGroup"
-  
+
   puts out "no" if none is found
  -->
  <xsl:template name="get_func_id_from_name">
@@ -155,19 +165,19 @@
   </xsl:choose>
  </xsl:template><!--xsl:template name="get_prop_id_from_name"-->
 
- 
- 
+
+
  <!-- 
  returns the id for a given signal name
  -->
  <xsl:template name="get_sig_id_from_name">
   <xsl:param name="signame" />
   <xsl:param name="class" select="no" />
-  
+
   <xsl:variable name="classid"><xsl:call-template name="get_id_from_name">
    <xsl:with-param name="classname"><xsl:value-of select="$class"/></xsl:with-param>
   </xsl:call-template></xsl:variable>
-  
+
   <xsl:choose>
    <xsl:when test="$classid='no'">
     <!-- class couldn't be found... strange -->

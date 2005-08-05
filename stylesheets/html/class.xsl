@@ -138,33 +138,41 @@
  </xsl:template>
 
  <xsl:template match="propname">
- <xsl:variable name="class" select="@class"/>
-  
-  <xsl:call-template name="prop.link">
-   <xsl:with-param name="prop" select="."/>
-   <xsl:with-param name="class" select="$class"/>
-  </xsl:call-template>
+  <xsl:variable name="class" select="@class"/>
+
+  <xsl:choose>
+   <xsl:when test="not($class) or $class=''">
+    <!-- empty class... try to find it -->
+    <xsl:apply-templates select="." mode="synoptic.mode"/>
+   </xsl:when>
+
+   <xsl:otherwise>
+    <!-- class given, all ok -->
+    <xsl:call-template name="prop.link">
+     <xsl:with-param name="prop" select="."/>
+     <xsl:with-param name="class" select="$class"/>
+    </xsl:call-template>
+   </xsl:otherwise>
+  </xsl:choose>
  </xsl:template>
 
  <xsl:template match="propname" mode="synoptic.mode">
   <xsl:variable name="classentry" select="ancestor::classentry[1]"/>
   <xsl:variable name="classtitle" select="$classentry/classmeta/classtitle"/>
-  
+
   <xsl:call-template name="prop.link">
    <xsl:with-param name="prop" select="."/>
    <xsl:with-param name="class" select="$classtitle"/>
   </xsl:call-template>
  </xsl:template>
- 
+
  <xsl:template name="prop.link">
   <xsl:param name="prop" select="."/>
   <xsl:param name="class" select="@class"/>
 
   <xsl:variable name="id">
    <xsl:call-template name="get_prop_id_from_name">
-    <xsl:with-param name="propname">
-     <xsl:value-of select="$prop"/>
-    </xsl:with-param>
+    <xsl:with-param name="propname" select="$prop"/>
     <xsl:with-param name="class" select="$class"/>
    </xsl:call-template>
   </xsl:variable>
