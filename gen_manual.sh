@@ -5,7 +5,7 @@ cd "`dirname "$0"`"
 
 if [ $# -lt 2 ]; then
     echo "Usage: ./gen_manual.sh <language> <type>"
-    echo "type: html phpweb test"
+    echo "type: html phpweb test demo"
     exit 1
 fi
 
@@ -43,13 +43,16 @@ if [ $type == "test" ]; then
 	$php -q liveGen.php $3
 fi
 
+build_dir=build/$language/$type
+manualpath=manual/$language/$manualfile
 
 if [ $type == "html" ]; then
-    build_dir=build/$language/html
     xslfile=$stylesheetdir/html/chunk.xsl
 elif [ $type == "phpweb" ]; then
-    build_dir=build/$language/phpweb
     xslfile=$stylesheetdir/html/phpweb.xsl
+elif [ $type == "demo" ]; then
+    xslfile=$stylesheetdir/html/chunk.xsl
+    manualpath=manual/demo_manual.xml
 else 
     echo "There is no type $type."
     exit 3
@@ -70,7 +73,7 @@ else
     rm -R $build_dir/*
 fi
 
-xsltproc --param base.dir "'./$build_dir/'" --xinclude $xslfile manual/$language/$manualfile
+xsltproc --param base.dir "'./$build_dir/'" --xinclude $xslfile $manualpath
 
 #copy images
 # I want to copy the linked images only. But how do I accomplish this
@@ -79,6 +82,6 @@ xsltproc --param base.dir "'./$build_dir/'" --xinclude $xslfile manual/$language
 # this one doesn't keep the directories
 cp -R images build/en/$type/
 
-if [ $type == "html" ] && [ $test == "0" ]; then
+if [ $type == "html" ] && [ $test == "0" ] && [ ! $type == "demo" ]; then
     $php -q distribute_html.php $language
 fi
