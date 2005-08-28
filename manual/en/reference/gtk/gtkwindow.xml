@@ -26,11 +26,6 @@
      <programlisting role="php">
 <![CDATA[
 <?php
-// Make sure the PHP-GTK 2 extension is loaded.
-if (!extension_loaded('php-gtk')) {
-        dl( 'php_gtk2.' . PHP_SHLIB_SUFFIX);
-}
-
 // Create a new window.
 $window = new GtkWindow();
 
@@ -40,7 +35,10 @@ $window->add(new GtkButton('2'));
 
 /*
 Spits out:
-Gtk-WARNING **: Attempting to add a widget with type GtkButton to a GtkWindow, but as a GtkBin subclass a GtkWindow can only contain one widget at a time; it already contains a widget of type GtkButton
+Gtk-WARNING **: Attempting to add a widget with type GtkButton to 
+a GtkWindow, but as a GtkBin subclass a GtkWindow can only 
+contain one widget at a time; it already contains a widget 
+of type GtkButton
 */
 ?>
 ]]>
@@ -239,10 +237,17 @@ Gtk-WARNING **: Attempting to add a widget with type GtkButton to a GtkWindow, b
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Deiconifies (unminimizes) the window.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Asks the window manager to deiconify (to un-minimize) the window.
+    </simpara>
+    <note>
+     It may be that there are some settings preventing this, so don't depend
+     on that it is really unminimized after calling this function.
+     Normally it is, but don't write code that crashes if not.
+    </note>
    </desc>
   </method>
 
@@ -257,7 +262,17 @@ Gtk-WARNING **: Attempting to add a widget with type GtkButton to a GtkWindow, b
     Sets the window to fullscreen mode.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Asks the window manager to set the window to fullscreen, taking
+     all the available space. Note that other windows on the screen
+     may still be above as long as the window is not activated.
+     To be sure the window is really fullscreen, activate it.
+    </simpara>
+    <note>
+     It may be that there are some settings preventing this, so don't depend
+     on that it is really fullscreen after calling this function.
+     Normally it is, but don't write code that crashes if not.
+    </note>
    </desc>
   </method>
 
@@ -288,15 +303,17 @@ Gtk-WARNING **: Attempting to add a widget with type GtkButton to a GtkWindow, b
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    If the window has a frame border.
    </shortdesc>
    <desc>
+    <simpara>
+     Tells you if the window has a border or is borderless.
+    </simpara>
     <para>
      See also: 
      <function class="GtkWindow">set_decorated</function>, 
      <propname class="GtkWindow">decorated</propname>
     </para>
-
    </desc>
   </method>
 
@@ -522,15 +539,21 @@ Gtk-WARNING **: Attempting to add a widget with type GtkButton to a GtkWindow, b
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    If the window is modal or not.
    </shortdesc>
    <desc>
+    <simpara>
+     Tells you if the window is modal.
+    </simpara>
+    <simpara>
+     Modal windows prevent user interaction with other windows of the
+     same application.
+    </simpara>
     <para>
      See also: 
      <function class="GtkWindow">set_modal</function>, 
      <propname class="GtkWindow">modal</propname>
     </para>
-
    </desc>
   </method>
 
@@ -563,14 +586,16 @@ Gtk-WARNING **: Attempting to add a widget with type GtkButton to a GtkWindow, b
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    If the window can be resized by the user.
    </shortdesc>
    <desc>
+    <simpara>
+     Tells you if the user may resize the window.
+    </simpara>
     <para>
      See also: 
      <function class="GtkWindow">set_resizable</function>
     </para>
-
    </desc>
   </method>
 
@@ -635,14 +660,16 @@ Gtk-WARNING **: Attempting to add a widget with type GtkButton to a GtkWindow, b
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    If a pager shall display the window.
    </shortdesc>
    <desc>
+    <simpara>
+     Tells you if a pager shall display the window.
+    </simpara>
     <para>
-     See also: 
+     See also:
      <function class="GtkWindow">set_skip_pager_hint</function>
     </para>
-
    </desc>
   </method>
 
@@ -654,14 +681,18 @@ Gtk-WARNING **: Attempting to add a widget with type GtkButton to a GtkWindow, b
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    If the window shall be hidden from the task bar.
    </shortdesc>
    <desc>
+    <simpara>
+     Tells you if the window shall be hidden fron the task bar.
+     Even if it's not shown in the task bar, it still may be shown
+     in the window list when doing an <literal>ALT+TAB</literal>.
+    </simpara>
     <para>
      See also: 
      <function class="GtkWindow">set_skip_taskbar_hint</function>
     </para>
-
    </desc>
   </method>
 
@@ -747,10 +778,21 @@ Gtk-WARNING **: Attempting to add a widget with type GtkButton to a GtkWindow, b
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Minimizes the window.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Minimizes (iconifies) the window.
+    </simpara>
+    <note>
+     It may be that there are some settings preventing this, so don't depend
+     on that it is really minimized after calling this function.
+     Normally it is, but don't write code that crashes if not.
+    </note>
+    <para>
+     See:
+     <function class="GtkWindow">deiconify</function>
+    </para>
    </desc>
   </method>
 
@@ -777,10 +819,22 @@ Gtk-WARNING **: Attempting to add a widget with type GtkButton to a GtkWindow, b
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Maximizes the window.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Tells the window manager to maximize the window. If it's maximized,
+     it takes all the available space which is not occupied by extra windows
+     like e.g. the task bar.
+    </simpara>
+    <note>
+     It may be that there are some settings preventing this, so don't depend
+     on that it is really fullscreen after calling this function.
+     Normally it is, but don't write code that crashes if not.
+    </note>
+    <para>
+     See: <function class="GtkWindow">unmaximize</function>
+    </para>
    </desc>
   </method>
 
@@ -838,10 +892,20 @@ Gtk-WARNING **: Attempting to add a widget with type GtkButton to a GtkWindow, b
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Shows the window to the user.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Activates and shows the window to the user. If it was hidden, it's shown. If 
+     the window has been overlapped by other windows, it will be raised
+     to the top. If it was minimized, it will be unminimized.
+    </simpara>
+    <simpara>
+     The method is useful to show a window which already exists, e.g. when
+     there is a "Show preferences" menu item in your application, but the
+     preferences dialog is already open, but hidden somewhere. In that case
+     you should use this function.
+    </simpara>
    </desc>
   </method>
 
@@ -999,7 +1063,6 @@ Gtk-WARNING **: Attempting to add a widget with type GtkButton to a GtkWindow, b
      <function class="GtkWindow">get_decorated</function>, 
      <propname class="GtkWindow">decorated</propname>
     </para>
-
    </desc>
   </method>
 
@@ -1278,6 +1341,14 @@ Gtk-WARNING **: Attempting to add a widget with type GtkButton to a GtkWindow, b
    </shortdesc>
    <desc>
     <simpara>
+     Tells the window manager to keep the window above all other windows.
+    </simpara>
+    <note>
+     It may be that there are some settings preventing this, so don't depend
+     on that it is really above every other window after calling this function.
+     Normally it is, but don't write code that crashes if not.
+    </note>
+    <simpara>
      See also: 
      <function class="GtkWindow">set_keep_below</function>
     </simpara>
@@ -1295,6 +1366,14 @@ Gtk-WARNING **: Attempting to add a widget with type GtkButton to a GtkWindow, b
     Forces the window to remain beneath other windows on the screen.
    </shortdesc>
    <desc>
+    <simpara>
+     Tells the window manager to keep the window below all other windows.
+    </simpara>
+    <note>
+     It may be that there are some settings preventing this, so don't depend
+     on that it is really below all other windows after calling this function.
+     Normally it is, but don't write code that crashes if not.
+    </note>
     <simpara>
      See also: 
      <function class="GtkWindow">set_keep_above</function>
@@ -1330,15 +1409,22 @@ Gtk-WARNING **: Attempting to add a widget with type GtkButton to a GtkWindow, b
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the window modal.
    </shortdesc>
    <desc>
+    <simpara>
+     Sets the window modal, preventing user interaction with any other
+     window of the same application.
+    </simpara>
+    <simpara>
+     A window should be set modal if it requires user interaction before
+     the rest of the application can continue, e.g. a message box.
+    </simpara>
     <para>
      See also: 
      <function class="GtkWindow">get_modal</function>, 
      <propname class="GtkWindow">modal</propname>
     </para>
-
    </desc>
   </method>
 
@@ -1387,14 +1473,16 @@ Gtk-WARNING **: Attempting to add a widget with type GtkButton to a GtkWindow, b
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets if the window may be resized by the user.
    </shortdesc>
    <desc>
+    <simpara>
+     Sets if the user may resize window or not.
+    </simpara>
     <para>
      See also: 
      <function class="GtkWindow">get_resizable</function>
     </para>
-
    </desc>
   </method>
 
@@ -1444,14 +1532,27 @@ Gtk-WARNING **: Attempting to add a widget with type GtkButton to a GtkWindow, b
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Hide the window from the pager or not.
    </shortdesc>
    <desc>
+    <simpara>
+     If the window shall <emphasis>not</emphasis> be shown in the pager.
+    </simpara>
+    <note>
+     <simpara>
+      A pager is a program showing the contents (windows) of each virtual
+      desktop, in small scale, to help the user get an overview of all
+      the desktops and its open applications.
+     </simpara>
+     <simpara>
+      Users of Microsoft Windows rarely have multiple desktops and probably
+      don't care about this setting.
+     </simpara>
+    </note>
     <para>
      See also: 
      <function class="GtkWindow">get_skip_pager_hint</function>
     </para>
-
    </desc>
   </method>
 
@@ -1463,14 +1564,19 @@ Gtk-WARNING **: Attempting to add a widget with type GtkButton to a GtkWindow, b
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Set that the window shall be hidden from the task bar.
    </shortdesc>
    <desc>
+    <simpara>
+     If the window shall <emphasis>not</emphasis> be shown in the task
+     bar. Note that even though the window is not shown in the task bar,
+     it still may be visible in the window list when <literal>ALT+TAB</literal>ing
+     through the windows.
+    </simpara>
     <para>
      See also: 
      <function class="GtkWindow">get_skip_taskbar_hint</function>
     </para>
-
    </desc>
   </method>
 
@@ -1482,15 +1588,17 @@ Gtk-WARNING **: Attempting to add a widget with type GtkButton to a GtkWindow, b
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the window title
    </shortdesc>
    <desc>
+    <simpara>
+     Sets the window title.
+    </simpara>
     <para>
      See also: 
      <function class="GtkWindow">get_title</function>, 
      <propname class="GtkWindow">title</propname>
     </para>
-
    </desc>
   </method>
 
@@ -1557,10 +1665,15 @@ Gtk-WARNING **: Attempting to add a widget with type GtkButton to a GtkWindow, b
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Show the window on all desktops.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Shows the window on all (virtual) desktops.
+    </simpara>
+    <para>
+     See: <function class="GtkWindow">unstick</function>
+    </para>
    </desc>
   </method>
 
@@ -1590,7 +1703,13 @@ Gtk-WARNING **: Attempting to add a widget with type GtkButton to a GtkWindow, b
     Returns the window to its original size and location.
    </shortdesc>
    <desc>
-
+    <simpara>
+     If the window has been set to be fullscreen, it's returned
+     to its original size and location.
+    </simpara>
+    <para>
+     See: <function class="GtkWindow">fullscreen</function>
+    </para>
    </desc>
   </method>
 
@@ -1602,10 +1721,16 @@ Gtk-WARNING **: Attempting to add a widget with type GtkButton to a GtkWindow, b
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the window to its original size and location.
    </shortdesc>
    <desc>
-
+    <simpara>
+     If the window has been set to be maximized, it's returned
+     to its original size and location.
+    </simpara>
+    <para>
+     See: <function class="GtkWindow">maximize</function>
+    </para>
    </desc>
   </method>
 
@@ -1617,10 +1742,15 @@ Gtk-WARNING **: Attempting to add a widget with type GtkButton to a GtkWindow, b
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Don't show the window on all desktops.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Don't show the window on all (virtual) desktops.
+    </simpara>
+    <para>
+     See: <function class="GtkWindow">stick</function>
+    </para>
    </desc>
   </method>
 
