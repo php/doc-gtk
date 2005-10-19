@@ -2,11 +2,182 @@
 <chapter id="tutorials.packing">
  <title>Packing widgets</title>
 
- <sect1>
-  <title>About this tutorial</title>
+ <sect1 id="tutorials.packing.about">
+  <title>Introduction</title>
   <simpara>
-   <!-- TODO -->
+   This tutorial shows the various methods to arrange widgets in a window,
+   and tells you how to choose the right one.
+  </simpara>
+  <para>
+   If you previously did your GUIs in Visual Basic or Visual C++, you will
+   wonder why you'd need a tutorial on widget placement. Until now it was like
+   this: Size the window, select a widget and position it at a 
+   <literal>(x,y)</literal> position and make it this wide and that high -
+   nothing more, totally easy. You have fixed positions and sizes, but they
+   stay on their place even when the window size is changed - they don't
+   adjust themselves because they don't know how.
+  </para>
+  <simpara>
+   In Gtk, things are dynamic: Widgets adjust their sizes when the window size
+   changes, except you explicitely tell them not to do so. Setting things up
+   is a bit more complicated than just fixing sizes and positions, but you
+   are rewarded with a flexible window that can be sized to nearly any size,
+   while still looking good.
   </simpara>
  </sect1>
-</chapter> 
- 
+
+
+ <sect1 id="tutorials.packing.basics">
+  <title>Packing basics</title>
+
+  <simpara>
+   There are different types of widgets in Gtk, depending on how
+   many children they can contain:
+  </simpara>
+
+  <itemizedlist>
+   <listitem>no children - normal widgets</listitem>
+   <listitem>exactly one child widget: bin</listitem>
+   <listitem>two or more child widgets: container</listitem>
+  </itemizedlist>
+
+  <para>
+   The base widget you will begin your programs with (in most
+   cases) is the <classname>GtkWindow</classname>, a bin. That
+   means it can have only one child. So what now - one widget is a
+   bit sparse for an application. The solution are the containers,
+   of which you choose one and add that to the window. To that
+   container, you can either add some widgets or even more containers.
+   That gives you the ability to nest containers and get exactly that
+   layout you have in your mind.
+  </para>
+
+  <para>
+   The different containers like <classname>GtkHBox</classname>, 
+   <classname>GtkVBox</classname>, <classname>GtkTable</classname> and
+   <classname>GtkFixed</classname> behave different in the way they layout
+   and arrange widgets. Each one suits a certain purpose and need to be
+   combined to achieve advanced layouts.
+  </para>
+ </sect1>
+
+
+ <sect1 id="tutorials.packing.box">
+  <title>Boxes - GtkHBox and GtkVBox</title>
+
+  <para>
+   The most simple, but most often used containers are the 
+   <classname>GtkBox</classname>es: <classname>GtkHBox</classname> and 
+   <classname>GtkVBox</classname>. They allow to add widgets in a single
+   row, not more, and not less. <classname>GtkHBox</classname> arranges
+   them horizontally, while <classname>GtkVBox</classname> lines them up
+   vertically.
+  </para>
+
+  <para>
+   You add the widgets via <function class="GtkBox">pack_start</function>
+   or <function class="GtkBox">pack_end</function>.
+   <function class="GtkBox">pack_start</function> adds them one after the
+   other from the beginning (left to right resp. top to bottom), while
+   <function class="GtkBox">pack_end</function> adds them from the end on
+   (right to left, or bottom to top).
+  </para>
+
+  <para>
+   You can influence the layout by adjusting the three optional parameters
+   of <function class="GtkBox">pack_start</function> and
+   <function class="GtkBox">pack_end</function> - see their documentation.
+  </para>
+
+  <example>
+   <title>Simple dynamic layout with <classname>GtkVBox</classname></title>
+   <programlisting role="php">
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+     href="&directory.examples;/tutorials/packing/boxes.phpw" parse="text">
+     <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+    </xi:include>
+   </programlisting>
+  </example>
+
+  <para>
+   Start the demo and resize the window: The multiline text widget adjusts its
+   size to fill all the space in the window which is not needed for the label
+   or the button. Change the third parameter from <literal>true</literal> to 
+   <literal>false</literal> at the place where <varname>scrwnd</varname> is
+   packed - what happens?
+  </para>
+
+  <para>
+   A special version of <classname>GtkBox</classname>es are
+   <classname>GtkHButtonBox</classname> and <classname>GtkVButtonBox</classname>:
+   They behave same as their box counterparts, but can contain 
+   <classname>GtkButton</classname>s only. To compensate this limitation,
+   they have some layout functions often needed for rows of buttons.
+  </para>
+ </sect1>
+
+
+ <sect1 id="tutorials.packing.table">
+  <title>Tabular layout with GtkTable</title>
+
+  <para>
+   While it's very easy to create dynamic layouts with 
+   <classname>GtkBox</classname>es, it's very hard to layout widgets
+   so that e.g. the labels on the left of the interaction widgets have the 
+   same width, regardless of their content. If you need tabular layouts,
+   <classname>GtkTable</classname> is the right selection. Widgets can
+   span several columns and rows, and can have different padding margins.
+  </para>
+
+  <example>
+   <title>Tabular layout</title>
+   <programlisting role="php">
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+     href="&directory.examples;/tutorials/packing/table.phpw" parse="text">
+     <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+    </xi:include>
+   </programlisting>
+  </example>
+
+  <para>
+   When running the example, you see that the <literal>Id</literal> label
+   is centered horizontally. By default, widgets are filled in both 
+   directions and take all the available space, which is ok for most
+   widgets. For <classname>GtkLabel</classname> however, it's not optimal:
+   Labels should be aligned at one side. As the 
+   <function classname="GtkLabel">set_justify</function> function justifies
+   the text for multiline labels only, we need to use a
+   <classname>GtkAlignment</classname> to align the label properly - label
+   <literal>Name</literal> shows the result.
+  </para>
+ </sect1>
+
+
+ <sect1 id="tutorials.packing.fixed">
+  <title>Fixed layout</title>
+
+  <para>
+   This container has no own layouting logic; you have to tell
+   where the widget shall be placed. The size of the widgets is
+   determined automatically, but you can override that by requesting
+   a certain size via <function class="GtkWidget">set_size_request</function>.
+  </para>
+
+  <simpara>
+   While it's very simple to place and layout the widgets, they are fixed:
+   Resizing the window doesn't move or resize the widgets. Use it only when
+   it's absolute necessary; dynamic containers are often the better choice.
+  </simpara>
+
+  <example>
+   <title>Fixed layout with <classname>GtkFixed</classname></title>
+   <programlisting role="php">
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+     href="&directory.examples;/tutorials/packing/fixed.phpw" parse="text">
+     <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+    </xi:include>
+   </programlisting>
+  </example>
+ </sect1>
+
+</chapter>

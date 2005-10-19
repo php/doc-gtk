@@ -1,0 +1,26 @@
+<?php
+$w = new GtkWindow();
+$w->set_title('GtkTable test');
+$w->connect_simple('destroy', array('gtk', 'main_quit'));
+
+$lbl1   = new GtkLabel('Email address:');
+$lbl2   = new GtkLabel('Id:');
+$lbl3   = new GtkLabel('Name:');
+$align3 = new GtkAlignment(0.0, 0.5, 0, 0);
+$align3->add($lbl3);
+$txt1   = new GtkEntry();
+$txt2   = new GtkEntry();
+$txt3   = new GtkEntry();
+
+$table  = new GtkTable(2, 2);
+$table->attach($lbl1  , 0, 1, 0, 1, 0);
+$table->attach($lbl2  , 0, 1, 1, 2, 0);
+$table->attach($align3, 0, 1, 2, 3, Gtk::FILL);
+$table->attach($txt1  , 1, 2, 0, 1);
+$table->attach($txt2  , 1, 2, 1, 2);
+$table->attach($txt3  , 1, 2, 2, 3);
+
+$w->add($table);
+$w->show_all();
+Gtk::main();
+?>
