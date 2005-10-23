@@ -13,7 +13,7 @@
      <div dir="rtl">
      <xsl:apply-templates select="./title"/>
      <xsl:apply-templates select="./partintro"/>
-    <xsl:apply-templates select="./classtree" />
+     <xsl:apply-templates select="./classtree" />
      <xsl:call-template name="component.toc"/>
      </div>
      <xsl:apply-templates select="./classentry|./refentry"/>
@@ -217,8 +217,10 @@
   <xsl:param name="node" select="." />
   <xsl:param name="append.bracket" select="0"/>
   <xsl:param name="with-link" select="0"/>
+
   <xsl:variable name="class">
     <xsl:choose>
+      <xsl:when test="count(ancestor::constructor)!='0'"></xsl:when>
       <xsl:when test="@class!=''">
         <xsl:value-of select="@class"/>
       </xsl:when>
