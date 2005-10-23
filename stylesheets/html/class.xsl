@@ -210,7 +210,6 @@
    <xsl:with-param name="node" select="."/>
    <xsl:with-param name="append.bracket" select="1"/>
    <xsl:with-param name="with-link" select="1"/>
-   <xsl:with-param name="class" select="ancestor-or-self::classentry/classmeta/classtitle"/>
   </xsl:call-template>
  </xsl:template>
 
@@ -218,7 +217,17 @@
   <xsl:param name="node" select="." />
   <xsl:param name="append.bracket" select="0"/>
   <xsl:param name="with-link" select="0"/>
-  <xsl:param name="class" select="@class"/>
+  <xsl:variable name="class">
+    <xsl:choose>
+      <xsl:when test="@class!=''">
+        <xsl:value-of select="@class"/>
+      </xsl:when>
+      <xsl:otherwise>
+        <!-- no "class" attribute for the given tag -->
+        <xsl:value-of select="ancestor-or-self::classentry/classmeta/classtitle"/>
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:variable>
 
   <xsl:variable name="id">
    <xsl:call-template name="get_func_id_from_name">
