@@ -4,7 +4,7 @@
     all the script files required for doc generation
     - distribute_html.php moves the generated html files in several subdirectories
        that we don't have 1800+ files in one directory
-    - gen_chapterents.php generates a file called manul/<lang>/chapters.ent 
+    - gen_chapterents.php generates a file called manual/<lang>/chapters.ent 
       which includes all the .xml files in one big one
     - gen_docs_from_source.sh uses the php-gtk sources to generate the
       reference section of the manual with all the functions, properties 
@@ -40,16 +40,13 @@ A: The problem is that the called php tries to load the php-gtk
 == Todo ==
 - docgen: generate signals (with phpgtk2 extension installed)
 - check if docmerger works
-
-- testmanual
-
 - automatically link returned classes in functions
 - automatically link classes in function parameters
 - allow interfaces
-- word index page
-
 
 == Done ==
++ index pages for classes, methods, properties and signals
++ <function> tags don't need class=".." attribute when used inside class (link to same class)
 - return value of functions is void sometimes | that's ok IMO
 - static constructors are linked to themselves | that's because the new "get_func_id_from_name" is too good in guessing the ids
 - static constructors have the same title as normal constructor (<class> Constructor) | how should they be named? they *are* constructors

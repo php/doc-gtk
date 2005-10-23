@@ -3,12 +3,18 @@
 <set id="phpgtk.demomanual" lang="en">
 <book id="software">
  <title>Demo manual book 1: Software</title>
+
+ <classtree id="classtree">
+  <title>Classtree</title>
+  <topclass>SowProgram</topclass>
+ </classtree>
+
  <classset id="broclasses">
   <title>Browsers</title>
   <partintro>
    <simpara>A browser is a program you can surf the web with</simpara>
   </partintro>
-  
+
   <classentry id="bro.broopera">
    <classmeta>
     <classtitle>BroOpera</classtitle>
@@ -17,13 +23,13 @@
      The fastest browser on earth
     </shortdesc>
     <desc>
-    
+
     </desc>
    </classmeta>
-   
+
    <!-- many constructors possible -->
    <constructors>
-       <constructor id="bro.broopera.constructor">
+    <constructor id="bro.broopera.constructor">
      <funcsynopsis>
       <funcprototype>
       <funcdef> <function>BroOpera</function></funcdef>
@@ -39,7 +45,7 @@
       </simpara>
       <para>
        If you want to open an URL directly at startup, try the
-       <function class="BroOpera">with_page</function> constructor.
+       <function>BroOpera::with_page</function> constructor.
       </para>
      </desc>
     </constructor>
@@ -56,7 +62,7 @@
      <desc>
       <para>
        Creates a new instance of the program, opening a page at startup.
-       If you don't want to open an url, try <function>constructor</function>.
+       If you don't want to open an url, try <function>BroOpera</function>.
       </para>
      </desc>
     </constructor>
@@ -164,7 +170,9 @@
       </simpara>
       <para>
        Backlink to the signal: <signalname>pageloaded</signalname>.
+       Backlink to a function with class: <function class="BroOpera">gotoUrl</function>.
        Backlink to a function: <function>gotoUrl</function>.
+       Other class's function: <function class="Bubu">gotoUrl</function>.
       </para>
      </desc>
     </property>
@@ -173,6 +181,30 @@
   </classentry>
 
  </classset>
- 
+
+</book>
+
+<book id="indices">
+ <title>Indices</title>
+ <index id="index.classes">
+     <title>Class index</title>
+     <type>classes</type>
+ </index>
+
+ <index id="index.methods">
+     <title>Method index (function index)</title>
+     <type>methods</type>
+ </index>
+
+ <index id="index.properties">
+     <title>Property index</title>
+     <type>properties</type>
+ </index>
+
+ <index id="index.signals">
+     <title>Signal index</title>
+     <type>signals</type>
+ </index>
+
 </book>
 </set>
