@@ -3,11 +3,30 @@
  <classmeta>
   <classtitle>GtkAboutDialog</classtitle>
   <classparent>GtkDialog</classparent>
+  <classimage fileref="&directory.images;/reference/gtk/gtkaboutdialog.png"/>
   <shortdesc>
-
+   Display information about an application
   </shortdesc>
   <desc>
-
+   <para>
+    The GtkAboutDialog offers a simple way to display information 
+    about a program like its logo, name, copyright, website and 
+    license. It is also possible to give credits to the authors, 
+    documenters, translators and artists who have worked on the 
+    program. An about dialog is typically opened when the user 
+    selects the About option from the Help menu. All parts of 
+    the dialog are optional.
+   </para>
+<!--   <para>
+    About dialog often contain links and email addresses. GtkAboutDialog 
+    supports this by offering global hooks, which are called when the 
+    user clicks on a link or email address, see gtk_about_dialog_set_email_hook() 
+    and gtk_about_dialog_set_url_hook(). Email addresses in the authors, 
+    documenters and artists properties are recognized by looking for 
+    <user@host>, URLs are recognized by looking for http://url, 
+    with url extending to the next space, tab or line break.
+   </para>
+-->
   </desc>
  </classmeta>
 
@@ -21,9 +40,25 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Constructs a new about dialog
    </shortdesc>
    <desc>
+    <para>
+     Creates a new instance of a <classname>GtkAbouDialog</classname>.
+     Remember that all of functions of its parent class 
+     <classname>GtkDialog</classname> can be used - for example
+     <function class="GtkDialog">run</function>.
+    </para>
+
+    <example>
+     <title>Simple GtkAboutDialog</title>
+     <programlisting role="php">
+      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+                  href="&directory.examples;/reference/gtk/gtkaboutdialog/constructor.phpw" parse="text">
+       <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+      </xi:include>
+     </programlisting>
+    </example>
 
    </desc>
   </constructor>
@@ -412,13 +447,34 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_logo</function></funcdef>
-     <paramdef>void</paramdef>
+     <paramdef><classname>GdkPixbuf</classname> <parameter>logo</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Set the program logo
    </shortdesc>
    <desc>
+    <para>
+     Sets the program logo. The <parameter>logo</parameter> has to be of
+     type <classname>PixBuf</classname>, which can easily be constructed
+     via the <function class="GtkWidget">render_icon</function> method
+     of <classname>GtkWidget</classname>.
+    </para>
+    <para>
+      If you set it explicitly to <literal>NULL</literal>, the dialogs
+      default icon is used.
+    </para>
+
+    <example>
+     <title>Dialog icon is used when logo is <literal>NULL</literal></title>
+     <programlisting role="php">
+      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+                  href="&directory.examples;/reference/gtk/gtkaboutdialog/set_logo.phpw" parse="text">
+       <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+      </xi:include>
+     </programlisting>
+    </example>
+
     <para>
      See also: 
      <function class="GtkAboutDialog">get_logo</function>
@@ -454,14 +510,16 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Set the program name.
    </shortdesc>
    <desc>
+    <simpara>
+     Sets the program name (how your program is called).
+    </simpara>
     <para>
      See also: 
      <function class="GtkAboutDialog">get_name</function>
     </para>
-
    </desc>
   </method>
 
@@ -507,9 +565,16 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Set the version of your program
    </shortdesc>
    <desc>
+    <simpara>
+     Set the version of your program. It is wise not to set it
+     to a string value, but use a central constant or
+     a variable from within your program class. If done so,
+     you can change the program version at one central place and 
+     don't forget one.
+    </simpara>
     <para>
      See also: 
      <function class="GtkAboutDialog">get_version</function>
@@ -526,9 +591,12 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Set the program's website.
    </shortdesc>
    <desc>
+    <simpara>
+     Set the program's website.
+    </simpara>
     <para>
      See also: 
      <function class="GtkAboutDialog">get_website</function>
