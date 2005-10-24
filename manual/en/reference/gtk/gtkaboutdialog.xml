@@ -44,7 +44,7 @@
    </shortdesc>
    <desc>
     <para>
-     Creates a new instance of a <classname>GtkAbouDialog</classname>.
+     Creates a new instance of a <classname>GtkAboutDialog</classname>.
      Remember that all of functions of its parent class 
      <classname>GtkDialog</classname> can be used - for example
      <function class="GtkDialog">run</function>.
@@ -113,9 +113,12 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the comments string.
    </shortdesc>
    <desc>
+    <simpara>
+     Returns the comments string.
+    </simpara>
     <para>
      See also: 
      <function class="GtkAboutDialog">set_comments</function>
@@ -132,9 +135,12 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the copyright string.
    </shortdesc>
    <desc>
+    <simpara>
+     Returns the copyright string.
+    </simpara>
     <para>
      See also: 
      <function class="GtkAboutDialog">set_copyright</function>
@@ -170,9 +176,12 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the license information.
    </shortdesc>
    <desc>
+    <simpara>
+     Returns the license information.
+    </simpara>
     <para>
      See also: 
      <function class="GtkAboutDialog">set_license</function>
@@ -184,14 +193,18 @@
   <method id="gtk.gtkaboutdialog.method.get_logo">
    <funcsynopsis>
     <funcprototype>
-     <funcdef> <function>get_logo</function></funcdef>
+     <funcdef><classname>GdkPixbuf</classname> <function>get_logo</function></funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the pixbuf displayed as logo in the about dialog.
    </shortdesc>
    <desc>
+    <simpara>
+     Returns the <classname>GdkPixbuf</classname> displayed as logo 
+     in the about dialog.
+    </simpara>
     <para>
      See also: 
      <function class="GtkAboutDialog">set_logo</function>
@@ -208,9 +221,12 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the icon name.
    </shortdesc>
    <desc>
+    <simpara>
+     Returns the icon name displayed as logo in the about dialog.
+    </simpara>
     <para>
      See also: 
      <function class="GtkAboutDialog">set_logo_icon_name</function>
@@ -227,9 +243,12 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the program name.
    </shortdesc>
    <desc>
+    <simpara>
+     Returns the program name displayed in the about dialog.
+    </simpara>
     <para>
      See also: 
      <function class="GtkAboutDialog">set_name</function>
@@ -246,9 +265,13 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the translator credits string.
    </shortdesc>
    <desc>
+    <simpara>
+     Returns the translator credits string which is displayed in 
+     the translators tab of the secondary credits dialog.
+    </simpara>
     <para>
      See also: 
      <function class="GtkAboutDialog">set_translator_credits</function>
@@ -265,9 +288,12 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the version string.
    </shortdesc>
    <desc>
+    <simpara>
+     Returns the version string.
+    </simpara>
     <para>
      See also: 
      <function class="GtkAboutDialog">set_version</function>
@@ -284,9 +310,12 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the website URL.
    </shortdesc>
    <desc>
+    <simpara>
+     Returns the website URL.
+    </simpara>
     <para>
      See also: 
      <function class="GtkAboutDialog">set_website</function>
@@ -303,9 +332,12 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the label used for the website link.
    </shortdesc>
    <desc>
+    <simpara>
+     Returns the label used for the website link.
+    </simpara>
     <para>
      See also: 
      <function class="GtkAboutDialog">set_website_label</function>
@@ -360,9 +392,14 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the comments string to display.
    </shortdesc>
    <desc>
+    <simpara>
+     Sets the comments string to display in the about dialog.
+     This should be a short string of one or two lines. It will
+     be displayed directly below the program name and version.
+    </simpara>
     <para>
      See also: 
      <function class="GtkAboutDialog">get_comments</function>
@@ -379,9 +416,14 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Set the copyright text.
    </shortdesc>
    <desc>
+    <simpara>
+     Set the copyright text. It is displayed between the 
+     <link linked="gtk.gtkaboutdialog.method.set_comments">comments</link> and
+     the <link linked="gtk.gtkaboutdialog.method.set_website">website</link>.
+    </simpara>
     <para>
      See also: 
      <function class="GtkAboutDialog">get_copyright</function>
@@ -432,9 +474,14 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Set the license text.
    </shortdesc>
    <desc>
+    <simpara>
+     Sets the license information to be displayed in the secondary 
+     license dialog. If license is not set or NULL, the license button 
+     is hidden.
+    </simpara>
     <para>
      See also: 
      <function class="GtkAboutDialog">get_license</function>
@@ -456,7 +503,7 @@
    <desc>
     <para>
      Sets the program logo. The <parameter>logo</parameter> has to be of
-     type <classname>PixBuf</classname>, which can easily be constructed
+     type <classname>GdkPixbuf</classname>, which can easily be constructed
      via the <function class="GtkWidget">render_icon</function> method
      of <classname>GtkWidget</classname>.
     </para>
@@ -491,12 +538,21 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Set logo to be displayed, by name.
    </shortdesc>
    <desc>
+    <simpara>
+     Sets the logo icon to be displayed, but not with the 
+     <classname>GdkPixbuf</classname> as
+     <function class="GtkAboutDialog">set_logo</function> does - 
+     you pass a name, and Gtk tries to find the icon in the list
+     of named images.
+     <!-- FIXME: give some working example names -->
+    </simpara>
     <para>
      See also: 
-     <function class="GtkAboutDialog">get_logo_icon_name</function>
+     <function class="GtkAboutDialog">get_logo_icon_name</function>,
+     <function class="GtkAboutDialog">set_logo</function>
     </para>
 
    </desc>
@@ -514,7 +570,8 @@
    </shortdesc>
    <desc>
     <simpara>
-     Sets the program name (how your program is called).
+     Sets the program name. If it is not set, a default value will
+     be taken: It's the filename of the script which has been started.
     </simpara>
     <para>
      See also: 
@@ -531,9 +588,18 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the translator credits string.
    </shortdesc>
    <desc>
+    <simpara>
+     Sets the translator credits string which is displayed in the translators 
+     tab of the secondary credits dialog.
+    </simpara>
+    <simpara>
+     If you set this value, a new "Credits" button appears on the lower left
+     of the about dialog, opening the window with the translator credits
+     (and other credits if set).
+    </simpara>
     <para>
      See also: 
      <function class="GtkAboutDialog">get_translator_credits</function>
@@ -569,8 +635,11 @@
    </shortdesc>
    <desc>
     <simpara>
-     Set the version of your program. It is wise not to set it
-     to a string value, but use a central constant or
+     Set the version of your program. 
+    </simpara>
+    <simpara>
+     It is wise not to hard-code
+     the value in your "about code", but use a central constant or
      a variable from within your program class. If done so,
      you can change the program version at one central place and 
      don't forget one.
@@ -613,9 +682,12 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the label to be used for the website link.
    </shortdesc>
    <desc>
+    <simpara>
+     Sets the label to be used for the website link. It defaults to the website URL.
+    </simpara>
     <para>
      See also: 
      <function class="GtkAboutDialog">get_website_label</function>
