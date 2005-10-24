@@ -36,10 +36,14 @@
  </xsl:template>
 
  <!-- method index -->
- <!-- FIXME: refentry methods have no parent class -->
+ <!-- 
+    FIXME: refentries aren't included
+    if you include refentries, the list is sorted by classes and not by method names
+    refentry methods have no parent class 
+ -->
  <xsl:template name="index.methods">
-  <xsl:for-each select="/set/book/classset/classentry/methods/method|/set/book/classset/refentry/method">
-   <xsl:sort select="funcsynopsis/funcprototype/funcdef/function|/set/book/classset/refentry/method"/>
+  <xsl:for-each select="/set/book/classset/classentry/methods/method">
+   <xsl:sort select="funcsynopsis/funcprototype/funcdef/function"/>
    <xsl:call-template name="index_link">
     <xsl:with-param name="title"><xsl:value-of select="funcsynopsis/funcprototype/funcdef/function"/>() - <xsl:value-of select="../../classmeta/classtitle"/></xsl:with-param>
     <xsl:with-param name="id"><xsl:value-of select="@id"/></xsl:with-param>
