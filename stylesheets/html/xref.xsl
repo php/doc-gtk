@@ -5,7 +5,7 @@
                 version='1.0'>
 
 <!-- ********************************************************************
-     $Id: xref.xsl,v 1.4 2005-04-11 21:54:45 cweiske Exp $
+     $Id: xref.xsl,v 1.5 2005-10-24 05:14:22 cweiske Exp $
      ********************************************************************
 
      This file is part of the XSL DocBook Stylesheet distribution.
@@ -25,12 +25,7 @@
 </xsl:template>
 
 <xsl:template match="link">
-  <xsl:variable name="targets" select="id(@linkend)"/>
-  <xsl:variable name="target" select="$targets[1]"/>
-
-  <xsl:call-template name="check.id.unique">
-    <xsl:with-param name="linkend" select="@linkend"/>
-  </xsl:call-template>
+  <xsl:variable name="target" select="id(@linked)"/>
 
   <a>
     <xsl:if test="@id">
@@ -58,7 +53,7 @@
                              mode="object.title.markup.textonly"/>
       </xsl:attribute>
     </xsl:if>
-
+    
     <xsl:apply-templates/>
   </a>
 </xsl:template>
