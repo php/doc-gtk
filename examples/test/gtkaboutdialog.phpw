@@ -1,0 +1,27 @@
+<?php
+/**
+*   GtkAboutDialog test script
+*/
+//gtk_icon_theme_load_icon ()
+$dlgAbout = new GtkAboutDialog();
+$dlgAbout->set_default_icon($dlgAbout->render_icon(Gtk::STOCK_CDROM, Gtk::ICON_SIZE_DIALOG));
+
+$dlgAbout->set_comments('These are my comments' . "\nWith a newline");
+$dlgAbout->set_copyright('Copyright (C) 1982-2005 myself');
+$dlgAbout->set_license("MyPL v2\nDo whatever you want to do.\nBut don't hurt anyone.");//Button
+//$dlgAbout->set_logo(null);
+$dlgAbout->set_logo($dlgAbout->render_icon(Gtk::STOCK_CDROM, Gtk::ICON_SIZE_LARGE_TOOLBAR));
+//$dlgAbout->set_logo_icon_name(null);
+
+//default is the filename of the starting script
+$dlgAbout->set_name('My first program');
+
+$dlgAbout->set_version('2.5.3');
+$dlgAbout->set_website('http://website.example.org');
+$dlgAbout->set_website_label('website label');
+
+$dlgAbout->set_translator_credits("German version - My Friend\nFrench version - Another Friend");
+
+$dlgAbout->run();
+
+?>
