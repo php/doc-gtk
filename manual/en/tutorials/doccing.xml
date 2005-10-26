@@ -13,7 +13,7 @@
    So if you just want to read the manual, this 
    shouldn't be of any interest to you.
   </simpara>
-  
+
   <para>
    This documentation, like the php-gtk2 sources and the official
    php documentation, resides at the CVS server of the php project
@@ -33,12 +33,12 @@
   <para>
    The only disadvantage is that you need to compile it from the sources
    into the desired format, which can take quite some time. This manual
-   consists of over 500 single files, the compiled html version of more
+   consists of over 300 single files, the compiled html version of more
    than 3000 files. Compilation takes 10 minutes on a 1.6GHz system,
    on a 400MHz it's around 40 to 45 minutes.
   </para>
  </sect1>
- 
+
  <sect1 id="tutorials.doccing.checkout">
   <title>Checking out, updating and compiling</title>
   <sect2>
@@ -62,8 +62,8 @@
     <literal>php-gtk-doc</literal> part.
    </para>
   </sect2>
-  
-  
+
+
   <sect2>
    <title>Compiling</title>
    <para>
@@ -114,7 +114,7 @@
     in our case <filename>build/en/html/</filename>
    </para>
   </sect2>
-  
+
   <sect2>
    <title>Livedocs</title>
    <para>
@@ -147,6 +147,345 @@
 
  <sect1 id="tutorials.doccing.writing">
   <title>Writing documentation</title>
-  <para>TO BE WRITTEN</para>
+  <para>
+   This chapter deals with actually contributing to the
+   PHP-Gtk documentation. If you have questions, feel free to ask
+   them at the <ulink url="mailto:php-gtk-doc@lists.php.net">php-gtk-doc
+   mailing list</ulink>.
+  </para>
+  <para>
+   If you have written some documentation, you probably want it to go
+   into the official manual. Please send your files by mail to the php-gtk-doc
+   mailing list mentioned above, or to one of the contributors listed
+   on the <link linked="appendix.doccredits">Documentation credits</link> page.
+   They will put your work in the official sources on the CVS server.
+   If you contribute to the docs regularly, you can get a CVS account. Ask
+   about it at the documentation mailing list.
+  </para>
+
+  <para>
+   If you have a CVS account: <emphasis>Always</emphasis> compile the manual
+   before committing changes! If there is an error in the xml, the nightly manual
+   generation will break and people will complain.
+  </para>
+
+  <sect2>
+   <title>Finding something to do</title>
+   <simpara>
+    The manual sources consist of over 300 single files, and so chances are
+    high that there are white spots in the docs. If you already have
+    noticed what's missing when browsing the manual, go ahead and fill the
+    white spot which interests you at most. If you don't know any empty 
+    places, search the manual files for <literal>FIXME</literal> and
+    <literal>TODO</literal> comments and start there.
+   </simpara>
+  </sect2>
+
+  <sect2 id="tutorials.doccing.writing.dirstructure">
+   <title>Directory and file structure</title>
+   <para>
+    As you might have noticed already, the manual sources are in the 
+    <filename>manual/</filename> directory, which contains folders for each
+    language. Have a look at <filename>manual/en/reference/</filename> - 
+    you will find folders for <literal>Gtk</literal>, <literal>Gdk</literal>.
+    Every class has it's own <literal>xml</literal> file in one of the folders
+    - that allows multiple people to work on different parts of manual at the
+    same time, and it allows slower machines to open a manual file. (What does
+    your editor application say if all was <emphasis>one big</emphasis> file 
+    with over 1.5 megabytes?)
+   </para>
+   <para>
+    You probably won't need to add any files, because the skeleton for the
+    class docs should exist at least. If you have to add a new file,
+    be sure it's registered in <filename>manual/reference.xml</filename>
+    - it won't be included in the manual otherwise.
+   </para>
+   <para>
+    Class images have its own directory, <filename>images/</filename>. The 
+    directory structure is about the same as the one for the xml files;
+    for example the image for <classname>GtkAboutDialog</classname> is at
+    <filename>images/reference/gtk/gtkaboutdialog.png</filename>. If you
+    create new images, make sure they are small. A file with 30kb is too
+    expensive, if you add all the image sizes up. Also make sure you use
+    <literal>.png</literal> files, and reduce the color palette to a fixed
+    size to keep file size low.
+   </para>
+   <para>
+    Executable examples have their own directory <filename>examples/</filename>
+    with a structure similar to the images and the xml doc files, with the 
+    exception that every single class has its own directory. The file are
+    named after the function/method they give an example for:
+    <function class="GtkAboutDialog">set_logo</function> function of
+    <classname>GtkAboutDialog</classname> has to go into
+    <filename>examples/reference/gtk/gtkaboutdialog/set_logo.phpw</filename>.
+    Notice the file extension. The filename of the default constructor
+    is <filename>constructor.phpw</filename>.
+   </para>
+  </sect2>
+
+
+  <sect2 id="tutorials.doccing.writing.basics">
+   <title>Basics</title>
+
+   <para>
+    One word first: Write the documentation with any program you
+    want to. I prefer the KDE text editor <literal>Kate</literal>,
+    but a <literal>vi</literal>, <literal>emacs</literal> or even
+    <literal>Notepad</literal> will do the job.
+    Note: If you use non-ASCII characters, you need to save the file
+    as <literal>UTF-8</literal> (mainly used in the non-english manuals).
+   </para>
+
+   <para>
+    The docs consist of structured text: You tell that a text is
+    in a paragraph, that the <emphasis>word</emphasis> shall get
+    special emphasis or that <literal>another word</literal> is to
+    be taken literal. If you have written HTML pages, you will know
+    the concept. 
+   </para>
+   <para>
+    You might wonder why the docs don't use HTML tags:
+    It's because docbook just describes the text structure, it doesn't
+    format it. HTML tries to separate layout (CSS) and content (XHTML)
+    as well, but docbook can be used to produce not only HTML, but PDFs
+    and real books, too. There are many special elements in a book: Chapters,
+    sections, examples, and in a programming manual like this you have
+    methods, parameters, properties, signals and so on.
+    Each element has its own tag. This seems quite confusing when you start
+    with docbook, but it has its benefits: Complete control over the output.
+   </para>
+
+   <para>
+    The most basic element is <literal>&lt;para&gt;</literal>, used to separate
+    text into paragraphs. Paragraphs contain other tags like links, filenames,
+    tables and so on. There is a special paragraph type
+    <literal>&lt;simpara&gt;</literal> for paragraphs without any other tag
+    inside.
+   </para>
+
+   <para>
+    The next important tags are are the links. Have a look at the 
+    <link linked="tutorials.doccing.writing.linking">their section</link>.
+   </para>
+
+   <para>
+    You can <emphasis>emphasise</emphasis> words or groups of words via
+    <literal>&lt;emphasis&gt;</literal>, or define <literal>literals</literal>
+    with <literal>&lt;literal&gt;</literal>. <filename>Filenames</filename> can
+    be expressed with <literal>&lt;filename&gt;</literal>, 
+    <varname>variables</varname> with <literal>&lt;varname&gt;</literal>.
+    There are many more small tags, but listing them here would make a
+    whole docbook manual.
+   </para>
+
+   <para>
+    If you want to list items, use the <literal>&lt;itemizedlist&gt;</literal>
+    (unordered) or <literal>&lt;orderedlist&gt;</literal> (ordered) tags.
+    The list items in it have to be surrounded with a 
+    <literal>&lt;listitem&gt;</literal> tag.
+    <programlisting role="xml"><![CDATA[
+<itemizedlist>
+ <listitem>First item</listitem>
+ <listitem>Second item</listitem>
+</itemizedlist>
+]]></programlisting>
+    <literal>&lt;listitem&gt;</literal>s themselves can contain 
+    <literal>&lt;para&gt;</literal> and other tags.
+   </para>
+
+   <!-- some more tags? Which? -->
+
+   <para>
+    Most times the skeleton of the class docs already exist, and you
+    will only have to fill the description with content and the tags
+    mentioned above. The tags which need to be filled are:
+    <literal>&lt;shortdesc&gt;</literal> for a short description of
+    a class/function/signal/property (only one single paragraph, preferably
+    no tags in it) and <literal>&lt;desc&gt;</literal>
+    with a full description of the class (use many paragraphs).
+   </para>
+
+   <para>
+    If you are uncertain how to do something or if the tag you have chosen
+    is correct, have a look at the other, already written files - they are
+    the best examples.
+   </para>
+  </sect2>
+
+
+  <sect2 id="tutorials.doccing.writing.linking">
+   <title>Linking</title>
+   <para>
+    The manual lives of the links which interconnect the pages, allowing
+    one to jump to other relevant sections with one click. Whenever
+    you reference to some other class or a similar function, just link 
+    it. It saves people a lot of time searching.
+   </para>
+   <para>
+    The manual knows four types of links between pages:
+   </para>
+
+   <itemizedlist>
+    <listitem>
+     <para>
+      <emphasis>Class links</emphasis> link to the overview page of a 
+      certain class. Use 
+      <programlisting role="xml"><![CDATA[
+<classname>GtkAboutDialog</classname>
+]]></programlisting>
+      to link to the MyClass overview page. It will look like this:
+      <classname>GtkAboutDialog</classname>.
+     </para>
+    </listitem>
+
+    <listitem>
+     <para>
+      <emphasis>Method/function links</emphasis> connect to a method or
+      function of a certain class. The function name will automatically
+      be completed with <literal>()</literal>. Use 
+      <programlisting role="xml"><![CDATA[
+<function class="GtkAboutDialog">set_logo</function>
+]]></programlisting>
+      to accomplish the task. The manual will look that way:
+      <function class="GtkAboutDialog">set_logo</function>.
+      The <literal>class</literal> parameter is not necessary
+      if you link to the current class; but add it nevertheless
+      - it means less effort when copying something to a different
+      part of the manual.
+     </para>
+    </listitem>
+
+    <listitem>
+     <para>
+      <emphasis>Links to signals</emphasis> are done that way:
+      <programlisting role="xml"><![CDATA[
+<signalname class="GtkDialog">close</signalname>
+]]></programlisting>
+      It will be compiled to that:
+      <signalname class="GtkDialog">close</signalname>.
+     </para>
+    </listitem>
+
+    <listitem>
+     <para>
+      <emphasis>Property links</emphasis> are a simple:
+      <programlisting role="xml"><![CDATA[
+<propname class="GtkDialog">action_area</propname>
+]]></programlisting>
+      It will result in:
+      <propname class="GtkDialog">action_area</propname>.
+     </para>
+    </listitem>
+
+    <listitem>
+     <para>
+      <emphasis>Free manual links</emphasis> are necessary if
+      you want to link a certain word in the text, or link
+      to a tutorial section. You need to provide the ID of the
+      section to be linked, and are free to choose a title:
+      <programlisting role="xml"><![CDATA[
+The <link linked="tutorials.doccing">Documentation tutorial</link>
+shows you how to compile the manual.
+]]></programlisting>
+      See the result:
+      The <link linked="tutorials.doccing">Documentation tutorial</link>
+      shows you how to compile the manual.
+     </para>
+    </listitem>
+
+    <listitem>
+     <para>
+      <emphasis>URL links</emphasis> leave the scope of the
+      manual; you can link to any HTTP/FTP/Mail address you
+      want:
+      <programlisting role="xml"><![CDATA[
+<ulink url="mailto:php-gtk-doc@lists.php.net">Documentation mailing list</ulink>
+]]></programlisting>
+      which will look like that:
+      <ulink url="mailto:php-gtk-doc@lists.php.net">Documentation mailing 
+      list</ulink>
+     </para>
+    </listitem>
+   </itemizedlist>
+  </sect2>
+
+
+  <sect2 id="tutorials.doccing.writing.examples">
+   <title>Code examples and images</title>
+
+   <simpara>
+    The PHP-Gtk2 supports, unlike the previous version for
+    PHP-Gtk1, images and external code examples.
+   </simpara>
+   <simpara>
+    There are three types of images: Class images, normal images
+    which create their own paragraph, and inline images which flow
+    with the text.
+   </simpara>
+   <para>
+    <emphasis>Class images</emphasis> are shown at the class overview
+    page, on the right side of the description. Just add a
+    <programlisting role="xml"><![CDATA[
+<classimage fileref="&directory.images;/reference/gtk/gtkiconview.constructor.png"/>
+]]></programlisting>. 
+    Note the <literal>&amp;directory.images;</literal> base
+    directory; it will be replaced with the correct images directory
+    at compile time.
+   </para>
+   <para>
+    Normal images are included in a paragraph via
+    <programlisting role="xml"><![CDATA[
+<graphic fileref="&directory.images;/path/to/the/file.png"/>
+]]></programlisting>
+    and inline images with
+    <programlisting role="xml"><![CDATA[
+<inlinegraphic fileref="&directory.images;/path/to/the/file.png"/>
+]]></programlisting>.
+   </para>
+
+   <para>
+    Code examples can be separated from the manual file, too.
+    This is especially useful for readers who want to run
+    the examples themselves: No need to copy&amp;paste the code, but
+    just execute it in the example code directory. Furthermore,
+    it's more easy to test the examples when writing and checking
+    the manual.
+   </para>
+
+   <note>
+    <para>
+     Examples may get their own file <emphasis>only</emphasis> if they
+     are a complete, executable program - code snippets have to be inline.
+    </para>
+   </note>
+
+   <para>
+     Detached examples can be included that way:
+     <programlisting role="xml"><![CDATA[
+    <example>
+     <title>Simple GtkAboutDialog</title>
+     <programlisting role="php">
+      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+                  href="&directory.examples;/reference/gtk/gtkaboutdialog/constructor.phpw" parse="text">
+       <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+      </xi:include>
+     </programlisting>
+    </example>
+]]></programlisting>
+   </para>
+
+   <para>
+    Examples for code snippets have to be inline as in:
+    <programlisting role="xml"><![CDATA[
+<programlisting role="php"><![CDATA[
+//some php code here
+]] >
+]]></programlisting>
+    The <literal>CDATA</literal> section is necessary that you don't have
+    to escape the code, and the closing <literal>]]&gt;</literal> has to be
+    without the space.
+   </para>
+  </sect2>
+
  </sect1>
 </chapter>
