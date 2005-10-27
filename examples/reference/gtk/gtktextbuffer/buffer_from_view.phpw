@@ -1,0 +1,23 @@
+<?php
+// Create a new window.
+$window = new GtkWindow();
+// Properly handle closing of the window.
+$window->connect_simple('destroy', array('gtk', 'main_quit'));
+
+// Create a new view.
+$textView = new GtkTextView();
+
+// Get the buffer from the view.
+$textBuffer = $textView->get_buffer();
+
+// Add some text to the buffer.
+$textBuffer->set_text('Hello World!');
+
+// Make sure no one edits the text.
+$textView->set_editable(false);
+
+// Add the view to the window, show everything, and start the main loop.
+$window->add($textView);
+$window->show_all();
+Gtk::main();
+?>

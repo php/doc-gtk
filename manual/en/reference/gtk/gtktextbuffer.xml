@@ -30,35 +30,10 @@
     <example>
      <title>Simple use of GtkTextBuffer.</title>
      <programlisting role="php">
-<![CDATA[
-<?php
-// Make sure the PHP-GTK 2 extension is loaded.
-if (!extension_loaded('php-gtk')) {
-        dl( 'php_gtk2.' . PHP_SHLIB_SUFFIX);
-}
-
-// Create a new window.
-$window = new GtkWindow();
-// Properly handle closing of the window.
-$window->connect_object('destroy', array('gtk', 'main_quit'));
-
-// Create a new buffer and a new view to show the buffer.
-$textBuffer = new GtkTextBuffer();
-$textView   = new GtkTextView();
-
-// Add some text to the buffer.
-$textBuffer->set_text('Hello World!', -1);
-
-// Add the buffer to the view and make sure no one edits the text.
-$textView->set_buffer($textBuffer);
-$textView->set_editable(false);
-
-// Add the view to the window, show everything, and start the main loop.
-$window->add($textView);
-$window->show_all();
-Gtk::main();
-?>
-]]>
+       <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+                  href="&directory.examples;/reference/gtk/gtktextbuffer/constructor.phpw" parse="text">
+        <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+       </xi:include>
      </programlisting>
     </example>
    </para>
@@ -94,70 +69,19 @@ Gtk::main();
      <example>
       <title>Instantiating a new buffer directly.</title>
       <programlisting role="php">
-<![CDATA[
-<?php
-// Make sure the PHP-GTK 2 extension is loaded.
-if (!extension_loaded('php-gtk')) {
-        dl( 'php_gtk2.' . PHP_SHLIB_SUFFIX);
-}
-
-// Create a new window.
-$window = new GtkWindow();
-// Properly handle closing of the window.
-$window->connect_object('destroy', array('gtk', 'main_quit'));
-
-// Create a new buffer and a new view to show the buffer.
-$textBuffer = new GtkTextBuffer();
-$textView   = new GtkTextView();
-
-// Add some text to the buffer.
-$textBuffer->set_text('Hello World!', -1);
-
-// Add the buffer to the view and make sure no one edits the text.
-$textView->set_buffer($textBuffer);
-$textView->set_editable(false);
-
-// Add the view to the window, show everything, and start the main loop.
-$window->add($textView);
-$window->show_all();
-Gtk::main();
-?>
-]]>
+       <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+                  href="&directory.examples;/reference/gtk/gtktextbuffer/constructor.phpw" parse="text">
+        <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+       </xi:include>
       </programlisting>
      </example>
      <example>
       <title>Getting a new buffer from a view.</title>
       <programlisting role="php">
-<![CDATA[
-<?php
-// Make sure the PHP-GTK 2 extension is loaded.
-if (!extension_loaded('php-gtk')) {
-        dl( 'php_gtk2.' . PHP_SHLIB_SUFFIX);
-}
-
-// Create a new window.
-$window = new GtkWindow();
-// Properly handle closing of the window.
-$window->connect_object('destroy', array('gtk', 'main_quit'));
-
-// Create a new view.
-$textView = new GtkTextView();
-
-// Get the buffer from the view.
-$textBuffer = $textView->get_buffer();
-
-// Add some text to the buffer.
-$textBuffer->set_text('Hello World!', -1);
-
-// Make sure no one edits the text.
-$textView->set_editable(false);
-
-// Add the view to the window, show everything, and start the main loop.
-$window->add($textView);
-$window->show_all();
-Gtk::main();
-?>
-]]>
+       <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+                  href="&directory.examples;/reference/gtk/gtktextbuffer/buffer_from_view.phpw" parse="text">
+        <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+       </xi:include>
       </programlisting>
      </example>
     </para>

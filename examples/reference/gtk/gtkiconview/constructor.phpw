@@ -3,7 +3,7 @@
 $wnd = new GtkWindow();
 $wnd->set_title('GtkIconView');
 $wnd->set_default_size(400, 400);
-$wnd->connect_object('destroy', array('gtk', 'main_quit'));
+$wnd->connect_simple('destroy', array('gtk', 'main_quit'));
 
 $iv = new GtkIconView();
 
