@@ -7,7 +7,7 @@
                 version='1.0'>
 
 <!-- ********************************************************************
-     $Id: synop.xsl,v 1.6 2005-04-11 21:54:45 cweiske Exp $
+     $Id: synop.xsl,v 1.7 2005-10-31 10:49:27 cweiske Exp $
      ********************************************************************
 
      This file is part of the XSL DocBook Stylesheet distribution.
@@ -38,7 +38,13 @@
    <xsl:number count="paramdef" format="1"/>
   </xsl:variable>
   <xsl:if test="$paramnum=1">(</xsl:if>
+  <xsl:if test="preceding-sibling::paramdef and $optional&gt;0">
+   <xsl:text> </xsl:text>
+  </xsl:if>
   <xsl:if test="$optional&gt;0">[</xsl:if>
+  <xsl:if test="preceding-sibling::paramdef">
+   <xsl:text>, </xsl:text>
+  </xsl:if>
   <xsl:if test="text() != 'void'">
    <xsl:choose>
     <xsl:when test="$funcsynopsis.style='ansi'">
@@ -49,17 +55,12 @@
     </xsl:otherwise>
    </xsl:choose>
   </xsl:if>
-  
-  <xsl:choose>
-   <xsl:when test="following-sibling::paramdef">
-    <xsl:text>, </xsl:text>
-   </xsl:when>
-   <xsl:otherwise>
-    <xsl:variable name="optionals" select=".//optional|preceding-sibling::paramdef/*/optional"/>
-    <xsl:for-each select="$optionals">]</xsl:for-each>
-    <xsl:text>);</xsl:text> 
-   </xsl:otherwise>
-  </xsl:choose>
+
+  <xsl:if test="not(following-sibling::paramdef)">
+   <xsl:variable name="optionals" select=".//optional|preceding-sibling::paramdef/*/optional"/>
+   <xsl:for-each select="$optionals">]</xsl:for-each>
+   <xsl:text>);</xsl:text> 
+  </xsl:if>
  </xsl:template>
 
  <xsl:template match="optional">
