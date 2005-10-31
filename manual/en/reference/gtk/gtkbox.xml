@@ -58,32 +58,55 @@
      <paramdef>GtkWidget <parameter>child</parameter></paramdef>
      <paramdef>bool <parameter><optional>expand = TRUE</optional></parameter></paramdef>
      <paramdef>bool <parameter><optional>fill = TRUE</optional></parameter></paramdef>
-     <paramdef>int <parameter><optional>padding = TRUE</optional></parameter></paramdef>
+     <paramdef>int <parameter><optional>padding = 0</optional></parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Adds a widget to the box in the next available position starting from the
+    end.
    </shortdesc>
    <desc>
+    <simpara>
+     Adds <parameter>child</parameter> to the box starting from the end. See
+     <function class="GtkBox">pack_start</function> for the parameter 
+     description.
+    </simpara>
+
+    <para>
+     The difference between <function class="GtkBox">pack_start</function> and
+     <function class="GtkBox">pack_end</function> can be explained with curtains:
+     <literal>pack_start</literal> adds the widgets from the left side of the box,
+     and <literal>pack_end</literal> does the same, but from the right side. The
+     more widgets you add, the more of the free space of the "window" between the
+     curtains is taken by the widgets. If the box is full, the "curtains" meet
+     in the center.
+    </para>
+
+    <simpara>
+     The buttons in the following image have been packed one after the other
+     in numerical order: Button 1 first, Button 5 at last. You see that
+     they are in order when using <function class="GtkBox">pack_start</function>,
+     but turned order when with <function class="GtkBox">pack_end</function> as
+     places are taken from the end.
+    </simpara>
+
+    <graphic fileref="&directory.images;/reference/gtk/gtkbox.pack_start_end.png"/>
+
+    <example>
+     <title>pack_start versus pack_end</title>
+     <programlisting role="php">
+      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+                  href="&directory.examples;/reference/gtk/gtkbox/start_vs_end.phpw" parse="text">
+       <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+      </xi:include>
+     </programlisting>
+    </example>
+
+
     <simpara>
      See also:
      <function class="GtkBox">pack_start</function>
     </simpara>
-   </desc>
-  </method>
-
-  <method id="gtk.gtkbox.method.pack_end_defaults">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>void <function>pack_end_defaults</function></funcdef>
-     <paramdef>GtkWidget <parameter>widget</parameter></paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-    Deprecated. Remove from documentation.
-   </shortdesc>
-   <desc>
-
    </desc>
   </method>
 
@@ -151,21 +174,6 @@
       </xi:include>
      </programlisting>
     </example>
-
-   </desc>
-  </method>
-
-  <method id="gtk.gtkbox.method.pack_start_defaults">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>void <function>pack_start_defaults</function></funcdef>
-     <paramdef>GtkWidget <parameter>widget</parameter></paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-    Deprecated. Remove from documentation.
-   </shortdesc>
-   <desc>
 
    </desc>
   </method>
