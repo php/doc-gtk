@@ -94,7 +94,7 @@
      <paramdef>GtkWidget <parameter>child</parameter></paramdef>
      <paramdef>bool <parameter><optional>expand = TRUE</optional></parameter></paramdef>
      <paramdef>bool <parameter><optional>fill = TRUE</optional></parameter></paramdef>
-     <paramdef>int <parameter><optional>padding = TRUE</optional></parameter></paramdef>
+     <paramdef>int <parameter><optional>padding = 0</optional></parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -120,6 +120,38 @@
      See also:
      <function class="GtkBox">pack_end</function>
     </simpara>
+
+    <example>
+     <title>GtkBox' expand and fill parameters in action</title>
+
+     <para>
+      This example demonstrates the <parameter>expand</parameter> and
+      <parameter>fill</parameter> parameters.
+     </para>
+     <para>
+      At first two <classname>GtkLabel</classname>s are created and
+      <function class="GtkBox">pack_start</function>'ed to a box,
+      the first expanded and the second unexpanded.
+     </para>
+     <para>
+      The right side of the window shows the <parameter>fill</parameter>
+      parameter: Two buttons are added to the box, both expanded, but only
+      the first one filled: The second one takes half of the space, but
+      keeps the ideal size required to display all the text, while
+      the first one takes all the space for display.
+     </para>
+
+
+     <graphic fileref="&directory.images;/reference/gtk/gtkbox.packing.png"/>
+
+     <programlisting role="php">
+      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+                  href="&directory.examples;/reference/gtk/gtkbox/packing.phpw" parse="text">
+       <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+      </xi:include>
+     </programlisting>
+    </example>
+
    </desc>
   </method>
 

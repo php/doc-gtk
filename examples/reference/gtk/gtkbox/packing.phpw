@@ -1,0 +1,63 @@
+<?php
+//GtkBox expand and fill parameter example
+
+/**
+* Example 1: The "expand" parameter
+*/
+$boxExpand   = new GtkVBox();
+$lblExpand   = new GtkLabel('Expand');
+$lblNoExpand = new GtkLabel('No expand');
+
+//Add the expanded Label with the 
+//expand parameter set to true
+$boxExpand->pack_start($lblExpand, true);
+
+//to see the difference better
+$boxExpand->pack_start(new GtkHSeparator(), false, false, 3);
+
+//Add the unexpanded label with the
+//expand parameter set to false
+$boxExpand->pack_start($lblNoExpand, false);
+
+
+/**
+* Example 2: The "fill" parameter
+*/
+$boxFill   = new GtkVBox();
+$btnFill   = new GtkButton('Fill');
+$btnNoFill = new GtkButton('No fill');
+
+//Add the filled button to the box
+//with the fill parameter set to true
+$boxFill->pack_start($btnFill, true, true);
+
+//to see the difference better
+$boxFill->pack_start(new GtkHSeparator(), false, false, 3);
+
+//Add the unfilled button to the box,
+//with the filled parameter set to false
+$boxFill->pack_start($btnNoFill, true, false);
+
+
+/**
+* Add both of the example boxes to the window
+*/
+$wnd = new GtkWindow();
+$wnd->set_title('Pack test');
+$wnd->connect_simple('destroy', array('gtk', 'main_quit'));
+$wnd->set_size_request(300, 200);
+
+//Set the box homogenous, so that left and right
+//example get the same space
+$hbox = new GtkHBox(true);
+
+//Add the expand example box
+$hbox->pack_start($boxExpand, true);
+//Add the fill example box
+$hbox->pack_start($boxFill, true);
+
+//Add the main box to the window
+$wnd->add($hbox);
+$wnd->show_all();
+Gtk::main();
+?>
