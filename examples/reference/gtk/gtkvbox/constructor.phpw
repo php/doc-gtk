@@ -1,0 +1,40 @@
+<?php
+//Here we create the GtkWindow
+$window = new GtkWindow();
+$window->set_title("GtkHBox and GtkVBox packing demonstration");
+$window->set_position(Gtk::WIN_POS_CENTER);
+$window->connect_simple("destroy", array("gtk", "main_quit"));
+$window->show();
+
+//Adding a GtkVBox to our $window
+$vbox = new GtkVBox(false, 5);
+$window->add($vbox);
+
+//Let's add a GtkLabel as the first (topmost) widget in our $vbox
+$label = new GtkLabel();
+$label->set_text("This GtkLabel is packed at the start of a GtkVBox.
+The GtkCalendar and the empty GtkTextView below are packed, respectively,
+at the start and the end of a GtkHBox, which is in turn packed at the end
+of the GtkVBox.");
+$label->set_justify(Gtk::JUSTIFY_LEFT);
+$vbox->pack_start($label, true, true, 5);
+$label->show();
+
+//Adding a GtkHBox to the end (bottom) of the $vbox
+$hbox = new GtkHBox(true, 0);
+$vbox->pack_end($hbox);
+
+//Here we'll add GtkCalendar to the start (ie. the left) of the $hbox
+$calendar = new GtkCalendar();
+$hbox->pack_start($calendar, true, true, 2);
+$calendar->show();
+
+//Adding a GtkTextView to the end (ie. the right) fo the $hbox
+$text = new GtkTextView();
+$text->set_editable(true);
+$hbox->pack_end($text, true, true, 2);
+$text->show();
+
+$window->show_all();
+Gtk::main();
+?>

@@ -4,31 +4,65 @@
   <classtitle>GtkVBox</classtitle>
   <classparent>GtkBox</classparent>
   <shortdesc>
-
+   A vertical box for organizing child widgets.
   </shortdesc>
   <desc>
-
+   <para>
+    The <classname>GtkVBox</classname> container is designed to organize child widgets along
+    a single column, by allocating the same width to all children. This overrides any child
+    requisition size, and child widgets that take up less than the allocated width are vertically
+    centered by default.
+   </para>
+   <para>
+    Adding child widgets to a <classname>GtkVBox</classname> is done by packing methods that are 
+    either inherited from the <classname>GtkBox</classname> class, such as 
+    <function class="GtkBox">pack_start</function>, or by the less flexible
+    <function class="GtkContainer">add</function>, common to all container widgets.
+   </para>
+   <para>
+    See also:
+    <classname>GtkHBox</classname>, <classname>GtkTable</classname>, <classname>GtkButtonBox</classname>,
+    <classname>GtkBox</classname>, <classname>GtkContainer</classname>.
+   </para>
   </desc>
  </classmeta>
 
  <constructors>
-
   <constructor id="gtk.gtkvbox.constructor">
    <funcsynopsis>
     <funcprototype>
     <funcdef> <function>GtkVBox</function></funcdef>
     <paramdef>bool <parameter><optional>homogeneous = FALSE</optional></parameter></paramdef>
-    <paramdef>int <parameter>spacing</parameter></paramdef>
+    <paramdef>int <parameter><optional>spacing = 0</optional></parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Creates a container for arranging widgets vertically.
    </shortdesc>
    <desc>
-
+    <para>
+     Creates a new vertical box container for packing child widgets into a column.
+    </para>
+    <para>
+     The parameter <parameter>homogeneous</parameter> is a boolean value which defines whether all
+     child widgets in the box should be assigned the height of the largest widget. The default
+     behaviour (false) is to maintain the individual height of the widgets unchanged.
+     The second parameter, <parameter>spacing</parameter>, defines the minimum number of pixels to
+     be left between widgets.
+    </para>
+    <example>
+     <title>GtkHBox and GtkVBox packing demonstration</title>
+     <programlisting role="php">
+      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+                  href="&directory.examples;/reference/gtk/gtkvbox/constructor.phpw" parse="text">
+       <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+      </xi:include>
+     </programlisting>
+    </example> 
    </desc>
   </constructor>
 
  </constructors>
 
 </classentry>
+
