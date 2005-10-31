@@ -4,10 +4,23 @@
   <classtitle>GtkBox</classtitle>
   <classparent>GtkContainer</classparent>
   <shortdesc>
-
+   Base class for box containers.
   </shortdesc>
   <desc>
-
+   <para>
+    <classname>GtkBox</classname> is a base class providing box
+    containers <classname>GtkHBox</classname> and 
+    <classname>GtkVBox</classname> with properties and methods for
+    packing any number of child widgets.
+   </para>
+   <para>
+    Note that <classname>GtkBox</classname> is an abstract class
+    and cannot be constructed directly.
+   </para>
+   <para>
+    For more information about packing widgets see
+    the <link linked="tutorials.packing">packing tutorial</link>.
+   </para>
   </desc>
  </classmeta>
 
@@ -21,14 +34,16 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    If all children shall have the same size.
    </shortdesc>
    <desc>
+    <para>
+     Returns if all children widgets shall have the same size.
+    </para>
     <para>
      See also: 
      <function class="GtkBox">set_homogeneous</function>
     </para>
-
    </desc>
   </method>
 
@@ -40,9 +55,12 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the spacing between widgets.
    </shortdesc>
    <desc>
+    <para>
+     Returns the space between the child widgets, in pixels.
+    </para>
     <para>
      See also: 
      <function class="GtkBox">set_spacing</function>
@@ -55,7 +73,7 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>pack_end</function></funcdef>
-     <paramdef>GtkWidget <parameter>child</parameter></paramdef>
+     <paramdef><classname>GtkWidget</classname> <parameter>child</parameter></paramdef>
      <paramdef>bool <parameter><optional>expand = TRUE</optional></parameter></paramdef>
      <paramdef>bool <parameter><optional>fill = TRUE</optional></parameter></paramdef>
      <paramdef>int <parameter><optional>padding = 0</optional></parameter></paramdef>
@@ -114,7 +132,7 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>pack_start</function></funcdef>
-     <paramdef>GtkWidget <parameter>child</parameter></paramdef>
+     <paramdef><classname>GtkWidget</classname> <parameter>child</parameter></paramdef>
      <paramdef>bool <parameter><optional>expand = TRUE</optional></parameter></paramdef>
      <paramdef>bool <parameter><optional>fill = TRUE</optional></parameter></paramdef>
      <paramdef>int <parameter><optional>padding = 0</optional></parameter></paramdef>
@@ -178,38 +196,23 @@
    </desc>
   </method>
 
-  <method id="gtk.gtkbox.method.query_child_packing">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>void <function>query_child_packing</function></funcdef>
-     <paramdef>void</paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-    Not public or not implemented. Should be removed from documentation.
-   </shortdesc>
-   <desc>
-    <para>
-     See also: 
-     <function class="GtkBox">set_child_packing</function>
-    </para>
-
-   </desc>
-  </method>
-
   <method id="gtk.gtkbox.method.reorder_child">
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>reorder_child</function></funcdef>
-     <paramdef>GtkWidget <parameter>child</parameter></paramdef>
+     <paramdef><classname>GtkWidget</classname> <parameter>child</parameter></paramdef>
      <paramdef>int <parameter>position</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Moves a child widget to a certain position.
    </shortdesc>
    <desc>
-
+    <para>
+     Moves the <parameter>child</parameter>'s position to the position given
+     as the second parameter. This allows you to change the order
+     of the widgets after they have been added to the box.
+    </para>
    </desc>
   </method>
 
@@ -217,20 +220,27 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_child_packing</function></funcdef>
-     <paramdef>GtkWidget <parameter>child</parameter></paramdef>
+     <paramdef><classname>GtkWidget</classname> <parameter>child</parameter></paramdef>
      <paramdef>bool <parameter>expand</parameter></paramdef>
      <paramdef>bool <parameter>fill</parameter></paramdef>
      <paramdef>int <parameter>padding</parameter></paramdef>
-     <paramdef>GtkPackType <parameter>pack_type</parameter></paramdef>
+     <paramdef><enumname>GtkPackType</enumname> <parameter>pack_type</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+     Sets packing parameters for a child.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     Changes the packing parameters set with 
+     <function class="GtkBox">pack_start</function> or
+     <function class="GtkBox">pack_end</function>.
+    </para>
+    <para>
+     See also:
      <function class="GtkBox">query_child_packing</function>
+     <function class="GtkBox">pack_start</function>
+     <function class="GtkBox">pack_end</function>
     </para>
 
    </desc>
@@ -244,14 +254,19 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Toggles equality of child sizing.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     <function class="GtkBox">set_homogeneous</function> sizes all
+     the child widgets in the container to the dimensions of the largest
+     child widget if set to <literal>true</literal>.  The default setting
+     is <literal>false</literal>.
+    </para>
+    <para>
+     See also:
      <function class="GtkBox">get_homogeneous</function>
     </para>
-
    </desc>
   </method>
 
@@ -263,14 +278,20 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets spacing between children.
    </shortdesc>
    <desc>
+    <simpara>
+     <function class="GtkBox">set_spacing</function> is used to set the
+     universal minimum spacing between the child widgets, in pixels.
+    </simpara>
+    <simpara>
+     The default setting is <literal>0</literal>.
+    </simpara>
     <para>
-     See also: 
+     See also:
      <function class="GtkBox">get_spacing</function>
     </para>
-
    </desc>
   </method>
 
