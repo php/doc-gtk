@@ -15,10 +15,18 @@
     will never be scaled down to a size smaller than that of the label.
    </para>
    <para>
-    It can be used to define the relative alignment of the child within the
-    container (<parameter>xalign</parameter>/<parameter>yalign</parameter>),
-    and the relative ammount of free space assigned to the container that the
-    child is allowed to extend (<parameter>xscale</parameter>/<parameter>yscale</parameter>).
+    It can be used to define the relative alignment of the child 
+    <emphasis>within</emphasis> the container, through the 
+    <parameter>xalign</parameter> and <parameter>yalign</parameter> parameters.
+    Both can vary between 0 and 1, meaning left/top and right/bottom, respectively.
+    This is very useful, for instance in left- or right-aligning <classname>GtkLabel</classname>s.
+   </para>
+   <para>
+    Another use for <classname>GtkAlignment</classname> (through 
+    <parameter>xscale</parameter> and <parameter>yscale</parameter>), is to 
+    indicate the ammount of extra free space in the container the child should
+    be extended to occupy. Note that this isn't the same as total size of the 
+    child widget.
    </para>
    <para>
     <classname>GtkAlignment</classname> also provides methods to specifically 

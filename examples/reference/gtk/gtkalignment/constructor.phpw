@@ -7,7 +7,7 @@ if( !class_exists('gtk')) {
 //A GtkVBox that will hold the GtkAlignment widgets and GtkHSeparators
 $vbox = new GtkVBox();
 
-//Let's create three GtkAlignment containers with different settings, each holding a button
+//Let's create four GtkAlignment containers with different settings, each holding a button
 
 
 //First GtkAlignment container. 
@@ -15,9 +15,9 @@ $vbox = new GtkVBox();
 //Positioning the button at the top-left of the window, not allowing it to extend:
 $align1 = new GtkAlignment(0, 0, 0, 0);
 //Let's push the button down and right, with padding on the top and left:
-$align1->set_padding(200, 0, 200, 0);
+$align1->set_padding(100, 100, 100, 100);
 //Creating a button.
-$button1 = new GtkButton('This GtkButton is here because of a padding_top and padding_left of 200 pixels.', false);
+$button1 = new GtkButton('Padding of 100 pixels', false);
 //Adding button1 to the first GtkAlignment container
 $align1->add($button1);
 //Packing the GtkAlignment container into the GtkVBox
@@ -32,7 +32,7 @@ $vbox->pack_start(new GtkHSeparator(), false, false, 3);
 //This container will center it's child, while not allowing it to extend to occupy all free space
 $align2 = new GtkAlignment(0.5, 0.5, 0, 0);
 //Creating a new button
-$button2 = new GtkButton('This GtkButton is centered using GtkAlignment');
+$button2 = new GtkButton('Centered, does not extend');
 //Adding button2 to the second GtkAlignment container
 $align2->add($button2);
 //Packing the GtkAlignment container into the GtkVBox
@@ -44,14 +44,29 @@ $vbox->pack_start(new GtkHSeparator(), false, false, 3);
 
 //Third GtkAlignment container. 
 
-//This container will center it's child, allowing it extend into 75% (0.75) of the free space
+//This container will center it's child, allowing it extend into 75% (0.75) of the *free space* in the container
 $align3 = new GtkAlignment(0.5, 0.5, 0.75, 0.75);
 //Creating a new button
-$button3 = new GtkButton('This one is centered and extends to occupy 75% of the empty space. Try resizing the window!');
+$button3 = new GtkButton("Centered, extends an extra \r\n75% of empty space");
 //Adding button3 to the third GtkAlignment container
 $align3->add($button3);
 //Packing the GtkAlignment container into the GtkVBox
 $vbox->pack_start($align3, true, true);
+
+//Adding a GtkHSeparator, to see the different GtkAlignment containers better
+$vbox->pack_start(new GtkHSeparator(), false, false, 3);
+
+
+//Fourth GtkAlignment container. 
+
+//This container will right-align it's child, without extending it
+$align4 = new GtkAlignment(1, 0.5, 0, 0);
+//Creating a new button
+$button4 = new GtkButton("Right-aligned, doesn't extend");
+//Adding button4 to the fourth GtkAlignment container
+$align4->add($button4);
+//Packing the GtkAlignment container into the GtkVBox
+$vbox->pack_start($align4, true, true);
 
 
 //Preparing the window
