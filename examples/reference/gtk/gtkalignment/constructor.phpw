@@ -1,0 +1,71 @@
+<?php
+//Checking for php-gtk
+if( !class_exists('gtk')) {
+	die('Please load the php-gtk2 module in your php.ini' . "\r\n");
+}
+
+//A GtkVBox that will hold the GtkAlignment widgets and GtkHSeparators
+$vbox = new GtkVBox();
+
+//Let's create three GtkAlignment containers with different settings, each holding a button
+
+
+//First GtkAlignment container. 
+
+//Positioning the button at the top-left of the window, not allowing it to extend:
+$align1 = new GtkAlignment(0, 0, 0, 0);
+//Let's push the button down and right, with padding on the top and left:
+$align1->set_padding(200, 0, 200, 0);
+//Creating a button.
+$button1 = new GtkButton('This GtkButton is here because of a padding_top and padding_left of 200 pixels.', false);
+//Adding button1 to the first GtkAlignment container
+$align1->add($button1);
+//Packing the GtkAlignment container into the GtkVBox
+$vbox->pack_start($align1, true, true);
+
+//Adding a GtkHSeparator, to see the different GtkAlignment containers better
+$vbox->pack_start(new GtkHSeparator(), false, false, 3);
+
+
+//Second GtkAlignment container. 
+
+//This container will center it's child, while not allowing it to extend to occupy all free space
+$align2 = new GtkAlignment(0.5, 0.5, 0, 0);
+//Creating a new button
+$button2 = new GtkButton('This GtkButton is centered using GtkAlignment');
+//Adding button2 to the second GtkAlignment container
+$align2->add($button2);
+//Packing the GtkAlignment container into the GtkVBox
+$vbox->pack_start($align2, true, true);
+
+//Adding a GtkHSeparator, to see the different GtkAlignment containers better
+$vbox->pack_start(new GtkHSeparator(), false, false, 3);
+
+
+//Third GtkAlignment container. 
+
+//This container will center it's child, allowing it extend into 75% (0.75) of the free space
+$align3 = new GtkAlignment(0.5, 0.5, 0.75, 0.75);
+//Creating a new button
+$button3 = new GtkButton('This one is centered and extends to occupy 75% of the empty space. Try resizing the window!');
+//Adding button3 to the third GtkAlignment container
+$align3->add($button3);
+//Packing the GtkAlignment container into the GtkVBox
+$vbox->pack_start($align3, true, true);
+
+
+//Preparing the window
+$win = new gtkwindow();
+$win->set_position(Gtk::WIN_POS_CENTER);
+$win->set_title('GtkAlignment demo');
+
+//Adding the GtkVBox to the window
+$win->add($vbox);
+//Connecting the destroy signal
+$win->connect_simple('destroy',array('gtk','main_quit'));
+//Showing the window's content
+$win->Show_All();
+//Main loop
+Gtk::main();
+
+?>

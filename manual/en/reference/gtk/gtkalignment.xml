@@ -4,10 +4,26 @@
   <classtitle>GtkAlignment</classtitle>
   <classparent>GtkBin</classparent>
   <shortdesc>
-
+   A container that controls the alignment and size of it's child.
   </shortdesc>
   <desc>
-
+   <para>
+    The <classname>GtkAlignment</classname> container controls the alignment
+    and size of it's child, relative to it's own dimensions. However, if the
+    child has a size request from it's own child/children, it will take 
+    precedence. For example, a <classname>GtkButton</classname> with a label
+    will never be scaled down to a size smaller than that of the label.
+   </para>
+   <para>
+    It can be used to define the relative alignment of the child within the
+    container (<parameter>xalign</parameter>/<parameter>yalign</parameter>),
+    and the relative ammount of free space assigned to the container that the
+    child is allowed to extend (<parameter>xscale</parameter>/<parameter>yscale</parameter>).
+   </para>
+   <para>
+    <classname>GtkAlignment</classname> also provides methods to specifically 
+    set (and retrieve the current) top, bottom, right and left padding of the widget.
+   </para>
   </desc>
  </classmeta>
 
@@ -16,7 +32,7 @@
   <constructor id="gtk.gtkalignment.constructor">
    <funcsynopsis>
     <funcprototype>
-    <funcdef> <function>GtkAlignment</function></funcdef>
+    <funcdef><function>GtkAlignment</function></funcdef>
     <paramdef>double <parameter><optional>xalign = 0.5</optional></parameter></paramdef>
     <paramdef>double <parameter><optional>yalign = 0.5</optional></parameter></paramdef>
     <paramdef>double <parameter><optional>xscale = 1.0</optional></parameter></paramdef>
@@ -24,10 +40,46 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Creates a container that controls the alignment and size of it's child.
    </shortdesc>
    <desc>
-
+    <para>
+     <classname>GtkAlignment</classname> is a container widget that controls
+     the alignment and size of it's child.
+    </para>
+    <para>
+     A <classname>GtkAlignment</classname> widget has four settings:
+     <itemizedlist>
+      <listitem><parameter>xalign</parameter>: This parameter is used to 
+      horizontally place the child. It's value can be anything between 0 (left)
+      and 1 (right). The default is 0.5, which centers the child widget
+      <emphasis>relative to the <classname>GtkAlignment</classname> 
+      container</emphasis>.
+      </listitem>
+      <listitem><parameter>yalign</parameter>: This parameter is used to 
+      vertically place the child. It's value can be anything between 0 (top) and
+      1 (bottom). It defaults to 0.5.
+      </listitem>
+      <listitem><parameter>xscale</parameter>: It defines the ammount of 
+      horizontal free space in the <classname>GtkAlignment</classname> container
+      that the child will be extended to occupy. 0 means the child won't extend,
+      1 means it'll extend over all the available free space. 
+      </listitem>
+      <listitem><parameter>yscale</parameter>: It defines the ammount of vertical
+      free space that the child will be extended to occupy. Ranges from 0 (the 
+      child won't extend) to 1 (extend over all the available free space).
+      </listitem>
+     </itemizedlist>
+     <example>
+      <title>GtkAlignment usage demonstration</title>
+      <programlisting role="php">
+       <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+                  href="&directory.examples;/reference/gtk/gtkalignment/constructor.phpw" parse="text">
+        <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+       </xi:include>
+      </programlisting>
+     </example> 
+    </para>
    </desc>
   </constructor>
 
@@ -43,14 +95,17 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Gets the padding on the different sides of the widget. 
    </shortdesc>
    <desc>
+    <para>
+     This method retrieves the current padding on the different sides of the
+     <classname>GtkAlignment</classname> container.
+    </para>
     <para>
      See also: 
      <function class="GtkAlignment">set_padding</function>
     </para>
-
    </desc>
   </method>
 
@@ -65,10 +120,13 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets new values for <classname>GtkAlignment</classname>.
    </shortdesc>
    <desc>
-
+    <para>
+     This method is used to define new values for a 
+     <classname>GtkAlignment</classname> container.
+    </para>
    </desc>
   </method>
 
@@ -83,9 +141,13 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the padding on the different sides of the widget.
    </shortdesc>
    <desc>
+    <para>
+     This method sets the padding on the different sides of the
+     <classname>GtkAlignment</classname> container.
+    </para>
     <para>
      See also: 
      <function class="GtkAlignment">get_padding</function>
