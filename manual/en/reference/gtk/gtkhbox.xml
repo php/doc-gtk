@@ -4,10 +4,31 @@
   <classtitle>GtkHBox</classtitle>
   <classparent>GtkBox</classparent>
   <shortdesc>
-
+   A horizontal box for organizing child widgets.
   </shortdesc>
   <desc>
-
+   <para>
+    The <classname>GtkHBox</classname> container is designed to organize child
+    widgets along a single row, allocating the same height to all children. 
+    This overrides any child requisition size, and child widgets that take up
+    less than the allocated space are horizontally centered by default within
+    that space.
+   </para>
+   <para>
+    Adding child widgets to a <classname>GtkHBox</classname> is done by packing
+    methods that are either inherited from the <classname>GtkBox</classname> 
+    class, such as <function class="GtkBox">pack_start</function>, or by the 
+    less flexible <function class="GtkContainer">add</function>, common to all
+    container widgets.
+   </para>
+   <para>GtkHBox and GtkVBox, in combination, are the most commonly used 
+    packing widgets.For sample code on how to use both, check the 
+    <classname>GtkVBox</classname> constructor entry.</para>
+   <para>
+    See also:
+    <classname>GtkVBox</classname>, <classname>GtkTable</classname>, <classname>GtkButtonBox</classname>,
+    <classname>GtkBox</classname>, <classname>GtkContainer</classname>.
+   </para>
   </desc>
  </classmeta>
 
@@ -18,14 +39,20 @@
     <funcprototype>
     <funcdef> <function>GtkHBox</function></funcdef>
     <paramdef>bool <parameter><optional>homogeneous = FALSE</optional></parameter></paramdef>
-    <paramdef>int <parameter>spacing</parameter></paramdef>
+    <paramdef>int <parameter><optional>spacing = 0</optional></parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Creates a container that arranges widgets horizontally.
    </shortdesc>
    <desc>
-
+    <para>
+     The parameter <parameter>homogeneous</parameter> is a boolean value which defines whether all
+     child widgets in the box should be assigned the width of the largest widget. The default
+     behaviour (false) is to maintain the individual width of the widgets unchanged.
+     The second parameter, <parameter>spacing</parameter>, defines the minimum number of pixels to
+     be left between widgets.
+    </para>
    </desc>
   </constructor>
 
