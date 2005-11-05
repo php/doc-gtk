@@ -4,10 +4,23 @@
   <classtitle>GtkHSeparator</classtitle>
   <classparent>GtkSeparator</classparent>
   <shortdesc>
-
+   A horizontal separator.
   </shortdesc>
   <desc>
-
+   <para>
+    A GtkHSeparator is a widget that consists of a horizontal line with a 
+    shadow that makes it look carved into the window. 
+    It is used to separate widgets that are laid out vertically.
+   </para>
+   <para>
+    Note that GtkHSeparator cannot be added to 
+    <classname>GtkMenu</classname>s. 
+    For that purpose, see <classname>GtkSeparatorMenuItem</classname>.
+   </para>
+   <para>
+    See also:
+    <classname>GtkVSeparator</classname>.
+   </para>
   </desc>
  </classmeta>
 
@@ -21,10 +34,27 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Creates a horizontal line.
    </shortdesc>
    <desc>
-
+    <para>
+     Constructing a GtkHSeparator and adding it to a widget amounts to the
+     same thing as drawing a horizontal line across that widget. 
+     Use the container's packing methods (for example, 
+     <function class="GtkBox">pack_start</function>) to organise spacing 
+     around the separators. Check the script below for some examples.
+    </para>
+    <para>
+     <example>
+      <title>Usage demonstration for GtkHSeparator and GtkVSeparator</title>
+      <programlisting role="php">
+       <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+                  href="&directory.examples;/reference/gtk/gtkseparator/separators.phpw" parse="text">
+        <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+       </xi:include>
+      </programlisting>
+     </example>
+    </para>
    </desc>
   </constructor>
 

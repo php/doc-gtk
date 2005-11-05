@@ -14,6 +14,14 @@
     a <classname>GtkMenuItem</classname>, or a 
     <classname>GtkOptionMenu</classname>.
    </para>
+   <para>
+    You can have control over the way a GtkLabel will be displayed with 
+    some methods such as <function class="GtkLabel">set_justify</function>
+    or <function class="GtkLabel">set_width_chars</function>. If you wish to
+    define an alignment (note that align and justify are not the same thing)
+    or padding for a GtkLabel, you can insert it into a 
+    <classname>GtkAlignment</classname> container.
+   </para>
   </desc>
  </classmeta>
 
@@ -32,38 +40,20 @@
    </shortdesc>
    <desc>
     <para>
-     Creates a new label with an (optional) text. If you set the <parameter>parse_mnemonic</parameter> to true,
-     the label will set the mnemonic key to the first letter right to the first underscore <literal>_</literal>.
+     Creates a new label with an (optional) text. If you set the 
+     <parameter>parse_mnemonic</parameter> to true,
+     the label will set the mnemonic key to the first letter right 
+     to the first underscore <literal>_</literal>.
     </para>
     <para>
      <example>
       <title>Creating a GtkLabel</title>
       <programlisting role="php">
-<![CDATA[<?php
-function rotate($label) {
-    $label->set_label($label->get_angle() . ' ' . 'label text - this <b>is</b> a' 
-      . '<span foreground="#F00">very long label</span>'
-      . 'so we can see <span background="green" size="larger"'
-      . ' weight="bold">rotation</span> better');
-    $label->set_angle($label->get_angle() + 1);
-    return true;
-}
-
-$wnd = new GtkWindow();
-$wnd->set_default_size(500,500);
-$wnd->set_title('GtkLabel::set_angle');
-$wnd->connect_object('destroy', array('gtk', 'main_quit'));
-
-$label = new GtkLabel('t_est', true);
-$label->set_use_markup(true);
-
-$wnd->add($label);
-$wnd->show_all();
-
-Gtk::timeout_add(50, 'rotate', $label);
-Gtk::main();
-?>
-]]></programlisting>
+       <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+                  href="&directory.examples;/reference/gtk/gtklabel/constructor.phpw" parse="text">
+        <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+       </xi:include>
+      </programlisting>
      </example>
     </para>
    </desc>
