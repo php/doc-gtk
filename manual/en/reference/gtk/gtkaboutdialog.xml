@@ -70,14 +70,17 @@
   <method id="gtk.gtkaboutdialog.method.get_artists">
    <funcsynopsis>
     <funcprototype>
-     <funcdef> <function>get_artists</function></funcdef>
+     <funcdef>array <function>get_artists</function></funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns artists credits as an array.
    </shortdesc>
    <desc>
+   <simpara>
+   Returns artists credits as an array.
+   </simpara>
     <para>
      See also: 
      <function class="GtkAboutDialog">set_artists</function>
@@ -89,14 +92,17 @@
   <method id="gtk.gtkaboutdialog.method.get_authors">
    <funcsynopsis>
     <funcprototype>
-     <funcdef> <function>get_authors</function></funcdef>
+     <funcdef>array <function>get_authors</function></funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns authors credits as an array.
    </shortdesc>
    <desc>
+  <simpara>
+   Returns authors credits as an array.
+   </simpara>
     <para>
      See also: 
      <function class="GtkAboutDialog">set_authors</function>
@@ -152,14 +158,17 @@
   <method id="gtk.gtkaboutdialog.method.get_documenters">
    <funcsynopsis>
     <funcprototype>
-     <funcdef> <function>get_documenters</function></funcdef>
+     <funcdef>array <function>get_documenters</function></funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns documenter credits as an array.
    </shortdesc>
-   <desc>
+   <desc>   
+   <simpara>
+   Returns documenter credits as an array.
+   </simpara>
     <para>
      See also: 
      <function class="GtkAboutDialog">set_documenters</function>
@@ -350,11 +359,11 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_artists</function></funcdef>
-     <paramdef>void</paramdef>
+     <paramdef>array <parameter>artists</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+   Sets the strings which are displayed in the artists tab of the secondary credits dialog.
    </shortdesc>
    <desc>
     <para>
@@ -369,13 +378,33 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_authors</function></funcdef>
-     <paramdef>void</paramdef>
+     <paramdef>array <parameter>authors</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the strings which are displayed in the authors tab of 
+    the secondary credits dialog.
    </shortdesc>
    <desc>
+   <simpara>
+   The <classname>GtkAboutDialog</classname> supports secondary 
+   credits for artists, authors, documenters and translators, if any of these 
+   are set the <classname>GtkAboutDialog</classname> window will 
+   automatically display  a "Credits"  button , clicking this displays the secondary 
+   credits window.
+   </simpara>
+    <simpara>
+    <function class="GtkAboutDialog">set_authors</function>, 
+    <function class="GtkAboutDialog">set_artists</function> and 
+    <function class="GtkAboutDialog">set_documenters</function> all 
+    accept a string array of credits, if any of the credits are recognised as email 
+    addresses or urls then these are displayed as  links assuming  the appropriate 
+    hooks have been set with <function class="GtkAboutDialog">set_email_hook</function>
+     or <function class="GtkAboutDialog">set_url_hook</function>
+    </simpara>
+    <simpara>
+    As of writing, the url and email hooks are not currently implemented.
+    </simpara>
     <para>
      See also: 
      <function class="GtkAboutDialog">get_authors</function>
@@ -436,11 +465,11 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_documenters</function></funcdef>
-     <paramdef>void</paramdef>
+     <paramdef>array <parameter>documenters</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+   Sets the strings which are displayed in the documenters tab of the secondary credits dialog.
    </shortdesc>
    <desc>
     <para>
