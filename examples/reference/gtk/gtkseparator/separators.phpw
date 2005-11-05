@@ -1,0 +1,56 @@
+<?php
+//Checking for php-gtk
+if( !class_exists('gtk')) {
+	die('Please load the php-gtk2 module in your php.ini' . "\r\n");
+}
+
+//The GtkBoxes we'll be using to arrange our demonstration  
+$vbox = new GtkVBox();
+$hbox = new GtkHBox();
+
+//Labels that will identify each portion of the window
+$label_top = new GtkLabel("Top");
+$label_br = new GtkLabel("Bottom right");
+$label_bl = new GtkLabel("Bottom left");
+
+//Our separators
+$vsep = new GtkVSeparator();
+$hsep = new GtkHSeparator();
+
+//Let's colour our separators. This is, of course, optional
+$green = new GdkColor(0, 65000, 0);
+$red = new GdkColor(65000,0,0);
+$style_1 = new GtkStyle();
+$style_2 = new GtkStyle();
+$style_1->bg[GTK::STATE_NORMAL] = $red;
+$style_2->bg[GTK::STATE_NORMAL] = $green;
+$hsep->set_style($style_1);
+$vsep->set_style($style_2);
+
+//Let's assemble our widgets
+$vbox->pack_start($label_top);
+//Here we're adding the horizontal separator, the "false, false, 3" means we
+//don't want it to extend or fill, and that it should have a padding of 3 px.
+//Check pack_start() in the manual for more info
+$vbox->pack_start($hsep, false, false, 3);
+$vbox->pack_start($hbox);
+$hbox->pack_start($label_br);
+//Same thing for the vertical separator. Note that you don't have to define 
+//this extra arguments, they're just here because I like it better this way =)
+$hbox->pack_start($vsep, false, false, 3);
+$hbox->pack_start($label_bl, true, true);
+
+//Preparing the window
+$win = new GtkWindow();
+$win->set_position(Gtk::WIN_POS_CENTER);
+$win->set_title('Separator demo');
+$win->set_default_size(200, 100);
+//Adding the GtkVBox to the window
+$win->add($vbox);
+//Connecting the destroy signal
+$win->connect_simple('destroy', array('gtk','main_quit'));
+//Showing the window's content
+$win->show_all();
+//Main loop
+Gtk::main();
+?>
