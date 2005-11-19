@@ -4,11 +4,30 @@
   <classtitle>GtkBin</classtitle>
   <classparent>GtkContainer</classparent>
   <shortdesc>
-
+    A container widget with only one child.
   </shortdesc>
   <desc>
-
+    <para>
+      The <classname>GtkBin</classname> widget is a container that is
+      capable of holding only one child. It is not very useful on its own,
+      but is often used for deriving subclasses, since it provides code for
+      needed for handling a single widget child. All widgets derived from
+      <classname>GtkBin</classname> therefore can only contain one
+      immediate child, although this child may itself contain multiple
+      widgets.
+    </para>
+    <para>
+      Since <classname>GtkBin</classname> is an abstract base class, there
+      is no constructor for it. However, many useful widgets are subclasses
+      of <classname>GtkBin</classname>, including
+      <classname>GtkButton</classname>, <classname>GtkFrame</classname>,
+      <classname>GtkHandleBox</classname> and
+      <classname>GtkWindow</classname>. You can use
+      <function class="GtkBin">get_child</function> to get the child
+      object.
+    </para>
   </desc>
+
  </classmeta>
 
  <methods>
@@ -16,16 +35,21 @@
   <method id="gtk.gtkbin.method.get_child">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>GtkWidget <function>get_child</function></funcdef>
+     <funcdef><classname>GtkWidget</classname> <function>get_child</function></funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the child of the <classname>GtkBin</classname>.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     Returns the child of the <classname>GtkBin</classname>, or 
+     <literal>NULL</literal> if the
+     bin contains no child widget.
+    </para>
+    <para>
+     See also:
      <propname class="GtkBin">child</propname>
     </para>
 
@@ -40,13 +64,19 @@
    <propname>child</propname>
    <proptype>GtkWidget</proptype>
    <shortdesc>
+    The child widget
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     This property allows access to the child widget contained by the
+     <classname>GtkBin</classname> object. It can be treated like any other
+     <classname>GtkWidget</classname>. If the value of this property is
+     <literal>NULL</literal>, then GtkBin object does not contain a child widget.
+    </para>
+    <para>
+     See also:
      <function class="GtkBin">get_child</function>
     </para>
-
    </desc>
   </property>
 

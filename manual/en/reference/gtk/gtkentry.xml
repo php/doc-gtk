@@ -4,10 +4,17 @@
   <classtitle>GtkEntry</classtitle>
   <classparent>GtkWidget</classparent>
   <shortdesc>
-
+    A single line text entry field.
   </shortdesc>
   <desc>
-
+    <para>
+      <classname>GtkEntry</classname> is a single line text entry widget.
+      It is generally used when input is required from the user. A fairly
+      large set of key bindings are supported by default and have the
+      potential to be edited by the user. If the entered text is longer
+      than the allocation of the widget, the widget will scroll so that the
+      cursor position is visible.
+    </para>
   </desc>
  </classmeta>
 
@@ -21,10 +28,27 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Creates a single line text entry widget.
    </shortdesc>
    <desc>
-
+    <para>
+      Creates a widget that will hold a single line of text. You have the
+      freedom to either set the widget programatically through
+      <function class="GtkEntry">set_text</function> or have it entered
+      by the user.
+    </para>
+    <example>
+      <title>
+        Retrieving text and echoing it using
+        <classname>GtkEntry</classname>
+      </title>
+      <programlisting role="php">
+       <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+                href="&directory.examples;/reference/gtk/gtkentry/constructor.phpw" parse="text">
+        <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+       </xi:include>
+      </programlisting>
+    </example>
    </desc>
   </constructor>
 
@@ -59,9 +83,9 @@
    </shortdesc>
    <desc>
     <para>
-     See also: 
-     <function class="GtkEntry">get_text</function>, 
-     <function class="GtkEntry">prepend_text</function>, 
+     See also:
+     <function class="GtkEntry">get_text</function>,
+     <function class="GtkEntry">prepend_text</function>,
      <function class="GtkEntry">set_text</function>
     </para>
 
@@ -80,7 +104,7 @@
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     See also:
      <function class="GtkEntry">set_activates_default</function>
     </para>
 
@@ -99,7 +123,7 @@
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     See also:
      <function class="GtkEntry">set_alignment</function>
     </para>
 
@@ -109,7 +133,7 @@
   <method id="gtk.gtkentry.method.get_completion">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>GtkEntryCompletion <function>get_completion</function></funcdef>
+     <funcdef><classname>GtkEntryCompletion</classname> <function>get_completion</function></funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
@@ -118,7 +142,7 @@
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     See also:
      <function class="GtkEntry">set_completion</function>
     </para>
 
@@ -137,7 +161,7 @@
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     See also:
      <function class="GtkEntry">set_has_frame</function>
     </para>
 
@@ -156,7 +180,7 @@
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     See also:
      <function class="GtkEntry">set_invisible_char</function>
     </para>
 
@@ -205,7 +229,7 @@
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     See also:
      <function class="GtkEntry">set_max_length</function>
     </para>
 
@@ -220,13 +244,24 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Retrieves the contents of the <classname>GtkEntry</classname> widget.
    </shortdesc>
    <desc>
     <para>
-     See also: 
-     <function class="GtkEntry">append_text</function>, 
-     <function class="GtkEntry">prepend_text</function>, 
+      Retrieves the text entered into the <classname>GtkEntry</classname>
+      widget, and also any appended or prepended text that may have been
+      set using <function class="GtkEntry">set_text</function> but not
+      displayed.
+    </para>
+    <note>
+      Contrary to rumours, this function is NOT marked as deprecated,
+      either in the earlier versions of GTK+ used by PHP-GTK or the current
+      versions.
+    </note>
+    <para>
+     See also:
+     <function class="GtkEntry">append_text</function>,
+     <function class="GtkEntry">prepend_text</function>,
      <function class="GtkEntry">set_text</function>
     </para>
 
@@ -245,7 +280,7 @@
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     See also:
      <function class="GtkEntry">set_visibility</function>
     </para>
 
@@ -264,7 +299,7 @@
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     See also:
      <function class="GtkEntry">set_width_chars</function>
     </para>
 
@@ -283,9 +318,9 @@
    </shortdesc>
    <desc>
     <para>
-     See also: 
-     <function class="GtkEntry">append_text</function>, 
-     <function class="GtkEntry">get_text</function>, 
+     See also:
+     <function class="GtkEntry">append_text</function>,
+     <function class="GtkEntry">get_text</function>,
      <function class="GtkEntry">set_text</function>
     </para>
 
@@ -320,7 +355,7 @@
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     See also:
      <function class="GtkEntry">get_activates_default</function>
     </para>
 
@@ -339,7 +374,7 @@
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     See also:
      <function class="GtkEntry">get_alignment</function>
     </para>
 
@@ -350,7 +385,7 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_completion</function></funcdef>
-     <paramdef>GtkEntryCompletion <parameter>completion</parameter></paramdef>
+     <paramdef><classname>GtkEntryCompletion</classname> <parameter>completion</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -358,7 +393,7 @@
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     See also:
      <function class="GtkEntry">get_completion</function>
     </para>
 
@@ -392,7 +427,7 @@
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     See also:
      <function class="GtkEntry">get_has_frame</function>
     </para>
 
@@ -411,7 +446,7 @@
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     See also:
      <function class="GtkEntry">get_invisible_char</function>
     </para>
 
@@ -430,7 +465,7 @@
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     See also:
      <function class="GtkEntry">get_max_length</function>
     </para>
 
@@ -464,9 +499,9 @@
    </shortdesc>
    <desc>
     <para>
-     See also: 
-     <function class="GtkEntry">append_text</function>, 
-     <function class="GtkEntry">get_text</function>, 
+     See also:
+     <function class="GtkEntry">append_text</function>,
+     <function class="GtkEntry">get_text</function>,
      <function class="GtkEntry">prepend_text</function>
     </para>
 
@@ -485,7 +520,7 @@
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     See also:
      <function class="GtkEntry">get_visibility</function>
     </para>
 
@@ -504,7 +539,7 @@
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     See also:
      <function class="GtkEntry">get_width_chars</function>
     </para>
 
@@ -520,7 +555,7 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <cbfunction>callback</cbfunction></funcdef>
-     <paramdef>GtkEntry <parameter>entry</parameter></paramdef>
+     <paramdef><classname>GtkEntry</classname> <parameter>entry</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -529,13 +564,13 @@
 
    </desc>
   </signal>
-  
+
   <signal id="gtk.gtkentry.signal.backspace">
    <signalname>backspace</signalname>
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <cbfunction>callback</cbfunction></funcdef>
-     <paramdef>GtkEntry <parameter>entry</parameter></paramdef>
+     <paramdef><classname>GtkEntry</classname> <parameter>entry</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -544,13 +579,13 @@
 
    </desc>
   </signal>
-  
+
   <signal id="gtk.gtkentry.signal.copy-clipboard">
    <signalname>copy-clipboard</signalname>
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <cbfunction>callback</cbfunction></funcdef>
-     <paramdef>GtkEntry <parameter>entry</parameter></paramdef>
+     <paramdef><classname>GtkEntry</classname> <parameter>entry</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -559,13 +594,13 @@
 
    </desc>
   </signal>
-  
+
   <signal id="gtk.gtkentry.signal.cut-clipboard">
    <signalname>cut-clipboard</signalname>
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <cbfunction>callback</cbfunction></funcdef>
-     <paramdef>GtkEntry <parameter>entry</parameter></paramdef>
+     <paramdef><classname>GtkEntry</classname> <parameter>entry</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -574,14 +609,14 @@
 
    </desc>
   </signal>
-  
+
   <signal id="gtk.gtkentry.signal.delete-from-cursor">
    <signalname>delete-from-cursor</signalname>
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <cbfunction>callback</cbfunction></funcdef>
-     <paramdef>GtkEntry <parameter>entry</parameter></paramdef>
-     <paramdef>GtkDeleteType <parameter>UNKNOWN</parameter></paramdef>
+     <paramdef><classname>GtkEntry</classname> <parameter>entry</parameter></paramdef>
+     <paramdef><enumname>GtkDeleteType</enumname> <parameter>UNKNOWN</parameter></paramdef>
      <paramdef>int <parameter>UNKNOWN</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
@@ -591,13 +626,13 @@
 
    </desc>
   </signal>
-  
+
   <signal id="gtk.gtkentry.signal.insert-at-cursor">
    <signalname>insert-at-cursor</signalname>
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <cbfunction>callback</cbfunction></funcdef>
-     <paramdef>GtkEntry <parameter>entry</parameter></paramdef>
+     <paramdef><classname>GtkEntry</classname> <parameter>entry</parameter></paramdef>
      <paramdef><!-- was: gchararray -->XXX <parameter>UNKNOWN</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
@@ -607,14 +642,14 @@
 
    </desc>
   </signal>
-  
+
   <signal id="gtk.gtkentry.signal.move-cursor">
    <signalname>move-cursor</signalname>
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <cbfunction>callback</cbfunction></funcdef>
-     <paramdef>GtkEntry <parameter>entry</parameter></paramdef>
-     <paramdef>GtkMovementStep <parameter>UNKNOWN</parameter></paramdef>
+     <paramdef><classname>GtkEntry</classname> <parameter>entry</parameter></paramdef>
+     <paramdef><enumname>GtkMovementStep</enumname> <parameter>UNKNOWN</parameter></paramdef>
      <paramdef>int <parameter>UNKNOWN</parameter></paramdef>
      <paramdef>bool <parameter>UNKNOWN</parameter></paramdef>
     </funcprototype>
@@ -625,13 +660,13 @@
 
    </desc>
   </signal>
-  
+
   <signal id="gtk.gtkentry.signal.paste-clipboard">
    <signalname>paste-clipboard</signalname>
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <cbfunction>callback</cbfunction></funcdef>
-     <paramdef>GtkEntry <parameter>entry</parameter></paramdef>
+     <paramdef><classname>GtkEntry</classname> <parameter>entry</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -640,14 +675,14 @@
 
    </desc>
   </signal>
-  
+
   <signal id="gtk.gtkentry.signal.populate-popup">
    <signalname>populate-popup</signalname>
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <cbfunction>callback</cbfunction></funcdef>
-     <paramdef>GtkEntry <parameter>entry</parameter></paramdef>
-     <paramdef>GtkMenu <parameter>UNKNOWN</parameter></paramdef>
+     <paramdef><classname>GtkEntry</classname> <parameter>entry</parameter></paramdef>
+     <paramdef><classname>GtkMenu</classname> <parameter>UNKNOWN</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -656,13 +691,13 @@
 
    </desc>
   </signal>
-  
+
   <signal id="gtk.gtkentry.signal.toggle-overwrite">
    <signalname>toggle-overwrite</signalname>
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <cbfunction>callback</cbfunction></funcdef>
-     <paramdef>GtkEntry <parameter>entry</parameter></paramdef>
+     <paramdef><classname>GtkEntry</classname> <parameter>entry</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -671,7 +706,7 @@
 
    </desc>
   </signal>
-  
+
  </signals>
 
 </classentry>

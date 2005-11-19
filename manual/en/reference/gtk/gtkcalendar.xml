@@ -4,10 +4,34 @@
   <classtitle>GtkCalendar</classtitle>
   <classparent>GtkWidget</classparent>
   <shortdesc>
-
+   Displays a calendar and allows the user to select a date.
   </shortdesc>
   <desc>
-
+   <para>
+    A <classname>GtkCalendar</classname> is a widget that displays a
+    calendar as a grid, one month at a time, allowing the user to select a
+    particular date.
+   </para>
+   <para>
+    The month and year currently displayed can be modified using
+    <function class="GtkCalendar">select_month</function>. The exact
+    day to be selected may be modified using
+    <function class="GtkCalendar">select_day</function>.
+   </para>
+   <para>
+    You may place a visual mark on a particular day by using
+    <function class="GtkCalendar">mark_day</function>. The marker
+    may be removed using
+    <function class="GtkCalendar">unmark_day</function>.
+   </para>
+   <para>
+    The visual style of the calendar may be modified comprehensively using
+    <function class="GtkCalendar">set_display_options</function>. Of course,
+    the whole purpose of creating the calendar itself is to retrive the
+    input from the user! You may use
+    <function class="GtkCalendar">get_month</function>to retrieve the date
+    selected by the user.
+   </para>
   </desc>
  </classmeta>
 
@@ -21,10 +45,11 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Creates a calender widget.
    </shortdesc>
    <desc>
-
+    Creates a calender widget that is set to display the current month
+    and year.
    </desc>
   </constructor>
 
@@ -51,7 +76,7 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>display_options</function></funcdef>
-     <paramdef>GtkCalendarDisplayOptions <parameter>flags</parameter></paramdef>
+     <paramdef><enumname>GtkCalendarDisplayOptions</enumname> <parameter>flags</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -70,7 +95,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Freezes the display prior to allow updates.
    </shortdesc>
    <desc>
 
@@ -85,7 +110,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the currently selected date.
    </shortdesc>
    <desc>
 
@@ -95,7 +120,7 @@
   <method id="gtk.gtkcalendar.method.get_display_options">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>GtkCalendarDisplayOptions <function>get_display_options</function></funcdef>
+     <funcdef><enumname>GtkCalendarDisplayOptions</enumname> <function>get_display_options</function></funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
@@ -104,10 +129,9 @@
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     See also:
      <function class="GtkCalendar">set_display_options</function>
     </para>
-
    </desc>
   </method>
 
@@ -119,12 +143,12 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Places a visual marker on the given day.
    </shortdesc>
    <desc>
     <para>
-     See also: 
-     <function class="GtkCalendar">select_day</function>, 
+     See also:
+     <function class="GtkCalendar">select_day</function>,
      <function class="GtkCalendar">unmark_day</function>
     </para>
 
@@ -139,12 +163,12 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Determines the day to be selected.
    </shortdesc>
    <desc>
     <para>
-     See also: 
-     <function class="GtkCalendar">mark_day</function>, 
+     See also:
+     <function class="GtkCalendar">mark_day</function>,
      <function class="GtkCalendar">unmark_day</function>
     </para>
 
@@ -160,7 +184,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Determines the month and year to be selected.
    </shortdesc>
    <desc>
 
@@ -171,7 +195,7 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_display_options</function></funcdef>
-     <paramdef>GtkCalendarDisplayOptions <parameter>flags</parameter></paramdef>
+     <paramdef><enumname>GtkCalendarDisplayOptions</enumname> <parameter>flags</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -179,7 +203,7 @@
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     See also:
      <function class="GtkCalendar">get_display_options</function>
     </para>
 
@@ -194,7 +218,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Thaws the display following freeze.
    </shortdesc>
    <desc>
 
@@ -209,12 +233,12 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Removes the visual marker set on a given day.
    </shortdesc>
    <desc>
     <para>
-     See also: 
-     <function class="GtkCalendar">mark_day</function>, 
+     See also:
+     <function class="GtkCalendar">mark_day</function>,
      <function class="GtkCalendar">select_day</function>
     </para>
 
@@ -230,106 +254,113 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <cbfunction>callback</cbfunction></funcdef>
-     <paramdef>GtkCalendar <parameter>calendar</parameter></paramdef>
+     <paramdef><classname>GtkCalendar</classname> <parameter>calendar</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
+    Emitted when the given day is selected.
    </shortdesc>
    <desc>
 
    </desc>
   </signal>
-  
+
   <signal id="gtk.gtkcalendar.signal.day-selected-double-click">
    <signalname>day-selected-double-click</signalname>
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <cbfunction>callback</cbfunction></funcdef>
-     <paramdef>GtkCalendar <parameter>calendar</parameter></paramdef>
+     <paramdef><classname>GtkCalendar</classname> <parameter>calendar</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
+    Emitted when the given day is clicked on twice.
    </shortdesc>
    <desc>
 
    </desc>
   </signal>
-  
+
   <signal id="gtk.gtkcalendar.signal.month-changed">
    <signalname>month-changed</signalname>
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <cbfunction>callback</cbfunction></funcdef>
-     <paramdef>GtkCalendar <parameter>calendar</parameter></paramdef>
+     <paramdef><classname>GtkCalendar</classname> <parameter>calendar</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
+    Emitted when the user attempts to change the current month.
    </shortdesc>
    <desc>
 
    </desc>
   </signal>
-  
+
   <signal id="gtk.gtkcalendar.signal.next-month">
    <signalname>next-month</signalname>
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <cbfunction>callback</cbfunction></funcdef>
-     <paramdef>GtkCalendar <parameter>calendar</parameter></paramdef>
+     <paramdef><classname>GtkCalendar</classname> <parameter>calendar</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
+    Emitted when the user chooses to go forward by one month.
    </shortdesc>
    <desc>
 
    </desc>
   </signal>
-  
+
   <signal id="gtk.gtkcalendar.signal.next-year">
    <signalname>next-year</signalname>
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <cbfunction>callback</cbfunction></funcdef>
-     <paramdef>GtkCalendar <parameter>calendar</parameter></paramdef>
+     <paramdef><classname>GtkCalendar</classname> <parameter>calendar</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
+    Emitted when the user chooses to go forward by one year.
    </shortdesc>
    <desc>
 
    </desc>
   </signal>
-  
+
   <signal id="gtk.gtkcalendar.signal.prev-month">
    <signalname>prev-month</signalname>
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <cbfunction>callback</cbfunction></funcdef>
-     <paramdef>GtkCalendar <parameter>calendar</parameter></paramdef>
+     <paramdef><classname>GtkCalendar</classname> <parameter>calendar</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
+    Emitted when the user chooses to go backward by one month.
    </shortdesc>
    <desc>
 
    </desc>
   </signal>
-  
+
   <signal id="gtk.gtkcalendar.signal.prev-year">
    <signalname>prev-year</signalname>
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <cbfunction>callback</cbfunction></funcdef>
-     <paramdef>GtkCalendar <parameter>calendar</parameter></paramdef>
+     <paramdef><classname>GtkCalendar</classname> <parameter>calendar</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
+    Emitted when the user chooses to go backward by one year.
    </shortdesc>
    <desc>
 
    </desc>
   </signal>
-  
+
  </signals>
 
 </classentry>

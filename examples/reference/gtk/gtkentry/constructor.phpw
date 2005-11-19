@@ -1,0 +1,42 @@
+<?php
+/* Checking for PHP-GTK 2 Module */
+if(!class_exists('gtk')) {
+	die('Please load the PHP-GTK 2 module in your php.ini');
+}
+
+/* Function to retrieve text from GtkEntry and Print it */
+function get_input($entry) {
+  $input=$entry->get_text();
+  echo "$input\r\n";
+  $entry->grab_focus();
+  $entry->set_text("");
+}
+
+/* Setting up the Window
+   Note the usage of connect_simple()
+   instead of deprecated connect_object() */
+$window = &new GtkWindow();
+$window->set_position(Gtk::WIN_POS_CENTER);
+$window->connect_simple('destroy', array('gtk', 'main_quit'));
+
+/* Adding a box to the Window to allow more than one Child */
+$box = &new GtkVBox();
+$window->add($box);
+
+/* Adding the GtkEntry widget and connecting
+   it to the callback function: get_text() */
+$entry = &new GtkEntry();
+$entry->connect('activate', 'get_input');
+$box->add($entry);
+
+/* Adding a GtkButton to the box and use connect_simple() so that it
+   will pass the GtkEntry to the callback function when it is clicked */
+$button = &new GtkButton('Click Me to echo input!');
+$button->connect_simple('clicked', 'get_input', $entry);
+$box->add($button);
+
+/* Display everything and start the main loop */
+$box->show_all();
+$window->show_all();
+Gtk::main();
+?>

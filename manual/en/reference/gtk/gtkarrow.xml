@@ -4,10 +4,26 @@
   <classtitle>GtkArrow</classtitle>
   <classparent>GtkMisc</classparent>
   <shortdesc>
-
+    Displays an arrow pointing in one of the four cardinal directions.
   </shortdesc>
   <desc>
-
+    <para>
+      The <classname>GtkArrow</classname> widget can be used to draw simple
+      arrows that need to point in one of the four cardinal directions (up,
+      down, left and right). The Style of the arrow displayed may be
+      modified to suit your requirements by modifying the values of the
+      parameters GtkShadowType and GtkArrowType.
+    </para>
+    <para>
+      <classname>GtkArrow</classname> will fill any space alloted to it,
+      but since it is inherited from <classname>GtkMisc</classname>,
+      it can be padded and/or aligned, to fill exactly the space the
+      programmer desires.
+    </para>
+    <para>
+      The direction or style of an arrow can be changed after creation
+      by using <function class="GtkArrow">set</function>.
+    </para>
   </desc>
  </classmeta>
 
@@ -17,12 +33,13 @@
    <funcsynopsis>
     <funcprototype>
     <funcdef> <function>GtkArrow</function></funcdef>
-    <paramdef>GtkArrowType <parameter>arrow_type</parameter></paramdef>
-    <paramdef>GtkShadowType <parameter>shadow_type</parameter></paramdef>
+    <paramdef><enumname>GtkArrowType</enumname> <parameter>arrow_type</parameter></paramdef>
+    <paramdef><enumname>GtkShadowType</enumname> <parameter>shadow_type</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Creates the arrow widget pointing in one of the four cardinal
+    directions
    </shortdesc>
    <desc>
 
@@ -37,18 +54,23 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set</function></funcdef>
-     <paramdef>GtkArrowType <parameter>arrow_type</parameter></paramdef>
-     <paramdef>GtkShadowType <parameter>shadow_type</parameter></paramdef>
+     <paramdef><enumname>GtkArrowType</enumname> <parameter>arrow_type</parameter></paramdef>
+     <paramdef><enumname>GtkShadowType</enumname> <parameter>shadow_type</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets new parameters for an existing <classname>GtkArrow</classname>
    </shortdesc>
    <desc>
-
+    This method redefines the parameters for an existing
+    <classname>GtkArrow</classname>. Typically, this method is used within
+    a callback function where the arrow is required to point in another
+    direction, change its appearance and/or vanish.
    </desc>
   </method>
 
  </methods>
+
+ <!-- FIXME: properties are missing -->
 
 </classentry>
