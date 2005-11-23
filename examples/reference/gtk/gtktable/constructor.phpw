@@ -1,0 +1,83 @@
+<?php
+//Checking for php-gtk
+if (!class_exists('gtk')) {
+    die('Please load the php-gtk2 module in your php.ini' . "\r\n");
+}
+
+//Creating the window that will hold our example program
+$window = new GtkWindow();
+//Title of the window
+$window->set_title("GtkTable usage demonstration");
+//Initial placement of the window 
+$window->set_position(Gtk::WIN_POS_CENTER);
+//Connecting the "destroy" signal
+$window->connect_simple('destroy', array('gtk', 'main_quit'));
+
+//Creating our GtkTable - note that the homogeneous property defaults to false.
+$table = new GtkTable(3, 3, false);
+
+//Let's define the spacing between columns and rows to 10 pixels
+$table->set_row_spacings(10);
+$table->set_col_spacings(10);
+
+//Adding the table to the window
+$window->add($table);
+
+//Now that we have a table, let's add some widgets to it
+//Note the different AttachOptions: resize the window to see the effects of each
+$text = new GtkTextView();
+$table->attach($text, 0, 3, 0, 1);
+
+$button1 = new GtkButton('Button 1 ');
+$table->attach($button1, 0, 1, 1, 2, Gtk::SHRINK, Gtk::SHRINK, 3, 3);
+
+$button2 = new GtkButton('Button 2 ');
+$table->attach($button2, 1, 2, 1, 2, Gtk::FILL, Gtk::FILL, 3, 3);
+
+$button3 = new GtkButton('Button 3 ');
+$table->attach($button3, 2, 3, 1, 2, Gtk::FILL, Gtk::EXPAND, 3, 3);
+
+//Let's add a label with information. We'll use it to experiment with acessing
+//widgets in a GtkTable
+$label = new GtkLabel("Expand this window to see the difference \r\n"
+         . "between the GtkAttachOptions settings.");
+$table->attach($label, 0, 3, 2, 3, Gtk::SHRINK, Gtk::SHRINK);
+
+//Adding a button that will change the text in the label
+$button4 = new GtkButton('Change label text');
+//If you recall, we created a 3*3 table, but as we're out of space right now, 
+//this button will be placed on row 4. You can use resize(), but just attaching
+//the child will cause the table to automatically change it's size 
+$table->attach($button4, 0, 3, 3, 4, Gtk::FILL, Gtk::EXPAND, 3, 3);
+
+//Let's connect button4 to a function that changes the text of the label
+$button4->connect_simple('clicked', 'change_text');
+
+//This function accesses the GtkLabel and changes it's content
+function change_text()
+{
+	//Getting a list of the GtkTable's child widgets
+	global $table;
+
+	$children = $table->get_children();
+	//Echoing the name of the children to the console
+	foreach($children as $key => $var) {
+	    echo $var->get_name()."\n";
+	}
+	echo "\n";
+	//Accessing the label's text
+	$current_text = $children['1']->get_text();
+	//Decide which text to show
+	if (substr($current_text, 0, 6) == "Expand") {
+		$children['1']->set_text("Have a nice day! \r\n");
+	} else {
+		$children['1']->set_text("Expand this window to see the difference \r\n"
+            . "between the GtkAttachOptions settings.");
+	}
+}
+
+//Make everything in the window visible
+$window->show_all();
+//Main loop
+Gtk::main();
+?>

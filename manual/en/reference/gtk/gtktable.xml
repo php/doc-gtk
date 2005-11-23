@@ -23,10 +23,40 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Creates a grid for packing widgets in regular patterns.
    </shortdesc>
    <desc>
-
+    <para>
+     The first two parameters in this constructor (<parameter>n_rows</parameter>,
+     <parameter>n_columns</parameter>) define the size of the table and thus the
+     number of cells. They are optional, and since the table will pick up the 
+     layout from the information given as its children are attached to it, they
+     will be overridden automatically if needed.
+    </para>
+    <para>
+     The last parameter (<parameter>homogeneous</parameter>) is also optional,
+     and relates to the way the table manages the size of it's child widgets.
+     If changed to true (the default value is <literal>FALSE</literal>) all
+     children will have the same height and width as the largest child.
+    </para>
+    <para>
+     There are a lot of parameters in the 
+     <function class="GtkTable">attach</function> method - nine in total -
+     four of which are optional. Basically, if the homogeneous parameter in the
+     constructor is set to <literal>TRUE</literal>, there is very little point
+     most of the time in using any of the four optional packing parameters.
+     These come into their own when the children are not required to take up
+     the same amount of space.
+    </para>
+    <example>
+     <title>GtkTable usage demonstration</title>
+     <programlisting role="php">
+      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+                  href="&directory.examples;/reference/gtk/gtktable/constructor.phpw" parse="text">
+       <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+      </xi:include>
+     </programlisting>
+    </example>
    </desc>
   </constructor>
 
@@ -38,22 +68,69 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>attach</function></funcdef>
-     <paramdef>GtkWidget <parameter>child</parameter></paramdef>
+     <paramdef><classname>GtkWidget</classname> <parameter>child</parameter></paramdef>
      <paramdef>int <parameter>left_attach</parameter></paramdef>
      <paramdef>int <parameter>right_attach</parameter></paramdef>
      <paramdef>int <parameter>top_attach</parameter></paramdef>
      <paramdef>int <parameter>bottom_attach</parameter></paramdef>
-     <paramdef>GtkAttachOptions <parameter><optional>xoptions = GTK_EXPAND|GTK_FILL</optional></parameter></paramdef>
-     <paramdef>GtkAttachOptions <parameter><optional>yoptions = GTK_EXPAND|GTK_FILL</optional></parameter></paramdef>
-     <paramdef>int <parameter><optional>xpadding = GTK_EXPAND|GTK_FILL</optional></parameter></paramdef>
-     <paramdef>int <parameter><optional>ypadding = GTK_EXPAND|GTK_FILL</optional></parameter></paramdef>
+     <paramdef><enumname>GtkAttachOptions</enumname> <parameter><optional>xoptions = Gtk::EXPAND|Gtk::FILL</optional></parameter></paramdef>
+     <paramdef><enumname>GtkAttachOptions</enumname> <parameter><optional>yoptions = Gtk::EXPAND|Gtk::FILL</optional></parameter></paramdef>
+     <paramdef>int <parameter><optional>xpadding = Gtk::EXPAND|Gtk::FILL</optional></parameter></paramdef>
+     <paramdef>int <parameter><optional>ypadding = Gtk::EXPAND|Gtk::FILL</optional></parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Adds widgets to a GtkTable.
    </shortdesc>
    <desc>
-
+    <para>
+     <function class="GtkTable">attach</function> is the way of adding widgets
+     to a <classname>GtkTable</classname>. It takes up to nine arguments, but 
+     only five are required.
+    </para>
+    <para>
+     The first argument (<parameter>child</parameter>) refers to the child 
+     widget to be attached. The two following arguments (
+     <parameter>left_attach</parameter>, <parameter>right_attach</parameter>)
+     denote the starting point that the child will be drawn from, at the left
+     hand side, and the end point that the child will be drawn to, to the 
+     right. These parameters are given in terms of columns, with the start 
+     point being 0. The next two arguments (<parameter>top_attach</parameter>,
+     <parameter>bottom_attach</parameter>) do the same thing, the only
+     difference beeing that they relate to rows instead of columns, controlling
+     the vertical positioning.
+    </para>
+    <para>
+     As with all container widgets, the <classname>GtkTable</classname> itself
+     takes up no screen space until it contains child widgets. If you attach
+     only one child with parameters that should set it in the bottom right 
+     corner and set <parameter>homogeneous</parameter> to 
+     <literal>FALSE</literal>, the resulting effect will not be that of a table
+     with only one entry in the bottom right corner, but of a container with a
+     single widget in it - regardless of the number of columns and rows 
+     specified in the table's constructor. Child settings always take precedence
+     in a non-homogeneous table, and so all table attachments are relative to 
+     the other child widgets. This is in line with the behaviour of other 
+     multiple-child capable containers where the child widget can have its own 
+     packing parameters set.
+    </para>
+    <para>
+     The behaviour is very different when a regular grid is in position, which
+     happens when the <classname>GtkTable</classname> has its 
+     <parameter>homogeneous</parameter> parameter set to <literal>TRUE</literal>.
+     The table works out the dimensions of the grid from the the largest child
+     widget's size request, and positions its children accordingly.
+    </para>
+    <para>
+     The final four optional parameters determine the way in which the child 
+     widget will respond to the area available to it (expand, shrink, fill) in 
+     each direction, and the padding between the child and its nearest border,
+     in each direction. 
+    </para>
+    <para>
+     See the <link linked="gtk.gtktable.constructor">constructor</link> entry 
+     for an usage example.
+    </para>
    </desc>
   </method>
 
@@ -69,10 +146,15 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Adds widgets to a GtkTable using default options.
    </shortdesc>
    <desc>
-
+    <para>
+     This method is very similar to <function class="GtkTable">attach</function>,
+     except that it takes less four parameters. Since those parameters are
+     optional in <function class="GtkTable">attach</function>, this method
+     is unnecessary.
+    </para>
    </desc>
   </method>
 
@@ -84,14 +166,17 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Gets the spacing after a given column.
    </shortdesc>
    <desc>
+    <para>
+     Gets the amount of space between a given table column and the adjacent
+     columns, in pixels. Note that the column count begins at 0.
+    </para>
     <para>
      See also: 
      <function class="GtkTable">set_col_spacing</function>
     </para>
-
    </desc>
   </method>
 
@@ -103,10 +188,16 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Gets the default column spacing for the table.
    </shortdesc>
    <desc>
-
+    <para>
+     Gets the default column spacing for the table. This is the spacing that
+     will be used for newly added columns.
+    </para>
+    <para>
+     See also: <function class="GtkTable">set_col_spacings</function>
+    </para>
    </desc>
   </method>
 
@@ -118,10 +209,16 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Gets the default row spacing for the table.
    </shortdesc>
    <desc>
-
+    <para>
+     Gets the default row spacing for the table. This is the spacing that
+     will be used for newly added rows.
+    </para>
+    <para>
+     See also: <function class="GtkTable">set_row_spacings</function>
+    </para>
    </desc>
   </method>
 
@@ -133,9 +230,13 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the current value of the <parameter>homogeneous</parameter> property.
    </shortdesc>
    <desc>
+    <para>
+     Returns whether the table cells are all constrained to the same width and
+     height.
+    </para>
     <para>
      See also: 
      <function class="GtkTable">set_homogeneous</function>
@@ -152,14 +253,17 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Gets the amount of space below a given row.
    </shortdesc>
    <desc>
     <para>
-     See also: 
-     <function class="GtkTable">set_row_spacing</function>
+     Gets the default row spacing for the table. This is the spacing that
+     will be used for newly added rows.
     </para>
-
+    <para>
+     See also: <function class="GtkTable">set_row_spacing</function>,
+     <function class="GtkTable">set_row_spacings</function>
+    </para>
    </desc>
   </method>
 
@@ -172,10 +276,13 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Changes the size of a GtkTable after its creation.
    </shortdesc>
    <desc>
-
+    <para>
+     If you need to change a table's size after it has been created, this
+     function allows you to do so.
+    </para>
    </desc>
   </method>
 
@@ -188,14 +295,16 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the space between a column and the adjacent columns.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     Alters the amount of space between a given table column and the adjacent columns.
+    </para>
+    <para>
+     See also:
      <function class="GtkTable">get_col_spacing</function>
     </para>
-
    </desc>
   </method>
 
@@ -207,10 +316,18 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the space between every column to the same given value.
    </shortdesc>
    <desc>
-
+    <para>
+     Sets the space between every column in <parameter>table</parameter>
+     equal to <parameter>spacing</parameter>.
+    </para>
+    <para>
+     See also: 
+     <function class="GtkTable">set_col_spacing</function>
+     <function class="GtkTable">get_col_spacing</function>
+    </para>
    </desc>
   </method>
 
@@ -222,14 +339,16 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Changes the homogenous property of table cells.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     Changes the homogenous property of table cells, ie. whether all cells are an equal size or not.
+    </para>
+    <para>
+     See also:
      <function class="GtkTable">get_homogeneous</function>
     </para>
-
    </desc>
   </method>
 
@@ -242,14 +361,16 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the space between a row and the adjacent rows.
    </shortdesc>
    <desc>
+    <para>
+     Alters the amount of space between a given table row and the adjacent rows.
+    </para>
     <para>
      See also: 
      <function class="GtkTable">get_row_spacing</function>
     </para>
-
    </desc>
   </method>
 
@@ -261,10 +382,13 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the space between every row to the same given value.
    </shortdesc>
    <desc>
-
+    <para>
+     Sets the space between every row in <parameter>table</parameter>
+     equal to <parameter>spacing</parameter>.
+    </para>
    </desc>
   </method>
 
