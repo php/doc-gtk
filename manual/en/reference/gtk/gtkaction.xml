@@ -4,10 +4,50 @@
   <classtitle>GtkAction</classtitle>
   <classparent>GObject</classparent>
   <shortdesc>
-
+    An action which can be triggered by a menu or toolbar item.
   </shortdesc>
   <desc>
-
+   <para>
+    Actions are basically some operation that you want the user to perform.
+    Hence, actions are usually linked to some event that triggers it. Each 
+    action provides methods to create icons, menu items and toolbar items that 
+    represent itself.
+   </para>
+   <para>
+    <classname>GtkAction</classname> allows you to create such actions, use 
+    methods to represent it, and actually perform that action when the event 
+    occurs. The following may be associated with an action:
+     <itemizedlist>
+      <listitem>A name (This is not transalated and is for internal use of the 
+      programmer)</listitem>
+      <listitem>A label (Translated and displayed on the screen)</listitem>
+      <listitem>An accelerator (The "shortcut-key" that triggers the action)
+      </listitem>
+      <listitem>Whether or not the label indicates a stock ID</listitem>
+      <listitem>A tooltip (Translated and displyed on mouse over)</listitem>
+      <listitem>A toolbar label (Translated and shorter than a label)
+      </listitem>
+      <listitem>The Callback (Function that specifies the action to be 
+      performed</listitem>
+     </itemizedlist>
+    The action will also have certain state information attached to it:
+     <itemizedlist>
+      <listitem>Visible (Show or Hide the action)</listitem>
+      <listitem>Sensitive (Enable or Disable the action)</listitem>
+     </itemizedlist>
+   </para>
+   <para>
+    Each action may have one or more proxies, such as menu items, toolbar 
+    buttons or other such proxy widgets. Proxies basically mirror the state
+    of the action (text label, tooltip, icon, visible etc.) and should change 
+    when the action's state changes. When the proxy is activated, it should 
+    activate its action (through the associated callback).
+   </para>
+   <para>
+    See also:
+    <classname>GtkToggleAction</classname> and
+    <classname>GtkRadioAction</classname>.
+   </para>
   </desc>
  </classmeta>
 
@@ -16,7 +56,7 @@
   <constructor id="gtk.gtkaction.constructor">
    <funcsynopsis>
     <funcprototype>
-    <funcdef> <function>GtkAction</function></funcdef>
+    <funcdef><function>GtkAction</function></funcdef>
     <paramdef>string <parameter>name</parameter></paramdef>
     <paramdef>string <parameter>label</parameter></paramdef>
     <paramdef>string <parameter>tooltip</parameter></paramdef>
@@ -24,10 +64,13 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Creates an action associated to the various parameters.
    </shortdesc>
    <desc>
-
+    Use the constructor to create a new <classname>GtkAction</classname>
+    object. You may then add the action to a 
+    <classname>GtkActionGroup</classname> and set the accelerator 
+    for the action.
    </desc>
   </constructor>
 
@@ -43,10 +86,14 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Emits "activate" signal on specified action.
    </shortdesc>
    <desc>
-
+    <para>
+     This function gets called by the proxy widgets when they get activated 
+     and result in an "activate" signal. You may use this function to manually 
+     generate an "activate" signal for a specified action.
+    </para>
    </desc>
   </method>
 
@@ -54,18 +101,24 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>block_activate_from</function></funcdef>
-     <paramdef>GtkWidget <parameter>proxy</parameter></paramdef>
+     <paramdef><classname>GtkWidget</classname> <parameter>proxy</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Disables calls to the <function class="GtkAction">activate</function> 
+    method.
    </shortdesc>
    <desc>
+    <para>
+     Disables calls to the <function class="GtkAction">activate</function> 
+     function by signals on the given proxy widget. This is used 
+     primarily to break notification loops for things like check or radio 
+     actions. 
+    </para>
     <para>
      See also: 
      <function class="GtkAction">unblock_activate_from</function>
     </para>
-
    </desc>
   </method>
 
@@ -77,14 +130,24 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Installs the accelerator for the specified action.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     Installs the accelerator for the specified action if action has an 
+     accelerator path and group. See 
+     <function class="GtkAction">set_accel_path</function> and 
+     <function class="GtkAction">set_accel_group</function> for more 
+     information on how to set these.
+    </para>
+    <para>
+     Please ensure that you have set the accelerator's path and group before 
+     using this method. Doing so otherwise nullifies the effect of this method
+    </para>
+    <para>
+     See also:
      <function class="GtkAction">disconnect_accelerator</function>
     </para>
-
    </desc>
   </method>
 
@@ -92,13 +155,24 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>connect_proxy</function></funcdef>
-     <paramdef>GtkWidget <parameter>proxy</parameter></paramdef>
+     <paramdef><classname>GtkWidget</classname> <parameter>proxy</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Connects a widget to an action object as a proxy
    </shortdesc>
    <desc>
+    <para>
+     This method allows you to tie a particular widget to an action object. 
+     Using this method will result in synchronisation of all the properties 
+     of the action with the widget (such as label, icon, tooltip etc.) It 
+     will also attach a callback so that the action gets activated when the 
+     proxy widget does.
+    </para>
+    <note>
+     If the widget is already connected to an action, it is disconnected 
+     first.
+    </note>
     <para>
      See also: 
      <function class="GtkAction">disconnect_proxy</function>
@@ -110,30 +184,38 @@
   <method id="gtk.gtkaction.method.create_icon">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>GtkWidget <function>create_icon</function></funcdef>
-     <paramdef>GtkIconSize <parameter>icon_size</parameter></paramdef>
+     <funcdef><classname>GtkWidget</classname> <function>create_icon</function></funcdef>
+     <paramdef><enumname>GtkIconSize</enumname> <parameter>icon_size</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Creates an icon associated with the specified action.
    </shortdesc>
    <desc>
-
+    <para>
+     This method is intended for use by action implementations to create icons 
+     displayed in the proxy widgets. The function takes the icon size as a 
+     parameter and return a widget that displays the icon for this action.
+    </para>
    </desc>
   </method>
 
   <method id="gtk.gtkaction.method.create_menu_item">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>GtkWidget <function>create_menu_item</function></funcdef>
+     <funcdef><classname>GtkWidget</classname> <function>create_menu_item</function></funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Creates a menu item widget that proxies for the given action.
    </shortdesc>
    <desc>
-
+    <para>
+     This method allows you to create a menu item that will act as a proxy for 
+      the specified action. All the properties of the action will be reflected 
+      by the menu widget.
+    </para>
    </desc>
   </method>
 
@@ -145,10 +227,14 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Creates a toolbar item widget that proxies for the given action.
    </shortdesc>
    <desc>
-
+    <para>
+     This method allows you to create a toolbar item that will act as a proxy 
+     for the specified action. All the properties of the action will be 
+     reflected by the toolbar item widget.
+    </para>
    </desc>
   </method>
 
@@ -160,14 +246,21 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Uninstalls the accelerator for the specified action.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     This method basically undoes the effect on one call to 
+     <function classname="GtkAction">connect_accelerator</function>.
+    </para>
+    <note>
+     This method does NOT destroy the accelerator, only disconnects it from 
+     the action. The accelerator is still available for future connections.
+    </note>
+    <para>
+     See also:
      <function class="GtkAction">connect_accelerator</function>
     </para>
-
    </desc>
   </method>
 
@@ -175,18 +268,22 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>disconnect_proxy</function></funcdef>
-     <paramdef>GtkWidget <parameter>proxy</parameter></paramdef>
+     <paramdef><classname>GtkWidget</classname> <parameter>proxy</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Disconnects a proxy widget from an action.
    </shortdesc>
    <desc>
+    <para>
+     This method is useful when you want to manually disconnect a particular 
+     widget from an action. The most common application of this is re-usable 
+     widgets where you might want to use the same widget for multiple actions.
+    </para>
     <para>
      See also: 
      <function class="GtkAction">connect_proxy</function>
     </para>
-
    </desc>
   </method>
 
@@ -198,14 +295,17 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the accelerator path for the specified action
    </shortdesc>
    <desc>
+    <para>
+     This method takes an action object as its parameter and returns the 
+     accel path for this action or NULL if none is set.
+    </para>
     <para>
      See also: 
      <function class="GtkAction">set_accel_path</function>
     </para>
-
    </desc>
   </method>
 
@@ -217,10 +317,13 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the name of the specified action.
    </shortdesc>
    <desc>
-
+    <para>
+     This method takes an action object as its parameter and returns the 
+     name associated to that action.
+		  </para>
    </desc>
   </method>
 
@@ -232,7 +335,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    FIXME
    </shortdesc>
    <desc>
 
@@ -247,7 +350,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    FIXME
    </shortdesc>
    <desc>
     <para>
@@ -267,7 +370,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    FIXME
    </shortdesc>
    <desc>
     <para>
@@ -287,7 +390,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    FIXME
    </shortdesc>
    <desc>
     <para>
@@ -307,7 +410,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    FIXME
    </shortdesc>
    <desc>
     <para>
@@ -323,11 +426,12 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_accel_group</function></funcdef>
-     <paramdef>GtkAccelGroup <parameter>accel_group</parameter></paramdef>
+     <paramdef><classname>GtkAccelGroup</classname> <parameter>accel_group</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the <classname>GtkAccelGroup</classname> in which the accelerator for
+    this action will be installed.
    </shortdesc>
    <desc>
 
@@ -342,14 +446,18 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the accel path for the specified action.
    </shortdesc>
    <desc>
+    <para>
+     Sets the accel path for all accelerators associated with the specified 
+     action. All proxy widgets associated with this action will have this 
+     accel path, so that their accelerators are consistent.
+    </para>
     <para>
      See also: 
      <function class="GtkAction">get_accel_path</function>
     </para>
-
    </desc>
   </method>
 
@@ -361,7 +469,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    FIXME
    </shortdesc>
    <desc>
     <para>
@@ -381,7 +489,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    FIXME
    </shortdesc>
    <desc>
     <para>
@@ -397,13 +505,22 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>unblock_activate_from</function></funcdef>
-     <paramdef>GtkWidget <parameter>proxy</parameter></paramdef>
+     <paramdef><classname>GtkWidget</classname> <parameter>proxy</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Re-enables calls to the <function classname="GtkAction">activate</function>
    </shortdesc>
    <desc>
+    <para>
+     Re-enables calls to the <function classname="GtkAction">activate</function>
+     function by signals on the given proxy widget. This undoes 
+     the blocking done by 
+     <function classname="GtkAction">block_activate_from</function>
+    </para>
+    <para>
+     This function is intended for use by action implementations.
+    </para>
     <para>
      See also: 
      <function class="GtkAction">block_activate_from</function>
@@ -425,12 +542,12 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
+    Emitted when the action is triggered (or activated!)
    </shortdesc>
    <desc>
-
    </desc>
   </signal>
-  
+
  </signals>
 
 </classentry>

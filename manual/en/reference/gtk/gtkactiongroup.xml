@@ -4,10 +4,27 @@
   <classtitle>GtkActionGroup</classtitle>
   <classparent>GObject</classparent>
   <shortdesc>
-
+   A group of action objects.
   </shortdesc>
   <desc>
-
+   <para>
+    Actions are organised into groups in this manner. An action groups can be
+    understood as a map from action names to <classname>GtkAction</classname> 
+    objects.
+   </para>
+   <para>
+    All actions that you feel make sense under a partiular context may be 
+    grouped under a single action group. Of course, all actions cannot be 
+    grouped under a single name, you may use multiple action groups for a 
+    particular user interface. In fact, most nontrivial applications will 
+    make use of multiple action groups.
+   </para>
+   <para>
+    As an example, consider an application that edits multiple documents. One 
+    group may hold global actions such as new, about and quit; and another 
+    group can be used to hold actions that are specific to one document, like 
+    save, cut, copy and paste.
+  </para>
   </desc>
  </classmeta>
 
@@ -21,10 +38,11 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+     Creates a new action group.
    </shortdesc>
    <desc>
-
+     Use the constructor to create a new action group with the specified name. 
+     You can then use other methods of the class to add actions to the group.
    </desc>
   </constructor>
 
@@ -36,19 +54,30 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>add_action</function></funcdef>
-     <paramdef>GtkAction <parameter>action</parameter></paramdef>
+     <paramdef><classname>GtkAction</classname> <parameter>action</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+     Adds an action to the action group.
    </shortdesc>
    <desc>
+    <para>
+     Use this method to add an action object to the specified action group. 
+     Note that the usage of this method does not setup the accel path of the 
+     action. This may cause trouble when you try to modify the accelerator of 
+     the widget associated with the action.
+    </para>
+    <para>
+     To workaround this problem, either set the accel path manually using 
+     <function classname="GtkAction">set_accel_path</function> or add the 
+     function to the group using <function classname="GtkActionGroup">
+     add_action_with_accel</function>
+    </para>
     <para>
      See also: 
      <function class="GtkActionGroup">get_action</function>, 
      <function class="GtkActionGroup">remove_action</function>
     </para>
-
    </desc>
   </method>
 
@@ -56,15 +85,17 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>add_action_with_accel</function></funcdef>
-     <paramdef>GtkAction <parameter>action</parameter></paramdef>
+     <paramdef><classname>GtkAction</classname> <parameter>action</parameter></paramdef>
      <paramdef>string <parameter>accelerator</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+     Adds an action to the action group and sets up its accelerator.
    </shortdesc>
    <desc>
-
+     This performs the same function as <function classname="GtkActionGroup">
+     add_action</function> with the extra functionality of setting up the 
+     action's accelerator.
    </desc>
   </method>
 
@@ -76,7 +107,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    FIXME
    </shortdesc>
    <desc>
     <para>
@@ -95,7 +126,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    FIXME
    </shortdesc>
    <desc>
 
@@ -110,7 +141,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+     FIXME
    </shortdesc>
    <desc>
 
@@ -125,7 +156,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    FIXME
    </shortdesc>
    <desc>
 
@@ -140,7 +171,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    FIXME
    </shortdesc>
    <desc>
 
@@ -155,7 +186,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    FIXME
    </shortdesc>
    <desc>
 
@@ -165,14 +196,20 @@
   <method id="gtk.gtkactiongroup.method.get_action">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>GtkAction <function>get_action</function></funcdef>
+     <funcdef><classname>GtkAction</classname> <function>get_action</function></funcdef>
      <paramdef>string <parameter>action_name</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+     Looks up an action in a group.
    </shortdesc>
    <desc>
+    <para>
+     You can use this method to lookup an action by its name in a specified 
+     action group. Pass the action group and action name as parameters to the 
+     function. It will return the action object, or <literal>NULL</literal> if 
+     no action by that name exists in the group.
+    </para>
     <para>
      See also: 
      <function class="GtkActionGroup">add_action</function>, 
@@ -190,10 +227,10 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+     Returns the name of the action group.
    </shortdesc>
    <desc>
-
+     This method will simply return the name of the specified action group.
    </desc>
   </method>
 
@@ -205,7 +242,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    FIXME
    </shortdesc>
    <desc>
     <para>
@@ -224,7 +261,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    FIXME
    </shortdesc>
    <desc>
     <para>
@@ -243,7 +280,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    FIXME
    </shortdesc>
    <desc>
     <para>
@@ -258,19 +295,27 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>remove_action</function></funcdef>
-     <paramdef>GtkAction <parameter>action</parameter></paramdef>
+     <paramdef><classname>GtkAction</classname> <parameter>action</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+     Removes an action object from the action group.
    </shortdesc>
    <desc>
+     <para>
+      Use this method to remove an action object from the specified action 
+      group. 
+     </para>
+     <note>
+      This method does NOT result in the action object being destroyed. It is 
+      simply disassociated with the action group. You may add the action to 
+      other action groups after using this method.
+     </note>
     <para>
      See also: 
      <function class="GtkActionGroup">add_action</function>, 
      <function class="GtkActionGroup">get_action</function>
     </para>
-
    </desc>
   </method>
 
@@ -282,7 +327,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    FIXME
    </shortdesc>
    <desc>
     <para>
@@ -301,7 +346,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    FIXME
    </shortdesc>
    <desc>
 
@@ -316,7 +361,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    FIXME
    </shortdesc>
    <desc>
 
@@ -331,7 +376,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    FIXME
    </shortdesc>
    <desc>
     <para>
@@ -350,7 +395,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    FIXME
    </shortdesc>
    <desc>
 
@@ -366,12 +411,13 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <cbfunction>callback</cbfunction></funcdef>
-     <paramdef>GtkActionGroup <parameter>actiongroup</parameter></paramdef>
-     <paramdef>GtkAction <parameter>UNKNOWN</parameter></paramdef>
-     <paramdef>GtkWidget <parameter>UNKNOWN</parameter></paramdef>
+     <paramdef><classname>GtkActionGroup</classname> <parameter>actiongroup</parameter></paramdef>
+     <paramdef><classname>GtkAction</classname> <parameter>UNKNOWN</parameter></paramdef>
+     <paramdef><classname>GtkWidget</classname> <parameter>UNKNOWN</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
+    FIXME
    </shortdesc>
    <desc>
 
@@ -383,12 +429,13 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <cbfunction>callback</cbfunction></funcdef>
-     <paramdef>GtkActionGroup <parameter>actiongroup</parameter></paramdef>
-     <paramdef>GtkAction <parameter>UNKNOWN</parameter></paramdef>
-     <paramdef>GtkWidget <parameter>UNKNOWN</parameter></paramdef>
+     <paramdef><classname>GtkActionGroup</classname> <parameter>actiongroup</parameter></paramdef>
+     <paramdef><classname>GtkAction</classname> <parameter>UNKNOWN</parameter></paramdef>
+     <paramdef><classname>GtkWidget</classname> <parameter>UNKNOWN</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
+    FIXME
    </shortdesc>
    <desc>
 
@@ -400,11 +447,12 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <cbfunction>callback</cbfunction></funcdef>
-     <paramdef>GtkActionGroup <parameter>actiongroup</parameter></paramdef>
-     <paramdef>GtkAction <parameter>UNKNOWN</parameter></paramdef>
+     <paramdef><classname>GtkActionGroup</classname> <parameter>actiongroup</parameter></paramdef>
+     <paramdef><classname>GtkAction</classname> <parameter>UNKNOWN</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
+    FIXME
    </shortdesc>
    <desc>
 
@@ -416,11 +464,12 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <cbfunction>callback</cbfunction></funcdef>
-     <paramdef>GtkActionGroup <parameter>actiongroup</parameter></paramdef>
-     <paramdef>GtkAction <parameter>UNKNOWN</parameter></paramdef>
+     <paramdef><classname>GtkActionGroup</classname> <parameter>actiongroup</parameter></paramdef>
+     <paramdef><classname>GtkAction</classname> <parameter>UNKNOWN</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
+    FIXME
    </shortdesc>
    <desc>
 
