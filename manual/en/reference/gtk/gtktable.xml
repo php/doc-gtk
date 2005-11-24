@@ -4,10 +4,39 @@
   <classtitle>GtkTable</classtitle>
   <classparent>GtkContainer</classparent>
   <shortdesc>
-
+   Container that provides a two-dimensional grid for packing widgets.
   </shortdesc>
   <desc>
-
+   <para>
+    <classname>GtkTable</classname> is a container that provides a simple way
+    of aligning many widgets in a window, both horizontally and vertically. 
+    Although not as flexible as <classname>GtkFixed</classname>, it's easier to
+    use and allows for relative positioning, by simply defining the number of 
+    rows and columns. The resulting cells have a structure similar to that of a
+    <classname>GtkBox</classname>, allowing a single child per cell, though
+    the child can span along multiple rows or columns.
+   </para>
+   <para>
+    Adding widgets to a <classname>GtkTable</classname> is mainly done through
+    the <function class="GtkTable">attach</function> method, that provides a 
+    great deal of control over the way the child should be placed within the 
+    table. The <function class="GtkTable">attach_defaults</function> and 
+    <function class="GtkContainer">add</function> methods are of lesser 
+    interest. To remove a widget from the table, you can use
+    <function class="GtkContainer">remove</function>.
+   </para>
+   <para>
+    Accessing child widgets placed within a <classname>GtkTable</classname> can
+    be done through the <function class="GtkContainer">get_children</function> 
+    method, inherited from <classname>GtkContainer</classname>. It returns a
+    list of the container's children. <!--FIXME: Are there other ways? -->
+   </para>
+   <para>
+    See also:
+    <classname>GtkVBox</classname>,
+    <classname>GtkHBox</classname>,
+    <classname>GtkFixed</classname>.
+   </para>
   </desc>
  </classmeta>
 
@@ -257,12 +286,11 @@
    </shortdesc>
    <desc>
     <para>
-     Gets the default row spacing for the table. This is the spacing that
-     will be used for newly added rows.
+     Gets the amount of space below a given row.
     </para>
     <para>
-     See also: <function class="GtkTable">set_row_spacing</function>,
-     <function class="GtkTable">set_row_spacings</function>
+     See also: 
+     <function class="GtkTable">set_row_spacing</function>
     </para>
    </desc>
   </method>
@@ -321,12 +349,13 @@
    <desc>
     <para>
      Sets the space between every column in <parameter>table</parameter>
-     equal to <parameter>spacing</parameter>.
+     equal to <parameter>spacing</parameter>. This is the spacing that
+     will be used for newly added columns. Note that this is different from
+     <function class="GtkTable">set_col_spacing</function>.
     </para>
     <para>
      See also: 
-     <function class="GtkTable">set_col_spacing</function>
-     <function class="GtkTable">get_col_spacing</function>
+     <function class="GtkTable">get_default_col_spacing</function>
     </para>
    </desc>
   </method>
@@ -387,7 +416,13 @@
    <desc>
     <para>
      Sets the space between every row in <parameter>table</parameter>
-     equal to <parameter>spacing</parameter>.
+     equal to <parameter>spacing</parameter>. This is the spacing that
+     will be used for newly added rows. Note that this is different from
+     <function class="GtkTable">set_row_spacing</function>.
+    </para>
+    <para>
+     See also: 
+     <function class="GtkTable">get_default_row_spacing</function>
     </para>
    </desc>
   </method>
