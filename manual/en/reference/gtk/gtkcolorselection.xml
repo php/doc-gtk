@@ -4,10 +4,15 @@
   <classtitle>GtkColorSelection</classtitle>
   <classparent>GtkVBox</classparent>
   <shortdesc>
-
+   Widget that is used to select a color.
   </shortdesc>
   <desc>
-
+   <classname>GtkColorSelection</classname> is a widget that is used to 
+   select a color. The widget provides a very user friendly interface that 
+   includes a 'color wheel' in addition to a number of sliders and entry 
+   boxes for color parameters such as Hue, Saturation, Red, Green, Blue, and 
+   opacity. The widget may be found on the standard color selection dialog 
+   box <classname>GtkColorSelectionDialog</classname>
   </desc>
  </classmeta>
 
@@ -21,10 +26,11 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Creates a new <classname>GtkColorSelection</classname>
    </shortdesc>
    <desc>
-
+    Creates a new <classname>GtkColorSelection</classname> widget used to 
+    select a color.
    </desc>
   </constructor>
 
@@ -40,14 +46,23 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    DEPRECATED. Returns the color currently selected in the 
+    <classname>GtkColorSelection</classname> widget.
    </shortdesc>
    <desc>
     <para>
-     See also: 
-     <function class="GtkColorSelection">set_color</function>
+     This method is used to return the currently selected color on the 
+     <classname>GtkColorSelection</classname> widget.
     </para>
-
+    <note>
+     WARNING! This method has been deprecated in PHP-Gtk2, and should NOT be
+     used in newly written code. Use 
+     <function class="GtkColorSelection">get_current_color</function> instead.
+    </note>
+    <para>
+     See also: 
+     <function class="GtkColorSelection">set_color</function>, 
+    </para>
    </desc>
   </method>
 
@@ -59,14 +74,19 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the current alpha value on the
+    <classname>GtkColorSelection</classname> widget.
    </shortdesc>
    <desc>
+    <para>
+     This method returns the current alpha value of the color selected on the 
+     specified <classname>GtkColorSelection</classname>. The value returned 
+     is an integer between 0 and 65535.
+    </para>
     <para>
      See also: 
      <function class="GtkColorSelection">set_current_alpha</function>
     </para>
-
    </desc>
   </method>
 
@@ -78,14 +98,20 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the current color selected on the 
+    <classname>GtkColorSelection</classname> widget.
    </shortdesc>
    <desc>
+    <para>
+     Use this method to ascertain the color that is currently selected on 
+     the <classname>GtkColorSelection</classname> widget. This function 
+     returns a GdkColor Object, containing the values of red, blue, green and 
+     pixel.
+    </para>
     <para>
      See also: 
      <function class="GtkColorSelection">set_current_color</function>
     </para>
-
    </desc>
   </method>
 
@@ -97,14 +123,20 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Determines if the GtkColorSelection has
+    opacity control enabled.
    </shortdesc>
    <desc>
+    <para>
+     Use this method to ascertain whether the specified 
+     <classname>GtkColorSelection</classname> has opacity (transparency) control 
+     enabled or not. The function returns <literal>TRUE</literal> if opacity 
+     controls are visible, <literal>FALSE</literal> otherwise.
+    </para>
     <para>
      See also: 
      <function class="GtkColorSelection">set_has_opacity_control</function>
     </para>
-
    </desc>
   </method>
 
@@ -116,14 +148,19 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Determines if the widget has a palette.
    </shortdesc>
    <desc>
+    <para>
+     Use this method to ascertain whether the specified 
+     <classname>GtkColorSelection</classname> has a visible palette or not. 
+     The function returns <literal>TRUE</literal> if the palette is visible, 
+     <literal>FALSE</literal> otherwise.
+    </para>
     <para>
      See also: 
      <function class="GtkColorSelection">set_has_palette</function>
     </para>
-
    </desc>
   </method>
 
@@ -135,14 +172,18 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the previous alpha value on the 
+    <classname>GtkColorSelection</classname> widget.
    </shortdesc>
    <desc>
+    <para>
+     Use this method to obtain the previous alpha value selected on the 
+     specified <classname>GtkColorSelection</classname>.
+    </para>
     <para>
      See also: 
      <function class="GtkColorSelection">set_previous_alpha</function>
     </para>
-
    </desc>
   </method>
 
@@ -154,14 +195,20 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the previous color selected on the 
+    widget.
    </shortdesc>
    <desc>
+    <para>
+     Use this method to ascertain the color that was previously selected on 
+     the <classname>GtkColorSelection</classname> widget. This function 
+     returns a GdkColor Object, containing the values of red, blue, green and 
+     pixel.
+    </para>
     <para>
      See also: 
      <function class="GtkColorSelection">set_previous_color</function>
     </para>
-
    </desc>
   </method>
 
@@ -173,10 +220,14 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Gets the current state of the specified 
+    <classname>GtkColorSelection</classname>
    </shortdesc>
    <desc>
-
+    Use this method to find out whether the user is in the process of 
+    selecting a color or if a color has been selected. The function returns 
+    <literal>TRUE</literal> if the user is currently dragging a color around, 
+    <literal>FALSE</literal> if the selection has stopped.
    </desc>
   </method>
 
@@ -188,14 +239,23 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    DEPRECATED. Sets the color currently selected in the 
+    <classname>GtkColorSelection</classname> widget.
    </shortdesc>
    <desc>
+    <para>
+     This method is used to set the currently selected color on the 
+     <classname>GtkColorSelection</classname> widget.
+    </para>
+    <note>
+     WARNING! This method has been deprecated in PHP-GTK 2, and should NOT be 
+     used in newly written code. Use 
+     <function class="GtkColorSelection">set_current_color</function> instead.
+    </note>
     <para>
      See also: 
      <function class="GtkColorSelection">get_color</function>
     </para>
-
    </desc>
   </method>
 
@@ -207,14 +267,20 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the current alpha value on the 
+    <classname>GtkColorSelection</classname> widget.
    </shortdesc>
    <desc>
+    <para>
+     Use this method to set the opacity of the currently selected color on
+     <classname>GtkColorSelection</classname> to the specified alpha 
+     value. You may pass an integer between 0 and 65535 as a valid alpha value
+     in the parameter.
+    </para>
     <para>
      See also: 
      <function class="GtkColorSelection">get_current_alpha</function>
     </para>
-
    </desc>
   </method>
 
@@ -226,14 +292,19 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the current color selected on the 
+    <classname>GtkColorSelection</classname> widget.
    </shortdesc>
    <desc>
+    <para>
+     Use this method to set the current color on the specified.
+     <classname>GtkColorSelection</classname> widget. Colors should be 
+     defined as GdkColor objects.
+    </para>
     <para>
      See also: 
      <function class="GtkColorSelection">get_current_color</function>
     </para>
-
    </desc>
   </method>
 
@@ -245,14 +316,19 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets whether the opacity control is visible for the widget.
    </shortdesc>
    <desc>
+    <para>
+     Use this method to set whether the opacity control for the 
+     <classname>GtkColorSelection</classname> is visible or not. Pass 
+     <literal>TRUE</literal> as a parameter if you want the opacity control 
+     to be visible, <literal>FALSE</literal> otherwise.
+    </para>
     <para>
      See also: 
      <function class="GtkColorSelection">get_has_opacity_control</function>
     </para>
-
    </desc>
   </method>
 
@@ -264,14 +340,20 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets whether the palette is visible for the 
+    <classname>GtkColorSelection</classname> widget is visible or not. 
    </shortdesc>
    <desc>
+    <para>
+     Use this method to set whether the opacity control for the 
+     <classname>GtkColorSelection</classname> widget. 
+     Pass <literal>TRUE</literal> as a parameter if you want the 
+     palette to be visible, <literal>FALSE</literal> otherwise.
+    </para>
     <para>
      See also: 
      <function class="GtkColorSelection">get_has_palette</function>
     </para>
-
    </desc>
   </method>
 
@@ -283,14 +365,19 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the previous value on alpha on the widget.
    </shortdesc>
    <desc>
+    <para>
+     Use this method to set the 'previous' value of alpha on the specified 
+     <classname>GtkColorSelection</classname> widget. This function however, 
+     is hardly used, since it usually does not make sense to have the 
+     previous value of alpha change.
+    </para>
     <para>
      See also: 
      <function class="GtkColorSelection">get_previous_alpha</function>
     </para>
-
    </desc>
   </method>
 
@@ -302,14 +389,19 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the previous color selected on the widget.
    </shortdesc>
    <desc>
+    <para>
+     Use this method to set the 'previous' color selected on the specified 
+     <classname>GtkColorSelection</classname> widget. This function however, 
+     is hardly used, since it usually does not make sense to have the 
+     previous color selected to change.
+    </para>
     <para>
      See also: 
      <function class="GtkColorSelection">get_previous_color</function>
     </para>
-
    </desc>
   </method>
 
@@ -321,10 +413,15 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    DEPRECATED. Sets the policy controlling when the 
+    <signalname class="GtkColorSelection">color-changed</signalname> signal 
+    is emitted.
    </shortdesc>
    <desc>
-
+    <note>
+     WARNING! This method has been deprecated in PHP-GTK 2, and should NOT be 
+     used in newly written code.
+    </note>
    </desc>
   </method>
 
@@ -341,9 +438,11 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
+    Emitted when the color changes in the 
+    widget according to its update policy
    </shortdesc>
    <desc>
-
+    FIXME
    </desc>
   </signal>
   

@@ -4,10 +4,30 @@
   <classtitle>GtkVButtonBox</classtitle>
   <classparent>GtkButtonBox</classparent>
   <shortdesc>
-
+   Container for arranging buttons in a column.
   </shortdesc>
   <desc>
-
+   <para>
+    A button box can be used to provide a consistent layout of buttons through
+    an application. A <classname>GtkVButtonBox</classname> arranges buttons in
+    a column.
+   </para>
+   <para>
+    Adding buttons to a <classname>GtkVButtonBox</classname> is done the same
+    way widgets are added to other containers, using 
+    <function class="GtkContainer">add</function>. The
+    <function class="GtkContainer">pack_start</function> and
+    <function class="GtkContainer">pack_end</function> methods work exactly as
+    <function class="GtkContainer">add</function>, adding widgets according to
+    the current layout style and depending on whether the child button has had
+    <function class="GtkButtonBox">set_child_secondary</function> called on it.
+   </para>
+   <para>
+    The spacing between buttons can be set with 
+    <function class="GtkBox">set_spacing</function>. The arrangement and layout
+    of the buttons can be changed with 
+    <function class="GtkButtonBox">set_layout</function>.
+   </para>
   </desc>
  </classmeta>
 
@@ -16,15 +36,41 @@
   <constructor id="gtk.gtkvbuttonbox.constructor">
    <funcsynopsis>
     <funcprototype>
-    <funcdef> <function>GtkVButtonBox</function></funcdef>
+    <funcdef>void <function>GtkVButtonBox</function></funcdef>
     <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Creates a new GtkVButtonBox.
    </shortdesc>
    <desc>
+    <para>
+     A new GtkVButtonBox is created as in the following example. Adding buttons
+     is also shown.
+    </para>
+    <!-- FIXME: Do inline examples require <?php ?> tags? -->
+    <programlisting role="php"><![CDATA[
+     //Creating a GtkVButtonBox
+     $vbbox = new GtkVButtonBox();
+     //Selecting a layout for the button box. Try other
+     //GtkButtonBoxStyle options to see the difference  
+     $vbbox->set_layout(Gtk::BUTTONBOX_SPREAD);
+     //Setting the spacing
+     $vbbox->set_spacing(25);
 
+     //Creating buttons to add
+     $button1 = new GtkButton('Button 1');
+     $button2 = new GtkButton('Button 2');
+
+     //Adding the buttons to the GtkVButtonBox
+     $vbbox->add($button1);
+     $vbbox->add($button2);
+    ]]></programlisting>
+    <para>
+     Note that there are no parameters in the constructor. Also, as with all
+     container widgets, GtkVButtonBox takes up no space until its child 
+     widgets are in place.
+    </para>
    </desc>
   </constructor>
 

@@ -4,10 +4,24 @@
   <classtitle>GtkExpander</classtitle>
   <classparent>GtkBin</classparent>
   <shortdesc>
-
+    A container that can hide its child.
   </shortdesc>
   <desc>
-
+   <para>
+    <classname>GtkExpander</classname> creates a container that can hide or 
+    display details on request. This is achieved by using a small triangle 
+    (similar to the one used in <classname>GtkTreeView</classname>) to control 
+    whether the details are shown or not. If the triangle is pointing to the 
+    right, details are hidden. On clicking the object, the triangle points 
+    downward which indicates that the details are now visible.
+   </para>
+   <para>
+    You can use <classname>GtkExpander</classname> as any other descendant of 
+    <classname>GtkBin</classname> by first creating the child widget and then 
+    using <function class="GtkContainer">add</function> to add it to the 
+    expander. When the expander is toggled, it automatically takes care of 
+    showing and hiding the details.
+   </para>
   </desc>
  </classmeta>
 
@@ -21,10 +35,25 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Creates an expander object.
    </shortdesc>
    <desc>
-
+    <para>
+     Creates a new expander object using the parameter as the text of the label.
+     The example below illustrates the usage of the constructor.
+    </para>
+    <example>
+      <title>
+        Using Expander to Show/Hide details
+        <classname>GtkExpander</classname>
+      </title>
+      <programlisting role="php">
+       <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+                href="&directory.examples;/reference/gtk/gtkexpander/constructor.phpw" parse="text">
+        <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+       </xi:include>
+      </programlisting>
+    </example>
    </desc>
   </constructor>
 
@@ -55,14 +84,18 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Return the current state of the expander
    </shortdesc>
    <desc>
+    <para>
+     Queries a <classname>GtkExpander</classname> and returns its current state.
+      Returns <literal>TRUE</literal> if the child widget is revealed, 
+     <literal>FALSE</literal> otherwise.
+    </para>
     <para>
      See also: 
      <function class="GtkExpander">set_expanded</function>
     </para>
-
    </desc>
   </method>
 
@@ -74,14 +107,18 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Fetches the text from the expander's label
    </shortdesc>
    <desc>
+    <para>
+     Fetches the text from the label of the specified GtkExpander, as set by 
+     <function class="GtkExpander">set_label</function>. If the label had not 
+     been set, the return value will be <literal>NULL</literal>.
+    </para>
     <para>
      See also: 
      <function class="GtkExpander">set_label</function>
     </para>
-
    </desc>
   </method>
 
@@ -93,14 +130,17 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Retrieves the label widget
    </shortdesc>
    <desc>
+    <para>
+     Use this method to retrieve the label widget for the specified 
+     <classname>GtkExpander</classname> object.
+    </para>
     <para>
      See also: 
      <function class="GtkExpander">set_label_widget</function>
     </para>
-
    </desc>
   </method>
 
@@ -112,14 +152,18 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the value set by 
+    <function class="GtkExpander">set_spacing</function>
    </shortdesc>
    <desc>
+    <para>
+     Returns the spacing between the specified 
+     <classname>GtkExpander</classname> and its child widget in pixels.
+    </para>
     <para>
      See also: 
      <function class="GtkExpander">set_spacing</function>
     </para>
-
    </desc>
   </method>
 
@@ -131,14 +175,19 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Determines if the child label's text is interpreted as Pango text markup 
+    language.
    </shortdesc>
    <desc>
+    <para>
+     This method returns <literal>TRUE</literal> if the specified 
+     <classname>GtkExpander</classname> has a child label that contains text 
+     to be parsed as markup.
+    </para>
     <para>
      See also: 
      <function class="GtkExpander">set_use_markup</function>
     </para>
-
    </desc>
   </method>
 
@@ -150,14 +199,18 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Determines whether an embedded underline in the expander label indicates 
+    a mnemonic.
    </shortdesc>
    <desc>
+    <para>
+     This method returns <literal>TRUE</literal> if an embedded underline 
+     in the expander label indicates the mnemonic accelerator keys.
+    </para>
     <para>
      See also: 
      <function class="GtkExpander">set_use_underline</function>
     </para>
-
    </desc>
   </method>
 
@@ -169,14 +222,19 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the state of the child to 'visible'.
    </shortdesc>
    <desc>
+    <para>
+     Use this method to set the state of the specified 
+     <classname>GtkExpander</classname>. Set to <literal>TRUE</literal> if 
+     you want the child widget to be revealed, and <literal>FALSE</literal> if
+     you want the child widget to be hidden.
+    </para>
     <para>
      See also: 
      <function class="GtkExpander">get_expanded</function>
     </para>
-
    </desc>
   </method>
 
@@ -188,14 +246,18 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the text of the label of the expander.
    </shortdesc>
    <desc>
+    <para>
+     Use this method to set the text of the specified 
+     <classname>GtkExpander</classname> to the passed parameter's value. Note 
+     that using this function will also clear any previously set labels.
+    </para>
     <para>
      See also: 
      <function class="GtkExpander">get_label</function>
     </para>
-
    </desc>
   </method>
 
@@ -207,14 +269,18 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the label widget for the expander.
    </shortdesc>
    <desc>
+    <para>
+     Use this method to set the label widget associated with the specified 
+     <classname>GtkExpander</classname>. This is the widget that will appear 
+     embedded alongside the expander arrow.
+    </para>
     <para>
      See also: 
      <function class="GtkExpander">get_label_widget</function>
     </para>
-
    </desc>
   </method>
 
@@ -226,14 +292,19 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the distance between the <classname>GtkExpander</classname> and its 
+    child.
    </shortdesc>
    <desc>
+    <para>
+     Use this method to set the number of pixels to place between the 
+     <classname>GtkExpander</classname> object and its child (usually a 
+     <classname>GtkLabel</classname>.
+    </para>
     <para>
      See also: 
      <function class="GtkExpander">get_spacing</function>
     </para>
-
    </desc>
   </method>
 
@@ -245,14 +316,20 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets if the child label's text is to be interpreted as Pango text markup 
+    language.
    </shortdesc>
    <desc>
+    <para>
+     Use this method if you want the label's text of the expander to be 
+     interpreted as Pango text markup. Set to <literal>TRUE</literal> if you 
+     want the text to interpreted as markup, <literal>FALSE</literal> 
+     otherwise.
+    </para>
     <para>
      See also: 
      <function class="GtkExpander">get_use_markup</function>
     </para>
-
    </desc>
   </method>
 
@@ -264,14 +341,20 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets whether an underscore preceding a character in the label means that 
+    the character is the mnemonic accelerator for the expander.
    </shortdesc>
    <desc>
+    <para>
+     Use this method to allow an underscore to determine which character will 
+     be set as the mnemonic accelerator for the specified 
+     <classname>GtkExpander</classname>. The character immediately following 
+     an underscore in the label text is set as the mnemonic.
+    </para>
     <para>
      See also: 
      <function class="GtkExpander">get_use_underline</function>
     </para>
-
    </desc>
   </method>
 
@@ -288,6 +371,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
+    Emitted when the expander is activated.
    </shortdesc>
    <desc>
 

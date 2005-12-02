@@ -4,10 +4,13 @@
   <classtitle>GtkColorSelectionDialog</classtitle>
   <classparent>GtkDialog</classparent>
   <shortdesc>
-
+   A standard dialog box selecting a color.
   </shortdesc>
   <desc>
-
+   The <classname>GtkColorSelectionDialog</classname> provides a standard 
+   dialog box which allows the user to select a color. The Dialog box 
+   implements the <classname>GtkColorSelection</classname> widget to enable 
+   the user to pick a color.
   </desc>
  </classmeta>
 
@@ -21,10 +24,11 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Creates a new GtkColorSelectionDialog.
    </shortdesc>
    <desc>
-
+    Use the constructor to create a new 
+    <classname>GtkColorSelectionDialog</classname>.
    </desc>
   </constructor>
 
@@ -36,9 +40,12 @@
    <propname>cancel_button</propname>
    <proptype>GtkWidget</proptype>
    <shortdesc>
+    The cancel button widget
    </shortdesc>
    <desc>
-
+    This widget refers to the cancel button contained within the 
+    <classname>GtkColorSelectionDialog</classname>. You may connect a 
+    callback to handle the clicked signal.
    </desc>
   </property>
 
@@ -46,9 +53,17 @@
    <propname>colorsel</propname>
    <proptype>GtkWidget</proptype>
    <shortdesc>
+    GtkColorSelection widget of the dialog
    </shortdesc>
    <desc>
-
+    This widget refers to the <classname>GtkColorSelection</classname> widget 
+    contained within <classname>GtkColorSelectionDialog</classname>. You may 
+    use this widget and its 
+    <function class="GtkColorSelection">get_current_color</function> to 
+    ascertain what color the user has selected. Another application would be 
+    to use the widget's 
+    <signalname class="GtkColor">color_changed</signalname> signal to be 
+    notified when the color changes.
    </desc>
   </property>
 
@@ -56,9 +71,12 @@
    <propname>help_button</propname>
    <proptype>GtkWidget</proptype>
    <shortdesc>
+    Help button widget.
    </shortdesc>
    <desc>
-
+    This widget refers to the help button contained within the 
+    <classname>GtkColorSelectionDialog</classname>. You may connect a 
+    callback to handle the clicked signal.
    </desc>
   </property>
 
@@ -66,9 +84,12 @@
    <propname>ok_button</propname>
    <proptype>GtkWidget</proptype>
    <shortdesc>
+    OK button widget.
    </shortdesc>
    <desc>
-
+    This widget refers to the OK button contained within the 
+    <classname>GtkColorSelectionDialog</classname>. You may connect a 
+    callback to handle the clicked signal.
    </desc>
   </property>
 

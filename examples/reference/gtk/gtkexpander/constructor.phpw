@@ -1,0 +1,36 @@
+<?php
+/* Creating the callbacks for handling basic window functions */
+function delete_event()
+{
+    return false;
+}
+
+function destroy()
+{
+    Gtk::main_quit();
+}
+
+/* Creating and initialising a new window to add our expander to */
+$window = new GtkWindow();
+$window->connect('destroy', 'destroy');
+$window->connect('delete-event', 'delete_event');
+$window->set_title('GtkExpander Demo');
+$window->set_default_size(250,60);
+$window->set_border_width(10);
+
+/* Creating a new expander object */
+$expander = new GtkExpander('Expander');
+
+/* Creating a label to store details */
+$label = new GtkLabel('Details can be shown or hidden');
+
+/* Adding the details to the expander */
+$expander->add($label);
+
+/* Adding the expander to the window */
+$window->add($expander);
+
+/* Displaying the window and starting the main loop */
+$window->show_all();
+Gtk::main();
+?>
