@@ -1,0 +1,25 @@
+<?php
+//Create the window in which the colorselector will be placed
+$window = new GtkWindow();
+//Set the window title
+$window->set_title('GtkColorSelection demo');
+//Quit the gtk loop when the window is being destroyed
+$window->connect_simple('destroy', array('gtk', 'main_quit'));
+
+//our color selection widget
+$colorsel = new GtkColorSelection();
+
+//An extra button to be placed in the window
+$btnClose = new GtkButton('_Quit');
+$btnClose->connect_simple('clicked', array($window, 'destroy'));
+
+//color selector and button will be placed there
+$vbox = new GtkVBox();
+$vbox->pack_start($colorsel);
+$vbox->pack_start($btnClose, false);
+
+$window->add($vbox);
+$window->show_all();
+
+Gtk::main();
+?>

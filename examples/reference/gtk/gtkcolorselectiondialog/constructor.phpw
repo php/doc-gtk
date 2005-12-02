@@ -1,0 +1,37 @@
+<?php
+//Create the color selection dialog
+$dlgColorsel = new GtkColorSelectionDialog('GtkColorSelectionDialog demo');
+//Quit Gtk loop when destroying the dialog
+$dlgColorsel->connect_simple('destroy', array('gtk', 'main_quit'));
+
+
+//Let the Cancel button quit the program
+$dlgColorsel->cancel_button->connect_simple('clicked', array($dlgColorsel, 'destroy'));
+
+//The OK button shows the current color
+$dlgColorsel->ok_button->set_label('Show color');
+$dlgColorsel->ok_button->connect('clicked', 'showColor');
+
+//The callback function when the OK button is clicked
+function showColor($button)
+{
+    $dlgColorsel = $button->get_toplevel();
+    $color       = $dlgColorsel->colorsel->get_current_color();
+    //The GdkColor has 48 bit depth (each R, B and G 16 bit). As
+    //we just want 8 bit, we shift the values by 8 bit
+    $strColor    = 'RGB: ' . ($color->red >> 8) . ' '
+                 . ($color->green >> 8) . ' ' . ($color->blue >> 8);
+    $msg = new GtkMessageDialog(null, 0, Gtk::MESSAGE_INFO, Gtk::BUTTONS_OK, $strColor);
+    $msg->run();
+    $msg->destroy();
+}//function showColor($button)
+
+//The help button shall be hidden
+$dlgColorsel->help_button->hide();
+
+
+//show the dialog
+$dlgColorsel->show();
+//start the main loop
+Gtk::main();
+?>
