@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<chapter id="tutorials.changes">
+ <title>Changes from PHP-Gtk1 to PHP-Gtk2</title>
+
+
+ <sect1>
+  <title>About this tutorial</title>
+  <simpara>
+   This tutorial tells you about the differences between PHP-Gtk1 and
+   PHP-Gtk2: What has changed, what's new and what not to do anymore.
+  </simpara>
+  <simpara>
+   PHP-Gtk2 tries to be backward-compatible as possible, but as Gtk2
+   itself broke BC pretty often, PHP-Gtk2 can't do magic. There are
+   many things which haven't changed, but some important smaller changes
+   you have to know when migrating to the second version.
+  </simpara>
+ </sect1>
+
+
+
+ <sect1 id="tutorials.changes.loadmodule">
+  <title>Loading the php_gtk PHP module</title>
+  <para>
+   In PHP-Gtk1, you never knew if the php-gtk module had been loaded
+   into PHP automatically via <filename>php.ini</filename>, or if it
+   was a bad setup (many of them!), and you had to load the module yourself:
+   <programlisting role="php">
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+     href="&directory.examples;/tutorials/changes/extension_load.phpw" parse="text">
+     <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+    </xi:include>
+   </programlisting>
+  </para>
+
+  <para>
+   In PHP5, loading modules via <literal>dl()</literal> is deprecated. That
+   means it still works, but people are encouraged not to do that any more.
+   So you can assume that php-gtk is already loaded, or, if you want to catch
+   all possible errors, check for the existance of the php-gtk module and throw
+   an error if it's not there:
+   <programlisting role="php">
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+     href="&directory.examples;/tutorials/changes/extension_check.phpw" parse="text">
+     <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+    </xi:include>
+   </programlisting>
+  </para>
+ </sect1>
+
+
+
+ <sect1 id="tutorials.changes.references">
+  <title>Object references or The Ampersand &amp;</title>
+  <para>
+   Object orientation was completely new to PHP4, and therefore not very
+   sophisticated nor complete in comparison to the OO in other languages like
+   Java. When assigning variables, it was absolutely necessary to not make copies
+   of Gtk objects, but pass references.
+   <programlisting role="php"><![CDATA[
+//PHP4: copy as default behavior
+$a = new GtkLabel();
+$a->set_text('1');
+$b = $a;
+$b->set_text('2');
+echo $a->get();//still 1
+]]></programlisting>
+    So to not make a copy, you had to use the ampersand &amp; when assigning variables:
+   <programlisting role="php"><![CDATA[
+//PHP4: making references
+$a = new GtkLabel();
+$a->set_text('1');
+$b = &$a;
+$b->set_text('2');
+echo $a->get();//is 2 now
+]]></programlisting>
+   However, a copy of the object <emphasis>still</emphasis> was made: On construction.
+   To be totally correct, especially with Gtk widgets, you had to do:
+   <programlisting role="php"><![CDATA[
+//PHP4: reference on instantiation
+$a = &new GtkLabel();
+]]></programlisting>
+  </para>
+
+  <para>
+   With PHP5, things have changed: Pass-by-reference is the default behavior now - one
+   doesn't need the ampersand any more! The following script does work on PHP5 with
+   PHP-Gtk2 without any problems:
+   <programlisting role="php">
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+     href="&directory.examples;/tutorials/changes/ampersand_php5.phpw" parse="text">
+     <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+    </xi:include>
+   </programlisting>
+  </para>
+
+  <para>
+   The same applies for callbacks: No ampersand any more!
+   While you had to do the following in PHP4 + Gtk1
+   <programlisting role="php"><![CDATA[
+$window->connect_object('destroy', array(&$object, 'function'));
+]]></programlisting>
+   you just leave the &amp; out with PHP5 and Gtk2:
+   <programlisting role="php"><![CDATA[
+$window->connect_simple('destroy', array($object, 'function'));
+]]></programlisting>
+  </para>
+ </sect1>
+
+
+
+ <sect1 id="tutorials.changes.constants">
+  <title>Gtk constants</title>
+
+  <para>
+   Gtk uses a lot of constants. In PHP-Gtk1, they were defined in global scope
+   and you could access them via
+   <programlisting role="php"><![CDATA[
+echo GTK_WIN_POS_CENTER;
+]]></programlisting>
+   If you execute that code with PHP-Gtk2, the following error will be thrown:
+  </para>
+
+  <screen><![CDATA[
+PHP Notice:  Use of undefined constant GTK_WIN_POS_CENTER -
+assumed 'GTK_WIN_POS_CENTER' in /path/to/file.php on line 23
+]]></screen>
+
+  <para>
+   The problem is that not the original value (GTK_WIN_POS_CENTER is the integer
+   <literal>1</literal> in PHP-Gtk1) is used, but the string
+   <literal>"GTK_WIN_POS_CENTER"</literal> - which is likely to break your code.
+  </para>
+
+  <para>
+   Static class constants are supported in PHP5, so the decision has been made
+   not to pollute the global namespace with PHP-Gtk constants any more. They
+   are defined in the classes <literal>Gtk</literal>, <literal>Gdk</literal> and
+   others.
+  </para>
+
+  <para>
+   In short, all you have to do (in most cases) is replacing the first underscore
+   <literal>_</literal> with two colons: <literal>GTK_WIN_POS_CENTER</literal>
+   has to be transformed to <literal>Gtk::WIN_POS_CENTER</literal>. 
+  </para>
+
+  <para>
+   Also note the new coding style: The first letter in <literal>Gtk</literal>,
+   <literal>Gdk</literal>, <literal>Pango</literal> and <literal>Atk</literal>
+   should be written uppercase.
+  </para>
+ </sect1>
+
+
+
+ <sect1 id="tutorials.changes.connect">
+  <title>Connecting signals</title>
+
+  <para>
+   To tie signals to a specific function in your code, you could use
+   <function class="GtkObject">connect</function>,
+   <function class="GtkObject">connect_object</function>,
+   <function class="GtkObject">connect_after</function> and
+   <function class="GtkObject">connect_object_after</function>.
+   Especially the functionality of <literal>connect_object</literal> wasn't
+   clear at first sight.
+  </para>
+
+  <para>
+   So the decision has been made to rename <literal>connect_object</literal>
+   to <function class="GtkObject">connect_simple</function> and
+   <literal>connect_object_after</literal> to
+   <function class="GtkObject">connect_simple_after</function>.
+   <emphasis>Simple</emphasis> means here that you have fewer function
+   parameters because the object is missing - something a
+   <literal>connect_object</literal> did not imply.
+  </para>
+ </sect1>
+
+
+
+ <sect1 id="tutorials.changes.deprecated">
+  <title>Deprecated widgets</title>
+
+  <simpara>
+   Gtk2 has a lot of new widget classes. Most of the new classes do something
+   better or a different way than an old class; and so the old widgets get
+   deprecated in favor of the new one.
+  </simpara>
+
+  <simpara>
+   To keep backward compatibility (BC), the old widgets can
+   still be used, but are likely to be removed in Gtk3 or so. That means
+   that you don't have to rewrite your old programs totally, but still can
+   use them without too much changes. However, you really shouldn't use any
+   of the deprecated widgets in newly written code. Don't do it.
+  </simpara>
+
+<!-- xsltproc segfaults when I uncomment the table!
+     Because of that I used the unordered list.
+  <table>
+   <title>List of deprecated widgets</title>
+   <tgroup>
+    <thead>
+     <row>
+      <entry>Old widget class</entry>
+      <entry>New widget class</entry>
+     </row>
+    </thead>
+    <tbody>
+     <row>
+      <entry><classname>GtkCList</classname></entry>
+      <entry><classname>GtkTreeView</classname> with <classname>GtkListStore</classname></entry>
+     </row>
+     <row>
+      <entry><classname>GtkCTree</classname></entry>
+      <entry><classname>GtkTreeView</classname> with <classname>GtkTreeStore</classname></entry>
+     </row>
+     <row>
+      <entry><classname>GtkPixmap</classname></entry>
+      <entry><classname>GtkImage</classname> with <classname>GdkPixbuf</classname></entry>
+     </row>
+    </tbody>
+   </tgroup>
+  </table>
+-->
+
+  <para>
+   <itemizedlist>
+    <title>List of deprecated widgets</title>
+    <listitem>
+     <classname>GtkCList</classname> =>
+     <classname>GtkTreeView</classname> with <classname>GtkListStore</classname>
+    </listitem>
+    <listitem>
+     <classname>GtkCTree</classname> =>
+     <classname>GtkTreeView</classname> with <classname>GtkTreeStore</classname>
+    </listitem>
+    <listitem>
+     <classname>GtkPixmap</classname> =>
+     <classname>GtkImage</classname> with <classname>GdkPixbuf</classname>
+    </listitem>
+   </itemizedlist>
+   </para>
+
+  <simpara>
+   The list may not be complete. If you think you found another deprecated
+   widget not listed here, write to
+   <ulink url="mailto:php-gtk-doc@lists.php.net">php-gtk-doc</ulink>.
+  </simpara>
+ </sect1>
+
+</chapter>
