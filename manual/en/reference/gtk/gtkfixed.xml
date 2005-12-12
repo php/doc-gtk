@@ -4,10 +4,32 @@
   <classtitle>GtkFixed</classtitle>
   <classparent>GtkContainer</classparent>
   <shortdesc>
-
+   A container that allows for precise placement of widgets.
   </shortdesc>
   <desc>
-
+   <para>
+    A <classname>GtkFixed</classname> container performs no automatic layout
+    management, as it is left to the programmer to provide the placement and
+    size of all child widgets, in pixels, through the 
+    <function class="GtkFixed">put</function> and 
+    <function class="GtkFixed">move</function> methods. The 
+    <function class="GtkContainer">add</function> method should not be used 
+    with GtkFixed.
+   </para>
+   <para>
+    Although this container allows for a fine grain of control over the exact
+    layout of a program, it is should not be used for most applications. One 
+    reason for this recommendation is that it requires great care and effort to
+    prevent display bugs (such as truncated text or overlapping widgets), and
+    makes it troublesome to add or remove widgets, as probably many others will
+    have to be rearranged. It has some other limitations, particularly when it
+    comes to tranlating text and handling right-to-left languages. It is also
+    harder to maintain layout consistency, especially in applications with 
+    complex and/or multiple windows.
+   </para>
+   <para>
+    See also: <classname>GtkTable</classname>, <classname>GtkBox</classname>.
+   </para>
   </desc>
  </classmeta>
 
@@ -21,10 +43,12 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Creates a new GtkFixed container.
    </shortdesc>
    <desc>
-
+    <para>
+     This function creates and returns a new <classname>GtkFixed</classname> widget.
+    </para>
    </desc>
   </constructor>
 
@@ -40,14 +64,14 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Gets whether the GtkFixed has its own GdkWindow.
    </shortdesc>
    <desc>
     <para>
-     See also: 
-     <function class="GtkFixed">set_has_window</function>
+     This fuction returns whether the <classname>GtkFixed</classname> has a
+     <classname>GdkWindow</classname> of it's own. See 
+     <function class="GtkFixed">set_has_window</function> for more information.
     </para>
-
    </desc>
   </method>
 
@@ -61,10 +85,16 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Moves child to new position.
    </shortdesc>
    <desc>
-
+    <para>
+     This method sets a new position for a child widget in a GtkFixed 
+     container. The parameters are the <parameter>x</parameter> and
+     <parameter>y</parameter> coordinates of the top left-hand corner of the
+     child widget, measured in pixels from the top left-hand corner of the 
+     container.
+    </para>
    </desc>
   </method>
 
@@ -78,10 +108,16 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets initial position of child.
    </shortdesc>
    <desc>
-
+				<para>
+     This method sets the initial position of the child widget(s) in a
+     <classname>GtkFixed</classname> container. The parameters are the 
+     <parameter>x</parameter> and <parameter>y</parameter> coordinates of the
+     top left-hand corner of the child widget, measured in pixels from the top
+     left-hand corner of the container. 
+    </para>
    </desc>
   </method>
 
@@ -93,9 +129,19 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Defines whether a separate window should be created.
    </shortdesc>
    <desc>
+    <para>
+     This function was added to provide an easy migration path for older 
+     applications which may expect GtkFixed to have a separate 
+     <classname>GdkWindow</classname>. The default is not to create a separate
+     window.
+    </para>
+    <para>
+     This function must be called while the GtkFixed is not realized, for
+     instance, immediately after the window is created.
+    </para>
     <para>
      See also: 
      <function class="GtkFixed">get_has_window</function>
