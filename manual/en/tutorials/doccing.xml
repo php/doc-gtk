@@ -13,7 +13,6 @@
    So if you just want to read the manual, this 
    shouldn't be of any interest to you.
   </simpara>
-
   <para>
    This documentation, like the php-gtk2 sources and the official
    php documentation, resides at the CVS server of the php project
@@ -368,6 +367,17 @@
 
     <listitem>
      <para>
+      <emphasis>Enumerator links</emphasis> are also very simple:
+      <programlisting role="xml"><![CDATA[
+<enumname>GtkButtonBoxStyle</enumname>
+]]></programlisting>
+      It will result in:
+      <enumname>GtkButtonBoxStyle</enumname>. 
+     </para>
+    </listitem>
+
+    <listitem>
+     <para>
       <emphasis>Property links</emphasis> are a simple:
       <programlisting role="xml"><![CDATA[
 <propname class="GtkDialog">action_area</propname>
@@ -448,7 +458,7 @@ shows you how to compile the manual.
     This is especially useful for readers who want to run
     the examples themselves: No need to copy&amp;paste the code, but
     just execute it in the example code directory. Furthermore,
-    it's more easy to test the examples when writing and checking
+    it's easier to test the examples when writing and checking
     the manual.
    </para>
 
@@ -466,7 +476,7 @@ shows you how to compile the manual.
      <title>Simple GtkAboutDialog</title>
      <programlisting role="php">
       <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
-                  href="&directory.examples;/reference/gtk/gtkaboutdialog/constructor.phpw" parse="text">
+                  ]]>href="&amp;directory.examples;/reference/gtk/gtkaboutdialog/constructor.phpw" parse="text"><![CDATA[
        <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
       </xi:include>
      </programlisting>
@@ -479,11 +489,14 @@ shows you how to compile the manual.
     <programlisting role="xml"><![CDATA[
 <programlisting role="php"><![CDATA[
 //some php code here
-]] >
+]]>]]&gt;<![CDATA[</programlisting>
 ]]></programlisting>
-    The <literal>CDATA</literal> section is necessary that you don't have
-    to escape the code, and the closing <literal>]]&gt;</literal> has to be
-    without the space.
+    The <literal>CDATA</literal> section is usefull because it allows you to
+    directly include code, without having to escape it. The 
+    &lt;?php and ?&gt; tags aren't required in code snippets. Note that 
+    <literal>CDATA</literal> opens a new document inside the current 
+    document, alas requiring new indention. Don't be afraid of breaking your
+    indenting scheme inside CDATA sections.
    </para>
   </sect2>
 
