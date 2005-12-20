@@ -4,10 +4,16 @@
   <classtitle>GtkFileChooserWidget</classtitle>
   <classparent>GtkVBox</classparent>
   <shortdesc>
-
+    A widget that allows selection of a file.
   </shortdesc>
   <desc>
-
+   <para>
+    This widget is suitable for allowing the user to choose files. It is
+    the primary element of the <classname>GtkFileChooserDialog</classname>.
+    For all practical purposes it is sufficient to use the dialog box
+    alone. However, certain specialized applications might require this
+    widget to be part of a larger window.
+   </para>
   </desc>
  </classmeta>
 
@@ -17,14 +23,21 @@
    <funcsynopsis>
     <funcprototype>
     <funcdef> <function>GtkFileChooserWidget</function></funcdef>
-    <paramdef>GtkFileChooserAction <parameter>action</parameter></paramdef>
+    <paramdef><enumname>GtkFileChooserAction</enumname> <parameter>action</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Creates a new <classname>GtkFileChooserWidget</classname>.
    </shortdesc>
    <desc>
-
+    <para>
+     Use this function to create a file chooser widget that can be embedded
+     in custom windows.
+    </para>
+    <note>
+     You need not call this function if you are using a
+     <classname>GtkFileChooserDialog</classname>.
+    </note>
    </desc>
   </constructor>
 
@@ -32,15 +45,20 @@
    <funcsynopsis>
     <funcprototype>
     <funcdef> <function>GtkFileChooserWidget::new_with_backend</function></funcdef>
-    <paramdef>GtkFileChooserAction <parameter>action</parameter></paramdef>
+    <paramdef><enumname>GtkFileChooserAction</enumname> <parameter>action</parameter></paramdef>
     <paramdef>string <parameter>backend</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Creates a new <classname>GtkFileChooserWidget</classname> with a
+    specified backend.
    </shortdesc>
    <desc>
-
+    <para>
+     This constructor is extremely useful if you want to allow non-local
+     files to be selected and the such. This a file chooser widget and can
+     be embedded in custom windows.
+    </para>
    </desc>
   </constructor>
 

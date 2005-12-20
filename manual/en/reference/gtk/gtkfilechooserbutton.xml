@@ -3,11 +3,22 @@
  <classmeta>
   <classtitle>GtkFileChooserButton</classtitle>
   <classparent>GtkHBox</classparent>
+  <classimage fileref="&directory.images;/reference/gtk/gtkfilechooserbutton.png"/>
   <shortdesc>
-
+    A button that launches a file chooser dialog.
   </shortdesc>
   <desc>
-
+   <para>
+    The <classname>GtkFileChooserButton</classname> is very similar in
+    functionality to a <classname>GtkColorButton</classname>. It is a
+    special kind of button that allows the user to select a file.
+   </para>
+   <para>
+    The button contains an area that displays the file name of the current
+    file selected and also displays a button that allows the user to launch
+    a file selection dialog. After the dialog is launched, the button is
+    immediately associated to the new file selected by the user.
+   </para>
   </desc>
  </classmeta>
 
@@ -18,14 +29,26 @@
     <funcprototype>
     <funcdef> <function>GtkFileChooserButton</function></funcdef>
     <paramdef>string <parameter>title</parameter></paramdef>
-    <paramdef>GtkFileChooserAction <parameter>action</parameter></paramdef>
+    <paramdef><enumname>GtkFileChooserAction</enumname> <parameter>action</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Creates a new <classname>GtkFileChooserButton</classname>
    </shortdesc>
    <desc>
-
+    <para>
+     Use this constructor to create a new file-selecting button widget.
+    </para>
+    <example>
+     <title>Using a GtkFileChooser button.</title>
+      <programlisting role="php">
+       <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
+                   href="&directory.examples;/reference/gtk/gtkfilechooserbutton/constructor.phpw"
+                   parse="text">
+        <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+       </xi:include>
+      </programlisting>
+    </example>
    </desc>
   </constructor>
 
@@ -41,14 +64,18 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the title of the file chooser dialog.
    </shortdesc>
    <desc>
+    <para>
+     Use this method to determine the title of the consequential
+     <classname>GtkFileChooserDialog</classname> that will be presented
+     when the button is clicked.
+    </para>
     <para>
      See also: 
      <function class="GtkFileChooserButton">set_title</function>
     </para>
-
    </desc>
   </method>
 
@@ -60,14 +87,18 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the width of the button.
    </shortdesc>
    <desc>
+    <para>
+     This method will return the width (in characters) of the button
+     widget. Obviously, this is determined by the label associated with the
+     button.
+    </para>
     <para>
      See also: 
      <function class="GtkFileChooserButton">set_width_chars</function>
     </para>
-
    </desc>
   </method>
 
@@ -79,14 +110,18 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the title of the file chooser dialog.
    </shortdesc>
    <desc>
+    <para>
+     Use this method to set the title of the consequential
+     <classname>GtkFileChooserDialog</classname> that will be presented
+     when the button is clicked.
+    </para>
     <para>
      See also: 
      <function class="GtkFileChooserButton">get_title</function>
     </para>
-
    </desc>
   </method>
 
@@ -98,14 +133,17 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the width between the button and its label.
    </shortdesc>
    <desc>
+    <para>
+     Use this method to set the width that the button will use. Pass the
+     width in number of characters.
+    </para>
     <para>
      See also: 
      <function class="GtkFileChooserButton">get_width_chars</function>
     </para>
-
    </desc>
   </method>
 

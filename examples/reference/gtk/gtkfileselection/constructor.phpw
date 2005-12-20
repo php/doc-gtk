@@ -1,0 +1,28 @@
+<?php
+/* Creating and initialising the file selection prompt */
+$filePrompt = new GtkFileSelection('GtkFileSelection Demo');
+$filePrompt->connect_simple('destroy', array('gtk', 'main_quit'));
+
+/* Adding a quit button that destroys the prompt */
+$filePrompt->cancel_button->set_label('Quit');
+$filePrompt->cancel_button->connect_simple('clicked', array($filePrompt, 'destroy'));
+
+/* Add an OK button that displays the file selected on click */
+$filePrompt->ok_button->set_label('Show the file');
+$filePrompt->ok_button->connect('clicked', 'showFile');
+
+/* Callback function that displays the file name */
+function showFile($okbutton)
+{
+    $filePrompt = $okbutton->get_toplevel();
+    $fileName = $filePrompt->get_filename();
+    $message = new GtkMessageDialog(null, 0, Gtk::MESSAGE_INFO,
+    Gtk::BUTTONS_OK, 'You selected: ' . $fileName);
+    $message->run();
+    $message->destroy();
+}
+
+/* Show the prompt and start the main loop */
+$filePrompt->show();
+Gtk::main();
+?>

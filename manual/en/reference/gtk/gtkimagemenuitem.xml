@@ -3,11 +3,18 @@
  <classmeta>
   <classtitle>GtkImageMenuItem</classtitle>
   <classparent>GtkMenuItem</classparent>
+  <classimage fileref="&directory.images;/reference/gtk/gtkimagemenuitem.png"/>
   <shortdesc>
-
+   A menu item with an icon.
   </shortdesc>
   <desc>
-
+   <para>
+    This is essentially a <classname>GtkMenuItem</classname> which has an
+    icon displayed next to the text label.
+   </para>
+   <para>
+    These items are frequently used for menu items like New, Open or Save.
+   </para>
   </desc>
  </classmeta>
 
@@ -17,14 +24,25 @@
    <funcsynopsis>
     <funcprototype>
     <funcdef> <function>GtkImageMenuItem</function></funcdef>
-    <paramdef>void</paramdef>
+    <!-- FIXME funny behavior! -->
+    <optional>
+     <paramdef>string <parameter>label</parameter></paramdef>
+    </optional>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Creates a new menu item with an icon.
    </shortdesc>
    <desc>
-
+    <para>
+     Use the constructor to generate a new menu item with an icon. You may
+     pass a string as the label, or a stock id, if you want to use the
+     existing stock icons.
+    </para>
+    <para>
+     You may even precede a character of the label with an
+     <literal>_</literal> to indicate the mnemonic for the menu item.
+    </para>
    </desc>
   </constructor>
 
@@ -37,10 +55,9 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    <!-- FIXME Not yet implemented -->
    </shortdesc>
    <desc>
-
    </desc>
   </constructor>
 
@@ -52,10 +69,9 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    <!-- FIXME Not yet implemented -->
    </shortdesc>
    <desc>
-
    </desc>
   </constructor>
 
@@ -67,7 +83,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    <!--FIXME No need for this, automatically done with constructor -->
    </shortdesc>
    <desc>
 
@@ -86,14 +102,17 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Gets the widget set as the image for the menu item.
    </shortdesc>
    <desc>
+    <para>
+     Use this method to retrieve the image widget currently associated with the
+     menu item.
+    </para>
     <para>
      See also: 
      <function class="GtkImageMenuItem">set_image</function>
     </para>
-
    </desc>
   </method>
 
@@ -105,14 +124,17 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the image widget for the menu item.
    </shortdesc>
    <desc>
+    <para>
+     Use this method to set the image for the menu item to the specified
+     widget.
+    </para>
     <para>
      See also: 
      <function class="GtkImageMenuItem">get_image</function>
     </para>
-
    </desc>
   </method>
 

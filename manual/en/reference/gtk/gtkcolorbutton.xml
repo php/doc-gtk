@@ -3,11 +3,19 @@
  <classmeta>
   <classtitle>GtkColorButton</classtitle>
   <classparent>GtkButton</classparent>
+  <classimage fileref="&directory.images;/reference/gtk/gtkcolorbutton.png"/>
   <shortdesc>
-
+    A button that launches a color selection dialog.
   </shortdesc>
   <desc>
-
+   <para>
+    <classname>GtkColorButton</classname> is a button that performs two
+    functions. One is to display the current color selected (or the default
+    color is no color has been selected yet) and the other is to allow the
+    user to launch a <classname>GtkColorSelectionDialog</classname> to
+    select a color. It is a suitable widget that may be displayed wherever
+    you require the user to select a color for a specific purpose.
+   </para>
   </desc>
  </classmeta>
 
@@ -21,13 +29,19 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Creates a new <classname>GtkColorButton</classname>.
    </shortdesc>
    <desc>
-
+    <para>
+     The constructor creates a new widget that is a slightly modified
+     button. The <classname>GtkColorButton</classname> contains a small area
+     of color indicating the current color selected. Clicking it will result
+     in the launching of a color selection dialog, allowing the user to
+     select a color. The small area of color on the button will be updated
+     as soon as the user is finished selecting a color.
+    </para>
    </desc>
   </constructor>
-
  </constructors>
 
  <methods>
@@ -40,14 +54,17 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the current alpha value.
    </shortdesc>
    <desc>
+    <para>
+     Use this method to determine the alpha value (transparency) of the 
+     color currently selected.
+    </para>
     <para>
      See also: 
      <function class="GtkColorButton">set_alpha</function>
     </para>
-
    </desc>
   </method>
 
@@ -59,14 +76,16 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the current color selected.
    </shortdesc>
    <desc>
+    <para>
+     Use this method to determine the current color selected by the user.
+    </para>
     <para>
      See also: 
      <function class="GtkColorButton">set_color</function>
     </para>
-
    </desc>
   </method>
 
@@ -78,14 +97,18 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the title of the color selection dialog.
    </shortdesc>
    <desc>
+    <para>
+     Use this method to determine the title of the
+     <classname>GtkColorSelectionDialog</classname> that will be launched
+     on click of the <classname>GtkColorButton</classname>.
+    </para>
     <para>
      See also: 
      <function class="GtkColorButton">set_title</function>
     </para>
-
    </desc>
   </method>
 
@@ -97,14 +120,19 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Determines whether the color selection dialog uses the alpha channel
+    or not.
    </shortdesc>
    <desc>
+    <para>
+     This method will return <literal>TRUE</literal> if the consequential
+     <classname>GtkColorSelectionDialog</classname> use the alpha channel
+     and <literal>FALSE</literal> if it doesn't.
+    </para>
     <para>
      See also: 
      <function class="GtkColorButton">set_use_alpha</function>
     </para>
-
    </desc>
   </method>
 
@@ -116,14 +144,17 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the current alpha value.
    </shortdesc>
    <desc>
+    <para>
+     Use this method to set the current opacity of the color selected. The
+     alpha value may be passed and an integer between 0 and 65535.
+    </para>
     <para>
      See also: 
      <function class="GtkColorButton">get_alpha</function>
     </para>
-
    </desc>
   </method>
 
@@ -135,14 +166,16 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the current color selected.
    </shortdesc>
    <desc>
+    <para>
+     Use this method to set the current color selected.
+    </para>
     <para>
      See also: 
      <function class="GtkColorButton">get_color</function>
     </para>
-
    </desc>
   </method>
 
@@ -154,14 +187,17 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the title of the color selection dialog.
    </shortdesc>
    <desc>
+    <para>
+     Use this method to set the title of the consequential
+     <classname>GtkColorSelectionDialog</classname>.
+    </para>
     <para>
      See also: 
      <function class="GtkColorButton">get_title</function>
     </para>
-
    </desc>
   </method>
 
@@ -173,14 +209,20 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets whether the color selection dialog will use the alpha channel or
+    not.
    </shortdesc>
    <desc>
+    <para>
+     Use this method to set whether the consequential
+     <classname>GtkColorSelectionDialog</classname> would use the alpha
+     channel or not. Pass <literal>TRUE</literal> if you want it to,
+     <literal>FALSE</literal> otherwise.
+    </para>
     <para>
      See also: 
      <function class="GtkColorButton">get_use_alpha</function>
     </para>
-
    </desc>
   </method>
 
@@ -197,6 +239,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
+    Emitted when the user selects a color.
    </shortdesc>
    <desc>
 

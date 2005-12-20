@@ -4,10 +4,20 @@
   <classtitle>GtkMenuItem</classtitle>
   <classparent>GtkItem</classparent>
   <shortdesc>
-
+   A widget used for holding items in menus.
   </shortdesc>
   <desc>
-
+   <para>
+    The <classname>GtkMenuItem</classname> is the fundamental building block
+    of all menus. These widgets are responsible for holding valid children
+    that will make up the menu. Their function is to correctly handle
+    highlighting, alignment, events and the addition of sub-menus.
+   </para>
+   <para>
+    Since this widget derives itself from <classname>GtkBin</classname>, it
+    can hold any valid child widget, although only a few may aid in the
+    creation of menus.
+   </para>
   </desc>
  </classmeta>
 
@@ -17,44 +27,22 @@
    <funcsynopsis>
     <funcprototype>
     <funcdef> <function>GtkMenuItem</function></funcdef>
-    <paramdef>void</paramdef>
+    <paramdef><optional>string <parameter>label</parameter></optional></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Creates a new <classname>GtkMenuItem</classname>.
    </shortdesc>
    <desc>
-
-   </desc>
-  </constructor>
-
-  <constructor id="gtk.gtkmenuitem.constructor.new_with_label">
-   <funcsynopsis>
-    <funcprototype>
-    <funcdef> <function>GtkMenuItem::new_with_label</function></funcdef>
-    <paramdef>string <parameter>label</parameter></paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </constructor>
-
-  <constructor id="gtk.gtkmenuitem.constructor.new_with_mnemonic">
-   <funcsynopsis>
-    <funcprototype>
-    <funcdef> <function>GtkMenuItem::new_with_mnemonic</function></funcdef>
-    <paramdef>string <parameter>label</parameter></paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-   <desc>
-
+    <para>
+     You may use the constructor to create a new menu item, optionally with
+     a label that may be passed as a parameter.
+    </para>
+    <note>
+     You may precede any character of the string parameter with an
+     <literal>_</literal>, to set that character as the mnemonic for the
+     item. This behavior is automatic.
+    </note>
    </desc>
   </constructor>
 
@@ -70,10 +58,13 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Emits the <literal>activate</literal> signal.
    </shortdesc>
    <desc>
-
+    <para>
+     Use this method on the <classname>GtkMenuItem</classname> to emit its
+     <literal>activate</literal> signal.
+    </para>
    </desc>
   </method>
 
@@ -85,10 +76,13 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Emits the <literal>deselect</literal> signal.
    </shortdesc>
    <desc>
-
+    <para>
+     Use this method on the <classname>GtkMenuItem</classname> to emit its
+     <literal>deactivate</literal> signal.
+    </para>
    </desc>
   </method>
 
@@ -100,14 +94,21 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns whether the menu item appears justified to the right of its menu
+    bar.
    </shortdesc>
    <desc>
+    <para>
+     Use this method to determine whether or not the
+     <classname>GtkMenuItem</classname> appears justified to the right of
+     the menu bar it is attached to. The function return
+     <literal>TRUE</literal> if it does, <literal>FALSE</literal> if not,
+     or if it is not attached to any menu bar.
+    </para>
     <para>
      See also: 
      <function class="GtkMenuItem">set_right_justified</function>
     </para>
-
    </desc>
   </method>
 
@@ -119,15 +120,19 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Return the submenu attached to the menu item.
    </shortdesc>
    <desc>
+    <para>
+     Use this method to return the submenu attached to the menu item. The
+     function will return the submenu widget, <literal>NULL</literal> if no
+     submenu is associated with the menu item.
+    </para>
     <para>
      See also: 
      <function class="GtkMenuItem">remove_submenu</function>, 
      <function class="GtkMenuItem">set_submenu</function>
     </para>
-
    </desc>
   </method>
 
@@ -139,15 +144,23 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Removes the submenu associated with the menu item.
    </shortdesc>
    <desc>
+    <para>
+     Use this method to remove the submenu that is associated with the menu
+     item.
+    </para>
+    <note>
+     This method does not result in the submenu being destroyed, merely
+     detached from the menu item. You may reuse the submenu widget
+     elsewhere.
+    </note>
     <para>
      See also: 
      <function class="GtkMenuItem">get_submenu</function>, 
      <function class="GtkMenuItem">set_submenu</function>
     </para>
-
    </desc>
   </method>
 
@@ -159,10 +172,17 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    DEPRECATED. Sets the menu item to be right aligned.
    </shortdesc>
    <desc>
-
+    <para>
+     Use this method to set the menu item to be justified to the right.
+    </para>
+    <note>
+     WARNING! This method has been deprecated in PHP-Gtk2, and should
+     NOT be used in newly written code. Use 
+     <function class="GtkMenuItem">set_right_justified</function> instead.
+    </note>    
    </desc>
   </method>
 
@@ -174,10 +194,13 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Emits the <literal>select</literal> signal.
    </shortdesc>
    <desc>
-
+    <para>
+     Use this method on the <classname>GtkMenuItem</classname> to emit its
+     <literal>select</literal> signal.
+    </para>
    </desc>
   </method>
 
@@ -189,10 +212,10 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the accelerator path for the menu item. 
    </shortdesc>
    <desc>
-
+    <!-- FIXME -->
    </desc>
   </method>
 
@@ -204,14 +227,17 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Aligns the menu item to the right.
    </shortdesc>
    <desc>
+    <para>
+     Use this method if you want the menu item appear at the far right when
+     you add it to a menu bar.
+    </para>
     <para>
      See also: 
      <function class="GtkMenuItem">get_right_justified</function>
     </para>
-
    </desc>
   </method>
 
@@ -223,15 +249,20 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the submenu for the menu item.
    </shortdesc>
    <desc>
+    <para>
+     This method is useful in associating a <classname>GtkMenu</classname>
+     as a submenu for the specified menu item. The parameter passed must be
+     a valid <classname>GtkWidget</classname> (most of the time, a 
+     <classname>GtkMenu</classname>)
+    </para>
     <para>
      See also: 
      <function class="GtkMenuItem">get_submenu</function>, 
      <function class="GtkMenuItem">remove_submenu</function>
     </para>
-
    </desc>
   </method>
 
@@ -243,10 +274,11 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Emits the <literal>toggle-size-allocate</literal> signal for the menu
+    item. 
    </shortdesc>
    <desc>
-
+    <!-- FIXME -->
    </desc>
   </method>
 
@@ -258,7 +290,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    <!-- FIXME Not yet Implemented? -->
    </shortdesc>
    <desc>
 
@@ -278,9 +310,9 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
+    Emitted when the menu item is activated.
    </shortdesc>
    <desc>
-
    </desc>
   </signal>
   
@@ -293,9 +325,9 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
+    Emitted when the menu is activated and if the menu item has a submenu.
    </shortdesc>
    <desc>
-
    </desc>
   </signal>
   
@@ -309,9 +341,9 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
+        
    </shortdesc>
    <desc>
-
    </desc>
   </signal>
   

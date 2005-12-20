@@ -1401,14 +1401,21 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_type_hint</function></funcdef>
-     <paramdef>GdkWindowTypeHint <parameter>hint</parameter></paramdef>
+     <paramdef><enumname>GdkWindowTypeHint</enumname> <parameter>hint</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Provides a hint to the window manager about the functionality of a window
    </shortdesc>
    <desc>
-
+    <simpara>
+     The application can use this call to provide a hint to the window manager
+     about the functionality of a window. The window manager can use this 
+     information when determining the decoration and behaviour of the window.
+    </simpara>
+    <simpara>
+     The hint must be set before the window is mapped.
+    </simpara>
    </desc>
   </method>
 
