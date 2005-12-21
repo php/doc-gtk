@@ -169,7 +169,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    FIXME: Code should be changed
    </shortdesc>
    <desc>
     <para>
@@ -188,7 +188,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    FIXME: Code should be changed
    </shortdesc>
    <desc>
     <para>
@@ -199,48 +199,24 @@
    </desc>
   </method>
 
-  <method id="gtk.gtkliststore.method.insert_with_values">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>void <function>insert_with_values</function></funcdef>
-     <paramdef>void</paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </method>
-
-  <method id="gtk.gtkliststore.method.insert_with_valuesv">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>void <function>insert_with_valuesv</function></funcdef>
-     <paramdef>void</paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </method>
-
   <method id="gtk.gtkliststore.method.iter_is_valid">
    <funcsynopsis>
     <funcprototype>
      <funcdef>bool <function>iter_is_valid</function></funcdef>
-     <paramdef>void</paramdef>
+     <paramdef><classname>GtkTreeIter</classname> <parameter>iter</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Checks if the given iterator is valid.
    </shortdesc>
    <desc>
-
+    <para>
+     Checks if the given is still valid (could be invalid because of deletion).
+    </para>
+    <note>
+     <simpara>Warning: This function is slow. Only use it for debugging and/or 
+         testing purposes.</simpara>
+    </note>
    </desc>
   </method>
 
@@ -248,18 +224,24 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>move_after</function></funcdef>
-     <paramdef>void</paramdef>
+     <paramdef><classname>GtkTreeIter</classname> <parameter>iter</parameter></paramdef>
+     <paramdef><classname>GtkTreeIter</classname> <parameter>position</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Moves the given row after a specified one.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     Moves the given <parameter>iter</parameter> just after 
+     <parameter>position</parameter>. If <parameter>position</parameter> is
+     <literal>NULL</literal>, the row will be moved at the start of the list.
+    </para>
+    <para>
+     See also:
+     <function class="GtkListStore">move_before</function>,
      <function class="GtkListStore">insert_after</function>
     </para>
-
    </desc>
   </method>
 
@@ -267,18 +249,33 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>move_before</function></funcdef>
-     <paramdef>void</paramdef>
+     <paramdef><classname>GtkTreeIter</classname> <parameter>iter</parameter></paramdef>
+     <paramdef><classname>GtkTreeIter</classname> <parameter>position</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Moves the given row before a specified one.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     Moves the given <parameter>iter</parameter> just before 
+     <parameter>position</parameter>. If <parameter>position</parameter> is
+     <literal>NULL</literal>, the row will be moved at the end of the list.
+    </para>
+    <para>
+     See also:
+     <function class="GtkListStore">move_after</function>,
      <function class="GtkListStore">insert_before</function>
     </para>
-
+    <example>
+     <title>Moving a row before another one</title>
+     <programlisting role="php">
+      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+                  href="&directory.examples;/reference/gtk/gtkliststore/move_before.php" parse="text">
+       <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+      </xi:include>
+     </programlisting>
+    </example>
    </desc>
   </method>
 
@@ -380,7 +377,7 @@
     </example>
    </desc>
   </method>
-
+<!--
   <method id="gtk.gtkliststore.method.set_column_types">
    <funcsynopsis>
     <funcprototype>
@@ -425,19 +422,32 @@
 
    </desc>
   </method>
-
+-->
   <method id="gtk.gtkliststore.method.swap">
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>swap</function></funcdef>
-     <paramdef>void</paramdef>
+     <paramdef><classname>GtkTreeIter</classname> <parameter>a</parameter></paramdef>
+     <paramdef><classname>GtkTreeIter</classname> <parameter>b</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Swaps two rows.
    </shortdesc>
    <desc>
-
+    <para>
+     Swaps rows <parameter>a</parameter> and <parameter>b</parameter> in the 
+     list store. Note that this function only works with unsorted stores.
+    </para>
+    <example>
+     <title>Swapping two rows</title>
+     <programlisting role="php">
+      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+                  href="&directory.examples;/reference/gtk/gtkliststore/swap.php" parse="text">
+       <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+      </xi:include>
+     </programlisting>
+    </example>
    </desc>
   </method>
 
