@@ -3893,9 +3893,17 @@
  <enum id="gtk.enum.type">
   <enumname>GtkType</enumname>
   <desc>
+   <para>
+    GtkType is used in <classname>GtkListStore</classname> and
+    <classname>GtkTreeStore</classname> to determine the type of
+    the column in the data table.
+   </para>
    <simpara>
-    
-   </simpara>
+    It depends on the GtkType, what type of data may be stored in
+    the particular column and how the default
+    <classname>GtkCellRenderer</classname> displays the value in
+    the view.
+   </para>
   </desc>
   <enumoption>
    <value>0</value>
@@ -3929,14 +3937,14 @@
    <value>20</value>
    <optionname>Gtk::TYPE_BOOLEAN</optionname>
    <shortdesc>
-    
+    A boolean value, <literal>TRUE</literal> or <literal>FALSE</literal>
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>32</value>
    <optionname>Gtk::TYPE_LONG</optionname>
    <shortdesc>
-    
+    A big integer number.
    </shortdesc>
   </enumoption>
   <enumoption>
@@ -3957,14 +3965,14 @@
    <value>60</value>
    <optionname>Gtk::TYPE_DOUBLE</optionname>
    <shortdesc>
-    
+    A decimal number with a fraction dot in it.
    </shortdesc>
   </enumoption>
   <enumoption>
    <value>64</value>
    <optionname>Gtk::TYPE_STRING</optionname>
    <shortdesc>
-    
+    A normal string.
    </shortdesc>
   </enumoption>
   <enumoption>
@@ -3999,7 +4007,7 @@
    <value>137706104</value>
    <optionname>Gtk::TYPE_PHP_VALUE</optionname>
    <shortdesc>
-    
+    Any PHP variable content.
    </shortdesc>
   </enumoption>
  </enum>
