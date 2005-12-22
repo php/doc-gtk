@@ -1,0 +1,435 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<classentry id="gtk.gtktreemodel">
+ <classmeta>
+  <classtitle>GtkTreeModel</classtitle>
+  <classparent>GInterface</classparent>
+  <shortdesc>
+   The tree interface used by <classname>GtkTreeView</classname>.
+  </shortdesc>
+  <desc>
+   <para>
+    The GtkTreeModel interface defines a generic tree interface for 
+    use by the <classname>GtkTreeView</classname> widget. It is an abstract 
+    interface, and is designed to be usable with any appropriate data 
+    structure. The programmer just has to implement this interface on their
+    own data type for it to be viewable by a <classname>GtkTreeView</classname>
+    widget.
+   </para>
+   <note>
+    <simpara>
+     This is an interface and cannot be instantiated directly.
+    </simpara>
+   </note>
+  </desc>
+ </classmeta>
+
+ <methods>
+
+  <method id="gtk.gtktreemodel.method.filter_new">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>filter_new</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtktreemodel.method.foreach">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>foreach</function></funcdef>
+     <paramdef>function <parameter>callback_func</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Loop through all rows.
+   </shortdesc>
+   <desc>
+    <para>
+     Calls the given callback function for each single row in
+     the store.
+    </para>
+    <para>
+     The callback function can have the following parameters:
+     <literal>(<classname>GtkTreeModel</classname> model,
+      <classname>GtkTreePath</classname> path,
+      <classname>GtkTreeIter</classname> iter)</literal>.
+    </para>
+    <example>
+     <title>Looping through all rows with foreach</title>
+     <programlisting role="php">
+      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+                  href="&directory.examples;/reference/gtk/gtktreemodel/foreach.php" parse="text">
+       <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+      </xi:include>
+     </programlisting>
+    </example>
+   </desc>
+  </method>
+
+  <method id="gtk.gtktreemodel.method.get_column_type">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef><classname>GType</classname> <function>get_column_type</function></funcdef>
+     <paramdef>int <parameter>column</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Returns the type of the column.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Returns the type of the column.
+    </simpara>
+   </desc>
+  </method>
+
+  <method id="gtk.gtktreemodel.method.get_flags">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>get_flags</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtktreemodel.method.get_iter">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef><classname>GtkTreeIter</classname> <function>get_iter</function></funcdef>
+     <paramdef><classname>GtkTreePath</classname> <parameter>path</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Returns an iter for the given GtkTreePath.
+   </shortdesc>
+   <desc>
+    <para>
+     Returns an iter for the given <parameter>path</parameter>.
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtktreemodel.method.get_iter_first">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef><classname>GtkTreeIter</classname> <function>get_iter_first</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Returns an iter to the first row.
+   </shortdesc>
+   <desc>
+    <para>
+     Returns an iterator to the first row in the store (the one
+     with path <literal>'0'</literal>).
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtktreemodel.method.get_iter_root">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef><classname>GtkTreeIter</classname> <function>get_iter_root</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    DEPRECATED. Alias for get_iter_first().
+   </shortdesc>
+   <desc>
+    <para>
+     DEPRECATED. Alias for <function class="GtkTreeModel">get_iter_first</function>.
+     Provided for compatibility reasons only. Don't use it in newly written code.
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtktreemodel.method.get_iter_from_string">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef><classname>GtkTreeIter</classname> <function>get_iter_from_string</function></funcdef>
+     <paramdef>string <parameter>path</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Convert the given string path to a valid path and return the iter.
+   </shortdesc>
+   <desc>
+    <para>
+     The function converts the given string (e.g. <literal>'0:1:0'</literal>)
+     to a valid <classname>GtkTreePath</classname> and returns the proper
+     iterator.
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtktreemodel.method.get_n_columns">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>int <function>get_n_columns</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Returns the number of columns used by tree_model.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Returns the number of columns used by tree_model.
+    </simpara>
+   </desc>
+  </method>
+
+  <method id="gtk.gtktreemodel.method.get_path">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef><classname>GtkTreePath</classname> <function>get_path</function></funcdef>
+     <paramdef><classname>GtkTreeIter</classname> <parameter>iter</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Returns a path to the given iterator.
+   </shortdesc>
+   <desc>
+    <para>
+     Returns the path for the given iterator.
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtktreemodel.method.get_string_from_iter">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>string <function>get_string_from_iter</function></funcdef>
+     <paramdef><classname>GtkTreeIter</classname> <parameter>iter</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Generates a string representation of the iter.
+   </shortdesc>
+   <desc>
+    <para>
+     Generates a string representation of the iter. This string is a ':' separated
+     list of numbers. For example, <literal>"4:10:0:3"</literal> would be an 
+     acceptable return value for this string.
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtktreemodel.method.get_value">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>mixed <function>get_value</function></funcdef>
+     <paramdef><classname>GtkTreeIter</classname> <parameter>iter</parameter></paramdef>
+     <paramdef>int <parameter>column</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Returns the value of a column of the given iter.
+   </shortdesc>
+   <desc>
+    <para>
+     Returns the value set at the <parameter>column</parameter> of the
+     given <parameter>iter</parameter>.
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtktreemodel.method.iter_children">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>??? <function>iter_children</function></funcdef>
+     <paramdef><classname>GtkTreeIter</classname> <parameter>iter</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+    <para>
+
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtktreemodel.method.iter_has_child">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>iter_has_child</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtktreemodel.method.iter_n_children">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>iter_n_children</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtktreemodel.method.iter_next">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>iter_next</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtktreemodel.method.iter_nth_child">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>iter_nth_child</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtktreemodel.method.iter_parent">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>iter_parent</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtktreemodel.method.ref_node">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>ref_node</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtktreemodel.method.row_changed">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>row_changed</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtktreemodel.method.row_deleted">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>row_deleted</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtktreemodel.method.row_has_child_toggled">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>row_has_child_toggled</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtktreemodel.method.row_inserted">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>row_inserted</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtktreemodel.method.unref_node">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>unref_node</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+ </methods>
+</classentry>
