@@ -28,15 +28,28 @@
   <method id="gtk.gtktreemodel.method.filter_new">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>void <function>filter_new</function></funcdef>
-     <paramdef>void</paramdef>
+     <funcdef><classname>GtkTreeModelFilter</classname> <function>filter_new</function></funcdef>
+     <paramdef><classname>GtkTreePath</classname> <parameter>path</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Creates a new filter using the given path as root.
    </shortdesc>
    <desc>
-
+    <para>
+     Creates and returns a new tree filter which uses the node referenced
+     by the given <parameter>path</parameter> as root node (not visible).
+     That means you can use it to display a part of the tree only.
+    </para>
+    <example>
+     <title>Displaying a part of the tree only</title>
+     <programlisting role="php">
+      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+                  href="&directory.examples;/reference/gtk/gtktreemodel/filter_new.phpw" parse="text">
+       <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+      </xi:include>
+     </programlisting>
+    </example>
    </desc>
   </method>
 
@@ -252,16 +265,18 @@
   <method id="gtk.gtktreemodel.method.iter_children">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>??? <function>iter_children</function></funcdef>
-     <paramdef><classname>GtkTreeIter</classname> <parameter>iter</parameter></paramdef>
+     <funcdef><classname>GtkTreeIter</classname> <function>iter_children</function></funcdef>
+     <paramdef><classname>GtkTreeIter</classname> <parameter><optional>parent</optional></parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns iter for the first child row.
    </shortdesc>
    <desc>
     <para>
-
+     Returns an iterator for the first child row of <parameter>parent</parameter>.
+     If the parameter is omitted, or <literal>NULL</literal> is passed, the iterator to
+     the first root row is returned.
     </para>
    </desc>
   </method>
@@ -269,45 +284,53 @@
   <method id="gtk.gtktreemodel.method.iter_has_child">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>void <function>iter_has_child</function></funcdef>
-     <paramdef>void</paramdef>
+     <funcdef>bool <function>iter_has_child</function></funcdef>
+     <paramdef><classname>GtkTreeIter</classname> <parameter>iter</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    If an iterator has one or more children.
    </shortdesc>
    <desc>
-
+    <para>
+     Tells you if the passed iterator has children rows or not.
+    </para>
    </desc>
   </method>
 
   <method id="gtk.gtktreemodel.method.iter_n_children">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>void <function>iter_n_children</function></funcdef>
-     <paramdef>void</paramdef>
+     <funcdef>int <function>iter_n_children</function></funcdef>
+     <paramdef><classname>GtkTreeIter</classname> <parameter>iter</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the number of childen <parameter>iter</parameter> has.
    </shortdesc>
    <desc>
-
+    <para>
+     Returns the number of children <parameter>iter</parameter> has.
+    </para>
    </desc>
   </method>
 
   <method id="gtk.gtktreemodel.method.iter_next">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>void <function>iter_next</function></funcdef>
-     <paramdef>void</paramdef>
+     <funcdef><classname>GtkTreeIter</classname> <function>iter_next</function></funcdef>
+     <paramdef><classname>GtkTreeIter</classname> <parameter>iter</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Next iterator on the same level.
    </shortdesc>
    <desc>
-
+    <para>
+     Returns an iterator to the next row on the same level as
+     <parameter>sibling</parameter>. Returns NULL if the row
+     has no follower.
+    </para>
    </desc>
   </method>
 
@@ -319,7 +342,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    FIXME: behavior needs to be changed
    </shortdesc>
    <desc>
 
@@ -334,7 +357,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    FIXME: behavior needs to be changed
    </shortdesc>
    <desc>
 
@@ -349,7 +372,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    FIXME
    </shortdesc>
    <desc>
 
@@ -360,14 +383,17 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>row_changed</function></funcdef>
-     <paramdef>void</paramdef>
+     <paramdef><classname>GtkTreePath</classname> <parameter>path</parameter></paramdef>
+     <paramdef><classname>GtkTreeIter</classname> <parameter>iter</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Emits the "row_changed" signal.
    </shortdesc>
    <desc>
-
+    <para>
+     Emits the "row_changed" signal.
+    </para>
    </desc>
   </method>
 
@@ -375,14 +401,16 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>row_deleted</function></funcdef>
-     <paramdef>void</paramdef>
+     <paramdef><classname>GtkTreePath</classname> <parameter>path</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Emits the "row_deleted" signal.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Emits the "row_deleted" signal.
+    </simpara>
    </desc>
   </method>
 
@@ -390,14 +418,19 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>row_has_child_toggled</function></funcdef>
-     <paramdef>void</paramdef>
+     <paramdef><classname>GtkTreePath</classname> <parameter>path</parameter></paramdef>
+     <paramdef><classname>GtkTreeIter</classname> <parameter>iter</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Emits the "row_has_child_toggled" signal.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Emits the "row_has_child_toggled" signal.
+     This should be called by models after the child state of 
+     a node changes.
+    </simpara>
    </desc>
   </method>
 
@@ -405,14 +438,17 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>row_inserted</function></funcdef>
-     <paramdef>void</paramdef>
+     <paramdef><classname>GtkTreePath</classname> <parameter>path</parameter></paramdef>
+     <paramdef><classname>GtkTreeIter</classname> <parameter>iter</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Emits the "row_inserted" signal.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Emits the "row_inserted" signal.
+    </simpara>
    </desc>
   </method>
 
@@ -424,7 +460,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    FIXME
    </shortdesc>
    <desc>
 

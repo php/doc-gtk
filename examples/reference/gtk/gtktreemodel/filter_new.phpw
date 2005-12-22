@@ -1,0 +1,37 @@
+<?php
+$store = new GtkTreeStore(Gtk::TYPE_STRING, Gtk::TYPE_LONG);
+
+$nothern = $store->append(null, array('Northern europe', 0));
+$western = $store->append(null, array('Western europe', 0));
+$central = $store->append(null, array('Central europe', 0));
+
+$ger = $store->append($central, array('Germany', 83251851));
+$fr  = $store->append($western, array('France', 59765983));
+$nl  = $store->append($western, array('Netherlands', 16318199));
+$no  = $store->append($nothern, array('Norway', 4525116));
+
+//display it
+$wnd = new GtkWindow();
+$wnd->set_title('GtkTreeStore example');
+$wnd->connect_simple('destroy', array('gtk', 'main_quit'));
+
+
+//get the path to western europe
+$westpath = $store->get_path($western);
+//create view which shows western europe only
+$view = new GtkTreeView($store->filter_new($westpath));
+
+
+//cell renderer, which actually displays the text
+$cell_renderer = new GtkCellRendererText();
+//append one column to the view which displays the tree store column 0
+$view->append_column(new GtkTreeViewColumn('Country', $cell_renderer, 'text', 0));
+//display column 1 from the tree store
+$view->append_column(new GtkTreeViewColumn('Population', $cell_renderer, 'text', 1));
+//show all children at once
+$view->expand_all();
+
+$wnd->add($view);
+$wnd->show_all();
+Gtk::main();
+?>
