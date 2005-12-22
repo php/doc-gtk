@@ -384,6 +384,8 @@
      </p>
     </xsl:if>
 
+    <xsl:call-template name="implementedinterfaces" />
+
     <p>
      <h3>
       <xsl:call-template name="gentext">
@@ -671,7 +673,7 @@
  <xsl:template match="funcsynopsis">
    <xsl:apply-templates select="funcprototype"/>
  </xsl:template>
- 
+
  <xsl:template match="property">
   <div>
   <a>
@@ -704,5 +706,5 @@
   </p>
   </div>
  </xsl:template>
- 
+
 </xsl:stylesheet>

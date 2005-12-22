@@ -248,4 +248,47 @@ Makes the indent for the class hierarchy
 
 </xsl:template>
 
+
+
+<!--
+ Lists all implemented interfaces of a the current classset
+-->
+ <xsl:template name="implementedinterfaces">
+  <xsl:if test="./classmeta/implements">
+    <h3>
+     <xsl:call-template name="gentext">
+      <xsl:with-param name="key">implementedinterfaces</xsl:with-param>
+     </xsl:call-template>
+    </h3>
+    <blockquote>
+     <div class="literallayout">
+    <xsl:for-each select="./classmeta/implements">
+     <xsl:variable name="id">
+      <xsl:call-template name="get_id_from_name">
+       <xsl:with-param name="classname" select="."/>
+      </xsl:call-template>
+     </xsl:variable>
+     <xsl:variable name="link">
+      <xsl:call-template name="href.target">
+       <xsl:with-param name="object" select="id($id)"/>
+      </xsl:call-template>
+     </xsl:variable>
+     <span dir="ltr">
+      <a>
+       <xsl:attribute name="href">
+        <xsl:value-of select="$link" />
+       </xsl:attribute>
+       <xsl:value-of select="." />
+      </a>
+     </span>
+     <xsl:if test="position()!=last()">
+      <xsl:text>, </xsl:text>
+     </xsl:if>
+    </xsl:for-each>
+     </div>
+    </blockquote>
+  </xsl:if>
+ </xsl:template>
+
+
 </xsl:stylesheet>
