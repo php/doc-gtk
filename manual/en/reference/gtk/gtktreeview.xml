@@ -3,11 +3,16 @@
  <classmeta>
   <classtitle>GtkTreeView</classtitle>
   <classparent>GtkContainer</classparent>
+  <classimage fileref="&directory.images;/reference/gtk/gtktreeview.png"/>
   <shortdesc>
-
+   A widget for displaying both trees and lists.
   </shortdesc>
   <desc>
-
+   <para>
+    Widget that displays any object that implements the
+    <classname>GtkTreeModel</classname> interface, for example
+    <classname>GtkListStore</classname> and <classname>GtkTreeStore</classname>.
+   </para>
   </desc>
  </classmeta>
 
@@ -17,14 +22,27 @@
    <funcsynopsis>
     <funcprototype>
     <funcdef> <function>GtkTreeView</function></funcdef>
-    <paramdef>void</paramdef>
+    <paramdef><classname>GtkTreeModel</classname> <parameter><optional>model</optional></parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Create a new tree view.
    </shortdesc>
    <desc>
-
+    <para>
+     Creates a new <classname>GtkTreeView</classname>, optionally with a data store. If you
+     don't set a it on construction, you can use
+     <function class="GtkTreeView">set_model</function> after.
+    </para>
+    <example>
+     <title>GtkTreeview with sortable columns and some data</title>
+     <programlisting role="php">
+      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+                  href="&directory.examples;/reference/gtk/gtktreeview/constructor.phpw" parse="text">
+       <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+      </xi:include>
+     </programlisting>
+    </example>
    </desc>
   </constructor>
 

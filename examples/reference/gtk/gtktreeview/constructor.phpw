@@ -1,0 +1,61 @@
+<?php
+//the model
+$store = new GtkListStore(Gtk::TYPE_BOOLEAN, Gtk::TYPE_STRING, Gtk::TYPE_LONG);
+
+//add some data to the data store
+$store->append(array(true , 'PHP'    , 1994));
+$store->append(array(true , 'C'      , 1970));
+$store->append(array(true , 'C++'    , 1983));
+$store->append(array(false, 'Ruby'   , 1995));
+$store->append(array(false, 'Python' , 1990));
+$store->append(array(true , 'Java'   , 1994));
+$store->append(array(false, 'Fortran', 1950));
+$store->append(array(false, 'List'   , 1958));
+$store->append(array(false, 'Haskell', 1987));
+$store->append(array(false, 'Eiffel' , 1985));
+
+//sort by year by default
+$store->set_sort_column_id(2, Gtk::SORT_ASCENDING);
+
+//We want to display our data in a GtkTreeView
+$treeview = new GtkTreeView($store);
+
+//the text renderer is used to display text
+$cell_renderer = new GtkCellRendererText();
+
+//Create the first column, make it resizable and sortable
+$colLanguage = new GtkTreeViewColumn('Language', $cell_renderer, 'text', 1);
+//make the column resizable in width
+$colLanguage->set_resizable(true);
+//make it sortable and let it sort after model column 1
+$colLanguage->set_sort_column_id(1);
+//add the column to the view
+$treeview->append_column($colLanguage);
+
+//second column, also sortable
+$colYear = new GtkTreeViewColumn('Year', $cell_renderer, 'text', 2);
+$colYear->set_sort_column_id(2);
+$treeview->append_column($colYear);
+
+//we want to display a boolean value, so we can use a check box for display
+$bool_cell_renderer = new GtkCellRendererToggle();
+$colUsed = new GtkTreeViewColumn('Used', $bool_cell_renderer, 'active', 0);
+$colUsed->set_sort_column_id(0);
+$treeview->append_column($colUsed);
+
+
+//A window where we can put our tree view
+$wnd = new GtkWindow();
+$wnd->set_title('Programming languages');
+$wnd->connect_simple('destroy', array('gtk', 'main_quit'));
+
+//to make the view scrollable, we need a scrolled window
+$scrwnd = new GtkScrolledWindow();
+$scrwnd->set_policy(Gtk::POLICY_AUTOMATIC, Gtk::POLICY_AUTOMATIC);
+$scrwnd->add($treeview);
+
+$wnd->add($scrwnd);
+$wnd->set_default_size(250, 200);
+$wnd->show_all();
+Gtk::main();
+?>
