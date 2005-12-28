@@ -385,6 +385,7 @@
     </xsl:if>
 
     <xsl:call-template name="implementedinterfaces" />
+    <xsl:call-template name="implementedby" />
 
     <p>
      <h3>
@@ -392,6 +393,15 @@
        <xsl:with-param name="key">description</xsl:with-param>
       </xsl:call-template>
      </h3>
+     <xsl:if test="@type='interface'">
+      <blockquote>
+       <strong>
+        <xsl:call-template name="gentext">
+         <xsl:with-param name="key">interfacewarning</xsl:with-param>
+        </xsl:call-template>
+       </strong>
+      </blockquote>
+     </xsl:if>
      <blockquote>
       <xsl:apply-templates select="./classmeta/desc"/>
      </blockquote>
