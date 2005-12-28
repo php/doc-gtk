@@ -302,7 +302,8 @@ Makes the indent for the class hierarchy
     </h3>
     <blockquote>
      <div class="literallayout">
-    <xsl:for-each select="/set/book/classset/classentry[classmeta/implements=classmeta/classtitle]">
+    <xsl:variable name="classname"><xsl:value-of select="classmeta/classtitle"/></xsl:variable>
+    <xsl:for-each select="/set/book/classset/classentry[classmeta/implements=$classname]">
      <xsl:variable name="id">
       <xsl:call-template name="get_id_from_name">
        <xsl:with-param name="classname" select="classmeta/classtitle"/>
