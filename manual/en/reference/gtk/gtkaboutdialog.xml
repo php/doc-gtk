@@ -5,14 +5,14 @@
   <classparent>GtkDialog</classparent>
   <classimage fileref="&directory.images;/reference/gtk/gtkaboutdialog.png"/>
   <shortdesc>
-   Display information about an application
+   Display information about an application.
   </shortdesc>
   <desc>
    <para>
     The GtkAboutDialog offers a simple way to display information 
     about a program like its logo, name, copyright, website and 
     license. It is also possible to give credits to the authors, 
-    documenters, translators and artists who have worked on the 
+    the documentation team, translators and artists who have worked on the 
     program. An about dialog is typically opened when the user 
     selects the About option from the Help menu. All parts of 
     the dialog are optional.
@@ -40,7 +40,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Constructs a new about dialog
+    Constructs a new about dialog.
    </shortdesc>
    <desc>
     <para>
@@ -79,7 +79,7 @@
    </shortdesc>
    <desc>
    <simpara>
-   Returns artists credits as an array.
+    Returns artists credits as an array.
    </simpara>
     <para>
      See also: 
@@ -100,14 +100,13 @@
     Returns authors credits as an array.
    </shortdesc>
    <desc>
-  <simpara>
-   Returns authors credits as an array.
-   </simpara>
+    <simpara>
+     Returns authors credits as an array.
+    </simpara>
     <para>
      See also: 
      <function class="GtkAboutDialog">set_authors</function>
     </para>
-
    </desc>
   </method>
 
@@ -129,7 +128,6 @@
      See also: 
      <function class="GtkAboutDialog">set_comments</function>
     </para>
-
    </desc>
   </method>
 
@@ -151,7 +149,6 @@
      See also: 
      <function class="GtkAboutDialog">set_copyright</function>
     </para>
-
    </desc>
   </method>
 
@@ -167,13 +164,12 @@
    </shortdesc>
    <desc>   
    <simpara>
-   Returns documenter credits as an array.
+    Returns documenter credits as an array.
    </simpara>
     <para>
      See also: 
      <function class="GtkAboutDialog">set_documenters</function>
     </para>
-
    </desc>
   </method>
 
@@ -195,7 +191,6 @@
      See also: 
      <function class="GtkAboutDialog">set_license</function>
     </para>
-
    </desc>
   </method>
 
@@ -218,7 +213,6 @@
      See also: 
      <function class="GtkAboutDialog">set_logo</function>
     </para>
-
    </desc>
   </method>
 
@@ -240,7 +234,6 @@
      See also: 
      <function class="GtkAboutDialog">set_logo_icon_name</function>
     </para>
-
    </desc>
   </method>
 
@@ -262,7 +255,6 @@
      See also: 
      <function class="GtkAboutDialog">set_name</function>
     </para>
-
    </desc>
   </method>
 
@@ -285,7 +277,6 @@
      See also: 
      <function class="GtkAboutDialog">set_translator_credits</function>
     </para>
-
    </desc>
   </method>
 
@@ -307,7 +298,6 @@
      See also: 
      <function class="GtkAboutDialog">set_version</function>
     </para>
-
    </desc>
   </method>
 
@@ -329,7 +319,6 @@
      See also: 
      <function class="GtkAboutDialog">set_website</function>
     </para>
-
    </desc>
   </method>
 
@@ -351,7 +340,6 @@
      See also: 
      <function class="GtkAboutDialog">set_website_label</function>
     </para>
-
    </desc>
   </method>
 
@@ -367,10 +355,13 @@
    </shortdesc>
    <desc>
     <para>
+     This function sets the strings that should be displayed in the artists
+     tab that is placed on the secondary credits dialog.
+    </para>
+    <para>
      See also: 
      <function class="GtkAboutDialog">get_artists</function>
     </para>
-
    </desc>
   </method>
 
@@ -386,30 +377,29 @@
     the secondary credits dialog.
    </shortdesc>
    <desc>
-   <simpara>
-   The <classname>GtkAboutDialog</classname> supports secondary 
-   credits for artists, authors, documenters and translators, if any of these 
-   are set the <classname>GtkAboutDialog</classname> window will 
-   automatically display  a "Credits"  button , clicking this displays the secondary 
-   credits window.
-   </simpara>
     <simpara>
-    <function class="GtkAboutDialog">set_authors</function>, 
-    <function class="GtkAboutDialog">set_artists</function> and 
-    <function class="GtkAboutDialog">set_documenters</function> all 
-    accept a string array of credits, if any of the credits are recognised as email 
-    addresses or urls then these are displayed as  links assuming  the appropriate 
-    hooks have been set with <function class="GtkAboutDialog">set_email_hook</function>
+     The <classname>GtkAboutDialog</classname> supports secondary 
+     credits for artists, authors, the documentation team and translators, 
+     if any of these are set the <classname>GtkAboutDialog</classname> window will 
+     automatically display  a "Credits"  button , clicking this displays the 
+     secondary credits window.
+    </simpara>
+    <simpara>
+     <function class="GtkAboutDialog">set_authors</function>, 
+     <function class="GtkAboutDialog">set_artists</function> and 
+     <function class="GtkAboutDialog">set_documenters</function> all 
+     accept a string array of credits, if any of the credits are recognized as email 
+     addresses or urls then these are displayed as  links assuming  the appropriate 
+     hooks have been set with <function class="GtkAboutDialog">set_email_hook</function>
      or <function class="GtkAboutDialog">set_url_hook</function>
     </simpara>
     <simpara>
-    As of writing, the url and email hooks are not currently implemented.
+     As of writing, the url and email hooks are not currently implemented.
     </simpara>
     <para>
      See also: 
      <function class="GtkAboutDialog">get_authors</function>
     </para>
-
    </desc>
   </method>
 
@@ -433,7 +423,6 @@
      See also: 
      <function class="GtkAboutDialog">get_comments</function>
     </para>
-
    </desc>
   </method>
 
@@ -450,14 +439,13 @@
    <desc>
     <simpara>
      Set the copyright text. It is displayed between the 
-     <link linked="gtk.gtkaboutdialog.method.set_comments">comments</link> and
+     <link linkes="gtk.gtkaboutdialog.method.set_comments">comments</link> and
      the <link linked="gtk.gtkaboutdialog.method.set_website">website</link>.
     </simpara>
     <para>
      See also: 
      <function class="GtkAboutDialog">get_copyright</function>
     </para>
-
    </desc>
   </method>
 
@@ -469,14 +457,17 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-   Sets the strings which are displayed in the documenters tab of the secondary credits dialog.
+    Sets the strings which are displayed in the documenters tab of the secondary credits dialog.
    </shortdesc>
    <desc>
+    <para>
+     This function is used to set the string which will be displayed
+     documenters tab that placed in the secondary credits dialog.
+    </para>
     <para>
      See also: 
      <function class="GtkAboutDialog">get_documenters</function>
     </para>
-
    </desc>
   </method>
 
@@ -515,7 +506,6 @@
      See also: 
      <function class="GtkAboutDialog">get_license</function>
     </para>
-
    </desc>
   </method>
 
@@ -583,7 +573,6 @@
      <function class="GtkAboutDialog">get_logo_icon_name</function>,
      <function class="GtkAboutDialog">set_logo</function>
     </para>
-
    </desc>
   </method>
 
@@ -633,7 +622,6 @@
      See also: 
      <function class="GtkAboutDialog">get_translator_credits</function>
     </para>
-
    </desc>
   </method>
 
@@ -664,20 +652,20 @@
    </shortdesc>
    <desc>
     <simpara>
-     Set the version of your program. 
+     Set the version of your program that will be displayed alongside the
+     name of the program.
     </simpara>
     <simpara>
      It is wise not to hard-code
      the value in your "about code", but use a central constant or
      a variable from within your program class. If done so,
-     you can change the program version at one central place and 
-     don't forget one.
+     you can change the program version at one central place without having
+     to remember to change it at all places that you mentioned it.
     </simpara>
     <para>
      See also: 
      <function class="GtkAboutDialog">get_version</function>
     </para>
-
    </desc>
   </method>
 
@@ -693,13 +681,13 @@
    </shortdesc>
    <desc>
     <simpara>
-     Set the program's website.
+     Set the program's website. This will be displayed just below the
+     program description.
     </simpara>
     <para>
      See also: 
      <function class="GtkAboutDialog">get_website</function>
     </para>
-
    </desc>
   </method>
 
@@ -721,7 +709,6 @@
      See also: 
      <function class="GtkAboutDialog">get_website_label</function>
     </para>
-
    </desc>
   </method>
 

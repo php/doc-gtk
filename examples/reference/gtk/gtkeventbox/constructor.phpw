@@ -1,0 +1,51 @@
+<?php
+/* Initialising the event box and adding an image to it */
+$imageEvent = new GtkEventBox();
+$imageWidget = GtkImage::new_from_stock(Gtk::STOCK_DIALOG_WARNING, Gtk::ICON_SIZE_DIALOG);
+$imageEvent->add($imageWidget);
+
+/* Initialising another event box and adding a label to it */
+$labelEvent = new GtkEventBox();
+$labelWidget = new GtkLabel("Click Something!");
+$labelEvent->add($labelWidget);
+
+/* Connecting the signals to the callback */
+$imageEvent->connect("button_press_event", "doSomething");
+$labelEvent->connect("button_press_event", "doSomething");
+
+/* The callback function */
+function doSomething($widget, $event)
+{
+    /* Determining which widget triggered the signal */
+    $widget = $widget->get_child()->get_name();
+    if ($widget=='GtkImage') {
+        $type = 'image';
+    } else {
+        $type = 'label';
+    }
+
+    /* Displaying a dialog that displays a message */
+    $dialog = new GtkMessageDialog(NULL,1,0,1,'You Clicked the '.$type.'!');
+    $dialog->run();
+    $dialog->destroy();
+}
+
+/* Creating a VBox to add the event boxes to */
+$vbox = new GtkVBox();
+$seperator = new GtkHSeparator();
+$vbox->pack_start($imageEvent);
+$vbox->pack_start($seperator);
+$vbox->pack_start($labelEvent);
+
+/* Creating a window and adding the VBox to it */
+$window = new GtkWindow();
+$window->add($vbox);
+$window->set_position(Gtk::WIN_POS_CENTER);
+$window->set_default_size(200,150);
+$window->show_all();
+$window->set_title("Event Boxes!");
+$window->connect_simple("destroy", array('gtk', 'main_quit'));
+
+/* Starting main loop */
+Gtk::main();
+?>

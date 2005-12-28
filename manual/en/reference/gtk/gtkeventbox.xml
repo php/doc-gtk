@@ -4,10 +4,25 @@
   <classtitle>GtkEventBox</classtitle>
   <classparent>GtkBin</classparent>
   <shortdesc>
-
+   A widget used to catch events.
   </shortdesc>
   <desc>
-
+   <para>
+    The primary purpose of this class is to provide those widgets who do
+    not have native event handling functions with the ability to receive
+    and act on user-driven input.
+   </para>
+   <para>
+    The most common usage is its application on images. Sometimes, you may
+    want images that you have displayed on your application to respond to
+    events. <classname>GtkEventBox</classname> helps you do just that. Of
+    course, you can always use this class on any widget that does not have
+    its own window.
+   </para>
+   <para>
+    This class is a subclass of <classname>GtkBin</classname> and therefore
+    has its own window.
+   </para>
   </desc>
  </classmeta>
 
@@ -21,11 +36,25 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Creates a new event box.
    </shortdesc>
    <desc>
-
+    <para>
+     Use this constructor to create a new
+     <classname>GtkEventBox</classname>.
+    </para>
+    <example>
+     <title>A Demonstration of usage of the event box.</title>
+     <programlisting role="php">
+      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
+                  href="&directory.examples;/reference/gtk/gtkeventbox/constructor.phpw"
+                  parse="text">
+       <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+      </xi:include>
+     </programlisting>
+    </example>
    </desc>
+                                                                             
   </constructor>
 
  </constructors>
@@ -40,14 +69,28 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns whether the event box is above or below the window of its
+    child.
    </shortdesc>
    <desc>
+    <para>
+     You may use this method to determine whether the event box should be
+     above or below the window of its child. If the window is above,
+     then all events inside the event box will go to the event box itself. 
+     However, if the window is below, events in the event boxes' 
+     children will first go to that widget, and then to the parent.
+    </para>
+    <para>
+     The default option keeps the window below the child.
+    </para>
+    <para>
+     The function will return <literal>TRUE</literal> if the window is
+     above the child, <literal>FALSE</literal> otherwise.
+    </para>
     <para>
      See also: 
      <function class="GtkEventBox">set_above_child</function>
     </para>
-
    </desc>
   </method>
 
@@ -59,14 +102,24 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns whether the event box contains a visible window.
    </shortdesc>
    <desc>
+    <para>
+     Use this method to determine whether the event boxes' child window is
+     visible or not. In case, it is invisible, that event box will only
+     receive events and nothing else. On the other hand, if the child
+     window is visible, it acts as the parent window for the widget
+     contained in the event box.
+    </para>
+    <para>
+     The function will return <literal>TRUE</literal> if the child window
+     is visible, <literal>FALSE</literal> otherwise.
+    </para>
     <para>
      See also: 
      <function class="GtkEventBox">set_visible_window</function>
     </para>
-
    </desc>
   </method>
 
@@ -78,14 +131,26 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets whether the event box is positioned above the window of its child.
    </shortdesc>
    <desc>
+    <para>
+     You may use this method if you wish to position your event box above
+     the window of its child, as opposed to below it. As mentioned before,
+     if the window is above, all events received inside the event box will
+     go to the event box itself. However is the window is positioned below,
+     events in the window of the child will first go to that widget and then
+     to its parents.
+    </para>
+    <para>
+     The default keeps the window below the child. You may pass
+     <literal>TRUE</literal> as a parameter to this method to position the
+     window above the child.
+    </para>
     <para>
      See also: 
      <function class="GtkEventBox">get_above_child</function>
     </para>
-
    </desc>
   </method>
 
@@ -97,14 +162,30 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets whether the child window of the event box is visible or not.
    </shortdesc>
    <desc>
+    <para>
+     You may use this method to set whether the child window of the event
+     box will be visible or not. An invisible child window will only
+     receive events and nothing else. However if the child window is
+     visible, it will act as a parent window for the widget that was added
+     to the event box.
+    </para>
+    <para>
+     You may make the child window invisible if you wish to trap events
+     only. Visible child windows are useful when you want to set the
+     background for the box to a different color or draw on it.
+    </para>
+    <para>
+     The default behavior is to make the child window visible. You may
+     pass <literal>FALSE</literal> as a parameter to the method if you wish
+     to make the window invisible.
+    </para>
     <para>
      See also: 
      <function class="GtkEventBox">get_visible_window</function>
     </para>
-
    </desc>
   </method>
 

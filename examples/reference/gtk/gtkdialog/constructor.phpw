@@ -1,0 +1,30 @@
+<?php
+/* Creating and initialising the dialog box */
+$dialogBox = new GtkDialog("This is a Dialog", NULL, Gtk::DIALOG_MODAL,
+array(Gtk::STOCK_NO, Gtk::RESPONSE_NO, Gtk::STOCK_YES, Gtk::RESPONSE_YES));
+
+/* Creating and adding a question to the dialog */
+$dialogQues = new GtkLabel("Do you like PHP-Gtk2?");
+$topArea = $dialogBox->vbox;
+$topArea->add($dialogQues);
+
+/* Showing all widgets added */
+$dialogBox->show_all();
+
+/* Running the dialog box */
+$result = $dialogBox->run();
+
+/* Accessing the result and performing appropriate action */
+switch($result)
+{
+    case (Gtk::RESPONSE_YES):
+        echo "Thanks!\n";
+        break;
+    case (Gtk::RESPONSE_NO):
+        echo "Why Not?!\n";
+        break;
+}
+
+/* Destroying the dialog box */
+$dialogBox->destroy();
+?>

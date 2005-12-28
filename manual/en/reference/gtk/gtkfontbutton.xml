@@ -3,11 +3,24 @@
  <classmeta>
   <classtitle>GtkFontButton</classtitle>
   <classparent>GtkButton</classparent>
+  <classimage fileref="&directory.images;/reference/gtk/gtkfontbutton.png"/> 
   <shortdesc>
-
+   A button that launches a font selection dialog.
   </shortdesc>
   <desc>
-
+   <para>
+    This button is very similar to the
+    <classname>GtkColorButton</classname> or the
+    <classname>GtkFileChooserButton</classname>. The two functions of this
+    button are to display the current font selected, and to launch a font
+    selection dialog when clicked.
+   </para>
+   <para>
+    When clicked the <classname>GtkFontButton</classname>, will launch a
+    <classname>GtkFontSelectionDialog</classname>. You may set many of the
+    dialog's properties using its methods. The button is most suitable in
+    preference dialogs, where you need the user to select a font.
+   </para>
   </desc>
  </classmeta>
 
@@ -21,10 +34,13 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Creates a new GtkFontButton.
    </shortdesc>
    <desc>
-
+    <para>
+     Use the constructor to generate a new font button that will launch a
+     <classname>GtkFontSelectionDialog</classname> when clicked.
+    </para>
    </desc>
   </constructor>
 
@@ -36,10 +52,14 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Create a new GtkFontButton with a preset font selected.
    </shortdesc>
    <desc>
-
+    <para>
+     Use this method if you want to the font button to show a preset font
+     already selected. Pass the name of the font that you would like
+     selected as a parameter to this method.
+    </para>
    </desc>
   </constructor>
 
@@ -55,14 +75,19 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Retrieves the name of the font selected.
    </shortdesc>
    <desc>
+    <para>
+     Use this method to retrieve the name of the font that is selected by
+     the user. Note that if the user hasn't used the button at all, the
+     method will return the default font that
+     <classname>GtkFontButton</classname> had initially showed.
+    </para>
     <para>
      See also: 
      <function class="GtkFontButton">set_font_name</function>
     </para>
-
    </desc>
   </method>
 
@@ -74,14 +99,19 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns whether the font size is displayed on the label.
    </shortdesc>
    <desc>
+    <para>
+     Use this method to determine whether the font size is displayed in the
+     label of the <classname>GtkFontButton</classname>. The method will
+     return <literal>TRUE</literal> if it does show,
+     <literal>FALSE</literal> otherwise.
+    </para>
     <para>
      See also: 
      <function class="GtkFontButton">set_show_size</function>
     </para>
-
    </desc>
   </method>
 
@@ -93,9 +123,15 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns whether the font style is displayed on the label.
    </shortdesc>
    <desc>
+    <para>
+     Use this method to determine whether the font style is displayed in
+     the label of the <classname>GtkFontButton</classname>. The method will
+     return <literal>TRUE</literal> if the styles such as bold, italic;
+     will be shown, <literal>FALSE</literal> otherwise.
+    </para>
     <para>
      See also: 
      <function class="GtkFontButton">set_show_style</function>
@@ -112,14 +148,18 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Retrieves the title of the resulting font selection dialog.
    </shortdesc>
    <desc>
+    <para>
+     Use this method when you want to retrieve the title that is displayed
+     on the font selection dialog that results when the
+     <classname>GtkFontButton</classname> is clicked.
+    </para>
     <para>
      See also: 
      <function class="GtkFontButton">set_title</function>
     </para>
-
    </desc>
   </method>
 
@@ -131,14 +171,21 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns whether the selected font is used by the button.
    </shortdesc>
    <desc>
+    <para>
+     Use this method when you want to determine whether the
+     <classname>GtkFontButton</classname> uses the font selected in the
+     font selection dialog. This means that the label of the font button 
+     itself will be displayed in the selected font. The function will 
+     return <literal>TRUE</literal> if it does, <literal>FALSE</literal>
+     otherwise.
+    </para>
     <para>
      See also: 
      <function class="GtkFontButton">set_use_font</function>
     </para>
-
    </desc>
   </method>
 
@@ -150,14 +197,21 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns whether the selected font size is used by the button.
    </shortdesc>
    <desc>
+    <para>
+     Use this method to determine whether the font size selected in the
+     font selection dialog will be used by the
+     <classname>GtkFontButton</classname> This means that the label of 
+     the font button itself will be displayed in the selected font size. 
+     The function will return <literal>TRUE</literal> if it does, 
+     <literal>FALSE</literal> otherwise.
+    </para>
     <para>
      See also: 
      <function class="GtkFontButton">set_use_size</function>
     </para>
-
    </desc>
   </method>
 
@@ -169,14 +223,19 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the font used by the button.
    </shortdesc>
    <desc>
+    <para>
+     This function will set the font name used by the
+     <classname>GtkFontButton</classname>. It is therefore, the font
+     displayed on the button's label. Pass the name of the font as a
+     parameter to this method.
+    </para>
     <para>
      See also: 
      <function class="GtkFontButton">get_font_name</function>
     </para>
-
    </desc>
   </method>
 
@@ -188,14 +247,19 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets whether the font size will be shown on the button.
    </shortdesc>
    <desc>
+    <para>
+     Use this method to set whether the font size selected by the font
+     selection dialog will be shown on the label of the
+     <classname>GtkFontButton</classname>. Pass <literal>TRUE</literal> as
+     a parameter if you want it to, <literal>FALSE</literal> otherwise.
+    </para>
     <para>
      See also: 
      <function class="GtkFontButton">get_show_size</function>
     </para>
-
    </desc>
   </method>
 
@@ -207,14 +271,19 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets whether the font style will be shown on the button. 
    </shortdesc>
    <desc>
+    <para>
+     Use this method to set whether the font style selected by the font
+     selection dialog, such as bold or italics, will be shown on the
+     <classname>GtkFontButton</classname>. Pass <literal>TRUE</literal> as
+     a parameter if you want it to, <literal>FALSE</literal> otherwise.
+    </para>
     <para>
      See also: 
      <function class="GtkFontButton">get_show_style</function>
     </para>
-
    </desc>
   </method>
 
@@ -226,14 +295,20 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the title of the resulting font selection dialog.
    </shortdesc>
    <desc>
+    <para>
+     Use this function to set the title that will be displayed on the font
+     selection dialog that will appear when the
+     <classname>GtkFontButton</classname> is clicked. You may pass the
+     title to be displayed as a parameter to the method. Note that, if you
+     do not use this method, the title will appear as "Pick a Font".
+    </para>
     <para>
      See also: 
      <function class="GtkFontButton">get_title</function>
     </para>
-
    </desc>
   </method>
 
@@ -245,14 +320,18 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets whether the font button will use the selected font.
    </shortdesc>
    <desc>
+    <para>
+     If you want the label of the font button itself to be displayed in the
+     font that is selected, then pass <literal>TRUE</literal> as a
+     parameter to the function; <literal>FALSE</literal> otherwise.
+    </para>
     <para>
      See also: 
      <function class="GtkFontButton">get_use_font</function>
     </para>
-
    </desc>
   </method>
 
@@ -264,14 +343,19 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets whether the font button will use the selected font size.
    </shortdesc>
    <desc>
+    <para>
+     If you want the label of the font button to be displayed in the font
+     size as selected in the font selection dialog, then pass
+     <literal>TRUE</literal> as a parameter to this function;
+     <literal>FALSE</literal> otherwise.
+    </para>
     <para>
      See also: 
      <function class="GtkFontButton">get_use_size</function>
     </para>
-
    </desc>
   </method>
 
@@ -288,9 +372,9 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
+    Emitted when the user selects a font.    
    </shortdesc>
    <desc>
-
    </desc>
   </signal>
   

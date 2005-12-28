@@ -3,11 +3,51 @@
  <classmeta>
   <classtitle>GtkDialog</classtitle>
   <classparent>GtkWindow</classparent>
+  <classimage fileref="&directory.images;/reference/gtk/gtkdialog.png"/>
   <shortdesc>
-
+   A popup window.
   </shortdesc>
   <desc>
-
+   <para>
+    As the name suggests, <classname>GtkDialog</classname> is a widget that
+    is useful whenever you want to interact with the user. For example,
+    you might want to ask the user a question, prompt for certain input, or
+    confirm some action. The <classname>GtkDialog</classname> helps in such
+    cases by providing a suitable window for interaction. Don't be fooled
+    by the simple example, a <classname>GtkDialog</classname> can do much
+    more powerful things than what is shown!
+   </para>
+   <para>
+    A <classname>GtkDialog</classname> is basically made up of two main
+    areas, the top area, where you may pack widgets like
+    <classname>GtkLabel</classname> or a <classname>GtkEntry</classname>.
+    The bottom area may be used to display
+    <classname>GtkButton</classname>s that will perform some action, like
+    OK or cancel. The bottom area of the dialog is known as the
+    <propname class="GtkDialog">action_area</propname>, while the top area 
+    is a <propname class="GtkDialog">vbox</propname>.
+   </para>
+   <para>
+    The general procedure for creating a dialog box would be to create a
+    Dialog Box with its constructor and then adding the appropriate widgets
+    to the <propname class="GtkDialog">vbox</propname> and 
+    <propname class="GtkDialog">action_area</propname>. Alternatively, 
+    instead of adding the required buttons to the 
+    <propname class="GtkDialog">action_area</propname>, you may make use of 
+    the <function class="GtkDialog">add_button</function> method. The
+    advantage of this method is that you get to choose a response signal. 
+    You may choose a response ID from <enumname>GtkResponseType</enumname>,
+    that suits the purpose of your button. The third and most convenient way 
+    to add buttons to the dialog is passing them as parameters while using 
+    the constructor.
+   </para>
+   <note>
+    Most of the time however, you do not have to go through all this
+    trouble unless you want to create a highly customized dialog. The
+    common types of dialog boxes have widgets of their own, like the
+    <classname>GtkFileChooserDialog</classname> or the
+    <classname>GtkColorSelectionDialog</classname>.
+   </note>
   </desc>
  </classmeta>
 
@@ -17,17 +57,34 @@
    <funcsynopsis>
     <funcprototype>
     <funcdef> <function>GtkDialog</function></funcdef>
-    <paramdef>void</paramdef>
+    <paramdef>string <parameter><optional>title = NULL</optional></parameter></paramdef>
+    <paramdef>GtkWidget <parameter><optional>parent_window = NULL</optional></parameter></paramdef>
+    <paramdef><enumname>GtkDialogFlags</enumname> <parameter><optional>dialog_flags = 0</optional></parameter></paramdef>
+    <paramdef>array <parameter><optional>(GtkButton,
+    <enumname>GtkResponseType</enumname>)</optional></parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Creates a new dialog box.
    </shortdesc>
    <desc>
-
+    <para>
+     Use the constructor to generate a dialog box in accordance with the
+     parameters provided. Alternatively, you may not pass any parameters and
+     construct all elements of the dialog manually.
+    </para>
+    <example>
+     <title>An reconstruction of the GtkMessageDialog using GtkDialog.</title>
+     <programlisting role="php">
+       <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
+                   href="&directory.examples;/reference/gtk/gtkdialog/constructor.phpw"
+                   parse="text">
+       <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+      </xi:include>
+     </programlisting>
+    </example>
    </desc>
   </constructor>
-
  </constructors>
 
  <methods>
@@ -41,10 +98,21 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Add a widget to the <literal>action_area</literal>
    </shortdesc>
    <desc>
-
+    <para>
+     Use this method to add an activatable widget to the
+     <literal>action_area</literal> of the dialog. The response ID to be
+     generated when the widget is activated is passed as a parameter to the
+     method. The widget is appended to the end of the dialog's action area.
+    </para>
+    <note>
+     Only <literal>activatable</literal> widgets may be added using this
+     method. To add a non-activatable widget, use the add method on the
+     <literal>action_area</literal> property of
+     <classname>GtkDialog</classname>.
+    </note>
    </desc>
   </method>
 
@@ -57,10 +125,22 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Adds a button to the dialog.
    </shortdesc>
    <desc>
-
+    <para>
+     You may use this method to manually add a button to the
+     <literal>action_area</literal> property of the Dialog. Of course, you
+     may also add buttons after you have called the constructor with
+     buttons. You may add a custom button or a stock item, depending on
+     whether you pass a stock-ID or plain text as the string parameter. The
+     response signal may also be indicated as given in
+     <enumname>GtkResponseType</enumname>s.
+    </para>
+    <para>
+     The created button is returned as a widget by this method, but mostly
+     you wouldn't need to use it.
+    </para>
    </desc>
   </method>
 
@@ -72,10 +152,9 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    FIXME. Not yet Implemented
    </shortdesc>
    <desc>
-
    </desc>
   </method>
 
@@ -87,14 +166,20 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns whether the dialog has a separator.
    </shortdesc>
    <desc>
+    <para>
+     You may use this function to determine whether the dialog box contains
+     a separator (between the <literal>vbox</literal> and
+     <literal>action_area</literal> properties). The function return
+     <literal>TRUE</literal> if it does, <literal>FALSE</literal>
+     otherwise.
+    </para>
     <para>
      See also: 
      <function class="GtkDialog">set_has_separator</function>
     </para>
-
    </desc>
   </method>
 
@@ -106,10 +191,14 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Emits the response signal.
    </shortdesc>
    <desc>
-
+    <para>
+     This methods emits the response signal on the dialog. The response
+     signal will be of the type specified by the response ID that is passed
+     as a parameter.
+    </para>
    </desc>
   </method>
 
@@ -121,10 +210,31 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Blocks the main loop until the dialog is destroyed.
    </shortdesc>
    <desc>
-
+    <para>
+     This is the method that allows you to analyze the response generated
+     by the dialog. When you call this method on a
+     <classname>GtkDialog</classname>, the main Gtk loop is blocked until
+     the dialog is either destroyed or emits a response signal.
+    </para>
+    <para>
+     The dialog is also automatically set as the modal type, and the show
+     method is also called automatically. However, you need to show any
+     child widgets yourself.
+    </para>
+    <para>
+     It is highly recommended to generate a response signal to exit from
+     the run loop. If you destroy the dialog when the loop is being run,
+     then your post-run code will not know whether the dialog was actually
+     destroyed or not.
+    </para>
+    <para>
+     The function will return the response ID as soon as one is generated
+     and exit itself. Note that you need to destroy the dialog manually when 
+     you have processed the response. 
+    </para>
    </desc>
   </method>
 
@@ -136,10 +246,9 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    FIXME. Not yet implemented.
    </shortdesc>
    <desc>
-
    </desc>
   </method>
 
@@ -151,10 +260,9 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    FIXME. Not yet implemented.
    </shortdesc>
    <desc>
-
    </desc>
   </method>
 
@@ -166,10 +274,16 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the response ID to be generated by the dialog.
    </shortdesc>
    <desc>
-
+    <para>
+     This function is used to set the response ID generated by the widget
+     that was added last to the <literal>action_area</literal>. The last
+     widget is usually the default widget for the dialog, and will be
+     activated when the return key is pressed. The response ID is passed as
+     a parameter to the method.
+    </para>
    </desc>
   </method>
 
@@ -181,14 +295,22 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets whether the dialog has a separator.
    </shortdesc>
    <desc>
+    <para>
+     You may use this method to set whether the <literal>vbox</literal> and
+     <literal>action_area</literal> are separated by a (usually horizontal)
+     separator. Pass <literal>TRUE</literal> as a parameter if you want the
+     separator to be present, <literal>FALSE</literal> otherwise.
+    </para>
+    <para>
+     The setting is <literal>TRUE</literal> by default.
+    </para>
     <para>
      See also: 
      <function class="GtkDialog">get_has_separator</function>
     </para>
-
    </desc>
   </method>
 
@@ -201,10 +323,18 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the activatable widgets to be sensitive or not.
    </shortdesc>
    <desc>
-
+    <para>
+     You may use this function to conveniently sensitize/desensitize dialog
+     buttons present in the <literal>action_area</literal>. This function
+     calls <function classname="GtkWidget">set_sensitive</function> on each
+     widget present in the <literal>action_area</literal> with the given
+     response ID (passed as a parameter). The setting may either be
+     <literal>TRUE</literal> or <literal>FALSE</literal> depending on
+     whether you want the corresponding buttons to be sensitive or not.
+    </para>
    </desc>
   </method>
 
@@ -216,9 +346,10 @@
    <propname>action_area</propname>
    <proptype>GtkWidget</proptype>
    <shortdesc>
+    Describes the area of the dialog that holds the action widgets
+    (buttons).
    </shortdesc>
    <desc>
-
    </desc>
   </property>
 
@@ -226,9 +357,10 @@
    <propname>vbox</propname>
    <proptype>GtkWidget</proptype>
    <shortdesc>
+    Describes the area of the dialog that holds the prompt widgets 
+    (labels). 
    </shortdesc>
    <desc>
-
    </desc>
   </property>
 
@@ -245,6 +377,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
+    Emitted when the dialog is destroyed.
    </shortdesc>
    <desc>
 
@@ -261,9 +394,9 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
+    Emitted when an action widget (button) is clicked.
    </shortdesc>
    <desc>
-
    </desc>
   </signal>
   
