@@ -82,6 +82,14 @@ xsltproc --param base.dir "'./$build_dir/'" --xinclude $xslfile $manualpath
 # this one doesn't keep the directories
 cp -R images build/en/$type/
 
+#highlight php sources
+#we need to escape the wildcard, because php doesn't allow enough
+# parameters - and could someone please tell me how to prevent
+# wildcard escaping? That "\\*" is a hack which is only understood
+# by highlight.php
+$php scripts/highlight.php php "build/$language/$type/\\*.html"
+
+#distribute over several files
 if [ $type == "html" ] && [ $test == "0" ] && [ ! $type == "demo" ]; then
     $php -q distribute_html.php $language
 fi
