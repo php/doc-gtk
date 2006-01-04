@@ -3,11 +3,24 @@
  <classmeta>
   <classtitle>GtkCheckButton</classtitle>
   <classparent>GtkToggleButton</classparent>
+  <classimage fileref="&directory.images;/reference/gtk/gtkcheckbutton.png"/>
   <shortdesc>
-
+   A widget that displays a check-box.
   </shortdesc>
   <desc>
-
+   <para>
+    This is a very common widget, used to display a check-box; optionally
+    with a label beside it. It is generally used to get some input from the
+    user (just like a button). This is actually a
+    <classname>GtkToggleButton</classname> placed next to a widget (usually 
+    next to a <classname>GtkLabel</classname>) but displays a check mark to
+    indicate that the it is in a toggled state.
+   </para>
+   <para>
+    A group of check buttons are usually used when you require the user to
+    select none or more of the given options. Note that this widget behaves
+    exactly like a <classname>GtkToggleButton</classname>
+   </para>
   </desc>
  </classmeta>
 
@@ -17,44 +30,27 @@
    <funcsynopsis>
     <funcprototype>
     <funcdef> <function>GtkCheckButton</function></funcdef>
-    <paramdef>void</paramdef>
+    <paramdef>string <parameter><optional>label = NULL</optional></parameter></paramdef>
+    <paramdef>Boolean <parameter><optional>use_underline = FALSE</optional></parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Creates a new check-box toggle button.
    </shortdesc>
    <desc>
-
-   </desc>
-  </constructor>
-
-  <constructor id="gtk.gtkcheckbutton.constructor.new_with_label">
-   <funcsynopsis>
-    <funcprototype>
-    <funcdef> <function>GtkCheckButton::new_with_label</function></funcdef>
-    <paramdef>string <parameter>label</parameter></paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </constructor>
-
-  <constructor id="gtk.gtkcheckbutton.constructor.new_with_mnemonic">
-   <funcsynopsis>
-    <funcprototype>
-    <funcdef> <function>GtkCheckButton::new_with_mnemonic</function></funcdef>
-    <paramdef>string <parameter>label</parameter></paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-   <desc>
-
+    <para>
+     Use the constructor to create a new check-box. You may pass a string as
+     the first parameter to display that as a label next to the toggle
+     button. Also, passing <literal>TRUE</literal> as the second parameter
+     with assign the letter that is preceded by an underscore in the label
+     as the mnemonic for the check-box.
+    </para>
+    <para>
+     This class is derived and therefore behaves much like a
+     <classname>GtkToggleButton</classname>. Hence, you may use the signal 
+     <signalname class="GtkToggleButton">toggled</signalname> to determine
+     any change in the state of the check-box.
+    </para>
    </desc>
   </constructor>
 
