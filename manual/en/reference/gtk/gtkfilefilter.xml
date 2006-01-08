@@ -4,10 +4,34 @@
   <classtitle>GtkFileFilter</classtitle>
   <classparent>GtkObject</classparent>
   <shortdesc>
-
+   A filter to select a subset of files.
   </shortdesc>
   <desc>
-
+   <para>
+    This is a filter that is basically used to restrict the the files that 
+    are shown in a <classname>GtkFileChooserWidget</classname>. You may filter
+    the files either by basis of their names 
+    (<function class="GtkFileFilter">add_pattern</function>), mime types 
+    (<function class="GtkFileFilter">add_mime_type</function>), or files 
+    that are supported by GdkPixbuf 
+    (<function class="GtkFileFilter">add_pixbuf_formats</function>).
+   </para>
+   <para>
+    When you choose to filter by mime types, note that selecting a
+    particular mime type will also automatically include all subclasses of
+    that type. For example, filtering for the mime type text/plain will
+    also include all files of type application/rtf since it a subclass of
+    text/plain. You may also use wild card to specify your mime type, such
+    as image/*.
+   </para>
+   <para>
+    The most common way to use a file filter is to add it to a
+    <classname>GtkFileChooserWidget</classname> with the 
+    <function class="GtkFileChooserWidget">set_filter</function> method. Of
+    course, the same method may also be used on a
+    <classname>GtkFileChooserButton</classname> or a
+    <classname>GtkFileChooserDialog</classname>.
+   </para>
   </desc>
  </classmeta>
 
@@ -21,10 +45,12 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Creates a new file filter.
    </shortdesc>
    <desc>
-
+    <para>
+     Use the constructor to create a new file filter.
+    </para>
    </desc>
   </constructor>
 
@@ -40,10 +66,12 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    FIXME! Not yet implemented.
    </shortdesc>
    <desc>
-
+    <para>
+     FIXME! Not yet implemented.
+    </para>
    </desc>
   </method>
 
@@ -55,10 +83,13 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Allow files of specified mime type to be displayed.
    </shortdesc>
    <desc>
-
+    <para>
+     Use the method when you want the file filter to allow files of the
+     mime type that you specified in the argument to be displayed.
+    </para>
    </desc>
   </method>
 
@@ -70,10 +101,28 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Allow files with names that match with the specified pattern to be
+    displayed.
    </shortdesc>
    <desc>
-
+    <para>
+     Use the method when you want to restrict the files to be displayed on
+     the basis of their names. The pattern that you pass as an argument
+     should a shell style <literal>glob</literal>, that is, a minimalist
+     regular expression that specifies what range of names you wish to
+     match.
+    </para>
+    <para>
+     For example,
+     <programlisting role="php">
+     <![CDATA[
+        $x = new GtkFileFilter();
+        $x->add_pattern("*conf");
+     ]]>
+     </programlisting>
+     will list allow the file filter to display only those files that end
+     with <literal>conf</literal>.
+    </para>
    </desc>
   </method>
 
@@ -85,10 +134,13 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Allow images supported by GdkPixbuf to be displayed.
    </shortdesc>
    <desc>
-
+    <para>
+     Use this method when you want the file filter to display all images of
+     formats that GdkPixbif supports.
+    </para>
    </desc>
   </method>
 
@@ -100,10 +152,12 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    FIXME! Not yet implemented.
    </shortdesc>
    <desc>
-
+    <para>
+     FIXME! Not yet implemented.
+    </para>
    </desc>
   </method>
 
@@ -115,14 +169,16 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the human-readable name of the file filter.
    </shortdesc>
    <desc>
+    <para>
+     Use this method to return the human-readable name of the file filter.
+    </para>
     <para>
      See also: 
      <function class="GtkFileFilter">set_name</function>
     </para>
-
    </desc>
   </method>
 
@@ -134,10 +190,9 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    FIXME!
    </shortdesc>
    <desc>
-
    </desc>
   </method>
 
@@ -149,14 +204,18 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the human-readable name of the file filter.
    </shortdesc>
    <desc>
+    <para>
+     You must use this method to set a human-readable name for the file
+     filter. This is most often used when you allow the user to select one
+     of many file filters in a <classname>GtkFileChooserWidget</classname>.
+    </para>
     <para>
      See also: 
      <function class="GtkFileFilter">get_name</function>
     </para>
-
    </desc>
   </method>
 
