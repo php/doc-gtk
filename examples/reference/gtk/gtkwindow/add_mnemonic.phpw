@@ -1,0 +1,39 @@
+<?php
+//Create the window and the box for the buttons
+$wnd = new GtkWindow();
+$vbox = new GtkVBox();
+
+//Button1 uses the easy method: An underscore before the
+//desired mnemonic adds the mnemonic automatically
+//Use Alt+1 to activate it
+$button1 = new GtkButton('Button _1');
+
+//Button2's mnemonic will be added by and, so we don't
+//use an underscore here
+$button2 = new GtkButton('Button 2');
+
+//pack the widgets
+$vbox->pack_start($button1);
+$vbox->pack_start($button2);
+$wnd->add($vbox);
+
+//little echo method
+function echoit($value) { echo $value . "\r\n"; }
+
+//if one of the button is clicked, it's label will be printed
+//on the console
+$button1->connect_simple('clicked', 'echoit', $button1->get_label());
+$button2->connect_simple('clicked', 'echoit', $button2->get_label());
+
+//Here we add the mnemonic for button2 by hand. So
+//pressing Alt+2 will cause button2 to be activated.
+$wnd->add_mnemonic(ord('2'), $button2);
+
+//We have to remove the mnemonic from the window before it gets destroyed
+//If we don't do this, a warning will be spit out
+$wnd->connect_simple('destroy', array($wnd, 'remove_mnemonic'), ord('2'), $button2);
+$wnd->connect_simple('destroy', array('gtk', 'main_quit'));
+
+$wnd->show_all();
+Gtk::main();
+?>

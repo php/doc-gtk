@@ -24,24 +24,10 @@
     <example>
      <title>Adding too many children.</title>
      <programlisting role="php">
-<![CDATA[
-<?php
-// Create a new window.
-$window = new GtkWindow();
-
-// Add two buttons.
-$window->add(new GtkButton('1'));
-$window->add(new GtkButton('2'));
-
-/*
-Spits out:
-Gtk-WARNING **: Attempting to add a widget with type GtkButton to 
-a GtkWindow, but as a GtkBin subclass a GtkWindow can only 
-contain one widget at a time; it already contains a widget 
-of type GtkButton
-*/
-?>
-]]>
+      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+                  href="&directory.examples;/reference/gtk/gtkwindow/constructor.phpw" parse="text">
+       <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+      </xi:include>
      </programlisting>
     </example>
    </para>
@@ -59,24 +45,24 @@ of type GtkButton
    <funcsynopsis>
     <funcprototype>
     <funcdef> <function>GtkWindow</function></funcdef>
-    <paramdef>GtkWindowType <parameter><optional>type = GTK::WINDOW_TOPLEVEL</optional></parameter></paramdef>
+    <paramdef><enumname>GtkWindowType</enumname> <parameter><optional>type = GTK::WINDOW_TOPLEVEL</optional></parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
     Creates a new GtkWindow instance.
    </shortdesc>
    <desc>
-    <simpara>
+    <para>
      Creates a new instance of GtkWindow of type <parameter>type</parameter>. 
      If no <parameter>type</parameter> is passed, the window will be created as
-     a <enumname>GTK::WINDOW_TOPLEVEL</enumname>. This means that the window 
+     a <enumname>Gtk::WINDOW_TOPLEVEL</enumname>. This means that the window 
      will have borders and a title bar by default. Windows of type
-     <enumname>GTK::WINDOW_POPUP</enumname> will not have borders or a title
+     <enumname>Gtk::WINDOW_POPUP</enumname> will not have borders or a title
      bar. Popup windows are used for things such as tooltips and menus. They 
      should not be used to create regular windows without borders. For that
      you should use a toplevel window and 
-     <function class="GtkWindow">set_decorated</function>.    
-    </simpara>
+     <function class="GtkWindow">set_decorated</function>.
+    </para>
    </desc>
   </constructor>
 
@@ -92,14 +78,43 @@ of type GtkButton
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Send the activate signal to the default widget.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     Activates the window's default widget (e.g. sends the
+     <signalname class="GtkButton">activate</signalname> signal to the widget).
+     Returns <literal>true</literal> if the widget could be activated,
+     <literal>false</literal> if not.
+    </para>
+    <note>
+     <para>
+      Before you can activate the default widget, you need to define it
+      with <function class="GtkWindow">set_default</function>.
+     </para>
+    </note>
+    <para>
+     That is very useful if you don't know which widget the default one is
+     (or don't care about that), but need to cause it to be clicked/activated.
+     The example shows how this method is used to cause the default button to
+     be activated when the user presses the <literal>Return</literal> key on
+     the text entry widget.
+    </para>
+    <para>
+     <example>
+      <title>Activating the button with return key on entry</title>
+      <programlisting role="php">
+       <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+        href="&directory.examples;/reference/gtk/gtkwindow/activate_default.phpw" parse="text">
+        <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+       </xi:include>
+      </programlisting>
+     </example>
+    </para>
+    <para>
+     See also:
      <function class="GtkWindow">set_default</function>
     </para>
-
    </desc>
   </method>
 
@@ -111,15 +126,18 @@ of type GtkButton
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Activates the widget with the focus.
    </shortdesc>
    <desc>
     <para>
-     See also: 
-     <function class="GtkWindow">get_focus</function>, 
+     Activates the current focused widget within the window.
+     Returns <literal>true</literal> if the widget got activated.
+    </para>
+    <para>
+     See also:
+     <function class="GtkWindow">get_focus</function>,
      <function class="GtkWindow">set_focus</function>
     </para>
-
    </desc>
   </method>
 
@@ -131,10 +149,20 @@ of type GtkButton
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Activate a keyboard shortcut in the window by hand.
    </shortdesc>
    <desc>
-
+    <para>
+     Activates mnemonics and accelerators for this GtkWindow.
+     This is normally called by the default key_press_event
+     handler for toplevel windows, however in some cases it
+     may be useful to call this directly when overriding
+     the standard key handling for a toplevel window.
+    </para>
+    <para>
+     Returns <literal>true</literal> if a mnemonic or accelerator 
+     was found and activated.
+    </para>
    </desc>
   </method>
 
@@ -142,7 +170,7 @@ of type GtkButton
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>add_accel_group</function></funcdef>
-     <paramdef>GtkAccelGroup <parameter>accel_group</parameter></paramdef>
+     <paramdef><classname>GtkAccelGroup</classname> <parameter>accel_group</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -150,13 +178,17 @@ of type GtkButton
    </shortdesc>
    <desc>
     <para>
+     Associate <parameter>accel_group</parameter> with the window, such
+     that pressing shortcuts and mnemonics on the window will activate
+     accelerators in <parameter>accel_group</parameter>.
+    </para>
+    <para>
      See also: 
      <function class="GtkWindow">remove_accel_group</function>
     </para>
-
    </desc>
   </method>
-
+<!-- Doesn't exist any more
   <method id="gtk.gtkwindow.method.add_embedded_xid">
    <funcsynopsis>
     <funcprototype>
@@ -175,24 +207,53 @@ of type GtkButton
 
    </desc>
   </method>
+-->
 
   <method id="gtk.gtkwindow.method.add_mnemonic">
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>add_mnemonic</function></funcdef>
      <paramdef>int <parameter>keyval</parameter></paramdef>
-     <paramdef>GtkWidget <parameter>target</parameter></paramdef>
+     <paramdef><classname>GtkWidget</classname> <parameter>target</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Adds a mnemonic to the window.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     Adds a mnemonic to the window. Whenever the mnemonic key is pressed,
+     the <parameter>target</parameter> widget will be activated.
+    </para>
+    <para>
+     The <parameter>keyval</parameter> parameter is the ASCII number of the
+     letter which shall cause the mnemonic to be activated. E.g. if you want
+     <literal>Alt+K</literal> to activate a <literal>$button</literal>, the
+     keyval would be 
+     <programlisting role="php"><![CDATA[ord('K')]]></programlisting> that is
+     value <literal>75</literal> in ASCII.
+    </para>
+    <note>
+     <para>
+      Before the window gets destroyed, you have to remove the mnemonic by
+      hand if you don't want a warning to be thrown.
+     </para>
+    </note>
+    <para>
+     <example>
+      <title>Adding a mnemonic by hand</title>
+      <programlisting role="php">
+       <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+        href="&directory.examples;/reference/gtk/gtkwindow/add_mnemonic.phpw" parse="text">
+        <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+       </xi:include>
+      </programlisting>
+     </example>
+    </para>
+    <para>
+     See also:
      <function class="GtkWindow">remove_mnemonic</function>
     </para>
-
    </desc>
   </method>
 
@@ -284,14 +345,17 @@ of type GtkButton
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    If the window wants to be focusable or not.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     Returns the value set with 
+     <function class="GtkWindow">set_accept_focus</function>.
+    </para>
+    <para>
+     See also:
      <function class="GtkWindow">set_accept_focus</function>
     </para>
-
    </desc>
   </method>
 
@@ -320,19 +384,29 @@ of type GtkButton
   <method id="gtk.gtkwindow.method.get_default_size">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>void <function>get_default_size</function></funcdef>
+     <funcdef>array <function>get_default_size</function></funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the window's default size.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     Gets the default size of the window. A value of <literal>-1</literal>
+     for the width or height indicates that a default size has not been 
+     explicitly set (with 
+     <function class="GtkWindow">set_default_size</function>) for that 
+     dimension, so the "natural" size of the window will be used.
+    </para>
+    <para>
+     The first value of the returned array is the width, the second 
+     is the height.
+    </para>
+    <para>
+     See also:
      <function class="GtkWindow">set_default_size</function>
     </para>
-
    </desc>
   </method>
 
@@ -344,35 +418,59 @@ of type GtkButton
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Whether the window will be destroyed with its transient parent.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     Returns whether the window will be destroyed with its transient parent.
+    </para>
+    <para>
+     See also:
      <function class="GtkWindow">set_destroy_with_parent</function>, 
      <propname class="GtkWindow">destroy_with_parent</propname>
     </para>
-
    </desc>
   </method>
 
   <method id="gtk.gtkwindow.method.get_focus">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>GtkWidget <function>get_focus</function></funcdef>
+     <funcdef><classname>GtkWidget</classname> <function>get_focus</function></funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the widget that has the focus.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     Retrieves the current focused widget within the window. Returns
+     <literal>NULL</literal> if no widget has the focus.
+    </para>
+    <note>
+     <para>
+      Note that this is the widget that would have the focus if the toplevel
+      window focused; if the toplevel window is not focused then
+      <programlisting role="php"><![CDATA[$widget->flags() & Gtk::HAS_FOCUS]]></programlisting>
+      will not be <literal>&gt; 0</literal> for the widget.
+     </para>
+    </note>
+    <para>
+     <example>
+      <title>Using GtkWindow::get_focus()</title>
+      <programlisting role="php">
+       <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+        href="&directory.examples;/reference/gtk/gtkwindow/get_focus.phpw" parse="text">
+        <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+       </xi:include>
+      </programlisting>
+     </example>
+    </para>
+    <para>
+     See also:
      <function class="GtkWindow">activate_focus</function>, 
      <function class="GtkWindow">set_focus</function>
     </para>
-
    </desc>
   </method>
 
@@ -384,14 +482,17 @@ of type GtkButton
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    If window should receive the input focus when mapped.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     Gets the value set by
+     <function class="GtkWindow">set_focus_on_map</function>.
+    </para>
+    <para>
+     See also:
      <function class="GtkWindow">set_focus_on_map</function>
     </para>
-
    </desc>
   </method>
 

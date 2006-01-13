@@ -1,0 +1,34 @@
+<?php
+//Create the widgets
+$wnd   = new GtkWindow();
+$vbox  = new GtkVBox();
+$entry = new GtkEntry();
+$btn   = new GtkButton('Button');
+
+//add them to the box
+$vbox->pack_start($entry);
+$vbox->pack_start($btn);
+
+//add the box to the window
+$wnd->add($vbox);
+
+//little echo method
+function echoit($value) { echo $value . "\r\n"; }
+
+//connect the clicked signal to out echo method
+$btn->connect_simple('clicked', 'echoit', $btn->get_label());
+$wnd->connect_simple('destroy', array('gtk', 'main_quit'));
+
+//here we let the activate signal of the gtkentry call the
+//activate_default method of the window
+$entry->connect_simple('activate', array($wnd, 'activate_default'));
+
+//allow our button to be the default widget
+$btn->set_flags(Gtk::CAN_DEFAULT);
+
+//set the button the default one in the window
+$wnd->set_default($btn);
+
+$wnd->show_all();
+Gtk::main();
+?>

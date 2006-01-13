@@ -1,0 +1,44 @@
+<?php
+/**
+* Start the script and use <Tab> key to cycle the focus
+* through the buttons. You will see the label of the focused
+* button be echoed to the console every second.
+* Also try to activate another window while the script is
+* running.
+*/
+
+$wnd  = new GtkWindow();
+$vbox = new GtkVBox();
+
+//Create ten buttons we can focus with <Tab>
+for ($nA = 1; $nA <= 10; $nA++) {
+    $button = new GtkButton('Button ' . $nA);
+    $vbox->add($button);
+}
+
+/**
+* This method will write the label of the current
+* focused widget to the console
+* It returns true, so that the interval doesn't stop
+*/
+function echoFocusedLabel($wnd)
+{
+    //get_focus() returns the widget
+    if ($wnd->get_focus()->flags() & Gtk::HAS_FOCUS) {
+        $focus = 'focus is set';
+    } else {
+        $focus = 'focus is NOT set (window not focused?)';
+    }
+    echo $wnd->get_focus()->get_label() . ' - ' . $focus . "\r\n";
+    return true;
+}
+
+//add a timeout of one second, so that the echoFocusedLabel
+//method will echo the label of the focused widget every second
+Gtk::timeout_add(1000, 'echoFocusedLabel', $wnd);
+
+$wnd->add($vbox);
+$wnd->connect_simple('destroy', array('gtk', 'main_quit'));
+$wnd->show_all();
+Gtk::main();
+?>

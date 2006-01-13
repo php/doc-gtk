@@ -1,0 +1,16 @@
+<?php
+// Create a new window.
+$window = new GtkWindow();
+
+// Add two buttons.
+$window->add(new GtkButton('1'));
+$window->add(new GtkButton('2'));
+
+/*
+Spits out:
+Gtk-WARNING **: Attempting to add a widget with type GtkButton to 
+a GtkWindow, but as a GtkBin subclass a GtkWindow can only 
+contain one widget at a time; it already contains a widget 
+of type GtkButton
+*/
+?>
