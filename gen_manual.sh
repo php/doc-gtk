@@ -11,6 +11,7 @@ fi
 
 language=$1
 type=$2
+realtype=$type
 
 stylesheetdir=stylesheets
 php=php
@@ -87,7 +88,7 @@ cp -R images build/en/$type/
 # parameters - and could someone please tell me how to prevent
 # wildcard escaping? That "\\*" is a hack which is only understood
 # by highlight.php
-$php scripts/highlight.php php "build/$language/$type/\\*.html"
+$php scripts/highlight.php php "build/$language/$realtype/\\*.html"
 
 #distribute over several files
 if [ $type == "html" ] && [ $test == "0" ] && [ ! $type == "demo" ]; then
