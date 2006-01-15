@@ -3,11 +3,27 @@
  <classmeta>
   <classtitle>GtkFrame</classtitle>
   <classparent>GtkBin</classparent>
+  <classimage fileref="&directory.images;/reference/gtk/gtkframe.png"/>
   <shortdesc>
-
+   A decorative frame for holding a widget.
   </shortdesc>
   <desc>
-
+   <para>
+    A <classname>GtkFrame</classname> is essentially a
+    <classname>GtkBin</classname> with a decorative border and an optional
+    label. It is most often used to neatly contain your widgets in an
+    application in an organized and appealing fashion.
+   </para>
+   <para>
+    If a label is specified, it will appear in a gap at the top of the
+    frame. The position of the label may be specified with 
+    <function class="GtkFrame">set_label_align</function>.
+   </para>
+   <para>
+    An important thing to note is that, since the 
+    <classname>GtkFrame</classname> is derived from 
+    <classname>GtkBin</classname>, it may hold only one child widget!
+   </para>
   </desc>
  </classmeta>
 
@@ -21,10 +37,17 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Creates a new frame optionally with a label.
    </shortdesc>
    <desc>
-
+    <para>
+     Use the constructor to create a new frame. You may also specify the
+     label that will be displayed on top of the frame as an argument to the
+     function. Alternatively, you may use 
+     <function class="GtkFrame">set_label_widget</function>, or 
+     <function class="GtkFrame">set_label</function> to add a label
+     to the frame after it has been created.
+    </para>
    </desc>
   </constructor>
 
@@ -40,14 +63,19 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the label assigned to the frame.
    </shortdesc>
    <desc>
+    <para>
+     Use this method to determine the label that is currently assigned to
+     the frame. The text of the label widget will be returned,
+     <literal>NULL</literal> if no label was assigned to the frame or if
+     the label widget was not of type <classname>GtkLabel</classname>.
+    </para>
     <para>
      See also: 
      <function class="GtkFrame">set_label</function>
     </para>
-
    </desc>
   </method>
 
@@ -59,14 +87,13 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    FIXME! Not yet implemented. 
    </shortdesc>
    <desc>
     <para>
      See also: 
      <function class="GtkFrame">set_label_align</function>
     </para>
-
    </desc>
   </method>
 
@@ -78,9 +105,14 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the frame's label widget.
    </shortdesc>
    <desc>
+    <para>
+     Use this method to retrieve the frame's label widget. The function will
+     always return a <classname>GtkLabel</classname> object, unless no
+     label is set, in which case <literal>NULL</literal> will be returned.
+    </para>
     <para>
      See also: 
      <function class="GtkFrame">set_label_widget</function>
@@ -97,14 +129,17 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the frame's shadow type.
    </shortdesc>
    <desc>
+    <para>
+     Use this method to retrieve the frame's shadow type. The function will
+     return a GtkShadowType constant.
+    </para>
     <para>
      See also: 
      <function class="GtkFrame">set_shadow_type</function>
     </para>
-
    </desc>
   </method>
 
@@ -116,14 +151,17 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the current label of the frame.
    </shortdesc>
    <desc>
+    <para>
+     Use this method to set the current label of the frame. You must pass
+     a string as a parameter to set that text as the label.
+    </para>
     <para>
      See also: 
      <function class="GtkFrame">get_label</function>
     </para>
-
    </desc>
   </method>
 
@@ -136,14 +174,21 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the alignment of the frame's label.
    </shortdesc>
    <desc>
+    <para>
+     This method may be used to control the alignment of the frame's label.
+     Two parameters are passed to the function, both are numbers varying
+     from 0 to 1. <literal>xalign</literal> determines the horizontal
+     alignment of the label (0 will imply the left most corner) and
+     <literal>yalign</literal> determines the vertical alignment (0 here,
+     implies that the label will be appear on top the frame's top border).
+    </para>
     <para>
      See also: 
      <function class="GtkFrame">get_label_align</function>
     </para>
-
    </desc>
   </method>
 
@@ -155,14 +200,20 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the frame's label.
    </shortdesc>
    <desc>
+    <para>
+     If you want to pass a <classname>GtkLabel</classname> to be the label
+     of the frame, the use this method. 
+     <function class="GtkFrame">set_label</function> will only allow
+     a string as it's parameter and this function will allow only
+     <classname>GtkLabel</classname>s.
+    </para>
     <para>
      See also: 
      <function class="GtkFrame">get_label_widget</function>
     </para>
-
    </desc>
   </method>
 
@@ -174,14 +225,18 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+     Sets the shadow type of the frame.
    </shortdesc>
    <desc>
+    <para>
+     You may use this function to set the shadow type of the borders of the
+     frame. 0 as a parameter will result in a frame with no outline,
+     whereas 3 will give you and etched in border.
+    </para>
     <para>
      See also: 
      <function class="GtkFrame">get_shadow_type</function>
     </para>
-
    </desc>
   </method>
 
