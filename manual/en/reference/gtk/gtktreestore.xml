@@ -99,6 +99,13 @@
       </xi:include>
      </programlisting>
     </example>
+    <para>
+     See also:
+      <function class="GtkTreeStore">insert</function>,
+      <function class="GtkTreeStore">insert_after</function>,
+      <function class="GtkTreeStore">insert_before</function>,
+      <function class="GtkTreeStore">prepend</function>
+    </para>
    </desc>
   </method>
 
@@ -123,53 +130,140 @@
   <method id="gtk.gtktreestore.method.insert">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>void <function>insert</function></funcdef>
-     <paramdef>void</paramdef>
+     <funcdef><classname>GtkTreeIter</classname> <function>insert</function></funcdef>
+     <paramdef><classname>GtkTreeIter</classname> <parameter>parent</parameter></paramdef>
+     <paramdef>int <parameter>position</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Insert a new row at the given position.
    </shortdesc>
    <desc>
-
+    <para>
+     Inserts a new row as child of <parameter>parent</parameter> at
+     <parameter>position</parameter>.
+    </para>
+    <para>
+     If <parameter>parent</parameter> is <literal>NULL</literal>, the new row
+     will be created at top-level. If <parameter>position</parameter> is
+     larger than the number of rows at that level, then the new row will
+     be inserted to the end of the list.
+    </para>
+    <para>
+     The newly inserted row has no values set; you have to use
+     <function class="GtkTreeStore">set</function> or
+     <function class="GtkTreeStore">set_value</function> to change them.
+    </para>
+    <example>
+     <title>Filling a GtkTreeStore with insert</title>
+     <programlisting role="php">
+      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+                  href="&directory.examples;/reference/gtk/gtktreestore/insert.phpw" parse="text">
+       <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+      </xi:include>
+     </programlisting>
+    </example>
+    <para>
+     See also:
+      <function class="GtkTreeStore">insert_after</function>,
+      <function class="GtkTreeStore">insert_before</function>,
+      <function class="GtkTreeStore">append</function>,
+      <function class="GtkTreeStore">prepend</function>
+    </para>
    </desc>
   </method>
 
   <method id="gtk.gtktreestore.method.insert_after">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>void <function>insert_after</function></funcdef>
-     <paramdef>void</paramdef>
+     <funcdef><classname>GtkTreeIter</classname> <function>insert_after</function></funcdef>
+     <paramdef><classname>GtkTreeIter</classname> <parameter><optional>parent</optional></parameter></paramdef>
+     <paramdef><classname>GtkTreeIter</classname> <parameter><optional>sibling</optional></parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Insert a new row after a given one.
    </shortdesc>
    <desc>
     <para>
-     See also: 
-     <function class="GtkTreeStore">move_after</function>
+     Inserts a new row after <parameter>sibling</parameter>. If sibling is
+     <literal>NULL</literal>, then the row will be prepended to parent's
+     children. If <parameter>parent</parameter> and
+     <parameter>sibling</parameter> are <literal>NULL</literal>, then the row
+     will be prepended to the toplevel. If both <parameter>sibling</parameter>
+     and <parameter>parent</parameter> are set, then
+     <parameter>parent</parameter> must be the parent of
+     <parameter>sibling</parameter>. When <parameter>sibling</parameter> is
+     set, <parameter>parent</parameter> is optional.
     </para>
-
+    <para>
+     The newly inserted row has no values set; you have to use
+     <function class="GtkTreeStore">set</function> or
+     <function class="GtkTreeStore">set_value</function> to change them.
+    </para>
+    <example>
+     <title>Filling a GtkTreeStore with insert_after</title>
+     <programlisting role="php">
+      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+                  href="&directory.examples;/reference/gtk/gtktreestore/insert_after.phpw" parse="text">
+       <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+      </xi:include>
+     </programlisting>
+    </example>
+    <para>
+     See also:
+      <function class="GtkTreeStore">insert</function>,
+      <function class="GtkTreeStore">insert_before</function>,
+      <function class="GtkTreeStore">append</function>,
+      <function class="GtkTreeStore">prepend</function>
+    </para>
    </desc>
   </method>
 
   <method id="gtk.gtktreestore.method.insert_before">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>void <function>insert_before</function></funcdef>
-     <paramdef>void</paramdef>
+     <funcdef><classname>GtkTreeIter</classname> <function>insert_before</function></funcdef>
+     <paramdef><classname>GtkTreeIter</classname> <parameter><optional>parent</optional></parameter></paramdef>
+     <paramdef><classname>GtkTreeIter</classname> <parameter><optional>sibling</optional></parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Insert a new row before a given one.
    </shortdesc>
    <desc>
     <para>
-     See also: 
-     <function class="GtkTreeStore">move_before</function>
+     Inserts a new row before <parameter>sibling</parameter>. If sibling is
+     <literal>NULL</literal>, then the row will be appended to parent's
+     children. If <parameter>parent</parameter> and
+     <parameter>sibling</parameter> are <literal>NULL</literal>, then the row
+     will be appended to the toplevel. If both <parameter>sibling</parameter>
+     and <parameter>parent</parameter> are set, then
+     <parameter>parent</parameter> must be the parent of
+     <parameter>sibling</parameter>. When <parameter>sibling</parameter> is
+     set, <parameter>parent</parameter> is optional.
     </para>
-
+    <para>
+     The newly inserted row has no values set; you have to use
+     <function class="GtkTreeStore">set</function> or
+     <function class="GtkTreeStore">set_value</function> to change them.
+    </para>
+    <example>
+     <title>Filling a GtkTreeStore with insert_before</title>
+     <programlisting role="php">
+      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+                  href="&directory.examples;/reference/gtk/gtktreestore/insert_before.phpw" parse="text">
+       <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+      </xi:include>
+     </programlisting>
+    </example>
+    <para>
+     See also:
+      <function class="GtkTreeStore">insert</function>,
+      <function class="GtkTreeStore">insert_after</function>,
+      <function class="GtkTreeStore">append</function>,
+      <function class="GtkTreeStore">prepend</function>
+    </para>
    </desc>
   </method>
 
@@ -177,14 +271,20 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>bool <function>is_ancestor</function></funcdef>
-     <paramdef>void</paramdef>
+     <paramdef><classname>GtkTreeIter</classname> <parameter>iter</parameter></paramdef>
+     <paramdef><classname>GtkTreeIter</classname> <parameter>descendant</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Checks if an iter is parent or grandparent of another iter.
    </shortdesc>
    <desc>
-
+    <para>
+     Returns <literal>TRUE</literal> if <parameter>iter</parameter> is an
+     ancestor of <parameter>descendant</parameter>. That is,
+     <parameter>iter</parameter> is the parent (or grandparent or
+     great-grandparent) of <parameter>descendant</parameter>.
+    </para>
    </desc>
   </method>
 

@@ -1,0 +1,32 @@
+<?php
+//new model with just one column of type string
+$store = new GtkTreeStore(Gtk::TYPE_STRING);
+
+//insert a new row without a parent (root row)
+$root = $store->insert_after();
+$store->set($root, 0, 'root');
+
+//insert root2 before $root
+$root2 = $store->insert_before(null, $root);
+$store->set($root2, 0, 'root2');
+
+//insert this child as child of root row
+$child1 = $store->insert_before($root);
+$store->set($child1, 0, 'child1');
+
+//insert this child before $child1
+$child2 = $store->insert_before($root, $child1);
+$store->set($child2, 0, 'child2');
+
+
+//Display the store
+$wnd  = new GtkWindow();
+$view = new GtkTreeView($store);
+$view->append_column(
+    new GtkTreeViewColumn('String column', new GtkCellRendererText(), 'text', 0)
+);
+$wnd->add($view);
+$wnd->connect_simple('destroy', array('gtk', 'main_quit'));
+$wnd->show_all();
+Gtk::main();
+?>
