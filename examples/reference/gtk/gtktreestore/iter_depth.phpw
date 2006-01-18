@@ -1,0 +1,16 @@
+<?php
+//Create the store
+$store = new GtkTreeStore(Gtk::TYPE_STRING);
+
+//Variable for the last inserted row
+$last  = null;
+
+//loop from 0 to 10
+for ($nA = 0; $nA <= 10; $nA++) {
+    //append a row as child of $last
+    //$last is NULL at first, so the row will be top-level
+    $last = $store->append($last, array('row ' . $nA));
+    //display the depth of the created iterator
+    echo 'Depth at level #' . $nA . ': ' . $store->iter_depth($last) . "\r\n";
+}
+?>

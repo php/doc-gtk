@@ -1,0 +1,24 @@
+<?php
+//Create the store
+$store = new GtkTreeStore(Gtk::TYPE_STRING);
+
+//Create first row
+$row1 = $store->append(null, array('row 1'));
+//Create second row
+$row2 = $store->append(null, array('row 2'));
+
+//move $row1 after $row2
+$store->move_after($row1, $row2);
+
+
+//Display the store
+$wnd  = new GtkWindow();
+$view = new GtkTreeView($store);
+$view->append_column(
+    new GtkTreeViewColumn('String column', new GtkCellRendererText(), 'text', 0)
+);
+$wnd->add($view);
+$wnd->connect_simple('destroy', array('gtk', 'main_quit'));
+$wnd->show_all();
+Gtk::main();
+?>

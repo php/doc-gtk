@@ -1,0 +1,14 @@
+<?php
+//Create the store
+$store = new GtkTreeStore(Gtk::TYPE_STRING);
+
+//add a row and save the iter into $row
+$row = $store->append(null, array('row'));
+//that should return true, as the row exists
+var_dump($store->iter_is_valid($row));
+
+//remove that row from the store
+$store->remove($row);
+//shouldn't be valid any more
+var_dump($store->iter_is_valid($row));
+?>

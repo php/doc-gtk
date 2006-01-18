@@ -292,14 +292,27 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>int <function>iter_depth</function></funcdef>
-     <paramdef>void</paramdef>
+     <paramdef><classname>GtkTreeIter</classname> <parameter>iter</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    How deep an iterator is nested in the tree.
    </shortdesc>
    <desc>
-
+    <para>
+     Calculates how deep the given <parameter>iter</parameter> is nested in
+     the store. If the given iter is a top-level row, <literal>0</literal>
+     is returned.
+    </para>
+    <example>
+     <title>Using iter_depth to determine the depth of a row</title>
+     <programlisting role="php">
+      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+                  href="&directory.examples;/reference/gtk/gtktreestore/iter_depth.phpw" parse="text">
+       <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+      </xi:include>
+     </programlisting>
+    </example>
    </desc>
   </method>
 
@@ -307,14 +320,30 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>bool <function>iter_is_valid</function></funcdef>
-     <paramdef>void</paramdef>
+     <paramdef><classname>GtkTreeIter</classname> <parameter>iter</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    If a given row exists in the store.
    </shortdesc>
    <desc>
-
+    <para>
+     Returns <literal>true</literal> if the given iterator points to a row
+     that exists in the model.
+    </para>
+    <para>
+     An iterator can get unvalid by removing it (or one of its parents)
+     from the tree.
+    </para>
+    <example>
+     <title>Checking an iter's validity by using iter_is_valid()</title>
+     <programlisting role="php">
+      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+                  href="&directory.examples;/reference/gtk/gtktreestore/iter_is_valid.phpw" parse="text">
+       <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+      </xi:include>
+     </programlisting>
+    </example>
    </desc>
   </method>
 
@@ -322,18 +351,37 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>move_after</function></funcdef>
-     <paramdef>void</paramdef>
+     <paramdef><classname>GtkTreeIter</classname> <parameter>iter</parameter></paramdef>
+     <paramdef><classname>GtkTreeIter</classname> <parameter>position</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Moves a given iter directly after another one.
    </shortdesc>
    <desc>
     <para>
-     See also: 
-     <function class="GtkTreeStore">insert_after</function>
+     Moves the row given by <parameter>iter</parameter> directly after
+     <parameter>position</parameter>.
     </para>
-
+    <para>
+     That method works only with unsorted stores and requires both iters to
+     be at the same level. If <parameter>position</parameter> is
+     <literal>NULL</literal>, the row will be moved to the start
+     of the level.
+    </para>
+    <example>
+     <title>Moving rows</title>
+     <programlisting role="php">
+      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+                  href="&directory.examples;/reference/gtk/gtktreestore/move_after.phpw" parse="text">
+       <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+      </xi:include>
+     </programlisting>
+    </example>
+    <para>
+     See also: 
+     <function class="GtkTreeStore">move_before</function>
+    </para>
    </desc>
   </method>
 
@@ -341,33 +389,70 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>move_before</function></funcdef>
-     <paramdef>void</paramdef>
+     <paramdef><classname>GtkTreeIter</classname> <parameter>iter</parameter></paramdef>
+     <paramdef><classname>GtkTreeIter</classname> <parameter>position</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Moves a given iter directly before another one.
    </shortdesc>
    <desc>
     <para>
-     See also: 
-     <function class="GtkTreeStore">insert_before</function>
+     Moves the row given by <parameter>iter</parameter> directly before
+     <parameter>position</parameter>.
     </para>
-
+    <para>
+     That method works only with unsorted stores and requires both iters to
+     be at the same level. If <parameter>position</parameter> is
+     <literal>NULL</literal>, the row will be moved to the end
+     of the level.
+    </para>
+    <para>
+     See also: 
+     <function class="GtkTreeStore">move_before</function>
+    </para>
    </desc>
   </method>
 
   <method id="gtk.gtktreestore.method.prepend">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>void <function>prepend</function></funcdef>
-     <paramdef>void</paramdef>
+     <funcdef><classname>GtkTreeIter</classname> <function>prepend</function></funcdef>
+     <paramdef><classname>GtkTreeIter</classname> <parameter><optional>parent</optional></parameter></paramdef>
+     <paramdef>array <parameter>items</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Add a row to the beginning of the store.
    </shortdesc>
    <desc>
-
+    <para>
+     Creates a new line and inserts it at the beginning of the store. The first
+     parameter <parameter>parent</parameter> can be <literal>NULL</literal>.
+     If that's the case, the new entry will have no parent and thus 
+     be a "root" entry.
+    </para>
+    <para>
+     The second parameter <parameter>items</parameter> is an array with a value
+     for each column. If your treestore has three columns, the array should have
+     three values.
+    </para>
+    <para>
+     The method returns a <classname>GtkTreeIter</classname> which you can use
+     to refer to the entry row; e.g. to use it as a parent for another row.
+    </para>
+    <para>
+     If you pass no parameters at all, an empty row with no values will be
+     created, and you have to use other methods like
+     <function class="GtkTreeStore">set</function> to change the column values.
+    </para>
+    <para>
+     See also:
+      <function class="GtkTreeStore">append</function>
+      <function class="GtkTreeStore">insert</function>,
+      <function class="GtkTreeStore">insert_after</function>,
+      <function class="GtkTreeStore">insert_before</function>,
+    </para>
    </desc>
   </method>
 
@@ -375,17 +460,20 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>bool <function>remove</function></funcdef>
-     <paramdef>void</paramdef>
+     <paramdef><classname>GtkTreeIter</classname> <parameter>iter</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Remove a row from the tree.
    </shortdesc>
    <desc>
-
+    <para>
+     Removes a row specified by <parameter>iter</parameter> from the tree.
+    </para>
    </desc>
   </method>
 
+<!--
   <method id="gtk.gtktreestore.method.reorder">
    <funcsynopsis>
     <funcprototype>
@@ -400,22 +488,52 @@
 
    </desc>
   </method>
-
+-->
   <method id="gtk.gtktreestore.method.set">
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set</function></funcdef>
-     <paramdef>void</paramdef>
+     <paramdef><classname>GtkTreeIter</classname> <parameter>iter</parameter></paramdef>
+     <paramdef>int <parameter>column_1</parameter></paramdef>
+     <paramdef>mixed <parameter>value_1</parameter></paramdef>
+     <paramdef>int <parameter><optional>column_2</optional></parameter></paramdef>
+     <paramdef>mixed <parameter>value_2</parameter></paramdef>
+     <paramdef>...</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Set the values of a row.
    </shortdesc>
    <desc>
-
+    <para>
+     Sets the values of the row specified by <parameter>iter</parameter>.
+     The parameters have to be pairs, determining the column id and the value
+     the column shall be set to.
+    </para>
+    <para>
+     This method is useful when you used
+     <function class="GtkTreeStore">insert</function> or one of its siblings
+     to create an empty row, or if you want to change multiple columns of a
+     row.
+    </para>
+    <example>
+     <title>Setting column values with set()</title>
+     <programlisting role="php">
+      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+                  href="&directory.examples;/reference/gtk/gtktreestore/set.phpw" parse="text">
+       <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+      </xi:include>
+     </programlisting>
+    </example>
+    <para>
+     See also:
+<!--       <function class="GtkTreeStore">set_value</function>, -->
+      <function class="GtkTreeStore">append</function>,
+      <function class="GtkTreeStore">prepend</function>
+    </para>
    </desc>
   </method>
-
+<!--
   <method id="gtk.gtktreestore.method.set_column_types">
    <funcsynopsis>
     <funcprototype>
@@ -460,19 +578,22 @@
 
    </desc>
   </method>
-
+-->
   <method id="gtk.gtktreestore.method.swap">
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>swap</function></funcdef>
-     <paramdef>void</paramdef>
+     <paramdef><classname>GtkTreeIter</classname> <parameter>iter1</parameter></paramdef>
+     <paramdef><classname>GtkTreeIter</classname> <parameter>iter2</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Swaps two rows.
    </shortdesc>
    <desc>
-
+    <para>
+     Swaps two rows on the same level. Works only with unsorted tree stores.
+    </para>
    </desc>
   </method>
 

@@ -1,0 +1,25 @@
+<?php
+//A row in that store can hold a string, an integer and a float
+$store = new GtkTreeStore(Gtk::TYPE_STRING, Gtk::TYPE_LONG, GTK::TYPE_DOUBLE);
+
+//create a new (empty) row
+$row = $store->insert();
+//set value of the first row
+$store->set($row, 0, 'String');
+//set value of the third and second row
+$store->set($row, 2, 0.5, 1, 20);
+
+
+//Display the store
+$wnd  = new GtkWindow();
+$view = new GtkTreeView($store);
+$rend = new GtkCellRendererText();
+$view->append_column(new GtkTreeViewColumn('String', $rend, 'text', 0));
+$view->append_column(new GtkTreeViewColumn('Int'   , $rend, 'text', 1));
+$view->append_column(new GtkTreeViewColumn('Float' , $rend, 'text', 2));
+$wnd->add($view);
+$wnd->connect_simple('destroy', array('gtk', 'main_quit'));
+$wnd->show_all();
+Gtk::main();
+
+?>
