@@ -1,0 +1,30 @@
+<?php
+//new model with just one column of type string
+$store = new GtkTreeStore(Gtk::TYPE_STRING);
+
+//create root entry: parent parameter is NULL
+$root = $store->append(null, array('This is the root'));
+//Create a child entry below the root one
+$child = $store->append($root, array('Child of root'));
+//Create a second child of root
+$store->append($root, array('Second child'));
+
+//create another root entry
+$root2 = $store->append(null, array('Another root'));
+
+//create empty root entry
+$empty = $store->append();
+//create empty entry below child
+$subchild = $store->append($child);
+
+//Display the store
+$wnd  = new GtkWindow();
+$view = new GtkTreeView($store);
+$view->append_column(
+    new GtkTreeViewColumn('String column', new GtkCellRendererText(), 'text', 0)
+);
+$wnd->add($view);
+$wnd->connect_simple('destroy', array('gtk', 'main_quit'));
+$wnd->show_all();
+Gtk::main();
+?>

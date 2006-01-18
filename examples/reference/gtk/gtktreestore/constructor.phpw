@@ -1,0 +1,42 @@
+<?php
+/*
+* GtkTreeStore example: Regions and the population
+*  of some european states
+* Create a tree store with string and long columns
+*/
+$store = new GtkTreeStore(Gtk::TYPE_STRING, Gtk::TYPE_LONG);
+
+//append a row to the root (NULL for parent)
+$nothern = $store->append(null, array('Northern europe', 0));
+$western = $store->append(null, array('Western europe', 0));
+$central = $store->append(null, array('Central europe', 0));
+
+//append a row as a child to another row: $central as parent
+$store->append($central, array('Germany', 83251851));
+//$western as parent
+$store->append($western, array('France', 59765983));
+$store->append($western, array('Netherlands', 16318199));
+$store->append($nothern, array('Norway', 4525116));
+
+
+//display it
+$wnd = new GtkWindow();
+$wnd->set_title('GtkTreeStore example');
+$wnd->connect_simple('destroy', array('gtk', 'main_quit'));
+
+//create the view with the tree store set as model
+$view = new GtkTreeView($store);
+
+//cell renderer, which actually displays the text
+$cell_renderer = new GtkCellRendererText();
+//append one column to the view which displays the tree store column 0
+$view->append_column(new GtkTreeViewColumn('Country', $cell_renderer, 'text', 0));
+//display column 1 from the tree store
+$view->append_column(new GtkTreeViewColumn('Population', $cell_renderer, 'text', 1));
+//show all children at once
+$view->expand_all();
+
+$wnd->add($view);
+$wnd->show_all();
+Gtk::main();
+?>

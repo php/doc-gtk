@@ -3,28 +3,102 @@
  <classmeta>
   <classtitle>GtkTreeStore</classtitle>
   <classparent>GObject</classparent>
+  <implements>GtkTreeModel</implements>
+  <implements>GtkTreeDragSource</implements>
+  <implements>GtkTreeDragDest</implements>
+  <implements>GtkTreeSortable</implements>
   <shortdesc>
-
+   A tree-like data structure that can be used with the GtkTreeView.
   </shortdesc>
   <desc>
-
+   <para>
+    The <classname>GtkTreeStore</classname> object is a list model
+    for use with a <classname>GtkTreeView</classname> widget. It implements
+    the <classname>GtkTreeModel</classname> interface, and consequentialy, can
+    use all of the methods available there. It also implements the 
+    <classname>GtkTreeSortable</classname> interface so it can be sorted by
+    the view. Finally, it also implements the tree drag and drop interfaces.
+   </para>
   </desc>
  </classmeta>
+
+
+ <constructors>
+  <constructor id="gtk.gtktreestore.constructor">
+   <funcsynopsis>
+    <funcprototype>
+    <funcdef> <function>GtkTreeStore</function></funcdef>
+    <paramdef><enumname>GtkType</enumname> <parameter>type_column_0</parameter></paramdef>
+    <paramdef><enumname>GtkType</enumname> <parameter><optional>type_column_1</optional></parameter></paramdef>
+    <paramdef><enumname>GtkType</enumname> <parameter><optional>type_column_2</optional></parameter></paramdef>
+    <paramdef>...</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Create a new tree store with a number of columns.
+   </shortdesc>
+   <desc>
+    <para>
+     Create a new tree store with a number of columns. For each colum, the
+     type has to be specified by choosing one of the <enumname>GtkType</enumname>s.
+    </para>
+    <example>
+     <title>Creating and filling a GtkTreeStore</title>
+     <programlisting role="php">
+      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+                  href="&directory.examples;/reference/gtk/gtktreestore/constructor.phpw" parse="text">
+       <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+      </xi:include>
+     </programlisting>
+    </example>
+   </desc>
+  </constructor>
+ </constructors>
+
 
  <methods>
 
   <method id="gtk.gtktreestore.method.append">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>void <function>append</function></funcdef>
-     <paramdef>void</paramdef>
+     <funcdef><classname>GtkTreeIter</classname> <function>append</function></funcdef>
+     <paramdef><classname>GtkTreeIter</classname> <parameter><optional>parent</optional></parameter></paramdef>
+     <paramdef>array <parameter>items</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Appends a new row to the store.
    </shortdesc>
    <desc>
-
+    <para>
+     Creates a new line and appends it to the end of the store. The first
+     parameter <parameter>parent</parameter> can be <literal>NULL</literal>.
+     If that's the case, the new entry will have no parent and thus 
+     be a "root" entry.
+    </para>
+    <para>
+     The second parameter <parameter>items</parameter> is an array with a value
+     for each column. If your treestore has three columns, the array should have
+     three values.
+    </para>
+    <para>
+     The method returns a <classname>GtkTreeIter</classname> which you can use
+     to refer to the entry row; e.g. to use it as a parent for another row.
+    </para>
+    <para>
+     If you pass no parameters at all, an empty row with no values will be
+     created, and you have to use other methods like
+     <function class="GtkTreeStore">set</function> to change the column values.
+    </para>
+    <example>
+     <title>Creating and filling a GtkTreeStore</title>
+     <programlisting role="php">
+      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+                  href="&directory.examples;/reference/gtk/gtktreestore/append.phpw" parse="text">
+       <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+      </xi:include>
+     </programlisting>
+    </example>
    </desc>
   </method>
 
@@ -36,10 +110,13 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Removes all rows.
    </shortdesc>
    <desc>
-
+    <para>
+     This method removes all rows from the store, clearing and leaving it 
+     empty.
+    </para>
    </desc>
   </method>
 
