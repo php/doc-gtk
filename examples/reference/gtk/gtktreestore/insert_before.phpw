@@ -7,16 +7,14 @@ $root = $store->insert_after();
 $store->set($root, 0, 'root');
 
 //insert root2 before $root
-$root2 = $store->insert_before(null, $root);
+$root2 = $store->insert_before($root);
 $store->set($root2, 0, 'root2');
 
 //insert this child as child of root row
-$child1 = $store->insert_before($root);
-$store->set($child1, 0, 'child1');
+$child1 = $store->insert_before(null, $root, array('child1'));
 
 //insert this child before $child1
-$child2 = $store->insert_before($root, $child1);
-$store->set($child2, 0, 'child2');
+$child2 = $store->insert_before($child1, $root, array('child2'));
 
 
 //Display the store

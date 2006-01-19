@@ -7,16 +7,14 @@ $root = $store->insert_after();
 $store->set($root, 0, 'root');
 
 //insert this child as child of root row
-$child1 = $store->insert_after($root);
-$store->set($child1, 0, 'child1');
+$child1 = $store->insert_after(null, $root, array('child1'));
 
 //insert this child after $child1
-$child2 = $store->insert_after($root, $child1);
-$store->set($child2, 0, 'child2');
+$child2 = $store->insert_after($child1, $root, array('child2'));
 
 //insert new child after $child1, making $child2
 //moving to position 2
-$child3 = $store->insert_after($root, $child1);
+$child3 = $store->insert_after($child1, $root);
 $store->set($child3, 0, 'child3');
 
 //Display the store

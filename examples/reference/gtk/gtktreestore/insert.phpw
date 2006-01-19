@@ -3,22 +3,20 @@
 $store = new GtkTreeStore(Gtk::TYPE_STRING);
 
 //insert a new row without a parent (root row)
-$root = $store->insert(null, 0);
+$root = $store->insert(0);
 $store->set($root, 0, 'root');
 
 //insert a new row as child of the previously created root row
-$child1 = $store->insert($root, 0);
+$child1 = $store->insert(0, $root);
 $store->set($child1, 0, 'child');
 
 //insert another row, but at position 0 - that means
 //before $child1
-$child2 = $store->insert($root, 0);
-$store->set($child2, 0, 'child 2');
+$child2 = $store->insert(0, $root, array('child2'));
 
 //insert at position 1: before $child1,
 //but after $child2
-$child3 = $store->insert($root, 1);
-$store->set($child3, 0, 'child 3');
+$child3 = $store->insert(1, $root, array('child3'));
 
 
 //Display the store

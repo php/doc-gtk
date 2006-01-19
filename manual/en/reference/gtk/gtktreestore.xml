@@ -131,8 +131,9 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef><classname>GtkTreeIter</classname> <function>insert</function></funcdef>
-     <paramdef><classname>GtkTreeIter</classname> <parameter>parent</parameter></paramdef>
      <paramdef>int <parameter>position</parameter></paramdef>
+     <paramdef><classname>GtkTreeIter</classname> <parameter><optional>parent</parameter></paramdef>
+     <paramdef>array <parameter><optional>items</optional></parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -150,9 +151,7 @@
      be inserted to the end of the list.
     </para>
     <para>
-     The newly inserted row has no values set; you have to use
-     <function class="GtkTreeStore">set</function> or
-     <function class="GtkTreeStore">set_value</function> to change them.
+     <parameter>items</parameter> can be an array of values for the column.
     </para>
     <example>
      <title>Filling a GtkTreeStore with insert</title>
@@ -177,8 +176,9 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef><classname>GtkTreeIter</classname> <function>insert_after</function></funcdef>
-     <paramdef><classname>GtkTreeIter</classname> <parameter><optional>parent</optional></parameter></paramdef>
      <paramdef><classname>GtkTreeIter</classname> <parameter><optional>sibling</optional></parameter></paramdef>
+     <paramdef><classname>GtkTreeIter</classname> <parameter><optional>parent</optional></parameter></paramdef>
+     <paramdef>array <parameter><optional>items</optional></parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -197,9 +197,7 @@
      set, <parameter>parent</parameter> is optional.
     </para>
     <para>
-     The newly inserted row has no values set; you have to use
-     <function class="GtkTreeStore">set</function> or
-     <function class="GtkTreeStore">set_value</function> to change them.
+     <parameter>items</parameter> can be an array of values for the column.
     </para>
     <example>
      <title>Filling a GtkTreeStore with insert_after</title>
@@ -224,8 +222,9 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef><classname>GtkTreeIter</classname> <function>insert_before</function></funcdef>
-     <paramdef><classname>GtkTreeIter</classname> <parameter><optional>parent</optional></parameter></paramdef>
      <paramdef><classname>GtkTreeIter</classname> <parameter><optional>sibling</optional></parameter></paramdef>
+     <paramdef><classname>GtkTreeIter</classname> <parameter><optional>parent</optional></parameter></paramdef>
+     <paramdef>array <parameter><optional>items</optional></parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -244,9 +243,7 @@
      set, <parameter>parent</parameter> is optional.
     </para>
     <para>
-     The newly inserted row has no values set; you have to use
-     <function class="GtkTreeStore">set</function> or
-     <function class="GtkTreeStore">set_value</function> to change them.
+     <parameter>items</parameter> can be an array of values for the column.
     </para>
     <example>
      <title>Filling a GtkTreeStore with insert_before</title>
