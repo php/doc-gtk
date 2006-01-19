@@ -81,7 +81,7 @@ xsltproc --param base.dir "'./$build_dir/'" --xinclude $xslfile $manualpath
 # without losing directory structure?
 #cp --target-directory=build/en/test/images/ `grep -oh 'src="[^"]*"' build/en/test/* | sed s/src=\"//g | sed s/\"//g`
 # this one doesn't keep the directories
-cp -R images build/en/$type/
+cp -R images build/en/$realtype/
 
 #highlight php sources
 #we need to escape the wildcard, because php doesn't allow enough
