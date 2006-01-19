@@ -3,65 +3,61 @@
  <classmeta>
   <classtitle>GtkToggleButton</classtitle>
   <classparent>GtkButton</classparent>
+  <classimage fileref="&directory.images;/reference/gtk/gtktogglebutton.png" frame="no"/>
   <shortdesc>
-
+   Button that retains its state.
   </shortdesc>
   <desc>
-
+   <para>
+    A <classname>GtkToggleButton</classname> is a 
+    <classname>GtkButton</classname> which will remain 'pressed-in' when
+    clicked. Clicking again will cause the toggle button to return to its
+    normal state.
+   </para>
+   <para>
+    The state of a <classname>GtkToggleButton</classname> can be set 
+    specifically using <function class="GtkToggleButton">set_active</function>,
+    and retrieved using <function class="GtkToggleButton">get_active</function>.
+   </para>
+   <para>
+    To simply switch the state of a toggle button, use
+    <function class="GtkToggleButton">toggled</function>.
+   </para>
   </desc>
  </classmeta>
 
  <constructors>
-
   <constructor id="gtk.gtktogglebutton.constructor">
    <funcsynopsis>
     <funcprototype>
     <funcdef> <function>GtkToggleButton</function></funcdef>
-    <paramdef>void</paramdef>
+    <paramdef>string <parameter><optional>label</optional></parameter></paramdef>
+    <paramdef>boolean <parameter><optional>use_underline</optional></parameter> = true</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Creates a new toggle button.
    </shortdesc>
    <desc>
-
+    <para>
+     Creates a new <classname>GtkToggleButton</classname>, optionally with
+     a text label. If you pass <literal>false</literal> as second parameter,
+     the mnemonics (<literal>_</literal>) will not be parsed.
+    </para>
+    <example>
+     <title>Creating a new GtkToggleButton</title>
+     <programlisting role="php">
+      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+                  href="&directory.examples;/reference/gtk/gtktogglebutton/constructor.phpw" parse="text">
+       <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+      </xi:include>
+     </programlisting>
+    </example>
    </desc>
   </constructor>
-
-  <constructor id="gtk.gtktogglebutton.constructor.new_with_label">
-   <funcsynopsis>
-    <funcprototype>
-    <funcdef> <function>GtkToggleButton::new_with_label</function></funcdef>
-    <paramdef>string <parameter>label</parameter></paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </constructor>
-
-  <constructor id="gtk.gtktogglebutton.constructor.new_with_mnemonic">
-   <funcsynopsis>
-    <funcprototype>
-    <funcdef> <function>GtkToggleButton::new_with_mnemonic</function></funcdef>
-    <paramdef>string <parameter>label</parameter></paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </constructor>
-
  </constructors>
 
  <methods>
-
   <method id="gtk.gtktogglebutton.method.get_active">
    <funcsynopsis>
     <funcprototype>
@@ -70,9 +66,13 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    If the toggle button is pressed.
    </shortdesc>
    <desc>
+    <para>
+     Returns wether the toggle button is pressed (<literal>true</literal>)
+     or not (<literal>false</literal>).
+    </para>
     <para>
      See also: 
      <function class="GtkToggleButton">set_active</function>, 
@@ -90,9 +90,13 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    If the button is set to an inconsistent state.
    </shortdesc>
    <desc>
+    <para>
+     Returns the value that has been set with
+     <function class="GtkToggleButton">set_inconsistent</function>.
+    </para>
     <para>
      See also: 
      <function class="GtkToggleButton">set_inconsistent</function>, 
@@ -110,14 +114,17 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Whether the button is displayed as a separate indicator and label.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     Returns whether the button is displayed as a separate indicator
+     and label.
+    </para>
+    <para>
+     See also:
      <function class="GtkToggleButton">set_mode</function>
     </para>
-
    </desc>
   </method>
 
@@ -129,12 +136,20 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the active state.
    </shortdesc>
    <desc>
     <para>
-     See also: 
-     <function class="GtkToggleButton">get_active</function>, 
+     Sets the button's active state (pressed or not). Set to
+     <literal>true</literal> if you want the
+     <classname>GtkToggleButton</classname> to be 'pressed in', and
+     <literal>false</literal> to raise it. This action causes the
+     <signalname class="GtkToggleButton">toggled</signalname> signal to be
+     emitted.
+    </para>
+    <para>
+     See also:
+     <function class="GtkToggleButton">get_active</function>,
      <propname class="GtkToggleButton">active</propname>
     </para>
 
@@ -149,15 +164,24 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Set the button to the inconsistent state.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     If the user has selected a range of elements (such as some text or
+     spreadsheet cells) that are affected by a toggle button, and the current
+     values in that range are inconsistent, you may want to display the toggle
+     in an "in between" state. This function turns on "in between" display.
+     Normally you would turn off the inconsistent state again if the user 
+     toggles the toggle button. This has to be done manually,
+     set_inconsistent() only affects visual appearance, it doesn't affect the
+     semantics of the button.
+    </para>
+    <para>
+     See also:
      <function class="GtkToggleButton">get_inconsistent</function>, 
      <propname class="GtkToggleButton">inconsistent</propname>
     </para>
-
    </desc>
   </method>
 
@@ -169,14 +193,25 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets whether the button is displayed as a separate indicator and label.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     Sets whether the button is displayed as a separate indicator and label.
+     You can call this function on a checkbutton or a radiobutton with
+     draw_indicator <literal>= false</literal> to make the button look like
+     a normal button.
+    </para>
+    <para>
+     This function only effects instances of classes like 
+     <classname>GtkCheckButton</classname> and <classname>GtkRadioButton</classname>
+     that derive from <classname>GtkToggleButton</classname>, not instances 
+     of <classname>GtkToggleButton</classname> itself.
+    </para>
+    <para>
+     See also:
      <function class="GtkToggleButton">get_mode</function>
     </para>
-
    </desc>
   </method>
 
@@ -188,10 +223,12 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    DEPRECATED Set the active state.
    </shortdesc>
    <desc>
-
+    <para>
+     DEPRECATED. Listed only for compatibility reasons.
+    </para>
    </desc>
   </method>
 
@@ -203,25 +240,30 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Toggle the button's state.
    </shortdesc>
    <desc>
-
+    <para>
+     Emits the toggled signal on the <classname>GtkToggleButton</classname>.
+     There is no good reason for an application ever to call this function.
+    </para>
    </desc>
   </method>
-
  </methods>
 
  <properties>
-
   <property id="gtk.gtktogglebutton.property.active" type="ro">
    <propname>active</propname>
    <proptype>bool</proptype>
    <shortdesc>
+    If the toggle button should be pressed in or not.
    </shortdesc>
    <desc>
+    <simpara>
+     If the toggle button should be pressed in or not.
+    </simpara>
     <para>
-     See also: 
+     See also:
      <function class="GtkToggleButton">get_active</function>, 
      <function class="GtkToggleButton">set_active</function>
     </para>
@@ -233,9 +275,12 @@
    <propname>draw_indicator</propname>
    <proptype>bool</proptype>
    <shortdesc>
+    If the toggle part of the button is displayed.
    </shortdesc>
    <desc>
-
+    <simpara>
+     If the toggle part of the button is displayed.
+    </simpara>
    </desc>
   </property>
 
@@ -243,8 +288,12 @@
    <propname>inconsistent</propname>
    <proptype>bool</proptype>
    <shortdesc>
+    If the toggle button is in an "in between" state.
    </shortdesc>
    <desc>
+    <simpara>
+     If the toggle button is in an "in between" state.
+    </simpara>
     <para>
      See also: 
      <function class="GtkToggleButton">get_inconsistent</function>, 
@@ -253,26 +302,27 @@
 
    </desc>
   </property>
-
  </properties>
 
  <signals>
-
   <signal id="gtk.gtktogglebutton.signal.toggled">
    <signalname>toggled</signalname>
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <cbfunction>callback</cbfunction></funcdef>
-     <paramdef>GtkToggleButton <parameter>togglebutton</parameter></paramdef>
+     <paramdef><classname>GtkToggleButton</classname> <parameter>togglebutton</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
+    The button's active state has changed.
    </shortdesc>
    <desc>
-
+    <para>
+     Should be connected if you wish to perform an action whenever the 
+     <classname>GtkToggleButton</classname>'s state is changed.
+    </para>
    </desc>
   </signal>
-  
  </signals>
 
 </classentry>

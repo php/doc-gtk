@@ -1,0 +1,21 @@
+<?php
+//Create a new toggle button with label and mnemonic
+$togglebtn = new GtkToggleButton('Toggle _me');
+//connect the toggled signal to the function "toggled"
+$togglebtn->connect('toggled', 'toggled');
+
+function toggled($togglebtn) {
+    if ($togglebtn->get_active()) {
+        echo "ToggleButton is ACTIVE\r\n";
+    } else {
+        echo "ToggleButton is NOT active\r\n";
+    }
+}
+
+$wnd = new GtkWindow();
+$wnd->set_border_width(10);
+$wnd->add($togglebtn);
+$wnd->connect_simple('destroy', array('gtk', 'main_quit'));
+$wnd->show_all();
+Gtk::main();
+?>
