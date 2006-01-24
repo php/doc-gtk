@@ -48,7 +48,7 @@ class updateMethods
         else {
             $parentMethods = $parent->getMethods();
             $trueMethods = $this->cleanMethods($childMethods, $parentMethods);
-            $classFile = "../manual/en/reference/gtk/".strtolower($this->currentClass).".xml";
+            $classFile = "gtk/".strtolower($this->currentClass).".xml";
             /* Check for manual's xml file */
             if(file_exists($classFile)) {
                 $xml = new DOMDocument();
@@ -162,7 +162,7 @@ class updateMethods
                 echo "Updating ".$daID."\n";
                 $topLevel->appendChild($xmlMethod);
                 $topLevel->appendChild($indentMethod);
-                $doc->save('../manual/en/reference/gtk/'.strtolower($this->currentClass).'.xml');
+                $doc->save('gtk/'.strtolower($this->currentClass).'.xml');
 
                 $this->methodCount += 1;
             }

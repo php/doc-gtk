@@ -23,6 +23,9 @@ for filename in xmlFiles:
         output.write('<!DOCTYPE book [\n')
         output.write('<!ENTITY directory.examples "../../examples">\n')
         output.write('<!ENTITY directory.images "images"> ]>\n')
+        nextline = input.readline()
+        if nextline.strip() != "]>":
+            output.write(nextline)
         restlines = input.readlines()
         for eachline in restlines:
             output.write(eachline)
