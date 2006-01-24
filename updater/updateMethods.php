@@ -157,7 +157,12 @@ class updateMethods
                 $xmlMethod->appendChild($indentDesc);
 
                 /* Save the xml file after adding the whole method node */
-                $topLevel = $doc->getElementsByTagName('methods');
+                if($ismethod) {
+                    $topLevel = $doc->getElementsByTagName('methods');
+                }
+                else {
+                    $topLevel = $doc->getElementsByTagName('constructors');
+                }
                 $topLevel = $topLevel->item(0);
                 echo "Updating ".$daID."\n";
                 $topLevel->appendChild($xmlMethod);
