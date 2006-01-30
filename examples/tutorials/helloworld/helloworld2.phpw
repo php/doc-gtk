@@ -1,0 +1,23 @@
+<?php
+if (!class_exists('gtk')) {
+    die("Please load the php-gtk2 module in your php.ini\r\n");
+}
+
+$wnd = new GtkWindow();
+$wnd->set_title('Hello world');
+$wnd->connect_simple('destroy', array('gtk', 'main_quit'));
+
+$vbox = new GtkVBox();
+$wnd->add($vbox);
+
+$lblHello = new GtkLabel("Just wanted to say\r\n'Hello world!'");
+$lblHello->set_justify(Gtk::JUSTIFY_CENTER);
+$vbox->pack_start($lblHello);
+
+$btnQuit = GtkButton::new_from_stock(Gtk::STOCK_QUIT);
+$btnQuit->connect_simple('clicked', array('gtk', 'main_quit'));
+$vbox->pack_start($btnQuit, false);
+
+$wnd->show_all();
+Gtk::main();
+?>

@@ -3,10 +3,155 @@
  <title>Hello world</title>
 
  <sect1>
-  <title>About this tutorial</title>
+  <title>Simple Hello world script</title>
   <simpara>
-   <!-- TODO -->
+   When you begin to learn a programming language, the first program you
+   often write is a 'hello world' program. So, just to fit in with everyone
+   else, the first tutorial in this manual just happens to be a
+   'hello world' tutorial!
   </simpara>
+  <simpara>
+   Throughout the tutorials we expect a reasonable grasp of PHP itself.
+   The tutorials are designed to give the user an idea of how to use PHP-Gtk,
+   and the ideas and techniques behind it.
+  </simpara>
+  <simpara>
+   In this tutorial we will create a simple window with the text
+   "Hello World!" in it.
+  </simpara>
+  <simpara>
+   We will start by listing the program and will then explain each line of
+   the program, giving an overview of a very basic PHP-Gtk application.
+  </simpara>
+
+
+  <example>
+   <title>A simple Hello World script</title>
+   <programlisting role="php">
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+     href="&directory.examples;/tutorials/helloworld/helloworld.phpw" parse="text">
+     <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+    </xi:include>
+   </programlisting>
+  </example>
+
+  <para>
+   Now copy the code into a text editor and save it as
+   <filename>hello.phpw</filename>. Then open a console and start it via
+   <command>php hello.phpw</command>. A window with title "Hello world" should
+   open and contain nothing but the text "Just wanted to say 'Hello world!'".
+  </para>
+
+
+  <example>
+   <title>Checking if PHP-Gtk is available</title>
+   <programlisting role="php"><![CDATA[if (!class_exists('gtk')) {
+    die("Please load the php-gtk2 module in your php.ini\r\n");
+}]]></programlisting>
+  </example>
+
+  <para>
+   Here we make sure that PHP-Gtk is available by checking if the class
+   <literal>gtk</literal> exists. Unlike PHP4 and PHP-Gtk1, you should not
+   try to load the PHP-Gtk module via
+   <ulink url="http://www.php.net/dl">dl</ulink> - that is deprecated in PHP5
+   and should not be used in newly written code. So all we can do is printing
+   out a message, that the module is not available and should be enabled by
+   the user.
+  </para>
+
+
+  <example>
+   <title>Create a window</title>
+   <programlisting role="php"><![CDATA[$wnd = new GtkWindow();]]></programlisting>
+  </example>
+
+  <para>
+   Creating a new <link linked="gtk.gtkwindow">window</link> widget is as easy as instantiating a new object: Variable
+   <literal>$wnd</literal> gets the new object assigned. If you already
+   programmed with PHP4 and PHP-Gtk1, you will miss the ampersand
+   <literal>&amp;</literal> before <literal>new</literal>. That was required
+   in PHP4, but may not be used any more in PHP5, as references are created
+   automatically.
+  </para>
+
+
+  <example>
+   <title>Set the window title</title>
+   <programlisting role="php"><![CDATA[$wnd->set_title('Hello world');]]></programlisting>
+  </example>
+
+  <simpara>
+   To make it easier to identify the window in the task bar, we set the title:
+   Just a normal call to an object method.
+  </simpara>
+
+
+  <example>
+   <title>Enable a clean shutdown</title>
+   <programlisting role="php"><![CDATA[$wnd->connect_simple('destroy', array('gtk', 'main_quit'));]]></programlisting>
+  </example>
+
+  <para>
+   That is the first interesting piece of code: The
+   <signalname class="GtkObject">destroy</signalname> signal gets connected to the
+   static <literal>Gtk::main_quit()</literal> method. It basically tells Gtk
+   to quit the main loop when the window gets closed/destroyed. (The main loop
+   is explained some paragraphs below.)
+  </para>
+
+
+  <example>
+   <title>Create a label to display text</title>
+   <programlisting role="php"><![CDATA[$lblHello = new GtkLabel("Just wanted to say\r\n'Hello world!'");]]></programlisting>
+  </example>
+
+  <para>
+   As done before, we create a new widget. This time we want to display a
+   small amount of text, and <classname>GtkLabel</classname> is perfect at
+   this task.
+  </para>
+
+
+  <example>
+   <title>Add the label to the window</title>
+   <programlisting role="php"><![CDATA[$wnd->add($lblHello);]]></programlisting>
+  </example>
+
+  <simpara>
+   Now we tell the window, that the label shall be added directly on it.
+  </simpara>
+
+
+  <example>
+   <title>Make the window visible</title>
+   <programlisting role="php"><![CDATA[$wnd->show_all();]]></programlisting>
+  </example>
+
+  <para>
+   Until now, you will see nothing on your screen. To make the window visible,
+   you will need to call the <function class="GtkWidget">show</function>.
+   That would make the window visible, but not the label - we would have to
+   call <function class="GtkWidget">show</function> on the label, too.
+   That is inconvenient if you have multiple widgets like buttons, checkboxes
+   and other on the window: <function class="GtkWidget">show_all</function>
+   takes care of making the window and all child widgets visible.
+  </para>
+
+
+  <example>
+   <title>Start the main loop</title>
+   <programlisting role="php"><![CDATA[Gtk::main();]]></programlisting>
+  </example>
+
+  <para>
+   After everything is set up, we need to make sure that the window stays
+   open and responds to user interactions. A normal PHP script would end and
+   stop at this point, but we want to keep it running: For that, the Gtk main
+   loop needs to be startet. It takes care of keeping the application running
+   and waiting for user events. If events occur, it delegates them to the
+   corresponding callbacks.
+  </para>
+
  </sect1>
-</chapter> 
- 
+</chapter>
