@@ -95,9 +95,9 @@
   <para>
    That is the first interesting piece of code: The
    <signalname class="GtkObject">destroy</signalname> signal gets connected to the
-   static <literal>Gtk::main_quit()</literal> method. It basically tells Gtk
-   to quit the main loop when the window gets closed/destroyed. (The main loop
-   is explained some paragraphs below.)
+   static <link linked="gtk.method.main_quit">Gtk::main_quit</link> method.
+   It basically tells Gtk to quit the main loop when the window gets 
+   closed/destroyed. (The main loop is explained some paragraphs below.)
   </para>
 
 
@@ -148,7 +148,7 @@
    After everything is set up, we need to make sure that the window stays
    open and responds to user interactions. A normal PHP script would end and
    stop at this point, but we want to keep it running: For that, the Gtk main
-   loop needs to be startet. It takes care of keeping the application running
+   loop needs to be started. It takes care of keeping the application running
    and waiting for user events. If events occur, it delegates them to the
    corresponding callbacks.
   </para>
