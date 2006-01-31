@@ -278,19 +278,45 @@
 <!--========================================================================-->
 
  <xsl:template match="signalname">
-  <xsl:variable name="signame">
-   <xsl:value-of select="."/>
-  </xsl:variable>
+  <xsl:variable name="class" select="@class"/>
+
+  <xsl:choose>
+   <xsl:when test="not($class) or $class=''">
+    <!-- empty class... try to find it -->
+    <xsl:apply-templates select="." mode="synoptic.mode"/>
+   </xsl:when>
+
+   <xsl:otherwise>
+    <!-- class given, all ok -->
+    <xsl:call-template name="signal.link">
+     <xsl:with-param name="signal" select="."/>
+     <xsl:with-param name="class" select="$class"/>
+    </xsl:call-template>
+   </xsl:otherwise>
+  </xsl:choose>
+ </xsl:template>
+
+ <xsl:template match="signalname" mode="synoptic.mode">
+  <xsl:variable name="classentry" select="ancestor::classentry[1]"/>
+  <xsl:variable name="classtitle" select="$classentry/classmeta/classtitle"/>
+
+  <xsl:call-template name="signal.link">
+   <xsl:with-param name="signal" select="."/>
+   <xsl:with-param name="class" select="$classtitle"/>
+  </xsl:call-template>
+ </xsl:template>
+
+ <xsl:template name="signal.link">
+  <xsl:param name="signal" select="."/>
+  <xsl:param name="class" select="@class"/>
 
   <xsl:variable name="id">
    <xsl:call-template name="get_sig_id_from_name">
-    <xsl:with-param name="signame">
-     <xsl:value-of select="$signame"/>
-    </xsl:with-param>
-    <xsl:with-param name="class" select="ancestor-or-self::classentry/classmeta/classtitle"/>
+    <xsl:with-param name="signame" select="$signal"/>
+    <xsl:with-param name="class" select="$class"/>
    </xsl:call-template>
   </xsl:variable>
-  
+
   <xsl:choose>
    <xsl:when test="$id!='no'">
     <xsl:variable name="link">
