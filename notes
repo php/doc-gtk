@@ -38,15 +38,17 @@ A: The problem is that the called php tries to load the php-gtk
 
 
 == Todo ==
-- docgen: generate signals (with phpgtk2 extension installed)
-- check if docmerger works
 - automatically link returned classes in functions
 - automatically link classes in function parameters
-- allow interfaces
 - constants index
-- properties can't be linked with a class="" attribute (xsl problem)
+- method index doesn't contain gtk:: functions
+- class index doesn't contain Gtk:: and Gdk::
+- make livegen work with enums and tutorials
+- check if build was successful
+- check if something has changed before building
 
 == Done ==
++ signal linking works
 + index pages for classes, methods, properties and signals
 + <function> tags don't need class=".." attribute when used inside class (link to same class)
 - return value of functions is void sometimes | that's ok IMO

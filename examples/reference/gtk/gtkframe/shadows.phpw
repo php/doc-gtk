@@ -1,0 +1,34 @@
+<?php
+/**
+* Display the four border types
+*/
+
+$wnd = new GtkWindow();
+$wnd->set_title('Shadow types');
+$wnd->connect_simple('destroy', array('gtk', 'main_quit'));
+$tbl = new GtkTable(2,2);
+$wnd->add($tbl);
+
+$frmIn = new GtkFrame('Gtk::SHADOW_IN');
+$frmIn->set_shadow_type(Gtk::SHADOW_IN);
+$frmIn->add(new GtkLabel('Gtk::SHADOW_IN'));
+$tbl->attach($frmIn, 0, 1, 0, 1);
+
+$frmIn = new GtkFrame('Gtk::SHADOW_OUT');
+$frmIn->set_shadow_type(Gtk::SHADOW_OUT);
+$frmIn->add(new GtkLabel('Gtk::SHADOW_OUT'));
+$tbl->attach($frmIn, 1, 2, 0, 1);
+
+$frmIn = new GtkFrame('Gtk::SHADOW_ETCHED_IN');
+$frmIn->set_shadow_type(Gtk::SHADOW_ETCHED_IN);
+$frmIn->add(new GtkLabel('Gtk::SHADOW_ETCHED_IN'));
+$tbl->attach($frmIn, 0, 1, 1, 2);
+
+$frmIn = new GtkFrame('Gtk::SHADOW_ETCHED_OUT');
+$frmIn->set_shadow_type(Gtk::SHADOW_ETCHED_OUT);
+$frmIn->add(new GtkLabel('Gtk::SHADOW_ETCHED_OUT'));
+$tbl->attach($frmIn, 1, 2, 1, 2);
+
+$wnd->show_all();
+Gtk::main();
+?>
