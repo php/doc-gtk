@@ -4,10 +4,30 @@
   <classtitle>GtkAdjustment</classtitle>
   <classparent>GtkObject</classparent>
   <shortdesc>
-
+   A GtkObject representing an adjustable bounded value
   </shortdesc>
   <desc>
-
+   <para>
+    The GtkAdjustment object represents a value which has an associated lower
+    and upper bound, together with step and page increments, and a page size.
+    It is used within several GTK+ widgets, including
+    <classname>GtkSpinButton</classname>, <classname>GtkViewport</classname>,
+    and <classname>GtkRange</classname> (which is a base class for
+    <classname>GtkHScrollbar</classname>, <classname>GtkVScrollbar</classname>,
+    <classname>GtkHScale</classname>, and <classname>GtkVScale</classname>).
+   </para>
+   <para>
+    The GtkAdjustment object does not update the value itself. Instead it is
+    left up to the owner of the GtkAdjustment to control the value.
+   </para>
+   <para>
+    The owner of the GtkAdjustment typically calls the
+    <function class="GtkAdjustment">value_changed</function> and
+    <function class="GtkAdjustment">changed</function> functions after
+    changing the value and its bounds. This results in the emission of the
+    <signalname class="GtkAdjustment">value_changed</signalname> or
+    <signalname class="GtkAdjustment">changed</signalname> signal respectively.
+   </para>
   </desc>
  </classmeta>
 
@@ -26,13 +46,14 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Creates a new GtkAdjustment.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Creates a new adjusment object with the given parameters
+    </simpara>
    </desc>
   </constructor>
-
  </constructors>
 
  <methods>
@@ -45,10 +66,15 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Emits a "changed" signal.
    </shortdesc>
    <desc>
-
+    <para>
+     Emits a <signalname class="GtkAdjustment">changed</signalname> signal
+     from the <classname>GtkAdjustment</classname>. This is typically called
+     by the owner of the <classname>GtkAdjustment</classname> after it has
+     changed any of the fields other than the <propname>value</propname>.
+    </para>
    </desc>
   </method>
 
@@ -61,10 +87,19 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Ensure that the value is in a certain range.
    </shortdesc>
    <desc>
-
+    <para>
+     Updates the <classname>GtkAdjustment</classname> value to ensure that the
+     range between <parameter>lower</parameter> and
+     <parameter>upper</parameter> is in the current page (i.e. between
+     <propname>value</propname> and <propname>value</propname> +
+     <propname>page_size</propname>). If the range is larger than the page
+     size, then only the start of it will be in the current page.
+     A <signalname>changed</signalname> signal will be emitted if the value
+     is changed.
+    </para>
    </desc>
   </method>
 
@@ -76,35 +111,17 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Gets the current value of the adjustment.
    </shortdesc>
    <desc>
     <para>
-     See also: 
-     <function class="GtkAdjustment">set_value</function>, 
+     Gets the current value of the adjustment.
+    </para>
+    <para>
+     See also:
+     <function class="GtkAdjustment">set_value</function>,
      <propname class="GtkAdjustment">value</propname>
     </para>
-
-   </desc>
-  </method>
-
-  <method id="gtk.gtkadjustment.method.set_all">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>void <function>set_all</function></funcdef>
-     <paramdef>double <parameter>value</parameter></paramdef>
-     <paramdef>double <parameter>lower</parameter></paramdef>
-     <paramdef>double <parameter>upper</parameter></paramdef>
-     <paramdef>double <parameter>step_increment</parameter></paramdef>
-     <paramdef>double <parameter>page_increment</parameter></paramdef>
-     <paramdef>double <parameter>page_size</parameter></paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-   <desc>
-
    </desc>
   </method>
 
@@ -116,15 +133,29 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Set the value.
    </shortdesc>
    <desc>
     <para>
-     See also: 
-     <function class="GtkAdjustment">get_value</function>, 
-     <propname class="GtkAdjustment">value</propname>
+     Sets the <classname>GtkAdjustment</classname> <propname>value</propname>.
+     The value is
+     <link linked="gtk.gtkadjustment.method.clamp_page">clamped</link> to lie
+     between adjustment-&gt;<propname>lower</propname> and 
+     adjustment-&gt;<propname>upper</propname>.
     </para>
 
+    <para>
+     Note that for adjustments which are used in a
+     <classname>GtkScrollbar</classname>, the effective range of allowed
+     values goes from adjustment-&gt;<propname>lower</propname> to
+     (adjustment-&gt;<propname>upper</propname> -
+     adjustment-&gt;<propname>page_size</propname>).
+    </para>
+    <para>
+     See also:
+     <function class="GtkAdjustment">get_value</function>,
+     <propname class="GtkAdjustment">value</propname>
+    </para>
    </desc>
   </method>
 
@@ -136,10 +167,12 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Emits a "value_changed" signal.
    </shortdesc>
    <desc>
-
+    Emits a <signalname>value-changed</signalname> signal from the 
+    <classname>GtkAdjustment</classname>. This is typically called by the
+    owner of the GtkAdjustment after it has changed the value field.
    </desc>
   </method>
 
@@ -151,9 +184,15 @@
    <propname>lower</propname>
    <proptype>double</proptype>
    <shortdesc>
+    The minimum value of the adjustment.
    </shortdesc>
    <desc>
-
+    <simpara>
+     The minimum value of the adjustment.
+    </simpara>
+    <para>
+     Default value: <literal>0</literal>.
+    </para>
    </desc>
   </property>
 
@@ -161,9 +200,15 @@
    <propname>page_increment</propname>
    <proptype>double</proptype>
    <shortdesc>
+    The page increment of the adjustment.
    </shortdesc>
    <desc>
-
+    <simpara>
+     The page increment of the adjustment.
+    </simpara>
+    <para>
+     Default value: <literal>0</literal>.
+    </para>
    </desc>
   </property>
 
@@ -171,9 +216,17 @@
    <propname>page_size</propname>
    <proptype>double</proptype>
    <shortdesc>
+    The page size of the adjustment.
    </shortdesc>
    <desc>
-
+    <para>
+     The page size of the adjustment. Note that the page-size is
+     irrelevant and should be set to zero if the adjustment is used for a
+     simple scalar value, e.g. in a <classname>GtkSpinButton</classname>.
+    </para>
+    <para>
+     Default value: <literal>0</literal>.
+    </para>
    </desc>
   </property>
 
@@ -181,9 +234,15 @@
    <propname>step_increment</propname>
    <proptype>double</proptype>
    <shortdesc>
+    The step increment of the adjustment.
    </shortdesc>
    <desc>
-
+    <simpara>
+     The step increment of the adjustment.
+    </simpara>
+    <para>
+     Default value: <literal>0</literal>.
+    </para>
    </desc>
   </property>
 
@@ -191,9 +250,17 @@
    <propname>upper</propname>
    <proptype>double</proptype>
    <shortdesc>
+    The maximum value of the adjustment.
    </shortdesc>
    <desc>
-
+    <para>
+     The maximum value of the adjustment. Note that values will be restricted
+     by (<propname>upper</propname> - <propname>page-size</propname>) if the
+     <propname>page-size</propname> property is nonzero.
+    </para>
+    <para>
+     Default value: <literal>0</literal>.
+    </para>
    </desc>
   </property>
 
@@ -201,8 +268,15 @@
    <propname>value</propname>
    <proptype>double</proptype>
    <shortdesc>
+    The value of the adjustment.
    </shortdesc>
    <desc>
+    <simpara>
+     The value of the adjustment.
+    </simpara>
+    <para>
+     Default value: <literal>0</literal>.
+    </para>
     <para>
      See also: 
      <function class="GtkAdjustment">get_value</function>, 
@@ -221,31 +295,37 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <cbfunction>callback</cbfunction></funcdef>
-     <paramdef>GtkAdjustment <parameter>adjustment</parameter></paramdef>
+     <paramdef><classname>GtkAdjustment</classname> <parameter>adjustment</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
+    One or more fields have changed.
    </shortdesc>
    <desc>
-
+    <para>
+     Emitted when one or more of the <classname>GtkAdjustment</classname>
+     fields have been changed, other than the <propname>value</propname> field.
+    </para>
    </desc>
   </signal>
-  
+
   <signal id="gtk.gtkadjustment.signal.value-changed">
    <signalname>value-changed</signalname>
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <cbfunction>callback</cbfunction></funcdef>
-     <paramdef>GtkAdjustment <parameter>adjustment</parameter></paramdef>
+     <paramdef><classname>GtkAdjustment</classname> <parameter>adjustment</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
+    The value field has been changed.
    </shortdesc>
    <desc>
-
+    <para>
+     Emitted when the <propname>value</propname> field has been changed.
+    </para>
    </desc>
   </signal>
-  
  </signals>
 
 </classentry>
