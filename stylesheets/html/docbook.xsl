@@ -9,7 +9,7 @@
             indent="no"/>
 
 <!-- ********************************************************************
-     $Id: docbook.xsl,v 1.7 2005-10-24 04:38:35 cweiske Exp $
+     $Id: docbook.xsl,v 1.8 2006-02-09 20:01:06 scottmattocks Exp $
      ********************************************************************
 
      This file is part of the XSL DocBook Stylesheet distribution.
@@ -133,6 +133,7 @@
 <xsl:param name="phpweb" select="false()"/>
 <xsl:template name="user.head.content">
   <xsl:param name="node" select="."/>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
 </xsl:template>
 
 <xsl:template name="user.header.navigation">
