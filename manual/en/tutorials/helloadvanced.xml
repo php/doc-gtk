@@ -1,0 +1,178 @@
+<chapter id="tutorials.helloadvanced">
+ <title>Hello world advanced</title>
+
+ <simpara>
+  This tutorial deals with some more advanced functionality
+  than the first hello world tutorial. Here, we create a
+  login screen in which the user can type his username and
+  his password. When the user clicks on the Login button, the
+  text fields are checked and an error message is shown if
+  the user forgot his name or his password.
+ </simpara>
+
+ <para>
+  Here is a screenshot of how the program will look when it's finished:
+  <graphic fileref="&directory.images;/tutorials/helloadvanced.png"/>
+ </para>
+
+
+ <para>
+  At first, we create a window, set its title and tell that the main loop
+  shall be quit when the window is destroyed - you already know that from
+  the first tutorial:
+  <programlisting role="php"><![CDATA[
+$wnd = new GtkWindow();
+$wnd->set_title('Login');
+$wnd->connect_simple('destroy', array('gtk', 'main_quit'));
+]]></programlisting>
+ </para>
+
+ <para>
+  The next task is to create all the widgets we need on this dialog:
+  At first, two text entry fields for username and password:
+  <programlisting role="php"><![CDATA[
+$txtUsername = new GtkEntry();
+$txtPassword = new GtkEntry();
+]]></programlisting>
+  Then we want the user to know which text field is password or
+  username, so there is the need for some descriptive labels:
+  <programlisting role="php"><![CDATA[
+//The second parameter says that the underscore should be parsed as underline
+$lblUsername = new GtkLabel('_Username', true);
+$lblPassword = new GtkLabel('_Password', true);
+]]></programlisting>
+  And at last, we need two buttons: One for login, and one to cancel the
+  process:
+  <programlisting role="php"><![CDATA[
+$btnLogin    = new GtkButton('_Login');
+$btnCancel   = new GtkButton('_Cancel');
+]]></programlisting>
+
+  You might note that the <classname>GtkLabel</classname> constructor
+  gets a second parameter passed, to tell that the underscore
+  <literal>_</literal> is shown as underline to the next character,
+  but that's not done in the <classname>GtkButton</classname> constructor:
+  The button constructor does that automatically, while the label one doesn't.
+  This behavior might be strange to you, but it's more likely that you have
+  a mnemonic in a button's label than that a normal label has one.
+ </para>
+
+
+ <para>
+  Now the labels need to know what widget needs to be activated when
+  they are activated via the mnemonic. This is done that way:
+  <programlisting role="php"><![CDATA[
+$lblUsername->set_mnemonic_widget($txtUsername);
+$lblPassword->set_mnemonic_widget($txtPassword);
+]]></programlisting>
+  Further, we need to determine what action is taken when the buttons
+  are clicked. The Cancel button shall destroy the window (thus ending
+  the application) and the Login button shall check the text fields and
+  take further action:
+  <programlisting role="php"><![CDATA[
+$btnCancel->connect_simple('clicked', array($wnd, 'destroy'));
+$btnLogin ->connect_simple('clicked', 'login', $wnd, $txtUsername, $txtPassword);
+]]></programlisting>
+  We pass the three widgets <varname>$wnd</varname>, 
+  <varname>$txtUsername</varname> and <varname>$txtPassword</varname>
+  as optional parameters to the (yet to be defined) 
+  <literal>login</literal> function, because we will need them there:
+  To get the values from the text fields, and to destroy/hide the window
+  if all is ok.
+ </para>
+
+
+ <para>
+  Now that we have all the widgets we need, they are added to
+  the window. As <classname>GtkWindow</classname> is a bin container,
+  it can hold only one single widget. So we need a container that
+  can hold several widgets and lays out our elements nicely.
+  The decision goes to <classname>GtkTable</classname>, because it provides
+  a way to keep the labels in a column, and the entry fields in the next one:
+  <programlisting role="php"><![CDATA[
+$tbl = new GtkTable(3, 2);
+$tbl->attach($lblCredit, 0, 2, 0, 1);
+$tbl->attach($lblUsername, 0, 1, 1, 2);
+$tbl->attach($txtUsername, 1, 2, 1, 2);
+$tbl->attach($lblPassword, 0, 1, 2, 3);
+$tbl->attach($txtPassword, 1, 2, 2, 3);
+]]></programlisting>
+  (The <varname>$lblCredit</varname> is just a label with a message).
+  The buttons get their own <classname>GtkHButtonBox</classname>, because
+  that class allows one to lay out several buttons very nicely:
+  <programlisting role="php"><![CDATA[
+$bbox = new GtkHButtonBox();
+$bbox->set_layout(Gtk::BUTTONBOX_EDGE);
+$bbox->add($btnCancel);
+$bbox->add($btnLogin);
+]]></programlisting>
+ </para>
+
+
+ <para>
+  The last thing in layouting is adding the table and the button box
+  to the window. That's not directly possible, because
+  <classname>GtkWindow</classname> is a <classname>GtkBin</classname>
+  and can hold only one widget. So we need another container,
+  this time a <classname>GtkVBox</classname>:
+  <programlisting role="php"><![CDATA[
+$vbox = new GtkVBox();
+$vbox->pack_start($tbl);
+$vbox->pack_start($bbox);
+]]></programlisting>
+  That would be all, and we can show the window:
+  <programlisting role="php"><![CDATA[
+$wnd->add($vbox);
+$wnd->show_all();
+Gtk::main();
+]]></programlisting>
+ </para>
+
+
+ <para>
+  The last thing missing is the <literal>login</literal> function that
+  is called when the user clicks the Login button. It shall check the
+  value of the username and password field: If their length is 0 (the
+  user didn't type anything in), an error message will be shown. If all
+  is ok, the window will be destroyed and the program could go on with
+  loading the main window.
+ </para>
+
+ <para>
+  Getting the text from the widgets is very simple, we just use the
+  <function class="GtkEntry">get_text</function> method of
+  <classname>GtkEntry</classname>:
+  <programlisting role="php"><![CDATA[
+$strUsername = $txtUsername->get_text();
+$strPassword = $txtPassword->get_text();
+]]></programlisting>
+  Checking is done via the normal
+  php <literal>strlen</literal> function. If an error occured, we want
+  to show a message box with a little message.
+  <classname>GtkMessageDialog</classname> is ideal for this, as it
+  automatically creates icons and the buttons (Ok, Yes/No) automatically:
+  <programlisting role="php"><![CDATA[
+$dialog = new GtkMessageDialog($wnd, Gtk::DIALOG_MODAL, Gtk::MESSAGE_ERROR, Gtk::BUTTONS_OK, $errors);
+$dialog->set_markup("The following errors occured:\r\n<span foreground='red'>" . $errors . "</span>");
+$dialog->run();
+$dialog->destroy();
+]]></programlisting>
+ </para>
+
+
+ <para>
+  Now make sure that you put the login function before(!) the main loop
+  and run it.
+ </para>
+
+ <example>
+  <title>The full program</title>
+  <programlisting role="php">
+   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
+               href="&directory.examples;/tutorials/helloadvanced/helloadvanced.phpw" parse="text">
+    <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+   </xi:include>
+  </programlisting>
+ </example>
+
+</chapter>
