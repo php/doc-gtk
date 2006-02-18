@@ -57,14 +57,18 @@ $img = GtkImage::new_from_file('/path/to/the/image.png');
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Creates a new GtkImage.
    </shortdesc>
    <desc>
-
+    <para>
+     Creates a new empty <classname>GtkImage</classname>.
+     You will fill it with content by using one of the
+     <literal>set_from_*</literal> methods.
+    </para>
    </desc>
   </constructor>
 
- <constructor id="gtk.gtkimage.constructor.new_from_animation">
+  <constructor id="gtk.gtkimage.constructor.new_from_animation">
    <funcsynopsis>
     <funcprototype>
      <funcdef> <function>GtkImage::new_from_animation</function></funcdef>
@@ -72,12 +76,16 @@ $img = GtkImage::new_from_file('/path/to/the/image.png');
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Creates a GtkImage displaying the given animation.
    </shortdesc>
-  <desc>
-
+   <desc>
+    <para>
+     Creates a <classname>GtkImage</classname> displaying the given
+     <parameter>animation</parameter>.
+    </para>
    </desc>
   </constructor>
+
   <constructor id="gtk.gtkimage.constructor.new_from_file">
    <funcsynopsis>
     <funcprototype>
@@ -86,68 +94,128 @@ $img = GtkImage::new_from_file('/path/to/the/image.png');
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Creates a new GtkImage displaying a file.
    </shortdesc>
-  <desc>
-
+   <desc>
+    <para>
+     Creates a new <classname>GtkImage</classname> displaying the file
+     <parameter>filename</parameter>. If the file isn't found or can't be
+     loaded, the resulting GtkImage will display a "broken image" icon.
+    </para>
+    <para>
+     If the file contains an animation, the image will contain an animation.
+    </para>
+    <para>
+     If you need to detect failures to load the file, use
+     <function class="GdkPixbuf">GdkPixbuf::new_from_file</function> to load
+     the file yourself, then create the GtkImage from the pixbuf.
+     (Or for animations, use
+     <function class="GdkPixbufAnimation">GdkPixbufAnimation::new_from_file</function>.
+    </para>
+    <para>
+     The storage type (<function class="GtkImage">get_storage_type</function>)
+     of the returned image is not defined, it will be whatever is appropriate
+     for displaying the file.
+    </para>
    </desc>
   </constructor>
+
   <constructor id="gtk.gtkimage.constructor.new_from_icon_set">
    <funcsynopsis>
     <funcprototype>
      <funcdef> <function>GtkImage::new_from_icon_set</function></funcdef>
-     <paramdef><parameter>size</parameter></paramdef>
+     <paramdef><classname>GtkIconSet</classname> <parameter>iconset</parameter></paramdef>
+     <paramdef><enumname>GtkIconSize</enumname> <parameter>size</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Creates a GtkImage displaying an icon set.
    </shortdesc>
-  <desc>
-
+   <desc>
+    <para>
+     Creates a <classname>GtkImage</classname> displaying an icon set.
+     Sample stock sizes are <literal>Gtk::ICON_SIZE_MENU</literal>,
+     <literal>Gtk::ICON_SIZE_SMALL_TOOLBAR</literal>.
+    </para>
+    <para>
+     Instead of using this function, usually it's better to create a
+     <classname>GtkIconFactory</classname>, put your icon sets in the icon
+     factory, add the icon factory to the list of default factories with
+     <function class="GtkIconFactory">add_default</function>, and then use
+     <function class="GtkImage">GtkImage::new_from_stock</function>. This
+     will allow themes to override the icon you ship with your application.
+    </para>
    </desc>
   </constructor>
+
   <constructor id="gtk.gtkimage.constructor.new_from_image">
    <funcsynopsis>
     <funcprototype>
      <funcdef> <function>GtkImage::new_from_image</function></funcdef>
+     <paramdef><classname>GdkImage</classname> <parameter>image</parameter></paramdef>
      <paramdef><parameter>mask</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Creates a GtkImage widget displaying a image with a mask.
    </shortdesc>
-  <desc>
-
+   <desc>
+    <para>
+     Creates a <classname>GtkImage</classname> widget displaying a image with
+     a mask. A <classname>GdkImage</classname> is a client-side image buffer
+     in the pixel format of the current display.
+    </para>
+    <para>
+     You should use this GtkImage constructor if your want to catch loading
+     errors by yourself, as the GdkImage constructors will give you proper
+     error messages.
+    </para>
    </desc>
   </constructor>
+
   <constructor id="gtk.gtkimage.constructor.new_from_pixbuf">
    <funcsynopsis>
     <funcprototype>
      <funcdef> <function>GtkImage::new_from_pixbuf</function></funcdef>
-     <paramdef><classname>GdkPixbuf</classname><parameter>pixbuf</parameter></paramdef>
+     <paramdef><classname>GdkPixbuf</classname> <parameter>pixbuf</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Creates a new GtkImage displaying pixbuf.
    </shortdesc>
-  <desc>
-
+   <desc>
+    <para>
+     Creates a new GtkImage displaying pixbuf.
+    </para>
+    <para>
+     note that this function just creates an GtkImage from the pixbuf.
+     The GtkImage created will not react to state changes.
+     Should you want that, you should use
+     <function class="GtkImage">GtkImage::new_from_icon_set</function>.
+    </para>
    </desc>
   </constructor>
+
   <constructor id="gtk.gtkimage.constructor.new_from_pixmap">
    <funcsynopsis>
     <funcprototype>
      <funcdef> <function>GtkImage::new_from_pixmap</function></funcdef>
+     <paramdef><classname>GdkPixmap</classname> <parameter>pixmap</parameter></paramdef>
      <paramdef><parameter>mask</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Creates a GtkImage widget displaying pixmap with a mask.
    </shortdesc>
-  <desc>
-
+   <desc>
+    <para>
+     Creates a <classname>GtkImage</classname> widget displaying pixmap
+     with a mask. A <classname>GdkPixmap</classname> is a server-side image
+     buffer in the pixel format of the current display.
+    </para>
    </desc>
   </constructor>
+
   <constructor id="gtk.gtkimage.constructor.new_from_stock">
    <funcsynopsis>
     <funcprototype>
@@ -157,16 +225,28 @@ $img = GtkImage::new_from_file('/path/to/the/image.png');
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Creates a GtkImage displaying a stock icon.
    </shortdesc>
-  <desc>
-
+   <desc>
+    <para>
+     Creates a <classname>GtkImage</classname> displaying a stock icon.
+     Sample stock icon names are <literal>Gtk::STOCK_OPEN</literal>,
+     <literal>Gtk::STOCK_EXIT</literal>. Sample stock sizes are
+     <literal>Gtk::ICON_SIZE_MENU</literal>,
+     <literal>Gtk::ICON_SIZE_SMALL_TOOLBAR</literal>. If the stock icon
+     name isn't known, a "broken image" icon will be displayed instead.
+     You can register your own stock icon names, see 
+     <function class="GtkIconFactory">add_default</function> and
+     <function class="GtkIconFactory">add</function>.
+    </para>
    </desc>
   </constructor>
-  </constructors>
+ </constructors>
+
+
 
  <methods>
-
+<!-- FIXME: not implemented yet
   <method id="gtk.gtkimage.method.get">
    <funcsynopsis>
     <funcprototype>
@@ -181,22 +261,28 @@ $img = GtkImage::new_from_file('/path/to/the/image.png');
 
    </desc>
   </method>
-
+-->
   <method id="gtk.gtkimage.method.get_animation">
    <funcsynopsis>
     <funcprototype>
-     <funcdef> <function>get_animation</function></funcdef>
+     <funcdef><classname>GdkPixbufAnimation</classname> <function>get_animation</function></funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Gets the GdkPixbufAnimation being displayed by the GtkImage.
    </shortdesc>
    <desc>
-
+    <para>
+     Gets the <classname>GdkPixbufAnimation</classname> being displayed
+     by the <classname>GtkImage</classname>. The storage type of the image
+     must be <literal>Gtk::IMAGE_EMPTY</literal> or
+     <literal>Gtk::IMAGE_ANIMATION</literal> (see
+     <function class="GtkImage">get_storage_type</function>).
+    </para>
    </desc>
   </method>
-
+<!-- FIXME: not implemented yet
   <method id="gtk.gtkimage.method.get_icon_name">
    <funcsynopsis>
     <funcprototype>
@@ -208,10 +294,9 @@ $img = GtkImage::new_from_file('/path/to/the/image.png');
 
    </shortdesc>
    <desc>
-
+Gets the icon name and size being displayed by the GtkImage. The storage type of the image must be GTK_IMAGE_EMPTY or GTK_IMAGE_ICON_NAME (see gtk_image_get_storage_type()).
    </desc>
   </method>
-
   <method id="gtk.gtkimage.method.get_icon_set">
    <funcsynopsis>
     <funcprototype>
@@ -241,19 +326,26 @@ $img = GtkImage::new_from_file('/path/to/the/image.png');
 
    </desc>
   </method>
+-->
 
   <method id="gtk.gtkimage.method.get_pixbuf">
    <funcsynopsis>
     <funcprototype>
-     <funcdef> <function>get_pixbuf</function></funcdef>
+     <funcdef><classname>GdkPixbuf</classname> <function>get_pixbuf</function></funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Gets the GdkPixbuf being displayed by the GtkImage.
    </shortdesc>
    <desc>
-
+    <para>
+     Gets the GdkPixbuf being displayed by the GtkImage.
+     The storage type of the image
+     must be <literal>Gtk::IMAGE_EMPTY</literal> or
+     <literal>Gtk::IMAGE_PIXBUF</literal> (see
+     <function class="GtkImage">get_storage_type</function>).
+    </para>
    </desc>
   </method>
 
@@ -265,17 +357,19 @@ $img = GtkImage::new_from_file('/path/to/the/image.png');
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Gets the pixel size used for named icons.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     Gets the pixel size used for named icons.
+    </para>
+    <para>
+     See also:
      <function class="GtkImage">set_pixel_size</function>
     </para>
-
    </desc>
   </method>
-
+<!-- FIXME: not implemented yet
   <method id="gtk.gtkimage.method.get_pixmap">
    <funcsynopsis>
     <funcprototype>
@@ -290,7 +384,6 @@ $img = GtkImage::new_from_file('/path/to/the/image.png');
 
    </desc>
   </method>
-
   <method id="gtk.gtkimage.method.get_stock">
    <funcsynopsis>
     <funcprototype>
@@ -305,19 +398,25 @@ $img = GtkImage::new_from_file('/path/to/the/image.png');
 
    </desc>
   </method>
+-->
 
   <method id="gtk.gtkimage.method.get_storage_type">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>GtkImageType <function>get_storage_type</function></funcdef>
+     <funcdef><enumname>GtkImageType</enumname> <function>get_storage_type</function></funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Gets the type of representation being used by the GtkImage to store image
+    data.
    </shortdesc>
    <desc>
-
+    <para>
+     Gets the type of representation being used by the GtkImage to store image
+     data. If the GtkImage has no image data, the return value will be
+     <literal>Gtk::IMAGE_EMPTY</literal>.
+    </para>
    </desc>
   </method>
 
@@ -325,14 +424,21 @@ $img = GtkImage::new_from_file('/path/to/the/image.png');
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set</function></funcdef>
-     <paramdef>void</paramdef>
+     <paramdef><classname>GdkImage</classname> <parameter>image</parameter></paramdef>
+     <paramdef><classname>GdkBitmap</classname> <parameter>mask</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the image.
    </shortdesc>
    <desc>
-
+    <para>
+     Sets the image to display.
+    </para>
+    <para>
+     The <parameter>mask</parameter> indicates which parts of the image should
+     be transparent.
+    </para>
    </desc>
   </method>
 
@@ -340,14 +446,16 @@ $img = GtkImage::new_from_file('/path/to/the/image.png');
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_from_animation</function></funcdef>
-     <paramdef>void</paramdef>
+     <paramdef><classname>GdkPixbufAnimation</classname> <parameter>animation</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    See <function class="GtkImage">GtkImage::new_from_animation</function>.
    </shortdesc>
    <desc>
-
+    <para>
+     See <function class="GtkImage">GtkImage::new_from_animation</function>.
+    </para>
    </desc>
   </method>
 
@@ -359,10 +467,12 @@ $img = GtkImage::new_from_file('/path/to/the/image.png');
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    See <function class="GtkImage">GtkImage::new_from_file</function>.
    </shortdesc>
    <desc>
-
+    <para>
+     See <function class="GtkImage">GtkImage::new_from_file</function>.
+    </para>
    </desc>
   </method>
 
@@ -370,15 +480,17 @@ $img = GtkImage::new_from_file('/path/to/the/image.png');
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_from_icon_name</function></funcdef>
-     <paramdef>string <parameter>icon_name</parameter></paramdef>
-     <paramdef>GtkIconSize <parameter>size</parameter></paramdef>
+     <paramdef><enumname>GtkStock</enumname> <parameter>icon_name</parameter></paramdef>
+     <paramdef><enumname>GtkIconSize</enumname> <parameter>size</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    See <function class="GtkImage">GtkImage::new_from_stock</function>.
    </shortdesc>
    <desc>
-
+    <para>
+     See <function class="GtkImage">GtkImage::new_from_stock</function>.
+    </para>
    </desc>
   </method>
 
@@ -386,14 +498,17 @@ $img = GtkImage::new_from_file('/path/to/the/image.png');
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_from_icon_set</function></funcdef>
-     <paramdef>void</paramdef>
+     <paramdef><classname>GtkIconSet</classname> <parameter>iconset</parameter></paramdef>
+     <paramdef><enumname>GtkIconSize</enumname> <parameter>size</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    See <function class="GtkImage">GtkImage::new_from_icon_set</function>.
    </shortdesc>
    <desc>
-
+    <para>
+     See <function class="GtkImage">GtkImage::new_from_icon_set</function>.
+    </para>
    </desc>
   </method>
 
@@ -401,14 +516,17 @@ $img = GtkImage::new_from_file('/path/to/the/image.png');
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_from_image</function></funcdef>
-     <paramdef>void</paramdef>
+     <paramdef><classname>GdkImage</classname> <parameter>image</parameter></paramdef>
+     <paramdef><classname>GdkBitmask</classname> <parameter>mask</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    See <function class="GtkImage">GtkImage::new_from_image</function>.
    </shortdesc>
    <desc>
-
+    <para>
+     See <function class="GtkImage">GtkImage::new_from_image</function>.
+    </para>
    </desc>
   </method>
 
@@ -416,14 +534,16 @@ $img = GtkImage::new_from_file('/path/to/the/image.png');
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_from_pixbuf</function></funcdef>
-     <paramdef>void</paramdef>
+     <paramdef><classname>GdkPixbuf</classname> <parameter>pixbuf</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    See <function class="GtkImage">GtkImage::new_from_pixbuf</function>.
    </shortdesc>
    <desc>
-
+    <para>
+     See <function class="GtkImage">GtkImage::new_from_pixbuf</function>.
+    </para>
    </desc>
   </method>
 
@@ -431,14 +551,17 @@ $img = GtkImage::new_from_file('/path/to/the/image.png');
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_from_pixmap</function></funcdef>
-     <paramdef>void</paramdef>
+     <paramdef><classname>GdkPixmap</classname> <parameter>pixmap</parameter></paramdef>
+     <paramdef><classname>GdkBitmask</classname> <parameter>mask</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    See <function class="GtkImage">GtkImage::new_from_pixmap</function>.
    </shortdesc>
    <desc>
-
+    <para>
+     See <function class="GtkImage">GtkImage::new_from_pixmap</function>.
+    </para>
    </desc>
   </method>
 
@@ -446,15 +569,17 @@ $img = GtkImage::new_from_file('/path/to/the/image.png');
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_from_stock</function></funcdef>
-     <paramdef>string <parameter>stock_id</parameter></paramdef>
-     <paramdef>GtkIconSize <parameter>size</parameter></paramdef>
+     <paramdef><enumname>GtkStock</enumname> <parameter>stock_id</parameter></paramdef>
+     <paramdef><enumname>GtkIconSize</enumname> <parameter>size</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    See <function class="GtkImage">GtkImage::new_from_stock</function>.
    </shortdesc>
    <desc>
-
+    <para>
+     See <function class="GtkImage">GtkImage::new_from_stock</function>.
+    </para>
    </desc>
   </method>
 
@@ -466,14 +591,18 @@ $img = GtkImage::new_from_file('/path/to/the/image.png');
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the pixel size to use for named icons.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     Sets the pixel size to use for named icons. If the pixel size is set to
+     a value <literal>!= -1</literal>, it is used instead of the icon size
+     set by <function class="GtkImage">set_from_icon_name</function>.
+    </para>
+    <para>
+     See also:
      <function class="GtkImage">get_pixel_size</function>
     </para>
-
    </desc>
   </method>
 
