@@ -1,0 +1,35 @@
+<?php
+//At first, create the label
+$lbl = new GtkAccelLabel('Test this GtkAccelLabel');
+
+//Then we need an acceleration group that stores the accelerators
+$accgrp = new GtkAccelGroup();
+
+//That button shall be activated when the accelerator is pressed
+$btn = new GtkButton('Save');
+
+//Add a "Ctrl+S" accelerator to the button (and the group)
+$btn->add_accelerator('activate', $accgrp, Gdk::KEY_S, Gdk::CONTROL_MASK, Gtk::ACCEL_VISIBLE);
+
+//Tell the label which widget shall be activated
+$lbl->set_accel_widget($btn);
+
+
+$wnd = new GtkWindow();
+//Add the accelerator group to the window, so that it can be used
+$wnd->add_accel_group($accgrp);
+
+
+//The rest of the setup is standard
+$wnd->set_default_size(300, -1);
+$wnd->connect_simple('destroy', array('gtk', 'main_quit'));
+
+$vbox = new GtkVBox();
+$vbox->pack_start($lbl);
+$vbox->pack_start(new GtkEntry(), false, false);
+$vbox->pack_start($btn, false, false);
+
+$wnd->add($vbox);
+$wnd->show_all();
+Gtk::main();
+?>

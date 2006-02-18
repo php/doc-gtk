@@ -1,0 +1,25 @@
+<?php
+$lbl = new GtkAccelLabel('Test this GtkAccelLabel');
+$accgrp = new GtkAccelGroup();
+$btn = new GtkButton('Save');
+
+$btn->add_accelerator('activate', $accgrp, Gdk::KEY_S, Gdk::CONTROL_MASK, Gtk::ACCEL_VISIBLE);
+$lbl->set_accel_widget($btn);
+
+$wnd = new GtkWindow();
+$wnd->add_accel_group($accgrp);
+$wnd->connect_simple('destroy', array('gtk', 'main_quit'));
+$wnd->set_default_size(300, -1);
+
+$vbox = new GtkVBox();
+$vbox->pack_start($lbl);
+$vbox->pack_start(new GtkEntry(), false, false);
+$vbox->pack_start($btn, false, false);
+
+$wnd->add($vbox);
+$wnd->show_all();
+
+var_dump('Width', $lbl->get_accel_width());
+
+Gtk::main();
+?>
