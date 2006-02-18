@@ -3,11 +3,40 @@
  <classmeta>
   <classtitle>GtkAccelLabel</classtitle>
   <classparent>GtkLabel</classparent>
+  <classimage fileref="&directory.images;/reference/gtk/gtkaccellabel.png" frame="yes"/>
   <shortdesc>
-
+   A label which displays an accelerator key on the right of the text
   </shortdesc>
   <desc>
-
+   <para>
+    The GtkAccelLabel widget is a subclass of <classname>GtkLabel</classname>
+    that also displays an accelerator key on the right of the label text,
+    e.g. '<literal>Ctl+S</literal>'. It is commonly used in menus to show the
+    keyboard short-cuts for commands. 
+   </para>
+   <para>
+    The accelerator key to display is not set explicitly. Instead, the
+    GtkAccelLabel displays the accelerators which have been added to a
+    particular widget. This widget is set by calling
+    <function class="GtkAccelLabel">set_accel_widget</function>.
+   </para>
+   <para>
+    For example, a <classname>GtkMenuItem</classname> widget may have an
+    accelerator added to emit the "activate" signal when the
+    '<literal>Ctl+S</literal>' key combination is pressed. A GtkAccelLabel is
+    created and added to the <classname>GtkMenuItem</classname>, and
+    <function class="GtkAccelLabel">set_accel_widget</function> is called
+    with the GtkMenuItem as the second argument.
+    The GtkAccelLabel will now display '<literal>Ctl+S</literal>' after its
+    label.
+   </para>
+   <para>
+    A GtkAccelLabel will only display accelerators which have 
+    <literal>Gtk::ACCEL_VISIBLE</literal> set (see
+    <enumname>GtkAccelFlags</enumname>). A GtkAccelLabel can display multiple
+    accelerators and even signal names, though it is almost always used to
+    display just one accelerator key.
+   </para>
   </desc>
  </classmeta>
 
@@ -17,14 +46,26 @@
    <funcsynopsis>
     <funcprototype>
     <funcdef> <function>GtkAccelLabel</function></funcdef>
-    <paramdef>string <parameter>string</parameter></paramdef>
+    <paramdef>string <parameter>label</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Creates a new GtkAccelLabel.
    </shortdesc>
    <desc>
-
+    <para>
+     Creates a new GtkAccelLabel with <parameter>label</parameter> as
+     the label text.
+    </para>
+    <example>
+     <title>GtkAccelLabel in a window</title>
+     <programlisting role="php">
+      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+                  href="&directory.examples;/reference/gtk/gtkaccellabel/constructor.phpw" parse="text">
+       <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+      </xi:include>
+     </programlisting>
+    </example>
    </desc>
   </constructor>
 
@@ -40,29 +81,34 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    DEPRECATED.
    </shortdesc>
    <desc>
-
+    <para>
+     DEPRECATED.
+     Use <function class="GtkAccelLabel">get_accel_width</function> instead.
+    </para>
    </desc>
   </method>
 
   <method id="gtk.gtkaccellabel.method.get_accel_widget">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>GtkWidget <function>get_accel_widget</function></funcdef>
+     <funcdef><classname>GtkWidget</classname> <function>get_accel_widget</function></funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Fetches the widget monitored by this accelerator label.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     Fetches the widget monitored by this accelerator label.
+    </para>
+    <para>
+     See also:
      <function class="GtkAccelLabel">set_accel_widget</function>
     </para>
-
    </desc>
   </method>
 
@@ -74,10 +120,15 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the width needed to display the accelerator key(s).
    </shortdesc>
    <desc>
-
+    <para>
+     Returns the width needed to display the accelerator key(s).
+     This is used by menus to align all of the 
+     <classname>GtkMenuItem</classname> widgets, and shouldn't be needed
+     by applications.
+    </para>
    </desc>
   </method>
 
@@ -89,44 +140,54 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Recreates the string representing the accelerator keys.
    </shortdesc>
    <desc>
-
+    <para>
+     Recreates the string representing the accelerator keys. This should not
+     be needed since the string is automatically updated whenever accelerators
+     are added or removed from the associated widget.
+    </para>
    </desc>
   </method>
-
+<!-- TODO: This method isn't implemented as GClosure isn't there yet
   <method id="gtk.gtkaccellabel.method.set_accel_closure">
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_accel_closure</function></funcdef>
-     <paramdef>void</paramdef>
+     <paramdef>FIXME: parameter missing</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the closure to be monitored by this accelerator label.
    </shortdesc>
    <desc>
-
+    <para>
+     Sets the closure to be monitored by this accelerator label. The closure
+     must be connected to an accelerator group; see 
+     <function class="GtkAccelGroup">connect</function>.
+    </para>
    </desc>
   </method>
-
+-->
   <method id="gtk.gtkaccellabel.method.set_accel_widget">
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_accel_widget</function></funcdef>
-     <paramdef>GtkWidget <parameter>accel_widget</parameter></paramdef>
+     <paramdef><classname>GtkWidget</classname> <parameter>accel_widget</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the widget to be monitored by this accelerator label.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     Sets the widget to be monitored by this accelerator label.
+    </para>
+    <para>
+     See also:
      <function class="GtkAccelLabel">get_accel_widget</function>
     </para>
-
    </desc>
   </method>
 
