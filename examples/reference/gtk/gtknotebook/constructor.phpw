@@ -1,0 +1,30 @@
+<?php
+//Create a new notebook
+$ntbk = new GtkNotebook();
+
+//Create a first page, no label
+$ntbk->append_page(new GtkLabel('This is the first child'));
+
+//Create the second page, this time with an extra label
+$ntbk->append_page(new GtkLabel('This is the second child'), new GtkLabel('Second'));
+
+//Create the third page, with an icon as label and
+//some nested childs
+$vbox = new GtkVBox();
+$vbox->pack_start(new GtkLabel('This is the third child'));
+$vbox->pack_start(new GtkEntry(), false, false);
+$vbox->pack_start(new GtkButton('Test'), false, false);
+$ntbk->append_page(
+    $vbox,
+    GtkImage::new_from_stock(Gtk::STOCK_ADD, Gtk::ICON_SIZE_MENU)
+);
+
+
+//The rest of the setup is standard
+$wnd = new GtkWindow();
+$wnd->set_default_size(300, -1);
+$wnd->connect_simple('destroy', array('gtk', 'main_quit'));
+$wnd->add($ntbk);
+$wnd->show_all();
+Gtk::main();
+?>
