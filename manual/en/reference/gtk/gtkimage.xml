@@ -4,10 +4,46 @@
   <classtitle>GtkImage</classtitle>
   <classparent>GtkMisc</classparent>
   <shortdesc>
-
+   A widget displaying an image
   </shortdesc>
   <desc>
-
+   <para>
+    The GtkImage widget displays an image. Various kinds of object can be
+    displayed as an image; most typically, you would load a
+    <classname>GdkPixbuf</classname> ("pixel buffer") from a file, and then
+    display that. There's a convenience function to do this,
+    <function class="GtkImage">GtkImage::new_from_file</function>, used as
+    follows:
+    <programlisting role="php"><![CDATA[
+$img = GtkImage::new_from_file('/path/to/the/image.png');
+]]></programlisting>
+   </para>
+   <para>
+    If the file isn't loaded successfully, the image will contain a
+    "broken image" icon similar to that used in many web browsers.
+    If you want to handle errors in loading the file yourself, for example
+    by displaying an error message, then load the image with
+    <function class="GdkPixbuf">GdkPixbuf::new_from_file</function>, then
+    create the GtkImage with
+    <function class="GtkImage">GtkImage::new_from_pixbuf</function>.
+   </para>
+   <para>
+    The image file may contain an animation, if so the GtkImage will display
+    an animation (<classname>GdkPixbufAnimation</classname>) instead of a
+    static image.
+   </para>
+   <para>
+    GtkImage is a subclass of <classname>GtkMisc</classname>, which implies
+    that you can align it (center, left, right) and add padding to it,
+    using <classname>GtkMisc</classname> methods.
+   </para>
+   <para>
+    GtkImage is a "no window" widget (has no <classname>GdkWindow</classname>
+    of its own), so by default does not receive events. If you want to receive
+    events on the image, such as button clicks, place the image inside a
+    <classname>GtkEventBox</classname>, then connect to the event signals on
+    the event box.
+   </para>
   </desc>
  </classmeta>
 
@@ -31,7 +67,7 @@
  <constructor id="gtk.gtkimage.constructor.new_from_animation">
    <funcsynopsis>
     <funcprototype>
-     <funcdef> <function>new_from_animation</function></funcdef>
+     <funcdef> <function>GtkImage::new_from_animation</function></funcdef>
       <paramdef><classname>GdkPixbufAnimation</classname><parameter>animation</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
@@ -45,8 +81,8 @@
   <constructor id="gtk.gtkimage.constructor.new_from_file">
    <funcsynopsis>
     <funcprototype>
-     <funcdef> <function>new_from_file</function></funcdef>
-      <paramdef><parameter>filename</parameter></paramdef>
+     <funcdef> <function>GtkImage::new_from_file</function></funcdef>
+     <paramdef><parameter>filename</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -59,8 +95,8 @@
   <constructor id="gtk.gtkimage.constructor.new_from_icon_set">
    <funcsynopsis>
     <funcprototype>
-     <funcdef> <function>new_from_icon_set</function></funcdef>
-      <paramdef><parameter>size</parameter></paramdef>
+     <funcdef> <function>GtkImage::new_from_icon_set</function></funcdef>
+     <paramdef><parameter>size</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -73,8 +109,8 @@
   <constructor id="gtk.gtkimage.constructor.new_from_image">
    <funcsynopsis>
     <funcprototype>
-     <funcdef> <function>new_from_image</function></funcdef>
-      <paramdef><parameter>mask</parameter></paramdef>
+     <funcdef> <function>GtkImage::new_from_image</function></funcdef>
+     <paramdef><parameter>mask</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -87,8 +123,8 @@
   <constructor id="gtk.gtkimage.constructor.new_from_pixbuf">
    <funcsynopsis>
     <funcprototype>
-     <funcdef> <function>new_from_pixbuf</function></funcdef>
-      <paramdef><classname>GdkPixbuf</classname><parameter>pixbuf</parameter></paramdef>
+     <funcdef> <function>GtkImage::new_from_pixbuf</function></funcdef>
+     <paramdef><classname>GdkPixbuf</classname><parameter>pixbuf</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -101,8 +137,8 @@
   <constructor id="gtk.gtkimage.constructor.new_from_pixmap">
    <funcsynopsis>
     <funcprototype>
-     <funcdef> <function>new_from_pixmap</function></funcdef>
-      <paramdef><parameter>mask</parameter></paramdef>
+     <funcdef> <function>GtkImage::new_from_pixmap</function></funcdef>
+     <paramdef><parameter>mask</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -115,8 +151,9 @@
   <constructor id="gtk.gtkimage.constructor.new_from_stock">
    <funcsynopsis>
     <funcprototype>
-     <funcdef> <function>new_from_stock</function></funcdef>
-      <paramdef><parameter>size</parameter></paramdef>
+     <funcdef> <function>GtkImage::new_from_stock</function></funcdef>
+     <paramdef><enumname>GtkStock</enumname> <parameter>stock_id</parameter></paramdef>
+     <paramdef><enumname>GtkIconSize</enumname> <parameter>size</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
