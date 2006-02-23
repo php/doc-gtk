@@ -1151,10 +1151,25 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Hides then reshows the window in its original position and with its
+    original size.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Hides then reshows the window in its original position and with its
+     original size. This method is not normally used in every day code. It
+     will ignore any changes that the user has made to the window and return
+     the window to its original settings. If you want to prevent the window
+     from being moved, pass <enumname>Gtk::WIN_POS_CENTER_ALWAYS</enumname> to
+     <function classname="GtkWindow">set_position</function>. If you want to
+     prevent the user from resizing the window, pass <literal>false</literal>
+     to <function classname="GtkWindow">set_resizable</function>.
+    </simpara>
+    <simpara>
+     See also:
+     <function classname="GtkWindow">set_position</function>
+     <function classname="GtkWindow">set_resizable</function>
+    </simpara>
    </desc>
   </method>
 
@@ -1196,9 +1211,19 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets whether or not the window will accept input focus.
    </shortdesc>
    <desc>
+    <simpara>
+     Sets whether or not the window will accept input focus. If
+     <parameter>setting</parameter> is <literal>true</literal>, the window will
+     accept focus. If it is <literal>false</literal>, it will not.
+    </simpara>
+    <note>
+     This method only sets a hint that the window manager can use to decide if
+     the window should be given focus. You should not rely 100% on this method
+     preventing the window from receiving focus.
+    </note>
     <para>
      See also: 
      <function class="GtkWindow">get_accept_focus</function>
@@ -1215,10 +1240,27 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Turns startup notification on or off.
    </shortdesc>
    <desc>
-
+    <simpara>
+     By default, after showing the first <classname>GtkWindow</classname> for
+     each <classname>GdkScreen</classname>, GTK+ calls <function
+     classname="GdkScreen">notify_startup_complete</function>. Pass
+     <literal>false</literal> to this function to disable the automatic startup
+     notification. You might do this if your first window is a splash screen,
+     and you want to delay notification until after your real main window has
+     been shown, for example.
+    </simpara>
+    <simpara>
+     In that example, you would disable startup notification temporarily, show
+     your splash screen, then re-enable it so that showing the main window
+     would automatically result in notification.
+    </simpara>
+    <simpara>
+     See also:
+     <function class="GdkScreen">notify_startup_complete</function>
+    </simpara>
    </desc>
   </method>
 
