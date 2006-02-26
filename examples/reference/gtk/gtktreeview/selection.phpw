@@ -1,0 +1,41 @@
+<?php
+//create a model
+$model = new GtkListStore(Gtk::TYPE_STRING);
+//create the view to display the model data
+$view = new GtkTreeView($model);
+//now, get the selection object of that view
+$selection = $view->get_selection();
+//capture the "changed" signal
+$selection->connect('changed', 'selection_changed');
+
+/**
+*   This is the callback function for the changed
+*   signal and display the value of the first column
+*   of the selected row.
+*/
+function selection_changed($selection)
+{
+    //get_selected returns the store and the iterator for that row
+    list($model, $iter) = $selection->get_selected();
+    //get one single value of the model via get_value
+    echo 'Value of column 0: ' . $model->get_value($iter, 0) . "\r\n";
+}//function selection_changed($selection)
+
+
+//add a column to display the data
+$col = new GtkTreeViewColumn('Number', new GtkCellRendererText(), 'text', 0);
+$view->append_column($col);
+
+//add some data to the model/store
+$model->append(array('Zero'));
+$model->append(array('One'));
+$model->append(array('Two'));
+
+//add the view to the window
+$wnd = new GtkWindow();
+$wnd->set_title('GtkTreeView selection example');
+$wnd->connect_simple('destroy', array('Gtk', 'main_quit'));
+$wnd->add($view);
+$wnd->show_all();
+Gtk::main();
+?>

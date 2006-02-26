@@ -621,15 +621,34 @@
   <method id="gtk.gtktreeview.method.get_selection">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>GtkTreeSelection <function>get_selection</function></funcdef>
+     <funcdef><classname>GtkTreeSelection</classname> <function>get_selection</function></funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the selection object associated with the view.
    </shortdesc>
    <desc>
-
+    <para>
+     This method returns the <classname>GtkTreeSelection</classname> object
+     associated with the view. The selection object itself contains
+     all the data about a selection, be it just a single row, or multiple
+     rows that are selected.
+    </para>
+    <para>
+     Always keep in mind that the view, not the underlying model, has a
+     selection! That means that different views of the same model can have
+     different selections.
+    </para>
+    <example>
+     <title>Using GtkTreeSelection</title>
+     <programlisting role="php">
+      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+                  href="&directory.examples;/reference/gtk/gtktreeview/selection.phpw" parse="text">
+       <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+      </xi:include>
+     </programlisting>
+    </example>
    </desc>
   </method>
 
