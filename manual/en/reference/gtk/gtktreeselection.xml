@@ -4,10 +4,37 @@
   <classtitle>GtkTreeSelection</classtitle>
   <classparent>GObject</classparent>
   <shortdesc>
-
+   Selection of a <classname>GtkTreeView</classname>.
   </shortdesc>
   <desc>
-
+   <para>
+    The GtkTreeSelection object is a helper object to manage the selection for
+    a <classname>GtkTreeView</classname> widget. The GtkTreeSelection object
+    is automatically created when a new GtkTreeView widget is created, and
+    cannot exist independentally of this widget. The primary reason the
+    GtkTreeSelection objects exists is for cleanliness of code and API.
+    That is, there is no conceptual reason all these functions could not be
+    methods on the GtkTreeView widget instead of a separate function.
+   </para>
+   <para>
+    The GtkTreeSelection object is gotten from a
+    <classname>GtkTreeView</classname> by calling
+    <function class="GtkTreeView">get_selection</function>. It can be
+    manipulated to check the selection status of the tree, as well as select
+    and deselect individual rows. Selection is done completely view side. As a
+    result, multiple views of the same model can have completely different
+    selections. Additionally, you cannot change the selection of a row on the
+    model that is not currently displayed by the view without expanding its
+    parents first.
+   </para>
+   <para>
+    One of the important things to remember when monitoring the selection of
+    a view is that the <signalname class="GtkTreeSelection">changed</signalname>
+    signal is mostly a hint. That is, it may only emit one signal when a range
+    of rows is selected. Additionally, it may on occasion emit a
+    <literal>changed</literal>" signal when nothing has happened (mostly as a
+    result of programmers calling select_row on an already selected row).
+   </para>
   </desc>
  </classmeta>
 
@@ -21,82 +48,141 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the number of selected rows.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     Returns the number of selected rows.
+    </para>
+    <para>
+     See also:
+     <function class="GtkTreeSelection">get_selected</function>,
      <function class="GtkTreeSelection">get_selected_rows</function>
     </para>
-
    </desc>
   </method>
 
   <method id="gtk.gtktreeselection.method.get_mode">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>GtkSelectionMode <function>get_mode</function></funcdef>
+     <funcdef><enumname>GtkSelectionMode</enumname> <function>get_mode</function></funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Gets the selection mode for selection.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     Gets the selection mode for selection. The selection mode determines, how
+     the rows in the view may be selected (just one row, multiple rows, ...)
+    </para>
+    <para>
+     See also:
      <function class="GtkTreeSelection">set_mode</function>
     </para>
-
    </desc>
   </method>
 
   <method id="gtk.gtktreeselection.method.get_selected">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>bool <function>get_selected</function></funcdef>
+     <funcdef>array <function>get_selected</function></funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Get the selected row.
    </shortdesc>
    <desc>
-
+    <para>
+     Returns an array containing the
+     <link linked="gtk.gtktreemodel">model</link> and the
+     <link linked="gtk.gtktreeiter">iterator</link> of the currently
+     selected row.
+    </para>
+    <para>
+     This method works only, if the
+     <link linked="gtk.enum.selectionmode">selection mode</link> is
+     <link linked="gtk.gtktreeselection.method.set_mode">set</link>
+     to <literal>Gtk::SELECTION_SINGLE</literal> or
+     <literal>Gtk::SELECTION_BROWSER</literal>. For other modes,
+     retrieve the selection with
+     <function class="GtkTreeSelection">get_selected_rows</function>.
+    </para>
+    <example>
+     <title>Using get_selected</title>
+     <programlisting role="php">
+      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+                  href="&directory.examples;/reference/gtk/gtktreeview/selection.phpw" parse="text">
+       <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+      </xi:include>
+     </programlisting>
+    </example>
+    <para>
+     See also:
+     <function class="GtkTreeSelection">get_selected_rows</function>
+    </para>
    </desc>
   </method>
 
   <method id="gtk.gtktreeselection.method.get_selected_rows">
    <funcsynopsis>
     <funcprototype>
-     <funcdef> <function>get_selected_rows</function></funcdef>
+     <funcdef>array <function>get_selected_rows</function></funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the selected rows for a multiselection.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     Returns an array containing the
+     <link linked="gtk.gtktreemodel">model</link> and an array
+     of tree paths of the selected rows. The tree path array
+     can be walked by an <literal>foreach</literal> or
+     <literal>for</literal> loop, and the single paths can be converted
+     to an iterator via the <function class="GtkTreeModel">get_iter</function>
+     method of <classname>GtkTreeModel</classname>.
+    </para>
+    <para>
+     Unlike the <function class="GtkTreeSelection">get_selected</function>
+     method, this here works with all
+     <link linked="gtk.enum.selectionmode">selection modes</link>.
+    </para>
+    <example>
+     <title>Using get_selected_rows</title>
+     <programlisting role="php">
+      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+                  href="&directory.examples;/reference/gtk/gtktreeselection/multi.phpw" parse="text">
+       <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+      </xi:include>
+     </programlisting>
+    </example>
+    <para>
+     See also:
+     <function class="GtkTreeSelection">get_selected</function>
      <function class="GtkTreeSelection">count_selected_rows</function>
     </para>
-
    </desc>
   </method>
 
   <method id="gtk.gtktreeselection.method.get_tree_view">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>GtkTreeView <function>get_tree_view</function></funcdef>
+     <funcdef><classname>GtkTreeView</classname> <function>get_tree_view</function></funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the treeview.
    </shortdesc>
    <desc>
-
+    <para>
+     Returns the <classname>GtkTreeView</classname> that this selection
+     object belongs to.
+    </para>
    </desc>
   </method>
 
@@ -108,7 +194,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    FIXME
    </shortdesc>
    <desc>
 
@@ -119,18 +205,20 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>bool <function>iter_is_selected</function></funcdef>
-     <paramdef>void</paramdef>
+     <paramdef><classname>GtkTreeIter</classname> <parameter>iter</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Checks if an iterator is selected or not.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     Checks if the given iterator is selected or not.
+    </para>
+    <para>
+     See also:
      <function class="GtkTreeSelection">path_is_selected</function>
     </para>
-
    </desc>
   </method>
 
@@ -138,18 +226,20 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>bool <function>path_is_selected</function></funcdef>
-     <paramdef>void</paramdef>
+     <paramdef>string <parameter>path</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Checks if a tree path is selected or not.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     Checks if the given tree path is selected or not.
+    </para>
+    <para>
+     See also:
      <function class="GtkTreeSelection">iter_is_selected</function>
     </para>
-
    </desc>
   </method>
 
@@ -161,14 +251,16 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Selects all rows.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     Selects all rows.
+    </para>
+    <para>
+     See also:
      <function class="GtkTreeSelection">unselect_all</function>
     </para>
-
    </desc>
   </method>
 
@@ -176,18 +268,20 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>select_iter</function></funcdef>
-     <paramdef>void</paramdef>
+     <paramdef><classname>GtkTreeIter</classname> <parameter>iter</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Selects a row.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     Selects a row specified by <parameter>iter</parameter>.
+    </para>
+    <para>
+     See also:
      <function class="GtkTreeSelection">unselect_iter</function>
     </para>
-
    </desc>
   </method>
 
@@ -195,18 +289,20 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>select_path</function></funcdef>
-     <paramdef>void</paramdef>
+     <paramdef>string <parameter>path</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Selects a row.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     Selects a row specified by <parameter>path</parameter>.
+    </para>
+    <para>
+     See also:
      <function class="GtkTreeSelection">unselect_path</function>
     </para>
-
    </desc>
   </method>
 
@@ -214,18 +310,22 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>select_range</function></funcdef>
-     <paramdef>void</paramdef>
+     <paramdef>int <parameter>lower</parameter></paramdef>
+     <paramdef>int <parameter>upper</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Selects a given range of rows.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     Selects the rows between <parameter>lower</parameter> and
+     <parameter>upper</parameter>.
+    </para>
+    <para>
+     See also:
      <function class="GtkTreeSelection">unselect_range</function>
     </para>
-
    </desc>
   </method>
 
@@ -233,14 +333,18 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>selected_foreach</function></funcdef>
-     <paramdef>void</paramdef>
+     <paramdef>callback <parameter>function</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Calls a function for each selected row.
    </shortdesc>
    <desc>
-
+    <para>
+     Calls the function or method specified by the
+     <parameter>function</parameter> parameter, once for each
+     of the rows selected.
+    </para>
    </desc>
   </method>
 
@@ -248,18 +352,21 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_mode</function></funcdef>
-     <paramdef>GtkSelectionMode <parameter>type</parameter></paramdef>
+     <paramdef><enumname>GtkSelectionMode</enumname> <parameter>type</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the selection mode.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     Sets the selection mode. The selection mode determines, how
+     the rows in the view may be selected (just one row, multiple rows, ...)
+    </para>
+    <para>
+     See also:
      <function class="GtkTreeSelection">get_mode</function>
     </para>
-
    </desc>
   </method>
 
@@ -271,7 +378,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    FIXME
    </shortdesc>
    <desc>
 
@@ -286,14 +393,17 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Deselects all rows.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     Deselects all rows. After calling this method, no rows
+     are selected.
+    </para>
+    <para>
+     See also:
      <function class="GtkTreeSelection">select_all</function>
     </para>
-
    </desc>
   </method>
 
@@ -301,18 +411,21 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>unselect_iter</function></funcdef>
-     <paramdef>void</paramdef>
+     <paramdef><classname>GtkTreeIter</classname> <parameter>iter</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Deselects an iterator.
    </shortdesc>
    <desc>
     <para>
-     See also: 
-     <function class="GtkTreeSelection">select_iter</function>
+     Deselects the given iterator.
     </para>
-
+    <para>
+     See also:
+     <function class="GtkTreeSelection">select_iter</function>,
+     <function class="GtkTreeSelection">unselect_path</function>
+    </para>
    </desc>
   </method>
 
@@ -320,18 +433,21 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>unselect_path</function></funcdef>
-     <paramdef>void</paramdef>
+     <paramdef>string <parameter>path</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Deselects a path.
    </shortdesc>
    <desc>
     <para>
-     See also: 
-     <function class="GtkTreeSelection">select_path</function>
+     Deselects the given tree path.
     </para>
-
+    <para>
+     See also:
+     <function class="GtkTreeSelection">select_path</function>,
+     <function class="GtkTreeSelection">unselect_iter</function>
+    </para>
    </desc>
   </method>
 
@@ -339,18 +455,22 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>unselect_range</function></funcdef>
-     <paramdef>void</paramdef>
+     <paramdef>int <parameter>lower</parameter></paramdef>
+     <paramdef>int <parameter>upper</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Deselects a given range of rows.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     Deselects all rows between <parameter>lower</parameter> and
+     <parameter>upper</parameter>.
+    </para>
+    <para>
+     See also:
      <function class="GtkTreeSelection">select_range</function>
     </para>
-
    </desc>
   </method>
 
@@ -363,16 +483,24 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <cbfunction>callback</cbfunction></funcdef>
-     <paramdef>GtkTreeSelection <parameter>treeselection</parameter></paramdef>
+     <paramdef><classname>GtkTreeSelection</classname> <parameter>treeselection</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
+    One or more rows have been selected.
    </shortdesc>
    <desc>
-
+    <para>
+     Called whenever one or more rows have been selected, or
+     some selected rows are unselected. It may also be called
+     when the program selects a row that is already selected.
+    </para>
+    <para>
+     See <function class="GtkTreeSelection">get_selected</function>
+     for an example.
+    </para>
    </desc>
   </signal>
-  
  </signals>
 
 </classentry>

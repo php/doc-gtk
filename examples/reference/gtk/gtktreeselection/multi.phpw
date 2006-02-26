@@ -1,0 +1,53 @@
+<?php
+//create a model
+$model = new GtkListStore(Gtk::TYPE_STRING);
+//create the view to display the model data
+$view = new GtkTreeView($model);
+
+//now, get the selection object of that view
+$selection = $view->get_selection();
+
+//we want to be able to select multiple rows
+$selection->set_mode(Gtk::SELECTION_MULTIPLE);
+
+//capture the "changed" signal
+$selection->connect('changed', 'selection_changed');
+
+/**
+*   This is the callback function for the changed
+*   signal and display the value of the first column
+*   of all selected rows
+*/
+function selection_changed($selection)
+{
+    list($model, $arPaths) = $selection->get_selected_rows();
+    echo "Selection is now:\r\n";
+    foreach ($arPaths as $path) {
+        $iter = $model->get_iter($path);
+        echo '  ' . $model->get_value($iter, 0) . "\r\n";
+    }
+}//function selection_changed($selection)
+
+
+//add a column to display the data
+$col = new GtkTreeViewColumn('Number', new GtkCellRendererText(), 'text', 0);
+$view->append_column($col);
+
+//add some data to the model/store
+$model->append(array('Zero'));
+$model->append(array('One'));
+$model->append(array('Two'));
+$model->append(array('Three'));
+$model->append(array('Four'));
+$model->append(array('Five'));
+
+$selection->select_range(1, -1);
+
+//add the view to the window
+$wnd = new GtkWindow();
+$wnd->set_title('GtkTreeView selection example');
+$wnd->connect_simple('destroy', array('Gtk', 'main_quit'));
+$wnd->add($view);
+$wnd->show_all();
+Gtk::main();
+?>
