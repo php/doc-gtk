@@ -94,6 +94,7 @@ class updateMethods
                 $xmlFunction = $doc->createElement('function', $daMethod);
 
                 $xmlFuncdef->appendChild($xmlFunction);
+                $xmlParamDefs = array();
                 
                 if($totalArgs > 0) {
                     /* Function has arguments */
@@ -122,6 +123,7 @@ class updateMethods
                             $xmlParameter->nodeValue = $param->getName();
                         }
                         $xmlParamdef->appendChild($xmlParameter);
+                        $xmlParamDefs[] = $xmlParamdef;
                     }
                 }
                 else {
@@ -141,7 +143,9 @@ class updateMethods
                 /* Appending child nodes in order */
                 $xmlPrototype->appendChild($xmlFuncdef);
                 $xmlPrototype->appendChild($indentFuncdef);
-                $xmlPrototype->appendChild($xmlParamdef);
+                foreach ($xmlParamDefs as $def) {
+                    $xmlPrototype->appendChild($xmlParamdef);
+                }
                 $xmlPrototype->appendChild($indentParamdef);
                 $xmlSynopsis->appendChild($xmlPrototype);
                 $xmlSynopsis->appendChild($indentPrototype);
