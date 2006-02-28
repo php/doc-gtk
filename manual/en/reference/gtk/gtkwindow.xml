@@ -1754,7 +1754,9 @@
 
    </shortdesc>
    <desc>
-
+    <note>
+     &deprecated.method;
+    </note>
    </desc>
   </method>
 
@@ -2078,21 +2080,37 @@
 
   <property id="gtk.gtkwindow.property.allow_grow" type="ro">
    <propname>allow_grow</propname>
-   <proptype>int</proptype>
+   <proptype>boolean</proptype>
    <shortdesc>
+    Whether or not the window is allowed to grow.
    </shortdesc>
    <desc>
-
+    <para>
+     <literal>true</literal> if users may expand the window beyond its minimum
+     size, <literal>false</literal> if they may not.
+    </para>
+    <para>
+     Defaults to <literal>true</literal>
+    </para>
    </desc>
   </property>
 
   <property id="gtk.gtkwindow.property.allow_shrink" type="ro">
    <propname>allow_shrink</propname>
-   <proptype>int</proptype>
+   <proptype>boolean</proptype>
    <shortdesc>
+    Whether or not the window is allowed to shrink.
    </shortdesc>
    <desc>
-
+    <para>
+     <literal>true</literal> if the window has no miniumum size, 
+     <literal>false</literal> if it does. It is not normally a good idea to
+     set this value to <literal>true</literal> because it will allow the user
+     to severly distort your layout.
+    </para>
+    <para>
+     Defaults to <literal>false</literal>.
+    </para>
    </desc>
   </property>
 
@@ -2118,10 +2136,18 @@
 
   <property id="gtk.gtkwindow.property.decorated" type="ro">
    <propname>decorated</propname>
-   <proptype>int</proptype>
+   <proptype>boolean</proptype>
    <shortdesc>
+    Whether or not the window is currently decorated.
    </shortdesc>
    <desc>
+    <para>
+     <literal>true</literal> if the window decorations (borders and title bar)
+     are currently visible, <literal>false</literal> if they are not. 
+    </para>
+    <para>
+     Defaults to <literal>true</literal>.
+    </para>
     <para>
      See also: 
      <function class="GtkWindow">get_decorated</function>, 
@@ -2143,10 +2169,18 @@
 
   <property id="gtk.gtkwindow.property.destroy_with_parent" type="ro">
    <propname>destroy_with_parent</propname>
-   <proptype>int</proptype>
+   <proptype>boolean</proptype>
    <shortdesc>
+    Whether or not the window will be destroyed with its parent window.
    </shortdesc>
    <desc>
+    <para>
+     <literal>true</literal> if the window will be destroyed when its parent
+     window is destroyed, <literal>false</literal> if it will not.
+    </para>
+    <para>
+     Defaults to <literal>false</literal>
+    </para>
     <para>
      See also: 
      <function class="GtkWindow">get_destroy_with_parent</function>, 
@@ -2218,12 +2252,19 @@
 
   <property id="gtk.gtkwindow.property.gravity" type="ro">
    <propname>gravity</propname>
-   <proptype>int</proptype>
+   <proptype><enumname>GdkGravity</enumname></proptype>
    <shortdesc>
+    The gravity of the window.
    </shortdesc>
    <desc>
     <para>
+     Defines the reference point of a window and the meaning of coordinates
+     passed to <function class="GtkWindow">move</function>. 
+    </para>
+    <para>
      See also: 
+     <enumname>GdkGravity</enumname>,
+     <function class="GtkWindow">move</function>,
      <function class="GtkWindow">get_gravity</function>, 
      <function class="GtkWindow">set_gravity</function>
     </para>
