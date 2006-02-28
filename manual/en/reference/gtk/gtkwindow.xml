@@ -170,7 +170,9 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>add_accel_group</function></funcdef>
-     <paramdef><classname>GtkAccelGroup</classname> <parameter>accel_group</parameter></paramdef>
+     <paramdef>
+      <classname>GtkAccelGroup</classname> <parameter>accel_group</parameter>
+     </paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -214,7 +216,9 @@
     <funcprototype>
      <funcdef>void <function>add_mnemonic</function></funcdef>
      <paramdef>int <parameter>keyval</parameter></paramdef>
-     <paramdef><classname>GtkWidget</classname> <parameter>target</parameter></paramdef>
+     <paramdef>
+      <classname>GtkWidget</classname> <parameter>target</parameter>
+     </paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -367,11 +371,13 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    If the window has a frame border.
+    Returns whether or not the window decorations are currently shown.
    </shortdesc>
    <desc>
     <simpara>
-     Tells you if the window has a border or is borderless.
+     Returns whether or not the window decorations are currently shown. Window
+     decorations can be turned on or off using <function
+     class="GtkWindow">set_decorated</function>
     </simpara>
     <para>
      See also: 
@@ -691,7 +697,9 @@
    </shortdesc>
    <desc>
     <simpara>
-     Tells you if the user may resize the window.
+     Tells you if the user may resize the window. Whether or not the user may
+     resize the window can be set using <function
+     class="GtkWindow">set_resizable</function>.
     </simpara>
     <para>
      See also: 
@@ -1017,9 +1025,13 @@
      classname="GtkWindow">get_position</function>.
     </para>
     <para>
+     To move the window to a relative positio, such as the center of the
+     screen, use <function class="GtkWindow">set_position</function>.
+    <para>
      See also:
      <function classname="GtkWindow">set_gravity</function>
      <function classname="GtkWindow">get_position</function>
+     <function classname="GtkWindow">set_position</function>
     </para>
    </desc>
   </method>
@@ -1207,7 +1219,7 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_accept_focus</function></funcdef>
-     <paramdef>bool <parameter>setting</parameter></paramdef>
+     <paramdef>bool <parameter>accept</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -1216,7 +1228,7 @@
    <desc>
     <simpara>
      Sets whether or not the window will accept input focus. If
-     <parameter>setting</parameter> is <literal>true</literal>, the window will
+     <parameter>accept</parameter> is <literal>true</literal>, the window will
      accept focus. If it is <literal>false</literal>, it will not.
     </simpara>
     <note>
@@ -1236,7 +1248,7 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_auto_startup_notification</function></funcdef>
-     <paramdef>bool <parameter>setting</parameter></paramdef>
+     <paramdef>bool <parameter>notify</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -1268,13 +1280,21 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_decorated</function></funcdef>
-     <paramdef>bool <parameter>setting</parameter></paramdef>
+     <paramdef>bool <parameter>decorated</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
     Turns the borders and title bar for the window on/off.
    </shortdesc>
    <desc>
+    <simpara>
+     Turns window decorations on or off. Decorations are the borders around a
+     window including the title bar at the top of the window. This method is
+     the recommended way for creating a window with no borders. You should not
+     create a popup window. To turn the decorations off, pass
+     <literal>false</literal> as the <parameter>decorated</parameter>
+     argument. To turn them back on again, pass <literal>true</literal>.
+    </simpara>
     <para>
      See also: 
      <function class="GtkWindow">get_decorated</function>, 
@@ -1291,14 +1311,35 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the given widget as the default for the window.
    </shortdesc>
    <desc>
+    <simpara>
+     Sets <parameter>default_widget</parameter> as the default widget for the
+     window. The default widget is the widget that will receive focus when the
+     window receives focus. 
+    </simpara>
+    <simpara>
+     If <literal>null</literal> is passed as
+     <parameter>default_widget</parameter>, the default widget will be unset.
+    </simpara>
+    <simpara>
+     It is normally easier to call <function
+     class="GtkWidget">grab_focus</function> on the widget that you want
+     to make the default rather than using <function
+     class="GtkWindow">set_default</function>. 
+    </simpara>
+    <note>
+     Before you can set a widget as the default you must set the
+     <enumname>Gtk::CAN_DEFAULT</enumname> flag for the widget by calling
+     <function class="GtkWidget">set_flags</function>.
+    </note>
     <para>
      See also: 
      <function class="GtkWindow">activate_default</function>
+     <function class="GtkWidget">grab_focus</function>
+     <function class="GtkWidget">set_flags</function>
     </para>
-
    </desc>
   </method>
 
@@ -1306,14 +1347,35 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_default_icon</function></funcdef>
-     <paramdef>void</paramdef>
+     <paramdef>
+      <classname>GdkPixbuf</classname> <parameter>icon</parameter>
+     </paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets a fallback icon for the window.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Sets an icon to be used when an icon has not been set using <function
+     class="GtkWindow">set_icon</function>. The <parameter>icon</parameter>
+     passed in must be a <classname>GdkPixbuf</classname> object.
+    </simpara>
+    <simpara>
+     See <function class="GtkWindow">set_icon</function> for a description of
+     what the icon is used for.
+    </simpara>
+    <simpara>
+     You might call this method if your application allows the icon for the
+     window to be changed at run time. Setting a default icon allows the
+     window to maintain a unique identity even if the icon set at run time
+     cannot be found or could not be loaded properly for some reason. 
+    </simpara>
+    <simpara>
+     See also:
+     <function class="GtkWindow">set_icon</function>
+     <function class="GdkPixbuf">new_from_file</function>
+    </simpara>
    </desc>
   </method>
 
@@ -1326,12 +1388,42 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the default size of the window.
    </shortdesc>
    <desc>
+    <simpara>
+     Sets the default size of the window to <parameter>width</parameter>
+     pixels wide by <parameter>height</parameter> pixels high. Setting either
+     parameter to <literal>-1</literal> will use the "natural" size for the
+     window. The "natural" size is the size of the window after its child
+     widget has been added and shown and before any other sizing has been
+     done.
+    </simpara>
+    <simpara>
+     Using <function class="GtkWindow">set_default_size</function> simply sets
+     the size of the window. It does not set any restrictions on whether or
+     not the user can resize the window later. This method acts as if the user
+     had resized the window. Unlike <function
+     class="GtkWidget">set_size_request</function>, the user may shrink the
+     window below the height and width passed to this function.
+    </simpara>
+    <simpara>
+     This method respects any <link
+     linkd="gtk.gtkwindow.method.set_geometry_hints">geometry hints</link>
+     that have been set for the window. If the height and width given do not
+     match the geomety hints, the window will be clamped to the nearest
+     acceptable dimensions.
+    </simpara>
+    <simpara>
+     Windows may not have a size smaller than <literal>1</literal> pixel
+     wide by <literal>1</literal> pixel high. If <literal>0</literal> is
+     passed for either argument, the value will be changed to
+     <literal>1</literal>.
+    </simpara>
     <para>
      See also: 
      <function class="GtkWindow">get_default_size</function>
+     <function class="GtkWidget">set_size_request</function>
     </para>
 
    </desc>
@@ -1341,7 +1433,7 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_destroy_with_parent</function></funcdef>
-     <paramdef>bool <parameter>setting</parameter></paramdef>
+     <paramdef>bool <parameter>destroy</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -1381,7 +1473,7 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_focus_on_map</function></funcdef>
-     <paramdef>bool <parameter>setting</parameter></paramdef>
+     <paramdef>bool <parameter>focus_on_map</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -1457,7 +1549,7 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_has_frame</function></funcdef>
-     <paramdef>bool <parameter>setting</parameter></paramdef>
+     <paramdef>bool <parameter>has_frame</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -1550,7 +1642,7 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_keep_above</function></funcdef>
-     <paramdef>bool <parameter>setting</parameter></paramdef>
+     <paramdef>bool <parameter>keep_above</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -1576,7 +1668,7 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_keep_below</function></funcdef>
-     <paramdef>bool <parameter>setting</parameter></paramdef>
+     <paramdef>bool <parameter>keep_below</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -1626,12 +1718,15 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Sets the window modal.
+    Sets whether or not the window is modal.
    </shortdesc>
    <desc>
     <simpara>
      Sets the window modal, preventing user interaction with any other
-     window of the same application.
+     window of the same application until the window is closed or made non-
+     modal. If <parameter>modal<parameter> is <literal>true</literal>, the
+     window will be modal. If it is <literal>false</literal> it will not be
+     modal.
     </simpara>
     <simpara>
      A window should be set modal if it requires user interaction before
@@ -1694,7 +1789,10 @@
    </shortdesc>
    <desc>
     <simpara>
-     Sets if the user may resize window or not.
+     Sets if the user may resize window or not. If
+     <parameter>resizeable</parameter> is <literal>true</literal> the user may
+     resize the window. If it is <literal>false</literal> they may not. By
+     default windows are resizable.
     </simpara>
     <para>
      See also: 
@@ -1745,7 +1843,7 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_skip_pager_hint</function></funcdef>
-     <paramdef>bool <parameter>setting</parameter></paramdef>
+     <paramdef>bool <parameter>skip</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -1777,7 +1875,7 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_skip_taskbar_hint</function></funcdef>
-     <paramdef>bool <parameter>setting</parameter></paramdef>
+     <paramdef>bool <parameter>skip</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -1809,7 +1907,9 @@
    </shortdesc>
    <desc>
     <simpara>
-     Sets the window title.
+     Sets the window title to the string <parameter>title</parameter>. The
+     title may show up in the title bar at the top of the window as well as
+     any task managers or task bars.
     </simpara>
     <para>
      See also: 
