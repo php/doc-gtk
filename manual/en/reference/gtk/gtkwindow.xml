@@ -45,7 +45,14 @@
    <funcsynopsis>
     <funcprototype>
     <funcdef> <function>GtkWindow</function></funcdef>
-    <paramdef><enumname>GtkWindowType</enumname> <parameter><optional>type = GTK::WINDOW_TOPLEVEL</optional></parameter></paramdef>
+    <paramdef>
+     <enumname>GtkWindowType</enumname>
+     <parameter>
+      <optional>
+       type = <enumname>GTK::WINDOW_TOPLEVEL</enumname>
+      </optional>
+     </parameter>
+    </paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -190,26 +197,6 @@
     </para>
    </desc>
   </method>
-<!-- Doesn't exist any more
-  <method id="gtk.gtkwindow.method.add_embedded_xid">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>void <function>add_embedded_xid</function></funcdef>
-     <paramdef>int <parameter>xid</parameter></paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-   <desc>
-    <para>
-     See also: 
-     <function class="GtkWindow">remove_embedded_xid</function>
-    </para>
-
-   </desc>
-  </method>
--->
 
   <method id="gtk.gtkwindow.method.add_mnemonic">
    <funcsynopsis>
@@ -272,10 +259,22 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Begins to move a window.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Begins moving a window.
+    </simpara>
+    <note>
+     This method is not normally called in code. If you need to move a window,
+     call <function class="GtkWindow">set_position</function> or <function
+     class="GtkWindow">move</function>.
+    </note>
+    <simpara>
+     See also:
+     <function class="GtkWindow">set_position</function>,
+     <function class="GtkWindow">move</function>
+    </simpara>
    </desc>
   </method>
 
@@ -287,10 +286,20 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Begins resizing the window.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Begins resizing the window.
+    </simpara>
+    <note>
+     This method is not normally called in code. If you need to resize a
+     window, call <function class="GtkWindow">resize</function>.
+    </note>
+    <simpara>
+     See also:
+     <function class="GtkWindow">resize</function>
+    </simpara>
    </desc>
   </method>
 
@@ -357,6 +366,9 @@
      <function class="GtkWindow">set_accept_focus</function>.
     </para>
     <para>
+     By default a window will accept focus.
+    </para>
+    <para>
      See also:
      <function class="GtkWindow">set_accept_focus</function>
     </para>
@@ -379,6 +391,9 @@
      decorations can be turned on or off using <function
      class="GtkWindow">set_decorated</function>
     </simpara>
+    <para>
+     By default a window will be decorated.
+    </para>
     <para>
      See also: 
      <function class="GtkWindow">set_decorated</function>, 
@@ -429,6 +444,9 @@
    <desc>
     <para>
      Returns whether the window will be destroyed with its transient parent.
+    </para>
+    <para>
+     By default a window will not be destroyed along with its parent.
     </para>
     <para>
      See also:
@@ -496,6 +514,9 @@
      <function class="GtkWindow">set_focus_on_map</function>.
     </para>
     <para>
+     By default a window will accept focus when it is mapped.
+    </para>
+    <para>
      See also:
      <function class="GtkWindow">set_focus_on_map</function>
     </para>
@@ -505,14 +526,25 @@
   <method id="gtk.gtkwindow.method.get_frame_dimensions">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>void <function>get_frame_dimensions</function></funcdef>
+     <funcdef>array <function>get_frame_dimensions</function></funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the dimensions of the frame window for the toplevel.
    </shortdesc>
    <desc>
+    <para>
+     Returns an array containing the widths of the frame window for the
+     toplevel. The array returned contains the left, top, right, and bottom
+     widths in that order.
+    </para>
+    <note>
+     Note: This is a special-purpose function intended for the framebuffer
+     port. It does not return the width of the window decorations. Use
+     <function class="GdkWindow">get_frame_extents</function> for that
+     purpose.
+    </note>
     <para>
      See also: 
      <function class="GtkWindow">set_frame_dimensions</function>
@@ -524,14 +556,23 @@
   <method id="gtk.gtkwindow.method.get_gravity">
    <funcsynopsis>
     <funcprototype>
-     <funcdef> <function>get_gravity</function></funcdef>
+     <funcdef>
+      <enumname>GdkGravity</enumname> <function>get_gravity</function>
+     </funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the window's gravity.
    </shortdesc>
    <desc>
+    <para>
+     Returns the window's gravity. A window's gravity defines the reference
+     point for the window.
+    </para>
+    <para>
+     By default a window has <enumname>Gdk::GRAVITY_NORTH_WEST</enumname>.
+    </para>
     <para>
      See also: 
      <function class="GtkWindow">set_gravity</function>, 
@@ -549,9 +590,16 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns whether or not the window as a frame window outside its
+    <classname>GdkWindow</classname>.
    </shortdesc>
    <desc>
+    <para>
+     Returns whether or not the window has a frame window outside its
+     <classname>GdkWindow</classname>. A window will have a frame window if a
+     frame window has been added using <function
+     class="GtkWindow">set_has_frame</function>.
+    </para>
     <para>
      See also: 
      <function class="GtkWindow">set_has_frame</function>, 
@@ -564,17 +612,34 @@
   <method id="gtk.gtkwindow.method.get_icon">
    <funcsynopsis>
     <funcprototype>
-     <funcdef> <function>get_icon</function></funcdef>
+     <funcdef><classname>GdkPixbuf</classname> <function>get_icon</function></funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the icon used to represent the window.
    </shortdesc>
    <desc>
     <para>
+     Returns the icon used to represent the window. The window's icon may be
+     shown in the title bar, the task bar, or a task manager. An icon can be
+     set by calling <function class="GtkWindow">set_icon</function> or
+     <function class="GtkWindow">set_icon_list</function>.
+    </para>
+    <para>
+     If a list of icons was set using <function
+     class="GtkWindow">set_icon_list</function>, this method will return the
+     first icon in the list.
+    </para>
+    <para>
+     By default a window does not have an icon. If no icon was set, this
+     method will return <literal>null</literal>.
+    </para>
+    <para>
      See also: 
-     <function class="GtkWindow">set_icon</function>
+     <function class="GtkWindow">set_icon</function>,
+     <function class="GtkWindow">set_icon_list</function>,
+     <function class="GtkWindow">get_icon_list</function>
     </para>
 
    </desc>
@@ -583,14 +648,19 @@
   <method id="gtk.gtkwindow.method.get_icon_list">
    <funcsynopsis>
     <funcprototype>
-     <funcdef> <function>get_icon_list</function></funcdef>
+     <funcdef>array <function>get_icon_list</function></funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the icons in the window's icon list.
    </shortdesc>
    <desc>
+    <para>
+     Returns the icons in the window's icon list. A list of icons may be set
+     for a window by calling <function
+      class="GtkWindow">set_icon_list</function>. 
+    </para>
     <para>
      See also: 
      <function class="GtkWindow">set_icon_list</function>
@@ -607,9 +677,13 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the name of the themed icon for the window.
    </shortdesc>
    <desc>
+    <para>
+     Returns the name of the themed icon for the window. If no themed icon was
+     set for the window, the method returns <literal>null</literal>.
+    </para>
     <para>
      See also: 
      <function class="GtkWindow">set_icon_name</function>
@@ -621,14 +695,22 @@
   <method id="gtk.gtkwindow.method.get_mnemonic_modifier">
    <funcsynopsis>
     <funcprototype>
-     <funcdef> <function>get_mnemonic_modifier</function></funcdef>
+     <funcdef>
+      <enumname>GdkModifierType</enumname> <function>get_mnemonic_modifier</function>
+     </funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the mnemonic modifier for the window.
    </shortdesc>
    <desc>
+    <para>
+     Returns the mnemonic modifier for the window. The mnemonic modifier is
+     the key, mouse button, or combination of keys and/or mouse buttons that
+     the user must press to activate a mnemonic. The mnemonic modifier is
+     normally a key such as <literal>Crtl</literal>.
+    </para>
     <para>
      See also: 
      <function class="GtkWindow">set_mnemonic_modifier</function>, 
@@ -650,7 +732,8 @@
    </shortdesc>
    <desc>
     <simpara>
-     Tells you if the window is modal.
+     Tells you if the window is modal. A window may be made modal by calling
+     <function class="GtkWindow">set_modal</function>.
     </simpara>
     <simpara>
      Modal windows prevent user interaction with other windows of the
@@ -667,15 +750,25 @@
   <method id="gtk.gtkwindow.method.get_position">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>void <function>get_position</function></funcdef>
+     <funcdef>array <function>get_position</function></funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Returns nothing. This method should probably be removed from the
-    documentation.
+    Returns the position of the window with respect to its gravity.
    </shortdesc>
    <desc>
+    <para>
+     Returns the position of the window with respect to its gravity. The
+     position will be returned as an array containing the 
+     <literal>x</literal> coordinate followed by the <literal>y</literal>
+     corrodinate. 
+    </para>
+    <para>
+     If the position has not been set explictly and the window has not yet
+     been mapped to the screen, this method will return <literal>0</literal>
+     for both coordinates.
+    </para>
     <para>
      See also: 
      <function class="GtkWindow">set_position</function>, 
@@ -716,9 +809,13 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the window's role.
    </shortdesc>
    <desc>
+    <para>
+     Returns the window's role. The role is used by X11 to reposition windows
+     when a user restarts an application. 
+    </para>
     <para>
      See also: 
      <function class="GtkWindow">set_role</function>
@@ -730,17 +827,21 @@
   <method id="gtk.gtkwindow.method.get_screen">
    <funcsynopsis>
     <funcprototype>
-     <funcdef> <function>get_screen</function></funcdef>
+     <funcdef><classname>GdkScreen</classname> <function>get_screen</function></funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the <classname>GdkScreen</classname> associated with teh window.
    </shortdesc>
    <desc>
     <para>
+     Returns the <classname>GdkScreen</classname> associated with teh window.
+    </para>
+    <para>
      See also: 
-     <function class="GtkWindow">set_screen</function>
+     <function class="GtkWindow">set_screen</function>,
+     <classname>GdkScreen</classname>
     </para>
 
    </desc>
@@ -2364,10 +2465,19 @@
 
   <property id="gtk.gtkwindow.property.modal" type="ro">
    <propname>modal</propname>
-   <proptype>int</proptype>
+   <proptype>boolean</proptype>
    <shortdesc>
+    Whether or not the window is modal.
    </shortdesc>
    <desc>
+    <para>
+     <literal>true</literal> if the window is modal, <literal>false</literal>
+     if it is not. If a window is modal, the user may not interact with the
+     parent window until the modal window is closed.
+    </para>
+    <para>
+     Defaults to <literal>false</literal>.
+    </para>
     <para>
      See also: 
      <function class="GtkWindow">get_modal</function>, 
@@ -2426,8 +2536,15 @@
    <propname>title</propname>
    <proptype>string</proptype>
    <shortdesc>
+    The title of the window.
    </shortdesc>
    <desc>
+    <para>
+     A string containing the title of the window. 
+    </para>
+    <para>
+     Defaults to <literal>null</literal>.
+    </para>
     <para>
      See also: 
      <function class="GtkWindow">get_title</function>, 
@@ -2449,20 +2566,36 @@
 
   <property id="gtk.gtkwindow.property.type" type="ro">
    <propname>type</propname>
-   <proptype>int</proptype>
+   <proptype><enumname>GtkWindowType</enumname></proptype>
    <shortdesc>
+    The window's type.
    </shortdesc>
    <desc>
-
+    <para>
+     The window's type. The type may be either
+     <enumname>Gtk::WINDOW_TOPLEVEL</enumname> or
+     <enumname>Gtk::WINDOW_POPUP</enumname>. The type is set on construction.
+    </para>
+    <para>
+     Defaults to <enumname>Gtk::WINDOW_TOPLEVEL</enumname>
+    </para>
    </desc>
   </property>
 
   <property id="gtk.gtkwindow.property.type_hint" type="ro">
    <propname>type_hint</propname>
-   <proptype>int</proptype>
+   <proptype><enumname>GdkWindowTypeHint</enumname></proptype>
    <shortdesc>
+    A hint describing the window's type.
    </shortdesc>
    <desc>
+    <para>
+     A hint to help the window manager determine the window type so that it
+     can treat the window properly.
+    </para>
+    <para>
+     Defaults to <enumname>Gdk::WINDOW_TYPE_HINT_NORMAL</enumname>.
+    </para>
     <para>
      See also: 
      <function class="GtkWindow">get_type_hint</function>, 
