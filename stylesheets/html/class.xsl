@@ -226,7 +226,6 @@
 
   <xsl:choose>
    <xsl:when test="$id!='no'">
-<xsl:message><xsl:value-of select="$id"/></xsl:message>
 
     <xsl:variable name="link">
      <xsl:call-template name="href.target">
