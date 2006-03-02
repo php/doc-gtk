@@ -73,7 +73,7 @@
      Emits a <signalname class="GtkAdjustment">changed</signalname> signal
      from the <classname>GtkAdjustment</classname>. This is typically called
      by the owner of the <classname>GtkAdjustment</classname> after it has
-     changed any of the fields other than the <propname>value</propname>.
+     changed any of the fields other than the <fieldname>value</fieldname>.
     </para>
    </desc>
   </method>
@@ -94,8 +94,8 @@
      Updates the <classname>GtkAdjustment</classname> value to ensure that the
      range between <parameter>lower</parameter> and
      <parameter>upper</parameter> is in the current page (i.e. between
-     <propname>value</propname> and <propname>value</propname> +
-     <propname>page_size</propname>). If the range is larger than the page
+     <fieldname>value</fieldname> and <fieldname>value</fieldname> +
+     <fieldname>page_size</fieldname>). If the range is larger than the page
      size, then only the start of it will be in the current page.
      A <signalname>changed</signalname> signal will be emitted if the value
      is changed.
@@ -120,7 +120,7 @@
     <para>
      See also:
      <function class="GtkAdjustment">set_value</function>,
-     <propname class="GtkAdjustment">value</propname>
+     <fieldname class="GtkAdjustment">value</fieldname>
     </para>
    </desc>
   </method>
@@ -137,24 +137,24 @@
    </shortdesc>
    <desc>
     <para>
-     Sets the <classname>GtkAdjustment</classname> <propname>value</propname>.
+     Sets the <classname>GtkAdjustment</classname> <fieldname>value</fieldname>.
      The value is
      <link linked="gtk.gtkadjustment.method.clamp_page">clamped</link> to lie
-     between adjustment-&gt;<propname>lower</propname> and 
-     adjustment-&gt;<propname>upper</propname>.
+     between adjustment-&gt;<fieldname>lower</fieldname> and 
+     adjustment-&gt;<fieldname>upper</fieldname>.
     </para>
 
     <para>
      Note that for adjustments which are used in a
      <classname>GtkScrollbar</classname>, the effective range of allowed
-     values goes from adjustment-&gt;<propname>lower</propname> to
-     (adjustment-&gt;<propname>upper</propname> -
-     adjustment-&gt;<propname>page_size</propname>).
+     values goes from adjustment-&gt;<fieldname>lower</fieldname> to
+     (adjustment-&gt;<fieldname>upper</fieldname> -
+     adjustment-&gt;<fieldname>page_size</fieldname>).
     </para>
     <para>
      See also:
      <function class="GtkAdjustment">get_value</function>,
-     <propname class="GtkAdjustment">value</propname>
+     <fieldname class="GtkAdjustment">value</fieldname>
     </para>
    </desc>
   </method>
@@ -178,10 +178,10 @@
 
  </methods>
 
- <properties>
+ <fields>
 
-  <property id="gtk.gtkadjustment.property.lower" type="ro">
-   <propname>lower</propname>
+  <property id="gtk.gtkadjustment.field.lower" type="ro">
+   <fieldname>lower</fieldname>
    <proptype>double</proptype>
    <shortdesc>
     The minimum value of the adjustment.
@@ -196,8 +196,8 @@
    </desc>
   </property>
 
-  <property id="gtk.gtkadjustment.property.page_increment" type="ro">
-   <propname>page_increment</propname>
+  <property id="gtk.gtkadjustment.field.page_increment" type="ro">
+   <fieldname>page_increment</fieldname>
    <proptype>double</proptype>
    <shortdesc>
     The page increment of the adjustment.
@@ -212,8 +212,8 @@
    </desc>
   </property>
 
-  <property id="gtk.gtkadjustment.property.page_size" type="ro">
-   <propname>page_size</propname>
+  <property id="gtk.gtkadjustment.field.page_size" type="ro">
+   <fieldname>page_size</fieldname>
    <proptype>double</proptype>
    <shortdesc>
     The page size of the adjustment.
@@ -230,8 +230,8 @@
    </desc>
   </property>
 
-  <property id="gtk.gtkadjustment.property.step_increment" type="ro">
-   <propname>step_increment</propname>
+  <property id="gtk.gtkadjustment.field.step_increment" type="ro">
+   <fieldname>step_increment</fieldname>
    <proptype>double</proptype>
    <shortdesc>
     The step increment of the adjustment.
@@ -246,8 +246,8 @@
    </desc>
   </property>
 
-  <property id="gtk.gtkadjustment.property.upper" type="ro">
-   <propname>upper</propname>
+  <property id="gtk.gtkadjustment.field.upper" type="ro">
+   <fieldname>upper</fieldname>
    <proptype>double</proptype>
    <shortdesc>
     The maximum value of the adjustment.
@@ -255,8 +255,8 @@
    <desc>
     <para>
      The maximum value of the adjustment. Note that values will be restricted
-     by (<propname>upper</propname> - <propname>page-size</propname>) if the
-     <propname>page-size</propname> property is nonzero.
+     by (<fieldname>upper</fieldname> - <fieldname>page-size</fieldname>) if the
+     <fieldname>page-size</fieldname> property is nonzero.
     </para>
     <para>
      Default value: <literal>0</literal>.
@@ -264,8 +264,8 @@
    </desc>
   </property>
 
-  <property id="gtk.gtkadjustment.property.value" type="ro">
-   <propname>value</propname>
+  <property id="gtk.gtkadjustment.field.value" type="ro">
+   <fieldname>value</fieldname>
    <proptype>double</proptype>
    <shortdesc>
     The value of the adjustment.
@@ -286,7 +286,7 @@
    </desc>
   </property>
 
- </properties>
+ </fields>
 
  <signals>
 
@@ -304,7 +304,7 @@
    <desc>
     <para>
      Emitted when one or more of the <classname>GtkAdjustment</classname>
-     fields have been changed, other than the <propname>value</propname> field.
+     fields have been changed, other than the <fieldname>value</fieldname> field.
     </para>
    </desc>
   </signal>
@@ -322,7 +322,7 @@
    </shortdesc>
    <desc>
     <para>
-     Emitted when the <propname>value</propname> field has been changed.
+     Emitted when the <fieldname>value</fieldname> field has been changed.
     </para>
    </desc>
   </signal>

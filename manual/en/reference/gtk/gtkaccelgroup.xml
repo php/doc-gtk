@@ -4,10 +4,27 @@
   <classtitle>GtkAccelGroup</classtitle>
   <classparent>GObject</classparent>
   <shortdesc>
-
+   Groups of global keyboard accelerators for an entire GtkWindow
   </shortdesc>
   <desc>
-
+   <para>
+    A GtkAccelGroup represents a group of keyboard accelerators, typically
+    attached to a toplevel <classname>GtkWindow</classname> (with
+    <function class="GtkWindow">add_accel_group</function>). Usually you won't
+    need to create a GtkAccelGroup directly; instead, when using
+    <classname>GtkItemFactory</classname>, GTK+ automatically sets up the
+    accelerators for your menus in the item factory's GtkAccelGroup.
+   </para>
+   <para>
+    Note that accelerators are different from mnemonics. Accelerators are
+    shortcuts for activating a menu item; they appear alongside the menu item
+    they're a shortcut for. For example "<literal>Ctrl+Q</literal>" might
+    appear alongside the "<literal>Quit</literal>" menu item. Mnemonics are
+    shortcuts for GUI elements such as text entries or buttons; they appear as
+    underlined characters. See <classname>GtkLabel</classname>
+    <function class="GtkLabel">constructor</function>. Menu items can have
+    both accelerators and mnemonics, of course.
+   </para>
   </desc>
  </classmeta>
 
@@ -21,10 +38,14 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Creates a new accelerator group.
    </shortdesc>
    <desc>
-
+    <para>
+     Creates a new accelerator group. After creating it, it won't help you
+     much until you attach it to a window - see
+     <function class="GtkWindow">add_accel_group</function>.
+    </para>
    </desc>
   </constructor>
 
@@ -188,7 +209,7 @@
 
    </desc>
   </signal>
-  
+
   <signal id="gtk.gtkaccelgroup.signal.accel-changed">
    <signalname>accel-changed</signalname>
    <funcsynopsis>
