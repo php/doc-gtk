@@ -156,6 +156,27 @@
   </xsl:choose>
  </xsl:template>
 
+
+ <xsl:template match="fieldname">
+  <xsl:variable name="class" select="@class"/>
+
+  <xsl:choose>
+   <xsl:when test="not($class) or $class=''">
+    <!-- empty class... try to find it -->
+    <xsl:apply-templates select="." mode="synoptic.mode"/>
+   </xsl:when>
+
+   <xsl:otherwise>
+    <!-- class given, all ok -->
+    <xsl:call-template name="field.link">
+     <xsl:with-param name="prop" select="."/>
+     <xsl:with-param name="class" select="$class"/>
+    </xsl:call-template>
+   </xsl:otherwise>
+  </xsl:choose>
+ </xsl:template>
+
+
  <xsl:template match="propname" mode="synoptic.mode">
   <xsl:variable name="classentry" select="ancestor::classentry[1]"/>
   <xsl:variable name="classtitle" select="$classentry/classmeta/classtitle"/>
@@ -166,15 +187,37 @@
   </xsl:call-template>
  </xsl:template>
 
+
+ <xsl:template match="fieldname" mode="synoptic.mode">
+  <xsl:variable name="classentry" select="ancestor::classentry[1]"/>
+  <xsl:variable name="classtitle" select="$classentry/classmeta/classtitle"/>
+
+  <xsl:call-template name="prop.link">
+   <xsl:with-param name="prop" select="."/>
+   <xsl:with-param name="class" select="$classtitle"/>
+  </xsl:call-template>
+ </xsl:template>
+
+
  <xsl:template name="prop.link">
   <xsl:param name="prop" select="."/>
   <xsl:param name="class" select="@class"/>
 
   <xsl:variable name="id">
-   <xsl:call-template name="get_prop_id_from_name">
-    <xsl:with-param name="propname" select="$prop"/>
-    <xsl:with-param name="class" select="$class"/>
-   </xsl:call-template>
+   <xsl:choose>
+    <xsl:when test="name(../..)='fields' or name(.)='fieldname'">
+     <xsl:call-template name="get_field_id_from_name">
+      <xsl:with-param name="propname" select="$prop"/>
+      <xsl:with-param name="class" select="$class"/>
+     </xsl:call-template>
+    </xsl:when>
+    <xsl:otherwise>
+     <xsl:call-template name="get_prop_id_from_name">
+      <xsl:with-param name="propname" select="$prop"/>
+      <xsl:with-param name="class" select="$class"/>
+     </xsl:call-template>
+    </xsl:otherwise>
+   </xsl:choose>
   </xsl:variable>
 
   <xsl:choose>
@@ -436,10 +479,11 @@
      <xsl:apply-templates select="./constructors" mode="synoptic.mode"/>
      <xsl:apply-templates select="./methods"  mode="synoptic.mode"/>
      <xsl:apply-templates select="./signals"  mode="synoptic.mode"/>
+     <xsl:apply-templates select="./fields" mode="synoptic.mode"/>
      <xsl:apply-templates select="./properties" mode="synoptic.mode"/>
     </p>
    </div>
-  <xsl:apply-templates select="./constructors|./methods|./signals|./properties"/>
+  <xsl:apply-templates select="./constructors|./methods|./signals|./fields|./properties"/>
  </xsl:template>
 
  <xsl:template match="classentry[@rtl='1']">
@@ -514,10 +558,11 @@
      <xsl:apply-templates select="./constructors" mode="synoptic.mode"/>
      <xsl:apply-templates select="./methods"  mode="synoptic.mode"/>
      <xsl:apply-templates select="./signals"  mode="synoptic.mode"/>
+     <xsl:apply-templates select="./fields"   mode="synoptic.mode"/>
      <xsl:apply-templates select="./properties" mode="synoptic.mode"/>
     </p>
    </div>
-  <xsl:apply-templates select="./constructors|./methods|./signals|./properties"/>
+  <xsl:apply-templates select="./constructors|./methods|./signals|./fields|./properties"/>
  </xsl:template>
 
  <xsl:template match="refentry">
@@ -620,6 +665,22 @@
     <xsl:with-param name="key">properties</xsl:with-param>
    </xsl:call-template>
   </h3>
+  <p>
+   <xsl:call-template name="gentext">
+    <xsl:with-param name="key">propertiesDisclaimer</xsl:with-param>
+   </xsl:call-template>
+  </p>
+  <blockquote>
+   <xsl:apply-templates select="./property" mode="synoptic.mode"/>
+  </blockquote>
+ </xsl:template>
+
+ <xsl:template match="fields" mode="synoptic.mode">
+  <h3>
+   <xsl:call-template name="gentext">
+    <xsl:with-param name="key">fields</xsl:with-param>
+   </xsl:call-template>
+  </h3>
   <blockquote>
    <xsl:apply-templates select="./property" mode="synoptic.mode"/>
   </blockquote>
@@ -644,7 +705,7 @@
       <xsl:apply-templates mode="synoptic.mode"/>
  </xsl:template>
 
- <xsl:template match="constructors|methods|signals|properties">
+ <xsl:template match="constructors|methods|signals|fields|properties">
   <xsl:choose>
    <xsl:when test="ancestor::classentry[@rtl='1']">
     <div dir="rtl">

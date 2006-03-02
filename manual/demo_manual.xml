@@ -43,6 +43,24 @@ what tags can be used in the manual.
       to link to the MyClass overview page.
      </para>
     </listitem>
+    <listitem>
+     <para>
+      <emphasis>Field links</emphasis> link to a certain field.
+      <fieldname>name</fieldname>. Use 
+      <programlisting role="xml"><![CDATA[
+<fieldname>fieldname</fieldname>
+]]></programlisting>
+     </para>
+    </listitem>
+    <listitem>
+     <para>
+      <emphasis>Property links</emphasis> link to a certain property.
+      <propname>version</propname>. Use 
+      <programlisting role="xml"><![CDATA[
+<propname>propname</propname>
+]]></programlisting>
+     </para>
+    </listitem>
    </itemizedlist>
 
      <example>
@@ -186,6 +204,24 @@ if ($a == $b) { startup(); shutup(); shutdown(); }
     </signal>
    </signals>
 
+
+   <fields>
+
+    <property id="bro.broopera.field.name" type="ro">
+     <propname>name</propname>
+     <proptype>string</proptype>
+     <shortdesc>
+      A normal field. Get it with $obj->name.
+     </shortdesc>
+     <desc>
+      <simpara>
+       Just a "normal" property:
+      </simpara>
+      <programlisting><![CDATA[echo $obj->name]]></programlisting>
+     </desc>
+    </property>
+
+   </fields>
 
    <!-- class properties -->
    <properties>

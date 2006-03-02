@@ -17,6 +17,7 @@
    <xsl:when test="$type='classes'">   <xsl:call-template name="index.classes"/>   </xsl:when>
    <xsl:when test="$type='methods'">   <xsl:call-template name="index.methods"/>   </xsl:when>
    <xsl:when test="$type='properties'"><xsl:call-template name="index.properties"/></xsl:when>
+   <xsl:when test="$type='fields'">    <xsl:call-template name="index.fields"/>    </xsl:when>
    <xsl:when test="$type='signals'">   <xsl:call-template name="index.signals"/>   </xsl:when>
    <xsl:otherwise>
     <xsl:message>Index type <xsl:value-of select="$type"/> not implemented.</xsl:message>
@@ -73,9 +74,20 @@
   </xsl:for-each>
  </xsl:template>
 
+ <!-- field index -->
+ <xsl:template name="index.fields">
+  <xsl:for-each select="/set/book/classset/classentry/properties/fields">
+   <xsl:sort select="propname"/>
+   <xsl:call-template name="index_link">
+    <xsl:with-param name="title"><xsl:value-of select="propname"/> - <xsl:value-of select="../../classmeta/classtitle"/></xsl:with-param>
+    <xsl:with-param name="id"><xsl:value-of select="@id"/></xsl:with-param>
+   </xsl:call-template>
+  </xsl:for-each>
+ </xsl:template>
+
  <!--
   The syntax index is a huge list with links to
-  classes, interfaces, functions, signals and properties
+  classes, interfaces, functions, signals, fields and properties
   in alphabetical order
  -->
  <xsl:template name="index.syntax">
@@ -83,6 +95,7 @@
                         |/set/book/classset/classentry/constructors/constructor
                         |/set/book/classset/classentry/methods/method
                         |/set/book/classset/classentry/properties/property
+                        |/set/book/classset/classentry/fields/property
                         |/set/book/classset/classentry/signals/signal">
    <!-- Sort by the title thingies -->
    <!-- FIXME: Functions with the same name but different classes aren't sorted correctly -->

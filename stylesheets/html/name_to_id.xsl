@@ -23,17 +23,17 @@
    </xsl:otherwise>
   </xsl:choose>
  </xsl:template>
- 
- 
+
+
  <!--
   returns the id for a given classname
   e.g. gtk.gtkbutton for GtkButton
-  
+
   puts out "no" if none is found
  -->
  <xsl:template name="get_id_from_name">
   <xsl:param name="classname" />
-  
+
   <xsl:variable name="classname_lowercase" select="translate($classname,&uppercase;,&lowercase;)"/>
 
   <xsl:choose>
@@ -77,34 +77,34 @@
   <xsl:param name="class" select="'no'" />
 
   <xsl:variable name="class_lowercase" select="translate($class,&uppercase;,&lowercase;)"/>
-  
+
   <xsl:variable name="classid"><xsl:call-template name="get_id_from_name">
    <xsl:with-param name="classname"><xsl:value-of select="$class"/></xsl:with-param>
   </xsl:call-template></xsl:variable>
 
   <!-- static class factory method -->
   <xsl:choose>
-  
+
    <xsl:when test="contains($funcname,'::')">
     <!-- seems to be a static one: factory method (constructor) -->
     <xsl:variable name="realclassid"><xsl:call-template name="get_id_from_name">
      <xsl:with-param name="classname"><xsl:value-of select="substring-before($funcname,'::')"/></xsl:with-param>
     </xsl:call-template></xsl:variable>
     <xsl:choose>
-    
+
      <xsl:when test="$realclassid='no'">
       <!-- static "gdk::funcname" or "atk::funcname" or such -->
       <xsl:value-of select="substring-before($funcname,'::')"/>.method.<xsl:value-of select="$funcname"/>
      </xsl:when>
-     
+
      <xsl:otherwise>
       <!-- constructor of class like "GtkButton::new_from_stock" -->
       <xsl:value-of select="$realclassid"/><xsl:text>.constructor.</xsl:text><xsl:value-of select="substring-after($funcname,'::')"/>
      </xsl:otherwise>
-    
+
     </xsl:choose>
    </xsl:when>
-   
+
    <xsl:otherwise>
     <!-- object function OR static gtk/gdk/atk/pango function -->
     <xsl:variable name="staticmethodid" select="/descendant::refentry/method[funcsynopsis/funcprototype/funcdef/function=$funcname]/@id"/>
@@ -129,20 +129,20 @@
        </xsl:otherwise>
        </xsl:choose>
      </xsl:otherwise>
-     
+
     </xsl:choose>
    </xsl:otherwise>
-  
+
   </xsl:choose>
-  
+
  </xsl:template><!--xsl:template name="get_func_id_from_name"-->
 
- 
- 
+
+
  <!--
  returns the id for a given property of a given class
  e.g. "gtk.gtkadjustment.property.value" for property "value" of class "GtkAdjustment"
- 
+
  returns "no" if none is found
  -->
  <xsl:template name="get_prop_id_from_name">
@@ -152,7 +152,7 @@
   <xsl:variable name="classid"><xsl:call-template name="get_id_from_name">
    <xsl:with-param name="classname"><xsl:value-of select="$class"/></xsl:with-param>
   </xsl:call-template></xsl:variable>
-  
+
   <xsl:choose>
    <xsl:when test="$classid='no'">
     <!-- class couldn't be found... strange -->
@@ -167,7 +167,35 @@
 
 
 
- <!-- 
+ <!--
+ returns the id for a given field of a given class
+ e.g. "gtk.gtkadjustment.field.value" for field "value" of class "GtkAdjustment"
+
+ returns "no" if none is found
+ -->
+ <xsl:template name="get_field_id_from_name">
+  <xsl:param name="propname" />
+  <xsl:param name="class" select="no" />
+
+  <xsl:variable name="classid"><xsl:call-template name="get_id_from_name">
+   <xsl:with-param name="classname"><xsl:value-of select="$class"/></xsl:with-param>
+  </xsl:call-template></xsl:variable>
+
+  <xsl:choose>
+   <xsl:when test="$classid='no'">
+    <!-- class couldn't be found... strange -->
+    <xsl:message>ERROR: classid for field <xsl:value-of select="$propname"/> not found</xsl:message>
+    <xsl:text>no</xsl:text>
+   </xsl:when>
+   <xsl:otherwise>
+    <xsl:value-of select="$classid"/><xsl:text>.field.</xsl:text><xsl:value-of select="$propname"/>
+   </xsl:otherwise>
+  </xsl:choose>
+ </xsl:template><!--xsl:template name="get_field_id_from_name"-->
+
+
+
+ <!--
  returns the id for a given signal name
  -->
  <xsl:template name="get_sig_id_from_name">
@@ -191,4 +219,4 @@
 
  </xsl:template><!--xsl:template name="get_sig_id_from_name"-->
 
-</xsl:stylesheet> 
+</xsl:stylesheet>

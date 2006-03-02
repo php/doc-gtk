@@ -82,7 +82,7 @@
   <xsl:choose>
    <xsl:when test="name($node)='constructor' or name($node)='method' or name($node)='signal' or name($node)='prop'">
     <xsl:variable name="classentry" select="(ancestor::classentry|ancestor::refentry)[1]"/>
-    <xsl:for-each select="$classentry/constructors|$classentry/methods/*|$classentry/signals/*|$classentry/properties/*|$classentry/method">
+    <xsl:for-each select="$classentry/constructors|$classentry/methods/*|$classentry/signals/*|$classentry/properties/*|$classentry/fields/*|$classentry/method">
      <xsl:call-template name="gen.text.toc.array">
       <xsl:with-param name="node" select="." />
      </xsl:call-template>

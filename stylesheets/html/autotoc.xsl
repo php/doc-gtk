@@ -6,7 +6,7 @@
                 version='1.0'>
 
 <!-- ********************************************************************
-     $Id: autotoc.xsl,v 1.10 2005-10-24 05:50:16 cweiske Exp $
+     $Id: autotoc.xsl,v 1.11 2006-03-02 21:45:47 cweiske Exp $
      ********************************************************************
 
      This file is part of the XSL DocBook Stylesheet distribution.
@@ -312,7 +312,7 @@ TODO:
 
 <xsl:template name="tocentry">
   <xsl:param name="indent"/>
-  <xsl:for-each select="*[@id!='']|constructors|methods|properties|signals|enums/enum">
+  <xsl:for-each select="*[@id!='']|constructors|methods|properties|fields|signals|enums/enum">
     <xsl:variable name="title">
       <xsl:choose>
         <xsl:when test="name(.)='classentry'">
@@ -322,7 +322,7 @@ TODO:
           <xsl:text>Constructor</xsl:text>
         </xsl:when>
         
-        <xsl:when test="(name(.)='constructors' or name(.)='methods') or (name(.)='properties') or (name(.)='signals')">
+        <xsl:when test="(name(.)='constructors' or name(.)='methods') or (name(.)='properties') or (name(.)='fields') or (name(.)='signals')">
           <xsl:value-of select="name(.)"/>
         </xsl:when>
         
