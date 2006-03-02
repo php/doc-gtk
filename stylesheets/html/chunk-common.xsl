@@ -105,6 +105,7 @@ its parent.
     <xsl:when test="name($node)='constructor'">1</xsl:when>
     <xsl:when test="name($node)='legalnotice'">1</xsl:when>
     <xsl:when test="name($node)='enum'">1</xsl:when>
+    <xsl:when test="name($node)='field'">1</xsl:when>
     <xsl:when test="name($node)='property'">1</xsl:when>
     <xsl:otherwise>0</xsl:otherwise>
   </xsl:choose>
@@ -712,6 +713,7 @@ its parent.
              |preceding::signal[1]
              |preceding::classset[1]
              |preceding::enumset[1]
+             |preceding::field[1]
              |preceding::property[1]
              |preceding::classtree[1]
              |preceding::classentry[1]
@@ -748,12 +750,14 @@ its parent.
              |following::index[1]
              |following::refentry[1]
              |following::enum[1]
+             |following::field[1]
              |following::property[1]
              |following::sect1[1]
              |descendant::book[1]
              |descendant::chapter[1]
              |descendant::appendix[1]
              |descendant::part[1]
+             |descendant::field[1]
              |descendant::property[1]
              |descendant::enum[1]
              |descendant::part[1]
@@ -786,6 +790,7 @@ its parent.
              |preceding::signal[1]
              |preceding::classset[1]
              |preceding::enumset[1]
+             |preceding::field[1]
              |preceding::property[1]
              |preceding::classtree[1]
              |preceding::classentry[1]
@@ -822,6 +827,7 @@ its parent.
              |following::index[1]
              |following::refentry[1]
              |following::enum[1]
+             |following::field[1]
              |following::property[1]
              |following::sect1[1]
              |descendant::book[1]
@@ -829,6 +835,7 @@ its parent.
              |descendant::appendix[1]
              |descendant::part[1]
              |descendant::enum[1]
+             |descendant::field[1]
              |descendant::property[1]
              |descendant::part[1]
              |descendant::constructor[1]
@@ -859,6 +866,7 @@ its parent.
              |preceding::signal[1]
              |preceding::classset[1]
              |preceding::enumset[1]
+             |preceding::field[1]
              |preceding::property[1]
              |preceding::classtree[1]
              |preceding::classentry[1]
@@ -895,12 +903,14 @@ its parent.
              |following::index[1]
              |following::refentry[1]
              |following::enum[1]
+             |following::field[1]
              |following::property[1]
              |descendant::book[1]
              |descendant::chapter[1]
              |descendant::appendix[1]
              |descendant::part[1]
              |descendant::enum[1]
+             |descendant::field[1]
              |descendant::property[1]
              |descendant::constructor[1]
              |descendant::method[1]
@@ -1062,7 +1072,7 @@ its parent.
   </xsl:choose>
 </xsl:template>
 
-<xsl:template match="enumset|classset|classtree|classentry|index|method|signal|property|constructor|enum">
+<xsl:template match="enumset|classset|classtree|classentry|index|method|signal|field|property|constructor|enum">
   <xsl:call-template name="process-chunk-element"/>
  </xsl:template>
 

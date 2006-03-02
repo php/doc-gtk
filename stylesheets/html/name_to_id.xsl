@@ -174,7 +174,7 @@
  returns "no" if none is found
  -->
  <xsl:template name="get_field_id_from_name">
-  <xsl:param name="propname" />
+  <xsl:param name="fieldname" />
   <xsl:param name="class" select="no" />
 
   <xsl:variable name="classid"><xsl:call-template name="get_id_from_name">
@@ -184,11 +184,11 @@
   <xsl:choose>
    <xsl:when test="$classid='no'">
     <!-- class couldn't be found... strange -->
-    <xsl:message>ERROR: classid for field <xsl:value-of select="$propname"/> not found</xsl:message>
+    <xsl:message>ERROR: classid for field <xsl:value-of select="$fieldname"/> not found</xsl:message>
     <xsl:text>no</xsl:text>
    </xsl:when>
    <xsl:otherwise>
-    <xsl:value-of select="$classid"/><xsl:text>.field.</xsl:text><xsl:value-of select="$propname"/>
+    <xsl:value-of select="$classid"/><xsl:text>.field.</xsl:text><xsl:value-of select="$fieldname"/>
    </xsl:otherwise>
   </xsl:choose>
  </xsl:template><!--xsl:template name="get_field_id_from_name"-->

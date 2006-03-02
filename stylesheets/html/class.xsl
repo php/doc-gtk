@@ -87,9 +87,13 @@
   <xsl:apply-templates />
  </xsl:template>
 
-  <xsl:template match="proptype">
-   <xsl:apply-templates />
-  </xsl:template>
+ <xsl:template match="fieldtype">
+  <xsl:apply-templates />
+ </xsl:template>
+
+ <xsl:template match="proptype">
+  <xsl:apply-templates />
+ </xsl:template>
   
   <xsl:template match="classimage">
    <div style="float:right; border:1px solid #000;">
@@ -205,9 +209,9 @@
 
   <xsl:variable name="id">
    <xsl:choose>
-    <xsl:when test="name(../..)='fields' or name(.)='fieldname'">
+    <xsl:when test="name(.)='fieldname'">
      <xsl:call-template name="get_field_id_from_name">
-      <xsl:with-param name="propname" select="$prop"/>
+      <xsl:with-param name="fieldname" select="$prop"/>
       <xsl:with-param name="class" select="$class"/>
      </xsl:call-template>
     </xsl:when>
@@ -222,6 +226,8 @@
 
   <xsl:choose>
    <xsl:when test="$id!='no'">
+<xsl:message><xsl:value-of select="$id"/></xsl:message>
+
     <xsl:variable name="link">
      <xsl:call-template name="href.target">
       <xsl:with-param name="object" select="id($id)"/>
@@ -682,8 +688,19 @@
    </xsl:call-template>
   </h3>
   <blockquote>
-   <xsl:apply-templates select="./property" mode="synoptic.mode"/>
+   <xsl:apply-templates select="./field" mode="synoptic.mode"/>
   </blockquote>
+ </xsl:template>
+
+ <xsl:template match="field" mode="synoptic.mode">
+  <dt>
+   <xsl:apply-templates select="./fieldname" mode="synoptic.mode"/>
+   <xsl:text>:</xsl:text>
+  </dt>
+  <dd>
+  <xsl:call-template name="spaceholder"/>
+   <xsl:apply-templates select="./shortdesc"/>
+  </dd>
  </xsl:template>
 
  <xsl:template match="property" mode="synoptic.mode">
@@ -769,6 +786,39 @@
 
  <xsl:template match="funcsynopsis">
    <xsl:apply-templates select="funcprototype"/>
+ </xsl:template>
+
+ <xsl:template match="field">
+  <div>
+  <a>
+   <xsl:attribute name="name"><xsl:value-of select="@id"/></xsl:attribute>
+  </a>
+  <h2>
+   <xsl:apply-templates select="." mode="title.markup"/>
+  </h2>
+  <p>
+  <span dir="ltr">
+   <xsl:text>Access: </xsl:text>
+   <xsl:choose>
+    <xsl:when test="@type='rw'">
+     <xsl:text>Read Write</xsl:text>
+    </xsl:when>
+    <xsl:when test="@type='ro'">
+     <xsl:text>Read Only</xsl:text>
+    </xsl:when>
+    <xsl:otherwise>
+     <xsl:text>UNKNOWN</xsl:text>
+    </xsl:otherwise>
+   </xsl:choose>
+   <br/>
+   <xsl:text>Type: </xsl:text>
+   <xsl:apply-templates select="./fieldtype"/>
+   </span>
+  </p>
+  <p>
+   <xsl:apply-templates select="./desc"/>
+  </p>
+  </div>
  </xsl:template>
 
  <xsl:template match="property">

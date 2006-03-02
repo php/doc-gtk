@@ -288,6 +288,19 @@ title of the element. This does not include the label.
  <xsl:value-of select="$classentry/classmeta/classtitle"/>
 </xsl:template>
 
+<xsl:template match="field" mode="title.markup">
+ <xsl:param name="text-only" select="'0'"/>
+ <xsl:param name="allow-anchors" select="'0'"/>
+ <xsl:variable name="classentry" select="ancestor::classentry"/>
+ <span dir="ltr">
+ <xsl:value-of select="$classentry/classmeta/classtitle"/>
+ <xsl:if test="count($classentry)>0">
+  <xsl:text>::</xsl:text>
+ </xsl:if>
+ <xsl:value-of select="(./fieldname)" />
+ </span>
+</xsl:template>
+
 <xsl:template match="property" mode="title.markup">
  <xsl:param name="text-only" select="'0'"/>
  <xsl:param name="allow-anchors" select="'0'"/>

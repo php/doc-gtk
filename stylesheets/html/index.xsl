@@ -1,7 +1,7 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
         version="1.0" encoding="utf-8">
 <!--
-   Stylesheets for index pages (class, method, signal and property index)
+   Stylesheets for index pages (class, method, signal, field and property index)
    Christian Weiske <cweiske@php.net>
 
    FIXME: group by first letter
@@ -76,10 +76,10 @@
 
  <!-- field index -->
  <xsl:template name="index.fields">
-  <xsl:for-each select="/set/book/classset/classentry/properties/fields">
-   <xsl:sort select="propname"/>
+  <xsl:for-each select="/set/book/classset/classentry/fields/field">
+   <xsl:sort select="fieldname"/>
    <xsl:call-template name="index_link">
-    <xsl:with-param name="title"><xsl:value-of select="propname"/> - <xsl:value-of select="../../classmeta/classtitle"/></xsl:with-param>
+    <xsl:with-param name="title"><xsl:value-of select="fieldname"/> - <xsl:value-of select="../../classmeta/classtitle"/></xsl:with-param>
     <xsl:with-param name="id"><xsl:value-of select="@id"/></xsl:with-param>
    </xsl:call-template>
   </xsl:for-each>
@@ -95,12 +95,13 @@
                         |/set/book/classset/classentry/constructors/constructor
                         |/set/book/classset/classentry/methods/method
                         |/set/book/classset/classentry/properties/property
-                        |/set/book/classset/classentry/fields/property
+                        |/set/book/classset/classentry/fields/field
                         |/set/book/classset/classentry/signals/signal">
    <!-- Sort by the title thingies -->
    <!-- FIXME: Functions with the same name but different classes aren't sorted correctly -->
    <xsl:sort select="classmeta/classtitle
                     |funcsynopsis/funcprototype/funcdef/function
+                    |fieldname
                     |propname
                     |signalname"
         order="ascending" data-type="text"/>
@@ -117,6 +118,7 @@
      <xsl:when test="$type='classentry'"><xsl:value-of select="classmeta/classtitle"/> (class)</xsl:when>
      <xsl:when test="$type='constructor'"><xsl:value-of select="funcsynopsis/funcprototype/funcdef/function"/>() (constructor)</xsl:when>
      <xsl:when test="$type='method'"><xsl:value-of select="funcsynopsis/funcprototype/funcdef/function"/>() (<xsl:value-of select="../../classmeta/classtitle"/>)</xsl:when>
+     <xsl:when test="$type='field'"><xsl:value-of select="fieldname"/> (field, <xsl:value-of select="../../classmeta/classtitle"/>)</xsl:when>
      <xsl:when test="$type='property'"><xsl:value-of select="propname"/> (property, <xsl:value-of select="../../classmeta/classtitle"/>)</xsl:when>
      <xsl:when test="$type='signal'"><xsl:value-of select="signalname"/> (signal, <xsl:value-of select="../../classmeta/classtitle"/>)</xsl:when>
      <xsl:otherwise>

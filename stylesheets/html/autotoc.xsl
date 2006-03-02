@@ -6,7 +6,7 @@
                 version='1.0'>
 
 <!-- ********************************************************************
-     $Id: autotoc.xsl,v 1.11 2006-03-02 21:45:47 cweiske Exp $
+     $Id: autotoc.xsl,v 1.12 2006-03-02 23:34:10 cweiske Exp $
      ********************************************************************
 
      This file is part of the XSL DocBook Stylesheet distribution.
@@ -325,7 +325,10 @@ TODO:
         <xsl:when test="(name(.)='constructors' or name(.)='methods') or (name(.)='properties') or (name(.)='fields') or (name(.)='signals')">
           <xsl:value-of select="name(.)"/>
         </xsl:when>
-        
+
+        <xsl:when test="name(.)='field'">
+          <xsl:value-of select="fieldname"/>
+        </xsl:when>
         <xsl:when test="name(.)='property'">
           <xsl:value-of select="propname"/>
         </xsl:when>
