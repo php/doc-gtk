@@ -168,7 +168,7 @@
 
    <xsl:otherwise>
     <!-- class given, all ok -->
-    <xsl:call-template name="field.link">
+    <xsl:call-template name="prop.link">
      <xsl:with-param name="prop" select="."/>
      <xsl:with-param name="class" select="$class"/>
     </xsl:call-template>
