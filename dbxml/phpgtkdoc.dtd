@@ -2,7 +2,7 @@
    Docbook Customization layer of PHP-GTK docs
    Authors: James Moore <jmoore@php.net>
 
-   $Id: phpgtkdoc.dtd,v 1.16 2005-08-02 07:01:10 cweiske Exp $
+   $Id: phpgtkdoc.dtd,v 1.17 2006-03-07 21:26:31 cweiske Exp $
 
 -->
 
@@ -84,7 +84,7 @@
 
 -->
 <!ELEMENT classentry 
-          ((classmeta),(constructors)?,(methods?,signals?,properties?))>
+          ((classmeta),(constructors)?,(methods?,signals?,properties?,fields?))>
 <!ATTLIST classentry
     %common.attrib;
     %refentry.role.attrib;
@@ -380,3 +380,44 @@
     %common.attrib;
 >
 
+
+<!--
+
+  - fields: wrapper for individual arguments.
+
+-->
+<!ELEMENT fields (field)+ >
+<!ATTLIST fields
+    %common.attrib;
+>
+
+<!--
+
+  - field: provides information about an objects properties
+
+-->
+<!ELEMENT field ((argname, argtype),(shortdesc,desc))>
+<!ATTLIST field
+    %common.attrib;
+    type (ro|rw) #REQUIRED
+>
+
+<!--
+
+  - fieldname: the name of the property
+
+-->
+<!ELEMENT fieldname (%docinfo.char.mix;)* >
+<!ATTLIST fieldname
+    %common.attrib;
+>
+
+<!--
+
+ - fieldtype: the type of property (int, char, object etc)
+
+-->
+<!ELEMENT fieldtype (%docinfo.char.mix;)* >
+<!ATTLIST fieldtype
+    %common.attrib;
+>
