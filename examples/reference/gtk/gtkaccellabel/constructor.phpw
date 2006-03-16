@@ -9,7 +9,9 @@ $accgrp = new GtkAccelGroup();
 $btn = new GtkButton('Save');
 
 //Add a "Ctrl+S" accelerator to the button (and the group)
-$btn->add_accelerator('activate', $accgrp, Gdk::KEY_S, Gdk::CONTROL_MASK, Gtk::ACCEL_VISIBLE);
+$btn->add_accelerator('activate', $accgrp, Gdk::KEY_S,
+    Gdk::CONTROL_MASK, Gtk::ACCEL_VISIBLE
+);
 
 //Tell the label which widget shall be activated
 $lbl->set_accel_widget($btn);

@@ -6,10 +6,14 @@ $dlg->set_version('2.5.3');
 
 $dlg->set_comments('These are my comments' . "\nWith a newline");
 $dlg->set_copyright('Copyright (C) 1982-2005 myself');
-$dlg->set_license("MyPL v2\nDo whatever you want to do.\nBut don't hurt anyone.");//Button
-$dlg->set_logo($dlg->render_icon(Gtk::STOCK_CDROM, Gtk::ICON_SIZE_LARGE_TOOLBAR));
+$dlg->set_license("MyPL v2\nDo whatever you want to do.\n"
+    . "But don't hurt anyone.");//Button
+$dlg->set_logo(
+    $dlg->render_icon(Gtk::STOCK_CDROM, Gtk::ICON_SIZE_LARGE_TOOLBAR)
+);
 $dlg->set_website('http://website.example.org');
-$dlg->set_translator_credits("German version - My Friend\nFrench version - Another Friend");
+$dlg->set_translator_credits("German version - My Friend\n"
+    . "French version - Another Friend");
 
 $dlg->run();
 ?>

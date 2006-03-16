@@ -1,9 +1,12 @@
 <?php
 function rotate($label) {
-    $label->set_label($label->get_angle() . ' ' . 'label text - this <b>is</b> a' 
-      . '<span foreground="#F00">very long label</span>'
-      . 'so we can see <span background="green" size="larger"'
-      . ' weight="bold">rotation</span> better');
+    $label->set_label(
+        $label->get_angle()
+        . ' label text - this <b>is</b> a' 
+        . '<span foreground="#F00">very long label</span>'
+        . 'so we can see <span background="green" size="larger"'
+        . ' weight="bold">rotation</span> better'
+    );
     $label->set_angle($label->get_angle() + 1);
     return true;
 }
@@ -11,7 +14,7 @@ function rotate($label) {
 $wnd = new GtkWindow();
 $wnd->set_default_size(500,500);
 $wnd->set_title('GtkLabel::set_angle');
-$wnd->connect_simple('destroy', array('gtk', 'main_quit'));
+$wnd->connect_simple('destroy', array('Gtk', 'main_quit'));
 
 $label = new GtkLabel('t_est', true);
 $label->set_use_markup(true);

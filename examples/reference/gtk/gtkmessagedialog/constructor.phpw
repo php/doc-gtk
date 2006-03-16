@@ -6,7 +6,10 @@ $dialog = new GtkMessageDialog(
     Gtk::BUTTONS_YES_NO,
     'Do you like PHP-Gtk2?'
 );
-$dialog->set_markup('Do <b>you</b> like PHP-Gtk <span foreground="red">2</span>?');
+$dialog->set_markup(
+    'Do <b>you</b> like PHP-Gtk '
+    . '<span foreground="red">2</span>?'
+);
 $answer = $dialog->run();
 $dialog->destroy();
 

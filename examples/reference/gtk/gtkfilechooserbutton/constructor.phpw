@@ -1,11 +1,15 @@
 <?php
-/* Creating and initialising a new window to add the FileChooser to */
+//Creating and initialising a new window
+// to add the FileChooser to
 $window = new GtkWindow();
 
-/* Quit the main loop when window is destroyed */
-$window->connect_simple('destroy', array('gtk', 'main_quit'));
+//Quit the main loop when window is destroyed
+$window->connect_simple(
+    'destroy',
+    array('Gtk', 'main_quit')
+);
 
-/* Setting parameters of the window */
+//Setting parameters of the window
 $window->set_title('GtkFileChooser Demo');
 $window->set_default_size(250,60);
 $window->set_border_width(10);
@@ -16,25 +20,30 @@ $window->set_border_width(10);
 * will be performed when the open button of the
 * GtkFileChooserDialog widget is clicked
 */
-$thebutton = new GtkFileChooserButton('Select the File',
-Gtk::FILE_CHOOSER_ACTION_OPEN);
+$thebutton = new GtkFileChooserButton(
+    'Select the File',
+    Gtk::FILE_CHOOSER_ACTION_OPEN
+);
 
-/* Creating a label and a quit button */
-$thelabel = new GtkLabel('Click to select a File: ');
+//Creating a label and a quit button
+$thelabel = new GtkLabel('Click to select a file: ');
 $toquit = new GtkButton('_Quit');
-$toquit->connect_simple('clicked', array($window, 'destroy'));
+$toquit->connect_simple(
+    'clicked',
+    array($window, 'destroy')
+);
 
-/* Creating a layout to add the elements */
+//Creating a layout to add the elements
 $thehbox = new GtkHBox();
 $thevbox = new GtkVBox();
 
-/* Adding the elements to the layout */
+//Adding the elements to the layout
 $thehbox->pack_start($thelabel);
 $thehbox->pack_start($thebutton);
 $thevbox->pack_start($thehbox);
 $thevbox->pack_start($toquit);
 
-/* Displaying the window and starting the main loop */
+//Displaying the window and starting the main loop
 $window->add($thevbox);
 $window->show_all();
 Gtk::main();

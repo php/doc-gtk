@@ -14,9 +14,12 @@ if (!class_exists('gtk')) {
 *   This function gets called as soon as the user 
 *   clicks on the Login button.
 *
-*   @param GtkWindow $wnd           The login window, needed to close it when all is ok
-*   @param GtkEntry $txtUsername    The username text field, used to get the username
-*   @param GtkEntry $txtPassword    The password widget to retrieve the password
+*   @param GtkWindow $wnd           The login window, needed to close it
+*                                    when all is ok
+*   @param GtkEntry $txtUsername    The username text field, used to get
+*                                    the username
+*   @param GtkEntry $txtPassword    The password widget to retrieve the
+*                                    password
 */
 function login(GtkWindow $wnd, GtkEntry $txtUsername, GtkEntry $txtPassword)
 {
@@ -36,8 +39,12 @@ function login(GtkWindow $wnd, GtkEntry $txtUsername, GtkEntry $txtPassword)
     if ($errors !== null) {
         //There was at least one error.
         //We show a message box with the errors
-        $dialog = new GtkMessageDialog($wnd, Gtk::DIALOG_MODAL, Gtk::MESSAGE_ERROR, Gtk::BUTTONS_OK, $errors);
-        $dialog->set_markup("The following errors occured:\r\n<span foreground='red'>" . $errors . "</span>");
+        $dialog = new GtkMessageDialog($wnd, Gtk::DIALOG_MODAL,
+            Gtk::MESSAGE_ERROR, Gtk::BUTTONS_OK, $errors);
+        $dialog->set_markup(
+            "The following errors occured:\r\n"
+            . "<span foreground='red'>" . $errors . "</span>"
+        );
         $dialog->run();
         $dialog->destroy();
     } else {
@@ -76,7 +83,7 @@ $lblPassword->set_mnemonic_widget($txtPassword);
 //Destroy the window when the user clicks Cancel
 $btnCancel->connect_simple('clicked', array($wnd, 'destroy'));
 //Call the login function when the user clicks on Login
-$btnLogin ->connect_simple('clicked', 'login', $wnd, $txtUsername, $txtPassword);
+$btnLogin->connect_simple('clicked', 'login', $wnd, $txtUsername, $txtPassword);
 
 
 //Lay out all the widgets in the table

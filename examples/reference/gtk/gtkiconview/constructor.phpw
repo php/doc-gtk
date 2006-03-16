@@ -3,7 +3,7 @@
 $wnd = new GtkWindow();
 $wnd->set_title('GtkIconView');
 $wnd->set_default_size(400, 400);
-$wnd->connect_simple('destroy', array('gtk', 'main_quit'));
+$wnd->connect_simple('destroy', array('Gtk', 'main_quit'));
 
 $iv = new GtkIconView();
 
@@ -27,7 +27,10 @@ $iv->set_item_width(100);
 
 //make it scrollable
 $scrollwin = new GtkScrolledWindow();
-$scrollwin->set_policy(Gtk::POLICY_AUTOMATIC, Gtk::POLICY_AUTOMATIC);
+$scrollwin->set_policy(
+    Gtk::POLICY_AUTOMATIC,
+    Gtk::POLICY_AUTOMATIC
+);
 $scrollwin->add($iv);
 
 $wnd->add($scrollwin);

@@ -6,7 +6,10 @@ $dlgColorsel->connect_simple('destroy', array('gtk', 'main_quit'));
 
 
 //Let the Cancel button quit the program
-$dlgColorsel->cancel_button->connect_simple('clicked', array($dlgColorsel, 'destroy'));
+$dlgColorsel->cancel_button->connect_simple(
+    'clicked',
+    array($dlgColorsel, 'destroy')
+);
 
 //The OK button shows the current color
 $dlgColorsel->ok_button->set_label('Show color');
@@ -21,7 +24,13 @@ function showColor($button)
     //we just want 8 bit, we shift the values by 8 bit
     $strColor    = 'RGB: ' . ($color->red >> 8) . ' '
                  . ($color->green >> 8) . ' ' . ($color->blue >> 8);
-    $msg = new GtkMessageDialog(null, 0, Gtk::MESSAGE_INFO, Gtk::BUTTONS_OK, $strColor);
+    $msg = new GtkMessageDialog(
+        null,
+        0,
+        Gtk::MESSAGE_INFO,
+        Gtk::BUTTONS_OK,
+        $strColor
+    );
     $msg->run();
     $msg->destroy();
 }//function showColor($button)
