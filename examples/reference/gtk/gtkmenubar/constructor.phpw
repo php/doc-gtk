@@ -1,0 +1,33 @@
+<?php
+//Create a simple menu bar
+$menubar = new GtkMenuBar();
+
+//Add File menu item with a dropdown menu
+$file = new GtkMenuItem('_File');
+$menubar->append($file);
+
+//Quit item
+$quit = new GtkMenuItem('_Quit');
+
+//This menu will popup when the File menu is activated
+$mnuFile = new GtkMenu();
+//Add the Quit item to the File popup menu
+$mnuFile->append($quit);
+
+//Set the popupmenu of the File menu item
+$file->set_submenu($mnuFile);
+
+
+//another menu item
+$edit = new GtkMenuItem('_Edit');
+$menubar->append($edit);
+
+
+//Add the menu bar to the window
+$wnd = new GtkWindow();
+$wnd->add($menubar);
+
+$wnd->connect_simple('destroy', array('Gtk', 'main_quit'));
+$wnd->show_all();
+Gtk::main();
+?>
