@@ -191,17 +191,88 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>popup</function></funcdef>
-     <!-- FIXME: parameters? -->
-     <paramdef>void</paramdef>
+     <paramdef>
+      <classname>GtkWidget</classname> 
+      <parameter><optional>parent_menu_shell</optional></parameter>
+     </paramdef>
+     <paramdef>
+      <classname>GtkWidget</classname> 
+      <parameter><optional>parent_menu_item</optional></parameter>
+     </paramdef>
+     <paramdef>
+      <literal>GtkMenuPositionFunc</literal> 
+      <parameter><optional>pos_function</optional></parameter>
+     </paramdef>
+     <paramdef>int <parameter>button</parameter></paramdef>
+     <paramdef>int <parameter>activate_time</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
     Pops up the menu
    </shortdesc>
    <desc>
+    <simpara>
+     The <function class="GtkMenu">popup</function> method looks fairly
+     intimidating at the outset, but is actually quite straightforward to
+     use.
+    </simpara>
+    <simpara>
+     The first thing to be aware of is that the 
+     <parameter>parent_menu_shell</parameter> and
+     <parameter>parent_menu_item</parameter> parameters would generally
+     only be used internally, to associate the popped-up menu with a given
+     <classname>GtkMenuShell</classname> descendant, or 
+     <classname>GtkMenuItem</classname>, or both.  In a freestanding popup
+     menu, both parameters should be passed as <literal>null</literal>.
+    </simpara>
     <para>
-     Shows the menu as a popup menu at the current cursor position.
+     The third parameter concerns the positioning of the popup menu, and
+     has as its default the position of the mouse pointer.  In order to
+     set a different position, you will need to set up a function that will
+     return an array of the co-ordinates, and call it from the 
+     <parameter>pos_function</parameter> parameter.
+     <informalexample>
+      <programlisting role="php">
+<![CDATA[
+<?php
+function position() {
+    $position = array(300, 200);
+    return $position;
+}
+
+$filemenu->popup(null, null, 'position', $event->button, $event->time);
+?>
+]]>
+      </programlisting>
+     </informalexample>
     </para>
+    <simpara>
+     The fourth parameter refers to the mouse button emitting the
+     <signalname class="GtkWidget">button-release-event</signalname> that
+     will be compared with the button emitting the 
+     <signalname class="GtkWidget">button-press-event</signalname> in
+     order to set the timer in the final parameter.  This only works if
+     you happen to be triggering the popup function with a button press,
+     and the button pressed and button released are the same - in all other
+     situations, the time element is ignored.  However, setting the 
+     <parameter>button</parameter> parameter to <literal>1</literal> or 
+     <literal>3</literal> will speed up the deactivation when the left or
+     right mouse button is released respectively, regardless of the callback
+     event.
+    </simpara>
+    <simpara>
+     The final parameter, <parameter>activate_time</parameter>, sets the
+     time conditions for the menu's deactivation.  If you have used a button
+     press event and ensured that the initial press and later release have
+     the same valid integer value, then setting the timer to 
+     <literal>0</literal> will make the menu disappear as soon as the user
+     releases the mouse-button that triggered it.  The safest setting for
+     this parameter is <literal>$event-&gt;time</literal> -
+     this being a setting that all <classname>GdkEvent</classname>
+     structures share; it causes the popup menu to react as you'd expect it
+     to, and won't spring any surprises if you duplicate or otherwise adapt
+     the original callback event.
+    </simpara>
     <example>
      <title>A popup menu on right click</title>
      <programlisting role="php">
