@@ -1,0 +1,52 @@
+<?php
+//Popup menu example:
+// An empty window in which you can right-click
+// to show a popup menu
+
+//Setup this menu: Add two items that echo something
+// to the console when clicked
+$menu = new GtkMenu();
+
+$echo1 = new GtkMenuItem('Echo 1');
+$echo1->connect_simple('activate', 'doEcho', 'echo1');
+$menu->append($echo1);
+
+$echo2 = new GtkMenuItem('Echo 2');
+$echo2->connect_simple('activate', 'doEcho', 'echo2');
+$menu->append($echo2);
+
+//The menu is not shown, but this here is necessary
+// to let it show when using popup()
+$menu->show_all();
+
+
+//This funciton is used as a callback and just echoes the parameter
+function doEcho($message) {
+    echo $message . "\r\n";
+}
+
+//The function used as callback for the popup
+function doPopup($window, $event, $menu)
+{
+    //Check if it was the right mouse button (button 3)
+    if ($event->button == 3) {
+        //popup the menu
+        $menu->popup();
+    }
+}
+
+//Create a normal window
+$wnd = new GtkWindow();
+
+//Normally, the window doesn't receive the button press events.
+// As we need them here, we force the window to accept and
+// distribute them to our callbacks
+$wnd->set_events($wnd->get_events() | Gdk::BUTTON_PRESS_MASK);
+//Connect a callback to the butt press event
+$wnd->connect('button-press-event', 'doPopup', $menu);
+
+//Standard stuff
+$wnd->connect_simple('destroy', array('Gtk', 'main_quit'));
+$wnd->show_all();
+Gtk::main();
+?>
