@@ -11,7 +11,7 @@
     The GtkTreeSelection object is a helper object to manage the selection for
     a <classname>GtkTreeView</classname> widget. The GtkTreeSelection object
     is automatically created when a new GtkTreeView widget is created, and
-    cannot exist independentally of this widget. The primary reason the
+    cannot exist independently of this widget. The primary reason the
     GtkTreeSelection objects exists is for cleanliness of code and API.
     That is, there is no conceptual reason all these functions could not be
     methods on the GtkTreeView widget instead of a separate function.
@@ -31,9 +31,10 @@
     One of the important things to remember when monitoring the selection of
     a view is that the <signalname class="GtkTreeSelection">changed</signalname>
     signal is mostly a hint. That is, it may only emit one signal when a range
-    of rows is selected. Additionally, it may on occasion emit a
-    <literal>changed</literal>" signal when nothing has happened (mostly as a
-    result of programmers calling select_row on an already selected row).
+    of rows is selected. Additionally, it may on occasion emit the signal
+    when nothing has happened (mostly as a result of programmers calling
+    <function class="GtkTreeView">select_row</function> on an already selected
+    row).
    </para>
   </desc>
  </classmeta>
@@ -97,14 +98,14 @@
    <desc>
     <para>
      Returns an array containing the
-     <link linked="gtk.gtktreemodel">model</link> and the
-     <link linked="gtk.gtktreeiter">iterator</link> of the currently
+     <link linkend="gtk.gtktreemodel">model</link> and the
+     <link linkend="gtk.gtktreeiter">iterator</link> of the currently
      selected row.
     </para>
     <para>
      This method works only, if the
-     <link linked="gtk.enum.selectionmode">selection mode</link> is
-     <link linked="gtk.gtktreeselection.method.set_mode">set</link>
+     <link linkend="gtk.enum.selectionmode">selection mode</link> is
+     <link linkend="gtk.gtktreeselection.method.set_mode">set</link>
      to <literal>Gtk::SELECTION_SINGLE</literal> or
      <literal>Gtk::SELECTION_BROWSER</literal>. For other modes,
      retrieve the selection with
@@ -139,7 +140,7 @@
    <desc>
     <para>
      Returns an array containing the
-     <link linked="gtk.gtktreemodel">model</link> and an array
+     <link linkend="gtk.gtktreemodel">model</link> and an array
      of tree paths of the selected rows. The tree path array
      can be walked by an <literal>foreach</literal> or
      <literal>for</literal> loop, and the single paths can be converted
@@ -149,7 +150,7 @@
     <para>
      Unlike the <function class="GtkTreeSelection">get_selected</function>
      method, this here works with all
-     <link linked="gtk.enum.selectionmode">selection modes</link>.
+     <link linkend="gtk.enum.selectionmode">selection modes</link>.
     </para>
     <example>
      <title>Using get_selected_rows</title>

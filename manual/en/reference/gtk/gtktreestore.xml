@@ -72,7 +72,7 @@
    <desc>
     <para>
      Creates a new line and appends it to the end of the store. The first
-     parameter <parameter>parent</parameter> can be <literal>NULL</literal>.
+     parameter <parameter>parent</parameter> can be <literal>null</literal>.
      If that's the case, the new entry will have no parent and thus 
      be a "root" entry.
     </para>
@@ -145,7 +145,7 @@
      <parameter>position</parameter>.
     </para>
     <para>
-     If <parameter>parent</parameter> is <literal>NULL</literal>, the new row
+     If <parameter>parent</parameter> is <literal>null</literal>, the new row
      will be created at top-level. If <parameter>position</parameter> is
      larger than the number of rows at that level, then the new row will
      be inserted to the end of the list.
@@ -187,9 +187,9 @@
    <desc>
     <para>
      Inserts a new row after <parameter>sibling</parameter>. If sibling is
-     <literal>NULL</literal>, then the row will be prepended to parent's
+     <literal>null</literal>, then the row will be prepended to parent's
      children. If <parameter>parent</parameter> and
-     <parameter>sibling</parameter> are <literal>NULL</literal>, then the row
+     <parameter>sibling</parameter> are <literal>null</literal>, then the row
      will be prepended to the toplevel. If both <parameter>sibling</parameter>
      and <parameter>parent</parameter> are set, then
      <parameter>parent</parameter> must be the parent of
@@ -233,9 +233,9 @@
    <desc>
     <para>
      Inserts a new row before <parameter>sibling</parameter>. If sibling is
-     <literal>NULL</literal>, then the row will be appended to parent's
+     <literal>null</literal>, then the row will be appended to parent's
      children. If <parameter>parent</parameter> and
-     <parameter>sibling</parameter> are <literal>NULL</literal>, then the row
+     <parameter>sibling</parameter> are <literal>null</literal>, then the row
      will be appended to the toplevel. If both <parameter>sibling</parameter>
      and <parameter>parent</parameter> are set, then
      <parameter>parent</parameter> must be the parent of
@@ -277,7 +277,7 @@
    </shortdesc>
    <desc>
     <para>
-     Returns <literal>TRUE</literal> if <parameter>iter</parameter> is an
+     Returns <literal>true</literal> if <parameter>iter</parameter> is an
      ancestor of <parameter>descendant</parameter>. That is,
      <parameter>iter</parameter> is the parent (or grandparent or
      great-grandparent) of <parameter>descendant</parameter>.
@@ -363,7 +363,7 @@
     <para>
      That method works only with unsorted stores and requires both iters to
      be at the same level. If <parameter>position</parameter> is
-     <literal>NULL</literal>, the row will be moved to the start
+     <literal>null</literal>, the row will be moved to the start
      of the level.
     </para>
     <example>
@@ -401,7 +401,7 @@
     <para>
      That method works only with unsorted stores and requires both iters to
      be at the same level. If <parameter>position</parameter> is
-     <literal>NULL</literal>, the row will be moved to the end
+     <literal>null</literal>, the row will be moved to the end
      of the level.
     </para>
     <para>
@@ -425,7 +425,7 @@
    <desc>
     <para>
      Creates a new line and inserts it at the beginning of the store. The first
-     parameter <parameter>parent</parameter> can be <literal>NULL</literal>.
+     parameter <parameter>parent</parameter> can be <literal>null</literal>.
      If that's the case, the new entry will have no parent and thus 
      be a "root" entry.
     </para>

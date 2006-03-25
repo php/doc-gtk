@@ -25,7 +25,7 @@
     <function class="GtkAdjustment">value_changed</function> and
     <function class="GtkAdjustment">changed</function> functions after
     changing the value and its bounds. This results in the emission of the
-    <signalname class="GtkAdjustment">value_changed</signalname> or
+    <signalname class="GtkAdjustment">value-changed</signalname> or
     <signalname class="GtkAdjustment">changed</signalname> signal respectively.
    </para>
   </desc>
@@ -94,11 +94,12 @@
      Updates the <classname>GtkAdjustment</classname> value to ensure that the
      range between <parameter>lower</parameter> and
      <parameter>upper</parameter> is in the current page (i.e. between
-     <fieldname>value</fieldname> and <fieldname>value</fieldname> +
-     <fieldname>page_size</fieldname>). If the range is larger than the page
-     size, then only the start of it will be in the current page.
-     A <signalname>changed</signalname> signal will be emitted if the value
-     is changed.
+     <fieldname class="GtkAdjustment">value</fieldname> and
+     <fieldname class="GtkAdjustment">value</fieldname> +
+     <fieldname class="GtkAdjustment">page_size</fieldname>). If the range
+     is larger than the page size, then only the start of it will be in the
+     current page. A <signalname class="GtkAdjustment">changed</signalname>
+     signal will be emitted if the value is changed.
     </para>
    </desc>
   </method>
@@ -139,17 +140,17 @@
     <para>
      Sets the <classname>GtkAdjustment</classname> <fieldname>value</fieldname>.
      The value is
-     <link linked="gtk.gtkadjustment.method.clamp_page">clamped</link> to lie
-     between adjustment-&gt;<fieldname>lower</fieldname> and 
-     adjustment-&gt;<fieldname>upper</fieldname>.
+     <link linkend="gtk.gtkadjustment.method.clamp_page">clamped</link> to lie
+     between $adjustment-&gt;<fieldname class="GtkAdjustment">lower</fieldname>
+     and $adjustment-&gt;<fieldname class="GtkAdjustment">upper</fieldname>.
     </para>
 
     <para>
      Note that for adjustments which are used in a
      <classname>GtkScrollbar</classname>, the effective range of allowed
      values goes from adjustment-&gt;<fieldname>lower</fieldname> to
-     (adjustment-&gt;<fieldname>upper</fieldname> -
-     adjustment-&gt;<fieldname>page_size</fieldname>).
+     ($adjustment-&gt;<fieldname class="GtkAdjustment">upper</fieldname> -
+     $adjustment-&gt;<fieldname class="GtkAdjustment">page_size</fieldname>).
     </para>
     <para>
      See also:
@@ -167,12 +168,14 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Emits a "value_changed" signal.
+    Emits a <signalname class="GtkAdjustment">value-changed</signalname>
+    signal.
    </shortdesc>
    <desc>
-    Emits a <signalname>value-changed</signalname> signal from the 
-    <classname>GtkAdjustment</classname>. This is typically called by the
-    owner of the GtkAdjustment after it has changed the value field.
+    Emits a <signalname class="GtkAdjustment">value-changed</signalname>
+    signal from the <classname>GtkAdjustment</classname>. This is typically
+    called by the owner of the GtkAdjustment after it has changed the
+    <fieldname class="GtkAdjustment">value</fieldname> field.
    </desc>
   </method>
 
@@ -220,7 +223,7 @@
    </shortdesc>
    <desc>
     <para>
-     The page size of the adjustment. Note that the page-size is
+     The page size of the adjustment. Note that the page size is
      irrelevant and should be set to zero if the adjustment is used for a
      simple scalar value, e.g. in a <classname>GtkSpinButton</classname>.
     </para>
@@ -255,8 +258,8 @@
    <desc>
     <para>
      The maximum value of the adjustment. Note that values will be restricted
-     by (<fieldname>upper</fieldname> - <fieldname>page-size</fieldname>) if the
-     <fieldname>page-size</fieldname> property is nonzero.
+     by <literal>upper - page_size</literal> if the
+     <fieldname class="GtkAdjustment">page_size</fieldname> value is non-zero.
     </para>
     <para>
      Default value: <literal>0</literal>.
@@ -304,7 +307,8 @@
    <desc>
     <para>
      Emitted when one or more of the <classname>GtkAdjustment</classname>
-     fields have been changed, other than the <fieldname>value</fieldname> field.
+     fields have been changed, other than the
+     <fieldname class="GtkAdjustment">value</fieldname> field.
     </para>
    </desc>
   </signal>
@@ -322,7 +326,8 @@
    </shortdesc>
    <desc>
     <para>
-     Emitted when the <fieldname>value</fieldname> field has been changed.
+     Emitted when the <fieldname class="GtkAdjustment">value</fieldname> field
+     has been changed.
     </para>
    </desc>
   </signal>

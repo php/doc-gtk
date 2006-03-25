@@ -1,28 +1,25 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <chapter id="tutorials.changes">
- <title>Changes from PHP-Gtk1 to PHP-Gtk2</title>
-
+ <title>Changes since PHP-GTK 1</title>
 
  <sect1>
   <title>About this tutorial</title>
   <simpara>
-   This tutorial tells you about the differences between PHP-Gtk1 and
-   PHP-Gtk2: What has changed, what's new and what not to do anymore.
+   This tutorial tells you about the differences between PHP-GTK 1 and
+   PHP-GTK 2: What has changed, what's new and what not to do anymore.
   </simpara>
   <simpara>
-   PHP-Gtk2 tries to be backward-compatible as possible, but as Gtk2
-   itself broke BC pretty often, PHP-Gtk2 can't do magic. There are
+   PHP-GTK 2 tries to be backward-compatible as possible, but as GTK 2
+   itself broke BC pretty often, PHP-GTK 2 can't do magic. There are
    many things which haven't changed, but some important smaller changes
    you have to know when migrating to the second version.
   </simpara>
  </sect1>
 
-
-
  <sect1 id="tutorials.changes.loadmodule">
-  <title>Loading the php_gtk PHP module</title>
+  <title>Loading the php_gtk Module</title>
   <para>
-   In PHP-Gtk1, you never knew if the php-gtk module had been loaded
+   In PHP-GTK 1, you never knew if the php-gtk module had been loaded
    into PHP automatically via <filename>php.ini</filename>, or if it
    was a bad setup (many of them!), and you had to load the module yourself:
    <programlisting role="php">
@@ -34,10 +31,10 @@
   </para>
 
   <para>
-   In PHP5, loading modules via <literal>dl()</literal> is deprecated. That
+   In PHP 5, loading modules via <literal>dl()</literal> is deprecated. That
    means it still works, but people are encouraged not to do that any more.
-   So you can assume that php-gtk is already loaded, or, if you want to catch
-   all possible errors, check for the existance of the php-gtk module and throw
+   So you can assume that PHP-GTK is already loaded, or, if you want to catch
+   all possible errors, check for the existance of the PHP-GTK module and throw
    an error if it's not there:
    <programlisting role="php">
     <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
@@ -48,17 +45,15 @@
   </para>
  </sect1>
 
-
-
  <sect1 id="tutorials.changes.references">
-  <title>Object references or The Ampersand &amp;</title>
+  <title>Object References (the Ampersand &amp;)</title>
   <para>
-   Object orientation was completely new to PHP4, and therefore not very
-   sophisticated nor complete in comparison to the OO in other languages like
-   Java. When assigning variables, it was absolutely necessary to not make copies
-   of Gtk objects, but pass references.
+   Support for object orientation was completely new to PHP 4, and was therefore
+   not very sophisticated in comparison to the OO support in other languages, such
+   as Java. When assigning variables, it was absolutely necessary not to make copies
+   of GTK objects, but to pass references.
    <programlisting role="php"><![CDATA[
-//PHP4: copy as default behavior
+//PHP 4: copy as default behavior
 $a = new GtkLabel();
 $a->set_text('1');
 $b = $a;
@@ -67,25 +62,25 @@ echo $a->get();//still 1
 ]]></programlisting>
     So to not make a copy, you had to use the ampersand &amp; when assigning variables:
    <programlisting role="php"><![CDATA[
-//PHP4: making references
+//PHP 4: making references
 $a = new GtkLabel();
 $a->set_text('1');
 $b = &$a;
 $b->set_text('2');
 echo $a->get();//is 2 now
 ]]></programlisting>
-   However, a copy of the object <emphasis>still</emphasis> was made: On construction.
-   To be totally correct, especially with Gtk widgets, you had to do:
+   However, a copy of the object <emphasis>still</emphasis> was made: on construction.
+   To be totally correct, especially with GTK widgets, you had to do:
    <programlisting role="php"><![CDATA[
-//PHP4: reference on instantiation
+//PHP 4: reference on instantiation
 $a = &new GtkLabel();
 ]]></programlisting>
   </para>
 
   <para>
-   With PHP5, things have changed: Pass-by-reference is the default behavior now - one
-   doesn't need the ampersand any more! The following script does work on PHP5 with
-   PHP-Gtk2 without any problems:
+   With PHP 5, things have changed: pass-by-reference is the default behavior now - one
+   doesn't need the ampersand any more! The following script works under PHP 5 with
+   PHP-GTK 2, without any problems:
    <programlisting role="php">
     <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
      href="&directory.examples;/tutorials/changes/ampersand_php5.phpw" parse="text">
@@ -95,30 +90,28 @@ $a = &new GtkLabel();
   </para>
 
   <para>
-   The same applies for callbacks: No ampersand any more!
-   While you had to do the following in PHP4 + Gtk1
+   The same applies for callbacks: no ampersand any more!
+   Whereas you had to do the following under PHP 4 and GTK 1:
    <programlisting role="php"><![CDATA[
 $window->connect_object('destroy', array(&$object, 'function'));
 ]]></programlisting>
-   you just leave the &amp; out with PHP5 and Gtk2:
+   you simply leave out the &amp; with PHP 5 and GTK 2:
    <programlisting role="php"><![CDATA[
 $window->connect_simple('destroy', array($object, 'function'));
 ]]></programlisting>
   </para>
  </sect1>
 
-
-
  <sect1 id="tutorials.changes.constants">
-  <title>Gtk constants</title>
+  <title>GTK constants</title>
 
   <para>
-   Gtk uses a lot of constants. In PHP-Gtk1, they were defined in global scope
-   and you could access them via
+   GTK+ uses a lot of constants. In PHP-GTK 1, they were defined in global
+   scope and you could access them via
    <programlisting role="php"><![CDATA[
 echo GTK_WIN_POS_CENTER;
 ]]></programlisting>
-   If you execute that code with PHP-Gtk2, the following error will be thrown:
+   If you execute that code with PHP-GTK 2, the following error will be thrown:
   </para>
 
   <screen><![CDATA[
@@ -127,71 +120,73 @@ assumed 'GTK_WIN_POS_CENTER' in /path/to/file.php on line 23
 ]]></screen>
 
   <para>
-   The problem is that not the original value (GTK_WIN_POS_CENTER is the integer
-   <literal>1</literal> in PHP-Gtk1) is used, but the string
-   <literal>"GTK_WIN_POS_CENTER"</literal> - which is likely to break your code.
+   The problem is that the original value is no longer used
+   (<literal>GTK_WIN_POS_CENTER</literal> resolves to the integer
+   <literal>1</literal> in PHP-GTK 1). The string literal itself,
+   <literal>"GTK_WIN_POS_CENTER"</literal>, is all PHP-GTK 2 sees
+   - which is likely to break your code.
   </para>
 
   <para>
-   Static class constants are supported in PHP5, so the decision has been made
-   not to pollute the global namespace with PHP-Gtk constants any more. They
+   Static class constants are supported in PHP 5, so the decision was made
+   not to pollute the global namespace with PHP-GTK constants any more. They
    are defined in the classes <literal>Gtk</literal>, <literal>Gdk</literal> and
    others.
   </para>
 
   <para>
-   In short, all you have to do (in most cases) is replacing the first underscore
-   <literal>_</literal> with two colons: <literal>GTK_WIN_POS_CENTER</literal>
-   has to be transformed to <literal>Gtk::WIN_POS_CENTER</literal>. 
+   In short, all you have to do (in most cases) is replace the first underscore
+   <literal>_</literal> with two colons: so that
+   <literal>GTK_WIN_POS_CENTER</literal> under PHP-GTK 1 becomes
+   <literal>Gtk::WIN_POS_CENTER</literal> under PHP-GTK 2. 
   </para>
 
   <para>
-   Also note the new coding style: The first letter in <literal>Gtk</literal>,
-   <literal>Gdk</literal>, <literal>Pango</literal> and <literal>Atk</literal>
-   should be written uppercase.
+   Also, note the new coding style. Only the first letter should be uppercased
+   in <literal>Gtk</literal>, <literal>Gdk</literal>, <literal>Pango</literal>
+   and <literal>Atk</literal> constants throughout the officially distributed
+   PHP-GTK 2 documentation and code, reflecting their new status as class
+   constants rather than globals.
   </para>
  </sect1>
 
-
-
  <sect1 id="tutorials.changes.connect">
-  <title>Connecting signals</title>
+  <title>Connecting Signals</title>
 
   <para>
-   To tie signals to a specific function in your code, you could use
+   To tie signals to a specific function in your PHP-GTK 1 code, you could use
    <function class="GtkObject">connect</function>,
    <function class="GtkObject">connect_object</function>,
-   <function class="GtkObject">connect_after</function> and
+   <function class="GtkObject">connect_after</function> or
    <function class="GtkObject">connect_object_after</function>.
-   Especially the functionality of <literal>connect_object</literal> wasn't
+   The functionality of <literal>connect_object</literal>, in particular, wasn't
    clear at first sight.
   </para>
 
   <para>
-   So the decision has been made to rename <literal>connect_object</literal>
-   to <function class="GtkObject">connect_simple</function> and
+   Following some changes made in the GTK signals API, the decision was taken
+   to rename <literal>connect_object</literal> to
+   <function class="GtkObject">connect_simple</function> and
    <literal>connect_object_after</literal> to
-   <function class="GtkObject">connect_simple_after</function>.
-   <emphasis>Simple</emphasis> means here that you have fewer function
-   parameters because the object is missing - something a
-   <literal>connect_object</literal> did not imply.
+   <function class="GtkObject">connect_simple_after</function> in PHP-GTK 2.
+   <emphasis>Simple</emphasis> here means that you have fewer function
+   parameters because the object itself is missing from them - something that
+   <literal>connect_object</literal> meant, but did not imply.
   </para>
  </sect1>
 
-
-
  <sect1 id="tutorials.changes.deprecated">
-  <title>Deprecated widgets</title>
+  <title>Deprecated Widgets</title>
 
   <simpara>
-   Gtk2 has a lot of new widget classes. Most of the new classes do something
-   better or a different way than an old class; and so the old widgets get
+   GTK 2 has a lot of new widget classes. Most of the new classes do something
+   better or a different way than an old class; and so the old widgets were
    deprecated in favor of the new one.
   </simpara>
 
   <simpara>
    To keep backward compatibility (BC), the old widgets can
-   still be used, but are likely to be removed in Gtk3 or so. That means
+   still be used, but are likely to be removed in GTK 3 or so. That means
    that you don't have to rewrite your old programs totally, but still can
    use them without too much changes. However, you really shouldn't use any
    of the deprecated widgets in newly written code. Don't do it.
@@ -261,7 +256,7 @@ assumed 'GTK_WIN_POS_CENTER' in /path/to/file.php on line 23
    </para>
   <para>
    <itemizedlist>
-    <title>List of deprecated methods</title>
+    <title>List of Deprecated Methods</title>
     <listitem>
      <function class="GtkWindow">set_policy</function> => 
      <function classname="GtkWindow">set_resizable</function>
@@ -269,8 +264,8 @@ assumed 'GTK_WIN_POS_CENTER' in /path/to/file.php on line 23
    </itemizedlist>
   </para>
   <simpara>
-   The list may not be complete. If you think you found another deprecated
-   widget not listed here, write to
+   The list may not be complete. If you find a deprecated widget that is not
+   listed here, please write to
    <ulink url="mailto:php-gtk-doc@lists.php.net">php-gtk-doc</ulink>.
   </simpara>
  </sect1>

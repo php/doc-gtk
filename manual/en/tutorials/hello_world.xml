@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <chapter id="tutorials.helloworld">
- <title>Hello world</title>
+ <title>Hello World (basic)</title>
 
   <simpara>
    When you begin to learn a programming language, the first program you
@@ -10,7 +10,7 @@
   </simpara>
   <simpara>
    Throughout the tutorials we expect a reasonable grasp of PHP itself.
-   The tutorials are designed to give the user an idea of how to use PHP-Gtk,
+   The tutorials are designed to give the user an idea of how to use PHP-GTK,
    and the ideas and techniques behind it.
   </simpara>
   <simpara>
@@ -19,7 +19,7 @@
   </simpara>
   <simpara>
    We will start by listing the program and will then explain each line of
-   the program, giving an overview of a very basic PHP-Gtk application.
+   the program, giving an overview of a very basic PHP-GTK application.
   </simpara>
 
 
@@ -42,20 +42,20 @@
 
 
   <example>
-   <title>Checking if PHP-Gtk is available</title>
+   <title>Checking if PHP-GTK is available</title>
    <programlisting role="php"><![CDATA[if (!class_exists('gtk')) {
     die("Please load the php-gtk2 module in your php.ini\r\n");
 }]]></programlisting>
   </example>
 
   <para>
-   Here we make sure that PHP-Gtk is available by checking if the class
-   <literal>gtk</literal> exists. Unlike PHP4 and PHP-Gtk1, you should not
-   try to load the PHP-Gtk module via
-   <ulink url="http://www.php.net/dl">dl</ulink> - that is deprecated in PHP5
-   and should not be used in newly written code. So all we can do is printing
-   out a message, that the module is not available and should be enabled by
-   the user.
+   Here we make sure that PHP-GTK is available by checking if the class
+   <literal>gtk</literal> exists. Unlike PHP 4 and PHP-GTK 1, you should not
+   try to load the PHP-GTK module via
+   <ulink url="http://www.php.net/dl">dl()</ulink>. This has been deprecated in
+   PHP 5, and should not be used in newly written code. So all we can do is
+   print out a message, that the module is not available and should be enabled
+   by the user.
   </para>
 
 
@@ -65,11 +65,11 @@
   </example>
 
   <para>
-   Creating a new <link linked="gtk.gtkwindow">window</link> widget is as easy as instantiating a new object: Variable
+   Creating a new <link linkend="gtk.gtkwindow">window</link> widget is as easy as instantiating a new object: Variable
    <literal>$wnd</literal> gets the new object assigned. If you already
-   programmed with PHP4 and PHP-Gtk1, you will miss the ampersand
+   programmed with PHP 4 and PHP-GTK 1, you will miss the ampersand
    <literal>&amp;</literal> before <literal>new</literal>. That was required
-   in PHP4, but may not be used any more in PHP5, as references are created
+   in PHP 4, but may not be used any more in PHP 5, as references are created
    automatically.
   </para>
 
@@ -93,8 +93,8 @@
   <para>
    That is the first interesting piece of code: The
    <signalname class="GtkObject">destroy</signalname> signal gets connected to the
-   static <link linked="gtk.method.main_quit">Gtk::main_quit</link> method.
-   It basically tells Gtk to quit the main loop when the window gets 
+   static <link linkend="gtk.method.main_quit">Gtk::main_quit</link> method.
+   It basically tells GTK to quit the main loop when the window gets 
    closed/destroyed. (The main loop is explained some paragraphs below.)
   </para>
 
@@ -145,7 +145,7 @@
   <para>
    After everything is set up, we need to make sure that the window stays
    open and responds to user interactions. A normal PHP script would end and
-   stop at this point, but we want to keep it running: For that, the Gtk main
+   stop at this point, but we want to keep it running: For that, the GTK main
    loop needs to be started. It takes care of keeping the application running
    and waiting for user events. If events occur, it delegates them to the
    corresponding callbacks.
@@ -155,9 +155,9 @@
  <sect1>
   <title>Further reading</title>
   <para>
-   Now that you have created your first PHP-Gtk application, you probably want
+   Now that you have created your first PHP-GTK 2 application, you probably want
    to create more complex layouts. To lean the basics, have a look at the
-   <link linked="tutorials.packing">Packing tutorial</link>.
+   <link linkend="tutorials.packing">Packing tutorial</link>.
   </para>
  </sect1>
 

@@ -11,9 +11,10 @@
    <classname>GtkColorSelection</classname> is a widget that is used to 
    select a color. The widget provides a very user friendly interface that 
    includes a 'color wheel' in addition to a number of sliders and entry 
-   boxes for color parameters such as Hue, Saturation, Red, Green, Blue, and 
-   opacity. The widget may be found on the standard color selection dialog 
-   box <classname>GtkColorSelectionDialog</classname>
+   boxes for color parameters such as <literal>hue</literal>,
+   <literal>saturation</literal>, <literal>RGB</literal>, and
+   <literal>opacity</literal>. The widget is used in the ready-made color
+   selection dialog box, <classname>GtkColorSelectionDialog</classname>.
   </desc>
  </classmeta>
 
@@ -69,7 +70,7 @@
      <classname>GtkColorSelection</classname> widget.
     </para>
     <note>
-     WARNING! This method has been deprecated in PHP-Gtk2, and should NOT be
+     WARNING! This method has been deprecated in PHP-GTK 2, and should NOT be
      used in newly written code. Use 
      <function class="GtkColorSelection">get_current_color</function> instead.
     </note>
@@ -95,7 +96,7 @@
     <para>
      This method returns the current alpha value of the color selected on the 
      specified <classname>GtkColorSelection</classname>. The value returned 
-     is an integer between 0 and 65535.
+     is an integer between <literal>0</literal> and <literal>65535</literal>.
     </para>
     <para>
      See also: 
@@ -119,8 +120,9 @@
     <para>
      Use this method to ascertain the color that is currently selected on 
      the <classname>GtkColorSelection</classname> widget. This function 
-     returns a GdkColor Object, containing the values of red, blue, green and 
-     pixel.
+     returns a <classname>GdkColor</classname> object, containing the values
+     of <literal>red</literal>, <literal>blue</literal>,
+     <literal>green</literal> and <literal>pixel</literal>.
     </para>
     <para>
      See also: 
@@ -137,15 +139,14 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Determines if the GtkColorSelection has
-    opacity control enabled.
+    Determines whether the GtkColorSelection has opacity control enabled.
    </shortdesc>
    <desc>
     <para>
      Use this method to ascertain whether the specified 
-     <classname>GtkColorSelection</classname> has opacity (transparency) control 
-     enabled or not. The function returns <literal>TRUE</literal> if opacity 
-     controls are visible, <literal>FALSE</literal> otherwise.
+     <classname>GtkColorSelection</classname> has opacity (transparency) control
+     enabled or not. The function returns <literal>true</literal> if opacity 
+     controls are visible, <literal>false</literal> otherwise.
     </para>
     <para>
      See also: 
@@ -167,9 +168,9 @@
    <desc>
     <para>
      Use this method to ascertain whether the specified 
-     <classname>GtkColorSelection</classname> has a visible palette or not. 
-     The function returns <literal>TRUE</literal> if the palette is visible, 
-     <literal>FALSE</literal> otherwise.
+     <classname>GtkColorSelection</classname> has a visible palette or not.
+     The function returns <literal>true</literal> if the palette is visible,
+     <literal>false</literal> otherwise.
     </para>
     <para>
      See also: 
@@ -214,9 +215,9 @@
    </shortdesc>
    <desc>
     <para>
-     Use this method to ascertain the color that was previously selected on 
-     the <classname>GtkColorSelection</classname> widget. This function 
-     returns a GdkColor Object, containing the values of red, blue, green and 
+     Use this method to ascertain the color that was previously selected on
+     the <classname>GtkColorSelection</classname> widget. This function
+     returns a GdkColor Object, containing the values of red, blue, green and
      pixel.
     </para>
     <para>
@@ -238,10 +239,10 @@
     <classname>GtkColorSelection</classname>
    </shortdesc>
    <desc>
-    Use this method to find out whether the user is in the process of 
-    selecting a color or if a color has been selected. The function returns 
-    <literal>TRUE</literal> if the user is currently dragging a color around, 
-    <literal>FALSE</literal> if the selection has stopped.
+    Use this method to find out whether the user is in the process of
+    selecting a color or if a color has been selected. The function returns
+    <literal>true</literal> if the user is currently dragging a color around,
+    <literal>false</literal> if the process of selection has stopped.
    </desc>
   </method>
 
@@ -288,8 +289,8 @@
     <para>
      Use this method to set the opacity of the currently selected color on
      <classname>GtkColorSelection</classname> to the specified alpha 
-     value. You may pass an integer between 0 and 65535 as a valid alpha value
-     in the parameter.
+     value. You may pass an integer between <literal>0</literal> and
+     <literal>65535</literal> as a valid alpha value.
     </para>
     <para>
      See also: 
@@ -313,7 +314,7 @@
     <para>
      Use this method to set the current color on the specified.
      <classname>GtkColorSelection</classname> widget. Colors should be 
-     defined as GdkColor objects.
+     defined as <classname>GdkColor</classname> objects.
     </para>
     <para>
      See also: 
@@ -336,8 +337,8 @@
     <para>
      Use this method to set whether the opacity control for the 
      <classname>GtkColorSelection</classname> is visible or not. Pass 
-     <literal>TRUE</literal> as a parameter if you want the opacity control 
-     to be visible, <literal>FALSE</literal> otherwise.
+     <literal>true</literal> as a parameter if you want the opacity control 
+     to be visible, <literal>false</literal> otherwise.
     </para>
     <para>
      See also: 
@@ -361,8 +362,8 @@
     <para>
      Use this method to set whether the opacity control for the 
      <classname>GtkColorSelection</classname> widget. 
-     Pass <literal>TRUE</literal> as a parameter if you want the 
-     palette to be visible, <literal>FALSE</literal> otherwise.
+     Pass <literal>true</literal> as a parameter if you want the 
+     palette to be visible, <literal>false</literal> otherwise.
     </para>
     <para>
      See also: 
@@ -386,7 +387,7 @@
      Use this method to set the 'previous' value of alpha on the specified 
      <classname>GtkColorSelection</classname> widget. This function however, 
      is hardly used, since it usually does not make sense to have the 
-     previous value of alpha change.
+     previous value of alpha change (other than to GTK internals).
     </para>
     <para>
      See also: 
@@ -410,7 +411,7 @@
      Use this method to set the 'previous' color selected on the specified 
      <classname>GtkColorSelection</classname> widget. This function however, 
      is hardly used, since it usually does not make sense to have the 
-     previous color selected to change.
+     previous color selected to change (other than to GTK internals).
     </para>
     <para>
      See also: 
@@ -452,8 +453,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Emitted when the color changes in the 
-    widget according to its update policy
+    Emitted when the color changes in the widget according to its update policy.
    </shortdesc>
    <desc>
     FIXME

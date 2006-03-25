@@ -19,7 +19,7 @@
    </para>
    <para>
     For more information about packing widgets see
-    the <link linked="tutorials.packing">packing tutorial</link>.
+    the <link linkend="tutorials.packing">packing tutorial</link>.
    </para>
   </desc>
  </classmeta>
@@ -34,11 +34,12 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    If all children shall have the same size.
+    Whether all children are allocated the same size.
    </shortdesc>
    <desc>
     <para>
-     Returns if all children widgets shall have the same size.
+     Returns <literal>true</literal> if all child widgets are allocated
+     the same size.
     </para>
     <para>
      See also: 
@@ -59,7 +60,7 @@
    </shortdesc>
    <desc>
     <para>
-     Returns the space between the child widgets, in pixels.
+     Returns the size of the space between the child widgets, in pixels.
     </para>
     <para>
      See also: 
@@ -74,19 +75,19 @@
     <funcprototype>
      <funcdef>void <function>pack_end</function></funcdef>
      <paramdef><classname>GtkWidget</classname> <parameter>child</parameter></paramdef>
-     <paramdef>bool <parameter><optional>expand = TRUE</optional></parameter></paramdef>
-     <paramdef>bool <parameter><optional>fill = TRUE</optional></parameter></paramdef>
+     <paramdef>bool <parameter><optional>expand = true</optional></parameter></paramdef>
+     <paramdef>bool <parameter><optional>fill = true</optional></parameter></paramdef>
      <paramdef>int <parameter><optional>padding = 0</optional></parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Adds a widget to the box in the next available position starting from the
+    Adds a widget to the box in the next available position, starting from the
     end.
    </shortdesc>
    <desc>
     <simpara>
      Adds <parameter>child</parameter> to the box starting from the end. See
-     <function class="GtkBox">pack_start</function> for the parameter 
+     <function class="GtkBox">pack_start</function> for the parameter
      description.
     </simpara>
 
@@ -132,8 +133,8 @@
     <funcprototype>
      <funcdef>void <function>pack_start</function></funcdef>
      <paramdef><classname>GtkWidget</classname> <parameter>child</parameter></paramdef>
-     <paramdef>bool <parameter><optional>expand = TRUE</optional></parameter></paramdef>
-     <paramdef>bool <parameter><optional>fill = TRUE</optional></parameter></paramdef>
+     <paramdef>bool <parameter><optional>expand = true</optional></parameter></paramdef>
+     <paramdef>bool <parameter><optional>fill = true</optional></parameter></paramdef>
      <paramdef>int <parameter><optional>padding = 0</optional></parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
@@ -180,7 +181,6 @@
       keeps the ideal size required to display all the text, while
       the first one takes all the space for display.
      </para>
-
 
      <graphic fileref="&directory.images;/reference/gtk/gtkbox.packing.png"/>
 

@@ -8,11 +8,12 @@
     A pushbutton widget that issues a signal when clicked.
   </shortdesc>
   <desc>
-    <para>
-        The <classname>GtkButton</classname> widget is usually displayed as a pushbutton
-        with a text label <classname>GtkLabel</classname> though it can contain any valid widget.
-        The <classname>GtkButton</classname> is generally used to attach a callback function or
-        method that is called when the button is clicked.
+   <para>
+    The <classname>GtkButton</classname> widget is usually displayed as a
+    pushbutton with a text label, <classname>GtkLabel</classname>, although it
+    can contain any valid widget. The <literal>GtkButton</literal> is generally
+    used to attach a callback function or method that is called when the button
+    is clicked.
     </para>
   </desc>
  </classmeta>
@@ -31,19 +32,28 @@
     Creates a new button widget.
    </shortdesc>
    <desc>
-    <para> <literal>label</literal> : the text to be displayed by the button label including an underscore to indicate the mnemonic character if desired or None if no label is required. </para>
-    <para> <literal>use_underline</literal> : if TRUE, an underscore in the text indicates the next character should be underlined and used for the mnemonic accelerator key if it is the first character so marked. </para>
     <para>
-        Creates a new button widget with the content depending on the parameters: label, and use_underline.
-        The default values for label is null and use_underline defaults to FALSE.
+     Creates a new <classname>GtkButton</classname> widget, the content of
+     which is dependant on the parameters <parameter>label</parameter> and
+     <parameter>use_underline</parameter>. The default values are
+     <literal>null</literal> and <literal>true</literal> respectively.
     </para>
     <para>
-        If label is specified the "label" property will be set with the text of the label,
-        the "use_underline" property will be set to TRUE and any characters that are preceded
-        by an underscore are underlined (use two underscores to insert an underscore in a label).
-        The first underscored character will become the mnemonic character used as the keyboard
-        accelerator for the button when pressed simultaneously with the Alt key.
-        The "use-underline" property can be set by using the optional use_underline parameter.
+     <parameter>label</parameter> is the text to be displayed in the button.
+     If you want to display anything other than a
+     <classname>GtkLabel</classname> in the button, create the button without
+     passing any parameters and add the widget at a later stage.
+    </para>
+    <para>
+     <parameter>use_underline</parameter>, if <literal>true</literal>, means
+     that an underscore in the label text will flag the next character as
+     the mnemonic accelerator key, if it is the first character so marked. This
+     is the default behaviour in PHP-GTK 2; you can switch it off by passing
+     <literal>0</literal> or <literal>false</literal> as the second parameter.
+    </para>
+    <para>
+     The mnemonic character is used as the keyboard accelerator for the button
+     when pressed simultaneously with the <literal>Alt</literal> key.
     </para>
     <example>
      <title>A button example</title>
@@ -65,30 +75,16 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-        Creates a new Button from stock.
+        Creates a <classname>GtkButton</classname> from stock.
    </shortdesc>
    <desc>
     <para>
-        The method new_from_stock() creates a new button with image and label from stock.
+     This method creates a new button with an image and label from stock. See
+     the example in the demo directory for a list of available stock options.
+     <!-- this badly needs some TLC -->
     </para>
    </desc>
   </constructor>
-
-  <constructor id="gtk.gtkbutton.constructor.new_with_mnemonic">
-   <funcsynopsis>
-    <funcprototype>
-    <funcdef> <function>GtkButton::new_with_mnemonic</function></funcdef>
-    <paramdef>string <parameter>label</parameter></paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </constructor>
-
  </constructors>
 
  <methods>
@@ -101,7 +97,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    The clicked() method emits the "clicked" signal to the button.
+    Emits the "clicked" signal to the button.
    </shortdesc>
    <desc>
     <para>
@@ -118,7 +114,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    The enter() method emits the "enter" signal to the button.
+    Emits the "enter" signal to the button.
    </shortdesc>
    <desc>
     <para>
@@ -163,7 +159,7 @@
    <desc>
     <para>
         The get_focus_on_click() method returns the value of the "focus-on-click" property.
-        If TRUE the button grabs focus when it is clicked by the mouse .
+        If <literal>true</literal>, the button grabs focus when it is clicked by the mouse .
     </para>
     <para>
      See also: 
@@ -200,7 +196,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Retrieves the text from the label of the button.
+    Retrieves the text from the button label.
    </shortdesc>
    <desc>
     <para>
@@ -253,7 +249,7 @@
    <desc>
     <para>
         The get_use_stock() method returns the value of the "use_stock" property.
-        If TRUE the button label is used to select a stock item instead of being used directly as the label text.
+        If <literal>true</literal>, the button label is used to select a stock item instead of being used directly as the label text.
     </para>
     <para>
      See also: 
@@ -275,7 +271,7 @@
    </shortdesc>
    <desc>
     <para>
-        The get_use_underline() method returns whether the "use_underline" property is TRUE meaning
+        The get_use_underline() method returns whether the "use_underline" property is <literal>true</literal> meaning
         that an underscore in the button label indicates a mnemonic.
     </para>
     <para>
@@ -375,7 +371,7 @@
    <desc>
     <para>
         The set_focus_on_click() method sets the "focus-on-click" property to the value of
-        focus_on_click. If focus_on_click is TRUE, the button grabs focus when it is clicked by the mouse.
+        focus_on_click. If focus_on_click is <literal>true</literal>, the button grabs focus when it is clicked by the mouse.
     </para>
     <para>
      See also: 
@@ -421,7 +417,7 @@
     <para>
         The set_label() method sets the text of the button label to label
         (also sets the "label" property). This string is also used to select
-        the stock item if the "use_stock" property is TRUE and the string
+        the stock item if the "use_stock" property is <literal>true</literal> and the string
         references a stock item. Any previously set labels will be cleared.
     </para>
     <para>
@@ -471,11 +467,11 @@
    </shortdesc>
    <desc>
     <para>
-        <literal>use_stock </literal> : If TRUE the button should use a stock item.
+        <literal>use_stock </literal> : If <literal>true</literal> the button should use a stock item.
     </para>
     <para>
         The set_use_stock() method sets the "use_stock" property to the value of use_stock.
-        If use_stock is TRUE, the label set on the button is used as a stock id to select the stock item for the button.
+        If use_stock is <literal>true</literal>, the label set on the button is used as a stock id to select the stock item for the button.
     </para>
     <para>
      See also: 
@@ -497,11 +493,11 @@
    </shortdesc>
    <desc>
     <para>
-        <literal>use_underline</literal> : TRUE if underscores in the text indicate mnemonics
+        <literal>use_underline</literal> : <literal>true</literal> if underscores in the text indicate mnemonics
     </para>
     <para>
         The set_use_underline() method sets the "use_underline" property to the value of
-        use_underline. If use_underline is TRUE, an underscore in the text of the button label
+        use_underline. If use_underline is <literal>true</literal>, an underscore in the text of the button label
         indicates that the next character should be underlined and used for the mnemonic accelerator
         key if it is also the first underlined character.
     </para>
@@ -639,8 +635,8 @@
     <para>
         The "released" signal is emitted when the button is released no matter where the pointer is.
     </para>
-    <para> <literal>button </literal>:	the button that received the signal </para>
-    <para> <literal>user_param1 </literal>:	the first user parameter (if any) specified with the connect() method</para>
+    <para> <literal>button </literal>: the button that received the signal </para>
+    <para> <literal>user_param1 </literal>: the first user parameter (if any) specified with the connect() method</para>
    </desc>
   </signal>
   

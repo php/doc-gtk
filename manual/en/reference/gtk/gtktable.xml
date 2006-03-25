@@ -48,7 +48,7 @@
     <funcdef> <function>GtkTable</function></funcdef>
     <paramdef>int <parameter><optional>n_rows = 1</optional></parameter></paramdef>
     <paramdef>int <parameter><optional>n_columns = 1</optional></parameter></paramdef>
-    <paramdef>bool <parameter><optional>homogeneous = FALSE</optional></parameter></paramdef>
+    <paramdef>bool <parameter><optional>homogeneous = false</optional></parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -65,14 +65,14 @@
     <para>
      The last parameter (<parameter>homogeneous</parameter>) is also optional,
      and relates to the way the table manages the size of it's child widgets.
-     If changed to true (the default value is <literal>FALSE</literal>) all
+     If changed to true (the default value is <literal>false</literal>) all
      children will have the same height and width as the largest child.
     </para>
     <para>
      There are a lot of parameters in the 
      <function class="GtkTable">attach</function> method - nine in total -
      four of which are optional. Basically, if the homogeneous parameter in the
-     constructor is set to <literal>TRUE</literal>, there is very little point
+     constructor is set to <literal>true</literal>, there is very little point
      most of the time in using any of the four optional packing parameters.
      These come into their own when the children are not required to take up
      the same amount of space.
@@ -134,7 +134,7 @@
      takes up no screen space until it contains child widgets. If you attach
      only one child with parameters that should set it in the bottom right 
      corner and set <parameter>homogeneous</parameter> to 
-     <literal>FALSE</literal>, the resulting effect will not be that of a table
+     <literal>false</literal>, the resulting effect will not be that of a table
      with only one entry in the bottom right corner, but of a container with a
      single widget in it - regardless of the number of columns and rows 
      specified in the table's constructor. Child settings always take precedence
@@ -146,7 +146,7 @@
     <para>
      The behaviour is very different when a regular grid is in position, which
      happens when the <classname>GtkTable</classname> has its 
-     <parameter>homogeneous</parameter> parameter set to <literal>TRUE</literal>.
+     <parameter>homogeneous</parameter> parameter set to <literal>true</literal>.
      The table works out the dimensions of the grid from the the largest child
      widget's size request, and positions its children accordingly.
     </para>
@@ -157,7 +157,7 @@
      in each direction. 
     </para>
     <para>
-     See the <link linked="gtk.gtktable.constructor">constructor</link> entry 
+     See the <link linkend="gtk.gtktable.constructor">constructor</link> entry 
      for an usage example.
     </para>
    </desc>
