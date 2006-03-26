@@ -1,5 +1,4 @@
-<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-		version="1.0">
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
 
  <xsl:template match="enumname">
   <xsl:param name="with-link" select="0" />
@@ -18,7 +17,7 @@
 
     <xsl:choose>
      <xsl:when test="$knownenum='1'">
-	  <span dir="ltr">
+      <span dir="ltr">
       <a>
        <xsl:attribute name="href">
         <xsl:call-template name="gen.enumname.url">
@@ -29,7 +28,7 @@
        </xsl:attribute>
        <xsl:apply-templates />
       </a>
-	  </span>
+     </span>
      </xsl:when>
      <xsl:otherwise>
       <b>
@@ -54,20 +53,22 @@
   <h1 class="title">
    <xsl:apply-templates select="./enumname" />
   </h1>
+<!-- THIS IS (ONE OF TWO PLACES) WHERE WE DISPLAY FLAG/ENUM TYPES, IF WE SO CHOOSE
   <p>
    <span dir="ltr">
-   <h3>
-    <xsl:choose>
-     <xsl:when test="@type='flags'">
-      <xsl:text>Flags</xsl:text>
-     </xsl:when>
-     <xsl:otherwise>
-      <xsl:text>Enums</xsl:text>
-     </xsl:otherwise>
-    </xsl:choose>
-   </h3>
-	</span>
+    <h3>
+     <xsl:choose>
+      <xsl:when test="@type='flags'">
+       <xsl:text>Flags</xsl:text>
+      </xsl:when>
+      <xsl:otherwise>
+       <xsl:text>Enums</xsl:text>
+      </xsl:otherwise>
+     </xsl:choose>
+    </h3>
+   </span>
   </p>
+-->
   <p>
    <xsl:apply-templates select="./desc"/>
   </p>
@@ -113,6 +114,7 @@
   <h1 class="title">
    <xsl:apply-templates select="./enumname" />
   </h1>
+<!-- THIS IS (ONE OF TWO PLACES) WHERE WE DISPLAY FLAG/ENUM TYPES, IF WE SO CHOOSE
   <p>
    <h3>
     <xsl:choose>
@@ -125,6 +127,7 @@
     </xsl:choose>
    </h3>
   </p>
+-->
   <p>
    <xsl:apply-templates select="./desc"/>
   </p>
@@ -170,11 +173,11 @@
       <xsl:value-of select="./value" />
      </xsl:when>
      <xsl:otherwise> 
-      <!-- automatically numbering -->
+      <!-- automatic numbering -->
       <xsl:choose>
        <xsl:when test="../enumname = 'GdkEventType'">
         <xsl:choose>
-         <xsl:when test="./optionname = 'GDK_NOTHING'">
+         <xsl:when test="./optionname = 'Gdk::NOTHING'">
           <xsl:text>-1</xsl:text>
          </xsl:when>
          <xsl:otherwise>
@@ -201,7 +204,26 @@
  </xsl:template>
 
  <xsl:template match="optionname">
-  <xsl:apply-templates />
+  <!-- we _might_ need to link to specific enum values, so let's allow for it -->
+  <xsl:choose>
+   <xsl:when test="@enum!=''">
+    <span dir="ltr">
+     <a>
+      <xsl:attribute name="href">
+       <xsl:call-template name="gen.enumname.url">
+        <xsl:with-param name="enumname">
+         <xsl:value-of select="@enum"/>
+        </xsl:with-param>
+       </xsl:call-template>
+      </xsl:attribute>
+      <xsl:apply-templates />
+     </a>
+    </span>
+   </xsl:when>
+   <xsl:otherwise>
+    <xsl:apply-templates />
+   </xsl:otherwise>
+  </xsl:choose>
  </xsl:template>
 
 <!-- ================================================================ -->

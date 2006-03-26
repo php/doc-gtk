@@ -5,7 +5,7 @@
                 version='1.0'>
 
 <!-- ********************************************************************
-     $Id: xref.xsl,v 1.5 2005-10-24 05:14:22 cweiske Exp $
+     $Id: xref.xsl,v 1.6 2006-03-26 02:46:07 sfox Exp $
      ********************************************************************
 
      This file is part of the XSL DocBook Stylesheet distribution.
@@ -25,7 +25,7 @@
 </xsl:template>
 
 <xsl:template match="link">
-  <xsl:variable name="target" select="id(@linked)"/>
+  <xsl:variable name="target" select="id(@linkend)"/>
 
   <a>
     <xsl:if test="@id">
@@ -53,7 +53,7 @@
                              mode="object.title.markup.textonly"/>
       </xsl:attribute>
     </xsl:if>
-    
+
     <xsl:apply-templates/>
   </a>
 </xsl:template>

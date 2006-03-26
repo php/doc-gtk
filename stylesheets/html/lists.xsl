@@ -6,7 +6,7 @@
                 version='1.0'>
 
 <!-- ********************************************************************
-     $Id: lists.xsl,v 1.6 2005-04-11 21:54:44 cweiske Exp $
+     $Id: lists.xsl,v 1.7 2006-03-26 02:46:07 sfox Exp $
      ********************************************************************
 
      This file is part of the XSL DocBook Stylesheet distribution.
@@ -62,56 +62,64 @@
 
 <xsl:template match="orderedlist">
   <xsl:variable name="start">
-    <xsl:choose>
-      <xsl:when test="@continuation='continues'">
-        <xsl:call-template name="orderedlist-starting-number"/>
-      </xsl:when>
+   <xsl:choose>
+     <xsl:when test="@continuation='continues'">
+      <xsl:call-template name="orderedlist-starting-number"/>
+     </xsl:when>
+     <xsl:otherwise>
+      <xsl:choose>
+       <!-- let's make it possible to start from wherever we like -->
+       <xsl:when test="@start!=''">
+        <xsl:value-of select="@start"/>
+       </xsl:when>
       <xsl:otherwise>1</xsl:otherwise>
-    </xsl:choose>
+     </xsl:choose>
+    </xsl:otherwise>
+   </xsl:choose>
   </xsl:variable>
   <xsl:variable name="numeration">
-    <xsl:choose>
-      <xsl:when test="@numeration='arabic'">1</xsl:when>
-      <xsl:when test="@numeration='loweralpha'">a</xsl:when>
-      <xsl:when test="@numeration='lowerroman'">i</xsl:when>
-      <xsl:when test="@numeration='upperalpha'">A</xsl:when>
-      <xsl:when test="@numeration='upperroman'">I</xsl:when>
-      <xsl:otherwise>
-        <!-- alternate the numeration based on depth -->
-        <xsl:variable name="depth" select="count(ancestor::orderedlist)"/>
-        <xsl:variable name="type" select="$depth mod 5"/>
-        <xsl:choose>
-          <xsl:when test="$type = 0">1</xsl:when>
-          <xsl:when test="$type = 1">a</xsl:when>
-          <xsl:when test="$type = 2">i</xsl:when>
-          <xsl:when test="$type = 3">A</xsl:when>
-          <xsl:when test="$type = 4">I</xsl:when>
-        </xsl:choose>
-      </xsl:otherwise>
-    </xsl:choose>
+   <xsl:choose>
+    <xsl:when test="@numeration='arabic'">1</xsl:when>
+    <xsl:when test="@numeration='loweralpha'">a</xsl:when>
+    <xsl:when test="@numeration='lowerroman'">i</xsl:when>
+    <xsl:when test="@numeration='upperalpha'">A</xsl:when>
+    <xsl:when test="@numeration='upperroman'">I</xsl:when>
+    <xsl:otherwise>
+     <!-- alternate the numeration based on depth -->
+     <xsl:variable name="depth" select="count(ancestor::orderedlist)"/>
+     <xsl:variable name="type" select="$depth mod 5"/>
+     <xsl:choose>
+      <xsl:when test="$type = 0">1</xsl:when>
+      <xsl:when test="$type = 1">a</xsl:when>
+      <xsl:when test="$type = 2">i</xsl:when>
+      <xsl:when test="$type = 3">A</xsl:when>
+      <xsl:when test="$type = 4">I</xsl:when>
+     </xsl:choose>
+    </xsl:otherwise>
+   </xsl:choose>
   </xsl:variable>
   <div class="{name(.)}">
-    <xsl:if test="title">
-      <xsl:apply-templates select="title"/>
-    </xsl:if>
-    <ol>
-    <xsl:if test="$start != '1'">
-      <xsl:attribute name="start">
-        <xsl:value-of select="$start"/>
-      </xsl:attribute>
-    </xsl:if>
-    <xsl:if test="$numeration != ''">
-      <xsl:attribute name="type">
-	<xsl:value-of select="$numeration"/>
-      </xsl:attribute>
-    </xsl:if>
-    <xsl:if test="@spacing='compact'">
-      <xsl:attribute name="compact">
-	<xsl:value-of select="compact"/>
-      </xsl:attribute>
-    </xsl:if>
-    <xsl:apply-templates select="listitem"/>
-    </ol>
+   <xsl:if test="title">
+    <xsl:apply-templates select="title"/>
+   </xsl:if>
+   <ol>
+   <xsl:if test="$start != '1'">
+    <xsl:attribute name="start">
+     <xsl:value-of select="$start"/>
+    </xsl:attribute>
+   </xsl:if>
+   <xsl:if test="$numeration != ''">
+    <xsl:attribute name="type">
+     <xsl:value-of select="$numeration"/>
+    </xsl:attribute>
+   </xsl:if>
+   <xsl:if test="@spacing='compact'">
+    <xsl:attribute name="compact">
+     <xsl:value-of select="compact"/>
+    </xsl:attribute>
+   </xsl:if>
+   <xsl:apply-templates select="listitem"/>
+   </ol>
   </div>
 </xsl:template>
 
@@ -144,7 +152,7 @@
   <xsl:variable name="usemark">
     <xsl:choose>
       <xsl:when test="$override != ''">
-	<xsl:value-of select="$override"/>
+       <xsl:value-of select="$override"/>
       </xsl:when>
       <xsl:otherwise>
 	<xsl:value-of select="$mark"/>

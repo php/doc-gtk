@@ -13,9 +13,10 @@
 <xsl:include href="chunk-common.xsl"/>
 <xsl:include href="chunker.xsl"/>
 
-	<xsl:param name="base.dir" select="'build/html/'"/>	
-	<xsl:param name="root.filename" select="'index'" />
-	<xsl:param name="use.id.as.filename" select="1" />
-	<xsl:param name="phpweb" select="false()"/>
-	<xsl:param name="html.ext" select="'.html'"/>
+<xsl:param name="base.dir" select="'build/html/'"/>	
+<xsl:param name="root.filename" select="'index'" />
+<xsl:param name="use.id.as.filename" select="1" />
+<xsl:param name="phpweb" select="false()"/>
+<xsl:param name="html.ext" select="'.html'"/>
+
 </xsl:stylesheet>

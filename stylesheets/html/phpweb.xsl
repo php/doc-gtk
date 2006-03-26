@@ -34,7 +34,7 @@
   <xsl:processing-instruction name="php">
    <xsl:text>
     require('shared-manual.inc');
-    sendManualHeaders('UTF-8', 'ru');
+    sendManualHeaders('UTF-8', 'en');
     setupNavigation(array('home' => array("
    </xsl:text>
    <xsl:call-template name="href.target">
@@ -77,12 +77,12 @@
 
  <xsl:template name="gen.toc.array">
   <xsl:param name="node" select="." />
-  <!-- we need a few special cases here so that we can handle constructor, methods, signals and properties.. -->
+  <!-- we need a few special cases here so that we can handle constructor, methods, signals, fields and properties.. -->
 
   <xsl:choose>
-   <xsl:when test="name($node)='constructor' or name($node)='method' or name($node)='signal' or name($node)='prop'">
+   <xsl:when test="name($node)='constructor' or name($node)='method' or name($node)='signal' or name($node)='prop' or name($node)='field'">
     <xsl:variable name="classentry" select="(ancestor::classentry|ancestor::refentry)[1]"/>
-    <xsl:for-each select="$classentry/constructors|$classentry/methods/*|$classentry/signals/*|$classentry/properties/*|$classentry/fields/*|$classentry/method">
+    <xsl:for-each select="$classentry/constructors|$classentry/methods/*|$classentry/signals/*|$classentry/fields/*|$classentry/properties/*|$classentry/method">
      <xsl:call-template name="gen.text.toc.array">
       <xsl:with-param name="node" select="." />
      </xsl:call-template>
@@ -307,4 +307,4 @@ echo str_repeat(make_image('inhier-blank.gif'),
 
  </xsl:template>
 
- </xsl:stylesheet>
+</xsl:stylesheet>

@@ -246,7 +246,7 @@ title of the element. This does not include the label.
  </xsl:call-template>
 </xsl:template>
 
-<xsl:template match="methods" mode="title.markup">
+<xsl:template match="constructors|methods" mode="title.markup">
  <xsl:param name="text-only" select="'0'"/>
  <xsl:param name="allow-anchors" select="'0'"/>
  <xsl:variable name="classentry" select="ancestor::classentry"/>
@@ -281,7 +281,7 @@ title of the element. This does not include the label.
  </span>
 </xsl:template>
 
-<xsl:template match="properties" mode="title.markup">
+<xsl:template match="properties|fields" mode="title.markup">
  <xsl:param name="text-only" select="'0'"/>
  <xsl:param name="allow-anchors" select="'0'"/>
  <xsl:variable name="classentry" select="ancestor::classentry"/>
@@ -301,7 +301,7 @@ title of the element. This does not include the label.
  </span>
 </xsl:template>
 
-<xsl:template match="property" mode="title.markup">
+<xsl:template match="prop" mode="title.markup">
  <xsl:param name="text-only" select="'0'"/>
  <xsl:param name="allow-anchors" select="'0'"/>
  <xsl:variable name="classentry" select="ancestor::classentry"/>

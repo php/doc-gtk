@@ -3,7 +3,7 @@
                 version='1.0'>
 
 <!-- ********************************************************************
-     $Id: titlepage.xsl,v 1.7 2005-04-11 21:54:45 cweiske Exp $
+     $Id: titlepage.xsl,v 1.8 2006-03-26 02:46:07 sfox Exp $
      ********************************************************************
 
      This file is part of the XSL DocBook Stylesheet distribution.
@@ -70,39 +70,39 @@
  <xsl:template name="authorgroup-title">
   <xsl:param name="id"></xsl:param>
   <xsl:choose>
-   <xsl:when test="$id='credits.phpgtk.authors'">
+   <xsl:when test="$id='appendix.credits.authors'">
       <xsl:call-template name="gentext">
        <xsl:with-param name="key">PHPGTKauths</xsl:with-param>
       </xsl:call-template>
    </xsl:when>
-   <xsl:when test="$id='credits.phpgtk.contributors'">
+   <xsl:when test="$id='appendix.credits.contributors'">
       <xsl:call-template name="gentext">
        <xsl:with-param name="key">PHPGTKcons</xsl:with-param>
       </xsl:call-template>
    </xsl:when>
-   <xsl:when test="$id='credits.phpgtk.manual.authors'">
+   <xsl:when test="$id='appendix.credits.pastcontributors'">
       <xsl:call-template name="gentext">
-       <xsl:with-param name="key">PHPGTKmanauths</xsl:with-param>
+       <xsl:with-param name="key">PHPGTKconsp</xsl:with-param>
       </xsl:call-template>
    </xsl:when>
-   <xsl:when test="$id='credits.phpgtk.manual.contributors'">
+   <xsl:when test="$id='editors'">
       <xsl:call-template name="gentext">
-       <xsl:with-param name="key">PHPGTKmancons</xsl:with-param>
+       <xsl:with-param name="key">editedby</xsl:with-param>
+      </xsl:call-template>
+   </xsl:when>
+   <xsl:when test="$id='appendix.doccredits.pastauthors'">
+      <xsl:call-template name="gentext">
+       <xsl:with-param name="key">PHPGTKmanauthsp</xsl:with-param>
+      </xsl:call-template>
+   </xsl:when>
+   <xsl:when test="$id='appendix.doccredits.pasteditors'">
+      <xsl:call-template name="gentext">
+       <xsl:with-param name="key">PHPGTKeditorsp</xsl:with-param>
       </xsl:call-template>
    </xsl:when>
    <xsl:otherwise></xsl:otherwise>
   </xsl:choose>
  </xsl:template>
-
- <xsl:template name="author-email-link">
-  <a>
-   <xsl:attribute name="href">
-    <xsl:text>mailto:</xsl:text><xsl:value-of select="./authoremail" />
-   </xsl:attribute>
-  <xsl:apply-templates select="honorific|firstname|othername|surname|lineage"  mode="titlepage.mode" />
-  </a>
- </xsl:template>
- 
 
  <xsl:template match="authorgroup" mode="titlepage.mode">
   <b>
@@ -121,15 +121,18 @@
               <xsl:with-param name="object" select="//appendix[@id='appendix.doccredits']"/>
       </xsl:call-template>
      </xsl:attribute>
-     <xsl:text>et al.</xsl:text>
+     <xsl:text>et al</xsl:text>
     </a>
+    <br />
+    <br />
    </div>
   </xsl:if>
  </xsl:template>
 
+
  <xsl:template match="authorgroup">
   <xsl:choose>
-   <xsl:when test="ancestor::appendix[@rtl='1']">
+   <xsl:when test = "ancestor::appendix[@rtl='1']">
     <div dir="rtl">
      <b>
       <xsl:call-template name="authorgroup-title">
@@ -164,7 +167,7 @@
   </div>
  </xsl:template>
 
-  <xsl:template match="editor/contrib|author/contrib" mode="titlepage.mode">
+ <xsl:template match="editor/contrib|author/contrib" mode="titlepage.mode">
   <xsl:text> : </xsl:text><xsl:apply-templates mode="titlepage.mode" />
  </xsl:template>
 
@@ -187,7 +190,6 @@
   <xsl:variable name="holders" select="holder"/>
 
   <p class="{name(.)}">
-
     <a>
      <xsl:attribute name="href">
       <xsl:call-template name="href.target">
@@ -203,12 +205,9 @@
     <xsl:call-template name="gentext.space"/>
     <xsl:apply-templates select="$years" mode="titlepage.mode"/>
     <xsl:call-template name="gentext.space"/>
-    <xsl:call-template name="gentext.by"/>
-    <xsl:call-template name="gentext.space"/>
     <xsl:apply-templates select="$holders" mode="titlepage.mode"/>
   </p>
 </xsl:template>
-
 
 <xsl:template match="year" mode="titlepage.mode">
   <xsl:apply-templates/><xsl:text>, </xsl:text>
@@ -243,14 +242,7 @@
 </xsl:template>
 
  <xsl:template name="editor-author-text" >
-  <xsl:choose>
-   <xsl:when test="./authoremail">
-     <xsl:call-template name="author-email-link" />
-   </xsl:when>
-   <xsl:otherwise>
   <xsl:apply-templates select="honorific|firstname|othername|surname|lineage"  mode="titlepage.mode" />
-  </xsl:otherwise>
-  </xsl:choose>
   <xsl:if test="count(ancestor::appendix)>0">
    <xsl:apply-templates select="contrib" mode="titlepage.mode" />
   </xsl:if>

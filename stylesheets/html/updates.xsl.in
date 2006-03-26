@@ -21,11 +21,11 @@
  <xsl:for-each select="$nodes">
   <xsl:text disable-output-escaping="yes">&amp;#0149; </xsl:text>
   <xsl:variable name="id"><xsl:value-of select="@id"/></xsl:variable>
-  <a href="http://gtk.php.net/manual/en/{$id}.php" date="">
+  <a href="http://gtk.php.net/manual/@LANG@/{$id}.php" date="">
   <xsl:value-of select="descendant::*[name()=$titlename]"/>
   </a>
   <xsl:if test="contains(@id, 'tutorial')"> (tutorial)</xsl:if>
-  <xsl:text> [</xsl:text>en<xsl:text disable-output-escaping="yes">]&lt;br /&gt;</xsl:text>
+  <xsl:text> [</xsl:text>@LANG@<xsl:text disable-output-escaping="yes">]&lt;br /&gt;</xsl:text>
   <xsl:text>
   </xsl:text>
  </xsl:for-each>

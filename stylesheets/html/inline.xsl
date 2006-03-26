@@ -3,7 +3,7 @@
                 version='1.0'>
 
 <!-- ********************************************************************
-     $Id: inline.xsl,v 1.7 2005-04-11 21:54:44 cweiske Exp $
+     $Id: inline.xsl,v 1.8 2006-03-26 02:46:07 sfox Exp $
      ********************************************************************
 
      This file is part of the XSL DocBook Stylesheet distribution.
@@ -197,11 +197,11 @@
 <xsl:template match="parameter">
   <xsl:call-template name="inline.italicmonoseq"/>
 </xsl:template>
-<!--
-<xsl:template match="property">
+
+<xsl:template match="prop">
   <xsl:call-template name="inline.charseq"/>
 </xsl:template>
--->
+
 <xsl:template match="returnvalue">
   <xsl:call-template name="inline.charseq"/>
 </xsl:template>

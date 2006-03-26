@@ -6,7 +6,7 @@
                 version='1.0'>
 
 <!-- ********************************************************************
-     $Id: autotoc.xsl,v 1.12 2006-03-02 23:34:10 cweiske Exp $
+     $Id: autotoc.xsl,v 1.13 2006-03-26 02:46:07 sfox Exp $
      ********************************************************************
 
      This file is part of the XSL DocBook Stylesheet distribution.
@@ -88,10 +88,10 @@
 <xsl:template name="component.toc">
   <xsl:if test="$generate.component.toc != 0">
     <xsl:variable name="nodes" select="section|sect1|sect2|refentry
-    				       |classentry[@hide='0']
+                           |classentry[@hide='0']
                            |classtree
                            |index
-    				       |enums/enum[@hide='0']
+                           |enums/enum[@hide='0']
                            |bridgehead[not(@renderas)]
                            |.//bridgehead[@renderas='sect1']"/>
     <xsl:if test="$nodes">
@@ -321,15 +321,13 @@ TODO:
         <xsl:when test="name(.)='constructor'">
           <xsl:text>Constructor</xsl:text>
         </xsl:when>
-        
         <xsl:when test="(name(.)='constructors' or name(.)='methods') or (name(.)='properties') or (name(.)='fields') or (name(.)='signals')">
           <xsl:value-of select="name(.)"/>
         </xsl:when>
-
         <xsl:when test="name(.)='field'">
           <xsl:value-of select="fieldname"/>
         </xsl:when>
-        <xsl:when test="name(.)='property'">
+        <xsl:when test="name(.)='prop'">
           <xsl:value-of select="propname"/>
         </xsl:when>
         <xsl:when test="name(.)='method'">
@@ -341,7 +339,6 @@ TODO:
         <xsl:when test="name(.)='enum'">
           <xsl:value-of select="enumname"/>
         </xsl:when>
-        
         <xsl:otherwise>
           <xsl:value-of select="title" />
         </xsl:otherwise>
@@ -358,10 +355,9 @@ TODO:
       <tocentry file="{$file}">
         <xsl:value-of select="$indent"/>
         <xsl:text>  </xsl:text>
-        <title>    
+        <title>
           <xsl:value-of select="$title" />
         </title>
-        
         <xsl:call-template name="tocentry">
           <xsl:with-param name="indent"><xsl:value-of select="$indent"/><xsl:text>  </xsl:text></xsl:with-param>
         </xsl:call-template>

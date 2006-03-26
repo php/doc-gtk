@@ -3,7 +3,7 @@
                 xmlns:lxslt="http://xml.apache.org/xslt"
                 xmlns:xalanredirect="org.apache.xalan.xslt.extensions.Redirect"
                 xmlns:doc="http://nwalsh.com/xsl/documentation/1.0"
-		version="1.1"
+                version="1.1"
                 exclude-result-prefixes="doc"
                 extension-element-prefixes="saxon xalanredirect lxslt">
 
@@ -45,8 +45,10 @@
   <xsl:param name="encoding" select="$default.encoding"/>
   <xsl:param name="indent" select="'no'"/>
   <xsl:param name="content" select="''"/>
+  <xsl:param name="chunk.quietly" select="1" />
 
-  <xsl:message>
+  <xsl:if test="$chunk.quietly=0">
+   <xsl:message>
     <xsl:text>Writing </xsl:text>
     <xsl:value-of select="$filename"/>
     <xsl:if test="name(.) != ''">
@@ -58,7 +60,8 @@
         <xsl:text>)</xsl:text>
       </xsl:if>
     </xsl:if>
-  </xsl:message>
+   </xsl:message>
+  </xsl:if>
 
   <xsl:variable name="vendor" select="system-property('xsl:vendor')"/>
 
@@ -118,7 +121,8 @@
   <xsl:param name="doctype-system" select="''"/>
   <xsl:param name="content" select="''"/>
 
-  <xsl:message>
+  <xsl:if test="$chunk.quietly = 0">
+   <xsl:message>
     <xsl:text>Writing </xsl:text>
     <xsl:value-of select="$filename"/>
     <xsl:if test="name(.) != ''">
@@ -126,6 +130,7 @@
     <xsl:value-of select="name(.)"/>
     </xsl:if>
   </xsl:message>
+ </xsl:if>
 
   <xsl:variable name="vendor" select="system-property('xsl:vendor')"/>
 

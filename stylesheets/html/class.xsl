@@ -270,11 +270,13 @@
     <xsl:choose>
       <xsl:when test="count(ancestor::constructor)!='0'"></xsl:when>
       <xsl:when test="@class!=''">
-        <xsl:value-of select="@class"/>
+       <xsl:value-of select="@class"/>
+      </xsl:when>
+      <xsl:when test="count(ancestor::refentry)!='0'">
+       <xsl:value-of select="ancestor-or-self::refentry/refmeta/refentrytitle"/>
       </xsl:when>
       <xsl:otherwise>
-        <!-- no "class" attribute for the given tag -->
-        <xsl:value-of select="ancestor-or-self::classentry/classmeta/classtitle"/>
+       <xsl:value-of select="ancestor-or-self::classentry/classmeta/classtitle"/>
       </xsl:otherwise>
     </xsl:choose>
   </xsl:variable>
@@ -676,7 +678,7 @@
    </xsl:call-template>
   </p>
   <blockquote>
-   <xsl:apply-templates select="./property" mode="synoptic.mode"/>
+   <xsl:apply-templates select="./prop" mode="synoptic.mode"/>
   </blockquote>
  </xsl:template>
 
@@ -702,7 +704,7 @@
   </dd>
  </xsl:template>
 
- <xsl:template match="property" mode="synoptic.mode">
+ <xsl:template match="prop" mode="synoptic.mode">
   <dt>
    <xsl:apply-templates select="./propname" mode="synoptic.mode"/>
    <xsl:text>:</xsl:text>
@@ -820,7 +822,7 @@
   </div>
  </xsl:template>
 
- <xsl:template match="property">
+ <xsl:template match="prop">
   <div>
   <a>
    <xsl:attribute name="name"><xsl:value-of select="@id"/></xsl:attribute>
