@@ -2071,7 +2071,7 @@ The Subject attribute will be renamed Keyword.
 		list (Continues) -->
 <!-- Spacing: Whether the vertical space in the list should be
 		compressed -->
-
+<!-- Start: the number to start counting from -->
 
 <!ENTITY % orderedlist.attlist "INCLUDE">
 <![%orderedlist.attlist;[
@@ -2087,6 +2087,7 @@ The Subject attribute will be renamed Keyword.
 				|restarts)	"restarts"
 		spacing		(normal
 				|compact)	#IMPLIED
+		start	CDATA		#IMPLIED
 		%common.attrib;
 		%orderedlist.role.attrib;
 		%local.orderedlist.attrib;

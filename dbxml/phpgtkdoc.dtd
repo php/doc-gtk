@@ -2,7 +2,7 @@
    Docbook Customization layer of PHP-GTK docs
    Authors: James Moore <jmoore@php.net>
 
-   $Id: phpgtkdoc.dtd,v 1.17 2006-03-07 21:26:31 cweiske Exp $
+   $Id: phpgtkdoc.dtd,v 1.18 2006-03-26 02:48:10 sfox Exp $
 
 -->
 
@@ -18,7 +18,7 @@
     %common.attrib;
 >
 
-<!ENTITY % phpgtkbook.class		"classtree classset enumset">
+<!ENTITY % phpgtkbook.class "classtree classset enumset">
 
 
 <!-- 
@@ -56,8 +56,8 @@
 <!ELEMENT shortdesc (%para.char.mix;)*>
 <!ATTLIST shortdesc
     %common.attrib;
-	%simpara.role.attrib;
-	%local.simpara.attrib;
+    %simpara.role.attrib;
+    %local.simpara.attrib;
 >
 
 <!--
@@ -68,8 +68,8 @@
 <!ELEMENT desc (%para.char.mix; | %para.mix; |  para | simpara)*>
 <!ATTLIST desc
     %common.attrib;
-	%para.role.attrib;
-	%local.para.attrib;
+    %para.role.attrib;
+    %local.para.attrib;
 >
 <!--
 
@@ -77,14 +77,12 @@
   It should contain
   - One classmeta element.
   - Optionally it should contain
-    A constructor
-	Followed by:
-  - A methods entry, a signals entry and an attributes entry 
-    (any of these three may be omitted).
+    a constructors entry, a signals entry and a properties/fields entry 
+    (any of these may be omitted).
 
 -->
 <!ELEMENT classentry 
-          ((classmeta),(constructors)?,(methods?,signals?,properties?,fields?))>
+          ((classmeta),(constructors?,methods?,properties?,fields?,signals?))>
 <!ATTLIST classentry
     %common.attrib;
     %refentry.role.attrib;
@@ -141,9 +139,9 @@
 <!ENTITY % method.class "(funcsynopsis),(shortdesc,desc)">
 
 <!-- Constructors
-     -multiple or one constructor for a class
+     - one or more constructor for a class
 -->
-<!ELEMENT constructors ((constructor)+)>
+<!ELEMENT constructors (constructor)+ >
 <!ATTLIST constructors
     %common.attrib;
 >
@@ -151,9 +149,9 @@
 <!-- 
 
    Constructor
-   - contains info about the classes constructor.
+   - contains info about the class constructor(s).
      should contain a funcsynopsis followed by a 
-	 shortdesc followed by a desc.
+     shortdesc followed by a desc.
 
 -->
 <!ELEMENT constructor (%method.class;)>
@@ -166,8 +164,8 @@
    Methods
    - Simple wrapper around all the method entries
      (not 100% necessary but makes sure they are all
-	  grouped together and makes my life simpler)
-  
+     grouped together and makes my life simpler)
+
   Should contain one or more method entry/ies
 
 -->
@@ -225,36 +223,31 @@
 <!ATTLIST callback
      %common.attrib;
 >
-<!--
- 
-   attributes: wrapper for attribute entries
 
--->
+<!--
+   attributes: wrapper for attribute entries
 <!ELEMENT attributes (attribute)+ >
 <!ATTLIST attributes
      %common.attrib;
 >
-
+-->
 
 <!--
 
   - attribute: contains attributename followed by shortdesc and a desc.
-
--->
 <!ELEMENT attribute ((attributename),(shortdesc,desc)) >
 <!ATTLIST attribute
     %common.attrib;
 >
+-->
 
 <!-- 
-
   - attributename: contains the name of the attribute
-
--->
 <!ELEMENT attributename (%docinfo.char.mix;)* >
 <!ATTLIST attributename
     %common.attrib;
 >
+-->
 
 <!--
 
