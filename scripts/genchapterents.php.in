@@ -1,0 +1,84 @@
+<?php
+
+$lang = '@LANG@';
+$langdir = '@LANGDIR@';
+$default = '@MANUAL@/en';
+$entities = array();
+$origlang = '@LANG@';
+$origentities = array();
+
+function gen_ent($path, $file, $lang)
+{
+    global $langdir;
+
+    $path = substr($path, strlen($langdir) + 1);
+    if ($path) $path .= "/";
+    $ent = preg_replace("%[\\/]%", ".", preg_replace("%^(?:manual[\\/])?en[\\/]((userguide|reference)[\\/])?(.*)\.xml$%",'\\3', $path.$file));
+    $ent = ltrim($ent, '.');
+    $ent = substr($ent, 0, -4);
+
+    return "<!ENTITY $ent SYSTEM \"".preg_replace('%^(?:[\\/])?en([\\/](userguide|reference)[\\/])?%', "$lang\\1", "$lang/$path$file")."\">";
+
+}
+
+function gen_dir_ents($langdir)
+{
+    global $entities, $lang;
+    $dir_handle = opendir($langdir);
+    while($file = readdir($dir_handle))
+    {
+        if (($file != "CVS") && ($file != ".cvsignore") && ($file != ".") && ($file != ".."))
+        {
+            if(is_dir($langdir."/".$file))
+            {
+                gen_dir_ents($langdir."/".$file);
+            }
+            else
+            {
+                if(substr($file, -4) == ".xml")
+                {
+                    if(($lang != "en") and (file_exists(preg_replace("%^([\\/])?en(/?|$)%", "\\1".$lang."\\2", $langdir)."/".$file)))
+                    {
+                        $entities[] = gen_ent($langdir, $file, $lang);
+                    }
+                    else
+                    {
+                        $entities[] = gen_ent($langdir, $file, "en");
+                    }
+                }
+            }
+        }
+    }
+    closedir($dir_handle);
+}
+
+if (is_dir($langdir)) {
+
+    gen_dir_ents($langdir);
+
+    if ($lang != "en") {
+        $origentities = $entities;
+        $lang = "en";
+        $langdir = $default;
+        $entities = array();
+        gen_dir_ents($langdir);
+    }
+
+} else {
+    die("\nPlease run configure from the top dir of php-gtk-doc checkout.\n");
+}
+
+sort($entities, SORT_STRING);
+
+while(list(,$val) = each($entities)) {
+    /* check for uniqueness */
+    if ($lang != $origlang) {
+        $check = str_replace("en/", "$origlang/", $val);
+        if (in_array($check, $origentities)) {
+            $val = $check;
+        }
+    }
+    echo $val."\n";
+}
+
+?>

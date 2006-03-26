@@ -19,11 +19,12 @@
 */
 
 if ($_SERVER["argc"] < 3) {
-    exit("Purpose: Syntax highlight PHP examples in XSLT generated HTML manual.\r\n"
+    exit("Purpose: Syntax highlight PHP examples in XSLT generated manual.\r\n"
         .'Usage: highlight.php [ "xml" | "php" ] [ filename.ext | dir | wildcard ] ...' ."\r\n"
     );
 }
 set_time_limit(5*60); // can run long, but not more than 5 minutes
+ini_set("error_reporting", E_ALL); // kill the E_STRICT warnings in GeSHi under PHP 5
 
 require dirname(__FILE__).'/geshi/geshi.php';
 $geshi = new GeSHi('', 'php', dirname(__FILE__).'/geshi/geshi');
@@ -42,14 +43,14 @@ $geshi->set_methods_style('color: black; font-style: italic', true);
 $geshi->set_regexps_style(0, 'color: #004090', true);
 
 // use this to get updated stylesheet info if changed via abovementioned API
-// $styles = $geshi->get_stylesheet();_
+// $styles = $geshi->get_stylesheet();
 
 function callback_html_number_entities_decode($matches) {
     return chr($matches[1]);
 }
 
 function callback_highlight_php($matches) {
-    $with_tags	= trim( html_entity_decode( $matches[1]));
+    $with_tags = trim(html_entity_decode($matches[1]));
     global $geshi;
     $geshi->set_language('php');
     $geshi->set_source($with_tags);
@@ -57,21 +58,23 @@ function callback_highlight_php($matches) {
 }
 
 function callback_highlight_xml($matches) {
-    $with_tags	= trim( html_entity_decode( $matches[1]));
+    $with_tags = trim(html_entity_decode($matches[1]));
     global $geshi;
     $geshi->set_language('xml');
     $geshi->set_source($with_tags);
 
-    $strCode	= $geshi->parse_code();
+    $strCode = $geshi->parse_code();
     return $strCode;
 }
 
-echo "Highlighting files ";
+echo "Highlighting files..";
 
 $files = $_SERVER["argv"];
 array_shift($files);// $argv[0] - script filename
 $TYPE = array_shift($files);//"xml" or "php"
+
 while (($file = array_shift($files)) !== null) {
+
     if (is_file($file)) {
         $process = array($file);
     } elseif (is_dir($file)) {
@@ -79,28 +82,27 @@ while (($file = array_shift($files)) !== null) {
         $process = glob($file . ($lastchar == "/" || $lastchar == "\\" ? "*" : "/*"));
     } else { // should be wildcard
         //please tell me how to prevent wildcard escaping in the shell
-        //then I can remove this
         $file = str_replace('\\*', '*', $file);
         $process = glob($file);
     }
+
     foreach ($process as $filename) {
         if (!is_file($filename)) { // do not recurse
             continue;
         }
-//        echo "highlighting $filename ...\n";
+
         $original = file_get_contents($filename);
         $highlighted = preg_replace_callback("!<pre class=\"phpcode\">(.*)</pre>!sU", "callback_highlight_php", $original);
         $highlighted = preg_replace_callback("!<pre class=\"xml\">(.*)</pre>!sU", "callback_highlight_xml", $highlighted);
+
         if ($original != $highlighted) {
-            // file_put_contents is only in PHP >= 5
             $fp = fopen( $filename, "wb");
             fwrite($fp, $highlighted);
             fclose($fp);
         }
         echo ".";
     }
-//    echo "done highlighting.\r\n";
 }
 
-echo " done\r\n";
+echo "\nhighlighting complete\n";
 ?>

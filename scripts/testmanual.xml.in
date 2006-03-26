@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE book PUBLIC "@DOCBOOK_DOCTYPE@" "../dbxml/phpgtkdoc.dtd"[
+
+<!-- Defaults for entities that should be defined in language-defs -->
+<!ENTITY % language-defs     SYSTEM "../@LANGDIR@/language-defs.ent">
+%language-defs;
+
+<!-- These are language independent -->
+<!ENTITY phpgtk2doc.build-date "@PHP_GTK2_DOC_BUILD_DATE@">
+<!ENTITY % global.entities  SYSTEM "../@MANUAL@/global.ent">
+<!ENTITY % global.chapters  SYSTEM "../@MANUAL@/chapters.ent">
+<!ENTITY % global.contribs  SYSTEM "../@MANUAL@/contributors.ent">
+%global.entities;
+%global.chapters;
+%global.contribs;
+
+<!ENTITY testclasses    SYSTEM "testclasses.xml">
+
+]>
+
+<set id="phpgtk.docs" lang="@LANG@">
+ &testclasses;
+</set>
