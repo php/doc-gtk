@@ -22,6 +22,7 @@
  <xsl:param name="use.id.as.filename" select="1" />
  <xsl:param name="phpweb" select="true()"/>
  <xsl:param name="html.ext" select="'.php'"/>
+ <xsl:param name="chunk.quietly" select="0" />
  
  <xsl:output method="xml" omit-xml-declaration="yes"  /> 
 

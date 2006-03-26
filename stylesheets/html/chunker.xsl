@@ -45,7 +45,6 @@
   <xsl:param name="encoding" select="$default.encoding"/>
   <xsl:param name="indent" select="'no'"/>
   <xsl:param name="content" select="''"/>
-  <xsl:param name="chunk.quietly" select="1" />
 
   <xsl:if test="$chunk.quietly=0">
    <xsl:message>
@@ -121,7 +120,7 @@
   <xsl:param name="doctype-system" select="''"/>
   <xsl:param name="content" select="''"/>
 
-  <xsl:if test="$chunk.quietly = 0">
+  <xsl:if test="$chunk.quietly=0">
    <xsl:message>
     <xsl:text>Writing </xsl:text>
     <xsl:value-of select="$filename"/>

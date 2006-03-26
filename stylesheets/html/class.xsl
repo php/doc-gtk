@@ -160,7 +160,6 @@
   </xsl:choose>
  </xsl:template>
 
-
  <xsl:template match="fieldname">
   <xsl:variable name="class" select="@class"/>
 
@@ -268,7 +267,9 @@
 
   <xsl:variable name="class">
     <xsl:choose>
-      <xsl:when test="count(ancestor::constructor)!='0'"></xsl:when>
+      <xsl:when test="count(ancestor::constructor)!='0' and not(@class)">
+       <xsl:value-of select="ancestor-or-self::classentry/classmeta/classtitle"/>
+      </xsl:when>
       <xsl:when test="@class!=''">
        <xsl:value-of select="@class"/>
       </xsl:when>
@@ -616,7 +617,7 @@
   <xsl:if test="position() > 1">
    <br/><br/>
   </xsl:if>
-     
+
   <xsl:apply-templates select="./funcsynopsis"/>
   <xsl:text disable-output-escaping="yes"> --</xsl:text>
   <xsl:apply-templates select="./shortdesc" />
