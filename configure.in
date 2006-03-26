@@ -17,18 +17,29 @@
 # $Id$
 
 AC_INIT
+
+make_command=""
+for a in "$MAKE" make gmake gnumake; do
+[ test -z "$a" ] && continue
+	if (sh -c "$a --version" 2>/dev/null | grep GNU >/dev/null); then
+		make_command=$a;
+		break;
+	fi
+done
+
+if [ test -z $make_command ]; then
+	AC_MSG_ERROR(GNU make is required)
+fi
+
 AC_CONFIG_SRCDIR([manual/global.ent])
 
 AC_PATH_PROG(XSLTPROC, xsltproc, no)
-AC_PATH_PROG(PHP, php, no)
-
-if test "$XSLTPROC" = "no";
-then
+if [ test "$XSLTPROC" = "no" ]; then
 	AC_MSG_ERROR(cannot find xsltproc)
 fi
 
-if test "$PHP" = "no";
-then
+AC_PATH_PROG(PHP, php, no)
+if [ test "$PHP" = "no" ]; then
 	AC_MSG_ERROR(unable to locate php executable)
 fi
 
@@ -47,69 +58,73 @@ AC_SUBST(MANUAL)
 PHP_GTK2_DOC_BUILD_DATE=`date`
 AC_SUBST(PHP_GTK2_DOC_BUILD_DATE)
 
-AC_MSG_CHECKING(for language)
-AC_ARG_WITH(lang,
-[  --with-lang=LANG		choose a language to work with],
-[
-	if test "$withval"
-	then
-		if test ! -d "$MANUAL/$withval";
-		then
-			AC_MSG_RESULT()
-			AC_MSG_ERROR(Language "$withval" not supported!)
-		fi
-	LANG=$withval
-	LANGDIR=$MANUAL/$withval
-	AC_MSG_RESULT($withval)
-	fi
-],[
-	LANG=en
-	LANGDIR=$MANUAL/en
-	AC_MSG_RESULT([en (default)])
-])
-
-AC_SUBST(LANG)
-AC_SUBST(LANGDIR)
-
 TS=`date -u +%Y%m%d`
 AC_SUBST(TS)
 
-# need an old copy of the source to check against for updates
-AC_ARG_WITH(history,
-[  --with-history=HISTORY		path to archived module copy (for updates) ],
+AC_MSG_CHECKING(for language)
+AC_ARG_WITH(lang, AC_HELP_STRING([--with-lang=LANG], [choose a language to work with]),
 [
-	if test "$withval"
-	then
-	  AC_MSG_CHECKING(for path to archived module copy (for updates))
-	  HISTORY=$withval
-	  AC_MSG_RESULT($withval)
-	  AC_SUBST(HISTORY)
-	fi
+if [ test ! -d "$MANUAL/$withval" ]; then
+	AC_MSG_RESULT()
+	AC_MSG_ERROR(Language "$withval" not supported!)
+fi
+LANG=$withval
+AC_MSG_RESULT($withval)
+],[
+LANG=en
+AC_MSG_RESULT([en (default)])
 ])
+
+AC_SUBST(LANG)
+LANGDIR=$MANUAL/$LANG
+AC_SUBST(LANGDIR)
+
+# need an old copy of the source to check against for updates
+AC_ARG_WITH(history, AC_HELP_STRING([--enable-history=PATH], [path to archived module copy (for updates)]),
+[
+HISTORY=$withval
+AC_MSG_CHECKING(for archive path)
+AC_MSG_RESULT($withval)
+if [ test -d $HISTORY/manual/$LANG ]; then
+	for xmlfile in `find $LANGDIR -name "*.xml" | sed -e"s%^$LANGDIR\/%%g" | sort`; do
+		if [ test -f $LANGDIR/$xmlfile ]; then
+			newfilepath=$LANGDIR/$xmlfile
+			oldfilepath=$HISTORY/manual/$LANG/$xmlfile
+			if [ test $newfilepath -nt $oldfilepath ]; then
+				echo Updating "$xmlfile"...
+				updates="$updates $newfilepath"
+			fi
+		fi
+	done;
+else
+	AC_MSG_ERROR(path "$withval" does not contain manual source!)
+fi
+],
+[HISTORY="no"])
 
 AC_SUBST(HISTORY)
 
-if [ test -d $HISTORY/manual/$LANG ]; then
-  for xmlfile in `find $LANGDIR -name "*.xml" | sed -e"s%^$LANGDIR\/%%g" | sort`
-do
-	if test -f $LANGDIR/$xmlfile
-	then
-		newfilepath=$LANGDIR/$xmlfile
-		oldfilepath=$HISTORY/manual/$LANG/$xmlfile
-		if test $newfilepath -nt $oldfilepath
-		then
-			echo Updating "$xmlfile"...
-			updates="$updates $newfilepath"
-		fi
-	fi
-done;
-fi
+# make quiet builds optional
+AC_MSG_CHECKING(whether to build silently)
+AC_ARG_ENABLE(output, AC_HELP_STRING([--disable-output], [whether to build silently]),
+[
+RESULT=yes
+QUIET=1
+],
+[
+RESULT=no
+QUIET=0
+])
+
+AC_MSG_RESULT($RESULT)
+AC_SUBST(QUIET)
 
 AC_CONFIG_FILES([\
 Makefile \
 $SCRIPT_DIR/manual.xml \
 $SCRIPT_DIR/mtoc.xml \
 $SCRIPT_DIR/testmanual.xml \
+$STYLESHEET_DIR/chunk.xsl \
 $STYLESHEET_DIR/phpweb.xsl \
 $STYLESHEET_DIR/updates.xsl \
 $SCRIPT_DIR/genchapterents.php ])
@@ -123,19 +138,16 @@ $XSLTPROC $SCRIPT_DIR/gen_name_to_id.xsl $SCRIPT_DIR/manual.xml > $STYLESHEET_DI
 #now add the list of updated files to the testclasses.xml
 # this has to be done after chapters.ent is created
 
-if test -n "$updates" ; then
-    echo creating $SCRIPT_DIR/testclasses.xml
-for updatedfile in $updates
-do
-	# need to remove 'manual/' from the search path since the dir structure changed
-	updatedfile=`echo $updatedfile | sed -e "s/$MANUAL\///g"`
-	ref=`grep -e "$updatedfile" $MANUAL/chapters.ent | sed "s/^<!ENTITY //" | sed "s/ .*//"`
-	if test -n "$ref"; then
-		refs="$refs \&$ref;"
-	fi
-done
-
-sed "s/@TEST_REFERENCES@/$refs/g" $SCRIPT_DIR/testclasses.xml.in > $SCRIPT_DIR/testclasses.xml
+if [ test -n "$updates" ]; then
+	echo creating $SCRIPT_DIR/testclasses.xml
+	for updatedfile in $updates; do
+		updatedfile=`echo $updatedfile | sed -e "s/$MANUAL\///g"`
+		ref=`grep -e "$updatedfile" $MANUAL/chapters.ent | sed "s/^<!ENTITY //" | sed "s/ .*//"`
+		if [ test -n "$ref"]; then
+			refs="$refs \&$ref;"
+		fi
+	done
+	sed "s/@TEST_REFERENCES@/$refs/g" $SCRIPT_DIR/testclasses.xml.in > $SCRIPT_DIR/testclasses.xml
 fi
 
 chmod +x $SCRIPT_DIR/genchapterents.php
