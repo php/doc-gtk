@@ -1,0 +1,141 @@
+# +----------------------------------------------------------------------+
+# | PHP Version 4.0                                                      |
+# +----------------------------------------------------------------------+
+# | Copyright (c) 1999-2006 The PHP Group                                |
+# +----------------------------------------------------------------------+
+# | This source file is subject to version 3.0.1 of the PHP license,     |
+# | that is bundled with this package in the file LICENSE and is         |
+# | available online at http://www.php.net/license/3_0_1.txt.            |
+# | If you did not receive a copy of the PHP license and are unable to   |
+# | obtain it through the world wide web, please send a note to          |
+# | license@php.net so we can mail you a copy immediately                |
+# +----------------------------------------------------------------------+
+# | Authors: James Moore <jmoore@php.net>, Steph Fox <sfox@php.net>      |
+# +----------------------------------------------------------------------+
+
+#
+# $Id$
+
+AC_INIT
+AC_CONFIG_SRCDIR([manual/global.ent])
+
+AC_PATH_PROG(XSLTPROC, xsltproc, no)
+AC_PATH_PROG(PHP, php, no)
+
+if test "$XSLTPROC" = "no";
+then
+	AC_MSG_ERROR(cannot find xsltproc)
+fi
+
+if test "$PHP" = "no";
+then
+	AC_MSG_ERROR(unable to locate php executable)
+fi
+
+DOCBOOK_DOCTYPE="-//PHP Group//DTD DocBk XML V3.1.7-Based Extension//EN"
+AC_SUBST(DOCBOOK_DOCTYPE)
+
+SCRIPT_DIR="./scripts"
+AC_SUBST(SCRIPT_DIR)
+
+STYLESHEET_DIR="./stylesheets/html"
+AC_SUBST(STYLESHEET_DIR)
+
+MANUAL="manual"
+AC_SUBST(MANUAL)
+
+PHP_GTK2_DOC_BUILD_DATE=`date`
+AC_SUBST(PHP_GTK2_DOC_BUILD_DATE)
+
+AC_MSG_CHECKING(for language)
+AC_ARG_WITH(lang,
+[  --with-lang=LANG		choose a language to work with],
+[
+	if test "$withval"
+	then
+		if test ! -d "$MANUAL/$withval";
+		then
+			AC_MSG_RESULT()
+			AC_MSG_ERROR(Language "$withval" not supported!)
+		fi
+	LANG=$withval
+	LANGDIR=$MANUAL/$withval
+	AC_MSG_RESULT($withval)
+	fi
+],[
+	LANG=en
+	LANGDIR=$MANUAL/en
+	AC_MSG_RESULT([en (default)])
+])
+
+AC_SUBST(LANG)
+AC_SUBST(LANGDIR)
+
+TS=`date -u +%Y%m%d`
+AC_SUBST(TS)
+
+# need an old copy of the source to check against for updates
+AC_ARG_WITH(history,
+[  --with-history=HISTORY		path to archived module copy (for updates) ],
+[
+	if test "$withval"
+	then
+	  AC_MSG_CHECKING(for path to archived module copy (for updates))
+	  HISTORY=$withval
+	  AC_MSG_RESULT($withval)
+	  AC_SUBST(HISTORY)
+	fi
+])
+
+AC_SUBST(HISTORY)
+
+if [ test -d $HISTORY/manual/$LANG ]; then
+  for xmlfile in `find $LANGDIR -name "*.xml" | sed -e"s%^$LANGDIR\/%%g" | sort`
+do
+	if test -f $LANGDIR/$xmlfile
+	then
+		newfilepath=$LANGDIR/$xmlfile
+		oldfilepath=$HISTORY/manual/$LANG/$xmlfile
+		if test $newfilepath -nt $oldfilepath
+		then
+			echo Updating "$xmlfile"...
+			updates="$updates $newfilepath"
+		fi
+	fi
+done;
+fi
+
+AC_CONFIG_FILES([\
+Makefile \
+$SCRIPT_DIR/manual.xml \
+$SCRIPT_DIR/mtoc.xml \
+$SCRIPT_DIR/testmanual.xml \
+$STYLESHEET_DIR/phpweb.xsl \
+$STYLESHEET_DIR/updates.xsl \
+$SCRIPT_DIR/genchapterents.php ])
+AC_OUTPUT
+
+echo creating chapters.ent
+$PHP -q $SCRIPT_DIR/genchapterents.php > $MANUAL/chapters.ent
+echo creating name_to_id.xsl
+$XSLTPROC $SCRIPT_DIR/gen_name_to_id.xsl $SCRIPT_DIR/manual.xml > $STYLESHEET_DIR/name_to_id.xsl
+
+#now add the list of updated files to the testclasses.xml
+# this has to be done after chapters.ent is created
+
+if test -n "$updates" ; then
+    echo creating $SCRIPT_DIR/testclasses.xml
+for updatedfile in $updates
+do
+	# need to remove 'manual/' from the search path since the dir structure changed
+	updatedfile=`echo $updatedfile | sed -e "s/$MANUAL\///g"`
+	ref=`grep -e "$updatedfile" $MANUAL/chapters.ent | sed "s/^<!ENTITY //" | sed "s/ .*//"`
+	if test -n "$ref"; then
+		refs="$refs \&$ref;"
+	fi
+done
+
+sed "s/@TEST_REFERENCES@/$refs/g" $SCRIPT_DIR/testclasses.xml.in > $SCRIPT_DIR/testclasses.xml
+fi
+
+chmod +x $SCRIPT_DIR/genchapterents.php

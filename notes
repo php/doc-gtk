@@ -1,41 +1,78 @@
+== Intro to the docs file system ==
 
-== File system ==
-/ (root)
-    all the script files required for doc generation
-    - distribute_html.php moves the generated html files in several subdirectories
-       that we don't have 1800+ files in one directory
-    - gen_chapterents.php generates a file called manual/<lang>/chapters.ent 
-      which includes all the .xml files in one big one
-    - gen_docs_from_source.sh uses the php-gtk sources to generate the
-      reference section of the manual with all the functions, properties 
-      and so
-    - gen_manual.sh compiles the html files out of the .xml ones
-    - gen_manualxml.php generates manual/<lang>/manual.xml from the
-      manual/manual.xml.in
-    - check_chapterusage.php: checks if all the xml files in the reference 
-      section are used in the manual
-build/
-    the compiled manual files are stored here
+/.
+    Build system entry point
+    - configure.in
+    - makefile.in
+      usage: autoconf, ./configure [--with-lang=$lang], make [html|phpweb|dist]
+      Default behaviour: lang=en and make html
+    - runfirst.sh is the entry point to the basic build system (no i18n support and HTML only)
+      usage: [sh] runfirst.sh
+      You can use whichever system you're most comfortable with, locally - either works. The
+      PHP-GTK web site uses the autoconf version
+dbxml/
+    DocBook XML .dtd, .xml and .ent files. phpgtkdoc.dtd is among them
+examples/
+    Sample code is filed here for auto-inclusion in the manual
+images/
+    Images for the manual are filed here
+livedocs/
+    Experimental livedocs scripts intended as an authoring tool only
 manual/
-    base manual files 
-    - manual.xml.in -> will be compiled to manual/<lang>/manual.xml
-manual/en/, manual/de/, ..
-    full manual for the language, including:
-    - manual.xml is generated automatically
-    - chapters.ent is generated automatically by gen_chapterents.php from the xml files
+    Base manual files
+    - appendix.xml (manually-created index for all appendix files)
+    - chapters.ent (generated file mapping the file paths used by the current manual build)
+    - global.ent (entities used across all translations)
+    - reference.xml (manually-created index for all reference files)
+    - tutorials.xml (manually-created index for all tutorial files)
+manual/$lang
+    Completed XML files for the language, including:
+    - bookinfo.xml
+    - language-defs.ent (translations of headings etc to $lang)
+    - license.xml (copy of the GNU Free Documentation License, in /en ONLY)
+    - preface.xml
+    appendix
+      - credits.xml (coding credits)
+      - doccredits.xml (documentation credits - add yourself here!)
+      - translicense.xml (translation of the GNU Free Documentation License to $lang)
+    reference
+      Class documentation is filed here
+    tutorials
+      Tutorials are filed here
+scripts/
+    - cleanup.sh removes a bunch of generated files. Use with trepidation!
+    - distribute_html.php splits the generated files into several subdirectories, in both build systems
+    - gen_chapterents.php generates manual/chapters.ent for the 'basic' build
+    - gen_docs_from_source.sh generates the manual reference section from PHP-GTK 2 source
+    - gen_manual.sh generates multiple HTML files for the 'basic' build
+    - gen_manualxml.php generates scripts/manual.xml for the 'basic' build
+    - gen_name_to_id.xsl is the template file for the name_to_id.xsl stylesheet, which is
+      used by both systems but generated only by the standard build. This shouldn't (but might)
+      cause language conflicts in the 'basic' build
+    - genchapterents.php.in generates manual/chapters.ent for the 'standard' build
+    - highlight.php highlights the source code in the phpweb build and in the 'basic' build
+    - manual.xml.in is the template file for scripts/manual.xml in both build systems
 stylesheets/
-    stylesheets which convert the xml manual files to html, phpweb, ...
-
+    XSL stylesheets, used to convert the XML manual files to HTML or PHP
+    common
+      Language support files. Translators will need to update these to match en.xml
+    html
+      Clever stuff. Includes name_to_id.xsl and phpweb.xsl, both of which are generated
+      during the standard build but not during the 'basic' build. Again, this shouldn't
+      (but may) cause language conflicts in the 'basic' build.
+    lib
+      Even cleverer stuff. Don't touch this!
+updater/
+    Anant's scripts to update the reference entries from PHP-GTK 2 source via reflection
 
 == Small FAQ ==
 Q: The livedocs don't work! Some file couldn't be found.
 A: Call the live.php with "debug=1" as parameter and check the output.
 
-Q: Livedocs give me a "Could not startup" error!
+Q: Livedocs gives me a "Could not startup" error!
 A: The problem is that the called php tries to load the php-gtk
     extension, but has no X-Server - so php can't start.
     Disable the loading of php-gtk.so in the php.ini, and it will work.
-
 
 == Todo ==
 - automatically link returned classes in functions
@@ -47,20 +84,7 @@ A: The problem is that the called php tries to load the php-gtk
 - check if build was successful
 - check if something has changed before building
 
-== Done ==
-+ signal linking works
-+ index pages for classes, methods, properties and signals
-+ <function> tags don't need class=".." attribute when used inside class (link to same class)
+== Other ==
 - return value of functions is void sometimes | that's ok IMO
 - static constructors are linked to themselves | that's because the new "get_func_id_from_name" is too good in guessing the ids
 - static constructors have the same title as normal constructor (<class> Constructor) | how should they be named? they *are* constructors
-+ name_to_id: signal names (for that, andrei have to get the generator support signals)
-+ functions have no paramdef sometimes
-+ docgen:  cross-link properties
-+ foo(void) paramdef -> foo()
-+ docgen: link from getter to setter and vice versa
-+ classtree
-+ generate <constructors>
-+ multiple constructors in class
-+ stylesheets/html/name_to_id.xsl rewrite so that it haven't to be generated from sources
-

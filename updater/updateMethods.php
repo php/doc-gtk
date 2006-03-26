@@ -12,7 +12,7 @@ class updateMethods
     public $missingClasses = array();
     
     function __construct()
-    {   
+    {
         /* Get all classes and filter out Gtk classes only */
         $gtkClasses = array();
         $allClasses = get_declared_classes();

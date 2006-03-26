@@ -1,0 +1,143 @@
+# +----------------------------------------------------------------------+
+# | PHP Version 5.1                                                      |
+# +----------------------------------------------------------------------+
+# | Copyright (c) 1999-2006 The PHP Group                                |
+# +----------------------------------------------------------------------+
+# | This source file is subject to version 3.0.1 of the PHP license,     |
+# | that is bundled with this package in the file LICENSE and is         |
+# | available online at http://www.php.net/license/3_0_1.txt.            |
+# | If you did not receive a copy of the PHP license and are unable to   |
+# | obtain it through the world wide web, please send a note to          |
+# | license@php.net so we can mail you a copy immediately                |
+# +----------------------------------------------------------------------+
+# | Authors: James Moore <jmoore@php.net>, Steph Fox <sfox@php.net>      |
+# +----------------------------------------------------------------------+
+
+#
+# $Id$
+#
+
+#
+# Paths
+#
+STYLESHEET_DIR = @STYLESHEET_DIR@
+SCRIPT_DIR = @SCRIPT_DIR@
+MANUAL = @MANUAL@
+LANG = @LANG@
+BUILD = build/@LANG@
+BUILD_TEST = testbuild
+HISTORY = @HISTORY@
+
+#
+# Programs and scripts
+#
+XSLTPROC = @XSLTPROC@
+PHP = @PHP@
+HIGHLIGHT = $(SCRIPT_DIR)/highlight.php
+SPLIT = $(SCRIPT_DIR)/distribute_html.php
+IMAGES = $(SCRIPT_DIR)/copy_images.php
+TMP = $(BUILD_TEST)/temp.php
+TS = @TS@
+
+#
+# Default Rule
+#
+all: html
+
+#
+# Build Aliases
+#
+bigmanual.html: $(BUILD)/bigmanual.html
+html: $(BUILD)/html/index.html
+phpweb: $(BUILD)/php/index.php
+mtoc: $(BUILD_TEST)/mtoc.xml
+test: $(BUILD_TEST)/index.html
+updates: $(BUILD_TEST)/updates-$(LANG).php
+
+mirror-files: $(BUILD)/bigmanual.html.gz \
+			  $(BUILD)/php_gtk_manual_$(LANG).tar.bz2 \
+			  $(BUILD)/php_gtk_manual_$(LANG).tar.gz \
+			  $(BUILD)/php_gtk_manual_$(LANG).zip
+
+#
+# Dependency Aliases
+#
+html = $(STYLESHEET_DIR)/html.xsl
+chunk = $(STYLESHEET_DIR)/chunk.xsl
+phpweb = $(STYLESHEET_DIR)/phpweb.xsl
+docbook = $(STYLESHEET_DIR)/docbook.xsl
+updates = $(STYLESHEET_DIR)/updates.xsl
+
+#
+# Make Rules
+#
+$(BUILD)/bigmanual.html: $(SCRIPT_DIR)/manual.xml
+	@mkdir -p $(BUILD)
+	$(XSLTPROC) --xinclude $(docbook) $(SCRIPT_DIR)/manual.xml > $(BUILD)/bigmanual.html
+
+$(BUILD)/html/index.html: scripts/manual.xml
+	@mkdir -p $(BUILD)/html
+	$(XSLTPROC) --param base.dir "'$(BUILD)/html/'" --xinclude $(chunk) $(SCRIPT_DIR)/manual.xml 
+	$(PHP) $(SPLIT) $(BUILD)/html 
+	$(PHP) $(IMAGES) $(BUILD)/html
+
+$(BUILD)/php/index.php: scripts/manual.xml
+	@mkdir -p $(BUILD)/php
+	$(XSLTPROC) --param base.dir "'$(BUILD)/php/'" --xinclude $(phpweb) $(SCRIPT_DIR)/manual.xml 
+	$(PHP) $(HIGHLIGHT) php $(BUILD)/php 
+	$(PHP) $(IMAGES) $(BUILD)/php
+
+$(BUILD)/bigmanual.html.gz: $(BUILD)/bigmanual.html
+	@mkdir -p $(BUILD)
+	gzip -c -9 $< > $@
+
+$(BUILD)/php_gtk_manual_$(LANG).tar.bz2: $(BUILD)/html/index.html
+	(cd $(BUILD); tar -cf - html) | bzip2 -9 > $@
+
+$(BUILD)/php_gtk_manual_$(LANG).tar.gz: $(BUILD)/html/index.html
+	(cd $(BUILD); tar -c html) | gzip -9 > $@
+
+$(BUILD)/php_gtk_manual_$(LANG).zip: $(BUILD)/html/index.html
+	(cd $(BUILD); zip -q -r -9 - html) > $@
+
+$(BUILD_TEST)/index.html: $(SCRIPT_DIR)/testmanual.xml
+	@mkdir -p $(BUILD_TEST)
+	$(XSLTPROC) --param base.dir --xinclude "'$(BUILD_TEST)/'" $(chunk) $(SCRIPT_DIR)/testmanual.xml
+
+$(BUILD_TEST)/mtoc.xml: $(SCRIPT_DIR)/mtoc.xml
+	@mkdir -p $(BUILD_TEST)
+	$(XSLTPROC) --param base.dir --xinclude "'$(BUILD_TEST)/'" $(chunk) $(SCRIPT_DIR)/mtoc.xml
+
+$(BUILD_TEST)/updates-$(LANG).php: $(SCRIPT_DIR)/testclasses.xml
+	@mkdir -p $(BUILD_TEST)
+	$(XSLTPROC) $(updates) $(SCRIPT_DIR)/testmanual.xml > $(TMP)
+	@cat $(TMP) | sed -e 's/ \[en\]//;s/\"\"/"$(TS)"/;/php/!d;s/^  *//' > $(BUILD_TEST)/updates-new.php
+	@if test -f $(HISTORY)/updates-$(LANG).php; then \
+		cp $(HISTORY)/updates-$(LANG).php $@; \
+		$(PHP) $(SCRIPT_DIR)/merge_updates.php $(BUILD_TEST)/updates-new.php $@; \
+	else \
+		mv $(BUILD_TEST)/updates-new.php $@; \
+	fi
+	@rm -f $(TMP)
+
+#
+# Clean Rules
+#
+clean:
+	rm -rf $(BUILD)
+	rm -rf autom4te.cache
+	rm -f config.status config.log configure Makefile
+	rm -f $(MANUAL)/chapters.ent
+	rm -f $(SCRIPT_DIR)/manual.xml $(SCRIPT_DIR)/genchapterents.php $(SCRIPT_DIR)/update.xsl
+
+distclean: clean
+	rm -f Makefile $(SCRIPT_DIR)/manual.xml configure
+	rm -f config.cache config.log config.status version.ent
+	cd $(SCRIPT_DIR); rm -f genchapterents.php
+	cd $(STYLESHEET_DIR); rm -f phpweb.xsl
+	rm -rf $(BUILD_TEST)
+
+cvsclean:
+	@for i in `find . -name .cvsignore`; do \
+		(cd `dirname $$i` 2>/dev/null && rm -rf `cat .cvsignore` || true); \
+	done
