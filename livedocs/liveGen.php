@@ -34,25 +34,25 @@ class PhpGtkLiveDocGenerator
     //relative to manual/en directory
     var $arBookFiles            = array('../reference.xml', '../tutorials.xml');
     var $arChapters = null;
-    
+
     var $strLang    = 'en';
     var $strTmpFile = 'test_manual.xml';
-    
+
     var $tpl_manual = null;
-    
-    
-    
+
+
+
     function PhpGtkLiveDocGenerator()
     {
         global $tpl_manual;
-        
+
         chdir(dirname(__FILE__));
         $this->tpl_manual = $tpl_manual;
         $this->loadChapterents();
     }//function PhpGtkLiveDocGenerator()
-    
-    
-    
+
+
+
     /**
     *	just returns the base path below which the manual files should be located
     */
@@ -60,9 +60,9 @@ class PhpGtkLiveDocGenerator
     {
         return '../manual/' . $this->strLang . '/';
     }//function getBasePath()
-        
-    
-    
+
+
+
     /**
     *	find the file in which $id should be described
     *
@@ -87,7 +87,7 @@ class PhpGtkLiveDocGenerator
                 return $file;
             }
         }
-        
+
         //not found yet...
         foreach ($this->arBookFiles as $strBookFile) {
             $strContent = file_get_contents($this->getBasePath() . $strBookFile);
@@ -97,9 +97,9 @@ class PhpGtkLiveDocGenerator
         }
         return null;
     }//function findFile($id)
-    
-    
-    
+
+
+
     /**
     *	checks if the given file is a special book file
     */
@@ -107,9 +107,9 @@ class PhpGtkLiveDocGenerator
     {
         return in_array($strFile, $this->arBookFiles);
     }//function isBookFile($strFile)
-    
-    
-    
+
+
+
     /**
     *	find the neighbour files to the given one
     */
@@ -118,11 +118,11 @@ class PhpGtkLiveDocGenerator
         if ($file === null) {
             return null;
         }
-        
+
         if (substr($file, 0, 10) != 'reference/') {
             return null;
         }
-        
+
         $fileid = $this->findChapterId($file);
         $arLines = file('../manual/reference.xml');
         $arFiles = array();
@@ -131,7 +131,9 @@ class PhpGtkLiveDocGenerator
         $strNext        = null;
         foreach ($arLines as $nLine => $strLine) {
             $strLine = trim($strLine);
-            if ($strLine[0] == '&') {
+            if ($strLine == '') {
+                continue;
+            } else if ($strLine[0] == '&') {
                 $strId = substr($strLine, 1, -1);
                 $strFile = $this->arChapters[$strId];
                 $arFiles[] = $strFile;
@@ -145,18 +147,18 @@ class PhpGtkLiveDocGenerator
             } else {
                 continue;
             }
-            
+
             if ($bFound) {
                 $strNext = $arFiles[count($arFiles) - 1];
                 break;
             }
         }
-        
+
         return array($strPrevious, $strNext);
     }//function findNeighbours($file)
-    
-    
-    
+
+
+
     /**
     *	parses the chapterents file and loads it into an array
     */
@@ -165,18 +167,18 @@ class PhpGtkLiveDocGenerator
         if ($this->arChapters !== null) {
             return;
         }
-        $arLines = file($this->getBasePath() . '/chapters.ent');
+        $arLines = file($this->getBasePath() . '/../chapters.ent');
         foreach ($arLines as $nLine => $strLine) {
             if ($nLine == 0) { continue; }
             $nSpacePos = strpos($strLine, ' ', 10);
             $strId = substr($strLine, 9, $nSpacePos - 9);
-            $strFile = substr($strLine, $nSpacePos + 9, -4);
+            $strFile = substr($strLine, $nSpacePos + 12, -3);
             $this->arChapters[$strId] = $strFile;
         }
     }//function loadChapterents()
-    
-    
-    
+
+
+
     /**
     *	finds the chapter id to the given filename
     *	e.g. "reference.gtk.gtkaboutdialog" for "reference/gtk/gtkaboutdialog.xml"
@@ -188,6 +190,7 @@ class PhpGtkLiveDocGenerator
     function findChapterId($file)
     {
         $this->loadChapterents();
+
         foreach ($this->arChapters as $id => $strFile) {
             if ($strFile == $file) {
                 return $id;
@@ -195,9 +198,9 @@ class PhpGtkLiveDocGenerator
         }
         return null;
     }//function findChapterId($file)
-    
-    
-    
+
+
+
     /**
     *	Finds out if the given id in the file is the first or the last id in the given file.
     *	This is necessary as we may need to include the predecessor or 
@@ -209,13 +212,13 @@ class PhpGtkLiveDocGenerator
     */
     function getPositionInfo($id, $file)
     {
-		echo $this->getBasePath().$file."\n";
+        echo $this->getBasePath().$file."\n";
         $arLines = file($this->getBasePath().$file);
         $bFirst = false;
         $bLast = false;
         $nIds = 0;
         $nMyPos = -1;
-        
+
         foreach ($arLines as $strLine) {
             if (preg_match('/id="[^"]+">/', $strLine)) {
                 if (strpos($strLine, 'id="' . $id . '">') !== false) {
@@ -227,16 +230,16 @@ class PhpGtkLiveDocGenerator
                 $nIds++;
             }
         }
-        
+
         if ($nMyPos == $nIds) {
             $bLast = true;
         }
-        
+
         return array($bFirst, $bLast);
     }//function getPositionInfo($id, $file)
-    
-    
-    
+
+
+
     /**
     *	builds the manual file with its contents stripped
     *	down to only have necessary sections for the given id
@@ -246,7 +249,7 @@ class PhpGtkLiveDocGenerator
     function buildManualFile($id)
     {
         $manual = str_replace('&book;', $this->stripDownBook('reference.xml', $id), $this->tpl_manual);
-        
+
         $strFile = $this->getBasePath() . $this->strTmpFile;
         echo 'Generating test manual file ' . $strFile . ' ';
         $hdl = fopen($strFile, 'w+');
@@ -254,9 +257,9 @@ class PhpGtkLiveDocGenerator
         fclose($hdl);
         echo 'done' . "\r\n";
     }//function buildManualFile($id)
-    
-    
-    
+
+
+
     /**
     *	strips down the book file (reference.xml, tutorials.xml)
     *	and replaces the required entities
@@ -268,16 +271,16 @@ class PhpGtkLiveDocGenerator
     function stripDownBook($bookfile, $id)
     {
         $file       = $this->findFile($id);
-        
+
         if ($this->isBookFile($file)) {
             return $this->stripDownBookOverview($bookfile, $id);
         } else {
             return $this->stripDownBookNormal($bookfile, $id, $file);
         }
     }//function stripDownBook($bookfile, $id)
-    
-    
-    
+
+
+
     /**
     *	implements stripping down of book files for *normal* ids,
     *	e.g. classes and class methods
@@ -286,13 +289,14 @@ class PhpGtkLiveDocGenerator
     function stripDownBookNormal($bookfile, $id, $file)
     {
         $chapid			= $this->findChapterId($file);
+
         list($bIsFirst, $bIsLast) = $this->getPositionInfo($id, $file);
         $arNeighbours	= $this->findNeighbours($file);
         $arNeighbourIds	= array(
             $this->findChapterId($arNeighbours[0]),
             $this->findChapterId($arNeighbours[1])
         );
-        
+
         $arLines = file('../manual/' . $bookfile);
         $strBookContent = '';
         foreach ($arLines as $nLine => $strLine) {
@@ -303,23 +307,25 @@ class PhpGtkLiveDocGenerator
                 continue;
             }
             $strLine2 = trim($strLine);
+
             $nFileType = 0;
             //the $nFileType = <number> assignments in the if are intended
             if (   ($strLine2 == '&' . $chapid . ';' && ($nFileType = 0) !== false)
                 || ($arNeighbourIds[0] !== null && $bIsFirst && $strLine2 == '&' . $arNeighbourIds[0] . ';' && ($nFileType = -1) !== false)
                 || ($arNeighbourIds[1] !== null && $bIsLast && $strLine2 == '&' . $arNeighbourIds[1] . ';' && ($nFileType = 1) !== false)
             ) {
+
                 $strBookContent .= $this->getFileContents(substr($strLine2, 1, -1), $id, $nFileType);
             }
         }
-        
+
         //Fixme: remove empty classsets and such unneeded things
-        
+
         return $strBookContent;
     }//function stripDownBookNormal($bookfile, $id, $file)
-    
-    
-    
+
+
+
     /**
     *	strips down the book itself and includes all the (stripped down) classes below it
     *	especially reference.xml
@@ -328,7 +334,7 @@ class PhpGtkLiveDocGenerator
     */
     function stripDownBookOverview($bookfile, $id)
     {
-        $arLines    = file('manual/' . $bookfile);
+        $arLines    = file('../manual/' . $bookfile);
         $strBookContent = '';
         $bInIt      = false;
         foreach ($arLines as $nLine => $strLine) {
@@ -348,14 +354,14 @@ class PhpGtkLiveDocGenerator
                 $strBookContent .= $this->getFileContents(substr($strLine2, 1, -1), $id, 1);
             }
         }
-    
+
         //Fixme: remove empty classsets and such unneeded things
-        
+
         return $strBookContent;
     }//function stripDownBookOverview($bookfile, $id)
-    
-    
-    
+
+
+
     /**
     *	loads the file's contents, strips them down to contain only
     *	required ids (top id, function id itself, predecessor and successor functions of the id's function itself)
@@ -367,19 +373,19 @@ class PhpGtkLiveDocGenerator
     function getFileContents($refid, $id, $nFileType)
     {
         $arContents = file($this->getBasePath() . $this->arChapters[$refid]);
-        
+
         $strStrippedContents = '';
         $bWaiting = false;//if we are waiting for a closing tag
         $strTag = '';//the tag we wait for
         $nIdNum = 0;//number of current id
         $nIdPos = 0;//position of $id in id array
-        
+
         if ($nFileType == 0) {
             //we're in the main file of the given id and need the position of the id among all other ids
             $arMatches = array();
             preg_match_all('/ id="([^"]+)"/', implode("\r\n", $arContents), $arMatches);
             unset($arMatches[0]);
-            
+
             $nMaxId = count($arMatches[1]);
             //find the right position
             foreach ($arMatches[1] as $nThisIdPos => $strThisId) {
@@ -391,7 +397,7 @@ class PhpGtkLiveDocGenerator
         } else {
             $nMaxId = substr_count(implode("\r\n", $arContents), ' id="');
         }
-        
+
         $nEmptyLines = 0;
         foreach ($arContents as $strLine) {
             if (!$bWaiting) {
@@ -431,7 +437,7 @@ class PhpGtkLiveDocGenerator
         }
         return $strStrippedContents;
     }//function getFileContents($refid, $nFileType)
-    
+
 }//class PhpGtkLiveDocGenerator
 
 $tpl_manual = <<<EOD

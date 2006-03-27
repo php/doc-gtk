@@ -41,11 +41,11 @@ if [ $type == "test" ]; then
 	type=html
 	
 	#generate the file
-	$php -q liveGen.php $3
+	$php -q ../livedocs/liveGen.php $3
 fi
 
 build_dir=../build/$language/$type
-manualpath=../scripts/$manualfile
+manualpath=../manual/$language/$manualfile
 
 if [ $type == "html" ]; then
 	xslfile=$stylesheetdir/html/chunk.xsl

@@ -54,8 +54,10 @@ class PhpGtkLiveDocs
 /*		$hdl = popen('./gen_manual.sh en test ' . $id . ' 2>&1', 'r');
 		var_dump(fread($hdl, 2048));
 		pclose($hdl);*/
-		$retval = shell_exec('../scripts/gen_manual.sh en test ' . $id . ' 2>&1');
+		$strCommand = '../scripts/gen_manual.sh en test ' . $id . ' 2>&1';
+		$retval = shell_exec($strCommand);
 		if (isset($_GET['debug'])) {
+            echo 'Executing ' . $strCommand . "<br/>\r\n";
 			var_dump(nl2br($retval));
 		}
 		return true;
@@ -65,7 +67,14 @@ class PhpGtkLiveDocs
 	
 	function getGeneratedFileContents($id)
 	{
-		return file_get_contents($this->getFileFromId($id));
+        $strFile = $this->getFileFromId($id);
+        if (isset($_GET['debug']) || file_exists($strFile)) {
+            return file_get_contents($strFile);
+        } else {
+            return 'File "' . $strFile . '" not found.'
+                . ' Probably a problem at manual compilation.'
+                . ' Use this script with debug=1" parameter to see the error.';
+        }
 	}//function getGeneratedFileContents($id)
 	
 	
