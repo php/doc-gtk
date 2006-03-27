@@ -4,10 +4,44 @@
   <classtitle>GtkCellRenderer</classtitle>
   <classparent>GtkObject</classparent>
   <shortdesc>
-
+   Base class to display cell contents in a GtkTreeView.
   </shortdesc>
   <desc>
+   <para>
+    The GtkCellRenderer is a base class of a set of objects used for rendering
+    a cell to a <classname>GdkDrawable</classname>. These objects are used
+    primarily by the <classname>GtkTreeView</classname> widget, though they
+    aren't tied to them in any specific way. It is worth noting that
+    GtkCellRenderer is not a <classname>GtkWidget</classname> and cannot be
+    treated as such.
+   </para>
+   <para>
+    Beyond merely rendering a cell, cell renderers can optionally provide
+    active user interface elements. A cell renderer can be
+    <propname class="GtkCellRendererToggle">activatable</propname>
+    like <classname>GtkCellRendererToggle</classname>, which toggles when it
+     gets activated by a mouse click, or it can be
+    <propname class="GtkCellRendererText">editable</propname> like
+    <classname>GtkCellRendererText</classname>, which allows the user to edit
+    the text using a <classname>GtkEntry</classname>.
+   </para>
+   <para>
+    Changes of edited cells are not automatically saved in the model; this has
+    to be done by hand: Connect to the
+    <signalname class="GtkCellRendererText">edited</signalname> (text) or
+    <signalname class="GtkCellRendererToggle">toggled</signalname> (toggle)
+    signal and set the new values in the store.
+   </para>
 
+    <example>
+     <title>Editable cell renderers</title>
+     <programlisting role="php">
+      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+                  href="&directory.examples;/reference/gtk/gtktreeview/editable.phpw" parse="text">
+       <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+      </xi:include>
+     </programlisting>
+    </example>
   </desc>
  </classmeta>
 
