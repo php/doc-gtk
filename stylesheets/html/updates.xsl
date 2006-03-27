@@ -20,7 +20,7 @@
 	<xsl:param name="titlename"/>
 	<xsl:for-each select="$nodes">
 		<xsl:variable name="id"><xsl:value-of select="@id"/></xsl:variable>
-		<a href="http://gtk.php.net/manual/en/{$id}.php"><xsl:value-of select="descendant::*[name()=$titlename]"/><xsl:if test="contains(@id, 'tutorial')"> (tutorial)</xsl:if></a>
+		<a href="http://gtk.php.net/manual1/en/{$id}.php"><xsl:value-of select="descendant::*[name()=$titlename]"/><xsl:if test="contains(@id, 'tutorial')"> (tutorial)</xsl:if></a>
 <xsl:text>
 </xsl:text>
 	</xsl:for-each>
