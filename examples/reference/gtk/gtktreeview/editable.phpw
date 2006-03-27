@@ -1,0 +1,166 @@
+<?php
+//Editable list with GtkTreeView
+
+/*
+* The task: Editable list with applications and some data about them
+*
+* The columns shall be like that:
+* icon   | title | category | works  | development progress
+* Pixbuf | Text  | Combo    | Toggle | Progress
+*/
+
+
+/*
+* Widget preparation
+*/
+
+//Data are stored in there (the model)
+$store = new GtkListStore(
+    GdkPixbuf::gtype, //icon
+    Gtk::TYPE_STRING, //title
+    Gtk::TYPE_STRING, //category
+    Gtk::TYPE_BOOLEAN,//works?
+    Gtk::TYPE_LONG    //development progress (percent)
+);
+
+//List with allowed categories
+$categories = new GtkListStore(Gtk::TYPE_STRING);
+$categories->append(array('Editors'));
+$categories->append(array('Games'));
+$categories->append(array('Setup'));
+$categories->append(array('Office'));
+
+
+
+//View is needed to display them
+$view = new GtkTreeView($store);
+
+
+//Icon column
+$rendererPixbuf = new GtkCellRendererPixbuf();
+$columnIcon = new GtkTreeViewColumn(
+    'Icon',          //title
+    $rendererPixbuf, //the renderer
+    'pixbuf',        //use that property
+    0                //data is in that model column
+);
+$view->append_column($columnIcon);
+
+//Name column
+$rendererText = new GtkCellRendererText();
+$rendererText->set_property('editable', true);
+$rendererText->connect('edited', 'name_edited', $store);
+
+$columnName = new GtkTreeViewColumn(
+    'Name',          //title
+    $rendererText,   //the renderer
+    'text',          //use that property
+    1                //data is in that model column
+);
+$view->append_column($columnName);
+
+//This function is called when the user
+// finished editing the name
+function name_edited($renderer, $row, $text, $model) {
+    $model->set($model->get_iter($row), 1, $text);
+}
+
+
+//Column: Category
+$rendererCategory = new GtkCellRendererCombo();
+$rendererCategory->set_property('model'      , $categories);
+$rendererCategory->set_property('text-column', 0);
+$rendererCategory->set_property('editable'   , true);
+//$rendererCategory->set_property('has-entry'  , false);
+$rendererCategory->connect('edited', 'category_edited', $store);
+
+$columnCategory = new GtkTreeViewColumn(
+    'Category',        //title
+    $rendererCategory, //the renderer
+    'text',            //use that property
+    2                  //data is in that model column
+);
+$view->append_column($columnCategory);
+
+//This function is called when the user
+// finished editing the name
+function category_edited($renderer, $row, $text, $model) {
+    $model->set($model->get_iter($row), 2, $text);
+}
+
+
+//Column: Works?
+$rendererWorks = new GtkCellRendererToggle();
+$rendererWorks->set_property('activatable', true);
+$rendererWorks->connect('toggled', 'works_toggled', $store);
+
+$columnWorks = new GtkTreeViewColumn(
+    'Works?',        //title
+    $rendererWorks,  //the renderer
+    'active',        //use that property
+    3                //data is in that model column
+);
+$view->append_column($columnWorks);
+
+function works_toggled($renderer, $row, $store) {
+    $iter = $store->get_iter($row);
+    //The value has been toggled -> we need
+    // to invert the current value
+    $store->set(
+        $iter,
+        3,
+        !$store->get_value($iter, 3)
+    );
+}
+
+//Column: Development progress
+$rendererProgress = new GtkCellRendererProgress();
+
+$columnProgress = new GtkTreeViewColumn(
+    'Progress',        //title
+    $rendererProgress, //the renderer
+    'value',           //use that property
+    4                  //data is in that model column
+);
+$view->append_column($columnProgress);
+
+
+
+/*
+* Add some data
+*/
+$store->append(array(
+    //icon
+    $view->render_icon(Gtk::STOCK_ABOUT, Gtk::ICON_SIZE_SMALL_TOOLBAR),
+    //text
+    'Game_Minesweeper',
+    //category
+    'Games',
+    //works?
+    true,
+    //progress in percent
+    100
+));
+$store->append(array(
+    $view->render_icon(Gtk::STOCK_MEDIA_PLAY, Gtk::ICON_SIZE_SMALL_TOOLBAR),
+    'PEAR_Frontend_Gtk2',
+    'Setup',
+    true,
+    70
+));
+$store->append(array(
+    $view->render_icon(Gtk::STOCK_HARDDISK, Gtk::ICON_SIZE_SMALL_TOOLBAR),
+    'PEAR_Package_File_Manager2',
+    'Setup',
+    true,
+    0
+));
+
+
+$wnd = new GtkWindow();
+$wnd->add($view);
+$wnd->set_title('Applications');
+$wnd->connect_simple('destroy', array('Gtk', 'main_quit'));
+$wnd->show_all();
+Gtk::main();
+?>
