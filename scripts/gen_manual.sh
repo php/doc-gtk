@@ -45,7 +45,7 @@ if [ $type == "test" ]; then
 fi
 
 build_dir=../build/$language/$type
-manualpath=../manual/$language/$manualfile
+manualpath=$manualfile
 
 if [ $type == "html" ]; then
 	xslfile=$stylesheetdir/html/chunk.xsl
