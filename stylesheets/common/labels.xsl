@@ -289,7 +289,7 @@ element label.</para>
  </xsl:if>
 </xsl:template>
 
-<xsl:template match="methods|signals|properties|method|signal|prop|constructor|legalnotice|enum" mode="label.markup">
+<xsl:template match="constructor|methods|method|properties|prop|fields|field|signals|signal|legalnotice|enum" mode="label.markup">
  <xsl:param name="punct">.</xsl:param>
  <xsl:if test="@label">
   <xsl:value-of select="@label"/>

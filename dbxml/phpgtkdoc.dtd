@@ -2,7 +2,7 @@
    Docbook Customization layer of PHP-GTK docs
    Authors: James Moore <jmoore@php.net>
 
-   $Id: phpgtkdoc.dtd,v 1.18 2006-03-26 02:48:10 sfox Exp $
+   $Id: phpgtkdoc.dtd,v 1.19 2006-03-28 20:46:36 sfox Exp $
 
 -->
 
@@ -65,7 +65,7 @@
   desc is a CNAME for para
 
  -->
-<!ELEMENT desc (%para.char.mix; | %para.mix; |  para | simpara)*>
+<!ELEMENT desc (%para.char.mix; | %para.mix; | para | simpara)*>
 <!ATTLIST desc
     %common.attrib;
     %para.role.attrib;
@@ -82,7 +82,7 @@
 
 -->
 <!ELEMENT classentry 
-          ((classmeta),(constructors?,methods?,properties?,fields?,signals?))>
+          ((classmeta),(constructors?,methods?,fields?,properties?,signals?))>
 <!ATTLIST classentry
     %common.attrib;
     %refentry.role.attrib;
@@ -182,6 +182,89 @@
 -->
 <!ELEMENT method (%method.class;)>
 <!ATTLIST method
+    %common.attrib;
+>
+
+<!--
+
+  - fields: wrapper for individual arguments.
+
+-->
+<!ELEMENT fields (field)+ >
+<!ATTLIST fields
+    %common.attrib;
+>
+
+<!--
+
+  - field: provides information about an objects properties
+
+-->
+<!ELEMENT field ((argname, argtype),(shortdesc,desc))>
+<!ATTLIST field
+    %common.attrib;
+    type (ro|rw) #REQUIRED
+>
+
+<!--
+
+  - fieldname: the name of the property
+
+-->
+<!ELEMENT fieldname (%docinfo.char.mix;)* >
+<!ATTLIST fieldname
+    %common.attrib;
+>
+
+<!--
+
+ - fieldtype: the type of property (int, char, object etc)
+
+-->
+<!ELEMENT fieldtype (%docinfo.char.mix;)* >
+<!ATTLIST fieldtype
+    %common.attrib;
+>
+
+
+<!--
+
+  - properties: wrapper for individual arguments.
+
+-->
+<!ELEMENT properties (prop)+ >
+<!ATTLIST properties
+    %common.attrib;
+>
+
+<!--
+
+  - prop: provides information about an objects properties
+
+-->
+<!ELEMENT prop ((argname, argtype),(shortdesc,desc))>
+<!ATTLIST prop
+    %common.attrib;
+    type (ro|rw) #REQUIRED
+>
+
+<!--
+
+  - propname: the name of the property
+
+-->
+<!ELEMENT propname (%docinfo.char.mix;)* >
+<!ATTLIST propname
+    %common.attrib;
+>
+
+<!--
+
+ - proptype: the type of property (int, char, object etc)
+
+-->
+<!ELEMENT proptype (%docinfo.char.mix;)* >
+<!ATTLIST proptype
     %common.attrib;
 >
 
@@ -329,88 +412,5 @@
 -->
 <!ELEMENT argtype (%docinfo.char.mix;)* >
 <!ATTLIST argtype
-    %common.attrib;
->
-
-<!--
-
-  - properties: wrapper for individual arguments.
-
--->
-<!ELEMENT properties (prop)+ >
-<!ATTLIST properties
-    %common.attrib;
->
-
-<!--
-
-  - prop: provides information about an objects properties
-
--->
-<!ELEMENT prop ((argname, argtype),(shortdesc,desc))>
-<!ATTLIST prop
-    %common.attrib;
-    type (ro|rw) #REQUIRED
->
-
-<!--
-
-  - propname: the name of the property
-
--->
-<!ELEMENT propname (%docinfo.char.mix;)* >
-<!ATTLIST propname
-    %common.attrib;
->
-
-<!--
-
- - proptype: the type of property (int, char, object etc)
-
--->
-<!ELEMENT proptype (%docinfo.char.mix;)* >
-<!ATTLIST proptype
-    %common.attrib;
->
-
-
-<!--
-
-  - fields: wrapper for individual arguments.
-
--->
-<!ELEMENT fields (field)+ >
-<!ATTLIST fields
-    %common.attrib;
->
-
-<!--
-
-  - field: provides information about an objects properties
-
--->
-<!ELEMENT field ((argname, argtype),(shortdesc,desc))>
-<!ATTLIST field
-    %common.attrib;
-    type (ro|rw) #REQUIRED
->
-
-<!--
-
-  - fieldname: the name of the property
-
--->
-<!ELEMENT fieldname (%docinfo.char.mix;)* >
-<!ATTLIST fieldname
-    %common.attrib;
->
-
-<!--
-
- - fieldtype: the type of property (int, char, object etc)
-
--->
-<!ELEMENT fieldtype (%docinfo.char.mix;)* >
-<!ATTLIST fieldtype
     %common.attrib;
 >

@@ -87,22 +87,26 @@
   <xsl:apply-templates />
  </xsl:template>
 
- <xsl:template match="fieldtype">
+ <xsl:template match="fieldtype|proptype">
   <xsl:apply-templates />
  </xsl:template>
 
- <xsl:template match="proptype">
-  <xsl:apply-templates />
+ <xsl:template match="classimage">
+  <div style="float:right; border:1px solid #000;">
+   <xsl:if test="@frame='no'">
+    <xsl:attribute name="style">float:right;</xsl:attribute>
+   </xsl:if>
+   <xsl:call-template name="process.image"/>
+  </div>
  </xsl:template>
-  
-  <xsl:template match="classimage">
-   <div style="float:right; border:1px solid #000;">
-    <xsl:if test="@frame='no'">
-     <xsl:attribute name="style">float:right;</xsl:attribute>
-    </xsl:if>
-    <xsl:call-template name="process.image"/>
-   </div>
-  </xsl:template>
+
+ <xsl:template match="funcsynopsis|funcprototype" mode="synoptic.mode">
+   <xsl:apply-templates mode="synoptic.mode"/>
+ </xsl:template>
+
+ <xsl:template match="funcsynopsis">
+   <xsl:apply-templates select="funcprototype"/>
+ </xsl:template>
 
 <!--========================================================================-->
 
@@ -141,7 +145,7 @@
   </xsl:choose>
  </xsl:template>
 
- <xsl:template match="propname">
+ <xsl:template match="fieldname|propname">
   <xsl:variable name="class" select="@class"/>
 
   <xsl:choose>
@@ -160,27 +164,7 @@
   </xsl:choose>
  </xsl:template>
 
- <xsl:template match="fieldname">
-  <xsl:variable name="class" select="@class"/>
-
-  <xsl:choose>
-   <xsl:when test="not($class) or $class=''">
-    <!-- empty class... try to find it -->
-    <xsl:apply-templates select="." mode="synoptic.mode"/>
-   </xsl:when>
-
-   <xsl:otherwise>
-    <!-- class given, all ok -->
-    <xsl:call-template name="prop.link">
-     <xsl:with-param name="prop" select="."/>
-     <xsl:with-param name="class" select="$class"/>
-    </xsl:call-template>
-   </xsl:otherwise>
-  </xsl:choose>
- </xsl:template>
-
-
- <xsl:template match="propname" mode="synoptic.mode">
+ <xsl:template match="fieldname|propname" mode="synoptic.mode">
   <xsl:variable name="classentry" select="ancestor::classentry[1]"/>
   <xsl:variable name="classtitle" select="$classentry/classmeta/classtitle"/>
 
@@ -189,18 +173,6 @@
    <xsl:with-param name="class" select="$classtitle"/>
   </xsl:call-template>
  </xsl:template>
-
-
- <xsl:template match="fieldname" mode="synoptic.mode">
-  <xsl:variable name="classentry" select="ancestor::classentry[1]"/>
-  <xsl:variable name="classtitle" select="$classentry/classmeta/classtitle"/>
-
-  <xsl:call-template name="prop.link">
-   <xsl:with-param name="prop" select="."/>
-   <xsl:with-param name="class" select="$classtitle"/>
-  </xsl:call-template>
- </xsl:template>
-
 
  <xsl:template name="prop.link">
   <xsl:param name="prop" select="."/>
@@ -486,12 +458,12 @@
     <p>
      <xsl:apply-templates select="./constructors" mode="synoptic.mode"/>
      <xsl:apply-templates select="./methods"  mode="synoptic.mode"/>
-     <xsl:apply-templates select="./signals"  mode="synoptic.mode"/>
      <xsl:apply-templates select="./fields" mode="synoptic.mode"/>
      <xsl:apply-templates select="./properties" mode="synoptic.mode"/>
+     <xsl:apply-templates select="./signals"  mode="synoptic.mode"/>
     </p>
    </div>
-  <xsl:apply-templates select="./constructors|./methods|./signals|./fields|./properties"/>
+  <xsl:apply-templates select="./constructors|./methods|./fields|./properties|./signals"/>
  </xsl:template>
 
  <xsl:template match="classentry[@rtl='1']">
@@ -565,12 +537,12 @@
     <p>
      <xsl:apply-templates select="./constructors" mode="synoptic.mode"/>
      <xsl:apply-templates select="./methods"  mode="synoptic.mode"/>
-     <xsl:apply-templates select="./signals"  mode="synoptic.mode"/>
      <xsl:apply-templates select="./fields"   mode="synoptic.mode"/>
      <xsl:apply-templates select="./properties" mode="synoptic.mode"/>
+     <xsl:apply-templates select="./signals"  mode="synoptic.mode"/>
     </p>
    </div>
-  <xsl:apply-templates select="./constructors|./methods|./signals|./fields|./properties"/>
+  <xsl:apply-templates select="./constructors|./methods|./fields|./properties|./signals"/>
  </xsl:template>
 
  <xsl:template match="refentry">
@@ -617,7 +589,6 @@
   <xsl:if test="position() > 1">
    <br/><br/>
   </xsl:if>
-
   <xsl:apply-templates select="./funcsynopsis"/>
   <xsl:text disable-output-escaping="yes"> --</xsl:text>
   <xsl:apply-templates select="./shortdesc" />
@@ -646,27 +617,6 @@
   </dd>
 </xsl:template>
 
- <xsl:template match="signals" mode="synoptic.mode">
-  <h3>
-   <xsl:call-template name="gentext">
-    <xsl:with-param name="key">signals</xsl:with-param>
-   </xsl:call-template>
-  </h3>
-  <blockquote>
-  <xsl:apply-templates select="./signal" mode="synoptic.mode"/>
-  </blockquote>
- </xsl:template>
-
- <xsl:template match="signal" mode="synoptic.mode">
-  <dt>
-   <xsl:apply-templates select="./signalname"/>
-  </dt>
-  <dd>
-   <xsl:call-template name="spaceholder"/>
-   <xsl:apply-templates select="./shortdesc"/>
-  </dd>
- </xsl:template>
-
  <xsl:template match="properties" mode="synoptic.mode">
   <h3>
    <xsl:call-template name="gentext">
@@ -694,9 +644,9 @@
   </blockquote>
  </xsl:template>
 
- <xsl:template match="field" mode="synoptic.mode">
+ <xsl:template match="field|prop" mode="synoptic.mode">
   <dt>
-   <xsl:apply-templates select="./fieldname" mode="synoptic.mode"/>
+   <xsl:apply-templates select="./fieldname|./propname" mode="synoptic.mode"/>
    <xsl:text>:</xsl:text>
   </dt>
   <dd>
@@ -705,26 +655,28 @@
   </dd>
  </xsl:template>
 
- <xsl:template match="prop" mode="synoptic.mode">
+ <xsl:template match="signals" mode="synoptic.mode">
+  <h3>
+   <xsl:call-template name="gentext">
+    <xsl:with-param name="key">signals</xsl:with-param>
+   </xsl:call-template>
+  </h3>
+  <blockquote>
+  <xsl:apply-templates select="./signal" mode="synoptic.mode"/>
+  </blockquote>
+ </xsl:template>
+
+ <xsl:template match="signal" mode="synoptic.mode">
   <dt>
-   <xsl:apply-templates select="./propname" mode="synoptic.mode"/>
-   <xsl:text>:</xsl:text>
+   <xsl:apply-templates select="./signalname"/>
   </dt>
   <dd>
-  <xsl:call-template name="spaceholder"/>
+   <xsl:call-template name="spaceholder"/>
    <xsl:apply-templates select="./shortdesc"/>
   </dd>
  </xsl:template>
 
- <xsl:template match="funcsynopsis" mode="synoptic.mode">
-   <xsl:apply-templates mode="synoptic.mode"/>
- </xsl:template>
-
- <xsl:template match="funcprototype" mode="synoptic.mode">
-      <xsl:apply-templates mode="synoptic.mode"/>
- </xsl:template>
-
- <xsl:template match="constructors|methods|signals|fields|properties">
+ <xsl:template match="constructors|methods|fields|properties|signals">
   <xsl:choose>
    <xsl:when test="ancestor::classentry[@rtl='1']">
     <div dir="rtl">
@@ -737,7 +689,7 @@
   </xsl:choose>
  </xsl:template>
 
- <xsl:template match="method|constructor">
+ <xsl:template match="constructor|method">
   <xsl:choose>
    <xsl:when test="ancestor::classentry[1][@rtl='1']">
     <div dir="rtl">
@@ -764,6 +716,39 @@
   </xsl:choose>
  </xsl:template>
 
+ <xsl:template match="field|prop">
+  <div>
+  <a>
+   <xsl:attribute name="name"><xsl:value-of select="@id"/></xsl:attribute>
+  </a>
+  <h2>
+   <xsl:apply-templates select="." mode="title.markup"/>
+  </h2>
+  <p>
+  <span dir="ltr">
+   <xsl:text>Access: </xsl:text>
+   <xsl:choose>
+    <xsl:when test="@type='rw'">
+     <xsl:text>Read Write</xsl:text>
+    </xsl:when>
+    <xsl:when test="@type='ro'">
+     <xsl:text>Read Only</xsl:text>
+    </xsl:when>
+    <xsl:otherwise>
+     <xsl:text>UNKNOWN</xsl:text>
+    </xsl:otherwise>
+   </xsl:choose>
+   <br/>
+   <xsl:text>Type: </xsl:text>
+   <xsl:apply-templates select="./fieldtype|./proptype"/>
+   </span>
+  </p>
+  <p>
+   <xsl:apply-templates select="./desc"/>
+  </p>
+  </div>
+ </xsl:template>
+
  <xsl:template match="signal">
   <a>
    <xsl:attribute name="name"><xsl:value-of select="@id"/></xsl:attribute>
@@ -784,76 +769,6 @@
   <p>
    <xsl:apply-templates select="./funcsynopsis" />
   </p>
- </xsl:template>
-
- <xsl:template match="funcsynopsis">
-   <xsl:apply-templates select="funcprototype"/>
- </xsl:template>
-
- <xsl:template match="field">
-  <div>
-  <a>
-   <xsl:attribute name="name"><xsl:value-of select="@id"/></xsl:attribute>
-  </a>
-  <h2>
-   <xsl:apply-templates select="." mode="title.markup"/>
-  </h2>
-  <p>
-  <span dir="ltr">
-   <xsl:text>Access: </xsl:text>
-   <xsl:choose>
-    <xsl:when test="@type='rw'">
-     <xsl:text>Read Write</xsl:text>
-    </xsl:when>
-    <xsl:when test="@type='ro'">
-     <xsl:text>Read Only</xsl:text>
-    </xsl:when>
-    <xsl:otherwise>
-     <xsl:text>UNKNOWN</xsl:text>
-    </xsl:otherwise>
-   </xsl:choose>
-   <br/>
-   <xsl:text>Type: </xsl:text>
-   <xsl:apply-templates select="./fieldtype"/>
-   </span>
-  </p>
-  <p>
-   <xsl:apply-templates select="./desc"/>
-  </p>
-  </div>
- </xsl:template>
-
- <xsl:template match="prop">
-  <div>
-  <a>
-   <xsl:attribute name="name"><xsl:value-of select="@id"/></xsl:attribute>
-  </a>
-  <h2>
-   <xsl:apply-templates select="." mode="title.markup"/>
-  </h2>
-  <p>
-  <span dir="ltr">
-   <xsl:text>Access: </xsl:text>
-   <xsl:choose>
-    <xsl:when test="@type='rw'">
-     <xsl:text>Read Write</xsl:text>
-    </xsl:when>
-    <xsl:when test="@type='ro'">
-     <xsl:text>Read Only</xsl:text>
-    </xsl:when>
-    <xsl:otherwise>
-     <xsl:text>UNKNOWN</xsl:text>
-    </xsl:otherwise>
-   </xsl:choose>
-   <br/>
-   <xsl:text>Type: </xsl:text>
-   <xsl:apply-templates select="./proptype"/>
-   </span>
-  </p>
-  <p>
-   <xsl:apply-templates select="./desc"/>
-  </p>
-  </div>
  </xsl:template>
 
 </xsl:stylesheet>
