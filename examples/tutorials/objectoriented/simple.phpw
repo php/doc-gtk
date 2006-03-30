@@ -1,0 +1,21 @@
+<?php
+
+class Hello extends GtkWindow
+{
+    function __construct()
+    {
+        parent::__construct();
+        $this->set_title('Hello World');
+        $this->connect_simple('destroy', array('gtk', 'main_quit'));
+
+        $label = new GtkLabel("Just wanted to say\r\n'Hello World!'");
+
+        $this->add($label);
+        $this->show_all();
+    }
+}
+
+new Hello();
+Gtk::main();
+
+?>

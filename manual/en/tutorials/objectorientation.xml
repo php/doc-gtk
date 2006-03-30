@@ -1,12 +1,356 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <chapter id="tutorials.objectorientation">
- <title>Object Orientated Programming</title>
+ <title>Object Oriented Programming</title>
 
  <sect1>
   <title>About this tutorial</title>
   <simpara>
-   <!-- TODO -->
+   This tutorial will attempt to teach you to program in PHP-GTK 2 in an object
+   oriented manner. PHP5 comes with great object-oriented support and hence we
+   can exploit all of the features of object-oriented programming while making
+   applications in PHP-GTK 2.
+  </simpara>
+  <simpara>
+    Why program in an object oriented fashion? There are a number of advantages
+    of choosing this style of programming, especially if your application is
+    split into several modules and is expected to be thousands of lines long.
+    One of the most important advantages is code cleanliness and organization.
+    It will be much easier for you and others to read and modify your code if
+    you program in an object-oriented manner, than if you had chosen to make
+    your application in a purely procedural way.
+  </simpara>
+  <simpara>
+    If you are convinced that object-orientation is the way to go, let's begin!
   </simpara>
  </sect1>
+
+ <sect1 id="tutorials.objectorientation.basics">
+  <title>Basic Object Orientation</title>
+  <simpara>
+   I'm going to assume that you are already familiar with object oriented
+   programming, if you're not, I suggest you get familiar with it before
+   proceeding with this tutorial. You may also want to look in the PHP5
+   manual's section on object orientation so that all this makes more sense to
+   you.
+  </simpara>
+  <para>
+   We'll begin with "porting" the simple Hello World! program to an object
+   oriented nature, so that you can grasp the concept quickly. The first thing
+   you have to do is to create a class. The most easy way to make your class 
+   is to extend one of the PHP-GTK 2 classes. Now, most applications have a 
+   <classname>GtkWindow</classname> as their top level widget. So does our 
+   Hello World program. So what we're going to do is to create a class that 
+   <literal>extends</literal> <classname>GtkWindow</classname>, so that it
+   makes our job easier:
+   <programlisting role="php"><![CDATA[
+class Hello extends GtkWindow
+{
+    // code goes here.
+}
+]]></programlisting>
+   Now we need to design the constructor of our class (a function that is
+   called when an object of our class is created). Let's think about what we
+   need to put in the constructor. Since the constructor is the first thing to
+   be called when an object of our class is created, we must put all the design
+   aspects of our program in the constructor. That means that the constructor
+   is the place where we create all the widgets that we require, design our
+   layout (see <link linkend="tutorials.packing">Packing Widgets</link>) and
+   finalize how our application should look.
+  </para>
+  <para>
+   Now, our class extends <classname>GtkWindow</classname>, but that doesn't
+   mean that <classname>GtkWindow</classname>'s constructor is called
+   automatically. This is the default behavior of PHP5 and hence we must call
+   <classname>GtkWindow</classname>'s constructor explicitly, using the 
+   <literal>parent</literal> keyword:
+   <programlisting role="php"><![CDATA[
+class Hello extends GtkWindow
+{
+    function __construct()
+    {
+        parent::__construct();
+    }
+}
+]]></programlisting>
+   This means that a GtkWindow will be created (with no parameters passed to
+   its constructor) whenever an object of our class "Hello" is created. Now the
+   question of how to access the newly created window arises. The
+   <literal>this</literal> keyword comes to our help! Using that keyword we can
+   modify all aspects of our newly created window:
+   <programlisting role="php"><![CDATA[
+function __construct()
+{
+    parent::__construct();
+    $this->set_title('Hello World!');
+    $this->connect_simple('destroy', array('gtk', 'main_quit'));
+}
+]]></programlisting>
+  </para>
+  <para>
+    Since this is a very simple program, we can finish all our tasks in the
+    constructor itself. We simply put the code that we put in our procedural
+    program into the constructor here. So we have the final program:
+    <example>
+     <title>Hello World - The Object Oriented Style</title>
+     <programlisting role="php">
+      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+       href="&directory.examples;/tutorials/objectoriented/simple.phpw" parse="text">
+       <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+      </xi:include>
+     </programlisting>
+    </example>
+    Although this is hardly a great example to show the way to program in an
+    object-oriented manner, it should help most of you get started. We'll look
+    into some of the more advanced concepts now.
+  </para>
+ </sect1>
+
+ <sect1 id="tutorials.objectorientation.advanced">
+  <title>A little more complexity</title>
+  <para>
+   We haven't used most of PHP5 powerful object oriented features so far.  Let's
+   make an application that opens a text file and displays its contents to you: 
+   a simple notepad-kind-of application. Please note that is a very very simple
+   application meant for educational purposes and has no practical functionality!
+   Here is the code, read it, and don't be intimidated by its size. A detailed 
+   explanation follows the code:
+   <example>
+    <title>A simple notepad</title>
+    <programlisting role="php">
+     <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+     href="&directory.examples;/tutorials/objectoriented/notepad.phpw" parse="text">
+      <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+     </xi:include>
+    </programlisting>
+   </example>
+  </para>
+ 
+  <sect2 id="tutorials.objectorientation.advanced.construct">
+   <title>The Constructor</title>
+   <para>
+    The class structure is similar to what we have seen before, except the
+    addition of some class properties and functions. Let's first have a look at
+    the constructor. The constructor takes a single optional argument that
+    defaults to <literal>null</literal>. That parameter is (path of) the
+    file name that we wish to open. If you don't pass a parameter to the
+    constructor, it will simply open nothing.
+   </para>
+   <para>
+    OK, so we first construct the parent (a GtkWindow) and then create some
+    widgets that we will use. A <classname>GtkVBox</classname> for our layout, a
+    <classname>GtkTextBuffer</classname> and a
+    <classname>GtkTextView</classname> to display the contents of the file and a
+    <classname>GtkStatusBar</classname> to display some messages. We setup the
+    layout and add the respective widgets to the VBox.
+   </para>
+   <para>
+    Next we set the class properties:
+    <programlisting role="php"><![CDATA[
+$this->currentFile = $fileName;
+$this->buffer = $textBuff;
+$this->status = $statusBar;
+]]> </programlisting>
+    These three lines set the values for the class properties. Class
+    properties are an essential part of all object-oriented PHP-GTK 2
+    applications. They are useful because you may need to access a particular
+    widget in a function that it was not created in. When we create a widget, the
+    object's scope is only within the function it was created in. For example,
+    we created the status bar in the constructor of our class, but we obviously
+    need to access it elsewhere (when we need to put some messages on it). But
+    since the variable <literal>$statusBar</literal> can be accessed only within
+    the constructor, we assign a class property (called
+    <literal>status</literal>) to it. Now we can access the status bar in any
+    function within the class by using <literal>$this->status</literal>.
+   </para>
+   <para>
+    Simply extend this concept to other widgets too. Basically, you need to
+    assign class properties to widgets that you think will need the entire class
+    as its scope. Actually, class properties can also be used efficiently to
+    store any data that you may need across the entire class. One example of
+    this in our applications is the <literal>currentFile</literal> property.
+    This will simply store the path of the current file opened, or
+    <literal>null</literal> if none is. We can then find out the name of the
+    current file opened in any function of the class. Class properties have 
+    other uses too, one such use I can think of is a flag. For our notepad
+    application, you may want to add a class property called 
+    <literal>saved</literal> which will have Boolean values to indicate 
+    whether the current file has been saved to disk or not.
+   </para>
+   <para>
+    Note that all the class properties have been defined as
+    <literal>protected</literal>. This is simply a good object oriented
+    practice. We don't want them to be public but we also want any classes that
+    extends ours to be able to access them.
+   </para>
+   <para>
+    And finally, we set the title of the window, maximize it, add the layout and
+    display all the widgets. And then we call the <literal>loadFile()</literal>
+    function to display the contents of our file in the text buffer that we had
+    created.
+   </para>
+  </sect2>
+
+  <sect2 id="tutorials.objectorientation.advanced.buildmenu">
+   <title>The buildMenu() function</title>
+   <para>
+    Note how we had called this function from the constructor:
+    <programlisting role="php"><![CDATA[
+$mainBox->pack_start($this->buildMenu(), false, false);
+]]> </programlisting>
+    We do that because we want to want to split our class into as many modules
+    as possible. Instead of building our entire layout in the constructor
+    itself, it is better to split the layout into major parts and dedicate a
+    function for each part. Here we have a function to build the menu bar, but
+    not for the text view or status bar because they take only 2 lines each to
+    construct!
+   </para>
+   <para>
+    In this function, we just create our menu bar, add a simple file menu with a
+    single "Quit" button to it. Let's have a look at these lines:
+    <programlisting role="php"><![CDATA[
+$quit->connect_simple('activate', array($this, 'quit'));
+$quit->connect_simple('enter_notify_event', array($this, 'updateStatus'), 1);
+$quit->connect_simple('leave_notify_event', array($this, 'updateStatus'), 0);
+]]> </programlisting>
+    Here we connect the <literal>activate</literal>,
+    <literal>enter-notify-event</literal> and
+    <literal>leave-notify-event</literal> to
+    their respective handlers. Look at the second parameter to the
+    <literal>connect_simple()</literal> functions. It is an array with two
+    elements. The first element is the special <literal>$this</literal> variable
+    and the second element is a string. If you had read the 
+    <link linkend="tutorials.helloworld">Hello World</link> tutorial, you would
+    have come across a line like this:
+    <programlisting role="php"><![CDATA[
+$wnd->connect_simple('destroy', array('gtk', 'main_quit'));
+]]> </programlisting>
+    Compare the usages and it should dawn on you that whenever you want to
+    connect a signal to callback function which is in a class, you must specify
+    the callback as an array, the first element of which points to the class,
+    and the second element of which is the name of the callback. Hence, we
+    connect the various events of our quit button to <literal>this</literal>
+    classes' <literal>quit()</literal> and <literal>updateStatus()</literal>
+    functions.
+   </para>
+   <para>
+    Sometimes, it is possible to pass parameters to functions in order to use
+    those objects in the function. As a rule of thumb, if you have more than one
+    function that uses a particular object, it is better to dedicate a class
+    property to it; but if there is only a single function that requires the
+    object, it is better to pass the object as a parameter instead. A common
+    occurrence of this situation is while connecting signals to callbacks. Have a
+    look at the tutorial on signals and callbacks for more on this and how to
+    pass custom parameters to the callbacks.
+   </para>
+   <para>
+    Getting back to the function, we return the <literal>top-most</literal>
+    widget in our menu: the menu bar, after adding the sub-menu to it. The
+    constructor then receives this object and adds it to the main VBox.
+   </para>
+  </sect2>
+
+  <sect2 id="tutorials.objectorientation.advanced.loadfile">
+   <title>The loadFile() function</title>
+   <para>
+    This function's purpose is to load the contents of the file to be opened and
+    display them in the text view. Fairly straight-forward, we first check
+    whether the class property <literal>currentFile</literal> is not null, and
+    then use <function class="GtkTextBuffer">set_text</function> on the
+    <literal>buffer</literal> class property.
+   </para>
+  </sect2>
+
+  <sect2 id="tutorials.objectorientation.advanced.updatestatus">
+   <title>The updateStatus() function</title>
+   <para>
+    This function serves as the callback for the
+    <literal>enter-notify-event</literal> and
+    <literal>leave-notify-event</literal> signals. Here we access the status bar
+    via the <literal>status</literal> class property and add/remove a message
+    depending on whether mouse is entering or leaving the Quit menu button.
+   </para>
+  </sect2>
+
+  <sect2 id="tutorials.objectorientation.advanced.quit">
+   <title>The quit() function</title>
+   <para>
+    This is the most simple function of all, only a single that quits the GTK
+    main loop. You may wonder why we have a one-line function called 'quit' when
+    we could have connected the signals directly to <literal>main_quit</literal> 
+    like:
+    <programlisting role="php"><![CDATA[
+$this->connect_simple('destroy', array('Gtk', 'main_quit'));
+]]> </programlisting>
+    The reason for that is, in applications, you would most probably want to do
+    some cleanup before the application quits, and this function is your chance
+    to do it. For our simple notepad application, an addition that is possible
+    here is to check for the <literal>saved</literal> flag (again, a class
+    property) and prompt the user to save the file if it is not.
+   </para>
+  </sect2>
+
+  <sect2 id="tutorials.objectorientation.advanced.instantiate">
+   <para>
+    The last two lines:
+    <programlisting role="php"><![CDATA[
+new Notepad('simple.phpw');
+Gtk::main();
+]]> </programlisting>
+    instantiates an object of our class (and thereby opens the simple.phpw file
+    located in the same directory) and starts the main GTK loop. You can also
+    shift <literal>Gtk::main()</literal> to the constructor of our class.
+   </para>
+  </sect2>
+ </sect1>
+
+ <sect1 id="tutorials.objectorientation.summary">
+  <title>Summary</title>
+  <para>
+   Hope this tutorial has been of some use in getting you started with the object
+   oriented style of programming in PHP-GTK 2. Before we wind up, a few more
+   pointers follow.</para>
+  <para>
+   <itemizedlist>
+    <listitem>
+     If you are building an extremely large application, you may want
+     to split it into multiple classes: one class for each module. For most
+     applications however, a single class should suffice.
+    </listitem>
+    <listitem>
+     If you use multiple classes in your application, the question of accessing
+     objects from one class in another arises. In this case, try to design a
+     hierarchy: one master class with other classes extending it. If that is not
+     possible, use global variables instead (not recommended).
+    </listitem>
+    <listitem>
+     If more than one function in your class needs to access a widget, make it a
+     class property. However if only one function requires it, pass it as a
+     parameter instead.
+    </listitem>
+    <listitem>
+     Always try to extend your classes from the widget class that will form the
+     base of your class. Also remember that you need to construct that widget
+     explicitly using the <literal>parent::__construct();</literal> statement.
+     You can access the methods of that widget via the <literal>this</literal>
+     keyword.
+    </listitem>
+    <listitem>
+     Keep your functions as short as possible. The whole point of object
+     oriented programming is modularization. If a function is beginning to get
+     bulky, consider splitting it. A frequent occurrence of this case is when you
+     try to design your entire (complicated) layout in the constructor itself.
+     Split it into functions that create parts of the layout and assemble them
+     all in the constructor instead.
+    </listitem>
+   </itemizedlist>
+  </para>
+  <para>
+   Don't forget to have a look at the Gtk2_Components section in 
+   <ulink url="http://pear.php.net/">PEAR</ulink>. 
+   All the packages there are made of high quality object-oriented code. 
+   Read their sources and emulate. All the best!
+  </para>
+ </sect1>
+ 
 </chapter> 
  

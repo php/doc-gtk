@@ -1,0 +1,87 @@
+<?php
+
+class Notepad extends GtkWindow
+{
+    protected $currentFile;
+    protected $buffer;
+    protected $status;
+    protected $context;
+    protected $lastid;
+
+    function __construct($fileName = null)
+    {
+        parent::__construct();
+                
+        $mainBox  = new GtkVBox();
+        $textBuff = new GtkTextBuffer();
+        $textView = new GtkTextView($textBuff);
+        $statusBar= new GtkStatusBar();
+
+        $mainBox->pack_start($this->buildMenu(), false, false);
+        $mainBox->pack_start($textView, true, true);
+        $mainBox->pack_start($statusBar, false, false);
+
+        $this->currentFile = $fileName;
+        $this->buffer = $textBuff;
+        $this->status = $statusBar;
+
+        $this->connect_simple('destroy', array($this, 'quit'));
+        $this->set_title('Simple Notepad');
+        $this->maximize();
+        $this->add($mainBox);
+        $this->show_all();
+
+        $this->loadFile();
+    }
+
+    function buildMenu()
+    {
+        $menuBar  = new GtkMenuBar();
+        $fileMenu = new GtkMenu();
+        $menuName = new GtkMenuItem('_File');
+        
+        $quit = new GtkImageMenuItem('gtk-quit');
+        $quit->connect_simple('activate', array($this, 'quit'));
+        $quit->connect_simple('enter_notify_event', 
+                                array($this, 'updateStatus'), 1);
+        $quit->connect_simple('leave_notify_event', 
+                                array($this, 'updateStatus'), 0);
+        
+        $fileMenu->append($quit);
+        $menuName->set_submenu($fileMenu);
+        $menuBar->add($menuName);
+
+        return $menuBar;
+    }
+   
+    function loadFile()
+    {
+        if($this->currentFile != null) {
+            $contents = file_get_contents($this->currentFile);
+            $this->buffer->set_text($contents);
+        }
+    }
+
+    function updateStatus($enter)
+    {
+        if($enter) {
+            $id = $this->status->get_context_id("Message");
+            $lastMsg = $this->status->push($id, "Quits the Application");
+            $this->context = $id;
+            $this->lastid = $lastMsg;
+        } else {
+            $this->status->remove($this->context, $this->lastid);
+        }
+    }
+    
+    function quit()
+    {
+        Gtk::main_quit();
+    }
+
+}
+
+new Notepad('simple.phpw');
+Gtk::main();
+
+?>
