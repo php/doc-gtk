@@ -1084,14 +1084,44 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>bool <function>mnemonic_activate</function></funcdef>
-     <paramdef>void</paramdef>
+     <paramdef>int <parameter>keyval</parameter></paramdef>
+     <paramdef>GdkModifierType <parameter>modifiers</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Activates widgets associated with the given mnemonic.
    </shortdesc>
    <desc>
-
+    <para>
+     Activates widgets assocated with the <parameter>keyval</parameter> and
+     <parameter>modifiers</parameter> mnemonic. A widget is associated with a
+     mnemonic when it is passed as an argument to <function
+     class="GtkWindow">add_mnemonic</function>. 
+    </para>
+    <para>
+     The <parameter>keyval</parameter> must be an integer. To get the integer
+     value for a key, use the PHP function <literal>ord</literal>.
+    </para>
+    <para>
+     The <parameter>modifiers</parameter> must match the window modifiers set
+     with <function class="GtkWindow">set_mnemonic_modifier</function>.
+    </para>
+    <para>
+     <example>
+      <title>Using GtkWindow::mnemonic_activate()</title>
+      <programlisting role="php">
+       <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+        href="&directory.examples;/reference/gtk/gtkwindow/mnemonic_activate.phpw" parse="text">
+        <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+       </xi:include>
+      </programlisting>
+     </example>
+    </para>
+    <para>
+     See also:
+     <function class="GtkWindow">add_mnemonic</function>
+     <function class="GtkWindow">remove_mnemonic</function>
+    </para>
    </desc>
   </method>
 
@@ -1123,7 +1153,7 @@
      This method simply requests that the window be moved. Call it does not
      necessarily mean that the window will be moved. To confirm that it has in
      fact been moved use <function
-     classname="GtkWindow">get_position</function>.
+     class="GtkWindow">get_position</function>.
     </para>
     <para>
      To move the window to a relative positio, such as the center of the
@@ -1131,9 +1161,9 @@
     </para>
     <para>
      See also:
-     <function classname="GtkWindow">set_gravity</function>
-     <function classname="GtkWindow">get_position</function>
-     <function classname="GtkWindow">set_position</function>
+     <function class="GtkWindow">set_gravity</function>
+     <function class="GtkWindow">get_position</function>
+     <function class="GtkWindow">set_position</function>
     </para>
    </desc>
   </method>
@@ -1146,10 +1176,29 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Parses an X Window System geometry string.
    </shortdesc>
    <desc>
-
+    <para>
+     Parses an X Window System geometry string. This method works on all Gtk+
+     ports including Win32 but is primarily intended for an X environment.
+    </para>
+    <para>
+     If either a size or position can be extracted from
+     <parameter>geometry</parameter>, then <function
+     class="GtkWindow">parse_geometry</function> calls <function
+     class="GtkWindow">set_default_size</function> and/or <function
+     class="GtkWindow">move</function> as needed and returns
+     <literal>true</literal>. If neither a size nor a positon can be extracted
+     from <parameter>geometry</parameter> <function
+     class="GtkWindow">parse_geometry</function> returns
+     <literal>false</literal>.
+    </para>
+    <para>
+     See also:
+     <function class="GtkWindow">set_default_size</function>,
+     <function class="GtkWindow">move</function>
+    </para>
    </desc>
   </method>
 
@@ -1177,7 +1226,7 @@
     </simpara>
     <para>
      See also:
-     <function classname="GtkWidget">show_all</function>
+     <function class="GtkWidget">show_all</function>
     </para>
    </desc>
   </method>
@@ -1186,14 +1235,30 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>bool <function>propagate_key_event</function></funcdef>
-     <paramdef>void</paramdef>
+     <paramdef>
+      <classname>GdkEventKey</classname> <parameter>keyevent</parameter>
+     </paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Passes a key press or release event to the focus chain until it is
+    handled.
    </shortdesc>
    <desc>
-
+    <para>
+     Passes <parameter>keyevent</parameter> off to the focus widget. If the
+     focus widget does not handle the event, it will be passed to the focus
+     widget's parent and will continue to move up the chain until either a
+     widget handles the event or there are not more containers to pass the
+     event off to.
+    </para>
+    <para>
+     This method is normally called automatically when a key is pressed in a
+     top level window.
+    </para>
+    <para>
+     If the event is handled, this method returns <literal>true</literal>.
+    </para>
    </desc>
   </method>
 
@@ -1275,14 +1340,14 @@
      will ignore any changes that the user has made to the window and return
      the window to its original settings. If you want to prevent the window
      from being moved, pass <enumname>Gtk::WIN_POS_CENTER_ALWAYS</enumname> to
-     <function classname="GtkWindow">set_position</function>. If you want to
+     <function class="GtkWindow">set_position</function>. If you want to
      prevent the user from resizing the window, pass <literal>false</literal>
-     to <function classname="GtkWindow">set_resizable</function>.
+     to <function class="GtkWindow">set_resizable</function>.
     </simpara>
     <simpara>
      See also:
-     <function classname="GtkWindow">set_position</function>
-     <function classname="GtkWindow">set_resizable</function>
+     <function class="GtkWindow">set_position</function>
+     <function class="GtkWindow">set_resizable</function>
     </simpara>
    </desc>
   </method>
@@ -1305,14 +1370,14 @@
      linkd="gtk.gtkwindow.method.set_geometry_hints">geometry
      contraints</link>. By default these constraints prevent the window from
      being resized smaller than the size set with <function
-     classname="GtkWidget">set_size_request</function>. Regardless of the
+     class="GtkWidget">set_size_request</function>. Regardless of the
      geometry constraints, a window may not be resized smaller than one pixel
      by one pixel.
     </simpara>
     <para>
      See also:
-     <function classname="GtkWindow">set_geometry_hints</function>
-     <function classname="GtkWidget">set_size_request</function>
+     <function class="GtkWindow">set_geometry_hints</function>
+     <function class="GtkWidget">set_size_request</function>
     </para>
    </desc>
   </method>
@@ -1360,7 +1425,7 @@
     <simpara>
      By default, after showing the first <classname>GtkWindow</classname> for
      each <classname>GdkScreen</classname>, GTK+ calls <function
-     classname="GdkScreen">notify_startup_complete</function>. Pass
+     class="GdkScreen">notify_startup_complete</function>. Pass
      <literal>false</literal> to this function to disable the automatic startup
      notification. You might do this if your first window is a splash screen,
      and you want to delay notification until after your real main window has

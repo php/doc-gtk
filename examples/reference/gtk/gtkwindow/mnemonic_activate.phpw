@@ -1,0 +1,36 @@
+<?php
+//Create the window. 
+$wnd  = new GtkWindow();
+
+//Button's mnemonic will be added by and, so we don't
+//use an underscore here
+$button = new GtkButton('Button');
+
+// Add the button to the window.
+$wnd->add($button);
+
+//little echo method
+function echoit($value) { echo $value . "\r\n"; }
+
+// When the button's mnemonic is activated, its label will be printed.
+$button->connect_simple('mnemonic_activate', 'echoit', $button->get_label());
+
+// We must tell the window which modifiers to use with the mnemonics.
+$wnd->set_mnemonic_modifier(Gdk::MOD1_MASK); // Alt
+
+// Here we add the mnemonic for the button by hand. So
+// pressing Alt+2 will cause the button to be activated.
+$wnd->add_mnemonic(ord('2'), $button);
+
+// We have to remove the mnemonic from the window before it gets destroyed
+// If we don't do this, a warning will be spit out
+$wnd->connect_simple('destroy', array($wnd, 'remove_mnemonic'), ord('2'), $button);
+$wnd->connect_simple('destroy', array('Gtk', 'main_quit'));
+
+// Show the window and all of its contents. Mnemonics cannot be activated 
+// until after the window is shown.
+$wnd->show_all();
+
+// Activate all widgets associated with Alt+2.
+$wnd->mnemonic_activate(ord('2'), Gdk::MOD1_MASK);
+?>
