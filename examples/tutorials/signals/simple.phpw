@@ -1,0 +1,19 @@
+<?php
+
+$win = new GtkWindow();
+$but = new GtkButton("Click to Quit!");
+
+$win->add($but);
+$win->show_all();
+
+$but->connect_simple("clicked", "quit");
+
+function quit()
+{
+    echo "You have quit!\n";
+    Gtk::main_quit();
+}
+
+Gtk::main();
+
+?>

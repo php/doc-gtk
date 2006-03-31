@@ -1,0 +1,31 @@
+<?php
+
+$win = new GtkWindow();
+$but = new GtkButton("Click to Quit!");
+
+$win->add($but);
+$win->show_all();
+
+$but->connect_simple("clicked", "first");
+$but->connect_simple("clicked", "second");
+$but->connect_simple("clicked", "third");
+
+function first()
+{
+    echo "I am the first function!\n";
+}
+
+function second()
+{
+    echo "I am the second function!\n";
+}
+
+function third()
+{
+    echo "And I'm the function that's going to stop this program!\n";
+    Gtk::main_quit();
+}
+
+Gtk::main();
+
+?>

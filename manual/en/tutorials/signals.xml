@@ -1,0 +1,428 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<chapter id="tutorials.signals">
+ <title>Signal Handling</title>
+
+ <sect1 id="tutorials.signals.introduction">
+  <title>Introduction</title>
+  <para>
+   This tutorial will deal with the concept of signal handling in PHP-GTK 2 which
+   is an important and fundamental, since this is what makes your application
+   "tick"!.
+  </para>
+  <para>
+   You might have noticed that at the end of every PHP-GTK 2 program we write
+   this statement:
+   <programlisting role="php"><![CDATA[
+Gtk::main();
+]]></programlisting>
+   What this means is that an infinite loop is started which waits for 
+   something to occur. Obviously you do not want to just create, display widgets
+   and quit! This loop is what keeps that from happening and is the key to keep
+   your application running. Conversely, the statement:
+   <programlisting role="php"><![CDATA[
+Gtk::main_quit();
+]]></programlisting>
+   exits from that loop. We use this whenever we really want to stop our
+   application.
+  </para>
+  <para>
+    First, it will be useful to define three terms that we will use frequently.
+  </para>
+  <para>
+   <itemizedlist>
+    <listitem>
+     Action: This is something that occurs. For example, the user clicking on a
+     button counts as an action.
+    </listitem>
+    <listitem>
+     Signal: This is a notification generated whenever an event occurs. This is 
+     the way your application knows that an action has just occurred.
+    </listitem>
+    <listitem>
+     Callback: This is where you get to handle a signal. A callback is just a
+     function that defines what happens when a particular signal is emitted.
+    </listitem>
+    <listitem>
+     Events: These are a continuous stream of impulses that communicate low-level
+     changes the environment of the underlying windowing system.
+    </listitem>
+   </itemizedlist>
+  </para>
+  <para>
+   Signal handling basically consists of connecting a signal to its callback, and
+   of course, writing the callback function itself. The job of generating the
+   signal whenever an action occurs is taken care by PHP-GTK 2. Another
+   important thing to note is that it is not necessary for an action to occur
+   to generate a signal. It is possible to manually generate a signal, and
+   PHP-GTK 2 generates signals internally all the time. 
+  </para>
+  <para>
+   A common instance of a signal being internally generated and used is when
+   <classname>GtkAdjustment</classname> emits the 
+   <signalname class="GtkAdjustment">value-changed</signalname> for a
+   <classname>GtkProgressBar</classname> to use it. Hence, most signals have a
+   default handler already inbuilt, which will be executed whether or not you
+   manually connect a callback to that signal.
+  </para>
+ </sect1>
+
+ <sect1 id="tutorials.signals.signals">
+  <title>Signals</title>
+  <note>
+   Signals are notifications emitted by widgets in response to some action
+   taking place.
+  </note>
+  <para>
+   As discussed before, it is essential for any application to respond to
+   some action that is triggered either by the user or automatically. Signals
+   help the program in knowing when a particular action has taken place so that
+   you can act on it.
+  </para>
+  <para>
+   Every widget has a set of signals associated with it. This means that, the
+   widget is capable of emitting any of those signals depending on the action
+   it receives. Also remember that signals are inherited across classes, and
+   hence the child class always derives all of the signals of its parent and
+   may add a few of its own.
+  </para>
+  <para>
+   An important concept to know here is that it is possible to emit a signal
+   without an action taking place at all. All widgets have functions that will
+   emit a particular signal when you use them, irrespective of whether the user
+   has actually performed an action or not. An example of such a function is the
+   <function class="GtkButton">clicked</function> method of
+   <classname>GtkButton</classname>, which will emit the
+   <literal>clicked</literal> signal for the button.
+  </para>
+ </sect1>
+
+ <sect1 id="tutorials.signals.callbacks">
+  <title>Callbacks</title>
+  <note>
+   Callbacks are functions that are executed when signals are emitted by
+   widgets.
+  </note>
+  <para>
+   Callbacks are the places where you do the actual work of acting upon signals
+   that are received. As a programmer, a callback is where you will place the
+   code that should be executed when a particular signal is emitted by the
+   widget.
+  </para>
+  <para>
+   Callbacks are also known as signal handler functions. Callbacks are of two
+   kinds: <literal>default handlers</literal> and 
+   <literal>user-defined handlers</literal>. The 
+   <literal>default handlers</literal> are called automatically on receipt of
+   their corresponding signals. <literal>Default handlers</literal> on the other
+   hand have to be explicitly <emphasis>connected</emphasis> to signals by the programmer
+   (that's you!).
+  </para>
+ </sect1>  
+
+ <sect1 id="tutorials.signals.connecting">
+  <title>Connecting the two</title>
+  <para>
+   It should be clear by now that if you want to react to an action, you must
+   connect its signal to a callback that you have written, so that PHP-GTK 2 can
+   call that function whenever the signal is triggered. Let's look into how you
+   can connect signals to callbacks.
+  </para>
+  <para>
+   There are 4 main functions that you can use to connect signals to callbacks:
+   <itemizedlist>
+    <listitem>connect_simple</listitem>
+    <listitem>connect_simple_after</listitem>
+    <listitem>connect</listitem>
+    <listitem>connect_after</listitem>
+   </itemizedlist>
+  </para>
+  <note>
+   The *_after methods are used if you want your callback to be invoked
+   <emphasis>after</emphasis> the default handler. We will be discussing only the
+   <literal>connect_simple</literal> and <literal>connect</literal> methods. The
+   respective *_after methods behave in the same way except for the fact that
+   the callback is guaranteed to be invoked only after the <literal>default
+   handler</literal> has.
+  </note>
+  <para>
+   There are two more methods: <literal>connect_object</literal> and
+   <literal>connect_object_after</literal>, but they are deprecated and provide
+   no additional functionality. It is highly recommended that you use the above
+   mentioned methods instead, in your PHP-GTK 2 programs.
+  </para>
+
+  <sect2 id="tutorials.signals.connecting.simple">
+   <title>Simple connections</title>
+   <para>
+    First we'll look into how to connect a signal to a callback in the most
+    simplest way. We'll be using , you guessed it, the
+    <literal>connect_simple</literal> method.
+   </para>
+   <para>
+    Of course, it is vital that you know the names of the signals that you would
+    want to connect to. The PHP-GTK 2 documentation contains a list of all signals 
+    that are relevant for a particular widget. Once you know that, and once you
+    have written a function that contains the code you want to be executed when
+    the signal is generated all you have to do is:
+    <programlisting role="php"><![CDATA[
+${widget}->connect_simple("{signal-name}", "{callback-name}");
+]]> </programlisting>
+    where, {widget} is the object whose signal you want to connect,
+    {signal-name} is the signal name, which of course must be relevant to
+    {widget}, and {callback-name} is the name of the callback function.
+   </para>
+   <note>
+    Callbacks are invoked whenever a signal is generated, by whatever means.
+    Remember that it is possible to generate signals through functions, and hence
+    a signal generation does not guarantee that the user has performed an
+    action.
+   </note>
+   <para>
+    To make things a little clearer, let's take a full fledged example. Here, we
+    add a button to a window. When a user clicks the button, the application
+    quits:
+    <example>
+     <title>A simple connection</title>
+     <programlisting role="php">
+      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+       href="&directory.examples;/tutorials/signals/simple.phpw" parse="text">
+       <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+      </xi:include>
+     </programlisting>
+    </example>
+   </para>
+   <para>
+    It's quite a simple program. We create a button and a window, add the button
+    to the window and show them. The line we are concerned with is:
+    <programlisting role="php"><![CDATA[
+$but->connect_simple("clicked", "quit");
+]]> </programlisting>
+    As you can see, we have connected the 
+    <signalname class="GtkButton">clicked</signalname> signal of a
+    <classname>GtkButton</classname> widget to the callback function named
+    <literal>quit</literal>. Simple, eh? The function <literal>quit</literal>
+    will be called whenever the <literal>clicked</literal> signal is emitted
+    from our button, or, whenever the user clicks on our button.
+   </para>
+   <para>
+    You can see in the <literal>quit</literal> function definition that we
+    display a message and then call the <literal>Gtk::main_quit()</literal>
+    function to exit the program.
+   </para>
+  </sect2>
+  
+  <sect2 id="tutorials.signals.connecting.multiple">
+   <title>Multiple Connections</title>
+   <para>
+    <emphasis>What if I connect the same signal twice to two different
+    callbacks?</emphasis>, I hear you ask. Well, the callback functions will simply be
+    called in the order in which they were connected. Yes, all the callbacks
+    that you connect will be invoked.
+   </para>
+   <para>
+    An example to make things crystal clear:
+    <example>
+     <title>Multiple signal connections</title>
+     <programlisting role="php">
+      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+       href="&directory.examples;/tutorials/signals/multiple.phpw" parse="text">
+       <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+      </xi:include>
+     </programlisting>
+    </example>
+    Run the program and you will see that the callback functions are indeed
+    invoked in the order in which they were connected.
+   </para>
+   <para>
+    <emphasis>OK, but what if I connect the signal to the same callback a hundred
+    times?</emphasis> The callback will be invoked a hundred times. But there's no
+    reason anyone would want to do this.
+   </para>
+   <para>
+    <emphasis>Can I connect multiple signals to the same callback?</emphasis> 
+    Yes, and in fact this is actually very useful. Many applications will have 
+    multiple ways of quitting the program: the regular "cross" button, a "quit" 
+    button on the file menu etc. You can connect signals for each one of them 
+    to a single <literal>quit</literal> function. You don't have to worry about 
+    where the signal came from, you just know that the user wants to quit the 
+    application.
+   </para>
+  </sect2>
+
+  <sect2 id="tutorials.signals.connecting.advanced">
+   <title>Customizing connections</title>
+   <para>
+    Sometimes, its useful to know which widget had triggered a particular
+    signal. If your application has more than one button, and you've connected
+    all their <literal>clicked</literal> signals to a single callback, you'd
+    definitely want to know which button the signal came from. It is in fact
+    efficient to write a single callback for multiple signals.
+   </para>
+   <para>
+    Here is where the <literal>connect</literal> method comes into the picture.
+    This method passes the object of the widget that generated the signal as the
+    first parameter to the callback.
+    <programlisting role="php"><![CDATA[
+$button1 = new GtkButton("First");
+$button2 = new GtkButton("Second");
+
+$button1->connect("clicked", "show");
+$button2->connect("clicked", "show");
+
+function show($whichbutton)
+{
+    echo $whichbutton->get_label();
+}
+]]> </programlisting>    
+    In the above example, you will get an output of "First" or "Second"
+    depending on which button was clicked.
+   </para>
+   <para>
+    It is also useful at times if you could pass custom parameters to your
+    callback functions. PHP-GTK 2 provides this functionality in both the
+    <literal>connect</literal> and <literal>connect_after</literal> methods. You
+    simply pass your parameters after the second argument to both these methods
+    separated by commas like this:
+    <example>
+     <title>Passing custom parameters</title>
+     <programlisting role="php">
+      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+       href="&directory.examples;/tutorials/signals/custom.phpw" parse="text">
+       <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+      </xi:include>
+     </programlisting>
+    </example>
+    In this example, we pass two custom parameters to our callback that helps us
+    from differentiating whether the mouse entered the button or left it. Note
+    that your custom parameters can be of any type: string, boolean, integer, an
+    array or even an object, as long as its a valid type in PHP. In fact, it is very
+    common necessity to pass widget objects as parameters to callbacks, because
+    a callback connected to a signal triggered by some widget may need to modify
+    some other widget. You may pass as many custom parameters as you want. Just
+    ensure that your callback function is designed to receive the same number of
+    parameters, or you may raise warnings.
+   </para>
+   <note>
+    For more information on signals such as
+    <literal>enter-notify-event</literal>, see the section on 
+    <link linkend="tutorials.signals.events">events</link>, because
+    there is more to this than meets the eye.
+   </note>
+  </sect2>
+
+  <sect2 id="tutorials.signals.connecting.object">
+   <title>Object-oriented connections</title>
+   <para>
+    Let us analyze the line that you might have seen frequently:
+    <programlisting role="php"><![CDATA[
+$window->connect_simple("destroy", array('gtk', 'main_quit'));
+]]> </programlisting>
+    Why an array as the second argument?
+   </para>
+   <para>
+    Remember that whenever you connect to callback functions in an
+    object-oriented context, the second argument to the connect_* functions must
+    be an array. The first element of the array should point to the class that
+    contains the callback and the second element must contain the name of the
+    callback itself.
+   </para>
+   <para>
+    When the callback is static in nature (like
+    <literal>Gtk::main_quit()</literal>), we generally specify the name of the
+    class as a string. However if the callback is not static in nature, but is a
+    member of your current class instead, the first element should be the
+    special <literal>$this</literal> variable. Have a look at the tutorial on
+    <link linkend="tutorials.objectorientation.advanced">Object Oriented
+    Programming</link> for examples of usage in such a context. The point is to
+    somehow make the first element of the array point to the class that contains
+    the callback and the second element point to the callback.
+   </para>
+  </sect2>
+ </sect1>
+
+ <sect1 id="tutorials.signals.events">
+  <title>Events</title>
+  <para>
+   There is a lot of difference between <literal>events</literal> and
+   <literal>signals</literal>, and both of them are far from interchangeable.
+  </para>
+  <para>
+   A signal is emitted by an instance of a <classname>GtkObject</classname> in
+   response to some action by the user or an instruction from a function or a
+   method.
+  </para>
+  <para>
+   Events on the other hand, are a continual stream of impulses that communicate
+   messages regarding the environmental changes in the underlying windowing
+   system. These are rather low-level, that means that every small change in the
+   environment counts as an event.
+  </para>
+  <note>
+   It is not possible to connect a callback to an event directly.
+  </note>
+  <para>
+   We had used the <literal>enter-notify-event</literal> signal in our previous
+   example. But it certainly sounds like it should be an event, isn't it? Many
+   of the events have important applications and it is often necessary to be
+   able to connect callbacks to them. For this purpose, PHP-GTK 2 provides
+   several signals known as <literal>event signals</literal> (such as
+   <literal>enter-notify-event</literal> and
+   <literal>leave-notify-event</literal>) that are actually wrappers over the
+   events themselves. These are ways of describing events in terms of signals so
+   that we can connects callbacks to them.
+  </para>
+  <para>
+   Whenever you require to capture an event, you would most probably find an
+   equivalent signal to work with. In case you don't, it is possible for every
+   widget that has its own <classname>GdkWindow</classname> to capture events
+   relevant to it. For those widgets that don't have a
+   <classname>GdkWindow</classname>, they must be encapsulated in a
+   <classname>GtkEventBox</classname> to be able to capture events. Capturing
+   an event is not an easy task, and is beyond the scope of this tutorial. Like
+   I said before, you will mostly find an equivalent signal to work with anyway,
+   so don't worry too much about events.
+  </para>
+ </sect1>
+
+ <sect1 id="tutorials.signals.summary">
+  <title>Summary</title>
+  <para>
+   We'll wind up this tutorial with a final summary of things that you learnt.
+  </para>
+  <para>
+   <itemizedlist>
+    <listitem>
+     Signal handling is basically connecting a signal to its callback
+     and writing the callback.
+    </listitem>
+    <listitem>
+     You may connect multiple signals to a single callback and a single signal to
+     multiple callbacks. Just remember that the callbacks are executed in the
+     order in which they were connected.
+    </listitem>
+    <listitem>
+     You may pass your own parameters to the callbacks by specifying them in the
+     arguments to the connect_* functions. Also remember that your callbacks
+     must be designed to receive the exact number of parameters that you
+     specify while connecting the signal to it.
+    </listitem>
+    <listitem>
+     While referring to callbacks that are in an object-oriented context,
+     remember that the second argument must be an array, the first element of
+     which must point to the class that the callback belongs to, and the second
+     element of which must be the name of the callback itself.
+    </listitem>
+    <listitem>
+     Remember the difference between and event and a signal. Also remember that
+     you may indirectly handle events with their corresponding signals.
+    </listitem>
+   </itemizedlist>
+  </para>
+  <para>
+   Hope this tutorial cleared up things a bit. The only way you'll learn is by
+   practicing, so, fire up your favorite text editor, and fire away! All the
+   Best!
+  </para>
+ </sect1>
+
+</chapter> 
