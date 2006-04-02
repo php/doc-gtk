@@ -1,14 +1,14 @@
 <?php
 
 $win = new GtkWindow();
-$but = new GtkButton("Move over me!");
+$but = new GtkButton('Move over me!');
 
 $win->add($but);
 $win->show_all();
 
-$win->connect_simple("destroy", array('gtk', 'main_quit'));
-$but->connect_simple("enter-notify-event", "showMessage", true, "You moved the mouse");
-$but->connect_simple("leave-notify-event", "showMessage", false, "You moved the mouse");
+$win->connect_simple('destroy', array('gtk', 'main_quit'));
+$but->connect_simple('enter-notify-event', 'showMessage', true, 'You moved the mouse');
+$but->connect_simple('leave-notify-event', 'showMessage', false, 'You moved the mouse');
 
 function showMessage($enter, $message)
 {
