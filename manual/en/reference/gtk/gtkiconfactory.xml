@@ -4,10 +4,28 @@
   <classtitle>GtkIconFactory</classtitle>
   <classparent>GObject</classparent>
   <shortdesc>
-
+   A collection of a set of variants for a particular icon.
   </shortdesc>
   <desc>
-
+   <para>
+    An icon factory helps you to manage a collection of GtkIconSets; and a
+    GtkIconSet manages a set of variants for a particular icon, that is, variants
+    for different sizes and widget states. Icons in an icon factory are named by
+    a Stock ID, which a simple string identifying the icon.
+   </para>
+   <para>
+    Each <classname>GtkStyle</classname> has a list of
+    <classname>GtkIconFactory</classname>s derived from the current theme; those
+    icon factories are consulted first when searching for an icon. If the theme
+    doesn't set a particular icon, PHP-GTK 2 looks for it in a list of default
+    icon factories, which are maintained by 
+    <function class="GtkIconFactory">add_default</function> and 
+    <function class="GtkIconFactory">remove_default</function>.
+   </para>
+   <para>
+    Applications with icons must add a default icon factory to their icons,
+    which will allow themes to override the icons for the application.
+   </para>
   </desc>
  </classmeta>
 
