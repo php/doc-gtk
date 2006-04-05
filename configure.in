@@ -50,12 +50,8 @@ PHP=$withval
 
 AC_PATH_PROG(PHP, php, $PHP)
 if [ test "$PHP" = "no" ]; then
-	AC_MSG_ERROR(unable to locate PHP executable)
-fi
-
-if (sh -c "$PHP -m" 2>/dev/null | grep gtk >/dev/null); then
-	AC_MSG_NOTICE($PHP has the php-gtk module loaded)
-	AC_MSG_ERROR(Please use --with-php=PATH to set an alternative)
+	AC_MSG_NOTICE(Unable to locate a PHP executable)
+	AC_MSG_ERROR(Please use --with-php=PATH)
 fi
 
 DOCBOOK_DOCTYPE="-//PHP Group//DTD DocBk XML V3.1.7-Based Extension//EN"
