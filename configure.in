@@ -36,9 +36,26 @@ if [ test "$XSLTPROC" = "no" ]; then
 	AC_MSG_ERROR(cannot find xsltproc)
 fi
 
-AC_PATH_PROG(PHP, php, no)
+# need to offer a way to set a PHP path, thanks to PHP-GTK fans
+AC_ARG_WITH(php,
+[  --with-php=PATH         path to PHP binary],
+[
+if ! (sh -c "$withval -v" 2>/dev/null | grep PHP >/dev/null); then
+	AC_MSG_ERROR($withval is not a PHP executable)
+fi
+PHP=$withval
+],
+[PHP="no"]
+)
+
+AC_PATH_PROG(PHP, php, $PHP)
 if [ test "$PHP" = "no" ]; then
-	AC_MSG_ERROR(unable to locate php executable)
+	AC_MSG_ERROR(unable to locate PHP executable)
+fi
+
+if (sh -c "$PHP -m" 2>/dev/null | grep gtk >/dev/null); then
+	AC_MSG_NOTICE($PHP has the php-gtk module loaded)
+	AC_MSG_ERROR(Please use --with-php=PATH to set an alternative)
 fi
 
 DOCBOOK_DOCTYPE="-//PHP Group//DTD DocBk XML V3.1.7-Based Extension//EN"
@@ -130,7 +147,7 @@ $STYLESHEET_DIR/updates.xsl \
 $SCRIPT_DIR/genchapterents.php ])
 
 echo creating chapters.ent
-$PHP -q $SCRIPT_DIR/genchapterents.php > $MANUAL/chapters.ent
+$PHP -q -C $SCRIPT_DIR/genchapterents.php > $MANUAL/chapters.ent
 echo creating name_to_id.xsl
 $XSLTPROC $SCRIPT_DIR/gen_name_to_id.xsl $SCRIPT_DIR/manual.xml > $STYLESHEET_DIR/name_to_id.xsl
 
