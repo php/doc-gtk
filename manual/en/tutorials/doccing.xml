@@ -309,7 +309,7 @@
     but a <literal>vi</literal>, <literal>emacs</literal> or even
     <literal>Notepad</literal> will do the job.
     Note: If you use non-ASCII characters, you need to save the file
-    as <literal>UTF-8</literal> (mainly used in the non-english manuals).
+    as <literal>UTF-8</literal>.
    </para>
 
    <para>
@@ -321,9 +321,9 @@
    </para>
    <para>
     You might wonder why the docs don't use HTML tags:
-    It's because docbook just describes the text structure, it doesn't
+    It's because DocBook just describes the text structure, it doesn't
     format it. HTML tries to separate layout (CSS) and content (XHTML)
-    as well, but docbook can be used to produce not only HTML, but PDFs
+    as well, but DocBook can be used to produce not only HTML, but PDFs
     and real books, too. There are many special elements in a book: Chapters,
     sections, examples, and in a programming manual like this you have
     methods, parameters, properties, signals and so on.
@@ -366,9 +366,9 @@
  <listitem>Second item</listitem>
 </itemizedlist>
 ]]></programlisting>
+    </informalexample>
     <literal>&lt;listitem&gt;</literal>s themselves can contain 
     <literal>&lt;para&gt;</literal> and other tags.
-    </informalexample>
    </para>
 
    <!-- some more tags? Which? -->
@@ -421,10 +421,12 @@
      <para>
       <emphasis>Method/function links</emphasis> connect to a method or
       function of a certain class. The function name will automatically
-      be completed with <literal>()</literal>. Use 
-      <programlisting role="xml"><![CDATA[
+      be completed with <literal>()</literal>. Use
+      <informalexample>
+       <programlisting role="xml"><![CDATA[
 <function class="GtkAboutDialog">set_logo</function>
 ]]></programlisting>
+      </informalexample>
       to accomplish the task. The manual will show:
       <function class="GtkAboutDialog">set_logo</function>.
       The <literal>class</literal> parameter is not necessary
@@ -436,27 +438,31 @@
 
     <listitem>
      <para>
-      <emphasis>Links to signals</emphasis> are done that way:
-      <programlisting role="xml"><![CDATA[
+      <emphasis>Links to signals</emphasis> are created in this way:
+      <informalexample>
+       <programlisting role="xml"><![CDATA[
 <signalname class="GtkDialog">close</signalname>
 ]]></programlisting>
-      It will be compiled to:
-      <signalname class="GtkDialog">close</signalname>.
+      </informalexample>
+      This will compiled to: <signalname class="GtkDialog">close</signalname>.
      </para>
     </listitem>
 
     <listitem>
      <para>
       <emphasis>Enumerator links</emphasis> are also very simple:
-      <programlisting role="xml"><![CDATA[
+      <informalexample>
+       <programlisting role="xml"><![CDATA[
 <enumname>GtkButtonBoxStyle</enumname>
 ]]></programlisting>
+      </informalexample>
       This will result in: <enumname>GtkButtonBoxStyle</enumname>.
-      You can also link to an enumeration or flag using one of it's
-      option fields:
-      <programlisting role="xml"><![CDATA[
+      You can also link to an enumeration or flag using one of its option fields:
+      <informalexample>
+       <programlisting role="xml"><![CDATA[
 <optionname enum="GtkIconLookupFlags">Gtk::ICON_LOOKUP_FORCE_SVG</optionname>
 ]]></programlisting>
+      </informalexample>
       This will compile to:
       <optionname enum="GtkIconLookupFlags">Gtk::ICON_LOOKUP_FORCE_SVG</optionname>.
      </para>
@@ -465,26 +471,29 @@
     <listitem>
      <para>
       <emphasis>Property links</emphasis> are a simple:
-      <programlisting role="xml"><![CDATA[
+      <informalexample>
+       <programlisting role="xml"><![CDATA[
 <fieldname class="GtkDialog">action_area</fieldname>
 ]]></programlisting>
-      This will result in:
-      <fieldname class="GtkDialog">action_area</fieldname>.
+      </informalexample>
+      This will result in: <fieldname class="GtkDialog">action_area</fieldname>.
      </para>
     </listitem>
 
     <listitem>
      <para>
-      <emphasis>Free manual links</emphasis> are necessary if
-      you want to link a certain word in the text, or link
-      to a tutorial section. You need to provide the ID of the
-      section to be linked, and are free to choose a title:
-      <programlisting role="xml"><![CDATA[
+      <emphasis>Free manual links</emphasis> are necessary if you want to link
+      a certain word in the text, or link to a tutorial section. You need to
+      provide the ID of the section to be linked, and are free to choose a
+      title:
+      <informalexample>
+       <programlisting role="xml"><![CDATA[
 The <link linkend="tutorials.doccing">documentation tutorial</link>
 shows you how to compile the manual.
 ]]></programlisting>
-      See the result:
-      The <link linkend="tutorials.doccing">documentation tutorial</link>
+      </informalexample>
+      See the result: 
+      The <link linkend="tutorials.doccing">documentation tutorial</link> 
       shows you how to compile the manual.
      </para>
     </listitem>
@@ -493,22 +502,28 @@ shows you how to compile the manual.
      <para>
       <emphasis>URL links</emphasis> leave the scope of the manual; you can
       write a plain link to any HTTP, FTP or email address you want:
-      <programlisting role="xml"><![CDATA[
+      <informalexample>
+       <programlisting role="xml"><![CDATA[
 <ulink url="mailto:php-gtk-doc@lists.php.net">documentation mailing list</ulink>
 ]]></programlisting>
+      </informalexample>
       which will look like:
       <ulink url="mailto:php-gtk-doc@lists.php.net">documentation mailing 
       list</ulink>.
       If the link is one commonly used in the manual, you can use one of
       the many XML entities listed in <literal>manual/global.ents</literal>
       to achieve a similar effect:
-      <programlisting role="xml"><![CDATA[
+      <informalexample>
+       <programlisting role="xml"><![CDATA[
 &link.phpgtkdoc;
 ]]></programlisting>
+      </informalexample>
       will result in: &link.phpgtkdoc;, and
-      <programlisting role="xml"><![CDATA[
+      <informalexample>
+       <programlisting role="xml"><![CDATA[
 <ulink url="mailto:&email.phpgtkdoc;">documentation mailing list</ulink>
 ]]></programlisting>
+      </informalexample>
       will give you:
       <ulink url="mailto:&email.phpgtkdoc;">documentation mailing list</ulink>.
      </para>
@@ -531,22 +546,28 @@ shows you how to compile the manual.
    <para>
     <emphasis>Class images</emphasis> are shown at the class overview
     page, on the right side of the description. Just add a
-    <programlisting role="xml"><![CDATA[
+    <informalexample>
+     <programlisting role="xml"><![CDATA[
 <classimage fileref="&directory.images;/reference/gtk/gtkiconview.constructor.png"/>
-]]></programlisting>. 
+]]></programlisting>
+    </informalexample>
     Note the <literal>&amp;directory.images;</literal> base
     directory; it will be replaced with the correct images directory
     at compile time.
    </para>
    <para>
     Normal images are included in a paragraph via
-    <programlisting role="xml"><![CDATA[
+    <informalexample>
+     <programlisting role="xml"><![CDATA[
 <graphic fileref="&directory.images;/path/to/the/file.png"/>
 ]]></programlisting>
+    </informalexample>
     and inline images with
-    <programlisting role="xml"><![CDATA[
+    <informalexample>
+     <programlisting role="xml"><![CDATA[
 <inlinegraphic fileref="&directory.images;/path/to/the/file.png"/>
-]]></programlisting>.
+]]></programlisting>
+    </informalexample>
    </para>
 
    <para>
@@ -566,26 +587,33 @@ shows you how to compile the manual.
 
    <para>
      Detached examples can be included in this way:
-     <programlisting role="xml"><![CDATA[
+     <informalexample>
+      <programlisting role="xml"><![CDATA[
     <example>
      <title>Simple GtkAboutDialog</title>
      <programlisting role="php">
       <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
-                  ]]>href="&amp;directory.examples;/reference/gtk/gtkaboutdialog/constructor.phpw" parse="text"><![CDATA[
+          ]]>href="&amp;directory.examples;/reference/gtk/gtkaboutdialog/constructor.phpw"
+             parse="text"><![CDATA[
        <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
       </xi:include>
      </programlisting>
     </example>
 ]]></programlisting>
+    </informalexample>
    </para>
 
    <para>
     Examples for code snippets have to be inline as in:
-    <programlisting role="xml"><![CDATA[
-<programlisting role="php"><![CDATA[
+    <informalexample>
+     <programlisting role="xml"><![CDATA[
+    <informalexample>
+     <programlisting role="php"><![CDATA[
 //some php code here
 ]]>]]&gt;<![CDATA[</programlisting>
+    </informalexample>
 ]]></programlisting>
+    </informalexample>
     The <literal>CDATA</literal> section is useful because it allows you to
     directly include code, without having to escape it. The 
     &lt;?php and ?&gt; tags aren't required in code snippets. Note that

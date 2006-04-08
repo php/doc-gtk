@@ -15,39 +15,45 @@
   <graphic fileref="&directory.images;/tutorials/helloadvanced.png"/>
  </para>
 
-
  <para>
   At first, we create a window, set its title and tell that the main loop
   shall be quit when the window is destroyed - you already know that from
   the first tutorial:
-  <programlisting role="php"><![CDATA[
+  <informalexample>
+   <programlisting role="php"><![CDATA[
 $wnd = new GtkWindow();
 $wnd->set_title('Login');
 $wnd->connect_simple('destroy', array('gtk', 'main_quit'));
 ]]></programlisting>
+  </informalexample>
  </para>
 
  <para>
   The next task is to create all the widgets we need on this dialog:
   At first, two text entry fields for username and password:
-  <programlisting role="php"><![CDATA[
+  <informalexample>
+   <programlisting role="php"><![CDATA[
 $txtUsername = new GtkEntry();
 $txtPassword = new GtkEntry();
 ]]></programlisting>
+  </informalexample>
   Then we want the user to know which text field is password or
   username, so there is the need for some descriptive labels:
-  <programlisting role="php"><![CDATA[
+  <informalexample>
+   <programlisting role="php"><![CDATA[
 //The second parameter says that the underscore should be parsed as underline
 $lblUsername = new GtkLabel('_Username', true);
 $lblPassword = new GtkLabel('_Password', true);
 ]]></programlisting>
+  </informalexample>
   And at last, we need two buttons: One for login, and one to cancel the
   process:
-  <programlisting role="php"><![CDATA[
+  <informalexample>
+   <programlisting role="php"><![CDATA[
 $btnLogin    = new GtkButton('_Login');
 $btnCancel   = new GtkButton('_Cancel');
 ]]></programlisting>
-
+  </informalexample>
   You might note that the <classname>GtkLabel</classname> constructor
   gets a second parameter passed, to tell that the underscore
   <literal>_</literal> is shown as underline to the next character,
@@ -57,22 +63,25 @@ $btnCancel   = new GtkButton('_Cancel');
   a mnemonic in a button's label than that a normal label has one.
  </para>
 
-
  <para>
   Now the labels need to know what widget needs to be activated when
   they are activated via the mnemonic. This is done that way:
-  <programlisting role="php"><![CDATA[
+  <informalexample>
+   <programlisting role="php"><![CDATA[
 $lblUsername->set_mnemonic_widget($txtUsername);
 $lblPassword->set_mnemonic_widget($txtPassword);
 ]]></programlisting>
+  </informalexample>
   Further, we need to determine what action is taken when the buttons
   are clicked. The Cancel button shall destroy the window (thus ending
   the application) and the Login button shall check the text fields and
   take further action:
-  <programlisting role="php"><![CDATA[
+  <informalexample>
+   <programlisting role="php"><![CDATA[
 $btnCancel->connect_simple('clicked', array($wnd, 'destroy'));
 $btnLogin ->connect_simple('clicked', 'login', $wnd, $txtUsername, $txtPassword);
 ]]></programlisting>
+  </informalexample>
   We pass the three widgets <varname>$wnd</varname>, 
   <varname>$txtUsername</varname> and <varname>$txtPassword</varname>
   as optional parameters to the (yet to be defined) 
@@ -81,7 +90,6 @@ $btnLogin ->connect_simple('clicked', 'login', $wnd, $txtUsername, $txtPassword)
   if all is ok.
  </para>
 
-
  <para>
   Now that we have all the widgets we need, they are added to
   the window. As <classname>GtkWindow</classname> is a bin container,
@@ -89,7 +97,8 @@ $btnLogin ->connect_simple('clicked', 'login', $wnd, $txtUsername, $txtPassword)
   can hold several widgets and lays out our elements nicely.
   The decision goes to <classname>GtkTable</classname>, because it provides
   a way to keep the labels in a column, and the entry fields in the next one:
-  <programlisting role="php"><![CDATA[
+  <informalexample>
+   <programlisting role="php"><![CDATA[
 $tbl = new GtkTable(3, 2);
 $tbl->attach($lblCredit, 0, 2, 0, 1);
 $tbl->attach($lblUsername, 0, 1, 1, 2);
@@ -97,17 +106,19 @@ $tbl->attach($txtUsername, 1, 2, 1, 2);
 $tbl->attach($lblPassword, 0, 1, 2, 3);
 $tbl->attach($txtPassword, 1, 2, 2, 3);
 ]]></programlisting>
+  </informalexample>
   (The <varname>$lblCredit</varname> is just a label with a message).
   The buttons get their own <classname>GtkHButtonBox</classname>, because
   that class allows one to lay out several buttons very nicely:
-  <programlisting role="php"><![CDATA[
+  <informalexample>
+   <programlisting role="php"><![CDATA[
 $bbox = new GtkHButtonBox();
 $bbox->set_layout(Gtk::BUTTONBOX_EDGE);
 $bbox->add($btnCancel);
 $bbox->add($btnLogin);
 ]]></programlisting>
+  </informalexample>
  </para>
-
 
  <para>
   The last thing in layouting is adding the table and the button box
@@ -115,19 +126,22 @@ $bbox->add($btnLogin);
   <classname>GtkWindow</classname> is a <classname>GtkBin</classname>
   and can hold only one widget. So we need another container,
   this time a <classname>GtkVBox</classname>:
-  <programlisting role="php"><![CDATA[
+  <informalexample>
+   <programlisting role="php"><![CDATA[
 $vbox = new GtkVBox();
 $vbox->pack_start($tbl);
 $vbox->pack_start($bbox);
 ]]></programlisting>
+  </informalexample>
   That would be all, and we can show the window:
-  <programlisting role="php"><![CDATA[
+  <informalexample>
+   <programlisting role="php"><![CDATA[
 $wnd->add($vbox);
 $wnd->show_all();
 Gtk::main();
 ]]></programlisting>
+  </informalexample>
  </para>
-
 
  <para>
   The last thing missing is the <literal>login</literal> function that
@@ -142,23 +156,26 @@ Gtk::main();
   Getting the text from the widgets is very simple, we just use the
   <function class="GtkEntry">get_text</function> method of
   <classname>GtkEntry</classname>:
-  <programlisting role="php"><![CDATA[
+  <informalexample>
+   <programlisting role="php"><![CDATA[
 $strUsername = $txtUsername->get_text();
 $strPassword = $txtPassword->get_text();
 ]]></programlisting>
+  </informalexample>
   Checking is done via the normal
   php <literal>strlen</literal> function. If an error occured, we want
   to show a message box with a little message.
   <classname>GtkMessageDialog</classname> is ideal for this, as it
   automatically creates icons and the buttons (Ok, Yes/No) automatically:
-  <programlisting role="php"><![CDATA[
+  <informalexample>
+   <programlisting role="php"><![CDATA[
 $dialog = new GtkMessageDialog($wnd, Gtk::DIALOG_MODAL, Gtk::MESSAGE_ERROR, Gtk::BUTTONS_OK, $errors);
 $dialog->set_markup("The following errors occured:\r\n<span foreground='red'>" . $errors . "</span>");
 $dialog->run();
 $dialog->destroy();
 ]]></programlisting>
+  </informalexample>
  </para>
-
 
  <para>
   Now make sure that you put the login function before(!) the main loop
@@ -169,7 +186,8 @@ $dialog->destroy();
   <title>The full program</title>
   <programlisting role="php">
    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
-               href="&directory.examples;/tutorials/helloadvanced/helloadvanced.phpw" parse="text">
+               href="&directory.examples;/tutorials/helloadvanced/helloadvanced.phpw"
+               parse="text">
     <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
    </xi:include>
   </programlisting>
