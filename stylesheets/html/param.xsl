@@ -5,7 +5,7 @@
                 version='1.0'>
 
 <!-- ********************************************************************
-     $Id: param.xsl,v 1.3 2005-04-11 21:54:45 cweiske Exp $
+     $Id: param.xsl,v 1.4 2006-04-08 16:52:27 sfox Exp $
      ********************************************************************
 
      This file is part of the XSL DocBook Stylesheet distribution.
@@ -17,7 +17,7 @@
 <doc:reference xmlns="">
 <referenceinfo>
 <releaseinfo role="meta">
-$Id: param.xsl,v 1.3 2005-04-11 21:54:45 cweiske Exp $
+$Id: param.xsl,v 1.4 2006-04-08 16:52:27 sfox Exp $
 </releaseinfo>
 <author><surname>Walsh</surname>
 <firstname>Norman</firstname></author>
@@ -500,7 +500,7 @@ SEE xref.xsl IF YOU NEED TO TURN IT OFF.</para>
 </doc:param>
 
 <!-- ==================================================================== -->
-<xsl:param name="spacing.paras" doc:type='boolean' select="'0'"/>
+<xsl:param name="spacing.paras" doc:type='boolean' select="'1'"/>
 
 <doc:param name="spacing.paras" xmlns="">
 <refpurpose>Insert additional &lt;p&gt; elements for spacing?</refpurpose>

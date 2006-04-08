@@ -3,7 +3,7 @@
                 version='1.0'>
 
 <!-- ********************************************************************
-     $Id: formal.xsl,v 1.5 2005-04-11 21:54:44 cweiske Exp $
+     $Id: formal.xsl,v 1.6 2006-04-08 16:52:27 sfox Exp $
      ********************************************************************
 
      This file is part of the XSL DocBook Stylesheet distribution.
@@ -36,14 +36,15 @@
 
 <xsl:template name="informal.object">
   <xsl:variable name="id"><xsl:call-template name="object.id"/></xsl:variable>
+  <p>
   <div class="{name(.)}" id="{$id}">
     <xsl:if test="$spacing.paras != 0"><p/></xsl:if>
     <a name="{$id}"/>
-    <span dir="ltr">
      <xsl:apply-templates/>
-    </span>
-    <xsl:if test="$spacing.paras != 0"><p/></xsl:if>
+<!-- for some reason this is a space too far - I'll put it back if/when I find why -->
+<!--    <xsl:if test="$spacing.paras != 0"></p></xsl:if> -->
   </div>
+  </p>
 </xsl:template>
 
 <xsl:template name="semiformal.object">
