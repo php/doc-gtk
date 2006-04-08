@@ -29,21 +29,18 @@ ini_set("error_reporting", E_ALL); // kill the E_STRICT warnings in GeSHi under 
 require dirname(__FILE__).'/geshi/geshi.php';
 $geshi = new GeSHi('', 'php', dirname(__FILE__).'/geshi/geshi');
 $geshi->set_tab_width(4);
-if (isset($GLOBALS["TYPE"]) && $GLOBALS["TYPE"] == "php") {
-    //use css in php mode only
-    $geshi->enable_classes();
-}
-$geshi->set_overall_class('phpcode');
+$geshi->set_overall_class('phphl');
 $geshi->set_overall_style('font-size: 85%', true);
-$geshi->set_keyword_group_style(1, 'color: #907000; font-weight: bold', true);
-$geshi->set_strings_style('color: green', true);
 $geshi->set_symbols_highlighting(false);
+
+$geshi->set_strings_style('color: green', true);
+$geshi->set_keyword_group_style(1, 'color: #d09010; font-weight: bold', true);
 $geshi->set_numbers_style('color: #aa0000; font-weight: bold', true);
 $geshi->set_methods_style('color: black; font-style: italic', true);
 $geshi->set_regexps_style(0, 'color: #004090', true);
 
 // use this to get updated stylesheet info if changed via abovementioned API
-// $styles = $geshi->get_stylesheet();
+// file_put_contents('style.css', $geshi->get_stylesheet());
 
 function callback_html_number_entities_decode($matches) {
     return chr($matches[1]);
@@ -53,14 +50,17 @@ function callback_highlight_php($matches) {
     $with_tags = trim(html_entity_decode($matches[1]));
     global $geshi;
     $geshi->set_language('php');
+	$geshi->set_overall_class('phphl'); // because last line changes it
+    $geshi->enable_classes();
     $geshi->set_source($with_tags);
-    return $geshi->parse_code();
+	return $geshi->parse_code();
 }
 
 function callback_highlight_xml($matches) {
     $with_tags = trim(html_entity_decode($matches[1]));
     global $geshi;
     $geshi->set_language('xml');
+    $geshi->enable_classes(false);
     $geshi->set_source($with_tags);
 
     $strCode = $geshi->parse_code();
