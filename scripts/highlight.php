@@ -29,7 +29,7 @@ ini_set("error_reporting", E_ALL); // kill the E_STRICT warnings in GeSHi under 
 require dirname(__FILE__).'/geshi/geshi.php';
 $geshi = new GeSHi('', 'php', dirname(__FILE__).'/geshi/geshi');
 $geshi->set_tab_width(4);
-$geshi->set_overall_class('phphl');
+$geshi->set_overall_class('phpcode');
 $geshi->set_overall_style('font-size: 85%', true);
 $geshi->set_symbols_highlighting(false);
 
@@ -50,7 +50,7 @@ function callback_highlight_php($matches) {
     $with_tags = trim(html_entity_decode($matches[1]));
     global $geshi;
     $geshi->set_language('php');
-	$geshi->set_overall_class('phphl'); // because last line changes it
+	$geshi->set_overall_class('phpcode'); // because last line changes it
     $geshi->enable_classes();
     $geshi->set_source($with_tags);
 	return $geshi->parse_code();
