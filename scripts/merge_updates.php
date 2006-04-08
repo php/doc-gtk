@@ -14,9 +14,9 @@
  */
 
 // Check number of args
-if ($GLOBALS["argc"] != 3) {
-    exit("Purpose: Merge pre-formatted contents of new updates file into pre-existing updates file.\r\n"
-        .'Usage: merge-updates.php [ newupdatesfile ] [ outfile ] ' ."\r\n"
+if ($argc < 3 || $argc > 4) {
+    exit("Purpose: Merge pre-formatted contents of new updates file with old updates file.\r\n"
+        .'Usage: merge-updates.php <new file> <old file> [ <outfile> ] ' ."\r\n"
     );
 }
 
@@ -32,10 +32,17 @@ class ManualUpdates {
    */
     var $newfile;
   /**
-   * Pre-existing updates file; used for output.
+   * Pre-existing updates file; can used for output.
    * @var string
    */
-    var $outfile;
+    var $oldfile;
+
+  /**
+   * File to use for output.
+   * @var string
+   */
+	var $outfile;
+
   /**
    * Array that will contain the new update data.
    * @var array
@@ -60,12 +67,13 @@ class ManualUpdates {
    * @param  string updatesfile, string outputfile
    * @return void
    */
-    function ManualUpdates($newupdates, $outupdates)
+    function ManualUpdates($newupdates, $oldupdates, $outupdates)
     {
         $this->newfile = $newupdates;
+        $this->oldfile = $oldupdates;
         $this->outfile = $outupdates;
-        $this->newarray = $this->_getUpdates($this->newfile);
-        $this->oldarray = $this->_getUpdates($this->outfile);
+        $this->newarray = $this->_getUpdates($this->newfile, 1);
+        $this->oldarray = $this->_getUpdates($this->oldfile, 0);
     }
 
   /**
@@ -75,46 +83,58 @@ class ManualUpdates {
    * @param  string filename
    * @return array filecontents
    */
-    function _getUpdates($filename)
+    function _getUpdates($filename, $new)
     {
         if (!is_readable($filename)) {
             trigger_error('Cannot get updates from ' . $filename, E_USER_WARNING);
             trigger_error($filename . ' does not exist or is not readable by this user.', E_USER_ERROR);
             exit;
         }
-        return file($filename);
+
+		$updates = array();
+		$data = file_get_contents($filename);
+		preg_match_all('!^.+href="([^"]+)".+date="([^"]+)">([^<]+).*$!m', $data, $match, PREG_SET_ORDER);
+		foreach ($match as $m) {
+			$updates[$m[1]] = array($m[3], $m[2], $m[0], $new);
+		}
+		return $updates;
     }
 
   /**
-   * Merges and sorts the arrays without array_intersect_key() or even a useful timestamp <sigh />
-   * Rewrite this function when we get PHP 5 and/or `date %s`
+   * Merges and sorts the updates arrays 
    * Sets output array
    * 
    * @param  none
    * @return void
    */
     function mergeUpdates() {
-        // We want to show MAX_UPDATES_TO_SHOW or the total of
-        // tonight's updates, whichever is the greater. Apparently.
-        $this->maximum = max(MAX_UPDATES_TO_SHOW, sizeof($this->newarray));
-        $merged = array_merge($this->newarray, $this->oldarray);
-
-        // Lines aren't unique. Titles are...
-        foreach ($merged as $line) {
-            $stripped = strip_tags($line);
-            $titles[] = substr($stripped, strpos($stripped, ' '));
-        }
-
-        $unique = array_unique($titles);
-
-        for ($i = 0; $i < sizeof($merged); $i++) {
-            if (array_key_exists($i, $unique) && sizeof($this->output) < $this->maximum) {
-                $this->output[] = $merged[$i];
-            } else {
-                unset($merged[$i]);
-            }
-        }
+		$maximum = max(MAX_UPDATES_TO_SHOW, count($this->newarray));
+		$this->output = array_merge($this->oldarray, $this->newarray);
+		uasort($this->output, array(&$this, 'sortByDate'));
+		$this->output = array_slice($this->output, 0, $maximum);
+		return;
     }
+
+	function sortByDate($a, $b)
+	{
+		/* if dates are the same */
+		if ((int)$a[1] == (int)$b[1]) {
+			/* and 'new' flags are the same */
+			if ($a[3] == $b[3]) {
+				/* sort by title */
+				return strcmp($a[0], $b[0]);
+			} else {
+				/*
+				 * otherwise sort by 'new' flags so that new entries show up at
+				 * the top
+				 */
+				return ($a[3] < $b[3]) ? 1 : -1;
+			}
+		}
+
+		/* sort by date */
+		return ((int)$a[1] < (int)$b[1]) ? 1 : -1;
+	}
 
   /**
    * Writes the updated output array to file, the old-fashioned way
@@ -124,10 +144,10 @@ class ManualUpdates {
    */
     function writeUpdatesToFile()
     {
-        $fp = fopen($this->outfile, 'w');
+		$fp = fopen($this->outfile, 'w');
 
         foreach ($this->output as $line) {
-            fwrite($fp, $line);
+            fwrite($fp, $line[2]."\n");
         }
         fclose($fp);
     }
@@ -135,10 +155,15 @@ class ManualUpdates {
 
 // Set the parameter vars
 $newupdates = $argv[1];
-$outupdates = $argv[2];
+$oldupdates = $argv[2];
+if ($argc > 3) {
+	$outupdates = $argv[3];
+} else {
+	$outupdates = $oldupdates;
+}
 
 // Create the current list of updates.
-$mu =& new ManualUpdates($newupdates, $outupdates);
+$mu =& new ManualUpdates($newupdates, $oldupdates, $outupdates);
 $mu->mergeUpdates();
 $mu->writeUpdatesToFile();
 
