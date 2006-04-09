@@ -152,7 +152,8 @@
     should be using CLI for building, by the way, but CGI will generally cope.
    </para>
    <para>
-    You can prevent the chunked builds (html, phpweb, test) from telling you
+    You can prevent the chunked builds (<literal>html</literal>,
+    <literal>phpweb</literal>, <literal>test</literal>) from telling you
     every time they write a file by using <command>--disable-output</command>.
     In theory at least, this should speed up the build time for those versions.
    </para>
@@ -169,9 +170,9 @@
     <command>make bigmanual.html</command> will give you a single, huge HTML
     file in less than five minutes; <command>make text</command> will do the
     same, but will also produce a copy of the manual as a single text file
-    at the end of the build run. <command>make html</command> will
-    eventually produce multiple HTML files in split directories alongside a
-    copy of the images directory; <command>make phpweb</command> will
+    at the end of the build run. <command>make html</command> will eventually
+    produce multiple HTML files in split directories alongside a copy of the
+    <literal>images</literal> directory; <command>make phpweb</command> will
     result in a copy of the manual as it appears on gtk.php.net. By popular
     demand, there is now also <command>make test id=ID</command>, where
     <literal>ID</literal> is the manual id for a component, e.g.
@@ -179,6 +180,13 @@
     or <literal>gtk.gtkwindow</literal>. This will build the relevant file -
     and anything below it in the hierarchy - into a toplevel directory named
     <literal>testbuild</literal> rather than into <literal>build</literal>.
+   </para>
+   <para>
+    There are two output types you are very unlikely to need at all:
+    <command>make mtoc</command>, which generates a machine-readable table of
+    contents in XML, and <command>make updates</command>, which is used on the
+    build server to generate the manual updates list for the home page at
+    <ulink url="&url.phpgtk;">&url.phpgtk;</ulink>.
    </para>
    <para>
     Further output formats are likely to become available in the near future.

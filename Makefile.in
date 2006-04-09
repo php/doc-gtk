@@ -49,11 +49,11 @@ all: html
 #
 bigmanual.html: $(BUILD)/bigmanual.html
 html: $(BUILD)/html/index.html
-phpweb: $(BUILD)/php/index.php
 mtoc: $(BUILD_TEST)/mtoc.xml
+phpweb: $(BUILD)/php/index.php
+test: $(BUILD_TEST)/$(id).html
 text: $(BUILD)/manual.txt
 updates: $(BUILD_TEST)/updates-$(LANG).php
-test: $(BUILD_TEST)/$(id).html
 
 mirror-files: $(BUILD)/bigmanual.html.gz              \
 			  $(BUILD)/php_gtk_manual_$(LANG).tar.bz2 \
@@ -73,10 +73,6 @@ updates = $(STYLESHEET_DIR)/updates.xsl
 #
 # Make Rules
 #
-
-$(BUILD_TEST)/$(id).html: scripts/manual.xml
-	@mkdir -p $(BUILD_TEST)
-	$(XSLTPROC) --param base.dir "'$(BUILD_TEST)/'" --stringparam rootid "$(id)" --xinclude $(chunk) $(SCRIPT_DIR)/manual.xml
 
 $(BUILD)/manual.txt: bigmanual.html
 	@mkdir -p $(BUILD)
@@ -115,9 +111,13 @@ $(BUILD)/php_gtk_manual_$(LANG).zip: $(BUILD)/html/index.html
 	@mkdir -p $(BUILD)
 	gzip -c -9 $< > $@
 
+$(BUILD_TEST)/$(id).html: scripts/manual.xml
+	@mkdir -p $(BUILD_TEST)
+	$(XSLTPROC) --param base.dir "'$(BUILD_TEST)/'" --stringparam rootid "$(id)" --xinclude $(chunk) $(SCRIPT_DIR)/manual.xml
+
 $(BUILD_TEST)/mtoc.xml: $(SCRIPT_DIR)/mtoc.xml
 	@mkdir -p $(BUILD_TEST)
-	$(XSLTPROC) --param base.dir --xinclude "'$(BUILD_TEST)/'" $(chunk) $(SCRIPT_DIR)/mtoc.xml
+	$(XSLTPROC) --param base.dir "'$(BUILD_TEST)/'" --xinclude $(chunk) $(SCRIPT_DIR)/mtoc.xml
 
 $(BUILD_TEST)/updates-$(LANG).php: $(SCRIPT_DIR)/testclasses.xml
 	@mkdir -p $(BUILD_TEST)
