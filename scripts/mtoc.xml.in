@@ -1,30 +1,27 @@
 <?xml version='1.0' encoding='utf-8' ?>
-<!DOCTYPE book PUBLIC "@DOCBOOK_DOCTYPE@" "@srcdir@/dbxml/phpgtkdoc.dtd"[
+<!DOCTYPE book PUBLIC "@DOCBOOK_DOCTYPE@" "../dbxml/phpgtkdoc.dtd"[
 
 <!-- Defaults for entities that should be defined in language-defs -->
-<!ENTITY % language-defs    SYSTEM "@UTF8LANG@/language-defs.ent">
+<!ENTITY % language-defs     SYSTEM "../@LANGDIR@/language-defs.ent">
 %language-defs;
 
 <!-- These are language independent -->
-<!ENTITY phpgtk.build-date "@PHP_GTK_DOC_BUILD_DATE@">
-<!ENTITY % global.entities  SYSTEM "global.ent">
-<!ENTITY % global.chapters  SYSTEM "chapters.ent">
+<!ENTITY phpgtk2doc.build-date "@PHP_GTK2_DOC_BUILD_DATE@">
+<!ENTITY % global.entities  SYSTEM "../@MANUAL@/global.ent">
+<!ENTITY % global.chapters  SYSTEM "../@MANUAL@/chapters.ent">
+<!ENTITY % global.contribs  SYSTEM "../@MANUAL@/contributors.ent">
 %global.entities;
 %global.chapters;
+%global.contribs;
 
-<!ENTITY userguide   SYSTEM "userguide.xml">
-<!ENTITY tutorials   SYSTEM "tutorials.xml">
-<!ENTITY reference   SYSTEM "reference.xml">
-<!ENTITY appendix    SYSTEM "appendix.xml">
-<!ENTITY keysyms     SYSTEM "keysyms.xml">
-<!ENTITY license     SYSTEM "license.xml">
-
+<!ENTITY tutorials   SYSTEM "../@MANUAL@/tutorials.xml">
+<!ENTITY reference   SYSTEM "../@MANUAL@/reference.xml">
+<!ENTITY appendix    SYSTEM "../@MANUAL@/appendix.xml">
 ]>
 
 <mtoc>
  &bookinfo;
  &preface;
- &userguide;
  &tutorials;
  &reference;
  &appendix;
