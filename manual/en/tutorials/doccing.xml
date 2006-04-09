@@ -144,7 +144,20 @@
     work if the base files for the German translation happen to exist!
    </para>
    <para>
-    There is another configuration option, <command>--with-history</command>,
+    Another configure option you may need to use is
+    <command>--with-php=PATH</command>, where <literal>PATH</literal> is the
+    full path to the PHP binary executable you intend to use. In most cases,
+    the PHP 4 or PHP 5 binary found automatically by autoconf will be fine
+    - but occasionally people have strange setups on their systems. You really
+    should be using CLI for building, by the way, but CGI will generally cope.
+   </para>
+   <para>
+    You can prevent the chunked builds (html, phpweb, test) from telling you
+    every time they write a file by using <command>--disable-output</command>.
+    In theory at least, this should speed up the build time for those versions.
+   </para>
+   <para>
+    There is one last configuration option, <command>--with-history</command>,
     which you may or may not fall across. It's used to define the path to an
     external directory containing only <literal>manual/*</literal> (a snapshot
     of <literal>php-gtk-doc/manual</literal>). This is only used during the
@@ -154,11 +167,21 @@
    <para>
     Finally, there is a choice of output style. Choosing
     <command>make bigmanual.html</command> will give you a single, huge HTML
-    file in less than five minutes; <command>make html</command> will
+    file in less than five minutes; <command>make text</command> will do the
+    same, but will also produce a copy of the manual as a single text file
+    at the end of the build run. <command>make html</command> will
     eventually produce multiple HTML files in split directories alongside a
-    copy of the images directory; and <command>make phpweb</command> will
-    result in a copy of the manual as it appears on gtk.php.net. Other
-    formats are likely to become available in the near future.
+    copy of the images directory; <command>make phpweb</command> will
+    result in a copy of the manual as it appears on gtk.php.net. By popular
+    demand, there is now also <command>make test id=ID</command>, where
+    <literal>ID</literal> is the manual id for a component, e.g.
+    <literal>tutorials.helloadvanced</literal>
+    or <literal>gtk.gtkwindow</literal>. This will build the relevant file -
+    and anything below it in the hierarchy - into a toplevel directory named
+    <literal>testbuild</literal> rather than into <literal>build</literal>.
+   </para>
+   <para>
+    Further output formats are likely to become available in the near future.
    </para>
   </sect2>
 
