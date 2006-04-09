@@ -3,7 +3,7 @@
                 version='1.0'>
 
 <!-- ********************************************************************
-     $Id: titlepage.xsl,v 1.8 2006-03-26 02:46:07 sfox Exp $
+     $Id: titlepage.xsl,v 1.9 2006-04-09 20:43:16 sfox Exp $
      ********************************************************************
 
      This file is part of the XSL DocBook Stylesheet distribution.
@@ -90,6 +90,26 @@
        <xsl:with-param name="key">editedby</xsl:with-param>
       </xsl:call-template>
    </xsl:when>
+   <xsl:when test="$id='translators'">
+      <xsl:call-template name="gentext">
+       <xsl:with-param name="key">translatedby</xsl:with-param>
+      </xsl:call-template>
+   </xsl:when>
+   <xsl:when test="$id='appendix.doccredits.authors'">
+      <xsl:call-template name="gentext">
+       <xsl:with-param name="key">PHPGTKmanauths</xsl:with-param>
+      </xsl:call-template>
+   </xsl:when>
+   <xsl:when test="$id='appendix.doccredits.editors'">
+      <xsl:call-template name="gentext">
+       <xsl:with-param name="key">PHPGTKeditors</xsl:with-param>
+      </xsl:call-template>
+   </xsl:when>
+   <xsl:when test="$id='appendix.doccredits.translators'">
+      <xsl:call-template name="gentext">
+       <xsl:with-param name="key">translatedby</xsl:with-param>
+      </xsl:call-template>
+   </xsl:when>
    <xsl:when test="$id='appendix.doccredits.pastauthors'">
       <xsl:call-template name="gentext">
        <xsl:with-param name="key">PHPGTKmanauthsp</xsl:with-param>
@@ -124,11 +144,10 @@
      <xsl:text>et al</xsl:text>
     </a>
     <br />
-    <br />
    </div>
   </xsl:if>
+  <br />
  </xsl:template>
-
 
  <xsl:template match="authorgroup">
   <xsl:choose>
