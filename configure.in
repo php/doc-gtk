@@ -36,7 +36,7 @@ if [ test "$XSLTPROC" = "no" ]; then
 	AC_MSG_ERROR(cannot find xsltproc)
 fi
 
-# need to offer a way to set a PHP path, thanks to PHP-GTK fans
+# need to offer a way to set a PHP path
 AC_ARG_WITH(php,
 [  --with-php=PATH         path to PHP binary],
 [
@@ -137,6 +137,7 @@ Makefile \
 $SCRIPT_DIR/manual.xml \
 $SCRIPT_DIR/mtoc.xml \
 $SCRIPT_DIR/testmanual.xml \
+$STYLESHEET_DIR/chunk.xsl \
 $STYLESHEET_DIR/phpweb.xsl \
 $STYLESHEET_DIR/updates.xsl \
 $SCRIPT_DIR/genchapterents.php ])
