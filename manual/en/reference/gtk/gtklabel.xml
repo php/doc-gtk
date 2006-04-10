@@ -108,14 +108,20 @@
   <method id="gtk.gtklabel.method.get_attributes">
    <funcsynopsis>
     <funcprototype>
-     <funcdef> <function>get_attributes</function></funcdef>
+     <funcdef>
+      <classname>PangoAttrList</classname> <function>get_attributes</function>
+     </funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the list of Pango attributes for the label.
    </shortdesc>
    <desc>
+    <para>
+     Returns the list of Pango attributes for the label that was set with
+     <function class="GtkLabel">set_attributes</function>.
+    </para>
     <para>
      See also: 
      <function class="GtkLabel">set_attributes</function>
@@ -567,13 +573,23 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_attributes</function></funcdef>
-     <paramdef>void</paramdef>
+     <paramdef>
+      <classname>PangoAttrList</classname> <parameter>list</parameter>
+     </paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets a list of Pango attributes for the label.
    </shortdesc>
    <desc>
+    <para>
+     Sets the Pango attributes for the label to those defined by
+     <parameter>list</parameter>. The attributes set by
+     <parameter>list</parameter> will be ignored if either
+     <propname class="GtkLabel">use_underline</propname> or
+     <propname class="GtkLabel">user_markup</propname> is
+     <literal>true</literal>.
+    </para>
     <para>
      See also: 
      <function class="GtkLabel">get_attributes</function>
@@ -914,8 +930,8 @@
    </shortdesc>
    <desc>
     <para>
-     Sets the label's text from the string str. 
-     If characters in str are preceded by an underscore, 
+     Sets the label's text from the string <parameter>str</parameter>. 
+     If characters in <parameter>str</parameter> are preceded by an underscore, 
      they are underlined indicating that they represent a keyboard 
      accelerator called a mnemonic. 
     </para>
@@ -1001,6 +1017,57 @@
   </method>
 
  </methods>
+
+ <properties>
+
+  <prop id="gtk.gtklabel.property.use_markup" type="rw">
+   <propname>use_markup</propname>
+   <proptype>boolean</proptype>
+   <shortdesc>
+    Whether or not the label should be processed for Pango markup.
+   </shortdesc>
+   <desc>
+    <para>
+     Whether or not the label should be processed for Pango markup. If
+     this property is <literal>true</literal>, the label will be processed for
+     Pango markup. If the property is <literal>false</literal>, any Pango markup
+     will be displayed literally in the label.
+    </para>
+    <para>
+     See also:
+     <function class="GtkLabel">set_use_markup</function>
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtklabel.property.use_underline" type="rw">
+   <propname>use_underline</propname>
+   <proptype>boolean</proptype>
+   <shortdesc>
+    Whether or not the label contains an underline for a mnemonic.
+   </shortdesc>
+   <desc>
+    <para>
+     Whether or not the label contains an underline for a mnemonic. If this
+     property is <literal>true</literal> any underlines in the label will be 
+     treated as mnemonic identifiers. If the property is
+     <literal>false</literal> any underlines will be shown literally in the
+     label.
+    </para>
+    <para>
+     If a label contains two underlines and
+     <propname>user_underline</propname> is <literal>true</literal>, both
+     underlines will be shown as mnemonics, but only the second underline will
+     work.
+    </para>
+    <para>
+     See also:
+     <function class="GtkLabel">set_use_underline</function>
+    </para>
+   </desc>
+  </prop>
+
+ </properties>
 
  <signals>
 
