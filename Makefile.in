@@ -48,6 +48,7 @@ all: html
 # Build Aliases
 #
 bigmanual.html: $(BUILD)/bigmanual.html
+demo: $(BUILD_TEST)/demo_manual.html
 html: $(BUILD)/html/index.html
 mtoc: $(BUILD_TEST)/mtoc.xml
 phpweb: $(BUILD)/php/index.php
@@ -111,9 +112,13 @@ $(BUILD)/php_gtk_manual_$(LANG).zip: $(BUILD)/html/index.html
 	@mkdir -p $(BUILD)
 	gzip -c -9 $< > $@
 
-$(BUILD_TEST)/$(id).html: scripts/manual.xml
+$(BUILD_TEST)/$(id).html: $(SCRIPT_DIR)/manual.xml
 	@mkdir -p $(BUILD_TEST)
 	$(XSLTPROC) --param base.dir "'$(BUILD_TEST)/'" --stringparam rootid "$(id)" --xinclude $(chunk) $(SCRIPT_DIR)/manual.xml
+
+$(BUILD_TEST)/demo_manual.html: $(SCRIPT_DIR)/demo_manual.xml
+	@mkdir -p $(BUILD_TEST)
+	$(XSLTPROC) --param base.dir "'$(BUILD_TEST)/'" --xinclude $(chunk) $(SCRIPT_DIR)/demo_manual.xml 
 
 $(BUILD_TEST)/mtoc.xml: $(SCRIPT_DIR)/mtoc.xml
 	@mkdir -p $(BUILD_TEST)
