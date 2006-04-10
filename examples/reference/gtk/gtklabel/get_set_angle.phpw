@@ -1,0 +1,22 @@
+<?php
+// Create a window to hold the label.
+$window = new GtkWindow();
+// Set up the window to close cleanly.
+$window->connect_simple('destroy', array('Gtk', 'main_quit'));
+
+// Create a label
+$label = new GtkLabel('Degree Angle');
+
+// Set the angle to 50 degrees.
+$label->set_angle(50);
+
+// Now update the label with the current angle.
+$label->set_text($label->get_angle() . ' ' . $label->get_text());
+
+// Add the label to the window.
+$window->add($label);
+
+// Show the window and start the main loop.
+$window->show_all();
+Gtk::main();
+?>

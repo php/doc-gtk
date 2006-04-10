@@ -1,0 +1,36 @@
+<?php
+function updateCounter($label)
+{
+	// Set the label text to the current text plus one.
+	$label->set_text($label->get_text() + 1);
+}
+
+// Create a window to hold the label.
+$window = new GtkWindow();
+
+// Set up the window to close cleanly.
+$window->connect_simple('destroy', array('Gtk', 'main_quit'));
+
+// Create a label.
+$label = new GtkLabel('0');
+
+// Create a button that will be used to increment the counter.
+$button = new GtkButton('Click Me!');
+
+// When the button is clicked, the counter should be updated.
+$button->connect_simple('clicked', 'updateCounter', $label);
+
+// Create a vbox to hold the label and button.
+$vBox = new GtkVBox();
+
+// Add the label & button to the box.
+$vBox->pack_start($label);
+$vBox->pack_start($button);
+
+// Add the box to the window.
+$window->add($vBox);
+
+// Show the window and start the main loop.
+$window->show_all();
+Gtk::main();
+?>

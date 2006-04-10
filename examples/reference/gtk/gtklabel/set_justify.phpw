@@ -1,0 +1,20 @@
+<?php
+// Create a window to hold the label.
+$window = new GtkWindow();
+
+// Set up the window to close cleanly.
+$window->connect_simple('destroy', array('Gtk', 'main_quit'));
+
+// Create a label with two lines of text.
+$label = new GtkLabel("This label has\ntwo lines of text.");
+
+// Set the justification for the label.
+$label->set_justify(Gtk::JUSTIFY_RIGHT);
+
+// Add the label to the window.
+$window->add($label);
+
+// Show the window and start the main loop.
+$window->show_all();
+Gtk::main();
+?>

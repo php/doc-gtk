@@ -99,6 +99,19 @@
      Returns the angle of rotation in degrees (0-359).
     </para>
     <para>
+     <example>
+      <title>Getting and Setting an Angle for GtkLabel</title>
+      <programlisting role="php">
+       <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+                  href="&directory.examples;/reference/gtk/gtklabel/get_set_angle.phpw" parse="text">
+        <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+       </xi:include>
+      </programlisting>
+     </example>
+     This example produces the following window:
+     <graphic fileref="&directory.images;/reference/gtk/gtklabel/set_angle.png" />
+    </para>
+    <para>
      See also: 
      <function class="GtkLabel">set_angle</function>
     </para>
@@ -562,6 +575,19 @@
      The angle setting for the label is ignored if the label is selectable, wrapped, or ellipsized.
     </para>
     <para>
+     <example>
+      <title>Getting and Setting an Angle for GtkLabel</title>
+      <programlisting role="php">
+       <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+                  href="&directory.examples;/reference/gtk/gtklabel/get_set_angle.phpw" parse="text">
+        <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+       </xi:include>
+      </programlisting>
+     </example>
+     This example produces the following window:
+     <graphic fileref="&directory.images;/reference/gtk/gtklabel/set_angle.png" />
+    </para>
+    <para>
      See also: 
      <function class="GtkLabel">get_angle</function>
     </para>
@@ -591,6 +617,17 @@
      <literal>true</literal>.
     </para>
     <para>
+     <example>
+      <title>Setting a List of Pango Attributes for a GtkLabel</title>
+      <programlisting role="php">
+       <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+                  href="&directory.examples;/reference/gtk/gtklabel/set_attributes.phpw" parse="text">
+        <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+       </xi:include>
+      </programlisting>
+     </example>
+    </para>
+    <para>
      See also: 
      <function class="GtkLabel">get_attributes</function>
     </para>
@@ -602,7 +639,10 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_ellipsize</function></funcdef>
-     <paramdef><classname>PangoEllipsizeMode</classname> <parameter>ellipsizationmode</parameter></paramdef>
+     <paramdef>
+      <enumname>PangoEllipsizeMode</enumname>
+      <parameter>ellipsizationmode</parameter>
+     </paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -615,13 +655,30 @@
      order to make it fit to a given width and replaced with an ellipsis.
     </para>
     <para>
-     If a window is 100px in width, and the text in the <classname>GtkLabel</classname>
-     would need 200px space to display, the window is resized to fit the label 
-     (with <literal>Pango::ELLIPSIZE_NONE</literal>). The modes 
-     <literal>Pango::ELLIPSIZE_START</literal>, <literal>Pango::ELLIPSIZE_MIDDLE</literal> and
-     <literal>Pango::ELLIPSIZE_END</literal> replace some text at the beginning, middle or end
-     with three dots (<literal>...</literal>) to make the needed width smaller and therefore keep the 
-     original width of 100px.
+     If a window is <literal>100px</literal> in width, and the text in the
+     <classname>GtkLabel</classname> would need <literal>200px</literal> space
+     to display, the window is resized to fit the label (with
+     <optionname enum="PangoEllipsizeMode">Pango::ELLIPSIZE_NONE</optionname>).
+     The modes <optionname
+     enum="PangoEllipsizeMode">Pango::ELLIPSIZE_START</optionname>,
+     <optionname enum="PangoEllipsizeMode">Pango::ELLIPSIZE_MIDDLE</optionname>
+     and <optionname enum="PangoEllipsizeMode">Pango::ELLIPSIZE_END</optionname>
+     replace some text at the beginning, middle or end with an ellipsis
+     (<literal>...</literal>) to make the needed width smaller and therefore
+     keep the original window width of <literal>100px</literal>.
+    </para>
+    <para>
+     <example>
+      <title>Setting the Ellipsization Mode of a GtkLabel</title>
+      <programlisting role="php">
+       <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+                  href="&directory.examples;/reference/gtk/gtklabel/set_ellipsize.phpw" parse="text">
+        <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+       </xi:include>
+      </programlisting>
+     </example>
+     This code will produce the window shown below.
+     <graphic fileref="&directory.images;/reference/gtk/gtklabel/set_ellipsize.png" /> 
     </para>
     <para>
      See also: 
@@ -634,7 +691,9 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_justify</function></funcdef>
-     <paramdef><classname>GtkJustification</classname> <parameter>jtype</parameter></paramdef>
+     <paramdef>
+      <enumname>GtkJustification</enumname> <parameter>jtype</parameter>
+     </paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -642,20 +701,33 @@
    </shortdesc>
    <desc>
     <para>
-     Sets the alignment of the lines in the text of the label relative to each other. 
-     <literal>Gtk::JUSTIFY_LEFT</literal> is the default value when the widget is first 
-     created.
+     Sets the alignment of the lines in the text of the label relative to each
+     other. <optionname enum="GtkJustification">Gtk::JUSTIFY_LEFT</optionname>
+     is the default value when the widget is first created.
     </para>
     <para>
      If you instead want to set the alignment of the label as a whole, 
      use <function class="GtkMisc">set_alignment</function> instead. 
-     It <emphasis>has no effect</emphasis> on labels containing only a <emphasis>single line</emphasis>.
+     It <emphasis>has no effect</emphasis> on labels containing only a
+     <emphasis>single line</emphasis>.
+    </para>
+    <para>
+     <example>
+      <title>Setting the Justification Mode of a GtkLabel</title>
+      <programlisting role="php">
+       <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+                  href="&directory.examples;/reference/gtk/gtklabel/set_justify.phpw" parse="text">
+        <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+       </xi:include>
+      </programlisting>
+     </example>
+     This code will produce the window shown below.
+     <graphic fileref="&directory.images;/reference/gtk/gtklabel/set_justify.png" /> 
     </para>
     <para>
      See also: 
      <function class="GtkLabel">get_justify</function>
     </para>
-
    </desc>
   </method>
 
@@ -673,11 +745,24 @@
     <para>
      Sets the text of the label. 
      The label is interpreted as including embedded underlines and/or 
-     Pango markup depending on the values of <function class="GtkLabel">set_use_underline</function>
-      and <function class="GtkLabel">set_use_markup</function>
+     Pango markup depending on the values of <function
+     class="GtkLabel">set_use_underline</function> and <function
+     class="GtkLabel">set_use_markup</function>
     </para>
     <para>
-     By default, <literal>use_markup</literal> is not activated - you've got to enable it before.
+     By default, <propname class="GtkLabel">use_markup</propname> is not
+     activated - you've got to enable it before markup will be interpreted.
+    </para>
+    <para>
+     <example>
+      <title>Setting the Text of a GtkLabel</title>
+      <programlisting role="php">
+       <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+                  href="&directory.examples;/reference/gtk/gtklabel/set_text.phpw" parse="text">
+        <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+       </xi:include>
+      </programlisting>
+     </example>
     </para>
     <para>
      See also: 
@@ -701,9 +786,23 @@
    </shortdesc>
    <desc>
     <para>
-     Toggles line wrapping within the GtkLabel widget. 
-     <literal>true</literal> makes it break lines if text exceeds the widget's size. 
-     <literal>false</literal> lets the text get cut off by the edge of the widget if it exceeds the widget size.
+     Toggles line wrapping within the GtkLabel widget. <literal>true</literal>
+     makes it break lines if text exceeds the widget's size. 
+     <literal>false</literal> lets the text get cut off by the edge of the
+     widget if it exceeds the widget size.
+    </para>
+    <para>
+     <example>
+      <title>Allowing GtkLabel Text to Wrap Lines</title>
+      <programlisting role="php">
+       <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+                  href="&directory.examples;/reference/gtk/gtklabel/set_line_wrap.phpw" parse="text">
+        <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+       </xi:include>
+      </programlisting>
+     </example>
+     This code will produce the window shown below.
+     <graphic fileref="&directory.images;/reference/gtk/gtklabel/set_line_wrap.png" /> 
     </para>
     <para>
      See also: 
@@ -720,12 +819,13 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Set the label text with a pango marked up string.
+    Set the label text with a Pango marked up string.
    </shortdesc>
    <desc>
     <para>
-     Parses str which is marked up with the Pango text markup language, 
-     setting the label's text and attribute list based on the parse results. 
+     Parses <parameter>str</parameter> which is marked up with the Pango text
+     markup language, setting the label's text and attribute list based on the
+     parse results. 
      <!-- FIXME
      If the str is external data, you may need to escape it with 
      g_markup_escape_text() or g_markup_printf_escaped():
@@ -742,15 +842,15 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Set the label text and mnemonic with a pango marked up string.
+    Set the label text and mnemonic with a Pango marked up string.
    </shortdesc>
    <desc>
     <para>
-     Parses str which is marked up with the Pango text markup language, 
-     setting the label's text and attribute list based on the parse results. 
-     If characters in str are preceded by an underscore, 
-     they are underlined indicating that they represent a keyboard 
-     accelerator called a mnemonic. 
+     Parses <parameter>str</parameter> which is marked up with the Pango text
+     markup language, setting the label's text and attribute list based on the
+     parse results. If characters in str are preceded by an underscore, they
+     are underlined indicating that they represent a keyboard accelerator
+     called a mnemonic. 
     </para>
     <para>
      The mnemonic key can be used to activate another widget, 
@@ -772,7 +872,8 @@
    </shortdesc>
    <desc>
     <para>
-     Sets the desired maximum width in characters to <literal>n_chars</literal> chars.
+     Sets the desired maximum width in characters to
+     <parameter>n_chars</parameter> chars.
     </para>
     <para>
      See also: 
@@ -800,10 +901,11 @@
      the constructor)
      the label can be associated with a widget that is the target of 
      the mnemonic. When the label is inside a widget 
-     (like a <classname>GtkButton</classname> or a <classname>GtkNotebook</classname>
-     tab) it is automatically associated with the correct widget, but 
-     sometimes (i.e. when the target is a <classname>GtkEntry</classname> 
-     next to the label) you need to set it explicitly using this function.
+     (like a <classname>GtkButton</classname> or a
+     <classname>GtkNotebook</classname> tab) it is automatically associated
+     with the correct widget, but sometimes (i.e. when the target is a
+     <classname>GtkEntry</classname> next to the label) you need to set it
+     explicitly using this function.
     </para>
     <para>
      <!-- FIXME: link the mnemonic_activate signal -->
@@ -828,7 +930,8 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    The pattern of underlines you want under the existing text within the GtkLabel widget.
+    The pattern of underlines you want under the existing text within the
+    GtkLabel widget.
    </shortdesc>
    <desc>
     <para>
@@ -851,11 +954,12 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Selectable labels allow the user to select text from the label, for copy-and-paste.
+    Sets whether or not the text of the label is selectable.
    </shortdesc>
    <desc>
     <para>
-     Selectable labels allow the user to select text from the label, for copy-and-paste.
+     Selectable labels allow the user to select text from the label, for
+     copy-and-paste.
      With this function you can enable and disable it.
     </para>
     <para>
@@ -901,8 +1005,8 @@
    </shortdesc>
    <desc>
     <para>
-     Sets the text within the label. It overwrites any text that was there before. 
-     Pango markup will not be used; you have to use 
+     Sets the text within the label. It overwrites any text that was there
+     before. Pango markup will not be used; you have to use 
      <function class="GtkLabel">set_markup</function> for this.
     </para>
     <para>
@@ -1076,7 +1180,9 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <cbfunction>callback</cbfunction></funcdef>
-     <paramdef><classname>GtkLabel</classname> <parameter>label</parameter></paramdef>
+     <paramdef>
+      <classname>GtkLabel</classname> <parameter>label</parameter>
+     </paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>

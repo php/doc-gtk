@@ -1,0 +1,35 @@
+<?php
+// Create a window to hold the label.
+$window = new GtkWindow();
+
+// Set up the window to close cleanly.
+$window->connect_simple('destroy', array('Gtk', 'main_quit'));
+
+// Create three labels with long text.
+$label1 = new GtkLabel('This label has lots of text. It should be ellipsized');
+$label2 = new GtkLabel('This label has lots of text. It should be ellipsized');
+$label3 = new GtkLabel('This label has lots of text. It should be ellipsized');
+
+// Set the ellipsization mode for all three labels.
+$label1->set_ellipsize(Pango::ELLIPSIZE_START);
+$label2->set_ellipsize(Pango::ELLIPSIZE_MIDDLE);
+$label3->set_ellipsize(Pango::ELLIPSIZE_END);
+
+// Create a vbox to hold the three labels.
+$vBox = new GtkVBox();
+
+// Add the labels to the box.
+$vBox->pack_start($label1, false, false, 3);
+$vBox->pack_start($label2, false, false, 3);
+$vBox->pack_start($label3, false, false, 3);
+
+// Add the box to the window.
+$window->add($vBox);
+
+// Set the window's size.
+$window->set_size_request(150, 75);
+
+// Show the window and start the main loop.
+$window->show_all();
+Gtk::main();
+?>
