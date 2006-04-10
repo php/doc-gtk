@@ -1,0 +1,56 @@
+<?php
+/*
+ * This sample shows how to use the
+ * GtkCellRenderer along with GtkTreeView
+ */
+
+// Creates the main window
+$window = new GtkWindow;
+$window->set_title('Cell Renderers');
+$window->connect_simple('destroy', array('Gtk', 'main_quit'));
+$window->set_position(GTK::WIN_POS_CENTER);
+$window->set_default_size(280,140);
+
+// Creates the data model
+$model = new GtkListStore(Gtk::TYPE_STRING, Gtk::TYPE_BOOLEAN);
+
+// Creates the view to display the content
+$view = new GtkTreeView($model);
+
+// Creates two columns
+$column1 = new GtkTreeViewColumn('Language');
+$column2 = new GtkTreeViewColumn('Open Source?');
+
+// Add the columns to the view
+$view->append_column($column1);
+$view->append_column($column2);
+
+// Creates two cell-renderers
+$cell_renderer1 = new GtkCellRendererText();
+$cell_renderer2 = new GtkCellRendererToggle();
+
+// change the property 'width'
+$cell_renderer1->set_property('width', 180);
+$cell_renderer2->set_property('width', -1);
+
+// Pack the cell-renderers
+$column1->pack_start($cell_renderer1, true);
+$column2->pack_start($cell_renderer2, true);
+
+// link the renderers to the model
+$column1->set_attributes($cell_renderer1, 'text',   0);
+$column2->set_attributes($cell_renderer2, 'active', 1);
+
+// Add some data
+$model->append(array('PHP',             true));
+$model->append(array('Python',          true));
+$model->append(array('Delphi',          false));
+$model->append(array('Visual Basic',    false));
+
+// pack the view inside the window
+$window->add($view);
+
+// show the window
+$window->show_all();
+Gtk::main();
+?>
