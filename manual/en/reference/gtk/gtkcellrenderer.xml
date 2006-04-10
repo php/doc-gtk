@@ -36,7 +36,7 @@
      <title>Editable cell renderers</title>
      <programlisting role="php">
       <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
-                  href="&directory.examples;/reference/gtk/gtktreeview/editable.phpw" parse="text">
+                  href="&directory.examples;/reference/gtk/gtkcellrenderer/gtkcellrenderer.phpw" parse="text">
        <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
       </xi:include>
      </programlisting>
@@ -184,6 +184,281 @@
   </method>
 
  </methods>
+
+ <properties>
+
+  <prop id="gtk.gtkcellrenderer.property.cell-background" type="w">
+   <propname>cell-background</propname>
+   <proptype>string</proptype>
+   <shortdesc>
+    The background color of the cell as a string. Default: None.
+   </shortdesc>
+   <desc>
+    <para>
+     The background color of the cell as a string. Default: None.
+    </para>
+    <para>
+     <example>
+      <title>set_property sample</title>
+      <programlisting role="php"><![CDATA[<?php
+$cellrenderer->set_property('cell-background', '#c0c0c0');
+?>]]></programlisting>
+     </example>
+    </para>
+    <para>
+     See also:
+     <function class="GObject">set_property</function>
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtkcellrenderer.property.cell-background-gdk" type="rw">
+   <propname>cell-background-gdk</propname>
+   <proptype>GdkColor</proptype>
+   <shortdesc>
+     The background color of the cell as a <classname>GtkColor</classname>
+   </shortdesc>
+   <desc>
+    <para>
+     Changes the background color of the cell with a <classname>GtkColor</classname>
+    </para>
+    <para>
+     <example>
+      <title>set_property sample</title>
+      <programlisting role="php"><![CDATA[<?php
+$cellrenderer->set_property('cell-background-gdk', new GdkColor(65535,0,0));
+?>]]></programlisting>
+     </example>
+    </para>
+    <para>
+     See also:
+     <function class="GObject">set_property</function>
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtkcellrenderer.property.cell-background-set" type="rw">
+   <propname>cell-background-set</propname>
+   <proptype>boolean</proptype>
+   <shortdesc>
+    If TRUE the cell background color is set by this cellrenderer. Default: FALSE.
+   </shortdesc>
+   <desc>
+    <para>
+     If TRUE the cell background color is set by this cellrenderer. Default: FALSE.
+    </para>
+    <para>
+     See also:
+     <function class="GObject">set_property</function>
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtkcellrenderer.property.height" type="rw">
+   <propname>height</propname>
+   <proptype>integer</proptype>
+   <shortdesc>
+    Changes the height of the cell. Allowed values >= -1. Default: -1
+   </shortdesc>
+   <desc>
+    <para>
+     Changes the height of the cell. Allowed values >= -1. Default: -1
+    </para>
+    <para>
+     <example>
+      <title>set_property sample</title>
+      <programlisting role="php"><![CDATA[<?php
+$cellrenderer->set_property('height', '28');
+?>]]></programlisting>
+     </example>
+    </para>
+    <para>
+     See also:
+     <function class="GObject">set_property</function>
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtkcellrenderer.property.is-expanded" type="rw">
+   <propname>is-expanded</propname>
+   <proptype>boolean</proptype>
+   <shortdesc>
+     If TRUE the row has children and it is expanded to show the children.
+   </shortdesc>
+   <desc>
+    <para>
+      If TRUE the row has children and it is expanded to show the children.
+    </para>
+    <para>
+     See also:
+     <function class="GObject">set_property</function>
+    </para>
+   </desc>
+  </prop>
+
+
+  <prop id="gtk.gtkcellrenderer.property.is-expander" type="rw">
+   <propname>is-expander</propname>
+   <proptype>boolean</proptype>
+   <shortdesc>
+    If TRUE the row has children. Default: FALSE.
+   </shortdesc>
+   <desc>
+    <para>
+      If TRUE the row has children. Default: FALSE.
+    </para>
+    <para>
+     See also:
+     <function class="GObject">set_property</function>
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtkcellrenderer.property.sensitive" type="rw">
+   <propname>sensitive</propname>
+   <proptype>boolean</proptype>
+   <shortdesc>
+     If TRUE the cell is displayed as sensitive. If FALSE, in grayscale. Default: TRUE.
+   </shortdesc>
+   <desc>
+    <para>
+      If TRUE the cell is displayed as sensitive. If FALSE, in grayscale. Default: TRUE.
+    </para>
+    <para>
+     See also:
+     <function class="GObject">set_property</function>
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtkcellrenderer.property.visible" type="rw">
+   <propname>visible</propname>
+   <proptype>boolean</proptype>
+   <shortdesc>
+     If TRUE the cell is displayed. Default: TRUE.
+   </shortdesc>
+   <desc>
+    <para>
+      If TRUE the cell is displayed. Default: TRUE.
+    </para>
+    <para>
+     See also:
+     <function class="GObject">set_property</function>
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtkcellrenderer.property.width" type="rw">
+   <propname>width</propname>
+   <proptype>integer</proptype>
+   <shortdesc>
+     The fixed width of the cell in pixels. Allowed values >= -1. Default: -1.
+   </shortdesc>
+   <desc>
+    <para>
+      The fixed width of the cell in pixels. Allowed values >= -1. Default: -1.
+    </para>
+    <para>
+     <example>
+      <title>set_property sample</title>
+      <programlisting role="php"><![CDATA[<?php
+$cellrenderer->set_property('width', '280');
+?>]]></programlisting>
+     </example>
+    </para>
+    <para>
+     See also:
+     <function class="GObject">set_property</function>
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtkcellrenderer.property.xalign" type="rw">
+   <propname>xalign</propname>
+   <proptype>float</proptype>
+   <shortdesc>
+     The fraction of free space to the left of the cell.
+   </shortdesc>
+   <desc>
+    <para>
+     The fraction of free space to the left of the cell in the range 0.0 to 1.0. Allowed values between 0 and 1. Default: 0.5.
+    </para>
+    <para>
+     See also:
+     <function class="GObject">set_property</function>
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtkcellrenderer.property.yalign" type="rw">
+   <propname>yalign</propname>
+   <proptype>float</proptype>
+   <shortdesc>
+    The fraction of free space above the cell.
+   </shortdesc>
+   <desc>
+    <para>
+      The fraction of free space above the cell in the range 0.0 to 1.0. Allowed values between 0 and 1. Default: 0.5.
+    </para>
+    <para>
+     See also:
+     <function class="GObject">set_property</function>
+    </para>
+   </desc>
+  </prop>
+
+
+  <prop id="gtk.gtkcellrenderer.property.xpad" type="rw">
+   <propname>xpad</propname>
+   <proptype>float</proptype>
+   <shortdesc>
+    The amount of padding to the left and right of the cell.
+   </shortdesc>
+   <desc>
+    <para>
+     The amount of padding to the left and right of the cell. Default: 0
+    </para>
+    <para>
+     <example>
+      <title>set_property sample</title>
+      <programlisting role="php"><![CDATA[<?php
+$cellrenderer->set_property('xpad', '32');
+?>]]></programlisting>
+     </example>
+    </para>
+    <para>
+     See also:
+     <function class="GObject">set_property</function>
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtkcellrenderer.property.ypad" type="rw">
+   <propname>ypad</propname>
+   <proptype>float</proptype>
+   <shortdesc>
+    The amount of padding above and below cell.
+   </shortdesc>
+   <desc>
+    <para>
+      The amount of padding above and below cell. Default: 0.
+    </para>
+    <para>
+     <example>
+      <title>set_property sample</title>
+      <programlisting role="php"><![CDATA[<?php
+$cellrenderer->set_property('ypad', '10');
+?>]]></programlisting>
+     </example>
+    </para>
+    <para>
+     See also:
+     <function class="GObject">set_property</function>
+    </para>
+   </desc>
+  </prop>
+
+</properties>
 
  <signals>
 
