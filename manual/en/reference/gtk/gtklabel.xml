@@ -1124,6 +1124,291 @@
 
  <properties>
 
+  <prop id="gtk.gtklabel.property.angle" type="rw">
+   <propname>angle</propname>
+   <proptype>float</proptype>
+   <shortdesc>
+    The display angle of the text.
+   </shortdesc>
+   <desc>
+    <para>
+     The display angle of the text.
+    </para>
+    <para>
+     This property is ignored if the text is selectable, wrapped or ellipsized.
+    </para>
+    <para>
+     Defaults to <literal>0</literal>.
+    </para>
+    <para>
+     See also:
+     <function class="GtkLabel">set_angle</function>
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtklabel.property.attributes" type="rw">
+   <propname>attributes</propname>
+   <proptype><classname>PangoAttrList</classname></proptype>
+   <shortdesc>
+    A list of Pango attributes applied to the label.
+   </shortdesc>
+   <desc>
+    <para>
+     A list of Pango attributes applied to the label.
+    </para>
+    <para>
+     Defaults to <literal>null</literal>.
+    </para>
+    <para>
+     See also:
+     <function class="GtkLabel">set_attributes</function>
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtklabel.property.cursor_position" type="ro">
+   <propname>curosr-position</propname>
+   <proptype>int</proptype>
+   <shortdesc>
+    The current position of the cursor.
+   </shortdesc>
+   <desc>
+    <para>
+     The current position of the cursor.
+    </para>
+    <para>
+     Defaults to <literal>0</literal>.
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtklabel.property.ellipsize" type="rw">
+   <propname>ellipsize</propname>
+   <proptype><enumname>PangoEllipsizeMode</enumname></proptype>
+   <shortdesc>
+    The ellipsization mode of the label.
+   </shortdesc>
+   <desc>
+    <para>
+     The ellipsization mode the label.
+    </para>
+    <para>
+     Defaults to <optionname
+     enum="PangoEllipsizeMode">Pango::ELLIPSIZE_NONE</optionname>.
+    </para>
+    <para>
+     See also:
+     <function class="GtkLabel">set_ellipsize</function>
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtklabel.property.justify" type="rw">
+   <propname>justify</propname>
+   <proptype><enumname>GtkJustification</enumname></proptype>
+   <shortdesc>
+    The justification mode of the label.
+   </shortdesc>
+   <desc>
+    <para>
+     The justification mode of the label.
+    </para>
+    <para>
+     The justification mode only describes the alignment of lines within the 
+     label relative to each other. It does not describe the alignemnt of the 
+     label relative to its parent container or other widgets.
+    </para>
+    <para>
+     Defaults to <optionname
+     enum="GtkJustification">Gtk::JUSTIFY_LEFT</optionname>.
+    </para>
+    <para>
+     See also:
+     <function class="GtkLabel">set_justify</function>,
+     <function class="GtkMisc">set_alignment</function>
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtklabel.property.label" type="rw">
+   <propname>label</propname>
+   <proptype>string</proptype>
+   <shortdesc>
+    The text to be shown by the label.
+   </shortdesc>
+   <desc>
+    <para>
+     The text to be shown by the label.
+    </para>
+    <para>
+     Defaults to <literal>null</literal>.
+    </para>
+    <para>
+     See also:
+     <function class="GtkLabel">set_text</function>
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtklabel.property.max_width_chars" type="rw">
+   <propname>max-width-chars</propname>
+   <proptype>int</proptype>
+   <shortdesc>
+    The maximum width of the widget in characters.
+   </shortdesc>
+   <desc>
+    <para>
+     The desired maximum width of the label, in characters.
+    </para>
+    <para>
+     If this property is set to <literal>-1</literal>, the width will be
+     calculated automatically, otherwise the label will request space for no
+     more than the requested number of characters. If the 
+     <propname class="GtkLabel">width-chars</propname> property is set to a
+     positive value, then this property is ignored.
+    </para>
+    <para>
+     Defaults to <literal>-1</literal>.
+    </para>
+    <para>
+     See also:
+     <function class="GtkLabel">set_max_width_chars</function>
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtklabel.property.mnemonic_keyval" type="ro">
+   <propname>mnemonic-keyval</propname>
+   <proptype>int</proptype>
+   <shortdesc>
+    The mnemonic accelerator key for this label.
+   </shortdesc>
+   <desc>
+    <para>
+     The mnemonic accelerator key for this label.
+    </para>
+    <para>
+     Defaults to <literal>16777215</literal>.
+    </para>
+    <para>
+     See also:
+     <function class="GtkLabel">set_text_with_mnemonic</function>
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtklabel.property.mnemonic_widget" type="rw">
+   <propname>mnemonic-widget</propname>
+   <proptype><classname>GtkWidget</classname></proptype>
+   <shortdesc>
+    The widget to be activated when the label's mnemonic key is pressed.
+   </shortdesc>
+   <desc>
+    <para>
+     The widget to be activated when the label's mnemonic key is pressed.
+    </para>
+    <para>
+     See also:
+     <function class="GtkLabel">set_mnemonic_widget</function>
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtklabel.property.pattern" type="wo">
+   <propname>pattern</propname>
+   <proptype>string</proptype>
+   <shortdesc>
+    A string of '_' characters indicating which characters in the label to 
+    underline.
+   </shortdesc>
+   <desc>
+    <para>
+     A string of <literal>_</literal> characters indicating which characters in
+     the label to underline.
+    </para>
+    <para>
+     Defaults to <literal>null</literal>.
+    </para>
+    <para>
+     See also:
+     <function class="GtkLabel">set_pattern</function>
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtklabel.property.selectable" type="rw">
+   <propname>selectable</propname>
+   <proptype>boolean</proptype>
+   <shortdesc>
+    Whether or not the text of the label is selectable.
+   </shortdesc>
+   <desc>
+    <para>
+     Whether or not the text of the label is selectable. Selectable text may be
+     highlighted and copied to the clipboard.
+    </para>
+    <para>
+     Defaults to <literal>false</literal>.
+    </para>
+    <para>
+     See also:
+     <function class="GtkLabel">set_selectable</function>
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtklabel.property.selection_bound" type="ro">
+   <propname>selection-bound</propname>
+   <proptype>int</proptype>
+   <shortdesc>
+    The position of the selection bound.
+   </shortdesc>
+   <desc>
+    <para>
+     The position of the selection bound.
+    </para>
+    <para>
+     The selection bound is the end of the selected region that is not the
+     cursor. For example, if the characters <literal>PHP-GTK</literal> were
+     selected by dragging the mouse from left to right, the cursor would be
+     after the <literal>K</literal> and the
+     <propname class="GtkLabel">selection-bound</propname> would be before the
+     first <literal>P</literal>. In this case, if the selected region
+     represented the entire text of the label,
+     <propname class="GtkLabel">selection-bound</propname> would be 
+     <literal>0</literal>.
+    </para>
+    <para>
+     Defaults to <literal>0</literal>.
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtklabel.property.single_line_mode" type="rw">
+   <propname>single-line-mode</propname>
+   <proptype>boolean</proptype>
+   <shortdesc>
+    Whether or not the label is in single line mode.
+   </shortdesc>
+   <desc>
+    <para>
+     Whether the label is in single line mode. In single line mode, the height
+     of the label does not depend on the actual text, it is always set to
+     ascent + descent of the font. This can be an advantage in situations where
+     resizing the label because of text changes would be distracting, e.g. in a
+     statusbar.
+    </para>
+    <para>
+     Defaults to <literal>false</literal>.
+    </para>
+    <para>
+     See also:
+     <function class="GtkLabel">set_single_line_mode</function>
+    </para>
+   </desc>
+  </prop>
+
   <prop id="gtk.gtklabel.property.use_markup" type="rw">
    <propname>use_markup</propname>
    <proptype>boolean</proptype>
@@ -1136,6 +1421,9 @@
      this property is <literal>true</literal>, the label will be processed for
      Pango markup. If the property is <literal>false</literal>, any Pango markup
      will be displayed literally in the label.
+    </para>
+    <para>
+     Defaults to <literal>false</literal>.
     </para>
     <para>
      See also:
@@ -1160,13 +1448,64 @@
     </para>
     <para>
      If a label contains two underlines and
-     <propname>user_underline</propname> is <literal>true</literal>, both
-     underlines will be shown as mnemonics, but only the second underline will
-     work.
+     <propname class="GtkLabel">user_underline</propname> is
+     <literal>true</literal>, both underlines will be shown as mnemonics, but 
+     only the second underline will work.
+    </para>
+    <para>
+     Defaults to <literal>false</literal>.
     </para>
     <para>
      See also:
      <function class="GtkLabel">set_use_underline</function>
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtklabel.property.width_chars" type="rw">
+   <propname>width-chars</propname>
+   <proptype>int</proptype>
+   <shortdesc>
+    The width of the widget in characters.
+   </shortdesc>
+   <desc>
+    <para>
+     The display width of the widget in characters. This property defaults to 
+     <literal>-1</literal> which means the width will be calculated
+     automatically. If the value is not <literal>-1</literal>, the requested
+     width will be the greater or <literal>3</literal> or the value of 
+     <propname class="GtkLabel">width-chars</propname>.
+    </para>
+    <para>
+     If this value is not <literal>-1</literal>, the value of
+     <propname class="GtkLabel">max-width-chars</propname> will be ignored.
+    </para>
+    <para>
+     See also:
+     <function class="GtkLabel">set_width_chars</function>
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtklabel.property.wrap" type="rw">
+   <propname>wrap</propname>
+   <proptype>boolean</proptype>
+   <shortdesc>
+    Whether or not a long string of text may wrap to the next line.
+   </shortdesc>
+   <desc>
+    <para>
+     Whether or not a long string of text may wrap to the next line. 
+     <literal>true</literal> means that the text may wrap to the next line if
+     needed. <literal>false</literal> means that the text will appear on a 
+     single line even if it does not all fit within the label's parent widget.
+    </para>
+    <para>
+     Defaults to <literal>false</literal>.
+    </para>
+    <para>
+     See also:
+     <function class="GtkLabel">set_line_wrap</function>
     </para>
    </desc>
   </prop>
@@ -1186,9 +1525,25 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
+    Emitted when all or part of the label's text is copied to the clipboard.
    </shortdesc>
    <desc>
-
+    <para>
+     Emitted when all or part of the label's text is copied to the clipboard.
+     Text is normally copied to the clipboard when the user selects a region of
+     text and then copies it using <literal>CTRL+C</literal> or right clicking
+     to bring up a context menu.
+    </para>
+    <para>
+     When this signal is emitted, the label whose text was copied is passed to
+     the callback.
+    </para>
+    <para>
+     This signal cannot be emitted unless the label has been made selectable by
+     passing <literal>true</literal> to <function
+     class="GtkLabel">set_selectable</function>, because text that is not
+     selectable cannot be copied to the clipboard.
+    </para>
    </desc>
   </signal>
   
@@ -1198,15 +1553,48 @@
     <funcprototype>
      <funcdef>void <cbfunction>callback</cbfunction></funcdef>
      <paramdef>GtkLabel <parameter>label</parameter></paramdef>
-     <paramdef>GtkMovementStep <parameter>UNKNOWN</parameter></paramdef>
-     <paramdef>int <parameter>UNKNOWN</parameter></paramdef>
-     <paramdef>bool <parameter>UNKNOWN</parameter></paramdef>
+     <paramdef>
+      <enumname>GtkMovementType</enumname> <parameter>type</parameter>
+     </paramdef>
+     <paramdef>int <parameter>direction</parameter></paramdef>
+     <paramdef>bool <parameter>selecting</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
+    Emitted when the cursor is moved within the label.
    </shortdesc>
    <desc>
-
+    <para>
+     Emitted when the cursor is moved within the label. 
+    </para>
+    <para>
+     When this signal is emitted, four arguments are passed to the callback.
+     First, the label will be passed. Next an integer,
+     <parameter>type</parameter>, is passed. This integer indicates the
+     type of movement. This value will be a
+     <enumname>GtkMovementType</enumname>. This value tells you whether the 
+     cursor has moved, by a character, word, line, etc. The third argument 
+     passed, <parameter>direction</parameter>, indicates the direction the
+     cursor has moved. A positive value means the cursor has moved toward the
+     end of the label's text. A negative value means the cursor has moved
+     toward the start of the label's text. The final argument,
+     <parameter>selecting</parameter> is a boolean value indicating whether or
+     not a region of text is being selected. A region of text is normally
+     selected when the user holds down <literal>Shift</literal> while moving
+     the cursor.
+    </para>
+    <note>
+     A negative value for <parameter>direction</parameter> does not necessarily
+     mean that the curosr was moved from right to left. Depending on the
+     direction of the language, a negative value could mean that the cursor was
+     moved from left to right.
+    </note>
+    <para>
+     This signal cannot be emitted unless the label has been made selectable by
+     passing <literal>true</literal> to <function
+     class="GtkLabel">set_selectable</function>, because text that is not
+     selectable cannot have a cursor position.
+    </para>
    </desc>
   </signal>
   
@@ -1216,13 +1604,27 @@
     <funcprototype>
      <funcdef>void <cbfunction>callback</cbfunction></funcdef>
      <paramdef>GtkLabel <parameter>label</parameter></paramdef>
-     <paramdef>GtkMenu <parameter>UNKNOWN</parameter></paramdef>
+     <paramdef>GtkMenu <parameter>popup</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
+    Emitted when a context menu for the label is popped up.
    </shortdesc>
    <desc>
-
+    <para>
+     Emitted when a context menu for the label is popped up.
+    </para>
+    <para>
+     A context menu will normally be popped up when a user right clicks on a 
+     selectable label. When this signal is emitted, the context menu is passed
+     to the callback.
+    </para>
+    <para>
+     This signal cannot be emitted unless the label has been made selectable by
+     passing <literal>true</literal> to <function
+     class="GtkLabel">set_selectable</function>, because text that is not
+     selectable will not have a context menu.
+    </para>
    </desc>
   </signal>
   
