@@ -37,4 +37,75 @@
 
  </constructors>
 
+ <properties>
+
+  <prop id="gtk.gtkcellrenderercombo.property.has-entry" type="rw">
+   <propname>has-entry</propname>
+   <proptype>boolean</proptype>
+   <shortdesc>
+     If FALSE, don't allow entering strings other than the given ones (from the model).
+   </shortdesc>
+   <desc>
+    <para>
+     If FALSE, don't allow entering strings other than the given ones (from the model).
+    </para>
+    <para>
+     <example>
+      <title>set_property sample</title>
+      <programlisting role="php"><![CDATA[<?php
+$cellrenderer->set_property('has-entry', false);
+?>]]></programlisting>
+     </example>
+    </para>
+    <para>
+     See also:
+     <function class="GObject">set_property</function>
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtkcellrenderercombo.property.model" type="rw">
+   <propname>model</propname>
+   <proptype>GtkTreeModel</proptype>
+   <shortdesc>
+    The tree model containing the possible values for the combo box entry.
+   </shortdesc>
+   <desc>
+    <para>
+      The tree model containing the possible values for the combo box entry.
+    </para>
+    <para>
+     See also:
+     <function class="GObject">set_property</function>
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtkcellrenderercombo.property.text-column" type="rw">
+   <propname>text-column</propname>
+   <proptype>integer</proptype>
+   <shortdesc>
+    The column number in the data model that will be used to get the strings from.
+   </shortdesc>
+   <desc>
+    <para>
+     The column number in the data model that will be used to get the strings from.
+    </para>
+    <para>
+     <example>
+      <title>set_property sample</title>
+      <programlisting role="php"><![CDATA[<?php
+$cellrenderer->set_property('text-column', 0);
+?>]]></programlisting>
+     </example>
+    </para>
+    <para>
+     See also:
+     <function class="GObject">set_property</function>
+    </para>
+   </desc>
+  </prop>
+
+</properties>
+
 </classentry>
