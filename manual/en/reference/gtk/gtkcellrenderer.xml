@@ -84,9 +84,20 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Retrieves an array containing the width and height of the cell.
    </shortdesc>
    <desc>
+    <para>
+      Retrieves an array containing the  width and height of the cell.
+    </para>
+    <para>
+     <example>
+      <title>set_property sample</title>
+      <programlisting role="php"><![CDATA[<?php
+print_r ($cellrenderer->get_fixed_size());
+?>]]></programlisting>
+     </example>
+    </para>
     <para>
      See also: 
      <function class="GtkCellRenderer">set_fixed_size</function>
@@ -103,10 +114,18 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Obtains the width and height needed to render the cell.
    </shortdesc>
    <desc>
-
+    Obtains the width and height needed to render the cell.
+    These values are returned as part of a tuple containing the x_offset, y_offset,
+    width and height. <function class="GtkCellRenderer">get_size</function> is used
+    by view widgets to determine the appropriate size for the cell_area to be passed
+    to the <function class="GtkCellRenderer">render</function> method.
+    If cell_area is not None, the x and y offsets of the cell relative
+    to this location are returned. Please note that the values set in
+    the returned width and height, as well as those in x_offset and y_offset
+    are inclusive of the xpad and ypad properties.
    </desc>
   </method>
 
@@ -134,9 +153,20 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the renderer size to the specified width and height, independent of the properties set.
    </shortdesc>
    <desc>
+    <para>
+      Sets the renderer size to the specified width and height, independent of the properties set.
+    </para>
+    <para>
+     <example>
+      <title>set_property sample</title>
+      <programlisting role="php"><![CDATA[<?php
+$cellrenderer->set_fixed_size(30,100);
+?>]]></programlisting>
+     </example>
+    </para>
     <para>
      See also: 
      <function class="GtkCellRenderer">get_fixed_size</function>
@@ -471,9 +501,13 @@ $cellrenderer->set_property('ypad', '10');
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
+    Emitted when the user cancels the  of editing a cell.
    </shortdesc>
    <desc>
-
+    The "editing-canceled" signal is emitted when the user cancels the
+    process of editing a cell. For example, an editable cell renderer
+    could be written to cancel editing when the user presses Escape.
+    Also see the <function class="GtkCellRenderer">editing_canceled</function> method.
    </desc>
   </signal>
   
@@ -483,14 +517,18 @@ $cellrenderer->set_property('ypad', '10');
     <funcprototype>
      <funcdef>void <cbfunction>callback</cbfunction></funcdef>
      <paramdef>GtkCellRenderer <parameter>cellrenderer</parameter></paramdef>
-     <paramdef><!-- was: GtkCellEditable -->XXX <parameter>UNKNOWN</parameter></paramdef>
-     <paramdef><!-- was: gchararray -->XXX <parameter>UNKNOWN</parameter></paramdef>
+     <paramdef>GtkCellEditable <parameter>editable</parameter></paramdef>
+     <paramdef>integer <parameter>path</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
+    Emitted when a cell starts to be edited.
    </shortdesc>
    <desc>
-
+    The "editing-started" signal is emitted when a cell starts to be edited.
+    The intended use of this signal is to do special setup on editable, e.g.
+    adding a <classname>GtkEntryCompletion</classname> or setting up additional
+    columns in a <classname>GtkComboBox</classname>.
    </desc>
   </signal>
   
