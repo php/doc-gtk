@@ -108,7 +108,7 @@ $(BUILD)/php_gtk_manual_$(LANG).tar.gz: $(BUILD)/html/index.html
 $(BUILD)/php_gtk_manual_$(LANG).zip: $(BUILD)/html/index.html
 	(cd $(BUILD); zip -q -r -9 - html) > $@
 
-(BUILD)/php_gtk_manual_$(LANG).txt.gz: $(BUILD)/manual.txt
+$(BUILD)/php_gtk_manual_$(LANG).txt.gz: $(BUILD)/manual.txt
 	@mkdir -p $(BUILD)
 	gzip -c -9 $< > $@
 
