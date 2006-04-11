@@ -21,13 +21,70 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Creates a new <classname>GtkCellRendererProgress</classname>.
    </shortdesc>
    <desc>
-
+    Creates a new <classname>GtkCellRendererProgress</classname>.
+    Rendering parameters are adjusted using the object properties.
+    The object properties can be set globally (with <function class="GObject">set_property</function>).
+    Also, with <classname>GtkTreeViewColumn</classname>, you can bind a
+    property to a value in a <classname>GtkTreeModel</classname>. For example,
+    you can bind the "text" property on the cell renderer to a string value in
+    the model, thus rendering a different string in each row of the gtk.TreeView.
    </desc>
   </constructor>
-
  </constructors>
+
+<properties>
+  <prop id="gtk.gtkcellrenderer.property.text" type="rw">
+   <propname>text</propname>
+   <proptype>string</proptype>
+   <shortdesc>
+    The text in the label that will be drawn over the progress bar.
+   </shortdesc>
+   <desc>
+    <para>
+    The text in the label that will be drawn over the progress bar.
+    </para>
+    <para>
+     <example>
+      <title>set_property sample</title>
+      <programlisting role="php"><![CDATA[<?php
+$cellrenderer->set_property( 'text', 'Percentage');
+?>]]></programlisting>
+     </example>
+    </para>
+    <para>
+     See also:
+     <function class="GObject">set_property</function>
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtkcellrenderer.property.value" type="rw">
+   <propname>value</propname>
+   <proptype>float</proptype>
+   <shortdesc>
+    The percentage that the progress bar is "filled in".
+   </shortdesc>
+   <desc>
+    <para>
+     The percentage that the progress bar is "filled in".
+    </para>
+    <para>
+     <example>
+      <title>set_property sample</title>
+      <programlisting role="php"><![CDATA[<?php
+$cellrenderer->set_property( 'value', '44');
+?>]]></programlisting>
+     </example>
+    </para>
+    <para>
+     See also:
+     <function class="GObject">set_property</function>
+    </para>
+   </desc>
+  </prop>
+</properties>
 
 </classentry>
