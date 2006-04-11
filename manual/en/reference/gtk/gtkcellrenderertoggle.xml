@@ -21,10 +21,18 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Creates a new <classname>GtkCellRendererToggle</classname>.
    </shortdesc>
    <desc>
-
+    Creates a new <classname>GtkCellRendererToggle</classname>.
+    The toggle button rendering parameters are adjusted using
+    the object properties. The object properties can be set globally
+    (with <function class="GObject">set_property</function>).
+    Also, with <classname>GtkTreeViewColumn</classname>, you
+    can bind a property to a value in a gtk.TreeModel. For
+    example, you can bind the "active" property on the cell
+    renderer to a boolean value in the model, thus causing
+    the check button to reflect the state of the model.
    </desc>
   </constructor>
 
@@ -59,9 +67,12 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns TRUE if radio toggles rather than checkboxes are being rendered.
    </shortdesc>
    <desc>
+    <para>
+      Returns TRUE if radio toggles rather than checkboxes are being rendered.
+    </para>
     <para>
      See also: 
      <function class="GtkCellRendererToggle">set_radio</function>
@@ -97,9 +108,13 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the style of the toggle button. If true, the toggle will be shown as RadioButton.
    </shortdesc>
    <desc>
+    <para>
+     Sets the style of the toggle button. If radio is TRUE, the cell renderer
+     renders a radio toggle. If FALSE, it renders a check toggle.
+    </para>
     <para>
      See also: 
      <function class="GtkCellRendererToggle">get_radio</function>
@@ -109,7 +124,77 @@
   </method>
 
  </methods>
+<properties>
 
+  <prop id="gtk.gtkcellrenderertoggle.property.activatable" type="rw">
+   <propname>activatable</propname>
+   <proptype>boolean</proptype>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+    <para>
+
+    </para>
+    <para>
+     See also:
+     <function class="GObject">set_property</function>
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtkcellrenderertoggle.property.active" type="w">
+   <propname>active</propname>
+   <proptype>boolean</proptype>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+    <para>
+
+    </para>
+    <para>
+     See also:
+     <function class="GObject">set_property</function>
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtkcellrenderertoggle.property.radio" type="w">
+   <propname>radio</propname>
+   <proptype>boolean</proptype>
+   <shortdesc>
+    If TRUE, draw the toggle is showed as a radio button.
+   </shortdesc>
+   <desc>
+    <para>
+      If TRUE, draw the toggle is showed as a radio button.
+    </para>
+    <para>
+     See also:
+     <function class="GObject">set_property</function>
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtkcellrenderertoggle.property.inconsistent" type="w">
+   <propname>inconsistent</propname>
+   <proptype>boolean</proptype>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+    <para>
+
+    </para>
+    <para>
+     See also:
+     <function class="GObject">set_property</function>
+    </para>
+   </desc>
+  </prop>
+
+</properties>
  <signals>
 
   <signal id="gtk.gtkcellrenderertoggle.signal.toggled">
