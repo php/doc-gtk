@@ -25,6 +25,16 @@
 
  <glossdiv id="appendix.glossary.c">
   <title>C</title>
+  <glossentry id="appendix.glossary.c.callback">
+   <glossterm>Callback</glossterm>
+   <glossdef>
+    <para>
+     A function that is invoked by some other piece of code. Frequently used to
+     code reactions to events.
+    </para>
+    <glossseealso otherterm="appendix.glossary.s.signalhandler" />
+   </glossdef>
+  </glossentry>
  </glossdiv>
 
  <glossdiv id="appendix.glossary.d">
@@ -34,7 +44,7 @@
    <glossdef>
     <para>
      Not to be used because it is obsolete or does not function properly. A
-     deprectated method, class or variable should not be used in new code
+     deprecated method, class or variable should not be used in new code
      because it has either been replaced with something else or may not be
      available in the future.
     </para>
@@ -114,6 +124,27 @@
 
  <glossdiv id="appendix.glossary.s">
   <title>S</title>
+  <glossentry id="appendix.glossary.s.signal">
+   <glossterm>Signal</glossterm>
+   <glossdef>
+    <para>
+     Notification that is generated whenever an event occurs. May be connected
+     to a callback to create signal handlers.
+    </para>
+    <glossseealso otherterm="appendix.glossary.c.callback" />
+    <glossseealso otherterm="appensix.glossary.s.signalhandler" />
+   </glossdef>
+  </glossentry>
+  <glossentry id="appendix.glossary.s.signalhandler">
+   <glossterm>Signal Handler</glossterm>
+   <glossdef>
+    <para>
+     A callback that is invoked in response to a signal that is generated.
+    </para>
+    <glossseealso otherterm="appendix.glossary.c.callback" />
+    <glossseealso otherterm="appendix.glossary.s.signal" />
+   </glossdef>
+  </glossentry>
  </glossdiv>
 
  <glossdiv id="appendix.glossary.t">
