@@ -75,7 +75,8 @@
    </shortdesc>
    <desc>
     <para>
-     DEPRECATED. Gets the string of the label.
+     <link linkend="appendix.glossary.d.deprecated">DEPRECATED</link>. Gets the
+     string of the label.
     </para>
     <para>
      Use <function class="GtkLabel">get_text</function> or
@@ -234,20 +235,24 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Obtains the coordinates where the label will draw the <classname>PangoLayout</classname>.
+    Obtains the coordinates where the label will draw the
+    <classname>PangoLayout</classname>.
    </shortdesc>
    <desc>
     <para>
-     Obtains the coordinates where the label will draw the <classname>PangoLayout</classname>
-     representing the text in the label; 
-     useful to convert mouse events into coordinates inside the <classname>PangoLayout</classname>, 
-     e.g. to take some action if some part of the label is clicked. 
+     Obtains the coordinates where the label will draw the
+     <classname>PangoLayout</classname> representing the text in the label; 
+     useful to convert mouse events into coordinates inside the
+     <classname>PangoLayout</classname>, e.g. to take some action if some part
+     of the label is clicked. 
     </para>
     <para>
-     Of course you will need to create a <classname>GtkEventBox</classname> to receive 
-     the events, and pack the label inside it, since labels are a Gtk::NO_WINDOW widget. 
-     Remember when using the <classname>PangoLayout</classname> functions you need to convert 
-     to and from pixels using PANGO_PIXELS() or PANGO_SCALE.
+     Of course you will need to create a <classname>GtkEventBox</classname> to
+     receive the events, and pack the label inside it, since labels are a 
+     <optionname enum="">Gtk::NO_WINDOW</optionname> widget. Remember when
+     using the <classname>PangoLayout</classname> functions you need to convert 
+     to and from pixels using 
+     <link linkend="pango.method.PIXELS">Panog::PIXELS</link> or PANGO_SCALE.
     </para>
    </desc>
   </method>
@@ -319,7 +324,9 @@
   <method id="gtk.gtklabel.method.get_mnemonic_widget">
    <funcsynopsis>
     <funcprototype>
-     <funcdef><classname>GtkWidget</classname> <function>get_mnemonic_widget</function></funcdef>
+     <funcdef>
+      <classname>GtkWidget</classname> <function>get_mnemonic_widget</function>
+     </funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
@@ -371,12 +378,12 @@
    </shortdesc>
    <desc>
     <para>
-     Gets the selected range of characters in the label. The first array value is the
-     start character offset, the second the end offset.
+     Gets the selected range of characters in the label. The first array value
+     is the start character offset, the second the end offset.
     </para>
     <para>
-     So a return array of <literal>array(1,2)</literal> would mean that 1 character
-     (from position 1 to position 2) is selected.
+     So a return array of <literal>array(1,2)</literal> would mean that 1
+     character (from position 1 to position 2) is selected.
     </para>
     <para> 
      See also:
@@ -419,7 +426,8 @@
    <desc>
     <simpara>
      Fetches the text from a label widget, as displayed on the screen.
-     This does not include any embedded underlines indicating mnemonics or Pango markup.
+     This does not include any embedded underlines indicating mnemonics or
+     <classname>Pango</classname> markup.
     </simpara>
     <para>
      See also: 
@@ -438,11 +446,13 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Returns whether the label's text is interpreted as marked up with the Pango text markup language.
+    Returns whether the label's text is interpreted as marked up with the
+    Pango text markup language.
    </shortdesc>
    <desc>
     <para>
-     Returns whether the label's text is interpreted as marked up with the Pango text markup language.
+     Returns whether the label's text is interpreted as marked up with the 
+     Pango text markup language.
     </para>
     <para>
      See also: 
@@ -503,14 +513,18 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    DEPRECATED. Parses the given string for underscores and converts the next character to an underlined character.
+    DEPRECATED. Parses the given string for underscores and converts the next 
+    character to an underlined character.
    </shortdesc>
    <desc>
     <para>
-     Parses the given string for underscores and converts the next character to an underlined character. 
-     The last character that was underlined will have its lower-cased accelerator keyval 
-     returned (i.e. "_File" would return the keyval for "f". 
-     This is probably only used within the Gtk+ library itself for menu items and such.
+     <link linkend="appendix.glossary.d.deprecated">DEPRECATED</link>.
+     Parses the given string for underscores and converts the next character to
+     an underlined character. 
+     The last character that was underlined will have its lower-cased 
+     accelerator keyval returned (i.e. "_File" would return the keyval for
+     "f"). This is probably only used within the Gtk+ library itself for menu
+     items and such.
     </para>
    </desc>
   </method>
@@ -530,7 +544,9 @@
     <para>
      Selects a range of characters in the label, if the label is selectable.
      If the label is not selectable, this function has no effect. 
-     If start_offset or end_offset are -1, then the end of the label will be substituted.
+     If <parameter>start_offset</parameter> or
+     <parameter>end_offset</parameter> are <literal>-1</literal>, then the end
+     of the label will be substituted.
     </para>
     <para>
      See also:
@@ -552,7 +568,8 @@
    </shortdesc>
    <desc>
     <para>
-     DEPRECATED. Alias for <function class="GtkLabel">set_text</function>.
+     <link linkend="appendix.glossary.d.deprecated">DEPRECATED</link>.
+     Alias for <function class="GtkLabel">set_text</function>.
      Only for backwards compatibility.
     </para>
    </desc>
@@ -571,8 +588,9 @@
    <desc>
     <para>
      Sets the angle of rotation for the label (0-359). 
-     An angle of 90 reads from from bottom to top, an angle of 270, from top to bottom. 
-     The angle setting for the label is ignored if the label is selectable, wrapped, or ellipsized.
+     An angle of 90 reads from from bottom to top, an angle of 270, from top to
+     bottom. The angle setting for the label is ignored if the label is
+     selectable, wrapped, or ellipsized.
     </para>
     <para>
      <example>
@@ -697,7 +715,8 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Sets the alignment of the lines in the text of the label relative to each other.
+    Sets the alignment of the lines in the text of the label relative to each
+    other.
    </shortdesc>
    <desc>
     <para>
@@ -831,6 +850,19 @@
      g_markup_escape_text() or g_markup_printf_escaped():
      -->
     </para>
+    <para>
+     <example>
+      <title>Setting GtkLabel Text with Panog Markup</title>
+      <programlisting role="php">
+       <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+                  href="&directory.examples;/reference/gtk/gtklabel/set_markup.phpw" parse="text">
+        <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+       </xi:include>
+      </programlisting>
+     </example>
+     This code will produce the window shown below.
+     <graphic fileref="&directory.images;/reference/gtk/gtklabel/set_markup.png" /> 
+    </para>
    </desc>
   </method>
 
@@ -848,9 +880,24 @@
     <para>
      Parses <parameter>str</parameter> which is marked up with the Pango text
      markup language, setting the label's text and attribute list based on the
-     parse results. If characters in str are preceded by an underscore, they
-     are underlined indicating that they represent a keyboard accelerator
-     called a mnemonic. 
+     parse results. If characters in <parameter>str</parameter> are preceded by
+     an underscore (<literal>_</literal>), they are underlined indicating that
+     they represent a keyboard <link
+     linkend="appendix.glossary.a.accelerator">accelerator</link> called a
+     <link linkend="appendix.glossary.m.mnemonic">mnemonic</link>.
+    </para>
+    <para>
+     <example>
+      <title>Setting GtkLabel Text with Panog Markup and a Mnemonic</title>
+      <programlisting role="php">
+       <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+                  href="&directory.examples;/reference/gtk/gtklabel/set_markup_with_mnemonic.phpw" parse="text">
+        <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+       </xi:include>
+      </programlisting>
+     </example>
+     This code will produce the window shown below.
+     <graphic fileref="&directory.images;/reference/gtk/gtklabel/set_markup_with_mnemonic.png" />
     </para>
     <para>
      The mnemonic key can be used to activate another widget, 

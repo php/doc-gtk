@@ -1,0 +1,20 @@
+<?php
+// Create a window to hold the label.
+$window = new GtkWindow();
+
+// Set up the window to close cleanly.
+$window->connect_simple('destroy', array('Gtk', 'main_quit'));
+
+// Create a label.
+$label = new GtkLabel();
+
+// Set some text with Pango markup.
+$label->set_markup_with_mnemonic('<span color="red">_Example</span> Label');
+
+// Add the label to the window.
+$window->add($label);
+
+// Show the window and start the main loop.
+$window->show_all();
+Gtk::main();
+?>
