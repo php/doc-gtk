@@ -130,11 +130,12 @@
    <propname>activatable</propname>
    <proptype>boolean</proptype>
    <shortdesc>
-
+    If TRUE, the toggle button can be activated.
    </shortdesc>
    <desc>
     <para>
-
+    If TRUE, the toggle button can be activated. If FALSE, the cells
+    are showed in grayscale and became not sensitive.
     </para>
     <para>
      See also:
@@ -143,15 +144,15 @@
    </desc>
   </prop>
 
-  <prop id="gtk.gtkcellrenderertoggle.property.active" type="w">
+  <prop id="gtk.gtkcellrenderertoggle.property.active" type="rw">
    <propname>active</propname>
    <proptype>boolean</proptype>
    <shortdesc>
-
+    Represents the state of the toggle button. True if it's active.
    </shortdesc>
    <desc>
     <para>
-
+      Represents the state of the toggle button. True if it's active.
     </para>
     <para>
      See also:
@@ -160,7 +161,7 @@
    </desc>
   </prop>
 
-  <prop id="gtk.gtkcellrenderertoggle.property.radio" type="w">
+  <prop id="gtk.gtkcellrenderertoggle.property.radio" type="rw">
    <propname>radio</propname>
    <proptype>boolean</proptype>
    <shortdesc>
@@ -177,7 +178,7 @@
    </desc>
   </prop>
 
-  <prop id="gtk.gtkcellrenderertoggle.property.inconsistent" type="w">
+  <prop id="gtk.gtkcellrenderertoggle.property.inconsistent" type="rw">
    <propname>inconsistent</propname>
    <proptype>boolean</proptype>
    <shortdesc>
@@ -203,13 +204,14 @@
     <funcprototype>
      <funcdef>void <cbfunction>callback</cbfunction></funcdef>
      <paramdef>GtkCellRendererToggle <parameter>cellrenderertoggle</parameter></paramdef>
-     <paramdef><!-- was: gchararray -->XXX <parameter>UNKNOWN</parameter></paramdef>
+     <paramdef>string <parameter>path</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
+    Emitted when the user changes the state of the toggle button.
    </shortdesc>
    <desc>
-
+    The "toggled" signal is emitted when the user changes the state of the toggle button.
    </desc>
   </signal>
   
