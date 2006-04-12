@@ -111,6 +111,8 @@
   </xsl:variable>
   <xsl:text disable-output-escaping="yes">&lt;xsl:when test="$signame='</xsl:text>
   <xsl:value-of select="$signame"/>
+  <xsl:text disable-output-escaping="yes">' and $class='</xsl:text>
+  <xsl:value-of select="ancestor-or-self::classentry/classmeta/classtitle"/>
   <xsl:text disable-output-escaping="yes">'"&gt;&lt;xsl:text&gt;</xsl:text>
   <xsl:value-of select="$id" />
   <xsl:text disable-output-escaping="yes">&lt;/xsl:text&gt;&lt;/xsl:when&gt;</xsl:text>
