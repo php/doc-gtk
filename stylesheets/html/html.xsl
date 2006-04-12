@@ -3,7 +3,7 @@
                 version='1.0'>
 
 <!-- ********************************************************************
-     $Id: html.xsl,v 1.5 2005-04-11 21:54:44 cweiske Exp $
+     $Id: html.xsl,v 1.6 2006-04-12 13:19:20 cweiske Exp $
      ********************************************************************
 
      This file is part of the XSL DocBook Stylesheet distribution.
@@ -50,6 +50,19 @@
       <xsl:text>&#x2022;</xsl:text>
     </xsl:otherwise>
   </xsl:choose>
+</xsl:template>
+
+<xsl:template name="anchor">
+  <xsl:param name="node" select="."/>
+  <xsl:param name="conditional" select="1"/>
+  <xsl:variable name="id">
+    <xsl:call-template name="object.id">
+      <xsl:with-param name="object" select="$node"/>
+    </xsl:call-template>
+  </xsl:variable>
+  <xsl:if test="$conditional = 0 or $node/@id or $node/@xml:id">
+    <a id="{$id}"/>
+  </xsl:if>
 </xsl:template>
 
 </xsl:stylesheet>

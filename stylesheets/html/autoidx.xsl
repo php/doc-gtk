@@ -17,6 +17,7 @@
                      |ancestor-or-self::chapter
                      |ancestor-or-self::classentry
                      |ancestor-or-self::appendix
+                     |ancestor-or-self::glossary
                      |ancestor-or-self::preface
                      |ancestor-or-self::section
                      |ancestor-or-self::sect1

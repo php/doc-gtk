@@ -9,7 +9,7 @@
             indent="no"/>
 
 <!-- ********************************************************************
-     $Id: docbook.xsl,v 1.8 2006-02-09 20:01:06 scottmattocks Exp $
+     $Id: docbook.xsl,v 1.9 2006-04-12 13:19:20 cweiske Exp $
      ********************************************************************
 
      This file is part of the XSL DocBook Stylesheet distribution.
@@ -35,6 +35,7 @@
 <xsl:include href="division.xsl"/>
 <xsl:include href="enum.xsl"/>
 <xsl:include href="formal.xsl"/>
+<xsl:include href="glossary.xsl"/>
 <xsl:include href="graphics.xsl"/>
 <xsl:include href="hierarchy.xsl"/>
 <xsl:include href="html.xsl"/>

@@ -90,6 +90,7 @@ its parent.
       <xsl:text>1</xsl:text>
     </xsl:when>
     <xsl:when test="name($node)='appendix'">1</xsl:when>
+    <xsl:when test="name($node)='glossary'">1</xsl:when>
     <xsl:when test="name($node)='chapter'">1</xsl:when>
     <xsl:when test="name($node)='part'">1</xsl:when>
     <xsl:when test="name($node)='refentry'">1</xsl:when>
@@ -707,6 +708,7 @@ its parent.
      select="(preceding::book[1]
              |preceding::chapter[1]
              |preceding::appendix[1]
+             |preceding::glossary[1]
              |preceding::part[1]
              |preceding::constructor[1]
              |preceding::method[1]
@@ -725,6 +727,7 @@ its parent.
              |ancestor::book[1]
              |ancestor::chapter[1]
              |ancestor::appendix[1]
+             |ancestor::glossary[1]
              |ancestor::part[1]
              |ancestor::constructor[1]
              |ancestor::method[1]
@@ -739,6 +742,7 @@ its parent.
     select="(following::book[1]
              |following::chapter[1]
              |following::appendix[1]
+             |following::glossary[1]
              |following::classset[1]
              |following::enumset[1]
              |following::part[1]
@@ -756,6 +760,7 @@ its parent.
              |descendant::book[1]
              |descendant::chapter[1]
              |descendant::appendix[1]
+             |descendant::glossary[1]
              |descendant::part[1]
              |descendant::field[1]
              |descendant::prop[1]
@@ -784,6 +789,7 @@ its parent.
      select="(preceding::book[1]
              |preceding::chapter[1]
              |preceding::appendix[1]
+             |preceding::glossary[1]
              |preceding::part[1]
              |preceding::constructor[1]
              |preceding::method[1]
@@ -802,6 +808,7 @@ its parent.
              |ancestor::book[1]
              |ancestor::chapter[1]
              |ancestor::appendix[1]
+             |ancestor::glossary[1]
              |ancestor::part[1]
              |ancestor::constructor[1]
              |ancestor::method[1]
@@ -816,6 +823,7 @@ its parent.
     select="(following::book[1]
              |following::chapter[1]
              |following::appendix[1]
+             |following::glossary[1]
              |following::classset[1]
              |following::enumset[1]
              |following::part[1]
@@ -833,6 +841,7 @@ its parent.
              |descendant::book[1]
              |descendant::chapter[1]
              |descendant::appendix[1]
+             |descendant::glossary[1]
              |descendant::part[1]
              |descendant::enum[1]
              |descendant::field[1]
@@ -860,6 +869,7 @@ its parent.
      select="(preceding::book[1]
              |preceding::chapter[1]
              |preceding::appendix[1]
+             |preceding::glossary[1]
              |preceding::part[1]
              |preceding::constructor[1]
              |preceding::method[1]
@@ -877,6 +887,7 @@ its parent.
              |ancestor::book[1]
              |ancestor::chapter[1]
              |ancestor::appendix[1]
+             |ancestor::glossary[1]
              |ancestor::part[1]
              |ancestor::reference[1]
              |ancestor::constructor[1]
@@ -892,6 +903,7 @@ its parent.
     select="(following::book[1]
              |following::chapter[1]
              |following::appendix[1]
+             |following::glossary[1]
              |following::classset[1]
              |following::enumset[1]
              |following::part[1]
@@ -908,6 +920,7 @@ its parent.
              |descendant::book[1]
              |descendant::chapter[1]
              |descendant::appendix[1]
+             |descendant::glossary[1]
              |descendant::part[1]
              |descendant::enum[1]
              |descendant::field[1]
@@ -1072,7 +1085,7 @@ its parent.
   </xsl:choose>
 </xsl:template>
 
-<xsl:template match="enumset|classset|classtree|classentry|index|method|signal|field|prop|constructor|enum">
+<xsl:template match="glossary|enumset|classset|classtree|classentry|index|method|signal|field|prop|constructor|enum">
   <xsl:call-template name="process-chunk-element"/>
  </xsl:template>
 
