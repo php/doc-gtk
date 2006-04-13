@@ -7,7 +7,7 @@
                 version='1.0'>
 
 <!-- ********************************************************************
-     $Id: verbatim.xsl,v 1.7 2005-04-11 21:54:45 cweiske Exp $
+     $Id: verbatim.xsl,v 1.8 2006-04-13 18:55:57 cweiske Exp $
      ********************************************************************
 
      This file is part of the XSL DocBook Stylesheet distribution.
@@ -21,14 +21,13 @@
 
 <xsl:template match="programlisting|screen|synopsis">
   <xsl:param name="suppress-numbers" select="'0'"/>
-  <span dir="ltr">
   <xsl:variable name="vendor" select="system-property('xsl:vendor')"/>
   <xsl:variable name="id"><xsl:call-template name="object.id"/></xsl:variable>
 
   <xsl:if test="@id">
     <a href="{$id}"/>
   </xsl:if>
-  <table class="{name(.)}"><tr><td>
+  <table class="{name(.)}" dir="ltr"><tr><td>
   <xsl:choose>
    <xsl:when test="@role='php'">
     <pre class="phpcode">
@@ -47,7 +46,6 @@
    </xsl:otherwise>
   </xsl:choose>
   </td></tr></table>
-  </span>
 </xsl:template>
 
 <xsl:template match="literallayout">
