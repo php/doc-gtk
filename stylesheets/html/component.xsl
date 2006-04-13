@@ -3,7 +3,7 @@
                 version='1.0'>
 
 <!-- ********************************************************************
-     $Id: component.xsl,v 1.5 2005-04-11 21:54:44 cweiske Exp $
+     $Id: component.xsl,v 1.6 2006-04-13 14:22:47 cweiske Exp $
      ********************************************************************
 
      This file is part of the XSL DocBook Stylesheet distribution.
@@ -23,7 +23,7 @@
   </xsl:variable>
 
   <h2 class="title">
-    <a name="{$id}"/>
+    <a name="{$id}" id="{$id}-title"/>
     <xsl:apply-templates select="$node" mode="object.title.markup"/>
   </h2>
 </xsl:template>
