@@ -692,7 +692,7 @@ its parent.
     </xsl:call-template>
   </xsl:variable>
 
-  <xsl:call-template name="write.chunk">
+  <xsl:call-template name="write.chunk.with.doctype">
     <xsl:with-param name="filename" select="$filename"/>
     <xsl:with-param name="content">
       <xsl:call-template name="chunk-element-content">
