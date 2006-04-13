@@ -3,7 +3,7 @@
                 version='1.0'>
 
 <!-- ********************************************************************
-     $Id: glossary.xsl,v 1.1 2006-04-12 13:19:20 cweiske Exp $
+     $Id: glossary.xsl,v 1.2 2006-04-13 18:10:19 cweiske Exp $
      ********************************************************************
 
      This file is part of the XSL DocBook Stylesheet distribution.
@@ -77,13 +77,15 @@
 <!-- ==================================================================== -->
 
 <xsl:template match="glossdiv">
-  <div class="{name(.)}">
-    <xsl:apply-templates select="(glossentry[1]/preceding-sibling::*)"/>
+  <xsl:if test="glossentry[1]">
+    <div class="{name(.)}">
+      <xsl:apply-templates select="(glossentry[1]/preceding-sibling::*)"/>
 
-    <dl>
-      <xsl:apply-templates select="glossentry"/>
-    </dl>
-  </div>
+      <dl>
+        <xsl:apply-templates select="glossentry"/>
+      </dl>
+    </div>
+  </xsl:if>
 </xsl:template>
 
 <xsl:template match="glossdiv/title">
