@@ -21,10 +21,16 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Creates a new checkmenuitem.
    </shortdesc>
    <desc>
-
+    <para>
+    Creates a new checkmenuitem with a text label specified by label.
+    If label is None or not specified then no label is created.
+    If label contains underscore characters then the character following
+    the underscore will be underlined and the character following the first
+    underscore will be used as the mnemonic keyboard accelerator.
+    </para>
    </desc>
   </constructor>
 
@@ -70,9 +76,12 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns whether the check menu item is active.
    </shortdesc>
    <desc>
+    <para>
+    Returns whether the check menu item is active. See <function class="GtkCheckMenuItem">set_active</function>.
+    </para>
     <para>
      See also: 
      <function class="GtkCheckMenuItem">set_active</function>, 
@@ -90,9 +99,13 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns TRUE if the CheckMenuItem is drawn as a radio menu item.
    </shortdesc>
    <desc>
+    <para>
+    Returns TRUE if the CheckMenuItem is drawn as a radio menu item.
+    This value is set by the <function class="GtkCheckMenuItem">set_draw_as_radio</function> method.
+    </para>
     <para>
      See also: 
      <function class="GtkCheckMenuItem">set_draw_as_radio</function>
@@ -128,9 +141,12 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Changes the state of the menu item's check box, setting the "state" property according to the value of is_active parameter.
    </shortdesc>
    <desc>
+    <para>
+    Changes the state of the menu item's check box, setting the "state" property according to the value of is_active parameter.
+    </para>
     <para>
      See also: 
      <function class="GtkCheckMenuItem">get_active</function>, 
@@ -148,9 +164,15 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Displays the check menu item like a radio menu item if the
+    value of draw_as_radio is TRUE.
    </shortdesc>
    <desc>
+    <para>
+    Displays the check menu item like a radio menu item if the
+    value of draw_as_radio is TRUE. If draw_as_radio is FALSE
+    the check menu item is displayed as normal (check box).
+    </para>
     <para>
      See also: 
      <function class="GtkCheckMenuItem">get_draw_as_radio</function>
@@ -216,10 +238,12 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    The toggle() method emits the "toggled" signal on the checkmenuitem.
    </shortdesc>
    <desc>
-
+    <para>
+        The toggle() method emits the "toggled" signal on the checkmenuitem.
+    </para>
    </desc>
   </method>
 
@@ -231,8 +255,34 @@
    <fieldname>active</fieldname>
    <fieldtype>bool</fieldtype>
    <shortdesc>
+     Represents the current state of the menu item.
    </shortdesc>
    <desc>
+    <para>
+     This property represents the state of the menu item.
+     TRUE if it's active, otherwise FALSE.
+    </para>
+    <para>
+     See also: 
+     <function class="GtkCheckMenuItem">get_active</function>, 
+     <function class="GtkCheckMenuItem">set_active</function>
+    </para>
+
+   </desc>
+  </field>
+
+  <field id="gtk.gtkcheckmenuitem.field.draw-as-radio" type="ro">
+   <fieldname>draw-as-radio</fieldname>
+   <fieldtype>bool</fieldtype>
+   <shortdesc>
+    TRUE if the CheckMenuItem is shown as a radio menu item.
+   </shortdesc>
+   <desc>
+    <para>
+    Boolean that represents how the CheckMenuItem is displaied.
+    TRUE if the CheckMenuItem is shown as a radio menu item and
+    FALSE as a CheckBox.
+    </para>
     <para>
      See also: 
      <function class="GtkCheckMenuItem">get_active</function>, 
@@ -255,9 +305,12 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
+    The "toggled" signal is emitted when the CheckMenuItem changes state.
    </shortdesc>
    <desc>
-
+    <para>
+      The "toggled" signal is emitted when the CheckMenuItem changes state.
+    </para>
    </desc>
   </signal>
   
