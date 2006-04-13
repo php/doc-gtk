@@ -113,11 +113,11 @@
 
 <xsl:template name="write.chunk.with.doctype">
   <xsl:param name="filename" select="''"/>
-  <xsl:param name="method" select="'xml'"/>
+  <xsl:param name="method" select="'html'"/>
   <xsl:param name="encoding" select="$default.encoding"/>
   <xsl:param name="indent" select="'no'"/>
-  <xsl:param name="doctype-public" select="'-//W3C//DTD XHTML 1.0 Transitional//EN'"/>
-  <xsl:param name="doctype-system" select="'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'"/>
+  <xsl:param name="doctype-public" select="''"/>
+  <xsl:param name="doctype-system" select="''"/>
   <xsl:param name="content" select="''"/>
 
   <xsl:if test="$chunk.quietly=0">
