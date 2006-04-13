@@ -3,7 +3,7 @@
                 version='1.0'>
 
 <!-- ********************************************************************
-     $Id: titlepage.xsl,v 1.9 2006-04-09 20:43:16 sfox Exp $
+     $Id: titlepage.xsl,v 1.10 2006-04-13 15:29:44 cweiske Exp $
      ********************************************************************
 
      This file is part of the XSL DocBook Stylesheet distribution.
@@ -342,7 +342,7 @@
   </xsl:variable>
 
   <h1 class="{name(.)}">
-    <a name="{$id}"/>
+    <a name="{$id}" id="{$id}-title"/>
     <xsl:apply-templates mode="titlepage.mode"/>
   </h1>
 </xsl:template>
