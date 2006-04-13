@@ -17,7 +17,8 @@
    <funcsynopsis>
     <funcprototype>
     <funcdef> <function>GtkCheckMenuItem</function></funcdef>
-    <paramdef>void</paramdef>
+    <paramdef>string <parameter>label</parameter></paramdef>
+    <paramdef>boolean <parameter>user_underline</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -30,6 +31,8 @@
     If label contains underscore characters then the character following
     the underscore will be underlined and the character following the first
     underscore will be used as the mnemonic keyboard accelerator.
+    The user_underline parameter defaults to TRUE. If use_underline is set to
+    FALSE the label text will not be parsed for mnemonic characters.
     </para>
    </desc>
   </constructor>
