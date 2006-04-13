@@ -3,7 +3,7 @@
                 version='1.0'>
 
 <!-- ********************************************************************
-     $Id: sections.xsl,v 1.4 2005-04-11 21:54:45 cweiske Exp $
+     $Id: sections.xsl,v 1.5 2006-04-13 18:48:59 cweiske Exp $
      ********************************************************************
 
      This file is part of the XSL DocBook Stylesheet distribution.
@@ -146,10 +146,16 @@
       </xsl:if>
     </xsl:if>
     <a>
-      <xsl:attribute name="name">
+      <xsl:variable name="id">
         <xsl:call-template name="object.id">
           <xsl:with-param name="object" select="$section"/>
         </xsl:call-template>
+      </xsl:variable>
+      <xsl:attribute name="name">
+       <xsl:value-of select="$id"/>
+      </xsl:attribute>
+      <xsl:attribute name="id">
+       <xsl:value-of select="concat($id,'-title')"/>
       </xsl:attribute>
     </a>
     <xsl:copy-of select="$title"/>
