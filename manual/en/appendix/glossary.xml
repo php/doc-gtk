@@ -2,7 +2,7 @@
 <glossary id="appendix.glossary">
  <title>Glossary</title>
  <simpara>
-  Important terms relating to PHP-GTK 2.
+  Terms relating to PHP-GTK 2.
  </simpara>
 
  <glossdiv id="appendix.glossary.a">
@@ -24,6 +24,17 @@
     <glossseealso otherterm="appendix.glossary.m.modifier" />
    </glossdef>
   </glossentry>
+  <glossentry id="appendix.glossary.a.atom">
+   <glossterm>Atom</glossterm>
+   <glossdef>
+    <para>
+     An atom consists of a unique numeric ID corresponding to a string name.
+     In GTK+, atoms are stored in a <classname>GdkAtom</classname> structure
+     and are used mostly in selection. They can turn up anywhere GTK+ needs
+     to avoid the overhead of passing arbitrary length strings.
+    </para>
+   </glossdef>
+  </glossentry>
  </glossdiv>
 
  <glossdiv id="appendix.glossary.b">
@@ -41,6 +52,33 @@
      frequently referred to as 'callbacks'.
     </para>
     <glossseealso otherterm="appendix.glossary.s.signalhandler" />
+   </glossdef>
+  </glossentry>
+  <glossentry id="appendix.glossary.c.clipmask">
+   <glossterm>Clip mask</glossterm>
+   <glossdef>
+    <para>
+     A clip mask or clipping region is a specified bitmap or list of
+     rectangles. It is used to restrict output from a graphics routine to a
+     particular region of the destination window.
+    </para>
+   </glossdef>
+  </glossentry>
+  <glossentry id="appendix.glossary.c.colormap">
+   <glossterm>Colormap</glossterm>
+   <glossdef>
+    <para>
+     A colormap is a portable mechanism allowing pixel values to be mapped to
+     RGB colors for display. In GTK+, the colormap is stored in a
+     <classname>GdkColormap</classname> structure.
+    </para>
+    <para>
+     More than one colormap may be installed at any given time, allowing the
+     windows associated with those maps to display with true colors. The
+     system colormap in most cases is a limited resource that should be
+     conserved by selecting RGB values from the predefined color database,
+     i.e. <literal>rgb.txt</literal>.
+    </para>
    </glossdef>
   </glossentry>
  </glossdiv>
@@ -63,10 +101,38 @@
     </para>
    </glossdef>
   </glossentry>
+  <glossentry id="appendix.glossary.d.drawable">
+   <glossterm>Drawable</glossterm>
+   <glossdef>
+    <para>
+     Either windows or pixmaps can be used as destinations in graphics
+     operations. These are collectively known as drawables. In GTK+, they are
+     a specific type: <classname>GdkDrawable</classname>.
+    </para>
+   </glossdef>
+  </glossentry>
  </glossdiv>
 
  <glossdiv id="appendix.glossary.e">
   <title>E</title>
+  <glossentry id="appendix.glossary.e.events">
+   <glossterm>Events</glossterm>
+   <glossdef>
+    <para>
+     Events are the way an application interacts with the user; this is why
+     GUI coding is known as 'event-driven programming'. A pointer movement,
+     the mouse entering or leaving a widget's focus area, a key or button
+     press, all qualify as events. The programmer ultimately has control over
+     which events are known to any given widget and, usually over the way the
+     event is handled (if at all). The default behaviour of an unhandled event
+     is to propagate up through the widget's ancestry.
+    </para>
+    <para>
+     GTK+ event data is stored in a <classname>GdkEvent</classname>
+     structure, and controlled via a <enumname>GdkEventMask</enumname>.
+    </para>
+   </glossdef>
+  </glossentry>
  </glossdiv>
 
  <glossdiv id="appendix.glossary.f">
@@ -74,7 +140,12 @@
   <glossentry id="appendix.glossary.f.focus">
    <glossterm>Focus</glossterm>
    <glossdef>
-    <para>FIXME</para>
+    <para>
+     When a widget has focus, it receives input from the keyboard. You can
+     usually use that input to shift focus to a neighbouring widget, as when
+     - for example - using the keyboard to scroll through the items listed in
+     a dropdown menu.
+    </para>
     <glossseealso otherterm="appendix.glossary.g.grab" />
    </glossdef>
   </glossentry>
@@ -85,14 +156,52 @@
   <glossentry id="appendix.glossary.g.grab">
    <glossterm>Grab</glossterm>
    <glossdef>
-    <para>FIXME</para>
+    <para>
+     Widgets can grab the pointer and keyboard away from other widgets. This
+     essentially means that the widget becomes "modal"; input goes only to that
+     widget, and the focus can't be changed to another widget. A typical reason
+     to grab input is to create a modal dialog; if a window has active grab,
+     interaction with other windows is blocked.
+    </para>
     <glossseealso otherterm="appendix.glossary.f.focus" />
+   </glossdef>
+  </glossentry>
+  <glossentry id="appendix.glossary.g.gc">
+   <glossterm>GC</glossterm>
+   <glossdef>
+    <para>
+     GC is short for graphics context.
+    </para>
+    <glossseealso otherterm="appendix.glossary.g.graphicscontext" />
+   </glossdef>
+  </glossentry>
+  <glossentry id="appendix.glossary.g.graphicscontext">
+   <glossterm>Graphics context</glossterm>
+   <glossdef>
+    <para>
+     Meta information pertaining to graphics output, such as foreground pixel,
+     background pixel, line width, clipmask etc, is stored in a graphics
+     context (GC). Everything drawn to a window or pixmap is modified
+     according to the information stored in the <classname>GdkGC</classname>
+     that is being used.
+    </para>
+    <glossseealso otherterm="appendix.glossary.c.clipmask" />
    </glossdef>
   </glossentry>
  </glossdiv>
 
  <glossdiv id="appendix.glossary.h">
   <title>H</title>
+  <glossentry id="appendix.glossary.h.hints">
+   <glossterm>Hints</glossterm>
+   <glossdef>
+    <para>
+     Certain properties, such as the preferred type of a window, are referred
+     to as 'hints', because the window manager makes no guarantee that it will
+     honor them. See <fieldname class="GtkWindow">type_hint</fieldname>.
+    </para>
+   </glossdef>
+  </glossentry>
  </glossdiv>
 
  <glossdiv id="appendix.glossary.i">
@@ -108,7 +217,13 @@
   <glossentry id="appendix.glossary.k.keysyms">
    <glossterm>Keysyms</glossterm>
    <glossdef>
-    <para>FIXME</para>
+    <para>
+     A keysym is a <emphasis>portable</emphasis> representation of the symbol
+     on the cap of a keyboard key. A key may have several associated keysyms,
+     all of which correspond to the key when various modifier keys are used.
+     There is a list of the keysyms used in PHP-GTK 2
+     <link linkend="appendix.keysyms">here</link>.
+    </para>
    </glossdef>
   </glossentry>
  </glossdiv>
@@ -229,6 +344,21 @@
 
  <glossdiv id="appendix.glossary.v">
   <title>V</title>
+  <glossentry id="appendix.glossary.v.visual">
+   <glossterm>Visual</glossterm>
+   <glossdef>
+    <para>
+     The specifications for color handling for a drawable, including visual
+     class, depth, RGB/pixel, etc., are collectively referred to as a visual
+     and - in GTK+ - are stored in a <classname>GdkVisual</classname>. The
+     visual accounts for the differences between various types of hardware
+     in determining the way pixel values are translated into visible colors.
+     A screen may support only one type of visual.
+    </para>
+    <glossseealso otherterm="appendix.glossary.c.colormap" />
+    <glossseealso otherterm="appendix.glossary.d.drawable" />
+   </glossdef>
+  </glossentry>
  </glossdiv>
 
  <glossdiv id="appendix.glossary.w">
@@ -237,6 +367,14 @@
 
  <glossdiv id="appendix.glossary.x">
   <title>X</title>
+  <glossentry id="appendix.glossary.x.xwindow">
+   <glossterm>XWindow</glossterm>
+   <glossdef>
+    <para>
+     FIXME
+    </para>
+   </glossdef>
+  </glossentry>
  </glossdiv>
 
  <glossdiv id="appendix.glossary.y">
