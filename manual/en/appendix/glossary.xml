@@ -11,10 +11,17 @@
    <glossterm>Accelerator</glossterm>
    <glossdef>
     <para>
-     A keyboard short cut which takes the place of a normal user action such as
-     clicking a button or selecting a menu item.
+     An accelerator is a keyboard key marked with a function name (for example,
+     <literal>Help</literal> or <literal>Delete</literal>), a function key
+     (<literal>F1</literal>, <literal>F2</literal>), or the combination of a
+     control key (<literal>[Ctrl]</literal>, <literal>[Shift]</literal>,
+     <literal>[Alt]</literal>) with a programmer-defined key. The difference
+     between a keyboard accelerator and a mnemonic is that an accelerator is
+     available throughout the application, whereas a mnemonic is specific to
+     a currently-visible widget.
     </para>
     <glossseealso otherterm="appendix.glossary.m.mnemonic" />
+    <glossseealso otherterm="appendix.glossary.m.modifier" />
    </glossdef>
   </glossentry>
  </glossdiv>
@@ -29,8 +36,9 @@
    <glossterm>Callback</glossterm>
    <glossdef>
     <para>
-     A function or a method that is invoked by PHP-GTK whenever a certain
-     condition is met. Frequently used as signal handlers.
+     A callback is a function or method that is invoked whenever a
+     predetermined condition is met. Signal handlers, particularly, are
+     frequently referred to as 'callbacks'.
     </para>
     <glossseealso otherterm="appendix.glossary.s.signalhandler" />
    </glossdef>
@@ -43,10 +51,10 @@
    <glossterm>Deprecated</glossterm>
    <glossdef>
     <para>
-     Not to be used because it is obsolete or does not function properly. A
-     deprecated method, class or variable should not be used in new code
-     because it has either been replaced with something else or may not be
-     available in the future.
+     Any method, class or variable marked as 'deprecated' may not be available
+     in future releases of GTK+, and so should not be used in new code.
+     Usually, deprecated functionality has already been replaced with something
+     better.
     </para>
     <para>
      For a list of deprecated items in PHP-GTK 2 and their replacements, see
@@ -63,10 +71,24 @@
 
  <glossdiv id="appendix.glossary.f">
   <title>F</title>
+  <glossentry id="appendix.glossary.f.focus">
+   <glossterm>Focus</glossterm>
+   <glossdef>
+    <para>FIXME</para>
+    <glossseealso otherterm="appendix.glossary.g.grab" />
+   </glossdef>
+  </glossentry>
  </glossdiv>
 
  <glossdiv id="appendix.glossary.g">
   <title>G</title>
+  <glossentry id="appendix.glossary.g.grab">
+   <glossterm>Grab</glossterm>
+   <glossdef>
+    <para>FIXME</para>
+    <glossseealso otherterm="appendix.glossary.f.focus" />
+   </glossdef>
+  </glossentry>
  </glossdiv>
 
  <glossdiv id="appendix.glossary.h">
@@ -83,6 +105,12 @@
 
  <glossdiv id="appendix.glossary.k">
   <title>K</title>
+  <glossentry id="appendix.glossary.k.keysyms">
+   <glossterm>Keysyms</glossterm>
+   <glossdef>
+    <para>FIXME</para>
+   </glossdef>
+  </glossentry>
  </glossdiv>
 
  <glossdiv id="appendix.glossary.l">
@@ -95,7 +123,30 @@
    <glossterm>Mnemonic</glossterm>
    <glossdef>
     <para>
-     FIXME
+     A mnemonic is an application-specific keyboard shortcut consisting of the
+     [Alt] key plus one programmer-defined keyboard character. A mnemonic is
+     indicated by an underlined letter in the label of the menu item, button
+     or other GUI component for which it is defined.
+    </para>
+    <glossseealso otherterm="appendix.glossary.a.accelerator" />
+    <glossseealso otherterm="appendix.glossary.u.underline" />
+   </glossdef>
+  </glossentry>
+  <glossentry id="appendix.glossary.m.modifier">
+   <glossterm>Modifier</glossterm>
+   <glossdef>
+    <para>
+     A keyboard modifier is a key that can be used in combination with other
+     keys to alter the meaning of those keys. Typical modifier keys would be
+     <literal>[Shift]</literal>, <literal>[Ctrl]</literal> and
+     <literal>[Alt]</literal>.
+    </para>
+    <para>
+     Modifiers can also be related to the mouse, so that the left, right and
+     centre mouse buttons can be programmed to respond in a different way
+     from one another within an application. For example, a left-button click
+     might only interact with the menu bar, whereas a right-button click might
+     display a popup menu in the vicinity of the pointer.
     </para>
     <glossseealso otherterm="appendix.glossary.a.accelerator" />
    </glossdef>
@@ -128,18 +179,19 @@
    <glossterm>Signal</glossterm>
    <glossdef>
     <para>
-     Notification that is generated whenever an event occurs. May be connected
-     to a callback to create signal handlers.
+     A signal is a notification that is generated whenever an event occurs. In
+     order for it to have any effect, it needs to be connected to a callback
+     function (also known as a signal handler).
     </para>
     <glossseealso otherterm="appendix.glossary.c.callback" />
-    <glossseealso otherterm="appensix.glossary.s.signalhandler" />
+    <glossseealso otherterm="appendix.glossary.s.signalhandler" />
    </glossdef>
   </glossentry>
   <glossentry id="appendix.glossary.s.signalhandler">
-   <glossterm>Signal Handler</glossterm>
+   <glossterm>Signal handler</glossterm>
    <glossdef>
     <para>
-     A callback that is invoked in response to a signal that is generated.
+     A callback function that is invoked in response to a signal.
     </para>
     <glossseealso otherterm="appendix.glossary.c.callback" />
     <glossseealso otherterm="appendix.glossary.s.signal" />
@@ -153,6 +205,24 @@
 
  <glossdiv id="appendix.glossary.u">
   <title>U</title>
+  <glossentry id="appendix.glossary.u.underline">
+   <glossterm>Underline</glossterm>
+   <glossdef>
+    <para>
+     An underline is used in the label of a widget such as a button or a menu
+     item to indicate the presence and value of a mnemonic. In PHP-GTK 2,
+     mnemonic support is enabled by default, so that a menu item with the label
+     text <literal>_Save</literal> will automatically have <literal>s</literal>
+     as its keyboard shortcut. You can switch off this default behaviour when
+     constructing simple widgets such as <classname>GtkButton</classname> and
+     <classname>GtkMenuItem</classname>, or alternatively use a double
+     underscore <literal>__</literal> in order to display a single one where
+     mnemonic support is present.
+    </para>
+    <glossseealso otherterm="appendix.glossary.a.accelerator" />
+    <glossseealso otherterm="appendix.glossary.m.mnemonic" />
+   </glossdef>
+  </glossentry>
  </glossdiv>
 
  <glossdiv id="appendix.glossary.v">
