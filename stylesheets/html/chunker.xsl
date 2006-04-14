@@ -116,8 +116,8 @@
   <xsl:param name="method" select="'html'"/>
   <xsl:param name="encoding" select="$default.encoding"/>
   <xsl:param name="indent" select="'no'"/>
-  <xsl:param name="doctype-public" select="''"/>
-  <xsl:param name="doctype-system" select="''"/>
+  <xsl:param name="doctype-public" select="'-//W3C//DTD HTML 4.0 Transitional//EN'"/>
+  <xsl:param name="doctype-system" select="'http://www.w3.org/TR/html4/loose.dtd'"/>
   <xsl:param name="content" select="''"/>
 
   <xsl:if test="$chunk.quietly=0">
