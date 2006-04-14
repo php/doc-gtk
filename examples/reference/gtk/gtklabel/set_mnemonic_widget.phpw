@@ -1,0 +1,39 @@
+<?php
+// A callback for the button.
+function buttonActivated()
+{
+	echo "The button was activated\n";
+}
+
+// Create a window to hold the label.
+$window = new GtkWindow();
+
+// Set up the window to close cleanly.
+$window->connect_simple('destroy', array('Gtk', 'main_quit'));
+
+// Create a label.
+$label = new GtkLabel('_Exampel Label', true);
+
+// Create the button.
+$button = new GtkButton('Use the label mnemonic.');
+
+// Set up a mnemonic-activate callback for the button.
+$button->connect_simple('mnemonic-activate', 'buttonActivated');
+
+// Set the button as the label's mnemonic widget.
+$label->set_mnemonic_widget($button);
+
+// Create a box for the label and button.
+$vBox = new GtkVBox();
+
+// Add the label and button to the box.
+$vBox->pack_start($label);
+$vBox->pack_start($button);
+
+// Add the label to the window.
+$window->add($vBox);
+
+// Show the window and start the main loop.
+$window->show_all();
+Gtk::main();
+?>

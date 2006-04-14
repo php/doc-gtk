@@ -774,10 +774,10 @@
     </para>
     <para>
      <example>
-      <title>Setting the Text of a GtkLabel</title>
+      <title>Setting the Text of a GtkLabel with Pango Markup</title>
       <programlisting role="php">
        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
-                  href="&directory.examples;/reference/gtk/gtklabel/set_text.phpw" parse="text">
+                  href="&directory.examples;/reference/gtk/gtklabel/set_label.phpw" parse="text">
         <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
        </xi:include>
       </programlisting>
@@ -923,6 +923,20 @@
      <parameter>n_chars</parameter> chars.
     </para>
     <para>
+     <example>
+      <title>Setting the Max Width of a GtkLabel in Characters</title>
+      <programlisting role="php">
+       <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+                  href="&directory.examples;/reference/gtk/gtklabel/set_max_width_chars.phpw" parse="text">
+        <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+       </xi:include>
+      </programlisting>
+     </example>
+     This code will produce the window shown below. Notice how only the first
+     ten characters or the label are shown.
+     <graphic fileref="&directory.images;/reference/gtk/gtklabel/set_max_width_chars.png" />
+    </para>
+    <para>
      See also: 
      <function class="GtkLabel">get_max_width_chars</function>
     </para>
@@ -938,7 +952,8 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Returns the widget associated with the mnemonic key.
+    Sets the widget that will be activated if the user presses the mnemonic
+    key for the label.
    </shortdesc>
    <desc>
     <para>
@@ -955,11 +970,26 @@
      explicitly using this function.
     </para>
     <para>
-     <!-- FIXME: link the mnemonic_activate signal -->
-     The target widget will be accelerated by emitting "mnemonic_activate" 
-     on it. The default handler for this signal will activate the 
-     widget if there are no mnemonic collisions and toggle focus 
-     between the colliding widgets otherwise.
+     The target widget will be accelerated by emitting <signalname 
+     class="GtkWidget">mnemonic_activate</signalname> on it. The default
+     handler for this signal will activate the widget if there are no mnemonic
+     collisions and toggle focus between the colliding widgets otherwise.
+    </para>
+    <para>
+     <example>
+      <title>Setting the Mnemonic Widget of a GtkLabel</title>
+      <programlisting role="php">
+       <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+                  href="&directory.examples;/reference/gtk/gtklabel/set_mnemonic_widget.phpw" parse="text">
+        <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+       </xi:include>
+      </programlisting>
+     </example>
+     This code will produce the window shown below. If the button is clicked
+     nothing will happen. However, if the user hits <literal>Alt+e</literal>
+     the <literal>buttonActivated</literal> <link 
+     linkend="appendix.glossary.c.callback">callback</link> will be called.
+     <graphic fileref="&directory.images;/reference/gtk/gtklabel/set_mnemonic_widget.png" />
     </para>
     <para>
      See also: 
@@ -1058,6 +1088,17 @@
     </para>
     <para>
      This will also clear any previously set mnemonic accelerators.
+    </para>
+    <para>
+     <example>
+      <title>Setting the Text of a GtkLabel</title>
+      <programlisting role="php">
+       <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+                  href="&directory.examples;/reference/gtk/gtklabel/set_text.phpw" parse="text">
+        <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+       </xi:include>
+      </programlisting>
+     </example>
     </para>
     <para>
      See also: 
