@@ -158,7 +158,14 @@
     <xsl:with-param name="object" select="$node"/>
    </xsl:call-template>
    <xsl:text>","</xsl:text>
-   <xsl:apply-templates select="$node" mode="title.markup"/>
+   <xsl:choose>
+    <xsl:when test="name($node)='method' or name($node)='prop' or name($node)='field'">
+     <xsl:apply-templates select="$node" mode="title.markup.phpweb.leftnav"/>
+    </xsl:when>
+    <xsl:otherwise>
+     <xsl:apply-templates select="$node" mode="title.markup"/>
+    </xsl:otherwise>
+   </xsl:choose>
    <xsl:text>",</xsl:text>
    <xsl:choose>
     <xsl:when test="name($node)='classentry'">

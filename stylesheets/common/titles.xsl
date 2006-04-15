@@ -266,6 +266,14 @@ title of the element. This does not include the label.
  </span>
 </xsl:template>
 
+<xsl:template match="method" mode="title.markup.phpweb.leftnav">
+ <xsl:param name="text-only" select="'0'"/>
+ <xsl:param name="allow-anchors" select="'0'"/>
+ <span dir="ltr">
+ <xsl:value-of select="(./funcsynopsis/funcprototype/funcdef/function)[1]" />
+ </span>
+</xsl:template>
+
 <xsl:template match="properties|fields" mode="title.markup">
  <xsl:param name="text-only" select="'0'"/>
  <xsl:param name="allow-anchors" select="'0'"/>
@@ -282,6 +290,14 @@ title of the element. This does not include the label.
  <xsl:if test="count($classentry)>0">
   <xsl:text>::</xsl:text>
  </xsl:if>
+ <xsl:value-of select="(./fieldname|./propname)" />
+ </span>
+</xsl:template>
+
+<xsl:template match="prop|field" mode="title.markup.phpweb.leftnav">
+ <xsl:param name="text-only" select="'0'"/>
+ <xsl:param name="allow-anchors" select="'0'"/>
+ <span dir="ltr">
  <xsl:value-of select="(./fieldname|./propname)" />
  </span>
 </xsl:template>
