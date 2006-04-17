@@ -1642,7 +1642,7 @@
      <funcdef>void <cbfunction>callback</cbfunction></funcdef>
      <paramdef>GtkLabel <parameter>label</parameter></paramdef>
      <paramdef>
-      <enumname>GtkMovementType</enumname> <parameter>type</parameter>
+      <enumname>GtkMovementStep</enumname> <parameter>step</parameter>
      </paramdef>
      <paramdef>int <parameter>direction</parameter></paramdef>
      <paramdef>bool <parameter>selecting</parameter></paramdef>
@@ -1658,9 +1658,9 @@
     <para>
      When this signal is emitted, four arguments are passed to the callback.
      First, the label will be passed. Next an integer,
-     <parameter>type</parameter>, is passed. This integer indicates the
+     <parameter>step</parameter>, is passed. This integer indicates the
      type of movement. This value will be a
-     <enumname>GtkMovementType</enumname>. This value tells you whether the 
+     <enumname>GtkMovementStep</enumname>. This value tells you whether the 
      cursor has moved, by a character, word, line, etc. The third argument 
      passed, <parameter>direction</parameter>, indicates the direction the
      cursor has moved. A positive value means the cursor has moved toward the
