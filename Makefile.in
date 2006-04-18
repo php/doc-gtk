@@ -53,6 +53,7 @@ html: $(BUILD)/html/index.html
 mtoc: $(BUILD_TEST)/mtoc.xml
 phpweb: $(BUILD)/php/index.php
 test: $(BUILD_TEST)/$(id).html
+phptest: $(BUILD_TEST)/$(id).php
 text: $(BUILD)/manual.txt
 updates: $(BUILD_TEST)/updates-$(LANG).php
 
@@ -115,6 +116,10 @@ $(BUILD)/php_gtk_manual_$(LANG).txt.gz: $(BUILD)/manual.txt
 $(BUILD_TEST)/$(id).html: $(SCRIPT_DIR)/manual.xml
 	@mkdir -p $(BUILD_TEST)
 	$(XSLTPROC) --param base.dir "'$(BUILD_TEST)/'" --stringparam rootid "$(id)" --xinclude $(chunk) $(SCRIPT_DIR)/manual.xml
+
+$(BUILD_TEST)/$(id).php: $(SCRIPT_DIR)/manual.xml
+	@mkdir -p $(BUILD_TEST)
+	$(XSLTPROC) --param base.dir "'$(BUILD_TEST)/'" --stringparam rootid "$(id)" --xinclude $(phpweb) $(SCRIPT_DIR)/manual.xml
 
 $(BUILD_TEST)/demo_manual.html: $(SCRIPT_DIR)/demo_manual.xml
 	@mkdir -p $(BUILD_TEST)

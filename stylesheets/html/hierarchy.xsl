@@ -8,7 +8,6 @@
 
 <xsl:template name="generate_hierarchy"/>
 
-
 <xsl:template name="get_parent_class">
  <xsl:param name="classname"/>
 
@@ -27,7 +26,6 @@
   <xsl:otherwise />
  </xsl:choose>
 </xsl:template>
-
 
 <xsl:template name="current-depth">
  <xsl:param name="classname"/>
@@ -50,7 +48,6 @@
   </xsl:otherwise>
  </xsl:choose>
 </xsl:template>
-
 
 <!--
 Makes the indent for the class hierarchy
@@ -81,7 +78,6 @@ Makes the indent for the class hierarchy
   </xsl:otherwise>
  </xsl:choose>
 </xsl:template>
-
 
 <xsl:template name="get_class_hierarchy">
  <xsl:param name="classname" />
@@ -146,7 +142,6 @@ Makes the indent for the class hierarchy
  
 </xsl:template>
 
-
 <xsl:template name="get_direct_subclasses">
  <xsl:param name="classname" />
  
@@ -175,7 +170,6 @@ Makes the indent for the class hierarchy
   </xsl:if>
  </xsl:for-each> 
 </xsl:template>
-
 
 <!--
  creates a class tree beginning from
@@ -248,10 +242,8 @@ Makes the indent for the class hierarchy
 
 </xsl:template>
 
-
-
 <!--
- Lists all implemented interfaces of a the current classset
+ Lists all implemented interfaces of the current classset
 -->
  <xsl:template name="implementedinterfaces">
   <xsl:if test="./classmeta/implements">
@@ -330,6 +322,5 @@ Makes the indent for the class hierarchy
     </blockquote>
   </xsl:if>
  </xsl:template>
-
 
 </xsl:stylesheet>

@@ -225,7 +225,7 @@
    </xsl:call-template>
   </xsl:variable>
 
-  <xsl:if test="$depth>0">
+  <xsl:if test="$depth > 0">
    <xsl:call-template name="phpweb.get_class_hierarchy">
     <xsl:with-param name="classname">
      <xsl:call-template name="get_parent_class">
@@ -235,49 +235,34 @@
    </xsl:call-template>
   </xsl:if>
 
-<xsl:variable name="rtl" select="ancestor-or-self::classentry[1][@rtl=1]"/>
+  <xsl:variable name="rtl" select="ancestor-or-self::classentry[1][@rtl=1]"/>
 
   <xsl:variable name="new.hack">
    <xsl:choose>
-    <xsl:when test="$depth=0">
-     <xsl:text></xsl:text>
+    <xsl:when test="$depth = 0 or $depth = 1">
+     <xsl:text disable-output-escaping="yes" />
     </xsl:when>
-    <xsl:when test="$depth=1">
-     <xsl:text disable-output-escaping="yes"/>
-    </xsl:when>
-    <xsl:when test="$depth=2">
+    <xsl:when test="$depth = 2">
      <xsl:choose>
       <xsl:when test="$rtl = true()">
-       <xsl:text disable-output-escaping="yes">
-print_image('revhier-arrow.gif');
-       </xsl:text>
+       <xsl:text disable-output-escaping="yes">print_image('revhier-arrow.gif');</xsl:text>
       </xsl:when>
       <xsl:otherwise>
-       <xsl:text disable-output-escaping="yes">
-print_image('inhier-arrow.gif');
-       </xsl:text>
+       <xsl:text disable-output-escaping="yes">print_image('inhier-arrow.gif');</xsl:text>
       </xsl:otherwise>
      </xsl:choose>
     </xsl:when>
     <xsl:otherwise>
      <xsl:choose>
       <xsl:when test="$rtl = true()">
-       <xsl:text disable-output-escaping="yes">
-echo str_repeat(make_image('inhier-blank.gif'), 
-       </xsl:text>
-       <xsl:number value="$depth+-2" format="1"/>
-       <xsl:text disable-output-escaping="yes">
-); print_image('revhier-arrow.gif');
-       </xsl:text>
+       <xsl:text disable-output-escaping="yes">echo str_repeat(make_image('inhier-blank.gif'), </xsl:text>
+       <xsl:number value="$depth + -2" format="1"/>
+       <xsl:text disable-output-escaping="yes">); print_image('revhier-arrow.gif');</xsl:text>
       </xsl:when>
       <xsl:otherwise>
-       <xsl:text disable-output-escaping="yes">
-echo str_repeat(make_image('inhier-blank.gif'), 
-       </xsl:text>
-       <xsl:number value="$depth+-2" format="1"/>
-       <xsl:text disable-output-escaping="yes">
-); print_image('inhier-arrow.gif');
-       </xsl:text>
+       <xsl:text disable-output-escaping="yes">echo str_repeat(make_image('inhier-blank.gif'), </xsl:text>
+       <xsl:number value="$depth + -2" format="1"/>
+       <xsl:text disable-output-escaping="yes">); print_image('inhier-arrow.gif');</xsl:text>
       </xsl:otherwise>
      </xsl:choose>
     </xsl:otherwise>
@@ -293,7 +278,7 @@ echo str_repeat(make_image('inhier-blank.gif'),
     </xsl:variable>
     <xsl:processing-instruction name="php">
      <xsl:value-of select="$new.hack"/>
-    </xsl:processing-instruction> 
+    </xsl:processing-instruction>
     &nbsp;
     <span dir="ltr">
      <a>
@@ -303,13 +288,17 @@ echo str_repeat(make_image('inhier-blank.gif'),
       <xsl:value-of select="$classname" />
      </a>
     </span>
-    <br/>
+    <br />
    </xsl:when>
    <xsl:otherwise>
-    <xsl:processing-instruction name="php">
-     <xsl:value-of select="$new.hack"/>
-     <xsl:value-of select="$classname" />
-    </xsl:processing-instruction> 
+    <xsl:value-of select="$new.hack"/>
+    <xsl:if test="$classname!=''">
+     &nbsp;
+     <span dir="ltr">
+      <xsl:value-of select="$classname" />
+     </span>
+     <br />
+    </xsl:if>
    </xsl:otherwise>
   </xsl:choose>
 
