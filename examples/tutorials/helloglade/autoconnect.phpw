@@ -1,0 +1,19 @@
+<?php
+//Create a new glade instance, load the
+// widgets from the file passed as parameter
+//We use the absolute file path as it is not uncommon
+// that the application is run from a different working directory
+$glade = new GladeXML(dirname(__FILE__) . '/helloglade.glade');
+
+//Let glade do all the signal connections we specified in the file
+$glade->signal_autoconnect();
+
+//This method is called when the button is clicked
+function onClickButton() {
+    echo "button clicked!\r\n";
+    Gtk::main_quit();
+}
+
+//Start the main loop
+Gtk::main();
+?>

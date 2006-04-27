@@ -1,0 +1,14 @@
+<?php
+//Loading a part of the glade file only
+
+//We want "btnClose" to be the root of the widget tree to load
+$glade = new GladeXML('helloglade.glade', 'btnClose');
+
+//That will work
+$btn = $glade->get_widget('btnClose');
+
+//This will fail, as the window isn't loaded:
+$window = $glade->get_widget('wndClose');
+//Output is NULL
+var_dump($window);
+?>

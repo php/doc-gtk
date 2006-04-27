@@ -1,0 +1,27 @@
+<?php
+//Here we use an object and connect all the
+// signals to *object methods* instead of
+// functions
+
+class MyClass {
+    //This method is called when the button is clicked
+    function onClickButton() {
+        echo "MyClass->onClickButton!\r\n";
+        Gtk::main_quit();
+    }
+
+    function staticMethod() {
+        echo "MyClass::staticMethod()\r\n";
+    }
+}
+
+$glade = new GladeXML(dirname(__FILE__) . '/helloglade.glade');
+
+//Let glade do all the signal connections we specified in the file
+// but this time, connect to the object methods
+$myClassInstance = new MyClass();
+$glade->signal_autoconnect_instance($myClassInstance);
+
+//Start the main loop
+Gtk::main();
+?>

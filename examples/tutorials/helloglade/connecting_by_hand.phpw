@@ -1,0 +1,26 @@
+<?php
+//Create a new glade instance, load the
+// widgets from the file passed as parameter
+//We use the absolute file path as it is not uncommon
+// that the application is run from a different working directory
+$glade = new GladeXML(dirname(__FILE__) . '/helloglade.glade');
+
+//Nothing happened when you clicked the button or closed
+// the window with Step 1's code.
+//Here we manually connect the widget signals as you know it
+$window = $glade->get_widget('wndClose');
+$window->connect_simple('destroy', array('Gtk', 'main_quit'));
+
+//Again, get the widget object and connect the clicked signal
+$button = $glade->get_widget('btnClose');
+$button->connect_simple('clicked', 'onClickButton');
+
+//This method is called when the button is clicked
+function onClickButton() {
+    echo "button clicked!\r\n";
+    Gtk::main_quit();
+}
+
+//Start the main loop
+Gtk::main();
+?>
