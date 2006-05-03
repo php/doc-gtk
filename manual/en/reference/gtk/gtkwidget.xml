@@ -2489,6 +2489,10 @@
     <funcprototype>
      <funcdef>boolean <function>set_visible</function></funcdef>
      <paramdef>boolean <parameter>visible</parameter></paramdef>
+     <paramdef>
+      boolean
+      <parameter><optional>all = <literal>true</literal></optional></parameter>
+     </paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -2501,6 +2505,14 @@
      <parameter>visible</parameter>. If <parameter>visible</parameter> is
      <literal>true</literal> the widget will be shown. If it is
      <literal>false</literal> it will be hidden.
+    </para>
+    <para>
+     The optional parameter <parameter>all</parameter> can be used to hide or
+     show all children under the widget. If <parameter>all</parameter> is
+     <literal>true</literal>, <function class="GtkWidget">show_all</function>
+     or <function class="GtkWidget">hide_all</function> will be called instead
+     of <function class="GtkWidget">show</function> or <function
+     class="GtkWidget">hide</function>.
     </para>
     <para>
      <function class="GtkWidget">set_visible</function> returns
