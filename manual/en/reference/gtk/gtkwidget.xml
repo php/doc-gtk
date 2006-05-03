@@ -1349,6 +1349,28 @@
    </desc>
   </method>
 
+  <method id="gtk.gtkwidget.method.is_visible">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>bool <function>is_visible</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Returns whether or not the widget is currently visible.
+   </shortdesc>
+   <desc>
+    <para>
+     Returns whether or not the widget is currently visible.
+    </para>
+    <para>
+     See also: 
+     <function class="GtkWidget">set_visible</function>
+    </para>
+
+   </desc>
+  </method>
+
   <method id="gtk.gtkwidget.method.list_accel_closures">
    <funcsynopsis>
     <funcprototype>
@@ -2459,6 +2481,38 @@
      written code and should be phased out of any existing code.
      Instead used <function class="GtkWidget">set_size_request</function>.
     </note>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkwidget.method.set_visible">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>boolean <function>set_visible</function></funcdef>
+     <paramdef>boolean <parameter>visible</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Hides or shows the widget depending on the value of
+    <parameter>visible</parameter>.
+   </shortdesc>
+   <desc>
+    <para>
+     Hides or shows the widget depending on the value of
+     <parameter>visible</parameter>. If <parameter>visible</parameter> is
+     <literal>true</literal> the widget will be shown. If it is
+     <literal>false</literal> it will be hidden.
+    </para>
+    <para>
+     <function class="GtkWidget">set_visible</function> returns
+     <literal>true</literal> if the widget is now visible and
+     <literal>false</literal>.
+    </para>
+    <para>
+     See also:
+     <function class="GtkWidget">show</function>,
+     <function class="GtkWidget">hide</function>,
+     <function class="GtkWidget">is_visible</function>
+    </para>
    </desc>
   </method>
 
