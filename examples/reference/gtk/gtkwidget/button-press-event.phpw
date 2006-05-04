@@ -1,0 +1,16 @@
+<?php
+$wnd = new GtkWindow();
+$wnd->connect_simple('destroy', array('Gtk', 'main_quit'));
+
+//we want to receive mouse button press events
+$wnd->set_events(Gdk::BUTTON_PRESS_MASK);
+$wnd->connect('button-press-event', 'onButtonPress');
+
+//here we handle the mouse button press events
+function onButtonPress($widget, $event) {
+    $widget->set_title($event->button . ' - ' . $event->x . ':' . $event->y);
+}
+$wnd->show();
+
+Gtk::main();
+?>

@@ -1,0 +1,21 @@
+<?php
+$wnd = new GtkWindow();
+$wnd->connect_simple('destroy', array('Gtk', 'main_quit'));
+
+//we want to receive key press events
+$wnd->connect('key-press-event', 'onKeyPress');
+
+//here we handle the key press events
+function onKeyPress($widget, $event) {
+    if ($event->state & Gdk::CONTROL_MASK && $event->keyval == Gdk::KEY_q) {
+        //Press Ctrl+q, and the window will be closed
+        $widget->destroy();
+    } else if ($event->keyval == Gdk::KEY_F1) {
+        //Press F1 to shwo a help text in the title
+        $widget->set_title('Press Ctrl+Q to quit');
+    }
+}
+
+$wnd->show();
+Gtk::main();
+?>
