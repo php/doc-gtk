@@ -2883,39 +2883,81 @@
 
    </desc>
   </signal>
-  
+
   <signal id="gtk.gtkwidget.signal.button-press-event">
    <signalname>button-press-event</signalname>
    <funcsynopsis>
     <funcprototype>
      <funcdef>bool <cbfunction>callback</cbfunction></funcdef>
-     <paramdef>GtkWidget <parameter>widget</parameter></paramdef>
-     <paramdef><!-- was: GdkEvent -->XXX <parameter>UNKNOWN</parameter></paramdef>
+     <paramdef><classname>GtkWidget</classname> <parameter>widget</parameter></paramdef>
+     <paramdef><classname>GdkEvent</classname> <parameter>event</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
+    Mouse button has been pressed down.
    </shortdesc>
    <desc>
+    <para>
+     This signal is emitted when a mouse button has been pressed down.
+    </para>
+    <para>
+     Useful event properties are:
+     <itemizedlist>
+      <listitem>
+       <literal>x, y</literal> - The x and y widget coordinates at which
+       the cursor is.
+      </listitem>
+      <listitem>
+       <literal>button</literal> - Mouse button (1 - left, 2 - middle, 3 - right)
+      </listitem>
+      <listitem>
+       <literal>state</literal> - Bitmask of other keys that were
+       pressed (e.g. Ctrl or Shift) - <enumname>GdkModifierType</enumname>
+      </listitem>
+      <listitem>
+       <literal>type</literal> - Event type, e.g. normal press, double click
+       or so - <enumname>GdkEventType</enumname>.
+      </listitem>
+     </itemizedlist>
+    </para>
+    <para>
+     <example>
+      <title>Using the key-press-event signal</title>
+      <programlisting role="php">
+       <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+        href="&directory.examples;/reference/gtk/gtkwidget/button-press-event.phpw" parse="text">
+        <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+       </xi:include>
+      </programlisting>
+     </example>
+    </para>
 
    </desc>
   </signal>
-  
+
   <signal id="gtk.gtkwidget.signal.button-release-event">
    <signalname>button-release-event</signalname>
    <funcsynopsis>
     <funcprototype>
      <funcdef>bool <cbfunction>callback</cbfunction></funcdef>
-     <paramdef>GtkWidget <parameter>widget</parameter></paramdef>
-     <paramdef><!-- was: GdkEvent -->XXX <parameter>UNKNOWN</parameter></paramdef>
+     <paramdef><classname>GtkWidget</classname> <parameter>widget</parameter></paramdef>
+     <paramdef><classname>GdkEvent</classname> <parameter>UNKNOWN</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
+    Mouse button has been released.
    </shortdesc>
    <desc>
-
+    <para>
+     This signal is emitted whenever a mouse button is released.
+    </para>
+    <para>
+     See <signalname class="GtkWidget">button-press-event</signalname>
+     for an example.
+    </para>
    </desc>
   </signal>
-  
+
   <signal id="gtk.gtkwidget.signal.can-activate-accel">
    <signalname>can-activate-accel</signalname>
    <funcsynopsis>
@@ -3027,122 +3069,182 @@
 
    </desc>
   </signal>
-  
+
   <signal id="gtk.gtkwidget.signal.drag-begin">
    <signalname>drag-begin</signalname>
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <cbfunction>callback</cbfunction></funcdef>
-     <paramdef>GtkWidget <parameter>widget</parameter></paramdef>
-     <paramdef><!-- was: GdkDragContext -->XXX <parameter>UNKNOWN</parameter></paramdef>
+     <paramdef><classname>GtkWidget</classname> <parameter>widget</parameter></paramdef>
+     <paramdef><classname>GdkDragContext</classname> <parameter>context</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
+    Dragging from the widget has been started.
    </shortdesc>
    <desc>
-
+    <para>
+     The <literal>drag-begin</literal> signal is emitted on the drag source
+     when a drag is started. A typical reason to connect to this signal is
+     to set up a custom drag icon with
+     <function class="GtkWidget">drag_source_set_icon</function>.
+    </para>
    </desc>
   </signal>
-  
+
   <signal id="gtk.gtkwidget.signal.drag-data-delete">
    <signalname>drag-data-delete</signalname>
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <cbfunction>callback</cbfunction></funcdef>
-     <paramdef>GtkWidget <parameter>widget</parameter></paramdef>
-     <paramdef><!-- was: GdkDragContext -->XXX <parameter>UNKNOWN</parameter></paramdef>
+     <paramdef><classname>GtkWidget</classname> <parameter>widget</parameter></paramdef>
+     <paramdef><classname>GdkDragContext</classname> <parameter>context</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
+    Drag move has been completed.
    </shortdesc>
    <desc>
-
+    <para>
+     The <literal>drag-data-delete</literal> signal is emitted on the drag
+     source when a drag with the action <literal>Gdk::ACTION_MOVE</literal>
+     is successfully completed. The signal handler is responsible for deleting
+     the data that has been dropped. What "delete" means, depends on the
+     context of the drag operation.
+    </para>
    </desc>
   </signal>
-  
+
   <signal id="gtk.gtkwidget.signal.drag-data-get">
    <signalname>drag-data-get</signalname>
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <cbfunction>callback</cbfunction></funcdef>
-     <paramdef>GtkWidget <parameter>widget</parameter></paramdef>
-     <paramdef><!-- was: GdkDragContext -->XXX <parameter>UNKNOWN</parameter></paramdef>
-     <paramdef><!-- was: GtkSelectionData -->XXX <parameter>UNKNOWN</parameter></paramdef>
-     <paramdef>int <parameter>UNKNOWN</parameter></paramdef>
-     <paramdef>int <parameter>UNKNOWN</parameter></paramdef>
+     <paramdef><classname>GtkWidget</classname> <parameter>widget</parameter></paramdef>
+     <paramdef><classname>GdkDragContext</classname> <parameter>context</parameter></paramdef>
+     <paramdef><classname>GtkSelectionData</classname> <parameter>data</parameter></paramdef>
+     <paramdef>int <parameter>info</parameter></paramdef>
+     <paramdef>int <parameter>time</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
+    Drag data need to be supplied.
    </shortdesc>
    <desc>
-
+    <para>
+     The <literal>drag-data-get</literal> signal is emitted on the drag
+     source when the drop site requests the data which is dragged. It
+     is the responsibility of the signal handler to fill data with the
+     data in the format which is indicated by info. See
+     <function class="GtkSelectionData">set</function> and
+     <function class="GtkSelectionData">set_text</function>.
+    </para>
    </desc>
   </signal>
-  
+
   <signal id="gtk.gtkwidget.signal.drag-data-received">
    <signalname>drag-data-received</signalname>
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <cbfunction>callback</cbfunction></funcdef>
-     <paramdef>GtkWidget <parameter>widget</parameter></paramdef>
-     <paramdef><!-- was: GdkDragContext -->XXX <parameter>UNKNOWN</parameter></paramdef>
-     <paramdef>int <parameter>UNKNOWN</parameter></paramdef>
-     <paramdef>int <parameter>UNKNOWN</parameter></paramdef>
-     <paramdef><!-- was: GtkSelectionData -->XXX <parameter>UNKNOWN</parameter></paramdef>
-     <paramdef>int <parameter>UNKNOWN</parameter></paramdef>
-     <paramdef>int <parameter>UNKNOWN</parameter></paramdef>
+     <paramdef><classname>GtkWidget</classname> <parameter>widget</parameter></paramdef>
+     <paramdef><classname>GdkDragContext</classname> <parameter>context</parameter></paramdef>
+     <paramdef>int <parameter>x</parameter></paramdef>
+     <paramdef>int <parameter>y</parameter></paramdef>
+     <paramdef><classname>GtkSelectionData</classname> <parameter>data</parameter></paramdef>
+     <paramdef>int <parameter>info</parameter></paramdef>
+     <paramdef>int <parameter>time</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
+    Drop data receive in the application.
    </shortdesc>
    <desc>
-
+    <para>
+     The <literal>drag-data-received</literal> signal is emitted on the drop
+     site when the dragged data has been received. If the data was received
+     in order to determine whether the drop will be accepted, the handler
+     is expected to call
+     <function class="GtkDragContext">drag_status</function> and not finish
+     the drag. If the data was received in response to a
+     <signalname class="GtkWidget">drag-drop</signalname> signal (and this
+     is the last target to be received), the handler for this signal is
+     expected to process the received data and then call
+     <function class="GtkDragContext">drag_finish</function>, setting the
+     success parameter depending on whether the data was processed successfully.
+    </para>
+    <para>
+     The handler may inspect and modify <literal>drag_context-&gt;action</literal>
+     before calling <function class="GtkDragContext">drag_finish</function>,
+     e.g. to implement <literal>Gdk::ACTION_ASK</literal>.
+    </para>
    </desc>
   </signal>
-  
+
   <signal id="gtk.gtkwidget.signal.drag-drop">
    <signalname>drag-drop</signalname>
    <funcsynopsis>
     <funcprototype>
      <funcdef>bool <cbfunction>callback</cbfunction></funcdef>
-     <paramdef>GtkWidget <parameter>widget</parameter></paramdef>
-     <paramdef><!-- was: GdkDragContext -->XXX <parameter>UNKNOWN</parameter></paramdef>
-     <paramdef>int <parameter>UNKNOWN</parameter></paramdef>
-     <paramdef>int <parameter>UNKNOWN</parameter></paramdef>
-     <paramdef>int <parameter>UNKNOWN</parameter></paramdef>
+     <paramdef><classname>GtkWidget</classname> <parameter>widget</parameter></paramdef>
+     <paramdef><classname>GdkDragContext</classname> <parameter>context</parameter></paramdef>
+     <paramdef>int <parameter>x</parameter></paramdef>
+     <paramdef>int <parameter>y</parameter></paramdef>
+     <paramdef>int <parameter>time</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
+    A drop occured.
    </shortdesc>
    <desc>
-
+    <para>
+     The <literal>drag-drop</literal> signal is emitted on the drop site when
+     the user drops the data onto the widget. The signal handler must determine
+     whether the cursor position is in a drop zone or not. If it is not in a
+     drop zone, it returns <literal>false</literal> and no further processing
+     is necessary. Otherwise, the handler returns <literal>true</literal>.
+     In this case, the handler must ensure that
+     <function class="GdkDragContext">drop_finish</function> is called to let
+     the source know that the drop is done. The call to
+     <function class="GdkDragContext">drop_finish</function> can be done either
+     directly or in a
+     <signalname class="GtkWidget">drag-data-received</signalname> handler
+     which gets triggered by calling
+     <function class="GdkDragContext">get_data</function> to receive
+     the data for one or more of the supported targets.
+    </para>
    </desc>
   </signal>
-  
+
   <signal id="gtk.gtkwidget.signal.drag-end">
    <signalname>drag-end</signalname>
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <cbfunction>callback</cbfunction></funcdef>
-     <paramdef>GtkWidget <parameter>widget</parameter></paramdef>
-     <paramdef><!-- was: GdkDragContext -->XXX <parameter>UNKNOWN</parameter></paramdef>
+     <paramdef><classname>GtkWidget</classname> <parameter>widget</parameter></paramdef>
+     <paramdef><classname>GdkDragContext</classname> <parameter>context</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
    </shortdesc>
    <desc>
-
+    <para>
+     The <literal>drag-end</literal> signal is emitted on the drag source
+     when a drag is finished. A typical reason to connect to this signal
+     is to undo things done in
+     <signalname class="GtkWidget">drag-begin</signalname>.
+    </para>
    </desc>
   </signal>
-  
+
   <signal id="gtk.gtkwidget.signal.drag-leave">
    <signalname>drag-leave</signalname>
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <cbfunction>callback</cbfunction></funcdef>
-     <paramdef>GtkWidget <parameter>widget</parameter></paramdef>
-     <paramdef><!-- was: GdkDragContext -->XXX <parameter>UNKNOWN</parameter></paramdef>
-     <paramdef>int <parameter>UNKNOWN</parameter></paramdef>
+     <paramdef><classname>GtkWidget</classname> <parameter>widget</parameter></paramdef>
+     <paramdef><classname>GdkDragContext</classname> <parameter>context</parameter></paramdef>
+     <paramdef>int <parameter>time</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -3151,17 +3253,17 @@
 
    </desc>
   </signal>
-  
+
   <signal id="gtk.gtkwidget.signal.drag-motion">
    <signalname>drag-motion</signalname>
    <funcsynopsis>
     <funcprototype>
      <funcdef>bool <cbfunction>callback</cbfunction></funcdef>
-     <paramdef>GtkWidget <parameter>widget</parameter></paramdef>
-     <paramdef><!-- was: GdkDragContext -->XXX <parameter>UNKNOWN</parameter></paramdef>
-     <paramdef>int <parameter>UNKNOWN</parameter></paramdef>
-     <paramdef>int <parameter>UNKNOWN</parameter></paramdef>
-     <paramdef>int <parameter>UNKNOWN</parameter></paramdef>
+     <paramdef><classname>GtkWidget</classname> <parameter>widget</parameter></paramdef>
+     <paramdef><classname>GdkDragContext</classname> <parameter>context</parameter></paramdef>
+     <paramdef>int <parameter>x</parameter></paramdef>
+     <paramdef>int <parameter>y</parameter></paramdef>
+     <paramdef>int <parameter>time</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -3344,39 +3446,76 @@
 
    </desc>
   </signal>
-  
+
   <signal id="gtk.gtkwidget.signal.key-press-event">
    <signalname>key-press-event</signalname>
    <funcsynopsis>
     <funcprototype>
      <funcdef>bool <cbfunction>callback</cbfunction></funcdef>
-     <paramdef>GtkWidget <parameter>widget</parameter></paramdef>
-     <paramdef><!-- was: GdkEvent -->XXX <parameter>UNKNOWN</parameter></paramdef>
+     <paramdef><classname>GtkWidget</classname> <parameter>widget</parameter></paramdef>
+     <paramdef><classname>GdkEvent</classname> <parameter>event</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
+    A key has been pressed.
    </shortdesc>
    <desc>
-
+    <para>
+     This signal is emitted when a key has been pressed down.
+    </para>
+    <para>
+     Useful event properties are:
+     <itemizedlist>
+      <listitem>
+       <literal>keyval</literal> - integer that can be compared to
+       the <link linkend="appendix.keysyms">key symbols</link> to check which
+       key has been pressed down.
+      </listitem>
+      <listitem>
+       <literal>state</literal> - a bitmask of
+       <enumname>GdkModifierType</enumname>s that can be used to check if
+       <literal>Ctrl</literal> or <literal>Alt</literal> have been hold down
+       additional to the pressed key.
+      </listitem>
+     </itemizedlist>
+    </para>
+    <para>
+     <example>
+      <title>Using the key-press-event signal</title>
+      <programlisting role="php">
+       <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+        href="&directory.examples;/reference/gtk/gtkwidget/key-press-event.phpw" parse="text">
+        <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+       </xi:include>
+      </programlisting>
+     </example>
+    </para>
    </desc>
   </signal>
-  
+
   <signal id="gtk.gtkwidget.signal.key-release-event">
    <signalname>key-release-event</signalname>
    <funcsynopsis>
     <funcprototype>
      <funcdef>bool <cbfunction>callback</cbfunction></funcdef>
-     <paramdef>GtkWidget <parameter>widget</parameter></paramdef>
-     <paramdef><!-- was: GdkEvent -->XXX <parameter>UNKNOWN</parameter></paramdef>
+     <paramdef><classname>GtkWidget</classname> <parameter>widget</parameter></paramdef>
+     <paramdef><classname>GdkEvent</classname> <parameter>event</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
+    A key has been released
    </shortdesc>
    <desc>
-
+    <para>
+     This signal is emitted whenever a key has been released.
+    </para>
+    <para>
+     See the <signalname class="GtkWidget">key-press-event</signalname>
+     documentation for an example.
+    </para>
    </desc>
   </signal>
-  
+
   <signal id="gtk.gtkwidget.signal.leave-notify-event">
    <signalname>leave-notify-event</signalname>
    <funcsynopsis>
