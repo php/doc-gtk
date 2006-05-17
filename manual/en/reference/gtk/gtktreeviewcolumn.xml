@@ -7,7 +7,10 @@
    A visible column in a GtkTreeView.
   </shortdesc>
   <desc>
-
+   Provides a column in a tree view widget. It uses a
+   <classname>GtkCellRenderer</classname> to display the value of
+   a given column for each row. Columns can be sorted, moved
+   and hidden.
   </desc>
  </classmeta>
 
@@ -17,14 +20,59 @@
    <funcsynopsis>
     <funcprototype>
     <funcdef> <function>GtkTreeViewColumn</function></funcdef>
-    <paramdef>void</paramdef>
+    <paramdef>string <parameter><optional>title</optional></parameter></paramdef>
+    <paramdef><classname>GtkCellRenderer</classname> <parameter><optional>cell_renderer</optional></parameter></paramdef>
+    <paramdef>string <parameter><optional>attribute</optional></parameter></paramdef>
+    <paramdef>int <parameter><optional>column</optional></parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Creates a new column object.
    </shortdesc>
    <desc>
-
+    <para>
+     Creates a new column object that can be added to a
+     <classname>GtkTreeView</classname> with the
+     <function class="GtkTreeView">add_column</function> method.
+    </para>
+    <para>
+     The first parameter defines the title of the column which is shown on top
+     of the widget. The second one, <parameter>cell_renderer</parameter>,
+     is used to draw the actual values in the column of the row.
+    </para>
+    <para>
+     Parameter <parameter>attribute</parameter> selects the attribute of the
+     cell renderer that shall be set.
+    </para>
+    <para>
+     The last parameter, <parameter>column</parameter> defines the number
+     of the <classname>GtkTreeModel</classname> column that is displayed.
+    </para>
+    <para>
+     <itemizedlist>
+      <title>Commonly used attributes</title>
+      <listitem>
+       <literal>text</literal> for <classname>GtkCellRendererText</classname>
+       and <classname>GtkCellRendererCombo</classname>
+      </listitem>
+      <listitem>
+       <literal>pixbuf</literal> for <classname>GtkCellRendererPixbuf</classname>
+      </listitem>
+      <listitem>
+       <literal>active</literal> for <classname>GtkCellRendererToggle</classname>
+      </listitem>
+      <listitem>
+       <literal>value</literal> for <classname>GtkCellRendererProgress</classname>
+      </listitem>
+     </itemizedlist>
+    </para>
+    <example>
+     <title>Creating a GtkTreeViewColumn</title>
+     <programlisting role="php"><![CDATA[
+$renderer = new GtkCellRendererText();
+$column = new GtkTreeViewColumn('Title', $renderer, 'text', 0);
+]]></programlisting>
+    </example>
    </desc>
   </constructor>
 
@@ -36,7 +84,7 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>add_attribute</function></funcdef>
-     <paramdef>GtkCellRenderer <parameter>cell_renderer</parameter></paramdef>
+     <paramdef><classname>GtkCellRenderer</classname> <parameter>cell_renderer</parameter></paramdef>
      <paramdef>string <parameter>attribute</parameter></paramdef>
      <paramdef>int <parameter>column</parameter></paramdef>
     </funcprototype>

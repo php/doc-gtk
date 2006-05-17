@@ -39,7 +39,7 @@
      <programlisting role="php">
       <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
                   href="&directory.examples;/reference/gtk/gtktreeview/constructor.phpw" parse="text">
-       <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+       <xi:fallback>FIXME:MISSING XINCLUDE CONTENT</xi:fallback>
       </xi:include>
      </programlisting>
     </example>
@@ -54,20 +54,30 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>int <function>append_column</function></funcdef>
-     <paramdef>GtkTreeViewColumn <parameter>column</parameter></paramdef>
+     <paramdef><classname>GtkTreeViewColumn</classname> <parameter>column</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Appends a column to the view.
    </shortdesc>
    <desc>
     <para>
-     See also: 
-     <function class="GtkTreeView">get_column</function>, 
-     <function class="GtkTreeView">insert_column</function>, 
+     Appends a column at the end (i.e. the most right place) of the view.
+    </para>
+    <example>
+     <title>Appending a column to a tree view</title>
+     <programlisting role="php"><![CDATA[
+$renderer = new GtkCellRendererText();
+$column = new GtkTreeViewColumn('Title', $renderer, 'text', 0);
+$treeview->append_column($column);
+]]></programlisting>
+    </example>
+    <para>
+     See also:
+     <function class="GtkTreeView">get_column</function>,
+     <function class="GtkTreeView">insert_column</function>,
      <function class="GtkTreeView">remove_column</function>
     </para>
-
    </desc>
   </method>
 
@@ -79,14 +89,17 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Collapses all nodes.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     Recursively collapses all visible, expanded nodes in the tree view.
+    </para>
+    <para>
+     See also:
+     <function class="GtkTreeView">collapse_row</function>,
      <function class="GtkTreeView">expand_all</function>
     </para>
-
    </desc>
   </method>
 
@@ -94,18 +107,22 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>collapse_row</function></funcdef>
-     <paramdef>void</paramdef>
+     <paramdef><classname>GtkTreePath</classname> <parameter>path</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Collapses a given row.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     Collapses the row at the given <parameter>path</parameter>
+     (hides its child rows, if they exist).
+    </para>
+    <para>
+     See also:
+     <function class="GtkTreeView">collapse_all</function>,
      <function class="GtkTreeView">expand_row</function>
     </para>
-
    </desc>
   </method>
 
@@ -117,10 +134,13 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Resizes all columns to their optimal width.
    </shortdesc>
    <desc>
-
+    <para>
+     Resizes all columns to their optimal width.
+     Only works after the treeview has been realized.
+    </para>
    </desc>
   </method>
 
@@ -128,14 +148,17 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef> <function>create_row_drag_icon</function></funcdef>
-     <paramdef>void</paramdef>
+     <paramdef><classname>GtkTreePath</classname> <parameter>path</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Creates a GdkPixmap representation of the row
    </shortdesc>
    <desc>
-
+    <para>
+     Creates a <classname>GdkPixmap</classname> representation of the row at
+     <parameter>path</parameter>. This image is used for a drag icon.
+    </para>
    </desc>
   </method>
 
@@ -147,7 +170,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+<!-- FIXME -->
    </shortdesc>
    <desc>
 
@@ -162,7 +185,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+<!-- FIXME -->
    </shortdesc>
    <desc>
 
@@ -177,11 +200,15 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Recursively expands all nodes in the tree view.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     Recursively expands all nodes in the tree view.
+    </para>
+    <para>
+     See also:
+     <function class="GtkTreeView">expand_row</function>,
      <function class="GtkTreeView">collapse_all</function>
     </para>
 
@@ -192,18 +219,21 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>bool <function>expand_row</function></funcdef>
-     <paramdef>void</paramdef>
+     <paramdef><classname>GtkTreePath</classname> <parameter>path</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Opens the row so its children are visible.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     Opens the row so its children are visible.
+    </para>
+    <para>
+     See also:
+     <function class="GtkTreeView">expand_all</function>,
      <function class="GtkTreeView">collapse_row</function>
     </para>
-
    </desc>
   </method>
 
@@ -215,10 +245,13 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Expands the row to a path.
    </shortdesc>
    <desc>
-
+    <para>
+     Expands the row at path. This will also expand all parent
+     rows of path as necessary.
+    </para>
    </desc>
   </method>
 
@@ -230,7 +263,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+<!-- FIXME -->
    </shortdesc>
    <desc>
 
@@ -240,15 +273,19 @@
   <method id="gtk.gtktreeview.method.get_bin_window">
    <funcsynopsis>
     <funcprototype>
-     <funcdef> <function>get_bin_window</function></funcdef>
+     <funcdef><classname>GdkWindow</classname> <function>get_bin_window</function></funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the window that the view renders to.
    </shortdesc>
    <desc>
-
+    <para>
+     Returns the window that tree_view renders to. This is used primarily 
+     to compare to event->window to confirm that the event on tree view is on 
+     the right window.
+    </para>
    </desc>
   </method>
 
@@ -260,7 +297,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+<!-- FIXME -->
    </shortdesc>
    <desc>
 
@@ -270,21 +307,23 @@
   <method id="gtk.gtktreeview.method.get_column">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>GtkTreeViewColumn <function>get_column</function></funcdef>
+     <funcdef><classname>GtkTreeViewColumn</classname> <function>get_column</function></funcdef>
      <paramdef>int <parameter>n</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Gets the GtkTreeViewColumn at the given position
    </shortdesc>
    <desc>
     <para>
-     See also: 
-     <function class="GtkTreeView">append_column</function>, 
-     <function class="GtkTreeView">insert_column</function>, 
+     Gets the GtkTreeViewColumn at the given position.
+    </para>
+    <para>
+     See also:
+     <function class="GtkTreeView">append_column</function>,
+     <function class="GtkTreeView">insert_column</function>,
      <function class="GtkTreeView">remove_column</function>
     </para>
-
    </desc>
   </method>
 
@@ -296,7 +335,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+<!-- FIXME: not implemented -->
    </shortdesc>
    <desc>
 
@@ -306,19 +345,22 @@
   <method id="gtk.gtktreeview.method.get_cursor">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>void <function>get_cursor</function></funcdef>
+     <funcdef>array <function>get_cursor</function></funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the current path and focus column.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     Returns an array with the current path and the
+     <classname>GtkTreeViewColumn</classname> that are active at the moment.
+    </para>
+    <para>
+     See also:
      <function class="GtkTreeView">set_cursor</function>
     </para>
-
    </desc>
   </method>
 
@@ -349,7 +391,7 @@
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     See also:
      <function class="GtkTreeView">set_drag_dest_row</function>
     </para>
 
@@ -364,14 +406,16 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Whether or not the tree allows interactive searching.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     Returns whether or not the tree allows interactive searching.
+    </para>
+    <para>
+     See also:
      <function class="GtkTreeView">set_enable_search</function>
     </para>
-
    </desc>
   </method>
 
@@ -383,14 +427,17 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the column that is the current expander column.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     Returns the column that is the current expander column. 
+     This column has the expander arrow drawn next to it.
+    </para>
+    <para>
+     See also:
      <function class="GtkTreeView">set_expander_column</function>
     </para>
-
    </desc>
   </method>
 
@@ -402,33 +449,38 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Whether fixed height mode is turned on or not.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     Returns whether fixed height mode is turned on for the tree view.
+    </para>
+    <para>
+     See also:
      <function class="GtkTreeView">set_fixed_height_mode</function>
     </para>
-
    </desc>
   </method>
 
   <method id="gtk.gtktreeview.method.get_hadjustment">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>GtkAdjustment <function>get_hadjustment</function></funcdef>
+     <funcdef><classname>GtkAdjustment</classname> <function>get_hadjustment</function></funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+     Gets the GtkAdjustment for the horizontal aspect.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     Gets the <classname>GtkAdjustment</classname> currently being used
+     for the horizontal aspect.
+    </para>
+    <para>
+     See also:
      <function class="GtkTreeView">set_hadjustment</function>
     </para>
-
    </desc>
   </method>
 
@@ -440,14 +492,16 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    If the headers on the view are visible.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     Returns true if the headers in the view are visible.
+    </para>
+    <para>
+     See also:
      <function class="GtkTreeView">set_headers_visible</function>
     </para>
-
    </desc>
   </method>
 
@@ -459,11 +513,14 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Whether hover expansion mode is turned on.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     Returns whether hover expansion mode is turned on for the view.
+    </para>
+    <para>
+     See also:
      <function class="GtkTreeView">set_hover_expand</function>
     </para>
 
@@ -478,11 +535,14 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Whether hover selection mode is turned on.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     Returns whether hover selection mode is turned on for the view.
+    </para>
+    <para>
+     See also:
      <function class="GtkTreeView">set_hover_selection</function>
     </para>
 
@@ -492,34 +552,57 @@
   <method id="gtk.gtktreeview.method.get_model">
    <funcsynopsis>
     <funcprototype>
-     <funcdef> <function>get_model</function></funcdef>
+     <funcdef><classname>GtkTreeModel</classname> <function>get_model</function></funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the model used.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     Returns the tree/list model used to hold the data.
+    </para>
+    <para>
+     See also:
      <function class="GtkTreeView">set_model</function>
     </para>
-
    </desc>
   </method>
 
   <method id="gtk.gtktreeview.method.get_path_at_pos">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>bool <function>get_path_at_pos</function></funcdef>
-     <paramdef>void</paramdef>
+     <funcdef>array <function>get_path_at_pos</function></funcdef>
+     <paramdef>int <parameter>x</parameter></paramdef>
+     <paramdef>int <parameter>y</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the tree path at a pixel position.
    </shortdesc>
    <desc>
-
+    <para>
+     Returns the tree path at the given pixel position. The coordinates
+     have to be widget coordinates.
+    </para>
+    <para>
+     The returned array has four elements:
+     <itemizedlist>
+      <listitem>
+       <classname>GtkTreePath</classname> of the row at the position
+      </listitem>
+      <listitem>
+       <classname>GtkTreeViewColumn</classname>
+      </listitem>
+      <listitem>
+       <literal>cell_x</literal>
+      </listitem>
+      <listitem>
+       <literal>cell_y</literal>
+      </listitem>
+     </itemizedlist>
+    </para>
    </desc>
   </method>
 
@@ -531,33 +614,37 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Whether the user can reorder rows via drag-and-drop.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+      Retrieves whether the user can reorder the tree via drag-and-drop.
+    </para>
+    <para>
+     See also:
      <function class="GtkTreeView">set_reorderable</function>
     </para>
-
    </desc>
   </method>
 
   <method id="gtk.gtktreeview.method.get_row_separator_func">
    <funcsynopsis>
     <funcprototype>
-     <funcdef> <function>get_row_separator_func</function></funcdef>
+     <funcdef>callback <function>get_row_separator_func</function></funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the current row separator function.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     Returns the current row separator function.
+    </para>
+    <para>
+     See also:
      <function class="GtkTreeView">set_row_separator_func</function>
     </para>
-
    </desc>
   </method>
 
@@ -569,14 +656,17 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the rules_hint setting.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     Gets the setting set by
+     <function class="GtkTreeView">set_rules_hint</function>.
+    </para>
+    <para>
+     See also:
      <function class="GtkTreeView">set_rules_hint</function>
     </para>
-
    </desc>
   </method>
 
@@ -588,14 +678,16 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the column id used for searches.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     Returns the column id used for searches.
+    </para>
+    <para>
+     See also:
      <function class="GtkTreeView">set_search_column</function>
     </para>
-
    </desc>
   </method>
 
@@ -611,7 +703,7 @@
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     See also:
      <function class="GtkTreeView">set_search_equal_func</function>
     </para>
 
@@ -645,7 +737,7 @@
      <programlisting role="php">
       <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
                   href="&directory.examples;/reference/gtk/gtktreeview/selection.phpw" parse="text">
-       <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+       <xi:fallback>FIXME:MISSING XINCLUDE CONTENT</xi:fallback>
       </xi:include>
      </programlisting>
     </example>
@@ -664,7 +756,7 @@
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     See also:
      <function class="GtkTreeView">set_vadjustment</function>
     </para>
 
@@ -690,7 +782,7 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>int <function>insert_column</function></funcdef>
-     <paramdef>GtkTreeViewColumn <parameter>column</parameter></paramdef>
+     <paramdef><classname>GtkTreeViewColumn</classname> <parameter>column</parameter></paramdef>
      <paramdef>int <parameter>position</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
@@ -699,12 +791,11 @@
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     See also:
      <function class="GtkTreeView">append_column</function>, 
      <function class="GtkTreeView">get_column</function>, 
      <function class="GtkTreeView">remove_column</function>
     </para>
-
    </desc>
   </method>
 
@@ -781,7 +872,7 @@
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     See also:
      <function class="GtkTreeView">append_column</function>, 
      <function class="GtkTreeView">get_column</function>, 
      <function class="GtkTreeView">insert_column</function>
@@ -878,7 +969,7 @@
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     See also:
      <function class="GtkTreeView">get_cursor</function>
     </para>
 
@@ -927,7 +1018,7 @@
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     See also:
      <function class="GtkTreeView">get_drag_dest_row</function>
     </para>
 
@@ -946,7 +1037,7 @@
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     See also:
      <function class="GtkTreeView">get_enable_search</function>
     </para>
 
@@ -965,7 +1056,7 @@
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     See also:
      <function class="GtkTreeView">get_expander_column</function>
     </para>
 
@@ -984,7 +1075,7 @@
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     See also:
      <function class="GtkTreeView">get_fixed_height_mode</function>
     </para>
 
@@ -1003,7 +1094,7 @@
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     See also:
      <function class="GtkTreeView">get_hadjustment</function>
     </para>
 
@@ -1037,7 +1128,7 @@
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     See also:
      <function class="GtkTreeView">get_headers_visible</function>
     </para>
 
@@ -1056,7 +1147,7 @@
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     See also:
      <function class="GtkTreeView">get_hover_expand</function>
     </para>
 
@@ -1075,7 +1166,7 @@
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     See also:
      <function class="GtkTreeView">get_hover_selection</function>
     </para>
 
@@ -1094,7 +1185,7 @@
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     See also:
      <function class="GtkTreeView">get_model</function>
     </para>
 
@@ -1113,7 +1204,7 @@
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     See also:
      <function class="GtkTreeView">get_reorderable</function>
     </para>
 
@@ -1132,7 +1223,7 @@
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     See also:
      <function class="GtkTreeView">get_row_separator_func</function>
     </para>
 
@@ -1151,7 +1242,7 @@
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     See also:
      <function class="GtkTreeView">get_rules_hint</function>
     </para>
 
@@ -1170,7 +1261,7 @@
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     See also:
      <function class="GtkTreeView">get_search_column</function>
     </para>
 
@@ -1189,7 +1280,7 @@
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     See also:
      <function class="GtkTreeView">get_search_equal_func</function>
     </para>
 
@@ -1208,7 +1299,7 @@
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     See also:
      <function class="GtkTreeView">get_vadjustment</function>
     </para>
 
@@ -1350,7 +1441,7 @@
     <funcprototype>
      <funcdef>void <cbfunction>callback</cbfunction></funcdef>
      <paramdef>GtkTreeView <parameter>treeview</parameter></paramdef>
-     <paramdef><!-- was: GtkTreePath -->XXX <parameter>UNKNOWN</parameter></paramdef>
+     <paramdef><!-- was:GtkTreePath -->XXX <parameter>UNKNOWN</parameter></paramdef>
      <paramdef>GtkTreeViewColumn <parameter>UNKNOWN</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
@@ -1367,8 +1458,8 @@
     <funcprototype>
      <funcdef>void <cbfunction>callback</cbfunction></funcdef>
      <paramdef>GtkTreeView <parameter>treeview</parameter></paramdef>
-     <paramdef><!-- was: GtkTreeIter -->XXX <parameter>UNKNOWN</parameter></paramdef>
-     <paramdef><!-- was: GtkTreePath -->XXX <parameter>UNKNOWN</parameter></paramdef>
+     <paramdef><!-- was:GtkTreeIter -->XXX <parameter>UNKNOWN</parameter></paramdef>
+     <paramdef><!-- was:GtkTreePath -->XXX <parameter>UNKNOWN</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -1384,8 +1475,8 @@
     <funcprototype>
      <funcdef>void <cbfunction>callback</cbfunction></funcdef>
      <paramdef>GtkTreeView <parameter>treeview</parameter></paramdef>
-     <paramdef><!-- was: GtkTreeIter -->XXX <parameter>UNKNOWN</parameter></paramdef>
-     <paramdef><!-- was: GtkTreePath -->XXX <parameter>UNKNOWN</parameter></paramdef>
+     <paramdef><!-- was:GtkTreeIter -->XXX <parameter>UNKNOWN</parameter></paramdef>
+     <paramdef><!-- was:GtkTreePath -->XXX <parameter>UNKNOWN</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -1479,8 +1570,8 @@
     <funcprototype>
      <funcdef>bool <cbfunction>callback</cbfunction></funcdef>
      <paramdef>GtkTreeView <parameter>treeview</parameter></paramdef>
-     <paramdef><!-- was: GtkTreeIter -->XXX <parameter>UNKNOWN</parameter></paramdef>
-     <paramdef><!-- was: GtkTreePath -->XXX <parameter>UNKNOWN</parameter></paramdef>
+     <paramdef><!-- was:GtkTreeIter -->XXX <parameter>UNKNOWN</parameter></paramdef>
+     <paramdef><!-- was:GtkTreePath -->XXX <parameter>UNKNOWN</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -1496,8 +1587,8 @@
     <funcprototype>
      <funcdef>bool <cbfunction>callback</cbfunction></funcdef>
      <paramdef>GtkTreeView <parameter>treeview</parameter></paramdef>
-     <paramdef><!-- was: GtkTreeIter -->XXX <parameter>UNKNOWN</parameter></paramdef>
-     <paramdef><!-- was: GtkTreePath -->XXX <parameter>UNKNOWN</parameter></paramdef>
+     <paramdef><!-- was:GtkTreeIter -->XXX <parameter>UNKNOWN</parameter></paramdef>
+     <paramdef><!-- was:GtkTreePath -->XXX <parameter>UNKNOWN</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
