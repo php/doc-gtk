@@ -1,0 +1,13 @@
+<?php
+// Create a label
+$label = new GtkLabel('Example Label');
+
+// Make the label selectable.
+$label->set_selectable(true);
+
+// Select a region.
+$label->select_region(3, 7);
+
+// Dump out the selection bounds.
+print_r($label->get_selection_bounds());
+?>
