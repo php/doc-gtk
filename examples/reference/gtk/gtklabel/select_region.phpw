@@ -1,0 +1,22 @@
+<?php
+// Create a window to hold the label.
+$window = new GtkWindow();
+// Set up the window to close cleanly.
+$window->connect_simple('destroy', array('Gtk', 'main_quit'));
+
+// Create a label
+$label = new GtkLabel('Example Label');
+
+// Make the label selectable.
+$label->set_selectable(true);
+
+// Select a region ("amp").
+$label->select_region(2, 5);
+
+// Add the label to the window.
+$window->add($label);
+
+// Show the window and start the main loop.
+$window->show_all();
+Gtk::main();
+?>
