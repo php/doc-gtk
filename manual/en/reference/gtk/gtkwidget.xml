@@ -25,10 +25,20 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Activeates the widget.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Activates the widget if it is activatable, such as
+     <classname>GtkButton</classname> or <classname>GtkMenuItem</classname>.
+     Activation is what happens when the <literal>Enter</literal> key is
+     pressed on a focused widget.
+    </simpara>
+    <simpara>
+     If the widget is activatable, this method will return
+     <literal>true</literal>, otherwise it will return
+     <literal>false</literal>.
+    </simpara>
    </desc>
   </method>
 
@@ -200,7 +210,11 @@
     Destroys the widget.
    </shortdesc>
    <desc>
-
+    <simpara>
+     Destroys the widget. When a widget is destroyed, it is no longer
+     accessible. When a top level widget is destroyed, all of its children are
+     destroyed as well.
+    </simpara>
    </desc>
   </method>
 
@@ -664,9 +678,13 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the first ancestor of the given type.
    </shortdesc>
    <desc>
+    <simpara>
+     Returns the first ancestor of the widget of type
+     <parameter>widget_type</parameter>. 
+    </simpara>
     <para>
      See also: 
      <function class="GtkWidget">is_ancestor</function>
@@ -1117,7 +1135,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the <classname>GtkStyle</classname> object for the widget.
    </shortdesc>
    <desc>
     <para>
@@ -1139,7 +1157,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the toplevel widget ancestor of the current widget.
    </shortdesc>
    <desc>
 
@@ -1253,7 +1271,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Removes the widget from being displayed on the screen.
    </shortdesc>
    <desc>
 
@@ -1268,7 +1286,8 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Removes the widget and all of its children from being displayed on the
+    screen.
    </shortdesc>
    <desc>
     <para>
@@ -1287,7 +1306,8 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Hides the widget when it receives the <signalname>delete-event<signalname>
+    signal instead of deleting it.
    </shortdesc>
    <desc>
 
@@ -1318,7 +1338,8 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns whether or not the calling widget is an ancestor of the given 
+    widget.
    </shortdesc>
    <desc>
     <para>
@@ -1776,7 +1797,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Realizes the widget.
    </shortdesc>
    <desc>
 
@@ -1876,7 +1897,8 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Moves the widget from its current parent container to another container
+    widget.
    </shortdesc>
    <desc>
 
@@ -2261,7 +2283,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the name of the widget.
    </shortdesc>
    <desc>
     <para>
@@ -2300,7 +2322,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the parent container for the widget.
    </shortdesc>
    <desc>
     <para>
@@ -2370,7 +2392,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets wether or not the widget will react to events.
    </shortdesc>
    <desc>
 
@@ -2429,7 +2451,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the <classname>GtkStyle</classname> object for the widget.
    </shortdesc>
    <desc>
     <para>
@@ -2452,7 +2474,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    DEPRECATED. Sets the widgets position relative to its parent.
    </shortdesc>
    <desc>
 
@@ -2468,7 +2490,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Sets a widgets size.
+    DEPRECATED. Sets a widgets size.
    </shortdesc>
    <desc>
     <simpara>
@@ -2551,7 +2573,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Displays the widget on the screen.
    </shortdesc>
    <desc>
 
@@ -2566,7 +2588,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Displays the widget and all of its children on the screen.
    </shortdesc>
    <desc>
     <para>
@@ -2724,7 +2746,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Removes the widget from its parent container.
    </shortdesc>
    <desc>
 
@@ -2739,7 +2761,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Unrealizes the widget.
    </shortdesc>
    <desc>
 
@@ -2754,7 +2776,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Decrements the reference counter for the widget.
    </shortdesc>
    <desc>
 
