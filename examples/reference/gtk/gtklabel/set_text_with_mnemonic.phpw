@@ -1,0 +1,21 @@
+<?php
+// Create a window to hold the label.
+$window = new GtkWindow();
+
+// Set up the window to close cleanly.
+$window->connect_simple('destroy', array('Gtk', 'main_quit'));
+
+// Create a label.
+$label = new GtkLabel();
+
+// Set the mnemonic text. Note this could be done on construction. It is done
+// this way for purposes of the example only. 
+$label->set_text_with_mnemonic('_Example Label');
+
+// Add the label to the window.
+$window->add($label);
+
+// Show the window and start the main loop.
+$window->show_all();
+Gtk::main();
+?>
