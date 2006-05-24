@@ -46,11 +46,17 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>add_accelerator</function></funcdef>
-     <paramdef>void</paramdef>
+     <paramdef>string <parameter>signal</parameter></paramdef>
+     <paramdef>
+      <classname>GtkAccelGroup</classname> <parameter>group</parameter>
+     </paramdef>
+     <paramdef>int <parameter>accel_key</parameter></paramdef>
+     <paramdef>GdkModifyerType <parameter>modifiers</parameter></paramdef>
+     <paramdef>GtkAccelFlags <parameter>flags</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Adds an accelerator for the widget.
    </shortdesc>
    <desc>
     <para>
@@ -1306,7 +1312,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Hides the widget when it receives the <signalname>delete-event<signalname>
+    Hides the widget when it receives the <signalname>delete-event</signalname>
     signal instead of deleting it.
    </shortdesc>
    <desc>
