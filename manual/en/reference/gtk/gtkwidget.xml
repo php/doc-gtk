@@ -1329,7 +1329,8 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns whether or not the widget and <parameter>area</parameter>
+    intersect.
    </shortdesc>
    <desc>
 
@@ -1364,7 +1365,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns whether or not the widget is the focus widget within its toplevel.
    </shortdesc>
    <desc>
     <para>
@@ -1401,12 +1402,12 @@
   <method id="gtk.gtkwidget.method.list_accel_closures">
    <funcsynopsis>
     <funcprototype>
-     <funcdef> <function>list_accel_closures</function></funcdef>
+     <funcdef>array <function>list_accel_closures</function></funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Lists the closures used by widget for accelerator group connections.
    </shortdesc>
    <desc>
 
@@ -1416,12 +1417,13 @@
   <method id="gtk.gtkwidget.method.list_mnemonic_labels">
    <funcsynopsis>
     <funcprototype>
-     <funcdef> <function>list_mnemonic_labels</function></funcdef>
+     <funcdef>array <function>list_mnemonic_labels</function></funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns an array of widgets for which the current widget is a mnemonic
+    target.
    </shortdesc>
    <desc>
 
@@ -1436,7 +1438,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Maps the widget to the screen.
    </shortdesc>
    <desc>
 
@@ -1451,7 +1453,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+   
    </shortdesc>
    <desc>
 
@@ -1466,7 +1468,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Activates the mnemonic for the widget.
    </shortdesc>
    <desc>
 
@@ -1477,11 +1479,17 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>modify_base</function></funcdef>
-     <paramdef>void</paramdef>
+     <paramdef>
+      <enumname>GtkStateType</enumname> <parameter>state</parameter>
+     </paramdef>
+     <paramdef>
+      <classname>GdkColor</classname> <parameter>color</parameter>
+     </paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the base color for the widget when in state
+    <parameter>state</parameter>.
    </shortdesc>
    <desc>
 
@@ -1492,11 +1500,17 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>modify_bg</function></funcdef>
-     <paramdef>void</paramdef>
+     <paramdef>
+      <enumname>GtkStateType</enumname> <parameter>state</parameter>
+     </paramdef>
+     <paramdef>
+      <classname>GdkColor</classname> <parameter>color</parameter>
+     </paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the background color for the widget when in state
+    <parameter>state</parameter>.
    </shortdesc>
    <desc>
 
@@ -1507,11 +1521,17 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>modify_fg</function></funcdef>
-     <paramdef>void</paramdef>
+     <paramdef>
+      <enumname>GtkStateType</enumname> <parameter>state</parameter>
+     </paramdef>
+     <paramdef>
+      <classname>GdkColor</classname> <parameter>color</parameter>
+     </paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the foreground color for the widget when in state
+    <parameter>state</parameter>.
    </shortdesc>
    <desc>
 
@@ -1522,11 +1542,13 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>modify_font</function></funcdef>
-     <paramdef>void</paramdef>
+     <paramdef>
+      <classname>PangoFontDescription</classname> <parameter>font</parameter>
+     </paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the font for the widget.
    </shortdesc>
    <desc>
 
@@ -1541,7 +1563,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Modifies style values for the widget.
    </shortdesc>
    <desc>
     <para>
@@ -1559,11 +1581,17 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>modify_text</function></funcdef>
-     <paramdef>void</paramdef>
+     <paramdef>
+      <enumname>GtkStateType</enumname> <parameter>state</parameter>
+     </paramdef>
+     <paramdef>
+      <classname>GdkColor</classname> <parameter>color</parameter>
+     </paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the text color for the widget when in state
+    <parameter>state</parameter>.
    </shortdesc>
    <desc>
 
@@ -1573,15 +1601,15 @@
   <method id="gtk.gtkwidget.method.path">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>void <function>path</function></funcdef>
+     <funcdef>string <function>path</function></funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the widget path.
    </shortdesc>
    <desc>
-
+    <simpara>Not yet implemented.</simpara>
    </desc>
   </method>
 
@@ -1593,7 +1621,8 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Removes a colormap pushed with <function
+    class="GtkWidget">push_colormap</function>.
    </shortdesc>
    <desc>
     <para>
@@ -1614,7 +1643,8 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Pops a composite child pushed with <function
+    class="GtkWidget">push_composite_child</function>.
    </shortdesc>
    <desc>
     <para>
@@ -1644,11 +1674,13 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>push_colormap</function></funcdef>
-     <paramdef>void</paramdef>
+     <paramdef>
+      <classname>GdkColormap</classname> <parameter>colormap</parameter>
+     </paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Pushes a colormap onto a global stack of colormaps.
    </shortdesc>
    <desc>
     <para>
@@ -1669,7 +1701,9 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Makes all newly-created widgets as composite children until the
+    corresponding <function class="GtkWidget">pop_composite_child</function>
+    call.
    </shortdesc>
    <desc>
     <para>
@@ -1688,7 +1722,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    DEPRECATED. Alias for <function class="GtkWidget">queue_draw</function>.
    </shortdesc>
    <desc>
     <para>
@@ -1710,7 +1744,8 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    DEPRECATED. Alias for <function
+    class="GtkWidget">queue_draw_area</function>.
    </shortdesc>
    <desc>
 
@@ -1725,7 +1760,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Queues the widget to be redrawn.
    </shortdesc>
    <desc>
 
@@ -1743,7 +1778,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Queues an area of the widget to be redrawn by invalidating it.
    </shortdesc>
    <desc>
 
@@ -1758,7 +1793,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Flags the widget to have its size renegotiated.
    </shortdesc>
    <desc>
 
@@ -1773,7 +1808,8 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Flags the widget to have its size renegotiated without invalidating the
+    widget.
    </shortdesc>
    <desc>
 
@@ -1788,7 +1824,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    DEPRECATED. Use <function class="GtkWidget">get_style</function> instead.
    </shortdesc>
    <desc>
 
@@ -1818,7 +1854,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Increments the reference counter for the widget.
    </shortdesc>
    <desc>
 
@@ -1828,12 +1864,17 @@
   <method id="gtk.gtkwidget.method.region_intersect">
    <funcsynopsis>
     <funcprototype>
-     <funcdef> <function>region_intersect</function></funcdef>
-     <paramdef>void</paramdef>
+     <funcdef>
+      <classname>GdkRegion</classname> <function>region_intersect</function>
+     </funcdef>
+     <paramdef>
+      <classname>GdkRegion</classname> <parameter>region</parameter>
+     </paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the intersection of the widget's area and
+    <parameter>region</parameter>.
    </shortdesc>
    <desc>
 
