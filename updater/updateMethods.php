@@ -27,7 +27,7 @@ class updateMethods
          * and GtkAccessible since they are classes with special parents.
          */
         foreach ($gtkClasses as $eachClass) {
-            if ($eachClass != "Gtk" && $eachClass !=" GtkAccessible") {
+            if ($eachClass != "Gtk" && $eachClass != "GtkAccessible") {
                 $this->currentClass = $eachClass;
                 $this->updateClass();
             }
