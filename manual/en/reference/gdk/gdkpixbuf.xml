@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8"?>
 <classentry id="gdk.gdkpixbuf">
  <classmeta>
   <classtitle>GdkPixbuf</classtitle>
@@ -7,7 +7,24 @@
    An object holding information about images in memory.
   </shortdesc>
   <desc>
-
+   <para>
+    A GdkPixbuf is an object that holds information about a whole image
+    (all the color values [red/green/blue/alpha] for every single pixel)
+    in memory.
+   </para>
+   <para>
+    Pixbufs can be created by loading an image file via
+    <link linkend="gdk.gdkpixbuf.constructor.new_from_file">GdkPixbuf::new_from_file</link>,
+    by using a given GD image object as source
+    (<link linkend="gdk.gdkpixbuf.constructor.new_from_file">GdkPixbuf::new_from_gd</link>)
+    or just using the normal constructor, creating an empty image.
+   </para>
+   <para>
+    A GdkPixbuf itself just <emphasis>contains</emphasis> the information, it does
+    <emphasis>not</emphasis> display it in any way. To display an image in your application,
+    you most likely want to use a <classname>GtkImage</classname> which uses a
+    GdkPixbuf as source.
+   </para>
   </desc>
  </classmeta>
 
@@ -17,11 +34,128 @@
    <funcsynopsis>
     <funcprototype>
     <funcdef> <function>GdkPixbuf</function></funcdef>
-    <paramdef>GdkColorspace <parameter>colorspace</parameter></paramdef>
-    <paramdef>bool <parameter>has_alpha</parameter></paramdef>
+    <paramdef><enumname>GdkColorspace</enumname> <parameter>colorspace</parameter></paramdef>
+    <paramdef>bool </paramdef>
     <paramdef>int <parameter>bits_per_sample</parameter></paramdef>
     <paramdef>int <parameter>width</parameter></paramdef>
     <paramdef>int <parameter>height</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Creates an empty image with the desired size.
+   </shortdesc>
+   <desc>
+    <para>
+     Creates an empty image with the desired size.
+    </para>
+    <para>
+     The <parameter>colorspace</parameter> parameter is always
+     <enumname>Gdk::COLORSPACE_RGB</enumname> as Gtk itself doesn't
+     support any other. <parameter>has_alpha</parameter> defines
+     it the image has opacity (transparency) information for each pixel.
+    </para>
+    <para>
+     <parameter>bits_per_sample</parameter> is the number of bits reserved
+     for each color sample (red/green/blue/alpha). This is normally 8.
+    </para>
+    <para>
+     Most times you don't want to create an image yourself but use an
+     one existing in a file - use
+     <link linkend="gdk.gdkpixbuf.constructor.new_from_file">GdkPixbuf::new_from_file</link>
+     then.
+    </para>
+   </desc>
+  </constructor>
+
+  <constructor id="gdk.gdkpixbuf.constructor.new_from_file">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef><function>GdkPixbuf::new_from_file</function></funcdef>
+     <paramdef>string <parameter>filename</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Creates a pixbuf based on an image file.
+   </shortdesc>
+   <desc>
+    <para>
+     This constructor creates a <classname>GdkPixbuf</classname>
+     object filled with the image information available in
+     <parameter>filename</parameter>. If an error occurs (e.g. file doesn't
+     exist), an exceptionof type <literal>PhpGtkGErrorException</literal>
+     is thrown.
+    </para>
+    <para>
+     Gdk supports loading a number of image formats, including
+     <literal>.jpg</literal>, <literal>.png</literal>
+     and <literal>.gif</literal>. On Windows, you need a 
+     dll for each file type in the <filename>pixbufloaders/</filename>
+     folder of your Gtk installation, e.g.
+     <filename>libpixbufloader-png.dll</filename> or
+     <filename>libpixbufloader-jpeg.dll</filename>.
+    </para>
+    <example>
+     <title>Loading an image file and catching errors</title>
+     <programlisting role="php">
+      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+                  href="&directory.examples;/reference/gdk/gdkpixbuf/new_from_file.phpw" parse="text">
+       <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+      </xi:include>
+     </programlisting>
+    </example>
+   </desc>
+  </constructor>
+
+  <constructor id="gdk.gdkpixbuf.constructor.new_from_file_at_size">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef><function>GdkPixbuf::new_from_file_at_size</function></funcdef>
+     <paramdef>string <parameter>filename</parameter></paramdef>
+     <paramdef>int <parameter>width</parameter></paramdef>
+     <paramdef>int <parameter>height</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Load an image file and scales it to the given size.
+   </shortdesc>
+   <desc>
+    <para>
+     Loads the given image into the pixbuf object and scales it to the given
+     size, respecting the aspect ratio. If an error occurs, an exception of type
+     <literal>PhpGtkGErrorException</literal> is thrown.
+    </para>
+    <example>
+     <title>Loading and scaling an image file</title>
+     <programlisting role="php">
+      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+                  href="&directory.examples;/reference/gdk/gdkpixbuf/new_from_file_at_size.phpw" parse="text">
+       <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+      </xi:include>
+     </programlisting>
+    </example>
+   </desc>
+  </constructor>
+
+  <constructor id="gdk.gdkpixbuf.constructor.new_from_xpm_data">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef> <function>GdkPixbuf::new_from_xpm_data</function></funcdef>
+     
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </constructor>
+
+  <constructor id="gdk.gdkpixbuf.constructor.new_from_gd">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef> <function>GdkPixbuf::new_from_gd</function></funcdef>
+     <paramdef> <parameter>gd_image</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -181,6 +315,21 @@
    </desc>
   </method>
 
+  <method id="gdk.gdkpixbuf.method.fill_area">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef> <function>fill_area</function></funcdef>
+     
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
   <method id="gdk.gdkpixbuf.method.get_bits_per_sample">
    <funcsynopsis>
     <funcprototype>
@@ -278,10 +427,12 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the height of the image.
    </shortdesc>
    <desc>
-
+    <para>
+     Returns the height of the image in pixels.
+    </para>
    </desc>
   </method>
 
@@ -305,6 +456,21 @@
     <funcprototype>
      <funcdef>string <function>get_option</function></funcdef>
      <paramdef>string <parameter>key</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gdk.gdkpixbuf.method.get_pixel">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef> <function>get_pixel</function></funcdef>
+     
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -350,6 +516,23 @@
     <funcprototype>
      <funcdef>int <function>get_width</function></funcdef>
      <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Returns the width of the image.
+   </shortdesc>
+   <desc>
+    <para>
+     Returns the width of the image in pixels.
+    </para>
+   </desc>
+  </method>
+
+  <method id="gdk.gdkpixbuf.method.put_pixel">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef> <function>put_pixel</function></funcdef>
+     
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -458,21 +641,6 @@
    </desc>
   </method>
 
-  <method id="gdk.gdkpixbuf.method.savev">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>bool <function>savev</function></funcdef>
-     <paramdef>void</paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </method>
-
   <method id="gdk.gdkpixbuf.method.scale">
    <funcsynopsis>
     <funcprototype>
@@ -500,17 +668,25 @@
   <method id="gdk.gdkpixbuf.method.scale_simple">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>GdkPixbuf <function>scale_simple</function></funcdef>
+     <funcdef><classname>GdkPixbuf</classname> <function>scale_simple</function></funcdef>
      <paramdef>int <parameter>dest_width</parameter></paramdef>
      <paramdef>int <parameter>dest_height</parameter></paramdef>
-     <paramdef>GdkInterpType <parameter>interp_type</parameter></paramdef>
+     <paramdef><enumname>GdkInterpType</enumname> <parameter>interp_type</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Scales the image to a given size.
    </shortdesc>
    <desc>
-
+    <para>
+     Creates a new pixbuf by scaling the current one to the given size,
+     respecting the aspect ratio.
+    </para>
+    <para>
+     The <parameter>interp_type</parameter> parameter defines which
+     scaling algorithm is used. Generally, the higher the quality is,
+     the longer it takes to scale.
+    </para>
    </desc>
   </method>
 
@@ -532,7 +708,7 @@
    </desc>
   </method>
 
- </methods>
+  </methods>
 
  <fields>
 
