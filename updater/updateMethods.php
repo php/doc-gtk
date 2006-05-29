@@ -66,9 +66,12 @@ class updateMethods
         $compelArgs = $method->getNumberOfRequiredParameters();
         $totalArgs = $method->getNumberOfParameters();
 
-        $prefix = strtolower(substr($classname, 0, 3));
-        if ($prefix == 'pan') {
-            $prefix = 'pango';
+        preg_match_all('/^([A-Za-z]*[a-z])[A-Z]/', $classname, $matches);
+        if (isset($matches[1][0])) {
+            $prefix = strtolower($matches[1][0]);
+        } else {
+            $prefix = strtolower(substr($classname, 0, 3));
+            echo 'Could not determine prefix for class "' . $classname . '". Using "' . $prefix . "\"\n";
         }
 
         $daClass = strtolower($classname);
