@@ -115,7 +115,12 @@ class updateMethods
             $xmlSynopsis = $doc->createElement('funcsynopsis', "\n    ");
             $xmlPrototype = $doc->createElement('funcprototype', "\n     ");
             $xmlFuncdef = $doc->createElement('funcdef', " ");
-            $xmlFunction = $doc->createElement('function', $daMethod);
+            if ($ismethod || $methodName == "__construct") {
+                $xmlFunction = $doc->createElement('function', $daMethod);
+            } else {
+                //alternative constructors need Classname::new_* as funcname
+                $xmlFunction = $doc->createElement('function', $classname . '::' . $daMethod);
+            }
 
             $xmlFuncdef->appendChild($xmlFunction);
             $xmlParamDefs = array();
