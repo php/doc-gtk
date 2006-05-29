@@ -1,109 +1,100 @@
 <?php
-
-/* Updates docs to newer methods and corrects existing ones.
- *  -Anant
- */
-
+/**
+*   Updates docbook class files by adding missing methods and
+*   constructors
+*
+*   @author Anant Narayanan <anant@kix.in>
+*   @author Christian Weiske <cweiske@php.net>
+*/
 class updateMethods
 {
     /* Stores class under consideration and missing classes */
-    protected $currentClass;
     public $methodCount=0;
     public $missingClasses = array();
 
     function __construct()
     {
-        /* Get all classes and filter out Gtk classes only */
-        $gtkClasses = array();
-        $allClasses = get_declared_classes();
-        foreach($allClasses as $oneClass) {
-            if(substr($oneClass,0,3)=="Gtk") {
-                $gtkClasses[] = $oneClass;
-            }
-        }
-        sort($gtkClasses);
+        //remove own filename
+        array_shift($GLOBALS['argv']);
 
-        /* Check each class, with manual overrides for classes: Gtk
-         * and GtkAccessible since they are classes with special parents.
-         */
-        foreach ($gtkClasses as $eachClass) {
-            if ($eachClass != "Gtk" && $eachClass != "GtkAccessible") {
-                $this->currentClass = $eachClass;
-                $this->updateClass();
+        $files = $GLOBALS['argv'];
+        foreach ($files as $file) {
+            if (substr($file, -4) != '.xml') {
+                echo '"' . $file . "\" is no xml file\n";
+                continue;
             }
+            if (!file_exists($file)) {
+                echo 'File "' . $file . "\" does not exist\n";
+                continue;
+            }
+
+            $classname = substr(basename($file), 0, -4);
+            $this->updateClass($classname, $file);
         }
     }
 
-    function updateClass()
+    function updateClass($classname, $file)
     {
         /* Obtain reflection object for current class */
-        $refObject = new ReflectionClass($this->currentClass);
-        echo 'Checking ' . str_pad($this->currentClass, 20, ' ');
+        $refObject = new ReflectionClass($classname);
+        $classname = $refObject->getName();
+        echo 'Checking ' . str_pad($classname, 20, ' ');
         $childMethods = $refObject->getMethods();
         $parent = $refObject->getParentClass();
         if ($parent === false) {
             $parent = null;
         }
-        if($parent !== null && $parent->getName() == "GObject") {
-            /* Parent is GObject, skip parents methods
-             * Add code later
-             */
-            echo "\n";
-         } else {
-            if ($parent !== null) {
-                $parentMethods = $parent->getMethods();
-                $trueMethods = $this->cleanMethods($childMethods, $parentMethods);
-            } else {
-                $trueMethods = $childMethods;
-            }
-            echo ' ' . count($trueMethods) . " methods\n";
-            $classFile = "gtk/".strtolower($this->currentClass).".xml";
-            /* Check for manual's xml file */
-            if(file_exists($classFile)) {
-                $xml = new DOMDocument();
-                $xml->load($classFile);
-                $xpath = new DOMXPath($xml);
-                foreach ($trueMethods as $key=>$methodObj) {
-                    /* Update each method */
-                    $this->updateMethod($key, $methodObj, $xml, $xpath);
-                }
-            } else {
-                /* Add to missing classes list */
-                $this->missingClasses[] = $this->currentClass;
-            }
+        if ($parent !== null) {
+            $parentMethods = $parent->getMethods();
+            $trueMethods = $this->cleanMethods($childMethods, $parentMethods);
+        } else {
+            $trueMethods = $childMethods;
+        }
+        echo ' ' . count($trueMethods) . " methods\n";
+        $xml = new DOMDocument();
+        $xml->load($file);
+        $xpath = new DOMXPath($xml);
+        foreach ($trueMethods as $key => $methodObj) {
+            /* Update each method */
+            $this->updateMethod($classname, $file, $key, $methodObj, $xml, $xpath);
         }
     }
 
-    function updateMethod($sNo, $method, $doc, $xpath)
+    function updateMethod($classname, $file, $sNo, $method, $doc, $xpath)
     {
         $methodName = $method->getName();
         $compelArgs = $method->getNumberOfRequiredParameters();
         $totalArgs = $method->getNumberOfParameters();
 
-        $daClass = strtolower($this->currentClass);
+        $prefix = strtolower(substr($classname, 0, 3));
+        if ($prefix == 'pan') {
+            $prefix = 'pango';
+        }
+
+        $daClass = strtolower($classname);
         $daMethod = strtolower($methodName);
 
-        if($methodName == "__construct") {
+        if ($methodName == "__construct") {
             //constructor
             $ismethod = false;
-            $daID = 'gtk.'.$daClass.'.constructor';
-        } else if ( substr($methodName, 0, 3) == "new") {
+            $daID = $prefix . '.' . $daClass . '.constructor';
+        } else if (substr($methodName, 0, 3) == "new") {
             //constructor
             $ismethod = false;
-            $daID = 'gtk.'.$daClass.'.constructor.'.$daMethod;
+            $daID = $prefix . '.' . $daClass . '.constructor.' . $daMethod;
         } else if (substr($methodName, 0, 2) == '__') {
             return;
         } else {
             //normal method
             $ismethod = true;
-            $daID = 'gtk.'.$daClass.'.method.'.$daMethod;
+            $daID = $prefix . '.' . $daClass . '.method.' . $daMethod;
         }
 
 
         if ($ismethod) {
-            $path = '/classentry/methods/method[@id="'.$daID.'"]/funcsynopsis/funcprototype';
+            $path = '/classentry/methods/method[@id="' . $daID . '"]/funcsynopsis/funcprototype';
         } else {
-            $path = '/classentry/constructors/constructor[@id="'.$daID.'"]/funcsynopsis/funcprototype';
+            $path = '/classentry/constructors/constructor[@id="' . $daID . '"]/funcsynopsis/funcprototype';
         }
         $functionNodes =
             $xpath->query($path);
@@ -111,7 +102,11 @@ class updateMethods
 
         if ($functionNodes->length == 0) {
             /* Method not present, Add it */
-            $xmlMethod = $doc->createElement('method', "\n   ");
+            if ($ismethod) {
+                $xmlMethod = $doc->createElement('method', "\n   ");
+            } else {
+                $xmlMethod = $doc->createElement('constructor', "\n   ");
+            }
             $xmlMethod->setAttribute('id', $daID);
 
             $xmlSynopsis = $doc->createElement('funcsynopsis', "\n    ");
@@ -158,13 +153,13 @@ class updateMethods
             }
 
             /* Filler nodes to maintain indentation :) */
-            $indentFuncdef = $doc->createTextNode("\n      ");
+            $indentFuncdef = $doc->createTextNode("\n     ");
             $indentParamdef = $doc->createTextNode("\n    ");
             $indentPrototype = $doc->createTextNode("\n   ");
             $indentSynopsis = $doc->createTextNode("\n   ");
-            $indentShortDesc = $doc->createTextNode("\n  ");
+            $indentShortDesc = $doc->createTextNode("\n   ");
             $indentDesc = $doc->createTextNode("\n  ");
-            $indentMethod = $doc->createTextNode("\n  ");
+            $indentMethod = $doc->createTextNode("\n\n  ");
 
             /* Appending child nodes in order */
             $xmlPrototype->appendChild($xmlFuncdef);
@@ -198,7 +193,7 @@ class updateMethods
             echo "Updating ".$daID."\n";
             $topLevel->appendChild($xmlMethod);
             $topLevel->appendChild($indentMethod);
-            $doc->save('gtk/'.strtolower($this->currentClass).'.xml');
+            $doc->save($file);
 
             $this->methodCount += 1;
         }
@@ -207,13 +202,13 @@ class updateMethods
             * Add code to check validity later
             */
         }
-    }//function updateMethod($sNo, $method, $doc, $xpath)
+    }//function updateMethod($classname, file, $sNo, $method, $doc, $xpath)
 
 
 
     /* Return methods belonging ONLY to the child */
     function cleanMethods($cMethods, $pMethods)
-    {   
+    {
         $result = array();
         foreach($cMethods as $cMethod) {
             $flag = 1;
@@ -227,7 +222,7 @@ class updateMethods
             }
         }
         return $result;
-    }    
+    }
 }
 
 $doIt = new updateMethods();
