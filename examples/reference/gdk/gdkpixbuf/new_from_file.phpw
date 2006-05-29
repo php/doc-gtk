@@ -1,0 +1,10 @@
+<?php
+//Examle: Loading an image file
+try {
+    $pixbuf = GdkPixbuf::new_from_file('test.png');
+} catch (Exception $e) {
+    //Here we catch errors that could occur
+    echo "An error occured:\n";
+    echo $e->getMessage() . "\n";
+}
+?>

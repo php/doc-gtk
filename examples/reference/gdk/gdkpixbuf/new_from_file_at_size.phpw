@@ -1,0 +1,11 @@
+<?php
+//Examle: Loading an image file and scaling it to the given size
+try {
+    $pixbuf = GdkPixbuf::new_from_file_at_size('test.png', 320, 240);
+    echo 'Size: ' . $pixbuf->get_width() . 'x' . $pixbuf->get_height() . "\n";
+} catch (Exception $e) {
+    //Here we catch errors that could occur
+    echo "An error occured:\n";
+    echo $e->getMessage() . "\n";
+}
+?>
