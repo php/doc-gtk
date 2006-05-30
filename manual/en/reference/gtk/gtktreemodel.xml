@@ -101,15 +101,25 @@
   <method id="gtk.gtktreemodel.method.get_flags">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>void <function>get_flags</function></funcdef>
+     <funcdef>int <function>get_flags</function></funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns a set of flags supported by the interface.
    </shortdesc>
    <desc>
-
+    <para>
+     Returns a set of flags supported by the interface. The flags will be 
+     different for different implementations of the interface 
+     (<classname>GtkListStore</classname>, 
+     <classname>GtkTreeModelSort</classname>, etc.) but will be constant for 
+     the life of the object.
+    </para>
+    <para>
+     The interger returned will be a bitwise mask of 
+     <enumname>GtkTreeModelFlags</enumname> values.
+    </para>
    </desc>
   </method>
 
