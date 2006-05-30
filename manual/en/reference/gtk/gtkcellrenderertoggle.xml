@@ -7,7 +7,11 @@
    Displays the contents of a cell in a GtkTreeView as a toggle button.
   </shortdesc>
   <desc>
-
+   <para>
+    Displays the contents of a cell in a GtkTreeView as a toggle button. The 
+    cell will likely be drawn as a checkbox which will be checked when the cell
+    is active (toggled on) or empty when the cell is not active.
+   </para>
   </desc>
  </classmeta>
 
@@ -48,9 +52,13 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns whether or not the cell renderer is active (toggled on).
    </shortdesc>
    <desc>
+    <para>
+     Returns <literal>true</literal> if the cell renderer is active, 
+     <literal>false</literal> if it is not.
+    </para>
     <para>
      See also: 
      <function class="GtkCellRendererToggle">set_active</function>
@@ -67,11 +75,13 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Returns TRUE if radio toggles rather than checkboxes are being rendered.
+    Returns <literal>true</literal> if radio toggles rather than checkboxes are
+    being rendered.
    </shortdesc>
    <desc>
     <para>
-      Returns TRUE if radio toggles rather than checkboxes are being rendered.
+     Returns <literal>true</literal> if radio toggles rather than checkboxes 
+     are being rendered.
     </para>
     <para>
      See also: 
@@ -85,13 +95,18 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_active</function></funcdef>
-     <paramdef>bool <parameter>setting</parameter></paramdef>
+     <paramdef>bool <parameter>state</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the state of the cell renderer.
    </shortdesc>
    <desc>
+    <para>
+     Sets the state of the cell renderer to <parameter>state</parameter>. If
+     <parameter>state</parameter> is <literal>true</literal>, the cell renderer
+     will be active.
+    </para>
     <para>
      See also: 
      <function class="GtkCellRendererToggle">get_active</function>
@@ -108,12 +123,14 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Sets the style of the toggle button. If true, the toggle will be shown as RadioButton.
+    Sets the style of the toggle button. If true, the toggle will be shown as
+    RadioButton.
    </shortdesc>
    <desc>
     <para>
-     Sets the style of the toggle button. If radio is TRUE, the cell renderer
-     renders a radio toggle. If FALSE, it renders a check toggle.
+     Sets the style of the toggle button. If radio is <literal>true</literal>, 
+     the cell renderer renders a radio toggle. If <literal>false</literal>, it
+     renders a check toggle.
     </para>
     <para>
      See also: 
@@ -124,18 +141,19 @@
   </method>
 
  </methods>
-<properties>
+ <properties>
 
   <prop id="gtk.gtkcellrenderertoggle.property.activatable" type="rw">
    <propname>activatable</propname>
    <proptype>boolean</proptype>
    <shortdesc>
-    If TRUE, the toggle button can be activated.
+    If <literal>true</literal>, the toggle button can be activated.
    </shortdesc>
    <desc>
     <para>
-    If TRUE, the toggle button can be activated. If FALSE, the cells
-    are showed in grayscale and became not sensitive.
+    If <literal>true</literal>, the toggle button can be activated. If
+    <literal>false</literal>, the cells are showed in grayscale and became 
+    insensitive.
     </para>
     <para>
      See also:
@@ -165,11 +183,11 @@
    <propname>radio</propname>
    <proptype>boolean</proptype>
    <shortdesc>
-    If TRUE, draw the toggle is showed as a radio button.
+    If <literal>true</literal>, draw the toggle is showed as a radio button.
    </shortdesc>
    <desc>
     <para>
-      If TRUE, draw the toggle is showed as a radio button.
+      If <literal>true</literal>, draw the toggle is showed as a radio button.
     </para>
     <para>
      See also:
@@ -182,11 +200,14 @@
    <propname>inconsistent</propname>
    <proptype>boolean</proptype>
    <shortdesc>
-
+    The inconsistent state of the cell renderer.
    </shortdesc>
    <desc>
     <para>
-
+     The inconsistent state of the cell renderer.
+    </para>
+    <para>
+     Defaults to <literal>false</literal>.
     </para>
     <para>
      See also:
@@ -203,7 +224,10 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <cbfunction>callback</cbfunction></funcdef>
-     <paramdef>GtkCellRendererToggle <parameter>cellrenderertoggle</parameter></paramdef>
+     <paramdef>
+      <classname>GtkCellRendererToggle</classname>
+      <parameter>cellrenderertoggle</parameter>
+     </paramdef>
      <paramdef>string <parameter>path</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
@@ -211,7 +235,10 @@
     Emitted when the user changes the state of the toggle button.
    </shortdesc>
    <desc>
-    The "toggled" signal is emitted when the user changes the state of the toggle button.
+    <para>
+     The "toggled" signal is emitted when the user changes the state of the 
+     toggle button.
+    </para>
    </desc>
   </signal>
   
