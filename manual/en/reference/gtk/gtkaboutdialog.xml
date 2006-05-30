@@ -475,14 +475,28 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef> <function>set_email_hook</function></funcdef>
-     <paramdef>void</paramdef>
+     <paramdef>
+      callback <parameter>callback</parameter>
+     </paramdef>
+     <paramdef>
+      mixed <parameter><optional>data, ...</optional></parameter>
+     </paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets a global callback to be called when a user activates an email link in
+    the dialog.
    </shortdesc>
    <desc>
-
+    <para>
+     Sets <parameter>callback</parameter> as a callback to be called when the 
+     user activates an email link. This callback will be called for all email
+     links in the dialog.
+    </para>
+    <para>
+     The optional argument <parameter>data</parameter> can be passed to provide
+     data for the callback function.
+    </para>
    </desc>
   </method>
 
@@ -629,14 +643,24 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef> <function>set_url_hook</function></funcdef>
-     <paramdef>void</paramdef>
+     <paramdef>callback <parameter>callback</parameter></paramdef>
+     <paramdef>
+      mixed <parameter><optional>data, ...</optional></parameter>
+     </paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets a global callback for all URL links in the dialog.
    </shortdesc>
    <desc>
-
+    <para>
+     Sets <parameter>callback</parameter> as a global callback to be called
+     when the user activates a URL link in the dialog.
+    </para>
+    <para>
+     The optional argument <parameter>data</parameter> can be passed to provide
+     data for the callback function.
+    </para>
    </desc>
   </method>
 
