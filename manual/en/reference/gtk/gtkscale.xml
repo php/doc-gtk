@@ -85,30 +85,48 @@
   <method id="gtk.gtkscale.method.get_layout">
    <funcsynopsis>
     <funcprototype>
-     <funcdef> <function>get_layout</function></funcdef>
+     <funcdef>
+      <classname>PangoLayout</classname> <function>get_layout</function>
+     </funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the <classname>PangoLayout</classname> for the scale.
    </shortdesc>
    <desc>
-
+    <para>
+     Returns the <classname>PangoLayout</classname> for the scale. If the
+     <fieldname class="GtkScale">draw_value</fieldname> field is
+     <literal>false</literal> this method will return <literal>null</literal>.
+    </para>
    </desc>
   </method>
 
   <method id="gtk.gtkscale.method.get_layout_offsets">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>void <function>get_layout_offsets</function></funcdef>
+     <funcdef>array <function>get_layout_offsets</function></funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the coordinates where the scale will draw the text in the scale.
    </shortdesc>
    <desc>
-
+    <para>
+     Returns an array of the coordinates where the scale will draw the text in
+     the scale.
+    </para>
+    <para>
+     If the scale has been set not to draw the value (using <function 
+     class="GtkScale">set_draw_value</function>) the values returned will both
+     be <literal>0</literal>.
+    </para>
+    <note>
+     The offsets returned may need to be converted using <function 
+     class="Pango">PIXELS</function>.
+    </note>
    </desc>
   </method>
 
@@ -211,15 +229,37 @@
    <signalname>format-value</signalname>
    <funcsynopsis>
     <funcprototype>
-     <funcdef><!-- was: gchararray -->XXX <cbfunction>callback</cbfunction></funcdef>
+     <funcdef>callback <cbfunction>callback</cbfunction></funcdef>
      <paramdef>GtkScale <parameter>scale</parameter></paramdef>
-     <paramdef>double <parameter>UNKNOWN</parameter></paramdef>
+     <paramdef>double <parameter>value</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
+    Signal which allows the display value of the scale to be changed.
    </shortdesc>
    <desc>
-
+    <para>
+     Signal which allows the display value of the scale to be changed. 
+    </para>
+    <para>
+     A signal handler can be connected to this signal to allow the display
+     value of the scale to be changed from the default. The callback will be
+     passed both the scale and the current value. The callback should return a
+     string representing the value as it is to be displayed.
+    </para>
+    <para>
+     <example>
+      <title>Formatting the Value of a Scale</title>
+      <programlisting role="php">
+       <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+                  href="&directory.examples;/reference/gtk/gtkscale/format-value.phpw" parse="text">
+        <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+       </xi:include>
+      </programlisting>
+     </example>
+     This code will produce the window shown below.
+     <graphic fileref="&directory.images;/reference/gtk/gtkscale/format-value.png" /> 
+    </para>
    </desc>
   </signal>
 
