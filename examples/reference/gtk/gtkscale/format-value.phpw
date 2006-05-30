@@ -1,0 +1,28 @@
+<?php
+// Callback to format the value of the scale.
+function format_value($scale, $value)
+{
+	return 'Value: ' . $value;
+}
+
+// Create a window.
+$window = new GtkWindow();
+
+// Set it up to close cleanly.
+$window->connect_simple('destroy', array('Gtk', 'main_quit'));
+
+// Create a scale.
+$scale = new GtkHScale(new GtkAdjustment(5, 0, 10));
+
+// Create a signal handler for the format-value signal.
+$scale->connect('format-value', 'format_value');
+
+// Add the scale to the window.
+$window->add($scale);
+
+// Show the window.
+$window->show_all();
+
+// Start the main loop.
+Gtk::main();
+?>
