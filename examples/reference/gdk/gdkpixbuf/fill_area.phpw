@@ -1,0 +1,35 @@
+<?php
+//Create a new pixbuf of size 320x240
+$pixbuf = new GdkPixbuf(Gdk::COLORSPACE_RGB, true, 8, 320, 240);
+
+//fill area at (10,10) of size (20,50) with color
+//(rgba = 255, 255, 255, 255)
+//the alpha value of 255 makes it opaque
+$pixbuf->fill_area(10, 10, 20, 50, 255, 255, 255, 255);
+
+
+//Create a pixel specification:
+//First, we define the RGBA values we need
+$r = 255;
+$g = 128;
+$b = 0;
+$a = 128;
+
+//Now create the pixel
+$pixel = 0;
+$pixel += $r << 24;
+$pixel += $g << 16;
+$pixel += $b << 8;
+$pixel += $a;
+
+//And fill another area with the pixel color
+$pixbuf->fill_area(50, 50, 30, 40, $pixel);
+
+
+//Display the pixbuf by using a GtkImage widget
+$wnd = new GtkWindow();
+$wnd->connect_simple('destroy', array('Gtk', 'main_quit'));
+$wnd->add(GtkImage::new_from_pixbuf($pixbuf));
+$wnd->show_all();
+Gtk::main();
+?>

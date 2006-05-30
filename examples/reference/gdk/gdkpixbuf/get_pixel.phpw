@@ -1,0 +1,19 @@
+<?php
+//Create a new pixbuf of size 320x240
+$pixbuf = new GdkPixbuf(Gdk::COLORSPACE_RGB, true, 8, 320, 240);
+
+//green, half-transparent
+//overwrites the previously set color
+$pixbuf->fill(128, 255, 0, 128);
+echo "setting: (128,255,0,128)\n";
+
+//now get the pixel at a certain position
+$pixel = $pixbuf->get_pixel(10, 20);
+echo 'pixel: ' . $pixel . "\n";
+
+$r = ($pixel & 0xff000000) >> 24;
+$g = ($pixel & 0x00ff0000) >> 16;
+$b = ($pixel & 0x0000ff00) >> 8;
+$a = ($pixel & 0x000000ff);
+echo "rgba: ($r,$g,$b,$a)\n";
+?>

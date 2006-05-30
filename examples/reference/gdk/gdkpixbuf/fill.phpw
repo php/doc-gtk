@@ -1,0 +1,28 @@
+<?php
+//Create a new pixbuf of size 320x240
+$pixbuf = new GdkPixbuf(Gdk::COLORSPACE_RGB, true, 8, 320, 240);
+
+//Create a pixel specification:
+$pixel = 0;
+$pixel += 255 << 24;//red
+$pixel += 128 << 16;//green
+$pixel += 0   <<  8;//blue
+$pixel += 128;      //alpha
+
+//And fill another area with the pixel color
+$pixbuf->fill($pixel);
+
+
+//Alternative:
+//green, half-transparent
+//overwrites the previously set color
+$pixbuf->fill(128, 255, 0, 128);
+
+
+//Display the pixbuf by using a GtkImage widget
+$wnd = new GtkWindow();
+$wnd->connect_simple('destroy', array('Gtk', 'main_quit'));
+$wnd->add(GtkImage::new_from_pixbuf($pixbuf));
+$wnd->show_all();
+Gtk::main();
+?>

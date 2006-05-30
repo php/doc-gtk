@@ -1,0 +1,45 @@
+<?php
+/**
+* Using Image_Graph to create a chart and displaying it directly
+* in a GtkImage widget, getting it to there with the
+* GdkPixbuf::new_from_gd() method.
+*
+* The Image_Graph code is a slightly modified version of the
+* simple.php example.
+*
+* You need Image_Graph version 0.7.3 or higher (0.7.2 doesn't
+* support the required "none" output switch)
+*/
+
+include 'Image/Graph.php';
+
+//we want to use the gd library
+$Graph = Image_Graph::factory('graph', array(array('width' => 400, 'height' => 300, 'canvas' => 'gd')));
+
+//prepare the chart
+$Plotarea = $Graph->addNew('plotarea');
+$Dataset = Image_Graph::factory('dataset');
+$Dataset->addPoint('Denmark', 10);
+$Dataset->addPoint('Norway', 3);
+$Dataset->addPoint('Sweden', 8);
+$Dataset->addPoint('Finland', 5);
+$Plot = $Plotarea->addNew('bar', $Dataset);
+$Plot->setLineColor('blue@0.2');
+
+//This is the key: Don't output anything, just finish it
+$Graph->done(array('output' => 'none'));
+
+//get the gd object
+$canvas = $Graph->_getCanvas();
+$gd = $canvas->_canvas;
+
+//Create GdkPixbuf from the GD object
+$pixbuf = GdkPixbuf::new_from_gd($gd);
+
+//Display the pixbuf by using a GtkImage widget
+$wnd = new GtkWindow();
+$wnd->connect_simple('destroy', array('Gtk', 'main_quit'));
+$wnd->add(GtkImage::new_from_pixbuf($pixbuf));
+$wnd->show_all();
+Gtk::main();
+?>

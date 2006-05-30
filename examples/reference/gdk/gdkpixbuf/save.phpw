@@ -1,0 +1,10 @@
+<?php
+//Create a new pixbuf of size 320x240
+$pixbuf = new GdkPixbuf(Gdk::COLORSPACE_RGB, false, 8, 320, 240);
+
+//green
+$pixbuf->fill(128, 255, 0, 255);
+
+//save it as a png file
+$pixbuf->save('green.png', 'png');
+?>

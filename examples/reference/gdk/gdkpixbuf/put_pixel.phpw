@@ -1,0 +1,17 @@
+<?php
+//Create a new pixbuf of size 320x240
+$pixbuf = new GdkPixbuf(Gdk::COLORSPACE_RGB, false, 8, 320, 240);
+
+//draw a white line
+for ($x = 0; $x < 320; $x++) {
+    $pixbuf->put_pixel($x, 50, 255, 255, 255, 255);
+}
+
+
+//Display the pixbuf by using a GtkImage widget
+$wnd = new GtkWindow();
+$wnd->connect_simple('destroy', array('Gtk', 'main_quit'));
+$wnd->add(GtkImage::new_from_pixbuf($pixbuf));
+$wnd->show_all();
+Gtk::main();
+?>
