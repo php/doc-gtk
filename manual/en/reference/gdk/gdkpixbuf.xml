@@ -35,7 +35,7 @@
     <funcprototype>
     <funcdef> <function>GdkPixbuf</function></funcdef>
     <paramdef><enumname>GdkColorspace</enumname> <parameter>colorspace</parameter></paramdef>
-    <paramdef>bool </paramdef>
+    <paramdef>bool <parameter>has_alpha</parameter></paramdef>
     <paramdef>int <parameter>bits_per_sample</parameter></paramdef>
     <paramdef>int <parameter>width</parameter></paramdef>
     <paramdef>int <parameter>height</parameter></paramdef>
@@ -140,7 +140,7 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef> <function>GdkPixbuf::new_from_xpm_data</function></funcdef>
-     
+     <paramdef> <parameter>data</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -159,21 +159,43 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Create a pixbuf based on a GD image object
    </shortdesc>
    <desc>
-
+    <para>
+     Creates a GdkPixbuf object based on a GD image object.
+    </para>
+    <para>
+     This method opens a range of possible interactions with
+     PEAR packages: Any package that is able to produce GD images can
+     be used to display its output directly in a
+     <classname>GtkImage</classname> widget by loading the GD resource
+     into a pixbuf.
+    </para>
+    <para>
+     The following examples uses the PEAR package Image_Graph to create
+     a chart. Then it obtains internally used GD object and converts it
+     to a GdkPixbuf, which itself is used as base for the
+     <classname>GtkImage</classname> widget.
+    </para>
+    <example>
+     <title>Displaying a chart created with Image_Graph</title>
+     <programlisting role="php">
+      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+                  href="&directory.examples;/reference/gdk/gdkpixbuf/new_from_gd.phpw" parse="text">
+       <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+      </xi:include>
+     </programlisting>
+    </example>
    </desc>
   </constructor>
-
  </constructors>
 
  <methods>
-
   <method id="gdk.gdkpixbuf.method.add_alpha">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>GdkPixbuf <function>add_alpha</function></funcdef>
+     <funcdef><classname>GdkPixbuf</classname> <function>add_alpha</function></funcdef>
      <paramdef>bool <parameter>substitute_color</parameter></paramdef>
      <paramdef>char <parameter>r</parameter></paramdef>
      <paramdef>char <parameter>g</parameter></paramdef>
@@ -181,7 +203,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+FIXME: Method parameters need to be fixed in the source.
    </shortdesc>
    <desc>
 
@@ -304,14 +326,35 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef> <function>fill</function></funcdef>
-     <paramdef>int <parameter>pixel</parameter></paramdef>
+     <paramdef>int <parameter>pixel or red</parameter></paramdef>
+     <paramdef>int <parameter><optional>green</optional></parameter></paramdef>
+     <paramdef>int <parameter><optional>blue</optional></parameter></paramdef>
+     <paramdef>int <parameter><optional>alpha</optional></parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Fill the whole image with a color.
    </shortdesc>
    <desc>
-
+    <para>
+     Fills the whole image with the specified color.
+    </para>
+    <para>
+     You can either supply one parameter, a
+     <emphasis>pixel specification</emphasis> or four parameters
+     that represent values from <literal>0-255</literal> for red, green, blue
+     and alpha. An alpha value of <literal>255</literal> means opaque, while
+     <literal>0</literal> means fully transparent.
+    </para>
+    <example>
+     <title>Filling the whole image with one color</title>
+     <programlisting role="php">
+      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+                  href="&directory.examples;/reference/gdk/gdkpixbuf/fill.phpw" parse="text">
+       <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+      </xi:include>
+     </programlisting>
+    </example>
    </desc>
   </method>
 
@@ -319,14 +362,46 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef> <function>fill_area</function></funcdef>
-     
+     <paramdef>int <parameter>x</parameter></paramdef>
+     <paramdef>int <parameter>y</parameter></paramdef>
+     <paramdef>int <parameter>width</parameter></paramdef>
+     <paramdef>int <parameter>height</parameter></paramdef>
+     <paramdef>int <parameter>pixel or red</parameter></paramdef>
+     <paramdef>int <parameter><optional>green</optional></parameter></paramdef>
+     <paramdef>int <parameter><optional>blue</optional></parameter></paramdef>
+     <paramdef>int <parameter><optional>alpha</optional></parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Fills a given area with a color.
    </shortdesc>
    <desc>
-
+    <para>
+     Fills the area specified by (<parameter>x</parameter>,
+     <parameter>y</parameter> - <parameter>width</parameter>,
+     <parameter>height</parameter>) with the specified color.
+    </para>
+    <para>
+     The color is either a <emphasis>pixel specification</emphasis> or
+     a tuple of red, green, blue and alpha values (ranging from 0 to 255).
+    </para>
+    <para>
+     A <emphasis>pixel specification</emphasis> is an integer with the bits
+     of red, green, blue and alpha shifted by 8. See the example how to create one.
+    </para>
+    <para>
+     An alpha value of <literal>0</literal> means completely transparent, while
+     <literal>255</literal> means totally opaque.
+    </para>
+    <example>
+     <title>Filling an areas of a pixbuf with color</title>
+     <programlisting role="php">
+      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+                  href="&directory.examples;/reference/gdk/gdkpixbuf/fill_area.phpw" parse="text">
+       <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+      </xi:include>
+     </programlisting>
+    </example>
    </desc>
   </method>
 
@@ -412,10 +487,13 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    If the image has an alpha channel.
    </shortdesc>
    <desc>
-
+    <para>
+     Returns <literal>true</literal> if the pixbuf has an alpha
+     channel.
+    </para>
    </desc>
   </method>
 
@@ -444,10 +522,13 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Queries the number of channels of a pixbuf.
    </shortdesc>
    <desc>
-
+    <para>
+     Queries the number of channels of a pixbuf. It will be
+     either 3 (RGB) or 4 (RGBA).
+    </para>
    </desc>
   </method>
 
@@ -469,15 +550,33 @@
   <method id="gdk.gdkpixbuf.method.get_pixel">
    <funcsynopsis>
     <funcprototype>
-     <funcdef> <function>get_pixel</function></funcdef>
-     
+     <funcdef>int <function>get_pixel</function></funcdef>
+     <paramdef>int <parameter>x</parameter></paramdef>
+     <paramdef>int <parameter>y</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the color of a single pixel
    </shortdesc>
    <desc>
-
+    <para>
+     Returns the color of a single pixel. The number returned is a
+     <emphasis>pixel specification</emphasis>. See the example on how to
+     split it into usable values.
+    </para>
+    <example>
+     <title>Get the color of a certain pixel</title>
+     <programlisting role="php">
+      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+                  href="&directory.examples;/reference/gdk/gdkpixbuf/get_pixel.phpw" parse="text">
+       <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+      </xi:include>
+     </programlisting>
+    </example>
+    <para>
+     See also:
+     <function class="GdkPixbuf">put_pixel</function>
+    </para>
    </desc>
   </method>
 
@@ -532,14 +631,31 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef> <function>put_pixel</function></funcdef>
-     
+     <paramdef>int <parameter>x</parameter></paramdef>
+     <paramdef>int <parameter>y</parameter></paramdef>
+     <paramdef>int <parameter>pixel or red</parameter></paramdef>
+     <paramdef>int <parameter><optional>green</optional></parameter></paramdef>
+     <paramdef>int <parameter><optional>blue</optional></parameter></paramdef>
+     <paramdef>int <parameter><optional>alpha</optional></parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Fill a given pixel with a color.
    </shortdesc>
    <desc>
-
+    <para>
+     Set a given single pixel to a given color.
+    </para>
+    <para>
+     Note that using this method repeatedly (e.g. in a loop) is
+     <emphasis>very</emphasis> slow.
+    </para>
+    <para>
+     See also:
+     <function class="GdkPixbuf">fill_area</function>,
+     <function class="GdkPixbuf">fill</function>,
+     <function class="GdkPixbuf">get_pixel</function>,
+    </para>
    </desc>
   </method>
 
@@ -596,9 +712,9 @@
      <paramdef>int <parameter>height</parameter></paramdef>
      <paramdef>GdkPixbufAlphaMode <parameter>alpha_mode</parameter></paramdef>
      <paramdef>int <parameter>alpha_threshold</parameter></paramdef>
-     <paramdef>GdkRgbDither <parameter><optional>dither = GDK_RGB_DITHER_NORMAL</optional></parameter></paramdef>
-     <paramdef>int <parameter><optional>x_dither = GDK_RGB_DITHER_NORMAL</optional></parameter></paramdef>
-     <paramdef>int <parameter><optional>y_dither = GDK_RGB_DITHER_NORMAL</optional></parameter></paramdef>
+     <paramdef>GdkRgbDither <parameter><optional>dither = Gdk::RGB_DITHER_NORMAL</optional></parameter></paramdef>
+     <paramdef>int <parameter><optional>x_dither = Gdk::RGB_DITHER_NORMAL</optional></parameter></paramdef>
+     <paramdef>int <parameter><optional>y_dither = Gdk::RGB_DITHER_NORMAL</optional></parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -630,14 +746,42 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>bool <function>save</function></funcdef>
-     <paramdef>void</paramdef>
+     <paramdef>string <parameter>filename</parameter></paramdef>
+     <paramdef>string <parameter>type</parameter></paramdef>
+     <paramdef>array <parameter><optional>options</optional></parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Save the pixbuf into a file.
    </shortdesc>
    <desc>
-
+    <para>
+     Saves the pixbuf into a file of a given type.
+    </para>
+    <example>
+     <title>Save a pixbuf into a file</title>
+     <programlisting role="php">
+      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+                  href="&directory.examples;/reference/gdk/gdkpixbuf/save.phpw" parse="text">
+       <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+      </xi:include>
+     </programlisting>
+    </example>
+    <para>
+     The optional third <parameter>options</parameter> can be a list of keys
+     and values that depend on the output format. E.g., jpg has a
+     <literal>quality</literal> parameter that defines the jpg quality from
+     <literal>0</literal> to <literal>100</literal>.
+    </para>
+    <example>
+     <title>Save a pixbuf into a jpg</title>
+     <programlisting role="php">
+      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+                  href="&directory.examples;/reference/gdk/gdkpixbuf/save_jpg.phpw" parse="text">
+       <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+      </xi:include>
+     </programlisting>
+    </example>
    </desc>
   </method>
 
