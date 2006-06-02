@@ -35,10 +35,10 @@ class DocCoverageAnalysis
     {
         $script = dirname(__FILE__) . DIRECTORY_SEPARATOR . 'gen_manual.sh';
         if (!file_exists($script)) {
-            "Coverage extractor doesn't exist\n" . $script . "\n";
+            echo "Coverage extractor doesn't exist\n" . $script . "\n";
             exit(1);
         } else if (!is_executable($script)) {
-            "Coverage extractor is not executable\n" . $script . "\n";
+            echo "Coverage extractor is not executable\n" . $script . "\n";
             exit(2);
         }
 
