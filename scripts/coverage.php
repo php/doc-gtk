@@ -191,7 +191,7 @@ EOD;
         $missing  = $type['missing'];
         $done     = $existing - $missing;
         if ($existing != 0) {
-            $percent  = 100 / $existing * $done;
+            $percent  = intval(100 / $existing * $done);
         } else {
             $percent = -100;
         }
