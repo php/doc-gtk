@@ -54,6 +54,8 @@ elif [ $type == "phpweb" ]; then
 elif [ $type == "demo" ]; then
 	xslfile=$stylesheetdir/html/chunk.xsl
 	manualpath=../manual/demo_manual.xml
+elif [ $type == "coverage" ]; then
+	xslfile=$stylesheetdir/coverage.xsl
 else 
 	echo "There is no type $type."
 	exit 3
@@ -68,7 +70,7 @@ fi
 #
 if [ ! -d $build_dir ]; then
 	mkdir $build_dir
-else 
+elif [ $type != "coverage" ]; then
 	#empty the dir
 	rm -R $build_dir/*
 fi
@@ -80,7 +82,9 @@ xsltproc --param base.dir "'$build_dir/'" --xinclude $xslfile $manualpath
 # parameters - and could someone please tell me how to prevent
 # wildcard escaping? That "\\*" is a hack which is only understood
 # by highlight.php
-$php ../scripts/highlight.php php "../build/$language/$realtype/\\*.html"
+if [ $type != "coverage" ]; then
+    $php ../scripts/highlight.php php "../build/$language/$realtype/\\*.html"
+fi
 
 #distribute over several files
 if [ $type == "html" ] && [ $test == "0" ] && [ ! $type == "demo" ]; then
