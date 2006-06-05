@@ -2039,6 +2039,7 @@
    </desc>
   </method>
 
+  <!-- Not implemented as of 2006-06-05
   <method id="gtk.method.rc_property_parse_border">
    <funcsynopsis>
     <funcprototype>
@@ -2053,7 +2054,9 @@
 
    </desc>
   </method>
+  -->
 
+  <!-- Not implemented as of 2006-06-05
   <method id="gtk.method.rc_property_parse_color">
    <funcsynopsis>
     <funcprototype>
@@ -2068,7 +2071,9 @@
 
    </desc>
   </method>
+  -->
 
+  <!-- Not implemented as of 2006-06-05
   <method id="gtk.method.rc_property_parse_enum">
    <funcsynopsis>
     <funcprototype>
@@ -2083,7 +2088,9 @@
 
    </desc>
   </method>
+  -->
 
+  <!-- Not implemented as of 2006-06-05
   <method id="gtk.method.rc_property_parse_flags">
    <funcsynopsis>
     <funcprototype>
@@ -2098,7 +2105,9 @@
 
    </desc>
   </method>
+  -->
 
+  <!-- Not implemented as of 2006-06-05
   <method id="gtk.method.rc_property_parse_requisition">
    <funcsynopsis>
     <funcprototype>
@@ -2113,6 +2122,7 @@
 
    </desc>
   </method>
+  -->
 
   <method id="gtk.method.rc_reparse_all">
    <funcsynopsis>
@@ -2160,6 +2170,7 @@
    </desc>
   </method>
 
+  <!-- Not implemented as of 2006-06-05
   <method id="gtk.method.rc_set_default_files">
    <funcsynopsis>
     <funcprototype>
@@ -2174,12 +2185,24 @@
 
    </desc>
   </method>
+  -->
 
   <method id="gtk.method.selection_owner_set_for_display">
    <funcsynopsis>
     <funcprototype>
      <funcdef>bool <function>selection_owner_set_for_display</function></funcdef>
-     <paramdef>void</paramdef>
+     <paramdef>
+      <classname>GdkDisplay</classname> <parameter>display</parameter>
+     </paramdef>
+     <paramdef>
+      <classname>GtkWidget</classname> <parameter>widget</parameter>
+     </paramdef>
+     <paramdef>
+      <classname>GdkAtom</classname> <parameter>selection</parameter>
+     </paramdef>
+     <paramdef>
+      int <parameter>timestamp</parameter>
+     </paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -2190,6 +2213,7 @@
    </desc>
   </method>
 
+  <!-- Not implemented as of 2006-06-05
   <method id="gtk.method.set_locale">
    <funcsynopsis>
     <funcprototype>
@@ -2204,7 +2228,9 @@
 
    </desc>
   </method>
+  -->
 
+  <!-- Not implemented as of 2006-06-05
   <method id="gtk.method.settings_install_property">
    <funcsynopsis>
     <funcprototype>
@@ -2219,7 +2245,9 @@
 
    </desc>
   </method>
+  -->
 
+  <!-- Not implemented as of 2006-06-05
   <method id="gtk.method.settings_install_property_parser">
    <funcsynopsis>
     <funcprototype>
@@ -2234,7 +2262,9 @@
 
    </desc>
   </method>
+  -->
 
+  <!-- Not implemented as of 2006-06-05
   <method id="gtk.method.show_about_dialog">
    <funcsynopsis>
     <funcprototype>
@@ -2249,7 +2279,9 @@
 
    </desc>
   </method>
+  -->
 
+  <!-- Not implemented as of 2006-06-05
   <method id="gtk.method.stock_add">
    <funcsynopsis>
     <funcprototype>
@@ -2264,7 +2296,9 @@
 
    </desc>
   </method>
+  -->
 
+  <!-- Not implemented as of 2006-06-05
   <method id="gtk.method.stock_add_static">
    <funcsynopsis>
     <funcprototype>
@@ -2279,16 +2313,17 @@
 
    </desc>
   </method>
+  -->
 
   <method id="gtk.method.stock_list_ids">
    <funcsynopsis>
     <funcprototype>
-     <funcdef> <function>stock_list_ids</function></funcdef>
+     <funcdef>array <function>stock_list_ids</function></funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns a list of available stock ids.
    </shortdesc>
    <desc>
 
@@ -2298,12 +2333,14 @@
   <method id="gtk.method.stock_lookup">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>bool <function>stock_lookup</function></funcdef>
-     <paramdef>void</paramdef>
+    <funcdef>array <function>stock_lookup</function></funcdef>
+     <paramdef>
+      <enumname>GtkStockItem</enumname> <parameter>stock_id</parameter>
+     </paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns an array of information for the given stock id.
    </shortdesc>
    <desc>
 
@@ -2359,17 +2396,22 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>int <function>timeout_add</function></funcdef>
-     <paramdef>void</paramdef>
+     <paramdef>int <parameter>timeout</parameter></paramdef>
+     <paramdef>callback <cbfunction>callback</cbfunction></paramdef>
+     <paramdef>
+      mixed <parameter><optional>user_data1, ...</optional></parameter>
+     </paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Adds a callback to be called at regular intervals.
    </shortdesc>
    <desc>
 
    </desc>
   </method>
 
+  <!-- Not implemented as of 2006-06-05
   <method id="gtk.method.timeout_add_full">
    <funcsynopsis>
     <funcprototype>
@@ -2384,6 +2426,7 @@
 
    </desc>
   </method>
+  -->
 
   <method id="gtk.method.timeout_remove">
    <funcsynopsis>
@@ -2393,7 +2436,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Removes a callback from being called at regular intervals.
    </shortdesc>
    <desc>
 
