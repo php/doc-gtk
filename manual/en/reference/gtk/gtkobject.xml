@@ -7,7 +7,10 @@
    A base class for all classes in the Gtk family.
   </shortdesc>
   <desc>
-
+   <para>
+    <classname>GtkObject</classname> is a base class for all classes in the
+    Gtk family. It is an abstract class which cannot be instantiated directly.
+   </para>
   </desc>
  </classmeta>
 
@@ -24,7 +27,11 @@
     Destroys the object.
    </shortdesc>
    <desc>
-
+    <para>
+     Destroys the object. When an object is destroyed, it is unset and will no
+     longer respond to any signal handlers created for it. When a top level
+     widget is destroyed, its children are also destroyed.
+    </para>
    </desc>
   </method>
 
@@ -39,7 +46,12 @@
     Returns the current object flags as an integer.
    </shortdesc>
    <desc>
-
+    <para>
+     Returns a bitmask of the current flags for the object.
+    </para>
+    <para>
+     This method is not often used in production code.
+    </para>
    </desc>
   </method>
 
@@ -54,6 +66,12 @@
     Sets flags for the object using a bitwise AND operation.
    </shortdesc>
    <desc>
+    <para>
+     Sets the flags for the object using a bitwise AND operation. Setting the
+     flags does not change the properties of the object. Therefore calling
+     this method has little impact on an object and may only serve to cause
+     confusion.
+    </para>
     <para>
      See also: 
      <function class="GtkObject">unset_flags</function>
@@ -92,6 +110,12 @@
    </shortdesc>
    <desc>
     <para>
+     Unsets the flags for the object using a bitwise NAND operation. Unsetting
+     the flags for an object does not change the properties of the object.
+     Therefore calling this method has little impact on an object and may only
+     serve to cause confusion.
+    </para>
+    <para>
      See also: 
      <function class="GtkObject">set_flags</function>
     </para>
@@ -112,9 +136,20 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
+    Emitted when an object is destroyed.
    </shortdesc>
    <desc>
-
+    <para>
+     Emitted when an object is destroyed. An object may be destroyed by
+     calling the <function class="GtkObject">destroy</function> method or by
+     destroying its top level parent.
+    </para>
+    <para>
+     When a user clicks on the <literal>X</literal> in the upper right hand
+     corner of a window, the <signalname
+     class="GtkObject">destroy</signalname> will be emitted and the window
+     will be destroyed along with all of its contents.
+    </para>
    </desc>
   </signal>
   
