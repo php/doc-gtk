@@ -34,16 +34,26 @@
    <funcsynopsis>
     <funcprototype>
     <funcdef> <function>GtkArrow</function></funcdef>
-    <paramdef><enumname>GtkArrowType</enumname> <parameter>arrow_type</parameter></paramdef>
+    <paramdef>
+     <enumname>GtkArrowType</enumname> <parameter>direction</parameter>
+    </paramdef>
     <paramdef><enumname>GtkShadowType</enumname> <parameter>shadow_type</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Creates the arrow widget pointing in one of the four cardinal
-    directions.
+    Creates an arrow widget pointing in one of the four cardinal directions.
    </shortdesc>
    <desc>
-
+    <para>
+     Creates an arrow pointing in direction <parameter>direction</parameter>.
+     <parameter>shadow_type</parameter> defines the appearance of the arrow.
+    </para>
+    <para>
+     <classname>GtkArrow</classname> extends from 
+     <classname>GtkMisc</classname> meaning that it can be padded and aligned
+     to take up as much or as little space as desired. By default, an arrow 
+     will expand and fill the space available to it.
+    </para>
    </desc>
   </constructor>
 
@@ -72,6 +82,42 @@
 
  </methods>
 
- <!-- FIXME: properties are missing -->
+ <properties>
+
+  <prop id="gtk.gtkarrow.property.arrow-type" type="rw">
+   <propname>arrow_type</propname>
+   <proptype><enumname>GtkDirectionType</enumname></proptype>
+   <shortdesc>
+    The direction the arrow is currently pointing.
+   </shortdesc>
+   <desc>
+    <para>
+     The direction the arrow is currently pointing. 
+    </para>
+    <para>
+     See also:
+     <function class="GtkArrow">set</function>
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtkarrow.property.shadow-type" type="rw">
+   <propname>shadow_type</propname>
+   <proptype><enumname>GtkShadowType</enumname></proptype>
+   <shortdesc>
+    The shadow style of the arrow.
+   </shortdesc>
+   <desc>
+    <para>
+     The shadow style of the arrow. 
+    </para>
+    <para>
+     See also:
+     <function class="GtkArrow">set</function>
+    </para>
+   </desc>
+  </prop>
+
+ </properties>
 
 </classentry>
