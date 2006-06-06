@@ -47,10 +47,24 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the heigth of the renderer to a value determined by its current font
+    and y_pad values.
    </shortdesc>
    <desc>
-
+    <para>
+     Sets the height of the renderer to a value determined by its current
+     <propname class="GtkCellRendererText">font</propname> and 
+     <propname class="GtkCellRendererText">y_pad</propname> values.
+     <parameter>number_of_rows</parameter> specifies the number of rows of text
+     each cell renderer should be allocated. If 
+     <parameter>number_of_rows</parameter> is <literal>-1</literal>, the fixed
+     height will be unset and the height will be determined by the properties
+     again.
+    </para>
+    <note>
+     This method is unflexible, and should really only be used if calculating
+     the size of a cell is too slow (ie, a massive number of cells displayed).
+    </note>
    </desc>
   </method>
 
