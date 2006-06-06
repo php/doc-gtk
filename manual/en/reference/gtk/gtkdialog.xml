@@ -148,13 +148,27 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>add_buttons</function></funcdef>
-     <paramdef>void</paramdef>
+     <paramdef>array <parameter>buttons</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    FIXME. Not yet Implemented
+    Adds an array of buttons to the dialog.
    </shortdesc>
    <desc>
+    <para>
+     Adds an array of buttons to the
+     <propname class="GtkDialog">action_area</propname> of the dialog.
+     <parameter>buttons</parameter> must be an array containing pairs of button
+     labels and dialog reponses. 
+    </para>
+    <para>
+     Calling <function class="GtkDialog">add_buttons</function> is similar to
+     calling <function class="GtkDialog">add_button</function> many times.
+    </para>
+    <para>
+     See also:
+     <function class="GtkDialog">add_button</function>
+    </para>
    </desc>
   </method>
 
