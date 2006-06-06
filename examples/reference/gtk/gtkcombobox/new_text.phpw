@@ -1,0 +1,24 @@
+<?php
+// Create a new window.
+$window = new GtkWindow();
+
+// Set the window up to close cleanly.
+$window->connect_simple('destroy', array('Gtk', 'main_quit'));
+
+// Create a text combobox.
+$combo = GtkComboBox::new_text();
+
+// Add some values.
+$combo->append_text('New Jersey');
+$combo->append_text('New Mexico');
+$combo->append_text('New York');
+
+// Add the combobox to the window.
+$window->add($combo);
+
+// Show the window and its contents.
+$window->show_all();
+
+// Start the main loop.
+Gtk::main();
+?>

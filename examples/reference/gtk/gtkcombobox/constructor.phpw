@@ -1,0 +1,39 @@
+<?php
+// Create a new window.
+$window = new GtkWindow();
+
+// Set the window up to close cleanly.
+$window->connect_simple('destroy', array('Gtk', 'main_quit'));
+
+// Create a text combobox.
+$combo = new GtkComboBox();
+
+// Create a model.
+$listStore = new GtkListStore(Gtk::TYPE_STRING);
+
+// Add some values.
+$listStore->append(array('New Jersey'));
+$listStore->append(array('New Mexico'));
+$listStore->append(array('New York'));
+
+// Set the model for the combo.
+$combo->set_model($listStore);
+
+// Create a cell renderer.
+$cellRenderer = new GtkCellRendererText();
+
+// Pack the cell renderer into the combo.
+$combo->pack_start($cellRenderer);
+
+// Tell teh combo where to get the text value of the cell renderer.
+$combo->set_attributes($cellRenderer, 'text', 0);
+
+// Add the combobox to the window.
+$window->add($combo);
+
+// Show the window and its contents.
+$window->show_all();
+
+// Start the main loop.
+Gtk::main();
+?>
