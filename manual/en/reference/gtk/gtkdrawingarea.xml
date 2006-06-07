@@ -9,16 +9,15 @@
   </shortdesc>
   <desc>
    <para>
-    This widget is essentially blank widget, on which you can draw by
-    accessing its <classname>GdkWindow</classname> (the
-    <literal>window</literal> field). You may use the widget to paint
-    custom patterns or use it for interactive painting like a paint
-    program.
+    This widget is essentially a blank widget, on which you can draw by
+    accessing its <literal>window</literal> field, which is a
+    GdkWindow. You may use the widget to paint custom patterns or for
+    interactive programs like <literal>scribble</literal>.
    </para>
    <para>
     There are three important signals of <classname>GtkWindow</classname>
     that are especially useful for this widget. The
-    <signalname class="GtkDrawingArea">realize</signalname> signal is
+    <signalname class="GtkWindow">realize</signalname> signal is
     used to take neccessary actions when the widget is instantiated on
     a particular display. Use the
     <signalname class="GtkWindow">configure-event</signalname>
@@ -44,7 +43,7 @@
     flexibility and thereby the complexity that it brings along.
     You'll be working on the Gdk layer rather than the Gtk layer when
     using this widget. Most of the time, clever use of the
-    <classname>GtkImage</classname> can prove to be an easier
+    <classname>GtkImage</classname> widget can prove to be an easier
     alternative to using a <classname>GtkDrawingArea</classname>.
    </note>
   </desc>
