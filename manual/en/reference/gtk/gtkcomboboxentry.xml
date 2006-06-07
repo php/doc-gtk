@@ -3,11 +3,32 @@
  <classmeta>
   <classtitle>GtkComboBoxEntry</classtitle>
   <classparent>GtkComboBox</classparent>
+  <classimage fileref="&directory.images;/reference/gtk/gtkcomboboxentry.png"/>
   <shortdesc>
    A text entry box with a prepopulated drop down list of values.
   </shortdesc>
   <desc>
-
+   <para>
+    This widget is similar to a <classname>GtkComboBox</classname> with
+    the exception that the user is allowed to enter a value that is not
+    present in the choice list. It displays the selected value in a
+    <classname>GtkEntry</classname> so that user can modify an
+    exisiting value, or enter a new one.
+   </para>
+   <para>
+    Like, the <classname>GtkComboBox</classname>, this widget may have
+    an underlying model, or use the convenient
+    <function class="GtkComboBoxEntry">new_text</function>
+    constructor. If you use a model, your model must always have a
+    text column that can be set by the
+    <function name="GtkComboBoxEntry">set_text_column</function>
+    function.
+   </para>
+   <para>
+    You may retrieve the text from the entry via the
+    <function name="GtkComboBox">get_active_text</function>
+    function.
+   </para>
   </desc>
  </classmeta>
 
@@ -17,14 +38,23 @@
    <funcsynopsis>
     <funcprototype>
     <funcdef> <function>GtkComboBoxEntry</function></funcdef>
-    <paramdef>void</paramdef>
+    <paramdef><classname>GtkTreeModel</classname><parameter><optional>model = null</optional></parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Create a new <classname>GtkComboBoxEntry</classname> widget.
    </shortdesc>
    <desc>
-
+    <para>
+     Use this contructor to create a basic
+     <classname>GtkComboBoxEntry</classname> widget. After
+     construction, you must set a model using
+     <function name="GtkComboBox">set_model</function>.
+     Alternatively, you may pass the model as a parameter to the
+     constructor. The model must also contain a text column, which
+     should be set using
+     <function name="GtkComboBoxEntry">set_text_column</function>.
+    </para>
    </desc>
   </constructor>
 
@@ -36,10 +66,20 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Convenience constructor to create a
+    <classname>GtkComboBoxEntry</classname> without creating a model.
    </shortdesc>
    <desc>
-
+    <para>
+     This is a convenience constructor that creates a
+     <classname>GtkComboBoxEntry</classname> that displays just
+     strings. If you use this to create the widget, you should only
+     manipulate the choices using
+     <function name="GtkComboBox">append_text</function>,
+     <function name="GtkComboBox">insert_text</function>,
+     <function name="GtkComboBox">prepend_text</function>, and
+     <function name="GtkComboBox">remove_text</function>.
+    </para>
    </desc>
   </constructor>
 
@@ -55,14 +95,18 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Return the column which the <classname>GtkEntry</classname> uses
+    to display the string choices.
    </shortdesc>
    <desc>
+    <para>
+     Return the column which the <classname>GtkEntry</classname> uses
+     to display the string choices.    
+    </para>
     <para>
      See also: 
      <function class="GtkComboBoxEntry">set_text_column</function>
     </para>
-
    </desc>
   </method>
 
@@ -74,14 +118,18 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Set the model column which the <classname>GtkEntry</classname>
+    must use to display the string choices.
    </shortdesc>
    <desc>
+    <para>
+     Set the model column which the <classname>GtkEntry</classname>
+     must use to display the string choices.
+    </para>
     <para>
      See also: 
      <function class="GtkComboBoxEntry">get_text_column</function>
     </para>
-
    </desc>
   </method>
 
