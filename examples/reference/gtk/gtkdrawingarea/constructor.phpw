@@ -1,0 +1,74 @@
+<?php
+
+/* Define some constants */
+define("SIZE", 10);
+define("SPACING", 2);
+
+/* The drawing area's Expose Event Callback */
+function doExpose($widget, $event)
+{
+    /* Red and White colors for the squares */
+    $color1 = new GdkColor(30000, 0, 30000);
+    $color2 = new GdkColor(65535, 65535, 65535);
+
+    /* A graphics context for the red box */
+    $gc1 = new GdkGC($widget->window);
+    $gc1->set_rgb_fg_color($color1);
+
+    /* A graphics context for the white box */
+    $gc2 = new GdkGC($widget->window);
+    $gc2->set_rgb_fg_color($color2);
+
+    /* Values to start painting with */
+    $xcount = 0;
+    $x = SPACING;
+
+    /* Traverse columns */
+    while ($x < $widget->allocation->width)
+    {
+        $y = SPACING;
+        $ycount = $xcount % 2;
+
+        /* Traverse rows */
+        while ($y < $widget->allocation->height)
+        {
+            /* Even number mean paint red box, else white box */
+            if ($ycount % 2) {
+                $gc = $gc1;
+            } else {
+                $gc = $gc2;
+            }
+
+            /* Paint a rectangle measuring SIZExSIZE */
+            $widget->window->draw_rectangle($gc, true, $x, $y, SIZE, SIZE);
+
+            /* Next row */
+            $y += SIZE + SPACING;
+            ++$ycount;
+        }
+
+        /* Next column */
+        $x += SIZE + SPACING;
+        ++$xcount;
+    }
+
+    /* Job's done, no more painting! */
+    return true;
+}
+
+/* Create the Window and Drawing area objects */
+$win = new GtkWindow();
+$dra = new GtkDrawingArea();
+
+/* Connect callbacks and start */
+$dra->connect('expose-event', 'doExpose');
+$win->connect_simple('destroy', array('Gtk', 'main_quit'));
+
+$win->set_title('Drawing Area Demo');
+$win->add($dra);
+$win->set_size_request(250,250);
+$win->show_all();
+
+Gtk::main();
+
+?>

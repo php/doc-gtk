@@ -3,11 +3,50 @@
  <classmeta>
   <classtitle>GtkDrawingArea</classtitle>
   <classparent>GtkWidget</classparent>
+  <classimage fileref="&directory.images;/reference/gtk/gtkdrawingarea.png"/>
   <shortdesc>
    A widget for creating custom user interface elements.
   </shortdesc>
   <desc>
-
+   <para>
+    This widget is essentially blank widget, on which you can draw by
+    accessing its <classname>GdkWindow</classname> (the
+    <literal>window</literal> field). You may use the widget to paint
+    custom patterns or use it for interactive painting like a paint
+    program.
+   </para>
+   <para>
+    There are three important signals of <classname>GtkWindow</classname>
+    that are especially useful for this widget. The
+    <signalname class="GtkDrawingArea">realize</signalname> signal is
+    used to take neccessary actions when the widget is instantiated on
+    a particular display. Use the
+    <signalname class="GtkWindow">configure-event</signalname>
+    signal to define what happens when the widget is changes size, and
+    finally, the 
+    <signalname class="GtkWindow">expose-event</signalname> signal
+    will allow you to handle redrawing the contents of the drawing
+    area.
+   </para>
+   <para>
+    An expose event also occurs when the drawing area first appears on
+    the screen, and also when the widget is covered by another window
+    and subsequently uncovered. You will most probably use
+    <classname>GdkWindow</classname>'s drawing methods to paint the
+    drawing area.
+   </para>
+   <para>
+    To receive mouse events on a drawing area, you have to enable them
+    by using <function class="GtkWidget">add_events</function>.
+   </para>
+   <note>
+    Avoid using the drawing area unless you really need the
+    flexibility and thereby the complexity that it brings along.
+    You'll be working on the Gdk layer rather than the Gtk layer when
+    using this widget. Most of the time, clever use of the
+    <classname>GtkImage</classname> can prove to be an easier
+    alternative to using a <classname>GtkDrawingArea</classname>.
+   </note>
   </desc>
  </classmeta>
 
@@ -21,10 +60,30 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Creates a new <classname>GtkDrawingArea</classname> widget.
    </shortdesc>
    <desc>
-
+    <para>
+     Use the constructor to create a new empty, drawing area widget.
+    </para>
+    <para>
+     In the example, we use the
+     <signalname class="GtkWidget">expose-event</signalname> to draw a
+     simple checkerboard. A word of caution, this example is not
+     intented to illustrate a real-world use of this widget, because
+     the same effect can be brought in a much easier manner using a
+     <classname>GtkImage</classname>. What is important to understand
+     is the underlying concept of how the widget works.
+    </para>
+    <example>
+     <title>Simple checkerboard using a GtkDrawingArea</title>
+     <programlisting role="php">
+      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+                  href="&directory.examples;/reference/gtk/gtkdrawingarea/constructor.phpw" parse="text">
+       <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+      </xi:include>
+     </programlisting>
+    </example>
    </desc>
   </constructor>
 
@@ -41,10 +100,14 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    DEPRECATED. Sets the size of the drawing area.
    </shortdesc>
    <desc>
-
+    <para>
+     &deprecated.method;
+     Use <function class="GtkWidget">set_size_request</function>
+     instead.
+    </para>
    </desc>
   </method>
 
