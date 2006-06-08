@@ -7,12 +7,13 @@
    A toolbar item for separating one group of items from another.
   </shortdesc>
   <desc>
-
+   <para>
+    A toolbar item separating groups of items from each other.
+   </para>
   </desc>
  </classmeta>
 
  <constructors>
-
   <constructor id="gtk.gtkseparatortoolitem.constructor">
    <funcsynopsis>
     <funcprototype>
@@ -21,17 +22,17 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Creates a new separator tool item.
    </shortdesc>
    <desc>
-
+    <para>
+     Creates a new separator tool item.
+    </para>
    </desc>
   </constructor>
-
  </constructors>
 
  <methods>
-
   <method id="gtk.gtkseparatortoolitem.method.get_draw">
    <funcsynopsis>
     <funcprototype>
@@ -40,14 +41,16 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    If the separator draws a line or not.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     If the separator draws a line or not.
+    </para>
+    <para>
+     See also:
      <function class="GtkSeparatorToolItem">set_draw</function>
     </para>
-
    </desc>
   </method>
 
@@ -59,17 +62,43 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Whether the separator is drawn as a vertical line, or just blank.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     Whether the separator is drawn as a vertical line, or just blank.
+    </para>
+    <para>
+     Setting this <literal>false</literal> along with
+     <function class="GtkToolItem">set_expand</function> is useful to create
+     an item that forces following items to the end of the toolbar.
+    </para>
+    <para>
+     See also:
      <function class="GtkSeparatorToolItem">get_draw</function>
     </para>
-
    </desc>
   </method>
-
  </methods>
+
+ <properties>
+  <prop id="gtk.gtktoolbutton.property.draw" type="rw">
+   <fieldname>draw</fieldname>
+   <fieldtype>bool</fieldtype>
+   <shortdesc>
+    Whether the separator is drawn, or just blank.
+   </shortdesc>
+   <desc>
+    <para>
+     Whether the separator is drawn, or just blank.
+    </para>
+    <para>
+     See also:
+     <function class="GtkWindow">get_draw</function>,
+     <function class="GtkWindow">set_draw</function>
+    </para>
+   </desc>
+  </prop>
+ </properties>
 
 </classentry>

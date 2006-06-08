@@ -1,0 +1,46 @@
+<?php
+//Popup menu for the toolbar
+//You need to make the window wider to get the context menu
+//The context menu is not shown when right-clicking on the items
+
+//Create a new toolbar widget
+$tb = new GtkToolbar();
+//Let the toolbar take the space it needs
+$tb->set_show_arrow(false);
+
+//Add some dummy symbols
+foreach (array(Gtk::STOCK_NEW, Gtk::STOCK_OPEN, Gtk::STOCK_SAVE) as $id) {
+    $item = GtkToolButton::new_from_stock($id);
+    $tb->insert($item, -1);
+}
+
+
+//Create the menu
+$menu = new GtkMenu();
+$styles = array(
+  array('_Icons only', Gtk::TOOLBAR_ICONS),
+  array('_Text only', Gtk::TOOLBAR_TEXT),
+  array('Icons _and text', Gtk::TOOLBAR_BOTH)
+);
+foreach ($styles as &$style) {
+    $item = new GtkMenuItem($style[0], true);
+    $item->connect_simple('activate', array($tb, 'set_style'), $style[1]);
+    $menu->append($item);
+}
+
+//Connect the callback and pass $menu as optional parameter
+$tb->connect('popup-context-menu', 'onPopup', $menu);
+
+function onPopup($tb, $x, $y, $button, $menu) {
+    //set all items to visible
+    $menu->show_all();
+    $menu->popup();
+}
+
+//Standard window that has the toolbar as only child
+$window = new GtkWindow();
+$window->add($tb);
+$window->connect_simple('destroy', array('Gtk', 'main_quit'));
+$window->show_all();
+Gtk::main();
+?>

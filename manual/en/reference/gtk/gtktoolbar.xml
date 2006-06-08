@@ -3,16 +3,39 @@
  <classmeta>
   <classtitle>GtkToolbar</classtitle>
   <classparent>GtkContainer</classparent>
+  <classimage fileref="&directory.images;/reference/gtk/gtktoolbar.png"/>
   <shortdesc>
    A toolbar widget that displays GtkToolItems.
   </shortdesc>
   <desc>
-
+   <para>
+    A toolbar displays buttons, dropdown menus and other widgets in a row.
+    The widgets need to be subclasses of <classname>GtkToolItem</classname>
+    and can be added with <function class="GtkToolbar">insert</function> and
+    deleted with <function class="GtkContainer">remove</function>.
+   </para>
+   <para>
+    You can group items on the toolbar by using
+    <classname>GtkSeparatorToolItem</classname>. If the
+    <propname class="GtkSeparatorToolItem">expand</propname> is set to
+    <literal>true</literal>, and
+    <propname class="GtkSeparatorToolItem">draw</propname> set to
+    <literal>false</literal>, it forces all following items to the end of the
+    toolbar.
+   </para>
+   <para>
+    If you get a warning like
+    <literal>Gtk-WARNING **: Mixing deprecated and non-deprecated
+    GtkToolbar API is not allowed</literal> remember that
+    <function class="GtkToolbar">insert</function> is the
+    <emphasis>only</emphasis> valid method to add items. All other
+    <literal>prepend_*</literal>, <literal>append_*</literal> and
+    <literal>insert_*</literal>methods are deprecated.
+   </para>
   </desc>
  </classmeta>
 
  <constructors>
-
   <constructor id="gtk.gtktoolbar.constructor">
    <funcsynopsis>
     <funcprototype>
@@ -21,17 +44,31 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Creates a new toolbar instance.
    </shortdesc>
    <desc>
-
+    <para>
+     Creates a new empty toolbar widget.
+    </para>
+    <para>
+     Items can be added with <function class="GtkToolbar">insert</function>
+     and need to be subclass of <classname>GtkToolItem</classname>.
+    </para>
+    <example>
+     <title>Creating a toolbar and adding buttons</title>
+     <programlisting role="php">
+      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+                  href="&directory.examples;/reference/gtk/gtktoolbar/constructor.phpw" parse="text">
+       <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+      </xi:include>
+     </programlisting>
+    </example>
    </desc>
   </constructor>
-
  </constructors>
 
  <methods>
-
+<!-- not implemented
   <method id="gtk.gtktoolbar.method.append_element">
    <funcsynopsis>
     <funcprototype>
@@ -40,38 +77,47 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    &deprecated; Create and append an item to the toolbar.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     &deprecated.method; Use <function class="GtkToolbar">insert</function> instead.
+    </para>
+    <para>
+     See also:
      <function class="GtkToolbar">insert_element</function>, 
      <function class="GtkToolbar">prepend_element</function>
     </para>
-
    </desc>
   </method>
 
   <method id="gtk.gtktoolbar.method.append_item">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>GtkWidget <function>append_item</function></funcdef>
-     <paramdef>void</paramdef>
+     <funcdef><classname>GtkWidget</classname> <function>append_item</function></funcdef>
+     <paramdef>string <parameter>text</parameter></paramdef>
+     <paramdef>string <parameter>tooltip_text</parameter></paramdef>
+     <paramdef>string <parameter>tooltip_private_text</parameter></paramdef>
+     <paramdef><classname>GtkWidget</classname> <parameter>icon</parameter></paramdef>
+     <paramdef><parameter>callback</parameter></paramdef>
+     <paramdef>mixed <parameter><optional>userdata</optional></parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    &deprecated; Append an item.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     &deprecated.method; Use <function class="GtkToolbar">insert</function> instead.
+    </para>
+    <para>
+     See also:
      <function class="GtkToolbar">insert_item</function>, 
      <function class="GtkToolbar">prepend_item</function>
     </para>
-
    </desc>
   </method>
-
+-->
   <method id="gtk.gtktoolbar.method.append_space">
    <funcsynopsis>
     <funcprototype>
@@ -80,16 +126,19 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    &deprecated; Append a space.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     &deprecated.method; Use <function class="GtkToolbar">insert</function>
+     instead.
+    </para>
+    <para>
+     See also:
      <function class="GtkToolbar">insert_space</function>, 
      <function class="GtkToolbar">prepend_space</function>, 
      <function class="GtkToolbar">remove_space</function>
     </para>
-
    </desc>
   </method>
 
@@ -97,21 +146,24 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>append_widget</function></funcdef>
-     <paramdef>GtkWidget <parameter>widget</parameter></paramdef>
+     <paramdef><classname>GtkWidget</classname> <parameter>widget</parameter></paramdef>
      <paramdef>string <parameter>tooltip_text</parameter></paramdef>
      <paramdef>string <parameter>tooltip_private_text</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    &deprecated; Append a widget with tooltips.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     &deprecated.method; Use <function class="GtkToolbar">insert</function>
+     instead.
+    </para>
+    <para>
+     See also:
      <function class="GtkToolbar">insert_widget</function>, 
      <function class="GtkToolbar">prepend_widget</function>
     </para>
-
    </desc>
   </method>
 
@@ -124,30 +176,35 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the item position for a point.
    </shortdesc>
    <desc>
-
+    <para>
+     Returns the item index position for the given (x,y) point on the toolbar.
+     Useful when dragging items onto the toolbar.
+    </para>
    </desc>
   </method>
 
   <method id="gtk.gtktoolbar.method.get_icon_size">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>GtkIconSize <function>get_icon_size</function></funcdef>
+     <funcdef><enumname>GtkIconSize</enumname> <function>get_icon_size</function></funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    &deprecated; Returns the size of the icons.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     &deprecated.method;
+    </para>
+    <para>
+     See also:
      <function class="GtkToolbar">set_icon_size</function>, 
      <function class="GtkToolbar">unset_icon_size</function>
     </para>
-
    </desc>
   </method>
 
@@ -155,14 +212,17 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>int <function>get_item_index</function></funcdef>
-     <paramdef>GtkToolItem <parameter>item</parameter></paramdef>
+     <paramdef><classname>GtkToolItem</classname> <parameter>item</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the index position for an item.
    </shortdesc>
    <desc>
-
+    <para>
+     Returns the index position at which <parameter>item</parameter>
+     is located.
+    </para>
    </desc>
   </method>
 
@@ -174,59 +234,72 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the number of items on the toolbar.
    </shortdesc>
    <desc>
-
+    <para>
+     Returns the number of items on the toolbar.
+    </para>
    </desc>
   </method>
 
   <method id="gtk.gtktoolbar.method.get_nth_item">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>GtkToolItem <function>get_nth_item</function></funcdef>
+     <funcdef><classname>GtkToolItem</classname> <function>get_nth_item</function></funcdef>
      <paramdef>int <parameter>n</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns tool item at a certain position.
    </shortdesc>
    <desc>
-
+    <para>
+     Returns the tool item at position number <parameter>n</parameter>.
+    </para>
    </desc>
   </method>
 
   <method id="gtk.gtktoolbar.method.get_orientation">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>GtkOrientation <function>get_orientation</function></funcdef>
+     <funcdef><enumname>GtkOrientation</enumname> <function>get_orientation</function></funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the orientation.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     Returns the orientation (horizontal or vertical) of the toolbar.
+    </para>
+    <para>
+     See also:
      <function class="GtkToolbar">set_orientation</function>
     </para>
-
    </desc>
   </method>
 
   <method id="gtk.gtktoolbar.method.get_relief_style">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>GtkReliefStyle <function>get_relief_style</function></funcdef>
+     <funcdef><enumname>GtkReliefStyle</enumname> <function>get_relief_style</function></funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the relief style of the buttons.
    </shortdesc>
    <desc>
-
+    <para>
+     Returns the relief style of the buttons on the toolbar.
+    </para>
+    <para>
+     See also:
+     <function class="GtkButton">set_relief</function>
+     (<classname>GtkButton</classname>)
+    </para>
    </desc>
   </method>
 
@@ -238,34 +311,40 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns if the toolbar has an overflow menu.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     Returns if the toolbar shows a dropdown arrow with a menu
+     containing the missing items if there is not enough space
+     to display all items.
+    </para>
+    <para>
+     See also:
      <function class="GtkToolbar">set_show_arrow</function>
     </para>
-
    </desc>
   </method>
 
   <method id="gtk.gtktoolbar.method.get_style">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>GtkToolbarStyle <function>get_style</function></funcdef>
+     <funcdef><enumname>GtkToolbarStyle</enumname> <function>get_style</function></funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the toolbar style (icons only/text only/both)
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     Returns how tool items are displayed (icons only/text only/both).
+    </para>
+    <para>
+     See also:
      <function class="GtkToolbar">set_style</function>, 
      <function class="GtkToolbar">unset_style</function>
     </para>
-
    </desc>
   </method>
 
@@ -277,14 +356,16 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns if tooltips are enabled.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     Returns if tooltips are enabled.
+    </para>
+    <para>
+     See also:
      <function class="GtkToolbar">set_tooltips</function>
     </para>
-
    </desc>
   </method>
 
@@ -292,18 +373,34 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>insert</function></funcdef>
-     <paramdef>GtkToolItem <parameter>item</parameter></paramdef>
+     <paramdef><classname>GtkToolItem</classname> <parameter>item</parameter></paramdef>
      <paramdef>int <parameter>pos</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Inserts an item at a certain position.
    </shortdesc>
    <desc>
-
+    <para>
+     Inserts a widget that is subclass of <classname>GtkToolItem</classname>
+     to the toolbar at a certain position.
+    </para>
+    <para>
+     If <parameter>pos</parameter> is <literal>0</literal>, it is prepended
+     at the beginning of the toolbar, before all items. If
+     <parameter>pos</parameter> is negative, it is appended after all other
+     elements.
+    </para>
+    <warning>
+     <para>
+     Despite all the other <literal>prepend_*</literal>,
+     <literal>append_*</literal> or <literal>insert_*</literal> methods,
+     this one here is the only valid. The other ones are all deprecated.
+     </para>
+    </warning>
    </desc>
   </method>
-
+<!-- not implemented
   <method id="gtk.gtktoolbar.method.insert_element">
    <funcsynopsis>
     <funcprototype>
@@ -312,38 +409,50 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    &deprecated; Create and insert an element.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     &deprecated.method; Use <function class="GtkToolbar">insert</function>
+     instead.
+    </para>
+    <para>
+     See also:
      <function class="GtkToolbar">append_element</function>, 
      <function class="GtkToolbar">prepend_element</function>
     </para>
-
    </desc>
   </method>
 
   <method id="gtk.gtktoolbar.method.insert_item">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>GtkWidget <function>insert_item</function></funcdef>
-     <paramdef>void</paramdef>
+     <funcdef><classname>GtkWidget</classname> <function>insert_item</function></funcdef>
+     <paramdef>string <parameter>text</parameter></paramdef>
+     <paramdef>string <parameter>tooltip_text</parameter></paramdef>
+     <paramdef>string <parameter>tooltip_private_text</parameter></paramdef>
+     <paramdef><classname>GtkWidget</classname> <parameter>icon</parameter></paramdef>
+     <paramdef><parameter>callback</parameter></paramdef>
+     <paramdef>mixed <parameter>userdata</parameter></paramdef>
+     <paramdef>int <parameter>position</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    &deprecated; Insert a widget at a position.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     &deprecated.method; Use <function class="GtkToolbar">insert</function>
+     instead.
+    </para>
+    <para>
+     See also:
      <function class="GtkToolbar">append_item</function>, 
      <function class="GtkToolbar">prepend_item</function>
     </para>
-
    </desc>
   </method>
-
+-->
   <method id="gtk.gtktoolbar.method.insert_space">
    <funcsynopsis>
     <funcprototype>
@@ -352,31 +461,43 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Insert a separator at a certain position.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     &deprecated.method; Use <function class="GtkToolbar">insert</function>
+     instead.
+    </para>
+    <para>
+     See also:
      <function class="GtkToolbar">append_space</function>, 
      <function class="GtkToolbar">prepend_space</function>, 
      <function class="GtkToolbar">remove_space</function>
     </para>
-
    </desc>
   </method>
 
   <method id="gtk.gtktoolbar.method.insert_stock">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>GtkWidget <function>insert_stock</function></funcdef>
-     <paramdef>void</paramdef>
+     <funcdef><classname>GtkWidget</classname> <function>insert_stock</function></funcdef>
+     <paramdef><enumname>GtkStockItems</enumname> <parameter>stock</parameter></paramdef>
+     <paramdef>string <parameter>tooltip_text</parameter></paramdef>
+     <paramdef>string <parameter>tooltip_private_text</parameter></paramdef>
+     <paramdef><classname>GtkWidget</classname> <parameter>icon</parameter></paramdef>
+     <paramdef><parameter>callback</parameter></paramdef>
+     <paramdef>mixed <parameter>userdata</parameter></paramdef>
+     <paramdef>int <parameter>position</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    &deprecated; Create and insert a stock button.
    </shortdesc>
    <desc>
-
+    <para>
+     &deprecated.method; Use <function class="GtkToolbar">insert</function>
+     instead.
+    </para>
    </desc>
   </method>
 
@@ -384,42 +505,55 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>insert_widget</function></funcdef>
-     <paramdef>GtkWidget <parameter>widget</parameter></paramdef>
+     <paramdef><classname>GtkWidget</classname> <parameter>widget</parameter></paramdef>
      <paramdef>string <parameter>tooltip_text</parameter></paramdef>
      <paramdef>string <parameter>tooltip_private_text</parameter></paramdef>
      <paramdef>int <parameter>position</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Create and insert a widget at a certain position.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     &deprecated.method; Use <function class="GtkToolbar">insert</function>
+     instead.
+    </para>
+    <para>
+     See also:
      <function class="GtkToolbar">append_widget</function>, 
      <function class="GtkToolbar">prepend_widget</function>
     </para>
-
    </desc>
   </method>
-
+<!-- not implemented
   <method id="gtk.gtktoolbar.method.prepend_element">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>GtkWidget <function>prepend_element</function></funcdef>
-     <paramdef>void</paramdef>
+     <funcdef><classname>GtkWidget</classname> <function>prepend_element</function></funcdef>
+     <paramdef><enumname>GtkToolbarChildType</enumname> <parameter>type</parameter></paramdef>
+     <paramdef><classname>GtkWidget</classname> <parameter>widget</parameter></paramdef>
+     <paramdef>string <parameter>text</parameter></paramdef>
+     <paramdef>string <parameter>tooltip_text</parameter></paramdef>
+     <paramdef>string <parameter>tooltip_private_text</parameter></paramdef>
+     <paramdef><classname>GtkWidget</classname> <parameter>icon</parameter></paramdef>
+     <paramdef><parameter>callback</parameter></paramdef>
+     <paramdef>mixed <parameter>userdata</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    &deprecated; Creates and add a child to the beginning.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     &deprecated.method; Use <function class="GtkToolbar">insert</function>
+     instead.
+    </para>
+    <para>
+     See also:
      <function class="GtkToolbar">append_element</function>, 
      <function class="GtkToolbar">insert_element</function>
     </para>
-
    </desc>
   </method>
 
@@ -427,22 +561,30 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>GtkWidget <function>prepend_item</function></funcdef>
-     <paramdef>void</paramdef>
+     <paramdef>string <parameter>text</parameter></paramdef>
+     <paramdef>string <parameter>tooltip_text</parameter></paramdef>
+     <paramdef>string <parameter>tooltip_private_text</parameter></paramdef>
+     <paramdef><classname>GtkWidget</classname> <parameter>icon</parameter></paramdef>
+     <paramdef><parameter>callback</parameter></paramdef>
+     <paramdef>mixed <parameter>userdata</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    &deprecated; Creates and adds a item to the beginning.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     &deprecated.method; Use <function class="GtkToolbar">insert</function>
+     instead.
+    </para>
+    <para>
+     See also:
      <function class="GtkToolbar">append_item</function>, 
      <function class="GtkToolbar">insert_item</function>
     </para>
-
    </desc>
   </method>
-
+-->
   <method id="gtk.gtktoolbar.method.prepend_space">
    <funcsynopsis>
     <funcprototype>
@@ -451,16 +593,19 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    &deprecated; Prepends a separator item.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     &deprecated.method; Use <function class="GtkToolbar">insert</function>
+     instead.
+    </para>
+    <para>
+     See also:
      <function class="GtkToolbar">append_space</function>, 
      <function class="GtkToolbar">insert_space</function>, 
      <function class="GtkToolbar">remove_space</function>
     </para>
-
    </desc>
   </method>
 
@@ -468,21 +613,24 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>prepend_widget</function></funcdef>
-     <paramdef>GtkWidget <parameter>widget</parameter></paramdef>
+     <paramdef><classname>GtkWidget</classname> <parameter>widget</parameter></paramdef>
      <paramdef>string <parameter>tooltip_text</parameter></paramdef>
      <paramdef>string <parameter>tooltip_private_text</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    &deprecated; Prepends a widget with tooltips.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     &deprecated.method; Use <function class="GtkToolbar">insert</function>
+     instead.
+    </para>
+    <para>
+     See also:
      <function class="GtkToolbar">append_widget</function>, 
      <function class="GtkToolbar">insert_widget</function>
     </para>
-
    </desc>
   </method>
 
@@ -494,16 +642,19 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    &deprecated; Removes a space element.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     &deprecated.method; Use <function class="GtkContainer">remove</function>
+     instead.
+    </para>
+    <para>
+     See also:
      <function class="GtkToolbar">append_space</function>, 
      <function class="GtkToolbar">insert_space</function>, 
      <function class="GtkToolbar">prepend_space</function>
     </para>
-
    </desc>
   </method>
 
@@ -516,10 +667,20 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Highlights toolbar with a new item.
    </shortdesc>
    <desc>
-
+    <para>
+     Highlights the toolbar to give an idea of what it would look like if
+     <parameter>tool_item</parameter> was added to the toolbar at position
+     <parameter>index</parameter>. If <parameter>tool_item</parameter> is
+     <literal>null</literal>, highlighting is turned off.
+    </para>
+    <para>
+     The <parameter>tool_item</parameter> must not be part of the widget
+     hierarchy. While this lasts, it may not be added to the hierarchy
+     or used as highlighting item for another toolbar.
+    </para>
    </desc>
   </method>
 
@@ -527,19 +688,21 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_icon_size</function></funcdef>
-     <paramdef>GtkIconSize <parameter>icon_size</parameter></paramdef>
+     <paramdef><enumname>GtkIconSize</enumname> <parameter>icon_size</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    &deprecated; Set the icon size.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     &deprecated.method;
+    </para>
+    <para>
+     See also:
      <function class="GtkToolbar">get_icon_size</function>, 
      <function class="GtkToolbar">unset_icon_size</function>
     </para>
-
    </desc>
   </method>
 
@@ -547,18 +710,20 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_orientation</function></funcdef>
-     <paramdef>GtkOrientation <parameter>orientation</parameter></paramdef>
+     <paramdef><enumname>GtkOrientation</enumname> <parameter>orientation</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Set the toolbar orientation.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     Sets the toolbar orientation, horizontal or vertical.
+    </para>
+    <para>
+     See also:
      <function class="GtkToolbar">get_orientation</function>
     </para>
-
    </desc>
   </method>
 
@@ -570,14 +735,17 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    If an overflow menu shall be displayed if necessary.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     Sets whether an arrow with a dropdown menu shall be shown
+     when there is not enough space to display all the items.
+    </para>
+    <para>
+     See also:
      <function class="GtkToolbar">get_show_arrow</function>
     </para>
-
    </desc>
   </method>
 
@@ -585,19 +753,47 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_style</function></funcdef>
-     <paramdef>GtkToolbarStyle <parameter>style</parameter></paramdef>
+     <paramdef><enumname>GtkToolbarStyle</enumname> <parameter>style</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets if the toolbar shows icons or text only, or both.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     Sets if the toolbar shall display icons only, text only
+     or both. If the orientation is set to vertical, it also can be
+     both + horizontal.
+    </para>
+    <para>
+     When creating the toolbar, the style is set to the user preference
+     (that can be changed in the Gnome control center). Set this setting
+     only if you are sure that you want to override the user's preference.
+    </para>
+    <example>
+     <title>Toolbar with dynamic styles</title>
+     <programlisting role="php">
+      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+                  href="&directory.examples;/reference/gtk/gtktoolbar/set_style.phpw" parse="text">
+       <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+      </xi:include>
+     </programlisting>
+    </example>
+    <para>
+     The following image shows the different styles, from left to right:
+     <itemizedlist>
+      <listitem><optionname enum="GtkToolbarStyle">Gtk::TOOLBAR_BOTH</optionname></listitem>
+      <listitem><optionname enum="GtkToolbarStyle">Gtk::TOOLBAR_TEXT</optionname></listitem>
+      <listitem><optionname enum="GtkToolbarStyle">Gtk::TOOLBAR_ICONS</optionname></listitem>
+      <listitem><optionname enum="GtkToolbarStyle">Gtk::TOOLBAR_BOTH_HORIZ</optionname></listitem>
+     </itemizedlist>
+    </para>
+    <graphic fileref="&directory.images;/reference/gtk/gtktoolbar_style.png"/>
+    <para>
+     See also:
      <function class="GtkToolbar">get_style</function>, 
      <function class="GtkToolbar">unset_style</function>
     </para>
-
    </desc>
   </method>
 
@@ -609,14 +805,16 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Enables or disabled tooltips.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     Enables or disables tooltips for the tool items.
+    </para>
+    <para>
+     See also:
      <function class="GtkToolbar">get_tooltips</function>
     </para>
-
    </desc>
   </method>
 
@@ -628,15 +826,20 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    &deprecated; Resets the icon size to the default.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     &deprecated.method;
+    </para>
+    <para>
+     Resets the user-defined icon size to the default one.
+    </para>
+    <para>
+     See also:
      <function class="GtkToolbar">get_icon_size</function>, 
      <function class="GtkToolbar">set_icon_size</function>
     </para>
-
    </desc>
   </method>
 
@@ -648,104 +851,206 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Resets the toolbar style to the user preference.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     Resets the toolbar style to the default, that is the
+     user preference.
+    </para>
+    <para>
+     See also:
      <function class="GtkToolbar">get_style</function>, 
      <function class="GtkToolbar">set_style</function>
     </para>
-
    </desc>
   </method>
-
  </methods>
 
- <signals>
+ <properties>
+  <prop id="gtk.gtktoolbar.property.orientation" type="rw">
+   <fieldname>orientation</fieldname>
+   <fieldtype><enumname>GtkOrientation</enumname></fieldtype>
+   <shortdesc>
+    The orientation of the toolbar.
+   </shortdesc>
+   <desc>
+    <para>
+     The orientation of the toolbar.
+    </para>
+    <para>
+     See also:
+     <function class="GtkWindow">get_orientation</function>,
+     <function class="GtkWindow">set_orientation</function>
+    </para>
+   </desc>
+  </prop>
 
+  <prop id="gtk.gtktoolbar.property.show_arrow" type="rw">
+   <fieldname>show_arrow</fieldname>
+   <fieldtype>bool</fieldtype>
+   <shortdesc>
+    If an arrow should be shown if the toolbar doesn't fit.
+   </shortdesc>
+   <desc>
+    <para>
+     If an arrow should be shown if the toolbar doesn't fit.
+    </para>
+    <para>
+     See also:
+     <function class="GtkWindow">get_show_arrow</function>,
+     <function class="GtkWindow">set_show_arrow</function>
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtktoolbar.property.toolbar_style" type="rw">
+   <fieldname>toolbar-style</fieldname>
+   <fieldtype><enumname>GtkToolbarStyle</enumname></fieldtype>
+   <shortdesc>
+    How to draw the toolbar.
+   </shortdesc>
+   <desc>
+    <para>
+     How to draw the toolbar.
+    </para>
+    <para>
+     See also:
+     <function class="GtkWindow">get_style</function>,
+     <function class="GtkWindow">set_style</function>
+    </para>
+   </desc>
+  </prop>
+ </properties>
+
+ <signals>
   <signal id="gtk.gtktoolbar.signal.focus-home-or-end">
    <signalname>focus-home-or-end</signalname>
    <funcsynopsis>
     <funcprototype>
      <funcdef>bool <cbfunction>callback</cbfunction></funcdef>
-     <paramdef>GtkToolbar <parameter>toolbar</parameter></paramdef>
-     <paramdef>bool <parameter>UNKNOWN</parameter></paramdef>
+     <paramdef><classname>GtkToolbar</classname> <parameter>toolbar</parameter></paramdef>
+     <paramdef>bool <parameter>focus_home</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
+    Internal use only.
    </shortdesc>
    <desc>
-
+    <para>
+     A keybinding signal used internally by GTK+.
+     This signal can't be used in application code.
+    </para>
    </desc>
   </signal>
-  
+
   <signal id="gtk.gtktoolbar.signal.move-focus">
    <signalname>move-focus</signalname>
    <funcsynopsis>
     <funcprototype>
      <funcdef>bool <cbfunction>callback</cbfunction></funcdef>
-     <paramdef>GtkToolbar <parameter>toolbar</parameter></paramdef>
-     <paramdef>GtkDirectionType <parameter>UNKNOWN</parameter></paramdef>
+     <paramdef><classname>GtkToolbar</classname> <parameter>toolbar</parameter></paramdef>
+     <paramdef><enumname>GtkDirectionType</enumname> <parameter>direction</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
+    Internal use only.
    </shortdesc>
    <desc>
-
+    <para>
+     A keybinding signal used internally by GTK+.
+     This signal can't be used in application code.
+    </para>
    </desc>
   </signal>
-  
+
   <signal id="gtk.gtktoolbar.signal.orientation-changed">
    <signalname>orientation-changed</signalname>
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <cbfunction>callback</cbfunction></funcdef>
-     <paramdef>GtkToolbar <parameter>toolbar</parameter></paramdef>
-     <paramdef>GtkOrientation <parameter>UNKNOWN</parameter></paramdef>
+     <paramdef><classname>GtkToolbar</classname> <parameter>toolbar</parameter></paramdef>
+     <paramdef><enumname>GtkOrientation</enumname> <parameter>orientation</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
+    The orientation has been changed.
    </shortdesc>
    <desc>
-
+    <para>
+     Emitted when the orientation of the toolbar changes.
+    </para>
+    <para>
+     See also:
+     <function class="GtkToolbar">set_orientation</function>
+    </para>
    </desc>
   </signal>
-  
+
   <signal id="gtk.gtktoolbar.signal.popup-context-menu">
    <signalname>popup-context-menu</signalname>
    <funcsynopsis>
     <funcprototype>
      <funcdef>bool <cbfunction>callback</cbfunction></funcdef>
-     <paramdef>GtkToolbar <parameter>toolbar</parameter></paramdef>
-     <paramdef>int <parameter>UNKNOWN</parameter></paramdef>
-     <paramdef>int <parameter>UNKNOWN</parameter></paramdef>
-     <paramdef>int <parameter>UNKNOWN</parameter></paramdef>
+     <paramdef><classname>GtkToolbar</classname> <parameter>toolbar</parameter></paramdef>
+     <paramdef>int <parameter>x</parameter></paramdef>
+     <paramdef>int <parameter>y</parameter></paramdef>
+     <paramdef>int <parameter>button</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
+    The user right-clicked the toolbar.
    </shortdesc>
    <desc>
-
+    <para>
+     This signal is emitted when the user right-clicked the toolbar
+     or used the key bound to display the popup menu.
+    </para>
+    <para>
+     You should use this if you want to display a popup menu for the toolbar.
+     If the signal was triggered by the keyboard, <parameter>button</parameter>
+     is <literal>-1</literal>.
+    </para>
+    <note>
+     <para>
+      The signal is emitted only if the right-click happens on the toolbar,
+      not on a tool item.
+     </para>
+    </note>
+    <example>
+     <title>Adding a popup menu to the toolbar</title>
+     <programlisting role="php">
+      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+                  href="&directory.examples;/reference/gtk/gtktoolbar/popup.phpw" parse="text">
+       <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+      </xi:include>
+     </programlisting>
+    </example>
    </desc>
   </signal>
-  
+
   <signal id="gtk.gtktoolbar.signal.style-changed">
    <signalname>style-changed</signalname>
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <cbfunction>callback</cbfunction></funcdef>
-     <paramdef>GtkToolbar <parameter>toolbar</parameter></paramdef>
-     <paramdef>GtkToolbarStyle <parameter>UNKNOWN</parameter></paramdef>
+     <paramdef><classname>GtkToolbar</classname> <parameter>toolbar</parameter></paramdef>
+     <paramdef><enumname>GtkToolbarStyle</enumname> <parameter>new_style</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
+    The style of the toolbar has been changed.
    </shortdesc>
    <desc>
-
+    <para>
+     Emitted when the style of the toolbar changes.
+    </para>
+    <para>
+     See also:
+     <function class="GtkToolbar">set_style</function>
+    </para>
    </desc>
   </signal>
-  
  </signals>
 
 </classentry>

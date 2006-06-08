@@ -1,0 +1,45 @@
+<?php
+//Toolbar example: set the toolbar style dynamically
+
+//Create a new toolbar widget
+$tb = new GtkToolbar();
+//Let the toolbar take the space it needs
+$tb->set_show_arrow(false);
+//We use a vertical toolbar here so that
+// Gtk::TOOLBAR_BOTH_HORIZ is visible
+$tb->set_orientation(Gtk::ORIENTATION_VERTICAL);
+
+$styles = array(
+  'Gtk::TOOLBAR_ICONS',
+  'Gtk::TOOLBAR_TEXT',
+  'Gtk::TOOLBAR_BOTH',
+  'Gtk::TOOLBAR_BOTH_HORIZ'
+);
+
+foreach ($styles as $style) {
+    $btn = new GtkToolButton(
+        GtkImage::new_from_stock(
+            Gtk::STOCK_SELECT_COLOR,
+            Gtk::ICON_SIZE_SMALL_TOOLBAR
+        ),
+        $style
+    );
+    $btn->connect_simple('clicked', 'onClickedStyle', $tb, $style);
+    $tb->insert($btn, -1);
+}
+
+function onClickedStyle($tb, $strStyle)
+{
+    //we have a string in $strStyle and need to
+    // convert it to the number
+    eval('$style = ' . $strStyle . ';');
+    $tb->set_style($style);
+}
+
+//Standard window that has the toolbar as only child
+$window = new GtkWindow();
+$window->add($tb);
+$window->connect_simple('destroy', array('Gtk', 'main_quit'));
+$window->show_all();
+Gtk::main();
+?>

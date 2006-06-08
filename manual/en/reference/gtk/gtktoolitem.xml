@@ -7,12 +7,16 @@
    An item to be shown in a GtkToolbar.
   </shortdesc>
   <desc>
-
+   <para>
+    An item to be shown in a <classname>GtkToolbar</classname>.
+    If you don't want special behavior, use one of the subclasses
+    like  <classname>GtkToolButton</classname> or
+    <classname>GtkSeparatorToolItem</classname>.
+   </para>
   </desc>
  </classmeta>
 
  <constructors>
-
   <constructor id="gtk.gtktoolitem.constructor">
    <funcsynopsis>
     <funcprototype>
@@ -21,17 +25,17 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Creates a new tool item.
    </shortdesc>
    <desc>
-
+    <para>
+     Creates a new tool item.
+    </para>
    </desc>
   </constructor>
-
  </constructors>
 
  <methods>
-
   <method id="gtk.gtktoolitem.method.get_expand">
    <funcsynopsis>
     <funcprototype>
@@ -40,14 +44,17 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    If the item takes extra space.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     Returns if the items takes extra space if the toolbar
+     is larger than the size of all tool items.
+    </para>
+    <para>
+     See also:
      <function class="GtkToolItem">set_expand</function>
     </para>
-
    </desc>
   </method>
 
@@ -59,29 +66,36 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    If all tool items are the same size.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     If this tool item gets the same size as all other homogeneous
+     tool items.
+    </para>
+    <para>
+     See also:
      <function class="GtkToolItem">set_homogeneous</function>
     </para>
-
    </desc>
   </method>
 
   <method id="gtk.gtktoolitem.method.get_icon_size">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>GtkIconSize <function>get_icon_size</function></funcdef>
+     <funcdef><enumname>GtkIconSize</enumname> <function>get_icon_size</function></funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the size used for the icon.
    </shortdesc>
    <desc>
-
+    <para>
+     Returns the icon size used for the tool item. Custom subclasses of
+     <classname>GtkToolItem</classname> should call this function to
+     find out what size icons they should use.
+    </para>
    </desc>
   </method>
 
@@ -93,79 +107,111 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Whether the tool item is important.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     Returns whether the tool item is important. See the set method
+     for futher explanation.
+    </para>
+    <para>
+     See also:
      <function class="GtkToolItem">set_is_important</function>
     </para>
-
    </desc>
   </method>
 
   <method id="gtk.gtktoolitem.method.get_orientation">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>GtkOrientation <function>get_orientation</function></funcdef>
+     <funcdef><enumname>GtkOrientation</enumname> <function>get_orientation</function></funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the orientation for the tool item.
    </shortdesc>
    <desc>
-
+    <para>
+     Returns the orientation used for the tool item.
+     Custom subclasses of <classname>GtkToolItem</classname> should call
+     this function to find out what size icons they should use.
+    </para>
    </desc>
   </method>
 
   <method id="gtk.gtktoolitem.method.get_proxy_menu_item">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>GtkWidget <function>get_proxy_menu_item</function></funcdef>
+     <funcdef><classname>GtkWidget</classname> <function>get_proxy_menu_item</function></funcdef>
      <paramdef>string <parameter>menu_item_id</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the proxy menu item.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     If <parameter>menu_item_id</parameter> matches the string passed
+     to <function class="GtkToolItem">set_proxy_menu_item</function>
+     return the corresponding <classname>GtkMenuItem</classname>.
+    </para>
+    <para>
+     Custom subclasses of <classname>GtkToolItem</classname> should use this
+     function to update their menu item when the GtkToolItem changes.
+     That the <parameter>menu_item_id</parameter>s must match ensures that
+     a GtkToolItem will not inadvertently change a menu item that they
+     did not create.
+    </para>
+    <para>
+     See also:
      <function class="GtkToolItem">retrieve_proxy_menu_item</function>, 
      <function class="GtkToolItem">set_proxy_menu_item</function>
     </para>
-
    </desc>
   </method>
 
   <method id="gtk.gtktoolitem.method.get_relief_style">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>GtkReliefStyle <function>get_relief_style</function></funcdef>
+     <funcdef><enumname>GtkReliefStyle</enumname> <function>get_relief_style</function></funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the relief style of the tool item.
    </shortdesc>
    <desc>
-
+    <para>
+     Returns the relief style of the tool item. See
+     <function class="GtkButton">set_relief_style</function>. Custom
+     subclasses of <classname>GtkToolItem</classname> should call this
+     function in the handler of the
+     <signalname class="GtkToolItem">toolbar_reconfigured</signalname>
+     signal to find out the relief style of buttons.
+    </para>
    </desc>
   </method>
 
   <method id="gtk.gtktoolitem.method.get_toolbar_style">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>GtkToolbarStyle <function>get_toolbar_style</function></funcdef>
+     <funcdef><enumname>GtkToolbarStyle</enumname> <function>get_toolbar_style</function></funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the toolbar style used for the tool item.
    </shortdesc>
    <desc>
-
+    <para>
+     Returns the toolbar style used for the tool item. Custom subclasses
+     of <classname>GtkToolItem</classname> should call this function in the
+     handler of the
+     <signalname class="GtkToolItem">toolbar_reconfigured</signalname> signal
+     to find out in what style the toolbar is displayed and change
+     themselves accordingly.
+    </para>
    </desc>
   </method>
 
@@ -177,14 +223,16 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns whether toolitem has a drag window.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     Returns whether toolitem has a drag window.
+    </para>
+    <para>
+     See also:
      <function class="GtkToolItem">set_use_drag_window</function>
     </para>
-
    </desc>
   </method>
 
@@ -196,14 +244,17 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Whether the item is visible on horizontally docked toolbars.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     Returns whether the toolitem is visible on toolbars that are docked
+     horizontally.
+    </para>
+    <para>
+     See also:
      <function class="GtkToolItem">set_visible_horizontal</function>
     </para>
-
    </desc>
   </method>
 
@@ -215,14 +266,22 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Whether the item is visible on vertically docked toolbars.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     Sets whether the tool item is visible when the toolbar is docked
+     vertically. Some tool items, such as text entries, are too wide
+     to be useful on a vertically docked toolbar.
+    </para>
+    <para>
+     If visible_vertical is <literal>false</literal> the tool item will
+     not appear on toolbars that are docked vertically.
+    </para>
+    <para>
+     See also:
      <function class="GtkToolItem">set_visible_vertical</function>
     </para>
-
    </desc>
   </method>
 
@@ -234,10 +293,19 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Rebuilt the overflow menu.
    </shortdesc>
    <desc>
-
+    <para>
+     Calling this function signals to the toolbar that the overflow menu item
+     for tool_item has changed. If the overflow menu is visible when this
+     function it called, the menu will be rebuilt.
+    </para>
+    <para>
+     The function must be called when the tool item changes what it will do
+     in response to the
+     <signalname class="GtkToolItem">create_menu_proxy</signalname> signal.
+    </para>
    </desc>
   </method>
 
@@ -249,15 +317,20 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the menu item for the overflow menu.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     Returns the <classname>GtkMenuItem</classname> that was last set
+     by <function class="GtkToolItem">set_proxy_menu_item</function>, ie. the
+     <classname>GtkMenuItem</classname> that is going to appear in the
+     overflow menu.
+    </para>
+    <para>
+     See also:
      <function class="GtkToolItem">get_proxy_menu_item</function>, 
      <function class="GtkToolItem">set_proxy_menu_item</function>
     </para>
-
    </desc>
   </method>
 
@@ -269,14 +342,17 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets if the menu item shall take more space then necessary.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     Sets if the menu item shall take more space then necessary if
+     the toolbar provides that space.
+    </para>
+    <para>
+     See also:
      <function class="GtkToolItem">get_expand</function>
     </para>
-
    </desc>
   </method>
 
@@ -288,14 +364,18 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    If the item shall have the same size as all other items.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     Sets whether the tool item is to be allocated the same size as other
+     homogeneous items. The effect is that all homogeneous items will have
+     the same width as the widest of the items.
+    </para>
+    <para>
+     See also:
      <function class="GtkToolItem">get_homogeneous</function>
     </para>
-
    </desc>
   </method>
 
@@ -307,14 +387,22 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Whether the tool item should be considered important.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     Sets whether the tool item should be considered important. The
+     <classname>GtkToolButton</classname> class uses this property to determine
+     whether to show or hide its label when the toolbar style is
+     <optionname enum="GtkToolbarStyle">Gtk::TOOLBAR_BOTH_HORIZ</optionname>.
+     The result is that only tool buttons with the 
+     <property class="GtkToolItem">is_important</property> property set have
+     labels, an effect known as "priority text"
+    </para>
+    <para>
+     See also:
      <function class="GtkToolItem">get_is_important</function>
     </para>
-
    </desc>
   </method>
 
@@ -323,19 +411,24 @@
     <funcprototype>
      <funcdef>void <function>set_proxy_menu_item</function></funcdef>
      <paramdef>string <parameter>menu_item_id</parameter></paramdef>
-     <paramdef>GtkWidget <parameter>menu_item</parameter></paramdef>
+     <paramdef><classname>GtkWidget</classname> <parameter>menu_item</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the menu item used in the overflow menu.
    </shortdesc>
    <desc>
     <para>
-     See also: 
-     <function class="GtkToolItem">get_proxy_menu_item</function>, 
+     Sets the <classname>GtkMenuItem</classname> used in the toolbar overflow
+     menu. The <parameter>menu_item_id</parameter> is used to identify the
+     caller of this function and should also be used with
+     <function class="GtkToolItem">get_proxy_menu_item</function>.
+    </para>
+    <para>
+     See also:
+     <function class="GtkToolItem">get_proxy_menu_item</function>,
      <function class="GtkToolItem">retrieve_proxy_menu_item</function>
     </para>
-
    </desc>
   </method>
 
@@ -343,16 +436,19 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_tooltip</function></funcdef>
-     <paramdef>GtkTooltips <parameter>tooltips</parameter></paramdef>
+     <paramdef><classname>GtkTooltips</classname> <parameter>tooltips</parameter></paramdef>
      <paramdef>string <parameter><optional>tip_text = null</optional></parameter></paramdef>
      <paramdef>string <parameter><optional>tip_private = null</optional></parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the tooltip.
    </shortdesc>
    <desc>
-
+    <para>
+     Sets the tooltip for this item in the given
+     <parameter>tooltips</parameter> object.
+    </para>
    </desc>
   </method>
 
@@ -364,14 +460,20 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets whether toolitem has a drag window.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     Sets whether toolitem has a drag window. When <literal>true</literal> the
+     toolitem can be used as a drag source through
+     <function class="Gtk">drag_source_set</function>. When the tool item has
+     a drag window it will intercept all events, even those that would
+     otherwise be sent to a child of toolitem.
+    </para>
+    <para>
+     See also:
      <function class="GtkToolItem">get_use_drag_window</function>
     </para>
-
    </desc>
   </method>
 
@@ -383,14 +485,16 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets if the item is visibl on horizontal toolbars.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     Sets if the item is visibl on horizontal toolbars.
+    </para>
+    <para>
+     See also:
      <function class="GtkToolItem">get_visible_horizontal</function>
     </para>
-
    </desc>
   </method>
 
@@ -402,69 +506,189 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets if the item is visibl on vertical toolbars.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     Sets if the item is visibl on vertical toolbars.
+    </para>
+    <para>
+     See also:
      <function class="GtkToolItem">get_visible_vertical</function>
     </para>
-
    </desc>
   </method>
-
  </methods>
 
- <signals>
+ <properties>
+  <prop id="gtk.gtktoolitem.property.is_important" type="rw">
+   <fieldname>is-important</fieldname>
+   <fieldtype>bool</fieldtype>
+   <shortdesc>
+       Whether the toolbar item is considered important.
+   </shortdesc>
+   <desc>
+    <para>
+     Whether the toolbar item is considered important.
+     When <literal>true</literal>, toolbar buttons show text in
+     <optionname enum="GtkToolbarStyle">Gtk::TOOLBAR_BOTH_HORIZ</optionname>
+     mode.
+    </para>
+    <para>
+     Default is <literal>false</literal>.
+    </para>
+    <para>
+     See also:
+     <function class="GtkWindow">get_is_important</function>,
+     <function class="GtkWindow">set_is_important</function>
+    </para>
+   </desc>
+  </prop>
 
+  <prop id="gtk.gtktoolitem.property.visible_horizontal" type="rw">
+   <fieldname>visible-horizontal</fieldname>
+   <fieldtype>bool</fieldtype>
+   <shortdesc>
+    Whether the item is visible on a horizontal toolbar.
+   </shortdesc>
+   <desc>
+    <para>
+     Whether the toolbar item is visible when the toolbar is
+     in a horizontal orientation.
+    </para>
+    <para>
+     Default is <literal>true</literal>.
+    </para>
+    <para>
+     See also:
+     <function class="GtkWindow">get_visible_horizontal</function>,
+     <function class="GtkWindow">set_visible_horizontal</function>
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtktoolitem.property.visible_vertical" type="rw">
+   <fieldname>visible-vertical</fieldname>
+   <fieldtype>bool</fieldtype>
+   <shortdesc>
+    Whether the item is visible on a vertical toolbar.
+   </shortdesc>
+   <desc>
+    <para>
+     Whether the toolbar item is visible when the toolbar is
+     in a vertical orientation.
+    </para>
+    <para>
+     Default is <literal>true</literal>.
+    </para>
+    <para>
+     See also:
+     <function class="GtkWindow">get_visible_vertical</function>,
+     <function class="GtkWindow">set_visible_vertical</function>
+    </para>
+   </desc>
+  </prop>
+ </properties>
+
+ <signals>
   <signal id="gtk.gtktoolitem.signal.create-menu-proxy">
    <signalname>create-menu-proxy</signalname>
    <funcsynopsis>
     <funcprototype>
      <funcdef>bool <cbfunction>callback</cbfunction></funcdef>
-     <paramdef>GtkToolItem <parameter>toolitem</parameter></paramdef>
+     <paramdef><classname>GtkToolItem</classname> <parameter>toolitem</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
+    The toolbar needs information about the overflow menu appearance.
    </shortdesc>
    <desc>
-
+    <para>
+     This signal is emitted when the toolbar needs information from the tool
+     item about whether the item should appear in the toolbar overflow menu.
+    </para>
+    <para>
+     In response the tool item should either 
+     <itemizedlist>
+      <listitem>
+       call <function class="GtkToolItem">set_proxy_menu_item</function> with
+       a <literal>null</literal> pointer and return <literal>true</literal>
+       to indicate that the item should not appear in the overflow menu.
+      </listitem>
+      <listitem>
+       call <function class="GtkToolItem">set_proxy_menu_item</function> with
+       a new menu item and return <literal>true</literal>, or return
+       <literal>false</literal> to indicate that the signal was not handled by
+       the item. This means that the item will not appear in the overflow menu
+       unless a later handler installs a menu item.
+      </listitem>
+     </itemizedlist>
+    </para>
+    <para>
+     The toolbar may cache the result of this signal. When the tool item
+     changes how it will respond to this signal it must call
+     <function class="GtkToolItem">rebuild_menu</function> to invalidate the
+     cache and ensure that the toolbar rebuilds its overflow menu.
+    </para>
    </desc>
   </signal>
-  
+
   <signal id="gtk.gtktoolitem.signal.set-tooltip">
    <signalname>set-tooltip</signalname>
    <funcsynopsis>
     <funcprototype>
      <funcdef>bool <cbfunction>callback</cbfunction></funcdef>
-     <paramdef>GtkToolItem <parameter>toolitem</parameter></paramdef>
-     <paramdef>GtkTooltips <parameter>UNKNOWN</parameter></paramdef>
-     <paramdef><!-- was: gchararray -->XXX <parameter>UNKNOWN</parameter></paramdef>
-     <paramdef><!-- was: gchararray -->XXX <parameter>UNKNOWN</parameter></paramdef>
+     <paramdef><classname>GtkToolItem</classname> <parameter>toolitem</parameter></paramdef>
+     <paramdef><classname>GtkTooltips</classname> <parameter>tooltips</parameter></paramdef>
+     <paramdef>string <parameter>tip_text</parameter></paramdef>
+     <paramdef>string <parameter>tip_private</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
+    This signal is emitted when the toolitem's tooltip changes.
    </shortdesc>
    <desc>
-
+    <para>
+     This signal is emitted when the toolitem's tooltip changes.
+    </para>
+    <para>
+     Application developers can use
+     <function class="GtkToolItem">set_tooltip</function> to set the
+     item's tooltip.
+    </para>
    </desc>
   </signal>
-  
+
   <signal id="gtk.gtktoolitem.signal.toolbar-reconfigured">
    <signalname>toolbar-reconfigured</signalname>
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <cbfunction>callback</cbfunction></funcdef>
-     <paramdef>GtkToolItem <parameter>toolitem</parameter></paramdef>
+     <paramdef><classname>GtkToolItem</classname> <parameter>toolitem</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
+    Some toolbar property has changed.
    </shortdesc>
    <desc>
-
+    <para>
+     This signal is emitted when some property of the toolbar that the
+     item is a child of changes. For custom subclasses of
+     <classname>GtkToolItem</classname>, the default handler of this signal
+     use the functions:
+    </para>
+    <itemizedlist>
+     <listitem><function class="GtkToolbar">get_orientation</function></listitem>
+     <listitem><function class="GtkToolbar">get_style</function></listitem>
+     <listitem><function class="GtkToolbar">get_icon_size</function></listitem>
+     <listitem><function class="GtkToolbar">get_relief_style</function></listitem>
+    </itemizedlist>
+    <para>
+     to find out what the toolbar should look like and change
+     themselves accordingly.
+    </para>
    </desc>
   </signal>
-  
  </signals>
 
 </classentry>

@@ -1,5 +1,4 @@
-<?
-
+<?php
 $window = new GtkWindow;
 $window->set_default_size(120,120);
 
@@ -16,5 +15,5 @@ $vbox->pack_start($button, false, false);
 
 $window->add($vbox);
 $window->show_all();
-gtk::main();
+Gtk::main();
 ?>

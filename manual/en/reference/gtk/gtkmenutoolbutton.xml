@@ -3,16 +3,25 @@
  <classmeta>
   <classtitle>GtkMenuToolButton</classtitle>
   <classparent>GtkToolButton</classparent>
+  <classimage fileref="&directory.images;/reference/gtk/gtkmenutoolbutton.png"/>
   <shortdesc>
    A menu item that shows both a button and a drop down menu.
   </shortdesc>
   <desc>
-
+   <para>
+    This tool item class represents a normal button with a button on the right
+    displaying an arrow. Pressing it will popup the attached
+    <classname>GtkMenu</classname>.
+   </para>
+   <para>
+    If no menu is attached with
+    <function class="GtkMenuToolButton">set_menu</function>,
+    the arrow is greyed out.
+   </para>
   </desc>
  </classmeta>
 
  <constructors>
-
   <constructor id="gtk.gtkmenutoolbutton.constructor">
    <funcsynopsis>
     <funcprototype>
@@ -22,33 +31,47 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Creates a new menu tool button.
    </shortdesc>
    <desc>
-
+    <para>
+     Creates a new <classname>GtkMenuToolButton</classname> with the specified
+     icon widget and label text. Since there is no new_from_stock static
+     method, you should create the <classname>GtkImage</classname> widget
+     with the <literal>new_from_stock</literal> constructor method.
+    </para>
+    <example>
+     <title>Open toolbar button with dropdown file menu</title>
+     <programlisting role="php">
+      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+                  href="&directory.examples;/reference/gtk/gtkmenutoolbutton/constructor.phpw" parse="text">
+       <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+      </xi:include>
+     </programlisting>
+    </example>
    </desc>
   </constructor>
-
  </constructors>
 
  <methods>
-
   <method id="gtk.gtkmenutoolbutton.method.get_menu">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>GtkWidget <function>get_menu</function></funcdef>
+     <funcdef><classname>GtkWidget</classname> <function>get_menu</function></funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Retrieves the attached menu.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     Returns the menu widget attached to the button.
+    </para>
+    <para>
+     See also:
      <function class="GtkMenuToolButton">set_menu</function>
     </para>
-
    </desc>
   </method>
 
@@ -56,16 +79,19 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_arrow_tooltip</function></funcdef>
-     <paramdef>GtkTooltips <parameter>tooltips</parameter></paramdef>
+     <paramdef><classname>GtkTooltips</classname> <parameter>tooltips</parameter></paramdef>
      <paramdef>string <parameter>tip_text</parameter></paramdef>
      <paramdef>string <parameter><optional>tip_private = null</optional></parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Set the tooltip for the arrow button.
    </shortdesc>
    <desc>
-
+   <para>
+    Sets the tooltip text for the dropdown button. See the
+    <classname>GtkTooltips</classname> class for more information.
+   </para>
    </desc>
   </method>
 
@@ -73,40 +99,63 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_menu</function></funcdef>
-     <paramdef>GtkWidget <parameter>menu</parameter></paramdef>
+     <paramdef><classname>GtkWidget</classname> <parameter>menu</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Attaches a menu to the button.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     Attaches the given widget, most times a <classname>GtkMenu</classname>
+     object, to the button.
+    </para>
+    <para>
+     See also:
      <function class="GtkMenuToolButton">get_menu</function>
     </para>
-
    </desc>
   </method>
-
  </methods>
 
- <signals>
+ <properties>
+  <prop id="gtk.gtkmenutoolbutton.property.menu" type="rw">
+   <fieldname>menu</fieldname>
+   <fieldtype><classname>GtkWidget</classname></fieldtype>
+   <shortdesc>
+    Menu widget.
+   </shortdesc>
+   <desc>
+    <para>
+     The menu widget attached to the button.
+    </para>
+    <para>
+     See also:
+     <function class="GtkWindow">get_menu</function>,
+     <function class="GtkWindow">set_menu</function>
+    </para>
+   </desc>
+  </prop>
+ </properties>
 
+ <signals>
   <signal id="gtk.gtkmenutoolbutton.signal.show-menu">
    <signalname>show-menu</signalname>
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <cbfunction>callback</cbfunction></funcdef>
-     <paramdef>GtkMenuToolButton <parameter>menutoolbutton</parameter></paramdef>
+     <paramdef><classname>GtkMenuToolButton</classname> <parameter>menutoolbutton</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
+    The dropdown menu is being shown.
    </shortdesc>
    <desc>
-
+    <para>
+     This signal is emitted whenever the dropdown menu is to be shown.
+    </para>
    </desc>
   </signal>
-  
  </signals>
 
 </classentry>

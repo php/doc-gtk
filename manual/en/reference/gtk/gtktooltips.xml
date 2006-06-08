@@ -7,12 +7,30 @@
    An object for managing a collection of tooltips.
   </shortdesc>
   <desc>
-
+   <para>
+    Tooltips are the messages that appear next to a widget when the mouse
+    pointer is held over it for a short amount of time. They are especially
+    helpful for adding more verbose descriptions of things such as buttons
+    in a toolbar.
+   </para>
+   <para>
+    An individual tooltip belongs to a group of tooltips. A group is created
+    with the constructor. Every tooltip in the group can then be turned off
+    with a call to <function class="GtkTooltips">disable</function> and
+    enabled with <function class="GtkTooltips">enable</function>.
+   </para>
+   <note>
+    <para>
+     Tooltips can only be set on widgets which have their own X window.
+     To add a tooltip to a widget that doesn't have its own window, place
+     the widget inside a <classname>GtkEventBox</classname> and add a tooltip
+     to that instead.
+    </para>
+   </note>
   </desc>
  </classmeta>
 
  <constructors>
-
   <constructor id="gtk.gtktooltips.constructor">
    <funcsynopsis>
     <funcprototype>
@@ -21,17 +39,28 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Creates a new tooltips object.
    </shortdesc>
    <desc>
-
+    <para>
+     Creates a new tooltips object. After instantiating the object,
+     you can begin to add tooltips for widgets with
+     <function class="GtkTooltips">set_tip</function>.
+    </para>
+    <example>
+     <title>Adding a tooltip to a button</title>
+     <programlisting role="php">
+      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+                  href="&directory.examples;/reference/gtk/gtktooltips/constructor.phpw" parse="text">
+       <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+      </xi:include>
+     </programlisting>
+    </example>
    </desc>
   </constructor>
-
  </constructors>
 
  <methods>
-
   <method id="gtk.gtktooltips.method.disable">
    <funcsynopsis>
     <funcprototype>
@@ -40,10 +69,14 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Disables the tooltips.
    </shortdesc>
    <desc>
-
+    <para>
+     Disables the tips for this tooltips object.
+     You can group tooltips for widgets by using multiple
+     tooltips objects for different widgets.
+    </para>
    </desc>
   </method>
 
@@ -55,10 +88,12 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Enables the tooltips.
    </shortdesc>
    <desc>
-
+    <para>
+     Enables the tips in this tooltip widget.
+    </para>
    </desc>
   </method>
 
@@ -70,10 +105,16 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Internal use only.
    </shortdesc>
    <desc>
-
+    <para>
+     Ensures that the window used for displaying the given tooltips is created.
+    </para>
+    <para>
+     Applications should never have to call this function, since
+     GTK+ takes care of this.
+    </para>
    </desc>
   </method>
 
@@ -85,14 +126,16 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Set the amount of time until the tips appear.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     Sets the amount of time in seconds until the tips appear.
+    </para>
+    <para>
+     See also:
      <fieldname class="GtkTooltips">delay</fieldname>
     </para>
-
    </desc>
   </method>
 
@@ -100,23 +143,25 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_tip</function></funcdef>
-     <paramdef>GtkWidget <parameter>widget</parameter></paramdef>
+     <paramdef><classname>GtkWidget</classname> <parameter>widget</parameter></paramdef>
      <paramdef>string <parameter>tip_text</parameter></paramdef>
      <paramdef>string <parameter><optional>tip_private = null</optional></parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Set the tooltip for a widget.
    </shortdesc>
    <desc>
-
+    <para>
+     Sets the tooltip for the given widget. The second parameter is optional
+     and not shown by default. To make it visible, you could use a
+     <classname>GtkTipsQuery</classname>.
+    </para>
    </desc>
   </method>
-
  </methods>
 
  <fields>
-
   <field id="gtk.gtktooltips.field.active_tips_data" type="ro">
    <fieldname>active_tips_data</fieldname>
    <fieldtype></fieldtype>
@@ -200,7 +245,6 @@
 
    </desc>
   </field>
-
  </fields>
 
 </classentry>

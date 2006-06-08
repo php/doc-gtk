@@ -41,6 +41,15 @@
       </xsl:attribute>
      </type>
 
+     <type title="properties">
+      <xsl:attribute name="existing">
+       <xsl:value-of select="count(properties/prop)"/>
+      </xsl:attribute>
+      <xsl:attribute name="missing">
+       <xsl:value-of select="count(properties/prop[normalize-space(desc)='' or normalize-space(shortdesc)=''])"/>
+      </xsl:attribute>
+     </type>
+
      <type title="fields">
       <xsl:attribute name="existing">
        <xsl:value-of select="count(fields/field)"/>

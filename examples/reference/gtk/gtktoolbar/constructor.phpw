@@ -1,0 +1,48 @@
+<?php
+//Toolbar example: create a toolbar and add some buttons
+
+//Create a new toolbar widget
+$tb = new GtkToolbar();
+//Let the toolbar take the space it needs
+$tb->set_show_arrow(false);
+
+//"New" toolbar button with stock icon
+$new    = GtkToolButton::new_from_stock(Gtk::STOCK_NEW);
+//Connect the "clicked" signal so we know when the user
+// clicks the button
+$new->connect_simple('clicked', 'onClickedToolButton', 'new');
+//Append the button to the toolbar (-1 means end of the toolbar)
+$tb->insert($new, -1);
+
+//Add another button, "open"
+$open   = GtkToolButton::new_from_stock(Gtk::STOCK_OPEN);
+$open->connect_simple('clicked', 'onClickedToolButton', 'open');
+$tb->insert($open, -1);
+
+//Separate new/open from save/saveas
+$tb->insert(new GtkSeparatorToolItem(), -1);
+
+//And a third one
+$save   = GtkToolButton::new_from_stock(Gtk::STOCK_SAVE);
+$save->connect_simple('clicked', 'onClickedToolButton', 'save');
+$tb->insert($save, -1);
+
+//The last one
+$saveas = GtkToolButton::new_from_stock(Gtk::STOCK_SAVE_AS);
+$saveas->connect_simple('clicked', 'onClickedToolButton', 'saveas');
+$tb->insert($saveas, -1);
+
+
+function onClickedToolButton($action)
+{
+    //Here you can handle the toolbar actions
+    echo 'You clicked the "' . $action . '" button' . "\r\n";
+}
+
+//Standard window that has the toolbar as only child
+$window = new GtkWindow();
+$window->add($tb);
+$window->connect_simple('destroy', array('Gtk', 'main_quit'));
+$window->show_all();
+Gtk::main();
+?>

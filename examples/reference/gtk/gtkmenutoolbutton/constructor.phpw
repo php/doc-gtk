@@ -1,0 +1,34 @@
+<?php
+//GtkMenuToolButton example
+
+//Create a new toolbar widget
+$tb = new GtkToolbar();
+
+//Add an "open" button
+$open   = new GtkMenuToolButton(
+    GtkImage::new_from_stock(
+        Gtk::STOCK_OPEN,
+        Gtk::ICON_SIZE_SMALL_TOOLBAR
+    ),
+    'Open'
+);
+$tb->insert($open, -1);
+
+//create a menu that will be added to the toolbutton later
+$menu = new GtkMenu();
+$menu->add(new GtkMenuItem('File 1'));
+$menu->add(new GtkMenuItem('File 2'));
+$menu->add(new GtkMenuItem('File 3'));
+//set the menu and all menuitem visible
+$menu->show_all();
+//attach the menu to the menu tool button
+$open->set_menu($menu);
+
+
+//Standard window that has the toolbar as only child
+$window = new GtkWindow();
+$window->add($tb);
+$window->connect_simple('destroy', array('Gtk', 'main_quit'));
+$window->show_all();
+Gtk::main();
+?>

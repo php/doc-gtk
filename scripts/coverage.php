@@ -1,14 +1,15 @@
 <?php
 /**
-* Documentation coverage analysis generator
+*   Documentation coverage analysis generator
 *
-* I chose to use a separate xsl file as this seemed to be
-* more easy
+*   I chose to use a separate xsl file as this seemed to be
+*   more easy.
+*
+*   The script calls the script "gen_manual.sh en coverage"
+*   and echoes the generated analysis html.
 *
 * @author Christian Weiske <cweiske@php.net>
 */
-
-
 class DocCoverageAnalysis
 {
     protected $typestemplate = array(
@@ -21,6 +22,10 @@ class DocCoverageAnalysis
             'existing' => 0
         ),
         'signals' => array(
+            'missing'  => 0,
+            'existing' => 0
+        ),
+        'properties' => array(
             'missing'  => 0,
             'existing' => 0
         ),
@@ -54,7 +59,7 @@ table {
     border: 1px solid black;
     border-collapse: collapse;
 }
-td {
+td, th {
     border: 1px solid grey;
 }
 table tr.classset td, table tr.documentation td {
@@ -88,8 +93,16 @@ EOD;
     protected function calcCoverage($doc)
     {
         $output = '<thead>' . "\r\n"
-            . '<tr><th rowspan="2">Name</th><th colspan="2">Constructors</th><th colspan="2">Methods</th><th colspan="2">Signals</th><th colspan="2">Fields</th></tr>' . "\r\n"
             . '<tr>'
+            . '<th rowspan="2">Name</th>'
+            . '<th colspan="2">Constructors</th>'
+            . '<th colspan="2">Methods</th>'
+            . '<th colspan="2">Signals</th>'
+            . '<th colspan="2">Properties</th>'
+            . '<th colspan="2">Fields</th>'
+            . '</tr>' . "\r\n"
+            . '<tr>'
+            . '<th>Done</th><th>All</th>'
             . '<th>Done</th><th>All</th>'
             . '<th>Done</th><th>All</th>'
             . '<th>Done</th><th>All</th>'
@@ -111,16 +124,14 @@ EOD;
 
         $output .= '<tr class="documentation">'
             . '<th>Documentation</th>'
-            . $this->getTypeDisplay($types['constructors'])
-            . $this->getTypeDisplay($types['methods'])
-            . $this->getTypeDisplay($types['signals'])
-            . $this->getTypeDisplay($types['fields'])
+            . $this->getTypesDisplay($types)
             . '</tr>' . "\r\n";
 
-        $output .= '<tr><th>All in all</th><td colspan="4"></td>'
+        $output .= '<tr><th>All in all</th><td colspan="2"></td>'
             . '<th>' . ($allExisting - $allMissing) . '</th>'
             . '<th>' . $allExisting . '</th>'
-            . '<th class="allpercent" colspan="2">'
+            . '<th colspan="2"></th>'
+            . '<th class="allpercent" colspan="4">'
               . number_format(100 / $allExisting * ($allExisting - $allMissing), 2)
              . '%</th>'
             . '</tr>' . "\r\n"
@@ -147,10 +158,7 @@ EOD;
 
         $output .= '<tr class="classset">'
             . '<th>' . htmlspecialchars((string)$classset['title']) . '</th>'
-            . $this->getTypeDisplay($types['constructors'])
-            . $this->getTypeDisplay($types['methods'])
-            . $this->getTypeDisplay($types['signals'])
-            . $this->getTypeDisplay($types['fields'])
+            . $this->getTypesDisplay($types)
             . '</tr>' . "\r\n";
 
         return array($output, $allExisting, $allMissing, $types);
@@ -174,15 +182,22 @@ EOD;
         }
 
         $output = '<tr><td>' . htmlspecialchars((string)$class['title']) . '</td>'
-            . $this->getTypeDisplay($types['constructors'])
-            . $this->getTypeDisplay($types['methods'])
-            . $this->getTypeDisplay($types['signals'])
-            . $this->getTypeDisplay($types['fields'])
+            . $this->getTypesDisplay($types)
             . '</tr>' . "\r\n";
 
         return array($output, $allExisting, $allMissing, $types);
     }//public function calcClass($class)
 
+
+
+    function getTypesDisplay($types)
+    {
+        return $this->getTypeDisplay($types['constructors'])
+            . $this->getTypeDisplay($types['methods'])
+            . $this->getTypeDisplay($types['signals'])
+            . $this->getTypeDisplay($types['properties'])
+            . $this->getTypeDisplay($types['fields']);
+    }//function getTypesDisplay($types)
 
 
     function getTypeDisplay($type)
@@ -225,8 +240,7 @@ EOD;
         return $types;
     }//protected function addTypes($types, $newTypes)
 
-}
-
+}//class DocCoverageAnalysis
 
 $da = new DocCoverageAnalysis();
 echo $da->run();

@@ -7,12 +7,14 @@
    A toolbar button that can be toggled on or off.
   </shortdesc>
   <desc>
-
+   <para>
+    A <classname>GtkToolItem</classname> containing a
+    toggle button.
+   </para>
   </desc>
  </classmeta>
 
  <constructors>
-
   <constructor id="gtk.gtktoggletoolbutton.constructor">
    <funcsynopsis>
     <funcprototype>
@@ -21,10 +23,12 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Creates a new toggle tool button.
    </shortdesc>
    <desc>
-
+    <para>
+     Creates a new toggle tool button.
+    </para>
    </desc>
   </constructor>
 
@@ -32,21 +36,21 @@
    <funcsynopsis>
     <funcprototype>
     <funcdef> <function>GtkToggleToolButton::new_from_stock</function></funcdef>
-    <paramdef>string <parameter>stock_id</parameter></paramdef>
+    <paramdef><enumname>GtkStockItems</enumname> <parameter>stock_id</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Creates a new toggle tool button based on a stock item.
    </shortdesc>
    <desc>
-
+    <para>
+     Creates a new toggle tool button based on a stock item.
+    </para>
    </desc>
   </constructor>
-
  </constructors>
 
  <methods>
-
   <method id="gtk.gtktoggletoolbutton.method.get_active">
    <funcsynopsis>
     <funcprototype>
@@ -55,14 +59,16 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    If the button is toggled active.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     If the button is toggled active.
+    </para>
+    <para>
+     See also:
      <function class="GtkToggleToolButton">set_active</function>
     </para>
-
    </desc>
   </method>
 
@@ -74,36 +80,39 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the button to active state.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     Sets the button to active (selected) state.
+    </para>
+    <para>
+     See also:
      <function class="GtkToggleToolButton">get_active</function>
     </para>
-
    </desc>
   </method>
-
  </methods>
 
  <signals>
-
   <signal id="gtk.gtktoggletoolbutton.signal.toggled">
    <signalname>toggled</signalname>
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <cbfunction>callback</cbfunction></funcdef>
-     <paramdef>GtkToggleToolButton <parameter>toggletoolbutton</parameter></paramdef>
+     <paramdef><classname>GtkToggleToolButton</classname> <parameter>toggletoolbutton</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
+    The state has been changed.
    </shortdesc>
    <desc>
-
+    <para>
+     Called when the active state of the button has been toggled.
+    </para>
    </desc>
   </signal>
-  
+
  </signals>
 
 </classentry>
