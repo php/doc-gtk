@@ -1,0 +1,24 @@
+<?php
+// Create a new window.
+$window = new GtkWindow();
+
+// Set the window up to close cleanly.
+$window->connect_simple('destroy', array('Gtk', 'main_quit'));
+
+// Create a status bar.
+$status = new GtkStatusbar();
+
+// Push a message onto the message stack.
+// We need a context id.
+$context_id = $status->get_context_id('example');
+$status->push($context_id, 'Andrei is dreamy.');
+
+// Add the combobox to the window.
+$window->add($status);
+
+// Show the window and its contents.
+$window->show_all();
+
+// Start the main loop.
+Gtk::main();
+?>
