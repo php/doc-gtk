@@ -122,6 +122,10 @@
      Counting begins at the left side of the icon.
     </para>
     <para>
+     The item width defaults to <literal>-1</literal>, meaning that the icon
+     view will determine the best suitable width.
+    </para>
+    <para>
      See also: 
      <function class="GtkIconView">set_item_width</function>
     </para>
@@ -150,6 +154,9 @@
      named box property.
     </para>
     <para>
+     The default margin is <literal>6</literal>.
+    </para>
+    <para>
      See also: 
      <function class="GtkIconView">set_margin</function>
     </para>
@@ -172,7 +179,7 @@
      information to be displayed. The markup column must be of type 
      string. If this property and the <fieldname>text-column</fieldname>
      property are both set to column numbers, it overrides the text column.
-     If both are set to -1, no texts are displayed.
+     If both are set to <literal>-1<literal>, no text is displayed.
     </para>
     <para>
      See also: 
@@ -184,7 +191,9 @@
   <method id="gtk.gtkiconview.method.get_model">
    <funcsynopsis>
     <funcprototype>
-     <funcdef><classname>GtkTreeStore</classname> <function>get_model</function></funcdef>
+     <funcdef>
+      <classname>GtkTreeStore</classname> <function>get_model</function>
+     </funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
@@ -205,18 +214,21 @@
   <method id="gtk.gtkiconview.method.get_orientation">
    <funcsynopsis>
     <funcprototype>
-     <funcdef><enumname>GtkOrientation</enumname> <function>get_orientation</function></funcdef>
+     <funcdef>
+      <enumname>GtkOrientation</enumname> <function>get_orientation</function>
+     </funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Horizontal or vertical orientation of the icon labels.
+    Returns the orientation of the icon labels.
    </shortdesc>
    <desc>
     <para>
      Returns the orientation of the icon's label: 
-     <literal>Gtk::ORIENTATION_HORIZONTAL</literal> means that the label
-     is left of the icon, and <literal>Gtk::ORIENTATION_VERTICAL</literal>
+     <optionname enum="GtkOrientation">Gtk::ORIENTATION_HORIZONTAL</optionname>
+     means that the label is left of the icon, and 
+     <optionname enum="GtkOrientation">Gtk::ORIENTATION_VERTICAL</optionname>
      shows the text below the icon.
     </para>
     <para>
@@ -229,16 +241,24 @@
   <method id="gtk.gtkiconview.method.get_path_at_pos">
    <funcsynopsis>
     <funcprototype>
-     <funcdef> <function>get_path_at_pos</function></funcdef>
+     <funcdef>array <function>get_path_at_pos</function></funcdef>
      <paramdef>int <parameter>x</parameter></paramdef>
      <paramdef>int <parameter>y</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-       FIXME - CAN'T GET WORKING
+    Returns the path to the item at the given position.
    </shortdesc>
    <desc>
-
+    <para>
+     Returns the path to the item <parameter>x</parameter> pixels from the left
+     and <parameter>y</parameter> pixels from the top of the widget. If no item
+     is found at the given position, <literal>null</literal> will be returned.
+    </para>
+    <para>
+     See also:
+     <function class="GtkIconView">get_item_at_pos</function>
+    </para>
    </desc>
   </method>
 
@@ -287,15 +307,24 @@
   <method id="gtk.gtkiconview.method.get_selected_items">
    <funcsynopsis>
     <funcprototype>
-     <funcdef> <function>get_selected_items</function></funcdef>
+     <funcdef>array <function>get_selected_items</function></funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    FIXME: NOT IMPLEMENTED
+    Returns an array of paths for the selected items.
    </shortdesc>
    <desc>
-
+    <para>
+     Returns an arrary of paths for the selected items. Each element of the 
+     returned array corresponds to the path of one of the selected items. The
+     return value will be an array even if the selection mode is 
+     <optionname enum="GtkSelectionMode">Gtk::SELECTION_MULTIPLE</optionname>.
+    </para>
+    <para>
+     See also:
+     <function class="GtkIconView">set_selection_mode</function>
+    </para>
    </desc>
   </method>
 
