@@ -21,10 +21,22 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Creates a new <classname>GtkEntryCompletion</classname> object.
    </shortdesc>
    <desc>
-
+    <para>
+     Creates a new <classname>GtkEntryCompletion</classname> object.
+    </para>
+    <example>
+     <title>A GtkEntryCompletion Sample.</title>
+     <programlisting role="php">
+       <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
+                   href="&directory.examples;/reference/gtk/gtkentrycompletion/constructor.phpw"
+                   parse="text">
+       <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+      </xi:include>
+     </programlisting>
+    </example>
    </desc>
   </constructor>
 
@@ -70,10 +82,14 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+     Returns the <classname>GtkEntry</classname> object that actually uses
+     this <classname>GtkEntryCompletion</classname>
    </shortdesc>
    <desc>
-
+    <para>
+     Returns the <classname>GtkEntry</classname> object that actually uses
+     this <classname>GtkEntryCompletion</classname>
+    </para>
    </desc>
   </method>
 
@@ -104,14 +120,18 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the minimum key length set for the <classname>GtkEntryCompletion</classname>.
    </shortdesc>
    <desc>
+    <para>
+     Returns the minimum key length set for the <classname>GtkEntryCompletion</classname>.
+     set by <function class="GtkEntryCompletion">set_minimum_key_length</function>
+     method.
+    </para>
     <para>
      See also: 
      <function class="GtkEntryCompletion">set_minimum_key_length</function>
     </para>
-
    </desc>
   </method>
 
@@ -123,9 +143,16 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the <classname>GtkTreeModel</classname> that the
+    <classname>GtkEntryCompletion</classname>
+    is using as data model.
    </shortdesc>
    <desc>
+    <para>
+     Returns the <classname>GtkTreeModel</classname> that the
+     <classname>GtkEntryCompletion</classname>
+     is using as data model. Returns NULL if the model is not set.
+    </para>
     <para>
      See also: 
      <function class="GtkEntryCompletion">set_model</function>
@@ -242,14 +269,22 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the minimum length of the search key.
    </shortdesc>
    <desc>
+    <para>
+     Sets the minimum length of the search key to the value specified by
+     <parameter>length</parameter>. This means that the key string
+     (contents of the <classname>GtkEntry</classname>) must be at least
+     <parameter>length</parameter> characters before a completion list
+     will be displayed. This is useful for long lists, where completing
+     using a small key will take too much time and will likely return a
+     too large dataset.
+    </para>
     <para>
      See also: 
      <function class="GtkEntryCompletion">get_minimum_key_length</function>
     </para>
-
    </desc>
   </method>
 
@@ -257,13 +292,21 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_model</function></funcdef>
-     <paramdef>void</paramdef>
+     <paramdef>GtkTreeModel <parameter>model</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+     Sets the <classname>GtkTreeModel</classname> to be used with the
+     <classname>GtkEntryCompletion</classname>.
    </shortdesc>
    <desc>
+    <para>
+     Sets the <classname>GtkTreeModel</classname> specified by <parameter>model</parameter>
+     to be used with the <classname>GtkEntryCompletion</classname>. A previously
+     <function class="GtkEntryCompletion">set_model</function>
+     will be removed before the new model is set. If model is NULL
+     or not specified, the old model will be unset.
+    </para>
     <para>
      See also: 
      <function class="GtkEntryCompletion">get_model</function>
@@ -299,14 +342,82 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+     Defines the what column of the <classname>GtkTreeModel</classname>
+     will be used as list for <classname>GtkEntryCompletion</classname>.
    </shortdesc>
    <desc>
-
+    <para>
+     The <function class="GtkEntryCompletion">set_text_column</function>
+     method defines the what column of the <classname>GtkTreeModel</classname>
+     (set by <function class="GtkEntryCompletion">set_model</function> method)
+     will be used as list for <classname>GtkEntryCompletion</classname>.
+     This method creates and adds a <classname>GtkCellRendererText</classname>
+     using the column specified by <parameter>column</parameter> as the source
+     for completion strings. If you don't use this method you will have to install
+     a <classname>GtkCellRendererText</classname> in the
+     <classname>GtkEntryCompletion</classname> and set a match function using the
+     <function class="GtkEntryCompletion">set_match_func</function> method to
+     display the completion strings.
+    </para>
    </desc>
   </method>
 
  </methods>
+
+ <properties>
+
+  <prop id="gtk.gtkentrycompletion.property.model" type="rw">
+   <propname>model</propname>
+   <proptype>GtkTreeModel</proptype>
+   <shortdesc>
+    The data model used for the <classname>GtkEntryCompletion</classname>.
+   </shortdesc>
+   <desc>
+    <para>
+     The data model used for the <classname>GtkEntryCompletion</classname>
+     to display the list of strings.
+    </para>
+    <para>
+     See also:
+     <function class="GObject">set_property</function>
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtkentrycompletion.property.minimum-key-length" type="rw">
+   <propname>minimum-key-length</propname>
+   <proptype>integer</proptype>
+   <shortdesc>
+    Minimum length of the search key in order to look up matches.
+   </shortdesc>
+   <desc>
+    <para>
+     Minimum length of the search key in order to look up matches.
+    </para>
+    <para>
+     See also:
+     <function class="GObject">set_property</function>
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtkentrycompletion.property.text-column" type="rw">
+   <propname>text-column</propname>
+   <proptype>integer</proptype>
+   <shortdesc>
+    The column of the model containing the strings.
+   </shortdesc>
+   <desc>
+    <para>
+     The column of the model containing the strings.
+    </para>
+    <para>
+     See also:
+     <function class="GObject">set_property</function>
+    </para>
+   </desc>
+  </prop>
+ </properties>
 
  <signals>
 
@@ -322,7 +433,6 @@
    <shortdesc>
    </shortdesc>
    <desc>
-
    </desc>
   </signal>
   
@@ -348,14 +458,18 @@
     <funcprototype>
      <funcdef>bool <cbfunction>callback</cbfunction></funcdef>
      <paramdef>GtkEntryCompletion <parameter>entrycompletion</parameter></paramdef>
-     <paramdef><!-- was: GtkTreeModel -->XXX <parameter>UNKNOWN</parameter></paramdef>
-     <paramdef><!-- was: GtkTreeIter -->XXX <parameter>UNKNOWN</parameter></paramdef>
+     <paramdef>GtkTreeModelFilter<parameter>treemodelfilter</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
+    The "match-selected" signal is emitted when a completion string was selected from the
+    completion list.
    </shortdesc>
    <desc>
-
+    <para>
+    The "match-selected" signal is emitted when a completion string was selected from the
+    completion list.
+    </para>
    </desc>
   </signal>
   
