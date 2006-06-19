@@ -1,0 +1,31 @@
+<?php
+$window = new GtkWindow;
+
+// creates the GtkEntry widget
+$entry = new GtkEntry();
+
+// creates the data model
+$store = new GtkListStore(Gtk::TYPE_STRING);
+
+// add values to the model
+$store->append(array('Aland'));
+$store->append(array('Albern'));
+$store->append(array('Alcott'));
+
+// creates the EntryCompletion object
+$completion = new GtkEntryCompletion;
+
+// sets the model
+$completion->set_model($store);
+
+// defines teh data column
+$completion->set_text_column(0);
+
+// defines the completion for the GtkEntry
+$entry->set_completion($completion);
+
+// show all
+$window->add($entry);
+$window->show_all();
+Gtk::Main();
+?>
