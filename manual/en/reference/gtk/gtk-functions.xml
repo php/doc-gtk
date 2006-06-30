@@ -704,7 +704,7 @@
   <method id="gtk.method.events_pending">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>int <function>events_pending</function></funcdef>
+     <funcdef>boolean <function>events_pending</function></funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
@@ -1547,6 +1547,11 @@ while (Gtk::events_pending()) {
 }
 ]]></programlisting>
     </informalexample>
+    <para>
+     Returns <literal>true</literal> if
+     <function class="Gtk">main_quit</function> has been called for the
+     innermost mainloop.
+    </para>
    </desc>
   </method>
 
