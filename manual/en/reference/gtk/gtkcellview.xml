@@ -3,11 +3,23 @@
  <classmeta>
   <classtitle>GtkCellView</classtitle>
   <classparent>GtkWidget</classparent>
+  <implements>GtkCellLayout</implements>
+
   <shortdesc>
    A widget for displaying a single cell of a GtkTreeModel.
   </shortdesc>
   <desc>
-
+   <para>
+    A GtkCellView displays a single row of a
+    <classname>GtkTreeModel</classname>, using cell renderers just like
+    <classname>GtkTreeView</classname>. GtkCellView doesn't support some
+    of the more complex features of <classname>GtkTreeView</classname>,
+    like cell editing and drag and drop.
+   </para>
+   <para>
+    The GtkCellView class is used in <classname>GtkComboBox</classname> which
+    is therefore capable of displaying several columns of one model at once.
+   </para>
   </desc>
  </classmeta>
 
@@ -21,63 +33,111 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Creates a new GtkCellView widget.
    </shortdesc>
    <desc>
+    <para>
+     Creates a new GtkCellView widget.
+    </para>
+   </desc>
+  </constructor>
 
+  <!-- FIXME: new_with_markup isn't implemented yet -->
+
+  <constructor id="gtk.gtkcellview.constructor.new_with_pixbuf">
+   <funcsynopsis>
+    <funcprototype>
+    <funcdef> <function>GtkCellView::new_with_pixbuf</function></funcdef>
+    <paramdef><classname>GdkPixbuf</classname> <parameter>pixbuf</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Creates a new GtkCellView widget and adds a pixbuf renderer.
+   </shortdesc>
+   <desc>
+    <para>
+     Creates a new GtkCellView widget, adds a
+     <classname>GtkCellRendererPixbuf</classname> to it, and makes its show the
+     pixbuf.
+    </para>
+   </desc>
+  </constructor>
+
+  <constructor id="gtk.gtkcellview.constructor.new_with_text">
+   <funcsynopsis>
+    <funcprototype>
+    <funcdef> <function>GtkCellView::new_with_text</function></funcdef>
+    <paramdef>string <parameter>text</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Creates a new GtkCellView widget and adds a text renderer.
+   </shortdesc>
+   <desc>
+    <para>
+     Creates a new GtkCellView widget, adds a
+     <classname>GtkCellRendererText</classname> to it, and makes its show
+     text.
+    </para>
    </desc>
   </constructor>
 
  </constructors>
 
  <methods>
-
   <method id="gtk.gtkcellview.method.get_cell_renderers">
    <funcsynopsis>
     <funcprototype>
-     <funcdef> <function>get_cell_renderers</function></funcdef>
+     <funcdef>array <function>get_cell_renderers</function></funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns all cell renderers.
    </shortdesc>
    <desc>
-
+    <para>
+     Returns the cell renderers which have been added to the cell view.
+    </para>
    </desc>
   </method>
 
   <method id="gtk.gtkcellview.method.get_displayed_row">
    <funcsynopsis>
     <funcprototype>
-     <funcdef> <function>get_displayed_row</function></funcdef>
+     <funcdef>int <function>get_displayed_row</function></funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the path of the row currently visible.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     Returns the path of the row that is shown currently.
+    </para>
+    <para>
+     See also:
      <function class="GtkCellView">set_displayed_row</function>
     </para>
-
    </desc>
   </method>
 
   <method id="gtk.gtkcellview.method.get_size_of_row">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>bool <function>get_size_of_row</function></funcdef>
-     <paramdef>void</paramdef>
+     <funcdef><classname>GtkRequisition</classname> <function>get_size_of_row</function></funcdef>
+     <paramdef>string <parameter>path</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the size needed to render the row.
    </shortdesc>
    <desc>
-
+    <para>
+     Returns the size needed by the view to display the model row
+     pointed to by <parameter>$path</parameter>.
+    </para>
    </desc>
   </method>
 
@@ -85,14 +145,16 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_background_color</function></funcdef>
-     <paramdef>void</paramdef>
+     <paramdef><classname>GdkColor</classname> <parameter>color</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the background color of the view.
    </shortdesc>
    <desc>
-
+    <para>
+     Sets the background color of the cell view.
+    </para>
    </desc>
   </method>
 
@@ -100,18 +162,24 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_displayed_row</function></funcdef>
-     <paramdef>void</paramdef>
+     <paramdef>string <parameter>path</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the row of the model to display.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     Sets the row of the model that is currently displayed by the GtkCellView.
+     If the path is unset (by passing <literal>null</literal>), then the
+     contents of the cellview "stick" at their last value; this is not
+     normally a desired result, but may be a needed intermediate state
+     if say, the model for the GtkCellView becomes temporarily empty.
+    </para>
+    <para>
+     See also:
      <function class="GtkCellView">get_displayed_row</function>
     </para>
-
    </desc>
   </method>
 
@@ -119,115 +187,19 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_model</function></funcdef>
-     <paramdef>void</paramdef>
+     <paramdef><classname>GtkTreeModel</classname> <parameter>model</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Set the model to display data from.
    </shortdesc>
    <desc>
-
+    <para>
+     Set the model to display data from. Pass <literal>null</literal> to unset
+     it.
+    </para>
    </desc>
   </method>
-
- <method id="gtk.gtkcellview.method.add_attribute">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef> <function>add_attribute</function></funcdef>
-      <paramdef><parameter>column</parameter></paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-  <desc>
-
-   </desc>
-  </method>
-  <method id="gtk.gtkcellview.method.clear">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef> <function>clear</function></funcdef>
-      <paramdef>void</paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-  <desc>
-
-   </desc>
-  </method>
-  <method id="gtk.gtkcellview.method.clear_attributes">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef> <function>clear_attributes</function></funcdef>
-      <paramdef><classname>GtkCellRenderer</classname><parameter>cell</parameter></paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-  <desc>
-
-   </desc>
-  </method>
-  <method id="gtk.gtkcellview.method.pack_end">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef> <function>pack_end</function></funcdef>
-      <paramdef><parameter><optional>expand</optional></parameter></paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-  <desc>
-
-   </desc>
-  </method>
-  <method id="gtk.gtkcellview.method.pack_start">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef> <function>pack_start</function></funcdef>
-      <paramdef><parameter><optional>expand</optional></parameter></paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-  <desc>
-
-   </desc>
-  </method>
-  <method id="gtk.gtkcellview.method.reorder">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef> <function>reorder</function></funcdef>
-      <paramdef><parameter>position</parameter></paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-  <desc>
-
-   </desc>
-  </method>
-  <method id="gtk.gtkcellview.method.set_attributes">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef> <function>set_attributes</function></funcdef>
-      <paramdef><parameter><optional>column</optional></parameter></paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-  <desc>
-
-   </desc>
-  </method>
-  </methods>
+ </methods>
 
 </classentry>

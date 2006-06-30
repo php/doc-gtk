@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<classentry id="gtk.gtkcelllayout" type="interface">
+ <classmeta>
+  <classtitle>GtkCellLayout</classtitle>
+  <classparent>GInterface</classparent>
+  <shortdesc>
+   An interface for packing cells.
+  </shortdesc>
+  <desc>
+   <para>
+    GtkCellLayout is an interface to be implemented by all objects which
+    want to provide a GtkTreeViewColumn-like API for packing cells, setting
+    attributes and data funcs.
+   </para>
+  </desc>
+ </classmeta>
+
+ <methods>
+  <method id="gtk.gtkcelllayout.method.add_attribute">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef> <function>add_attribute</function></funcdef>
+     <paramdef><classname>GtkCellRenderer</classname><parameter>cell</parameter></paramdef>
+     <paramdef>string <parameter>attribute</parameter></paramdef>
+     <paramdef>int <parameter>column</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Adds an model attribute to cell renderer mapping.
+   </shortdesc>
+   <desc>
+    <para>
+     Adds an attribute mapping to the list in the cell layout. The column
+     is the column of the model to get a value from, and the attribute is
+     the parameter on cell to be set from the value.
+    </para>
+    <para>
+     So for example if column 2 of the model contains strings, you could
+     have the "text" attribute of a <classname>GtkCellRendererText</classname>
+     get its values from column 2.
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkcelllayout.method.clear">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef> <function>clear</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Removes all renderers.
+   </shortdesc>
+   <desc>
+    <para>
+     Unsets all the mappings on all renderers on the cell layout
+     and removes all renderers from it.
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkcelllayout.method.clear_attributes">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef> <function>clear_attributes</function></funcdef>
+     <paramdef><classname>GtkCellRenderer</classname><parameter>cell</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Clears all existing attributes set.
+   </shortdesc>
+   <desc>
+    <para>
+     Clears all existing attributes previously set with
+     <function class="GtkCellLayout">set_attributes</function>.
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkcelllayout.method.pack_end">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef> <function>pack_end</function></funcdef>
+     <paramdef><classname>GtkCellRenderer</classname> <parameter>cell</parameter></paramdef>
+     <paramdef>bool <parameter><optional>expand</optional></parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Packs the cell to the end of the layout.
+   </shortdesc>
+   <desc>
+    <para>
+     Packs the cell to the end of the layout. If expand is
+     <literal>false</literal>, then the cell is allocated no more space
+     than it needs. Any unused space is divided evenly between cells
+     for which expand is <literal>true</literal>.
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkcelllayout.method.pack_start">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef> <function>pack_start</function></funcdef>
+     <paramdef><classname>GtkCellRenderer</classname> <parameter>cell</parameter></paramdef>
+     <paramdef>bool <parameter><optional>expand</optional></parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Packs the cell into the beginning of the layout.
+   </shortdesc>
+   <desc>
+    <para>
+     Packs the cell into the beginning of the layout. If expand is
+     <literal>false</literal>, then the cell is allocated no more space
+     than it needs. Any unused space is divided evenly between cells
+     for which expand is <literal>true</literal>.
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkcelllayout.method.reorder">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef> <function>reorder</function></funcdef>
+     <paramdef><classname>GtkCellRenderer</classname> <parameter>cell</parameter></paramdef>
+     <paramdef>int <parameter>position</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Moves the given cell to a certain position.
+   </shortdesc>
+   <desc>
+    <para>
+     Re-inserts <parameter>cell</parameter> at position. Note that cell
+     has already to be packed into the layout for this to function properly.
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkcelllayout.method.set_attributes">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef> <function>set_attributes</function></funcdef>
+     <paramdef>string <parameter>attribute1</parameter></paramdef>
+     <paramdef>int <parameter>column1</parameter></paramdef>
+     <paramdef>string <parameter><optional>attribute2</optional></parameter></paramdef>
+     <paramdef>int <parameter><optional>column2</optional></parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Sets a bunch of model attribute - cell renderer mappings.
+   </shortdesc>
+   <desc>
+    <para>
+     Sets the attributes in list as the attributes of the cell layout.
+     The attributes should be in attribute/column order, as in
+     <function class="GtkCellLayout">add_attribute</function>. All existing
+     attributes are removed, and replaced with the new attributes.
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkcelllayout.method.set_cell_data_func">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef> <function>set_cell_data_func</function></funcdef>
+     <paramdef><classname>GtkCellRenderer</classname> <parameter>cell</parameter></paramdef>
+     <paramdef><parameter>callback</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Sets a callback to set the value for a renderer.
+   </shortdesc>
+   <desc>
+    <para>
+     Sets the callback that determines the value for the given renderer.
+    </para>
+    <para>
+     The callback has the following parameters:
+    </para>
+    <para>
+     <literal>
+      callback(<classname>GtkCellLayout</classname> <parameter>cell_layout</parameter>,
+      <classname>GtkCellRenderer</classname> <parameter>cell</parameter>,
+      <classname>GtkTreeModel</classname> <parameter>tree_model</parameter>,
+      <classname>GtkTreeIter</classname> <parameter>iter</parameter> [,
+      <parameter><optional>user_data</optional></parameter>])
+     </literal>
+    </para>
+   </desc>
+  </method>
+
+ </methods>
+</classentry>
