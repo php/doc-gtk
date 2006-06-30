@@ -3,11 +3,50 @@
  <classmeta>
   <classtitle>GtkProgressBar</classtitle>
   <classparent>GtkProgress</classparent>
+  <classimage fileref="&directory.images;/reference/gtk/gtkprogressbar.png" border="1"/>
   <shortdesc>
    A widget for displaying incremental or continuous progress.
   </shortdesc>
   <desc>
-
+   <para>
+    The GtkProgressBar is typically used to display the progress of a long
+    running operation. It provides a visual clue that processing is underway.
+    The GtkProgressBar can be used in two different modes: percentage mode
+    and activity mode.
+   </para>
+   <para>
+    When an application can determine how much work needs to take place
+    (e.g. read a fixed number of bytes from a file) and can monitor its
+    progress, it can use the GtkProgressBar in percentage mode and the user
+    sees a growing bar indicating the percentage of the work that has been
+    completed. In this mode, the application is required to call
+    <function class="GtkProgressBar">set_fraction</function> periodically
+    to update the progress bar.
+   </para>
+   <para>
+    When an application has no accurate way of knowing the amount of work
+    to do, it can use the GtkProgressBar in activity mode, which shows
+    activity by a block moving back and forth within the progress area.
+    In this mode, the application is required to call
+    <function class="GtkProgressBar">pulse</function> perodically to update
+    the progress bar.
+   </para>
+   <para>
+    There is quite a bit of flexibility provided to control the appearance
+    of the GtkProgressBar. Functions are provided to control the orientation
+    of the bar, optional text can be displayed along with the bar,
+    and the step size used in activity mode can be set.
+   </para>
+   <note>
+    <para>
+     The progress bar is <emphasis>not</emphasis> updated after calling
+     <function class="GtkProgressBar">pulse</function> or
+     <function class="GtkProgressBar">set_fraction</function>, but in the
+     main loop. This means that, in a long running operation, you need
+     to let the UI update itself by using
+     <function class="Gtk">main_iteration</function>.
+    </para>
+   </note>
   </desc>
  </classmeta>
 
@@ -17,32 +56,32 @@
    <funcsynopsis>
     <funcprototype>
     <funcdef> <function>GtkProgressBar</function></funcdef>
-    <paramdef>void</paramdef>
+    <paramdef><classname>GtkAdjustment</classname> <parameter><optional>adjustment</optional></parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Creates a new progress bar.
    </shortdesc>
    <desc>
-
+    <para>
+     Creates a new progress bar.
+    </para>
+    <note>
+     <para>
+      Using the optional parameter is deprecated.
+     </para>
+    </note>
+    <example>
+     <title>Using a GtkProgressBar</title>
+     <programlisting role="php">
+      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+                  href="&directory.examples;/reference/gtk/gtkprogressbar/constructor.phpw" parse="text">
+       <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+      </xi:include>
+     </programlisting>
+    </example>
    </desc>
   </constructor>
-
-  <constructor id="gtk.gtkprogressbar.constructor.new_with_adjustment">
-   <funcsynopsis>
-    <funcprototype>
-    <funcdef> <function>GtkProgressBar::new_with_adjustment</function></funcdef>
-    <paramdef>GtkAdjustment <parameter><optional>adjustment = null</optional></parameter></paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </constructor>
-
  </constructors>
 
  <methods>
@@ -50,19 +89,21 @@
   <method id="gtk.gtkprogressbar.method.get_ellipsize">
    <funcsynopsis>
     <funcprototype>
-     <funcdef> <function>get_ellipsize</function></funcdef>
+     <funcdef><enumname>PangoEllipsizeMode</enumname> <function>get_ellipsize</function></funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the ellipsize mode used.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     Returns the ellipsize mode used.
+    </para>
+    <para>
+     See also:
      <function class="GtkProgressBar">set_ellipsize</function>
     </para>
-
    </desc>
   </method>
 
@@ -74,33 +115,37 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the current fraction value.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     Returns the current fraction value between 0 and 1.
+    </para>
+    <para>
+     See also:
      <function class="GtkProgressBar">set_fraction</function>
     </para>
-
    </desc>
   </method>
 
   <method id="gtk.gtkprogressbar.method.get_orientation">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>GtkProgressBarOrientation <function>get_orientation</function></funcdef>
+     <funcdef><enumname>GtkProgressBarOrientation</enumname> <function>get_orientation</function></funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the orientation.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     Returns the bar's orientation.
+    </para>
+    <para>
+     See also:
      <function class="GtkProgressBar">set_orientation</function>
     </para>
-
    </desc>
   </method>
 
@@ -112,14 +157,16 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Retutns the pulse step size.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     Returns the pulse step size.
+    </para>
+    <para>
+     See also:
      <function class="GtkProgressBar">set_pulse_step</function>
     </para>
-
    </desc>
   </method>
 
@@ -131,14 +178,17 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the text on the bar.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     Returns the text on the progress bar, <literal>null</literal> if not
+     set.
+    </para>
+    <para>
+     See also:
      <function class="GtkProgressBar">set_text</function>
     </para>
-
    </desc>
   </method>
 
@@ -150,70 +200,18 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Indicates that some progress is made, but you don't know how much.
    </shortdesc>
    <desc>
-
-   </desc>
-  </method>
-
-  <method id="gtk.gtkprogressbar.method.set_activity_blocks">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>void <function>set_activity_blocks</function></funcdef>
-     <paramdef>int <parameter>blocks</parameter></paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </method>
-
-  <method id="gtk.gtkprogressbar.method.set_activity_step">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>void <function>set_activity_step</function></funcdef>
-     <paramdef>int <parameter>step</parameter></paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </method>
-
-  <method id="gtk.gtkprogressbar.method.set_bar_style">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>void <function>set_bar_style</function></funcdef>
-     <paramdef>GtkProgressBarStyle <parameter>style</parameter></paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </method>
-
-  <method id="gtk.gtkprogressbar.method.set_discrete_blocks">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>void <function>set_discrete_blocks</function></funcdef>
-     <paramdef>int <parameter>blocks</parameter></paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-   <desc>
-
+    <para>
+     Indicates that some progress is made, but you don't know how much.
+    </para>
+    <para>
+     Causes the progress bar to enter "activity mode," where a block bounces
+     back and forth. Each call to pulse() causes the block to move by a
+     little bit (the amount of movement per pulse is determined by
+     <function class="GtkProgressBar">set_pulse_step</function>).
+    </para>
    </desc>
   </method>
 
@@ -221,18 +219,21 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_ellipsize</function></funcdef>
-     <paramdef>void</paramdef>
+     <paramdef><enumname>PangoEllipsizeMode</enumname> <parameter>mode</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the mode used to ellipsize the text.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     Sets the mode used to ellipsize (add an ellipsis: "...") the text
+     if there is not enough space to render the entire string.
+    </para>
+    <para>
+     See also:
      <function class="GtkProgressBar">get_ellipsize</function>
     </para>
-
    </desc>
   </method>
 
@@ -244,14 +245,18 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Set the current percentage value.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     Causes the progress bar to "fill in" the given fraction of the bar.
+     The fraction should be between <literal>0.0</literal> and
+     <literal>1.0</literal>, inclusive.
+    </para>
+    <para>
+     See also:
      <function class="GtkProgressBar">get_fraction</function>
     </para>
-
    </desc>
   </method>
 
@@ -259,18 +264,21 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_orientation</function></funcdef>
-     <paramdef>GtkProgressBarOrientation <parameter>orientation</parameter></paramdef>
+     <paramdef><enumname>GtkProgressBarOrientation</enumname> <parameter>orientation</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Switches to a different orientation.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     Causes the progress bar to switch to a different orientation
+     (left-to-right, right-to-left, top-to-bottom, or bottom-to-top).
+    </para>
+    <para>
+     See also:
      <function class="GtkProgressBar">get_orientation</function>
     </para>
-
    </desc>
   </method>
 
@@ -282,14 +290,19 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the size of the bouncing block.
    </shortdesc>
    <desc>
     <para>
-     See also: 
-     <function class="GtkProgressBar">get_pulse_step</function>
+     Sets the fraction of total progress bar length to move the
+     bouncing block for each call to
+     <function class="GtkProgressBar">pulse</function>.
     </para>
-
+    <para>
+     See also:
+     <function class="GtkProgressBar">get_pulse_step</function>,
+     <function class="GtkProgressBar">pulse</function>
+    </para>
    </desc>
   </method>
 
@@ -301,16 +314,107 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the displayed text.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     Causes the given text to appear superimposed on the progress bar.
+    </para>
+    <para>
+     See also:
      <function class="GtkProgressBar">get_text</function>
     </para>
-
    </desc>
   </method>
+
+  <!-- deprecated method follow here -->
+
+  <method id="gtk.gtkprogressbar.method.set_activity_blocks">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_activity_blocks</function></funcdef>
+     <paramdef>int <parameter>blocks</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    &deprecated;
+   </shortdesc>
+   <desc>
+    <para>
+     &deprecated.method;
+     Use <function class="GtkProgressBar">set_pulse_step</function> instead.
+    </para>
+    <para>
+     Sets the number of blocks used when the progress bar is in activity mode.
+     Larger numbers make the visible block smaller.
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkprogressbar.method.set_activity_step">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_activity_step</function></funcdef>
+     <paramdef>int <parameter>step</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    &deprecated;
+   </shortdesc>
+   <desc>
+    <para>
+     &deprecated.method;
+    </para>
+    <para>
+     Sets the step value used when the progress bar is in activity mode.
+     The step is the amount by which the progress is incremented each
+     iteration.
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkprogressbar.method.set_bar_style">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_bar_style</function></funcdef>
+     <paramdef><enumname>GtkProgressBarStyle</enumname> <parameter>style</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    &deprecated;
+   </shortdesc>
+   <desc>
+    <para>
+     &deprecated.method;
+    </para>
+    <para>
+     Sets the style of the GtkProgressBar. The default style is
+     Gtk::PROGRESS_CONTINUOUS.
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkprogressbar.method.set_discrete_blocks">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_discrete_blocks</function></funcdef>
+     <paramdef>int <parameter>blocks</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    &deprecated;
+   </shortdesc>
+   <desc>
+    <para>
+     &deprecated.method;
+    </para>
+    <para>
+     Sets the number of blocks that the progress bar is
+     divided into when the style is Gtk::PROGRESS_DISCRETE.
+    </para>
+   </desc>
+  </method>
+
 
   <method id="gtk.gtkprogressbar.method.update">
    <funcsynopsis>
@@ -320,10 +424,13 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    &deprecated;
    </shortdesc>
    <desc>
-
+    <para>
+     &deprecated.method;
+     Use <function class="GtkProgressBar">set_fraction</function> instead.
+    </para>
    </desc>
   </method>
 

@@ -1,0 +1,59 @@
+<?php
+//Example for the two progress bar modes:
+// continuous and pulsing
+
+$window = new GtkWindow();
+$window->connect_simple('destroy', array('Gtk', 'main_quit'));
+$vbox = new GtkVBox();
+
+$vbox->pack_start(new GtkLabel('Normal:'), false);
+
+//Create a new continuous progress bar
+$normal = new GtkProgressBar();
+//Add it to the vbox
+$vbox->pack_start($normal);
+
+
+$vbox->pack_start(new GtkLabel('Pulsing:'), false);
+
+//Create a pulsing progress bar
+$pulsing = new GtkProgressBar();
+//Set the step size the pulse should go on each update
+$pulsing->set_pulse_step(0.1);
+//Add it to the vbox
+$vbox->pack_start($pulsing);
+
+
+function update(GtkProgressBar $normal, GtkProgressBar $pulsing) {
+    //Since the "pulsing" mode doesn't have any fixed values,
+    // all we need to call is this method.
+    $pulsing->pulse();
+
+    //The normal mode needs a certain value to be set.
+    // Here we add 10% to the current value, resetting
+    // it to 0 when it reaches 110% (so that we get a nice
+    // animation)
+    $normal->set_fraction(
+        (($normal->get_fraction() * 10 + 1) % 11) / 10
+    );
+    //Setting the text to the current percentage
+    $normal->set_text(
+        ($normal->get_fraction() * 100) . '%'
+    );
+
+    //Keep the timeout running. When not returning true,
+    //it stops.
+    return true;
+}
+
+//A timeout to be called every 200 milliseconds that updates
+// the progress bar
+Gtk::timeout_add(200, 'update', $normal, $pulsing);
+
+
+//add the progress bar to the window
+$window->add($vbox);
+
+$window->show_all();
+Gtk::main();
+?>
