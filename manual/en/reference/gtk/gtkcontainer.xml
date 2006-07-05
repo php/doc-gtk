@@ -8,7 +8,23 @@
    widgets.
   </shortdesc>
   <desc>
-
+   <para>
+    An abstract class to be extended by widget that hole one or more other
+    widgets.
+   </para>
+   <para>
+    Containers (widgets that extend from <classname>GtkContainer</classname>)
+    provide a context for the widgets they contain. Containers manage the
+    location, re-sizing and order of their children.
+   </para>
+   <para>
+    Containers can be broken down into two groups: bins (containers that
+    extend from <classname>GtkBin</classname>) and multi-child containers.
+    Bins may only have one child and in general provide some additional set of
+    functionality or display enhancement for their child widget. Multi-child
+    containers, on the other hand, normally do not provide any additional
+    functionality and instead focus on organizing a set of widgets.
+   </para>
   </desc>
  </classmeta>
 
@@ -32,9 +48,16 @@
      When a child is added to the container the
      <signalname>add</signalname> is emitted.
     </simpara>
+    <note>
+     Most multi-child containers provide an alternative, more powerful method
+     for adding children to the container. <function
+     class="GtkContainer">add</function> should normally only be called on
+     bins.
+    </note>
    </desc>
   </method>
 
+  <!-- Not implemented as of 2006-07-03
   <method id="gtk.gtkcontainer.method.add_with_properties">
    <funcsynopsis>
     <funcprototype>
@@ -49,6 +72,7 @@
 
    </desc>
   </method>
+  -->
 
   <method id="gtk.gtkcontainer.method.check_resize">
    <funcsynopsis>
@@ -712,3 +736,22 @@
  </signals>
 
 </classentry>
+<!-- Keep this comment at the end of the file
+Local variables:
+mode: sgml
+sgml-omittag:t
+sgml-shorttag:t
+sgml-minimize-attributes:nil
+sgml-always-quote-attributes:t
+sgml-indent-step:1
+sgml-indent-data:t
+sgml-parent-document:nil
+sgml-default-dtd-file:"../../../manual.ced"
+sgml-exposed-tags:nil
+sgml-local-catalogs:nil
+sgml-local-ecat-files:nil
+End:
+vim600: syn=xml fen fdm=syntax fdl=2 si
+vim: et tw=78 syn=sgml
+vi: ts=1 sw=1
+-->
