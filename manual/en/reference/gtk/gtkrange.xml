@@ -4,31 +4,36 @@
   <classtitle>GtkRange</classtitle>
   <classparent>GtkWidget</classparent>
   <shortdesc>
-   A base class for widgets that display a range of values.
+   A base class for widgets that visualize an adjustment.
   </shortdesc>
   <desc>
-
+   <para>
+    A base class for widgets that visualize an adjustment.
+    It provides the base functionality for <classname>GtkScrollbar</classname>
+    and <classname>GtkScale</classname>.
+   </para>
   </desc>
  </classmeta>
 
  <methods>
-
   <method id="gtk.gtkrange.method.get_adjustment">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>GtkAdjustment <function>get_adjustment</function></funcdef>
+     <funcdef><classname>GtkAdjustment</classname> <function>get_adjustment</function></funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the adjustment.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     Returns the adjustment used as "model" for this widget.
+    </para>
+    <para>
+     See also:
      <function class="GtkRange">set_adjustment</function>
     </para>
-
    </desc>
   </method>
 
@@ -40,33 +45,37 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    If the range is inverted.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     Returns if the range is inverted.
+    </para>
+    <para>
+     See also:
      <function class="GtkRange">set_inverted</function>
     </para>
-
    </desc>
   </method>
 
   <method id="gtk.gtkrange.method.get_update_policy">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>GtkUpdateType <function>get_update_policy</function></funcdef>
+     <funcdef><enumname>GtkUpdateType</enumname> <function>get_update_policy</function></funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the setting when updates signals are sent.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     Returns when update signals are sent out.
+    </para>
+    <para>
+     See also:
      <function class="GtkRange">set_update_policy</function>
     </para>
-
    </desc>
   </method>
 
@@ -78,14 +87,16 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the current adjustment value.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     Returns the current adjustment value.
+    </para>
+    <para>
+     See also:
      <function class="GtkRange">set_value</function>
     </para>
-
    </desc>
   </method>
 
@@ -97,14 +108,23 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the adjustment.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     Sets the adjustment to be used as the "model" object for this range
+     widget. The adjustment indicates the current range value, the minimum
+     and maximum range values, the step/page increments used for keybindings
+     and scrolling, and the page size. The page size is normally 0 for
+     <classname>GtkScale</classname> and nonzero for
+     <classname>GtkScrollbar</classname>, and indicates the size of the
+     visible area of the widget being scrolled. The page size affects the
+     size of the scrollbar slider.
+    </para>
+    <para>
+     See also:
      <function class="GtkRange">get_adjustment</function>
     </para>
-
    </desc>
   </method>
 
@@ -117,10 +137,15 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the step and page sizes for the range.
    </shortdesc>
    <desc>
-
+    <para>
+     Sets the step and page sizes for the range. The step size is used when
+     the user clicks the <classname>GtkScrollbar</classname> arrows or moves
+     <classname>GtkScale</classname> via arrow keys. The page size is used
+     for example when moving via Page Up or Page Down keys.
+    </para>
    </desc>
   </method>
 
@@ -132,14 +157,18 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the inverted setting.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     Ranges normally move from lower to higher values as the slider moves
+     from top to bottom or left to right. Inverted ranges have higher values
+     at the top or on the right rather than on the bottom or left.
+    </para>
+    <para>
+     See also:
      <function class="GtkRange">get_inverted</function>
     </para>
-
    </desc>
   </method>
 
@@ -152,10 +181,15 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the minimum and maximum values.
    </shortdesc>
    <desc>
-
+    <para>
+     Sets the allowable values in the <classname>GtkRange</classname>, and
+     clamps the range value to be between <parameter>min</parameter> and
+     <parameter>max</parameter>. (If the range has a non-zero page size,
+     it is clamped between min and max - page-size.)
+    </para>
    </desc>
   </method>
 
@@ -163,18 +197,30 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_update_policy</function></funcdef>
-     <paramdef>GtkUpdateType <parameter>policy</parameter></paramdef>
+     <paramdef><enumname>GtkUpdateType</enumname> <parameter>policy</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the update policy.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     Sets the update policy for the range.
+     <optionname enum="GtkUpdateType">Gtk::UPDATE_CONTINUOUS</optionname> means
+     that anytime the range slider is moved, the range value will change and
+     the <signalname class="GtkRange">value_changed</signalname> signal will
+     be emitted.
+     <optionname enum="GtkUpdateType">Gtk::UPDATE_DELAYED</optionname> means
+     that the value will be updated after a brief timeout where no slider motion
+     occurs, so updates are spaced by a short time rather than continuous.
+     <optionname enum="GtkUpdateType">Gtk::UPDATE_DISCONTINUOUS</optionname>
+     means that the value will only be updated when the user releases the button
+     and ends the slider drag operation.
+    </para>
+    <para>
+     See also:
      <function class="GtkRange">get_update_policy</function>
     </para>
-
    </desc>
   </method>
 
@@ -186,85 +232,280 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the current value.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     Sets the current value of the range; if the value is outside
+     the minimum or maximum range values, it will be clamped to fit
+     inside them. The range emits the
+     <signalname class="GtkRange">value_changed</signalname> signal if the
+     value changes.
+    </para>
+    <para>
+     See also:
      <function class="GtkRange">get_value</function>
     </para>
-
    </desc>
   </method>
-
  </methods>
 
- <signals>
 
+ <properties>
+  <prop id="gtk.gtkrange.property.adjustment" type="rw">
+   <propname>adjustment</propname>
+   <proptype><classname>GtkAdjustment</classname></proptype>
+   <shortdesc>
+    "model" for the range object.
+   </shortdesc>
+   <desc>
+    <para>
+     The GtkAdjustment that contains the current value of this range object.
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtkrange.property.inverted" type="rw">
+   <propname>inverted</propname>
+   <proptype>bool</proptype>
+   <shortdesc>
+    Invert direction slider.
+   </shortdesc>
+   <desc>
+    <para>
+     Invert direction slider moves to increase range value.
+    </para>
+    <para>
+     Default: <literal>false</literal>
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtkrange.property.update-policy" type="rw">
+   <propname>update-policy</propname>
+   <proptype><enumname>GtkUpdateType</enumname></proptype>
+   <shortdesc>
+    How the range should be updated.
+   </shortdesc>
+   <desc>
+    <para>
+     How the range should be updated on the screen.
+    </para>
+    <para>
+     Default:
+     <optionname enum="GtkUpdateType">Gtk::UPDATE_CONTINUOUS</optionname>
+    </para>
+   </desc>
+  </prop>
+ </properties>
+
+
+ <styleproperties>
+  <prop id="gtk.gtkrange.property.arrow-displacement-x" type="rw">
+   <propname>arrow-displacement-x</propname>
+   <proptype>int</proptype>
+   <shortdesc>
+    How far to move the x direction when the button is depressed.
+   </shortdesc>
+   <desc>
+    <para>
+     How far in the x direction to move the arrow when the button is depressed.
+    </para>
+    <para>
+     Default: <literal>0</literal>
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtkrange.property.arrow-displacement-y" type="rw">
+   <propname>arrow-displacement-y</propname>
+   <proptype>int</proptype>
+   <shortdesc>
+    How far to move the y direction when the button is depressed.
+   </shortdesc>
+   <desc>
+    <para>
+     How far in the y direction to move the arrow when the button is depressed.
+    </para>
+    <para>
+     Default: <literal>0</literal>
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtkrange.property.slider-width" type="rw">
+   <propname>slider-width</propname>
+   <proptype>int</proptype>
+   <shortdesc>
+    Width of scrollbar or scale thumb.
+   </shortdesc>
+   <desc>
+    <para>
+     Width of scrollbar or scale thumb.
+    </para>
+    <para>
+     Default: <literal>14</literal>
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtkrange.property.stepper-size" type="rw">
+   <propname>stepper-size</propname>
+   <proptype>int</proptype>
+   <shortdesc>
+    Length of step buttons at ends.
+   </shortdesc>
+   <desc>
+    <para>
+     Length of step buttons at ends.
+    </para>
+    <para>
+     Allowed values: <literal>&gt;= 0</literal>
+    </para>
+    <para>
+     Default: <literal>14</literal>
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtkrange.property.stepper-spacing" type="rw">
+   <propname>stepper-spacing</propname>
+   <proptype>int</proptype>
+   <shortdesc>
+    Spacing between step buttons and thumb.
+   </shortdesc>
+   <desc>
+    <para>
+     Spacing between step buttons and thumb.
+    </para>
+    <para>
+     Allowed values: <literal>&gt;= 0</literal>
+    </para>
+    <para>
+     Default: <literal>0</literal>
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtkrange.property.trough-border" type="rw">
+   <propname>trough-border</propname>
+   <proptype>int</proptype>
+   <shortdesc>
+    Spacing between thumb/steppers and outer trough bevel.
+   </shortdesc>
+   <desc>
+    <para>
+     Spacing between thumb/steppers and outer trough bevel.
+    </para>
+    <para>
+     Allowed values: <literal>&gt;= 0</literal>
+    </para>
+    <para>
+     Default: <literal>1</literal>
+    </para>
+   </desc>
+  </prop>
+ </styleproperties>
+
+
+ <signals>
   <signal id="gtk.gtkrange.signal.adjust-bounds">
    <signalname>adjust-bounds</signalname>
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <cbfunction>callback</cbfunction></funcdef>
-     <paramdef>GtkRange <parameter>range</parameter></paramdef>
-     <paramdef>double <parameter>UNKNOWN</parameter></paramdef>
+     <paramdef><classname>GtkRange</classname> <parameter>range</parameter></paramdef>
+     <paramdef>double <parameter>value</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
+    The range's minimum/maximum values have changed.
    </shortdesc>
    <desc>
-
+    <para>
+     Emitted when the range's minimum/maximum values have changed.
+    </para>
    </desc>
   </signal>
-  
+
   <signal id="gtk.gtkrange.signal.change-value">
    <signalname>change-value</signalname>
    <funcsynopsis>
     <funcprototype>
      <funcdef>bool <cbfunction>callback</cbfunction></funcdef>
-     <paramdef>GtkRange <parameter>range</parameter></paramdef>
-     <paramdef>GtkScrollType <parameter>UNKNOWN</parameter></paramdef>
-     <paramdef>double <parameter>UNKNOWN</parameter></paramdef>
+     <paramdef><classname>GtkRange</classname> <parameter>range</parameter></paramdef>
+     <paramdef><enumname>GtkScrollType</enumname> <parameter>scrolltype</parameter></paramdef>
+     <paramdef>double <parameter>value</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
+    Check value before it is set.
    </shortdesc>
    <desc>
-
+    <para>
+     The <literal>change-value</literal> signal is emitted when a scroll
+     action is performed on a range. It allows an application to determine
+     the type of scroll event that occurred and the resultant new value.
+     The application can handle the event itself and return
+     <literal>true</literal> to prevent further processing. Or, by returning
+     <literal>false</literal>, it can pass the event to other handlers until
+     the default GTK+ handler is reached.
+    </para>
+    <para>
+     The value parameter is unrounded. An application that overrides the
+     <literal>change-value</literal> signal is responsible for clamping the
+     value to the desired number of decimal digits; the default GTK+ handler
+     clamps the value based on
+     <fieldname class="GtkRange">round_digits</fieldname>.
+    </para>
+    <para>
+     It is not possible to use delayed update policies in an overridden
+     <literal>change-value</literal> handler.
+    </para>
    </desc>
   </signal>
-  
+
   <signal id="gtk.gtkrange.signal.move-slider">
    <signalname>move-slider</signalname>
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <cbfunction>callback</cbfunction></funcdef>
-     <paramdef>GtkRange <parameter>range</parameter></paramdef>
-     <paramdef>GtkScrollType <parameter>UNKNOWN</parameter></paramdef>
+     <paramdef><classname>GtkRange</classname> <parameter>range</parameter></paramdef>
+     <paramdef><enumname>GtkScrollType</enumname> <parameter>scrolltype</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
+    Virtual function that moves the slider.
    </shortdesc>
    <desc>
-
+    <para>
+     Virtual function that moves the slider. Used for keybindings.
+    </para>
    </desc>
   </signal>
-  
+
   <signal id="gtk.gtkrange.signal.value-changed">
    <signalname>value-changed</signalname>
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <cbfunction>callback</cbfunction></funcdef>
-     <paramdef>GtkRange <parameter>range</parameter></paramdef>
+     <paramdef><classname>GtkRange</classname> <parameter>range</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
+    Emitted when the range value changes.
    </shortdesc>
    <desc>
-
+    <para>
+     Emitted when the range value changes.
+    </para>
+    <para>
+     See also:
+     <function class="GtkRange">get_value</function>,
+     <function class="GtkRange">set_update_policy</function>
+    </para>
    </desc>
   </signal>
-  
  </signals>
 
 </classentry>
