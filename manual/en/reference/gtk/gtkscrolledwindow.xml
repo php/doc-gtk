@@ -9,6 +9,58 @@
   </shortdesc>
   <desc>
    <para>
+    <classname>GtkScrolledWindow</classname> is a <classname>GtkBin</classname>
+    subclass: it's a container the accepts a single child widget.
+    GtkScrolledWindow adds scrollbars to the child widget and optionally draws
+    a beveled frame around the child widget.
+   </para>
+   <para>
+    The scrolled window can work in two ways. Some widgets have native scrolling
+    support; these widgets have "slots" for
+    <classname>GtkAdjustment</classname> objects. Widgets with native scroll
+    support include <classname>GtkTreeView</classname>,
+    <classname>GtkTextView</classname>, and <classname>GtkLayout</classname>.
+   </para>
+   <para>
+    For widgets that lack native scrolling support, the
+    <classname>GtkViewport</classname> widget acts as an adaptor class,
+    implementing scrollability for child widgets that lack their own scrolling
+    capabilities. Use <classname>GtkViewport</classname> to scroll child
+    widgets such as <classname>GtkTable</classname>,
+    <classname>GtkBox</classname>, and so on.
+   </para>
+   <para>
+    If a widget has native scrolling abilities, it can be added to the
+    <classname>GtkScrolledWindow</classname> with
+    <function class="GtkContainer">add</function>. If a widget does not,
+    you must first add the widget to a <classname>GtkViewport</classname>,
+    then add the <classname>GtkViewport</classname> to the scrolled window.
+    The convenience function
+    <function class="GtkScrolledWindow">add_with_viewport</function> does
+    exactly this, so you can ignore the presence of the viewport.
+   </para>
+   <para>
+    The position of the scrollbars is controlled by the scroll adjustments.
+    See <classname>GtkAdjustment</classname> for the fields in an adjustment
+     - for <classname>GtkScrollbar</classname>, used by
+     <classname>GtkScrolledWindow</classname>, the
+     <fieldname class="GtkAdjustment">value</fieldname> field represents the
+     position of the scrollbar, which must be between the
+     <fieldname class="GtkAdjustment">lower</fieldname> field and
+     "<fieldname class="GtkAdjustment">upper</fieldname> -
+      <fieldname class="GtkAdjustment">page_size</fieldname>".
+     The <fieldname class="GtkAdjustment">page_size</fieldname> field
+     represents the size of the visible scrollable area. The
+     <fieldname class="GtkAdjustment">step_increment</fieldname> and
+     <fieldname class="GtkAdjustment">page_increment</fieldname> fields are
+     used when the user asks to step down (using the small stepper arrows)
+     or page down (using for example the PageDown key).
+    </para>
+    <para>
+     If a GtkScrolledWindow doesn't behave quite as you would like, or
+     doesn't have exactly the right layout, it's very possible to set up your
+     own scrolling with <classname>GtkScrollbar</classname> and for example a
+     <classname>GtkTable</classname>.
    </para>
   </desc>
  </classmeta>
@@ -33,7 +85,15 @@
     Creates a new scrolled window.
    </shortdesc>
    <desc>
-
+    <para>
+     Creates a new scrolled window. The two arguments are the scrolled
+     window's adjustments; these will be shared with the scrollbars and
+     the child widget to keep the bars in sync with the child.
+    </para>
+    <para>
+     Usually you want to pass <literal>null</literal> for the adjustments,
+     which will cause the scrolled window to create them for you.
+    </para>
    </desc>
   </constructor>
 
@@ -52,7 +112,6 @@
 
    </shortdesc>
    <desc>
-
    </desc>
   </method>
 
