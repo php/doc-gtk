@@ -460,10 +460,11 @@
      <xsl:apply-templates select="./methods"  mode="synoptic.mode"/>
      <xsl:apply-templates select="./fields" mode="synoptic.mode"/>
      <xsl:apply-templates select="./properties" mode="synoptic.mode"/>
+     <xsl:apply-templates select="./styleproperties" mode="synoptic.mode"/>
      <xsl:apply-templates select="./signals"  mode="synoptic.mode"/>
     </p>
    </div>
-  <xsl:apply-templates select="./constructors|./methods|./fields|./properties|./signals"/>
+  <xsl:apply-templates select="./constructors|./methods|./fields|./properties|./styleproperties|./signals"/>
  </xsl:template>
 
  <xsl:template match="classentry[@rtl='1']">
@@ -506,7 +507,7 @@
      </div>
     </blockquote>
     </p>
-    
+
     <p>
      <h3>
       <xsl:call-template name="gentext">
@@ -539,10 +540,11 @@
      <xsl:apply-templates select="./methods"  mode="synoptic.mode"/>
      <xsl:apply-templates select="./fields"   mode="synoptic.mode"/>
      <xsl:apply-templates select="./properties" mode="synoptic.mode"/>
+     <xsl:apply-templates select="./styleproperties" mode="synoptic.mode"/>
      <xsl:apply-templates select="./signals"  mode="synoptic.mode"/>
     </p>
    </div>
-  <xsl:apply-templates select="./constructors|./methods|./fields|./properties|./signals"/>
+  <xsl:apply-templates select="./constructors|./methods|./fields|./properties|./styleproperties|./signals"/>
  </xsl:template>
 
  <xsl:template match="refentry">
@@ -576,7 +578,7 @@
    </xsl:attribute>
   <h3>
    <xsl:call-template name="gentext">
-    <xsl:with-param name="key">constructor</xsl:with-param>
+    <xsl:with-param name="key">constructors</xsl:with-param>
    </xsl:call-template>
   </h3>
     <blockquote>
@@ -584,7 +586,7 @@
     </blockquote>
   </div>
  </xsl:template>
- 
+
  <xsl:template match="constructor" mode="synoptic.mode">
   <xsl:if test="position() > 1">
    <br/><br/>
@@ -615,7 +617,7 @@
      <xsl:call-template name="spaceholder"/>
      <xsl:apply-templates select="./shortdesc" mode="synoptic.mode"/>
   </dd>
-</xsl:template>
+ </xsl:template>
 
  <xsl:template match="properties" mode="synoptic.mode">
   <h3>
@@ -626,6 +628,22 @@
   <p>
    <xsl:call-template name="gentext">
     <xsl:with-param name="key">propertiesDisclaimer</xsl:with-param>
+   </xsl:call-template>
+  </p>
+  <blockquote>
+   <xsl:apply-templates select="./prop" mode="synoptic.mode"/>
+  </blockquote>
+ </xsl:template>
+
+ <xsl:template match="styleproperties" mode="synoptic.mode">
+  <h3>
+   <xsl:call-template name="gentext">
+    <xsl:with-param name="key">styleproperties</xsl:with-param>
+   </xsl:call-template>
+  </h3>
+  <p>
+   <xsl:call-template name="gentext">
+    <xsl:with-param name="key">stylepropertiesDisclaimer</xsl:with-param>
    </xsl:call-template>
   </p>
   <blockquote>
@@ -676,7 +694,7 @@
   </dd>
  </xsl:template>
 
- <xsl:template match="constructors|methods|fields|properties|signals">
+ <xsl:template match="constructors|methods|fields|properties|styleproperties|signals">
   <xsl:choose>
    <xsl:when test="ancestor::classentry[@rtl='1']">
     <div dir="rtl">

@@ -274,7 +274,7 @@ title of the element. This does not include the label.
  </span>
 </xsl:template>
 
-<xsl:template match="properties|fields" mode="title.markup">
+<xsl:template match="properties|styleproperties|fields" mode="title.markup">
  <xsl:param name="text-only" select="'0'"/>
  <xsl:param name="allow-anchors" select="'0'"/>
  <xsl:variable name="classentry" select="ancestor::classentry"/>

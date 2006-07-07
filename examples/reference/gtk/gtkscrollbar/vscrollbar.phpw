@@ -1,0 +1,43 @@
+<?php
+//Creating and styling a vertical scrollbar
+
+//At first, define some values for the adjustment
+$value     = 50;
+$lower     = 1;
+$upper     = 100;
+$step_incr = 1;
+$page_incr = 10;
+$page_size = 10;
+
+//Create the adjustment with the values
+$adj = new GtkAdjustment(
+    $value, $lower, $upper,
+    $step_incr, $page_incr, $page_size
+);
+//Create the scrollbar with the adjustment
+$sb = new GtkVScrollbar($adj);
+//Set the name of the widget, so that it can be styled individually
+$sb->set_name('my-scrollbar');
+//Re-set the value, since passing the adjustment to the scrollbar
+// resets the value to zero
+$adj->set_value(50);
+
+//Here we apply some style properties to our scrollbar
+Gtk::rc_parse_string('
+style "mysbstyle" {
+  GtkVScrollbar::has-forward-stepper = 0
+  GtkVScrollbar::has-secondary-forward-stepper = 1
+  GtkVScrollbar::fixed-slider-length = 1
+  GtkVScrollbar::min-slider-length = 10
+} widget "*.my-scrollbar" style "mysbstyle"');
+
+
+//Normal stuff, you know it
+$wnd = new GtkWindow();
+$wnd->set_default_size(-1, 300);
+$wnd->add($sb);
+$wnd->show_all();
+$wnd->connect_simple('destroy', array('Gtk', 'main_quit'));
+
+Gtk::main();
+?>

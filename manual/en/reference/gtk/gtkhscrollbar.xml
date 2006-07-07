@@ -3,11 +3,28 @@
  <classmeta>
   <classtitle>GtkHScrollbar</classtitle>
   <classparent>GtkScrollbar</classparent>
+  <classimage fileref="&directory.images;/reference/gtk/gtkhscrollbar.png"/>
   <shortdesc>
    A horizontal scrollbar.
   </shortdesc>
   <desc>
+   <para>
+    The <classname>GtkHScrollbar</classname> widget is a widget arranged
+    horizontally creating a scrollbar. See <classname>GtkScrollbar</classname>
+    for details on scrollbars.
+   </para>
+   <para>
+    You also might want to use a <classname>GtkAdjustment</classname> to
+    specify the boundaries of the scrollbar.
+   </para>
 
+   <note>
+    <para>
+     If you want to add scrollbars to a <classname>GtkTextView</classname> or a
+     <classname>GtkTreeView</classname>, you should use a
+     <classname>GtkScrolledWindow</classname>.
+    </para>
+   </note>
   </desc>
  </classmeta>
 
@@ -17,14 +34,30 @@
    <funcsynopsis>
     <funcprototype>
     <funcdef> <function>GtkHScrollbar</function></funcdef>
-    <paramdef>GtkAdjustment <parameter><optional>adjustment = null</optional></parameter></paramdef>
+    <paramdef><classname>GtkAdjustment</classname> <parameter><optional>adjustment = null</optional></parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Creates a new horizontal scrollbar.
    </shortdesc>
    <desc>
+    <para>
+     Creates a new horizontal scrollbar. If the <parameter>adjustment</parameter>
+     parameter is omitted or set to <literal>null</literal>, an
+     <classname>GtkAdjustment</classname> will be created for you. Since all
+     of the adjustments values are set to <literal>0</literal>, it might be
+     easier and faster to construct the adjustment yourself.
+    </para>
 
+    <example>
+     <title>Creating and styling a vertical scrollbar</title>
+     <programlisting role="php">
+      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+                  href="&directory.examples;/reference/gtk/gtkscrollbar/vscrollbar.phpw" parse="text">
+       <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+      </xi:include>
+     </programlisting>
+    </example>
    </desc>
   </constructor>
 

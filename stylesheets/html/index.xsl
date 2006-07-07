@@ -52,7 +52,7 @@
 
  <!-- property index -->
  <xsl:template name="index.properties">
-  <xsl:for-each select="(/set/book/classset/classentry/properties/prop|/set/book/classset/classentry/fields/field)">
+  <xsl:for-each select="(/set/book/classset/classentry/properties/prop|/set/book/classset/classentry/styleproperties/prop|/set/book/classset/classentry/fields/field)">
    <xsl:sort select="(propname|fieldname)"/>
    <xsl:variable name="classname">
     <xsl:value-of select="ancestor::classentry/classmeta/classtitle" />
@@ -94,7 +94,7 @@
 
  <!--
   The syntax index is a huge list with links to
-  classes, interfaces, functions, signals, fields and properties, enums and flags
+  classes, interfaces, functions, signals, fields, styleproperties and properties, enums and flags
   in alphabetical order
  -->
  <xsl:template name="index.syntax">
@@ -102,6 +102,7 @@
                         |/set/book/classset/classentry/constructors/constructor
                         |/set/book/classset/classentry/methods/method
                         |/set/book/classset/classentry/properties/prop
+                        |/set/book/classset/classentry/styleproperties/prop
                         |/set/book/classset/classentry/fields/field
                         |/set/book/classset/classentry/signals/signal">
                         |/set/book/enumset/enums/enum/enumoption">

@@ -7,8 +7,145 @@
    A base class for GtkHScrollbar and GtkVScrollbar
   </shortdesc>
   <desc>
-
+   <para>
+    The <classname>GtkScrollbar</classname> widget is an abstract base class
+    for <classname>GtkHScrollbar</classname> and
+    <classname>GtkVScrollbar</classname>. It is not very useful in itself.
+   </para>
+   <para>
+    The position of the thumb in a scrollbar is controlled by the scroll
+    adjustments. See <classname>GtkAdjustment</classname> for the fields in an
+    adjustment - for <classname>GtkScrollbar</classname>, the
+    <fieldname class="GtkAdjustment">value</fieldname> field represents the
+    position of the scrollbar, which must be between the
+    <fieldname class="GtkAdjustment">lower</fieldname> field and
+    "<fieldname class="GtkAdjustment">upper</fieldname> -
+    <fieldname class="GtkAdjustment">page_size</fieldname>." The
+    <fieldname class="GtkAdjustment">page_size</fieldname> field represents the
+    size of the visible scrollable area. The
+    <fieldname class="GtkAdjustment">step_increment</fieldname> and
+    <fieldname class="GtkAdjustment">page_increment</fieldname> fields are used
+    when the user asks to step down (using the small stepper arrows) or page down
+    (using for example the PageDown key).
+   </para>
+   <para>
+    <classname>GtkScrollbar</classname> has no own method; have a look at
+    <classname>GtkRange</classname> instead.
+   </para>
+   <note>
+    <para>
+     If you want to add scrollbars to a <classname>GtkTextView</classname> or a
+     <classname>GtkTreeView</classname>, you should use a
+     <classname>GtkScrolledWindow</classname>.
+    </para>
+   </note>
   </desc>
  </classmeta>
+
+
+ <styleproperties>
+
+  <prop id="gtk.gtkscrollbar.property.fixed-slider-length" type="ro">
+   <propname>fixed-slider-length</propname>
+   <proptype>boolean</proptype>
+   <shortdesc>
+    Don't change slider size, just lock it to the minimum length.
+   </shortdesc>
+   <desc>
+    <para>
+     Don't change slider size, just lock it to the minimum length.
+    </para>
+    <para>
+     Default: <literal>false</literal>
+    </para>
+    <para>
+     See: <propname class="GtkScrollbar">min-slider-length</propname>
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtkscrollbar.property.has-backward-stepper" type="ro">
+   <propname>has-backward-stepper</propname>
+   <proptype>boolean</proptype>
+   <shortdesc>
+    Display the standard backward arrow button.
+   </shortdesc>
+   <desc>
+    <para>
+     Display the standard backward arrow button.
+    </para>
+    <para>
+     Default: <literal>true</literal>
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtkscrollbar.property.has-forward-stepper" type="ro">
+   <propname>has-forward-stepper</propname>
+   <proptype></proptype>
+   <shortdesc>
+    Display the standard forward arrow button.
+   </shortdesc>
+   <desc>
+    <para>
+     Display the standard forward arrow button.
+    </para>
+    <para>
+     Default: <literal>true</literal>
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtkscrollbar.property.has-secondary-backward-stepper" type="ro">
+   <propname>has-secondary-backward-stepper</propname>
+   <proptype>boolean</proptype>
+   <shortdesc>
+    Display a second backward arrow button on the opposite end of the scrollbar.
+   </shortdesc>
+   <desc>
+    <para>
+     Display a second backward arrow button on the opposite end of the scrollbar.
+    </para>
+    <para>
+     Default: <literal>false</literal>
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtkscrollbar.property.has-secondary-forward-stepper" type="ro">
+   <propname>has-secondary-forward-stepper</propname>
+   <proptype>boolean</proptype>
+   <shortdesc>
+    Display a secondary forward arrow button on the opposite end of the scrollbar.
+   </shortdesc>
+   <desc>
+    <para>
+     Display a secondary forward arrow button on the opposite end of the scrollbar.
+    </para>
+    <para>
+     Default: <literal>false</literal>
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtkscrollbar.property.min-slider-length" type="ro">
+   <propname>min-slider-length</propname>
+   <proptype>boolean</proptype>
+   <shortdesc>
+    Minimum length of scrollbar slider.
+   </shortdesc>
+   <desc>
+    <para>
+     Minimum length of scrollbar slider.
+    </para>
+    <para>
+     Allowed values: <literal>&gt;= 0</literal>
+    </para>
+    <para>
+     Default: <literal>21</literal>
+    </para>
+   </desc>
+  </prop>
+ </styleproperties>
 
 </classentry>

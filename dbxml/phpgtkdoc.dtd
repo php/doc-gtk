@@ -2,7 +2,7 @@
    Docbook Customization layer of PHP-GTK docs
    Authors: James Moore <jmoore@php.net>
 
-   $Id: phpgtkdoc.dtd,v 1.19 2006-03-28 20:46:36 sfox Exp $
+   $Id: phpgtkdoc.dtd,v 1.20 2006-07-07 14:16:56 cweiske Exp $
 
 -->
 
@@ -82,7 +82,7 @@
 
 -->
 <!ELEMENT classentry 
-          ((classmeta),(constructors?,methods?,fields?,properties?,signals?))>
+          ((classmeta),(constructors?,methods?,fields?,properties?,styleproperties?,signals?))>
 <!ATTLIST classentry
     %common.attrib;
     %refentry.role.attrib;
@@ -234,6 +234,16 @@
 -->
 <!ELEMENT properties (prop)+ >
 <!ATTLIST properties
+    %common.attrib;
+>
+
+<!--
+
+  - styleproperties: wrapper for individual arguments.
+
+-->
+<!ELEMENT styleproperties (prop)+ >
+<!ATTLIST styleproperties
     %common.attrib;
 >
 
