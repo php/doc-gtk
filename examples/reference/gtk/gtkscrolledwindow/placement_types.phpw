@@ -1,0 +1,56 @@
+<?php
+//This examples shows what the different
+// corner types look like
+
+//Create first scrolled window
+$scr_tl = new GtkScrolledWindow();
+//Add a label on top of a viewport that is
+// child of the scrolled window
+$scr_tl->add_with_viewport(
+    new GtkLabel('Gtk::CORNER_TOP_LEFT')
+);
+//Set the children placement to top+left
+$scr_tl->set_placement(Gtk::CORNER_TOP_LEFT);
+
+
+//Create the second scrolled window
+$scr_bl = new GtkScrolledWindow();
+//Again, a viewport with a label as child
+$scr_bl->add_with_viewport(
+    new GtkLabel('Gtk::CORNER_BOTTOM_LEFT')
+);
+//Now, we set the placement to bottom+left
+$scr_bl->set_placement(Gtk::CORNER_BOTTOM_LEFT);
+
+
+//Third for top+right
+$scr_tr = new GtkScrolledWindow();
+$scr_tr->add_with_viewport(
+    new GtkLabel('Gtk::CORNER_TOP_RIGHT')
+);
+$scr_tr->set_placement(Gtk::CORNER_TOP_RIGHT);
+
+
+//And the last: child at bottom+right
+$scr_br = new GtkScrolledWindow();
+$scr_br->add_with_viewport(
+    new GtkLabel('Gtk::CORNER_BOTTOM_RIGHT')
+);
+$scr_br->set_placement(Gtk::CORNER_BOTTOM_RIGHT);
+
+
+//Add all the scrolled windows to a table
+$tbl = new GtkTable(3, 3);
+$tbl->attach($scr_tl, 0, 1, 0, 1);
+$tbl->attach($scr_tr, 2, 3, 0, 1);
+$tbl->attach($scr_bl, 0, 1, 2, 3);
+$tbl->attach($scr_br, 2, 3, 2, 3);
+
+
+//Standard window creation stuff
+$wnd = new GtkWindow();
+$wnd->connect_simple('destroy', array('Gtk', 'main_quit'));
+$wnd->add($tbl);
+$wnd->show_all();
+Gtk::main();
+?>
