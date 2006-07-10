@@ -533,14 +533,17 @@
     <funcprototype>
      <funcdef>void <cbfunction>callback</cbfunction></funcdef>
      <paramdef><classname>GtkScrolledWindow</classname> <parameter>scrolledwindow</parameter></paramdef>
-     <paramdef><enumname>GtkDirectionType</enumname> <parameter>UNKNOWN</parameter></paramdef>
+     <paramdef><enumname>GtkDirectionType</enumname> <parameter>direction</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
+    Focus is moved out of the scrolled window.
    </shortdesc>
    <desc>
     <para>
-     
+     This signal is emitted when the user moves the focus out of the
+     scrolled window by pressing <literal>Control+Tab</literal> or
+     <literal>Shift+Control+Tab</literal>.
     </para>
    </desc>
   </signal>
@@ -551,15 +554,74 @@
     <funcprototype>
      <funcdef>void <cbfunction>callback</cbfunction></funcdef>
      <paramdef><classname>GtkScrolledWindow</classname> <parameter>scrolledwindow</parameter></paramdef>
-     <paramdef><enumname>GtkScrollType</enumname> <parameter>UNKNOWN</parameter></paramdef>
-     <paramdef>bool <parameter>UNKNOWN</parameter></paramdef>
+     <paramdef><enumname>GtkScrollType</enumname> <parameter>scrolltype</parameter></paramdef>
+     <paramdef>bool <parameter>horizontal</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
+    Child widget is scrolled by keyboard action.
    </shortdesc>
    <desc>
     <para>
-     
+     The <literal>scroll-child</literal> signal is emitted when the child
+     widget is being scrolled by a keyboard action. The default key bindings
+     with resulting scrolltype and horizontal arguments are:
+    </para>
+    <para>
+     <table>
+      <tgroup cols="2">
+       <tbody>
+        <row>
+         <entry><literal>Control+Left Arrow</literal></entry>
+         <entry><optionname enum="GtkScrollType">Gtk::SCROLL_STEP_BACKWARD</optionname> (horizontal)</entry>
+        </row>
+        <row>
+         <entry><literal>Control+Right Arrow</literal></entry>
+         <entry><optionname enum="GtkScrollType">Gtk::SCROLL_STEP_FORWARD</optionname> (horizontal)</entry>
+        </row>
+        <row>
+         <entry><literal>Control+Up Arrow</literal></entry>
+         <entry><optionname enum="GtkScrollType">Gtk::SCROLL_STEP_BACKWARD</optionname> (vertical)</entry>
+        </row>
+        <row>
+         <entry><literal>Control+Down Arrow</literal></entry>
+         <entry><optionname enum="GtkScrollType">Gtk::SCROLL_STEP_FORWARD</optionname> (vertical)</entry>
+        </row>
+        <row>
+         <entry><literal>Control+Page Up</literal></entry>
+         <entry><optionname enum="GtkScrollType">Gtk::SCROLL_PAGE_BACKWARD</optionname> (horizontal)</entry>
+        </row>
+        <row>
+         <entry><literal>Control+Page Down</literal></entry>
+         <entry><optionname enum="GtkScrollType">Gtk::SCROLL_PAGE_FORWARD</optionname> (horizontal)</entry>
+        </row>
+        <row>
+         <entry><literal>Page Up</literal></entry>
+         <entry><optionname enum="GtkScrollType">Gtk::SCROLL_PAGE_BACKWARD</optionname> (vertical)</entry>
+        </row>
+        <row>
+         <entry><literal>Page Down</literal></entry>
+         <entry><optionname enum="GtkScrollType">Gtk::SCROLL_PAGE_FORWARD</optionname> (vertical)</entry>
+        </row>
+        <row>
+         <entry><literal>Control+Home</literal></entry>
+         <entry><optionname enum="GtkScrollType">Gtk::SCROLL_START</optionname> (horizontal)</entry>
+        </row>
+        <row>
+         <entry><literal>Control+End</literal></entry>
+         <entry><optionname enum="GtkScrollType">Gtk::SCROLL_END</optionname> (horizontal)</entry>
+        </row>
+        <row>
+         <entry><literal>Home</literal></entry>
+         <entry><optionname enum="GtkScrollType">Gtk::SCROLL_START</optionname> (vertical)</entry>
+        </row>
+        <row>
+         <entry><literal>End</literal></entry>
+         <entry><optionname enum="GtkScrollType">Gtk::SCROLL_END</optionname> (vertical)</entry>
+        </row>
+       </tbody>
+      </tgroup>
+     </table>
     </para>
    </desc>
   </signal>
