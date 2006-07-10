@@ -2503,9 +2503,14 @@
    <fieldname>configure_notify_received</fieldname>
    <fieldtype>int</fieldtype>
    <shortdesc>
+    Whether or not a window resize configuration event is currently
+    outstanding.
    </shortdesc>
    <desc>
-
+    <para>
+     <literal>1</literal> if a resize configureation event is outstanding,
+     <literal>0</literal> otherwise.
+    </para>
    </desc>
   </field>
 
@@ -2513,9 +2518,12 @@
    <fieldname>configure_request_count</fieldname>
    <fieldtype>int</fieldtype>
    <shortdesc>
+    The number of outstanding resize configuration requests.
    </shortdesc>
    <desc>
-
+    <para>
+     The number of currently outstanding resize configuration requests.
+    </para>
    </desc>
   </field>
 
@@ -2546,9 +2554,17 @@
    <fieldname>default_widget</fieldname>
    <fieldtype>GtkWidget</fieldtype>
    <shortdesc>
+    The widget which will be activated by default.
    </shortdesc>
    <desc>
-
+    <para>
+     The child widget which will be activated by default when the user presses
+     <literal>ENTER</literal> when the window has keyboard focus.
+    </para>
+    <para>
+     See also:
+     <function class="GtkWindow">set_default</function>
+    </para>
    </desc>
   </field>
 
@@ -2579,9 +2595,16 @@
    <fieldname>focus_widget</fieldname>
    <fieldtype>GtkWidget</fieldtype>
    <shortdesc>
+    The widget that currently has keyboard focus.
    </shortdesc>
    <desc>
-
+    <para>
+     The child widget that currently has keyboard focus.
+    </para>
+    <para>
+     See also:
+     <function class="GtkWindow">set_focus</function>
+    </para>
    </desc>
   </field>
 
@@ -2589,9 +2612,16 @@
    <fieldname>frame</fieldname>
    <fieldtype></fieldtype>
    <shortdesc>
+    The frame window surrounding the window.
    </shortdesc>
    <desc>
-
+    <para>
+     The frame window surrounding the window.
+    </para>
+    <para>
+     See also:
+     <function class="GtkWindow">set_has_frame</function>
+    </para>
    </desc>
   </field>
 
