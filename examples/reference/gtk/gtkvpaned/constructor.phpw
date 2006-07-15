@@ -1,0 +1,21 @@
+<?php
+$vpane = new GtkVPaned();
+$vpane->set_border_width(5);
+
+$top = new GtkFrame();
+$top->add(new GtkLabel('Top'));
+$top->set_shadow_type(Gtk::SHADOW_IN);
+$vpane->add1($top);
+
+$bottom = new GtkFrame();
+$bottom->add(new GtkLabel('Bottom'));
+$bottom->set_shadow_type(Gtk::SHADOW_IN);
+$vpane->add2($bottom);
+
+//standard stuff for window creation
+$wnd = new GtkWindow();
+$wnd->connect_simple('destroy', array('Gtk', 'main_quit'));
+$wnd->add($vpane);
+$wnd->show_all();
+Gtk::main();
+?>
