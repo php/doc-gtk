@@ -845,9 +845,14 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
+    The widget is activated.
    </shortdesc>
    <desc>
-
+    <para>
+     The "activate" signal is emitted when the entry is activated
+     either by user action (pressing the Enter key) or programmatically
+     with the <function class="GtkWidget">activate</function> method.
+    </para>
    </desc>
   </signal>
 
@@ -860,9 +865,13 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
+    The Backspace key is pressed.
    </shortdesc>
    <desc>
-
+    <para>
+     The "backspace" signal is emitted when the Backspace key is entered from
+     the keyboard.
+    </para>
    </desc>
   </signal>
 
@@ -875,9 +884,13 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
+    The selection is copied to the clipboad.
    </shortdesc>
    <desc>
-
+    <para>
+     The "copy-clipboard" signal is emitted when the selection text
+     in the entry is copied to the clipboard.
+    </para>
    </desc>
   </signal>
 
@@ -890,9 +903,13 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
+    The selection is cut into the clipboad.
    </shortdesc>
    <desc>
-
+    <para>
+     The "cut-clipboard" signal is emitted when the selection in the entry
+     is cut (removed from the entry) and placed in the clipboard.
+    </para>
    </desc>
   </signal>
 
@@ -902,14 +919,19 @@
     <funcprototype>
      <funcdef>void <cbfunction>callback</cbfunction></funcdef>
      <paramdef><classname>GtkEntry</classname> <parameter>entry</parameter></paramdef>
-     <paramdef><enumname>GtkDeleteType</enumname> <parameter>UNKNOWN</parameter></paramdef>
-     <paramdef>int <parameter>UNKNOWN</parameter></paramdef>
+     <paramdef><enumname>GtkDeleteType</enumname> <parameter>delete_type</parameter></paramdef>
+     <paramdef>int <parameter>count</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
+    Some text is deleted from the entry.
    </shortdesc>
    <desc>
-
+    <para>
+     The "delete-from-cursor" signal is emitted when the a deletion from the cursor
+     i.e. removal o text at the cursor position, either before it (negative count)
+     or after it (positive count).
+    </para>
    </desc>
   </signal>
 
@@ -919,13 +941,17 @@
     <funcprototype>
      <funcdef>void <cbfunction>callback</cbfunction></funcdef>
      <paramdef><classname>GtkEntry</classname> <parameter>entry</parameter></paramdef>
-     <paramdef><!-- was: gchararray -->XXX <parameter>UNKNOWN</parameter></paramdef>
+     <paramdef>string <parameter>string</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
+    Text is inserted.
    </shortdesc>
    <desc>
-
+    <para>
+     The "insert-at-cursor" signal is emitted when text is being inserted
+     in the entry.
+    </para>
    </desc>
   </signal>
 
@@ -935,15 +961,21 @@
     <funcprototype>
      <funcdef>void <cbfunction>callback</cbfunction></funcdef>
      <paramdef><classname>GtkEntry</classname> <parameter>entry</parameter></paramdef>
-     <paramdef><enumname>GtkMovementStep</enumname> <parameter>UNKNOWN</parameter></paramdef>
-     <paramdef>int <parameter>UNKNOWN</parameter></paramdef>
-     <paramdef>bool <parameter>UNKNOWN</parameter></paramdef>
+     <paramdef><enumname>GtkMovementStep</enumname> <parameter>step</parameter></paramdef>
+     <paramdef>int <parameter>count</parameter></paramdef>
+     <paramdef>bool <parameter>extend_selection</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
+    The caret is moved.
    </shortdesc>
    <desc>
-
+    <para>
+     The "move-cursor" signal is emitted when the cursor is being moved by
+     <parameter>count</parameter> steps of size <parameter>step</parameter>.
+     If <parameter>extend_selection</parameter> is <literal>true</literal>,
+     the selection is extended as the cursor is being moved.
+    </para>
    </desc>
   </signal>
 
@@ -956,9 +988,13 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
+    Text is pasted from the clipboard.
    </shortdesc>
    <desc>
-
+    <para>
+     The "paste-clipboard" signal is emitted when the contents
+     of the clipboard are pasted into the entry.
+    </para>
    </desc>
   </signal>
 
@@ -968,13 +1004,16 @@
     <funcprototype>
      <funcdef>void <cbfunction>callback</cbfunction></funcdef>
      <paramdef><classname>GtkEntry</classname> <parameter>entry</parameter></paramdef>
-     <paramdef><classname>GtkMenu</classname> <parameter>UNKNOWN</parameter></paramdef>
+     <paramdef><classname>GtkMenu</classname> <parameter>menu</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
+    The context menu needs to be populated.
    </shortdesc>
    <desc>
-
+    <para>
+     The "populate-popup" signal is emitted when the menu needs populating.
+    </para>
    </desc>
   </signal>
 
@@ -987,12 +1026,15 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
+    Toggles the internal overwrite_mode attribute.
    </shortdesc>
    <desc>
-
+    <para>
+     The "toggle-overwrite" signal is emitted when the internal
+     entry attribute "overwrite_mode" is toggled by pressing the Insert key.
+    </para>
    </desc>
   </signal>
-
  </signals>
 
 </classentry>
