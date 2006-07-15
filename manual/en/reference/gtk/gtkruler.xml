@@ -7,77 +7,58 @@
    A base class for GtkHRuler and GtkVRuler.
   </shortdesc>
   <desc>
-
+   <note><para>&widget.toospecialized;</para></note>
+   <para>
+    The GTKRuler widget is a base class for horizontal and vertical rulers.
+    Rulers are used to show the mouse pointer's location in a window.
+    The ruler can either be horizontal or vertical on the window.
+    Within the ruler a small triangle indicates the location of the mouse
+    relative to the horizontal or vertical ruler.
+   </para>
   </desc>
  </classmeta>
 
  <methods>
-
-  <method id="gtk.gtkruler.method.draw_pos">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>void <function>draw_pos</function></funcdef>
-     <paramdef>void</paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </method>
-
-  <method id="gtk.gtkruler.method.draw_ticks">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>void <function>draw_ticks</function></funcdef>
-     <paramdef>void</paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </method>
-
   <method id="gtk.gtkruler.method.get_metric">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>GtkMetricType <function>get_metric</function></funcdef>
+     <funcdef><enumname>GtkMetricType</enumname> <function>get_metric</function></funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the display units.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     Returns the units used for display.
+    </para>
+    <para>
+     See also:
      <function class="GtkRuler">set_metric</function>
     </para>
-
    </desc>
   </method>
 
   <method id="gtk.gtkruler.method.get_range">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>void <function>get_range</function></funcdef>
+     <funcdef>array <function>get_range</function></funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the range of the ruler.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     Returns the range of the ruler. The array consists of the following values:
+     <literal>($lower, $upper, $position, $max_size)</literal>
+    </para>
+    <para>
+     See also:
      <function class="GtkRuler">set_range</function>
     </para>
-
    </desc>
   </method>
 
@@ -85,18 +66,20 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_metric</function></funcdef>
-     <paramdef>GtkMetricType <parameter>metric</parameter></paramdef>
+     <paramdef><enumname>GtkMetricType</enumname> <parameter>metric</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the display unit.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     Sets the unit to use (pixels, inches, ...)
+    </para>
+    <para>
+     See also:
      <function class="GtkRuler">get_metric</function>
     </para>
-
    </desc>
   </method>
 
@@ -111,17 +94,85 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the range of the ruler.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     Sets the range of the ruler.
+    </para>
+    <para>
+     See also:
      <function class="GtkRuler">get_range</function>
     </para>
-
    </desc>
   </method>
-
  </methods>
+
+
+ <properties>
+  <prop id="gtk.gtkruler.property.lower" type="rw">
+   <propname>lower</propname>
+   <proptype>double</proptype>
+   <shortdesc>
+    Lower limit of ruler.
+   </shortdesc>
+   <desc>
+    <para>
+     Lower limit of ruler.
+    </para>
+    <para>
+     Default: <literal>0</literal>
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtkruler.property.max-size" type="rw">
+   <propname>max-size</propname>
+   <proptype>double</proptype>
+   <shortdesc>
+    Maximum size of the ruler.
+   </shortdesc>
+   <desc>
+    <para>
+     Maximum size of the ruler.
+    </para>
+    <para>
+     Default: <literal>0</literal>
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtkruler.property.position" type="rw">
+   <propname>position</propname>
+   <proptype>double</proptype>
+   <shortdesc>
+    Position of mark on the ruler.
+   </shortdesc>
+   <desc>
+    <para>
+     Position of mark on the ruler.
+    </para>
+    <para>
+     Default: <literal>0</literal>
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtkruler.property.upper" type="rw">
+   <propname>upper</propname>
+   <proptype>double</proptype>
+   <shortdesc>
+    Upper limit of ruler.
+   </shortdesc>
+   <desc>
+    <para>
+     Upper limit of ruler.
+    </para>
+    <para>
+     Default: <literal>0</literal>
+    </para>
+   </desc>
+  </prop>
+ </properties>
 
 </classentry>

@@ -1,0 +1,16 @@
+<?php
+$ruler = new GtkHRuler();
+$lower = 0;
+$upper = 300;
+$position = 200;
+$max_size = 300;
+$ruler->set_range($lower, $upper, $position, $max_size);;
+
+//standard stuff for window creation
+$wnd = new GtkWindow();
+$wnd->set_border_width(5);
+$wnd->connect_simple('destroy', array('Gtk', 'main_quit'));
+$wnd->add($ruler);
+$wnd->show_all();
+Gtk::main();
+?>
