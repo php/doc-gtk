@@ -28,13 +28,13 @@
   </desc>
  </classmeta>
 
- <methods>
 
+ <methods>
   <method id="gtk.gtkcontainer.method.add">
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>add</function></funcdef>
-     <paramdef>GtkWidget <parameter>widget</parameter></paramdef>
+     <paramdef><classname>GtkWidget</classname> <parameter>widget</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -82,13 +82,16 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Emits the "check-resize" signal on the container.
    </shortdesc>
    <desc>
-
+    <para>
+     Emits the <signalname class="GtkContainer">check-resize</signalname>
+     signal on the container.
+    </para>
    </desc>
   </method>
-
+<!--
   <method id="gtk.gtkcontainer.method.child_get">
    <funcsynopsis>
     <funcprototype>
@@ -178,7 +181,7 @@
 
    </desc>
   </method>
-
+-->
   <method id="gtk.gtkcontainer.method.child_type">
    <funcsynopsis>
     <funcprototype>
@@ -187,10 +190,17 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the type of the children supported by the container./
    </shortdesc>
    <desc>
-
+    <para>
+     Returns the type of the children supported by the container.
+    </para>
+    <para>
+     Note that this may return <literal>Gtk::TYPE_NONE</literal> to indicate
+     that no more children can be added, e.g. for a
+     <classname>GtkPaned</classname> which already has two children.
+    </para>
    </desc>
   </method>
 
@@ -202,13 +212,18 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    &deprecated;
    </shortdesc>
    <desc>
-
+    <para>
+     &deprecated.method;
+    </para>
+    <para>
+     Use <function class="GtkContainer">get_children</function> instead.
+    </para>
    </desc>
   </method>
-
+<!--
   <method id="gtk.gtkcontainer.method.forall">
    <funcsynopsis>
     <funcprototype>
@@ -253,7 +268,7 @@
 
    </desc>
   </method>
-
+-->
   <method id="gtk.gtkcontainer.method.get_border_width">
    <funcsynopsis>
     <funcprototype>
@@ -262,112 +277,123 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns border width.
    </shortdesc>
    <desc>
     <para>
-     See also: 
-     <function class="GtkContainer">set_border_width</function>, 
-     <fieldname class="GtkContainer">border_width</fieldname>
+     Returns the border width around the container.
     </para>
-
+    <para>
+     See also:
+     <function class="GtkContainer">set_border_width</function>,
+     <propname class="GtkContainer">border-width</propname>
+    </para>
    </desc>
   </method>
 
   <method id="gtk.gtkcontainer.method.get_children">
    <funcsynopsis>
     <funcprototype>
-     <funcdef> <function>get_children</function></funcdef>
+     <funcdef>array <function>get_children</function></funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns an array of all children
    </shortdesc>
    <desc>
     <para>
-     See also: 
-     <function class="GtkContainer">resize_children</function>
+     Returns an array with all non-internal children.
     </para>
-
    </desc>
   </method>
 
   <method id="gtk.gtkcontainer.method.get_focus_chain">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>bool <function>get_focus_chain</function></funcdef>
+     <funcdef>array <function>get_focus_chain</function></funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the focus order.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     Retrieves the focus chain of the container, if one has been set
+     explicitly. If no focus chain has been explicitly set, GTK+
+     computes the focus chain based on the positions of the children.
+     In that case, <literal>null</literal> is returned.
+    </para>
+    <para>
+     See also:
      <function class="GtkContainer">set_focus_chain</function>, 
      <function class="GtkContainer">unset_focus_chain</function>
     </para>
-
    </desc>
   </method>
 
   <method id="gtk.gtkcontainer.method.get_focus_hadjustment">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>GtkAdjustment <function>get_focus_hadjustment</function></funcdef>
+     <funcdef><classname>GtkAdjustment</classname> <function>get_focus_hadjustment</function></funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Retrieves the horizontal focus adjustment.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     Retrieves the horizontal focus adjustment for the container.
+    </para>
+    <para>
+     See also:
      <function class="GtkContainer">set_focus_hadjustment</function>
     </para>
-
    </desc>
   </method>
 
   <method id="gtk.gtkcontainer.method.get_focus_vadjustment">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>GtkAdjustment <function>get_focus_vadjustment</function></funcdef>
+     <funcdef><classname>GtkAdjustment</classname> <function>get_focus_vadjustment</function></funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Retrieves the vertical focus adjustment.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     Retrieves the vertical focus adjustment for the container.
+    </para>
+    <para>
+     See also:
      <function class="GtkContainer">set_focus_vadjustment</function>
     </para>
-
    </desc>
   </method>
 
   <method id="gtk.gtkcontainer.method.get_resize_mode">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>GtkResizeMode <function>get_resize_mode</function></funcdef>
+     <funcdef><enumname>GtkResizeMode</enumname> <function>get_resize_mode</function></funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the resize mode.
    </shortdesc>
    <desc>
     <para>
-     See also: 
-     <function class="GtkContainer">set_resize_mode</function>, 
-     <fieldname class="GtkContainer">resize_mode</fieldname>
+     Returns the resize mode for the container.
     </para>
-
+    <para>
+     See also:
+     <function class="GtkContainer">set_resize_mode</function>, 
+     <propname class="GtkContainer">resize-mode</propname>
+    </para>
    </desc>
   </method>
 
@@ -375,14 +401,33 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>propagate_expose</function></funcdef>
-     <paramdef>void</paramdef>
+     <paramdef><classname>GtkWidget</classname> <parameter>child</parameter></paramdef>
+     <paramdef><parameter>event</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sends an expose event to a child.
    </shortdesc>
    <desc>
-
+    <para>
+     When a container receives an expose event, it must send synthetic
+     expose events to all children that don't have their own
+     <classname>GdkWindow</classname>s. This function provides a convenient
+     way of doing this. A container, when it receives an expose event, calls
+     <literal>propagate_expose</literal> once for each child, passing in the
+     event the container received.
+    </para>
+    <para>
+     propagate_expose() takes care of deciding whether an expose event needs
+     to be sent to the child, intersecting the event's area with the child
+     area, and sending the event.
+    </para>
+    <para>
+     In most cases, a container can simply either simply inherit the
+     expose implementation from <classname>GtkContainer</classname>, or,
+     do some drawing and then chain to the expose implementation from
+     <classname>GtkContainer</classname>.
+    </para>
    </desc>
   </method>
 
@@ -390,14 +435,16 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>remove</function></funcdef>
-     <paramdef>GtkWidget <parameter>widget</parameter></paramdef>
+     <paramdef><classname>GtkWidget</classname> <parameter>widget</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Removes a widget from the container.
    </shortdesc>
    <desc>
-
+    <para>
+     Removes widget from container. The widget must be inside container.
+    </para>
    </desc>
   </method>
 
@@ -409,14 +456,16 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Recalculates its and the children's sizes.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     Causes the container to recalculate its size and its children's sizes.
+    </para>
+    <para>
+     See also:
      <function class="GtkContainer">get_children</function>
     </para>
-
    </desc>
   </method>
 
@@ -428,15 +477,17 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the border around the container.
    </shortdesc>
    <desc>
     <para>
-     See also: 
-     <function class="GtkContainer">get_border_width</function>, 
-     <fieldname class="GtkContainer">border_width</fieldname>
+     Sets the width of the empty border drawn around the container.
     </para>
-
+    <para>
+     See also: 
+     <function class="GtkContainer">get_border_width</function>,
+     <propname class="GtkContainer">border-width</propname>
+    </para>
    </desc>
   </method>
 
@@ -444,19 +495,28 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_focus_chain</function></funcdef>
-     <paramdef>void</paramdef>
+     <paramdef>array <parameter>widgets</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Overrides the automatically computed focus chain.
    </shortdesc>
    <desc>
+    <para>
+     Sets a focus chain, overriding the one computed automatically by GTK+.
+    </para>
+    <para>
+     In principle each widget in the chain should be a descendant of the
+     container, but this is not enforced by this method, since it's allowed
+     to set the focus chain before you pack the widgets, or have a widget
+     in the chain that isn't always packed. The necessary checks are done
+     when the focus chain is actually traversed.
+    </para>
     <para>
      See also: 
      <function class="GtkContainer">get_focus_chain</function>, 
      <function class="GtkContainer">unset_focus_chain</function>
     </para>
-
    </desc>
   </method>
 
@@ -464,18 +524,22 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_focus_child</function></funcdef>
-     <paramdef>GtkWidget <parameter>child</parameter></paramdef>
+     <paramdef><classname>GtkWidget</classname> <parameter>child</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Emits the "set-focus-child" signal.
    </shortdesc>
    <desc>
     <para>
-     See also: 
-     <fieldname class="GtkContainer">focus_child</fieldname>
+     This method emits the "set-focus-child" signal that arranges
+     for the child widget referenced by child to get the focus and
+     recalculates the container adjustments.
     </para>
-
+    <para>
+     See also:
+     <propname class="GtkContainer">focus_child</propname>
+    </para>
    </desc>
   </method>
 
@@ -483,18 +547,27 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_focus_hadjustment</function></funcdef>
-     <paramdef>GtkAdjustment <parameter>adjustment</parameter></paramdef>
+     <paramdef><classname>GtkAdjustment</classname> <parameter>adjustment</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the horizontal adjustment.
    </shortdesc>
    <desc>
     <para>
-     See also: 
-     <function class="GtkContainer">get_focus_hadjustment</function>
+     Hooks up an adjustment to focus handling in a container, so when a child
+     of the container is focused, the adjustment is scrolled to show that
+     widget. This function sets the horizontal alignment.
     </para>
-
+    <para>
+     The adjustments have to be in pixel units and in the same coordinate
+     system as the allocation for immediate children of the container.
+    </para>
+    <para>
+     See also:
+     <function class="GtkContainer">get_focus_hadjustment</function>,
+     <function class="GtkContainer">set_focus_vadjustment</function>
+    </para>
    </desc>
   </method>
 
@@ -502,18 +575,27 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_focus_vadjustment</function></funcdef>
-     <paramdef>GtkAdjustment <parameter>adjustment</parameter></paramdef>
+     <paramdef><classname>GtkAdjustment</classname> <parameter>adjustment</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the vertical adjustment.
    </shortdesc>
    <desc>
     <para>
-     See also: 
-     <function class="GtkContainer">get_focus_vadjustment</function>
+     Hooks up an adjustment to focus handling in a container, so when a child
+     of the container is focused, the adjustment is scrolled to show that
+     widget. This function sets the vertical alignment.
     </para>
-
+    <para>
+     The adjustments have to be in pixel units and in the same coordinate
+     system as the allocation for immediate children of the container.
+    </para>
+    <para>
+     See also:
+     <function class="GtkContainer">get_focus_vadjustment</function>,
+     <function class="GtkContainer">set_focus_hadjustment</function>
+    </para>
    </desc>
   </method>
 
@@ -525,14 +607,16 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the reallocate_redraws flag.
    </shortdesc>
    <desc>
     <para>
-     See also: 
-     <fieldname class="GtkContainer">reallocate_redraws</fieldname>
+     Sets the reallocate_redraws flag of the container to the given value. 
     </para>
-
+    <para>
+     Containers requesting reallocation redraws get automatically
+     redrawn if any of their children changed allocation.
+    </para>
    </desc>
   </method>
 
@@ -540,19 +624,26 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_resize_mode</function></funcdef>
-     <paramdef>GtkResizeMode <parameter>resize_mode</parameter></paramdef>
+     <paramdef><enumname>GtkResizeMode</enumname> <parameter>resize_mode</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the resize mode for the container.
    </shortdesc>
    <desc>
     <para>
-     See also: 
-     <function class="GtkContainer">get_resize_mode</function>, 
-     <fieldname class="GtkContainer">resize_mode</fieldname>
+     Sets the resize mode for the container.
     </para>
-
+    <para>
+     The resize mode of a container determines whether a resize request will
+     be passed to the container's parent, queued for later execution
+     or executed immediately.
+    </para>
+    <para>
+     See also:
+     <function class="GtkContainer">get_resize_mode</function>, 
+     <propname class="GtkContainer">resize-mode</propname>
+    </para>
    </desc>
   </method>
 
@@ -564,52 +655,59 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Removes a focus chain explicitly set.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     Removes a focus chain explicitly set with
+     <function class="GtkContainer">set_focus_chain</function>.
+    </para>
+    <para>
+     See also:
      <function class="GtkContainer">get_focus_chain</function>, 
      <function class="GtkContainer">set_focus_chain</function>
     </para>
-
    </desc>
   </method>
-
  </methods>
 
- <fields>
 
-  <field id="gtk.gtkcontainer.field.border_width" type="ro">
-   <fieldname>border_width</fieldname>
-   <fieldtype>int</fieldtype>
+ <properties>
+  <prop id="gtk.gtkcontainer.prop.border-width" type="rw">
+   <propname>border-width</propname>
+   <proptype>int</proptype>
    <shortdesc>
+    Border around the container
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     The width of the empty border outside the containers children.
+    </para>
+    <para>
+     Default: <literal>0</literal>
+    </para>
+    <para>
+     See also:
      <function class="GtkContainer">get_border_width</function>, 
      <function class="GtkContainer">set_border_width</function>
     </para>
-
    </desc>
-  </field>
+  </prop>
 
-  <field id="gtk.gtkcontainer.field.focus_child" type="ro">
-   <fieldname>focus_child</fieldname>
-   <fieldtype>GtkWidget</fieldtype>
+  <prop id="gtk.gtkcontainer.prop.child" type="w">
+   <propname>child</propname>
+   <proptype><classname>GtkWidget</classname></proptype>
    <shortdesc>
+    Add a new child to the container.
    </shortdesc>
    <desc>
     <para>
-     See also: 
-     <function class="GtkContainer">set_focus_child</function>
+     Can be used to add a new child to the container.
     </para>
-
    </desc>
-  </field>
-
-  <field id="gtk.gtkcontainer.field.has_focus_chain" type="ro">
+  </prop>
+<!--
+  <field id="gtk.gtkcontainer.field.has_focus_chain" type="rw">
    <fieldname>has_focus_chain</fieldname>
    <fieldtype>int</fieldtype>
    <shortdesc>
@@ -642,26 +740,31 @@
 
    </desc>
   </field>
-
-  <field id="gtk.gtkcontainer.field.resize_mode" type="ro">
-   <fieldname>resize_mode</fieldname>
-   <fieldtype>int</fieldtype>
+-->
+  <prop id="gtk.gtkcontainer.prop.resize-mode" type="rw">
+   <propname>resize-mode</propname>
+   <proptype><enumname>GtkResizeMode</enumname></proptype>
    <shortdesc>
+    How resize events are handled.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     Specify how resize events are handled.
+    </para>
+    <para>
+     Default: <optionname enum="GtkResizeMode">Gtk::RESIZE_PARENT</optionname>
+    </para>
+    <para>
+     See also:
      <function class="GtkContainer">get_resize_mode</function>, 
      <function class="GtkContainer">set_resize_mode</function>
     </para>
-
    </desc>
-  </field>
+  </prop>
+ </properties>
 
- </fields>
 
  <signals>
-
   <signal id="gtk.gtkcontainer.signal.add">
    <signalname>add</signalname>
    <funcsynopsis>
@@ -681,58 +784,70 @@
     child are passed to the callback. The add signal is only 
     emitted when a child is added to the container using the add
     method. If a child is added using the box method
-    <function class="GtkBox">pack_start</function>, the add 
+    <function class="GtkBox">pack_start</function>, the add
     signal will not be emitted.
    </desc>
   </signal>
-  
+
   <signal id="gtk.gtkcontainer.signal.check-resize">
    <signalname>check-resize</signalname>
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <cbfunction>callback</cbfunction></funcdef>
-     <paramdef>GtkContainer <parameter>container</parameter></paramdef>
+     <paramdef><classname>GtkContainer</classname> <parameter>container</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
+    Recalculation of children is requested.
    </shortdesc>
    <desc>
-
+    <para>
+     The "check-resize" signal is emitted when the
+      <function class="GtkContainer">check_resize</function> method is called
+      forcing the recalculation of the container and its children.
+      See the <function class="GtkContainer">set_resize_mode</function> method
+      for details.
+    </para>
    </desc>
   </signal>
-  
+
   <signal id="gtk.gtkcontainer.signal.remove">
    <signalname>remove</signalname>
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <cbfunction>callback</cbfunction></funcdef>
-     <paramdef>GtkContainer <parameter>container</parameter></paramdef>
-     <paramdef>GtkWidget <parameter>UNKNOWN</parameter></paramdef>
+     <paramdef><classname>GtkContainer</classname> <parameter>container</parameter></paramdef>
+     <paramdef><classname>GtkWidget</classname> <parameter>child</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
+    Widget is removed from container.
    </shortdesc>
    <desc>
-
+    <para>
+     Emitted whenever a child is removed from the container.
+    </para>
    </desc>
   </signal>
-  
+
   <signal id="gtk.gtkcontainer.signal.set-focus-child">
    <signalname>set-focus-child</signalname>
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <cbfunction>callback</cbfunction></funcdef>
-     <paramdef>GtkContainer <parameter>container</parameter></paramdef>
-     <paramdef>GtkWidget <parameter>UNKNOWN</parameter></paramdef>
+     <paramdef><classname>GtkContainer</classname> <parameter>container</parameter></paramdef>
+     <paramdef><classname>GtkWidget</classname> <parameter>child</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
+    Focus changes.
    </shortdesc>
    <desc>
-
+    <para>
+     The child widget is given focus.
+    </para>
    </desc>
   </signal>
-  
  </signals>
 
 </classentry>
