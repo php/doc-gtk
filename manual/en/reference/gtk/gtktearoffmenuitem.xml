@@ -3,16 +3,30 @@
  <classmeta>
   <classtitle>GtkTearoffMenuItem</classtitle>
   <classparent>GtkMenuItem</classparent>
+  <classimage fileref="&directory.images;/reference/gtk/gtktearoffmenuitem.png"/>
   <shortdesc>
    A menu item that can be "torn off" into a floating window.
   </shortdesc>
   <desc>
-
+   <para>
+    A GtkTearoffMenuItem is a special GtkMenuItem which is used to tear off
+    and reattach its menu.
+   </para>
+   <para>
+    When its menu is shown normally, the GtkTearoffMenuItem is drawn as a
+    dotted line indicating that the menu can be torn off. Activating it causes
+    its menu to be torn off and displayed in its own window as a tearoff menu.
+   </para>
+   <para>
+    When its menu is shown as a tearoff menu, the GtkTearoffMenuItem is drawn
+    as a dotted line which has a left pointing arrow graphic indicating that
+    the tearoff menu can be reattached. Activating it will erase the tearoff
+    menu window.
+   </para>
   </desc>
  </classmeta>
 
  <constructors>
-
   <constructor id="gtk.gtktearoffmenuitem.constructor">
    <funcsynopsis>
     <funcprototype>
@@ -21,13 +35,25 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Creates a new tearoff menu item.
    </shortdesc>
    <desc>
-
+    <para>
+     This constructor doesn't have any parameters; just
+     instantiate and add it to a <classname>GtkMenu</classname>
+     via its <function class="GtkContainer">add</function> method.
+    </para>
+    <example>
+     <title>Detaching a menu</title>
+     <programlisting role="php">
+      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+                  href="&directory.examples;/reference/gtk/gtktearoffmenuitem/constructor.phpw" parse="text">
+       <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+      </xi:include>
+     </programlisting>
+    </example>
    </desc>
   </constructor>
-
  </constructors>
 
 </classentry>

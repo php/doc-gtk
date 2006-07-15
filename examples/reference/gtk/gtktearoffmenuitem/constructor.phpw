@@ -1,0 +1,33 @@
+<?php
+//The menu will look like this:
+// [File            ]
+//  + -----------
+//  + New
+//  + Open
+//  + Save
+
+//Create a menu bar to add the file menu to
+$menubar = new GtkMenuBar();
+
+//File menu
+$file = new GtkMenuItem('_File');
+$menubar->add($file);
+//Menu to hold the items
+$mnuFile = new GtkMenu();
+$file->set_submenu($mnuFile);
+
+//Add the tearoff menu item to the file menu
+$mnuFile->add(new GtkTearOffMenuItem());
+//Add the normal menu items
+$mnuFile->add(new GtkImageMenuItem(Gtk::STOCK_NEW));
+$mnuFile->add(new GtkImageMenuItem(Gtk::STOCK_OPEN));
+$mnuFile->add(new GtkImageMenuItem(Gtk::STOCK_SAVE));
+
+
+//standard stuff for window creation
+$wnd = new GtkWindow();
+$wnd->connect_simple('destroy', array('Gtk', 'main_quit'));
+$wnd->add($menubar);
+$wnd->show_all();
+Gtk::main();
+?>
