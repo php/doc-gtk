@@ -2988,14 +2988,27 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>bool <cbfunction>callback</cbfunction></funcdef>
-     <paramdef>GtkWindow <parameter>window</parameter></paramdef>
-     <paramdef><!-- was: GdkEvent -->XXX <parameter>UNKNOWN</parameter></paramdef>
+     <paramdef>
+      <classname>GtkWindow</classname> <parameter>window</parameter>
+     </paramdef>
+     <paramdef>
+      <classname>GdkEvent</classname> <parameter>event</parameter>
+     </paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
+    Emitted when an event other than key-press, key-release, or a change in
+    focus occurs on the window's frame.
    </shortdesc>
    <desc>
-
+    <para>
+     This signal is emitted when an event other than key-press, key-release,
+     or a change in focus occurs on the window's frame.
+    </para>
+    <para>
+     The callback will be passed the window in which the event occured and the
+     event itself.
+    </para>
    </desc>
   </signal>
   
@@ -3004,13 +3017,27 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <cbfunction>callback</cbfunction></funcdef>
-     <paramdef>GtkWindow <parameter>window</parameter></paramdef>
+     <paramdef>
+      <classname>GtkWindow</classname> <parameter>window</parameter>
+     </paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
+    Emitted when a mnemonic accelerator is added, removed or changed or the
+    mnemonic modifier is set.
    </shortdesc>
    <desc>
-
+    <para>
+    This signal is emitted when the set of <link
+    linkend="appendix.glossary.m.mnemonic">mnemonic</link> accelerators for
+    the window is changed. 
+    </para>
+    <para>
+     See also:
+     <function class="GtkWindow">add_mnemonic</function>,
+     <function class="GtkWindow">remove_mnemonic</function>,
+     <function class="GtkWindow">set_mnemonic_modifier</function>
+    </para>
    </desc>
   </signal>
   
@@ -3019,14 +3046,30 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <cbfunction>callback</cbfunction></funcdef>
-     <paramdef>GtkWindow <parameter>window</parameter></paramdef>
-     <paramdef>GtkDirectionType <parameter>UNKNOWN</parameter></paramdef>
+     <paramdef>
+      <classname>GtkWindow</classname> <parameter>window</parameter>
+     </paramdef>
+     <paramdef>
+      <enumname>GtkDirectionType</enumname> <parameter>direction</parameter>
+     </paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
+    Emitted when the user changes the window's focus widget.
    </shortdesc>
    <desc>
-
+    <para>
+     This signal is emitted when the user changes the window's focus widget by
+     tabbing from one widget to another or moving between focusable widgets
+     with the arrow keys.
+    </para>
+    <para>
+     The callback will recieve the window that emitted the signal
+     (<parameter>window</parameter>) and the direction
+     (<parameter>direction</parameter>) the focus has moved.
+     <parameter>direction</parameter> normally corresponds to the key or key
+     combination pressed by the user.
+    </para>
    </desc>
   </signal>
   
@@ -3035,14 +3078,33 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <cbfunction>callback</cbfunction></funcdef>
-     <paramdef>GtkWindow <parameter>window</parameter></paramdef>
-     <paramdef>GtkWidget <parameter>UNKNOWN</parameter></paramdef>
+     <paramdef>
+      <classname>GtkWindow</classname> <parameter>window</parameter>
+     </paramdef>
+     <paramdef>
+      <classname>GtkWidget</classname> <parameter>focus_widget</parameter>
+     </paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
+    Emitted when the window's focus widget is changed.
    </shortdesc>
    <desc>
-
+    <para>
+     This signal is emitted when the window's focus widget is changed (usually
+     by calling <function class="GtkWindow">set_focus</function> or <function
+     class="GtkWidget">grab_focus</function>). 
+    </para>
+    <para>
+     The callback will be passed two parameters:
+     <parameter>window</parameter>, the window that emitted the signal, and
+     <parameter>focus_wigdget</parameter>, the new focus widget.
+    </para>
+    <para>
+     See also:
+     <function class="GtkWindow">set_focus</function>,
+     <function class="GtkWidget">grab_focus</function>
+    </para>
    </desc>
   </signal>
   
