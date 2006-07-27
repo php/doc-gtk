@@ -56,12 +56,13 @@ test: $(BUILD_TEST)/$(id).html
 phptest: $(BUILD_TEST)/$(id).php
 text: $(BUILD)/manual.txt
 updates: $(BUILD_TEST)/updates-$(LANG).php
-
+revcheck: revcheck.html
 mirror-files: $(BUILD)/bigmanual.html.gz              \
 			  $(BUILD)/php_gtk_manual_$(LANG).tar.bz2 \
 			  $(BUILD)/php_gtk_manual_$(LANG).tar.gz  \
 			  $(BUILD)/php_gtk_manual_$(LANG).zip     \
 			  $(BUILD)/php_gtk_manual_$(LANG).txt.gz
+
 
 #
 # Dependency Aliases
@@ -162,3 +163,8 @@ cvsclean:
 	@for i in `find . -name .cvsignore`; do \
 		(cd `dirname $$i` 2>/dev/null && rm -rf `cat .cvsignore` || true); \
 	done
+
+FORCE:
+
+revcheck.html: FORCE
+	$(PHP) -f ./scripts/revcheck.php $(LANG) > revcheck.html
