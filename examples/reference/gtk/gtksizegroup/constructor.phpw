@@ -1,0 +1,25 @@
+<?php
+//we create two buttons:
+// one has two lines, being higher than the second
+$oh = new GtkButton("Oh!\nOh!");
+// the other has a longer text, making it wider
+// than the first
+$longer = new GtkButton('This is a longer text');
+
+$box = new GtkHBox();
+$box->pack_start($oh);
+$box->pack_start($longer);
+
+//but GtkSizeGroup saves the day:
+// both buttons get the same height and width!
+$group = new GtkSizeGroup(Gtk::SIZE_GROUP_BOTH);
+$group->add_widget($oh);
+$group->add_widget($longer);
+
+$wnd = new GtkWindow();
+$wnd->set_border_width(10);
+$wnd->connect_simple('destroy', array('gtk', 'main_quit'));
+$wnd->add($box);
+$wnd->show_all();
+Gtk::main();
+?>

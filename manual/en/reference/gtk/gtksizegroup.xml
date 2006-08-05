@@ -3,70 +3,112 @@
  <classmeta>
   <classtitle>GtkSizeGroup</classtitle>
   <classparent>GObject</classparent>
+  <classimage fileref="&directory.images;/reference/gtk/gtksizegroup.png" border="1"/>
   <shortdesc>
    An object for forcing a group of widgets to request the same size.
   </shortdesc>
   <desc>
-
+   <para>
+    <classname>GtkSizeGroup</classname> provides a mechanism for grouping
+    a number of widgets together so they all request the same amount of space.
+    This is typically useful when you want a column of widgets to have
+    the same size, but you can't use a <classname>GtkTable</classname> widget.
+   </para>
+   <para>
+    In detail, the size requested for each widget in a GtkSizeGroup is the
+    maximum of the sizes that would have been requested for each widget in
+    the size group if they were not in the size group. The mode of the size
+    group (see <function class="GtkSizeGroup">set_mode</function>) determines
+    whether this applies to the horizontal size, the vertical size, or
+    both sizes.
+   </para>
+   <para>
+    Note that size groups only affect the amount of space requested, not the
+    size that the widgets finally receive. If you want the widgets in a
+    GtkSizeGroup to actually be the same size, you need to pack them in such
+    a way that they get the size they request and not more. For example, if
+    you are packing your widgets into a table, you would not include the
+    <optionname enum="GtkAttachOptions">Gtk::FILL</optionname> flag.
+   </para>
   </desc>
  </classmeta>
 
  <constructors>
-
   <constructor id="gtk.gtksizegroup.constructor">
    <funcsynopsis>
     <funcprototype>
     <funcdef> <function>GtkSizeGroup</function></funcdef>
-    <paramdef>GtkSizeGroupMode <parameter>mode</parameter></paramdef>
+    <paramdef><enumname>GtkSizeGroupMode</enumname> <parameter>mode</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Creates a new size group.
    </shortdesc>
    <desc>
-
+    <para>
+     A GtkSizeGroup is not a widget taking up any space, rather
+     providing additional bindings between widgets.
+    </para>
+    <para>
+     At first, create your application as you would do normally:
+     Instantiate widgets, add them to containers and so. After that,
+     create a GtkSizeGroup and add widgets to it with
+     <function class="GtkSizeGroup">add_widget</function> and
+     the widgets will magically have the same size.
+    </para>
+    <example>
+     <title>Using a GtkSizeGroup</title>
+     <programlisting role="php">
+      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+                  href="&directory.examples;/reference/gtk/gtksizegroup/constructor.phpw" parse="text">
+       <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+      </xi:include>
+     </programlisting>
+    </example>
    </desc>
   </constructor>
-
  </constructors>
 
  <methods>
-
   <method id="gtk.gtksizegroup.method.add_widget">
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>add_widget</function></funcdef>
-     <paramdef>GtkWidget <parameter>widget</parameter></paramdef>
+     <paramdef><classname>GtkWidget</classname> <parameter>widget</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Adds a widget to the group.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     Adds a widget to the group.
+    </para>
+    <para>
+     See also:
      <function class="GtkSizeGroup">remove_widget</function>
     </para>
-
    </desc>
   </method>
 
   <method id="gtk.gtksizegroup.method.get_mode">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>GtkSizeGroupMode <function>get_mode</function></funcdef>
+     <funcdef><enumname>GtkSizeGroupMode</enumname> <function>get_mode</function></funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Gets the current mode of the size group.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     Gets the current mode of the size group.
+    </para>
+    <para>
+     See also:
      <function class="GtkSizeGroup">set_mode</function>
     </para>
-
    </desc>
   </method>
 
@@ -74,18 +116,20 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>remove_widget</function></funcdef>
-     <paramdef>GtkWidget <parameter>widget</parameter></paramdef>
+     <paramdef><classname>GtkWidget</classname> <parameter>widget</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Removes a widget from the group.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     Removes a widget from the group.
+    </para>
+    <para>
+     See also:
      <function class="GtkSizeGroup">add_widget</function>
     </para>
-
    </desc>
   </method>
 
@@ -93,21 +137,24 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_mode</function></funcdef>
-     <paramdef>GtkSizeGroupMode <parameter>mode</parameter></paramdef>
+     <paramdef><enumname>GtkSizeGroupMode</enumname> <parameter>mode</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the group's mode.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     Sets the <enumname>GtkSizeGroupMode</enumname> of the size group. The mode
+     of the size group determines whether the widgets in the size group should
+     all have the same horizontal requisition.
+    </para>
+    <para>
+     See also:
      <function class="GtkSizeGroup">get_mode</function>
     </para>
-
    </desc>
   </method>
-
  </methods>
 
 </classentry>
