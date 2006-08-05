@@ -7,12 +7,15 @@
    A base class for GtkProgressBar.
   </shortdesc>
   <desc>
-
+   <para>
+    A GtkProgress is the abstract base class used to derive
+    a <classname>GtkProgressBar</classname> which provides a visual
+    representation of the progress of a long running operation.
+   </para>
   </desc>
  </classmeta>
 
  <methods>
-
   <method id="gtk.gtkprogress.method.configure">
    <funcsynopsis>
     <funcprototype>
@@ -23,10 +26,16 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    &deprecated; Reconfigure minimum, maximum and current value.
    </shortdesc>
    <desc>
-    &deprecated.method;
+    <para>
+     &deprecated.method;
+    </para>
+    <para>
+     Allows the configuration of the minimum, maximum, and current
+     values for the GtkProgress.
+    </para>
    </desc>
   </method>
 
@@ -38,10 +47,15 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    &deprecated; Returns the current progress as a percentage.
    </shortdesc>
    <desc>
-    &deprecated.method;
+    <para>
+     &deprecated.method;
+    </para>
+    <para>
+     Returns the current progress as a percentage.
+    </para>
    </desc>
   </method>
 
@@ -53,10 +67,17 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    &deprecated; Returns the current text.
    </shortdesc>
    <desc>
-    &deprecated.method;
+    <para>
+     &deprecated.method;
+    </para>
+    <para>
+     Returns the current text associated with the GtkProgress. This text is
+     the based on the underlying format string after any substitutions are
+     made.
+    </para>
    </desc>
   </method>
 
@@ -68,10 +89,17 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    &deprecated; Calculates the percentage from the supplied absolute
+    progress value.
    </shortdesc>
    <desc>
-    &deprecated.method;
+    <para>
+     &deprecated.method;
+    </para>
+    <para>
+     Returns the progress as a percentage calculated from the supplied absolute
+     progress value.
+    </para>
    </desc>
   </method>
 
@@ -83,10 +111,16 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    &deprecated; Returns the text based on the supplied value.
    </shortdesc>
    <desc>
-    &deprecated.method;
+    <para>
+     &deprecated.method;
+    </para>
+    <para>
+     Returns the text indicating the progress based on the supplied value.
+     The current value for the GtkProgress remains unchanged.
+    </para>
    </desc>
   </method>
 
@@ -98,10 +132,15 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    &deprecated; Returns the current progress complete value.
    </shortdesc>
    <desc>
-    &deprecated.method;
+    <para>
+     &deprecated.method;
+    </para>
+    <para>
+     Returns the current progress complete value.
+    </para>
     <para>
      See also: 
      <function class="GtkProgress">set_value</function>
@@ -117,10 +156,17 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    &deprecated; Sets the progress bar to activity or percentage mode.
    </shortdesc>
    <desc>
-    &deprecated.method;
+    <para>
+     &deprecated.method;
+    </para>
+    <para>
+     A GtkProgress can be in one of two different modes: percentage mode
+     (the default) and activity mode. In activity mode, the progress is
+     simply indicated as activity rather than as a percentage complete.
+    </para>
    </desc>
   </method>
 
@@ -128,14 +174,21 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_adjustment</function></funcdef>
-     <paramdef>GtkAdjustment <parameter>adjustment</parameter></paramdef>
+     <paramdef><classname>GtkAdjustment</classname> <parameter>adjustment</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    &deprecated; Associates a GtkAdjustment with the GtkProgress.
    </shortdesc>
    <desc>
-    &deprecated.method;
+    <para>
+     &deprecated.method;
+    </para>
+    <para>
+     Associates a <classname>GtkAdjustment</classname> with the GtkProgress.
+     A GtkAdjustment is used to represent the upper and lower bounds and the
+     step interval of the underlying value for which progress is shown.
+    </para>
    </desc>
   </method>
 
@@ -147,10 +200,30 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    &deprecated; Sets a format string used to display text.
    </shortdesc>
    <desc>
-    &deprecated.method;
+    <para>
+     &deprecated.method;
+    </para>
+    <para>
+     Sets a format string used to display text indicating the current
+     progress. The string can contain the following substitution characters:
+    </para>
+    <itemizedlist>
+     <listitem>
+      <literal>%v</literal> - the current progress value.
+     </listitem>
+     <listitem>
+      <literal>%l</literal> - the lower bound for the progress value.
+     </listitem>
+     <listitem>
+      <literal>%u</literal> - the upper bound for the progress value.
+     </listitem>
+     <listitem>
+      <literal>%p</literal> - the current progress percentage.
+     </listitem>
+    </itemizedlist>
    </desc>
   </method>
 
@@ -162,10 +235,15 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    
+    &deprecated; Sets the current percentage completion.
    </shortdesc>
    <desc>
-    &deprecated.method;
+    <para>
+     &deprecated.method;
+    </para>
+    <para>
+     Sets the current percentage completion for the GtkProgress.
+    </para>
    </desc>
   </method>
 
@@ -177,10 +255,15 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    &deprecated; Controls whether progress text is shown.
    </shortdesc>
    <desc>
-    &deprecated.method;
+    <para>
+     &deprecated.method;
+    </para>
+    <para>
+     Controls whether progress text is shown.
+    </para>
    </desc>
   </method>
 
@@ -193,10 +276,15 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    &deprecated; Sets the text alignment in the progress bar area.
    </shortdesc>
    <desc>
-    &deprecated.method;
+    <para>
+     &deprecated.method;
+    </para>
+    <para>
+     Controls the alignment of the text within the progress bar area.
+    </para>
    </desc>
   </method>
 
@@ -208,17 +296,112 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    &deprecated; Sets the value to an absolute value.
    </shortdesc>
    <desc>
-    &deprecated.method;
     <para>
-     See also: 
+     &deprecated.method;
+    </para>
+    <para>
+     Sets the value within the GtkProgress to an absolute value. The value
+     must be within the valid range of values for the underlying GtkAdjustment.
+    </para>
+    <para>
+     See also:
      <function class="GtkProgress">get_value</function>
     </para>
    </desc>
   </method>
-
  </methods>
+
+ <properties>
+  <prop id="gtk.gtkprogress.property.activity-mode" type="rw">
+   <propname>activity-mode</propname>
+   <proptype>bool</proptype>
+   <shortdesc>
+    Percentage or activity mode.
+   </shortdesc>
+   <desc>
+    <para>
+     If <literal>true</literal> the GtkProgress is in activity mode,
+     meaning that it signals something is happening, but not how much
+     of the activity is finished. This is used when you're doing something
+     that you don't know how long it will take.
+    </para>
+    <para>
+     Default: <literal>false</literal>
+    </para>
+    <para>
+     See also:
+     <function class="GtkWindow">set_activity_mode</function>
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtkprogress.property.show-text" type="rw">
+   <propname>show-text</propname>
+   <proptype>bool</proptype>
+   <shortdesc>
+    Whether the progress is shown as text.
+   </shortdesc>
+   <desc>
+    <para>
+     Whether the progress is shown as text.
+    </para>
+    <para>
+     Default: <literal>false</literal>
+    </para>
+    <para>
+     See also:
+     <function class="GtkWindow"></function>,
+     <function class="GtkWindow"></function>
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtkprogress.property.text-xalign" type="rw">
+   <propname>text-xalign</propname>
+   <proptype>double</proptype>
+   <shortdesc>
+    Horizontal text alignment.
+   </shortdesc>
+   <desc>
+    <para>
+     A number between <literal>0.0</literal> and <literal>1.0</literal>
+     specifying the horizontal alignment of the text in the progress widget.
+    </para>
+    <para>
+     Default: <literal>0.5</literal>
+    </para>
+    <para>
+     See also:
+     <function class="GtkWindow"></function>,
+     <function class="GtkWindow"></function>
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtkprogress.property.text-yalign" type="rw">
+   <propname>text-yalign</propname>
+   <proptype>double</proptype>
+   <shortdesc>
+    Vertical text alignment.
+   </shortdesc>
+   <desc>
+    <para>
+     A number between <literal>0.0</literal> and <literal>1.0</literal>
+     specifying the vertical alignment of the text in the progress widget.
+    </para>
+    <para>
+     Default: <literal>0.5</literal>
+    </para>
+    <para>
+     See also:
+     <function class="GtkWindow"></function>,
+     <function class="GtkWindow"></function>
+    </para>
+   </desc>
+  </prop>
+ </properties>
 
 </classentry>
