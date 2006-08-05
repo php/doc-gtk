@@ -8,7 +8,7 @@
   </shortdesc>
   <desc>
    <note>
-    &deprecated.class;          
+    &deprecated.class;
     Use <classname>GtkComboBox</classname> instead.
    </note>
    <para>
@@ -21,7 +21,6 @@
  </classmeta>
 
  <constructors>
-
   <constructor id="gtk.gtkcombo.constructor">
    <funcsynopsis>
     <funcprototype>
@@ -30,17 +29,20 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Creates a new combo box.
    </shortdesc>
    <desc>
-    &deprecated.method;
+    <para>
+     &deprecated.method;
+    </para>
+    <para>
+     Creates a new combo box.
+    </para>
    </desc>
   </constructor>
-
  </constructors>
 
  <methods>
-
   <method id="gtk.gtkcombo.method.disable_activate">
    <funcsynopsis>
     <funcprototype>
@@ -49,10 +51,18 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Stops the GtkCombo from showing the popup list on return key.
    </shortdesc>
    <desc>
-    &deprecated.method;
+    <para>
+     &deprecated.method;
+    </para>
+    <para>
+     Stops the GtkCombo widget from showing the popup list when the
+     <classname>GtkEntry</classname> emits the "activate" signal, i.e.
+     when the Return key is pressed. This may be useful if, for example,
+     you want the Return key to close a dialog instead.
+    </para>
    </desc>
   </method>
 
@@ -64,10 +74,21 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Whether the text entered is case sensitive.
    </shortdesc>
    <desc>
-    &deprecated.method;
+    <para>
+     &deprecated.method;
+    </para>
+    <para>
+     Specifies whether the text entered into the GtkEntry field and
+     the text in the list items is case sensitive.
+    </para>
+    <para>
+     This may be useful, for example, when you have called
+     <function class="GtkCombo">set_value_in_list</function> to limit the
+     values entered, but you are not worried about differences in case.
+    </para>
    </desc>
   </method>
 
@@ -75,15 +96,21 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_item_string</function></funcdef>
-     <paramdef>GtkItem <parameter>item</parameter></paramdef>
+     <paramdef><classname>GtkItem</classname> <parameter>item</parameter></paramdef>
      <paramdef>string <parameter>item_value</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the string representation of a particular list item.
    </shortdesc>
    <desc>
-    &deprecated.method;
+    <para>
+     &deprecated.method;
+    </para>
+    <para>
+     Sets the string to place in the GtkEntry field when a particular list
+     item is selected. This is needed if the list item is not a simple label.
+    </para>
    </desc>
   </method>
 
@@ -91,14 +118,19 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_popdown_strings</function></funcdef>
-     <paramdef>void</paramdef>
+     <paramdef>array <parameter>strings</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Convenience function to set all of the items in the popup list.
    </shortdesc>
    <desc>
-    &deprecated.method;
+    <para>
+     &deprecated.method;
+    </para>
+    <para>
+     Convenience function to set all of the items in the popup list.
+    </para>
    </desc>
   </method>
 
@@ -110,10 +142,16 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    If the arrow can be used to step through the list.
    </shortdesc>
    <desc>
-    &deprecated.method;
+    <para>
+     &deprecated.method;
+    </para>
+    <para>
+     Specifies if the arrow (cursor) keys can be used to step through
+     the items in the list. This is on by default.
+    </para>
    </desc>
   </method>
 
@@ -125,10 +163,15 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Obsolete function, does nothing.
    </shortdesc>
    <desc>
-    &deprecated.method;
+    <para>
+     &deprecated.method;
+    </para>
+    <para>
+     Obsolete function, does nothing.
+    </para>
    </desc>
   </method>
 
@@ -141,24 +184,42 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Whether the value entered must match one of the values in the list.
    </shortdesc>
    <desc>
-    &deprecated.method;
+    <para>
+     &deprecated.method;
+    </para>
+    <para>
+     Specifies whether the value entered in the text entry field
+     must match one of the values in the list. If this is set then the
+     user will not be able to perform any other action until a valid
+     value has been entered.
+    </para>
+    <para>
+     If an empty field is acceptable, the
+     <parameter>ok_if_empty</parameter> parameter should be
+     <literal>true</literal>.
+    </para>
    </desc>
   </method>
-
  </methods>
 
- <fields>
 
+ <fields>
   <field id="gtk.gtkcombo.field.entry" type="ro">
    <fieldname>entry</fieldname>
    <fieldtype>GtkWidget</fieldtype>
    <shortdesc>
+    Entry widget to type values.
    </shortdesc>
    <desc>
-    &deprecated.property;
+    <para>
+     &deprecated.property;
+    </para>
+    <para>
+     Entry widget to type values.
+    </para>
    </desc>
   </field>
 
@@ -166,12 +227,17 @@
    <fieldname>list</fieldname>
    <fieldtype>GtkWidget</fieldtype>
    <shortdesc>
+    Dropdown list widget.
    </shortdesc>
    <desc>
-    &deprecated.property;
+    <para>
+     &deprecated.property;
+    </para>
+    <para>
+     Dropdown list widget.
+    </para>
    </desc>
   </field>
-
  </fields>
 
 </classentry>
