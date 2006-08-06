@@ -7,12 +7,19 @@
    A widget that is not displayed on the screen.
   </shortdesc>
   <desc>
-
+   <para>
+    The GtkInvisible widget is used internally in GTK+, and is
+    probably not very useful for application developers. 
+   </para>
+   <para>
+    It is used for reliable pointer grabs and selection
+    handling in the code for drag-and-drop.
+   </para>
   </desc>
  </classmeta>
 
- <constructors>
 
+ <constructors>
   <constructor id="gtk.gtkinvisible.constructor">
    <funcsynopsis>
     <funcprototype>
@@ -21,47 +28,53 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Creates a new GtkInvisible.
    </shortdesc>
    <desc>
-
+    <para>
+     Creates a new GtkInvisible.
+    </para>
    </desc>
   </constructor>
 
- <constructor id="gtk.gtkinvisible.constructor.new_for_screen">
+  <constructor id="gtk.gtkinvisible.constructor.new_for_screen">
    <funcsynopsis>
     <funcprototype>
-     <funcdef> <function>new_for_screen</function></funcdef>
+     <funcdef> <function>GtkInvisible::new_for_screen</function></funcdef>
       <paramdef><classname>GdkScreen</classname><parameter>screen</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Creates a new GtkInvisible object for a specified screen.
    </shortdesc>
-  <desc>
-
+   <desc>
+    <para>
+     Creates a new GtkInvisible object for a specified screen.
+    </para>
    </desc>
   </constructor>
-  </constructors>
+ </constructors>
+
 
  <methods>
-
   <method id="gtk.gtkinvisible.method.get_screen">
    <funcsynopsis>
     <funcprototype>
-     <funcdef> <function>get_screen</function></funcdef>
+     <funcdef><classname>GdkScreen</classname> <function>get_screen</function></funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the GdkScreen object associated with invisible.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     Returns the GdkScreen object associated with invisible.
+    </para>
+    <para>
+     See also:
      <function class="GtkInvisible">set_screen</function>
     </para>
-
    </desc>
   </method>
 
@@ -69,21 +82,22 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_screen</function></funcdef>
-     <paramdef>void</paramdef>
+     <paramdef><classname>GdkScreen</classname> <parameter>screen</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the GdkScreen where the invisible object will be displayed.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     Sets the GdkScreen where the GtkInvisible object will be displayed.
+    </para>
+    <para>
+     See also:
      <function class="GtkInvisible">get_screen</function>
     </para>
-
    </desc>
   </method>
-
  </methods>
 
 </classentry>
