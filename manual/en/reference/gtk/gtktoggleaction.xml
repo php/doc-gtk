@@ -28,10 +28,15 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Creates a new toggle action object.
    </shortdesc>
    <desc>
-
+    <para>
+     Creates a new GtkToggleAction object. To add the action to a
+     <classname>GtkActionGroup</classname> and set the accelerator for the
+     action, call
+     <function class="GtkActionGroup">add_action_with_accel</function>.
+    </para>
    </desc>
   </constructor>
  </constructors>
@@ -46,7 +51,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the checked state.
    </shortdesc>
    <desc>
     <para>
@@ -67,14 +72,16 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Whether the action should have proxies like a radio action.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     Returns whether the action should have proxies like a radio action.
+    </para>
+    <para>
+     See also:
      <function class="GtkToggleAction">set_draw_as_radio</function>
     </para>
-
    </desc>
   </method>
 
@@ -107,14 +114,16 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets whether the action should have proxies like a radio action.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     Sets whether the action should have proxies like a radio action.
+    </para>
+    <para>
+     See also:
      <function class="GtkToggleAction">get_draw_as_radio</function>
     </para>
-
    </desc>
   </method>
 
@@ -126,32 +135,35 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Emits the "toggled" signal.
    </shortdesc>
    <desc>
-
+    <para>
+     Emits the "toggled" signal.
+    </para>
    </desc>
   </method>
-
  </methods>
 
- <signals>
 
+ <signals>
   <signal id="gtk.gtktoggleaction.signal.toggled">
    <signalname>toggled</signalname>
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <cbfunction>callback</cbfunction></funcdef>
-     <paramdef>GtkToggleAction <parameter>toggleaction</parameter></paramdef>
+     <paramdef><classname>GtkToggleAction</classname> <parameter>toggleaction</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
+    The state has been toggled.
    </shortdesc>
    <desc>
-
+    <para>
+     The state has been toggled.
+    </para>
    </desc>
   </signal>
-  
  </signals>
 
 </classentry>
