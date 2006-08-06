@@ -1,10 +1,10 @@
 <?php
 //Function to retrieve text from GtkEntry and print it
 function get_input($entry) {
-  $input = $entry->get_text();
-  echo "$input\r\n";
-  $entry->grab_focus();
-  $entry->set_text("");
+    $input = $entry->get_text();
+    echo "$input\r\n";
+    $entry->grab_focus();
+    $entry->set_text("");
 }
 
 //Setting up the Window
@@ -27,12 +27,11 @@ $box->add($entry);
 //Adding a GtkButton to the box and use connect_simple()
 // so that it will pass the GtkEntry to the callback
 // function when it is clicked
-$button = &new GtkButton('Click Me to echo input!');
+$button = new GtkButton('Click Me to echo input!');
 $button->connect_simple('clicked', 'get_input', $entry);
 $box->add($button);
 
 //Display everything and start the main loop
-$box->show_all();
 $window->show_all();
 Gtk::main();
 ?>
