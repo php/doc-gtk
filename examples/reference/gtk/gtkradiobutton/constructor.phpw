@@ -1,0 +1,24 @@
+<?php
+$box = new GtkVBox();
+
+$label = new GtkLabel("click a button\n");
+$box->pack_end($label);
+
+$radio = null;
+foreach (array('Red', 'Green', 'Blue') as $strLabel) {
+    $radio = new GtkRadioButton($radio, $strLabel, true);
+    $box->pack_start($radio);
+    $radio->connect('toggled', 'onToggle', $label);
+}
+
+function onToggle($radio, $label)
+{
+    $label->set_text("toggled:\n" . $radio->get_label());
+}
+
+$wnd = new GtkWindow();
+$wnd->connect_simple('destroy', array('gtk', 'main_quit'));
+$wnd->add($box);
+$wnd->show_all();
+Gtk::main();
+?>

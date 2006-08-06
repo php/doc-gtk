@@ -3,32 +3,100 @@
  <classmeta>
   <classtitle>GtkRadioButton</classtitle>
   <classparent>GtkCheckButton</classparent>
+  <classimage fileref="&directory.images;/reference/gtk/gtkradiobutton.png"/>
   <shortdesc>
    A toggle button of which only one in a group may be active.
   </shortdesc>
   <desc>
-
+   <para>
+    A single radio button performs the same basic function as a 
+    <classname>GtkCheckButton</classname>, as its position in the object
+    hierarchy reflects. It is only when multiple radio buttons are grouped
+    together that they become a different user interface component
+     in their own right.
+   </para>
+   <para>
+    Every radio button is a member of some group of radio buttons.
+    When one is selected, all other radio buttons in the same group
+    are deselected. A <classname>GtkRadioButton</classname> is one
+    way of giving the user a choice from many options.
+   </para>
+   <para>
+    Radio button widgets are created with
+    <link linkend="gtk.gtkradiobutton.constructor">new GtkRadioButton()</link>,
+    passing <literal>null</literal> as the argument if this is the first radio
+    button in a group.
+   </para>
+<!--
+   <para>
+    Alternatively, when adding widgets to an existing group of radio buttons,
+    use
+    <link linkend="gtk.gtkradiobutton.constructor.new_from_widget">new_from_widget</link>
+    with a GtkRadioButton that already has a group assigned to it.
+   </para>
+-->
+   <para>
+    To retrieve the group a GtkRadioButton is assigned to, use
+    <function class="GtkRadioButton">get_group</function>.
+   </para>
+   <para>
+    To remove a GtkRadioButton from one group and make it part of a new one,
+    use <function class="GtkRadioButton">set_group</function>.
+   </para>
   </desc>
  </classmeta>
 
- <methods>
 
+ <constructors>
+  <constructor id="gtk.gtkradiobutton.constructor">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef> <function>GtkRadioButton</function></funcdef>
+     <paramdef><classname>GtkRadioButton</classname> <parameter><optional>group</optional></parameter></paramdef>
+     <paramdef>string <parameter><optional>text</optional></parameter></paramdef>
+     <paramdef>bool <parameter><optional>use_underline</optional></parameter> = <literal>true</literal></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Creates a new radio button.
+   </shortdesc>
+   <desc>
+    <para>
+     Creates a new radio button.
+    </para>
+    <example>
+     <title>Creating GtkRadioButtons</title>
+     <programlisting role="php">
+      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+                  href="&directory.examples;/reference/gtk/gtkradiobutton/constructor.phpw" parse="text">
+       <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+      </xi:include>
+     </programlisting>
+    </example>
+   </desc>
+  </constructor>
+ </constructors>
+
+
+ <methods>
   <method id="gtk.gtkradiobutton.method.get_group">
    <funcsynopsis>
     <funcprototype>
-     <funcdef> <function>get_group</function></funcdef>
+     <funcdef>array <function>get_group</function></funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the group members.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     Returns an array of widgets that are in the group.
+    </para>
+    <para>
+     See also:
      <function class="GtkRadioButton">set_group</function>
     </para>
-
    </desc>
   </method>
 
@@ -40,10 +108,13 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    &deprecated;
    </shortdesc>
    <desc>
-
+    <para>
+     &deprecated.method;
+     Use <function class="GtkRadioButton">get_group</function>.
+    </para>
    </desc>
   </method>
 
@@ -51,40 +122,44 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_group</function></funcdef>
-     <paramdef>void</paramdef>
+     <paramdef><classname>GtkRadioButton</classname> <parameter>group</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the group of the button.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     Sets the group the widget shall belong to. Typically this
+     is the first widget of the group, but maybe any other.
+    </para>
+    <para>
+     See also:
      <function class="GtkRadioButton">get_group</function>
     </para>
-
    </desc>
   </method>
-
  </methods>
 
- <signals>
 
+ <signals>
   <signal id="gtk.gtkradiobutton.signal.group-changed">
    <signalname>group-changed</signalname>
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <cbfunction>callback</cbfunction></funcdef>
-     <paramdef>GtkRadioButton <parameter>radiobutton</parameter></paramdef>
+     <paramdef><classname>GtkRadioButton</classname> <parameter>radiobutton</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
+    A widget has been added/removed from the group.
    </shortdesc>
    <desc>
-
+    <para>
+     A widget has been added/removed from the group.
+    </para>
    </desc>
   </signal>
-  
  </signals>
 
 </classentry>
