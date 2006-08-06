@@ -1,0 +1,37 @@
+<?php
+//Example: using GtkSeparatorMenuItems to
+// separate menu items
+
+//Create a menu bar
+$mbar  = new GtkMenuBar();
+//Add a menu item
+$file  = new GtkMenuItem('_File');
+//with a submenu
+$fmenu = new GtkMenu();
+$file->set_submenu($fmenu);
+$mbar->add($file);
+
+//Now, we create a "normal" file menu:
+// New, Open, Save, Save As, Quit
+//To make it visually appealing, we separate
+// the items with GtkSeparatorMenuItems
+$fmenu->add(new GtkImageMenuItem(Gtk::STOCK_NEW));
+$fmenu->add(new GtkImageMenuItem(Gtk::STOCK_OPEN));
+
+$fmenu->add(new GtkSeparatorMenuItem());
+
+$fmenu->add(new GtkImageMenuItem(Gtk::STOCK_SAVE));
+$fmenu->add(new GtkImageMenuItem(Gtk::STOCK_SAVE_AS));
+
+$fmenu->add(new GtkSeparatorMenuItem());
+
+$fmenu->add(new GtkImageMenuItem(Gtk::STOCK_QUIT));
+
+
+//standard stuff
+$wnd = new GtkWindow();
+$wnd->connect_simple('destroy', array('gtk', 'main_quit'));
+$wnd->add($mbar);
+$wnd->show_all();
+Gtk::main();
+?>
