@@ -3,7 +3,7 @@
  <classmeta>
   <classtitle>GtkImageMenuItem</classtitle>
   <classparent>GtkMenuItem</classparent>
-  <classimage fileref="&directory.images;/reference/gtk/gtkimagemenuitem.png"/>
+  <classimage fileref="&directory.images;/reference/gtk/gtkimagemenuitem.png" border="1"/>
   <shortdesc>
    A menu item with an icon.
   </shortdesc>
@@ -19,15 +19,11 @@
  </classmeta>
 
  <constructors>
-
   <constructor id="gtk.gtkimagemenuitem.constructor">
    <funcsynopsis>
     <funcprototype>
     <funcdef> <function>GtkImageMenuItem</function></funcdef>
-    <!-- FIXME funny behavior! -->
-    <optional>
-     <paramdef>string <parameter>label</parameter></paramdef>
-    </optional>
+    <paramdef>string <parameter><optional>label</optional></parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -36,68 +32,33 @@
    <desc>
     <para>
      Use the constructor to generate a new menu item with an icon. You may
-     pass a string as the label, or a stock id, if you want to use the
-     existing stock icons.
+     pass a string as the label, or a
+     <link linkend="gtk.enum.stockitems">stock id</link>, if you want to use
+     the existing stock icons.
     </para>
     <para>
      You may even precede a character of the label with an
      <literal>_</literal> to indicate the mnemonic for the menu item.
     </para>
+    <example>
+     <title>Creating image menu items</title>
+     <programlisting role="php">
+      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+                  href="&directory.examples;/reference/gtk/gtkseparatormenuitem/constructor.phpw" parse="text">
+       <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+      </xi:include>
+     </programlisting>
+    </example>
    </desc>
   </constructor>
-
-  <constructor id="gtk.gtkimagemenuitem.constructor.new_from_stock">
-   <funcsynopsis>
-    <funcprototype>
-    <funcdef> <function>GtkImageMenuItem::new_from_stock</function></funcdef>
-    <paramdef>string <parameter>stock_id</parameter></paramdef>
-    <paramdef>GtkAccelGroup <parameter>accel_group</parameter></paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-    <!-- FIXME Not yet implemented -->
-   </shortdesc>
-   <desc>
-   </desc>
-  </constructor>
-
-  <constructor id="gtk.gtkimagemenuitem.constructor.new_with_label">
-   <funcsynopsis>
-    <funcprototype>
-    <funcdef> <function>GtkImageMenuItem::new_with_label</function></funcdef>
-    <paramdef>string <parameter>label</parameter></paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-    <!-- FIXME Not yet implemented -->
-   </shortdesc>
-   <desc>
-   </desc>
-  </constructor>
-
-  <constructor id="gtk.gtkimagemenuitem.constructor.new_with_mnemonic">
-   <funcsynopsis>
-    <funcprototype>
-    <funcdef> <function>GtkImageMenuItem::new_with_mnemonic</function></funcdef>
-    <paramdef>string <parameter>label</parameter></paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-    <!--FIXME No need for this, automatically done with constructor -->
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </constructor>
-
  </constructors>
 
- <methods>
 
+ <methods>
   <method id="gtk.gtkimagemenuitem.method.get_image">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>GtkWidget <function>get_image</function></funcdef>
+     <funcdef><classname>GtkWidget</classname> <function>get_image</function></funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
@@ -120,7 +81,7 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_image</function></funcdef>
-     <paramdef>GtkWidget <parameter>image</parameter></paramdef>
+     <paramdef><classname>GtkWidget</classname> <parameter>image</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -137,7 +98,6 @@
     </para>
    </desc>
   </method>
-
  </methods>
 
 </classentry>
