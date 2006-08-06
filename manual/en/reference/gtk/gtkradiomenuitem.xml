@@ -3,105 +3,105 @@
  <classmeta>
   <classtitle>GtkRadioMenuItem</classtitle>
   <classparent>GtkCheckMenuItem</classparent>
+  <classimage fileref="&directory.images;/reference/gtk/gtkradiomenuitem.png" border="0"/>
   <shortdesc>
    A toggle menu item of which only one in the group may be active.
   </shortdesc>
   <desc>
-
+   <para>
+    A radio menu item is a check menu item that belongs to a group.
+    At each instant exactly one of the radio menu items from a group
+    is selected.
+   </para>
   </desc>
  </classmeta>
 
  <constructors>
-
- <constructor id="gtk.gtkradiomenuitem.constructor.new_from_widget">
+  <constructor id="gtk.gtkradiomenuitem.constructor">
    <funcsynopsis>
     <funcprototype>
-     <funcdef> <function>new_from_widget</function></funcdef>
-      <paramdef>
-       <classname>GtkRadioMenuItem</classname>
-       <parameter><optional>group</optional></parameter>
-      </paramdef>
-      <paramdef>void</paramdef>
+     <funcdef> <function>GtkRadioMenuItem</function></funcdef>
+     <paramdef><classname>GtkRadioMenuItem</classname> <parameter><optional>group</optional></parameter></paramdef>
+     <paramdef>string <parameter><optional>text</optional></parameter></paramdef>
+     <paramdef>bool <parameter><optional>use_underline</optional></parameter> = <literal>true</literal></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
-   </shortdesc>
-  <desc>
-
-   </desc>
-  </constructor>
-  <constructor id="gtk.gtkradiomenuitem.constructor.new_with_label_from_widget">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef> <function>new_with_label_from_widget</function></funcdef>
-      <paramdef>
-       <classname>GtkRadioMenuItem</classname>
-       <parameter><optional>group</optional></parameter>
-      </paramdef>
-      <paramdef><parameter>label</parameter></paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-  <desc>
-
-  </desc>
-  </constructor>
-  <constructor id="gtk.gtkradiomenuitem.constructor.new_with_mnemonic_from_widget">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef> <function>new_with_mnemonic_from_widget</function></funcdef>
-      <paramdef>
-       <classname>GtkRadioMenuItem</classname>
-       <parameter><optional>group</optional></parameter>
-      </paramdef>
-      <paramdef><parameter>label</parameter></paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-  <desc>
-
-   </desc>
-  </constructor>
-  </constructors>
-
- <methods>
-
-  <method id="gtk.gtkradiomenuitem.method.get_group">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef> <function>get_group</function></funcdef>
-     <paramdef>void</paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
+    Creates a new radio menu item.
    </shortdesc>
    <desc>
     <para>
-     See also: 
-     <function class="GtkRadioMenuItem">set_group</function>
+     Creates a new radio menu item. The <parameter>group</parameter>
+     is the menu item to which group the new item belongs.
+     Set it to <literal>null</literal> if you are creating the first
+     radio menu item of the group.
     </para>
-
+    <example>
+     <title>Creating GtkRadioMenuItems</title>
+     <programlisting role="php">
+      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+                  href="&directory.examples;/reference/gtk/gtkradiomenuitem/constructor.phpw" parse="text">
+       <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+      </xi:include>
+     </programlisting>
+    </example>
    </desc>
-  </method>
+  </constructor>
 
-  <method id="gtk.gtkradiomenuitem.method.group">
+  <constructor id="gtk.gtkradiomenuitem.constructor.new_from_widget">
    <funcsynopsis>
     <funcprototype>
-     <funcdef> <function>group</function></funcdef>
+     <funcdef><classname>GtkRadioMenuItem</classname> <function>new_from_widget</function></funcdef>
+     <paramdef>string <parameter><optional>text</optional></parameter></paramdef>
+     <paramdef>bool <parameter><optional>use_underline</optional></parameter> = <literal>true</literal></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Creates a new radio menu item based on an existing one.
+   </shortdesc>
+   <desc>
+    <para>
+     Creates a new radio menu item based on the current one.
+    </para>
+    <para>
+     This is a convenience method; with it you don't need to set
+     the radio button group.
+    </para>
+    <example>
+     <title>Creating radio menu items based on others.</title>
+     <programlisting role="php">
+<![CDATA[
+$red   = new GtkRadioMenuItem(null, '_Red', true);
+$blue  = $red->new_from_widget('_Blue', true);
+$green = $red->new_from_widget('_Green');
+]]>
+     </programlisting>
+    </example>
+   </desc>
+  </constructor>
+ </constructors>
+
+
+ <methods>
+  <method id="gtk.gtkradiomenuitem.method.get_group">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>array <function>get_group</function></funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns an array of all group members.
    </shortdesc>
    <desc>
-
+    <para>
+     Returns an array with <classname>GtkRadioMenuItem</classname>s,
+     containing all group members.
+    </para>
+    <para>
+     See also:
+     <function class="GtkRadioMenuItem">set_group</function>
+    </para>
    </desc>
   </method>
 
@@ -109,40 +109,43 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_group</function></funcdef>
-     <paramdef>void</paramdef>
+     <paramdef><classname>GtkRadioMenuItem</classname> <parameter>group</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the group the item belongs to.
    </shortdesc>
    <desc>
     <para>
-     See also: 
+     Sets the group the menu item shall belong to.
+    </para>
+    <para>
+     See also:
      <function class="GtkRadioMenuItem">get_group</function>
     </para>
-
    </desc>
   </method>
-
  </methods>
 
- <signals>
 
+ <signals>
   <signal id="gtk.gtkradiomenuitem.signal.group-changed">
    <signalname>group-changed</signalname>
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <cbfunction>callback</cbfunction></funcdef>
-     <paramdef>GtkRadioMenuItem <parameter>radiomenuitem</parameter></paramdef>
+     <paramdef><classname>GtkRadioMenuItem</classname> <parameter>radiomenuitem</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
+    The item is in another group.
    </shortdesc>
    <desc>
-
+    <para>
+     Emitted when the group of the item changes.
+    </para>
    </desc>
   </signal>
-  
  </signals>
 
 </classentry>

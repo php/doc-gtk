@@ -1,0 +1,41 @@
+<?php
+//Create a menu bar
+$mbar  = new GtkMenuBar();
+//Add a menu item
+$color  = new GtkMenuItem('_Color');
+//with a submenu
+$cmenu = new GtkMenu();
+$color->set_submenu($cmenu);
+$mbar->add($color);
+
+
+//Create a new radio menu item; no group
+$red   = new GtkRadioMenuItem(null, '_Red', true);
+//Here another one, this time using the $red as group
+$blue  = new GtkRadioMenuItem($red, '_Blue', true);
+//Again: Same group as the previous, $red
+$green = new GtkRadioMenuItem($red, '_Green', true);
+
+//Add the items to the menu
+$cmenu->add($red);
+$cmenu->add($blue);
+$cmenu->add($green);
+
+//Set the red item pre-selected
+$red->set_active(true);
+
+
+//set some colors to be able to identify the colors
+// without reading the text
+$red  ->get_child()->modify_fg(Gtk::STATE_NORMAL, GdkColor::parse('#F00'));
+$blue ->get_child()->modify_fg(Gtk::STATE_NORMAL, GdkColor::parse('#00F'));
+$green->get_child()->modify_fg(Gtk::STATE_NORMAL, GdkColor::parse('#0F0'));
+
+
+//standard window stuff
+$wnd = new GtkWindow();
+$wnd->connect_simple('destroy', array('gtk', 'main_quit'));
+$wnd->add($mbar);
+$wnd->show_all();
+Gtk::main();
+?>
