@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<!-- $Revision: 1.10 $ -->
+<!-- $Revision: 1.11 $ -->
 <classentry id="gtk.gtktreeview">
  <classmeta>
   <classtitle>GtkTreeView</classtitle>
@@ -10,15 +10,25 @@
   </shortdesc>
   <desc>
    <para>
-    Widget that displays any object that implements the
-    <classname>GtkTreeModel</classname> interface, for example
-    <classname>GtkListStore</classname> and <classname>GtkTreeStore</classname>.
+    A GtkTreeView can display both list and tree structures. To display a list,
+    pass a <classname>GtkListStore</classname> object to the constructor or
+    <function class="GtkTreeView">set_model</function>. For a tree, use a
+    <classname>GtkTreeStore</classname> object. Basically any object of
+    a class that implements the <classname>GtkTreeModel</classname> interface
+    is suitable.
+   </para>
+   <para>
+    After creating the view and setting the model, you need to create some
+    <classname>GtkTreeViewColumn</classname>s and add them to the view with
+    <function class="GtkTreeView">append_column</function>. The column widgets
+    themselves need some <classname>GtkCellRenderer</classname>s that actually
+    draw and display the data of the model.
    </para>
   </desc>
  </classmeta>
 
- <constructors>
 
+ <constructors>
   <constructor id="gtk.gtktreeview.constructor">
    <funcsynopsis>
     <funcprototype>
@@ -46,11 +56,10 @@
     </example>
    </desc>
   </constructor>
-
  </constructors>
 
- <methods>
 
+ <methods>
   <method id="gtk.gtktreeview.method.append_column">
    <funcsynopsis>
     <funcprototype>
