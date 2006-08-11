@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<!-- $Revision: 1.12 $ -->
+<!-- $Revision: 1.13 $ -->
 <classentry id="gtk.gtktreeview">
  <classmeta>
   <classtitle>GtkTreeView</classtitle>
@@ -23,6 +23,14 @@
     <function class="GtkTreeView">append_column</function>. The column widgets
     themselves need some <classname>GtkCellRenderer</classname>s that actually
     draw and display the data of the model.
+   </para>
+   <para>
+    To obtain the selected rows of the view, get the view's
+    <classname>GtkTreeSelection</classname> object that manages the selection
+    by using <function class="GtkTreeView">get_selection</function>.
+    If you want to track if it changes, connect its
+    <signalname class="GtkTreeSelection">changed</signalname>
+    signal.
    </para>
   </desc>
  </classmeta>
