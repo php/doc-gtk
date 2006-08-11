@@ -1,0 +1,2812 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- EN-Revision: 1.21 Maintainer: dnfeitosa Status: ready -->
+
+<classentry id="gtk.gtkwindow">
+ <classmeta>
+  <classtitle>GtkWindow</classtitle>
+  <classparent>GtkBin</classparent>
+  <shortdesc>
+   Uma janela que irá conter o resto da aplicação.
+  </shortdesc>
+  <desc>
+   <simpara>
+    Uma janela é uma estrutura que contém a aplicação. Ela oferece
+    todo o contexto para os outros widgets que compoem a aplicação.
+   </simpara>
+   <simpara>
+    Como uma subclasse de <classname>GtkBin</classname>, uma janela deve
+    conter somente um child. Para adicionar mais widgets à uma janela,
+    primeiro adicione um widget que aceite mais de um child (container) como
+    <classname>GtkHBox</classname> ou <classname>GtkVBox</classname>.
+    Depois adicione outros widgets ao container. Tentar adicionar
+    mais que um child à janela irá produzir um aviso.
+   </simpara>
+   <para>
+    <example>
+     <title>Adicionando vários filhos.</title>
+     <programlisting role="php">
+      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+                  href="&directory.examples;/reference/gtk/gtkwindow/constructor.phpw" parse="text">
+       <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+      </xi:include>
+     </programlisting>
+    </example>
+   </para>
+   <simpara>
+    <classname>GtkWindow</classname> é um widget de alto nível.
+    Isto significa que ele não pode ser adicionado como filho de
+    outro widget. Tentar adicioná-lo irá produzir um Gtk-WARNING.
+   </simpara>
+  </desc>
+ </classmeta>
+
+ <constructors>
+
+  <constructor id="gtk.gtkwindow.constructor">
+   <funcsynopsis>
+    <funcprototype>
+    <funcdef> <function>GtkWindow</function></funcdef>
+    <paramdef>
+     <enumname>GtkWindowType</enumname>
+     <parameter>
+      <optional>
+       type = <enumname>Gtk::WINDOW_TOPLEVEL</enumname>
+      </optional>
+     </parameter>
+    </paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Cria uma nova instância de GtkWindow.
+   </shortdesc>
+   <desc>
+    <para>
+     Cria uma nova instância de GtkWindow do tipo <parameter>type</parameter>.
+     Se nenhum <parameter>type</parameter> é informado, a janela será criada
+     como uma <enumname>Gtk::WINDOW_TOPLEVEL</enumname>. Isto significa que a
+     janela terá bordas e uma barra de título por padrão. Janelas do tipo
+     <enumname>Gtk::WINDOW_POPUP</enumname> não possuem bordas ou barra de
+     título. Janelas Popup são usadas como tooltips e menus. Elas não devem
+     ser usadas para criar janelas regulares sem bordas. Para isso, você deve
+     usar uma janela de alto nível e 
+     <function class="GtkWindow">set_decorated</function>.
+    </para>
+   </desc>
+  </constructor>
+
+ </constructors>
+
+ <methods>
+
+  <method id="gtk.gtkwindow.method.activate_default">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>bool <function>activate_default</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Envia o sinal de ativação ao widget padrão.
+   </shortdesc>
+   <desc>
+    <para>
+     Ativa o widghet padrão da janela (ex. envia o sinal 
+     <signalname class="GtkButton">activate</signalname> para o widget).
+     Retorna <literal>true</literal> se o widget pôde ser ativado ou
+     <literal>false</literal> se não pôde.
+    </para>
+    <note>
+     <para>
+      Antes que você possa ativar o widget padrão, você definí-lo com
+      <function class="GtkWindow">set_default</function>.
+     </para>
+    </note>
+    <para>
+     Isto é bem útil se você não sabe qual widget é o padrão (ou não se
+     importa), mas precisa que seja que ele seja clicado/ativado.
+     O exemplo mostra como este método é usado para que o botão padrão seja
+     ativado quando o usuário aperte a tecla <literal>Enter</literal> no
+     widget caixa de texto.
+    </para>
+    <para>
+     <example>
+      <title>Ativando o botão com Enter na caixa de texto</title>
+      <programlisting role="php">
+       <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+        href="&directory.examples;/reference/gtk/gtkwindow/activate_default.phpw" parse="text">
+        <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+       </xi:include>
+      </programlisting>
+     </example>
+    </para>
+    <para>
+     Veja também:
+     <function class="GtkWindow">set_default</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkwindow.method.activate_focus">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>bool <function>activate_focus</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Ativa o widget com foco.
+   </shortdesc>
+   <desc>
+    <para>
+     Ativa o atual widget com foco dentro da janela.
+    Retorna <literal>true</literal> se o widget foi ativado.
+    </para>
+    <para>
+     Veja também:
+     <function class="GtkWindow">get_focus</function>,
+     <function class="GtkWindow">set_focus</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkwindow.method.activate_key">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>bool <function>activate_key</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Ativa um atalho de teclado na janela.
+   </shortdesc>
+   <desc>
+    <para>
+     Ativa aceleradores para este GtkWindow. Isto normalmente é chamado
+     por padrão pelo manipulador key_press_event para janelas de alto nível,
+     entretanto em alguns casos pode ser útil chamá-los diretamente
+     sobrescrevendo a tecla padrão para uma janela.
+    </para>
+    <para>
+     Retorna <literal>true</literal> se o mnemônico ou acelerador foi
+     encontrado e ativado.
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkwindow.method.add_accel_group">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>add_accel_group</function></funcdef>
+     <paramdef>
+      <classname>GtkAccelGroup</classname> <parameter>accel_group</parameter>
+     </paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+    <para>
+     Associa <parameter>accel_group</parameter> com a janela, tal que
+     pressionando o atalho e o mnemônico na janela irá ativar os aceleradores em
+     <parameter>accel_group</parameter>.
+    </para>
+    <para>
+     Veja também: 
+     <function class="GtkWindow">remove_accel_group</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkwindow.method.add_mnemonic">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>add_mnemonic</function></funcdef>
+     <paramdef>int <parameter>keyval</parameter></paramdef>
+     <paramdef>
+      <classname>GtkWidget</classname> <parameter>target</parameter>
+     </paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Adiciona um mnemônico à janela.
+   </shortdesc>
+   <desc>
+    <para>
+     Adiciona um mnemônico à janela. Quando a chave mnemônica é pressionada,
+     o widget <parameter>target</parameter> será ativado.
+    </para>
+    <para>
+     O parâmetro <parameter>keyval</parameter> é o correspondente ASCII da
+     tecla que ativará o mnemônico. Ex.: Se você quiser que <literal>Alt+K</literal> 
+     ative um <literal>$button</literal>, o valor deve ser
+     <programlisting role="php"><![CDATA[ord('K')]]></programlisting> que é
+     <literal>75</literal> em ASCII.
+    </para>
+    <note>
+     <para>
+      Antes da janela ser destruída, você deve remover o mnemônico se não
+      quiser que um aviso seja mostrado.
+     </para>
+    </note>
+    <para>
+     <example>
+      <title>Adicionando um mnemônico</title>
+      <programlisting role="php">
+       <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+        href="&directory.examples;/reference/gtk/gtkwindow/add_mnemonic.phpw" parse="text">
+        <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+       </xi:include>
+      </programlisting>
+     </example>
+    </para>
+    <para>
+     Veja também:
+     <function class="GtkWindow">remove_mnemonic</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkwindow.method.begin_move_drag">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>begin_move_drag</function></funcdef>
+     <paramdef>int <parameter>button</parameter></paramdef>
+     <paramdef>int <parameter>root_x</parameter></paramdef>
+     <paramdef>int <parameter>root_y</parameter></paramdef>
+     <paramdef>int <parameter>timestamp</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Começa a mover uma janela.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Começa a mover uma janela.
+    </simpara>
+    <note>
+     Este método não é normalmente chamado no código. Se você precisa mover
+     uma janela, chame <function class="GtkWindow">set_position</function> ou
+     <function class="GtkWindow">move</function>.
+    </note>
+    <simpara>
+     Veja também:
+     <function class="GtkWindow">set_position</function>,
+     <function class="GtkWindow">move</function>
+    </simpara>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkwindow.method.begin_resize_drag">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>begin_resize_drag</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Começa a redimensionar uma janela.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Começa a redimensionar uma janela.
+    </simpara>
+    <note>
+     Este método não é normalmente chamado no código. Se você precisa
+     redimensionar uma janela, chame <function class="GtkWindow">resize</function>.
+    </note>
+    <simpara>
+     Veja também:
+     <function class="GtkWindow">resize</function>
+    </simpara>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkwindow.method.deiconify">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>deiconify</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Maximiza a janela.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Pede que o gerenciador de janelas maximize a janela.
+    </simpara>
+    <note>
+     Pode ser que hajam algumas configurações que impeçam isso, então não
+     dependa dessa função para maximizar suas janelas. Normalmente, ela faz,
+     mas não escreva um código que trave se não fizer.
+    </note>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkwindow.method.fullscreen">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>fullscreen</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Ajusta a janela para o modo fullscreen.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Pede que o gerenciador de janelas ajuste a janela para o modo fullscreen,
+     tomando todo o espaço disponível. Note que outras janelas na tela ficarão
+     abaixo enquanto não forem ativadas. Para ter certeza que a janela será
+     realmente fullscreen, ative este método.
+    </simpara>
+    <note>
+     Pode ser que hajam algumas configurações que impeçam isso, então não
+     dependa dessa função para maximizar suas janelas. Normalmente, ela faz,
+     mas não escreva um código que trave se não fizer.
+    </note>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkwindow.method.get_accept_focus">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>bool <function>get_accept_focus</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Se a janela pode ser focada ou não.
+   </shortdesc>
+   <desc>
+    <para>
+     Retorna o valor com 
+     <function class="GtkWindow">set_accept_focus</function>.
+    </para>
+    <para>
+     Por padrão uma janela aceita foco.
+    </para>
+    <para>
+     Veja também:
+     <function class="GtkWindow">set_accept_focus</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkwindow.method.get_decorated">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>bool <function>get_decorated</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Retorna se as decorações da janela estão sendo mostradas atualmente.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Retorna se as decorações da janela estão sendo mostradas atualmente.
+     As decorações nas janelas podem ser desativadas usando-se
+     <function class="GtkWindow">set_decorated</function>
+    </simpara>
+    <para>
+     Por padrão, uma janela é decorada.
+    </para>
+    <para>
+     Veja também: 
+     <function class="GtkWindow">set_decorated</function>, 
+     <fieldname class="GtkWindow">decorated</fieldname>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkwindow.method.get_default_size">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>array <function>get_default_size</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Retorna o tamanho padrão da janela.
+   </shortdesc>
+   <desc>
+    <para>
+     Retorna o tamanho padrão da janela. Um valor <literal>-1</literal> para a
+     largura ou altura indica que um valor padrão não foi explicitamente
+     definido (com <function class="GtkWindow">set_default_size</function>)
+     para essa dimensão, então o tamanho "natural" da janela será usado.
+    </para>
+    <para>
+     O primeiro valor do array retornado é a largura e o segundo é a altura.
+    </para>
+    <para>
+     Veja também:
+     <function class="GtkWindow">set_default_size</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkwindow.method.get_destroy_with_parent">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>bool <function>get_destroy_with_parent</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Se a janela será destruída junto com seu parent.
+   </shortdesc>
+   <desc>
+    <para>
+     Se a janela será destruída junto com seu parent.
+    </para>
+    <para>
+     Por padrão, uma janela não será destruída com seu parent.
+    </para>
+    <para>
+     Veja também:
+     <function class="GtkWindow">set_destroy_with_parent</function>, 
+     <fieldname class="GtkWindow">destroy_with_parent</fieldname>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkwindow.method.get_focus">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef><classname>GtkWidget</classname> <function>get_focus</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Retorna o widget que tem o foco.
+   </shortdesc>
+   <desc>
+    <para>
+     Recupera o widget que possui o foco atualmente na janela. Retorna
+     <literal>null</literal> se nenhum widget estiver focado.
+    </para>
+    <note>
+     <para>
+      Note que este é o widget que terá foco se a janela toplevel estiver ativa; se a
+      janela toplevel não estiver ativa então 
+      <programlisting role="php"><![CDATA[$widget->flags() & Gtk::HAS_FOCUS]]></programlisting>
+      não será <literal>&gt; 0</literal> para o widget.
+     </para>
+    </note>
+    <para>
+     <example>
+      <title>Usando GtkWindow::get_focus()</title>
+      <programlisting role="php">
+       <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+        href="&directory.examples;/reference/gtk/gtkwindow/get_focus.phpw" parse="text">
+        <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+       </xi:include>
+      </programlisting>
+     </example>
+    </para>
+    <para>
+     Veja também:
+     <function class="GtkWindow">activate_focus</function>, 
+     <function class="GtkWindow">set_focus</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkwindow.method.get_focus_on_map">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>bool <function>get_focus_on_map</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Se a janela deve receber o foco de entrada quando mapeada.
+   </shortdesc>
+   <desc>
+    <para>
+     Retorna o valor definido por
+     <function class="GtkWindow">set_focus_on_map</function>.
+    </para>
+    <para>
+     Por padrão, uma janela aceitará foco quando mapeada.
+    </para>
+    <para>
+     Veja também:
+     <function class="GtkWindow">set_focus_on_map</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkwindow.method.get_frame_dimensions">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>array <function>get_frame_dimensions</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Retorna as dimensões do frame para a toplevel.
+   </shortdesc>
+   <desc>
+    <para>
+     Retorna um array contendo as dimensões do frame para a toplevel. O array
+     retornado contém as larguras da esquerda, topo, direita e base nesta
+     ordem.
+    </para>
+    <note>
+     Nota: Esta é uma função com o propósito especial para portes em
+     framebuffer. Ela não retorna a largura das decorações de janela. Use
+     <function class="GdkWindow">get_frame_extents</function> para essa
+     finalidade.
+    </note>
+    <para>
+     Veja também: 
+     <function class="GtkWindow">set_frame_dimensions</function>
+    </para>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtkwindow.method.get_gravity">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>
+      <enumname>GdkGravity</enumname> <function>get_gravity</function>
+     </funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Retorna o ponto de gravidade da janela.
+   </shortdesc>
+   <desc>
+    <para>
+     Retorna o ponto de gravidade da janela. O ponto de gravidade define o
+     ponto de referência para a janela.
+    </para>
+    <para>
+     Por padrão, uma janela contém <enumname>Gdk::GRAVITY_NORTH_WEST</enumname>.
+    </para>
+    <para>
+     Veja também: 
+     <function class="GtkWindow">set_gravity</function>, 
+     <fieldname class="GtkWindow">gravity</fieldname>
+    </para>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtkwindow.method.get_has_frame">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>bool <function>get_has_frame</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Retorna se a janela possui ou não um frame fora de 
+    <classname>GdkWindow</classname>.
+   </shortdesc>
+   <desc>
+    <para>
+     Retorna se a janela possui ou nçao um frame fora de 
+     <classname>GdkWindow</classname>. Uma janela possui um frame window se 
+     o frame window foi adicionado usando-se <function 
+     class="GtkWindow">set_has_frame</function>.
+    </para>
+    <para>
+     Veja também: 
+     <function class="GtkWindow">set_has_frame</function>, 
+     <fieldname class="GtkWindow">has_frame</fieldname>
+    </para>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtkwindow.method.get_icon">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef><classname>GdkPixbuf</classname> <function>get_icon</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Retorna o ícone usado para representar a janela.
+   </shortdesc>
+   <desc>
+    <para>
+     Retorna o ícone usado para representar a janela. O ícone da janela é
+     mostrado na barra de título, na barra de tarefas ou no gerenciador de
+     tarefas. Um ícone pode ser adicionado usando-se <function class="GtkWindow">
+     set_icon</function> ou <function class="GtkWindow">set_icon_list</function>.
+    </para>
+    <para>
+     Se uma lista de ícone foi setada usando <function class="GtkWindow">
+     set_icon_list</function>, este método retornará o primeiro ícone da lista.
+    </para>
+    <para>
+     Por padrão, uma janela não possui ícone. Se nenhum ícone for definido, este
+     método retornará <literal>null</literal>.
+    </para>
+    <para>
+     Veja também: 
+     <function class="GtkWindow">set_icon</function>,
+     <function class="GtkWindow">set_icon_list</function>,
+     <function class="GtkWindow">get_icon_list</function>
+    </para>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtkwindow.method.get_icon_list">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>array <function>get_icon_list</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Retorna os ícones na lista de ícones da janela.
+   </shortdesc>
+   <desc>
+    <para>
+     Retorna os ícones na lista de ícones da janela. Uma lista de ícones pode
+     ser setada usando-se <function class="GtkWindow">set_icon_list</function>. 
+    </para>
+    <para>
+     Veja também: 
+     <function class="GtkWindow">set_icon_list</function>
+    </para>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtkwindow.method.get_icon_name">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>string <function>get_icon_name</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Retorna o nome do ícone com tema da janela.
+   </shortdesc>
+   <desc>
+    <para>
+     Retorna o nome do ícone com tema da janela. Se nenhum ícone com tema for
+     definido, este método retornará <literal>null</literal>.
+    </para>
+    <para>
+     Veja também: 
+     <function class="GtkWindow">set_icon_name</function>
+    </para>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtkwindow.method.get_mnemonic_modifier">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>
+      <enumname>GdkModifierType</enumname> <function>get_mnemonic_modifier</function>
+     </funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Retorna um modificador mnemônico para a janela.
+   </shortdesc>
+   <desc>
+    <para>
+     Retorna um modificado mnemônico para a janela. O modificador mnemônico é
+     uma tecla, botão do mouse ou combinação de teclas e/uo botões do mouse
+     que o usuário pode pressionar para ativá-lo. O modificador mnemônico
+     normalmente é uma tecla como <literal>Crtl</literal>.
+    </para>
+    <para>
+     Veja também: 
+     <function class="GtkWindow">set_mnemonic_modifier</function>, 
+     <fieldname class="GtkWindow">mnemonic_modifier</fieldname>
+    </para>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtkwindow.method.get_modal">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>bool <function>get_modal</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Se a janela é modal ou não.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Diz se a janela é modal. Uma janela pode tornar-se modal pela chamada de
+     <function class="GtkWindow">set_modal</function>.
+    </simpara>
+    <simpara>
+     Janelas modais previnem que o usuário interaja com outras janelas da
+     mesma aplicação.
+    </simpara>
+    <para>
+     Veja também: 
+     <function class="GtkWindow">set_modal</function>, 
+     <fieldname class="GtkWindow">modal</fieldname>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkwindow.method.get_position">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>array <function>get_position</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Retorna a posição da janela levando em consideração sua gravidade.
+   </shortdesc>
+   <desc>
+    <para>
+     Retorna a posição da janela levando em consideração sua gravidade. A
+     posição será retornada como um array contendo as coordenadas
+     <literal>x</literal> seguida por <literal>y</literal>.
+    </para>
+    <para>
+     Se a posição não foi explícitamente setada e a janela não foi ainda
+     mapeada na tela, este método retornará <literal>0</literal> para ambas as
+     coordenadas.
+    </para>
+    <para>
+     Veja também: 
+     <function class="GtkWindow">set_position</function>, 
+     <fieldname class="GtkWindow">position</fieldname>
+    </para>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtkwindow.method.get_resizable">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>bool <function>get_resizable</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Se a janela pode ser redimensionada pelo usuário.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Diz se a janela pode ser redimensionda pelo usuário. Se pode ou não pode
+     ser definido usando-se <function class="GtkWindow">set_resizable</function>.
+    </simpara>
+    <para>
+     Veja também: 
+     <function class="GtkWindow">set_resizable</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkwindow.method.get_role">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>string <function>get_role</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Retorna as regras da janela.
+   </shortdesc>
+   <desc>
+    <para>
+     Retorna as regras da janela. As regras são usadas pelo X11 para as
+     janelas de reposição quando um usuário reinicia uma aplicação.
+    </para>
+    <para>
+     Veja também: 
+     <function class="GtkWindow">set_role</function>
+    </para>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtkwindow.method.get_screen">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef><classname>GdkScreen</classname> <function>get_screen</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Retorna o <classname>GdkScreen</classname> associado com a janela.
+   </shortdesc>
+   <desc>
+    <para>
+     Retorna o <classname>GdkScreen</classname> associado com a janela.
+    </para>
+    <para>
+     Veja também: 
+     <function class="GtkWindow">set_screen</function>,
+     <classname>GdkScreen</classname>
+    </para>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtkwindow.method.get_size">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>get_size</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtkwindow.method.get_skip_pager_hint">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>bool <function>get_skip_pager_hint</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Se um pager deve mostrar a janela.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Diz se um pager deve mostrar a janela.
+    </simpara>
+    <para>
+     Veja também:
+     <function class="GtkWindow">set_skip_pager_hint</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkwindow.method.get_skip_taskbar_hint">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>bool <function>get_skip_taskbar_hint</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Se uma janela deve ser ocultada da barra de tarefas.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Diz se uma janela deve ser ocultada na barra de tarefas. Mesmo que não
+     seja exibida na barra de tarefas, será listada quando 
+     <literal>ALT+TAB</literal> for pressionado.
+    </simpara>
+    <para>
+     Veja também: 
+     <function class="GtkWindow">set_skip_taskbar_hint</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkwindow.method.get_title">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>string <function>get_title</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Retorna o título da janela.
+   </shortdesc>
+   <desc>
+    <para>
+     Retorna o título de uma janela. Se o título não foi explícitamente
+     definido, <literal>null</literal> será retornado.
+    </para>
+    <para>
+     Veja também: 
+     <function class="GtkWindow">set_title</function>, 
+     <fieldname class="GtkWindow">title</fieldname>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkwindow.method.get_transient_for">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>GtkWindow <function>get_transient_for</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Retorna o parent provisório da janela.
+   </shortdesc>
+   <desc>
+    <para>
+     Retorna o parente provisório da janela. Um parent provisório pode ser
+     definido usando-se <function class="GtkWindow">set_transient_for</function>
+     ou pode ser feito automaticamente criando um novo <classname>GtkDialog</classname>.
+    </para>
+    <para>
+     Veja também: 
+     <function class="GtkWindow">set_transient_for</function>
+    </para>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtkwindow.method.get_type_hint">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef> <function>get_type_hint</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Retorna uma dica do tipo da janela.
+   </shortdesc>
+   <desc>
+    <para>
+     Retorna uma dica do tipo da janela. Esta dica pode ser usada pelo sistema
+     para decorar a janela de acordo com sua função.
+    </para>
+    <para>
+     Veja também: 
+     <function class="GtkWindow">set_type_hint</function>, 
+     <fieldname class="GtkWindow">type_hint</fieldname>
+    </para>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtkwindow.method.has_toplevel_focus">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>bool <function>has_toplevel_focus</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Retorna se um input possui ou não foco dentro da janela.
+   </shortdesc>
+   <desc>
+    <para>
+     Retorna se um input possui ou não foco dentro da janela. Para janelas
+     toplevel, este método retorna o mesmo que <function
+     class="GtkWindow">is_active</function>, mas para janelas embutidas como 
+     <classname>GtkPlug</classname> os resultados podem ser diferentes.
+    </para>
+    <para>
+     Veja também:
+     <function class="GtkWindow">is_active</function>
+     <fieldname class="GtkWindow">has-toplevel-focus</fieldname>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkwindow.method.iconify">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>iconify</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Minimiza a janela.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Minimiza a janela.
+    </simpara>
+    <note>
+     Pode ser que hajam algumas configurações que impeçam isso, então não
+     dependa dessa função para maximizar suas janelas. Normalmente, ela faz,
+     mas não escreva um código que trave se não fizer.
+    </note>
+    <para>
+     Veja também:
+     <function class="GtkWindow">deiconify</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkwindow.method.is_active">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>bool <function>is_active</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Retorna se a janela possui foco de entrada.
+   </shortdesc>
+   <desc>
+    <para>
+     Retorna <literal>true</literal> se o foco de entrada estiver na janela.
+     Se estiver, poderá receber comandos do usuário.
+    </para>
+    <para>
+     Veja também:
+     <function class="GtkWindow">has_toplevel_focus</function>
+     <fieldname class="GtkWindow">is-active</fieldname>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkwindow.method.maximize">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>maximize</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Maximiza a janela.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Pede ao gerenciador de que maximize a janela. Se for maximizada, a janela
+     ocupará todo o espaço que não está sendo ocupado por janelas extras como
+     por exemplo a barra de tarefas.
+    </simpara>
+    <note>
+     Pode ser que hajam algumas configurações que impeçam isso, então não
+     dependa dessa função para maximizar suas janelas. Normalmente, ela faz,
+     mas não escreva um código que trave se não fizer.
+    </note>
+    <para>
+     See: <function class="GtkWindow">unmaximize</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkwindow.method.mnemonic_activate">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>bool <function>mnemonic_activate</function></funcdef>
+     <paramdef>int <parameter>keyval</parameter></paramdef>
+     <paramdef>GdkModifierType <parameter>modifiers</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Ativa os widgets associados à um menmônico.
+   </shortdesc>
+   <desc>
+    <para>
+     Ativa os widgets associados com os mnemônicos <parameter>keyval</parameter>
+     e <parameter>modifiers</parameter>. Um widget é associado à um mnemônico
+     quando passado como argumento para <function class="GtkWindow">
+     add_mnemonic</function>.
+    </para>
+    <para>
+     O parâmetro <parameter>keyval</parameter> deve ser um integer. Para pegar
+     o valor integer de uma tecla, use a função do PHP <literal>ord</literal>.
+    </para>
+    <para>
+     Os <parameter>modifiers</parameter> devem ser compatíveis com 
+     <function class="GtkWindow">set_mnemonic_modifier</function>.
+    </para>
+    <para>
+     <example>
+      <title>Usando GtkWindow::mnemonic_activate()</title>
+      <programlisting role="php">
+       <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+        href="&directory.examples;/reference/gtk/gtkwindow/mnemonic_activate.phpw" parse="text">
+        <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+       </xi:include>
+      </programlisting>
+     </example>
+    </para>
+    <para>
+     Veja também:
+     <function class="GtkWindow">add_mnemonic</function>
+     <function class="GtkWindow">remove_mnemonic</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkwindow.method.move">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>move</function></funcdef>
+     <paramdef>int <parameter>x</parameter></paramdef>
+     <paramdef>int <parameter>y</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Solicita que a janela seja movida para posição dada.
+   </shortdesc>
+   <desc>
+    <para>
+     Solicita que a janela seja movida para a posição dada.
+    </para>
+    <para>
+     O local referenciado por <parameter>x</parameter> e
+     <parameter>y</parameter> depende da gravidade (<link
+     linkd="gtk.gtkwindow.method.set_gravity">gravity</link>)
+     da janela. Por padrão, uma janela contém gravidade à noroeste
+     (<link linkd="gdk.enum.gravity">north west gravity</link>).
+     Isto significa que o topo no lado esquerdo será posicionado à
+     <parameter>x</parameter> pixels a partir da borda esquerda e
+     <parameter>y</parameter> pixels a partir da borda superior.
+    </para>
+    <para>
+     Este método simplesmente solicita que a janela seja movida. Chamá-lo não
+     significa necessariamente que a janela será movida. Para confirmar que
+     ela foi de fato movida, use <function class="GtkWindow">get_position</function>.
+    </para>
+    <para>
+     Para mover a janela para uma posição relativa, como o centro da tela, 
+     use <function class="GtkWindow">set_position</function>.
+    </para>
+    <para>
+     Veja também:
+     <function class="GtkWindow">set_gravity</function>
+     <function class="GtkWindow">get_position</function>
+     <function class="GtkWindow">set_position</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkwindow.method.parse_geometry">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>bool <function>parse_geometry</function></funcdef>
+     <paramdef>string <parameter>geometry</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Analiza uma string do X Window System contendo a geometria.
+   </shortdesc>
+   <desc>
+    <para>
+     Analiza uma string do X Window System contendo a geometria. Este método
+     funciona em todas as plataformas que suportam Gtk+, mas´foi primariamente
+     projetada para um ambiente X.
+    </para>
+    <para>
+     Se qualquer tamanho ou posição podem ser extraídos de
+     <parameter>geometry</parameter>, então <function
+     class="GtkWindow">parse_geometry</function> chama <function
+     class="GtkWindow">set_default_size</function> e/ou <function
+     class="GtkWindow">move</function> conforme o necessário e retorna
+     <literal>true</literal>. Se nem o tamanho ou posição podem ser extraídos
+     de <parameter>geometry</parameter> <function
+     class="GtkWindow">parse_geometry</function> retorna
+     <literal>false</literal>.
+    </para>
+    <para>
+     Veja também:
+     <function class="GtkWindow">set_default_size</function>,
+     <function class="GtkWindow">move</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkwindow.method.present">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>present</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Exibe a janela ao usuário.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Ativa e exibe a janela ao usuário. Se ela estiver oculta, então é
+     exibida. Se a janela foi sobreposta por outra janela, ela será movida ao
+     topo. Se foi minimizada, será maximizada.
+    </simpara>
+    <simpara>
+     Este método é útil para mostrar uma janela que já existe, ex. quando há
+     um item de menu "Exibir preferencias" em sua aplicação, mas o diálogo de
+     preferências está atualmente aberto, mas oculto m algum lugar. Neste
+     caso, você deve usar esta função.
+    </simpara>
+    <para>
+     Veja também:
+     <function class="GtkWidget">show_all</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkwindow.method.propagate_key_event">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>bool <function>propagate_key_event</function></funcdef>
+     <paramdef>
+      <classname>GdkEventKey</classname> <parameter>keyevent</parameter>
+     </paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Propaga um evento de tecla aos widgets até que seja capturado.
+   </shortdesc>
+   <desc>
+    <para>
+     Passa <parameter>keyevent</parameter> ao widget em foco. Se o widget com
+     foco não pode manipular este evento, ele será passado aos seus parents até
+     que seja capturado ou não haja mais parents para ser repassado.
+    </para>
+    <para>
+     Este método geralmente é chamado automaticamente quando uma tecla é
+     pressionada em uma janela top level.
+    </para>
+    <para>
+     Se o evento é capturado, este método retorna <literal>true</literal>.
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkwindow.method.remove_accel_group">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>remove_accel_group</function></funcdef>
+     <paramdef>GtkAccelGroup <parameter>accel_group</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+    <para>
+     Veja também: 
+     <function class="GtkWindow">add_accel_group</function>
+    </para>
+
+   </desc>
+  </method>
+
+<!-- Doesn't exist any more
+  <method id="gtk.gtkwindow.method.remove_embedded_xid">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>remove_embedded_xid</function></funcdef>
+     <paramdef>int <parameter>xid</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+    <para>
+     Veja também: 
+     <function class="GtkWindow">add_embedded_xid</function>
+    </para>
+
+   </desc>
+  </method>
+-->
+
+  <method id="gtk.gtkwindow.method.remove_mnemonic">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>remove_mnemonic</function></funcdef>
+     <paramdef>int <parameter>keyval</parameter></paramdef>
+     <paramdef>GtkWidget <parameter>target</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+    <para>
+     Veja também: 
+     <function class="GtkWindow">add_mnemonic</function>
+    </para>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtkwindow.method.reshow_with_initial_size">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>reshow_with_initial_size</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Oculta e re-exibe a janela em sua posição e tamanho originais.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Oculta e depois re-exibe a janela em seu tamenho e posição originais.
+     Este método é normalmente usado constantemente. Ele ignorará qualquer mudança que
+     o usuário tenha feito à janela e a retornará em suas configurações
+     originais. Se você deseja previnir que a janela seja movida, passe 
+     <enumname>Gtk::WIN_POS_CENTER_ALWAYS</enumname> a 
+     <function class="GtkWindow">set_position</function>. Se você deseja
+     previnir que o usuário redimensione a janela, passe <literal>false</literal>
+     à <function class="GtkWindow">set_resizable</function>.
+    </simpara>
+    <simpara>
+     Veja também:
+     <function class="GtkWindow">set_position</function>
+     <function class="GtkWindow">set_resizable</function>
+    </simpara>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkwindow.method.resize">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>resize</function></funcdef>
+     <paramdef>int <parameter>width</parameter></paramdef>
+     <paramdef>int <parameter>height</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Redimensiona a janela.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Redimensiona a janela da mesma maneira que seria redimensionada pelo
+     usuário. A janela obedecerá sua consistência (<link linkd="gtk.gtkwindow.method.set_geometry_hints">
+     geometry contraints</link>). Por padrão essa consistência previne que a
+     janela seja redimensionada para um tamanho menor que o definido com 
+     <function class="GtkWidget">set_size_request</function>. Sem levar em
+     consideração a consistência, uma janela não pode ser redimensionada para
+     menor que 1x1 pixel.
+    </simpara>
+    <para>
+     Veja também:
+     <function class="GtkWindow">set_geometry_hints</function>
+     <function class="GtkWidget">set_size_request</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkwindow.method.set_accept_focus">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_accept_focus</function></funcdef>
+     <paramdef>bool <parameter>accept</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Define se a janela pode ou não receber foco.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Define se a janela pode ou não receber foco. Se <parameter>accept
+     </parameter> é <literal>true</literal>, a janela aceitará foco. Se for
+     <literal>false</literal>, não aceitará.
+    </simpara>
+    <note>
+     Este método apenas define uma dica que o gerenciador de janela pode usar
+     para decidir se a janela deve ser focada. Você não deve confiar 100%
+     neste método para previnir que a janela receba foco.
+    </note>
+    <para>
+     Veja também: 
+     <function class="GtkWindow">get_accept_focus</function>
+    </para>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtkwindow.method.set_auto_startup_notification">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_auto_startup_notification</function></funcdef>
+     <paramdef>bool <parameter>notify</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Liga e desliga notificações.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Por padrão, após exibir a primeira <classname>GtkWindow</classname> para
+     cada <classname>GdkScreen</classname>, GTK+ chama <function
+     class="GdkScreen">notify_startup_complete</function>. Passe
+     <literal>false</literal> à esta função para desabilitar a auto
+     inicialização da notificação. Você deve fazer isso se sua
+     primeira janela é um splash screen, e deseja atrasar a notificação até
+     que sua janela principal seja exibida, por exemplo.
+    </simpara>
+    <simpara>
+     Neste exemplo, você gostaria de disabilitar a notificação de
+     inicialização temporariamente, exibir seu splash screen, e então
+     reabilitá-la de forma a mostrar a janela principal que resultará na
+     notificação.
+    </simpara>
+    <simpara>
+     Veja também:
+     <function class="GdkScreen">notify_startup_complete</function>
+    </simpara>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkwindow.method.set_decorated">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_decorated</function></funcdef>
+     <paramdef>bool <parameter>decorated</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Ative e desativa as bordas e a barra de título da janela.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Ative e desativa as decorações. As decorações de janela são as bordas em
+     torno da janela, incluindo a barra de título no topo. Este método é a
+     maneira recomendada para criar janelas sem bordas. Você nçao deve criar
+     uma janela popup. Para desativar as decorações, passe
+     <literal>false</literal> como argumento para
+     <parameter>decorated</parameter>. Para ativá-los de volta, passe
+     <literal>true</literal>.
+    </simpara>
+    <para>
+     Veja também: 
+     <function class="GtkWindow">get_decorated</function>, 
+     <fieldname class="GtkWindow">decorated</fieldname>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkwindow.method.set_default">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_default</function></funcdef>
+     <paramdef>GtkWidget <parameter>default_widget</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Define o widget como o padrão para a janela.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Define <parameter>default_widget</parameter> como o widget padrão para a
+     janela. O widget padrão é o widget que receberá foco quando a janela
+     receber foco.
+    </simpara>
+    <simpara>
+     Se <literal>null</literal> é passado como
+     <parameter>default_widget</parameter>, o widget padrão não estará mais
+     definido.
+    </simpara>
+    <simpara>
+     É mais fácil chamar <function class="GtkWidget">grab_focus</function> no
+     widget que você quer tornar padrão, do que usar <function
+     class="GtkWindow">set_default</function>.
+    </simpara>
+    <note>
+     Antes de você poder definir um widget como padrão, você precisa ativar a
+     flag <enumname>Gtk::CAN_DEFAULT</enumname>, chamando
+     <function class="GtkWidget">set_flags</function>.
+    </note>
+    <para>
+     Veja também: 
+     <function class="GtkWindow">activate_default</function>
+     <function class="GtkWidget">grab_focus</function>
+     <function class="GtkWidget">set_flags</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkwindow.method.set_default_icon">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_default_icon</function></funcdef>
+     <paramdef>
+      <classname>GdkPixbuf</classname> <parameter>icon</parameter>
+     </paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Define um ícone padrão para a janela.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Define um ícone para ser usado quando um ícone não foi definido usando 
+     <function class="GtkWindow">set_icon</function>. O parâmetro <parameter>icon</parameter>
+     passado deve ser um objeto <classname>GdkPixbuf</classname>
+    </simpara>
+    <simpara>
+     Veja <function class="GtkWindow">set_icon</function> para uma descrição
+     do que o ícone é usado.
+    </simpara>
+    <simpara>
+     Você deve chamar este método se sua aplicação permite que o ícone da
+     janela seja alterado em tempo de execução. Definir um ícone padrão para
+     a janela permite manter uma única identidade, mesmo se o ícone definido em
+     tempo de execução não possa ser encontrado ou não possa ser carregado por
+     alguma razão.
+    </simpara>
+    <simpara>
+     Veja também:
+     <function class="GtkWindow">set_icon</function>
+     <function class="GdkPixbuf">new_from_file</function>
+    </simpara>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkwindow.method.set_default_size">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_default_size</function></funcdef>
+     <paramdef>int <parameter>width</parameter></paramdef>
+     <paramdef>int <parameter>height</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Define o tamanho padrão da janela.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Define o tamanho padrão da janela para <parameter>width</parameter>
+     pixels por <parameter>height</parameter> pixels. Definindo os parâmetros
+     como <literal>-1</literal>, fará com que seja usado o tamanho "natural" da
+     janela. O tamanho natural, é aquele depois que seu child widget foi
+     adicionado e exibido antes de qualquer redimensionamento.
+    </simpara>
+    <simpara>
+     Usar <function class="GtkWindow">set_default_size</function> simplesmente
+     definirá o tamanho da janela. Isto não impõe qualquer restrição se o
+     usuário pode ou não redimensionar a janela posteriormente. Este método
+     age se o usuário redimensionou a janela. Diferentemente de <function
+     class="GtkWidget">set_size_request</function>,ao usuário deve encolher a
+     janela abaixo da altura e comprimento passados à esta função.
+    </simpara>
+    <simpara>
+     Este método respeita qualquer <link
+     linkd="gtk.gtkwindow.method.set_geometry_hints">dica geométrica</link>
+     que foi definida para a janela. Se a altura e o comprimento dados não
+     casam com a dica geométrica, a janela será travada próxima às dimensões
+     aceitáveis.
+    </simpara>
+    <simpara>
+     As janelas não devem ter um tamanho menor que <literal>1</literal> pixel
+     de largura por <literal>1</literal> pixel de altura. Se <literal>0</literal>
+     é passado para ambos argumentos, o valor será modificado para
+     <literal>1</literal>.
+    </simpara>
+    <para>
+     Veja também: 
+     <function class="GtkWindow">get_default_size</function>
+     <function class="GtkWidget">set_size_request</function>
+    </para>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtkwindow.method.set_destroy_with_parent">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_destroy_with_parent</function></funcdef>
+     <paramdef>bool <parameter>destroy</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+    <para>
+     Veja também: 
+     <function class="GtkWindow">get_destroy_with_parent</function>, 
+     <fieldname class="GtkWindow">destroy_with_parent</fieldname>
+    </para>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtkwindow.method.set_focus">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_focus</function></funcdef>
+     <paramdef>GtkWidget <parameter>focus</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+    <para>
+     Veja também: 
+     <function class="GtkWindow">activate_focus</function>, 
+     <function class="GtkWindow">get_focus</function>
+    </para>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtkwindow.method.set_focus_on_map">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_focus_on_map</function></funcdef>
+     <paramdef>bool <parameter>focus_on_map</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+    <para>
+     Veja também: 
+     <function class="GtkWindow">get_focus_on_map</function>
+    </para>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtkwindow.method.set_frame_dimensions">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_frame_dimensions</function></funcdef>
+     <paramdef>int <parameter>left</parameter></paramdef>
+     <paramdef>int <parameter>top</parameter></paramdef>
+     <paramdef>int <parameter>right</parameter></paramdef>
+     <paramdef>int <parameter>bottom</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+    <para>
+     Veja também: 
+     <function class="GtkWindow">get_frame_dimensions</function>
+    </para>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtkwindow.method.set_geometry_hints">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_geometry_hints</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtkwindow.method.set_gravity">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_gravity</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+    <para>
+     Veja também: 
+     <function class="GtkWindow">get_gravity</function>, 
+     <fieldname class="GtkWindow">gravity</fieldname>
+    </para>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtkwindow.method.set_has_frame">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_has_frame</function></funcdef>
+     <paramdef>bool <parameter>has_frame</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+    <para>
+     Veja também: 
+     <function class="GtkWindow">get_has_frame</function>, 
+     <fieldname class="GtkWindow">has_frame</fieldname>
+    </para>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtkwindow.method.set_icon">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_icon</function></funcdef>
+     <paramdef><optional>GdkPixbuf <parameter>icon</parameter></optional></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+    <para>
+     Veja também: 
+     <function class="GtkWindow">get_icon</function>
+    </para>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtkwindow.method.set_icon_from_file">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_icon_from_file</function></funcdef>
+     <paramdef>string <parameter>filename</parameter></paramdef>
+     <paramdef>GError <parameter>error</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtkwindow.method.set_icon_list">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_icon_list</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+    <para>
+     Veja também: 
+     <function class="GtkWindow">get_icon_list</function>
+    </para>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtkwindow.method.set_icon_name">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_icon_name</function></funcdef>
+     <paramdef>string <parameter>name</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+    <para>
+     Veja também: 
+     <function class="GtkWindow">get_icon_name</function>
+    </para>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtkwindow.method.set_keep_above">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_keep_above</function></funcdef>
+     <paramdef>bool <parameter>keep_above</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Força a janela a permanecer no topo em relação à outras janelas na tela.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Diz ao gerenciador de janelas para manter a janela acima de todas as
+     outras janelas.
+    </simpara>
+    <note>
+     Pode ser que hajam algumas configurações que impeçam isso, então não
+     dependa dessa função para maximizar suas janelas. Normalmente, ela faz,
+     mas não escreva um código que trave se não fizer.
+    </note>
+    <simpara>
+     Veja também: 
+     <function class="GtkWindow">set_keep_below</function>
+    </simpara>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkwindow.method.set_keep_below">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_keep_below</function></funcdef>
+     <paramdef>bool <parameter>keep_below</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Força a janela a permanecer abaixo de outras janelas na tela.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Tells the window manager to keep the window below all other windows.
+    </simpara>
+    <note>
+     Pode ser que hajam algumas configurações que impeçam isso, então não
+     dependa dessa função para maximizar suas janelas. Normalmente, ela faz,
+     mas não escreva um código que trave se não fizer.
+    </note>
+    <simpara>
+     Veja também: 
+     <function class="GtkWindow">set_keep_above</function>
+    </simpara>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkwindow.method.set_mnemonic_modifier">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_mnemonic_modifier</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+    <para>
+     Veja também: 
+     <function class="GtkWindow">get_mnemonic_modifier</function>, 
+     <fieldname class="GtkWindow">mnemonic_modifier</fieldname>
+    </para>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtkwindow.method.set_modal">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_modal</function></funcdef>
+     <paramdef>bool <parameter>modal</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Define se a janela é ou não modal.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Define a janela como modal, previnindo a interação do usuário com
+     qualquer outra janela da mesma aplicação até que esta seja fechada ou
+     tornada não modal. Se o parâmetro <parameter>modal</parameter> for
+     <literal>true</literal>, a janela será modal. Se for <literal>false</literal>
+     não será.
+    </simpara>
+    <simpara>
+     Uma janela pode ser modal se requer uma interação com o usuário antes que
+     o resto da aplicação possa continuar, ex. uma caixa de mensagem.
+    </simpara>
+    <para>
+     Veja também: 
+     <function class="GtkWindow">get_modal</function>, 
+     <fieldname class="GtkWindow">modal</fieldname>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkwindow.method.set_policy">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_policy</function></funcdef>
+     <paramdef>int <parameter>allow_shrink</parameter></paramdef>
+     <paramdef>int <parameter>allow_grow</parameter></paramdef>
+     <paramdef>int <parameter>auto_shrink</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+    <note>
+     &deprecated.method;
+    </note>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkwindow.method.set_position">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_position</function></funcdef>
+     <paramdef>GtkWindowPosition <parameter>position</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+    <para>
+     Veja também: 
+     <function class="GtkWindow">get_position</function>, 
+     <fieldname class="GtkWindow">position</fieldname>
+    </para>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtkwindow.method.set_resizable">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_resizable</function></funcdef>
+     <paramdef>bool <parameter>resizable</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Define se a janela pode ser redimensionada pelo usuário.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Define se a janela pode ser redimensionada pelo usuário ou não. Se o
+     parâmetro <parameter>resizeable</parameter> é <literal>true</literal>,
+     o usuário pode redimensionar a janela. Se for <literal>false</literal>
+     não poderá. Por padrão, janelas são redimensionáveis.
+    </simpara>
+    <para>
+     Veja também: 
+     <function class="GtkWindow">get_resizable</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkwindow.method.set_role">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_role</function></funcdef>
+     <paramdef>string <parameter>role</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+    <para>
+     Veja também: 
+     <function class="GtkWindow">get_role</function>
+    </para>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtkwindow.method.set_screen">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_screen</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+    <para>
+     Veja também: 
+     <function class="GtkWindow">get_screen</function>
+    </para>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtkwindow.method.set_skip_pager_hint">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_skip_pager_hint</function></funcdef>
+     <paramdef>bool <parameter>skip</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Oculta a janela do pager ou não.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Se a janela <emphasis>não</emphasis> deve se exibida no pager.
+    </simpara>
+    <note>
+     <simpara>
+      Um pager é um programa que exibe o conteúdo (janela) de cada desktop
+      virtual, em escala reduzida, para ajudar o usuário a ter uma visão de
+      todos os desktops e as aplicações abertas.
+     </simpara>
+     <simpara>
+      Usuários do Microsoft Windows raramente usam múltiplos desktop a
+      provavelmente não se importam com esta configuração.
+     </simpara>
+    </note>
+    <para>
+     Veja também: 
+     <function class="GtkWindow">get_skip_pager_hint</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkwindow.method.set_skip_taskbar_hint">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_skip_taskbar_hint</function></funcdef>
+     <paramdef>bool <parameter>skip</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Define se a janela deve ser ocultada da barra de tarefas.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Se a janela <emphasis>não</emphasis> deve ser exibida na barra de
+     tarefas. Note que mesmo que a janela não seja exibida na barra de
+     tarefas, continuará visível na lista de janelas quando <literal>ALT+TAB</literal>
+     for pressionado.
+    </simpara>
+    <para>
+     Veja também: 
+     <function class="GtkWindow">get_skip_taskbar_hint</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkwindow.method.set_title">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_title</function></funcdef>
+     <paramdef>string <parameter>title</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Define o título da janela.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Define o título da janela com sendo <parameter>title</parameter>. O
+     título deve ser exibido na barra de título, no topo da janela e também em
+     qualquer gerenciador ou barra de tarefa.
+    </simpara>
+    <para>
+     Veja também: 
+     <function class="GtkWindow">get_title</function>, 
+     <fieldname class="GtkWindow">title</fieldname>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkwindow.method.set_transient_for">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_transient_for</function></funcdef>
+     <paramdef>GtkWindow <parameter>parent</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+    <para>
+     Veja também: 
+     <function class="GtkWindow">get_transient_for</function>
+    </para>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtkwindow.method.set_type_hint">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_type_hint</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+    <para>
+     Veja também: 
+     <function class="GtkWindow">get_type_hint</function>, 
+     <fieldname class="GtkWindow">type_hint</fieldname>
+    </para>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtkwindow.method.set_wmclass">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_wmclass</function></funcdef>
+     <paramdef>string <parameter>wmclass_name</parameter></paramdef>
+     <paramdef>string <parameter>wmclass_class</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtkwindow.method.stick">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>stick</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Exibe a janela em todos os desktops.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Exibe a janela em todos os desktops virtuais.
+    </simpara>
+    <para>
+     See: <function class="GtkWindow">unstick</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkwindow.method.tooltips_get_info_from_tip_window">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>bool <function>tooltips_get_info_from_tip_window</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtkwindow.method.unfullscreen">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>unfullscreen</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Retorna a janela à seu tamanho e posição originais.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Se a janela foi definida como fullscreen, será retornada à seu tamanho e
+     posição originais.
+    </simpara>
+    <para>
+     Veja: <function class="GtkWindow">fullscreen</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkwindow.method.unmaximize">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>unmaximize</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Retorna a janela à seu tamanho e posição originais.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Se a janela foi maximizada, será retornada à seu tamanho e
+     posição originais.
+    </simpara>
+    <para>
+     Veja: <function class="GtkWindow">maximize</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkwindow.method.unstick">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>unstick</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Não exibe a janela em todos os desktops.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Não exibe a janela em todos os desktops virtuais.
+    </simpara>
+    <para>
+     Veja: <function class="GtkWindow">stick</function>
+    </para>
+   </desc>
+  </method>
+
+ </methods>
+
+ <fields>
+
+  <field id="gtk.gtkwindow.field.allow_grow" type="ro">
+   <fieldname>allow_grow</fieldname>
+   <fieldtype>boolean</fieldtype>
+   <shortdesc>
+    Se a janela pode ou não crescer.
+   </shortdesc>
+   <desc>
+    <para>
+     <literal>true</literal> se os usuários podem expandir a janela além de
+     seu tamanho mínimo, <literal>false</literal> se não.
+    </para>
+    <para>
+     O padrão é <literal>true</literal>
+    </para>
+   </desc>
+  </field>
+
+  <field id="gtk.gtkwindow.field.allow_shrink" type="ro">
+   <fieldname>allow_shrink</fieldname>
+   <fieldtype>boolean</fieldtype>
+   <shortdesc>
+    Se a janela pode ou não encolher.
+   </shortdesc>
+   <desc>
+    <para>
+     <literal>true</literal> se a janela não possui tamanho mínimo, 
+     <literal>false</literal> se possui. Geralmente não é uma boa idéia definir
+     este valor como sendo <literal>true</literal> porque ela permite que o
+     usuário distorça seu layout.
+    </para>
+    <para>
+     O padrão é <literal>false</literal>.
+    </para>
+   </desc>
+  </field>
+
+  <field id="gtk.gtkwindow.field.configure_notify_received" type="ro">
+   <fieldname>configure_notify_received</fieldname>
+   <fieldtype>int</fieldtype>
+   <shortdesc>
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </field>
+
+  <field id="gtk.gtkwindow.field.configure_request_count" type="ro">
+   <fieldname>configure_request_count</fieldname>
+   <fieldtype>int</fieldtype>
+   <shortdesc>
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </field>
+
+  <field id="gtk.gtkwindow.field.decorated" type="ro">
+   <fieldname>decorated</fieldname>
+   <fieldtype>boolean</fieldtype>
+   <shortdesc>
+    Se a janela atualmente está ou não decorada.
+   </shortdesc>
+   <desc>
+    <para>
+     <literal>true</literal> se as decorações da janela (borda e barra de
+     título) estão atualmente visíveis, <literal>false</literal> se não estão.
+    </para>
+    <para>
+     O padrão é <literal>true</literal>.
+    </para>
+    <para>
+     Veja também: 
+     <function class="GtkWindow">get_decorated</function>, 
+     <function class="GtkWindow">set_decorated</function>
+    </para>
+
+   </desc>
+  </field>
+
+  <field id="gtk.gtkwindow.field.default_widget" type="ro">
+   <fieldname>default_widget</fieldname>
+   <fieldtype>GtkWidget</fieldtype>
+   <shortdesc>
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </field>
+
+  <field id="gtk.gtkwindow.field.destroy_with_parent" type="ro">
+   <fieldname>destroy_with_parent</fieldname>
+   <fieldtype>boolean</fieldtype>
+   <shortdesc>
+    Se a janela será ou não destruída com sua janela pai.
+   </shortdesc>
+   <desc>
+    <para>
+     <literal>true</literal> se a janela será destruída quando sua janela pai
+     for destruída, <literal>false</literal> se não for.
+    </para>
+    <para>
+     O padrão é <literal>false</literal>.
+    </para>
+    <para>
+     Veja também: 
+     <function class="GtkWindow">get_destroy_with_parent</function>, 
+     <function class="GtkWindow">set_destroy_with_parent</function>
+    </para>
+
+   </desc>
+  </field>
+
+  <field id="gtk.gtkwindow.field.focus_widget" type="ro">
+   <fieldname>focus_widget</fieldname>
+   <fieldtype>GtkWidget</fieldtype>
+   <shortdesc>
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </field>
+
+  <field id="gtk.gtkwindow.field.frame" type="ro">
+   <fieldname>frame</fieldname>
+   <fieldtype></fieldtype>
+   <shortdesc>
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </field>
+
+  <field id="gtk.gtkwindow.field.frame_bottom" type="ro">
+   <fieldname>frame_bottom</fieldname>
+   <fieldtype>int</fieldtype>
+   <shortdesc>
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </field>
+
+  <field id="gtk.gtkwindow.field.frame_left" type="ro">
+   <fieldname>frame_left</fieldname>
+   <fieldtype>int</fieldtype>
+   <shortdesc>
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </field>
+
+  <field id="gtk.gtkwindow.field.frame_right" type="ro">
+   <fieldname>frame_right</fieldname>
+   <fieldtype>int</fieldtype>
+   <shortdesc>
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </field>
+
+  <field id="gtk.gtkwindow.field.frame_top" type="ro">
+   <fieldname>frame_top</fieldname>
+   <fieldtype>int</fieldtype>
+   <shortdesc>
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </field>
+
+  <field id="gtk.gtkwindow.field.gravity" type="ro">
+   <fieldname>gravity</fieldname>
+   <fieldtype><enumname>GdkGravity</enumname></fieldtype>
+   <shortdesc>
+    A gravidade da janela.
+   </shortdesc>
+   <desc>
+    <para>
+     Define o ponto de referencia de uma janela no sentido de coordenadas
+     passadas às função <function class="GtkWindow">move</function>. 
+    </para>
+    <para>
+     Veja também: 
+     <enumname>GdkGravity</enumname>,
+     <function class="GtkWindow">move</function>,
+     <function class="GtkWindow">get_gravity</function>, 
+     <function class="GtkWindow">set_gravity</function>
+    </para>
+
+   </desc>
+  </field>
+
+  <field id="gtk.gtkwindow.field.group" type="ro">
+   <fieldname>group</fieldname>
+   <fieldtype>GtkWindowGroup</fieldtype>
+   <shortdesc>
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </field>
+
+  <field id="gtk.gtkwindow.field.has_focus" type="ro">
+   <fieldname>has_focus</fieldname>
+   <fieldtype>int</fieldtype>
+   <shortdesc>
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </field>
+
+  <field id="gtk.gtkwindow.field.has_frame" type="ro">
+   <fieldname>has_frame</fieldname>
+   <fieldtype>int</fieldtype>
+   <shortdesc>
+   </shortdesc>
+   <desc>
+    <para>
+     Veja também: 
+     <function class="GtkWindow">get_has_frame</function>, 
+     <function class="GtkWindow">set_has_frame</function>
+    </para>
+
+   </desc>
+  </field>
+
+  <field id="gtk.gtkwindow.field.has_user_ref_count" type="ro">
+   <fieldname>has_user_ref_count</fieldname>
+   <fieldtype>int</fieldtype>
+   <shortdesc>
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </field>
+
+  <field id="gtk.gtkwindow.field.iconify_initially" type="ro">
+   <fieldname>iconify_initially</fieldname>
+   <fieldtype>int</fieldtype>
+   <shortdesc>
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </field>
+
+  <field id="gtk.gtkwindow.field.keys_changed_handler" type="ro">
+   <fieldname>keys_changed_handler</fieldname>
+   <fieldtype>int</fieldtype>
+   <shortdesc>
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </field>
+
+  <field id="gtk.gtkwindow.field.maximize_initially" type="ro">
+   <fieldname>maximize_initially</fieldname>
+   <fieldtype>int</fieldtype>
+   <shortdesc>
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </field>
+
+  <field id="gtk.gtkwindow.field.mnemonic_modifier" type="ro">
+   <fieldname>mnemonic_modifier</fieldname>
+   <fieldtype></fieldtype>
+   <shortdesc>
+   </shortdesc>
+   <desc>
+    <para>
+     Veja também: 
+     <function class="GtkWindow">get_mnemonic_modifier</function>, 
+     <function class="GtkWindow">set_mnemonic_modifier</function>
+    </para>
+
+   </desc>
+  </field>
+
+  <field id="gtk.gtkwindow.field.modal" type="ro">
+   <fieldname>modal</fieldname>
+   <fieldtype>boolean</fieldtype>
+   <shortdesc>
+    Se a janela é ou não modal.
+   </shortdesc>
+   <desc>
+    <para>
+     <literal>true</literal> se a janela é modal, <literal>false</literal>
+     se não for. Se uma janela é modal, o usuário não poderá interagir com o
+     resto da aplicação até que ela seja fechada.
+    </para>
+    <para>
+     O padrão é <literal>false</literal>.
+    </para>
+    <para>
+     Veja também: 
+     <function class="GtkWindow">get_modal</function>, 
+     <function class="GtkWindow">set_modal</function>
+    </para>
+
+   </desc>
+  </field>
+
+  <field id="gtk.gtkwindow.field.need_default_position" type="ro">
+   <fieldname>need_default_position</fieldname>
+   <fieldtype>int</fieldtype>
+   <shortdesc>
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </field>
+
+  <field id="gtk.gtkwindow.field.need_default_size" type="ro">
+   <fieldname>need_default_size</fieldname>
+   <fieldtype>int</fieldtype>
+   <shortdesc>
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </field>
+
+  <field id="gtk.gtkwindow.field.position" type="ro">
+   <fieldname>position</fieldname>
+   <fieldtype>int</fieldtype>
+   <shortdesc>
+   </shortdesc>
+   <desc>
+    <para>
+     Veja também: 
+     <function class="GtkWindow">get_position</function>, 
+     <function class="GtkWindow">set_position</function>
+    </para>
+
+   </desc>
+  </field>
+
+  <field id="gtk.gtkwindow.field.stick_initially" type="ro">
+   <fieldname>stick_initially</fieldname>
+   <fieldtype>int</fieldtype>
+   <shortdesc>
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </field>
+
+  <field id="gtk.gtkwindow.field.title" type="ro">
+   <fieldname>title</fieldname>
+   <fieldtype>string</fieldtype>
+   <shortdesc>
+    O título da janela.
+   </shortdesc>
+   <desc>
+    <para>
+     Uma string contendo o título da janela.
+    </para>
+    <para>
+      O padrão é <literal>null</literal>.
+    </para>
+    <para>
+     Veja também: 
+     <function class="GtkWindow">get_title</function>, 
+     <function class="GtkWindow">set_title</function>
+    </para>
+
+   </desc>
+  </field>
+
+  <field id="gtk.gtkwindow.field.transient_parent" type="ro">
+   <fieldname>transient_parent</fieldname>
+   <fieldtype>GtkWindow</fieldtype>
+   <shortdesc>
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </field>
+
+  <field id="gtk.gtkwindow.field.type" type="ro">
+   <fieldname>type</fieldname>
+   <fieldtype><enumname>GtkWindowType</enumname></fieldtype>
+   <shortdesc>
+    O tipo da janela.
+   </shortdesc>
+   <desc>
+    <para>
+     O tipo da janela. O tipo pode ser 
+     <enumname>Gtk::WINDOW_TOPLEVEL</enumname> ou
+     <enumname>Gtk::WINDOW_POPUP</enumname>. O tipo não é difinido na
+     construção.
+    </para>
+    <para>
+     O padrão é <enumname>Gtk::WINDOW_TOPLEVEL</enumname>
+    </para>
+   </desc>
+  </field>
+
+  <field id="gtk.gtkwindow.field.type_hint" type="ro">
+   <fieldname>type_hint</fieldname>
+   <fieldtype><enumname>GdkWindowTypeHint</enumname></fieldtype>
+   <shortdesc>
+    Uma dica descrevendo o tipo da janela.
+   </shortdesc>
+   <desc>
+    <para>
+     Uma dica para ajudar o gerenciador de janelas a determinar o tipo de
+     janela para que possa criá-la apropriadamente.
+    </para>
+    <para>
+     O padrão é <enumname>Gdk::WINDOW_TYPE_HINT_NORMAL</enumname>.
+    </para>
+    <para>
+     Veja também: 
+     <function class="GtkWindow">get_type_hint</function>, 
+     <function class="GtkWindow">set_type_hint</function>
+    </para>
+
+   </desc>
+  </field>
+
+  <field id="gtk.gtkwindow.field.wm_role" type="ro">
+   <fieldname>wm_role</fieldname>
+   <fieldtype>string</fieldtype>
+   <shortdesc>
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </field>
+
+  <field id="gtk.gtkwindow.field.wmclass_class" type="ro">
+   <fieldname>wmclass_class</fieldname>
+   <fieldtype>string</fieldtype>
+   <shortdesc>
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </field>
+
+  <field id="gtk.gtkwindow.field.wmclass_name" type="ro">
+   <fieldname>wmclass_name</fieldname>
+   <fieldtype>string</fieldtype>
+   <shortdesc>
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </field>
+
+ </fields>
+
+ <signals>
+
+  <signal id="gtk.gtkwindow.signal.activate-default">
+   <signalname>activate-default</signalname>
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
+     <paramdef>GtkWindow <parameter>window</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </signal>
+  
+  <signal id="gtk.gtkwindow.signal.activate-focus">
+   <signalname>activate-focus</signalname>
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
+     <paramdef>GtkWindow <parameter>window</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </signal>
+  
+  <signal id="gtk.gtkwindow.signal.frame-event">
+   <signalname>frame-event</signalname>
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>bool <cbfunction>callback</cbfunction></funcdef>
+     <paramdef>GtkWindow <parameter>window</parameter></paramdef>
+     <paramdef><!-- was: GdkEvent -->XXX <parameter>UNKNOWN</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </signal>
+  
+  <signal id="gtk.gtkwindow.signal.keys-changed">
+   <signalname>keys-changed</signalname>
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
+     <paramdef>GtkWindow <parameter>window</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </signal>
+  
+  <signal id="gtk.gtkwindow.signal.move-focus">
+   <signalname>move-focus</signalname>
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
+     <paramdef>GtkWindow <parameter>window</parameter></paramdef>
+     <paramdef>GtkDirectionType <parameter>UNKNOWN</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </signal>
+  
+  <signal id="gtk.gtkwindow.signal.set-focus">
+   <signalname>set-focus</signalname>
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
+     <paramdef>GtkWindow <parameter>window</parameter></paramdef>
+     <paramdef>GtkWidget <parameter>UNKNOWN</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </signal>
+  
+ </signals>
+
+</classentry>
+<!-- Keep this comment at the end of the file
+Local variables:
+mode: sgml
+sgml-omittag:t
+sgml-shorttag:t
+sgml-minimize-attributes:nil
+sgml-always-quote-attributes:t
+sgml-indent-step:1
+sgml-indent-data:t
+sgml-parent-document:nil
+sgml-default-dtd-file:"../../../manual.ced"
+sgml-exposed-tags:nil
+sgml-local-catalogs:nil
+sgml-local-ecat-files:nil
+End:
+vim600: syn=xml fen fdm=syntax fdl=2 si
+vim: et tw=78 syn=sgml
+vi: ts=1 sw=1
+-->
