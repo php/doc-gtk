@@ -1,15 +1,25 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<!-- $Revision: 1.2 $ -->
+<!-- $Revision: 1.3 $ -->
 <classentry id="gtk.gtkeditable" type="interface">
  <classmeta>
   <classtitle>GtkEditable</classtitle>
   <classparent>GInterface</classparent>
   <shortdesc>
-   
+   Interface for text-editing widgets.
   </shortdesc>
   <desc>
    <para>
-    
+    The GtkEditable interface is an interface which should be implemented
+    by text editing widgets, such as <classname>GtkEntry</classname> and
+    <classname>GtkText</classname>. It contains functions for generically
+    manipulating an editable widget, a large number of action signals used
+    for key bindings, and several signals that an application can connect
+    to to modify the behavior of a widget.
+   </para>
+   <para>
+    As an example of the latter usage, by connecting the following handler
+    to <signalname class="GtkEditable">insert-text</signalname>,
+    an application can convert all entry into a widget into uppercase.
    </para>
   </desc>
  </classmeta>
@@ -24,10 +34,18 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Copy the current selection into clipboard.
    </shortdesc>
    <desc>
-
+    <para>
+     Causes the characters in the current selection to be
+     copied to the clipboard.
+    </para>
+    <para>
+     See also:
+     <function class="GtkEditable">cut_clipboard</function>,
+     <function class="GtkEditable">paste_clipboard</function>
+    </para>
    </desc>
   </method>
 
@@ -39,10 +57,19 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Copy the current selection into clipboard &amp; delete.
    </shortdesc>
    <desc>
-
+    <para>
+     Causes the characters in the current selection to be copied
+     to the clipboard and then deleted from the widget.
+    </para>
+    <para>
+     See also:
+     <function class="GtkEditable">delete_text</function>,
+     <function class="GtkEditable">copy_clipboard</function>,
+     <function class="GtkEditable">paste_clipboard</function>
+    </para>
    </desc>
   </method>
 
@@ -54,10 +81,17 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Deletes the current contents of the selection.
    </shortdesc>
    <desc>
-
+    <para>
+     Deletes the current contents of the widgets selection and disclaims
+     the selection.
+    </para>
+    <para>
+     See also:
+     <function class="GtkEditable">delete_text</function>
+    </para>
    </desc>
   </method>
 
@@ -70,10 +104,40 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Deletes a sequence of characters.
    </shortdesc>
    <desc>
-
+    <para>
+     Deletes a sequence of characters. The characters that are
+     deleted are those characters at positions from
+     <parameter>start_pos</parameter> up to, but not including 
+     <parameter>end_pos</parameter>. If <parameter>end_pos</parameter>
+     is negative, then the the characters deleted will be those
+     characters from <parameter>start_pos</parameter> to the end of the text.
+    </para>
+    <example>
+     <title>Deleting all text from an entry</title>
+     <programlisting role="php">
+<![CDATA[
+$editable->delete_text(0, -1);
+]]>
+     </programlisting>
+    </example>
+    <example>
+     <title>Deleting all selected text from the editable</title>
+     <programlisting role="php">
+<![CDATA[
+$bounds = $editable->get_selection_bounds();
+if ($bounds !== false) {
+    $editable->delete_text($bounds[0], $bounds[1]);
+}
+]]>
+     </programlisting>
+    </example>
+    <para>
+     See also:
+     <function class="GtkEditable">delete_selection</function>
+    </para>
    </desc>
   </method>
 
@@ -86,10 +150,25 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Retrieves a sequence of characters.
    </shortdesc>
    <desc>
-
+    <para>
+     Retrieves a sequence of characters. The characters that are retrieved
+     are those characters at positions from <parameter>start_pos</parameter>
+     up to, but not including <parameter>end_pos</parameter>. If
+     <parameter>end_pos</parameter> is negative, then the the characters
+     retrieved will be those characters from <parameter>start_pos</parameter>
+     o the end of the text.
+    </para>
+    <example>
+     <title>Retrieving all text</title>
+     <programlisting role="php">
+<![CDATA[
+$text = $editable->get_chars(0, -1);
+]]>
+     </programlisting>
+    </example>
    </desc>
   </method>
 
@@ -101,10 +180,16 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    If the text can be changed.
    </shortdesc>
    <desc>
-
+    <para>
+     If the text can be changed by the user.
+    </para>
+    <para>
+     See also:
+     <function class="GtkEditable">set_editable</function>
+    </para>
    </desc>
   </method>
 
@@ -112,14 +197,26 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>int <function>get_position</function></funcdef>
-      <paramdef>void</paramdef>
+     <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Retrieves the current cursor position.
    </shortdesc>
    <desc>
-
+    <para>
+     Retrieves the current cursor position.
+    </para>
+    <para>
+      The cursor is displayed before the character with the given
+      (base 0) index in the widget. The value will be less than or
+      equal to the number of characters in the widget.
+      Note that this position is in characters, not in bytes.
+    </para>
+    <para>
+     See also:
+     <function class="GtkEditable">set_position</function>
+    </para>
    </desc>
   </method>
 
@@ -127,14 +224,21 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>array <function>get_selection_bounds</function></funcdef>
-      <paramdef>void</paramdef>
+     <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Gets the current selection bounds.
    </shortdesc>
    <desc>
-
+    <para>
+     Gets the current selection bounds, if there is a selection.
+    </para>
+    <para>
+     If there is one, the method returns an array with starting
+     and ending locations. Having no selection, the method returns
+     <literal>false</literal>.
+    </para>
    </desc>
   </method>
 
@@ -142,14 +246,36 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>insert_text</function></funcdef>
-      <paramdef><parameter>position</parameter></paramdef>
+     <paramdef>string <parameter>text</parameter></paramdef>
+     <paramdef>int <parameter>position</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Inserts text at a given position.
    </shortdesc>
    <desc>
-
+    <para>
+     Inserts text at the given position.
+    </para>
+    <example>
+     <title>Inserting text at the beginning</title>
+     <programlisting role="php">
+<![CDATA[
+$text = $editable->insert_text(0, 'begin');
+]]>
+     </programlisting>
+    </example>
+    <example>
+     <title>Inserting text at the end</title>
+     <programlisting role="php">
+<![CDATA[
+$text = $editable->insert_text(
+    strlen($editable->get_chars(0, -1)),
+    'end'
+);
+]]>
+     </programlisting>
+    </example>
    </desc>
   </method>
 
@@ -157,14 +283,22 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>paste_clipboard</function></funcdef>
-      <paramdef>void</paramdef>
+     <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Paste the clipboard contents at the current cursor position.
    </shortdesc>
    <desc>
-
+    <para>
+     Causes the contents of the clipboard to be pasted into
+     the given widget at the current cursor position.
+    </para>
+    <para>
+     See also:
+     <function class="GtkEditable">cut_clipboard</function>,
+     <function class="GtkEditable">copy_clipboard</function>
+    </para>
    </desc>
   </method>
 
@@ -177,10 +311,25 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Selects a part of the text.
    </shortdesc>
    <desc>
-
+    <para>
+     Selects a region of text. The characters that are selected are
+     those characters at positions from <parameter>start_pos</parameter>
+     up to, but not including <parameter>end_pos</parameter>. If
+     <parameter>end_pos</parameter> is negative, then the the characters
+     selected will be those characters from <parameter>start_pos</parameter>
+     to the end of the text.
+    </para>
+    <example>
+     <title>Selecting all text</title>
+     <programlisting role="php">
+<![CDATA[
+$text = $editable->select_region(0, -1);
+]]>
+     </programlisting>
+    </example>
    </desc>
   </method>
 
@@ -192,10 +341,16 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    If the user can edit the text in the editable widget.
    </shortdesc>
    <desc>
-
+    <para>
+     Determines if the user can edit the text in the editable widget or not.
+    </para>
+    <para>
+     See also:
+     <function class="GtkEditable">get_editable</function>
+    </para>
    </desc>
   </method>
 
@@ -207,12 +362,147 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the cursor position.
    </shortdesc>
    <desc>
-
+    <para>
+     Sets the cursor position.
+    </para>
+    <para>
+     The cursor is displayed before the character with the given (base 0)
+     index in the widget. The value must be less than or equal to the number
+     of characters in the widget. A value of <literal>-1</literal> indicates
+     that the position should be set after the last character in the entry.
+     Note that this position is in characters, not in bytes.
+    </para>
+    <para>
+     See also:
+     <function class="GtkEditable">get_position</function>
+    </para>
    </desc>
   </method>
  </methods>
+
+
+ <properties>
+  <prop id="gtk.gtkeditable.property.editable" type="ro">
+   <propname>editable</propname>
+   <proptype>int</proptype>
+   <shortdesc>
+    Whether or not the widget is editable by the user.
+   </shortdesc>
+   <desc>
+    <para>
+     Whether or not the widget is editable by the user.
+    </para>
+    <para>
+     See also:
+     <function class="GtkEditable">get_editable</function>,
+     <function class="GtkEditable">set_editable</function>
+    </para>
+   </desc>
+  </prop>
+
+
+  <prop id="gtk.gtkeditable.property.selection_start" type="ro">
+   <propname>selection_start</propname>
+   <proptype>int</proptype>
+   <shortdesc>
+    The starting position of the selected characters in the widget.
+   </shortdesc>
+   <desc>
+    <para>
+     The starting position of the selected characters in the widget.
+    </para>
+    <para>
+     See also:
+     <function class="GtkEditable">get_selection_bounds</function>,
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtkeditable.property.selection_end" type="ro">
+   <propname>selection_end</propname>
+   <proptype>int</proptype>
+   <shortdesc>
+    The end position of the selected characters in the widget.
+   </shortdesc>
+   <desc>
+    <para>
+     The end position of the selected characters in the widget.
+    </para>
+    <para>
+     See also:
+     <function class="GtkEditable">get_selection_bounds</function>,
+    </para>
+   </desc>
+  </prop>
+ </properties>
+
+
+ <signals>
+  <signal id="gtk.gtkeditable.signal.changed">
+   <signalname>changed</signalname>
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
+     <paramdef><classname>GtkEditable</classname> <parameter>editable</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Indicates that the user has changed the contents of the widget.
+   </shortdesc>
+   <desc>
+    <para>
+     Indicates that the user has changed the contents of the widget.
+    </para>
+   </desc>
+  </signal>
+
+  <signal id="gtk.gtkeditable.signal.delete-text">
+   <signalname>delete-text</signalname>
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
+     <paramdef><classname>GtkEditable</classname> <parameter>editable</parameter></paramdef>
+     <paramdef>int <parameter>start_pos</parameter></paramdef>
+     <paramdef>int <parameter>end_pos</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Emitted when text is deleted from the widget by the user.
+   </shortdesc>
+   <desc>
+    <para>
+     This signal is emitted when text is deleted from the widget by the user.
+    </para>
+    <para>
+     The default handler for this signal will normally be responsible for
+     deleting the text.
+    </para>
+   </desc>
+  </signal>
+
+  <signal id="gtk.gtkeditable.signal.insert-text">
+   <signalname>insert-text</signalname>
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
+     <paramdef><classname>GtkEditable</classname> <parameter>editable</parameter></paramdef>
+     <paramdef>string <parameter>new_text</parameter></paramdef>
+     <paramdef>int <parameter>new_text_length</parameter></paramdef>
+     <paramdef>int <parameter>position</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Emitted when text is inserted into the widget by the user.
+   </shortdesc>
+   <desc>
+    <para>
+     This signal is emitted when text is inserted into the widget by the user.
+    </para>
+   </desc>
+  </signal>
+ </signals>
 
 </classentry>
