@@ -1,0 +1,61 @@
+<?php
+//Create a check list with things to buy
+// You can toggle the check item.
+
+$store = new GtkListStore(
+    Gtk::TYPE_STRING, //item
+    Gtk::TYPE_BOOLEAN //bought?
+);
+
+//View is needed to display them
+$view = new GtkTreeView($store);
+
+//Item column
+$rendererText = new GtkCellRendererText();
+$columnItem   = new GtkTreeViewColumn(
+    'Item', new GtkCellRendererText(), 'text', 0
+);
+$view->append_column($columnItem);
+
+
+//GtkCellRendererToggle: bought? column
+$rendererBought = new GtkCellRendererToggle();
+$rendererBought->set_property('activatable', true);
+$rendererBought->connect('toggled', 'bought_toggled', $store);
+
+$columnBought = new GtkTreeViewColumn(
+    'Bought?',        //title
+    $rendererBought,  //the renderer
+    'active',        //use that property
+    1                //data is in that model column
+);
+$view->append_column($columnBought);
+
+//When the user toggles the state, this
+// method will be called.
+function bought_toggled($renderer, $row, $store)
+{
+    $iter = $store->get_iter($row);
+    //The value has been toggled -> we need
+    // to invert the current value
+    $store->set(
+        $iter,
+        1,
+        !$store->get_value($iter, 1)
+    );
+}
+
+//Add some data
+$store->append(array('Milk'  , false));
+$store->append(array('Butter', false));
+$store->append(array('Juice' , true));
+$store->append(array('Bread' , false));
+
+
+$wnd = new GtkWindow();
+$wnd->add($view);
+$wnd->set_title('Check list');
+$wnd->connect_simple('destroy', array('Gtk', 'main_quit'));
+$wnd->show_all();
+Gtk::main();
+?>

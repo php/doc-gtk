@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<!-- $Revision: 1.11 $ -->
+<!-- $Revision: 1.12 $ -->
 <classentry id="gtk.gtkcellrenderertoggle">
  <classmeta>
   <classtitle>GtkCellRendererToggle</classtitle>
   <classparent>GtkCellRenderer</classparent>
+  <classimage fileref="&directory.images;/reference/gtk/gtkcellrenderertoggle.png"/>
   <shortdesc>
    Displays the contents of a cell in a GtkTreeView as a toggle button.
   </shortdesc>
@@ -16,8 +17,8 @@
   </desc>
  </classmeta>
 
- <constructors>
 
+ <constructors>
   <constructor id="gtk.gtkcellrenderertoggle.constructor">
    <funcsynopsis>
     <funcprototype>
@@ -29,22 +30,32 @@
     Creates a new <classname>GtkCellRendererToggle</classname>.
    </shortdesc>
    <desc>
-    Creates a new <classname>GtkCellRendererToggle</classname>.
-    The toggle button rendering parameters are adjusted using
-    the object properties. The object properties can be set globally
-    (with <function class="GObject">set_property</function>).
-    Also, with <classname>GtkTreeViewColumn</classname>, you
-    can bind a property to a value in a gtk.TreeModel. For
-    example, you can bind the "active" property on the cell
-    renderer to a boolean value in the model, thus causing
-    the check button to reflect the state of the model.
+    <para>
+     Creates a new <classname>GtkCellRendererToggle</classname>.
+     The toggle button rendering parameters are adjusted using
+     the object properties. The object properties can be set globally
+     (with <function class="GObject">set_property</function>).
+     Also, with <classname>GtkTreeViewColumn</classname>, you
+     can bind a property to a value in a gtk.TreeModel. For
+     example, you can bind the "active" property on the cell
+     renderer to a boolean value in the model, thus causing
+     the check button to reflect the state of the model.
+    </para>
+    <example>
+     <title>Creating an editable toggle renderer</title>
+     <programlisting role="php">
+      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+                  href="&directory.examples;/reference/gtk/gtkcellrenderertoggle/constructor.phpw" parse="text">
+       <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+      </xi:include>
+     </programlisting>
+    </example>
    </desc>
   </constructor>
-
  </constructors>
 
- <methods>
 
+ <methods>
   <method id="gtk.gtkcellrenderertoggle.method.get_active">
    <funcsynopsis>
     <funcprototype>
@@ -140,10 +151,10 @@
 
    </desc>
   </method>
-
  </methods>
- <properties>
 
+
+ <properties>
   <prop id="gtk.gtkcellrenderertoggle.property.activatable" type="rw">
    <propname>activatable</propname>
    <proptype>boolean</proptype>
@@ -196,10 +207,10 @@
     </para>
    </desc>
   </prop>
-
  </properties>
- <signals>
 
+
+ <signals>
   <signal id="gtk.gtkcellrenderertoggle.signal.toggled">
    <signalname>toggled</signalname>
    <funcsynopsis>
@@ -222,7 +233,6 @@
     </para>
    </desc>
   </signal>
-  
  </signals>
 
 </classentry>
