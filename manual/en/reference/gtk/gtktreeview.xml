@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<!-- $Revision: 1.13 $ -->
+<!-- $Revision: 1.14 $ -->
 <classentry id="gtk.gtktreeview">
  <classmeta>
   <classtitle>GtkTreeView</classtitle>
   <classparent>GtkContainer</classparent>
-  <classimage fileref="&directory.images;/reference/gtk/gtktreeview.png"/>
+  <classimage fileref="&directory.images;/reference/gtk/gtktreeview.png" frame="no"/>
   <shortdesc>
    A widget for displaying both trees and lists.
   </shortdesc>
@@ -1104,18 +1104,26 @@ $treeview->append_column($column);
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_hadjustment</function></funcdef>
-     <paramdef>GtkAdjustment <parameter>adjustment</parameter></paramdef>
+     <paramdef><classname>GtkAdjustment</classname> <parameter>adjustment</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the GtkAdjustment for the current horizontal aspect.
    </shortdesc>
    <desc>
     <para>
-     &seealso;
-     <function class="GtkTreeView">get_hadjustment</function>
+     Sets the GtkAdjustment for the current horizontal aspect.
     </para>
-
+    <para>
+     Under normal circumstances you don't need this method if you
+     use a <classname>GtkScrolledWindow</classname> and
+     <function class="GtkContainer">add</function> the view to it.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkTreeView">get_hadjustment</function>,
+     <function class="GtkTreeView">set_vadjustment</function>
+    </para>
    </desc>
   </method>
 
@@ -1295,14 +1303,22 @@ $treeview->append_column($column);
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the column of the interactive search.
    </shortdesc>
    <desc>
+    <para>
+     Sets column as the column where the interactive search code should
+     search in. Additionally, turns on interactive searching.
+    </para>
+    <note>
+     <para>
+      The column refers to a column of the model.
+     </para>
+    </note>
     <para>
      &seealso;
      <function class="GtkTreeView">get_search_column</function>
     </para>
-
    </desc>
   </method>
 
@@ -1321,7 +1337,6 @@ $treeview->append_column($column);
      &seealso;
      <function class="GtkTreeView">get_search_equal_func</function>
     </para>
-
    </desc>
   </method>
 
@@ -1329,18 +1344,26 @@ $treeview->append_column($column);
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_vadjustment</function></funcdef>
-     <paramdef>GtkAdjustment <parameter>adjustment</parameter></paramdef>
+     <paramdef><classname>GtkAdjustment</classname> <parameter>adjustment</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the GtkAdjustment for the current vertical aspect.
    </shortdesc>
    <desc>
     <para>
-     &seealso;
-     <function class="GtkTreeView">get_vadjustment</function>
+     Sets the GtkAdjustment for the current vertical aspect.
     </para>
-
+    <para>
+     Under normal circumstances you don't need this method if you
+     use a <classname>GtkScrolledWindow</classname> and
+     <function class="GtkContainer">add</function> the view to it.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkTreeView">get_vadjustment</function>,
+     <function class="GtkTreeView">set_hadjustment</function>
+    </para>
    </desc>
   </method>
 
