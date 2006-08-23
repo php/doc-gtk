@@ -1,0 +1,1735 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- EN-Revision: 1.19 Maintainer: dnfeitosa Status: ready -->
+<classentry id="gtk.gtklabel">
+ <classmeta>
+  <classtitle>GtkLabel</classtitle>
+  <classparent>GtkMisc</classparent>
+  <shortdesc>
+   Um widget que exibe uma quantidade pequena ou média de texto.
+  </shortdesc>
+  <desc>
+   <para>
+    O widget GtkLabel exibe uma quantidade pequena de texto.
+    Como o nome sugere, a maioria dos rótulos são usados para nomear
+    outro widget como um <classname>GtkButton</classname>,
+    um <classname>GtkMenuItem</classname>, ou um 
+    <classname>GtkOptionMenu</classname>.
+   </para>
+   <para>
+    Você pode ter controle sobre o caminho no qual o GtkLabel será exibido com
+    alguns métodos, como <function class="GtkLabel">set_justify</function>
+    ou <function class="GtkLabel">set_width_chars</function>. Se você deseja
+    definir o alinhamento (note que alinhamento e justificação não são a
+    mesma coisa) ou preenchimento para um GtkLabel, você pode inserí-lo dentro de um
+    container <classname>GtkAlignment</classname>.
+   </para>
+  </desc>
+ </classmeta>
+
+ <constructors>
+
+  <constructor id="gtk.gtklabel.constructor">
+   <funcsynopsis>
+    <funcprototype>
+    <funcdef> <function>GtkLabel</function></funcdef>
+    <paramdef>string <parameter><optional>string = null</optional></parameter></paramdef>
+    <paramdef>boolean <parameter><optional>parse_mnemonic = false</optional></parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Cria um novo <classname>GtkLabel</classname>.
+   </shortdesc>
+   <desc>
+    <para>
+     Cria um novo rótulo com um texto (opcional). Se você definir
+     <parameter>parse_mnemonic</parameter> para <literal>true</literal>,
+     o rótulo irá definir a tecla mnemônica para a primeira letra à direita
+     do primeiro underscore (<literal>_</literal>).
+    </para>
+    <para>
+     <example>
+      <title>Criando um GtkLabel</title>
+      <programlisting role="php">
+       <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+                  href="&directory.examples;/reference/gtk/gtklabel/constructor.phpw" parse="text">
+        <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+       </xi:include>
+      </programlisting>
+     </example>
+    </para>
+   </desc>
+  </constructor>
+
+ </constructors>
+
+ <methods>
+
+  <method id="gtk.gtklabel.method.get">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>get</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+				OBSOLETO. Retorna o texto do rótulo.
+   </shortdesc>
+   <desc>
+    <para>
+     <link linkend="appendix.glossary.d.deprecated">OBSOLETO</link>. Retorna o texto
+     do rótulo.
+    </para>
+    <para>
+     Use <function class="GtkLabel">get_text</function> ou
+     <function class="GtkLabel">get_label</function> no lugar.
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtklabel.method.get_angle">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>int <function>get_angle</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Retorna o ângulo de rotação do rótulo.
+   </shortdesc>
+   <desc>
+    <para>
+     Retorna em graus o ângulo de rotação do rótulo.
+    </para>
+    <para>
+     <example>
+      <title>Pegando e setando um ângulo para um GtkLabel</title>
+      <programlisting role="php">
+       <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+                  href="&directory.examples;/reference/gtk/gtklabel/get_set_angle.phpw" parse="text">
+        <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+       </xi:include>
+      </programlisting>
+     </example>
+					Este exemplo produz a seguinte janela:
+     <graphic fileref="&directory.images;/reference/gtk/gtklabel/set_angle.png" />
+    </para>
+    <para>
+     Veja também: 
+     <function class="GtkLabel">set_angle</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtklabel.method.get_attributes">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>
+      <classname>PangoAttrList</classname> <function>get_attributes</function>
+     </funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Retorna uma lista de atributos Pango para o rótulo.
+   </shortdesc>
+   <desc>
+    <para>
+      Retorna uma lista de atributos Pango para o rótulo que foi definido com 
+     <function class="GtkLabel">set_attributes</function>.
+    </para>
+    <para>
+     Veja também: 
+     <function class="GtkLabel">set_attributes</function>
+    </para>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtklabel.method.get_ellipsize">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef><classname>PangoEllipsizeMode</classname> <function>get_ellipsize</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Retorna o modo que é usado para encurtar o texto.
+   </shortdesc>
+   <desc>
+    <para>
+     Retorna o modo que é usado para encurtar o texto.
+    </para>
+    <para>
+     Veja também: 
+     <function class="GtkLabel">set_ellipsize</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtklabel.method.get_justify">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>GtkJustification <function>get_justify</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Retorna a justificação do rótulo.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Retorna a justificação do rótulo.
+    </simpara>
+    <para>
+     Veja também: 
+     <function class="GtkLabel">set_justify</function>
+    </para>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtklabel.method.get_label">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>string <function>get_label</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Traz o texto incluindo qualquer underscore indicando mnemônicos e marcação Pango.
+   </shortdesc>
+   <desc>
+    <para>
+     Traz o texto de um GtkLabel incluindo qualquer underscore 
+     indicando mnemônicos e marcação Pango.
+    </para>
+    <para>
+     Veja também: 
+     <function class="GtkLabel">set_label</function>,
+     <function class="GtkLabel">set_text</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtklabel.method.get_layout">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef><classname>PangoLayout</classname> <function>get_layout</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Retorna o <classname>PangoLayout</classname> usado para exibir o rótulo.
+   </shortdesc>
+   <desc>
+    <para>
+     Retorna o <classname>PangoLayout</classname> usado para exibir o rótulo.
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtklabel.method.get_layout_offsets">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>get_layout_offsets</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+     Obtém as coordenas onde o rótulo irá desenhar o 
+    <classname>PangoLayout</classname>.
+   </shortdesc>
+   <desc>
+    <para>
+     Obtém as coordenadas onde o rótulo irá desenhar o 
+     <classname>PangoLayout</classname> representando o texto;
+     útil para converter eventos de mouse em coordenadas dentro do
+     <classname>PangoLayout</classname>, ex. para tomar alguma ação caso alguma
+     parte do rótulo seja clicada.
+    </para>
+    <para>
+     Claro que você precisará criar um <classname>GtkEventBox</classname> para
+     receber os eventos, e empacotar o rótulo dentro dele, uma vez que rótulos são
+     widgets do tipo <optionname enum="">Gtk::NO_WINDOW</optionname>. Lembre-se que
+     quando usar as funções <classname>PangoLayout</classname> você precisará converter
+     os pixels usando 
+     <link linkend="pango.method.PIXELS">Pango::PIXELS</link> ou PANGO_SCALE.
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtklabel.method.get_line_wrap">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>bool <function>get_line_wrap</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Retorna se as linhas no rótulo são automaticamente quebradas.
+   </shortdesc>
+   <desc>
+    <para>
+     Retorna se as linhas no rótulo são automaticamente quebradas.
+    </para>
+    <para>
+     Veja também: 
+     <function class="GtkLabel">set_line_wrap</function>
+    </para>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtklabel.method.get_max_width_chars">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>int <function>get_max_width_chars</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Retorna a largura máxima em caracteres.
+   </shortdesc>
+   <desc>
+    <para>
+     Retorna a largura máxima em caracteres.
+    </para>
+    <para>
+     Veja também: 
+     <function class="GtkLabel">set_max_width_chars</function>
+    </para>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtklabel.method.get_mnemonic_keyval">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>int <function>get_mnemonic_keyval</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Retorna o valor da tecla mnemônica se estiver setado.
+   </shortdesc>
+   <desc>
+    <para>
+     Se o rótulo foi definido com um mnemônico, este método será usado
+     para retornar o valor usado para o acelerador.
+     Se não houver um mnemônico definido, retornará
+     <literal>Gdk::VoidSymbol</literal>.
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtklabel.method.get_mnemonic_widget">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>
+      <classname>GtkWidget</classname> <function>get_mnemonic_widget</function>
+     </funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Recupera o alvo do mnemônico para este rótulo.
+   </shortdesc>
+   <desc>
+    <para>
+     Recupera o alvo do mnemônico para este rótulo.
+    </para>
+    <para>
+     Veja também: 
+     <function class="GtkLabel">set_mnemonic_widget</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtklabel.method.get_selectable">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>bool <function>get_selectable</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Verifica se o usuário pode selecionar o texto no rótulo.
+   </shortdesc>
+   <desc>
+    <para>
+     Verifica se o usuário pode selecionar o texto no rótulo.
+    </para>
+    <para>
+     Veja também: 
+     <function class="GtkLabel">set_selectable</function>
+    </para>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtklabel.method.get_selection_bounds">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>array <function>get_selection_bounds</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Retorna o intervalo de caracteres do rótulo.
+   </shortdesc>
+   <desc>
+    <para>
+     Retorna o intervalo de caracteres do rótulo. O primeiro valor do array
+     é o início, o segundo é o fim.
+    </para>
+    <para>
+     Então um array de valor <literal>array(1,2)</literal>, significa que do caractere
+     1 ao 2 no texto está selecionado.
+    </para>
+    <para>
+     <example>
+      <title>Pegando o intervalo de caracteres de um GtkLabel</title>
+      <programlisting role="php">
+       <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+                  href="&directory.examples;/reference/gtk/gtklabel/get_selection_bounds.phpw" parse="text">
+        <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+       </xi:include>
+      </programlisting>
+     </example>
+    </para>
+    <para> 
+     Veja também:
+     <function class="GtkLabel">select_region</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtklabel.method.get_single_line_mode">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>bool <function>get_single_line_mode</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Retorna se o rótulo exibe apenas um linha.
+   </shortdesc>
+   <desc>
+    <para>
+     Retorna se o rótulo exibe apenas um linha.
+    </para>
+    <para>
+     Veja também: 
+     <function class="GtkLabel">set_single_line_mode</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtklabel.method.get_text">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>string <function>get_text</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Traz o texto de um rótulo, como mostrado na tela.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Traz o texto de um rótulo, como mostrado na tela. Isto não inclui qualquer
+     underscore interno indicando mnemônicos ou marcação <classname>Pango</classname>.
+    </simpara>
+    <para>
+     Veja também: 
+     <function class="GtkLabel">get_label</function>,
+     <function class="GtkLabel">set_text</function>
+    </para>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtklabel.method.get_use_markup">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>bool <function>get_use_markup</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Retorna se o texto do rótulo é interpretado com marcações Pango.
+   </shortdesc>
+   <desc>
+    <para>
+     Retorna se o texto do rótulo é interpretado com marcações Pango.
+    </para>
+    <para>
+     Veja também: 
+     <function class="GtkLabel">set_use_markup</function>
+    </para>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtklabel.method.get_use_underline">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>bool <function>get_use_underline</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Retorna se um underscore interno indica algum mnemônico.
+   </shortdesc>
+   <desc>
+    <para>
+    Retorna se um underscore interno indica algum mnemônico.
+    </para>
+    <para>
+     Veja também: 
+     <function class="GtkLabel">set_use_underline</function>
+    </para>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtklabel.method.get_width_chars">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>int <function>get_width_chars</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+				Recupera a largura do rótulo em caracteres.
+   </shortdesc>
+   <desc>
+    <para>
+					Recupera a largura do rótulo em caracteres.
+    </para>
+    <para>
+     Veja também: 
+     <function class="GtkLabel">set_width_chars</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtklabel.method.parse_uline">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>int <function>parse_uline</function></funcdef>
+     <paramdef>string <parameter>string</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+				OBSOLETO. Procura por underscores na string e converte o caractere seguinte ao underscore
+				em um mnemônico.
+   </shortdesc>
+   <desc>
+    <para>
+     <link linkend="appendix.glossary.d.deprecated">OBSOLETO</link>.
+					Procura por underscores e converte a letra seguinte ao underscore em um mnemônico.
+					O último caractere que estiver com o underscore terá um acelerador retornado (ex.
+					"_File" retornará o atalho "f"). Isto provavelmente usado na própria biblioteca Gtk+
+					para item de menu.
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtklabel.method.select_region">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>select_region</function></funcdef>
+     <paramdef>int <parameter>start_offset</parameter></paramdef>
+     <paramdef>int <parameter>end_offset</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+				Seleciona um intevalo de caracteres no rótulo, se este for selecionável.
+   </shortdesc>
+   <desc>
+    <para>
+					Seleciona um intevalo de caracteres no rótulo, se este for selecionável.
+					Se o rótulo não é selecionável, esta função não terá efeito. Se
+     <parameter>start_offset</parameter> ou
+					<parameter>end_offset</parameter> é <literal>-1</literal>, então o final do rótulo
+					será substituído.
+    </para>
+    <para>
+     <example>
+      <title>Selecionando uma região de um GtkLabel</title>
+      <programlisting role="php">
+       <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+                  href="&directory.examples;/reference/gtk/gtklabel/select_region.phpw" parse="text">
+        <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+       </xi:include>
+      </programlisting>
+     </example>
+					Este exemplo produz a seguinte janela:
+     <graphic fileref="&directory.images;/reference/gtk/gtklabel/select_region.png" />
+    </para>
+    <para>
+     Veja também:
+     <function class="GtkLabel">set_selectable</function>,
+     <function class="GtkLabel">get_selectable</function>,
+     <function class="GtkLabel">get_selection_bounds</function>,
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtklabel.method.set">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set</function></funcdef>
+     <paramdef>string <parameter>str</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    OBSOLETO. Atalho para <function class="GtkLabel">set_text</function>.
+   </shortdesc>
+   <desc>
+    <para>
+     <link linkend="appendix.glossary.d.deprecated">OBSOLETO</link>.
+     Atalho para <function class="GtkLabel">set_text</function>.
+					Apenas para manter compatibilidade.
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtklabel.method.set_angle">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_angle</function></funcdef>
+     <paramdef>int <parameter>angle</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+				Define o ângulo de rotação para o rótulo.
+   </shortdesc>
+   <desc>
+    <para>
+					Define o ângulo de rotação para o rótulo (0-359).
+					Um ângulo de 90 é lido de baixo para cima, 270, de cima para baixo. A configuração do
+					ângulo para o rótulo é ignorada se o rótulo é selecionável possui quebra de linha
+					ou está abreviado.
+    </para>
+    <para>
+     <example>
+      <title>Pegando e definindo um ângulo para um GtkLabel</title>
+      <programlisting role="php">
+       <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+                  href="&directory.examples;/reference/gtk/gtklabel/get_set_angle.phpw" parse="text">
+        <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+       </xi:include>
+      </programlisting>
+     </example>
+					Este exemplo produz a seguinte janela:
+     <graphic fileref="&directory.images;/reference/gtk/gtklabel/set_angle.png" />
+    </para>
+    <para>
+     Veja também: 
+     <function class="GtkLabel">get_angle</function>
+    </para>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtklabel.method.set_attributes">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_attributes</function></funcdef>
+     <paramdef>
+      <classname>PangoAttrList</classname> <parameter>list</parameter>
+     </paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+				Define uma lista de atributos Pago para o rótulo.
+   </shortdesc>
+   <desc>
+    <para>
+					Define os atributos Pango definido por
+     <parameter>list</parameter> para o rótulo. Os atributos definidos por
+     <parameter>list</parameter> serão ignorados se
+     <propname class="GtkLabel">use_underline</propname> ou
+     <propname class="GtkLabel">user_markup</propname> for
+     <literal>true</literal>.
+    </para>
+    <para>
+     <example>
+      <title>Definido uma lista de atributos Pango para um GtkLabel</title>
+      <programlisting role="php">
+       <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+                  href="&directory.examples;/reference/gtk/gtklabel/set_attributes.phpw" parse="text">
+        <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+       </xi:include>
+      </programlisting>
+     </example>
+    </para>
+    <para>
+     Veja também: 
+     <function class="GtkLabel">get_attributes</function>
+    </para>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtklabel.method.set_ellipsize">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_ellipsize</function></funcdef>
+     <paramdef>
+      <enumname>PangoEllipsizeMode</enumname>
+      <parameter>ellipsizationmode</parameter>
+     </paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+				Define um modo de abreviação para tornar o rótulo ajustável ao tamanho.
+   </shortdesc>
+   <desc>
+    <para>
+					Define um modo de abreviação para tornar o rótulo ajustável ao tamanho.
+					No processo de abreviação, caracteres são removidos do texto de modo que
+					faça o rótulo se ajustar ao tamanho definido e são substituídos por pontos.
+    </para>
+    <para>
+					Se uma janela possui <literal>100px</literal> de largura, e o texto no
+					<classname>GtkLabel</classname> precisa de <literal>200px</literal> de espaço,
+					a janela é redimensionada para ajustar o rótulo (com
+     <optionname enum="PangoEllipsizeMode">Pango::ELLIPSIZE_NONE</optionname>).
+     Os modos <optionname
+     enum="PangoEllipsizeMode">Pango::ELLIPSIZE_START</optionname>,
+     <optionname enum="PangoEllipsizeMode">Pango::ELLIPSIZE_MIDDLE</optionname>
+     e <optionname enum="PangoEllipsizeMode">Pango::ELLIPSIZE_END</optionname>
+					substituem uma porção do texto no começo, meio ou fim com a abreviação
+					(<literal>...</literal>) para tornar a largura necessária menor e manter
+					o tamanho original da janela em <literal>100px</literal>.
+    </para>
+    <para>
+     <example>
+      <title>Definindo o modo de abreviação de um GtkLabel</title>
+      <programlisting role="php">
+       <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+                  href="&directory.examples;/reference/gtk/gtklabel/set_ellipsize.phpw" parse="text">
+        <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+       </xi:include>
+      </programlisting>
+     </example>
+					Este example produzirá a seguinte janela:
+     <graphic fileref="&directory.images;/reference/gtk/gtklabel/set_ellipsize.png" /> 
+    </para>
+    <para>
+     Veja também: 
+     <function class="GtkLabel">get_ellipsize</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtklabel.method.set_justify">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_justify</function></funcdef>
+     <paramdef>
+      <enumname>GtkJustification</enumname> <parameter>jtype</parameter>
+     </paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+				Define o alinhamento das linhas no texto do rótulo, uma relativa à outra.
+   </shortdesc>
+   <desc>
+    <para>
+					Define o alinhamento das linhas no texto do rótulo, uma relativa à outra.
+     <optionname enum="GtkJustification">Gtk::JUSTIFY_LEFT</optionname>
+					é o padrão quando o widget é criado.
+    </para>
+    <para>
+					Se você quer definir um alinhamento como um todo, use 
+     <function class="GtkMisc">set_alignment</function> no lugar. 
+     Isto <emphasis>não tem efeito</emphasis> em rótulos com uma
+     <emphasis>única linha</emphasis>.
+    </para>
+    <para>
+     <example>
+      <title>Definindo o modo de alinhamento de um GtkLabel</title>
+      <programlisting role="php">
+       <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+                  href="&directory.examples;/reference/gtk/gtklabel/set_justify.phpw" parse="text">
+        <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+       </xi:include>
+      </programlisting>
+     </example>
+						Este exemplo produzirá a seguinte janela:
+     <graphic fileref="&directory.images;/reference/gtk/gtklabel/set_justify.png" /> 
+    </para>
+    <para>
+     Veja também: 
+     <function class="GtkLabel">get_justify</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtklabel.method.set_label">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_label</function></funcdef>
+     <paramdef>string <parameter>str</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+				Define o texto do rótulo incluindo marcação Pango.
+   </shortdesc>
+   <desc>
+    <para>
+					Define o texto do rótulo.
+					O rótulo é interpretado incluindo underscores e/ou marcação Pango dependendo
+					dos valores de <function class="GtkLabel">set_use_underline</function> e
+					<function class="GtkLabel">set_use_markup</function>
+    </para>
+    <para>
+					Por padrão, <propname class="GtkLabel">use_markup</propname> não é ativado
+     - você terá que ativá-lo antes para a marcação ser interpretada.
+    </para>
+    <para>
+     <example>
+      <title>Definindo o texto de um GtkLabel com marcações Pango</title>
+      <programlisting role="php">
+       <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+                  href="&directory.examples;/reference/gtk/gtklabel/set_label.phpw" parse="text">
+        <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+       </xi:include>
+      </programlisting>
+     </example>
+    </para>
+    <para>
+     Veja também: 
+     <function class="GtkLabel">get_label</function>,
+     <function class="GtkLabel">set_text</function>,
+     <function class="GtkLabel">set_markup</function>
+    </para>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtklabel.method.set_line_wrap">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_line_wrap</function></funcdef>
+     <paramdef>bool <parameter>wrap</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+				Ativa a quebra de linha no GtkLabel.
+   </shortdesc>
+   <desc>
+    <para>
+					Ativa a quebra de linha no GtkLabel.
+					<literal>true</literal> faz com que a linha quebre caso o texto exceda
+					o tamanho do widget. <literal>false</literal> faz com que o texto seja cortado
+					se exceder o tamanho do widget.
+    </para>
+    <para>
+     <example>
+      <title>Permitindo que o GtkLabel quebre as linhas</title>
+      <programlisting role="php">
+       <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+                  href="&directory.examples;/reference/gtk/gtklabel/set_line_wrap.phpw" parse="text">
+        <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+       </xi:include>
+      </programlisting>
+     </example>
+					Este produzirá produzirá a janela abaixo.
+     <graphic fileref="&directory.images;/reference/gtk/gtklabel/set_line_wrap.png" /> 
+    </para>
+    <para>
+     Veja também: 
+     <function class="GtkLabel">get_line_wrap</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtklabel.method.set_markup">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_markup</function></funcdef>
+     <paramdef>string <parameter>str</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+				Define o rótulo com uma string formatada pelo Pango.
+   </shortdesc>
+   <desc>
+    <para>
+					Interpreta <parameter>str</parameter> com a formatação Pango e define o rótulo
+					com os resultados da interpretação.
+    </para>
+    <para>
+     <example>
+      <title>Definindo o GtkLabel com formatação Pango</title>
+      <programlisting role="php">
+       <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+                  href="&directory.examples;/reference/gtk/gtklabel/set_markup.phpw" parse="text">
+        <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+       </xi:include>
+      </programlisting>
+     </example>
+					Este código produzirá a janela abaixo.
+     <graphic fileref="&directory.images;/reference/gtk/gtklabel/set_markup.png" /> 
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtklabel.method.set_markup_with_mnemonic">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_markup_with_mnemonic</function></funcdef>
+     <paramdef>string <parameter>str</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+				Define o rótulo de texto e o mnemônico com uma string formatada pelo Pango.
+   </shortdesc>
+   <desc>
+    <para>
+					Interpreta <parameter>str</parameter> com a linguagem de formatação Pango, 
+					definindo o rótulo com o resultado da interpretação. Se algum caractere
+					em <parameter>str</parameter> é precedido por um underscore (<literal>_</literal>),
+					ele é sublinhado indicando que representa um <link linkend="appendix.glossary.a.accelerator">
+					acelerador</link> no teclado, chamado <link linkend="appendix.glossary.m.mnemonic">
+					mnemônico</link>.
+    </para>
+    <para>
+     <example>
+      <title>Definindo o GtkLabel com uma string formatada pelo Pango e um mnemônico</title>
+      <programlisting role="php">
+       <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+                  href="&directory.examples;/reference/gtk/gtklabel/set_markup_with_mnemonic.phpw" parse="text">
+        <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+       </xi:include>
+      </programlisting>
+     </example>
+					Este código produzirá a janela abaixo.
+     <graphic fileref="&directory.images;/reference/gtk/gtklabel/set_markup_with_mnemonic.png" />
+    </para>
+    <para>
+					A tecla menomônica pode ser utilizada para ativar outro widget,
+					escolhido automaticamente, ou explicitamente usando
+     <function class="GtkLabel">set_mnemonic_widget</function>.
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtklabel.method.set_max_width_chars">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_max_width_chars</function></funcdef>
+     <paramdef>int <parameter>n_chars</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+				Define a largura máxima desejada em caracteres.
+   </shortdesc>
+   <desc>
+    <para>
+				Define a largura máxima desejada em 
+     <parameter>n_chars</parameter> caracteres.
+    </para>
+    <para>
+     <example>
+      <title>Definindo a largura máxima do GtkLabel em caracteres</title>
+      <programlisting role="php">
+       <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+                  href="&directory.examples;/reference/gtk/gtklabel/set_max_width_chars.phpw" parse="text">
+        <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+       </xi:include>
+      </programlisting>
+     </example>
+					Este código produzirá a janela exibida abaixo. Note que apenas os 10 primeiros caracteres
+					no rótulo são mostrados.
+     <graphic fileref="&directory.images;/reference/gtk/gtklabel/set_max_width_chars.png" />
+    </para>
+    <para>
+     Veja também: 
+     <function class="GtkLabel">get_max_width_chars</function>
+    </para>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtklabel.method.set_mnemonic_widget">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_mnemonic_widget</function></funcdef>
+     <paramdef>GtkWidget <parameter>widget</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+				Define o widget que será ativado se o usuário pressionar o acelerador do rótulo.
+   </shortdesc>
+   <desc>
+    <para>
+					Se o rótulo foi definido e possui um mnemônico (usando 
+     <function class="GtkLabel">set_markup_with_mnemonic</function>,
+     <function class="GtkLabel">set_text_with_mnemonic</function> ou
+					o construtor) o rótulo pode ser associado à um widget que é o alvo
+					do mnemônico. Quando o rótulo está dentro de um widget (como um <classname>
+					GtkButton</classname> ou uma aba de um <classname>GtkNotebook</classname>)
+					é automaticamente associado com o widget correto, mas algumas vezes (por exmplo,
+					quando o alvo é um <classname>GtkEntry</classname> proximo ao rótulo) você deve definí-lo
+					explicitament usando este método.
+    </para>
+    <para>
+					O widget alvo será stivado emitindo um <signalname 
+     class="GtkWidget">mnemonic_activate</signalname> nele. O manipulador padrão
+					para este sinal ativará o widget se não houver colisão de mnemônicos ou colocará o
+					foco entre os widgets caso haja.
+    </para>
+    <para>
+     <example>
+      <title>Definindo o widget para o mnemônico de um GtkLabel</title>
+      <programlisting role="php">
+       <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+                  href="&directory.examples;/reference/gtk/gtklabel/set_mnemonic_widget.phpw" parse="text">
+        <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+       </xi:include>
+      </programlisting>
+     </example>
+					Este código produzirá a janela exibida abaixo. Se o botão for clicado
+					nada acontecerá. Entretanto, se o usuário teclar <literal>Alt+e</literal>
+					o <link linkend="appendix.glossary.c.callback">callback</link>
+					<literal>buttonActivated</literal> será chamado.
+     <graphic fileref="&directory.images;/reference/gtk/gtklabel/set_mnemonic_widget.png" />
+    </para>
+    <para>
+     Veja também: 
+     <function class="GtkLabel">get_mnemonic_widget</function>
+    </para>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtklabel.method.set_pattern">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_pattern</function></funcdef>
+     <paramdef>string <parameter>pattern</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+				O padrão de underscores que você deseja colocar dentro do rótulo.
+   </shortdesc>
+   <desc>
+    <para>
+					O padrão de underscores que você deseja colocar no texto dentro do rótulo.
+    </para>
+    <para>
+					Por exemplo, se o texto atual de um rótulo diz "FooBarBaz",
+					passando um padrão de "<literal><![CDATA[___   ___]]></literal>" 
+					irá sublinhar "Foo" e "Baz", mas não "Bar".
+    </para>
+    <para>
+     <example>
+      <title>Definindo o padrão de um GtkLabel</title>
+      <programlisting role="php">
+       <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+                  href="&directory.examples;/reference/gtk/gtklabel/set_pattern.phpw" parse="text">
+        <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+       </xi:include>
+      </programlisting>
+     </example>
+					Este código produzirá a janela abaixo.
+     <graphic fileref="&directory.images;/reference/gtk/gtklabel/set_pattern.png" />
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtklabel.method.set_selectable">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_selectable</function></funcdef>
+     <paramdef>bool <parameter>setting</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+				Define se o texto do rótulo é selecionável ou não.
+   </shortdesc>
+   <desc>
+    <para>
+					Rótulos selecionáveis permitem ao usuário selecionar o texto para cópia.
+					Com este método você pode habilitar ou desabilitar este recurso.
+    </para>
+    <para>
+     Veja também: 
+     <function class="GtkLabel">get_selectable</function>
+    </para>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtklabel.method.set_single_line_mode">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_single_line_mode</function></funcdef>
+     <paramdef>bool <parameter>single_line_mode</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+				Define se o rótulo será contido em uma única linha. 
+   </shortdesc>
+   <desc>
+    <para>
+					Define se o rótulo será contido em um aúnica linha. Se for, o texto não será 
+					quebrado em múltiplas linhas.
+    </para>
+    <para>
+     Veja também: 
+     <function class="GtkLabel">get_single_line_mode</function>
+    </para>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtklabel.method.set_text">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_text</function></funcdef>
+     <paramdef>string <parameter>str</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+				Define o texto do rótulo.
+   </shortdesc>
+   <desc>
+    <para>
+					Define qual será o texto dentro do rótulo. Isto sobrescreve qualquer texto
+					anterior. Formatação Pango não será usada; se você precisa utilizar alguma
+					formatação, use <function class="GtkLabel">set_markup</function> para isso.
+    </para>
+    <para>
+					Isto também irá eliminar qualquer mnemônico definido anteriormente.
+    </para>
+    <para>
+     <example>
+      <title>Definindo o texto de um GtkLabel</title>
+      <programlisting role="php">
+       <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+                  href="&directory.examples;/reference/gtk/gtklabel/set_text.phpw" parse="text">
+        <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+       </xi:include>
+      </programlisting>
+     </example>
+    </para>
+    <para>
+     Veja também: 
+     <function class="GtkLabel">get_text</function>,
+     <function class="GtkLabel">set_text_with_mnemonic</function>,
+     <function class="GtkLabel">set_label</function>,
+     <function class="GtkLabel">set_markup</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtklabel.method.set_text_with_mnemonic">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_text_with_mnemonic</function></funcdef>
+     <paramdef>string <parameter>str</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+				Define o texto do rótulo e seu mnemônico.
+   </shortdesc>
+   <desc>
+    <para>
+					Define se o texto do rótulo a partir da string <parameter>str</parameter>.
+					Se um caractere em <parameter>str</parameter> for precedido por um underscore,
+					o caractere seguinte será sublinhado indicando um aceledador no teclado, 
+     chamado <link linkend="appendix.glossary.m.mnemonic">mnemônico</link>.
+    </para>
+    <para>
+					A tecla mnemônica pode ser usada para ativar outro widget,
+					escolhido automaticamente, ou explicitamente usando 
+     <function class="GtkLabel">set_mnemonic_widget</function>.
+    </para>
+    <para>
+     <example>
+      <title>Definindo o texto de um GtkLabel com um mnemônico</title>
+      <programlisting role="php">
+       <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+                  href="&directory.examples;/reference/gtk/gtklabel/set_text_with_mnemonic.phpw" parse="text">
+        <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+       </xi:include>
+      </programlisting>
+     </example>
+    </para>
+    <para>
+     Veja também: 
+     <function class="GtkLabel">set_text</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtklabel.method.set_use_markup">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_use_markup</function></funcdef>
+     <paramdef>bool <parameter>setting</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+				Define se o texto do rótulo contém formatação Pango.
+   </shortdesc>
+   <desc>
+    <para>
+					Define se o texto do rótulo contém formatação Pango.
+    </para>
+    <para>
+     Veja também:
+     <function class="GtkLabel">get_use_markup</function>,
+     <function class="GtkLabel">set_markup</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtklabel.method.set_use_underline">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_use_underline</function></funcdef>
+     <paramdef>bool <parameter>setting</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+				Define se um underscore será usado para indicar um acelerador mnemônico.
+   </shortdesc>
+   <desc>
+    <para>
+					Se <literal>true</literal>, um underscore no texto indicará que o caractere
+					sublinhado será usado como um acelerador mnemônico.
+    </para>
+    <para>
+     Veja também: 
+     <function class="GtkLabel">get_use_underline</function>,
+     <function class="GtkLabel">set_text_with_mnemonic</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtklabel.method.set_width_chars">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_width_chars</function></funcdef>
+     <paramdef>int <parameter>n_chars</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+				Define a largura desejada do rótulo em caracteres.
+   </shortdesc>
+   <desc>
+    <para>
+					Define a largura desejada do rótulo em caracteres.
+    </para>
+    <para>
+     Veja também: 
+     <function class="GtkLabel">get_width_chars</function>,
+     <function class="GtkLabel">set_max_width_chars</function>
+    </para>
+   </desc>
+  </method>
+
+ </methods>
+
+ <properties>
+
+  <prop id="gtk.gtklabel.property.angle" type="rw">
+   <propname>angle</propname>
+   <proptype>float</proptype>
+   <shortdesc>
+				O ângulo de exibição do rótulo.
+   </shortdesc>
+   <desc>
+    <para>
+					O ângulo de exibição do rótulo.
+    </para>
+    <para>
+					Esta propriedade é ignorada se o texto for selecionável, possuir quebra de linha
+					ou for abreviado.
+    </para>
+    <para>
+					O padrão é <literal>0</literal>.
+    </para>
+    <para>
+     Veja também:
+     <function class="GtkLabel">set_angle</function>
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtklabel.property.attributes" type="rw">
+   <propname>attributes</propname>
+   <proptype><classname>PangoAttrList</classname></proptype>
+   <shortdesc>
+				Uma lista de atributos Pango aplicados ao rótulo.
+   </shortdesc>
+   <desc>
+    <para>
+					Uma lista de atributos Pango aplicados ao rótulo.
+    </para>
+    <para>
+     O padrão é <literal>null</literal>.
+    </para>
+    <para>
+     Veja também:
+     <function class="GtkLabel">set_attributes</function>
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtklabel.property.cursor_position" type="ro">
+   <propname>curosr-position</propname>
+   <proptype>int</proptype>
+   <shortdesc>
+				A atual posição do cursor.
+   </shortdesc>
+   <desc>
+    <para>
+					A atual posição do cursor.
+    </para>
+    <para>
+     O padrão é <literal>0</literal>.
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtklabel.property.ellipsize" type="rw">
+   <propname>ellipsize</propname>
+   <proptype><enumname>PangoEllipsizeMode</enumname></proptype>
+   <shortdesc>
+				O modo de abraviação do rótulo.
+   </shortdesc>
+   <desc>
+    <para>
+					O modo de abraviação do rótulo.
+    </para>
+    <para>
+     O padrão é <optionname
+     enum="PangoEllipsizeMode">Pango::ELLIPSIZE_NONE</optionname>.
+    </para>
+    <para>
+     Veja também:
+     <function class="GtkLabel">set_ellipsize</function>
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtklabel.property.justify" type="rw">
+   <propname>justify</propname>
+   <proptype><enumname>GtkJustification</enumname></proptype>
+   <shortdesc>
+				O modo de justificação do rótulo.
+   </shortdesc>
+   <desc>
+    <para>
+					O modo de justificação do rótulo.
+    </para>
+    <para>
+					O modo de justificação refere-se ao alinhamento das linhas dentro do
+					rótulo, relativas umas às outras. Isto não se refere ao alinhamento
+					de seu parent ou outros widgets.
+    </para>
+    <para>
+     O padrão é <optionname
+     enum="GtkJustification">Gtk::JUSTIFY_LEFT</optionname>.
+    </para>
+    <para>
+     Veja também:
+     <function class="GtkLabel">set_justify</function>,
+     <function class="GtkMisc">set_alignment</function>
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtklabel.property.label" type="rw">
+   <propname>label</propname>
+   <proptype>string</proptype>
+   <shortdesc>
+				O texto que será exibido pelo rotulo.
+   </shortdesc>
+   <desc>
+    <para>
+					O texto que será exibido pelo rotulo.
+    </para>
+    <para>
+     O padrão é <literal>null</literal>.
+    </para>
+    <para>
+     Veja também:
+     <function class="GtkLabel">set_text</function>
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtklabel.property.max_width_chars" type="rw">
+   <propname>max-width-chars</propname>
+   <proptype>int</proptype>
+   <shortdesc>
+				A largura máxima do widget em caracters.
+   </shortdesc>
+   <desc>
+    <para>
+					A largura máxima desejada do widget em caracters.
+    </para>
+    <para>
+					Se esta propriedade for definida para <literal>-1</literal>, a largura será
+					calculada automaticamente, caso contrário o rótulo alocará não mais que
+					o número de caracteres necessários. Se a propriedade <propname class="GtkLabel">
+					width-chars</propname> for definida para um valor positivo, então esta propriedade 
+					será ignorada.
+    </para>
+    <para>
+     O padrão é <literal>-1</literal>.
+    </para>
+    <para>
+     Veja também:
+     <function class="GtkLabel">set_max_width_chars</function>
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtklabel.property.mnemonic_keyval" type="ro">
+   <propname>mnemonic-keyval</propname>
+   <proptype>int</proptype>
+   <shortdesc>
+				O acelerador mnemônico para este rótulo.
+   </shortdesc>
+   <desc>
+    <para>
+					O acelerador mnemônico para este rótulo.
+    </para>
+    <para>
+     O padrão é <literal>16777215</literal>.
+    </para>
+    <para>
+     Veja também:
+     <function class="GtkLabel">set_text_with_mnemonic</function>
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtklabel.property.mnemonic_widget" type="rw">
+   <propname>mnemonic-widget</propname>
+   <proptype><classname>GtkWidget</classname></proptype>
+   <shortdesc>
+				O widget que será ativado quando a tecla mnemônica for pressionada.
+   </shortdesc>
+   <desc>
+    <para>
+					O widget que será ativado quando a tecla mnemônica for pressionada.
+    </para> <para>
+     Veja também:
+     <function class="GtkLabel">set_mnemonic_widget</function>
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtklabel.property.pattern" type="wo">
+   <propname>pattern</propname>
+   <proptype>string</proptype>
+   <shortdesc>
+				Uma string de caracteres '_' indicando quais caracteres no rótulo serão 
+				sublinhados.
+   </shortdesc>
+   <desc>
+    <para>
+					Uma string de caracteres <literal>_</literal> indicando quais caracteres 
+					no rótulo serão sublinhados.
+    </para>
+    <para>
+     O padrão é <literal>null</literal>.
+    </para>
+    <para>
+     Veja também:
+     <function class="GtkLabel">set_pattern</function>
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtklabel.property.selectable" type="rw">
+   <propname>selectable</propname>
+   <proptype>boolean</proptype>
+   <shortdesc>
+				Indica se o texto do rotulo é selecionável ou não.
+   </shortdesc>
+   <desc>
+    <para>
+					Indica se o texto do rotulo é selecionável ou não. Um texto selecionável pode ser 
+					copiado para a área de transferência.
+    </para>
+    <para>
+     O padrão é <literal>false</literal>.
+    </para>
+    <para>
+     Veja também:
+     <function class="GtkLabel">set_selectable</function>
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtklabel.property.selection_bound" type="ro">
+   <propname>selection-bound</propname>
+   <proptype>int</proptype>
+   <shortdesc>
+				A posição da borda de seleção.
+   </shortdesc>
+   <desc>
+    <para>
+					A posição da borda de seleção.
+    </para>
+    <para>
+					A borda de seleção é o final da região selecionada que não é o cursor.
+					Por exemplo, se os caracteres <literal>PHP-GTK</literal> foram selecionados
+					da esquerda para a direita, o cursor estará após o <literal>K</literal> e
+					<propname class="GtkLabel">selection-bound</propname> estará antes do primeiro
+					<literal>P</literal>. Neste caso, se a região selecionada representa todo o texto
+					do rótulo, <propname class="GtkLabel">selection-bound</propname> será
+     <literal>0</literal>.
+    </para>
+    <para>
+     O padrão é <literal>0</literal>.
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtklabel.property.single_line_mode" type="rw">
+   <propname>single-line-mode</propname>
+   <proptype>boolean</proptype>
+   <shortdesc>
+				Se o texto estará contido em uma linha única ou não.
+   </shortdesc>
+   <desc>
+    <para>
+					Se o texto está em linha única ou não. Em linha única, a altura
+					do rótulo não depende do texto, ela é sempre definida com a altura da fonte.
+    </para>
+    <para>
+     O padrão é <literal>false</literal>.
+    </para>
+    <para>
+     Veja também:
+     <function class="GtkLabel">set_single_line_mode</function>
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtklabel.property.use_markup" type="rw">
+   <propname>use_markup</propname>
+   <proptype>boolean</proptype>
+   <shortdesc>
+				Se o rótulo deve usar formatação Pango.
+   </shortdesc>
+   <desc>
+    <para>
+					Se o rótulo deve ou não usar formatação Pango. Se esta propriedade for
+					<literal>true</literal>, o rótulo será formatado com Pango. Se for 
+					<literal>false</literal>, qualquer formatação Pango será exibida literalmente.
+    </para>
+    <para>
+     O padrão é <literal>false</literal>.
+    </para>
+    <para>
+     Veja também:
+     <function class="GtkLabel">set_use_markup</function>
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtklabel.property.use_underline" type="rw">
+   <propname>use_underline</propname>
+   <proptype>boolean</proptype>
+   <shortdesc>
+				Se o rótulo contém ou não um undescore para o mnemônico.
+   </shortdesc>
+   <desc>
+    <para>
+					Se o rótulo contém ou não um undescore para o mnemônico. Se esta propriedade
+					for <literal>true</literal>, qualquer underscore no rótulo será tratado como
+					um identificador mnemônico. Se esta propriedade for <literal>false</literal>
+					qualquer unsderscore será exibido literalmente no rótulo.
+    </para>
+    <para>
+					Se um rótulo possuir dois underscores e 
+     <propname class="GtkLabel">user_underline</propname> é
+					<literal>true</literal>, ambos underscores serão exibidos, mas apenas
+					o segundo funcionará como um mnemônico.
+    </para>
+    <para>
+     O padrão é false <literal>false</literal>.
+    </para>
+    <para>
+     Veja também:
+     <function class="GtkLabel">set_use_underline</function>
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtklabel.property.width_chars" type="rw">
+   <propname>width-chars</propname>
+   <proptype>int</proptype>
+   <shortdesc>
+				A largura do widget em caracteres.
+   </shortdesc>
+   <desc>
+    <para>
+					A alrgura de exibição do widget em caracteres. O padrão para esta propriedade
+					é <literal>-1</literal>, o que significa que a largura será calculada 
+					automaticamente. Se o valor não for <literal>-1</literal>, o valor requisitado será
+					maior, igual a <literal>3</literal> ou o valor de <propname class="GtkLabel">width-chars</propname>.
+    </para>
+    <para>
+					Se este valor não for <literal>-1</literal>, o valor de
+     <propname class="GtkLabel">max-width-chars</propname> será ignorado.
+    </para>
+    <para>
+     Veja também:
+     <function class="GtkLabel">set_width_chars</function>
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtklabel.property.wrap" type="rw">
+   <propname>wrap</propname>
+   <proptype>boolean</proptype>
+   <shortdesc>
+				Se uma string extensa vai ou não ser quebrada para uma próxima linha.
+   </shortdesc>
+   <desc>
+    <para>
+					Se uma string extensa vai ou não ser quebrada para uma próxima linha.
+					<literal>true</literal> significa que o texto irá para uma próxima linha
+					se necessário. <literal>false</literal> significa que o texto aparecerá
+					em uma única linha, mesmo que seja maior que seu parent.
+    </para>
+    <para>
+					O padrão é <literal>false</literal>.
+    </para>
+    <para>
+     Veja também:
+     <function class="GtkLabel">set_line_wrap</function>
+    </para>
+   </desc>
+  </prop>
+
+ </properties>
+
+ <signals>
+
+  <signal id="gtk.gtklabel.signal.copy-clipboard">
+   <signalname>copy-clipboard</signalname>
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
+     <paramdef>
+      <classname>GtkLabel</classname> <parameter>label</parameter>
+     </paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+				Emitido quando o texto rótulo é totalmente ou parcialmente copiado para a 
+				área de transferência.
+   </shortdesc>
+   <desc>
+    <para>
+					Emitido quando o texto rótulo é totalmente ou parcialmente copiado para a 
+					área de transferência. O texto é normalmente copiado quando o usuário seleciona
+					uma região do texto e o copia usando <literal>CTRL+C</literal> ou clicando com o 
+					botão da direita através do menu de contexto.
+    </para>
+    <para>
+					Quando este sinla é emitido, o rótulo o qual o texto foi copiado é passado
+					para o callback.
+    </para>
+    <para>
+					Este sinal não pode ser emitido a menos que o rótulo seja selecionável, passando
+					<literal>true</literal> para <function class="GtkLabel">set_selectable</function>, 
+					pois um texto que não pode ser selecionado não pode ser copiado para a área de transferência.
+    </para>
+   </desc>
+  </signal>
+  
+  <signal id="gtk.gtklabel.signal.move-cursor">
+   <signalname>move-cursor</signalname>
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
+     <paramdef>GtkLabel <parameter>label</parameter></paramdef>
+     <paramdef>
+      <enumname>GtkMovementStep</enumname> <parameter>step</parameter>
+     </paramdef>
+     <paramdef>int <parameter>direction</parameter></paramdef>
+     <paramdef>bool <parameter>selecting</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+				Emitido quando o cursor se move por cima do rótulo.
+   </shortdesc>
+   <desc>
+    <para>
+					Emitido quando o cursor se move por cima do rótulo.
+    </para>
+    <para>
+					Quando este sinal  emitido, quatro argumentos são passados para o callback.
+					Primeiro, o rótulo é passado. Depois, um inteiro, <parameter>step</parameter>, 
+					é passado. Este valor indica o tipo de movimento. Este valor será um
+					<enumname>GtkMovementStep</enumname>. Este valor diz se o cursor se moveu pelos 
+					caracteres, palavras, linhas, etc. O terceiro argumento, <parameter>direction</parameter>,
+					indica a direção na qual o cursor se moveu. Um valor positivo indica que o cursor foi movido
+					para o final do texto. Um valor negativo significa que o cursor foi movido para o início.
+					O último argumento, <parameter>selecting</parameter> é um valor booleano indicando se o texto
+					foi selecionado. Uma região do texto normalmente é selecionada quando o usuário pressiona
+					<literal>shift</literal> enquanto move o cursor.
+    </para>
+    <note>
+					Um valor negativo para <parameter>direction</parameter> não significa necessariamente
+					que o cursor foi movido da direita para a esquerda. Dependendo da direção da linguagem,
+					um valor negativo pode significar que o cursor foi movido da esquerda para a direita.
+    </note>
+    <para>
+					Este sinal não pode ser emitido a menos que o rótulo seja selecionável, passando
+					<literal>true</literal> para <function class="GtkLabel">set_selectable</function>, 
+					pois um texto que não pode ser selecionado não pode ter uma posição do cursor.
+    </para>
+   </desc>
+  </signal>
+  
+  <signal id="gtk.gtklabel.signal.populate-popup">
+   <signalname>populate-popup</signalname>
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
+     <paramdef>GtkLabel <parameter>label</parameter></paramdef>
+     <paramdef>GtkMenu <parameter>popup</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+				Emitido quando um menu de contexto para o rótulo é aberto.
+   </shortdesc>
+   <desc>
+    <para>
+					Emitido quando um menu de contexto para o rótulo é aberto.
+    </para>
+    <para>
+					Um menu de contexto normalmente é aberto quando o usuário clica com o botão da direita
+					em um rótulo selecionável. Quando este sinal é emitido, o menu de contexto é passado para o 
+					callback.
+    </para>
+    <para>
+					Este sinal não pode ser emitido a menos que o rótulo seja selecionável, passando
+					<literal>true</literal> para <function class="GtkLabel">set_selectable</function>, 
+					pois um texto que não pode ser selecionado não pode ter um menu de contexto.
+    </para>
+   </desc>
+  </signal>
+  
+ </signals>
+
+</classentry>
