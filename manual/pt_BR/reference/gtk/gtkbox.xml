@@ -1,0 +1,350 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- EN-Revision: 1.14 Maintainer: fernandoc Status: ready -->
+<classentry id="gtk.gtkbox">
+ <classmeta>
+  <classtitle>GtkBox</classtitle>
+  <classparent>GtkContainer</classparent>
+  <shortdesc>
+   Classe base para conatiners de caixa.
+  </shortdesc>
+  <desc>
+   <para>
+    <classname>GtkBox</classname> é a classe base provendo os containers de 
+    caixa <classname>GtkHBox</classname> e 
+    <classname>GtkVBox</classname> com propriedades e metodos para
+    empacotar qualquer número de widgets filhos.
+   </para>
+   <para>
+    Note que <classname>GtkBox</classname> é uma classe abstrata e não
+    pode ser construída diretamente.
+   </para>
+   <para>
+    Para maiores inormações sobre o empacotamento de widgets
+    veja o <link linkend="tutorials.packing">tutorial de empacotamento</link>.
+   </para>
+  </desc>
+ </classmeta>
+
+ <methods>
+
+  <method id="gtk.gtkbox.method.get_homogeneous">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>bool <function>get_homogeneous</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Quando todos os filhos tem o mesmo tamanho alocado.
+   </shortdesc>
+   <desc>
+    <para>
+     Retorna <literal>true</literal> se é alocado o mesmo tamanho
+     para todos os widgets filhos.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkBox">set_homogeneous</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkbox.method.get_spacing">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>int <function>get_spacing</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Retorna o espaçamento entre os widgets.
+   </shortdesc>
+   <desc>
+    <para>
+     Retorna o tamanho do espaço entre os widgets filhos, em pixels.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkBox">set_spacing</function>
+    </para>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtkbox.method.pack_end">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>pack_end</function></funcdef>
+     <paramdef><classname>GtkWidget</classname> <parameter>child</parameter></paramdef>
+     <paramdef>bool <parameter><optional>expand = true</optional></parameter></paramdef>
+     <paramdef>bool <parameter><optional>fill = true</optional></parameter></paramdef>
+     <paramdef>int <parameter><optional>padding = 0</optional></parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Adiciona um widget na caixa na próxima posição disponível, começando
+    a partir do final
+   </shortdesc>
+   <desc>
+    <simpara>
+     Adiciona <parameter>child</parameter> na caixa comaçando a apartir do final. Veja
+     <function class="GtkBox">pack_start</function> para a 
+     descrição dos parâmetros.
+    </simpara>
+
+    <para>
+     A diferença entre <function class="GtkBox">pack_start</function> e
+     <function class="GtkBox">pack_end</function> pode ser explicada assim:
+     <literal>pack_start</literal> adiciona os widgets no lado esquerdo da caixa,
+     and <literal>pack_end</literal> faz o mesmo, mas do lado direito. 
+     Enquanto mais widgets você adicionar, mais do espaço livre da janela entre os lados
+     será ocupado pelos widgets. Se a caixa estiver cheia, os widgets
+     se encontram no centro.
+    </para>
+
+    <simpara>
+     Os botões na imagem a seguir foram empacotados um após o outro, em
+     ordem numerica: Button 1 primeiro, Button 5 ao final. Você pode ver
+     que eles estão em ordem usando <function class="GtkBox">pack_start</function>,
+     mas mudam de ordem quando é usado <function class="GtkBox">pack_end</function> já
+     que os lugares são colocados a partir do final.
+    </simpara>
+
+    <graphic fileref="&directory.images;/reference/gtk/gtkbox.pack_start_end.png"/>
+
+    <example>
+     <title>pack_start verso pack_end</title>
+     <programlisting role="php">
+      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="&directory.examples;/reference/gtk/gtkbox/start_vs_end.phpw" parse="text">
+       <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+      </xi:include>
+     </programlisting>
+    </example>
+
+
+    <simpara>
+     &seealso;
+     <function class="GtkBox">pack_start</function>
+    </simpara>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkbox.method.pack_start">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>pack_start</function></funcdef>
+     <paramdef><classname>GtkWidget</classname> <parameter>child</parameter></paramdef>
+     <paramdef>bool <parameter><optional>expand = true</optional></parameter></paramdef>
+     <paramdef>bool <parameter><optional>fill = true</optional></parameter></paramdef>
+     <paramdef>int <parameter><optional>padding = 0</optional></parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Adiciona o widget na caixa na próxima poição disponível começando a partir
+    do início.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Adiciona <parameter>child</parameter> na caixa começando a partir do início.
+     Se a caixa for um <classname>GtkVBox</classname>, o
+     <parameter>child</parameter> será adicionado a apartir do topo. Se a caixa
+     for um <classname>GtkHBox</classname> o <parameter>child</parameter>
+     será adicionado a partir da esquerda.
+    </simpara>
+    <simpara>
+     O argumento opcional <parameter>expand</parameter>, controla quando o widget deverá ou não
+     consumir todo o espaço disponível quando o 
+     container e o <parameter>child</parameter> forem exibidos. Consumir todo o espaço
+     disponível não quer dizer que <parameter>child</parameter> será
+     redimencionado para ocupar o container.
+    </simpara>
+    <simpara>
+     &seealso;
+     <function class="GtkBox">pack_end</function>
+    </simpara>
+
+    <example>
+     <title>Os parâmetros expand e fill do GtkBox em ação</title>
+
+     <para>
+      Este exemplo demostra os parâmetros <parameter>expand</parameter> e
+      <parameter>fill</parameter>.
+     </para>
+     <para>
+      No começo dois <classname>GtkLabel</classname> são criados e 
+      <function class="GtkBox">pack_start</function> em uma caixa,
+      o primeiro espandido e o segundo não expandido.
+     </para>
+     <para>
+      O lado direito da janela mostra o parâmetro <parameter>fill</parameter>:
+      Dois botões são adicionados na caixa, ambos expandidos, mas apenas o primeiro com fill,
+      o segundo ocupa a metade do espaço, mas
+      mantém o tamanho ideal para mostrar todo o texto, enquanto
+      o primeiro ocupa todo o espaço para motrar
+     </para>
+
+     <graphic fileref="&directory.images;/reference/gtk/gtkbox.packing.png"/>
+
+     <programlisting role="php">
+      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="&directory.examples;/reference/gtk/gtkbox/packing.phpw" parse="text">
+       <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+      </xi:include>
+     </programlisting>
+    </example>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtkbox.method.reorder_child">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>reorder_child</function></funcdef>
+     <paramdef><classname>GtkWidget</classname> <parameter>child</parameter></paramdef>
+     <paramdef>int <parameter>position</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Move o widget filho para uma certa posição.
+   </shortdesc>
+   <desc>
+    <para>
+     Move a posição de <parameter>child</parameter> para a posição dada
+     como o segundo parâmetro. Isto permite que você mude a 
+     ordem dos widget depois deles terem sido adicionados a caixa.
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkbox.method.set_child_packing">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_child_packing</function></funcdef>
+     <paramdef><classname>GtkWidget</classname> <parameter>child</parameter></paramdef>
+     <paramdef>bool <parameter>expand</parameter></paramdef>
+     <paramdef>bool <parameter>fill</parameter></paramdef>
+     <paramdef>int <parameter>padding</parameter></paramdef>
+     <paramdef><enumname>GtkPackType</enumname> <parameter>pack_type</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+     Define os parãmetros de empacotamento para um filho.
+   </shortdesc>
+   <desc>
+    <para>
+     Muda os parãmetros de empacotamento definidos com 
+     <function class="GtkBox">pack_start</function> ou
+     <function class="GtkBox">pack_end</function>.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkBox">query_child_packing</function>
+     <function class="GtkBox">pack_start</function>
+     <function class="GtkBox">pack_end</function>
+    </para>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtkbox.method.set_homogeneous">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_homogeneous</function></funcdef>
+     <paramdef>bool <parameter>homogeneous</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Muda a definição de todos os filhos terem o mesmo tamanho.
+   </shortdesc>
+   <desc>
+    <para>
+     <function class="GtkBox">set_homogeneous</function> dimensiona todos
+     os widgets filhos do container com o tamanho do maior widget
+     filho se for definida como <literal>true</literal>. A definição
+     padrão é <literal>false</literal>.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkBox">get_homogeneous</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkbox.method.set_spacing">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_spacing</function></funcdef>
+     <paramdef>int <parameter>spacing</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Define o espaçamento entre os filhos.
+   </shortdesc>
+   <desc>
+    <simpara>
+     <function class="GtkBox">set_spacing</function> é usado para definir
+     universalmente o espaço minimo entre os widgets filhos, em pixels.
+    </simpara>
+    <simpara>
+     A definição padrão é <literal>0</literal>.
+    </simpara>
+    <para>
+     &seealso;
+     <function class="GtkBox">get_spacing</function>
+    </para>
+   </desc>
+  </method>
+
+ <method id="gtk.gtkbox.method.pack_end_defaults">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef> <function>pack_end_defaults</function></funcdef>
+      <paramdef><classname>GtkWidget</classname><parameter>widget</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    OBSOLETO: use ao invés <function class="GtkBox">pack_end</function>.
+   </shortdesc>
+  <desc>
+    <para>
+        &deprecated.method;
+    </para>
+   </desc>
+  </method>
+  <method id="gtk.gtkbox.method.pack_start_defaults">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef> <function>pack_start_defaults</function></funcdef>
+      <paramdef><classname>GtkWidget</classname><parameter>widget</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+        OBSOLETO: use ao invés <function class="GtkBox">pack_start</function>.
+   </shortdesc>
+  <desc>
+    <para>
+        &deprecated.method;
+    </para>
+   </desc>
+  </method>
+  </methods>
+
+</classentry>
+<!-- Keep this comment at the end of the file
+Local variables:
+mode: sgml
+sgml-omittag:t
+sgml-shorttag:t
+sgml-minimize-attributes:nil
+sgml-always-quote-attributes:t
+sgml-indent-step:1
+sgml-indent-data:t
+sgml-parent-document:nil
+sgml-default-dtd-file:"../../../manual.ced"
+sgml-exposed-tags:nil
+sgml-local-catalogs:nil
+sgml-local-ecat-files:nil
+End:
+vim600: syn=xml fen fdm=syntax fdl=2 si
+vim: et tw=78 syn=sgml
+vi: ts=1 sw=1
+-->

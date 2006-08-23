@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- EN-Revision: 1.8 Maintainer: fernandoc Status: ready -->
+<classentry id="gtk.gtkcolorbutton">
+ <classmeta>
+  <classtitle>GtkColorButton</classtitle>
+  <classparent>GtkButton</classparent>
+  <classimage fileref="&directory.images;/reference/gtk/gtkcolorbutton.png"/>
+  <shortdesc>
+    Um botão que lança um dialogo de seleção de cores.
+  </shortdesc>
+  <desc>
+   <para>
+    <classname>GtkColorButton</classname> é um botão que realiza duas 
+    funções. Uma é mostrar a cor atualmente selecionada ( ou a cor padrão
+    se nenhiuma cor foi selecionada ainda) e outra é permitir ao usuário
+    lançar um <classname>GtkColorSelectionDialog</classname> para
+    selecionar uma cor. É adequado para ser mostrado aonde você
+    precise que o usuário escolha uma cor para um assunto especifico.
+   </para>
+  </desc>
+ </classmeta>
+
+ <constructors>
+
+  <constructor id="gtk.gtkcolorbutton.constructor">
+   <funcsynopsis>
+    <funcprototype>
+    <funcdef> <function>GtkColorButton</function></funcdef>
+    <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    cria um novo <classname>GtkColorButton</classname>.
+   </shortdesc>
+   <desc>
+    <para>
+     O construtor cria um novo widget que é um botão levemente
+     modificado. O <classname>GtkColorButton</classname> contém uma pequena
+     area de cor indicando a cor atualmente selecionada. Clicando-o fará
+     com que seja lançado um dialogo de seleção de cor, permitindo ao
+     usuário escolher uma cor. A pequena area colorida do botão será atualizada
+     assim que o usuário escolher uma cor.
+    </para>
+   </desc>
+  </constructor>
+ </constructors>
+
+ <methods>
+
+  <method id="gtk.gtkcolorbutton.method.get_alpha">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>int <function>get_alpha</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Retorna o valor atual de alpha.
+   </shortdesc>
+   <desc>
+    <para>
+     Use este metodo para determinar o valor atual de alpha(transparencia) da
+     cor atualmente selecionada.
+    </para>
+    <para>
+     Veja também:
+     <function class="GtkColorButton">set_alpha</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkcolorbutton.method.get_color">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>GdkColor <function>get_color</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Retorna a cor selecionada atualmente.
+   </shortdesc>
+   <desc>
+    <para>
+     Use este metodo para determinar a cor atualmente selecionada pelo usuário.
+    </para>
+    <para>
+     Veja também: 
+     <function class="GtkColorButton">set_color</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkcolorbutton.method.get_title">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>string <function>get_title</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Retorna o titulo do dialogo de seleção de cor.
+   </shortdesc>
+   <desc>
+    <para>
+     Use este metodo para determinar o titulo de
+     <classname>GtkColorSelectionDialog</classname> que será lançado
+     ao clicar em <classname>GtkColorButton</classname>.
+    </para>
+    <para>
+     Veja também: 
+     <function class="GtkColorButton">set_title</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkcolorbutton.method.get_use_alpha">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>bool <function>get_use_alpha</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Determina quando o dialgo de seleção de cores usa o canal
+    alpha ou não.
+   </shortdesc>
+   <desc>
+    <para>
+     Este metodo irá retornar <literal>true</literal> se a consequente
+     <classname>GtkColorSelectionDialog</classname> usa o canal alpha
+     e <literal>false</literal> se não usar.
+    </para>
+    <para>
+     Veja também:
+     <function class="GtkColorButton">set_use_alpha</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkcolorbutton.method.set_alpha">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_alpha</function></funcdef>
+     <paramdef>int <parameter>alpha</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Define o valor atual de alpha.
+   </shortdesc>
+   <desc>
+    <para>
+     Use este metodo para definir a opacidade da cor atualmente selecionada. O
+     valor de alpha deve ser passado como um inteiro entre 0 e 65535.
+    </para>
+    <para>
+     Veja também: 
+     <function class="GtkColorButton">get_alpha</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkcolorbutton.method.set_color">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_color</function></funcdef>
+     <paramdef>GdkColor <parameter>color</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Define a cor atualmente selecionada.
+   </shortdesc>
+   <desc>
+    <para>
+     Use este metodo para definir a cor atualmente selecionada.
+    </para>
+    <para>
+     veja também: 
+     <function class="GtkColorButton">get_color</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkcolorbutton.method.set_title">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_title</function></funcdef>
+     <paramdef>string <parameter>title</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Define o titulo do dialogo de selção de cores.
+   </shortdesc>
+   <desc>
+    <para>
+     Use este metodo para definir o titulo do consequente
+     <classname>GtkColorSelectionDialog</classname>.
+    </para>
+    <para>
+     Veja também: 
+     <function class="GtkColorButton">get_title</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkcolorbutton.method.set_use_alpha">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_use_alpha</function></funcdef>
+     <paramdef>bool <parameter>use_alpha</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Define quando o dialogo de seleção de cores irá usar o canal alpha
+    ou não.
+   </shortdesc>
+   <desc>
+    <para>
+     Use este metodo para definir quando o consequente
+     <classname>GtkColorSelectionDialog</classname> irá usar o canal alpha
+     ou não. Passe <literal>true</literal> se você quiser,
+     <literal>false</literal> se não.
+    </para>
+    <para>
+     Veja também: 
+     <function class="GtkColorButton">get_use_alpha</function>
+    </para>
+   </desc>
+  </method>
+
+ </methods>
+
+ <signals>
+
+  <signal id="gtk.gtkcolorbutton.signal.color-set">
+   <signalname>color-set</signalname>
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
+     <paramdef>GtkColorButton <parameter>colorbutton</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Emitido quando o usuário seleciona uma cor.
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </signal>
+  
+ </signals>
+
+</classentry>

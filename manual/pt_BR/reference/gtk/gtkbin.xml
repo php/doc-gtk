@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- EN-Revision: 1.8 Maintainer: fernandoc Status: ready -->
+<classentry id="gtk.gtkbin">
+ <classmeta>
+  <classtitle>GtkBin</classtitle>
+  <classparent>GtkContainer</classparent>
+  <shortdesc>
+    Um widget que contém apenas um widget filho.
+  </shortdesc>
+  <desc>
+    <para>
+      O widget <classname>GtkBin</classname> é um container que 
+      é capaz de guardar apenas um filho. Não é muito útil por sí,
+      mas é comumente usado ao derivar subclasses, já que provê código necessário 
+      para manipular apenas um widget filho. Todos os widgets derivados de
+      <classname>GtkBin</classname> portanto podem conter apenas um 
+      filho imediato, entretanto, este filho por sí pode conter
+      multiplos widgets.
+    </para>
+    <para>
+      Sendo <classname>GtkBin</classname> uma classe base abstrata, não
+      existe construtor para ela. Entretanto, vários widgets uteis são subclasses
+      de <classname>GtkBin</classname>, incluindo
+      <classname>GtkButton</classname>, <classname>GtkFrame</classname>,
+      <classname>GtkHandleBox</classname> e
+      <classname>GtkWindow</classname>. Você pode usar
+      <function class="GtkBin">get_child</function> para obter
+      o objeto filho.
+    </para>
+  </desc>
+
+ </classmeta>
+
+ <methods>
+
+  <method id="gtk.gtkbin.method.get_child">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef><classname>GtkWidget</classname> <function>get_child</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Retorna o filho de <classname>GtkBin</classname>
+   </shortdesc>
+   <desc>
+    <para>
+     Retorna o filho de <classname>GtkBin</classname>, ou 
+     <literal>null</literal> se o 
+     bin não conter um widget filho.
+    </para>
+    <para>
+     &seealso;
+     <fieldname class="GtkBin">child</fieldname>
+    </para>
+
+   </desc>
+  </method>
+
+ </methods>
+
+ <fields>
+
+  <field id="gtk.gtkbin.field.child" type="ro">
+   <fieldname>child</fieldname>
+   <fieldtype>GtkWidget</fieldtype>
+   <shortdesc>
+    O widget filho.
+   </shortdesc>
+   <desc>
+    <para>
+     Esta propriedade permite o acesso ao widget filho contido pelo objeto 
+     <classname>GtkBin</classname>. Pode ser tradado como qualquer outro
+     <classname>GtkWidget</classname>. Se o valor desta propriedade for
+     <literal>null</literal>, então o objeto GtkBin não contém um widget filho.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkBin">get_child</function>
+    </para>
+   </desc>
+  </field>
+
+ </fields>
+
+</classentry>
