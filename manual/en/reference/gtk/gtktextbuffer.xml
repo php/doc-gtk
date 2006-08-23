@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<!-- $Revision: 1.13 $ -->
+<!-- $Revision: 1.14 $ -->
 <classentry id="gtk.gtktextbuffer">
  <classmeta>
   <classtitle>GtkTextBuffer</classtitle>
@@ -119,13 +119,22 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>apply_tag</function></funcdef>
-     <paramdef>void</paramdef>
+     <paramdef><classname>GtkTextTag</classname> <parameter>tag</parameter></paramdef>
+     <paramdef><classname>GtkTreeIter</classname> <parameter>start</parameter></paramdef>
+     <paramdef><classname>GtkTreeIter</classname> <parameter>end</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Apply a <classname>GtkTextTag</classname> to a range of text.
    </shortdesc>
    <desc>
+    <para>
+    Apply a <classname>GtkTextTag</classname> to the range of text
+    between <parameter>start</parameter> and <parameter>end</parameter>.
+    </para>
+    <para>
+    This method emits the <signalname>apply-tag</signalname> signal.
+    </para>
     <para>
      &seealso;
      <function class="GtkTextBuffer">create_tag</function>, 
@@ -192,7 +201,7 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>copy_clipboard</function></funcdef>
-     <paramdef>GtkClipboard <parameter>clipboard</parameter></paramdef>
+     <paramdef><classname>GtkClipboard</classname> <parameter>clipboard</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -231,13 +240,29 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>GtkTextMark <function>create_mark</function></funcdef>
-     <paramdef>void</paramdef>
+     <paramdef>string <parameter>name</parameter></paramdef>
+     <paramdef><classname>GtkTreeIter</classname> <parameter>location</parameter></paramdef>
+     <paramdef>boolean <parameter>left_gravity</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Creates a mark with the name and position specified by the user.
    </shortdesc>
    <desc>
+    <para>
+    Creates a mark with the name specified by <parameter>name</parameter>
+    at the position specified by <parameter>location</parameter>.
+    If <parameter>name</parameter> is NULL, the mark is anonymous;
+    otherwise, the mark can be retrieved by name using the
+    <function class="GtkTextBuffer">get_mark</function> method.
+    If a mark has <parameter>left_gravity</parameter>, and text
+    is inserted at the mark's current location, the mark will
+    be moved to the left of the newly-inserted text.
+    </para>
+    <para>
+    This method emits the <signalname>mark_set</signalname>
+    signal as notification of the mark's initial placement.
+    </para>
     <para>
      &seealso;
      <function class="GtkTextBuffer">delete_mark</function>, 
@@ -272,7 +297,7 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>cut_clipboard</function></funcdef>
-     <paramdef>GtkClipboard <parameter>clipboard</parameter></paramdef>
+     <paramdef><classname>GtkClipboard</classname> <parameter>clipboard</parameter></paramdef>
      <paramdef>bool <parameter>default_editable</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
@@ -293,14 +318,25 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>delete</function></funcdef>
-     <paramdef>void</paramdef>
+     <paramdef><classname>GtkTreeIter</classname> <parameter>start</parameter></paramdef>
+     <paramdef><classname>GtkTreeIter</classname> <parameter>end</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Deletes the text between the range given by the user.
    </shortdesc>
    <desc>
-
+    <para>
+     Deletes the text between <parameter>start</parameter> and
+     <parameter>end</parameter>.
+    </para>
+    <para>
+     Because the textbuffer is modified, all outstanding
+     iterators become invalid after calling this function.
+    </para>
+    <para>
+     This method emits the <signalname>delete_range</signalname> signal.
+    </para>
    </desc>
   </method>
 
@@ -327,7 +363,7 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>delete_mark</function></funcdef>
-     <paramdef>GtkTextMark <parameter>mark</parameter></paramdef>
+     <paramdef><classname>GtkTextMark</classname> <parameter>mark</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -458,10 +494,11 @@ if (!extension_loaded('php-gtk')) {
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns an iterator pointing at the last position in the text buffer.
    </shortdesc>
    <desc>
-
+    Returns an iterator pointing at the "end iterator" one past
+    the last valid character in the text buffer.
    </desc>
   </method>
 
@@ -648,10 +685,13 @@ if (!extension_loaded('php-gtk')) {
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns an array containing iterators that point
+    at the start and end of the selection.
    </shortdesc>
    <desc>
-
+    Returns an array containing iterators that point
+    at the start and end of the selection, if any.
+    If there is no selection an empty array is returned.
    </desc>
   </method>
 
@@ -678,10 +718,10 @@ if (!extension_loaded('php-gtk')) {
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns an iterator pointing at the location of the first position in the text buffer.
    </shortdesc>
    <desc>
-
+    Returns an iterator pointing at the location of the first position in the text buffer.
    </desc>
   </method>
 
@@ -708,13 +748,24 @@ if (!extension_loaded('php-gtk')) {
    <funcsynopsis>
     <funcprototype>
      <funcdef>string <function>get_text</function></funcdef>
-     <paramdef>void</paramdef>
+     <paramdef><classname>GtkTreeIter</classname> <parameter>start</parameter></paramdef>
+     <paramdef><classname>GtkTreeIter</classname> <parameter>end</parameter></paramdef>
+     <paramdef>boolean <parameter>include_hidden_chars</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the text in the specified range.
    </shortdesc>
    <desc>
+    <para>
+    Returns the text in the specified range [<parameter>start</parameter>,
+    <parameter>end</parameter>). This method does not return characters
+    representing embedded images, so byte and character indexes
+    into the returned string do not correspond to byte and character
+    indexes into the buffer. Text marked with tags that set the
+    invisibility attribute are excluded if <parameter>include_hidden_chars</parameter>
+    is FALSE.
+    </para>
     <para>
      &seealso;
      <function class="GtkTextBuffer">set_text</function>
@@ -747,10 +798,11 @@ if (!extension_loaded('php-gtk')) {
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Inserts the given text in the current cursor position.
    </shortdesc>
    <desc>
-
+    Calls the <function class="GtkTextBuffer">insert</function> method,
+    using the current cursor position as the insertion point.
    </desc>
   </method>
 
@@ -813,14 +865,19 @@ if (!extension_loaded('php-gtk')) {
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>insert_pixbuf</function></funcdef>
-     <paramdef>void</paramdef>
+     <paramdef><classname>GtkTextIter</classname> <parameter>location</parameter></paramdef>
+     <paramdef><classname>GdkPixbuf</classname> <parameter>image</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Inserts an image into the text buffer.
    </shortdesc>
    <desc>
-
+    Inserts an image specified by <parameter>image</parameter>
+    into the text buffer at the location specified by <parameter>location</parameter>.
+    The image will be counted as one character in character counts, and when
+    obtaining the buffer contents as a string, will be represented by the Unicode
+    "object replacement character" 0xFFFC.
    </desc>
   </method>
 
@@ -982,7 +1039,7 @@ if (!extension_loaded('php-gtk')) {
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>remove_selection_clipboard</function></funcdef>
-     <paramdef>GtkClipboard <parameter>clipboard</parameter></paramdef>
+     <paramdef><classname>GtkClipboard</classname> <parameter>clipboard</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -1083,9 +1140,13 @@ if (!extension_loaded('php-gtk')) {
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Replaces the current contents of the textbuffer.
    </shortdesc>
    <desc>
+    <para>
+    Replaces the current contents of the textbuffer with the contents
+    of <parameter>text</parameter>.
+    </para>
     <para>
      &seealso;
      <function class="GtkTextBuffer">get_text</function>
