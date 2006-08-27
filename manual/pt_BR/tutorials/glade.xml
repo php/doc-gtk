@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- EN-Revision: 1.5 Maintainer: fernandoc Status: ready -->
+<chapter id="tutorials.helloglade">
+ <title>Alô Glade!</title>
+
+ <sect1>
+  <title>Sobre este tutorial</title>
+  <para>
+   Este tutorial irá mostrar a você como usar arquivos
+   <literal>.glade</literal> na sua aplicação PHP-Gtk2.
+  </para>
+  <para>
+   Glade2 é um programa para desenho de interface, permitindo a você criar a sua
+   aplicação Gtk2 com apenas o seu mouse sem programação. Os resultados do seu trabalho
+   são salvos em um arquivo <filename>.glade</filename> e pode ser caregado
+   em sua aplicação PHP-Gtk2 facilmente.
+  </para>
+  <simpara>
+   Criando a interface de usuário com o Glade salva muito tempo, especialmente
+   em grandes projetos e também lhe dá a abilidade de dividir o trabalho:
+   A pessoa que faz o design da interface cria a GUI com o ( e não precisa
+   saber nada sobre programação) e você pode se concentrar na programação
+   em vez de se preocupar com tarefas de acessibilidade da GUI.
+  </simpara>
+ </sect1>
+
+
+ <sect1 id="tutorials.helloglade.preparation">
+  <title>Preparação</title>
+  <simpara>
+   Nós iremos concentrar em fazer as coisas com o Glade, não em desenhar
+   uma interface sofisticada. Este é o motivo porque o arquivo
+   <filename>.glade</filename> do exemplo é muito
+   simples; uma janela com um unico botão nela.
+  </simpara>
+  <para>
+   A janela tem o nome (id) <literal>wndClose</literal>, e o botão 
+   recebe o nome <literal>btnClose</literal>.
+  </para>
+  <example>
+   <title>O arquivo .glade de exemplo - helloglade.glade</title>
+   <programlisting role="xml">
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
+     href="&directory.examples;/tutorials/helloglade/helloglade.glade" parse="text">
+     <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+    </xi:include>
+   </programlisting>
+  </example>
+ </sect1>
+
+
+ <sect1 id="tutorials.helloglade.loading">
+  <title>Carregando o arquivo</title>
+
+  <para>
+   A primeira coisa a fazer é carregar o arquivo <filename>.glade</filename>
+   da seção anterior. O construtor <classname>GladeXML</classname>
+   leva o caminho do arquivo como primeiro parâmetro, assim tudo o que precisamos fazer é:
+  </para>
+  <example>
+   <title>Carregando o arquivo .glade</title>
+   <programlisting role="php">
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
+     href="&directory.examples;/tutorials/helloglade/loading.phpw" parse="text">
+     <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+    </xi:include>
+   </programlisting>
+  </example>
+  <para>
+   Ao executar o script, você irá notar que a janela com o botão aparece na
+   sua tela, mas não reage a nada além de fechar a janela.
+   Mesmo assim, a janela é destruída, mas seu script continua a executar
+   - claramente um caso de falta de conexão de sinais.
+  </para>
+
+  <sect2 id="tutorials.helloglade.connecting">
+   <title>Conectando os sinais na mão</title>
+   <para>
+    Proximo, nós iremos conectar os sinais que nós conhecemos: Chamar
+    <function class="GtkObject">connect</function> ou
+    <function class="GtkObject">connect_simple</function> no
+    objeto do widget. Para obter o objeto, use o metodo
+    <function class="GladeXML">get_widget</function> e passe o
+    nome do widget (id) para ele. Então faça o trabalho como de costume:
+   </para>
+   <example>
+    <title>Obtendo e conectando widgets</title>
+    <programlisting role="php">
+     <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
+      href="&directory.examples;/tutorials/helloglade/connecting_by_hand.phpw" parse="text">
+      <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+     </xi:include>
+    </programlisting>
+   </example>
+  </sect2>
+
+  <sect2 id="tutorials.helloglade.autoconnect">
+   <title>Usando o Glade para conectar os sinais</title>
+   <para>
+    Você provavelmente notou as tags &lt;signal&gt; no arquivo
+    <filename>.glade</filename> - é
+    possível definir manipuladores de sinais diretamente no arquivo. Tudo o que nós temos que fazer
+    é dizer ao Glade para estabelecer as conexões usando
+    <function class="GladeXML">signal_autoconnect</function>.
+   </para>
+   <para>
+    Você pode definir nome de funções simples como manipulador que será chamado
+    quando um evento ocorrer, ou usar uma notação especial para
+    metodos estáticos, separando o nome de uma classe e o metodo da classe
+    com dois pontos duplo como em <literal>NomeClasse::metodoClasse</literal>.
+   </para>
+   <example>
+    <title>Usando signal_autoconnect</title>
+    <programlisting role="php">
+     <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
+      href="&directory.examples;/tutorials/helloglade/autoconnect.phpw" parse="text">
+      <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+     </xi:include>
+    </programlisting>
+   </example>
+  </sect2>
+
+  <sect2 id="tutorials.helloglade.autoconnect_instance">
+   <title>Conectando com metodos de objetos</title>
+   <para>
+    Apenas conectar funções ou metodos estáticos não prenche na realidade
+    as necessidades de um bom programador. Para sair do código espagueti,
+    nós precisamos ser capazes de conectar sinais a metodos de objetos.
+   </para>
+   <para>
+    Fazer isto é realmente simples: Apenas use
+    <function class="GladeXML">signal_autoconnect_instance</function> com
+    o objeto como primeiro parâmetro ao invéz de usar
+    <function class="GladeXML">signal_autoconnect</function>:
+   </para>
+   <example>
+    <title>Usando signal_autoconnect</title>
+    <programlisting role="php">
+     <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
+      href="&directory.examples;/tutorials/helloglade/autoconnect_instance.phpw" parse="text">
+      <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+     </xi:include>
+    </programlisting>
+   </example>
+  </sect2>
+
+ </sect1>
+
+
+ <sect1 id="tutorials.helloglade.partial">
+  <title>Carregando uma parte de um arquivo .glade</title>
+
+  <para>
+   Em grandes projetos, você deve ter várias janelas definidas em seu
+   arquivo <filename>.glade</filename>,
+   e todas são carregadas ao carregar o arquivo
+   <filename>.glade</filename>. Isto a) deixa mais lento o início da
+   sua aplicação e b) mostra todas as janelas imediatamente, se você
+   não definiu sua visibilidade como escondida no Glade. Além disso, você deve querer usar
+   <function class="GladeXML">signal_autoconnect_instance</function>
+   em apenas uma parte do arquivo <filename>.glade</filename> para um objeto,
+   enquanto conectar outra parte em outro objeto.
+  </para>
+  <para>
+   A solução para este problema é o segundo parâmetro do construtor de 
+   <classname>GladeXML</classname>: Apenas passe o id
+   do widget que será o raíz, e apenas esta parte do arquivo
+   <filename>.glade</filename> será carregada.
+  </para>
+  <example>
+   <title>Carregando parcialmente um arquivo .glade</title>
+   <programlisting role="php">
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
+     href="&directory.examples;/tutorials/helloglade/partially.phpw" parse="text">
+     <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+    </xi:include>
+   </programlisting>
+  </example>
+
+</sect1>
+</chapter>
