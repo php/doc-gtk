@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<!-- $Revision: 1.4 $ -->
+<!-- $Revision: 1.5 $ -->
 <chapter id="tutorials.installation">
  <title>Installing PHP-GTK 2</title>
-  
-  <sect1>
+
+  <sect1 id="userguide.installation.introduction">
    <title>Introduction</title>
    <para>
     PHP-GTK 2 is an extension to PHP and can be used only with versions 5.1
@@ -19,64 +19,68 @@
     systems.
    </para>
   </sect1>
-  
+
   <sect1 id="userguide.installation.windows">
    <title>Installation on Windows</title>
-   
-   <sect2>
+
+   <sect2 id="userguide.installation.windows.gnope">
     <title>Using Gnope</title>
     <para>
      Gnope has proven to be the most easiest way of installing and maintaining
      PHP-GTK 2 on Windows. Gnope is a fully featured PHP-GTK 2 installer,
-     complete with PHP 5.1 and PEAR. A few simple mouse clicks and you're done!
+     complete with PHP 5.1, GTK 2.6 and PEAR.
+     A few simple mouse clicks and you're done!
     </para>
     <para>
      Just download the installer from <ulink url="&url.gnope;">gnope.org</ulink>
      and follow the on-screen instructions. Gnope also has a PEARified channel
      of its own, where you can download PHP-GTK 2 applications, in addition to
-     official PEAR packages from the Gtk2 category.
+     official PEAR packages, e.g. from the
+     <ulink url="&url.pear.gtk2;">Gtk2 category</ulink>.
     </para>
    </sect2>
-   
-   <sect2>
+
+   <sect2 id="userguide.installation.windows.manual">
     <title>Manual Installation</title>
     <para>
-     Download the Alpha binary release of PHP-GTK 2 for Windows from the 
+     Download the Alpha binary release of PHP-GTK 2 for Windows from the
      PHP-GTK 2 <ulink url="&url.phpgtk.download;">download</ulink> page. Unzip
      the file into a directory of your choice. A directory named
      <literal>php-gtk</literal> will be created containing everything included
      in the release.
     </para>
     <para>
-     You will need a copy of <literal>php.exe</literal> (CLI Version) and 
-     <literal>php5ts.dll</literal>, both of which are available in the binary
+     You will need a copy of <filename>php.exe</filename> (CLI Version) and
+     <filename>php5ts.dll</filename>, both of which are available in the binary
      release of PHP 5 for windows, and put them in the
-     <literal>php-gtk</literal> directory. If you wish to use any other
-     extensions with this copy of <literal>php.exe</literal>, make sure you
+     <filename>php-gtk</filename> directory. If you wish to use any other
+     extensions with this copy of <filename>php.exe</filename>, make sure you
      put their binaries here too.
     </para>
     <para>
-     After this, you must set your <literal>PATH</literal> to include the
-     <literal>gtk+2.6.9</literal> directory present in the release. You can
-     also let the <literal>gtkpath</literal> batch file set the appropriate
-     PATH for the current command line session by executing it.
+     <!-- FIXME: Do we need to do this? I doubt that this is necessary
+        -cweiske -->
+     After this, you must set your <literal>PATH</literal> variable to include
+     the <filename>gtk+2.6.9</filename> directory present in the release.
+     You can also let the <literal>gtkpath.bat</literal> batch file set the
+     appropriate <literal>PATH</literal> for the current command line
+     session by executing it.
     </para>
    </sect2>
-   
-   <sect2>
+
+   <sect2 id="userguide.installation.windows.cvs">
     <title>Compiling from CVS</title>
     <para>
-     This is the least recommended method of installing PHP-GTK 2. If you still
-     want to go ahead with this, please read win32/README.win32.txt in the CVS
-     checkout.
+     This is the least recommended method of installing PHP-GTK 2 on Windows.
+     If you still want to go ahead with this, please read
+     <filename>win32/README.win32.txt</filename> in the CVS checkout.
     </para>
    </sect2>
-   
   </sect1>
-  
+
   <sect1 id="userguide.installation.linux">
    <title>Installation on Linux</title>
-   
+
    <para>
     The best way to install PHP-GTK 2 on Linux is to compile it. No binary or
     source packages are available as yet for any distribution, so you can't use
@@ -84,9 +88,9 @@
     should be valid for most distributions of Linux, as well as other POSIX
     compliant systems.
    </para>
-   
+
    <note>The methods listed here reportedly don't work on FreeBSD</note>
-   
+
    <para>
     There are two ways to go about installing PHP-GTK 2 on your Linux system.
     You can either choose to use your existing PHP installation, or decide to
@@ -94,128 +98,138 @@
     method and is recommended for users with little or no Linux experience.
     In any case, you need Gtk+ version 2.6 upwards installed.
    </para>
-   
-   <sect2>
+
+   <sect2 id="userguide.installation.linux.newphp">
     <title>Installing PHP-GTK 2 along with a new PHP installation</title>
-    
+
     <para>
      Just follow these steps, and you should be okay! First thing you need 
-     is a fresh checkout of PHP. You can choose either the 5_1 or 5_2 branches,
+     is a fresh checkout of PHP. You can choose either the
+     <literal>5_1</literal> or <literal>5_2</literal> branches,
      both work fine:
-     
-     <programlisting role="bash">
-         $ cvs -d :pserver:cvsread@cvs.php.net:/repository login
-         $ cvs -d :pserver:cvsread@cvs.php.net:/repository co -r PHP_5_2 php-src
-     </programlisting>
-     
+
+     <programlisting role="bash"><![CDATA[
+$ cvs -d :pserver:cvsread@cvs.php.net:/repository login
+$ cvs -d :pserver:cvsread@cvs.php.net:/repository co -r PHP_5_2 php-src]]></programlisting>
+
      Now, you need to compile and install it:
-     
-     <programlisting role="bash">
-         $ cd php-src
-         $ ./buildconf
-         $ ./configure --prefix=/opt/php5_2 --disable-cgi
-         $ make
-         $ su
-         $ make install
-         $ echo extension=php_gtk2.so >> /opt/php5_2/lib/php.ini
-         $ /opt/php5_2/bin/php-config --extension-dir | xargs echo 'extension_dir=' >> /opt/php5_2/lib/php.ini
-     </programlisting>
+
+     <programlisting role="bash"><![CDATA[
+$ cd php-src
+$ ./buildconf
+$ ./configure --prefix=/opt/php5_2 --disable-cgi
+$ make
+$ su
+$ make install
+$ echo extension=php_gtk2.so >> /opt/php5_2/lib/php.ini
+$ /opt/php5_2/bin/php-config --extension-dir | xargs echo 'extension_dir=' >> /opt/php5_2/lib/php.ini]]></programlisting>
     </para>
-    
+
+    <note>
+     <para>
+      If the current CVS of PHP does not compile, try an
+      official release from the
+      <ulink url="&url.php.download;">php downloads page</ulink>,
+      or a <ulink url="&url.php.snapshots;">snapshot</ulink>.
+     </para>
+    </note>
+
     <para>
      Now, let's checkout and install PHP-GTK 2:
-     
-      <programlisting role="bash">
-         $ cd ..
-         $ cvs -d :pserver:cvsread@cvs.php.net:/repository co php-gtk
-         $ cd php-gtk
-         $ ./buildconf --with-phpize=/opt/php5_2/bin/phpize
-         $ ./configure --with-php-config=/opt/php5_2/bin/php-config
-         $ make
-         $ make install
-     </programlisting>
+
+      <programlisting role="bash"><![CDATA[
+$ cd ..
+$ cvs -d :pserver:cvsread@cvs.php.net:/repository co php-gtk
+$ cd php-gtk
+$ ./buildconf --with-phpize=/opt/php5_2/bin/phpize
+$ ./configure --with-php-config=/opt/php5_2/bin/php-config
+$ make
+$ make install]]></programlisting>
     </para>
-    
+
     <para>
      You might want to create a link to the new php executable:
-     
-      <programlisting role="bash">
-         $ ln -s /opt/php5_2/bin/php /usr/bin/php-gtk
-      </programlisting>
-      
+
+      <programlisting role="bash"><![CDATA[
+$ ln -s /opt/php5_2/bin/php /usr/bin/php-gtk]]></programlisting>
+
      That's it, you're done!
     </para>
-   
    </sect2>
-   
-   <sect2>
+
+   <sect2 id="userguide.installation.linux.existingphp">
     <title>Using an existing PHP installation</title>
-    
+
     <para>
-     If you decide to `add-on' PHP-GTK 2 to your existing PHP installation,
-     ensure that your version of PHP is atleast 5.1 with CLI enabled. PHP-GTK 2
-     will NOT work with any other versions of PHP. You can check your PHP
-     version by typing <command>php -v</command> on the command line. Don't
-     forget to check if the word <literal>cli</literal> appears in the output!
+     If you decide to 'add-on' PHP-GTK 2 to your existing PHP installation,
+     ensure that your version of PHP is at least 5.1 with CLI enabled.
+     PHP-GTK 2 will NOT work with any other versions of PHP.
+     You can check your PHP version by typing <command>php -v</command>
+     on the command line. Don't forget to check if the word
+     <literal>cli</literal> appears in the output!
     </para>
-    
+
     <para>
      Now, checkout the latest CVS source of PHP-GTK 2, or download the Alpha
      source tarball, as per instructions on the PHP-GTK 2
      <ulink url="&url.phpgtk.download;">download</ulink> page.
      <literal>cd</literal> into the checked out / extracted directory, and
      execute the following:
-     <programlisting role="bash">
-         $ ./buildconf
-         $ ./configure
-         $ make
-         $ make install
-     </programlisting>
+     <programlisting role="bash"><![CDATA[
+$ ./buildconf
+$ ./configure
+$ make
+$ make install]]></programlisting>
     </para>
-    
+
     <para>
      This should just work for most people. However, if there are multiple
      installations of PHP in your machine or you have installed PHP in some
      exotic location, you might face trouble. Most of these cases can be solved
      by specifying the exact locations of the <literal>phpize</literal> and
      <literal>php-config</literal> files:
-     <programlisting role="bash">
-         $ ./buildconf --with-phpize=/path/to/phpize
-         $ ./configure --with-php-config=/path/to/php-config
-     </programlisting>
+     <programlisting role="bash"><![CDATA[
+$ ./buildconf --with-phpize=/path/to/phpize
+$ ./configure --with-php-config=/path/to/php-config]]></programlisting>
+    </para>
+   </sect2>
+
+   <sect2 id="userguide.installation.linux.testing">
+    <title>Testing your installation</title>
+
+    <para>
+     Before you can use PHP-GTK 2, you need to enable the extension in
+     your php.ini. Just add a
+     <programlisting role="ini"><![CDATA[
+extension=php_gtk2.so]]></programlisting>
+     below all the other <literal>extension=</literal> settings.
     </para>
 
-   </sect2>
-   
-   <sect2>
-    <title>Testing your installation</title>
     <para>
      You can test whether your installation was successful by executing:
-     
-     <programlisting role="bash">
-         $ php-gtk -m | grep php-gtk
-     </programlisting>
-     
+
+     <programlisting role="bash"><![CDATA[
+$ php-gtk -m | grep php-gtk]]></programlisting>
+
      You should get a single line that reads <literal>php-gtk</literal>.
      Substitute <literal>php-gtk</literal> with your PHP executable if you
      installed PHP-GTK 2 on your existing PHP installation.
     </para>
    </sect2>
-      
   </sect1>
-  
+
   <sect1 id="tutorials.installation.macosx">
-  <title>Installation on Mac OS X</title>
-  
+   <title>Installation on Mac OS X</title>
+
     <para>
-     You need to make sure you have the Apple Developer Tools, BSD Subsytem,
+     You need to make sure you have the Apple Developer Tools, BSD Subsystem,
      and an installation of X before you try installing PHP-GTK 2. Although
-     the BSD subsytem is installed by default on Mac OS X, you need select
+     the BSD subsystem is installed by default on Mac OS X, you need select
      the Developer Tools and X Server manually. Although you can use any X
      server, the easiest would be to use the one Apple provides by default on
      it's Mac OS X installer.
     </para>
-    
+
     <para>
      Get <ulink url="&url.macports;">MacPorts</ulink> (previously knows as
      DarwinPorts) or <ulink url="&url.fink;">Fink</ulink> and install it. You
@@ -223,37 +237,35 @@
      Apple's default distribution), and Gtk+ itself. Both Fink and MacPorts
      provide versions 2.6 and above of Gtk+.
     </para>
-    
+
     <para>
      Once you have all of the above in place, checkout a 5_2 branch of PHP,
      compile and install it. Although you may installation it anywhere,
      <literal>/usr/local</literal> is generally considered to be a good place.
-     
-     <programlisting role="bash">
-         $ cvs -d :pserver:cvsread@cvs.php.net:/repository co -r PHP_5_2 php-src
-         $ cd php-src
-         $ ./buildconf
-         $ ./configure --disable-cgi
-         $ make
-         $ sudo make install
-     </programlisting>
+
+     <programlisting role="bash"><![CDATA[
+$ cvs -d :pserver:cvsread@cvs.php.net:/repository co -r PHP_5_2 php-src
+$ cd php-src
+$ ./buildconf
+$ ./configure --disable-cgi
+$ make
+$ sudo make install]]></programlisting>
     </para>
-    
+
     <para>
      Now get the latest checkout of PHP-GTK and compile it:
-     
-     <programlisting role="bash">
-         $ cd..
-         $ cvs -d :pserver:cvsread@cvs.php.net:/repository co php-gtk
-         $ cd php-gtk
-         $ ./buildconf --with-phpize=/usr/local/bin/phpize
-         $ ./configure --with-php-config=/usr/local/bin/php-config \
-                       --disable-libglade
-         $ make
-         $ sudo make install
-     </programlisting>
+
+     <programlisting role="bash"><![CDATA[
+$ cd..
+$ cvs -d :pserver:cvsread@cvs.php.net:/repository co php-gtk
+$ cd php-gtk
+$ ./buildconf --with-phpize=/usr/local/bin/phpize
+$ ./configure --with-php-config=/usr/local/bin/php-config \
+            --disable-libglade
+$ make
+$ sudo make install]]></programlisting>
     </para>
-    
+
     <para>
      Finally, copy over the <literal>php.ini-recommended</literal> file
      to <literal>/usr/local/lib/php.ini</literal> and change the value of
@@ -264,5 +276,5 @@
      that points to <literal>/usr/local/bin/php</literal>
     </para>
    </sect1>
-   
+
 </chapter>
