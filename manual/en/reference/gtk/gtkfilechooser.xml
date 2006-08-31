@@ -1,0 +1,758 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- $Revision: 1.1 $ -->
+<classentry id="gtk.gtkfilechooser" type="interface">
+ <classmeta>
+  <classtitle>GtkFileChooser</classtitle>
+  <shortdesc>
+    File chooser interface used by GtkFileChooserWidget and gtkfilechooser.
+  </shortdesc>
+   <desc>
+   <para>
+    GtkFileChooser is an interface that can be implemented by file
+    selection widgets. In GTK+, the main objects that implement this
+    interface are <classname>GtkFileChooserWidget</classname>,
+    <classname>gtkfilechooser</classname>,
+    and <classname>GtkFileChooserButton</classname>. You do not need to write
+    an object that implements the <classname>GtkFileChooser</classname>
+    interface unless you are trying to adapt an existing file selector
+    to expose a standard programming interface.
+   </para>
+  </desc>
+ </classmeta>
+
+ <methods>
+  <method id="gtk.gtkfilechooser.method.add_filter">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef> <function>add_filter</function></funcdef>
+      <paramdef><classname>GtkFileFilter</classname><parameter>filter</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Adds a filter to the GtkFileChooser
+   </shortdesc>
+   <desc>
+   <para>
+    Adds a filter to the <classname>gtkfilechooser</classname>.
+    This filter is specified by the parameter that is a
+    <classname>GtkFileFilter</classname> object.
+   </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkfilechooser.method.add_shortcut_folder">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef> <function>add_shortcut_folder</function></funcdef>
+     <paramdef>string <parameter>folder</parameter></paramdef>
+     <paramdef><parameter>error</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+    <desc>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtkfilechooser.method.add_shortcut_folder_uri">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef> <function>add_shortcut_folder_uri</function></funcdef>
+     <paramdef>string <parameter>uri</parameter></paramdef>
+     <paramdef><parameter>error</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtkfilechooser.method.get_action">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef><enumname>GtkFileChooserAction</enumname> <function>get_action</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Returns the action of the chooser.
+   </shortdesc>
+   <desc>
+   <para>
+    Returns the action of the file chooser.
+    defined through the <function class="GtkFileChooser">set_action</function>
+    method.
+   </para>
+   <para>
+    It can be <enumname>Gtk::FILE_CHOOSER_ACTION_OPEN</enumname> or
+    <enumname>Gtk::FILE_CHOOSER_ACTION_SELECT_FOLDER</enumname>.
+   </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkfilechooser.method.get_current_folder">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef> <function>get_current_folder</function></funcdef>
+      <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+     Returns the current folder.
+   </shortdesc>
+   <desc>
+    <para>
+     Returns the current folder.
+    </para>
+    <para>
+     If a file is shown at the button, then only its path will be returned.
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkfilechooser.method.get_current_folder_uri">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef> <function>get_current_folder_uri</function></funcdef>
+      <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtkfilechooser.method.get_extra_widget">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef> <function>get_extra_widget</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Returns the extra widget defined for the chooser.
+   </shortdesc>
+   <desc>
+   <para>
+    Returns the widget defined through the method
+    <function class="GtkFileChooserButton">set_extra_widget</function>.
+   </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkfilechooser.method.get_filename">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef> <function>get_filename</function></funcdef>
+      <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+     Returns the current file location selected.
+   </shortdesc>
+   <desc>
+    <para>
+     Returns the current file location selected in the chooser.
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkfilechooser.method.get_filenames">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef> <function>get_filenames</function></funcdef>
+     <paramdef>bool <parameter>convert</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtkfilechooser.method.get_filter">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef> <function>get_filter</function></funcdef>
+      <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+     Returns the <classname>GtkFileFilter</classname> object.
+   </shortdesc>
+   <desc>
+    <para>
+     Returns the <classname>GtkFileFilter</classname> object attributed througth the
+     <function class="GtkFileChooser">add_filter</function> method.
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkfilechooser.method.get_local_only">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef> <function>get_local_only</function></funcdef>
+      <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtkfilechooser.method.get_preview_filename">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef> <function>get_preview_filename</function></funcdef>
+      <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtkfilechooser.method.get_preview_uri">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef> <function>get_preview_uri</function></funcdef>
+      <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtkfilechooser.method.get_preview_widget">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef> <function>get_preview_widget</function></funcdef>
+      <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+  <method id="gtk.gtkfilechooser.method.get_preview_widget_active">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef> <function>get_preview_widget_active</function></funcdef>
+      <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtkfilechooser.method.get_select_multiple">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef> <function>get_select_multiple</function></funcdef>
+      <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtkfilechooser.method.get_show_hidden">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef> <function>get_show_hidden</function></funcdef>
+      <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtkfilechooser.method.get_uri">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef> <function>get_uri</function></funcdef>
+      <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtkfilechooser.method.get_uris">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef> <function>get_uris</function></funcdef>
+      <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtkfilechooser.method.get_use_preview_label">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef> <function>get_use_preview_label</function></funcdef>
+      <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtkfilechooser.method.list_filters">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef> <function>list_filters</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtkfilechooser.method.list_shortcut_folder_uris">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef> <function>list_shortcut_folder_uris</function></funcdef>
+     <paramdef>bool <parameter>convert</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtkfilechooser.method.list_shortcut_folders">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef> <function>list_shortcut_folders</function></funcdef>
+     <paramdef>bool <parameter>convert</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtkfilechooser.method.remove_filter">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef> <function>remove_filter</function></funcdef>
+      <paramdef><classname>GtkFileFilter</classname><parameter>filter</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtkfilechooser.method.remove_shortcut_folder">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef> <function>remove_shortcut_folder</function></funcdef>
+     <paramdef>string <parameter>folder</parameter></paramdef>
+     <paramdef><parameter>error</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtkfilechooser.method.remove_shortcut_folder_uri">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef> <function>remove_shortcut_folder_uri</function></funcdef>
+     <paramdef>string <parameter>uri</parameter></paramdef>
+     <paramdef><parameter>error</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtkfilechooser.method.select_all">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef> <function>select_all</function></funcdef>
+      <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtkfilechooser.method.select_filename">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef> <function>select_filename</function></funcdef>
+      <paramdef><parameter>filename</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtkfilechooser.method.select_uri">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef> <function>select_uri</function></funcdef>
+      <paramdef><parameter>uri</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtkfilechooser.method.set_action">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef> <function>set_action</function></funcdef>
+     <paramdef><enumname>GtkFileChooserAction</enumname> <parameter>action</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Defines the action.
+   </shortdesc>
+  <desc>
+   <para>
+    Defines the action of the <classname>GtkFileChooser</classname>.
+    The action changes its behavior allowing the user to select a file
+    of a folder.
+   </para>
+   <para>
+    It can be <optionname>Gtk::FILE_CHOOSER_ACTION_OPEN</optionname> or
+    <optionname>Gtk::FILE_CHOOSER_ACTION_SELECT_FOLDER</optionname>.
+   </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkfilechooser.method.set_current_folder">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef> <function>set_current_folder</function></funcdef>
+     <paramdef><parameter>filename</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+     Defines the current path shown.
+   </shortdesc>
+   <desc>
+    <para>
+     Defines the current path shown.
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkfilechooser.method.set_current_folder_uri">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef> <function>set_current_folder_uri</function></funcdef>
+      <paramdef><parameter>uri</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtkfilechooser.method.set_current_name">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef> <function>set_current_name</function></funcdef>
+      <paramdef><parameter>name</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtkfilechooser.method.set_extra_widget">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef> <function>set_extra_widget</function></funcdef>
+      <paramdef><classname>GtkWidget</classname><parameter>extra_widget</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Define an extra widget that is packed at the bottom of the widget.
+   </shortdesc>
+   <desc>
+   <para>
+    Define an extra widget that is packed at the bottom of the
+    file chooser.
+   </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkfilechooser.method.set_filename">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef> <function>set_filename</function></funcdef>
+      <paramdef><parameter>filename</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+     Defines the current file location.
+   </shortdesc>
+   <desc>
+    <para>
+     Defines the current file location shown.
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkfilechooser.method.set_filter">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef> <function>set_filter</function></funcdef>
+      <paramdef><classname>GtkFileFilter</classname><parameter>filter</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtkfilechooser.method.set_local_only">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef> <function>set_local_only</function></funcdef>
+      <paramdef><parameter>local_only</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtkfilechooser.method.set_preview_widget">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef> <function>set_preview_widget</function></funcdef>
+      <paramdef><classname>GtkWidget</classname><parameter>preview_widget</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtkfilechooser.method.set_preview_widget_active">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef> <function>set_preview_widget_active</function></funcdef>
+      <paramdef><parameter>active</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtkfilechooser.method.set_select_multiple">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef> <function>set_select_multiple</function></funcdef>
+      <paramdef><parameter>select_multiple</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtkfilechooser.method.set_show_hidden">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef> <function>set_show_hidden</function></funcdef>
+      <paramdef><parameter>show_hidden</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtkfilechooser.method.set_uri">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef> <function>set_uri</function></funcdef>
+      <paramdef><parameter>uri</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtkfilechooser.method.set_use_preview_label">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef> <function>set_use_preview_label</function></funcdef>
+      <paramdef><parameter>use_label</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtkfilechooser.method.unselect_all">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef> <function>unselect_all</function></funcdef>
+      <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtkfilechooser.method.unselect_filename">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef> <function>unselect_filename</function></funcdef>
+      <paramdef><parameter>filename</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtkfilechooser.method.unselect_uri">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef> <function>unselect_uri</function></funcdef>
+      <paramdef><parameter>uri</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+ </methods>
+
+</classentry>
