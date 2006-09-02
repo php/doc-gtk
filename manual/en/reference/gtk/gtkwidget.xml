@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<!-- $Revision: 1.23 $ -->
+<!-- $Revision: 1.24 $ -->
 <classentry id="gtk.gtkwidget">
  <classmeta>
   <classtitle>GtkWidget</classtitle>
@@ -72,19 +72,37 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>add_events</function></funcdef>
-     <paramdef>int <parameter>events</parameter></paramdef>
+     <paramdef><enumname>GdkEventMask</enumname> <parameter>events</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Let the widget receive more events.
    </shortdesc>
    <desc>
+    <para>
+     Lets the widget receive more events by adding the event
+     masks to the list of to-be-notified-of event types.
+    </para>
+    <para>
+     With that, you can let e.g. a <classname>GtkButton</classname>
+     receive
+     <signalname class="GtkWidget">motion-notify-event</signalname>s
+     which it doesn't do by default.
+    </para>
+    <example>
+     <title>Tracking mouse movement on a button with add_events</title>
+     <programlisting role="php">
+      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+       href="&directory.examples;/reference/gtk/gtkwidget/add_events.phpw" parse="text">
+       <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+      </xi:include>
+     </programlisting>
+    </example>
     <para>
      &seealso;
      <function class="GtkWidget">get_events</function>, 
      <function class="GtkWidget">set_events</function>
     </para>
-
    </desc>
   </method>
 

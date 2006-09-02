@@ -1,0 +1,20 @@
+<?php
+/**
+* We let the button receive an event that normally
+* is not recognized by using GtkWidget::add_events()
+*/
+$btn = new GtkButton('move the mouse');
+$btn->add_events(Gdk::POINTER_MOTION_MASK);
+$btn->connect('motion-notify-event', 'onMouseOver');
+
+function onMouseOver($btn, $event) {
+    $btn->set_label($event->x . ', ' . $event->y);
+}
+
+$wnd = new GtkWindow();
+$wnd->set_default_size(200, 100);
+$wnd->add($btn);
+$wnd->show_all();
+$wnd->connect_simple('destroy', array('Gtk', 'main_quit'));
+Gtk::main();
+?>
