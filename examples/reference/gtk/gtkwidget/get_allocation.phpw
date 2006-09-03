@@ -1,0 +1,21 @@
+<?php
+$wnd = new GtkWindow();
+$lbl = new GtkLabel();
+$wnd->add($lbl);
+
+$wnd->connect_simple('destroy', array('Gtk', 'main_quit'));
+
+function showAllocation($wnd, $lbl)
+{
+    $allocation = $wnd->get_allocation();
+    $lbl->set_text(
+        $allocation->x . 'x' . $allocation->y . ', ' .
+        $allocation->width . 'x' . $allocation->height
+    );
+    return true;
+}
+
+$wnd->show_all();
+Gtk::timeout_add(100, 'showAllocation', $wnd, $lbl);
+Gtk::main();
+?>

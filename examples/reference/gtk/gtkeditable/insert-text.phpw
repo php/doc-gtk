@@ -1,0 +1,15 @@
+<?php
+$entry = new GtkEntry();
+$entry->connect('insert-text', 'onInsertText', 'test');
+
+function onInsertText($entry, $new_text, $new_text_len, $pos, $userdata)
+{
+    echo $new_text . ':' . $new_text_len . ':' . get_class($pos) . ':' . $userdata . "\n";
+}
+
+$wnd = new GtkWindow();
+$wnd->connect_simple('destroy', array('gtk', 'main_quit'));
+$wnd->add($entry);
+$wnd->show_all();
+Gtk::main();
+?>

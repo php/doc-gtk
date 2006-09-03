@@ -1,8 +1,8 @@
 <?php
-//Create the window. 
+//Create the window.
 $wnd  = new GtkWindow();
 
-//Button's mnemonic will be added by and, so we don't
+//Button's mnemonic will be added by hand, so we don't
 //use an underscore here
 $button = new GtkButton('Button');
 
@@ -33,4 +33,5 @@ $wnd->show_all();
 
 // Activate all widgets associated with Alt+2.
 $wnd->mnemonic_activate(ord('2'), Gdk::MOD1_MASK);
+Gtk::main();
 ?>

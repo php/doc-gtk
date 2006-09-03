@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<!-- $Revision: 1.24 $ -->
+<!-- $Revision: 1.25 $ -->
 <classentry id="gtk.gtkwidget">
  <classmeta>
   <classtitle>GtkWidget</classtitle>
@@ -17,7 +17,6 @@
  </classmeta>
 
  <methods>
-
   <method id="gtk.gtkwidget.method.activate">
    <funcsynopsis>
     <funcprototype>
@@ -26,7 +25,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Activeates the widget.
+    Activates the widget.
    </shortdesc>
    <desc>
     <simpara>
@@ -52,8 +51,8 @@
       <classname>GtkAccelGroup</classname> <parameter>group</parameter>
      </paramdef>
      <paramdef>int <parameter>accel_key</parameter></paramdef>
-     <paramdef>GdkModifyerType <parameter>modifiers</parameter></paramdef>
-     <paramdef>GtkAccelFlags <parameter>flags</parameter></paramdef>
+     <paramdef><enumname>GdkModifyerType</enumname> <parameter>modifiers</parameter></paramdef>
+     <paramdef><enumname>GtkAccelFlags</enumname> <parameter>flags</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -64,7 +63,6 @@
      &seealso;
      <function class="GtkWidget">remove_accelerator</function>
     </para>
-
    </desc>
   </method>
 
@@ -110,7 +108,7 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>add_mnemonic_label</function></funcdef>
-     <paramdef>GtkWidget <parameter>label</parameter></paramdef>
+     <paramdef><classname>GtkWidget</classname> <parameter>label</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -144,7 +142,7 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>bool <function>child_focus</function></funcdef>
-     <paramdef>GtkDirectionType <parameter>direction</parameter></paramdef>
+     <paramdef><enumname>GtkDirectionType</enumname> <parameter>direction</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -178,15 +176,36 @@
   <method id="gtk.gtkwidget.method.class_path">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>void <function>class_path</function></funcdef>
+     <funcdef>string <function>class_path</function></funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Not public or not implemented.
+    Returns the class path of the widget
    </shortdesc>
    <desc>
-
+    <para>
+     Returns the path of the widget through the packaging
+     hierarchy, from the root parent to the widget itself.
+     The single class names are separated by dots.
+    </para>
+    <para>
+     It is the same as <function class="GtkWidget">path</function>,
+     just that always the class names, not widget names are used.
+    </para>
+    <example>
+     <title>Getting a widget's path</title>
+     <programlisting role="php">
+      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+       href="&directory.examples;/reference/gtk/gtkwidget/path.php" parse="text">
+       <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+      </xi:include>
+     </programlisting>
+    </example>
+    <para>
+     &seealso;
+     <function class="GtkWidget">path</function>
+    </para>
    </desc>
   </method>
 
@@ -242,7 +261,7 @@
     </simpara>
    </desc>
   </method>
-
+<!--
   <method id="gtk.gtkwidget.method.destroyed">
    <funcsynopsis>
     <funcprototype>
@@ -257,19 +276,59 @@
 
    </desc>
   </method>
-
+-->
   <method id="gtk.gtkwidget.method.drag_begin">
    <funcsynopsis>
     <funcprototype>
-     <funcdef> <function>drag_begin</function></funcdef>
-     <paramdef>void</paramdef>
+     <funcdef><classname>GdkDragContext</classname> <function>drag_begin</function></funcdef>
+     <paramdef>array <parameter>targets</parameter></paramdef>
+     <paramdef><enumname>GdkDragAction</enumname> <parameter>actions</parameter></paramdef>
+     <paramdef>int <parameter>button</parameter></paramdef>
+     <paramdef><classname>GdkEvent</classname> <parameter>event</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Not implemented or not public.
+    Initiates a drag on the source side.
    </shortdesc>
    <desc>
-
+    <para>
+     Initiates a drag on the source side. The function only needs to be used
+     when the application is starting drags itself, and is not needed when
+     <function class="GtkWidget">drag_source_set</function> is used.
+    </para>
+    <para>
+     <table>
+      <title>Method parameters</title>
+      <tgroup>
+       <tbody>
+        <row>
+         <entry>targets</entry>
+         <entry>
+          The targets (data formats) in which the source can provide the data.
+         </entry>
+        </row>
+        <row>
+         <entry>actions</entry>
+         <entry>
+          A bitmask of the allowed drag actions for this drag.
+         </entry>
+        </row>
+        <row>
+         <entry>button</entry>
+         <entry>
+          The button the user clicked to start the drag.
+         </entry>
+        </row>
+        <row>
+         <entry>event</entry>
+         <entry>
+          The event that triggered the start of the drag.
+         </entry>
+        </row>
+       </tbody>
+      </tgroup>
+     </table>
+    </para>
    </desc>
   </method>
 
@@ -632,13 +691,23 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>bool <function>event</function></funcdef>
-     <paramdef>GdkEvent <parameter>event</parameter></paramdef>
+     <paramdef><classname>GdkEvent</classname> <parameter>event</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Emit an event signal on the widget.
    </shortdesc>
    <desc>
+    <para>
+     Rarely-used function. This function is used to emit the event signals
+     on a widget (those signals should never be emitted without using this
+     function to do so). If you want to synthesize an event though, don't
+     use this function; instead, use
+     <function class="Gtk">main_do_event</function> so the event will behave
+     as if it were in the event queue. Don't synthesize expose events;
+     instead, use <function class="GdkWindow">invalidate_rect</function>
+     to invalidate a region of the window.
+    </para>
    </desc>
   </method>
 
@@ -650,21 +719,26 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Stops emission of child-notify signals.
    </shortdesc>
    <desc>
+    <para>
+     Stops emission of
+     <signalname class="GtkContainer">child-notify</signalname> signals on
+     the widget. The signals are queued until
+     <function class="GtkWidget">thaw_child_notify</function> is called.
+    </para>
     <para>
      &seealso;
      <function class="GtkWidget">thaw_child_notify</function>
     </para>
-
    </desc>
   </method>
 
   <method id="gtk.gtkwidget.method.get_accessible">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>AtkNoOpObject <function>get_accessible</function></funcdef>
+     <funcdef><classname>AtkNoOpObject</classname> <function>get_accessible</function></funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
@@ -679,42 +753,52 @@
   <method id="gtk.gtkwidget.method.get_allocation">
    <funcsynopsis>
     <funcprototype>
-     <funcdef> <function>get_allocation</function></funcdef>
+     <funcdef><classname>GdkRectangle</classname> <function>get_allocation</function></funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the current allocation.
    </shortdesc>
    <desc>
+    <para>
+     Returns the current allocation (size) of the widget.
+    </para>
+    <example>
+     <title>Displaying a widget's size</title>
+     <programlisting role="php">
+      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+       href="&directory.examples;/reference/gtk/gtkwidget/get_allocation.php" parse="text">
+       <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+      </xi:include>
+     </programlisting>
+    </example>
     <para>
      &seealso;
      <fieldname class="GtkWidget">allocation</fieldname>
     </para>
-
    </desc>
   </method>
 
   <method id="gtk.gtkwidget.method.get_ancestor">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>GtkWidget <function>get_ancestor</function></funcdef>
-     <paramdef>GType <parameter>widget_type</parameter></paramdef>
+     <funcdef><classname>GtkWidget</classname> <function>get_ancestor</function></funcdef>
+     <paramdef><classname>GType</classname> <parameter>widget_type</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
     Returns the first ancestor of the given type.
    </shortdesc>
    <desc>
-    <simpara>
+    <para>
      Returns the first ancestor of the widget of type
-     <parameter>widget_type</parameter>. 
-    </simpara>
+     <parameter>widget_type</parameter>.
+    </para>
     <para>
      &seealso;
      <function class="GtkWidget">is_ancestor</function>
     </para>
-
    </desc>
   </method>
 
@@ -741,21 +825,32 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns value set with set_child_visible().
    </shortdesc>
    <desc>
+    <para>
+     Gets the value set with
+     <function class="GtkWidget">set_child_visible</function>. If you feel
+     a need to use this function, your code probably needs reorganization.
+    </para>
+    <para>
+     This function is only useful for container implementations and
+     never should be called by an application.
+    </para>
+    <para>
+     Returns <literal>true</literal> if the widget is mapped with the parent.
+    </para>
     <para>
      &seealso;
      <function class="GtkWidget">set_child_visible</function>
     </para>
-
    </desc>
   </method>
 
   <method id="gtk.gtkwidget.method.get_clipboard">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>GtkClipboard <function>get_clipboard</function></funcdef>
+     <funcdef><classname>GtkClipboard</classname> <function>get_clipboard</function></funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
@@ -897,35 +992,48 @@
   <method id="gtk.gtkwidget.method.get_display">
    <funcsynopsis>
     <funcprototype>
-     <funcdef> <function>get_display</function></funcdef>
+     <funcdef><classname>GdkDisplay</classname> <function>get_display</function></funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the GdkDisplay for the toplevel of this widget.
    </shortdesc>
    <desc>
-
+    <para>
+     Get the <classname>GdkDisplay</classname> for the toplevel window
+     associated with this widget. This function can only be called after
+     the widget has been added to a widget hierarchy with a
+     <classname>GtkWindow</classname> at the top.
+    </para>
+    <para>
+     In general, you should only create display specific resources when
+     a widget has been realized.
+    </para>
    </desc>
   </method>
 
   <method id="gtk.gtkwidget.method.get_events">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>int <function>get_events</function></funcdef>
+     <funcdef><enumname>GdkEventMask</enumname> <function>get_events</function></funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the event mask for the widget.
    </shortdesc>
    <desc>
+    <para>
+     Returns the event mask for the widget (a bitfield containing flags
+     from the <enumname>GdkEventMask</enumname> enumeration).
+     These are the events that the widget will receive.
+    </para>
     <para>
      &seealso;
      <function class="GtkWidget">add_events</function>, 
      <function class="GtkWidget">set_events</function>
     </para>
-
    </desc>
   </method>
 
@@ -971,15 +1079,17 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the custom widget name.
    </shortdesc>
    <desc>
     <para>
+     Returns the custom widget name.
+    </para>
+    <para>
      &seealso;
-     <function class="GtkWidget">set_name</function>, 
+     <function class="GtkWidget">set_name</function>,
      <fieldname class="GtkWidget">name</fieldname>
     </para>
-
    </desc>
   </method>
 
@@ -1024,7 +1134,7 @@
   <method id="gtk.gtkwidget.method.get_parent">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>GtkWidget <function>get_parent</function></funcdef>
+     <funcdef><classname>GtkWidget</classname> <function>get_parent</function></funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
@@ -1037,91 +1147,119 @@
      container which holds the widget. Usually, the only widgets in
      an application that do not have a parent are windows.
     </simpara>
-    <simpara>
+    <para>
      The widget returned will be a <classname>GtkContainer</classname>
      descendant.
-    </simpara>
+    </para>
     <para>
      &seealso;
      <function class="GtkWidget">set_parent</function>, 
      <fieldname class="GtkWidget">parent</fieldname>
     </para>
-
    </desc>
   </method>
 
   <method id="gtk.gtkwidget.method.get_parent_window">
    <funcsynopsis>
     <funcprototype>
-     <funcdef> <function>get_parent_window</function></funcdef>
+     <funcdef><classname>GdkWindow</classname> <function>get_parent_window</function></funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the widget's parent GdkWindow.
    </shortdesc>
    <desc>
+    <para>
+     Returns the widget's parent GdkWindow.
+    </para>
     <para>
      &seealso;
      <function class="GtkWidget">set_parent_window</function>
     </para>
-
    </desc>
   </method>
 
   <method id="gtk.gtkwidget.method.get_pointer">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>void <function>get_pointer</function></funcdef>
+     <funcdef>array <function>get_pointer</function></funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the mouse coordinates relative to the widget.
    </shortdesc>
    <desc>
-
+    <para>
+     Obtains the location of the mouse pointer in widget coordinates.
+    </para>
+    <para>
+     Widget coordinates are a bit odd; for historical reasons, they are
+     defined as widget->window coordinates for widgets that are not
+     <literal>Gtk::NO_WINDOW</literal> widgets, and are relative to
+     widget->allocation.x, widget->allocation.y for widgets that are
+     <literal>Gtk::NO_WINDOW</literal> widgets.
+    </para>
    </desc>
   </method>
 
   <method id="gtk.gtkwidget.method.get_root_window">
    <funcsynopsis>
     <funcprototype>
-     <funcdef> <function>get_root_window</function></funcdef>
+     <funcdef><classname>GdkWindow</classname> <function>get_root_window</function></funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the root GdkWindow.
    </shortdesc>
    <desc>
-
+    <para>
+     Get the root window where this widget is located. This function
+     can only be called after the widget has been added to a widget
+     hierarchy with GtkWindow at the top.
+    </para>
+    <para>
+     The root window is useful for such purposes as creating a popup
+     <classname>GdkWindow</classname> associated with the window.
+    </para>
    </desc>
   </method>
 
   <method id="gtk.gtkwidget.method.get_screen">
    <funcsynopsis>
     <funcprototype>
-     <funcdef> <function>get_screen</function></funcdef>
+     <funcdef><classname>GdkScreen</classname> <function>get_screen</function></funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the GdkScreen of the toplevel parent.
    </shortdesc>
    <desc>
+    <para>
+     Get the <classname>GdkScreen</classname> from the toplevel window
+     associated with this widget. This function can only be called after
+     the widget has been added to a widget hierarchy with a
+     <classname>GtkWindow</classname> at the top.
+    </para>
+    <para>
+     In general, you should only create screen specific resources when
+     a widget has been realized, and you should free those resources
+     when the widget is unrealized.
+    </para>
     <para>
      &seealso;
      <function class="GtkWidget">has_screen</function>
     </para>
-
    </desc>
   </method>
 
   <method id="gtk.gtkwidget.method.get_settings">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>GtkSettings <function>get_settings</function></funcdef>
+     <funcdef><classname>GtkSettings</classname> <function>get_settings</function></funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
@@ -1155,7 +1293,7 @@
   <method id="gtk.gtkwidget.method.get_style">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>GtkStyle <function>get_style</function></funcdef>
+     <funcdef><classname>GtkStyle</classname> <function>get_style</function></funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
@@ -1164,28 +1302,32 @@
    </shortdesc>
    <desc>
     <para>
+     Returns the <classname>GtkStyle</classname> object for the widget.
+    </para>
+    <para>
      &seealso;
      <function class="GtkWidget">ensure_style</function>, 
      <function class="GtkWidget">modify_style</function>, 
      <function class="GtkWidget">set_style</function>, 
      <fieldname class="GtkWidget">style</fieldname>
     </para>
-
    </desc>
   </method>
 
   <method id="gtk.gtkwidget.method.get_toplevel">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>GtkWidget <function>get_toplevel</function></funcdef>
+     <funcdef><classname>GtkWidget</classname> <function>get_toplevel</function></funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Returns the toplevel widget ancestor of the current widget.
+    Returns the toplevel ancestor widget of the current widget.
    </shortdesc>
    <desc>
-
+    <para>
+     Returns the toplevel ancestor widget of the current widget.
+    </para>
    </desc>
   </method>
 
@@ -1277,14 +1419,18 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Checks whether a GdkScreen is associated with the widget.
    </shortdesc>
    <desc>
+    <para>
+     Checks whether there is a <classname>GdkScreen</classname> is associated
+     with this widget. All toplevel widgets have an associated screen, and
+     all widgets added into a hierarchy with a toplevel window at the top.
+    </para>
     <para>
      &seealso;
      <function class="GtkWidget">get_screen</function>
     </para>
-
    </desc>
   </method>
 
@@ -1299,7 +1445,13 @@
     Removes the widget from being displayed on the screen.
    </shortdesc>
    <desc>
-
+    <para>
+     Hides the widget.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkWidget">show</function>
+    </para>
    </desc>
   </method>
 
@@ -1316,10 +1468,12 @@
    </shortdesc>
    <desc>
     <para>
+     Hides the widget and all of its children.
+    </para>
+    <para>
      &seealso;
      <function class="GtkWidget">show_all</function>
     </para>
-
    </desc>
   </method>
 
@@ -1335,7 +1489,11 @@
     signal instead of deleting it.
    </shortdesc>
    <desc>
-
+    <para>
+     Hides the widget when it receives the
+     <signalname>delete-event</signalname>
+     signal instead of deleting it.
+    </para>
    </desc>
   </method>
 
@@ -1343,16 +1501,18 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>bool <function>intersect</function></funcdef>
-     <paramdef>GdkRectangle <parameter>area</parameter></paramdef>
-     <paramdef>GdkRectangle <parameter>intersection</parameter></paramdef>
+     <paramdef><classname>GdkRectangle</classname> <parameter>area</parameter></paramdef>
+     <paramdef><classname>GdkRectangle</classname> <parameter>intersection</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Returns whether or not the widget and <parameter>area</parameter>
-    intersect.
+    Returns whether or not the widget and the area intersect.
    </shortdesc>
    <desc>
-
+    <para>
+     Returns whether or not the widget and <parameter>area</parameter>
+     intersect.
+    </para>
    </desc>
   </method>
 
@@ -1360,19 +1520,22 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>bool <function>is_ancestor</function></funcdef>
-     <paramdef>GtkWidget <parameter>ancestor</parameter></paramdef>
+     <paramdef><classname>GtkWidget</classname> <parameter>ancestor</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Returns whether or not the calling widget is an ancestor of the given 
+    Returns whether or not the calling widget is an ancestor of the given
     widget.
    </shortdesc>
    <desc>
     <para>
+     Returns whether or not the calling widget is an ancestor
+     of the given widget.
+    </para>
+    <para>
      &seealso;
      <function class="GtkWidget">get_ancestor</function>
     </para>
-
    </desc>
   </method>
 
@@ -1384,15 +1547,18 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Returns whether or not the widget is the focus widget within its toplevel.
+    Returns whether the widget is the focus widget within its toplevel.
    </shortdesc>
    <desc>
+    <para>
+     Returns whether or not the widget is
+     the focus widget within its toplevel.
+    </para>
     <para>
      &seealso;
      <function class="GtkWidget">child_focus</function>, 
      <function class="GtkWidget">grab_focus</function>
     </para>
-
    </desc>
   </method>
 
@@ -1414,7 +1580,6 @@
      &seealso;
      <function class="GtkWidget">set_visible</function>
     </para>
-
    </desc>
   </method>
 
@@ -1429,7 +1594,9 @@
     Lists the closures used by widget for accelerator group connections.
    </shortdesc>
    <desc>
-
+    <para>
+     Lists the closures used by widget for accelerator group connections.
+    </para>
    </desc>
   </method>
 
@@ -1445,7 +1612,10 @@
     target.
    </shortdesc>
    <desc>
-
+    <para>
+     Returns an array of widgets for which the current widget is a mnemonic
+     target.
+    </para>
    </desc>
   </method>
 
@@ -1628,7 +1798,32 @@
     Returns the widget path.
    </shortdesc>
    <desc>
-    <simpara>Not yet implemented.</simpara>
+    <para>
+     Obtains the full path to the widget. The path is simply the name
+     of a widget and all its parents in the container hierarchy, separated
+     by periods. The name of a widget comes from
+     <function class="GtkWidget">get_name</function>.
+     Paths are used to apply styles to a widget in <filename>gtkrc</filename>
+     configuration files.
+     Widget names are the type of the widget by default (e.g. "GtkButton")
+     or can be set to an application-specific value with
+     <function class="GtkWidget">set_name</function>. By setting the name
+     of a widget, you allow users or theme authors to apply styles to that
+     specific widget in their gtkrc file.
+    </para>
+    <example>
+     <title>Getting a widget's path</title>
+     <programlisting role="php">
+      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+       href="&directory.examples;/reference/gtk/gtkwidget/path.php" parse="text">
+       <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+      </xi:include>
+     </programlisting>
+    </example>
+    <para>
+     &seealso;
+     <function class="GtkWidget">path</function>
+    </para>
    </desc>
   </method>
 
@@ -2494,7 +2689,7 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_state</function></funcdef>
-     <paramdef>GtkStateType <parameter>state</parameter></paramdef>
+     <paramdef><enumname>GtkStateType</enumname> <parameter>state</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -2642,7 +2837,14 @@
     Displays the widget on the screen.
    </shortdesc>
    <desc>
-
+    <para>
+     Displays the widget on the screen.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkWidget">hide</function>,
+     <function class="GtkWidget">show_all</function>
+    </para>
    </desc>
   </method>
 
@@ -2658,10 +2860,13 @@
    </shortdesc>
    <desc>
     <para>
+     Displays the widget and all of its children on the screen.
+    </para>
+    <para>
      &seealso;
+     <function class="GtkWidget">show</function>,
      <function class="GtkWidget">hide_all</function>
     </para>
-
    </desc>
   </method>
 
@@ -2673,10 +2878,16 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets a widget visible and wait until it is shown.
    </shortdesc>
    <desc>
-
+    <para>
+     Shows a widget. If the widget is an unmapped toplevel widget
+     (i.e. a GtkWindow that has not yet been shown),
+     enter the main loop and wait for the window to actually be mapped.
+     Be careful; because the main loop is running, anything can happen
+     during this function.
+    </para>
    </desc>
   </method>
 
@@ -2815,7 +3026,9 @@
     Removes the widget from its parent container.
    </shortdesc>
    <desc>
-
+    <para>
+     Removes the widget from its parent container.
+    </para>
    </desc>
   </method>
 
@@ -2848,11 +3061,9 @@
 
    </desc>
   </method>
-
  </methods>
 
  <fields>
-
   <field id="gtk.gtkwidget.field.allocation" type="ro">
    <fieldname>allocation</fieldname>
    <fieldtype>GdkRectangle</fieldtype>
@@ -2952,11 +3163,9 @@
     </para>
    </desc>
   </field>
-
  </fields>
 
  <signals>
-
   <signal id="gtk.gtkwidget.signal.accel-closures-changed">
    <signalname>accel-closures-changed</signalname>
    <funcsynopsis>

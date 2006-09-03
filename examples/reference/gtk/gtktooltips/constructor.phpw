@@ -1,0 +1,25 @@
+<?php
+$tt = new GtkTooltips();
+
+$btn = new GtkButton('Quit');
+$btn->connect_simple('clicked', array('Gtk', 'main_quit'));
+
+//set the tip
+$tt->set_tip(
+    //widget to set the tip of
+    $btn,
+    //normal tooltip
+    'Quits the application',
+    //longer description
+    'If you press this button, then'
+    . ' the application ends its life.'
+);
+
+
+//create the window, add the button
+$wnd = new GtkWindow();
+$wnd->connect_simple('destroy', array('Gtk', 'main_quit'));
+$wnd->add($btn);
+$wnd->show_all();
+Gtk::main();
+?>
