@@ -1,0 +1,439 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- EN-Revision: 1.3 Maintainer: fernandoc Status: ready -->
+<chapter id="tutorials.signals">
+ <title>Manipulação de Sinais</title>
+
+ <sect1 id="tutorials.signals.introduction">
+  <title>Introdução</title>
+  <para>
+   Este tutorial irá lidar com o conceito de manipulação de sinais no PHP-GTK 2 o que
+   é importante e fundamental, já que é isto que faz a sua aplicação
+   "tick"!. <!-- TODO o que significa "tick" aqui?-->
+  </para>
+  <para>
+   Você deve ter notado que ao final de todos os programas PHP-GTK 2 que nós
+   escrevemos tem este comando:
+   <programlisting role="php"><![CDATA[
+Gtk::main();
+]]></programlisting>
+   O que isso significa é que um laço infinito é iniciado o qual apenas espera
+   para algo acontecer. Obiviamente você não quer apenas criar, mastras os
+   widgets e sair. Este laço é o que impede isso de acontecer e é a chave
+   para a execução da sua aplicação. Resumindo, o comando:
+   <programlisting role="php"><![CDATA[
+Gtk::main_quit();
+]]></programlisting>
+   sai deste laço. Nós usamos isto em qualquer lugar que nós realmente queramos parar
+   a nossa aplicação.
+  </para>
+  <para>
+    Primeiramente, será útil definir alguns termos que nós vamos usar feqüentemente.
+  </para>
+  <para>
+   <itemizedlist>
+    <listitem>
+     Ação: Isto é alguma coisa que acontece. Por exemplo, o usuário clica
+     em um botão conta como uma ação.
+    </listitem>
+    <listitem>
+     Sinal: Esta é uma notificação gerada quando um evento acontece. Esta é
+     a maneira para a sua aplicação saber que uma ação recém ocorreu.
+    </listitem>
+    <listitem>
+     Callback: Uma função ou metodo que é invocado por outro pedaço de código.
+    </listitem>
+    <listitem>
+     Manipulador de Sinal: um callback que é chamado em resposta a um sinal
+     ser emitido. Aqui é onde você coloca o código que irá manipular o sinal.
+    </listitem>
+    <listitem>
+     Eventos: estes são um feixe continuo de impulsos que comunica as mudanças
+     de baixo nível no ambiente para o sistema de gerenciamento de janelas.
+    </listitem>
+   </itemizedlist>
+  </para>
+  <para>
+   A manipulação de sinais basicamente consiste em conectar um sinal ao seu 
+   manipulador de sinal, e claro, escrever o manipulador de sinal em sí. O trabalho de
+   gerar um sinal sempre que uma ação ocorrer é feito pelo PHP-GTK 2.
+   Outra coisa para notar é que a geração do sinal não garante que o susário
+   tenha realizado alguma ação. è possível gerar manualmente um
+   sinal, e o PHP-GTK 2 gera sinais internamente a toda a hora. 
+  </para>
+  <para>
+   Uma situação comum de um sinal ser gerado internamente e usado é quando
+   <classname>GtkAdjustment</classname> emite 
+   <signalname class="GtkAdjustment">value-changed</signalname> para um 
+   <classname>GtkProgressBar</classname> usa-lo. Então, alguns sinais tem um
+   manipulador padrão já embutido, o qual será executado se você conectar ou não
+   manualmente um manipulador de sinal para este sinal.
+  </para>
+  <para>
+   A maioria das vezes entretanto, se você quer que algo aconteça quando um
+   sinal é gerado, você precisa criar um manipulador de sinal para ele.
+  </para>
+ </sect1>
+
+ <sect1 id="tutorials.signals.signals">
+  <title>Sinais</title>
+  <note>
+   Sinais são notificações emitidas pelos widgets em resposta a alguma
+   ação que acontece.
+  </note>
+  <para>
+   Como discutido antes, é essencial para qualquer aplicação responder a alguma
+   ação que é disparada ou pelo usuário ou automaticamente. Sinais
+   ajudam o programa a saber quando uma ação em particular aconteceu assim
+   você pode agir de acordo .
+  </para>
+  <para>
+   Cada widget tem o seu conjunto de sinais associado a ele. Isto significa que
+   o widget é capaz de emitir qualqyer um destes sinais dependendo da ação que
+   ele recebe. Também lembre-se que sinais são passados entre classes, e assim,
+   uma classe filha sempre deriva todos os sinais da classe pai e pode
+   adicionar alguns por sí mesma.
+  </para>
+  <para>
+   Um conceito importante para saber aqui é que é possível emitir um sinal
+   sem o usuário realizar alguma ação. A maioria dos widgets tem funções
+   que irão emitir um sinal em particular quando você usa-las, sem importar
+   se o usuário realizou a ação ou não. Um exemplo de uma
+   função assim é o metodo <function class="GtkButton">clicked</function>
+   da classe <classname>GtkButton</classname>, o qual irá emitir o sinal
+   <literal>clicked</literal> para o botão.
+  </para>
+ </sect1>
+
+ <sect1 id="tutorials.signals.callbacks">
+  <title>Callbacks e Manipuladores de Sinal</title>
+  <note>
+   Callbacks são funções que são chamados por outro pedaço de código.
+  </note>
+  <note>
+   Manipuladores de sinal são callbacks que são executadas quando um sinal
+   em particular é gerado.
+  </note>
+  <para>
+   Manipuladores de sinais são os lugares aonde você realiza o trabalho de 
+   agir quando os sinais são recebidos. Como um programador, um manipulador de sinal
+   é aonde você precisa colocar o código que deve ser executado quando um sinal em particular
+   é emitido pelo widget.
+  </para>
+  <para>
+   Manipuladores de sinais são de dois tipos: <literal>manipuladores padrão</literal> e
+   <literal>manipuladores definidos pelo usuário</literal>. Os
+   <literal>manipuladores padrão</literal> são chamados automaticamente ao
+   receber o seu sinal correspondente. <literal>Manipuladores definidos pelo usuário</literal> por outro
+   lado devem ser explicitamente <emphasis>conectados</emphasis> aos sinais
+   pelo programador (este é você!).
+  </para>
+ </sect1>  
+
+ <sect1 id="tutorials.signals.connecting">
+  <title>Conectando os dois</title>
+  <para>
+   Deve estar claro agora que se você quer reagir a uma ação, você deve conectar 
+   o sinal ao manipulador de sinal que você escreveu, assim o
+   PHP-GTK 2 pode chamar a função sempre que o sinal seja disparado. Vamos
+   fer como você pode conectar os sinais aos manipuladores de sinal.
+  </para>
+  <para>
+   Existem 4 funções principais que você pode usar para conectar sinais a callbacks:
+   <itemizedlist>
+    <listitem>connect_simple</listitem>
+    <listitem>connect_simple_after</listitem>
+    <listitem>connect</listitem>
+    <listitem>connect_after</listitem>
+   </itemizedlist>
+  </para>
+  <note>
+   Os metodos *_after são usados se você quer que seus manipuladores de sinal sejam invocados
+   <emphasis>depois</emphasis> daqueles conectados usando
+   <literal>connect</literal> e <literal>connect_simple</literal>. Nós estaremos discutindo
+   apenas <literal>connect_simple</literal> e 
+   <literal>connect</literal>. Os metodos *_after respectivos funcionam da
+   mesma maneira, exceto pelo fato de que o manipulador de sinal é garantidamente
+   chamado apenas após aqueles conectados com <literal>connect</literal> ou
+   <literal>connect_simple</literal> tenham sido.
+  </note>
+  
+  <sect2 id="tutorials.signals.connecting.simple">
+   <title>Conecções Simples</title>
+   <para>
+    Primeiro nós iremos ver como conectar um sinal a um manipulador de sinal
+    da maneira mais simples. Nós estaremos usando, você adivinhou, o metodo
+    <literal>connect_simple</literal>.
+   </para>
+   <para>
+    Claro, é vital que você saiba os nomes dos sinais aos quais
+    você quer conectar. A documentação do PHP-GTK 2 contém uma lista de todos os sinais
+    que são importantes para um widget em particular. Uma vez que você sabe disto, é uma vez que você
+    já tenha escrito uma função que contenha o código que você quer que seja executado quando
+    o sinal é gerado, tudo o que você tem que fazer é:
+    <programlisting role="php"><![CDATA[
+${widget}->connect_simple('{signal-name}', '{callback-name}');
+]]> </programlisting>
+    aonde, {widget} é o objeto ao qual você quer conectar o sinal,
+    {signal-name} é o nome do sinal, o qual deve ser relevante para
+    {widget}, e {callback-name} é o nome da função de callback.
+   </para>
+   <note>
+    Manipuladores de sinal são invocados sempre que um sinal seja gerado, por qualquer meio.
+    Lembre-se que é possível gerar sinais atráves de funções, é assim
+    a geração de um sinal não garante que o usuário tenha realizado
+    uma ação.
+   </note>
+   <para>
+    Para tornar as coisas mais claras, vamos ver um exemplo completo. Aqui nós
+    adicionamos um botão a janela. Quando o usuário clica no botão, a aplicação
+    termina:
+    <example>
+     <title>Uma conexão simples</title>
+     <programlisting role="php">
+      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+       href="&directory.examples;/tutorials/signals/simple.phpw" parse="text">
+       <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+      </xi:include>
+     </programlisting>
+    </example>
+   </para>
+   <para>
+    É um programa muito simples. Nós criamos um botão e uma janela, adicionamos o botão 
+    a janela e os mostramos. A linha na qual estamos interessados é:
+    <programlisting role="php"><![CDATA[
+$but->connect_simple('clicked', 'quit');
+]]> </programlisting>
+    Como você pode ver, nós conectamos o sinal 
+    <signalname class="GtkButton">clicked</signalname> de um widget
+    <classname>GtkButton</classname> ao manipulador de sinal chamado
+    <literal>quit</literal>. Simples, não é? A função <literal>quit</literal>
+    será chamada quando o sinal <literal>clicked</literal> for emitido
+    a partir de nosso botão, ou quando o usuário clicar em nosso botão.
+   </para>
+   <para>
+    Você pode ver na definição da função <literal>quit</literal> que nós
+    mostramos uma mensagem e então chamamos a função <literal>Gtk::main_quit()</literal>
+    para sair do programa.
+   </para>
+  </sect2>
+  
+  <sect2 id="tutorials.signals.connecting.multiple">
+   <title>Multiplas Conexões</title>
+   <para>
+    <emphasis>O que acontece se eu conectar o mesmo sinal duas vezes para 
+    callbacks diferentes?</emphasis>, Eu ouço você perguntar. Bem, os manipuladores de sinal irão simplesmente
+    ser chamados na ordem no qual eles foram conectados.
+   </para>
+   <note>
+    Se qualquer um dos nossos manipuladores de sinal retornar <literal>true</literal> então mais nenhum
+    dos manipuladores de sinal serão chamados para o sinal que esta sendo manipulado atualmente. Isto é
+    uma maneira útil de controlar a lógica quando você tem manipuladores de sinal múltiplos.
+   </note>
+   <para>
+    Um exemplo para fazer as coisas claras como cristal:
+    <example>
+     <title>Conexão de multiplos sinais</title>
+     <programlisting role="php">
+      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+       href="&directory.examples;/tutorials/signals/multiple.phpw" parse="text">
+       <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+      </xi:include>
+     </programlisting>
+    </example>
+    Execute o programa e você verá que os manipuladores de sinal são
+    invocados na ordem que foram conectados.
+   </para>
+   <para>
+    <emphasis>Certo, mas se eu conectar o sinal ao mesmo callback uma centena de 
+    vezes?</emphasis> O callback será invocado uma centena de vezes. Mas não 
+    existe razão para alguem queree fazer isto.
+   </para>
+   <para>
+    <emphasis>Posso conectar multiplos sinais para o mesmo callback?</emphasis> 
+    Sim, e de fato isso é muito útil. Várias aplicações terão
+    multiplas maneiras de sair de um programa: o botão de fechar normal, um item "sair"
+    no menu arquivo, etc. Você pode conectar sinais para cada um deles
+    para uma unica função <literal>sair</literal>. Você não tem que se preocupar da onde
+    o sinal veio, você apenas sabe que o usuário quer sair
+    da aplicação.
+   </para>
+  </sect2>
+
+  <sect2 id="tutorials.signals.connecting.advanced">
+   <title>Personalizando Conexões</title>
+   <para>
+    Algumas vezes, é útil saber qual widget disparou um sinal em
+    particular. Se sua aplicação tem mais de um botão, e você conectou
+    todos os sinais <literal>clicked</literal> deles para um único callback, você
+    definitivamente quer saber de qual botão o sinal veio. É fato que é
+    eficiente escrever um único manipulador de sinal para multiplos sinais.
+   </para>
+   <para>
+    Aqui é aonde o metodo <literal>connect</literal> vem para a foto.
+    Este metodo passa o objeto do widget que gerou o sinal como o
+    primeiro parâmetro do manipulador de sinal.
+    <programlisting role="php"><![CDATA[
+$button1 = new GtkButton('Primeiro');
+$button2 = new GtkButton('Segundo');
+
+$button1->connect('clicked', 'show');
+$button2->connect('clicked', 'show');
+
+function show($whichbutton)
+{
+    echo $whichbutton->get_label();
+}
+]]> </programlisting>    
+    No exemplo acima, você terá como saída "Primeiro" ou "Segundo"
+    dependendo de qual botão foi clicado.
+   </para>
+   <para>
+    Também é útil algumas vezes se você puder passar parâmetros para os 
+    seus manipuladores de sinal. O PHP-GTK 2 provê esta funcionalidade nos metodos
+    <literal>connect</literal> e <literal>connect_after</literal>. Você pode simplesmente
+    passar os seus parâmetros depois dos seus argumentos para ambos os metodos
+    separados por vírgulas como por exemplo:
+    <example>
+     <title>Passando parâmetros personalizados</title>
+     <programlisting role="php">
+      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+       href="&directory.examples;/tutorials/signals/custom.phpw" parse="text">
+       <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+      </xi:include>
+     </programlisting>
+    </example>
+    Neste exemplo, nós passamos dois parâmetros personalizados para o nosso manipulador
+    de sinal que ajuda-nos a diferenciar quando o mouse entrou no botão ou 
+    deixou-o. Note que o nossos parâmetros personalizados podem ser de qualquer tipo: string, boleano, 
+    inteiro, um array ou até mesmo um objeto, contando que sejá um tipo válido no PHP. 
+    De fato, é uma necessidade muito comum passar objetos de widgets como parâmetros
+    para manipuladores de sinal, porque um callback conectado a um sinal disparado por
+    algum widget pode necessitar modificar outro widget. Você pode passar quantos
+    parâmetros personalizados quanto quiser. Apenas certifique-se que o seu manipulador de sinal
+    é designado para receber o mesmo número de parâmetros, ou você 
+    terá avisos.
+   </para>
+   <note>
+    Para maiores informações sobre sinais como
+    <literal>enter-notify-event</literal>, veja a seção sobre 
+    <link linkend="tutorials.signals.events">eventos</link>, porque
+    tem mais sobre isso do que seus olhos podem ver.
+   </note>
+  </sect2>
+
+  <sect2 id="tutorials.signals.connecting.object">
+   <title>Conexões Orientadas a Objeto</title>
+   <para>
+    Vamos ver uma linha que você deve ter visto frequentemente:
+    <programlisting role="php"><![CDATA[
+$window->connect_simple('destroy', array('gtk', 'main_quit'));
+]]> </programlisting>
+    Porque um array como segundo argumento?
+   </para>
+   <para>
+    Lembre-se de que em qualquer lugar que você conectar funções de callback em
+    um contexto orientado a objetos, o segundo argumento das funções connect_* devem
+    ser uma matriz. O primeiro elemento da matriz deve apontar para a classe que contém o callback
+    e o segundo elemento deve conter o nome do
+    callback em sí.
+   </para>
+   <para>
+    Quando o callback é estatico por natureza (como
+    <literal>Gtk::main_quit()</literal>), nós geralmente especificamos o nome da classe
+    como uma string. Entretanto, se o callback não é estatico por natureza, mas é menbro
+    da classe atual, o primeiro elemento deve ser a variável
+    especial <literal>$this</literal>. De uma olhada no tutorial
+    <link linkend="tutorials.objectorientation.advanced">Programação Orientada a
+    Objeto</link> para exemplos de utilização neste contexto. O ponto é de alguma maneira
+    fazer o primeiro elemento da array apontar para a classe que contém o callback
+    e o segundo elemento apontar para o callback.
+   </para>
+  </sect2>
+ </sect1>
+
+ <sect1 id="tutorials.signals.events">
+  <title>Eventos</title>
+  <para>
+   Existe muita diferença entre <literal>eventos</literal> e
+   <literal>sinais</literal>, e ambos deles estão longe de ser intercambiáveis.
+  </para>
+  <para>
+   Um sinal é emitido por uma instância de <classname>GtkObject</classname> em
+   resposta a alguma ação pelo usuário ou uma instrução de uma função ou
+   metodo.
+  </para>
+  <para>
+   Eventos por outro lado, são um feixe continuo de impulsos que comunicam
+   mensagens sobre modificações do ambiênte no sistema de janelas.
+   Estes são de baixo nível, isto significa que qualquer pequena modifcação
+   no ambiênte conta cmo um evento.
+  </para>
+  <note>
+   Não é possível conectar um callback a um evento diretamente.
+  </note>
+  <para>
+   Nós usamos o sinal <literal>enter-notify-event</literal> no nosso exemplo
+   anterior. Mas certamente parece que deve ser um evento, não é? Vários dos
+   eventos tem importantes aplicações e é normalmente necessário ser
+   capaz de conectar callback a eles. para este fim, o PHP-GTK 2 provê
+   vários sinais conhecidos como <literal>sinais de evento</literal> (como 
+   <literal>enter-notify-event</literal> e
+   <literal>leave-notify-event</literal>) que atualmente são emcapsulamento sobre os
+   eventos em sí. Estes são maneiras de descrever eventos em termos de sinais assim
+   nós podemos conectar callbacks a eles.
+  </para>
+  <para>
+   Quando você precisar capturar um evento, você provavelmente irá encontar
+   um sinal equivalente para trabalhar. No caso de você não encontarr, é possível para todos os
+   widgets que tenham o seu próprio <classname>GdkWindow</classname> capturar eventos
+   importantes para sí. Para aqueles widgets que não tem
+   <classname>GdkWindow</classname>, eles devem ser emcapsulados em um
+   <classname>GtkEventBox</classname> para ser capaz de capturar eventost. Capturar 
+   um evento não é uma tarefa fácil, e esta além do escopo deste tutorial. Como eu disse
+   antes, você irá provavelmente encontarr um sinal equivalente para trabalhar de qualquer maneira,
+   então não se preocupe muito com eventos.
+  </para>
+ </sect1>
+
+ <sect1 id="tutorials.signals.summary">
+  <title>sumário</title>
+  <para>
+   Nós iremos encerrar este tutorial com um sumário final das coisas que você aprendeu.
+  </para>
+  <para>
+   <itemizedlist>
+    <listitem>
+     Manipulação de sinal é basicamente conectar um sinal ao seu manipulador de sinal e 
+     escrever o manipulador de sinal em sí.
+    </listitem>
+    <listitem>
+     Você pode conectar vários sinais para um único manipulador de sinais e um único
+     sinal a multiplos manipuladores de sinal. Apenas lembre-se que manipuladores de sinal
+     são executados na ordem que foram conectados.
+    </listitem>
+    <listitem>
+     Você pode passar seus próprios parâmetros para os manipuladores de sinal especificando eles
+     nos argumentos das funções connect_*. também lembre-se que seu 
+     manipulador de sinal deve ser designado para receber o número exato de
+     parâmetro que você especificou ao conectar o sinal a ele.
+    </listitem>
+    <listitem>
+     Ao se referir a callbacks que estão em um contexto orientado a objetos,
+     lembre-se que o segundo argumento deve ser um array, o primeiro elemento
+     o qual deve apontar para a classe a qual o callback pertence, e o segundo
+     elemento o qual deve ser o nome do callback em sí.
+    </listitem>
+    <listitem>
+     lembre-se das diferenças entre evento e o sinal. Também lembre-se que 
+     você pode indiretamente manipular eventos com os seus sinais correspondentes.
+    </listitem>
+   </itemizedlist>
+  </para>
+  <para>
+   Espero que este tutorial tenha clareado as coisas um pouco. A única maneira de você aprender
+   é praticando, asiim, abra o seu editor de texto favorito, e começe a escrever! O
+   melhor para todos!
+  </para>
+ </sect1>
+
+</chapter> 
