@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<!-- $Revision: 1.8 $ -->
+<!-- $Revision: 1.9 $ -->
 <classentry id="gtk.gtkuimanager">
  <classmeta>
   <classtitle>GtkUIManager</classtitle>
@@ -8,7 +8,9 @@
    An object for creating menus and toolbars from XML.
   </shortdesc>
   <desc>
-
+    A GtkUIManager object constructs menus and toolbars from an XML description.
+    GtkUIManager is used to create a user interfaces consisting of menus and
+    toolbars from a UI definition which references one or more action groups.
   </desc>
  </classmeta>
 
@@ -22,10 +24,10 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Creates a new GtkUIManager object.
    </shortdesc>
    <desc>
-
+    A GtkUIManager object constructs menus and toolbars from an XML description.
    </desc>
   </constructor>
 
@@ -46,10 +48,15 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Adds a new UI element to the specified location.
    </shortdesc>
    <desc>
     <para>
+      Adds a UI element of the 
+      <enumname>GtkUiManagerItemType</enumname> specified by type to the
+      current contents of the ui manager at the location specified by path.
+      Use <function class="GtkUiManager">new_merge_id()</function> to get an
+      unused merge id.
      &seealso;
      <function class="GtkUIManager">get_ui</function>, 
      <function class="GtkUIManager">remove_ui</function>
@@ -67,10 +74,14 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Merges a file UI definition.
    </shortdesc>
    <desc>
-
+    This method parses a file containing a UI definition and merges it with the
+    current UI definition. If there is an error during the parsing of the file
+    it will be place in GError. This method returns a merge id which can be used
+    to unmerge the UI with the
+    <function class="GtkUiManager">remove_ui()</function> method.
    </desc>
   </method>
 
@@ -82,10 +93,13 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Merges a string UI definition.
    </shortdesc>
    <desc>
-
+    This method parses a string containing a UI definition and merges it with
+    the current UI definition. An enclosing &lt;ui&gt; element is added if it is
+    missing. This method returns a merge id which can be used to unmerge the UI
+    with the <function class="GtkUiManager">remove_ui()</function> method.
    </desc>
   </method>
 
@@ -97,10 +111,14 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Make sure all pending updates have been added.
    </shortdesc>
    <desc>
-
+    This method makes sure that all pending updates to the UI have been
+    completed. This may occasionally be necessary, since GtkUiManager updates
+    the UI in an idle function. A typical example where this method is useful is
+    to enforce that the menubar and toolbar have been added to the main window
+    before showing it.
    </desc>
   </method>
 
@@ -112,10 +130,11 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns an associated <classname>GtkAccelGroup</classname>
    </shortdesc>
    <desc>
-
+    This method returns the <classname>GtkAccelGroup</classname> associated
+    with the current instance.
    </desc>
   </method>
 
@@ -127,10 +146,15 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Looks up a <classname>GtkAction</classname> by following a path.
    </shortdesc>
    <desc>
-
+    This method looks up a <classname>GtkAction</classname> by following 
+    a path. The path consists of the names specified in the XML description 
+    of the UI. separated by '/'. Elements that don't have a name or action 
+    attribute in the XML (e.g. &lt;popup&gt;) can be addressed by their XML 
+    element name (e.g. "popup"). The root element ("/ui") can be omitted in
+    the path.
    </desc>
   </method>
 
@@ -142,10 +166,10 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns associated <classname>GtkActionGroup</classname> objects.
    </shortdesc>
    <desc>
-
+    This method returns the list of associated GtkActionGroup objects.
    </desc>
   </method>
 
@@ -157,10 +181,12 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns <literal>true</literal>
+    if regular menus will have tearoff menu items.
    </shortdesc>
    <desc>
     <para>
+     If true, regular menus generated will have tearoff menu items.
      &seealso;
      <function class="GtkUIManager">set_add_tearoffs</function>
     </para>
@@ -176,10 +202,13 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Obtains a list of all toplevel widgets of the requested types.
    </shortdesc>
    <desc>
-
+    Returns a list of all specified the types of toplevel widgets to include.
+    Allowed types are: 
+    <optionname enum="GtkUiManagerItemType">Gtk::UI_MANAGER_MENUBAR</optionname>    ,<optionname enum="GtkUiManagerItemType">Gtk::UI_MANAGER_TOOLBAR</optionname> 
+    and <optionname enum="GtkUiManagerItemType">Gtk::UI_MANAGER_POPUP</optionname>.
    </desc>
   </method>
 
@@ -191,10 +220,12 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Gets a string containing an XML representation of the merged UI.
    </shortdesc>
    <desc>
     <para>
+      This method creates a UI definition of the merged UI and returns it as an
+      XML string.
      &seealso;
      <function class="GtkUIManager">add_ui</function>, 
      <function class="GtkUIManager">remove_ui</function>
@@ -211,10 +242,14 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Looks up a widget by following a path.
    </shortdesc>
    <desc>
-
+    This method looks up a widget by following a path. The path consists of 
+    the names specified in the XML description of the UI. separated by '/'.
+    Elements that don't have a name or action attribute in the XML (e.g. 
+    &lt;popup&gt;) can be addressed by their XML element name (e.g. "popup").
+    The root element ("/ui") can be omitted in the path.
    </desc>
   </method>
 
@@ -227,14 +262,18 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Inserts a <classname>GtkActionGroup</classname> at a location.
    </shortdesc>
    <desc>
     <para>
+      This method inserts a <classname>GtkActionGroup</classname> into the
+      list of associated action groups at the position specified by 
+      <literal>pos</literal>. Actions in earlier groups hide actions with 
+      the same name in later groups. If pos is negative the group
+      is inserted at the end of the list.
      &seealso;
      <function class="GtkUIManager">remove_action_group</function>
     </para>
-
    </desc>
   </method>
 
@@ -246,10 +285,11 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns a merge id for GtkUIManager::add_ui().
    </shortdesc>
    <desc>
-
+    Returns an unused merge id, suitable for use with
+    <function class="GtkUiManager">add_ui()</function>.
    </desc>
   </method>
 
@@ -261,14 +301,18 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Removes the par of the ui definition content.
    </shortdesc>
    <desc>
     <para>
+     Using a merge id returned by 
+     <function class="GtkUiManager">add_ui()</function>, 
+     <function class="GtkUiManager">add_ui_from_string()</function> or
+     <function class="GtkUiManager">add_ui_from_file()</function> methods
+     and removes the part of the UI content identified by the id.
      &seealso;
      <function class="GtkUIManager">insert_action_group</function>
     </para>
-
    </desc>
   </method>
 
@@ -300,14 +344,17 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Controls if regular menu items will have tearoffs.
    </shortdesc>
    <desc>
     <para>
+     If set to <literal>true</literal> regular menus generated by
+     <classname>GtkUIManager</classname> will have tearoff
+     menu items. Note that this only affects regular menus. Generated popup
+     menus never have tearoff menu items.
      &seealso;
      <function class="GtkUIManager">get_add_tearoffs</function>
     </para>
-
    </desc>
   </method>
 
@@ -324,9 +371,12 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
+    This signal is emitted when the set of actions changes.
    </shortdesc>
    <desc>
-
+    This signal is emitted whenever the set of actions changes. One items, the
+    <classname>GtkUIManager</classname> instance, is passed to a registered
+    callback.
    </desc>
   </signal>
   
@@ -340,9 +390,14 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
+    This signal is emitted for each generated menubar and toolbar
    </shortdesc>
    <desc>
-
+    This signal is emitted for each generated menubar and toolbar. It is not
+    emitted for generated popup menus, which can be obtained by
+    <function class="GtkUiManager">get_widget</function>.  Two items, the
+    <classname>GtkUIManager</classname> instance and the
+    widget added are passed to a registered callback.
    </desc>
   </signal>
   
@@ -357,9 +412,15 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
+    This signal is emitted when a widget is connected to an action.
    </shortdesc>
    <desc>
-
+    The <literal>connect-proxy</literal> signal is emitted after connecting a
+    proxy to an action in the group. This is intended for simple customizations
+    for which a custom action class would be too clumsy, e.g. showing tooltips
+    for menuitems in the statusbar. Three items, the
+    <classname>GtkUIManager</classname> instance, the action and the proxy
+    widget are passed to a registered callback.
    </desc>
   </signal>
   
@@ -374,9 +435,13 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
+    This signal is emitted when a widget is disconnected from an action.
    </shortdesc>
    <desc>
-
+    The <literal>disconnect-proxy</literal> signal is emitted after
+    disconnecting a proxy from an action in the group. Three items, the 
+    <classname>GtkUIManager</classname> instance, the action and
+    the proxy widget are passed to a registered callback.
    </desc>
   </signal>
   
@@ -390,9 +455,14 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
+    Emitted after action is activated.
    </shortdesc>
    <desc>
-
+    The <literal>post-activate</literal> signal is emitted after action is
+    activated. This signal is intended for applications to get notification
+    after any action is activated. Two items, the 
+    <classname>GtkUIManager</classname> instance and the action are passed
+    to a registered callback.
    </desc>
   </signal>
   
@@ -406,12 +476,19 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
+    Emitted before action is activated.
    </shortdesc>
    <desc>
-
+    The <literal>pre-activate</literal> signal is emitted before action is
+    activated. This signal is intended for applications to get notification
+    before any action is activated. Two items, the
+    <classname>GtkUIManager</classname> instance and the action are passed to
+    a registered callback.
    </desc>
   </signal>
   
  </signals>
 
 </classentry>
+
+
