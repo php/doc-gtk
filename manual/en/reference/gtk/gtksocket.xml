@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<!-- $Revision: 1.7 $ -->
+<!-- $Revision: 1.8 $ -->
 <classentry id="gtk.gtksocket">
  <classmeta>
   <classtitle>GtkSocket</classtitle>
@@ -8,7 +8,41 @@
    A container for showing a toplevel window from another process.
   </shortdesc>
   <desc>
-
+    <para>
+      Together with <classname>GtkPlug</classname>, GtkSocket provides the
+      ability to embed widgets from one process into another process in a
+      fashion that is transparent to the user. One process creates a GtkSocket
+      widget and, passes the that widget's window ID to the other process, which
+      then creates a <classname>GtkPlug</classname> with that window ID. Any
+      widgets contained in the <classname>GtkPlug</classname> then will appear
+      inside the first applications window.
+    </para>
+    <para>
+      The socket's window ID is obtained by using <function
+      class="GtkSocket">get_id</function>. Before using this function, the
+      socket must have been realized and added to its parent.
+    </para>
+    <para>
+      When the embedded window has been destroyed, then it will destroy the
+      socket as well. You should always, therefore, be prepared for your sockets
+      to be destroyed at any time when the main event loop is running.
+    </para>
+    <para>
+      The communication between a GtkSocket and a <classname>GtkPlug</classname>
+      follows the <ulink
+      url="http://standards.freedesktop.org/xembed-spec/xembed-spec-latest.html">XEmbed</ulink>
+      protocol. This protocol has also been implemented in other toolkits.
+    </para>
+    <para>
+      A socket can also be used to swallow arbitrary pre-existing top-level
+      windows using <function class="GtkSocket">steal</function>, though the
+      integration when this is done will not be as close as between a
+      <classname>GtkPlug</classname> and a GtkSocket.
+    </para>
+    <para>
+      The <classname>GtkPlug</classname> and GtkSocket widgets are currently not
+      available on all platforms.
+    </para>
   </desc>
  </classmeta>
 
@@ -22,10 +56,12 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Create a <classname>GtkSocket</classname>
    </shortdesc>
    <desc>
-
+    <para>
+      Create a new empty <classname>GtkSocket</classname>
+    </para>
    </desc>
   </constructor>
 
@@ -41,10 +77,30 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Adds a client such as a <classname>GtkPlug</classname>.
    </shortdesc>
    <desc>
     <para>
+      This method adds an <ulink
+      url="http://standards.freedesktop.org/xembed-spec/xembed-spec-latest.html">XEmbed</ulink>
+      client specified by <literal>window_id</literal> to the
+      <classname>GtkSocket</classname>. The client may be in the same process or
+      in a different process.
+    </para>
+    <para>
+      You can embed a <classname>GtkPlug</classname> in a
+      <classname>GtkSocket</classname> using one of two methods.
+    </para>
+    <para>
+      Create the <classname>GtkPlug</classname>, then call <function
+      class="GtkPlug">get_id</function> to get the window ID of the plug, and
+      finally pass that to <function class="GtkSocket">add_id</function>
+    </para>
+    <para>
+      Call the <function class="GtkSocket">get_id</function> method to get the
+      window ID for the socket, then create the <classname>GtkPlug</classname>
+      passing in that ID. The <classname>GtkSocket</classname> must have already
+      be added into a toplevel window before you can make this call.
      &seealso;
      <function class="GtkSocket">get_id</function>
     </para>
@@ -55,15 +111,20 @@
   <method id="gtk.gtksocket.method.get_id">
    <funcsynopsis>
     <funcprototype>
-     <funcdef> <function>get_id</function></funcdef>
+     <funcdef>int <function>get_id</function></funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Retrieve the window ID for the socket.
    </shortdesc>
    <desc>
     <para>
+      This method gets the window ID of a <classname>GtkSocket</classname>
+      widget, which can then be used to create a client embedded inside the
+      socket, for instance with <classname>GtkPlug</classname>. The
+      <classname>GtkSocket</classname> must have already be added into a
+      toplevel window before you can make this call.
      &seealso;
      <function class="GtkSocket">add_id</function>
     </para>
@@ -79,10 +140,23 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    DEPRECATED. Reparents a pre-existing toplevel window into a GtkSocket
    </shortdesc>
    <desc>
-
+    <para>
+      This method is deprecated and should not be used in newly-written code.
+    </para>
+    <para>
+      Reparents a pre-existing toplevel window into a
+      <classname>GtkSocket</classname>. This is meant to embed clients that do
+      not know about embedding into a <classname>GtkSocket</classname>, however
+      doing so is inherently unreliable, and using this function is not
+      recommended.
+    </para>
+    <para>
+      The <classname>GtkSocket</classname> must have already be added into a
+      toplevel window before you can make this call.
+    </para>
    </desc>
   </method>
 
@@ -99,9 +173,13 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
+    This signal is emitted when a client is successfully added to the socket.
    </shortdesc>
    <desc>
-
+    <para>
+      The callback will be passed one parameters:
+     <parameter>socket</parameter>, the object which received the signal
+    </para>
    </desc>
   </signal>
   
@@ -114,12 +192,22 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
+    This signal is emitted when a client is removed from the socket.
    </shortdesc>
    <desc>
-
+    <para>
+      The default action is to destroy the <classname>GtkSocket</classname>
+      widget, so if you want to reuse it you must add a signal handler that
+      returns <literal>True</literal>.
+    </para>
+    <para>
+      The callback will be passed one parameters:
+     <parameter>socket</parameter>, the object which received the signal
+     </para>
    </desc>
   </signal>
   
  </signals>
 
 </classentry>
+
