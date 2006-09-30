@@ -1,0 +1,16 @@
+<?php
+$vbox = new GtkVBox();
+
+$handlebox = new GtkHandleBox();
+$handlebox->add(new GtkLabel('I can be detached'));
+$vbox->pack_start($handlebox, false);
+
+$vbox->pack_start(new GtkTextView());
+
+
+$wnd = new GtkWindow();
+$wnd->connect_simple('destroy', array('gtk', 'main_quit'));
+$wnd->add($vbox);
+$wnd->show_all();
+Gtk::main();
+?>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<!-- $Revision: 1.7 $ -->
+<!-- $Revision: 1.8 $ -->
 <classentry id="gtk.gtkhandlebox">
  <classmeta>
   <classtitle>GtkHandleBox</classtitle>
@@ -8,12 +8,35 @@
    A container for creating detachable window elements.
   </shortdesc>
   <desc>
-
+   <para>
+    The GtkHandleBox widget allows a portion of a window to be "torn off".
+    It is a bin widget which displays its child and a handle that the user
+    can drag to tear off a separate window (the float window) containing
+    the child widget.
+    A thin ghost is drawn in the original location of the handlebox.
+    By dragging the separate window back to its original location,
+    it can be reattached.
+   </para>
+   <para>
+    When reattaching, the ghost and float window, must be aligned
+    along one of the edges, the <emphasis>snap edge</emphasis>.
+    This either can be specified by the application programmer explicitely,
+    or GTK+ will pick a reasonable default based on the handle position.
+   </para>
+   <para>
+    To make detaching and reattaching the handlebox as minimally confusing
+    as possible to the user, it is important to set the snap edge so that
+    the snap edge does not move when the handlebox is deattached.
+    For instance, if the handlebox is packed at the bottom of a VBox,
+    then when the handlebox is detached, the bottom edge of the handlebox's
+    allocation will remain fixed as the height of the handlebox shrinks,
+    so the snap edge should be set to
+    <optionname enum="GtkPositionType">Gtk::POS_BOTTOM</optionname>.
+   </para>
   </desc>
  </classmeta>
 
  <constructors>
-
   <constructor id="gtk.gtkhandlebox.constructor">
    <funcsynopsis>
     <funcprototype>
@@ -22,71 +45,86 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Creates a new handle box.
    </shortdesc>
    <desc>
-
+    <para>
+     Creates a new handle box.
+    </para>
+    <example>
+     <title>Adding a handle box to a window</title>
+     <programlisting role="php">
+      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+                  href="&directory.examples;/reference/gtk/gtkhandlebox/constructor.phpw" parse="text">
+       <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+      </xi:include>
+     </programlisting>
+    </example>
    </desc>
   </constructor>
-
  </constructors>
 
  <methods>
-
   <method id="gtk.gtkhandlebox.method.get_handle_position">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>GtkPositionType <function>get_handle_position</function></funcdef>
+     <funcdef><enumname>GtkPositionType</enumname> <function>get_handle_position</function></funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Gets the handle position of the handle box.
    </shortdesc>
    <desc>
+    <para>
+     Gets the handle position of the handle box.
+    </para>
     <para>
      &seealso;
      <function class="GtkHandleBox">set_handle_position</function>
     </para>
-
    </desc>
   </method>
 
   <method id="gtk.gtkhandlebox.method.get_shadow_type">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>GtkShadowType <function>get_shadow_type</function></funcdef>
+     <funcdef><enumname>GtkShadowType</enumname> <function>get_shadow_type</function></funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Gets the type of shadow drawn around the handle box.
    </shortdesc>
    <desc>
+    <para>
+     Gets the type of shadow drawn around the handle box.
+    </para>
     <para>
      &seealso;
      <function class="GtkHandleBox">set_shadow_type</function>
     </para>
-
    </desc>
   </method>
 
   <method id="gtk.gtkhandlebox.method.get_snap_edge">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>GtkPositionType <function>get_snap_edge</function></funcdef>
+     <funcdef><enumname>GtkPositionType</enumname> <function>get_snap_edge</function></funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Gets the edge used for determining reattachment of the handle box.
    </shortdesc>
    <desc>
+    <para>
+     Gets the edge used for determining reattachment of the handle box.
+    </para>
     <para>
      &seealso;
      <function class="GtkHandleBox">set_snap_edge</function>
     </para>
-
    </desc>
   </method>
 
@@ -94,18 +132,20 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_handle_position</function></funcdef>
-     <paramdef>GtkPositionType <parameter>position</parameter></paramdef>
+     <paramdef><enumname>GtkPositionType</enumname> <parameter>position</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the side of the handlebox where the handle is drawn.
    </shortdesc>
    <desc>
+    <para>
+     Sets the side of the handlebox where the handle is drawn.
+    </para>
     <para>
      &seealso;
      <function class="GtkHandleBox">get_handle_position</function>
     </para>
-
    </desc>
   </method>
 
@@ -113,18 +153,20 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_shadow_type</function></funcdef>
-     <paramdef>GtkShadowType <parameter>type</parameter></paramdef>
+     <paramdef><enumname>GtkShadowType</enumname> <parameter>type</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the type of shadow to be drawn around the border of the handle box.
    </shortdesc>
    <desc>
+    <para>
+     Sets the type of shadow to be drawn around the border of the handle box.
+    </para>
     <para>
      &seealso;
      <function class="GtkHandleBox">get_shadow_type</function>
     </para>
-
    </desc>
   </method>
 
@@ -132,57 +174,155 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_snap_edge</function></funcdef>
-     <paramdef>GtkPositionType <parameter>edge</parameter></paramdef>
+     <paramdef><enumname>GtkPositionType</enumname> <parameter>edge</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the snap edge of a handlebox.
    </shortdesc>
    <desc>
+    <para>
+     Sets the snap edge of a handlebox.
+     The snap edge is the edge of the detached child that must be aligned
+     with the corresponding edge of the "ghost" left behind when the child
+     was detached to reattach the torn-off window.
+     Usually, the snap edge should be chosen so that it stays in the same
+     place on the screen when the handlebox is torn off.
+    </para>
+    <para>
+     If the snap edge is not set, then an appropriate value will be guessed
+     from the handle position.
+     If the handle position is
+     <optionname enum="GtkPositionType">Gtk::POS_RIGHT</optionname> or
+     <optionname enum="GtkPositionType">Gtk::POS_LEFT</optionname>, then the
+     snap edge will be
+     <optionname enum="GtkPositionType">Gtk::POS_TOP</optionname>, otherwise
+     it will be <optionname enum="">Gtk::POS_LEFT</optionname>.
+    </para>
+    <para>
+     To unset the value (and let Gtk guess the position), set it to
+     <literal>-1</literal>.
+    </para>
     <para>
      &seealso;
      <function class="GtkHandleBox">get_snap_edge</function>
     </para>
-
    </desc>
   </method>
-
  </methods>
 
- <signals>
 
+ <properties>
+  <prop id="gtk.gtkhandlebox.property.handle-position" type="rw">
+   <propname>handle-position</propname>
+   <proptype><enumname>GtkPositionType</enumname></proptype>
+   <shortdesc>
+     Position of the handle relative to the child widget.
+   </shortdesc>
+   <desc>
+    <para>
+     Position of the handle relative to the child widget.
+    </para>
+    <para>
+     Default: <optionname enum="GtkPositionType">Gtk::POS_LEFT</optionname>
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtkhandlebox.property.shadow-type" type="rw">
+   <propname>shadow-type</propname>
+   <proptype><enumname>GtkShadowType</enumname></proptype>
+   <shortdesc>
+     Appearance of the shadow that surrounds the container.
+   </shortdesc>
+   <desc>
+    <para>
+     Appearance of the shadow that surrounds the container.
+    </para>
+    <para>
+     Default: <optionname enum="GtkShadowType">Gtk::SHADOW_ETCHED_OUT</optionname>
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtkhandlebox.property.snap-edge" type="rw">
+   <propname>snap-edge</propname>
+   <proptype><enumname>GtkPositionType</enumname></proptype>
+   <shortdesc>
+     Side of the handlebox that's lined up with the docking point to dock the handlebox.
+   </shortdesc>
+   <desc>
+    <para>
+     Side of the handlebox that's lined up with the docking point
+     to dock the handlebox.
+    </para>
+    <para>
+     Default: <optionname enum="GtkPositionType">Gtk::POS_LEFT</optionname>
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtkhandlebox.property.snap-edge-set" type="rw">
+   <propname>snap-edge-set</propname>
+   <proptype>boolean</proptype>
+   <shortdesc>
+     Whether to use the value from the <literal>snap_edge</literal> property.
+   </shortdesc>
+   <desc>
+    <para>
+     Whether to use the value from the
+     <propname class="GtkHandleBox">snap_edge</propname> property or a
+     value derived from
+     <propname class="GtkHandleBox">handle_position</propname>.
+    </para>
+    <para>
+     Default: <literal>false</literal>
+    </para>
+   </desc>
+  </prop>
+ </properties>
+
+
+ <signals>
   <signal id="gtk.gtkhandlebox.signal.child-attached">
    <signalname>child-attached</signalname>
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <cbfunction>callback</cbfunction></funcdef>
-     <paramdef>GtkHandleBox <parameter>handlebox</parameter></paramdef>
-     <paramdef>GtkWidget <parameter>UNKNOWN</parameter></paramdef>
+     <paramdef><classname>GtkHandleBox</classname> <parameter>handlebox</parameter></paramdef>
+     <paramdef><classname>GtkWidget</classname> <parameter>child_widget</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
+    The contents of the box are reattached to the main window.
    </shortdesc>
    <desc>
-
+    <para>
+     This signal is emitted when the contents of the handlebox are reattached
+     to the main window.
+    </para>
    </desc>
   </signal>
-  
+
   <signal id="gtk.gtkhandlebox.signal.child-detached">
    <signalname>child-detached</signalname>
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <cbfunction>callback</cbfunction></funcdef>
-     <paramdef>GtkHandleBox <parameter>handlebox</parameter></paramdef>
-     <paramdef>GtkWidget <parameter>UNKNOWN</parameter></paramdef>
+     <paramdef><classname>GtkHandleBox</classname> <parameter>handlebox</parameter></paramdef>
+     <paramdef><classname>GtkWidget</classname> <parameter>child_widget</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
+    The widget is detached from the main window.
    </shortdesc>
    <desc>
-
+    <para>
+     This signal is emitted when the contents of the handlebox are detached
+     from the main window.
+    </para>
    </desc>
   </signal>
-  
  </signals>
 
 </classentry>
