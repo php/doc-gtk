@@ -106,7 +106,7 @@ class updateMethods
         if ($functionNodes->length == 0) {
             /* Method not present, Add it */
             if ($ismethod) {
-                $xmlMethod = $doc->createElement('method', "\n   ");
+                $xmlMethod = $doc->createElement('method', "\n    ");
             } else {
                 $xmlMethod = $doc->createElement('constructor', "\n   ");
             }

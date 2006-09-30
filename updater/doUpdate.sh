@@ -1,4 +1,4 @@
 #!/bin/sh
-python prepxpath.py
-php updateMethods.php
-python remxpath.py
+php prepxpath.php $@
+php updateMethods.php $@
+php remxpath.php $@
