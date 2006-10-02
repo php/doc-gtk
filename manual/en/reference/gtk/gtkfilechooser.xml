@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- $Revision: 1.1 $ -->
+<!-- $Revision: 1.2 $ -->
 <classentry id="gtk.gtkfilechooser" type="interface">
  <classmeta>
   <classtitle>GtkFileChooser</classtitle>
@@ -32,43 +32,68 @@
     Adds a filter to the GtkFileChooser
    </shortdesc>
    <desc>
-   <para>
-    Adds a filter to the <classname>gtkfilechooser</classname>.
-    This filter is specified by the parameter that is a
-    <classname>GtkFileFilter</classname> object.
-   </para>
+    <para>
+     Adds a filter to the <classname>gtkfilechooser</classname>.
+     This filter is specified by the parameter that is a
+     <classname>GtkFileFilter</classname> object.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkFileChooser">remove_filter</function>,
+     <function class="GtkFileChooser">set_filter</function>
+    </para>
    </desc>
   </method>
 
   <method id="gtk.gtkfilechooser.method.add_shortcut_folder">
    <funcsynopsis>
     <funcprototype>
-     <funcdef> <function>add_shortcut_folder</function></funcdef>
+     <funcdef>bool <function>add_shortcut_folder</function></funcdef>
      <paramdef>string <parameter>folder</parameter></paramdef>
      <paramdef><parameter>error</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Adds a folder to be displayed with the shortcut folders.
    </shortdesc>
-    <desc>
-
+   <desc>
+    <para>
+     Adds a folder to be displayed with the shortcut folders in a file chooser.
+     Note that shortcut folders do not get saved,
+     as they are provided by the application.
+      For example, you can use this to add a
+      "/usr/share/mydrawprogram/Clipart" folder to the volume list.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkFileChooser">remove_shortcut_folder</function>
+    </para>
    </desc>
   </method>
 
   <method id="gtk.gtkfilechooser.method.add_shortcut_folder_uri">
    <funcsynopsis>
     <funcprototype>
-     <funcdef> <function>add_shortcut_folder_uri</function></funcdef>
+     <funcdef>bool <function>add_shortcut_folder_uri</function></funcdef>
      <paramdef>string <parameter>uri</parameter></paramdef>
      <paramdef><parameter>error</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Adds a folder URI to be displayed with the shortcut folders.
    </shortdesc>
    <desc>
-
+    <para>
+     Adds a folder URI to be displayed with the shortcut folders
+     in a file chooser. Note that shortcut folders do not get saved,
+     as they are provided by the application.
+     For example, you can use this to add a
+     "file:///usr/share/mydrawprogram/Clipart" folder to the volume list.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkFileChooser">remove_shortcut_folder_uri</function>
+    </para>
    </desc>
   </method>
 
@@ -83,15 +108,19 @@
     Returns the action of the chooser.
    </shortdesc>
    <desc>
-   <para>
-    Returns the action of the file chooser.
-    defined through the <function class="GtkFileChooser">set_action</function>
-    method.
-   </para>
-   <para>
-    It can be <enumname>Gtk::FILE_CHOOSER_ACTION_OPEN</enumname> or
-    <enumname>Gtk::FILE_CHOOSER_ACTION_SELECT_FOLDER</enumname>.
-   </para>
+    <para>
+     Returns the action of the file chooser.
+     defined through the <function class="GtkFileChooser">set_action</function>
+     method.
+    </para>
+    <para>
+     It can be <enumname>Gtk::FILE_CHOOSER_ACTION_OPEN</enumname> or
+     <enumname>Gtk::FILE_CHOOSER_ACTION_SELECT_FOLDER</enumname>.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkFileChooser">set_action</function>
+    </para>
    </desc>
   </method>
 
@@ -112,28 +141,38 @@
     <para>
      If a file is shown at the button, then only its path will be returned.
     </para>
+    <para>
+     &seealso;
+     <function class="GtkFileChooser">set_current_folder</function>
+    </para>
    </desc>
   </method>
 
   <method id="gtk.gtkfilechooser.method.get_current_folder_uri">
    <funcsynopsis>
     <funcprototype>
-     <funcdef> <function>get_current_folder_uri</function></funcdef>
-      <paramdef>void</paramdef>
+     <funcdef>string <function>get_current_folder_uri</function></funcdef>
+     <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Gets the current folder as an URI.
    </shortdesc>
    <desc>
-
+    <para>
+     Gets the current folder as an URI.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkFileChooser">set_current_folder_uri</function>
+    </para>
    </desc>
   </method>
 
   <method id="gtk.gtkfilechooser.method.get_extra_widget">
    <funcsynopsis>
     <funcprototype>
-     <funcdef> <function>get_extra_widget</function></funcdef>
+     <funcdef><classname>GtkWidget</classname> <function>get_extra_widget</function></funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
@@ -141,26 +180,36 @@
     Returns the extra widget defined for the chooser.
    </shortdesc>
    <desc>
-   <para>
-    Returns the widget defined through the method
-    <function class="GtkFileChooserButton">set_extra_widget</function>.
-   </para>
+    <para>
+     Returns the widget defined through the method
+     <function class="GtkFileChooserButton">set_extra_widget</function>.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkFileChooser">set_extra_widget</function>
+    </para>
    </desc>
   </method>
 
   <method id="gtk.gtkfilechooser.method.get_filename">
    <funcsynopsis>
     <funcprototype>
-     <funcdef> <function>get_filename</function></funcdef>
-      <paramdef>void</paramdef>
+     <funcdef>string <function>get_filename</function></funcdef>
+     <paramdef>bool <parameter>convert</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-     Returns the current file location selected.
+    Returns the current file location selected.
    </shortdesc>
    <desc>
     <para>
      Returns the current file location selected in the chooser.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkFileChooser">get_filenames</function>,
+     <function class="GtkFileChooser">get_uri</function>,
+     <function class="GtkFileChooser">set_filename</function>
     </para>
    </desc>
   </method>
@@ -168,22 +217,32 @@
   <method id="gtk.gtkfilechooser.method.get_filenames">
    <funcsynopsis>
     <funcprototype>
-     <funcdef> <function>get_filenames</function></funcdef>
+     <funcdef>array <function>get_filenames</function></funcdef>
      <paramdef>bool <parameter>convert</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Lists all the selected files and subfolders.
    </shortdesc>
    <desc>
-
+    <para>
+     Lists all the selected files and subfolders in the current
+     folder. The returned names are full absolute paths.
+     If files in the current folder cannot be represented as
+     local filenames they will be ignored.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkFileChooser">get_filename</function>,
+     <function class="GtkFileChooser">get_uris</function>
+    </para>
    </desc>
   </method>
 
   <method id="gtk.gtkfilechooser.method.get_filter">
    <funcsynopsis>
     <funcprototype>
-     <funcdef> <function>get_filter</function></funcdef>
+     <funcdef><classname>GtkFileFilter</classname> <function>get_filter</function></funcdef>
       <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
@@ -192,8 +251,12 @@
    </shortdesc>
    <desc>
     <para>
-     Returns the <classname>GtkFileFilter</classname> object attributed througth the
+     Returns the <classname>GtkFileFilter</classname> object attributed through the
      <function class="GtkFileChooser">add_filter</function> method.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkFileChooser">set_filter</function>
     </para>
    </desc>
   </method>
@@ -201,194 +264,283 @@
   <method id="gtk.gtkfilechooser.method.get_local_only">
    <funcsynopsis>
     <funcprototype>
-     <funcdef> <function>get_local_only</function></funcdef>
-      <paramdef>void</paramdef>
+     <funcdef>bool <function>get_local_only</function></funcdef>
+     <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Whether only local files can be selected.
    </shortdesc>
    <desc>
-
+    <para>
+     Gets whether only local files can be selected in the file selector.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkFileChooser">set_local_only</function>
+    </para>
    </desc>
   </method>
 
   <method id="gtk.gtkfilechooser.method.get_preview_filename">
    <funcsynopsis>
     <funcprototype>
-     <funcdef> <function>get_preview_filename</function></funcdef>
-      <paramdef>void</paramdef>
+     <funcdef>string <function>get_preview_filename</function></funcdef>
+     <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Filename that should be previewed in a custom preview widget.
    </shortdesc>
    <desc>
-
+    <para>
+     Gets the filename that should be previewed in a custom preview widget.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkFileChooser">get_preview_uri</function>
+    </para>
    </desc>
   </method>
 
   <method id="gtk.gtkfilechooser.method.get_preview_uri">
    <funcsynopsis>
     <funcprototype>
-     <funcdef> <function>get_preview_uri</function></funcdef>
-      <paramdef>void</paramdef>
+     <funcdef>string <function>get_preview_uri</function></funcdef>
+     <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    URI that should be previewed in a custom preview widget.
    </shortdesc>
    <desc>
-
+    <para>
+     Gets the URI that should be previewed in a custom preview widget.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkFileChooser">get_preview_filename</function>
+    </para>
    </desc>
   </method>
 
   <method id="gtk.gtkfilechooser.method.get_preview_widget">
    <funcsynopsis>
     <funcprototype>
-     <funcdef> <function>get_preview_widget</function></funcdef>
-      <paramdef>void</paramdef>
+     <funcdef><classname>GtkWidget</classname> <function>get_preview_widget</function></funcdef>
+     <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Gets the current preview widget.
    </shortdesc>
    <desc>
-
+    <para>
+     Gets the current preview widget.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkFileChooser">set_preview_widget</function>
+    </para>
    </desc>
   </method>
+
   <method id="gtk.gtkfilechooser.method.get_preview_widget_active">
    <funcsynopsis>
     <funcprototype>
-     <funcdef> <function>get_preview_widget_active</function></funcdef>
-      <paramdef>void</paramdef>
+     <funcdef>bool <function>get_preview_widget_active</function></funcdef>
+     <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Whether the preview widget should be shown for the current filename.
    </shortdesc>
    <desc>
-
+    <para>
+     Gets whether the preview widget set by
+     <function class="GtkFileChooser">set_preview_widget</function> should be
+     shown for the current filename.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkFileChooser">set_preview_widget_active</function>
+    </para>
    </desc>
   </method>
 
   <method id="gtk.gtkfilechooser.method.get_select_multiple">
    <funcsynopsis>
     <funcprototype>
-     <funcdef> <function>get_select_multiple</function></funcdef>
-      <paramdef>void</paramdef>
+     <funcdef>bool <function>get_select_multiple</function></funcdef>
+     <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Whether multiple files can be selected.
    </shortdesc>
    <desc>
-
+    <para>
+     Whether multiple files can be selected in the file selector.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkFileChooser">set_select_multiple</function>
+    </para>
    </desc>
   </method>
 
   <method id="gtk.gtkfilechooser.method.get_show_hidden">
    <funcsynopsis>
     <funcprototype>
-     <funcdef> <function>get_show_hidden</function></funcdef>
-      <paramdef>void</paramdef>
+     <funcdef>bool <function>get_show_hidden</function></funcdef>
+     <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Whether hidden files and folders are displayed.
    </shortdesc>
    <desc>
-
+    <para>
+     Whether hidden files and folders are displayed in the file selector.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkFileChooser">set_show_hidden</function>
+    </para>
    </desc>
   </method>
 
   <method id="gtk.gtkfilechooser.method.get_uri">
    <funcsynopsis>
     <funcprototype>
-     <funcdef> <function>get_uri</function></funcdef>
-      <paramdef>void</paramdef>
+     <funcdef>string <function>get_uri</function></funcdef>
+     <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    URI for the currently selected file.
    </shortdesc>
    <desc>
-
+    <para>
+     Gets the URI for the currently selected file in the file selector.
+     If multiple files are selected, one of the filenames will be returned at random.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkFileChooser">set_uri</function>
+    </para>
    </desc>
   </method>
 
   <method id="gtk.gtkfilechooser.method.get_uris">
    <funcsynopsis>
     <funcprototype>
-     <funcdef> <function>get_uris</function></funcdef>
-      <paramdef>void</paramdef>
+     <funcdef>array <function>get_uris</function></funcdef>
+     <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Lists all the selected files and subfolders.
    </shortdesc>
    <desc>
-
+    <para>
+     Lists all the selected files and subfolders in the current
+     folder of chooser. The returned names are full absolute URIs.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkFileChooser">get_filenames</function>,
+     <function class="GtkFileChooser">get_uri</function>
+    </para>
    </desc>
   </method>
 
   <method id="gtk.gtkfilechooser.method.get_use_preview_label">
    <funcsynopsis>
     <funcprototype>
-     <funcdef> <function>get_use_preview_label</function></funcdef>
-      <paramdef>void</paramdef>
+     <funcdef>bool <function>get_use_preview_label</function></funcdef>
+     <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Gets whether a stock label should be drawn with the name of the previewed file.
    </shortdesc>
    <desc>
-
+    <para>
+     Gets whether a stock label should be drawn with the name
+     of the previewed file.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkFileChooser">set_use_preview_label</function>
+    </para>
    </desc>
   </method>
 
   <method id="gtk.gtkfilechooser.method.list_filters">
    <funcsynopsis>
     <funcprototype>
-     <funcdef> <function>list_filters</function></funcdef>
+     <funcdef>array <function>list_filters</function></funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Lists the current set of user-selectable filters.
    </shortdesc>
    <desc>
-
+    <para>
+     Lists the current set of user-selectable filters
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkFileChooser">add_filter</function>,
+     <function class="GtkFileChooser">get_filter</function>,
+     <function class="GtkFileChooser">remove_filter</function>
+    </para>
    </desc>
   </method>
 
   <method id="gtk.gtkfilechooser.method.list_shortcut_folder_uris">
    <funcsynopsis>
     <funcprototype>
-     <funcdef> <function>list_shortcut_folder_uris</function></funcdef>
+     <funcdef>array <function>list_shortcut_folder_uris</function></funcdef>
      <paramdef>bool <parameter>convert</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Queries the list of shortcut folders.
    </shortdesc>
    <desc>
-
+    <para>
+     Queries the list of shortcut folders in the file chooser.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkFileChooser">add_shortcut_folder_uri</function>,
+     <function class="GtkFileChooser">list_shortcut_folder</function>
+    </para>
    </desc>
   </method>
 
   <method id="gtk.gtkfilechooser.method.list_shortcut_folders">
    <funcsynopsis>
     <funcprototype>
-     <funcdef> <function>list_shortcut_folders</function></funcdef>
+     <funcdef>array <function>list_shortcut_folders</function></funcdef>
      <paramdef>bool <parameter>convert</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Queries the list of shortcut folders.
    </shortdesc>
    <desc>
-
+    <para>
+     Queries the list of shortcut folders in the file chooser.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkFileChooser">add_shortcut_folder</function>,
+     <function class="GtkFileChooser">list_shortcut_folder_uris</function>
+    </para>
    </desc>
   </method>
 
@@ -400,10 +552,17 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Removes filter from the list of filters the user can select.
    </shortdesc>
    <desc>
-
+    <para>
+     Removes filter from the list of filters that the user can select between.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkFileChooser">add_filter</function>,
+     <function class="GtkFileChooser">list_filters</function>
+    </para>
    </desc>
   </method>
 
@@ -442,45 +601,83 @@
   <method id="gtk.gtkfilechooser.method.select_all">
    <funcsynopsis>
     <funcprototype>
-     <funcdef> <function>select_all</function></funcdef>
-      <paramdef>void</paramdef>
+     <funcdef>void <function>select_all</function></funcdef>
+     <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Selects all the files in the current folder.
    </shortdesc>
    <desc>
-
+    <para>
+     Selects all the files in the current folder of a file chooser.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkFileChooser">select_filename</function>,
+     <function class="GtkFileChooser">select_uri</function>,
+     <function class="GtkFileChooser">unselect_all</function>
+    </para>
    </desc>
   </method>
 
   <method id="gtk.gtkfilechooser.method.select_filename">
    <funcsynopsis>
     <funcprototype>
-     <funcdef> <function>select_filename</function></funcdef>
-      <paramdef><parameter>filename</parameter></paramdef>
+     <funcdef>bool <function>select_filename</function></funcdef>
+     <paramdef><parameter>filename</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Selects a filename.
    </shortdesc>
    <desc>
-
+    <para>
+     Selects a filename.
+     If the file name isn't in the current folder of chooser,
+     then the current folder of chooser will be changed
+     to the folder containing filename.
+    </para>
+    <para>
+     Returns <literal>true</literal> if both the folder could be changed and the
+     file was selected successfully, <literal>false</literal> otherwise.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkFileChooser">select_all</function>,
+     <function class="GtkFileChooser">select_uri</function>,
+     <function class="GtkFileChooser">unselect_filename</function>
+    </para>
    </desc>
   </method>
 
   <method id="gtk.gtkfilechooser.method.select_uri">
    <funcsynopsis>
     <funcprototype>
-     <funcdef> <function>select_uri</function></funcdef>
-      <paramdef><parameter>uri</parameter></paramdef>
+     <funcdef>bool <function>select_uri</function></funcdef>
+     <paramdef><parameter>uri</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Selects an URI.
    </shortdesc>
    <desc>
-
+    <para>
+     Selects an URI.
+     If the file name isn't in the current folder of chooser,
+     then the current folder of chooser will be changed
+     to the folder containing filename.
+    </para>
+    <para>
+     Returns <literal>true</literal> if both the folder could be changed and the
+     file was selected successfully, <literal>false</literal> otherwise.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkFileChooser">select_all</function>,
+     <function class="GtkFileChooser">select_filename</function>,
+     <function class="GtkFileChooser">unselect_uri</function>
+    </para>
    </desc>
   </method>
 
@@ -501,8 +698,8 @@
     of a folder.
    </para>
    <para>
-    It can be <optionname>Gtk::FILE_CHOOSER_ACTION_OPEN</optionname> or
-    <optionname>Gtk::FILE_CHOOSER_ACTION_SELECT_FOLDER</optionname>.
+    It can be <optionname enum="GtkFileChooserAction">Gtk::FILE_CHOOSER_ACTION_OPEN</optionname> or
+    <optionname enum="GtkFileChooserAction">Gtk::FILE_CHOOSER_ACTION_SELECT_FOLDER</optionname>.
    </para>
    </desc>
   </method>
@@ -510,7 +707,7 @@
   <method id="gtk.gtkfilechooser.method.set_current_folder">
    <funcsynopsis>
     <funcprototype>
-     <funcdef> <function>set_current_folder</function></funcdef>
+     <funcdef>bool <function>set_current_folder</function></funcdef>
      <paramdef><parameter>filename</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
@@ -521,70 +718,116 @@
     <para>
      Defines the current path shown.
     </para>
+    <para>
+     Returns <literal>true</literal> if the folder could be changed
+     successfully, <literal>false</literal> otherwise.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkFileChooser">get_current_folder</function>,
+     <function class="GtkFileChooser">set_current_folder_uri</function>
+    </para>
    </desc>
   </method>
 
   <method id="gtk.gtkfilechooser.method.set_current_folder_uri">
    <funcsynopsis>
     <funcprototype>
-     <funcdef> <function>set_current_folder_uri</function></funcdef>
-      <paramdef><parameter>uri</parameter></paramdef>
+     <funcdef>bool <function>set_current_folder_uri</function></funcdef>
+     <paramdef><parameter>uri</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+     Defines the current path shown.
    </shortdesc>
    <desc>
-
+    <para>
+     Sets the current folder from an URI.
+     The user will be shown the full contents of the current folder,
+     plus user interface elements for navigating to other folders.
+    </para>
+    <para>
+     Returns <literal>true</literal> if the folder could be changed
+     successfully, <literal>false</literal> otherwise.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkFileChooser">get_current_folder_uri</function>,
+     <function class="GtkFileChooser">set_current_folder</function>
+    </para>
    </desc>
   </method>
 
   <method id="gtk.gtkfilechooser.method.set_current_name">
    <funcsynopsis>
     <funcprototype>
-     <funcdef> <function>set_current_name</function></funcdef>
-      <paramdef><parameter>name</parameter></paramdef>
+     <funcdef>void <function>set_current_name</function></funcdef>
+     <paramdef><parameter>name</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the current name in the file selector.
    </shortdesc>
    <desc>
-
+    <para>
+     Sets the current name in the file selector, as if entered by the user.
+     Note that the name passed in here is a UTF-8 string rather than
+     a filename.
+     This function is meant for such uses as a suggested name in
+     a "Save As..." dialog.
+    </para>
+    <para>
+     If you want to preselect a particular existing file, you should use
+     <function class="GtkFileChooser">set_filename</function> instead.
+    </para>
    </desc>
   </method>
 
   <method id="gtk.gtkfilechooser.method.set_extra_widget">
    <funcsynopsis>
     <funcprototype>
-     <funcdef> <function>set_extra_widget</function></funcdef>
-      <paramdef><classname>GtkWidget</classname><parameter>extra_widget</parameter></paramdef>
+     <funcdef>void <function>set_extra_widget</function></funcdef>
+     <paramdef><classname>GtkWidget</classname><parameter>extra_widget</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
     Define an extra widget that is packed at the bottom of the widget.
    </shortdesc>
    <desc>
-   <para>
-    Define an extra widget that is packed at the bottom of the
-    file chooser.
-   </para>
+    <para>
+     Define an extra widget that is packed at the bottom of the
+     file chooser.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkFileChooser">get_extra_widget</function>
+    </para>
    </desc>
   </method>
 
   <method id="gtk.gtkfilechooser.method.set_filename">
    <funcsynopsis>
     <funcprototype>
-     <funcdef> <function>set_filename</function></funcdef>
-      <paramdef><parameter>filename</parameter></paramdef>
+     <funcdef>bool <function>set_filename</function></funcdef>
+     <paramdef><parameter>filename</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-     Defines the current file location.
+    Defines the current file location.
    </shortdesc>
    <desc>
     <para>
      Defines the current file location shown.
+    </para>
+    <para>
+     Note that the file must exist, or nothing will be done
+     except for the directory change. To pre-enter a filename for the
+     user, as in a save-as dialog, use
+     <function class="GtkFileChooser">set_current_name</function>.
+    </para>
+    <para>
+     Returns <literal>true</literal> if both the folder could be changed
+     and the file was selected successfully, <literal>false</literal> otherwise.
     </para>
    </desc>
   </method>
@@ -592,15 +835,22 @@
   <method id="gtk.gtkfilechooser.method.set_filter">
    <funcsynopsis>
     <funcprototype>
-     <funcdef> <function>set_filter</function></funcdef>
-      <paramdef><classname>GtkFileFilter</classname><parameter>filter</parameter></paramdef>
+     <funcdef>void <function>set_filter</function></funcdef>
+     <paramdef><classname>GtkFileFilter</classname><parameter>filter</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the current filter
    </shortdesc>
    <desc>
-
+    <para>
+     Sets the current filter; only the files that pass the filter will be displayed.
+     If the user-selectable list of filters is non-empty, then the filter should be
+     one of the filters in that list.
+     Setting the current filter when the list of filters is empty is useful if
+     you want to restrict the displayed set of files without letting
+     the user change it.
+    </para>
    </desc>
   </method>
 
@@ -608,59 +858,98 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef> <function>set_local_only</function></funcdef>
-      <paramdef><parameter>local_only</parameter></paramdef>
+     <paramdef><parameter>local_only</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets whether only local files can be selected.
    </shortdesc>
    <desc>
-
+    <para>
+     Sets whether only local files can be selected in the file selector.
+    </para>
+    <para>
+     If it is <literal>true</literal> (the default), then the selected file
+     are files are guaranteed to be accessible through the operating systems
+     native file file system and therefore the application only needs to
+     worry about the filename functions in <classname>GtkFileChooser</classname>,
+     like <function class="GtkFileChooser">get_filename</function>,
+     rather than the URI functions like
+     <function class="GtkFileChooser">get_uri</function>.
+    </para>
    </desc>
   </method>
 
   <method id="gtk.gtkfilechooser.method.set_preview_widget">
    <funcsynopsis>
     <funcprototype>
-     <funcdef> <function>set_preview_widget</function></funcdef>
+     <funcdef>void <function>set_preview_widget</function></funcdef>
       <paramdef><classname>GtkWidget</classname><parameter>preview_widget</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets an application-supplied widget to display a custom preview of the file.
    </shortdesc>
    <desc>
-
+    <para>
+     Sets an application-supplied widget to use to display a custom
+     preview of the currently selected file.
+     To implement a preview, after setting the preview widget, you connect
+     to the <signalname class="GtkFileChooser">update-preview</signalname>
+     signal, and call <function class="GtkFileChooser">get_preview_filename</function>
+     or <function class="GtkFileChooser">get_preview_uri</function> on each change.
+     If you can display a preview of the new file, update your widget and
+     set the preview active using
+     <function class="GtkFileChooser">set_preview_widget_active</function>.
+     Otherwise, set the preview inactive.
+    </para>
+    <para>
+     When there is no application-supplied preview widget, or the
+     application-supplied preview widget is not active, the file chooser
+     may display an internally generated preview of the current file or
+     it may display no preview at all.
+    </para>
    </desc>
   </method>
 
   <method id="gtk.gtkfilechooser.method.set_preview_widget_active">
    <funcsynopsis>
     <funcprototype>
-     <funcdef> <function>set_preview_widget_active</function></funcdef>
-      <paramdef><parameter>active</parameter></paramdef>
+     <funcdef>void <function>set_preview_widget_active</function></funcdef>
+     <paramdef><parameter>active</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets whether the preview widget should be shown.
    </shortdesc>
    <desc>
-
+    <para>
+     Sets whether the preview widget set by
+     <function class="GtkFileChooser">set_preview_widget</function> should
+     be shown for the current filename.
+     When it is set to false, the file chooser may display an internally
+     generated preview of the current file or it may display
+     no preview at all. See
+     <function class="GtkFileChooser">set_preview_widget</function>
+     for more details.
+    </para>
    </desc>
   </method>
 
   <method id="gtk.gtkfilechooser.method.set_select_multiple">
    <funcsynopsis>
     <funcprototype>
-     <funcdef> <function>set_select_multiple</function></funcdef>
+     <funcdef>void <function>set_select_multiple</function></funcdef>
       <paramdef><parameter>select_multiple</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets whether multiple files can be selected.
    </shortdesc>
    <desc>
-
+    <para>
+     Sets whether multiple files can be selected in the file selector.
+    </para>
    </desc>
   </method>
 
