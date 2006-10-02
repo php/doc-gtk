@@ -1,14 +1,18 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<!-- $Revision: 1.4 $ -->
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Revision: 1.5 $ -->
 <classentry id="pango.pangofontset">
  <classmeta>
   <classtitle>PangoFontset</classtitle>
   <classparent>GObject</classparent>
   <shortdesc>
-
+    Holds a set of <classname>PangoFont</classname> objects.
   </shortdesc>
   <desc>
-
+    <para>
+      This class holds a set of <classname>PangoFont</classname> objects and can
+      be retrieved using <function class="PangoContext">load_fontset</function>
+      or <function class="PangoFontMap">load_fontset</function>
+    </para>
   </desc>
  </classmeta>
 
@@ -22,10 +26,16 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Invokes a callback on each item of the font set.
    </shortdesc>
    <desc>
-
+    <para>
+      Invokes the callback function specified on each
+      <classname>PangoFont</classname> of the font set.
+       The callback function can have the following parameters:
+      <literal>(<classname>PangoFontSet</classname> fontset,
+      <classname>PangoFont</classname> font)</literal>.
+    </para>
    </desc>
   </method>
 
@@ -37,10 +47,14 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the best font for displaying a unicode character.
    </shortdesc>
    <desc>
-
+    <para>
+      This method returns the <classname>PangoFont</classname> in the fontset
+      that contains the best glyph for the unicode character specified by
+      <literal>wc</literal>.
+    </para>
    </desc>
   </method>
 
@@ -52,10 +66,13 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns a <classname>PangoFontMetrics</classname> object.
    </shortdesc>
    <desc>
-
+    <para>
+      This method returns a <classname>PangoFontMetrics</classname> object that
+      contains the metric information for the fonts in the fontset.
+    </para>
    </desc>
   </method>
 
