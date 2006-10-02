@@ -1,14 +1,23 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<!-- $Revision: 1.4 $ -->
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Revision: 1.5 $ -->
 <classentry id="pango.pangofontfamily">
  <classmeta>
   <classtitle>PangoFontFamily</classtitle>
   <classparent>GObject</classparent>
   <shortdesc>
-
+    Used to represent a family of related font faces.
   </shortdesc>
   <desc>
-
+    <para>
+      The <classname>PangoFontFamily</classname> object is used to represent a
+      family of related font faces. The faces in a family share a common design,
+      but differ in slant, weight, width and other aspects. An array of
+      <classname>PangoFontFamily</classname> objects can be retrieved from a
+      <classname>PangoContext</classname> object using the
+      <function class="PangoContext">list_families</function> method or from a
+      <classname>PangoFontMap</classname> object using
+      the <function class="PangoFontMap">list_families</function> method.
+    </para>
   </desc>
  </classmeta>
 
@@ -22,10 +31,15 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns a string containing the name of the font family.
    </shortdesc>
    <desc>
-
+    <para>
+      This method returns a string containing the name of the font family. The
+      name is unique among all fonts for the font backend and can be used in a
+      <classname>PangoFontDescription</classname> to specify that a face from
+      this family is desired.
+    </para>
    </desc>
   </method>
 
@@ -37,10 +51,15 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns <literal>True</literal> if the font is monospace.
    </shortdesc>
    <desc>
-
+    This method returns <literal>True</literal> if the font family describes a
+    monospace font. A monospace font is a font designed for text display where
+    the the characters form a regular grid. For Western languages this would
+    mean that the advance width of all characters are the same, but this
+    categorization also includes Asian fonts which include double-width
+    characters: characters that occupy two grid cells.
    </desc>
   </method>
 
@@ -52,13 +71,19 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns an array of <classname>PangoFontFace</classname> objects.
    </shortdesc>
    <desc>
-
+    <para>
+      This method returns an array of the different
+      <classname>PangoFontFace</classname> objects that make up the font family.
+      The faces in a family share a common design, but differ in slant, weight,
+      width and other aspects.
+    </para>
    </desc>
   </method>
 
  </methods>
 
 </classentry>
+
