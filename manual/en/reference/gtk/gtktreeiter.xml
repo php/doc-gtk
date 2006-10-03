@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- $Revision: 1.4 $ -->
+<!-- $Revision: 1.5 $ -->
 <classentry id="gtk.gtktreeiter">
  <classmeta>
   <classtitle>GtkTreeIter</classtitle>
@@ -17,7 +17,8 @@
  </classmeta>
 
  <methods>
- <method id="gtk.gtktreeiter.method.free">
+  <!-- Commented out until it doesn't produce a double free error anymore
+  <method id="gtk.gtktreeiter.method.free">
    <funcsynopsis>
     <funcprototype>
      <funcdef> <function>free</function></funcdef>
@@ -31,5 +32,26 @@
 
    </desc>
   </method>
-  </methods>
+  -->
+
+  <method id="gtk.gtktreeiter.method.copy">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>
+      <classname>GtkTreeIter</classname>
+      <function>copy</function>
+     </funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Creates a copy of a <classname>GtkTreeIter</classname>.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Creates a copy of a <classname>GtkTreeIter</classname>.
+    </simpara>
+   </desc>
+  </method>
+ </methods>
 </classentry>
