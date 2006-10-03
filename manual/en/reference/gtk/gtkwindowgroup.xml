@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<!-- $Revision: 1.5 $ -->
+<!-- $Revision: 1.6 $ -->
 <classentry id="gtk.gtkwindowgroup">
  <classmeta>
   <classtitle>GtkWindowGroup</classtitle>
@@ -8,7 +8,9 @@
    A group of related GtkWindows.
   </shortdesc>
   <desc>
-
+    An object containing a set of <classname>GtkWindow</classname> widgets that
+    can be managed together and limits the effect of <function
+    class="GtkWidget">grab_add</function>.
   </desc>
  </classmeta>
 
@@ -22,10 +24,12 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Creates a new GtkWindowGroup instance.
    </shortdesc>
    <desc>
-
+    Creates a new object. Grabs added with <function
+    class="GtkWidget">grab_add</function> only affect windows within the same
+    window group.
    </desc>
   </constructor>
 
@@ -41,10 +45,13 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Adds a <classname>GtkWindow</classname> to the
+    <classname>GtkWindowGroup</classname>.
    </shortdesc>
    <desc>
     <para>
+      This method adds the <classname>GtkWindow</classname> passed by
+      <literal>window</literal> to the <classname>GtkWindowGroup</classname>
      &seealso;
      <function class="GtkWindowGroup">remove_window</function>
     </para>
@@ -60,10 +67,13 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Removes a <classname>GtkWindow</classname> from the
+    <classname>GtkWindowGroup</classname>.
    </shortdesc>
    <desc>
     <para>
+      This method removes the <classname>GtkWindow</classname> passed by
+      <literal>window</literal> from the <classname>GtkWindowGroup</classname>
      &seealso;
      <function class="GtkWindowGroup">add_window</function>
     </para>
@@ -74,3 +84,4 @@
  </methods>
 
 </classentry>
+
