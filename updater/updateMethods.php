@@ -36,9 +36,14 @@ class updateMethods
     function updateClass($classname, $file)
     {
         /* Obtain reflection object for current class */
-        $refObject = new ReflectionClass($classname);
+		try {
+			$refObject = new ReflectionClass($classname);
+		} catch (ReflectionException $re) {
+			echo $re->getMessage() . "\n";
+			return;
+		}
         $classname = $refObject->getName();
-        echo 'Checking ' . str_pad($classname, 20, ' ');
+        echo '  Checking ' . str_pad($classname, 25, ' ');
         $childMethods = $refObject->getMethods();
         $parent = $refObject->getParentClass();
         if ($parent === false) {
@@ -50,7 +55,7 @@ class updateMethods
         } else {
             $trueMethods = $childMethods;
         }
-        echo ' ' . count($trueMethods) . " methods\n";
+        echo ' ' . str_pad(count($trueMethods), 3) . " methods\n";
         $xml = new DOMDocument();
         $xml->load($file);
         $xpath = new DOMXPath($xml);
@@ -66,7 +71,7 @@ class updateMethods
         $compelArgs = $method->getNumberOfRequiredParameters();
         $totalArgs = $method->getNumberOfParameters();
 
-        preg_match_all('/^([A-Za-z]*[a-z])[A-Z]/', $classname, $matches);
+        preg_match_all('/^([A-Z][a-z]{2,5})[A-Z]/', $classname, $matches);
         if (isset($matches[1][0])) {
             $prefix = strtolower($matches[1][0]);
         } else {
@@ -95,9 +100,9 @@ class updateMethods
 
 
         if ($ismethod) {
-            $path = '/classentry/methods/method[@id="' . $daID . '"]/funcsynopsis/funcprototype';
+            $path = '/classentry/methods/method[@id="' . $daID . '"]';
         } else {
-            $path = '/classentry/constructors/constructor[@id="' . $daID . '"]/funcsynopsis/funcprototype';
+            $path = '/classentry/constructors/constructor[@id="' . $daID . '"]';
         }
         $functionNodes =
             $xpath->query($path);
@@ -189,29 +194,103 @@ class updateMethods
             $xmlMethod->appendChild($xmlDesc);
             $xmlMethod->appendChild($indentDesc);
 
+			// Add a static identifier if the method is static.
+			if ($method->isStatic()) {
+				$this->_addStatic($xmlDesc, $doc);
+			}
+
             /* Save the xml file after adding the whole method node */
             if($ismethod) {
-                echo "M";
+                echo "M ";
                 $topLevel = $doc->getElementsByTagName('methods');
+				
+				// If there is no methods section, create one.
+				if ($topLevel->length == 0) {
+					$methods = $doc->createElement('methods');
+					$doc->appendChild($methods);
+					$topLevel = $doc->getElementsByTagName('methods');
+				}
             } else {
-                echo "C";
+                echo "C ";
                 $topLevel = $doc->getElementsByTagName('constructors');
+
+				// If there is no constructor section, create one.
+				if ($topLevel->length == 0) {
+					$methods = $doc->createElement('constructors');
+					$doc->appendChild($methods);
+					$topLevel = $doc->getElementsByTagName('constructors');
+				}
             }
             $topLevel = $topLevel->item(0);
+
             echo "Updating ".$daID."\n";
             $topLevel->appendChild($xmlMethod);
             $topLevel->appendChild($indentMethod);
             $doc->save($file);
 
             $this->methodCount += 1;
-        }
-        else {
+        }  else {
             /* Method exists
-            * Add code to check validity later
-            */
+			 * @todo Add code to check validity later
+			 */
+			// Grab the element.
+			$xmlMethod = $functionNodes->item(0);
+			$xmlDesc   = $xmlMethod->getElementsByTagName('desc')->item(0);
+
+			// Add a static entity if needed.
+			if ($method->isStatic()) {
+				if ($this->_addStatic($xmlDesc, $doc)) {
+					++$this->methodCount;
+					$doc->save($file);
+				}
+			}
         }
     }//function updateMethod($classname, file, $sNo, $method, $doc, $xpath)
 
+	/**
+	 * Adds a simpara and a static entity to an existing method declaration.
+	 *
+	 * Hackish but working.
+	 *
+	 * @access private
+	 * @param  object  $desc The DOMNode for the method description.
+	 * @param  object  $doc  The DOMDocument object.
+	 * @return boolean true if the method was updated.
+	 */
+	function _addStatic($desc, $doc)
+	{
+		// Check to see if the static entity has already been added.
+		if ($desc->hasChildNodes()) {
+			// The DOMDocument translates the entities on loading.
+			$staticText = 'This method must be called statically.';
+
+			// Get simparas.
+			$list = $desc->getElementsByTagName('simpara');
+			for ($i = 0; $i < $list->length; ++$i) {
+				$node = $list->item($i);
+				if ($node->hasChildNodes()) {
+					// Check for the static text.
+					$child = $node->firstChild;
+					do {
+						if ($child instanceof DOMText &&
+							trim($child->wholeText) == $staticText
+							) {
+							return false;
+						}
+					} while ($child = $child->nextSibling);
+				}
+			}
+		}
+
+		$desc->appendChild($doc->createTextNode(' '));
+		$simpara = $doc->createElement('simpara');
+		$simpara->appendChild($doc->createTextNode("\n     "));
+		$simpara->appendChild($doc->createEntityReference('static'));
+		$simpara->appendChild($doc->createTextNode("\n    "));
+		$desc->appendChild($simpara);
+		$desc->appendChild($doc->createTextNode("\n   "));
+		return true;
+	}
 
 
     /* Return methods belonging ONLY to the child */
