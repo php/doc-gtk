@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<!-- $Revision: 1.10 $ -->
+<?xml version="1.0" encoding="utf-8"?>
+<!-- $Revision: 1.11 $ -->
 <classentry id="gtk.gtkstatusbar">
  <classmeta>
   <classtitle>GtkStatusbar</classtitle>
@@ -40,15 +40,13 @@
    <desc>
     <para>
      Creates a new GtkStatusbar. The new status bar will have an empty message
-     stack. New messages should be added using <function
-     class="GtkStatusbar">push</function>.
+     stack. New messages should be added using <function class="GtkStatusbar">push</function>.
     </para>
     <para>
      <example>
       <title>Creating a GtkStatusbar</title>
       <programlisting role="php">
-       <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
-                  href="&directory.examples;/reference/gtk/gtkstatusbar/constructor.phpw" parse="text">
+       <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="&directory.examples;/reference/gtk/gtkstatusbar/constructor.phpw" parse="text">
         <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
        </xi:include>
       </programlisting>
@@ -113,8 +111,7 @@
     </para>
     <para>
      A resize grip is shown by default. To hide the resize grip, pass
-     <literal>false</literal> to <function
-     class="GtkStatusbar">set_has_resize_grip</function>.
+     <literal>false</literal> to <function class="GtkStatusbar">set_has_resize_grip</function>.
     </para>
     <para>
      &seealso;
@@ -163,15 +160,13 @@
    <desc>
     <para>
      Adds <parameter>text</parameter> as the top message on the message stack.
-     The <parameter>context_id</parameter> is an integer returned by <function
-     class="GtkStatusbar">get_context_id</function> and identifies the type of
+     The <parameter>context_id</parameter> is an integer returned by <function class="GtkStatusbar">get_context_id</function> and identifies the type of
      message being added.
     </para>
     <para>
      <function class="GtkStatusbar">push</function> returns an integer
      identifier for the message that is added. This value can be used to
-     remove the message using <function
-     class="GtkStatusbar">remove</function>.
+     remove the message using <function class="GtkStatusbar">remove</function>.
     </para>
     <para>
      &seealso;
@@ -248,7 +243,22 @@
    </desc>
   </method>
 
- </methods>
+ <method id="gtk.gtkstatusbar.method.remove_message">
+    <funcsynopsis>
+    <funcprototype>
+     <funcdef> <function>remove_message</function></funcdef>
+     <paramdef><parameter>message_id</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  </methods>
 
  <signals>
 
@@ -267,8 +277,7 @@
    <desc>
     <para>
      <signalname class="GtkStatusbar">text-popped</signalname> is emitted when
-     a new message is popped off of the message stack using <function
-     class="GtkStatusbar">pop</function>. 
+     a new message is popped off of the message stack using <function class="GtkStatusbar">pop</function>. 
     </para>
     <para>
      &seealso;
@@ -293,8 +302,7 @@
    <desc>
     <para>
      <signalname class="GtkStatusbar">text-pushed</signalname> is emitted when
-     a new message is pushed onto the message stack using <function
-     class="GtkStatusbar">push</function>. 
+     a new message is pushed onto the message stack using <function class="GtkStatusbar">push</function>. 
     </para>
     <para>
      By default, <cbfunction>callback</cbfunction> will be passed the status
