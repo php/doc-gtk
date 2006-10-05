@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<!-- $Revision: 1.6 $ -->
+<!-- $Revision: 1.7 $ -->
 <classentry id="gtk.gtkplug">
  <classmeta>
   <classtitle>GtkPlug</classtitle>
@@ -8,7 +8,15 @@
    A toplevel window to be embedded into other processes.
   </shortdesc>
   <desc>
-
+   <para>
+    This class provides the ability to embed widgets from one process into
+    another in a way that is transparent to the user. One process creates a
+    <classname>GtkSocket</classname> widget and passes the ID of that widget's
+    window to the other process, which then creates a
+    <classname>GtkPlug</classname> with that window ID. Any widgets contained in
+    the <classname>GtkPlug</classname> will appear inside the first
+    application's window.
+   </para>
   </desc>
  </classmeta>
 
@@ -18,14 +26,21 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>construct</function></funcdef>
-     <paramdef>void</paramdef>
+     <paramdef>int <parameter>socket_id</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Create a new plug with a specified window ID.
    </shortdesc>
    <desc>
-
+    <para>
+     Creates a new <classname>GtkPlug</classname> widget inside the
+     <classname>GtkSocket</classname> identified by
+     <literal>socket_id</literal>. If <literal>socket_id</literal> is 0, the
+     plug is left "unplugged" and can later be plugged into a
+     <classname>GtkSocket</classname> by the <function
+     class="GtkSocket">add_id</function> method.
+    </para>
    </desc>
   </method>
 
@@ -33,14 +48,20 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>construct_for_display</function></funcdef>
-     <paramdef>void</paramdef>
+     <paramdef><classname>GdkDisplay</classname> <parameter>display</parameter></paramdef>
+     <paramdef><classname>GtkSocket</classname> <parameter>socket_id</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Creates a new plug widget.
    </shortdesc>
    <desc>
-
+    <para>
+    Finish the initialization of plug for a given
+    <classname>GtkSocket</classname> identified by <literal>socket_id</literal>
+    which is currently displayed on <literal>display</literal>. This function
+    will generally only be used by classes deriving from GtkPlug.
+    </para>
    </desc>
   </method>
 
@@ -52,10 +73,12 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Retrieves the window ID for the plug.
    </shortdesc>
    <desc>
-
+    This method returns the window ID of the <classname>GtkPlug</classname>
+    widget, which can be used to embed this window inside another window, for
+    instance with <function class="GtkSocket">add_id</function>.
    </desc>
   </method>
 
@@ -72,12 +95,20 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
+    Emitted when plug window is reparented to socket window.
    </shortdesc>
    <desc>
-
+    <para>
+      This signal is emitted when the <classname>GtkPlug</classname> window is
+      reparented to the <classname>GtkSocket</classname> window.
+    </para>
+    <para>
+      The callback will be passed one parameter:
+     <parameter>plug</parameter>, the plug which received the signal
+     </para>
    </desc>
   </signal>
-  
+
  </signals>
 
 </classentry>
