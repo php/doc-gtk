@@ -1,4 +1,5 @@
 #!/bin/sh
-php prepxpath.php $@
-php updateMethods.php $@
-php remxpath.php $@
+path="`dirname "$0"`"
+php "$path/prepxpath.php" $@
+php "$path/updateMethods.php" $@
+php "$path/remxpath.php" $@
