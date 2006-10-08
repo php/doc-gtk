@@ -56,10 +56,13 @@ class UpdateMethods
     function updateClass($classname, $file)
     {
         /* Obtain reflection object for current class */
+        if (!class_exists($classname)) {
+            include_once $classname . '.php';
+        }
         try {
             $refObject  = new ReflectionClass($classname);
         } catch (ReflectionException $re) {
-            echo $re->getMessage() . "\n";
+            echo 'Error getting ReflectionClass: ' . $re->getMessage() . "\n";
             return;
         }
         $refObject      = new ReflectionClass($classname);
@@ -79,11 +82,14 @@ class UpdateMethods
         }
         echo ' ' . str_pad(count($trueMethods), 3) . " methods\n";
         $xml = new DOMDocument();
-        $xml->load($file);
-        $xpath = new DOMXPath($xml);
-        foreach ($trueMethods as $key => $methodObj) {
-            /* Update each method */
-            $this->updateMethod($classname, $file, $key, $methodObj, $xml, $xpath);
+        if ($xml->load($file)) {
+            $xpath = new DOMXPath($xml);
+            foreach ($trueMethods as $key => $methodObj) {
+                /* Update each method */
+                $this->updateMethod($classname, $file, $key, $methodObj, $xml, $xpath);
+            }
+        } else {
+            echo 'XML is broken in ' . $file . " - skipping.\n";
         }
     }//function updateClass($classname, $file)
 
@@ -360,9 +366,11 @@ if ($doIt->methodCount == 0) {
     echo "\n\nNo Methods to Update! Quitting...\n\n";
 } else {
     echo "\n\n" . $doIt->methodCount . " methods were updated!";
-    echo "\nThe following classes' xml source files do not exist and therefore were NOT updated:\n";
-    foreach ($doIt->missingClasses as $missClass) {
-        echo $missClass."\n";
+    if (count($doIt->missingClasses) > 0) {
+        echo "\nThe following classes' xml source files do not exist and therefore were NOT updated:\n";
+        foreach ($doIt->missingClasses as $missClass) {
+            echo $missClass."\n";
+        }
     }
 }
 
