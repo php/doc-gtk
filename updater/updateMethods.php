@@ -11,6 +11,14 @@
 *   After finishing this script, remxpath.php removes
 *   the entities.
 *
+*   TODO:
+*   - add void if no return value
+*   - add void if no parameters
+*   - check existing methods
+*   - check method parameters
+*   - beautify output / get rid of those indent* xml nodes
+*   - write test cases
+*
 *   @author Anant Narayanan <anant@kix.in>
 *   @author Christian Weiske <cweiske@php.net>
 */
