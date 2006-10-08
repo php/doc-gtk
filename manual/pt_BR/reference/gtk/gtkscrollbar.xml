@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<!-- EN-Revision: 1.3 Maintainer: dnfeitosa Status: ready -->
-
+<!-- EN-Revision: 1.6 Maintainer: dnfeitosa Status: ready -->
 <classentry id="gtk.gtkscrollbar">
  <classmeta>
   <classtitle>GtkScrollbar</classtitle>
@@ -9,8 +8,141 @@
 	 Classe base para GtkHScrollbar e GtkVScrollbar.
   </shortdesc>
   <desc>
-
+   <para>
+    O widget <classname>GtkScrollbar</classname> é uma classe abstrata 
+    para <classname>GtkHScrollbar</classname> e
+    <classname>GtkVScrollbar</classname>. Ela por si só, não é muito útil.
+   </para>
+   <para>
+		 A posição da barra em um scrollbar é controlada pelos ajustes de rolagem. Veja
+		 <classname>GtkAdjustment</classname> para uma referência dos parâmetros - para
+		 <classname>GtkScrollbar</classname>, o campo <fieldname class="GtkAdjustment">
+		 value</fieldname> representa a posição do scrollbar, que deve ser entre o campor
+    <fieldname class="GtkAdjustment">lower</fieldname> e 
+    "<fieldname class="GtkAdjustment">upper</fieldname> -
+    <fieldname class="GtkAdjustment">page_size</fieldname>." O campo
+		<fieldname class="GtkAdjustment">page_size</fieldname> representa o tamanho da área
+		visível. Os campos <fieldname class="GtkAdjustment">step_increment</fieldname> e
+		<fieldname class="GtkAdjustment">page_increment</fieldname> são usados quando o usuário
+		solicita que o conteúdo seja rolado para baixo (usando as setas ou a tecla PageDown).
+   </para>
+   <para>
+    <classname>GtkScrollbar</classname> não possui métodos próprios; ao invés, dê uma olhada em
+    <classname>GtkRange</classname>.
+   </para>
+   <note>
+    <para>
+		 Se você deseja adicionar um scrollbar à um <classname>GtkTextView</classname> ou um
+     <classname>GtkTreeView</classname>, você deve usar
+     <classname>GtkScrolledWindow</classname>.
+    </para>
+   </note>
   </desc>
  </classmeta>
+
+
+ <styleproperties>
+  <prop id="gtk.gtkscrollbar.property.fixed-slider-length" type="ro">
+   <propname>fixed-slider-length</propname>
+   <proptype>boolean</proptype>
+   <shortdesc>
+		 Não modifica o tamanho padrão da barra de roalgem, apenas o fixa no tamanho mínimo.
+   </shortdesc>
+   <desc>
+    <para>
+			Não modifica o tamanho padrão da barra de roalgem, apenas o fixa no tamanho mínimo.
+    </para>
+    <para>
+     Padrão: <literal>false</literal>
+    </para>
+    <para>
+     Veja: <propname class="GtkScrollbar">min-slider-length</propname>
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtkscrollbar.property.has-backward-stepper" type="ro">
+   <propname>has-backward-stepper</propname>
+   <proptype>boolean</proptype>
+   <shortdesc>
+		Exibe o botão padrão de retrocesso.
+   </shortdesc>
+   <desc>
+    <para>
+			Exibe o botão padrão de retrocesso.
+    </para>
+    <para>
+     Padrão: <literal>true</literal>
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtkscrollbar.property.has-forward-stepper" type="ro">
+   <propname>has-forward-stepper</propname>
+   <proptype></proptype>
+   <shortdesc>
+		Exibe o botão padrão de adiantamento.
+   </shortdesc>
+   <desc>
+    <para>
+			Exibe o botão padrão de adiantamento.
+    </para>
+    <para>
+     Padrão: <literal>true</literal>
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtkscrollbar.property.has-secondary-backward-stepper" type="ro">
+   <propname>has-secondary-backward-stepper</propname>
+   <proptype>boolean</proptype>
+   <shortdesc>
+		 Exibe um segundo botão padrão de retrocesso do lado oposto do scrollbar.
+   </shortdesc>
+   <desc>
+    <para>
+			Exibe um segundo botão padrão de retrocesso do lado oposto do scrollbar.
+    </para>
+    <para>
+     Padrão: <literal>false</literal>
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtkscrollbar.property.has-secondary-forward-stepper" type="ro">
+   <propname>has-secondary-forward-stepper</propname>
+   <proptype>boolean</proptype>
+   <shortdesc>
+		 Exibe um segundo botão padrão de adiantamento do lado oposto do scrollbar.
+   </shortdesc>
+   <desc>
+    <para>
+			Exibe um segundo botão padrão de adiantamento do lado oposto do scrollbar.
+    </para>
+    <para>
+     Padrão: <literal>false</literal>
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtkscrollbar.property.min-slider-length" type="ro">
+   <propname>min-slider-length</propname>
+   <proptype>boolean</proptype>
+   <shortdesc>
+		 Tamanho mínimo da barra de roalgem do scrollbar.
+   </shortdesc>
+   <desc>
+    <para>
+			Tamanho mínimo da barra de roalgem do scrollbar.
+    </para>
+    <para>
+     Valores permitidos: <literal>&gt;= 0</literal>
+    </para>
+    <para>
+     Padrão: <literal>21</literal>
+    </para>
+   </desc>
+  </prop>
+ </styleproperties>
 
 </classentry>

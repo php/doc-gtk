@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<!-- EN-Revision: 1.16 Maintainer: dnfeitosa Status: ready -->
-
+<!-- EN-Revision: 1.21 Maintainer: dnfeitosa Status: ready -->
 <enums id="gtkenum">
 
 
@@ -718,6 +717,9 @@
     quando empacotado dentro de um <classname>GtkScrolledWindow</classname>.
     Isto é o oposto do lugar em que as barras de rolagem estão posicionadas.
    </simpara>
+   <para>
+    <graphic fileref="&directory.images;/reference/gtk/gtkscrolledwindow/placement.png"/>
+   </para>
   </desc>
 
   <enumoption>
@@ -3076,6 +3078,7 @@
    <simpara>
 				Usado para alterar a aparência da sombra da linha de um <classname>GtkFrame
 				</classname> ou <classname>GtkScrolledWindow</classname>.
+    <classname>GtkScrolledWindow</classname>.
     <classname>GtkArrow</classname>s também usam tipos de sombra.
    </simpara>
    <para>
@@ -4234,6 +4237,41 @@
    <optionname>Gtk::TREE_MODEL_LIST_ONLY</optionname>
    <shortdesc>
 				O modelo é uma lista, e nunca possuirá um child.
+   </shortdesc>
+  </enumoption>
+ </enum>
+
+
+ <enum id="gtk.enum.treeviewcolumnsizing">
+  <enumname>GtkTreeViewColumnSizing</enumname>
+  <desc>
+   <simpara>
+    Usado por <classname>GtkTreeViewColumn</classname>
+    <function class="GtkTreeViewColumn">set_sizing</function>.
+   </simpara>
+  </desc>
+
+  <enumoption>
+   <value>0</value>
+   <optionname>Gtk::GtkTreeViewColumnSizing</optionname>
+   <shortdesc>
+		As colunas só se tornam grandes em reação à mudanças no modelo.
+   </shortdesc>
+  </enumoption>
+
+  <enumoption>
+   <value>1</value>
+   <optionname>Gtk::TREE_VIEW_COLUMN_AUTOSIZE</optionname>
+   <shortdesc>
+		As colunas se redimensionam para ajustar-se ao melhor tamanho cada vez que o modelo é alterado.
+   </shortdesc>
+  </enumoption>
+
+  <enumoption>
+   <value>2</value>
+   <optionname>Gtk::TREE_VIEW_COLUMN_FIXED</optionname>
+   <shortdesc>
+		As colunas possuem uma largura fixa em pixels.
    </shortdesc>
   </enumoption>
  </enum>
