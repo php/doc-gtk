@@ -1,0 +1,649 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- EN-Revision: 1.6 Maintainer: dnfeitosa Status: ready -->
+<classentry id="gtk.gtktreemodelsort">
+ <classmeta>
+  <classtitle>GtkTreeModelSort</classtitle>
+  <classparent>GObject</classparent>
+  <implements>GtkTreeModel</implements>
+  <implements>GtkTreeSortable</implements>
+  <shortdesc>
+	 Um GtkTreeModel wrapper que ordena o modelo base.
+  </shortdesc>
+  <desc>
+   <para>
+		 O GtkTreeModelSort é um modelo que ordena um submodelo.
+		 Ele não armazena nenhum dado, mas cria um modelo filho que age como um
+		 proxy para os dados. Ele possui tipos de colunas idênticos ao seu 
+		 modelo filho e as mudanças são propagadas. O propósito deste modelo 
+		 é oferecer uma maneira de ordenar modelos diferentes sem ter que 
+		 modificá-los.
+   </para>
+  </desc>
+ </classmeta>
+
+ <constructors>
+  <constructor id="gtk.gtktreemodelsort.constructor">
+   <funcsynopsis>
+    <funcprototype>
+    <funcdef> <function>GtkTreeModelSort</function></funcdef>
+    <paramdef><classname>GtkTreeModel</classname> <parameter>model</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+		Cria um novo modelo ordenável baseado em outro.
+   </shortdesc>
+   <desc>
+    <para>
+			Cria um novo modelo ordenável baseado em outro modelo dado.
+    </para>
+   </desc>
+  </constructor>
+ </constructors>
+
+ <methods>
+  <method id="gtk.gtktreemodelsort.method.clear_cache">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>clear_cache</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+		Limpa os iteradores em cache.
+   </shortdesc>
+   <desc>
+    <para>
+			Esta função quase nunca deve ser chamada.
+			Ela limpa o modelo de ordenação de qualquer iterador em cache que não foram
+			referenciados por <function class="GtkTreeModel">ref_node</function>.
+			Isto pode ser útil se o modelo a ser ordenado é estático (e não muda) 
+			e possui vários acessos não referenciados aos nós. Um efeito colateral 
+			desta função é que todos iteradores não referenciados serão 
+			inválidos.
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtktreemodelsort.method.convert_child_iter_to_iter">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef><classname>GtkTreeIter</classname> <function>convert_child_iter_to_iter</function></funcdef>
+     <paramdef><classname>GtkTreeIter</classname> <parameter>child_iter</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+		Converte um iterador de um modelo filho para um local.
+   </shortdesc>
+   <desc>
+    <para>
+			Retorna a linha no modelo de ordenação que corresponde à linha
+			no modelo filho apontado por <parameter>child_iter</parameter>.
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtktreemodelsort.method.convert_child_path_to_path">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef><classname>GtkTreePath</classname> <function>convert_child_path_to_path</function></funcdef>
+     <paramdef><classname>GtkTreePath</classname> <parameter>child_path</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+		Converte um caminho no modelo filho para um caminho local.
+   </shortdesc>
+   <desc>
+    <para>
+			Converte um caminho no modelo filho para um caminho local.
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtktreemodelsort.method.convert_iter_to_child_iter">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef><classname>GtkTreeIter</classname> <function>convert_iter_to_child_iter</function></funcdef>
+     <paramdef><classname>GtkTreeIter</classname> <parameter>iter</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+		Converte um iterador local em um iterador no modelo filho.
+   </shortdesc>
+   <desc>
+    <para>
+			Retorna a linha no modelo filho no qual o <parameter>iter</parameter> 
+			aponta.
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtktreemodelsort.method.convert_path_to_child_path">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef><classname>GtkTreePath</classname> <function>convert_path_to_child_path</function></funcdef>
+     <paramdef><classname>GtkTreePath</classname> <parameter>path</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+		Converte um caminho local em um caminho do modelo filho.
+   </shortdesc>
+   <desc>
+    <para>
+			Converte um caminho local em um caminho do modelo filho.
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtktreemodelsort.method.get_model">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef><classname>GtkTreeModel</classname> <function>get_model</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+		Retorna o modelo filho.
+   </shortdesc>
+   <desc>
+    <para>
+			Retorna o modelo filho.
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtktreemodelsort.method.iter_is_valid">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>bool <function>iter_is_valid</function></funcdef>
+     <paramdef><classname>GtkTreeIter</classname> <parameter>iter</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+		Verifica se o iterador é valido.
+   </shortdesc>
+   <desc>
+    <para>
+			Verifica se o iterador é valido.
+    </para>
+    <note>
+     <para>
+			 Este método é lento. Use-o apenas para fins de teste/debug.
+     </para>
+    </note>
+   </desc>
+  </method>
+
+  <method id="gtk.gtktreemodelsort.method.reset_default_sort_func">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>reset_default_sort_func</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+		Recupera o estado padrão (não ordenado).
+   </shortdesc>
+   <desc>
+    <para>
+			Este método restaura a forma não ordenada. Isto é, a mesma 
+			ordem que seu modelo filho.
+    </para>
+    <para>
+			Ele irá reordenar o modelo para estar na mesma ordem que o modelo filho
+		 	apenas se o GtkTreeModelSort estiver em um estado não-ordenado.
+    </para>
+   </desc>
+  </method>
+ <method id="gtk.gtktreemodelsort.method.foreach">
+    <funcsynopsis>
+    <funcprototype>
+     <funcdef> <function>foreach</function></funcdef>
+     <paramdef><parameter>callback</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtktreemodelsort.method.get">
+    <funcsynopsis>
+    <funcprototype>
+     <funcdef> <function>get</function></funcdef>
+     
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtktreemodelsort.method.get_column_type">
+    <funcsynopsis>
+    <funcprototype>
+     <funcdef> <function>get_column_type</function></funcdef>
+     <paramdef><parameter>index</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtktreemodelsort.method.get_flags">
+    <funcsynopsis>
+    <funcprototype>
+     <funcdef> <function>get_flags</function></funcdef>
+     
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtktreemodelsort.method.get_iter">
+    <funcsynopsis>
+    <funcprototype>
+     <funcdef> <function>get_iter</function></funcdef>
+     <paramdef><parameter>treepath</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtktreemodelsort.method.get_iter_first">
+    <funcsynopsis>
+    <funcprototype>
+     <funcdef> <function>get_iter_first</function></funcdef>
+     
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtktreemodelsort.method.get_iter_root">
+    <funcsynopsis>
+    <funcprototype>
+     <funcdef> <function>get_iter_root</function></funcdef>
+     
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtktreemodelsort.method.get_iter_from_string">
+    <funcsynopsis>
+    <funcprototype>
+     <funcdef> <function>get_iter_from_string</function></funcdef>
+     <paramdef><parameter>path</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtktreemodelsort.method.get_n_columns">
+    <funcsynopsis>
+    <funcprototype>
+     <funcdef> <function>get_n_columns</function></funcdef>
+     
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtktreemodelsort.method.get_path">
+    <funcsynopsis>
+    <funcprototype>
+     <funcdef> <function>get_path</function></funcdef>
+     <paramdef><classname>GtkTreeIter</classname><parameter>iter</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtktreemodelsort.method.get_string_from_iter">
+    <funcsynopsis>
+    <funcprototype>
+     <funcdef> <function>get_string_from_iter</function></funcdef>
+     <paramdef><classname>GtkTreeIter</classname><parameter>iter</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtktreemodelsort.method.get_value">
+    <funcsynopsis>
+    <funcprototype>
+     <funcdef> <function>get_value</function></funcdef>
+     <paramdef><parameter>column</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtktreemodelsort.method.iter_children">
+    <funcsynopsis>
+    <funcprototype>
+     <funcdef> <function>iter_children</function></funcdef>
+     <paramdef><classname>GtkTreeIter</classname><parameter>parent_iter</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtktreemodelsort.method.iter_has_child">
+    <funcsynopsis>
+    <funcprototype>
+     <funcdef> <function>iter_has_child</function></funcdef>
+     <paramdef><classname>GtkTreeIter</classname><parameter>iter</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtktreemodelsort.method.iter_n_children">
+    <funcsynopsis>
+    <funcprototype>
+     <funcdef> <function>iter_n_children</function></funcdef>
+     <paramdef><classname>GtkTreeIter</classname><parameter>iter</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtktreemodelsort.method.iter_next">
+    <funcsynopsis>
+    <funcprototype>
+     <funcdef> <function>iter_next</function></funcdef>
+     <paramdef><classname>GtkTreeIter</classname><parameter>iter</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtktreemodelsort.method.iter_nth_child">
+    <funcsynopsis>
+    <funcprototype>
+     <funcdef> <function>iter_nth_child</function></funcdef>
+     <paramdef><parameter>n</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtktreemodelsort.method.iter_parent">
+    <funcsynopsis>
+    <funcprototype>
+     <funcdef> <function>iter_parent</function></funcdef>
+     <paramdef><classname>GtkTreeIter</classname><parameter><optional>iter</optional></parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtktreemodelsort.method.ref_node">
+    <funcsynopsis>
+    <funcprototype>
+     <funcdef> <function>ref_node</function></funcdef>
+     <paramdef><classname>GtkTreeIter</classname><parameter>iter</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtktreemodelsort.method.row_changed">
+    <funcsynopsis>
+    <funcprototype>
+     <funcdef> <function>row_changed</function></funcdef>
+     <paramdef><classname>GtkTreeIter</classname><parameter>iter</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtktreemodelsort.method.row_deleted">
+    <funcsynopsis>
+    <funcprototype>
+     <funcdef> <function>row_deleted</function></funcdef>
+     <paramdef><parameter>path</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtktreemodelsort.method.row_has_child_toggled">
+    <funcsynopsis>
+    <funcprototype>
+     <funcdef> <function>row_has_child_toggled</function></funcdef>
+     <paramdef><classname>GtkTreeIter</classname><parameter>iter</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtktreemodelsort.method.row_inserted">
+    <funcsynopsis>
+    <funcprototype>
+     <funcdef> <function>row_inserted</function></funcdef>
+     <paramdef><classname>GtkTreeIter</classname><parameter>iter</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtktreemodelsort.method.unref_node">
+    <funcsynopsis>
+    <funcprototype>
+     <funcdef> <function>unref_node</function></funcdef>
+     <paramdef><classname>GtkTreeIter</classname><parameter>iter</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtktreemodelsort.method.get_sort_column_id">
+    <funcsynopsis>
+    <funcprototype>
+     <funcdef> <function>get_sort_column_id</function></funcdef>
+     
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtktreemodelsort.method.has_default_sort_func">
+    <funcsynopsis>
+    <funcprototype>
+     <funcdef> <function>has_default_sort_func</function></funcdef>
+     
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtktreemodelsort.method.set_default_sort_func">
+    <funcsynopsis>
+    <funcprototype>
+     <funcdef> <function>set_default_sort_func</function></funcdef>
+     <paramdef><parameter>callback</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtktreemodelsort.method.set_sort_column_id">
+    <funcsynopsis>
+    <funcprototype>
+     <funcdef> <function>set_sort_column_id</function></funcdef>
+     <paramdef><parameter>order</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtktreemodelsort.method.set_sort_func">
+    <funcsynopsis>
+    <funcprototype>
+     <funcdef> <function>set_sort_func</function></funcdef>
+     <paramdef><parameter>callback</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtktreemodelsort.method.sort_column_changed">
+    <funcsynopsis>
+    <funcprototype>
+     <funcdef> <function>sort_column_changed</function></funcdef>
+     
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  </methods>
+
+</classentry>
