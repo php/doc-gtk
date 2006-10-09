@@ -12,12 +12,20 @@
 *   the entities.
 *
 *   TODO:
-*   - add void if no return value
+*   - beautify output (xml_beautifier?)
+*   - add/check signals
+*   - add/check properties
+*
+*   Done:
+*   - add void if no return value (always since we cannot determine)
 *   - add void if no parameters
+*   - get rid of those indent* xml nodes
+*   - do not include interface methods
+*   - interface list
+*   - write unit tests
 *   - check existing methods
-*   - check method parameters
-*   - beautify output / get rid of those indent* xml nodes
-*   - write test cases
+*   - check parameters of already docced methods
+*       (void -> parameter, parameter count)
 *
 *   @author Anant Narayanan <anant@kix.in>
 *   @author Christian Weiske <cweiske@php.net>
@@ -25,8 +33,8 @@
 class UpdateMethods
 {
     /* Stores class under consideration and missing classes */
-    public $methodCount=0;
-    public $missingClasses = array();
+    public $methodCount     = 0;
+    public $missingClasses  = array();
 
 
 
@@ -84,17 +92,40 @@ class UpdateMethods
         }
         if ($parent !== null) {
             $parentMethods = $parent->getMethods();
+            //also remove interface methods
+            foreach ($refObject->getInterfaces() as $refInterface) {
+                $parentMethods = array_merge($parentMethods, $refInterface->getMethods());
+            }
             $trueMethods   = $this->cleanMethods($childMethods, $parentMethods);
         } else {
             $trueMethods   = $childMethods;
         }
         echo ' ' . str_pad(count($trueMethods), 3) . " methods\n";
-        $xml = new DOMDocument();
-        if ($xml->load($file)) {
-            $xpath = new DOMXPath($xml);
+        $arMethodNames = $this->getMethodNames($trueMethods);
+
+        $doc = new DOMDocument();
+        if ($doc->load($file)) {
+            $xpath = new DOMXPath($doc);
+            $this->checkInterface($doc, $xpath, $refObject);
+
+            //check the existence of each method defined in the docs
+            foreach ($xpath->query('//methods/method/funcsynopsis/funcprototype/funcdef/function/text()') as $method) {
+                $strMethod = $method->textContent;
+                if (!in_array($strMethod, $arMethodNames)) {
+                    //method in docs but not in class -> remove it
+                    $toRemove = $xpath->query('//methods/method[funcsynopsis/funcprototype/funcdef/function/text()="' . $strMethod . '"]');
+                    $toRemoveParent = $xpath->query('//methods');
+                    $toRemoveParent->item(0)->removeChild($toRemove->item(0));
+                }
+            }
+
+            //Update each method in the class
             foreach ($trueMethods as $key => $methodObj) {
-                /* Update each method */
-                $this->updateMethod($classname, $file, $key, $methodObj, $xml, $xpath);
+                $this->updateMethod($classname, $file, $key, $methodObj, $doc, $xpath);
+            }
+
+            if (is_subclass_of($classname, 'GObject')) {
+                $this->checkSignals($classname, $doc, $xpath);
             }
         } else {
             echo 'XML is broken in ' . $file . " - skipping.\n";
@@ -114,7 +145,7 @@ class UpdateMethods
     *   @param DOMDocument      $doc        DOM document object
     *   @param DOMXPath         $xpath      DOM XPath object for the document
     */
-    function updateMethod($classname, $file, $sNo, $method, $doc, $xpath)
+    function updateMethod($classname, $file, $sNo, ReflectionMethod $method, DOMDocument $doc, DOMXPath $xpath)
     {
         $methodName = $method->getName();
         $compelArgs = $method->getNumberOfRequiredParameters();
@@ -129,8 +160,6 @@ class UpdateMethods
         }
 
         $daClass = strtolower($classname);
-        $daMethod = strtolower($methodName);
-
         if ($methodName == "__construct") {
             //constructor
             $ismethod = false;
@@ -138,13 +167,13 @@ class UpdateMethods
         } else if (substr($methodName, 0, 3) == "new") {
             //constructor
             $ismethod = false;
-            $daID = $prefix . '.' . $daClass . '.constructor.' . $daMethod;
+            $daID = $prefix . '.' . $daClass . '.constructor.' . $methodName;
         } else if (substr($methodName, 0, 2) == '__') {
             return;
         } else {
             //normal method
             $ismethod = true;
-            $daID = $prefix . '.' . $daClass . '.method.' . $daMethod;
+            $daID = $prefix . '.' . $daClass . '.method.' . $methodName;
         }
 
 
@@ -160,20 +189,20 @@ class UpdateMethods
         if ($functionNodes->length == 0) {
             /* Method not present, Add it */
             if ($ismethod) {
-                $xmlMethod = $doc->createElement('method', "\n    ");
+                $xmlMethod  = $doc->createElement('method', "\n");
             } else {
-                $xmlMethod = $doc->createElement('constructor', "\n   ");
+                $xmlMethod  = $doc->createElement('constructor', "\n");
             }
             $xmlMethod->setAttribute('id', $daID);
 
-            $xmlSynopsis = $doc->createElement('funcsynopsis', "\n    ");
-            $xmlPrototype = $doc->createElement('funcprototype', "\n     ");
-            $xmlFuncdef = $doc->createElement('funcdef', " ");
+            $xmlSynopsis    = $doc->createElement('funcsynopsis', "\n");
+            $xmlPrototype   = $doc->createElement('funcprototype', "\n");
+            $xmlFuncdef     = $doc->createElement('funcdef', $ismethod ? 'void ' : '');
             if ($ismethod || $methodName == "__construct") {
-                $xmlFunction = $doc->createElement('function', $daMethod);
+                $xmlFunction = $doc->createElement('function', $methodName);
             } else {
                 //alternative constructors need Classname::new_* as funcname
-                $xmlFunction = $doc->createElement('function', $classname . '::' . $daMethod);
+                $xmlFunction = $doc->createElement('function', $classname . '::' . $methodName);
             }
 
             $xmlFuncdef->appendChild($xmlFunction);
@@ -182,69 +211,51 @@ class UpdateMethods
             if ($totalArgs > 0) {
                 /* Function has arguments */
                 foreach ($method->getParameters() as $param) {
-                    $xmlParamdef = $doc->createElement('paramdef');
-                    if ($param->getClass()) {
-                        /* Parameter is of object type */
-                        $xmlClassname = $doc->createElement('classname', $param->getClass()->getName());
-                        $xmlParamdef->appendChild($xmlClassname);
-                    }
-                    $xmlParameter = $doc->createElement('parameter');
-                    if ($param->isOptional()) {
-                        /* Parameter is optional */
-                        if ($param->isDefaultValueAvailable()) {
-                            /* Parameter has default value */
-                            $xmlOptional =
-                                $doc->createElement('optional', $param->getName()."=".$param->getDefaultValue());
-                        } else {
-                            $xmlOptional =
-                                $doc->createElement('optional', $param->getName());
-                        }
-                        $xmlParameter->appendChild($xmlOptional);
-                    } else {
-                        $xmlParameter->nodeValue = $param->getName();
-                    }
-                    $xmlParamdef->appendChild($xmlParameter);
-                    $xmlParamDefs[] = $xmlParamdef;
+                    $xmlParamDefs[] = $this->createParameterDefinition($param, $doc);
                 }
-            }
-            else {
+            } else {
                 /* Function has NO arguments */
-                $xmlParamdef = $doc->createElement('paramdef', "void");
+                $xmlParamDefs[] = $doc->createElement('paramdef', 'void');
             }
-
-            /* Filler nodes to maintain indentation :) */
-            $indentFuncdef   = $doc->createTextNode("\n     ");
-            $indentParamdef  = $doc->createTextNode("\n    ");
-            $indentPrototype = $doc->createTextNode("\n   ");
-            $indentSynopsis  = $doc->createTextNode("\n   ");
-            $indentShortDesc = $doc->createTextNode("\n   ");
-            $indentDesc      = $doc->createTextNode("\n  ");
-            $indentMethod    = $doc->createTextNode("\n\n  ");
 
             /* Appending child nodes in order */
+            $xmlPrototype->appendChild($doc->createTextNode('     '));
             $xmlPrototype->appendChild($xmlFuncdef);
-            $xmlPrototype->appendChild($indentFuncdef);
-            foreach ($xmlParamDefs as $def) {
+            $xmlPrototype->appendChild($doc->createTextNode("\n"));
+
+            foreach ($xmlParamDefs as $xmlParamdef) {
+                $xmlPrototype->appendChild($doc->createTextNode('     '));
                 $xmlPrototype->appendChild($xmlParamdef);
+                $xmlPrototype->appendChild($doc->createTextNode("\n"));
             }
-            $xmlPrototype->appendChild($indentParamdef);
+            $xmlPrototype->appendChild($doc->createTextNode("    "));
+
+            $xmlSynopsis->appendChild($doc->createTextNode('    '));
             $xmlSynopsis->appendChild($xmlPrototype);
-            $xmlSynopsis->appendChild($indentPrototype);
+            $xmlSynopsis->appendChild($doc->createTextNode("\n   "));
 
             /* Add nodes for shortdesc and desc */
-            $xmlShortDesc = $doc->createElement('shortdesc', "\n\n   ");
-            $xmlDesc      = $doc->createElement('desc', "\n\n   ");
+            $xmlShortDesc = $doc->createElement('shortdesc', "\n    \n   ");
+            $xmlDesc      = $doc->createElement('desc', "\n   ");
+
+            $xmlMethod->appendChild($doc->createTextNode("   "));
             $xmlMethod->appendChild($xmlSynopsis);
-            $xmlMethod->appendChild($indentSynopsis);
+            $xmlMethod->appendChild($doc->createTextNode("\n"));
+
+            $xmlMethod->appendChild($doc->createTextNode("   "));
             $xmlMethod->appendChild($xmlShortDesc);
-            $xmlMethod->appendChild($indentShortDesc);
+            $xmlMethod->appendChild($doc->createTextNode("\n"));
+
+            $xmlMethod->appendChild($doc->createTextNode("   "));
             $xmlMethod->appendChild($xmlDesc);
-            $xmlMethod->appendChild($indentDesc);
+            $xmlMethod->appendChild($doc->createTextNode("\n"));
 
             // Add a static identifier if the method is static.
             if ($method->isStatic()) {
-                $this->_addStatic($xmlDesc, $doc);
+                $this->_addStatic($doc, $xmlDesc);
             }
+
+            $xmlMethod->appendChild($doc->createTextNode('  '));
 
             /* Save the xml file after adding the whole method node */
             if ($ismethod) {
@@ -270,23 +281,26 @@ class UpdateMethods
             }
             $topLevel = $topLevel->item(0);
             echo "Updating " . $daID . "\n";
+            $topLevel->appendChild($doc->createTextNode('  '));
             $topLevel->appendChild($xmlMethod);
-            $topLevel->appendChild($indentMethod);
+            $topLevel->appendChild($doc->createTextNode("\n\n"));
+
             $doc->save($file);
 
             $this->methodCount += 1;
         } else {
             /**
             *   Method exists
-            *   @todo Add code to check validity later
             */
             // Grab the element.
             $xmlMethod = $functionNodes->item(0);
             $xmlDesc   = $xmlMethod->getElementsByTagName('desc')->item(0);
 
+            $this->checkExistingMethodParams($doc, $xpath, $method, $path);
+
             // Add a static entity if needed.
             if ($method->isStatic()) {
-                if ($this->_addStatic($xmlDesc, $doc)) {
+                if ($this->addStatic($doc, $xmlDesc)) {
                     ++$this->methodCount;
                     $doc->save($file);
                 }
@@ -301,15 +315,18 @@ class UpdateMethods
     *
     *   Hackish but working.
     *
-    *   @access private
-    *   @param  object  $desc The DOMNode for the method description.
-    *   @param  object  $doc  The DOMDocument object.
+    *   @param  DOMDocument $doc  The DOMDocument object.
+    *   @param  DOMNode     $desc The DOMNode for the method description.
     *   @return boolean true if the method was updated.
     */
-    function _addStatic($desc, $doc)
+    function addStatic(DOMDocument $doc, DOMNode $desc)
     {
         // Check to see if the static entity has already been added.
         if ($desc->hasChildNodes()) {
+            /**
+            *   BAD HACK: This will not work anymore if the
+            *   entity changes.
+            */
             // The DOMDocument translates the entities on loading.
             $staticText = 'This method must be called statically.';
 
@@ -331,15 +348,144 @@ class UpdateMethods
             }
         }
 
-        $desc->appendChild($doc->createTextNode(' '));
         $simpara = $doc->createElement('simpara');
         $simpara->appendChild($doc->createTextNode("\n     "));
         $simpara->appendChild($doc->createEntityReference('static'));
         $simpara->appendChild($doc->createTextNode("\n    "));
+        $desc->appendChild($doc->createTextNode(' '));
         $desc->appendChild($simpara);
         $desc->appendChild($doc->createTextNode("\n   "));
         return true;
-    }//function _addStatic($desc, $doc)
+    }//function addStatic(DOMDocument $doc, DOMNode $desc)
+
+
+
+    /**
+    *   Checks the existing XML if all parameters exist in there.
+    *
+    *   @param DOMDocument      $doc        XML document to modify
+    *   @param DOMXPath         $xpath      XPath to search with
+    *   @param ReflectionMethod $method     Method to get parameter information form
+    *   @param string           $path       XPath expression to the method/constructor
+    */
+    function checkExistingMethodParams(DOMDocument $doc, DOMXPath $xpath, ReflectionMethod $method, $path)
+    {
+        $strMethod      = $method->getName();
+        $nParameters    = $method->getNumberOfParameters();
+        $nXmlParameters = $xpath->evaluate('count(' . $path . '/funcsynopsis/funcprototype/paramdef[not(text()="void")])');
+        $nVoidParameter = $xpath->evaluate('count(' . $path . '/funcsynopsis/funcprototype/paramdef[text()="void"])');
+
+        $funcdef = $xpath->query($path . '/funcsynopsis/funcprototype')->item(0);
+
+        if ($nParameters == 0) {
+            if ($nVoidParameter == 0) {
+                //add void
+                $funcdef->appendChild($doc->createTextNode(" "));
+                $funcdef->appendChild($doc->createElement('paramdef', 'void'));
+                $funcdef->appendChild($doc->createTextNode("\n    "));
+            } else if ($nXmlParameters > 0) {
+                //the method has no parameters but the doc has.
+                //very very strange. Do nothing but emit a warning
+                echo $strMethod . ' has no parameters, but the docs have. Strange.' . "\n";
+            } else {
+                return;
+            }
+        } else {
+            /**
+            *   Check the existing parameters.
+            *   What could be done:
+            *   + check number
+            *   - check type
+            *   - check name
+            */
+            if ($nVoidParameter) {
+                //no void anymore
+                $toRemove = $xpath->query($path . '/funcsynopsis/funcprototype/paramdef[text()="void"]');
+                $funcdef->removeChild($toRemove->item(0));
+            }
+
+            if ($nParameters == $nXmlParameters) {
+                //we assume all is ok
+                return;
+            } else {
+                //parameter count does not match
+                if ($nXmlParameters > 0) {
+                    //remove the existing parameters
+                    $toRemove = $xpath->query($path . '/funcsynopsis/funcprototype/paramdef');
+                    for ($nA = 0; $nA < $toRemove->length; $nA++) {
+                        $funcdef->removeChild($toRemove->item($nA));
+                    }
+                }
+                //Create new paramdefs
+                foreach ($method->getParameters() as $parameter) {
+                    $funcdef->appendChild($doc->createTextNode(' '));
+                    $funcdef->appendChild($this->createParameterDefinition($parameter, $doc));
+                    $funcdef->appendChild($doc->createTextNode("\n    "));
+                }
+            }
+        }
+    }//function checkExistingMethodParams(DOMDocument $doc, DOMXPath $xpath, ReflectionMethod $method, $path)
+
+
+
+    /**
+    *   Checks if the interface list matches the class definition
+    *
+    *   @param DOMDocument  $doc    xml document to modify
+    *   @param DOMXPath     $xpath  xpath to search elements with
+    *   @param ReflectionClass  $refClass   Class to get the interface list from
+    */
+    function checkInterface(DOMDocument $doc, DOMXPath $xpath, ReflectionClass $refClass)
+    {
+        $meta = $doc->getElementsByTagName('classmeta')->item(0);
+        $nInterfaces = count($refClass->getInterfaces());
+
+        if ($nInterfaces == 0
+            && $xpath->evaluate('count(/classentry/classmeta/implements)') > 0
+        ) {
+            //remove all interfaces
+            foreach ($xpath->query('/classentry/classmeta/implements') as $implements) {
+                $meta->removeChild($implements);
+            }
+        } else if ($nInterfaces > 0) {
+            $shortdesc = $xpath->query('/classentry/classmeta/shortdesc')->item(0);
+
+            foreach ($refClass->getInterfaces() as $refInterface) {
+                $strInterface = $refInterface->getName();
+                if ($xpath->evaluate('count(/classentry/classmeta/implements[text()="' . $strInterface . '"])') == 0) {
+                    //add new interface
+                    $meta->insertBefore(
+                        $doc->createTextNode('  '),
+                        $shortdesc
+                    );
+                    $meta->insertBefore(
+                        $doc->createElement('implements', $strInterface),
+                        $shortdesc
+                    );
+                    $meta->insertBefore(
+                        $doc->createTextNode("\n"),
+                        $shortdesc
+                    );
+                }
+            }
+        }
+    }//function checkInterface(DOMDocument $doc, DOMXPath $xpath, ReflectionClass $refClass)
+
+
+
+    /**
+    *   Checks if the class provides signals and if they are
+    *   documented. Adds signal doc prototypes.
+    *
+    *   @param string       $classname  Classname to check
+    *   @param DOMDocument  $doc        XML document to modify
+    *   @param DOMXPath     $xpath      XPath object to search with
+    */
+    function checkSignals($classname, DOMDocument $doc, DOMXPath $xpath)
+    {
+    
+    }//function checkSignals($classname, DOMDocument $doc, DOMXPath $xpath)
+
 
 
     /**
@@ -352,10 +498,10 @@ class UpdateMethods
     {
         $result = array();
         foreach($cMethods as $cMethod) {
-            $flag = 1;
+            $flag = true;
             foreach($pMethods as $pMethod) {
                 if($cMethod->getName() == $pMethod->getName()) {
-                    $flag = 0;
+                    $flag = false;
                 }
             }
             if($flag) {
@@ -365,13 +511,65 @@ class UpdateMethods
         return $result;
     }//function cleanMethods($cMethods, $pMethods)
 
+
+
+    /**
+    *   Takes an array of ReflectionMethod objects
+    *   and returns an array of strings (method names).
+    *
+    *   @param array $arMethods     Array of ReflectionMethod objects
+    *   @return array               Array of strings (method names)
+    */
+    function getMethodNames($arMethods)
+    {
+        $arMethodNames = array();
+        foreach ($arMethods as $method) {
+            $arMethodNames[] = $method->getName();
+        }
+        return $arMethodNames;
+    }//function getMethodNames($arMethods)
+
+
+
+    /**
+    *   Creates a <paramdef> parameter definition tag
+    *   from the given ReflectionParameter object.
+    */
+    function createParameterDefinition(ReflectionParameter $param, DOMDocument $doc)
+    {
+        $xmlParamdef = $doc->createElement('paramdef');
+        if ($param->getClass()) {
+            /* Parameter is of object type */
+            $xmlClassname = $doc->createElement('classname', $param->getClass()->getName());
+            $xmlParamdef->appendChild($xmlClassname);
+            $xmlParamdef->appendChild($doc->createTextNode(' '));
+        }
+        $xmlParameter = $doc->createElement('parameter');
+        if ($param->isOptional()) {
+            //Parameter is optional
+            if ($param->isDefaultValueAvailable()) {
+                //Parameter has default value
+                $xmlOptional =
+                    $doc->createElement('optional', $param->getName() . ' = ' . $param->getDefaultValue());
+            } else {
+                $xmlOptional =
+                    $doc->createElement('optional', $param->getName());
+            }
+            $xmlParameter->appendChild($xmlOptional);
+        } else {
+            $xmlParameter->nodeValue = $param->getName();
+        }
+        $xmlParamdef->appendChild($xmlParameter);
+        return $xmlParamdef;
+    }//function createParameterDefinition(ReflectionParameter $param, DOMDocument $doc)
+
 }//class UpdateMethods
 
 
 $doIt = new UpdateMethods();
 
 if ($doIt->methodCount == 0) {
-    echo "\n\nNo Methods to Update! Quitting...\n\n";
+    echo "\n\nNo methods to update! Quitting...\n\n";
 } else {
     echo "\n\n" . $doIt->methodCount . " methods were updated!";
     if (count($doIt->missingClasses) > 0) {
@@ -382,6 +580,5 @@ if ($doIt->methodCount == 0) {
     }
 }
 
-echo "\n\n";
-
+echo "\n";
 ?>

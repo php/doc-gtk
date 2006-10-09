@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<!-- $Revision: 1.1 $ -->
+<!-- $Revision: 1.2 $ -->
 <classentry id="gtk.docupdatetestclass">
  <classmeta>
   <classtitle>DocUpdateTestClass</classtitle>
   <classparent>GtkWidget</classparent>
+  <implements>DocUpdateTestInterface2</implements>
   <shortdesc>
   </shortdesc>
   <desc>
@@ -37,15 +38,96 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    DEPRECATED.
+    Method doesn't exist in class
    </shortdesc>
    <desc>
     <para>
-     DEPRECATED.
-     Use <function class="GtkAccelLabel">get_accel_width</function> instead.
     </para>
    </desc>
   </method>
+
+  <method id="doc.docupdatetestclass.method.alreadyDocced">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>int <function>alreadyDocced</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Docced method
+   </shortdesc>
+   <desc>
+    <para>
+     Docced method.
+    </para>
+   </desc>
+  </method>
+
+  <method id="doc.docupdatetestclass.method.alreadyDoccedNoVoid">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>int <function>alreadyDoccedNoVoid</function></funcdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Docced method without a void paramdef
+   </shortdesc>
+   <desc>
+    <para>
+     Docced method without a void paramdef.
+    </para>
+   </desc>
+  </method>
+
+  <method id="doc.docupdatetestclass.method.alreadyDoccedWrongParams">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>int <function>alreadyDoccedWrongParams</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Parameter "param1" is missing, but has a void parameter
+    that needs to be detected.
+   </shortdesc>
+   <desc>
+    <para>
+    </para>
+   </desc>
+  </method>
+
+  <method id="doc.docupdatetestclass.method.alreadyDoccedWrongParams2">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>int <function>alreadyDoccedWrongParams2</function></funcdef>
+     <paramdef><parameter>param1</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    param2 is missing
+   </shortdesc>
+   <desc>
+    <para>
+    </para>
+   </desc>
+  </method>
+
+  <method id="doc.docupdatetestclass.method.interfaceFunc2">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>int <function>interfaceFunc2</function></funcdef>
+     <paramdef><parameter>param1</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Is in interface, should be removed here
+   </shortdesc>
+   <desc>
+    <para>
+    </para>
+   </desc>
+  </method>
+
  </methods>
 
 </classentry>
