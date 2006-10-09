@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<!-- $Revision: 1.2 $ -->
+<!-- $Revision: 1.3 $ -->
 <classentry id="gtk.gtkcelleditable" type="interface">
  <classmeta>
   <classtitle>GtkCellEditable</classtitle>
   <classparent>GInterface</classparent>
   <shortdesc>
-   
+   An interface providing cell editing in a <classname>GtkTreeView</classname>.
   </shortdesc>
   <desc>
    <para>
-    
+    This interface provides editing of a cell contained in a
+    <classname>GtkTreeView</classname>.
    </para>
   </desc>
  </classmeta>
@@ -24,10 +25,15 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Emits the <signalname class="GtkCellEditable">editing-done</signalname>
+    signal.
    </shortdesc>
-  <desc>
-
+   <desc>
+    <para>
+     This method emits the <signalname
+     class="GtkCellEditable">editing-done</signalname> signal that notifies the
+     cell renderer to update its value from the cell.
+    </para>
    </desc>
   </method>
 
@@ -39,10 +45,16 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Emits the <signalname class="GtkCellEditable">remove-widget</signalname>
+    signal.
    </shortdesc>
   <desc>
-
+    <para>
+     This method emits the <signalname
+     class="GtkCellEditable">remove-widget</signalname> signal which indicates
+     that the cell is finished editing, and the celleditable widget may now be
+     destroyed.
+    </para>
    </desc>
   </method>
 
@@ -54,12 +66,60 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Begins the editing on a widget.
    </shortdesc>
   <desc>
-
+    <para>
+     This method begins editing on a GtkCellEditable widget that has been
+     reparented over the treeview cell. <literal>event</literal> is the
+     <classname>GdkEvent</classname> that began the editing process. It may be
+     NULL, in the instance that editing was initiated through programatic means.
+    </para>
    </desc>
   </method>
  </methods>
+
+ <signals>
+
+  <signal id="gtk.gtkcelleditable.signal.editing-done">
+   <signalname>editing-done</signalname>
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
+     <paramdef>GtkCellEditable <parameter>celleditable</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    This signal is emitted when editing is complete.
+   </shortdesc>
+   <desc>
+    <para>
+     After editing is complete, calling <function
+     class="GtkCellEditable">editing_done</function> emits this signal.
+    </para>
+   </desc>
+  </signal>
+
+  <signal id="gtk.gtkcelleditable.signal.remove-widget">
+   <signalname>remove-widget</signalname>
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
+     <paramdef>GtkCellEditable <parameter>celleditable</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    This signal is emitted when the celleditable widget can be destroyed.
+   </shortdesc>
+   <desc>
+    <para>
+     This signal is emitted when the cellrenderer for the treeview cell has
+     retrieved the edited information and the celleditable widget can be
+     destroyed.
+    </para>
+   </desc>
+  </signal>
+
+ </signals>
 
 </classentry>

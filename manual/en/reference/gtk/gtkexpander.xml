@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- $Revision: 1.10 $ -->
+<!-- $Revision: 1.11 $ -->
 <classentry id="gtk.gtkexpander">
  <classmeta>
   <classtitle>GtkExpander</classtitle>
@@ -66,10 +66,25 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Creates a GtkExpander instance with a mnemonic label.
    </shortdesc>
    <desc>
-
+    <para>
+     This is a static method which creates a new
+     <classname>GtkExpander</classname> instance using <literal>label</literal>
+     as the text of the label. If characters in label are preceded by an
+     underscore, they are underlined. If you need a literal underscore character
+     in a label, use '__' (two underscores). The first underlined character
+     represents a keyboard accelerator called a mnemonic. Pressing Alt with that
+     key activates the button. If label is <literal>Null</literal> the expander
+     will have no label.
+    </para>
+    <para>
+     This method is a shortcut, you can achieve the same results by creating a
+     new <classname>GtkExpander</classname> instance with a label containing an
+     underscore and then calling the <function
+     class="GtkExpander">set_use_underline</function>
+    </para>
     <simpara>
      &static;
     </simpara>
@@ -378,7 +393,10 @@
     Emitted when the expander is activated.
    </shortdesc>
    <desc>
-
+    <para>
+     This signal is emitted when the expander is activated by the user clicking
+     on the expander toggle.
+    </para>
    </desc>
   </signal>
   
