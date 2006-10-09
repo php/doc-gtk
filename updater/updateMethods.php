@@ -252,7 +252,7 @@ class UpdateMethods
 
             // Add a static identifier if the method is static.
             if ($method->isStatic()) {
-                $this->_addStatic($doc, $xmlDesc);
+                $this->addStatic($doc, $xmlDesc);
             }
 
             $xmlMethod->appendChild($doc->createTextNode('  '));
@@ -483,7 +483,7 @@ class UpdateMethods
     */
     function checkSignals($classname, DOMDocument $doc, DOMXPath $xpath)
     {
-    
+
     }//function checkSignals($classname, DOMDocument $doc, DOMXPath $xpath)
 
 
