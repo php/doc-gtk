@@ -15,6 +15,7 @@
 *   - beautify output (xml_beautifier?)
 *   - add/check signals
 *   - add/check properties
+*   - what happens if no <methods> tag exists?
 *
 *   Done:
 *   - add void if no return value (always since we cannot determine)
@@ -73,7 +74,7 @@ class UpdateMethods
     {
         /* Obtain reflection object for current class */
         if (!class_exists($classname)) {
-            include_once $classname . '.php';
+            @include_once $classname . '.php';
         }
         try {
             $refObject  = new ReflectionClass($classname);
