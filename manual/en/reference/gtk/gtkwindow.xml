@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- $Revision: 1.27 $ -->
+<!-- $Revision: 1.28 $ -->
 <classentry id="gtk.gtkwindow">
  <classmeta>
   <classtitle>GtkWindow</classtitle>
@@ -151,7 +151,8 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>bool <function>activate_key</function></funcdef>
-     <paramdef>void</paramdef>
+     
+     <paramdef><parameter>event</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -279,7 +280,12 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>begin_resize_drag</function></funcdef>
-     <paramdef>void</paramdef>
+     
+     <paramdef><parameter>edge</parameter></paramdef>
+     <paramdef><parameter>button</parameter></paramdef>
+     <paramdef><parameter>root_x</parameter></paramdef>
+     <paramdef><parameter>root_y</parameter></paramdef>
+     <paramdef><parameter>timestamp</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -817,28 +823,7 @@
    </desc>
   </method>
 
-  <method id="gtk.gtkwindow.method.get_screen">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef><classname>GdkScreen</classname> <function>get_screen</function></funcdef>
-     <paramdef>void</paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-    Returns the <classname>GdkScreen</classname> associated with teh window.
-   </shortdesc>
-   <desc>
-    <para>
-     Returns the <classname>GdkScreen</classname> associated with teh window.
-    </para>
-    <para>
-     &seealso;
-     <function class="GtkWindow">set_screen</function>,
-     <classname>GdkScreen</classname>
-    </para>
-
-   </desc>
-  </method>
+  
 
   <method id="gtk.gtkwindow.method.get_size">
    <funcsynopsis>
@@ -1083,48 +1068,7 @@
    </desc>
   </method>
 
-  <method id="gtk.gtkwindow.method.mnemonic_activate">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>bool <function>mnemonic_activate</function></funcdef>
-     <paramdef>int <parameter>keyval</parameter></paramdef>
-     <paramdef>GdkModifierType <parameter>modifiers</parameter></paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-    Activates widgets associated with the given mnemonic.
-   </shortdesc>
-   <desc>
-    <para>
-     Activates widgets assocated with the <parameter>keyval</parameter> and
-     <parameter>modifiers</parameter> mnemonic. A widget is associated with a
-     mnemonic when it is passed as an argument to <function class="GtkWindow">add_mnemonic</function>. 
-    </para>
-    <para>
-     The <parameter>keyval</parameter> must be an integer. To get the integer
-     value for a key, use the PHP function <literal>ord</literal>.
-    </para>
-    <para>
-     The <parameter>modifiers</parameter> must match the window modifiers set
-     with <function class="GtkWindow">set_mnemonic_modifier</function>.
-    </para>
-    <para>
-     <example>
-      <title>Using GtkWindow::mnemonic_activate()</title>
-      <programlisting role="php">
-       <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="&directory.examples;/reference/gtk/gtkwindow/mnemonic_activate.phpw" parse="text">
-        <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
-       </xi:include>
-      </programlisting>
-     </example>
-    </para>
-    <para>
-     &seealso;
-     <function class="GtkWindow">add_mnemonic</function>
-     <function class="GtkWindow">remove_mnemonic</function>
-    </para>
-   </desc>
-  </method>
+  
 
   <method id="gtk.gtkwindow.method.move">
    <funcsynopsis>
@@ -1728,15 +1672,21 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_geometry_hints</function></funcdef>
-     <paramdef>
-      <classname>GtkWidget</classname> <parameter>geometry_widget</parameter>
-     </paramdef>
-     <paramdef>
-      <enumname>GdkGeometry</enumname> <parameter>geometry</parameter>
-     </paramdef>
-     <paramdef>
-      <enumname>GdkWindowHints</enumname> <parameter>geom_mask</parameter>
-     </paramdef>
+     
+     
+     
+     <paramdef><classname>GtkWidget</classname> <parameter>widget</parameter></paramdef>
+     <paramdef><parameter>min_width</parameter></paramdef>
+     <paramdef><parameter>min_height</parameter></paramdef>
+     <paramdef><parameter>max_width</parameter></paramdef>
+     <paramdef><parameter>max_height</parameter></paramdef>
+     <paramdef><parameter>base_width</parameter></paramdef>
+     <paramdef><parameter>base_height</parameter></paramdef>
+     <paramdef><parameter>width_inc</parameter></paramdef>
+     <paramdef><parameter>height_inc</parameter></paramdef>
+     <paramdef><parameter>min_aspect</parameter></paramdef>
+     <paramdef><parameter>max_aspect</parameter></paramdef>
+     <paramdef><parameter>win_gravity</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -1857,7 +1807,9 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_icon_from_file</function></funcdef>
-     <paramdef>string <parameter>filename</parameter></paramdef>
+     
+     <paramdef><parameter>filename</parameter></paramdef>
+     <paramdef><parameter>error</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -2439,6 +2391,7 @@
     <funcprototype>
      <funcdef> <function>get_default_icon_list</function></funcdef>
      
+     <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -2457,6 +2410,7 @@
     <funcprototype>
      <funcdef> <function>list_toplevels</function></funcdef>
      
+     <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -2474,6 +2428,8 @@
     <funcsynopsis>
     <funcprototype>
      <funcdef> <function>set_default_icon_from_file</function></funcdef>
+     
+     <paramdef><parameter>filename</parameter></paramdef>
      <paramdef><parameter>error</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
@@ -2528,6 +2484,8 @@
     <funcsynopsis>
     <funcprototype>
      <funcdef> <function>window_mnemonic_activate</function></funcdef>
+     
+     <paramdef><parameter>keyval</parameter></paramdef>
      <paramdef><parameter>modifier</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>

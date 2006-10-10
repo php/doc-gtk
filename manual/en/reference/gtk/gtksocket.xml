@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<!-- $Revision: 1.8 $ -->
+<?xml version="1.0" encoding="utf-8"?>
+<!-- $Revision: 1.9 $ -->
 <classentry id="gtk.gtksocket">
  <classmeta>
   <classtitle>GtkSocket</classtitle>
@@ -18,8 +18,7 @@
       inside the first applications window.
     </para>
     <para>
-      The socket's window ID is obtained by using <function
-      class="GtkSocket">get_id</function>. Before using this function, the
+      The socket's window ID is obtained by using <function class="GtkSocket">get_id</function>. Before using this function, the
       socket must have been realized and added to its parent.
     </para>
     <para>
@@ -29,8 +28,7 @@
     </para>
     <para>
       The communication between a GtkSocket and a <classname>GtkPlug</classname>
-      follows the <ulink
-      url="http://standards.freedesktop.org/xembed-spec/xembed-spec-latest.html">XEmbed</ulink>
+      follows the <ulink url="http://standards.freedesktop.org/xembed-spec/xembed-spec-latest.html">XEmbed</ulink>
       protocol. This protocol has also been implemented in other toolkits.
     </para>
     <para>
@@ -73,7 +71,8 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>add_id</function></funcdef>
-     <paramdef>void</paramdef>
+     
+     <paramdef><parameter>window_id</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -81,8 +80,7 @@
    </shortdesc>
    <desc>
     <para>
-      This method adds an <ulink
-      url="http://standards.freedesktop.org/xembed-spec/xembed-spec-latest.html">XEmbed</ulink>
+      This method adds an <ulink url="http://standards.freedesktop.org/xembed-spec/xembed-spec-latest.html">XEmbed</ulink>
       client specified by <literal>window_id</literal> to the
       <classname>GtkSocket</classname>. The client may be in the same process or
       in a different process.
@@ -92,8 +90,7 @@
       <classname>GtkSocket</classname> using one of two methods.
     </para>
     <para>
-      Create the <classname>GtkPlug</classname>, then call <function
-      class="GtkPlug">get_id</function> to get the window ID of the plug, and
+      Create the <classname>GtkPlug</classname>, then call <function class="GtkPlug">get_id</function> to get the window ID of the plug, and
       finally pass that to <function class="GtkSocket">add_id</function>
     </para>
     <para>
@@ -136,7 +133,8 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>steal</function></funcdef>
-     <paramdef>void</paramdef>
+     
+     <paramdef><parameter>wid</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -210,4 +208,3 @@
  </signals>
 
 </classentry>
-

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- $Revision: 1.8 $ -->
+<!-- $Revision: 1.9 $ -->
 <classentry id="gtk.gtktreemodel" type="interface">
  <classmeta>
   <classtitle>GtkTreeModel</classtitle>
@@ -21,32 +21,7 @@
 
  <methods>
 
-  <method id="gtk.gtktreemodel.method.filter_new">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef><classname>GtkTreeModelFilter</classname> <function>filter_new</function></funcdef>
-     <paramdef><classname>GtkTreePath</classname> <parameter>path</parameter></paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-    Creates a new filter using the given path as root.
-   </shortdesc>
-   <desc>
-    <para>
-     Creates and returns a new tree filter which uses the node referenced
-     by the given <parameter>path</parameter> as root node (not visible).
-     That means you can use it to display a part of the tree only.
-    </para>
-    <example>
-     <title>Displaying a part of the tree only</title>
-     <programlisting role="php">
-      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="&directory.examples;/reference/gtk/gtktreemodel/filter_new.phpw" parse="text">
-       <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
-      </xi:include>
-     </programlisting>
-    </example>
-   </desc>
-  </method>
+  
 
   <method id="gtk.gtktreemodel.method.foreach">
    <funcsynopsis>
@@ -343,7 +318,9 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>iter_nth_child</function></funcdef>
-     <paramdef>void</paramdef>
+     
+     <paramdef><classname>GtkTreeIter</classname> <parameter>parent_iter</parameter></paramdef>
+     <paramdef><parameter>n</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -358,7 +335,8 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>iter_parent</function></funcdef>
-     <paramdef>void</paramdef>
+     
+     <paramdef><classname>GtkTreeIter</classname> <parameter><optional>iter</optional></parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -373,7 +351,8 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>ref_node</function></funcdef>
-     <paramdef>void</paramdef>
+     
+     <paramdef><classname>GtkTreeIter</classname> <parameter>iter</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -461,7 +440,8 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>unref_node</function></funcdef>
-     <paramdef>void</paramdef>
+     
+     <paramdef><classname>GtkTreeIter</classname> <parameter>iter</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -477,6 +457,7 @@
     <funcprototype>
      <funcdef> <function>get</function></funcdef>
      
+     <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>

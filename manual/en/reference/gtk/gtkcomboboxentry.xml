@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- $Revision: 1.7 $ -->
+<!-- $Revision: 1.8 $ -->
 <classentry id="gtk.gtkcomboboxentry">
  <classmeta>
   <classtitle>GtkComboBoxEntry</classtitle>
   <classparent>GtkComboBox</classparent>
   <classimage fileref="&directory.images;/reference/gtk/gtkcomboboxentry.png"/>
-  <shortdesc>
+    <implements>GtkCellLayout</implements>
+<shortdesc>
    A text entry box with a prepopulated drop down list of values.
   </shortdesc>
   <desc>
@@ -88,6 +89,8 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef> <function>GtkComboBoxEntry::new_with_model</function></funcdef>
+     
+     <paramdef><parameter>model</parameter></paramdef>
      <paramdef><parameter>text_column</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>

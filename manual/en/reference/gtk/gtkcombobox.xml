@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- $Revision: 1.21 $ -->
+<!-- $Revision: 1.22 $ -->
 <classentry id="gtk.gtkcombobox">
  <classmeta>
   <classtitle>GtkComboBox</classtitle>
   <classparent>GtkBin</classparent>
-  <shortdesc>
+    <implements>GtkCellLayout</implements>
+<shortdesc>
    A widget used to choose from a list of items.
   </shortdesc>
   <desc>
@@ -302,24 +303,7 @@
    </desc>
   </method>
 
-  <method id="gtk.gtkcombobox.method.get_row_separator_func">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef> <function>get_row_separator_func</function></funcdef>
-     <paramdef>void</paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-   <desc>
-    <para>
-     &seealso;
-     <function class="GtkComboBox">set_row_separator_func</function>
-    </para>
-
-   </desc>
-  </method>
+  
 
   <method id="gtk.gtkcombobox.method.get_row_span_column">
    <funcsynopsis>
@@ -641,7 +625,8 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_model</function></funcdef>
-     <paramdef>void</paramdef>
+     
+     <paramdef><parameter>model</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -670,8 +655,9 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_row_separator_func</function></funcdef>
-     <paramdef>callback <parameter>func</parameter></paramdef>
-     <paramdef>mixed <parameter>data</parameter></paramdef>
+     
+     
+     <paramdef><parameter>callback</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -765,118 +751,14 @@
    </desc>
   </method>
 
- <method id="gtk.gtkcombobox.method.add_attribute">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef> <function>add_attribute</function></funcdef>
-      <paramdef><parameter>column</parameter></paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-  <desc>
-
-   </desc>
-  </method>
-  <method id="gtk.gtkcombobox.method.clear">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef> <function>clear</function></funcdef>
-      <paramdef>void</paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-  <desc>
-
-   </desc>
-  </method>
-  <method id="gtk.gtkcombobox.method.clear_attributes">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef> <function>clear_attributes</function></funcdef>
-      <paramdef><classname>GtkCellRenderer</classname><parameter>cell</parameter></paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-  <desc>
-
-   </desc>
-  </method>
-  <method id="gtk.gtkcombobox.method.pack_end">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef> <function>pack_end</function></funcdef>
-      <paramdef><parameter><optional>expand</optional></parameter></paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-  <desc>
-
-   </desc>
-  </method>
-  <method id="gtk.gtkcombobox.method.pack_start">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef> <function>pack_start</function></funcdef>
-      <paramdef><parameter><optional>expand</optional></parameter></paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-  <desc>
-
-   </desc>
-  </method>
-  <method id="gtk.gtkcombobox.method.reorder">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef> <function>reorder</function></funcdef>
-      <paramdef><parameter>position</parameter></paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-  <desc>
-
-   </desc>
-  </method>
-  <method id="gtk.gtkcombobox.method.set_attributes">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef> <function>set_attributes</function></funcdef>
-      <paramdef><parameter><optional>column</optional></parameter></paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-  <desc>
-
-   </desc>
-  </method>
-  <method id="gtk.gtkcombobox.method.set_cell_data_func">
-    <funcsynopsis>
-    <funcprototype>
-     <funcdef> <function>set_cell_data_func</function></funcdef>
-     <paramdef><parameter>callback</parameter></paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </method>
+ 
+  
+  
+  
+  
+  
+  
+  
 
   </methods>
 

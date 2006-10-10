@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- $Revision: 1.11 $ -->
+<!-- $Revision: 1.12 $ -->
 <classentry id="gtk.gtkentrycompletion">
  <classmeta>
   <classtitle>GtkEntryCompletion</classtitle>
   <classparent>GObject</classparent>
   <classimage fileref="&directory.images;/reference/gtk/gtkentrycompletion.png"/>
-  <shortdesc>
+    <implements>GtkCellLayout</implements>
+<shortdesc>
    An object used to provide auto-completion functionality for a GtkEntry.
   </shortdesc>
   <desc>
@@ -250,7 +251,8 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_match_func</function></funcdef>
-     <paramdef>void</paramdef>
+     
+     <paramdef><parameter>callback</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -367,6 +369,7 @@
     <funcprototype>
      <funcdef> <function>get_text_column</function></funcdef>
      
+     <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -377,125 +380,21 @@
    </desc>
   </method>
 
-  <method id="gtk.gtkentrycompletion.method.add_attribute">
-    <funcsynopsis>
-    <funcprototype>
-     <funcdef> <function>add_attribute</function></funcdef>
-     <paramdef><parameter>column</parameter></paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
+  
 
-   </shortdesc>
-   <desc>
+  
 
-   </desc>
-  </method>
+  
 
-  <method id="gtk.gtkentrycompletion.method.clear">
-    <funcsynopsis>
-    <funcprototype>
-     <funcdef> <function>clear</function></funcdef>
-     
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
+  
 
-   </shortdesc>
-   <desc>
+  
 
-   </desc>
-  </method>
+  
 
-  <method id="gtk.gtkentrycompletion.method.clear_attributes">
-    <funcsynopsis>
-    <funcprototype>
-     <funcdef> <function>clear_attributes</function></funcdef>
-     <paramdef><classname>GtkCellRenderer</classname><parameter>cell</parameter></paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
+  
 
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </method>
-
-  <method id="gtk.gtkentrycompletion.method.pack_end">
-    <funcsynopsis>
-    <funcprototype>
-     <funcdef> <function>pack_end</function></funcdef>
-     <paramdef><parameter><optional>expand</optional></parameter></paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </method>
-
-  <method id="gtk.gtkentrycompletion.method.pack_start">
-    <funcsynopsis>
-    <funcprototype>
-     <funcdef> <function>pack_start</function></funcdef>
-     <paramdef><parameter><optional>expand</optional></parameter></paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </method>
-
-  <method id="gtk.gtkentrycompletion.method.reorder">
-    <funcsynopsis>
-    <funcprototype>
-     <funcdef> <function>reorder</function></funcdef>
-     <paramdef><parameter>position</parameter></paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </method>
-
-  <method id="gtk.gtkentrycompletion.method.set_attributes">
-    <funcsynopsis>
-    <funcprototype>
-     <funcdef> <function>set_attributes</function></funcdef>
-     <paramdef><parameter><optional>column</optional></parameter></paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </method>
-
-  <method id="gtk.gtkentrycompletion.method.set_cell_data_func">
-    <funcsynopsis>
-    <funcprototype>
-     <funcdef> <function>set_cell_data_func</function></funcdef>
-     <paramdef><parameter>callback</parameter></paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </method>
+  
 
   </methods>
 

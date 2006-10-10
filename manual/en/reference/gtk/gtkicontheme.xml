@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- $Revision: 1.8 $ -->
+<!-- $Revision: 1.9 $ -->
 <classentry id="gtk.gtkicontheme">
  <classmeta>
   <classtitle>GtkIconTheme</classtitle>
@@ -37,7 +37,10 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>add_builtin_icon</function></funcdef>
-     <paramdef>void</paramdef>
+     
+     <paramdef><parameter>icon_name</parameter></paramdef>
+     <paramdef><parameter>size</parameter></paramdef>
+     <paramdef><classname>GdkPixbuf</classname> <parameter>pixbuf</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -109,7 +112,8 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>GtkIconTheme <function>get_for_screen</function></funcdef>
-     <paramdef>void</paramdef>
+     
+     <paramdef><classname>GdkScreen</classname> <parameter>screen</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -123,41 +127,9 @@
    </desc>
   </method>
 
-  <method id="gtk.gtkicontheme.method.get_icon_sizes">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef> <function>get_icon_sizes</function></funcdef>
-     <paramdef>string <parameter>icon_name</parameter></paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
+  
 
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </method>
-
-  <method id="gtk.gtkicontheme.method.get_search_path">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>void <function>get_search_path</function></funcdef>
-     <paramdef>void</paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-   <desc>
-    <para>
-     &seealso;
-     <function class="GtkIconTheme">append_search_path</function>, 
-     <function class="GtkIconTheme">prepend_search_path</function>, 
-     <function class="GtkIconTheme">set_search_path</function>
-    </para>
-
-   </desc>
-  </method>
+  
 
   <method id="gtk.gtkicontheme.method.has_icon">
    <funcsynopsis>
@@ -184,6 +156,7 @@
     <funcprototype>
      <funcdef> <function>list_icons</function></funcdef>
      <paramdef>string <parameter>context</parameter></paramdef>
+     <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -294,7 +267,8 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_screen</function></funcdef>
-     <paramdef>void</paramdef>
+     
+     <paramdef><classname>GdkScreen</classname> <parameter>screen</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -305,26 +279,7 @@
    </desc>
   </method>
 
-  <method id="gtk.gtkicontheme.method.set_search_path">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>void <function>set_search_path</function></funcdef>
-     <paramdef>void</paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-   <desc>
-    <para>
-     &seealso;
-     <function class="GtkIconTheme">append_search_path</function>, 
-     <function class="GtkIconTheme">get_search_path</function>, 
-     <function class="GtkIconTheme">prepend_search_path</function>
-    </para>
-
-   </desc>
-  </method>
+  
 
  </methods>
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- $Revision: 1.7 $ -->
+<!-- $Revision: 1.8 $ -->
 <classentry id="gtk.gtkitemfactory">
  <classmeta>
   <classtitle>GtkItemFactory</classtitle>
@@ -42,7 +42,12 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>add_foreign</function></funcdef>
-     <paramdef>void</paramdef>
+     
+     <paramdef><classname>GtkWidget</classname> <parameter>accel_widget</parameter></paramdef>
+     <paramdef><parameter>full_path</parameter></paramdef>
+     <paramdef><classname>GtkAccelGroup</classname> <parameter>accel_group</parameter></paramdef>
+     <paramdef><parameter>keyval</parameter></paramdef>
+     <paramdef><parameter>modifiers</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -73,85 +78,15 @@
    </desc>
   </method>
 
-  <method id="gtk.gtkitemfactory.method.create_item">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>void <function>create_item</function></funcdef>
-     <paramdef>void</paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
+  
 
-   </shortdesc>
-   <desc>
-    &deprecated.method;
-    <para>
-     &seealso;
-     <function class="GtkItemFactory">delete_item</function>, 
-     <function class="GtkItemFactory">get_item</function>
-    </para>
-   </desc>
-  </method>
+  
 
-  <method id="gtk.gtkitemfactory.method.create_items">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>void <function>create_items</function></funcdef>
-     <paramdef>void</paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
+  
 
-   </shortdesc>
-   <desc>
-    &deprecated.method;
-   </desc>
-  </method>
+  
 
-  <method id="gtk.gtkitemfactory.method.create_items_ac">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>void <function>create_items_ac</function></funcdef>
-     <paramdef>void</paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-   <desc>
-    &deprecated.method;
-   </desc>
-  </method>
-
-  <method id="gtk.gtkitemfactory.method.delete_entries">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>void <function>delete_entries</function></funcdef>
-     <paramdef>void</paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-   <desc>
-    &deprecated.method;
-   </desc>
-  </method>
-
-  <method id="gtk.gtkitemfactory.method.delete_entry">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>void <function>delete_entry</function></funcdef>
-     <paramdef>void</paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-   <desc>
-    &deprecated.method;
-   </desc>
-  </method>
+  
 
   <method id="gtk.gtkitemfactory.method.delete_item">
    <funcsynopsis>
@@ -256,50 +191,11 @@
    </desc>
   </method>
 
-  <method id="gtk.gtkitemfactory.method.popup_data">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef> <function>popup_data</function></funcdef>
-     <paramdef>void</paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
+  
 
-   </shortdesc>
-   <desc>
-    &deprecated.method;
-   </desc>
-  </method>
+  
 
-  <method id="gtk.gtkitemfactory.method.popup_with_data">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>void <function>popup_with_data</function></funcdef>
-     <paramdef>void</paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-   <desc>
-    &deprecated.method;
-   </desc>
-  </method>
-
-  <method id="gtk.gtkitemfactory.method.set_translate_func">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>void <function>set_translate_func</function></funcdef>
-     <paramdef>void</paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-   <desc>
-    &deprecated.method;
-   </desc>
-  </method>
+  
 
  <method id="gtk.gtkitemfactory.method.from_path">
     <funcsynopsis>
@@ -341,6 +237,8 @@
     <funcsynopsis>
     <funcprototype>
      <funcdef> <function>path_delete</function></funcdef>
+     
+     <paramdef><parameter>ifactory_path</parameter></paramdef>
      <paramdef><parameter>path</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>

@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<!-- $Revision: 1.8 $ -->
+<?xml version="1.0" encoding="utf-8"?>
+<!-- $Revision: 1.9 $ -->
 <classentry id="gtk.gtkimcontext">
  <classmeta>
   <classtitle>GtkIMContext</classtitle>
@@ -39,7 +39,8 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>bool <function>filter_keypress</function></funcdef>
-     <paramdef>void</paramdef>
+     
+     <paramdef><parameter>event</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -80,40 +81,9 @@
    </desc>
   </method>
 
-  <method id="gtk.gtkimcontext.method.get_preedit_string">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>void <function>get_preedit_string</function></funcdef>
-     <paramdef>void</paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
+  
 
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </method>
-
-  <method id="gtk.gtkimcontext.method.get_surrounding">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>bool <function>get_surrounding</function></funcdef>
-     <paramdef>void</paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-   <desc>
-    <para>
-     &seealso;
-     <function class="GtkIMContext">delete_surrounding</function>, 
-     <function class="GtkIMContext">set_surrounding</function>
-    </para>
-
-   </desc>
-  </method>
+  
 
   <method id="gtk.gtkimcontext.method.reset">
    <funcsynopsis>
@@ -134,7 +104,8 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_client_window</function></funcdef>
-     <paramdef>void</paramdef>
+     
+     <paramdef><classname>GdkWindow</classname> <parameter>window</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>

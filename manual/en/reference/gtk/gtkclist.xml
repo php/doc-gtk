@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- $Revision: 1.13 $ -->
+<!-- $Revision: 1.14 $ -->
 <classentry id="gtk.gtkclist">
  <classmeta>
   <classtitle>GtkCList</classtitle>
@@ -41,20 +41,7 @@
 
  <methods>
 
-  <method id="gtk.gtkclist.method.append">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>int <function>append</function></funcdef>
-     <paramdef>void</paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-    DEPRECATED. Adds a row to the list at the bottom. 
-   </shortdesc>
-   <desc>
-    &deprecated.method;
-   </desc>
-  </method>
+  
 
   <method id="gtk.gtkclist.method.clear">
    <funcsynopsis>
@@ -178,20 +165,7 @@
    </desc>
   </method>
 
-  <method id="gtk.gtkclist.method.find_row_from_data">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>int <function>find_row_from_data</function></funcdef>
-     <paramdef>void</paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-    DEPRECATED. Searches the CList for the row with the specified data.
-   </shortdesc>
-   <desc>
-    &deprecated.method;
-   </desc>
-  </method>
+  
 
   <method id="gtk.gtkclist.method.freeze">
    <funcsynopsis>
@@ -303,62 +277,11 @@
    </desc>
   </method>
 
-  <method id="gtk.gtkclist.method.get_pixmap">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>int <function>get_pixmap</function></funcdef>
-     <paramdef>void</paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-    DEPRECATED. Gets the pixmap and bitmap mask of the specified cell.
-   </shortdesc>
-   <desc>
-    &deprecated.method;
-    <para>
-     &seealso;
-     <function class="GtkCList">set_pixmap</function>
-    </para>
-   </desc>
-  </method>
+  
 
-  <method id="gtk.gtkclist.method.get_pixtext">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>int <function>get_pixtext</function></funcdef>
-     <paramdef>void</paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-    DEPRECATED. Gets the text, pixmap and bitmap mask for the specified cell.
-   </shortdesc>
-   <desc>
-    &deprecated.method;
-    <para>
-     &seealso;
-     <function class="GtkCList">set_pixtext</function>
-    </para>
-   </desc>
-  </method>
+  
 
-  <method id="gtk.gtkclist.method.get_row_data">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef> <function>get_row_data</function></funcdef>
-     <paramdef>int <parameter>row</parameter></paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-    DEPRECATED. Gets the currently set data for the specified row. 
-   </shortdesc>
-   <desc>
-    &deprecated.method;
-    <para>
-     &seealso;
-     <function class="GtkCList">set_row_data</function>
-    </para>
-   </desc>
-  </method>
+  
 
   <method id="gtk.gtkclist.method.get_row_style">
    <funcsynopsis>
@@ -402,7 +325,9 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>int <function>get_selection_info</function></funcdef>
-     <paramdef>void</paramdef>
+     
+     <paramdef><parameter>x</parameter></paramdef>
+     <paramdef><parameter>y</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -414,24 +339,7 @@
    </desc>
   </method>
 
-  <method id="gtk.gtkclist.method.get_text">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>int <function>get_text</function></funcdef>
-     <paramdef>void</paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-    DEPRECATED. Gets the text for the specified cell.
-   </shortdesc>
-   <desc>
-    &deprecated.method;
-    <para>
-     &seealso;
-     <function class="GtkCList">set_text</function>
-    </para>
-   </desc>
-  </method>
+  
 
   <method id="gtk.gtkclist.method.get_vadjustment">
    <funcsynopsis>
@@ -453,20 +361,7 @@
    </desc>
   </method>
 
-  <method id="gtk.gtkclist.method.insert">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>int <function>insert</function></funcdef>
-     <paramdef>void</paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-    DEPRECATED. Adds a row of text to the CList at the specified position. 
-   </shortdesc>
-   <desc>
-    &deprecated.method;
-   </desc>
-  </method>
+  
 
   <method id="gtk.gtkclist.method.moveto">
    <funcsynopsis>
@@ -507,35 +402,9 @@
    </desc>
   </method>
 
-  <method id="gtk.gtkclist.method.prepend">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>int <function>prepend</function></funcdef>
-     <paramdef>void</paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-    DEPRECATED. Adds a row to the list at the top.
-   </shortdesc>
-   <desc>
-    &deprecated.method;
-   </desc>
-  </method>
+  
 
-  <method id="gtk.gtkclist.method.remove">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>void <function>remove</function></funcdef>
-     <paramdef>int <parameter>row</parameter></paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-    DEPRECATED. Removes the specified row from the list.
-   </shortdesc>
-   <desc>
-    &deprecated.method;
-   </desc>
-  </method>
+  
 
   <method id="gtk.gtkclist.method.row_is_visible">
    <funcsynopsis>
@@ -627,7 +496,9 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_background</function></funcdef>
-     <paramdef>void</paramdef>
+     
+     <paramdef><parameter>row</parameter></paramdef>
+     <paramdef><classname>GdkColor</classname> <parameter>color</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -835,27 +706,15 @@
    </desc>
   </method>
 
-  <method id="gtk.gtkclist.method.set_compare_func">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>void <function>set_compare_func</function></funcdef>
-     <paramdef>void</paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-    DEPRECATED. Sets the compare function of the <classname>GtkClist
-    </classname> to specified function.
-   </shortdesc>
-   <desc>
-    &deprecated.method;
-   </desc>
-  </method>
+  
 
   <method id="gtk.gtkclist.method.set_foreground">
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_foreground</function></funcdef>
-     <paramdef>void</paramdef>
+     
+     <paramdef><parameter>row</parameter></paramdef>
+     <paramdef><classname>GdkColor</classname> <parameter>color</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -890,7 +749,11 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_pixmap</function></funcdef>
-     <paramdef>void</paramdef>
+     
+     <paramdef><parameter>row</parameter></paramdef>
+     <paramdef><parameter>column</parameter></paramdef>
+     <paramdef><classname>GdkPixmap</classname> <parameter>pixmap</parameter></paramdef>
+     <paramdef><parameter><optional>mask</optional></parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -909,7 +772,13 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_pixtext</function></funcdef>
-     <paramdef>void</paramdef>
+     
+     <paramdef><parameter>row</parameter></paramdef>
+     <paramdef><parameter>column</parameter></paramdef>
+     <paramdef><parameter>text</parameter></paramdef>
+     <paramdef><parameter>spacing</parameter></paramdef>
+     <paramdef><classname>GdkPixmap</classname> <parameter>pixmap</parameter></paramdef>
+     <paramdef><parameter>mask</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -940,40 +809,9 @@
    </desc>
   </method>
 
-  <method id="gtk.gtkclist.method.set_row_data">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>void <function>set_row_data</function></funcdef>
-     <paramdef>void</paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-    DEPRECATED. Sets data for the specified row.
-   </shortdesc>
-   <desc>
-    &deprecated.method;
-    <para>
-     &seealso;
-     <function class="GtkCList">get_row_data</function>
-    </para>
-   </desc>
-  </method>
+  
 
-  <method id="gtk.gtkclist.method.set_row_data_full">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>void <function>set_row_data_full</function></funcdef>
-     <paramdef>void</paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-    DEPRECATED. Sets the data for specified row, with a callback when the row 
-    is destroyed. 
-   </shortdesc>
-   <desc>
-    &deprecated.method;
-   </desc>
-  </method>
+  
 
   <method id="gtk.gtkclist.method.set_row_height">
    <funcsynopsis>

@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<!-- $Revision: 1.10 $ -->
+<?xml version="1.0" encoding="utf-8"?>
+<!-- $Revision: 1.11 $ -->
 <classentry id="gtk.gtkstyle">
  <classmeta>
   <classtitle>GtkStyle</classtitle>
@@ -37,7 +37,15 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>apply_default_background</function></funcdef>
-     <paramdef>void</paramdef>
+     
+     <paramdef><classname>GdkWindow</classname> <parameter>window</parameter></paramdef>
+     <paramdef><parameter>set_bg</parameter></paramdef>
+     <paramdef><parameter>state_type</parameter></paramdef>
+     <paramdef><classname>GdkRectangle</classname> <parameter>area</parameter></paramdef>
+     <paramdef><parameter>x</parameter></paramdef>
+     <paramdef><parameter>y</parameter></paramdef>
+     <paramdef><parameter>width</parameter></paramdef>
+     <paramdef><parameter>height</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -52,7 +60,14 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>apply_default_pixmap</function></funcdef>
-     <paramdef>void</paramdef>
+     
+     <paramdef><classname>GdkWindow</classname> <parameter>window</parameter></paramdef>
+     <paramdef><parameter>set_bg</parameter></paramdef>
+     <paramdef><classname>GdkRectangle</classname> <parameter>area</parameter></paramdef>
+     <paramdef><parameter>x</parameter></paramdef>
+     <paramdef><parameter>y</parameter></paramdef>
+     <paramdef><parameter>width</parameter></paramdef>
+     <paramdef><parameter>height</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -67,7 +82,8 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>GtkStyle <function>attach</function></funcdef>
-     <paramdef>void</paramdef>
+     
+     <paramdef><classname>GdkWindow</classname> <parameter>window</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -112,7 +128,16 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>draw_arrow</function></funcdef>
-     <paramdef>void</paramdef>
+     
+     <paramdef><classname>GdkWindow</classname> <parameter>window</parameter></paramdef>
+     <paramdef><parameter>state_type</parameter></paramdef>
+     <paramdef><parameter>shadow_type</parameter></paramdef>
+     <paramdef><parameter>arrow_type</parameter></paramdef>
+     <paramdef><parameter>fill</parameter></paramdef>
+     <paramdef><parameter>x</parameter></paramdef>
+     <paramdef><parameter>y</parameter></paramdef>
+     <paramdef><parameter>width</parameter></paramdef>
+     <paramdef><parameter>height</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -131,7 +156,14 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>draw_box</function></funcdef>
-     <paramdef>void</paramdef>
+     
+     <paramdef><classname>GdkWindow</classname> <parameter>window</parameter></paramdef>
+     <paramdef><parameter>state_type</parameter></paramdef>
+     <paramdef><parameter>shadow_type</parameter></paramdef>
+     <paramdef><parameter>x</parameter></paramdef>
+     <paramdef><parameter>y</parameter></paramdef>
+     <paramdef><parameter>width</parameter></paramdef>
+     <paramdef><parameter>height</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -146,49 +178,22 @@
    </desc>
   </method>
 
-  <method id="gtk.gtkstyle.method.draw_box_gap">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>void <function>draw_box_gap</function></funcdef>
-     <paramdef>void</paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
+  
 
-   </shortdesc>
-   <desc>
-    <para>
-     &seealso;
-     <function class="GtkStyle">paint_box_gap</function>
-    </para>
-
-   </desc>
-  </method>
-
-  <method id="gtk.gtkstyle.method.draw_check">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>void <function>draw_check</function></funcdef>
-     <paramdef>void</paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-   <desc>
-    <para>
-     &seealso;
-     <function class="GtkStyle">paint_check</function>
-    </para>
-
-   </desc>
-  </method>
+  
 
   <method id="gtk.gtkstyle.method.draw_diamond">
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>draw_diamond</function></funcdef>
-     <paramdef>void</paramdef>
+     
+     <paramdef><classname>GdkWindow</classname> <parameter>window</parameter></paramdef>
+     <paramdef><parameter>state_type</parameter></paramdef>
+     <paramdef><parameter>shadow_type</parameter></paramdef>
+     <paramdef><parameter>x</parameter></paramdef>
+     <paramdef><parameter>y</parameter></paramdef>
+     <paramdef><parameter>width</parameter></paramdef>
+     <paramdef><parameter>height</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -207,7 +212,12 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>draw_expander</function></funcdef>
-     <paramdef>void</paramdef>
+     
+     <paramdef><classname>GdkWindow</classname> <parameter>window</parameter></paramdef>
+     <paramdef><parameter>state_type</parameter></paramdef>
+     <paramdef><parameter>x</parameter></paramdef>
+     <paramdef><parameter>y</parameter></paramdef>
+     <paramdef><parameter>is_open</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -222,87 +232,24 @@
    </desc>
   </method>
 
-  <method id="gtk.gtkstyle.method.draw_extension">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>void <function>draw_extension</function></funcdef>
-     <paramdef>void</paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
+  
 
-   </shortdesc>
-   <desc>
-    <para>
-     &seealso;
-     <function class="GtkStyle">paint_extension</function>
-    </para>
+  
 
-   </desc>
-  </method>
+  
 
-  <method id="gtk.gtkstyle.method.draw_flat_box">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>void <function>draw_flat_box</function></funcdef>
-     <paramdef>void</paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-   <desc>
-    <para>
-     &seealso;
-     <function class="GtkStyle">paint_flat_box</function>
-    </para>
-
-   </desc>
-  </method>
-
-  <method id="gtk.gtkstyle.method.draw_focus">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>void <function>draw_focus</function></funcdef>
-     <paramdef>void</paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-   <desc>
-    <para>
-     &seealso;
-     <function class="GtkStyle">paint_focus</function>
-    </para>
-
-   </desc>
-  </method>
-
-  <method id="gtk.gtkstyle.method.draw_handle">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>void <function>draw_handle</function></funcdef>
-     <paramdef>void</paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-   <desc>
-    <para>
-     &seealso;
-     <function class="GtkStyle">paint_handle</function>
-    </para>
-
-   </desc>
-  </method>
+  
 
   <method id="gtk.gtkstyle.method.draw_hline">
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>draw_hline</function></funcdef>
-     <paramdef>void</paramdef>
+     
+     <paramdef><classname>GdkWindow</classname> <parameter>window</parameter></paramdef>
+     <paramdef><parameter>state_type</parameter></paramdef>
+     <paramdef><parameter>x1</parameter></paramdef>
+     <paramdef><parameter>x2</parameter></paramdef>
+     <paramdef><parameter>y</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -321,7 +268,13 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>draw_layout</function></funcdef>
-     <paramdef>void</paramdef>
+     
+     <paramdef><classname>GdkWindow</classname> <parameter>window</parameter></paramdef>
+     <paramdef><parameter>state_type</parameter></paramdef>
+     <paramdef><parameter>use_text</parameter></paramdef>
+     <paramdef><parameter>x</parameter></paramdef>
+     <paramdef><parameter>y</parameter></paramdef>
+     <paramdef><classname>PangoLayout</classname> <parameter>layout</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -336,49 +289,22 @@
    </desc>
   </method>
 
-  <method id="gtk.gtkstyle.method.draw_option">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>void <function>draw_option</function></funcdef>
-     <paramdef>void</paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
+  
 
-   </shortdesc>
-   <desc>
-    <para>
-     &seealso;
-     <function class="GtkStyle">paint_option</function>
-    </para>
-
-   </desc>
-  </method>
-
-  <method id="gtk.gtkstyle.method.draw_polygon">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>void <function>draw_polygon</function></funcdef>
-     <paramdef>void</paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-   <desc>
-    <para>
-     &seealso;
-     <function class="GtkStyle">paint_polygon</function>
-    </para>
-
-   </desc>
-  </method>
+  
 
   <method id="gtk.gtkstyle.method.draw_resize_grip">
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>draw_resize_grip</function></funcdef>
-     <paramdef>void</paramdef>
+     
+     <paramdef><classname>GdkWindow</classname> <parameter>window</parameter></paramdef>
+     <paramdef><parameter>state_type</parameter></paramdef>
+     <paramdef><parameter>edge</parameter></paramdef>
+     <paramdef><parameter>x</parameter></paramdef>
+     <paramdef><parameter>y</parameter></paramdef>
+     <paramdef><parameter>width</parameter></paramdef>
+     <paramdef><parameter>height</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -397,7 +323,14 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>draw_shadow</function></funcdef>
-     <paramdef>void</paramdef>
+     
+     <paramdef><classname>GdkWindow</classname> <parameter>window</parameter></paramdef>
+     <paramdef><parameter>state_type</parameter></paramdef>
+     <paramdef><parameter>shadow_type</parameter></paramdef>
+     <paramdef><parameter>x</parameter></paramdef>
+     <paramdef><parameter>y</parameter></paramdef>
+     <paramdef><parameter>width</parameter></paramdef>
+     <paramdef><parameter>height</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -412,49 +345,20 @@
    </desc>
   </method>
 
-  <method id="gtk.gtkstyle.method.draw_shadow_gap">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>void <function>draw_shadow_gap</function></funcdef>
-     <paramdef>void</paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
+  
 
-   </shortdesc>
-   <desc>
-    <para>
-     &seealso;
-     <function class="GtkStyle">paint_shadow_gap</function>
-    </para>
-
-   </desc>
-  </method>
-
-  <method id="gtk.gtkstyle.method.draw_slider">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>void <function>draw_slider</function></funcdef>
-     <paramdef>void</paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-   <desc>
-    <para>
-     &seealso;
-     <function class="GtkStyle">paint_slider</function>
-    </para>
-
-   </desc>
-  </method>
+  
 
   <method id="gtk.gtkstyle.method.draw_string">
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>draw_string</function></funcdef>
-     <paramdef>void</paramdef>
+     
+     <paramdef><classname>GdkWindow</classname> <parameter>window</parameter></paramdef>
+     <paramdef><parameter>state_type</parameter></paramdef>
+     <paramdef><parameter>x</parameter></paramdef>
+     <paramdef><parameter>y</parameter></paramdef>
+     <paramdef><parameter>string</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -469,30 +373,18 @@
    </desc>
   </method>
 
-  <method id="gtk.gtkstyle.method.draw_tab">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>void <function>draw_tab</function></funcdef>
-     <paramdef>void</paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-   <desc>
-    <para>
-     &seealso;
-     <function class="GtkStyle">paint_tab</function>
-    </para>
-
-   </desc>
-  </method>
+  
 
   <method id="gtk.gtkstyle.method.draw_vline">
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>draw_vline</function></funcdef>
-     <paramdef>void</paramdef>
+     
+     <paramdef><classname>GdkWindow</classname> <parameter>window</parameter></paramdef>
+     <paramdef><parameter>state_type</parameter></paramdef>
+     <paramdef><parameter>y1</parameter></paramdef>
+     <paramdef><parameter>y2</parameter></paramdef>
+     <paramdef><parameter>x</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -545,7 +437,19 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>paint_arrow</function></funcdef>
-     <paramdef>void</paramdef>
+     
+     <paramdef><classname>GdkWindow</classname> <parameter>window</parameter></paramdef>
+     <paramdef><parameter>state_type</parameter></paramdef>
+     <paramdef><parameter>shadow_type</parameter></paramdef>
+     <paramdef><classname>GdkRectangle</classname> <parameter>area</parameter></paramdef>
+     <paramdef><classname>GtkWidget</classname> <parameter>widget</parameter></paramdef>
+     <paramdef><parameter>detail</parameter></paramdef>
+     <paramdef><parameter>arrow_type</parameter></paramdef>
+     <paramdef><parameter>fill</parameter></paramdef>
+     <paramdef><parameter>x</parameter></paramdef>
+     <paramdef><parameter>y</parameter></paramdef>
+     <paramdef><parameter>width</parameter></paramdef>
+     <paramdef><parameter>height</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -564,7 +468,17 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>paint_box</function></funcdef>
-     <paramdef>void</paramdef>
+     
+     <paramdef><classname>GdkWindow</classname> <parameter>window</parameter></paramdef>
+     <paramdef><parameter>state_type</parameter></paramdef>
+     <paramdef><parameter>shadow_type</parameter></paramdef>
+     <paramdef><classname>GdkRectangle</classname> <parameter>area</parameter></paramdef>
+     <paramdef><classname>GtkWidget</classname> <parameter>widget</parameter></paramdef>
+     <paramdef><parameter>detail</parameter></paramdef>
+     <paramdef><parameter>x</parameter></paramdef>
+     <paramdef><parameter>y</parameter></paramdef>
+     <paramdef><parameter>width</parameter></paramdef>
+     <paramdef><parameter>height</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -583,7 +497,20 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>paint_box_gap</function></funcdef>
-     <paramdef>void</paramdef>
+     
+     <paramdef><classname>GdkWindow</classname> <parameter>window</parameter></paramdef>
+     <paramdef><parameter>state_type</parameter></paramdef>
+     <paramdef><parameter>shadow_type</parameter></paramdef>
+     <paramdef><classname>GdkRectangle</classname> <parameter>area</parameter></paramdef>
+     <paramdef><classname>GtkWidget</classname> <parameter>widget</parameter></paramdef>
+     <paramdef><parameter>detail</parameter></paramdef>
+     <paramdef><parameter>x</parameter></paramdef>
+     <paramdef><parameter>y</parameter></paramdef>
+     <paramdef><parameter>width</parameter></paramdef>
+     <paramdef><parameter>height</parameter></paramdef>
+     <paramdef><parameter>gap_side</parameter></paramdef>
+     <paramdef><parameter>gap_x</parameter></paramdef>
+     <paramdef><parameter>gap_width</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -602,7 +529,17 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>paint_check</function></funcdef>
-     <paramdef>void</paramdef>
+     
+     <paramdef><classname>GdkWindow</classname> <parameter>window</parameter></paramdef>
+     <paramdef><parameter>state_type</parameter></paramdef>
+     <paramdef><parameter>shadow_type</parameter></paramdef>
+     <paramdef><classname>GdkRectangle</classname> <parameter>area</parameter></paramdef>
+     <paramdef><classname>GtkWidget</classname> <parameter>widget</parameter></paramdef>
+     <paramdef><parameter>detail</parameter></paramdef>
+     <paramdef><parameter>x</parameter></paramdef>
+     <paramdef><parameter>y</parameter></paramdef>
+     <paramdef><parameter>width</parameter></paramdef>
+     <paramdef><parameter>height</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -621,7 +558,17 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>paint_diamond</function></funcdef>
-     <paramdef>void</paramdef>
+     
+     <paramdef><classname>GdkWindow</classname> <parameter>window</parameter></paramdef>
+     <paramdef><parameter>state_type</parameter></paramdef>
+     <paramdef><parameter>shadow_type</parameter></paramdef>
+     <paramdef><classname>GdkRectangle</classname> <parameter>area</parameter></paramdef>
+     <paramdef><classname>GtkWidget</classname> <parameter>widget</parameter></paramdef>
+     <paramdef><parameter>detail</parameter></paramdef>
+     <paramdef><parameter>x</parameter></paramdef>
+     <paramdef><parameter>y</parameter></paramdef>
+     <paramdef><parameter>width</parameter></paramdef>
+     <paramdef><parameter>height</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -640,7 +587,15 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>paint_expander</function></funcdef>
-     <paramdef>void</paramdef>
+     
+     <paramdef><classname>GdkWindow</classname> <parameter>window</parameter></paramdef>
+     <paramdef><parameter>state_type</parameter></paramdef>
+     <paramdef><classname>GdkRectangle</classname> <parameter>area</parameter></paramdef>
+     <paramdef><classname>GtkWidget</classname> <parameter>widget</parameter></paramdef>
+     <paramdef><parameter>detail</parameter></paramdef>
+     <paramdef><parameter>x</parameter></paramdef>
+     <paramdef><parameter>y</parameter></paramdef>
+     <paramdef><parameter>expander_style</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -659,7 +614,18 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>paint_extension</function></funcdef>
-     <paramdef>void</paramdef>
+     
+     <paramdef><classname>GdkWindow</classname> <parameter>window</parameter></paramdef>
+     <paramdef><parameter>state_type</parameter></paramdef>
+     <paramdef><parameter>shadow_type</parameter></paramdef>
+     <paramdef><classname>GdkRectangle</classname> <parameter>area</parameter></paramdef>
+     <paramdef><classname>GtkWidget</classname> <parameter>widget</parameter></paramdef>
+     <paramdef><parameter>detail</parameter></paramdef>
+     <paramdef><parameter>x</parameter></paramdef>
+     <paramdef><parameter>y</parameter></paramdef>
+     <paramdef><parameter>width</parameter></paramdef>
+     <paramdef><parameter>height</parameter></paramdef>
+     <paramdef><parameter>gap_side</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -678,7 +644,17 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>paint_flat_box</function></funcdef>
-     <paramdef>void</paramdef>
+     
+     <paramdef><classname>GdkWindow</classname> <parameter>window</parameter></paramdef>
+     <paramdef><parameter>state_type</parameter></paramdef>
+     <paramdef><parameter>shadow_type</parameter></paramdef>
+     <paramdef><classname>GdkRectangle</classname> <parameter>area</parameter></paramdef>
+     <paramdef><classname>GtkWidget</classname> <parameter>widget</parameter></paramdef>
+     <paramdef><parameter>detail</parameter></paramdef>
+     <paramdef><parameter>x</parameter></paramdef>
+     <paramdef><parameter>y</parameter></paramdef>
+     <paramdef><parameter>width</parameter></paramdef>
+     <paramdef><parameter>height</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -697,7 +673,16 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>paint_focus</function></funcdef>
-     <paramdef>void</paramdef>
+     
+     <paramdef><classname>GdkWindow</classname> <parameter>window</parameter></paramdef>
+     <paramdef><parameter>state_type</parameter></paramdef>
+     <paramdef><classname>GdkRectangle</classname> <parameter>area</parameter></paramdef>
+     <paramdef><classname>GtkWidget</classname> <parameter>widget</parameter></paramdef>
+     <paramdef><parameter>detail</parameter></paramdef>
+     <paramdef><parameter>x</parameter></paramdef>
+     <paramdef><parameter>y</parameter></paramdef>
+     <paramdef><parameter>width</parameter></paramdef>
+     <paramdef><parameter>height</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -716,7 +701,18 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>paint_handle</function></funcdef>
-     <paramdef>void</paramdef>
+     
+     <paramdef><classname>GdkWindow</classname> <parameter>window</parameter></paramdef>
+     <paramdef><parameter>state_type</parameter></paramdef>
+     <paramdef><parameter>shadow_type</parameter></paramdef>
+     <paramdef><classname>GdkRectangle</classname> <parameter>area</parameter></paramdef>
+     <paramdef><classname>GtkWidget</classname> <parameter>widget</parameter></paramdef>
+     <paramdef><parameter>detail</parameter></paramdef>
+     <paramdef><parameter>x</parameter></paramdef>
+     <paramdef><parameter>y</parameter></paramdef>
+     <paramdef><parameter>width</parameter></paramdef>
+     <paramdef><parameter>height</parameter></paramdef>
+     <paramdef><parameter>orientation</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -735,7 +731,15 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>paint_hline</function></funcdef>
-     <paramdef>void</paramdef>
+     
+     <paramdef><classname>GdkWindow</classname> <parameter>window</parameter></paramdef>
+     <paramdef><parameter>state_type</parameter></paramdef>
+     <paramdef><classname>GdkRectangle</classname> <parameter>area</parameter></paramdef>
+     <paramdef><classname>GtkWidget</classname> <parameter>widget</parameter></paramdef>
+     <paramdef><parameter>detail</parameter></paramdef>
+     <paramdef><parameter>x1</parameter></paramdef>
+     <paramdef><parameter>x2</parameter></paramdef>
+     <paramdef><parameter>y</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -754,7 +758,16 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>paint_layout</function></funcdef>
-     <paramdef>void</paramdef>
+     
+     <paramdef><classname>GdkWindow</classname> <parameter>window</parameter></paramdef>
+     <paramdef><parameter>state_type</parameter></paramdef>
+     <paramdef><parameter>use_text</parameter></paramdef>
+     <paramdef><classname>GdkRectangle</classname> <parameter>area</parameter></paramdef>
+     <paramdef><classname>GtkWidget</classname> <parameter>widget</parameter></paramdef>
+     <paramdef><parameter>detail</parameter></paramdef>
+     <paramdef><parameter>x</parameter></paramdef>
+     <paramdef><parameter>y</parameter></paramdef>
+     <paramdef><classname>PangoLayout</classname> <parameter>layout</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -773,7 +786,17 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>paint_option</function></funcdef>
-     <paramdef>void</paramdef>
+     
+     <paramdef><classname>GdkWindow</classname> <parameter>window</parameter></paramdef>
+     <paramdef><parameter>state_type</parameter></paramdef>
+     <paramdef><parameter>shadow_type</parameter></paramdef>
+     <paramdef><classname>GdkRectangle</classname> <parameter>area</parameter></paramdef>
+     <paramdef><classname>GtkWidget</classname> <parameter>widget</parameter></paramdef>
+     <paramdef><parameter>detail</parameter></paramdef>
+     <paramdef><parameter>x</parameter></paramdef>
+     <paramdef><parameter>y</parameter></paramdef>
+     <paramdef><parameter>width</parameter></paramdef>
+     <paramdef><parameter>height</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -788,30 +811,23 @@
    </desc>
   </method>
 
-  <method id="gtk.gtkstyle.method.paint_polygon">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>void <function>paint_polygon</function></funcdef>
-     <paramdef>void</paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-   <desc>
-    <para>
-     &seealso;
-     <function class="GtkStyle">draw_polygon</function>
-    </para>
-
-   </desc>
-  </method>
+  
 
   <method id="gtk.gtkstyle.method.paint_resize_grip">
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>paint_resize_grip</function></funcdef>
-     <paramdef>void</paramdef>
+     
+     <paramdef><classname>GdkWindow</classname> <parameter>window</parameter></paramdef>
+     <paramdef><parameter>state_type</parameter></paramdef>
+     <paramdef><classname>GdkRectangle</classname> <parameter>area</parameter></paramdef>
+     <paramdef><classname>GtkWidget</classname> <parameter>widget</parameter></paramdef>
+     <paramdef><parameter>detail</parameter></paramdef>
+     <paramdef><parameter>edge</parameter></paramdef>
+     <paramdef><parameter>x</parameter></paramdef>
+     <paramdef><parameter>y</parameter></paramdef>
+     <paramdef><parameter>width</parameter></paramdef>
+     <paramdef><parameter>height</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -830,7 +846,17 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>paint_shadow</function></funcdef>
-     <paramdef>void</paramdef>
+     
+     <paramdef><classname>GdkWindow</classname> <parameter>window</parameter></paramdef>
+     <paramdef><parameter>state_type</parameter></paramdef>
+     <paramdef><parameter>shadow_type</parameter></paramdef>
+     <paramdef><classname>GdkRectangle</classname> <parameter>area</parameter></paramdef>
+     <paramdef><classname>GtkWidget</classname> <parameter>widget</parameter></paramdef>
+     <paramdef><parameter>detail</parameter></paramdef>
+     <paramdef><parameter>x</parameter></paramdef>
+     <paramdef><parameter>y</parameter></paramdef>
+     <paramdef><parameter>width</parameter></paramdef>
+     <paramdef><parameter>height</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -849,7 +875,20 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>paint_shadow_gap</function></funcdef>
-     <paramdef>void</paramdef>
+     
+     <paramdef><classname>GdkWindow</classname> <parameter>window</parameter></paramdef>
+     <paramdef><parameter>state_type</parameter></paramdef>
+     <paramdef><parameter>shadow_type</parameter></paramdef>
+     <paramdef><classname>GdkRectangle</classname> <parameter>area</parameter></paramdef>
+     <paramdef><classname>GtkWidget</classname> <parameter>widget</parameter></paramdef>
+     <paramdef><parameter>detail</parameter></paramdef>
+     <paramdef><parameter>x</parameter></paramdef>
+     <paramdef><parameter>y</parameter></paramdef>
+     <paramdef><parameter>width</parameter></paramdef>
+     <paramdef><parameter>height</parameter></paramdef>
+     <paramdef><parameter>gap_side</parameter></paramdef>
+     <paramdef><parameter>gap_x</parameter></paramdef>
+     <paramdef><parameter>gap_width</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -868,7 +907,18 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>paint_slider</function></funcdef>
-     <paramdef>void</paramdef>
+     
+     <paramdef><classname>GdkWindow</classname> <parameter>window</parameter></paramdef>
+     <paramdef><parameter>state_type</parameter></paramdef>
+     <paramdef><parameter>shadow_type</parameter></paramdef>
+     <paramdef><classname>GdkRectangle</classname> <parameter>area</parameter></paramdef>
+     <paramdef><classname>GtkWidget</classname> <parameter>widget</parameter></paramdef>
+     <paramdef><parameter>detail</parameter></paramdef>
+     <paramdef><parameter>x</parameter></paramdef>
+     <paramdef><parameter>y</parameter></paramdef>
+     <paramdef><parameter>width</parameter></paramdef>
+     <paramdef><parameter>height</parameter></paramdef>
+     <paramdef><parameter>orientation</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -887,7 +937,15 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>paint_string</function></funcdef>
-     <paramdef>void</paramdef>
+     
+     <paramdef><classname>GdkWindow</classname> <parameter>window</parameter></paramdef>
+     <paramdef><parameter>state_type</parameter></paramdef>
+     <paramdef><classname>GdkRectangle</classname> <parameter>area</parameter></paramdef>
+     <paramdef><classname>GtkWidget</classname> <parameter>widget</parameter></paramdef>
+     <paramdef><parameter>detail</parameter></paramdef>
+     <paramdef><parameter>x</parameter></paramdef>
+     <paramdef><parameter>y</parameter></paramdef>
+     <paramdef><parameter>string</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -906,7 +964,17 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>paint_tab</function></funcdef>
-     <paramdef>void</paramdef>
+     
+     <paramdef><classname>GdkWindow</classname> <parameter>window</parameter></paramdef>
+     <paramdef><parameter>state_type</parameter></paramdef>
+     <paramdef><parameter>shadow_type</parameter></paramdef>
+     <paramdef><classname>GdkRectangle</classname> <parameter>area</parameter></paramdef>
+     <paramdef><classname>GtkWidget</classname> <parameter>widget</parameter></paramdef>
+     <paramdef><parameter>detail</parameter></paramdef>
+     <paramdef><parameter>x</parameter></paramdef>
+     <paramdef><parameter>y</parameter></paramdef>
+     <paramdef><parameter>width</parameter></paramdef>
+     <paramdef><parameter>height</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -925,7 +993,15 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>paint_vline</function></funcdef>
-     <paramdef>void</paramdef>
+     
+     <paramdef><classname>GdkWindow</classname> <parameter>window</parameter></paramdef>
+     <paramdef><parameter>state_type</parameter></paramdef>
+     <paramdef><classname>GdkRectangle</classname> <parameter>area</parameter></paramdef>
+     <paramdef><classname>GtkWidget</classname> <parameter>widget</parameter></paramdef>
+     <paramdef><parameter>detail</parameter></paramdef>
+     <paramdef><parameter>y1</parameter></paramdef>
+     <paramdef><parameter>y2</parameter></paramdef>
+     <paramdef><parameter>x</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -940,26 +1016,19 @@
    </desc>
   </method>
 
-  <method id="gtk.gtkstyle.method.ref">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>GtkStyle <function>ref</function></funcdef>
-     <paramdef>void</paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </method>
+  
 
   <method id="gtk.gtkstyle.method.render_icon">
    <funcsynopsis>
     <funcprototype>
      <funcdef> <function>render_icon</function></funcdef>
-     <paramdef>void</paramdef>
+     
+     <paramdef><classname>GtkIconSource</classname> <parameter>source</parameter></paramdef>
+     <paramdef><parameter>direction</parameter></paramdef>
+     <paramdef><parameter>state</parameter></paramdef>
+     <paramdef><parameter>size</parameter></paramdef>
+     <paramdef><classname>GtkWidget</classname> <parameter><optional>widget</optional></parameter></paramdef>
+     <paramdef><parameter><optional>detail</optional></parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -974,7 +1043,9 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_background</function></funcdef>
-     <paramdef>void</paramdef>
+     
+     <paramdef><classname>GdkWindow</classname> <parameter>window</parameter></paramdef>
+     <paramdef><parameter>state_type</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -989,7 +1060,8 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_font</function></funcdef>
-     <paramdef>void</paramdef>
+     
+     <paramdef><classname>GdkFont</classname> <parameter>font</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -1004,20 +1076,7 @@
    </desc>
   </method>
 
-  <method id="gtk.gtkstyle.method.unref">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>void <function>unref</function></funcdef>
-     <paramdef>void</paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </method>
+  
 
  </methods>
 
@@ -1025,7 +1084,7 @@
 
   <field id="gtk.gtkstyle.field.base" type="ro">
    <fieldname>base</fieldname>
-   <fieldtype></fieldtype>
+   <fieldtype/>
    <shortdesc>
    </shortdesc>
    <desc>
@@ -1035,7 +1094,7 @@
 
   <field id="gtk.gtkstyle.field.base_gc" type="ro">
    <fieldname>base_gc</fieldname>
-   <fieldtype></fieldtype>
+   <fieldtype/>
    <shortdesc>
    </shortdesc>
    <desc>
@@ -1045,7 +1104,7 @@
 
   <field id="gtk.gtkstyle.field.bg" type="ro">
    <fieldname>bg</fieldname>
-   <fieldtype></fieldtype>
+   <fieldtype/>
    <shortdesc>
    </shortdesc>
    <desc>
@@ -1055,7 +1114,7 @@
 
   <field id="gtk.gtkstyle.field.bg_gc" type="ro">
    <fieldname>bg_gc</fieldname>
-   <fieldtype></fieldtype>
+   <fieldtype/>
    <shortdesc>
    </shortdesc>
    <desc>
@@ -1065,7 +1124,7 @@
 
   <field id="gtk.gtkstyle.field.bg_pixmap" type="ro">
    <fieldname>bg_pixmap</fieldname>
-   <fieldtype></fieldtype>
+   <fieldtype/>
    <shortdesc>
    </shortdesc>
    <desc>
@@ -1075,7 +1134,7 @@
 
   <field id="gtk.gtkstyle.field.black" type="ro">
    <fieldname>black</fieldname>
-   <fieldtype></fieldtype>
+   <fieldtype/>
    <shortdesc>
    </shortdesc>
    <desc>
@@ -1085,7 +1144,7 @@
 
   <field id="gtk.gtkstyle.field.black_gc" type="ro">
    <fieldname>black_gc</fieldname>
-   <fieldtype></fieldtype>
+   <fieldtype/>
    <shortdesc>
    </shortdesc>
    <desc>
@@ -1095,7 +1154,7 @@
 
   <field id="gtk.gtkstyle.field.dark" type="ro">
    <fieldname>dark</fieldname>
-   <fieldtype></fieldtype>
+   <fieldtype/>
    <shortdesc>
    </shortdesc>
    <desc>
@@ -1105,7 +1164,7 @@
 
   <field id="gtk.gtkstyle.field.dark_gc" type="ro">
    <fieldname>dark_gc</fieldname>
-   <fieldtype></fieldtype>
+   <fieldtype/>
    <shortdesc>
    </shortdesc>
    <desc>
@@ -1115,7 +1174,7 @@
 
   <field id="gtk.gtkstyle.field.fg" type="ro">
    <fieldname>fg</fieldname>
-   <fieldtype></fieldtype>
+   <fieldtype/>
    <shortdesc>
    </shortdesc>
    <desc>
@@ -1125,7 +1184,7 @@
 
   <field id="gtk.gtkstyle.field.fg_gc" type="ro">
    <fieldname>fg_gc</fieldname>
-   <fieldtype></fieldtype>
+   <fieldtype/>
    <shortdesc>
    </shortdesc>
    <desc>
@@ -1135,7 +1194,7 @@
 
   <field id="gtk.gtkstyle.field.font_desc" type="ro">
    <fieldname>font_desc</fieldname>
-   <fieldtype></fieldtype>
+   <fieldtype/>
    <shortdesc>
    </shortdesc>
    <desc>
@@ -1145,7 +1204,7 @@
 
   <field id="gtk.gtkstyle.field.light" type="ro">
    <fieldname>light</fieldname>
-   <fieldtype></fieldtype>
+   <fieldtype/>
    <shortdesc>
    </shortdesc>
    <desc>
@@ -1155,7 +1214,7 @@
 
   <field id="gtk.gtkstyle.field.light_gc" type="ro">
    <fieldname>light_gc</fieldname>
-   <fieldtype></fieldtype>
+   <fieldtype/>
    <shortdesc>
    </shortdesc>
    <desc>
@@ -1165,7 +1224,7 @@
 
   <field id="gtk.gtkstyle.field.mid" type="ro">
    <fieldname>mid</fieldname>
-   <fieldtype></fieldtype>
+   <fieldtype/>
    <shortdesc>
    </shortdesc>
    <desc>
@@ -1175,7 +1234,7 @@
 
   <field id="gtk.gtkstyle.field.mid_gc" type="ro">
    <fieldname>mid_gc</fieldname>
-   <fieldtype></fieldtype>
+   <fieldtype/>
    <shortdesc>
    </shortdesc>
    <desc>
@@ -1185,7 +1244,7 @@
 
   <field id="gtk.gtkstyle.field.text" type="ro">
    <fieldname>text</fieldname>
-   <fieldtype></fieldtype>
+   <fieldtype/>
    <shortdesc>
    </shortdesc>
    <desc>
@@ -1195,7 +1254,7 @@
 
   <field id="gtk.gtkstyle.field.text_aa" type="ro">
    <fieldname>text_aa</fieldname>
-   <fieldtype></fieldtype>
+   <fieldtype/>
    <shortdesc>
    </shortdesc>
    <desc>
@@ -1205,7 +1264,7 @@
 
   <field id="gtk.gtkstyle.field.text_aa_gc" type="ro">
    <fieldname>text_aa_gc</fieldname>
-   <fieldtype></fieldtype>
+   <fieldtype/>
    <shortdesc>
    </shortdesc>
    <desc>
@@ -1215,7 +1274,7 @@
 
   <field id="gtk.gtkstyle.field.text_gc" type="ro">
    <fieldname>text_gc</fieldname>
-   <fieldtype></fieldtype>
+   <fieldtype/>
    <shortdesc>
    </shortdesc>
    <desc>
@@ -1225,7 +1284,7 @@
 
   <field id="gtk.gtkstyle.field.white" type="ro">
    <fieldname>white</fieldname>
-   <fieldtype></fieldtype>
+   <fieldtype/>
    <shortdesc>
    </shortdesc>
    <desc>
@@ -1235,7 +1294,7 @@
 
   <field id="gtk.gtkstyle.field.white_gc" type="ro">
    <fieldname>white_gc</fieldname>
-   <fieldtype></fieldtype>
+   <fieldtype/>
    <shortdesc>
    </shortdesc>
    <desc>

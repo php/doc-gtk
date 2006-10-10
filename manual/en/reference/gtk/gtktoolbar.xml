@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- $Revision: 1.10 $ -->
+<!-- $Revision: 1.11 $ -->
 <classentry id="gtk.gtktoolbar">
  <classmeta>
   <classtitle>GtkToolbar</classtitle>
@@ -326,27 +326,7 @@
    </desc>
   </method>
 
-  <method id="gtk.gtktoolbar.method.get_style">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef><enumname>GtkToolbarStyle</enumname> <function>get_style</function></funcdef>
-     <paramdef>void</paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-    Returns the toolbar style (icons only/text only/both)
-   </shortdesc>
-   <desc>
-    <para>
-     Returns how tool items are displayed (icons only/text only/both).
-    </para>
-    <para>
-     &seealso;
-     <function class="GtkToolbar">set_style</function>, 
-     <function class="GtkToolbar">unset_style</function>
-    </para>
-   </desc>
-  </method>
+  
 
   <method id="gtk.gtktoolbar.method.get_tooltips">
    <funcsynopsis>
@@ -477,29 +457,7 @@
    </desc>
   </method>
 
-  <method id="gtk.gtktoolbar.method.insert_stock">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef><classname>GtkWidget</classname> <function>insert_stock</function></funcdef>
-     <paramdef><enumname>GtkStockItems</enumname> <parameter>stock</parameter></paramdef>
-     <paramdef>string <parameter>tooltip_text</parameter></paramdef>
-     <paramdef>string <parameter>tooltip_private_text</parameter></paramdef>
-     <paramdef><classname>GtkWidget</classname> <parameter>icon</parameter></paramdef>
-     <paramdef><parameter>callback</parameter></paramdef>
-     <paramdef>mixed <parameter>userdata</parameter></paramdef>
-     <paramdef>int <parameter>position</parameter></paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-    &deprecated; Create and insert a stock button.
-   </shortdesc>
-   <desc>
-    <para>
-     &deprecated.method; Use <function class="GtkToolbar">insert</function>
-     instead.
-    </para>
-   </desc>
-  </method>
+  
 
   <method id="gtk.gtktoolbar.method.insert_widget">
    <funcsynopsis>
@@ -749,52 +707,7 @@
    </desc>
   </method>
 
-  <method id="gtk.gtktoolbar.method.set_style">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>void <function>set_style</function></funcdef>
-     <paramdef><enumname>GtkToolbarStyle</enumname> <parameter>style</parameter></paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-    Sets if the toolbar shows icons or text only, or both.
-   </shortdesc>
-   <desc>
-    <para>
-     Sets if the toolbar shall display icons only, text only
-     or both. If the orientation is set to vertical, it also can be
-     both + horizontal.
-    </para>
-    <para>
-     When creating the toolbar, the style is set to the user preference
-     (that can be changed in the Gnome control center). Set this setting
-     only if you are sure that you want to override the user's preference.
-    </para>
-    <example>
-     <title>Toolbar with dynamic styles</title>
-     <programlisting role="php">
-      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="&directory.examples;/reference/gtk/gtktoolbar/set_style.phpw" parse="text">
-       <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
-      </xi:include>
-     </programlisting>
-    </example>
-    <para>
-     The following image shows the different styles, from left to right:
-     <itemizedlist>
-      <listitem><optionname enum="GtkToolbarStyle">Gtk::TOOLBAR_BOTH</optionname></listitem>
-      <listitem><optionname enum="GtkToolbarStyle">Gtk::TOOLBAR_TEXT</optionname></listitem>
-      <listitem><optionname enum="GtkToolbarStyle">Gtk::TOOLBAR_ICONS</optionname></listitem>
-      <listitem><optionname enum="GtkToolbarStyle">Gtk::TOOLBAR_BOTH_HORIZ</optionname></listitem>
-     </itemizedlist>
-    </para>
-    <graphic fileref="&directory.images;/reference/gtk/gtktoolbar_style.png"/>
-    <para>
-     &seealso;
-     <function class="GtkToolbar">get_style</function>, 
-     <function class="GtkToolbar">unset_style</function>
-    </para>
-   </desc>
-  </method>
+  
 
   <method id="gtk.gtktoolbar.method.set_tooltips">
    <funcsynopsis>
@@ -869,6 +782,7 @@
     <funcprototype>
      <funcdef> <function>get_toolbar_style</function></funcdef>
      
+     <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>

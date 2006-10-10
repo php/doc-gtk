@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- $Revision: 1.11 $ -->
+<!-- $Revision: 1.12 $ -->
 <classentry id="gtk.gtkstatusbar">
  <classmeta>
   <classtitle>GtkStatusbar</classtitle>
@@ -176,40 +176,7 @@
    </desc>
   </method>
 
-  <method id="gtk.gtkstatusbar.method.remove">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>void <function>remove</function></funcdef>
-     <paramdef>int <parameter>context_id</parameter></paramdef>
-     <paramdef>int <parameter>message_id</parameter></paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-    Removes a message from the stack.
-   </shortdesc>
-   <desc>
-    <para>
-     Removes the message with <parameter>message_id</parameter>
-     <emphasis>and</emphasis> <parameter>context_id</parameter>.
-    </para>
-    <para>
-     <parameter>message_id</parameter> should be a message identifier returned
-     from <function class="GtkStatusbar">push</function>.
-     <parameter>context_id</parameter> should be a context identifier returned
-     from <function class="GtkStatusbar">get_context_id</function>.
-    </para>
-    <para>
-     If you simply want to remove the top message off of the message stack,
-     use <function class="GtkStatusbar">pop</function>.
-    </para>
-    <para>
-     &seealso;
-     <function class="GtkStatusbar">push</function>,
-     <function class="GtkStatusbar">pop</function>,
-     <function class="GtkStatusbar">get_context_id</function>
-    </para>
-   </desc>
-  </method>
+  
 
   <method id="gtk.gtkstatusbar.method.set_has_resize_grip">
    <funcsynopsis>
@@ -247,6 +214,8 @@
     <funcsynopsis>
     <funcprototype>
      <funcdef> <function>remove_message</function></funcdef>
+     
+     <paramdef><parameter>context_id</parameter></paramdef>
      <paramdef><parameter>message_id</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>

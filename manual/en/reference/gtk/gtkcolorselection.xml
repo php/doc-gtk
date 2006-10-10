@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- $Revision: 1.10 $ -->
+<!-- $Revision: 1.11 $ -->
 <classentry id="gtk.gtkcolorselection">
  <classmeta>
   <classtitle>GtkColorSelection</classtitle>
@@ -250,7 +250,11 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_color</function></funcdef>
-     <paramdef>void</paramdef>
+     
+     <paramdef><parameter>red</parameter></paramdef>
+     <paramdef><parameter>green</parameter></paramdef>
+     <paramdef><parameter>blue</parameter></paramdef>
+     <paramdef><parameter><optional>opacity</optional></parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -303,7 +307,8 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_current_color</function></funcdef>
-     <paramdef>void</paramdef>
+     
+     <paramdef><classname>GdkColor</classname> <parameter>color</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -400,7 +405,8 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_previous_color</function></funcdef>
-     <paramdef>void</paramdef>
+     
+     <paramdef><classname>GdkColor</classname> <parameter>color</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -445,6 +451,7 @@
     <funcprototype>
      <funcdef> <function>palette_to_string</function></funcdef>
      
+     <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>

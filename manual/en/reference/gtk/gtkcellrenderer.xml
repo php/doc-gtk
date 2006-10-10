@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<!-- $Revision: 1.12 $ -->
+<?xml version="1.0" encoding="utf-8"?>
+<!-- $Revision: 1.13 $ -->
 <classentry id="gtk.gtkcellrenderer">
  <classmeta>
   <classtitle>GtkCellRenderer</classtitle>
@@ -36,8 +36,7 @@
     <example>
      <title>Editable cell renderers</title>
      <programlisting role="php">
-      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
-                  href="&directory.examples;/reference/gtk/gtkcellrenderer/gtkcellrenderer.phpw" parse="text">
+      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="&directory.examples;/reference/gtk/gtkcellrenderer/gtkcellrenderer.phpw" parse="text">
        <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
       </xi:include>
      </programlisting>
@@ -51,7 +50,13 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>bool <function>activate</function></funcdef>
-     <paramdef>void</paramdef>
+     
+     <paramdef><classname>GdkEvent</classname> <parameter>event</parameter></paramdef>
+     <paramdef><classname>GtkWidget</classname> <parameter>widget</parameter></paramdef>
+     <paramdef><parameter>path</parameter></paramdef>
+     <paramdef><classname>GdkRectangle</classname> <parameter>background_area</parameter></paramdef>
+     <paramdef><classname>GdkRectangle</classname> <parameter>cell_area</parameter></paramdef>
+     <paramdef><parameter>flags</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -107,34 +112,19 @@ print_r ($cellrenderer->get_fixed_size());
    </desc>
   </method>
 
-  <method id="gtk.gtkcellrenderer.method.get_size">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>void <function>get_size</function></funcdef>
-     <paramdef>void</paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-    Obtains the width and height needed to render the cell.
-   </shortdesc>
-   <desc>
-    Obtains the width and height needed to render the cell.
-    These values are returned as part of a array containing the x_offset, y_offset,
-    width and height. <function class="GtkCellRenderer">get_size</function> is used
-    by view widgets to determine the appropriate size for the cell_area to be passed
-    to the <function class="GtkCellRenderer">render</function> method.
-    If cell_area is not None, the x and y offsets of the cell relative
-    to this location are returned. Please note that the values set in
-    the returned width and height, as well as those in x_offset and y_offset
-    are inclusive of the xpad and ypad properties.
-   </desc>
-  </method>
+  
 
   <method id="gtk.gtkcellrenderer.method.render">
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>render</function></funcdef>
-     <paramdef>void</paramdef>
+     
+     <paramdef><classname>GdkWindow</classname> <parameter>window</parameter></paramdef>
+     <paramdef><classname>GtkWidget</classname> <parameter>widget</parameter></paramdef>
+     <paramdef><classname>GdkRectangle</classname> <parameter>background_area</parameter></paramdef>
+     <paramdef><classname>GdkRectangle</classname> <parameter>cell_area</parameter></paramdef>
+     <paramdef><classname>GdkRectangle</classname> <parameter>expose_area</parameter></paramdef>
+     <paramdef><parameter>flags</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -180,7 +170,13 @@ $cellrenderer->set_fixed_size(30,100);
    <funcsynopsis>
     <funcprototype>
      <funcdef> <function>start_editing</function></funcdef>
-     <paramdef>void</paramdef>
+     
+     <paramdef><classname>GdkEvent</classname> <parameter>event</parameter></paramdef>
+     <paramdef><classname>GtkWidget</classname> <parameter>widget</parameter></paramdef>
+     <paramdef><parameter>path</parameter></paramdef>
+     <paramdef><classname>GdkRectangle</classname> <parameter>background_area</parameter></paramdef>
+     <paramdef><classname>GdkRectangle</classname> <parameter>cell_area</parameter></paramdef>
+     <paramdef><parameter>flags</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -289,11 +285,11 @@ $cellrenderer->set_property('cell-background-gdk', new GdkColor(65535,0,0));
    <propname>height</propname>
    <proptype>integer</proptype>
    <shortdesc>
-    Changes the height of the cell. Allowed values >= -1. Default: -1
+    Changes the height of the cell. Allowed values &gt;= -1. Default: -1
    </shortdesc>
    <desc>
     <para>
-     Changes the height of the cell. Allowed values >= -1. Default: -1
+     Changes the height of the cell. Allowed values &gt;= -1. Default: -1
     </para>
     <para>
      <example>
@@ -383,11 +379,11 @@ $cellrenderer->set_property('height', '28');
    <propname>width</propname>
    <proptype>integer</proptype>
    <shortdesc>
-     The fixed width of the cell in pixels. Allowed values >= -1. Default: -1.
+     The fixed width of the cell in pixels. Allowed values &gt;= -1. Default: -1.
    </shortdesc>
    <desc>
     <para>
-      The fixed width of the cell in pixels. Allowed values >= -1. Default: -1.
+      The fixed width of the cell in pixels. Allowed values &gt;= -1. Default: -1.
     </para>
     <para>
      <example>

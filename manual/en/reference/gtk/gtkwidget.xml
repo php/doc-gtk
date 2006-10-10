@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- $Revision: 1.28 $ -->
+<!-- $Revision: 1.29 $ -->
 <classentry id="gtk.gtkwidget">
  <classmeta>
   <classtitle>GtkWidget</classtitle>
@@ -241,24 +241,7 @@
    </desc>
   </method>
 
-  <method id="gtk.gtkwidget.method.destroy">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>void <function>destroy</function></funcdef>
-     <paramdef>void</paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-    Destroys the widget.
-   </shortdesc>
-   <desc>
-    <simpara>
-     Destroys the widget. When a widget is destroyed, it is no longer
-     accessible. When a top level widget is destroyed, all of its children are
-     destroyed as well.
-    </simpara>
-   </desc>
-  </method>
+  
 <!--
   <method id="gtk.gtkwidget.method.destroyed">
    <funcsynopsis>
@@ -395,7 +378,9 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef> <function>drag_dest_find_target</function></funcdef>
-     <paramdef>void</paramdef>
+     
+     <paramdef><classname>GdkDragContext</classname> <parameter>context</parameter></paramdef>
+     <paramdef><parameter><optional>targets</optional></parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -425,7 +410,10 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>drag_dest_set</function></funcdef>
-     <paramdef>void</paramdef>
+     
+     <paramdef><parameter>flags</parameter></paramdef>
+     <paramdef><parameter>targets</parameter></paramdef>
+     <paramdef><parameter>actions</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -440,7 +428,10 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>drag_dest_set_proxy</function></funcdef>
-     <paramdef>void</paramdef>
+     
+     <paramdef><classname>GdkWindow</classname> <parameter>proxy_window</parameter></paramdef>
+     <paramdef><parameter>protocol</parameter></paramdef>
+     <paramdef><parameter>use_coordinates</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -455,7 +446,8 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>drag_dest_set_target_list</function></funcdef>
-     <paramdef>void</paramdef>
+     
+     <paramdef><parameter>targets</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -485,7 +477,10 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>drag_get_data</function></funcdef>
-     <paramdef>void</paramdef>
+     
+     <paramdef><classname>GdkDragContext</classname> <parameter>context</parameter></paramdef>
+     <paramdef><parameter>target</parameter></paramdef>
+     <paramdef><parameter><optional>time</optional></parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -545,7 +540,10 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>drag_source_set</function></funcdef>
-     <paramdef>void</paramdef>
+     
+     <paramdef><parameter>sbmask</parameter></paramdef>
+     <paramdef><parameter>targets</parameter></paramdef>
+     <paramdef><parameter>actions</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -560,7 +558,10 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>drag_source_set_icon</function></funcdef>
-     <paramdef>void</paramdef>
+     
+     <paramdef><classname>GdkColormap</classname> <parameter>colormap</parameter></paramdef>
+     <paramdef><classname>GdkPixmap</classname> <parameter>pixmap</parameter></paramdef>
+     <paramdef><parameter><optional>mask</optional></parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -575,7 +576,8 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>drag_source_set_icon_pixbuf</function></funcdef>
-     <paramdef>void</paramdef>
+     
+     <paramdef><classname>GdkPixbuf</classname> <parameter>pixbuf</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -605,7 +607,8 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>drag_source_set_target_list</function></funcdef>
-     <paramdef>void</paramdef>
+     
+     <paramdef><parameter>targets</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -846,7 +849,8 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef><classname>GtkClipboard</classname> <function>get_clipboard</function></funcdef>
-     <paramdef>void</paramdef>
+     
+     <paramdef><parameter>selection</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -1508,8 +1512,9 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>bool <function>intersect</function></funcdef>
+     
+     
      <paramdef><classname>GdkRectangle</classname> <parameter>area</parameter></paramdef>
-     <paramdef><classname>GdkRectangle</classname> <parameter>intersection</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -1590,22 +1595,7 @@
    </desc>
   </method>
 
-  <method id="gtk.gtkwidget.method.list_accel_closures">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>array <function>list_accel_closures</function></funcdef>
-     <paramdef>void</paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-    Lists the closures used by widget for accelerator group connections.
-   </shortdesc>
-   <desc>
-    <para>
-     Lists the closures used by widget for accelerator group connections.
-    </para>
-   </desc>
-  </method>
+  
 
   <method id="gtk.gtkwidget.method.list_mnemonic_labels">
    <funcsynopsis>
@@ -1641,20 +1631,7 @@
    </desc>
   </method>
 
-  <method id="gtk.gtkwidget.method.menu_get_for_attach_widget">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef> <function>menu_get_for_attach_widget</function></funcdef>
-     <paramdef>void</paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-   
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </method>
+  
 
   <method id="gtk.gtkwidget.method.mnemonic_activate">
    <funcsynopsis>
@@ -1879,20 +1856,7 @@
    </desc>
   </method>
 
-  <method id="gtk.gtkwidget.method.propagate_event">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>void <function>propagate_event</function></funcdef>
-     <paramdef>void</paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </method>
+  
 
   <method id="gtk.gtkwidget.method.push_colormap">
    <funcsynopsis>
@@ -2075,46 +2039,18 @@
    </desc>
   </method>
 
-  <method id="gtk.gtkwidget.method.ref">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>GtkWidget <function>ref</function></funcdef>
-     <paramdef>void</paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-    Increments the reference counter for the widget.
-   </shortdesc>
-   <desc>
+  
 
-   </desc>
-  </method>
-
-  <method id="gtk.gtkwidget.method.region_intersect">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>
-      <classname>GdkRegion</classname> <function>region_intersect</function>
-     </funcdef>
-     <paramdef>
-      <classname>GdkRegion</classname> <parameter>region</parameter>
-     </paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-    Returns the intersection of the widget's area and
-    <parameter>region</parameter>.
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </method>
+  
 
   <method id="gtk.gtkwidget.method.remove_accelerator">
    <funcsynopsis>
     <funcprototype>
      <funcdef>bool <function>remove_accelerator</function></funcdef>
-     <paramdef>void</paramdef>
+     
+     <paramdef><classname>GtkAccelGroup</classname> <parameter>accel_group</parameter></paramdef>
+     <paramdef><parameter>accel_key</parameter></paramdef>
+     <paramdef><parameter>accel_mods</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -2196,26 +2132,16 @@
    </desc>
   </method>
 
-  <method id="gtk.gtkwidget.method.reset_shapes">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>void <function>reset_shapes</function></funcdef>
-     <paramdef>void</paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </method>
+  
 
   <method id="gtk.gtkwidget.method.selection_add_target">
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>selection_add_target</function></funcdef>
-     <paramdef>void</paramdef>
+     
+     <paramdef><parameter>selection</parameter></paramdef>
+     <paramdef><parameter>target</parameter></paramdef>
+     <paramdef><parameter>info</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -2226,26 +2152,14 @@
    </desc>
   </method>
 
-  <method id="gtk.gtkwidget.method.selection_add_targets">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>void <function>selection_add_targets</function></funcdef>
-     <paramdef>void</paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </method>
+  
 
   <method id="gtk.gtkwidget.method.selection_clear">
    <funcsynopsis>
     <funcprototype>
      <funcdef>bool <function>selection_clear</function></funcdef>
-     <paramdef>void</paramdef>
+     
+     <paramdef><parameter>event</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -2264,7 +2178,8 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>selection_clear_targets</function></funcdef>
-     <paramdef>void</paramdef>
+     
+     <paramdef><parameter>selection</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -2279,7 +2194,10 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>bool <function>selection_convert</function></funcdef>
-     <paramdef>void</paramdef>
+     
+     <paramdef><parameter>selection</parameter></paramdef>
+     <paramdef><parameter>target</parameter></paramdef>
+     <paramdef><parameter><optional>time</optional></parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -2294,7 +2212,9 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>bool <function>selection_owner_set</function></funcdef>
-     <paramdef>void</paramdef>
+     
+     <paramdef><parameter>selection</parameter></paramdef>
+     <paramdef><parameter><optional>time</optional></parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -2324,7 +2244,8 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>int <function>send_expose</function></funcdef>
-     <paramdef>void</paramdef>
+     
+     <paramdef><classname>GdkEvent</classname> <parameter>event</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -2335,20 +2256,7 @@
    </desc>
   </method>
 
-  <method id="gtk.gtkwidget.method.set">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>void <function>set</function></funcdef>
-     <paramdef>void</paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </method>
+  
 
   <method id="gtk.gtkwidget.method.set_accel_path">
    <funcsynopsis>
@@ -2404,7 +2312,8 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_colormap</function></funcdef>
-     <paramdef>void</paramdef>
+     
+     <paramdef><classname>GdkColormap</classname> <parameter>colormap</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -2444,7 +2353,8 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_default_colormap</function></funcdef>
-     <paramdef>void</paramdef>
+     
+     <paramdef><classname>GdkColormap</classname> <parameter>colormap</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -2542,7 +2452,8 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_extension_events</function></funcdef>
-     <paramdef>void</paramdef>
+     
+     <paramdef><parameter>mode</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -2620,7 +2531,8 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_parent_window</function></funcdef>
-     <paramdef>void</paramdef>
+     
+     <paramdef><classname>GdkWindow</classname> <parameter>parent_window</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -2835,7 +2747,10 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>shape_combine_mask</function></funcdef>
-     <paramdef>void</paramdef>
+     
+     <paramdef><parameter>shape_mask</parameter></paramdef>
+     <paramdef><parameter>offset_x</parameter></paramdef>
+     <paramdef><parameter>offset_y</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -2915,7 +2830,8 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>size_allocate</function></funcdef>
-     <paramdef>void</paramdef>
+     
+     <paramdef><parameter>allocation</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -2941,50 +2857,11 @@
    </desc>
   </method>
 
-  <method id="gtk.gtkwidget.method.style_get">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>void <function>style_get</function></funcdef>
-     <paramdef>void</paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
+  
 
-   </shortdesc>
-   <desc>
+  
 
-   </desc>
-  </method>
-
-  <method id="gtk.gtkwidget.method.style_get_property">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>void <function>style_get_property</function></funcdef>
-     <paramdef>void</paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </method>
-
-  <method id="gtk.gtkwidget.method.style_get_valist">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>void <function>style_get_valist</function></funcdef>
-     <paramdef>void</paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </method>
+  
 
   <method id="gtk.gtkwidget.method.thaw_child_notify">
    <funcsynopsis>
@@ -3009,7 +2886,10 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>bool <function>translate_coordinates</function></funcdef>
-     <paramdef>void</paramdef>
+     
+     <paramdef><classname>GtkWidget</classname> <parameter>dest_widget</parameter></paramdef>
+     <paramdef><parameter>src_x</parameter></paramdef>
+     <paramdef><parameter>src_y</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -3067,25 +2947,13 @@
    </desc>
   </method>
 
-  <method id="gtk.gtkwidget.method.unref">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>void <function>unref</function></funcdef>
-     <paramdef>void</paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-    Decrements the reference counter for the widget.
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </method>
+  
  <method id="gtk.gtkwidget.method.drag_source_add_image_targets">
     <funcsynopsis>
     <funcprototype>
      <funcdef> <function>drag_source_add_image_targets</function></funcdef>
      
+     <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -3101,6 +2969,7 @@
     <funcprototype>
      <funcdef> <function>drag_source_add_uri_targets</function></funcdef>
      
+     <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>

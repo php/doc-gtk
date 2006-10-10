@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- $Revision: 1.5 $ -->
+<!-- $Revision: 1.6 $ -->
 <classentry id="gtk.gtkpreview">
  <classmeta>
   <classtitle>GtkPreview</classtitle>
@@ -59,7 +59,15 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>put</function></funcdef>
-     <paramdef>void</paramdef>
+     
+     <paramdef><classname>GdkWindow</classname> <parameter>window</parameter></paramdef>
+     <paramdef><classname>GdkGC</classname> <parameter>gc</parameter></paramdef>
+     <paramdef><parameter>srcx</parameter></paramdef>
+     <paramdef><parameter>srcy</parameter></paramdef>
+     <paramdef><parameter>destx</parameter></paramdef>
+     <paramdef><parameter>desty</parameter></paramdef>
+     <paramdef><parameter>width</parameter></paramdef>
+     <paramdef><parameter>height</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -74,7 +82,8 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_dither</function></funcdef>
-     <paramdef>void</paramdef>
+     
+     <paramdef><parameter>dither</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -121,6 +130,7 @@
     <funcprototype>
      <funcdef> <function>get_cmap</function></funcdef>
      
+     <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -139,6 +149,7 @@
     <funcprototype>
      <funcdef> <function>get_preview_visual</function></funcdef>
      
+     <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -157,6 +168,7 @@
     <funcprototype>
      <funcdef> <function>reset</function></funcdef>
      
+     <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -174,6 +186,10 @@
     <funcsynopsis>
     <funcprototype>
      <funcdef> <function>set_color_cube</function></funcdef>
+     
+     <paramdef><parameter>nred_shades</parameter></paramdef>
+     <paramdef><parameter>ngreen_shades</parameter></paramdef>
+     <paramdef><parameter>nblue_shades</parameter></paramdef>
      <paramdef><parameter>ngray_shades</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
