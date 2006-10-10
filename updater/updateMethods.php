@@ -124,6 +124,7 @@ class UpdateMethods
                     $toRemove = $xpath->query('//methods/method[funcsynopsis/funcprototype/funcdef/function/text()="' . $strMethod . '"]');
                     $toRemoveParent = $xpath->query('//methods');
                     $toRemoveParent->item(0)->removeChild($toRemove->item(0));
+                    echo 'M Removing ' . $classname . '::' . $strMethod . "\n";
                     ++$nRemoved;
                 }
             }
