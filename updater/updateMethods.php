@@ -15,7 +15,8 @@
 *   - beautify output (xml_beautifier?)
 *   - add/check signals
 *   - add/check properties
-*   - what happens if no <methods> tag exists?
+*   - write no-<methods> and no-<constructors> testcase
+*   - testcase for adding constructor
 *
 *   Done:
 *   - add void if no return value (always since we cannot determine)
@@ -27,6 +28,7 @@
 *   - check existing methods
 *   - check parameters of already docced methods
 *       (void -> parameter, parameter count)
+*   - what happens if no <methods> tag exists?
 *
 *   @author Anant Narayanan <anant@kix.in>
 *   @author Christian Weiske <cweiske@php.net>
@@ -101,15 +103,20 @@ class UpdateMethods
         } else {
             $trueMethods   = $childMethods;
         }
-        echo ' ' . str_pad(count($trueMethods), 3) . " methods\n";
+
         $arMethodNames = $this->getMethodNames($trueMethods);
 
         $doc = new DOMDocument();
         if ($doc->load($file)) {
             $xpath = new DOMXPath($doc);
+
+            $nExisting = $xpath->evaluate('count(//methods/method/funcsynopsis/funcprototype/funcdef/function/text())');
+            echo ' ' . str_pad(count($trueMethods), 3) . ' methods (' . $nExisting . ' existing)' . "\n";
+
             $this->checkInterface($doc, $xpath, $refObject);
 
             //check the existence of each method defined in the docs
+            $nRemoved = 0;
             foreach ($xpath->query('//methods/method/funcsynopsis/funcprototype/funcdef/function/text()') as $method) {
                 $strMethod = $method->textContent;
                 if (!in_array($strMethod, $arMethodNames)) {
@@ -117,7 +124,12 @@ class UpdateMethods
                     $toRemove = $xpath->query('//methods/method[funcsynopsis/funcprototype/funcdef/function/text()="' . $strMethod . '"]');
                     $toRemoveParent = $xpath->query('//methods');
                     $toRemoveParent->item(0)->removeChild($toRemove->item(0));
+                    ++$nRemoved;
                 }
+            }
+            if ($nRemoved > 0) {
+                $this->methodCount += $nRemoved;
+                echo ' Removed ' . $nRemoved . ' methods' . "\n";
             }
 
             //Update each method in the class
@@ -127,6 +139,11 @@ class UpdateMethods
 
             if (is_subclass_of($classname, 'GObject')) {
                 $this->checkSignals($classname, $doc, $xpath);
+            }
+
+            if ($this->methodCount > 0) {
+                //something changed? save the thing
+                $doc->save($file);
             }
         } else {
             echo 'XML is broken in ' . $file . " - skipping.\n";
@@ -258,37 +275,34 @@ class UpdateMethods
 
             $xmlMethod->appendChild($doc->createTextNode('  '));
 
-            /* Save the xml file after adding the whole method node */
             if ($ismethod) {
                 echo "M ";
-                $topLevel = $doc->getElementsByTagName('methods');
+                $topLevels = $doc->getElementsByTagName('methods');
 
                 // If there is no methods section, create one.
-                if ($topLevel->length == 0) {
-                    $methods = $doc->createElement('methods');
-                    $doc->appendChild($methods);
-                    $topLevel = $doc->getElementsByTagName('methods');
+                if ($topLevels->length == 0) {
+                    $methods        = $doc->createElement('methods');
+                    $doc->getElementsByTagName('classentry')->item(0)->appendChild($methods);
+                    $topLevels       = $doc->getElementsByTagName('methods');
                 }
             } else {
                 echo "C ";
-                $topLevel = $doc->getElementsByTagName('constructors');
+                $topLevels = $doc->getElementsByTagName('constructors');
 
                 // If there is no constructor section, create one.
-                if ($topLevel->length == 0) {
-                    $methods = $doc->createElement('constructors');
-                    $doc->appendChild($methods);
-                    $topLevel = $doc->getElementsByTagName('constructors');
+                if ($topLevels->length == 0) {
+                    $constructors   = $doc->createElement('constructors');
+                    $doc->getElementsByTagName('classentry')->item(0)->appendChild($constructors);
+                    $topLevels       = $doc->getElementsByTagName('constructors');
                 }
             }
-            $topLevel = $topLevel->item(0);
+            $topLevel = $topLevels->item(0);
             echo "Updating " . $daID . "\n";
             $topLevel->appendChild($doc->createTextNode('  '));
             $topLevel->appendChild($xmlMethod);
             $topLevel->appendChild($doc->createTextNode("\n\n"));
 
-            $doc->save($file);
-
-            $this->methodCount += 1;
+            ++$this->methodCount;
         } else {
             /**
             *   Method exists
@@ -300,10 +314,10 @@ class UpdateMethods
             $this->checkExistingMethodParams($doc, $xpath, $method, $path);
 
             // Add a static entity if needed.
-            if ($method->isStatic()) {
+            //only if not a constructor
+            if ($ismethod && $method->isStatic()) {
                 if ($this->addStatic($doc, $xmlDesc)) {
                     ++$this->methodCount;
-                    $doc->save($file);
                 }
             }
         }
