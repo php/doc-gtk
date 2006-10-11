@@ -17,6 +17,7 @@
 *   - add/check properties
 *   - write no-<methods> and no-<constructors> testcase
 *   - testcase for adding constructor
+*   - adding constructor: replace __construct name with classname
 *
 *   Done:
 *   - add void if no return value (always since we cannot determine)
