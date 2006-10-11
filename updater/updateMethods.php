@@ -17,7 +17,6 @@
 *   - add/check properties
 *   - write no-<methods> and no-<constructors> testcase
 *   - testcase for adding constructor
-*   - adding constructor: replace __construct name with classname
 *
 *   Done:
 *   - add void if no return value (always since we cannot determine)
@@ -30,6 +29,7 @@
 *   - check parameters of already docced methods
 *       (void -> parameter, parameter count)
 *   - what happens if no <methods> tag exists?
+*   - adding constructor: replace __construct name with classname
 *
 *   @author Anant Narayanan <anant@kix.in>
 *   @author Christian Weiske <cweiske@php.net>
@@ -218,7 +218,9 @@ class UpdateMethods
             $xmlSynopsis    = $doc->createElement('funcsynopsis', "\n");
             $xmlPrototype   = $doc->createElement('funcprototype', "\n");
             $xmlFuncdef     = $doc->createElement('funcdef', $ismethod ? 'void ' : '');
-            if ($ismethod || $methodName == "__construct") {
+            if ($methodName == '__construct') {
+                $xmlFunction = $doc->createElement('function', $classname);
+            } else if ($ismethod) {
                 $xmlFunction = $doc->createElement('function', $methodName);
             } else {
                 //alternative constructors need Classname::new_* as funcname
@@ -284,7 +286,11 @@ class UpdateMethods
                 // If there is no methods section, create one.
                 if ($topLevels->length == 0) {
                     $methods        = $doc->createElement('methods');
-                    $doc->getElementsByTagName('classentry')->item(0)->appendChild($methods);
+                    $classentry     = $doc->getElementsByTagName('classentry')->item(0);
+                    $classentry->appendChild($doc->createTextNode("\n\n "));
+                    $classentry->appendChild($methods);
+                    $classentry->appendChild($doc->createTextNode("\n"));
+                    $methods->appendChild($doc->createTextNode("\n"));
                     $topLevels       = $doc->getElementsByTagName('methods');
                 }
             } else {
@@ -294,7 +300,11 @@ class UpdateMethods
                 // If there is no constructor section, create one.
                 if ($topLevels->length == 0) {
                     $constructors   = $doc->createElement('constructors');
-                    $doc->getElementsByTagName('classentry')->item(0)->appendChild($constructors);
+                    $classentry     = $doc->getElementsByTagName('classentry')->item(0);
+                    $classentry->appendChild($doc->createTextNode("\n\n "));
+                    $classentry->appendChild($constructors);
+                    $classentry->appendChild($doc->createTextNode("\n"));
+                    $constructors->appendChild($doc->createTextNode("\n"));
                     $topLevels       = $doc->getElementsByTagName('constructors');
                 }
             }
