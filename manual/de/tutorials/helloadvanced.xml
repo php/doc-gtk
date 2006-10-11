@@ -1,0 +1,211 @@
+<chapter id="tutorials.helloadvanced">
+<!-- $Revision: 1.1 $ -->
+ <title>Hallo Welt (Fortgeschritten)</title>
+
+ <simpara>
+  Diese Übung behandelt einige fortgeschrittenere
+  Funktionalitäten als die erste Hallo Welt Übung.
+  Hier erstellen wir ein Loginfenster, in dem der
+  Benutzer seinen Benutzernamen und sein Passwort 
+  eingeben kann. Wenn der Benutzer den Loginknopf
+  drückt, werden die Textfelder überprüft, und eine
+  Fehlermeldung wird angezeigt wenn der Benutzer
+  seinen Namen oder sein Passwort vergessen hat.
+ </simpara>
+
+ <para>
+  Hier ein Screenshot, wie das Programm aussieht, wenn
+  es fertig ist:
+  <graphic fileref="&directory.images;/tutorials/helloadvanced.png"/>
+ </para>
+
+ <para>
+  Zuerst erstellen wir ein Fenster, setzen den Fensternamen und sagen
+  der Hauptschleife, dass sie das beendet werden soll, wenn das Fenster
+  zerstört wird - Sie kennen das bereits aus der ersten Übung:
+  <informalexample>
+   <programlisting role="php"><![CDATA[
+$wnd = new GtkWindow();
+$wnd->set_title('Login');
+$wnd->connect_simple('destroy', array('gtk', 'main_quit'));
+]]></programlisting>
+  </informalexample>
+ </para>
+
+ <para>
+  Die nächste Aufgabe ist das Erstellen aller Elemente, die wir
+  für diesen Dialog brauchen werden: Zuerst zwei Texteingabe
+  Felder für den Benutzernamen und das Passwort:
+  <informalexample>
+   <programlisting role="php"><![CDATA[
+$txtUsername = new GtkEntry();
+$txtPassword = new GtkEntry();
+]]></programlisting>
+  </informalexample>
+  Anschließend wollen wir den Benutzer wissen lassen, welches
+  Textfeld für das Passwort und den Benutzernamen ist, deshalb
+  brauchen wir einige aussagekräftige Labels:
+  <informalexample>
+   <programlisting role="php"><![CDATA[
+//The second parameter says that the underscore should be parsed as underline
+$lblUsername = new GtkLabel('_Username', true);
+$lblPassword = new GtkLabel('_Password', true);
+]]></programlisting>
+  </informalexample>
+  Und zuletzt brauchen wir zwei Knöpfe: Einen für das Anmelden, und einen,
+  um den Vorgang abzubrechen:
+  <informalexample>
+   <programlisting role="php"><![CDATA[
+$btnLogin    = new GtkButton('_Login');
+$btnCancel   = new GtkButton('_Cancel');
+]]></programlisting>
+  </informalexample>
+  Sie haben vielleicht gemerkt, dass der <classname>GtkLabel</classname> 
+  Konstruktor einen zweiten Parameter übergeben bekommt, um festzulegen,
+  dass der Unterstrich <literal>_</literal> als Unterstreichung des nächsten
+  Zeichens gezeigt werden soll, aber das wird nicht im <classname>GtkButton</classname>
+  Konstruktor erledigt: Der Button-Konstruktor macht dies automatisch,
+  während der Label Konstruktor dies nicht tut. Dieses Verhalten
+  mag Ihnen seltsam erscheinen, aber die Wahrscheinlichkeit, dass Sie
+  ein "Mnemonic Label" auf einem Button haben möchten ist viel höher,
+  als dass sie das bei einem normalen Label wollen.
+ </para>
+
+ <para>
+  Nun müssen die Labels wissen, was für ein Widget aktiviert
+  werden muss, wenn sie über den Mnemonic aktiviert werden.
+  Dies wird auf folgende Weise gemacht:
+  <informalexample>
+   <programlisting role="php"><![CDATA[
+$lblUsername->set_mnemonic_widget($txtUsername);
+$lblPassword->set_mnemonic_widget($txtPassword);
+]]></programlisting>
+  </informalexample>
+  Desweiteren, müssen wir festlegen, welche Aktion ausgeführt werden
+  sollen, wenn die Knöpfe gedrückt werden.
+  Der Abbrechen Knopf soll das Fenster zerstören (und somit die Applikation
+  beenden) und der Loginknopf soll die Textfelder auf Korrektheit überprüfen
+  und weitere Aktionen ausführen:
+  <informalexample>
+   <programlisting role="php"><![CDATA[
+$btnCancel->connect_simple('clicked', array($wnd, 'destroy'));
+$btnLogin ->connect_simple('clicked', 'login', $wnd, $txtUsername, $txtPassword);
+]]></programlisting>
+  </informalexample>
+  Wir übergeben die drei Widgets <varname>$wnd</varname>,
+  <varname>$txtUsername</varname> und <varname>$txtPassword</varname>
+  als zusätzliche Parameter an die (noch zu definierende)
+  <literal>login</literal> Funktion, weil wir sie dort brauchen werden:
+  Um die Werte der Textfelder zu bekommen, und um das Fenster wenn alles 
+  in Ordnung ist zu zerstören/verbergen.
+ </para>
+
+ <para>
+  Da wir jetzt alle Widgets, die wir brauchen, haben, werden sie dem
+  Fenster hinzugefügt. Da <classname>GtkWindow</classname> ein
+  binärer Container ist, kann es nur ein einzelnes Widget beihalten.
+  Deshalb brauchen wir einen Container, der mehrere Widgets beinhalten
+  kann und auch unsere Elemente schön anordnen kann.
+  Die Entscheidung fällt auf <classname>GtkTable</classname>, weil es
+  uns ermöglicht, die Labels in eine Spalte zu packen, und die
+  Eingabefelder in der nächsten Spalte:
+  <informalexample>
+   <programlisting role="php"><![CDATA[
+$tbl = new GtkTable(3, 2);
+$tbl->attach($lblCredit, 0, 2, 0, 1);
+$tbl->attach($lblUsername, 0, 1, 1, 2);
+$tbl->attach($txtUsername, 1, 2, 1, 2);
+$tbl->attach($lblPassword, 0, 1, 2, 3);
+$tbl->attach($txtPassword, 1, 2, 2, 3);
+]]></programlisting>
+  </informalexample>
+  (Die <varname>$lblCredit</varname> Variable ist einfach ein Label mit 
+  einer Nachricht). Die Buttons erhalten ihre eigene
+  <classname>GtkHButtonBox</classname>, weil diese Klasse es einem erlaubt,
+  mehrere Knöpfe auf einfache Weise ansprechend anzuordnen:
+  <informalexample>
+   <programlisting role="php"><![CDATA[
+$bbox = new GtkHButtonBox();
+$bbox->set_layout(Gtk::BUTTONBOX_EDGE);
+$bbox->add($btnCancel);
+$bbox->add($btnLogin);
+]]></programlisting>
+  </informalexample>
+ </para>
+
+ <para>
+  Das Letzte am Layout ist das Hinzufügen der Tabelle und der Box
+  für die Knöpfe zum Fenster. Dies ist nicht direkt möglich, weil
+  <classname>GtkWindow</classname> ein <classname>GtkBin</classname>
+  ist und nur ein Widget beinhalten kann. Deshalb brauchen wir einen
+  anderen Container, diesmal eine <classname>GtkVBox</classname>:
+  <informalexample>
+   <programlisting role="php"><![CDATA[
+$vbox = new GtkVBox();
+$vbox->pack_start($tbl);
+$vbox->pack_start($bbox);
+]]></programlisting>
+  </informalexample>
+  Das war es, nun können wir das Fenster anzeigen:
+  <informalexample>
+   <programlisting role="php"><![CDATA[
+$wnd->add($vbox);
+$wnd->show_all();
+Gtk::main();
+]]></programlisting>
+  </informalexample>
+ </para>
+
+ <para>
+  Das Letze, was noch fehlt, ist die <literal>login</literal>funktion,
+  die aufgerufen wird, wenn the Benutzer den Loginknopf 
+  drückt. Sie soll die Werte des Benutzername- und Passwortfeldes
+  überprüfen: Wenn Ihre Länge 0 ist (der Benutzer hat nichts eingegeben),
+  wird eine Fehlermeldung angezeigt. Wenn alles in Ordnung ist, wird
+  das Fenster zerstört und das Programm könnte mit dem Laden des
+  Hauptfensters fortfahren.
+ </para>
+
+ <para>
+  Das Erhalten des Textes aus den Widgets ist sehr einfach, wir
+  benutzten nur die
+  <function class="GtkEntry">get_text</function>-Methode
+  von <classname>GtkEntry</classname>:
+  <informalexample>
+   <programlisting role="php"><![CDATA[
+$strUsername = $txtUsername->get_text();
+$strPassword = $txtPassword->get_text();
+]]></programlisting>
+  </informalexample>
+  Die Überprufung läuft über die normale php-<literal>strlen</literal>-Funktion.
+  Falls ein Fehler auftritt, wollen wir eine kleine Messagebox mit einer
+  kurzen Nachricht anzeigen.
+  <classname>GtkMessageDialog</classname> ist eignet sich hervorragend 
+  dazu, da es automatisch die Symbole und Knöpfe erstellt (Ok, Ja/Nein):
+  <informalexample>
+   <programlisting role="php"><![CDATA[
+$dialog = new GtkMessageDialog($wnd, Gtk::DIALOG_MODAL, Gtk::MESSAGE_ERROR, Gtk::BUTTONS_OK, $errors);
+$dialog->set_markup("The following errors occured:\r\n<span foreground='red'>" . $errors . "</span>");
+$dialog->run();
+$dialog->destroy();
+]]></programlisting>
+  </informalexample>
+ </para>
+
+ <para>
+  Zuletzt stellen Sie sicher, dass Sie die login Funktion vor(!) der main Schleife
+  einfügen und führen Sie es aus.
+ </para>
+
+ <example>
+  <title>Das ganze Programm</title>
+  <programlisting role="php">
+   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
+               href="&directory.examples;/tutorials/helloadvanced/helloadvanced.phpw"
+               parse="text">
+    <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+   </xi:include>
+  </programlisting>
+ </example>
+
+</chapter>

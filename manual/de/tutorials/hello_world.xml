@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- $Revision: 1.1 $ -->
+<chapter id="tutorials.helloworld">
+ <title>Hallo Welt (Grundlage)</title>
+
+  <simpara>
+   Wenn Sie anfangen, eine Programmiersprache zu erlernen, ist das erste
+   Programme, das Sie schreiben ein 'Hallo Welt' Programm. Um uns
+   allen anderen anzupassen, wird die erste Übung in diesem Handbuch ein
+   'Hallo Welt' Programm sein!
+  </simpara>
+  <simpara>
+   Überall in den Übungen setzten wir ein angemessenes Wissen von PHP voraus.
+   Der Aufbau der Übungen verleiht dem Leser sowohl das Wissen, wie man PHP-GTK 
+   benutzt, als auch das Wissen über die Technik im Hintergrund.
+  </simpara>
+  <simpara>
+   In dieser Übung erstellen wir ein einfaches Fenster, in dem der Text "Hallo Welt!"
+   enthalten sein wird.
+  </simpara>
+  <simpara>
+   Wir beginnen mit der Auflistung des Programms und erklären anschließend jede
+   Zeile des Programms, und geben einen Überblick zur Funktionsweise einer einfachen
+   PHP-GTK-Anwendung.
+  </simpara>
+
+
+  <example>
+   <title>Ein einfaches "Hallo Welt"-Beispiel</title>
+   <programlisting role="php">
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+     href="&directory.examples;/tutorials/helloworld/helloworld.phpw" parse="text">
+     <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+    </xi:include>
+   </programlisting>
+  </example>
+
+  <para>
+   Kopieren Sie nun den Quelltext in einen Texteditor und speichern sie ihn als
+   <filename>hello.phpw</filename>. Anschließend öffnen Sie eine Konsole und starten
+   das Skript durch <command>php hello.phpw</command>. Es erscheint ein Fenster mit
+   dem Titel "Hello world", das nichts außer dem Text
+   "Just wanted to say 'Hello world!'" enthält.
+  </para>
+
+
+  <example>
+   <title>Überprüfen, ob PHP-GTK vorhanden ist</title>
+   <programlisting role="php"><![CDATA[if (!class_exists('gtk')) {
+    die("Please load the php-gtk2 module in your php.ini\r\n");
+}]]></programlisting>
+  </example>
+
+  <para>
+   Wir stellen sicher, dass PHP-GTK vorhanden ist, in dem wir überprüfen, ob 
+   die Klasse <literal>gtk</literal> existiert. Im Gegensatz zu PHP 4 und PHP-GTK 1,
+   sollten Sie nicht versuchen das PHP-GTK Modul durch
+   <ulink url="http://www.php.net/dl">dl()</ulink> zu laden.
+   Dies wurde in PHP 5 verworfen, und sollte nicht in neu geschriebenem Code
+   verwendet werden. Alles, was wir tun können ist die Ausgabe einer Nachricht, dass
+   das Modul nicht vorhanden ist und vom Benutzer aktiviert werden soll.
+  </para>
+
+
+  <example>
+   <title>Ein Fenster erstellen</title>
+   <programlisting role="php"><![CDATA[$wnd = new GtkWindow();]]></programlisting>
+  </example>
+
+  <para>
+   Das Erstellen eines neuen <link linkend="gtk.gtkwindow">window</link> Widgets
+   ist genau so leicht, wie die Instanzierung eines neuen Objekts: der Variable
+   <literal>$wnd</literal> wird das neue Objekt zugewiesen. Falls Sie schon mit
+   PHP 4 und PHP-GTK 1 programmiert hatten, werden Sie das kaufmännische Und
+   <literal>&amp;</literal> vor <literal>new</literal> vermissen. Dies war in
+   PHP 4 erforderlich, sollte aber nicht mehr in PHP 5 benutzt werden,
+   weil Referenzen automatisch erstellt werden.
+  </para>
+
+
+  <example>
+   <title>Setzen des Fensternamens</title>
+   <programlisting role="php"><![CDATA[$wnd->set_title('Hello world');]]></programlisting>
+  </example>
+
+  <simpara>
+   Um die Identifizierung des Fensters in der Fensterleiste leichter zu ermöglichen,
+   setzen wir einen Fensternamen:
+   Ein ganz einfacher Aufruf einer Objektmethode.
+  </simpara>
+
+
+  <example>
+   <title>Ein sauberes Beenden ermöglichen</title>
+   <programlisting role="php"><![CDATA[$wnd->connect_simple('destroy', array('gtk', 'main_quit'));]]></programlisting>
+  </example>
+
+  <para>
+   Dies ist der wirklich erste interessante Teil des Quelltexts: Das
+   <signalname class="GtkObject">destroy</signalname> Signal wird
+   an die statische <link linkend="gtk.method.main_quit">Gtk::main_quit</link> 
+   Methode verbunden. Es sagt einfach zu GTK, dass es die main Schleife
+   verlassen soll, wenn das Fenster geschlossen/zerstört wird.
+   (Die Main-Schleife wird in eingen Abschnitten weiter unten erklärt.)
+  </para>
+
+
+  <example>
+   <title>Ein Label zur Darstellung des Texts erstellen</title>
+   <programlisting role="php"><![CDATA[$lblHello = new GtkLabel("Just wanted to say\r\n'Hello world!'");]]></programlisting>
+  </example>
+
+  <para>
+   Wie auch zuvor, erstellen wir ein neues Widget. Diesmal wollen wir einen
+   kleinen Text darstellen, und <classname>GtkLabel</classname> erweist sich
+   als perfekt für diese Aufgabe.
+  </para>
+
+
+  <example>
+   <title>Das Label zum Fenster hinzufügen</title>
+   <programlisting role="php"><![CDATA[$wnd->add($lblHello);]]></programlisting>
+  </example>
+
+  <simpara>
+   Jetzt sagen wir dem Fenster, dass das Label direkt hinzugefügt werden soll.
+  </simpara>
+
+
+  <example>
+   <title>Das Fenster sichtbar machen</title>
+   <programlisting role="php"><![CDATA[$wnd->show_all();]]></programlisting>
+  </example>
+
+  <para>
+   Bis jetzt sehen Sie nichts auf Ihrem Bildschirm. Um das Fenster
+   sichtbar zu machen, müssen Sie die <function class="GtkWidget">show</function>-
+   Methode aufrufen. Das macht das Fenster sichbar, aber nicht das Label - wir müssten
+   auch die <function class="GtkWidget">show</function>-Methode für das
+   Label aufrufen. Das ist sehr ungünstig, wenn Sie mehrere Widgets, zum
+   Beispiel Knöpfe, Checkboxen und andere im Fenster haben:
+   <function class="GtkWidget">show_all</function> übernimmt das Sichtbarmachen
+   des Fensters und aller Kindelemente.
+  </para>
+
+
+  <example>
+   <title>Starten der Hauptschleife</title>
+   <programlisting role="php"><![CDATA[Gtk::main();]]></programlisting>
+  </example>
+
+  <para>
+   Nachdem alles eingestellt wurden, müssen wir sicherstellen, dass das
+   Fenster offen bleibt und auf alle Benutzerinteraktionen reagiert.
+   Ein normales PHP Skript würde zu Ende sein und an dieser Stelle stoppen,
+   aber wir wollen es laufen lassen: Dazu muss die main Schleife gestartet
+   werden. Sie sorgt dafür, dass die Applikation ausgeführt wird und auf
+   Benutzerereignisse wartet. Wenn Ereignisse auftreten, leitet es sie
+   an die entsprechenden Callbacks.
+  </para>
+
+
+ <sect1 id="tutorials.helloworld.futherreading">
+  <title>Literaturhinweise</title>
+  <para>
+   Nachdem Sie nun Ihre erste PHP-GTK 2 Applikation erstellt haben, wollen 
+   Sie vielleicht ein komplexeres Layout erstellen. Um das Grundlegende
+   zu lernen, schauen Sie sich die
+   <link linkend="tutorials.packing">Verschachtelungsübung</link> an.
+  </para>
+ </sect1>
+
+</chapter>
