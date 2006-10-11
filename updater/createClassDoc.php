@@ -1,6 +1,6 @@
 <?php
 /**
-for line in `cat missing`; do line2=`echo $line | tr [A-Z] [a-z]`; php createMissingClassDocs.php $line > $line2.xml; done
+for line in `cat missing`; do line2=`echo $line | tr [A-Z] [a-z]`; php createClassDoc.php $line > $line2.xml; done
 */
 if ($argc != 2) {
     die('Please specify the classname to create the doc for.' . "\n");
