@@ -7,7 +7,7 @@
                 version='1.0'>
 
 <!-- ********************************************************************
-     $Id: synop.xsl,v 1.8 2006-10-11 16:34:34 cweiske Exp $
+     $Id: synop.xsl,v 1.9 2006-10-12 20:23:58 scottmattocks Exp $
      ********************************************************************
 
      This file is part of the XSL DocBook Stylesheet distribution.
@@ -46,7 +46,6 @@
    <xsl:text>, </xsl:text>
   </xsl:if>
   <xsl:if test="not(text() = 'void')">
-<xsl:message>!<xsl:value-of select="parameter/text()"/>!</xsl:message>
    <xsl:choose>
     <xsl:when test="$funcsynopsis.style='ansi'">
      <xsl:apply-templates/>
