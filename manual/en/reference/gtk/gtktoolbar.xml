@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- $Revision: 1.11 $ -->
+<!-- $Revision: 1.12 $ -->
 <classentry id="gtk.gtktoolbar">
  <classmeta>
   <classtitle>GtkToolbar</classtitle>
@@ -777,19 +777,28 @@
     </para>
    </desc>
   </method>
- <method id="gtk.gtktoolbar.method.get_toolbar_style">
-    <funcsynopsis>
+  <method id="gtk.gtktoolbar.method.get_toolbar_style">
+   <funcsynopsis>
     <funcprototype>
-     <funcdef> <function>get_toolbar_style</function></funcdef>
-     
+     <funcdef>
+      <enumname>GtkToolbarStyle</enumname> 
+      <function>get_toolbar_style</function>
+     </funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the <enumname>GtkToolbarStyle</enumname> for the toolbar.
    </shortdesc>
    <desc>
-
+    <para>
+     Returns the <enumname>GtkToolbarStyle</enumname> for the toolbar. The 
+     toolbar style determines if the toolbar items show text, images or both.
+    </para>
+    <para>
+     &seealso;
+     <function classname="GtkToolbar">set_toolbar_style</function>
+    </para>
    </desc>
   </method>
 
@@ -797,14 +806,23 @@
     <funcsynopsis>
     <funcprototype>
      <funcdef> <function>set_toolbar_style</function></funcdef>
-     <paramdef><parameter>style</parameter></paramdef>
+     <paramdef>
+      <enumname>GtkToolbarStyle</enumname> <parameter>style</parameter>
+     </paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the <enumname>GtkToolbarStyle</enumname> for the toolbar.
    </shortdesc>
    <desc>
-
+    <para>
+     Sets the <enumname>GtkToolbarStyle</enumname> for the toolbar. The
+     toolbar style determines if the toolbar items show text, images or both.
+    </para>
+    <para>
+     &seealso;
+     <function classname="GtkToolbar">get_toolbar_style</function>
+    </para>
    </desc>
   </method>
 
