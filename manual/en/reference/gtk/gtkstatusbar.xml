@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- $Revision: 1.12 $ -->
+<!-- $Revision: 1.13 $ -->
 <classentry id="gtk.gtkstatusbar">
  <classmeta>
   <classtitle>GtkStatusbar</classtitle>
@@ -166,7 +166,8 @@
     <para>
      <function class="GtkStatusbar">push</function> returns an integer
      identifier for the message that is added. This value can be used to
-     remove the message using <function class="GtkStatusbar">remove</function>.
+     remove the message using <function
+     class="GtkStatusbar">remove_message</function>.
     </para>
     <para>
      &seealso;
@@ -175,8 +176,6 @@
     </para>
    </desc>
   </method>
-
-  
 
   <method id="gtk.gtkstatusbar.method.set_has_resize_grip">
    <funcsynopsis>
@@ -210,24 +209,30 @@
    </desc>
   </method>
 
- <method id="gtk.gtkstatusbar.method.remove_message">
-    <funcsynopsis>
+  <method id="gtk.gtkstatusbar.method.remove_message">
+   <funcsynopsis>
     <funcprototype>
      <funcdef> <function>remove_message</function></funcdef>
-     
-     <paramdef><parameter>context_id</parameter></paramdef>
-     <paramdef><parameter>message_id</parameter></paramdef>
+     <paramdef>int <parameter>context_id</parameter></paramdef>
+     <paramdef>int <parameter>message_id</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Removes a message from the stack.
    </shortdesc>
    <desc>
-
+    <para>
+     Removes the message with the given <parameter>context_id</parameter> and
+     <parameter>message_id</parameter>.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkStatusbar">push</function>,
+     <function class="GtkStatusbar">pop</function>
+    </para>
    </desc>
   </method>
-
-  </methods>
+ </methods>
 
  <signals>
 
