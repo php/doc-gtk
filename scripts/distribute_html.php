@@ -6,7 +6,7 @@
 * subdirs for: atk, gdk, gtk, pango, tutorials
 */
 
-$prefixes = array('atk','gdk','gtk','pango','tutorials');
+$prefixes = array('atk','gdk', 'glade', 'gtk', 'pango', 'mozembed', 'sourceview', 'tutorials');
 
 if ($GLOBALS['argc'] < 1) {
     exit("Purpose: Distribute the HTML files in the XSLT generated manual.\r\n"
