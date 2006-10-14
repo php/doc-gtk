@@ -1,14 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- $Revision: 1.1 $ -->
+<!-- $Revision: 1.2 $ -->
 <classentry id="glade.gladexml">
  <classmeta>
   <classtitle>GladeXML</classtitle>
   <classparent>GObject</classparent>
   <shortdesc>
-   
+   Represents an instantiation of an XML interface description. 
   </shortdesc>
   <desc>
-   
+   <para>
+    <literal>Glade</literal> is an user builder for Gtk+. You can rapidly
+    create user interfaces in a WYSIWYG fashion using the tool, which 
+    generates an XML representation of that interface in the form of a 
+    <literal>.glade</literal>
+   </para>
+   <para>
+    This object represents an instantiation of that <literal>.glade</literal>.
+    You can use this object in your program to individually handle your
+    widgets.
+   </para>
+   <para>
+    It is also possible to describe signal handlers using Glade. If you have
+    done so, you may use the
+    <function class="GladeXML">signal_autoconnect</function> method to
+    automatically connect all the widgets to their respective handlers. If
+    your handlers are part of classes, then use the
+    <function class="GladeXML">signal_autoconnect_instance</function> method.
+   </para>
+   <para>
+    Do have a look at
+    <link linkend="tutorials.helloglade">Glade Tutorial</link> for more on
+    how to use the Glade extension.
+   </para>
   </desc>
  </classmeta>
 
@@ -24,7 +47,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    
+    FIXME.
    </shortdesc>
    <desc>
     <simpara>
@@ -32,7 +55,6 @@
     </simpara>
    </desc>
   </constructor>
-
 </constructors>
 
 
@@ -41,13 +63,21 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>get_widget</function></funcdef>
-     <paramdef><parameter>name</parameter></paramdef>
+     <paramdef>string <parameter>name</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    
+    Returns a <classname>GtkWidget</classname> object corresponding to the
+    given name.
    </shortdesc>
    <desc>
+    <para>
+     Use this method to retrieve a widget object corresponding to a particular
+     name from the <classname>GladeXML</classname> description. This is
+     probably the most frequently used function, since you need the widget
+     object to do anything with the widget (connect signals, modify
+     properties etc.) after you have loaded the description.
+    </para>
    </desc>
   </method>
 
@@ -55,13 +85,18 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>get_widget_prefix</function></funcdef>
-     <paramdef><parameter>prefix</parameter></paramdef>
+     <paramdef>string <parameter>prefix</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    
+    Returns a set of widgets whose names begin with the provided string. 
    </shortdesc>
    <desc>
+    <para>
+     Use this method to get an array of widget objects that correspond to
+     names beginning with the provided string from the
+     <classname>GladeXML</classname> object.
+    </para>
    </desc>
   </method>
 
@@ -73,9 +108,19 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    
+    Resolves relative pathnames specified by a file. 
    </shortdesc>
    <desc>
+    <para>
+     Use this method to get an absolute pathname corresponding to a
+     relative pathname specified by the <literal>filename</literal> passed.
+     The method uses the directory of the XML file with which the
+     <classname>GladeXML</classname> object is associated, as the base.
+    </para>
+    <para>
+     If <literal>filename</literal> is an absolute pathname, then the
+     original filename is returned.
+    </para>
    </desc>
   </method>
 
@@ -87,9 +132,21 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    
+    Automatically connects all specified signal handlers to their corresponding
+    functions.
    </shortdesc>
    <desc>
+    <para>
+     If you have specified signal handlers in your <literal>.glade</literal>
+     file; then use this method to automatically connect all your signals to 
+     functions with the same name as the signal handlers specified.
+    </para>
+    <para>
+     Note that all your functions must be part of the global namespace for this
+     to work. If you intend to use methods that are part of a class as signal
+     handlers, then use
+     <function class="GladeXML">signal_autoconnect_instance</function> instead.
+    </para>
    </desc>
   </method>
 
@@ -101,9 +158,20 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    
+    Automatically connects all specified signal handlers to their corresponding
+    methods of a class.
    </shortdesc>
    <desc>
+    <para>
+     If you have specified signal handlers in your <literal>.glade</literal>
+     file; then use this method to automatically connect all your signals to 
+     methods with the same name as the signal handlers specified, and belonging
+     to the specified class object.
+    </para>
+    <para>
+     You must pass an instance of the class to which the methods you intend
+     to connect belong as a parameter to this method.
+    </para>
    </desc>
   </method>
 
@@ -115,7 +183,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    
+    FIXME 
    </shortdesc>
    <desc>
    </desc>
