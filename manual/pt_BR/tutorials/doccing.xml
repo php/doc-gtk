@@ -1,0 +1,791 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- EN-Revision: 1.15 Maintainer: fernandoc Status: ready -->
+<chapter id="tutorials.doccing">
+ <title>A documentação do PHP-GTK 2</title>
+
+ <sect1>
+  <title>Sobre este Tutorial e o Manual</title>
+  <simpara>
+   Este tutorial explica como obter, compilar e escrever ou extender a
+   documentação oficial do PHP-GTK 2- isto é, o manual
+   que você esta lendo atualmente.
+  </simpara>
+  <simpara>
+   Se você simplesmente quer ler o manual, este provavelmente não é
+   de nenhum interesse para você.
+  </simpara>
+  <para>
+   A fonte desta documentação, em conjunto com o fonte do PHP-GTK 2 e
+   qualquer outra coisa que venha de baixo do guarda-chuva do PHP, reside no
+   servidor CVS do projeto PHP em 
+   <ulink url="http://cvs.php.net">cvs.php.net</ulink>. É
+   baseado num dialeto do XML chamado <emphasis>DocBook</emphasis>, o qual 
+   foi criado para ser usado em livros e outras formas de documentação tecnica.
+   A razão pela qual a documentação do PHP-GTK não pode aderir estritamente a sintaxe do DocBook
+   é por causa de uma das suas maiores fraquesas: não há sintaxe do DocBook para
+   suportar documentação de linguagens orientadas a objeto. Nós tivemos que desenvolver
+   o nosso próprio. Isto, por sua vez, significa que o grupo da documentação do PHP-GTK também
+   precisou adaptar outros mecanismos do php.net - como o livedocs e versões .chm
+   - especificamente para funcionar com a sintaxe do php-gtk-doc, aonde nós poderiamos
+   utilizar estas ferramentas sem modificações se nós pudessemos usar o XML puro do DocBook.
+  </para>
+  <para>
+   Apesar disso, existem vários beneficios em basear o manual em DocBook.
+   O documento (todo o manual) pode ser disribuído em vários arquivos,
+   assim os arquivos são peças manipuláveis e várias pessoas podem trabalhar
+   ao mesmo tempo em várias partes dele. Além disso, os arquivos XML base podem ser convertidos em ]
+   vários formatos: HTML puro para leitura offline, código PHP (como você pode ver
+   no manual online), arquivos <literal>.chm</literal> do Windows, e
+   arquivos <literal>.pdf</literal>, para nomear alguns poucos.
+  </para>
+  <para>
+   A grande disvantagem e que você precisa compilar o XML dos fontes
+   no formato desejadp, o que pode levar algum tempo. Este manual 
+   consiste em mais de 300 arquivos únicos, e a versão compilda em HTML tem
+   mais de 3000 arquivos gerados. A compilação eva 10 minutos em um sistema 1.6GHz;
+   em um 400MHz é em torno de 40 a 45 minutos. Para combater este problema,
+   tem uma versão do manual em uma única pagina HTML,
+   <literal>bigmanual.html</literal>, a qual é construída em alguns poucos minutos
+   e pode se usada para descobrir qualquer erro de sintaxe nos arquivos fonte.
+  </para>
+ </sect1>
+
+ <sect1 id="tutorials.doccing.checkout">
+  <title>Obtendo, Atualizando e Compilando</title>
+
+  <sect2>
+   <title>Criando um ambiênte de construção</title>
+   <para>
+    Existem agora dois sistemas diferentes de construção para o módulo php-gtk-doc;
+    o padrão, usado no servidor e tento diversas opções para gerar,
+    e o alternativo, o qual atualmente apenas oferece a versão em Inglês
+    e a versão em multiplos arquivos HTML.
+   </para>
+   <para>
+    A vantagem principal do sistema alternativo é que ele faz ser possível
+    compilar o manual do PHP-GTK no windows sem instalar um emulador de Linux
+    como o <ulink url="http://www.cygwin.com/">cygwin</ulink>.
+    Você precisará, entretanto, várias versões nativas de 
+    <ulink url="http://unxutils.sourceforge.net/">Ferramentas Unix</ulink> para poder
+    criar um ambiênte para construi-lo. Instalar estas simplesmente significa
+    descompacta-las no seu diretório raíz, assim esta é uma opção fácil se você
+    não tem conectividade suficiente ou esta de outra maneira impedido de
+    instalar o cygwin em seu computador local.
+   </para>
+   <para>
+    Quanquel que seja a opção de construção que você escolha, você precisará ter instalado o 
+    <command>xsltproc</command> para processar as planilhas de estilo XSL. Num
+    sistema Linux, você pode instalar isto com o seu gerenciador de pacotes. Se você
+    esta trabalhando no ambiênte cygwin, você pode adiciona-lo atráves do mecanismo de
+    instalação do cygwin. Se você esta simplesmente usando o Windows, você pode copiar os binários do xsltproc
+    (você vao precisar dos pacotes iconv, zlib, libxml2 e libxslt) de
+    xmlsoft.org do contribuidor Igor Zlatkovic's
+    <ulink url="http://www.zlatkovic.com/libxml.en.html">pagina do projeto</ulink>
+    e discompactar no seu diretório raíz.
+   </para>
+
+   <note>
+    <para>
+     Existem outros processador XSLT por ai, mas já que nós achamos o xsltproc
+     por muito ser a alternativa mais rápida das disponíveis, as planilhas de estilo usadas
+     para gerar o manual do PHP-GTK 2 agora dependem inteiramente dele.
+    </para>
+   </note>
+  </sect2>
+
+  <sect2>
+   <title>Obtendo do CVS</title>
+   <para>
+    Antes que nós possamos modificar ou mesmo compilar o manual, nós precisamos
+    obter uma cópia do CVS. Para realizar isto, você precisa de um cliente CVS. Praticamente em
+    todos os sistemas Linux, a ferramenta de linha de comando <literal>cvs</literal> esta
+    instalada. Isto esta disponível também atráves do cygwin. No windows existem
+    clientes CVS nativos apontar-e-clicar disponíveis, como o 
+    <ulink url="http://www.tortoisecvs.org/">Tortoise CVS</ulink>.
+   </para>
+   <para>
+    Para obter uma copia dos documentos usando a ferramenta de linha de comando do <literal>cvs</literal>,
+    digite:
+    <command>cvs -d :pserver:cvsread@cvs.php.net:/repository co -P php-gtk-doc</command>
+   </para>
+   <para>
+    Se você já tem uma copia, você pode atualiza-la via:
+    <command>cvs -d :pserver:cvsread@cvs.php.net:/repository update -Pd php-gtk-doc</command>
+    (se você esta dentro do diretório php-gtk-doc, você pode (tem que) omitir a parte 
+    <literal>php-gtk-doc</literal>).
+   </para>
+   <para>
+    Para obter uma copia do módulo da documentação usando o TortoiseCVS: vá para
+    <literal>File/CVS checkout</literal> e prencha o formulário. O protocolo
+    é a opção <literal>Password server (:pserver)</literal>; o servidor é
+    <literal>cvs.php.net</literal>, e a pasta do repositório é
+    <literal>/repository</literal>. Se você tem uma conta de CVS, por favor use o seu
+    próprio nome de usuário; se não use <literal>cvsread</literal>; e o módulo, 
+    claro, é <literal>php-gtk-doc</literal>. Na versão atual do 
+    TortoiseCVS, os finais de linha são convertidos para o Windows por padrão; nós
+    não queremos isso em qualquer lugar do repositório, assim se você quer
+    enviar(commit) qualquer uma das suas modificações você deve ir em <literal>Options</literal>
+    e marcar a caixa que diz <literal>Use UNIX line endings</literal>.
+   </para>
+  </sect2>
+
+  <sect2>
+   <title>Compilando a Construção Padrão</title>
+   <para>
+    A partir da linha de comando, entre no diretório php-gtk-doc através do comando
+    <command>cd php-gtk-doc</command>. Digite <command>autoconf</command> para criar
+    o arquivo de configuração.
+   </para>
+   <para>
+    Existe suporte completo a internacionalização (i18n) neste sistema de construção,
+    com a configuração padrão sendo Inglês (en). Se você esta compilando para qualquer outra língua
+    que não seja o Inglês, você precisará definir na linha do configure
+    o código da língua para a língua que você quer, exemplo:
+    <command>./configure --with-lang=de</command>. Note que isto funciona apenas
+    se os arquivos base para a tradução em Alemão existirem!
+   </para>
+   <para>
+    Outra opção para o configure que você pode precisar usar é
+    <command>--with-php=PATH</command>, aonde <literal>PATH</literal> é o
+    caminho completo para o executável binário do PHP que você quer usar. Na maioria dos
+    casos o binário encontrado do PHP 4 ou PHP 5 automaticamente pelo autoconf estará bem
+    - mas ocasionalmente as pessoas tem configurações estranhas em seus sistema. Você realmente
+    deve usar o CLI para gerar o manual, a propósito, mas geralmente o CGI se arranja.
+   </para>
+   <para>
+    Você pode previnir as gerações em pedaços (<literal>html</literal>,
+    <literal>phpweb</literal>, <literal>test</literal>) de dizer a você
+    cada vez que eles escrevem um arquivo usando <command>--disable-output</command>.
+    Na teoria ao menos, isto deve tornar a geração mais rapida para estas versões.
+   </para>
+   <para>
+    Existe uma ultima opção de configuração, <command>--with-history</command>,
+    a qual você pode ou não tropeçar. è usada para definir um caminho a um diretório
+    externo contendo apenas <literal>manual/*</literal> (um snapshot
+    de <literal>php-gtk-doc/manual</literal>). Isto é usado apenas para
+    a opção <command>make updates</command>, a qual esta primariamente aqui para
+    gerar a lista de documentação atualizada no servidor. Você não vai precisar dela.
+   </para>
+   <para>
+    Finalmente, existe uma opção de estilo de saída. Escolher
+    <command>make bigmanual.html</command> irá dar a você um único, grande arquivo HTML
+    em menos de cinco minutos; <command>make text</command> irá fazer o
+    mesmo, mas irá também produzir uma copia do manual como um único arquivo de texto
+    ao final da execução. <command>make html</command> irá eventualmente
+    produzir multiplos arquivos HTML divididos em diretórios em conjunto com uma
+    copia do diretório <literal>images</literal>; <command>make phpweb</command> irá
+    resultar em uma copia do manual como ele parece no gtk.php.net. Por demanda
+    popular, também existe agora <command>make test id=ID</command>, aonde
+    <literal>ID</literal> é o id do manual para um componente, ex.
+    <literal>tutorials.helloadvanced</literal>
+    ou <literal>gtk.gtkwindow</literal>. Isto irá gerar o arquivo relevante -
+    e qualquer coisa abaixo dele na hierarquia - em um diretório chamado
+    <literal>testbuild</literal> ao invés de <literal>build</literal>.
+   </para>
+   <para>
+    Existem dois tipos de saída que é muito difícil que você vá precisar:
+    <command>make mtoc</command>, o qual cria uma tabela de conteúdo
+    em XML para leitura pelo computador, <command>make updates</command>, o qual é usado no
+    servidor do manual para gerar a lista com as atualizações do manual para a pagina em 
+    <ulink url="&url.phpgtk;">&url.phpgtk;</ulink>.
+   </para>
+   <para>
+    Outros formatos de saída podem se tornar disponíveis em um futuro proxímo.
+   </para>
+  </sect2>
+
+  <sect2>
+   <title>Compilando o metodo alternativo</title>
+   <para>
+    A partir da linha de comando, mude para o diretório php-gtk-doc através do comando
+    <command>cd php-gtk-doc</command>. Agora configure alguns arquivos
+    basicos: <command>./runfirst.sh</command> (ou
+    <command>sh ./runfirst.sh</command> se você esta trabalhando dentro do Windows). O
+    <literal>runfirst</literal>-script apenas deve ser chamado novamente somente se
+    arquivos completamente novos forem adicionados ao manual, ou se a data de geração
+    preceisa ser atualizada. Assim se você quer compilar o manual em uma base diária,
+    você precisará fazer isso todas as vezes.
+   </para>
+   <para>
+    Vamos criar o manual em sí: primeiro você deve entender que o
+    manual do php-gtk existe em diversas línguas, em adição aos
+    diversos formatos mencionados anteriormente. Assim ao compilar você precisa
+    qual manual você quer compilar. A língua é determinada
+    como um código de duas letras, como <literal>en</literal> para
+    Inglês, <literal>de</literal> para Alemão e assim por diante. O tipo
+    é um de <literal>html</literal> para a documentação HTML normal
+    que você pode copiar de <ulink url="&url.phpgtk;">gtk.php.net</ulink>,
+    <literal>phpweb</literal> para gerar os arquivos como a documentação online 
+    no site do PHP-GTK, ou <literal>test</literal> se você quer
+    compilar uma parte dos arquivos apenas.
+   </para>
+   <para>
+    Assim nós chamamos <command>./gen_manual.sh &lt;language&gt; &lt;type&gt;</command>,
+    por exemplo <command>./gen_manual.sh en html</command>. Você verá as
+    linhas fluindo no terminal; vá em algum lugar e volte em dez
+    minutos - levará algum tempo. Os arquivos serão gerados no
+    diretório <filename>build/&lt;language&gt;/&lt;type&gt;/</filename>,
+    em nosso caso <filename>build/en/html/</filename>
+   </para>
+  </sect2>
+
+  <sect2>
+   <title>Livedocs</title>
+   <para>
+    Se você é um editor e apenas quer testar se a sessão que você
+    recem escreveu esta coreta e aparece como o intencionado no html, você pode chamar
+    <command>./gen_manual.sh &lt;language&gt; test &lt;id&gt;</command>,
+    como em <command>./gen_manual.sh en test gtk.gtkiconview</command>.
+    Isto irá ativar um modo especial no qual o manual será reduzido a
+    uma versão minima contento apenas as coisas mais necessárias
+    para compilar esta pagina(id) em especial. Entretanto, este script não
+    é perfeito e pode(atualmente) gerar arquivos de referência, e neste muitos
+    links não funcionam.
+   </para>
+
+   <para>
+    Se você tem um servidor Apache com o PHP instalado, você pode usar o livedocs:
+    Abra o arquivo <filename>live.php</filename> em seu browser (no servidor web,
+    não no diretório local em sí!) e navegue através do manual - as paginas
+    são criadas de acordo com a demanda, na maioria das vezes levando de 1 a 2 segundos. 
+   </para>
+  </sect2>
+ </sect1>
+
+ <sect1 id="tutorials.doccing.translating">
+  <title>Traduzindo o Manula</title>
+  <para>
+   Este capitulo lida com a tradução da documentação do PHP-GTK 2.
+   Traduzir a documentação é o processo de pegar a documentação
+   anteriormente escrita em Inglês e rescrever em outra língua.
+  </para>
+
+  <sect2>
+   <title>Começando</title>
+   <simpara>
+    Congratulações! Lendo este tutorial, você já esta no caminho correto para
+    traduzir a documentação. Lendo este tutorial (todo o tutorial 
+    &quot;Documentação do PHP-GTK 2&quot;, não apena esta sessão) é
+    o primeiro passo para se envolver com os esforços da tradução. Através 
+    desta sessão do tutorial, sempre que você ver <literal>lang</literal>
+    você deve substitui-lo com a abreviação de duas letras(ou quatro em alguns casos)
+    para a língua na qual você esta planejando 
+    traduzir a documentação.
+   </simpara>
+   <para>
+    Uma vez que você tenha terminado de ler este tutorial, existem alguns poucos
+    que precisam ser traduzidos para que a documentação possa ser gerada de maneira apropriada
+    e o ínicio da documentação para a sua língua se tornar disponível:
+    <itemizedlist>
+     <listitem>manual/<literal>lang</literal>/preface.xml</listitem>
+     <listitem>manual/<literal>lang</literal>/bookinfo.xml</listitem>
+     <listitem>manual/<literal>lang</literal>/language-defs.ent</listitem>
+     <listitem>stylesheets/common/<literal>lang</literal>.xml</listitem>
+    </itemizedlist>
+    Estes quatro arquivos provem o básico para a documentação assim como uma lista
+    de palavras e frases usadas de modo comum.
+   </para>
+   <para>
+    Uma vez que estes arquivos sejam traduzidos, eles devem ser enviados por email para
+    <ulink url="mailto:php-gtk-doc@lists.php.net">lista de email do php-gtk-doc</ulink>.
+    Um membro da equipe de documentação irá conferir os arquivos para
+    se certificar que eles funcionam de maneira adequada com o sistema de geração. A equipe de documentação
+    irá conferir os seus arquivos e avisar a você se tudo esta correto tão
+    rápido quanto eles possam.
+    <note>
+     Ao enviar arquivos para a lista de email, renomeie language-defs.ent
+     para language-defs.ent.txt. Isto irá evitar que o servidor de
+     email ignore o arquivo.
+    </note>
+   </para>
+  </sect2>
+  <sect2>
+   <title>Traduzindo os arquivos.Translating Files</title>
+   <para>
+    Uma vez que estes quatro arquivos base sejam traduzidos o próximo passo
+    é traduzir os outros arquivos para prover algum conteúdo para a nova versão da língua.
+    Antes que uma nova versão de uma língua se torne disponível, deve existir
+    conteúdo suficiente para qualquer um que queira ler a nova versão. Sendo assim,
+    uma versão traduzida não estará disponível até que tenha pelo mínimo
+    três tutoriais traduzidos. Um bom lugar para começar e este tutorial.
+   </para>
+   <para>
+    Se três tutoriais já estiverem traduzidos, sinta-se a vontade para
+    traduzir qualquer outro arquivo na documentação.
+   </para>
+  </sect2>
+  <sect2>
+   <title>Submetendo os arquivos traduzidos</title>
+   <para>
+    A fonte da documentação é controlada com o CVS. Enquanto qualquer um pode
+    obter a documentação nem todos podem gravar as mudanças. Antes de ser dado
+    permissão para gravar os arquivos diretamente a alguém, ele deve passar por 
+    um pequeno período probatório. Durante este período, todos os arquivos traduzidos
+    devem ser enviados por email para <ulink url="mailto:php-gtk-doc@lists.php.net">
+    lista de email do php-gtk-doc</ulink>. Um membro da equipe de documentação irá revisar as 
+    suas modificações e enviar os arquivos para o CVS por você. Após você enviar as suas 
+    modificações por email algumas vezes, a equipe de documentação irá solicitar que sejam 
+    dados poderes você para gravar os arquivos por sí mesmo.
+   </para>
+  </sect2>
+ </sect1>
+
+ <sect1 id="tutorials.doccing.writing">
+  <title>Escrevendo Documentação</title>
+  <para>
+   Este capitulo lida atualmente em contribuir om a documentação do PHP-GTK 2. Se
+   você tiver alguma questão posterior, sinta-se a vontade para pergunta-la na
+   <ulink url="mailto:php-gtk-doc@lists.php.net">lista de email do php-gtk-doc</ulink>.
+  </para>
+  <para>
+   Se você escreveu alguma documentação, você provavelvente vá querer que ela
+   vá no manual oficial. Por favor envie os seus arquivos por email para a 
+   lista de email do php-gtk-doc mencionada acima, ou para um dos contribuidores listados
+   na pagina dos <link linkend="appendix.doccredits">créditos da documetação</link>.
+   Esles irão colocar o seu trabalho nos fontes oficiais no servidor CVS.
+   Se você contribuir regularmente para a documentação, você pode obter uma conta de CVS. Pergunte
+   sobre isto na lista de email da documentação.
+  </para>
+
+  <para>
+   Se você tem uma conta de CVS: <emphasis>SEMPRE</emphasis> compile o manual
+   antes de enviar as suas modificações! Se houver um erro no xml, a geração noturna
+   do manual irá parar e as pessoas irão reclamar.
+  </para>
+
+  <sect2>
+   <title>Encontrando algo para fazer</title>
+   <simpara>
+    Os fontes do manual consistem de mais de 300 arquivos únicos, e assim são
+    altas as chances que ajam pontos em branco na documentação. Se você já tiver visto o
+    que esta faltando ao navegar pelo manual, vá em frente e prencha o
+    ponto em branco que mais lhe interessar. Se você não souber de nenhum
+    lugar, procure nos arquivos do manual por comentários
+    <literal>FIXME</literal> e <literal>TODO</literal> e começe por aqui.
+   </simpara>
+  </sect2>
+
+  <sect2 id="tutorials.doccing.writing.dirstructure">
+   <title>Estrutura de arquivos e diretórios</title>
+   <para>
+    Como você já deve ter visto, as fontes do manual estão no diretório
+    <filename>manual/</filename>, o qual contém pastas para cada 
+    língua. De uma olhada em <filename>manual/en/reference/</filename> - 
+    você encontrará pastas para <literal>gtk</literal>, <literal>gdk</literal>.
+    Cada classe tem o seu próprio arquivo <literal>xml</literal> em uma das pastas
+    - isto permite a várias pessoas trabalharem em partes diferentes do manual ao
+    mesmo tempo, e permite a maquinas mais lentas abrir o arquivo do manual.
+   </para>
+   <para>
+    Você provavelmente não irá precisar adicionar quaiquer arquivos, porque os esqueletos
+    para a documentação das classes devem existir no mínimo. Se você tiver que adicionar um
+    novo arquivo, tenha certesa de registra-lo em <filename>manual/reference.xml</filename>
+    - se não ele não será incluído no manual.
+   </para>
+   <para>
+    Imagens de classes tem o seu próprio diretório, <filename>images/</filename>. A
+    estrutura do diretório é a mesma que aquela para os arquivos xml;
+    poe xemplo, a imagem para <classname>GtkAboutDialog</classname> esta em 
+    <filename>images/reference/gtk/gtkaboutdialog.png</filename>. Se você
+    criar novas imagens, tenha certesa que seja pequena. Um arquivo com 30kb é
+    muito grande, se você adicionar o tamanho de todas as imagens. Também tenha certesa de usar
+    arquivos <literal>.png</literal>, e reduza a paleta para um tamanho
+    fixo para manter o tamanho do arquivo pequeno.
+   </para>
+   <para>
+    Exemplos executáveis tem o seu próprio diretório <filename>examples/</filename>
+    com uma estrutura similar aos aquivos de imagem e xml, com a 
+    exeção que cada classe tem o seu próprio diretório. Os arquivos são chamados
+    com o nome da função/método da qual eles dão exemplo, para a função:
+    <function class="GtkAboutDialog">set_logo</function> da classe
+    <classname>GtkAboutDialog</classname> deve ir em 
+    <filename>examples/reference/gtk/gtkaboutdialog/set_logo.phpw</filename>.
+    Note a extensão do arquivo. O nome do arquivo do construtor padrão
+    é <filename>constructor.phpw</filename>.
+   </para>
+  </sect2>
+
+  <sect2 id="tutorials.doccing.writing.basics">
+   <title>Bàsico</title>
+
+   <para>
+    Primeiro uma palavra: Escreva a documentação com qualquer progrma que
+    você queira. Eu prefiro o editor de texto do KDE <literal>Kate</literal>,
+    mas um <literal>vi</literal>, <literal>emacs</literal> ou até mesmo
+    <literal>Notepad</literal> irão fazer o trabalho.
+    Nota: Se você usar caracteres que não sejam ASCII, você precisa 
+    salvar o arquivo como <literal>UTF-8</literal>.
+   </para>
+
+   <para>
+    A documentação consiste de texto estruturado: Você diz que um texto
+    esta em um paragrafo, que a <emphasis>palavra</emphasis> deve ter
+    uma enfâse especial ou que <literal>outra palavra</literal> deve ser
+    entendida como literal. Se você escreveu paginas em HTML, você
+    já saberá o conceito.
+   </para>
+   <para>
+    Você deve imaginar porque a documentação não usa tags HTML:
+    è porque o DocBook apenas descreve a estrutura do texto, ele não
+    formata-o. O HTML tenta separar o layout (CSS) e o conteúdo (XHTML)
+    também, mas o DocBook pode ser usado para produzir não apenas HTML, mas PDF
+    e livros reais também. Existem vários elementos especiais em um livro: Capítulos,
+    sessões, exemplos, e em um manual de programação como este você tem
+    métodos, parâmetros, propriedades, sinais e assim por diante.
+    Cada eleento tem a sua própria tag. Isto parece confuso quando você começa
+    com o DocBook, mas tem seus benefícios: Controle completo sobre a saída.
+   </para>
+
+   <para>
+    O mais básico elemento é <literal>&lt;para&gt;</literal>, usado para separar o
+    texto emparagrafos. Paragrafos contém outras tags como links, nomes de arquivos,
+    tabelas e assim por diante. Existe um tipo de paragrafo especial
+    <literal>&lt;simpara&gt;</literal> para paragrafos
+    que não contenham nenhuma outra tag.
+   </para>
+
+   <para>
+    As próximas tags importantes são os links. De uma olhada na
+    <link linkend="tutorials.doccing.writing.linking">sua sessão</link>.
+   </para>
+
+   <para>
+    Você pode colocar <emphasis>enfâse</emphasis> em palavras ou grupos de palavras através
+    <literal>&lt;emphasis&gt;</literal>, ou definir <literal>literais</literal>
+    com <literal>&lt;literal&gt;</literal>. <filename>Nomes de arquivo</filename> podem
+    ser expressados com <literal>&lt;filename&gt;</literal>, 
+    <varname>variáveis</varname> com <literal>&lt;varname&gt;</literal>.
+    Existem muitas mais pequenas tags, mas lista-las aqui faria uma
+    manual inteiro.
+   </para>
+
+   <para>
+    Se você quer listar itens, use as tags <literal>&lt;itemizedlist&gt;</literal>
+    (não ordenado) ou <literal>&lt;orderedlist&gt;</literal> (ordenado).
+    Os item da lista nela devem ser cercados com uma tag 
+    <literal>&lt;listitem&gt;</literal>.
+    <informalexample>
+     <programlisting role="xml"><![CDATA[
+<itemizedlist>
+ <listitem>First item</listitem>
+ <listitem>Second item</listitem>
+</itemizedlist>
+]]></programlisting>
+    </informalexample>
+    <literal>&lt;listitem&gt;</literal>s em sí podem conter
+    <literal>&lt;para&gt;</literal> e outras tags.
+   </para>
+
+   <!-- some more tags? Which? -->
+
+   <para>
+    Na maioria das vezes o esqueleto da documentação da classe existe, e você
+    irá apenas ter que prencher a descrição com o conteúdo e as tags
+    mencionadas acima. As tags que precisam ser prenchidas são:
+    <literal>&lt;shortdesc&gt;</literal> para uma descrição curta da
+    classe/função/sinal/propriedade (apenas um único paragrafo, preferencialmente
+    sem tags nele) e <literal>&lt;desc&gt;</literal>
+    com uma descrição completa da classe (use vários paragrafos).
+   </para>
+
+   <para>
+    Se você não tem certesa como fazer algo ou se a tag que você escolheu
+    esta correta, de uma olhada nos outros arquivos já escritos - eles são
+    o melhor exemplo.
+   </para>
+  </sect2>
+
+  <sect2 id="tutorials.doccing.writing.linking">
+   <title>Criando Links</title>
+   <para>
+    O manual vive através de links que interconectam as paginas, permitindo
+    pular para outra sessão importante com um click. Sempre que você fazer uma
+    referencia para outra classe ou um função similar, crie um link. Ele
+    salva tempo das pessoas procurarem.
+   </para>
+   <para>
+    O manual conhece quatro tipos de links entre as paginas:
+   </para>
+
+   <itemizedlist>
+    <listitem>
+     <para>
+      <emphasis>Links de Classe</emphasis> cria um link para a pagina da descrição de uma certa
+      classe. Porr exemplo, você usaria:
+      <informalexample>
+       <programlisting role="xml"><![CDATA[
+<classname>GtkAboutDialog</classname>
+]]></programlisting>
+      </informalexample>
+      Para criar um link para a descrição da classe GtkAboutDialog. Ele irá parecer com isto:
+      <classname>GtkAboutDialog</classname>.
+     </para>
+    </listitem>
+
+    <listitem>
+     <para>
+      <emphasis>Links para metodos/funções</emphasis> conectam a um metodo ou função
+      de uma certa classe. O nome da função irá automaticamente
+      ser completado com <literal>()</literal>. Use
+      <informalexample>
+       <programlisting role="xml"><![CDATA[
+<function class="GtkAboutDialog">set_logo</function>
+]]></programlisting>
+      </informalexample>
+      para realizar esta tarefa. O manual irá mostrar:
+      <function class="GtkAboutDialog">set_logo</function>.
+      O parâmetro <literal>class</literal> não é necessário
+      se você criar uma ligação para a classe atual; mas adicione-o mesmo assim
+      - significa menos esforço ao copiar alguma coisa para uma parte diferente
+      do manual.
+     </para>
+    </listitem>
+
+    <listitem>
+     <para>
+      <emphasis>Links para sinais</emphasis> são criados desta maneira:
+      <informalexample>
+       <programlisting role="xml"><![CDATA[
+<signalname class="GtkDialog">close</signalname>
+]]></programlisting>
+      </informalexample>
+      Isto será compilado como: <signalname class="GtkDialog">close</signalname>.
+     </para>
+    </listitem>
+
+    <listitem>
+     <para>
+      <emphasis>Links para enumerações</emphasis> também são muito simples:
+      <informalexample>
+       <programlisting role="xml"><![CDATA[
+<enumname>GtkButtonBoxStyle</enumname>
+]]></programlisting>
+      </informalexample>
+      Isto irá resultar em: <enumname>GtkButtonBoxStyle</enumname>.
+      Você pode também criar um link para uma enumeração ou flag usando o seu campo de opção:
+      <informalexample>
+       <programlisting role="xml"><![CDATA[
+<optionname enum="GtkIconLookupFlags">Gtk::ICON_LOOKUP_FORCE_SVG</optionname>
+]]></programlisting>
+      </informalexample>
+      Isto irá compilar em:
+      <optionname enum="GtkIconLookupFlags">Gtk::ICON_LOOKUP_FORCE_SVG</optionname>.
+     </para>
+    </listitem>
+
+    <listitem>
+     <para>
+      <emphasis>Links de Propriedade</emphasis> são simples:
+      <informalexample>
+       <programlisting role="xml"><![CDATA[
+<fieldname class="GtkDialog">action_area</fieldname>
+]]></programlisting>
+      </informalexample>
+      Isto irá resultar em: <fieldname class="GtkDialog">action_area</fieldname>.
+     </para>
+    </listitem>
+
+    <listitem>
+     <para>
+      <emphasis>Links livres do manual</emphasis> são necessários se você quer criar um
+      link para uma certa palavra de texto, ou para uma sessão do tutorial. Você precisa
+      prover o ID da sessão que ocê quer criar o link, e é libre
+      para escolher um titulo:
+      <informalexample>
+       <programlisting role="xml"><![CDATA[
+The <link linkend="tutorials.doccing">documentation tutorial</link>
+shows you how to compile the manual.
+]]></programlisting>
+      </informalexample>
+      Veja o resultado: 
+      The <link linkend="tutorials.doccing">documentation tutorial</link> 
+      shows you how to compile the manual.
+     </para>
+    </listitem>
+
+    <listitem>
+     <para>
+      <emphasis>Links para URL</emphasis> deixa o escopo do manual; você pode
+      escrever links para qualquer endereço de HTTP, FTP ou email que você quiser:
+      <informalexample>
+       <programlisting role="xml"><![CDATA[
+<ulink url="mailto:php-gtk-doc@lists.php.net">lista de email da documentação</ulink>
+]]></programlisting>
+      </informalexample>
+      o qual vai se parecer com:
+      <ulink url="mailto:php-gtk-doc@lists.php.net">lista de email da
+      documentação</ulink>.
+      Se um link é comunmente usado no manual, você pode usar uma das
+      várias entidades XML listadas em <literal>manual/global.ents</literal>
+      para ter um efeito similar:
+      <informalexample>
+       <programlisting role="xml"><![CDATA[
+&link.phpgtkdoc;
+]]></programlisting>
+      </informalexample>
+      o qual resultará em: &link.phpgtkdoc;, e
+      <informalexample>
+       <programlisting role="xml"><![CDATA[
+<ulink url="mailto:&email.phpgtkdoc;">lista de email da documentação</ulink>
+]]></programlisting>
+      </informalexample>
+      o qual dará a você:
+      <ulink url="mailto:&email.phpgtkdoc;">lista de email da documentação</ulink>.
+     </para>
+    </listitem>
+   </itemizedlist>
+  </sect2>
+
+  <sect2 id="tutorials.doccing.writing.examples">
+   <title>Exemplos de Código e Imagens</title>
+
+   <simpara>
+    A documentação do PHP-GTK 2, diferentemente da versão criada para o
+    PHP-GTK 1, suporta imagens e exemplos de códigos externos.
+   </simpara>
+   <simpara>
+    Existem três tipos de imagens: imagens de classe, imagens normais
+    as quais craim seu próprio paragrafo, e imagens internas as quais
+    fluem com o texto.
+   </simpara>
+   <para>
+    <emphasis>Imagens de Classe</emphasis> são exibidas na pagina da descrição da classe,
+    do lado direito da descrição. Apenas adicione
+    <informalexample>
+     <programlisting role="xml"><![CDATA[
+<classimage fileref="&directory.images;/reference/gtk/gtkiconview.constructor.png"/>
+]]></programlisting>
+    </informalexample>
+    Note que o diretório base <literal>&amp;directory.images;</literal>;
+    ele será substituido com o diretório correto das imagens
+    na hora de compilar.
+   </para>
+   <para>
+    Imagens normais são incluídas no paragrafo através de
+    <informalexample>
+     <programlisting role="xml"><![CDATA[
+<graphic fileref="&directory.images;/path/to/the/file.png"/>
+]]></programlisting>
+    </informalexample>
+    e imagens internas com
+    <informalexample>
+     <programlisting role="xml"><![CDATA[
+<inlinegraphic fileref="&directory.images;/path/to/the/file.png"/>
+]]></programlisting>
+    </informalexample>
+   </para>
+
+   <para>
+    Exemplos de código podem ser separados do arquivo do manual também. isot é 
+    especialmente útil para leitores que querem usar o exemplo por sí mesmos: sem
+    a necessidade de copiar e colar o código, apenas execute-o no diretório de exemplos
+    de códigos. Alem disso, é mais fácil para testar os exemplos ao escrever
+    e editar o manual.
+   </para>
+
+   <note>
+    <para>
+     Exemplos devem ter o seu prórpio arquivo <emphasis>apenas</emphasis> se eels forem
+     um programa completo, executável - pedaços de códgo devem ser embutidos.
+    </para>
+   </note>
+
+   <para>
+     Exemplos separados em arquivos podem ser inclusos desta maneira:
+     <informalexample>
+      <programlisting role="xml"><![CDATA[
+    <example>
+     <title>Simple GtkAboutDialog</title>
+     <programlisting role="php">
+      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+          ]]>href="&amp;directory.examples;/reference/gtk/gtkaboutdialog/constructor.phpw"
+             parse="text"><![CDATA[
+       <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+      </xi:include>
+     </programlisting>
+    </example>
+]]></programlisting>
+    </informalexample>
+   </para>
+
+   <para>
+    Exemplos para pedaços de código devem ser embutidos assim:
+    <informalexample>
+     <programlisting role="xml"><![CDATA[
+    <informalexample>
+     <programlisting role="php"><![CDATA[
+//some php code here
+]]>]]&gt;<![CDATA[</programlisting>
+    </informalexample>
+]]></programlisting>
+    </informalexample>
+    A sessão <literal>CDATA</literal> é útil porque ela permite a você 
+    incluir diretamente o código sem ter que escapa-lo. As tags 
+    &lt;?php and ?&gt; não são requeridas para pedaços de código. Nore que
+    <literal>CDATA</literal> abre um novo documento dentro do documento atual,
+    assim precisando de uma nova identação. Não tenha medo de quebrar a sua identação
+    dentro de sessões CDATA.
+   </para>
+  </sect2>
+
+ </sect1>
+
+ <sect1 id="tutorials.doccing.standards">
+  <title>Padrão de Codificação</title>
+  <simpara>
+   Para manter a documentação consistente, nós definimos as seguintes regras
+   as quais devem ser seguidas ao escrever arquivos xml da documentação:
+  </simpara>
+
+  <itemizedlist>
+   <listitem>
+    Todos os arquivos devem ser escritos em
+    <ulink url="http://en.wikipedia.org/wiki/UTF-8">UTF-8</ulink>
+   </listitem>
+   <listitem>
+    Identação das tags XML é <literal>1</literal> a mais que seu parente.
+   </listitem>
+   <listitem>
+    Caracteres de espaço são usados para a identação. Tabs não são permitidos, mesmo quando
+    os espaços soman a largura de um tab.
+   </listitem>
+   <listitem>
+    As linhas devem ser quebradas no máximo em 80 caracteres.
+   </listitem>
+   <listitem>
+    O elemento <literal>shortdesc</literal> de um item obsoleto deve apenas conter
+    uma das entidades de obsoleto disponíveis: 
+    <literal>&amp;deprecated.class;</literal>,
+    <literal>&amp;deprecated.method;</literal>,
+    <literal>&amp;deprecated.property;</literal>.
+   </listitem>
+  </itemizedlist>
+
+  <para>
+   Exemplos de código PHP escrito para o manual devem seguir os 
+   <ulink url="http://cvs.php.net/viewcvs.cgi/*checkout*/php-gtk/CODING_STANDARDS">
+   padrões de codificação do PHP-GTK</ulink>.
+  </para>
+ </sect1>
+
+</chapter>
+<!-- Keep this comment at the end of the file
+Local variables:
+mode: sgml
+sgml-omittag:t
+sgml-shorttag:t
+sgml-minimize-attributes:nil
+sgml-always-quote-attributes:t
+sgml-indent-step:1
+sgml-indent-data:t
+sgml-parent-document:nil
+sgml-default-dtd-file:"../../../manual.ced"
+sgml-exposed-tags:nil
+sgml-local-catalogs:nil
+sgml-local-ecat-files:nil
+End:
+vim600: syn=xml fen fdm=syntax fdl=2 si
+vim: et tw=78 syn=sgml
+vi: ts=1 sw=1
+-->
+
