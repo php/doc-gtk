@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- EN-Revision: 1.6 Maintainer: dnfeitosa Status: ready -->
+<classentry id="gtk.gtkaccelgroup">
+ <classmeta>
+  <classtitle>GtkAccelGroup</classtitle>
+  <classparent>GObject</classparent>
+  <shortdesc>
+		Grupo de aceleradores de teclado global para uma GtkWindow.
+  </shortdesc>
+  <desc>
+   <para>
+		 Um GtkAccelGroup representa um grupo de aceleradores de teclado, tipicamente
+		 anexados ao <classname>GtkWindow</classname> toplevel (através de
+		 <function class="GtkWindow">add_accel_group</function>). 
+		 Geralmente você não precisa criar um GtkAccelGroup diretamente; ao invés disso,
+		 quando se usa o <classname>GtkItemFactory</classname>, o GTK+ já se encarrega
+		 de criar os aceleradores para seus menus na fábrica de itens.
+   </para>
+   <para>
+		 Note que aceleradores são diferentes de mnemônicos. Aceleradores são atalhos
+		 para ativar um item no menu; eles aparecem ao lado do item do menu para o qual
+		 é o atalho. Por exemplo "<literal>Ctrl+Q</literal>" deve aparecer ao lado do
+		 item "Quit" no menu. Mnemônicos são atalhos para itens da interface, como caixas de
+		 texto ou botões; eles aparecem na forma de linhas que sublinham caracteres.
+		 Veja <classname>GtkLabel</classname><function class="GtkLabel">constructor</function>. 
+		 Itens de menu podem possuir tanto aceleradores, quanto mnemônicos.
+   </para>
+  </desc>
+ </classmeta>
+
+ <constructors>
+
+  <constructor id="gtk.gtkaccelgroup.constructor">
+   <funcsynopsis>
+    <funcprototype>
+    <funcdef> <function>GtkAccelGroup</function></funcdef>
+    <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+		Cria um novo grupo de aceleradores.
+   </shortdesc>
+   <desc>
+    <para>
+			Cria um novo grupo de aceleradores. Após criá-lo, ele não o ajudará muito
+			até que seja anexado à uma janela - veja
+     <function class="GtkWindow">add_accel_group</function>.
+    </para>
+   </desc>
+  </constructor>
+
+ </constructors>
+
+ <methods>
+
+  <method id="gtk.gtkaccelgroup.method.activate">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>bool <function>activate</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtkaccelgroup.method.connect">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>connect</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtkaccelgroup.method.connect_by_path">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>connect_by_path</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtkaccelgroup.method.disconnect">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>bool <function>disconnect</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtkaccelgroup.method.disconnect_key">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>bool <function>disconnect_key</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtkaccelgroup.method.find">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef> <function>find</function></funcdef>
+     <paramdef>bool <parameter>(*find_func</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtkaccelgroup.method.lock">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>lock</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtkaccelgroup.method.query">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef> <function>query</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtkaccelgroup.method.unlock">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>unlock</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+ </methods>
+
+ <signals>
+
+  <signal id="gtk.gtkaccelgroup.signal.accel-activate">
+   <signalname>accel-activate</signalname>
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>bool <cbfunction>callback</cbfunction></funcdef>
+     <paramdef>GtkAccelGroup <parameter>accelgroup</parameter></paramdef>
+     <paramdef>GObject <parameter>UNKNOWN</parameter></paramdef>
+     <paramdef>int <parameter>UNKNOWN</parameter></paramdef>
+     <paramdef><!-- was: GdkModifierType -->XXX <parameter>UNKNOWN</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </signal>
+
+  <signal id="gtk.gtkaccelgroup.signal.accel-changed">
+   <signalname>accel-changed</signalname>
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
+     <paramdef>GtkAccelGroup <parameter>accelgroup</parameter></paramdef>
+     <paramdef>int <parameter>UNKNOWN</parameter></paramdef>
+     <paramdef><!-- was: GdkModifierType -->XXX <parameter>UNKNOWN</parameter></paramdef>
+     <paramdef><!-- was: GClosure -->XXX <parameter>UNKNOWN</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </signal>
+  
+ </signals>
+
+</classentry>
