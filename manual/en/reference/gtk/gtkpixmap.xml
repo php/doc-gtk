@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- $Revision: 1.5 $ -->
+<!-- $Revision: 1.6 $ -->
 <classentry id="gtk.gtkpixmap">
  <classmeta>
   <classtitle>GtkPixmap</classtitle>
@@ -20,15 +20,20 @@
   <method id="gtk.gtkpixmap.method.get">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>void <function>get</function></funcdef>
+     <funcdef>arary <function>get</function></funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    &deprecated; Returns the <classname>GdkPixmap</classname> and
+    <classname>GdkBitmap</classname> mask for the pixmap.
    </shortdesc>
    <desc>
     &deprecated.method;
+    <para>
+     Returns the <classname>GdkPixmap</classname> and
+     <classname>GdkBitmap</classname> mask for the pixmap.
+    </para>
    </desc>
   </method>
 
@@ -36,16 +41,25 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set</function></funcdef>
-     
-     <paramdef><classname>GdkPixmap</classname> <parameter>val</parameter></paramdef>
-     <paramdef><parameter>mask</parameter></paramdef>
+     <paramdef>
+      <classname>GdkPixmap</classname> <parameter>val</parameter>
+     </paramdef>
+     <paramdef>
+      <classname>GdkBitmap</classname> <parameter>mask</parameter>
+     </paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    &deprecated; Sets the <classname>GdkPixmap</classname> and 
+    <classname>GdkBitmap</classname> mask for the pixmap.
    </shortdesc>
    <desc>
     &deprecated.method;
+    <para>
+     Sets <parameter>val</parameter> as the <classname>GdkPixmap</classname>
+     and <parameter>mask</parameter> as the <classname>GdkBitmap</classname>
+     mask for the pix map.
+    </para>
    </desc>
   </method>
 
@@ -57,10 +71,14 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    &deprecated.method;
+    &deprecated.method; Sets wether an extra pixmap should be automatically 
+    created and used when the pixmap is insensitive.
    </shortdesc>
    <desc>
-
+    <para>
+     Sets wether an extra pixmap should be automatically created and used when
+     the pixmap is insensitive. Defaults to <literal>true</literal>.
+    </para>
    </desc>
   </method>
 
