@@ -1,0 +1,610 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- EN-Revision: 1.13 Maintainer: dnfeitosa Status: ready -->
+<classentry id="gtk.gtktreestore">
+ <classmeta>
+  <classtitle>GtkTreeStore</classtitle>
+  <classparent>GObject</classparent>
+  <implements>GtkTreeModel</implements>
+  <implements>GtkTreeDragSource</implements>
+  <implements>GtkTreeDragDest</implements>
+  <implements>GtkTreeSortable</implements>
+	<implements>Traversable</implements>
+	<shortdesc>
+	 Uma estrutura de dados do tipo árvore que pode ser utilizada com GtkTreeView.
+  </shortdesc>
+  <desc>
+   <para>
+		 O objeto <classname>GtkTreeStore</classname> é um modelo de lista para ser usado
+		 com um widget <classname>GtkTreeView</classname>. Ele implementa a interface
+		 <classname>GtkTreeModel</classname> e conseqüentemente pode usar todos seus métodos
+		 disponíveis. Ele também implementa a interface <classname>GtkTreeSortable</classname>
+		 possibilitando ordenar a view. Finalmente, ele implementa as interfaces 
+		 'clique-arraste' de árvore.
+   </para>
+  </desc>
+ </classmeta>
+
+
+ <constructors>
+  <constructor id="gtk.gtktreestore.constructor">
+   <funcsynopsis>
+    <funcprototype>
+    <funcdef> <function>GtkTreeStore</function></funcdef>
+    <paramdef><enumname>GtkType</enumname> <parameter>type_column_0</parameter></paramdef>
+    <paramdef><enumname>GtkType</enumname> <parameter><optional>type_column_1</optional></parameter></paramdef>
+    <paramdef><enumname>GtkType</enumname> <parameter><optional>type_column_2</optional></parameter></paramdef>
+    <paramdef>...</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+		Cria um novo GtkTreeStore com um número de colunas.
+   </shortdesc>
+   <desc>
+    <para>
+			Cria um novo GtkTreeStore com um número de colunas. Para cada coluna, o tipo
+			tem que ser especificado pela escolha dos <enumname>GtkType</enumname>s.
+    </para>
+    <example>
+     <title>Criando e preechendo um GtkTreeStore</title>
+     <programlisting role="php">
+      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="&directory.examples;/reference/gtk/gtktreestore/constructor.phpw" parse="text">
+       <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+      </xi:include>
+     </programlisting>
+    </example>
+   </desc>
+  </constructor>
+ </constructors>
+
+
+ <methods>
+
+  <method id="gtk.gtktreestore.method.append">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef><classname>GtkTreeIter</classname> <function>append</function></funcdef>
+     <paramdef><classname>GtkTreeIter</classname> <parameter><optional>parent</optional></parameter></paramdef>
+     <paramdef>array <parameter>items</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+		Adiciona uma nova linha ao GtkTreeStore.
+   </shortdesc>
+   <desc>
+    <para>
+			Cria uma nova linha e a adiciona ao final do GtkTreeStore. O primeiro parâmetro
+			<parameter>parent</parameter> pode ser <literal>null</literal>.
+			Neste caso, a nova entrada não possuirá um parent e será considerado 
+			como sendo "raíz".
+    </para>
+    <para>
+			O segundo parâmetro <parameter>items</parameter> é um array com os valores para 
+			cada coluna. Se sua treestore possuir três colunas, o array deve conter
+			três valores.
+    </para>
+    <para>
+			O método retorna um <classname>GtkTreeIter</classname> que você pode usar
+			como referencia à linha; por exemplo, para usar como um parent para uma outra linha.
+    </para>
+    <para>
+			Se você não passar nenhum parâmetro, uma linha vazia será criada, e você
+			precisará usar outros métodos como <function class="GtkTreeStore">set</function>
+			para mudar o valor das colunas.
+    </para>
+    <example>
+     <title>Criando e preenchendo um GtkTreeStore</title>
+     <programlisting role="php">
+      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="&directory.examples;/reference/gtk/gtktreestore/append.phpw" parse="text">
+       <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+      </xi:include>
+     </programlisting>
+    </example>
+    <para>
+     &seealso;
+      <function class="GtkTreeStore">insert</function>,
+      <function class="GtkTreeStore">insert_after</function>,
+      <function class="GtkTreeStore">insert_before</function>,
+      <function class="GtkTreeStore">prepend</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtktreestore.method.clear">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>clear</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+		Remove todas as linhas.
+   </shortdesc>
+   <desc>
+    <para>
+			Este método remove todas as linhas do GtkTreeStore, deixando-o vazio.
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtktreestore.method.insert">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef><classname>GtkTreeIter</classname> <function>insert</function></funcdef>
+     <paramdef>int <parameter>position</parameter></paramdef>
+     <paramdef><classname>GtkTreeIter</classname> <parameter><optional>parent</optional></parameter></paramdef>
+     <paramdef>array <parameter><optional>items</optional></parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+		Insere uma linha na posição especificada.
+   </shortdesc>
+   <desc>
+    <para>
+			Insere uma nova linha como um child de <parameter>parent</parameter>
+			na posição <parameter>position</parameter>.
+    </para>
+    <para>
+			Se <parameter>parent</parameter> é <literal>null</literal>, a nova linha
+			será criada no topo. Se <parameter>position</parameter> for maior que o número
+			de linhas naquele nível, então a nova linha será inserida no final da lista.
+    </para>
+    <para>
+     <parameter>items</parameter> pode ser um array de valores para a coluna.
+    </para>
+    <example>
+     <title>Preenchendo um GtkTreeStore com insert</title>
+     <programlisting role="php">
+      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="&directory.examples;/reference/gtk/gtktreestore/insert.phpw" parse="text">
+       <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+      </xi:include>
+     </programlisting>
+    </example>
+    <para>
+     &seealso;
+      <function class="GtkTreeStore">insert_after</function>,
+      <function class="GtkTreeStore">insert_before</function>,
+      <function class="GtkTreeStore">append</function>,
+      <function class="GtkTreeStore">prepend</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtktreestore.method.insert_after">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef><classname>GtkTreeIter</classname> <function>insert_after</function></funcdef>
+     <paramdef><classname>GtkTreeIter</classname> <parameter><optional>sibling</optional></parameter></paramdef>
+     <paramdef><classname>GtkTreeIter</classname> <parameter><optional>parent</optional></parameter></paramdef>
+     <paramdef>array <parameter><optional>items</optional></parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+		Insere uma nova linha após uma especificada.
+   </shortdesc>
+   <desc>
+    <para>
+			Insere uma nova linha após <parameter>sibling</parameter>. Se sibling for
+			<literal>null</literal>, então a linha será acrescentada ao parent.
+			Se <parameter>parent</parameter> e <parameter>sibling</parameter> forem
+			<literal>null</literal>, então a linha será acrescentada ao topo.
+			Se ambos <parameter>sibling</parameter> e <parameter>parent</parameter> 
+			estiverem definidos, então <parameter>parent</parameter> deve ser parent de 
+			<parameter>sibling</parameter>. Quando <parameter>sibling</parameter> estiver 
+			definido, <parameter>parent</parameter> é opcional.
+    </para>
+    <para>
+     <parameter>items</parameter> pode ser um array de valores para as colunas.
+    </para>
+    <example>
+     <title>Preenchendo um GtkTreeStore com insert_after</title>
+     <programlisting role="php">
+      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="&directory.examples;/reference/gtk/gtktreestore/insert_after.phpw" parse="text">
+       <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+      </xi:include>
+     </programlisting>
+    </example>
+    <para>
+     &seealso;
+      <function class="GtkTreeStore">insert</function>,
+      <function class="GtkTreeStore">insert_before</function>,
+      <function class="GtkTreeStore">append</function>,
+      <function class="GtkTreeStore">prepend</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtktreestore.method.insert_before">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef><classname>GtkTreeIter</classname> <function>insert_before</function></funcdef>
+     <paramdef><classname>GtkTreeIter</classname> <parameter><optional>sibling</optional></parameter></paramdef>
+     <paramdef><classname>GtkTreeIter</classname> <parameter><optional>parent</optional></parameter></paramdef>
+     <paramdef>array <parameter><optional>items</optional></parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+		Insere uma nova linha antes de um específica.
+   </shortdesc>
+   <desc>
+    <para>
+			Insere uma linha antes de <parameter>sibling</parameter>. Se sibilng for
+			<literal>null</literal>, então a linha será adicionada ao parent como um child.
+			Se <parameter>parent</parameter> e <parameter>sibling</parameter> forem 
+			<literal>null</literal>, então a linha será adicionada no topo. Se ambos
+			<parameter>sibling</parameter> e <parameter>parent</parameter> estão definidos,
+			então <parameter>parent</parameter> deve ser parent de <parameter>sibling</parameter>.
+			Quando <parameter>sibling</parameter> está definido, <parameter>parent</parameter>
+			é opcional.
+    </para>
+    <para>
+     <parameter>items</parameter> pode ser um array de valores para a coluna.
+    </para>
+    <example>
+     <title>Preenchendo um GtkTreeStore com insert_before</title>
+     <programlisting role="php">
+      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="&directory.examples;/reference/gtk/gtktreestore/insert_before.phpw" parse="text">
+       <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+      </xi:include>
+     </programlisting>
+    </example>
+    <para>
+     &seealso;
+      <function class="GtkTreeStore">insert</function>,
+      <function class="GtkTreeStore">insert_after</function>,
+      <function class="GtkTreeStore">append</function>,
+      <function class="GtkTreeStore">prepend</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtktreestore.method.is_ancestor">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>bool <function>is_ancestor</function></funcdef>
+     <paramdef><classname>GtkTreeIter</classname> <parameter>iter</parameter></paramdef>
+     <paramdef><classname>GtkTreeIter</classname> <parameter>descendant</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+		Verifica se um iterador é parent ou "avô" de um outro iterador.
+   </shortdesc>
+   <desc>
+    <para>
+			Retorna <literal>true</literal> se <parameter>iter</parameter> é
+			ancestor de <parameter>descendant</parameter>. Isto é, se
+			<parameter>iter</parameter> é parent (ou "avô") de 
+			<parameter>descendant</parameter>.
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtktreestore.method.iter_depth">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>int <function>iter_depth</function></funcdef>
+     <paramdef><classname>GtkTreeIter</classname> <parameter>iter</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+		A profundidade e um iterador na árvore.
+   </shortdesc>
+   <desc>
+    <para>
+			Calcula a profundidade do <parameter>iter</parameter> presente na árvore.
+			Se o iterador passado for uma linha presente no topo, <literal>0</literal>
+			é retornado.
+    </para>
+    <example>
+     <title>Usando iter_depth para determinar a profundidade de uma linha</title>
+     <programlisting role="php">
+      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="&directory.examples;/reference/gtk/gtktreestore/iter_depth.phpw" parse="text">
+       <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+      </xi:include>
+     </programlisting>
+    </example>
+   </desc>
+  </method>
+
+  <method id="gtk.gtktreestore.method.iter_is_valid">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>bool <function>iter_is_valid</function></funcdef>
+     <paramdef><classname>GtkTreeIter</classname> <parameter>iter</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+		Se a linha existe no GtkTreeStore.
+   </shortdesc>
+   <desc>
+    <para>
+			Retorna <literal>true</literal> se o iterador passado aponta para uma linha
+			que existe no modelo.
+    </para>
+    <para>
+			Um iterador pode ser invalidado removendo-o (ou um de seus parents)
+			da árvore.
+    </para>
+    <example>
+     <title>Verificando a validade de um iterador usando iter_is_valid()</title>
+     <programlisting role="php">
+      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="&directory.examples;/reference/gtk/gtktreestore/iter_is_valid.phpw" parse="text">
+       <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+      </xi:include>
+     </programlisting>
+    </example>
+   </desc>
+  </method>
+
+  <method id="gtk.gtktreestore.method.move_after">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>move_after</function></funcdef>
+     <paramdef><classname>GtkTreeIter</classname> <parameter>iter</parameter></paramdef>
+     <paramdef><classname>GtkTreeIter</classname> <parameter>position</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+		Move um iterador para além de uma posição.
+   </shortdesc>
+   <desc>
+    <para>
+			Move a linha especificada em <parameter>iter</parameter> para após
+			<parameter>position</parameter>.
+    </para>
+    <para>
+			Este método funciona apenas com GtkTreeStores que não estejam ordenadas
+			e requer que ambos iteradores estejam no mesmo nível. Se 
+			<parameter>position</parameter> for <literal>null</literal>, a linha será
+			movida para o início do nível.
+    </para>
+    <example>
+     <title>Movimentado linhas</title>
+     <programlisting role="php">
+      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="&directory.examples;/reference/gtk/gtktreestore/move_after.phpw" parse="text">
+       <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+      </xi:include>
+     </programlisting>
+    </example>
+    <para>
+     &seealso;
+     <function class="GtkTreeStore">move_before</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtktreestore.method.move_before">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>move_before</function></funcdef>
+     <paramdef><classname>GtkTreeIter</classname> <parameter>iter</parameter></paramdef>
+     <paramdef><classname>GtkTreeIter</classname> <parameter>position</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+		Move um iterador para antes de uma posição.
+   </shortdesc>
+   <desc>
+    <para>
+			Move uma linha dada por <parameter>iter</parameter> para antes de
+     <parameter>position</parameter>.
+    </para>
+    <para>
+			Este método funciona apenas com GtkTreeStores que não estejam ordenadas
+			e requer que ambos iteradores estejam no mesmo nível. Se 
+			<parameter>position</parameter> for <literal>null</literal>, a linha será
+			movida para o final do nível.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkTreeStore">move_before</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtktreestore.method.prepend">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef><classname>GtkTreeIter</classname> <function>prepend</function></funcdef>
+     <paramdef><classname>GtkTreeIter</classname> <parameter><optional>parent</optional></parameter></paramdef>
+     <paramdef>array <parameter>items</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+		 Adiciona uma linha para o início do GtkTreeStore.
+   </shortdesc>
+   <desc>
+    <para>
+			Cria uma nova linha e a insere no início do GtkTreeStore. O primeiro parâmetro
+			<parameter>parent</parameter> pode ser <literal>null</literal>.
+			Neste caso, a nova entrada não possuirá parent e será considerado 
+			"raíz".
+    </para>
+    <para>
+			O segundo parâmetro <parameter>items</parameter> é um array com os valores 
+			para cada coluna. Se seu GtkTreeStore possuir três colunas, o array deve conter
+			três valores.
+    </para>
+    <para>
+			O método retorna um <classname>GtkTreeIter</classname> que pode ser usado
+			como referência para uma outra linha; por exemplo como parent de outra linha.
+    </para>
+    <para>
+			Se você não passar nenhum parâmetro, uma linha vazia será criada, e você terá
+			que usar outros métodos tais como <function class="GtkTreeStore">set</function> 
+			para mudar o valor das colunas.
+    </para>
+    <para>
+     &seealso;
+      <function class="GtkTreeStore">append</function>
+      <function class="GtkTreeStore">insert</function>,
+      <function class="GtkTreeStore">insert_after</function>,
+      <function class="GtkTreeStore">insert_before</function>,
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtktreestore.method.remove">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>bool <function>remove</function></funcdef>
+     <paramdef><classname>GtkTreeIter</classname> <parameter>iter</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+		Remove uma linha da árvore.
+   </shortdesc>
+   <desc>
+    <para>
+			Remove uma linha especificada por <parameter>iter</parameter> da árvore.
+    </para>
+   </desc>
+  </method>
+
+<!--
+  <method id="gtk.gtktreestore.method.reorder">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>reorder</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+-->
+  <method id="gtk.gtktreestore.method.set">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set</function></funcdef>
+     <paramdef><classname>GtkTreeIter</classname> <parameter>iter</parameter></paramdef>
+     <paramdef><parameter>column</parameter></paramdef>
+     <paramdef><parameter>value</parameter></paramdef>
+     <paramdef><parameter><optional>column</optional></parameter></paramdef>
+     <paramdef><parameter><optional>value</optional></parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+		Define o valor de uma linha.
+   </shortdesc>
+   <desc>
+    <para>
+			Define o valor da linha especificada por <parameter>iter</parameter>.
+			Os parâmetros devem ser passados aos pares, determinando o identificador da
+		 	coluna e o valor que será definido.
+    </para>
+    <para>
+			Este método é útil quando você usa
+			<function class="GtkTreeStore">insert</function> ou um de seus siblings para
+			criar uma linha vazia, ou se você deseja modificar múltiplas colunas de uma
+			linha.
+    </para>
+    <example>
+     <title>Definindo o valor das colunas com set()</title>
+     <programlisting role="php">
+      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="&directory.examples;/reference/gtk/gtktreestore/set.phpw" parse="text">
+       <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+      </xi:include>
+     </programlisting>
+    </example>
+    <para>
+     &seealso;
+<!--       <function class="GtkTreeStore">set_value</function>, -->
+      <function class="GtkTreeStore">append</function>,
+      <function class="GtkTreeStore">prepend</function>
+    </para>
+   </desc>
+  </method>
+<!--
+  <method id="gtk.gtktreestore.method.set_column_types">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_column_types</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtktreestore.method.set_valist">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_valist</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtktreestore.method.set_value">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_value</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+-->
+  <method id="gtk.gtktreestore.method.swap">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>swap</function></funcdef>
+     <paramdef><classname>GtkTreeIter</classname> <parameter>iter1</parameter></paramdef>
+     <paramdef><classname>GtkTreeIter</classname> <parameter>iter2</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+		 Troca duas linhas de posição.
+   </shortdesc>
+   <desc>
+    <para>
+			Troca duas linhas do mesmo nível de posição. Funciona apenas com GtkTreeStore não ordenados.
+    </para>
+   </desc>
+  </method>
+
+ <method id="gtk.gtktreestore.method.set_column_types">
+    <funcsynopsis>
+    <funcprototype>
+     <funcdef> <function>set_column_types</function></funcdef>
+     <paramdef>array <parameter>columns</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+		Define o tipo das colunas do GtkTreeStore.
+   </shortdesc>
+   <desc>
+    <para>
+			Define o tipo das colunas do GtkTreeStore para os tipos no array
+			<parameter>columns</parameter>.
+    </para>
+    <para>
+			Este método tem em vista primeiramente objetos que herdam de
+			<classname>GtkTreeStore</classname>, e devem ser usados na construção de
+			um novo <classname>GtkTreeStore</classname>. Ele não irá funcionar após uma
+			linha ter sido adicionada, ou um método da interface 
+     <classname>GtkTreeModel</classname>  ter sido chamado.
+    </para>
+   </desc>
+  </method>
+ </methods>
+</classentry>
