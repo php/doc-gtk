@@ -1,51 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 1.8 Maintainer: dnfeitosa Status: ready -->
+<!-- EN-Revision: 1.9 Maintainer: dnfeitosa Status: ready -->
 <classentry id="gtk.gtktreemodel" type="interface">
  <classmeta>
   <classtitle>GtkTreeModel</classtitle>
   <classparent>GInterface</classparent>
   <shortdesc>
-		A interface da árvore usada por <classname>GtkTreeView</classname>.
+   A interface da árvore usada por <classname>GtkTreeView</classname>.
   </shortdesc>
   <desc>
    <para>
-		 A interface GtkTreeModel define uma interface genérica de árvores usada
-		 pelo widget <classname>GtkTreeView</classname>. Esta é uma interface abstrata,
-		 e desenhada para ser usada com qualquer estrutura de dados apropriada. O programador
-		 tem apenas que implementar esta interface em seu próprio tipo para torná-lo visível
-		 em um widget <classname>GtkTreeView</classname>.
+    A interface GtkTreeModel define uma interface genérica de árvores usada
+    pelo widget <classname>GtkTreeView</classname>. Esta é uma interface abstrata,
+    e desenhada para ser usada com qualquer estrutura de dados apropriada. O programador
+    tem apenas que implementar esta interface em seu próprio tipo para torná-lo visível
+    em um widget <classname>GtkTreeView</classname>.
    </para>
   </desc>
  </classmeta>
 
  <methods>
 
-  <method id="gtk.gtktreemodel.method.filter_new">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef><classname>GtkTreeModelFilter</classname> <function>filter_new</function></funcdef>
-     <paramdef><classname>GtkTreePath</classname> <parameter>path</parameter></paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-		 Cria um novo filtro usando um caminho dado como a raíz.
-   </shortdesc>
-   <desc>
-    <para>
-			Cria e retorna um novo filtro de árvore que usa o nó referenciado
-			pelo caminho (<parameter>path</parameter>) como o nó raíz (não visível).
-			Isto significa que você pode usá-lo para exibir apenas uma parte da árvore.
-    </para>
-    <example>
-     <title>Exibindo apenas uma parte da árvore</title>
-     <programlisting role="php">
-      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="&directory.examples;/reference/gtk/gtktreemodel/filter_new.phpw" parse="text">
-       <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
-      </xi:include>
-     </programlisting>
-    </example>
-   </desc>
-  </method>
+
 
   <method id="gtk.gtktreemodel.method.foreach">
    <funcsynopsis>
@@ -55,14 +30,14 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-		Percorre todas as linhas.
+    Percorre todas as linhas.
    </shortdesc>
    <desc>
     <para>
-			Chama o callback para cada linha.
+     Chama o callback para cada linha.
     </para>
     <para>
-			A função callback pode ter os seguintes parâmetros:
+     A função callback pode ter os seguintes parâmetros:
      <literal>(<classname>GtkTreeModel</classname> modelo,
       <classname>GtkTreePath</classname> caminho,
       <classname>GtkTreeIter</classname> iterador)</literal>.
@@ -86,7 +61,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-		Retorna o tipo da coluna.
+    Retorna o tipo da coluna.
    </shortdesc>
    <desc>
     <simpara>
@@ -103,17 +78,17 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-		Retorna um conjunto de flags suportados pela interface.
+    Retorna um conjunto de flags suportados pela interface.
    </shortdesc>
    <desc>
     <para>
-			Retorna um conjunto de flags suportados pela interface. Estas flags serão
-			diferentes implementações da interface (<classname>GtkListStore</classname>, 
-			<classname>GtkTreeModelSort</classname>, etc.) mas serão constantes durante 
-			a vida do objeto.
+     Retorna um conjunto de flags suportados pela interface. Estas flags serão
+     diferentes implementações da interface (<classname>GtkListStore</classname>, 
+     <classname>GtkTreeModelSort</classname>, etc.) mas serão constantes durante 
+     a vida do objeto.
     </para>
     <para>
-			O inteiro retornado será uma máscara de bits dos valores
+     O inteiro retornado será uma máscara de bits dos valores
      <enumname>GtkTreeModelFlags</enumname>.
     </para>
    </desc>
@@ -127,11 +102,11 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-		Retorna um iterador de um GtkTreePath.
+    Retorna um iterador de um GtkTreePath.
    </shortdesc>
    <desc>
     <para>
-			Retorna um iterador de um caminho (<parameter>path</parameter>).
+     Retorna um iterador de um caminho (<parameter>path</parameter>).
     </para>
    </desc>
   </method>
@@ -144,12 +119,12 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-		Retorna um iterador da primeira linha.
+    Retorna um iterador da primeira linha.
    </shortdesc>
    <desc>
     <para>
-			Retorna um iterador da primeira linha (o que possui caminho
-			<literal>'0'</literal>).
+     Retorna um iterador da primeira linha (o que possui caminho
+     <literal>'0'</literal>).
     </para>
    </desc>
   </method>
@@ -162,12 +137,12 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-		OBSOLETO. Atalho para get_iter_first().
+    OBSOLETO. Atalho para get_iter_first().
    </shortdesc>
    <desc>
     <para>
-			OBSOLETO. Atalho para <function class="GtkTreeModel">get_iter_first</function>.
-			Oferecido por razões de compatibilidade. Não use-o em códigos novos.
+     OBSOLETO. Atalho para <function class="GtkTreeModel">get_iter_first</function>.
+     Oferecido por razões de compatibilidade. Não use-o em códigos novos.
     </para>
    </desc>
   </method>
@@ -180,12 +155,13 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-		Converte uma string de um caminho em um caminho válido e retorna seu iterador.
+    Converte uma string de um caminho em um caminho válido e retorna seu iterador.
    </shortdesc>
    <desc>
     <para>
-			Esta função converte uma string (ex. <literal>'0:1:0'</literal>)
-			para um <classname>GtkTreePath</classname> válido e retorna seu iterador apropriado.
+     Esta função converte uma string (ex. <literal>'0:1:0'</literal>)
+     para um <classname>GtkTreePath</classname> válido e retorna seu iterador 
+     apropriado.
     </para>
    </desc>
   </method>
@@ -198,11 +174,11 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-		Retorna o número de colunas usados pelo tree_model.
+    Retorna o número de colunas usados pelo tree_model.
    </shortdesc>
    <desc>
     <simpara>
-			Retorna o número de colunas usados pelo tree_model.
+     Retorna o número de colunas usados pelo tree_model.
     </simpara>
    </desc>
   </method>
@@ -215,12 +191,12 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-		Retorna o caminho para o iterador.
+    Retorna o caminho para o iterador.
    </shortdesc>
    <desc>
     <para>
-			Retorna o caminho para o iterador.
-		</para>
+     Retorna o caminho para o iterador.
+    </para>
    </desc>
   </method>
 
@@ -232,13 +208,13 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-		Gera uma representação do iterador na forma de uma string.
+    Gera uma representação do iterador na forma de uma string.
    </shortdesc>
    <desc>
     <para>
-			Gera uma representação do iterador na forma de uma string. Esta string é uma lista
-			de números separada por ':'. Por exemplo, <literal>"4:10:0:3"</literal> pode ser um valor
-			retornado aceitável para esta string.
+     Gera uma representação do iterador na forma de uma string. Esta string é uma lista
+     de números separada por ':'. Por exemplo, <literal>"4:10:0:3"</literal> pode ser um valor
+     retornado aceitável para esta string.
     </para>
    </desc>
   </method>
@@ -252,12 +228,12 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-		Retorna o valor de uma coluna de um iterador.
+    Retorna o valor de uma coluna de um iterador.
    </shortdesc>
    <desc>
     <para>
-			Retorna o valor definido em <parameter>column</parameter> para o
-			dado <parameter>iter</parameter>.
+     Retorna o valor definido em <parameter>column</parameter> para o
+     dado <parameter>iter</parameter>.
     </para>
    </desc>
   </method>
@@ -270,14 +246,14 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-		Retorna o iterador para a primeira linha child.
+    Retorna o iterador para a primeira linha child.
    </shortdesc>
    <desc>
     <para>
-			Retorna um iterador para a primeira linha child em 
-			<parameter>parent</parameter>. Se o parâmetro é omitido, ou 
-			<literal>null</literal> é passado, o iterador para a primeira linha raíz
-			é retornado.
+     Retorna um iterador para a primeira linha child em 
+     <parameter>parent</parameter>. Se o parâmetro é omitido, ou 
+     <literal>null</literal> é passado, o iterador para a primeira linha raíz
+     é retornado.
     </para>
    </desc>
   </method>
@@ -290,11 +266,11 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-		Se um iterador possui um ou mais filhos.
+    Se um iterador possui um ou mais filhos.
    </shortdesc>
    <desc>
     <para>
-			Informa se um iterador possui um ou mais filhos.
+     Informa se um iterador possui um ou mais filhos.
     </para>
    </desc>
   </method>
@@ -307,11 +283,11 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-		Retorna a quantidade de filhos que <parameter>iter</parameter> possui.
+    Retorna a quantidade de filhos que <parameter>iter</parameter> possui.
    </shortdesc>
    <desc>
     <para>
-			Retorna a quantidade de filhos que <parameter>iter</parameter> possui.
+     Retorna a quantidade de filhos que <parameter>iter</parameter> possui.
     </para>
    </desc>
   </method>
@@ -324,13 +300,13 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-		Próximo iterador no mesmo nível.
+    Próximo iterador no mesmo nível.
    </shortdesc>
    <desc>
     <para>
-			Retorna um iterador para a próxima linha no mesmo nível que seu
-			<parameter>sibling</parameter>. Retorna <literal>null</literal> se a linha não 
-			possuir um.
+     Retorna um iterador para a próxima linha no mesmo nível que seu
+     <parameter>sibling</parameter>. Retorna <literal>null</literal> se a linha não 
+     possuir um.
     </para>
    </desc>
   </method>
@@ -339,7 +315,9 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>iter_nth_child</function></funcdef>
-     <paramdef>void</paramdef>
+     
+     <paramdef><classname>GtkTreeIter</classname> <parameter>parent_iter</parameter></paramdef>
+     <paramdef><parameter>n</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -354,7 +332,8 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>iter_parent</function></funcdef>
-     <paramdef>void</paramdef>
+     
+     <paramdef><classname>GtkTreeIter</classname> <parameter><optional>iter</optional></parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -369,7 +348,8 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>ref_node</function></funcdef>
-     <paramdef>void</paramdef>
+     
+     <paramdef><classname>GtkTreeIter</classname> <parameter>iter</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -389,11 +369,11 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-		 Emite o sinal "row_changed".
+    Emite o sinal "row_changed".
    </shortdesc>
    <desc>
     <para>
-			Emite o sinal "row_changed".
+     Emite o sinal "row_changed".
     </para>
    </desc>
   </method>
@@ -406,11 +386,11 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-		 Emite o sinal "row_deleted".
+    Emite o sinal "row_deleted".
    </shortdesc>
    <desc>
     <simpara>
-			Emite o sinal "row_deleted".
+     Emite o sinal "row_deleted".
     </simpara>
    </desc>
   </method>
@@ -424,13 +404,13 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-		 Emite o sinal "row_has_child_toggled".
+    Emite o sinal "row_has_child_toggled".
    </shortdesc>
    <desc>
     <simpara>
-			Emite o sinal "row_has_child_toggled".
-			Este método deve ser chamado pelos modelos depois que o estado
-			de um nó filho seja modificado.
+     Emite o sinal "row_has_child_toggled".
+     Este método deve ser chamado pelos modelos depois que o estado
+     de um nó filho seja modificado.
     </simpara>
    </desc>
   </method>
@@ -444,11 +424,11 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-		 Emite o sinal "row_inserted".
+    Emite o sinal "row_inserted".
    </shortdesc>
    <desc>
     <simpara>
-			Emite o sinal "row_inserted".
+     Emite o sinal "row_inserted".
     </simpara>
    </desc>
   </method>
@@ -457,7 +437,8 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>unref_node</function></funcdef>
-     <paramdef>void</paramdef>
+     
+     <paramdef><classname>GtkTreeIter</classname> <parameter>iter</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -469,10 +450,11 @@
   </method>
 
  <method id="gtk.gtktreemodel.method.get">
-    <funcsynopsis>
-    <funcprototype>
-     <funcdef> <function>get</function></funcdef>
+  <funcsynopsis>
+   <funcprototype>
+    <funcdef> <function>get</function></funcdef>
      
+     <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -483,7 +465,7 @@
    </desc>
   </method>
 
-  </methods>
+ </methods>
 
 
 
@@ -499,11 +481,11 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-		 A linha foi modificada no modelo.
+    A linha foi modificada no modelo.
    </shortdesc>
    <desc>
     <simpara>
-			A linha foi modificada no modelo.
+     A linha foi modificada no modelo.
     </simpara>
    </desc>
   </signal>
@@ -517,11 +499,11 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-		A linha foi deletada.
+    A linha foi deletada.
    </shortdesc>
    <desc>
     <simpara>
-			A linha foi deletada.
+     A linha foi deletada.
     </simpara>
    </desc>
   </signal>
@@ -552,11 +534,11 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-		A linha foi inserida.
+    A linha foi inserida.
    </shortdesc>
    <desc>
     <simpara>
-			A linha foi inserida.
+     A linha foi inserida.
     </simpara>
    </desc>
   </signal>
@@ -570,7 +552,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-		As linhas foram reordenadas.
+    As linhas foram reordenadas.
    </shortdesc>
    <desc>
 

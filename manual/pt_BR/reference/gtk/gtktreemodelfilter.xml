@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 1.5 Maintainer: dnfeitosa Status: ready -->
+<!-- EN-Revision: 1.6 Maintainer: dnfeitosa Status: ready -->
 <classentry id="gtk.gtktreemodelfilter">
  <classmeta>
   <classtitle>GtkTreeModelFilter</classtitle>
   <classparent>GObject</classparent>
+  <implements>GtkTreeModel</implements>
+  <implements>GtkTreeDragSource</implements>
   <shortdesc>
-		Um GtkTreeModel wrapper que oculta partes da base do modelo.
+   Um GtkTreeModel wrapper que oculta partes da base do modelo.
   </shortdesc>
   <desc>
 
@@ -33,7 +35,8 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>convert_child_iter_to_iter</function></funcdef>
-     <paramdef>void</paramdef>
+     
+     <paramdef><classname>GtkTreeIter</classname> <parameter>child_iter</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -48,7 +51,8 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef> <function>convert_child_path_to_path</function></funcdef>
-     <paramdef>void</paramdef>
+     
+     <paramdef><parameter>child_path</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -63,7 +67,8 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>convert_iter_to_child_iter</function></funcdef>
-     <paramdef>void</paramdef>
+     
+     <paramdef><classname>GtkTreeIter</classname> <parameter>filter_iter</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -78,7 +83,8 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef> <function>convert_path_to_child_path</function></funcdef>
-     <paramdef>void</paramdef>
+     
+     <paramdef><parameter>filter_path</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -119,20 +125,7 @@
    </desc>
   </method>
 
-  <method id="gtk.gtktreemodelfilter.method.set_modify_func">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>void <function>set_modify_func</function></funcdef>
-     <paramdef>void</paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
 
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </method>
 
   <method id="gtk.gtktreemodelfilter.method.set_visible_column">
    <funcsynopsis>
@@ -153,21 +146,7 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_visible_func</function></funcdef>
-     <paramdef>void</paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
 
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </method>
-
- <method id="gtk.gtktreemodelfilter.method.foreach">
-    <funcsynopsis>
-    <funcprototype>
-     <funcdef> <function>foreach</function></funcdef>
      <paramdef><parameter>callback</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
@@ -179,396 +158,10 @@
    </desc>
   </method>
 
-  <method id="gtk.gtktreemodelfilter.method.get">
-    <funcsynopsis>
-    <funcprototype>
-     <funcdef> <function>get</function></funcdef>
-     
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
 
-   </shortdesc>
-   <desc>
 
-   </desc>
-  </method>
 
-  <method id="gtk.gtktreemodelfilter.method.get_column_type">
-    <funcsynopsis>
-    <funcprototype>
-     <funcdef> <function>get_column_type</function></funcdef>
-     <paramdef><parameter>index</parameter></paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
 
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </method>
-
-  <method id="gtk.gtktreemodelfilter.method.get_flags">
-    <funcsynopsis>
-    <funcprototype>
-     <funcdef> <function>get_flags</function></funcdef>
-     
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </method>
-
-  <method id="gtk.gtktreemodelfilter.method.get_iter">
-    <funcsynopsis>
-    <funcprototype>
-     <funcdef> <function>get_iter</function></funcdef>
-     <paramdef><parameter>treepath</parameter></paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </method>
-
-  <method id="gtk.gtktreemodelfilter.method.get_iter_first">
-    <funcsynopsis>
-    <funcprototype>
-     <funcdef> <function>get_iter_first</function></funcdef>
-     
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </method>
-
-  <method id="gtk.gtktreemodelfilter.method.get_iter_root">
-    <funcsynopsis>
-    <funcprototype>
-     <funcdef> <function>get_iter_root</function></funcdef>
-     
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </method>
-
-  <method id="gtk.gtktreemodelfilter.method.get_iter_from_string">
-    <funcsynopsis>
-    <funcprototype>
-     <funcdef> <function>get_iter_from_string</function></funcdef>
-     <paramdef><parameter>path</parameter></paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </method>
-
-  <method id="gtk.gtktreemodelfilter.method.get_n_columns">
-    <funcsynopsis>
-    <funcprototype>
-     <funcdef> <function>get_n_columns</function></funcdef>
-     
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </method>
-
-  <method id="gtk.gtktreemodelfilter.method.get_path">
-    <funcsynopsis>
-    <funcprototype>
-     <funcdef> <function>get_path</function></funcdef>
-     <paramdef><classname>GtkTreeIter</classname><parameter>iter</parameter></paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </method>
-
-  <method id="gtk.gtktreemodelfilter.method.get_string_from_iter">
-    <funcsynopsis>
-    <funcprototype>
-     <funcdef> <function>get_string_from_iter</function></funcdef>
-     <paramdef><classname>GtkTreeIter</classname><parameter>iter</parameter></paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </method>
-
-  <method id="gtk.gtktreemodelfilter.method.get_value">
-    <funcsynopsis>
-    <funcprototype>
-     <funcdef> <function>get_value</function></funcdef>
-     <paramdef><parameter>column</parameter></paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </method>
-
-  <method id="gtk.gtktreemodelfilter.method.iter_children">
-    <funcsynopsis>
-    <funcprototype>
-     <funcdef> <function>iter_children</function></funcdef>
-     <paramdef><classname>GtkTreeIter</classname><parameter>parent_iter</parameter></paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </method>
-
-  <method id="gtk.gtktreemodelfilter.method.iter_has_child">
-    <funcsynopsis>
-    <funcprototype>
-     <funcdef> <function>iter_has_child</function></funcdef>
-     <paramdef><classname>GtkTreeIter</classname><parameter>iter</parameter></paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </method>
-
-  <method id="gtk.gtktreemodelfilter.method.iter_n_children">
-    <funcsynopsis>
-    <funcprototype>
-     <funcdef> <function>iter_n_children</function></funcdef>
-     <paramdef><classname>GtkTreeIter</classname><parameter>iter</parameter></paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </method>
-
-  <method id="gtk.gtktreemodelfilter.method.iter_next">
-    <funcsynopsis>
-    <funcprototype>
-     <funcdef> <function>iter_next</function></funcdef>
-     <paramdef><classname>GtkTreeIter</classname><parameter>iter</parameter></paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </method>
-
-  <method id="gtk.gtktreemodelfilter.method.iter_nth_child">
-    <funcsynopsis>
-    <funcprototype>
-     <funcdef> <function>iter_nth_child</function></funcdef>
-     <paramdef><parameter>n</parameter></paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </method>
-
-  <method id="gtk.gtktreemodelfilter.method.iter_parent">
-    <funcsynopsis>
-    <funcprototype>
-     <funcdef> <function>iter_parent</function></funcdef>
-     <paramdef><classname>GtkTreeIter</classname><parameter><optional>iter</optional></parameter></paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </method>
-
-  <method id="gtk.gtktreemodelfilter.method.ref_node">
-    <funcsynopsis>
-    <funcprototype>
-     <funcdef> <function>ref_node</function></funcdef>
-     <paramdef><classname>GtkTreeIter</classname><parameter>iter</parameter></paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </method>
-
-  <method id="gtk.gtktreemodelfilter.method.row_changed">
-    <funcsynopsis>
-    <funcprototype>
-     <funcdef> <function>row_changed</function></funcdef>
-     <paramdef><classname>GtkTreeIter</classname><parameter>iter</parameter></paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </method>
-
-  <method id="gtk.gtktreemodelfilter.method.row_deleted">
-    <funcsynopsis>
-    <funcprototype>
-     <funcdef> <function>row_deleted</function></funcdef>
-     <paramdef><parameter>path</parameter></paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </method>
-
-  <method id="gtk.gtktreemodelfilter.method.row_has_child_toggled">
-    <funcsynopsis>
-    <funcprototype>
-     <funcdef> <function>row_has_child_toggled</function></funcdef>
-     <paramdef><classname>GtkTreeIter</classname><parameter>iter</parameter></paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </method>
-
-  <method id="gtk.gtktreemodelfilter.method.row_inserted">
-    <funcsynopsis>
-    <funcprototype>
-     <funcdef> <function>row_inserted</function></funcdef>
-     <paramdef><classname>GtkTreeIter</classname><parameter>iter</parameter></paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </method>
-
-  <method id="gtk.gtktreemodelfilter.method.unref_node">
-    <funcsynopsis>
-    <funcprototype>
-     <funcdef> <function>unref_node</function></funcdef>
-     <paramdef><classname>GtkTreeIter</classname><parameter>iter</parameter></paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </method>
-
-  <method id="gtk.gtktreemodelfilter.method.drag_data_delete">
-    <funcsynopsis>
-    <funcprototype>
-     <funcdef> <function>drag_data_delete</function></funcdef>
-     <paramdef><parameter>path</parameter></paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </method>
-
-  <method id="gtk.gtktreemodelfilter.method.drag_data_get">
-    <funcsynopsis>
-    <funcprototype>
-     <funcdef> <function>drag_data_get</function></funcdef>
-     <paramdef><classname>GtkSelectionData</classname><parameter>selection_data</parameter></paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </method>
-
-  <method id="gtk.gtktreemodelfilter.method.row_draggable">
-    <funcsynopsis>
-    <funcprototype>
-     <funcdef> <function>row_draggable</function></funcdef>
-     <paramdef><parameter>path</parameter></paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </method>
-
-  </methods>
+ </methods>
 
 </classentry>

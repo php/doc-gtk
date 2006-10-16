@@ -1,35 +1,35 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<!-- EN-Revision: 1.14 Maintainer: dnfeitosa Status: ready -->
+<!-- EN-Revision: 1.15 Maintainer: dnfeitosa Status: ready -->
 <classentry id="gtk.gtktreeview">
  <classmeta>
   <classtitle>GtkTreeView</classtitle>
   <classparent>GtkContainer</classparent>
   <classimage fileref="&directory.images;/reference/gtk/gtktreeview.png" frame="no"/>
   <shortdesc>
-	 Um widget para exibição de árvores e listas.
+   Um widget para exibição de árvores e listas.
   </shortdesc>
   <desc>
    <para>
-		 Uma GtkTreeView pode exibir tanto listas quanto estruturas de árvore. Para 
-		 exibir uma lista, passe um objeto <classname>GtkListStore</classname> no construtor
-		 ou <function class="GtkTreeView">set_model</function>. Para uma árvore, use um
-		 objeto <classname>GtkTreeStore</classname>. Basicamente, qualquer objeto ou 
-		 classe que implemente a interface <classname>GtkTreeModel</classname> 
-		 pode ser usado.
+    Uma GtkTreeView pode exibir tanto listas quanto estruturas de árvore. Para 
+    exibir uma lista, passe um objeto <classname>GtkListStore</classname> no construtor
+    ou <function class="GtkTreeView">set_model</function>. Para uma árvore, use um
+    objeto <classname>GtkTreeStore</classname>. Basicamente, qualquer objeto ou 
+    classe que implemente a interface <classname>GtkTreeModel</classname> 
+    pode ser usado.
    </para>
    <para>
-		 Depois de criar a view e definir o modelo, você precisará criar alguns
-		 <classname>GtkTreeViewColumn</classname>s e adicioná-los com 
-		 <function class="GtkTreeView">append_column</function>. Os widgets de coluna
-		 precisam de alguns <classname>GtkCellRenderer</classname>s 
-		 que desenham e exibem o dado do modelo.
+    Depois de criar a view e definir o modelo, você precisará criar alguns
+    <classname>GtkTreeViewColumn</classname>s e adicioná-los com 
+    <function class="GtkTreeView">append_column</function>. Os widgets de coluna
+    precisam de alguns <classname>GtkCellRenderer</classname>s 
+    que desenham e exibem o dado do modelo.
    </para>
    <para>
-		 Para obter as linhas selecionadas na view, pegue o objeto
+    Para obter as linhas selecionadas na view, pegue o objeto
     <classname>GtkTreeSelection</classname> que gerencia a seleção usando
     <function class="GtkTreeView">get_selection</function>.
-		Se você'
-	 	deseja restrear alguma mudança, conecte-o ao sinal
+    Se você'
+    deseja restrear alguma mudança, conecte-o ao sinal
     <signalname class="GtkTreeSelection">changed</signalname>.
    </para>
   </desc>
@@ -40,24 +40,23 @@
   <constructor id="gtk.gtktreeview.constructor">
    <funcsynopsis>
     <funcprototype>
-    <funcdef> <function>GtkTreeView</function></funcdef>
-    <paramdef><classname>GtkTreeModel</classname> <parameter><optional>model</optional></parameter></paramdef>
+     <funcdef> <function>GtkTreeView</function></funcdef>
+     <paramdef><classname>GtkTreeModel</classname> <parameter><optional>model</optional></parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-		 Cria um novo tree view.
+    Cria um novo tree view.
    </shortdesc>
    <desc>
     <para>
-			Cria um novo <classname>GtkTreeView</classname>, opcionalmente com uma fonte de dados.
-			Se você não definir esta fonte na construção, você pode usar
+     Cria um novo <classname>GtkTreeView</classname>, opcionalmente com uma fonte de dados.
+     Se você não definir esta fonte na construção, você pode usar
      <function class="GtkTreeView">set_model</function> para definí-la.
     </para>
     <example>
      <title>GtkTreeview com colunas ordenáveis e alguns dados</title>
      <programlisting role="php">
-      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
-                  href="&directory.examples;/reference/gtk/gtktreeview/constructor.phpw" parse="text">
+      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="&directory.examples;/reference/gtk/gtktreeview/constructor.phpw" parse="text">
        <xi:fallback>FIXME:MISSING XINCLUDE CONTENT</xi:fallback>
       </xi:include>
      </programlisting>
@@ -76,19 +75,19 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-		Adiciona uma coluna à view.
+    Adiciona uma coluna à view.
    </shortdesc>
    <desc>
     <para>
-		 Adiciona uma coluna no final (ex. o lugar mais à direita) da view.
+     Adiciona uma coluna no final (ex. o lugar mais à direita) da view.
     </para>
     <example>
      <title>Adicionando uma coluna à um tree view</title>
      <programlisting role="php"><![CDATA[
-$renderer = new GtkCellRendererText();
-$column = new GtkTreeViewColumn('Title', $renderer, 'text', 0);
-$treeview->append_column($column);
-]]></programlisting>
+      $renderer = new GtkCellRendererText();
+      $column = new GtkTreeViewColumn('Title', $renderer, 'text', 0);
+      $treeview->append_column($column);
+      ]]></programlisting>
     </example>
     <para>
      &seealso;
@@ -107,11 +106,11 @@ $treeview->append_column($column);
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-		Oculta todos os nós.
+    Oculta todos os nós.
    </shortdesc>
    <desc>
     <para>
-		 Oculta recursivamente todos os nós visíveis e expandidos na tree view.
+     Oculta recursivamente todos os nós visíveis e expandidos na tree view.
     </para>
     <para>
      &seealso;
@@ -129,12 +128,12 @@ $treeview->append_column($column);
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-		Oculta uma linha.
+    Oculta uma linha.
    </shortdesc>
    <desc>
     <para>
-			Oculta a linha definida em <parameter>path</parameter>
-			(oculta suas linhas child, se existirem).
+     Oculta a linha definida em <parameter>path</parameter>
+     (oculta suas linhas child, se existirem).
     </para>
     <para>
      &seealso;
@@ -152,12 +151,12 @@ $treeview->append_column($column);
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-		 Redimensiona todas as colunas para seus tamanhos apropriados.
+    Redimensiona todas as colunas para seus tamanhos apropriados.
    </shortdesc>
    <desc>
     <para>
-		 Redimensiona todas as colunas para seus tamanhos apropriados.
-		 Funciona apenas se a treeview já foi processada e exibida.
+     Redimensiona todas as colunas para seus tamanhos apropriados.
+     Funciona apenas se a treeview já foi processada e exibida.
     </para>
    </desc>
   </method>
@@ -170,46 +169,16 @@ $treeview->append_column($column);
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-		Cria uma representação GdkPixmap da linha.
+    Cria uma representação GdkPixmap da linha.
    </shortdesc>
    <desc>
     <para>
-			Cria uma repredentação <classname>GdkPixmap</classname> da linha
-			dada por <parameter>path</parameter>. 
-			Esta imagem é usada em um ícone.
+     Cria uma repredentação <classname>GdkPixmap</classname> da linha
+     dada por <parameter>path</parameter>.  Esta imagem é usada em um ícone.
     </para>
    </desc>
   </method>
 
-  <method id="gtk.gtktreeview.method.enable_model_drag_dest">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>void <function>enable_model_drag_dest</function></funcdef>
-     <paramdef>void</paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-<!-- FIXME -->
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </method>
-
-  <method id="gtk.gtktreeview.method.enable_model_drag_source">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>void <function>enable_model_drag_source</function></funcdef>
-     <paramdef>void</paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-<!-- FIXME -->
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </method>
 
   <method id="gtk.gtktreeview.method.expand_all">
    <funcsynopsis>
@@ -219,11 +188,11 @@ $treeview->append_column($column);
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-		Expande recursivamente todos os nós na tree view.
+    Expande recursivamente todos os nós na tree view.
    </shortdesc>
    <desc>
     <para>
-			Expande recursivamente todos os nós na tree view.
+     Expande recursivamente todos os nós na tree view.
     </para>
     <para>
      &seealso;
@@ -238,15 +207,17 @@ $treeview->append_column($column);
    <funcsynopsis>
     <funcprototype>
      <funcdef>bool <function>expand_row</function></funcdef>
-     <paramdef><classname>GtkTreePath</classname> <parameter>path</parameter></paramdef>
+
+     <paramdef><parameter>path</parameter></paramdef>
+     <paramdef><parameter>open_all</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-		Abre uma linha e torna seus childs visíveis.
+    Abre uma linha e torna seus childs visíveis.
    </shortdesc>
    <desc>
     <para>
-			Abre uma linha e torna seus childs visíveis.
+     Abre uma linha e torna seus childs visíveis.
     </para>
     <para>
      &seealso;
@@ -260,16 +231,17 @@ $treeview->append_column($column);
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>expand_to_path</function></funcdef>
-     <paramdef>void</paramdef>
+
+     <paramdef><parameter>path</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-		Expande a linha por um caminho.
+    Expande a linha por um caminho.
    </shortdesc>
    <desc>
     <para>
-			Expande a linha por um caminho. Isto irá também expandir
-			todas as linhas no caminho se necessário.
+     Expande a linha por um caminho. Isto irá também expandir
+     todas as linhas no caminho se necessário.
     </para>
    </desc>
   </method>
@@ -278,11 +250,14 @@ $treeview->append_column($column);
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>get_background_area</function></funcdef>
-     <paramdef>void</paramdef>
+
+     <paramdef><parameter>path</parameter></paramdef>
+     <paramdef><classname>GtkTreeViewColumn</classname> <parameter>column</parameter></paramdef>
+     <paramdef><classname>GdkRectangle</classname> <parameter>rect</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-<!-- FIXME -->
+    <!-- FIXME -->
    </shortdesc>
    <desc>
 
@@ -297,12 +272,12 @@ $treeview->append_column($column);
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-		Retorna a janela na qual a tree view se encontra.
+    Retorna a janela na qual a tree view se encontra.
    </shortdesc>
    <desc>
     <para>
-			Retorna a janela na qual a tree view se encontra. Isto é usado para saber se o evento 
-			na treeview está na janela correta.
+     Retorna a janela na qual a tree view se encontra. Isto é usado para saber se o evento 
+     na treeview está na janela correta.
     </para>
    </desc>
   </method>
@@ -311,11 +286,14 @@ $treeview->append_column($column);
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>get_cell_area</function></funcdef>
-     <paramdef>void</paramdef>
+
+     <paramdef><parameter>path</parameter></paramdef>
+     <paramdef><classname>GtkTreeViewColumn</classname> <parameter>column</parameter></paramdef>
+     <paramdef><classname>GdkRectangle</classname> <parameter>rect</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-<!-- FIXME -->
+    <!-- FIXME -->
    </shortdesc>
    <desc>
 
@@ -330,11 +308,11 @@ $treeview->append_column($column);
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-		 Retorna um GtkTreeViewColumn em uma determinada posição.
+    Retorna um GtkTreeViewColumn em uma determinada posição.
    </shortdesc>
    <desc>
     <para>
-			Retorna um GtkTreeViewColumn em uma determinada posição.
+     Retorna um GtkTreeViewColumn em uma determinada posição.
     </para>
     <para>
      &seealso;
@@ -353,7 +331,7 @@ $treeview->append_column($column);
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-<!-- FIXME: not implemented -->
+    <!-- FIXME: not implemented -->
    </shortdesc>
    <desc>
 
@@ -368,12 +346,12 @@ $treeview->append_column($column);
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-		Retorna o caminho e a coluna com foco.
+    Retorna o caminho e a coluna com foco.
    </shortdesc>
    <desc>
     <para>
-			Retorna um array com o caminho e o <classname>GtkTreeViewColumn</classname> 
-			que está ativo no momento.
+     Retorna um array com o caminho e o <classname>GtkTreeViewColumn</classname> 
+     que está ativo no momento.
     </para>
     <para>
      &seealso;
@@ -382,39 +360,6 @@ $treeview->append_column($column);
    </desc>
   </method>
 
-  <method id="gtk.gtktreeview.method.get_dest_row_at_pos">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>bool <function>get_dest_row_at_pos</function></funcdef>
-     <paramdef>void</paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </method>
-
-  <method id="gtk.gtktreeview.method.get_drag_dest_row">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>void <function>get_drag_dest_row</function></funcdef>
-     <paramdef>void</paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-   <desc>
-    <para>
-     &seealso;
-     <function class="GtkTreeView">set_drag_dest_row</function>
-    </para>
-
-   </desc>
-  </method>
 
   <method id="gtk.gtktreeview.method.get_enable_search">
    <funcsynopsis>
@@ -424,11 +369,11 @@ $treeview->append_column($column);
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-		Retorna se a árvore permite ou não uma busca interativa.
+    Retorna se a árvore permite ou não uma busca interativa.
    </shortdesc>
    <desc>
     <para>
-			Retorna se a árvore permite ou não uma busca interativa.
+     Retorna se a árvore permite ou não uma busca interativa.
     </para>
     <para>
      &seealso;
@@ -445,12 +390,12 @@ $treeview->append_column($column);
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-		Retorna a coluna que possui o botão para expansão.
+    Retorna a coluna que possui o botão para expansão.
    </shortdesc>
    <desc>
     <para>
-			Retorna a coluna que possui o botão para expansão.
-			Esta coluna possui esta seta de expansão desenhada próximo a ela.
+     Retorna a coluna que possui o botão para expansão.
+     Esta coluna possui esta seta de expansão desenhada próximo a ela.
     </para>
     <para>
      &seealso;
@@ -467,11 +412,11 @@ $treeview->append_column($column);
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-		Retorna se a modo de altura fixa está ativada ou não.
+    Retorna se a modo de altura fixa está ativada ou não.
    </shortdesc>
    <desc>
     <para>
-			Retorna se a modo de altura fixa está ativada ou não para a tree view.
+     Retorna se a modo de altura fixa está ativada ou não para a tree view.
     </para>
     <para>
      &seealso;
@@ -488,12 +433,12 @@ $treeview->append_column($column);
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-		 Retorna o GtkAdjustment para o posicionamento horizontal.
+    Retorna o GtkAdjustment para o posicionamento horizontal.
    </shortdesc>
    <desc>
     <para>
-			Retorna o <classname>GtkAdjustment</classname> atualmente usado para o posicionamento
-			horizontal.
+     Retorna o <classname>GtkAdjustment</classname> atualmente usado para o posicionamento
+     horizontal.
     </para>
     <para>
      &seealso;
@@ -510,11 +455,11 @@ $treeview->append_column($column);
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-		Se os cabeçalhos são visíveis.
+    Se os cabeçalhos são visíveis.
    </shortdesc>
    <desc>
     <para>
-			Retorna se os cabeçalhos são visíveis ou não.
+     Retorna se os cabeçalhos são visíveis ou não.
     </para>
     <para>
      &seealso;
@@ -531,11 +476,11 @@ $treeview->append_column($column);
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-		Se o modo de expansão está ativado.
+    Se o modo de expansão está ativado.
    </shortdesc>
    <desc>
     <para>
-			Se o modo de expansão está ativado.
+     Se o modo de expansão está ativado.
     </para>
     <para>
      &seealso;
@@ -553,11 +498,11 @@ $treeview->append_column($column);
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-		 Se o modo de seleção está ativado.
+    Se o modo de seleção está ativado.
    </shortdesc>
    <desc>
     <para>
-			Se o modo de seleção está ativado.
+     Se o modo de seleção está ativado.
     </para>
     <para>
      &seealso;
@@ -575,11 +520,11 @@ $treeview->append_column($column);
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-		Retorna o modelo usado.
+    Retorna o modelo usado.
    </shortdesc>
    <desc>
     <para>
-		 Retorna o modelo da árvore/lista usado para armazenar o dado.
+     Retorna o modelo da árvore/lista usado para armazenar o dado.
     </para>
     <para>
      &seealso;
@@ -597,15 +542,15 @@ $treeview->append_column($column);
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-		 Retorna o caminho da árvore na posição do pixel.
+    Retorna o caminho da árvore na posição do pixel.
    </shortdesc>
    <desc>
     <para>
-			Retorna o caminho da árvore na posição do pixel. As coordenadas devem ser
-			de um widget.
+     Retorna o caminho da árvore na posição do pixel. As coordenadas devem ser
+     de um widget.
     </para>
     <para>
-		 O array retornado possui quatro elementos:
+     O array retornado possui quatro elementos:
      <itemizedlist>
       <listitem>
        <classname>GtkTreePath</classname> da linha nesta posição
@@ -632,11 +577,11 @@ $treeview->append_column($column);
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-		Retorna se o usuário pode ou não reordenar as linhas através de arraste.
+    Retorna se o usuário pode ou não reordenar as linhas através de arraste.
    </shortdesc>
    <desc>
     <para>
-			Retorna se o usuário pode ou não reordenar as linhas através de arraste.
+     Retorna se o usuário pode ou não reordenar as linhas através de arraste.
     </para>
     <para>
      &seealso;
@@ -645,26 +590,6 @@ $treeview->append_column($column);
    </desc>
   </method>
 
-  <method id="gtk.gtktreeview.method.get_row_separator_func">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>callback <function>get_row_separator_func</function></funcdef>
-     <paramdef>void</paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-		Retorna a função atual de separação de linhas.
-   </shortdesc>
-   <desc>
-    <para>
-			Retorna a função atual de separação de linhas.
-    </para>
-    <para>
-     &seealso;
-     <function class="GtkTreeView">set_row_separator_func</function>
-    </para>
-   </desc>
-  </method>
 
   <method id="gtk.gtktreeview.method.get_rules_hint">
    <funcsynopsis>
@@ -674,11 +599,11 @@ $treeview->append_column($column);
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-		Retorna a configuração de rules_hint.
+    Retorna a configuração de rules_hint.
    </shortdesc>
    <desc>
     <para>
-			Retorna a configuração definida em
+     Retorna a configuração definida em
      <function class="GtkTreeView">set_rules_hint</function>.
     </para>
     <para>
@@ -696,11 +621,11 @@ $treeview->append_column($column);
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-		Retorna o identificador usado em buscas.
+    Retorna o identificador usado em buscas.
    </shortdesc>
    <desc>
     <para>
-			Retorna o identificador usado em buscas.
+     Retorna o identificador usado em buscas.
     </para>
     <para>
      &seealso;
@@ -709,24 +634,6 @@ $treeview->append_column($column);
    </desc>
   </method>
 
-  <method id="gtk.gtktreeview.method.get_search_equal_func">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef> <function>get_search_equal_func</function></funcdef>
-     <paramdef>void</paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-   <desc>
-    <para>
-     &seealso;
-     <function class="GtkTreeView">set_search_equal_func</function>
-    </para>
-
-   </desc>
-  </method>
 
   <method id="gtk.gtktreeview.method.get_selection">
    <funcsynopsis>
@@ -736,23 +643,22 @@ $treeview->append_column($column);
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-		Retirna o objeto de seleção associado com a view.
+    Retirna o objeto de seleção associado com a view.
    </shortdesc>
    <desc>
     <para>
-			Este método retorna o objeto <classname>GtkTreeSelection</classname> associado
-			à view. O objeto de seleção por si só contém todos os dados a respeito da seleção,
-			a partir de uma única ou múltiplas linhas selecionadas.
+     Este método retorna o objeto <classname>GtkTreeSelection</classname> associado
+     à view. O objeto de seleção por si só contém todos os dados a respeito da seleção,
+     a partir de uma única ou múltiplas linhas selecionadas.
     </para>
     <para>
-			Tenha sempre em mente que a view, não o modelo, possui uma seleção, o que significa
-			que diferentes views do mesmo modelo podem possuir diferentes seleções.
+     Tenha sempre em mente que a view, não o modelo, possui uma seleção, o que significa
+     que diferentes views do mesmo modelo podem possuir diferentes seleções.
     </para>
     <example>
      <title>Usando o GtkTreeSelection</title>
      <programlisting role="php">
-      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
-                  href="&directory.examples;/reference/gtk/gtktreeview/selection.phpw" parse="text">
+      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="&directory.examples;/reference/gtk/gtktreeview/selection.phpw" parse="text">
        <xi:fallback>FIXME:MISSING XINCLUDE CONTENT</xi:fallback>
       </xi:include>
      </programlisting>
@@ -784,6 +690,7 @@ $treeview->append_column($column);
     <funcprototype>
      <funcdef>void <function>get_visible_rect</function></funcdef>
      <paramdef>GdkRectangle <parameter>visible_rect</parameter></paramdef>
+     <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -815,26 +722,16 @@ $treeview->append_column($column);
    </desc>
   </method>
 
-  <method id="gtk.gtktreeview.method.insert_column_with_attributes">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>int <function>insert_column_with_attributes</function></funcdef>
-     <paramdef>void</paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </method>
 
   <method id="gtk.gtktreeview.method.insert_column_with_data_func">
    <funcsynopsis>
     <funcprototype>
      <funcdef>int <function>insert_column_with_data_func</function></funcdef>
-     <paramdef>void</paramdef>
+
+     <paramdef><parameter>position</parameter></paramdef>
+     <paramdef><parameter>title</parameter></paramdef>
+     <paramdef><classname>GtkCellRenderer</classname> <parameter>cellrenderer</parameter></paramdef>
+     <paramdef><parameter>callback</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -845,20 +742,6 @@ $treeview->append_column($column);
    </desc>
   </method>
 
-  <method id="gtk.gtktreeview.method.map_expanded_rows">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>void <function>map_expanded_rows</function></funcdef>
-     <paramdef>void</paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </method>
 
   <method id="gtk.gtktreeview.method.move_column_after">
    <funcsynopsis>
@@ -901,7 +784,9 @@ $treeview->append_column($column);
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>row_activated</function></funcdef>
-     <paramdef>void</paramdef>
+
+     <paramdef><parameter>path</parameter></paramdef>
+     <paramdef><classname>GtkTreeViewColumn</classname> <parameter>column</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -916,7 +801,8 @@ $treeview->append_column($column);
    <funcsynopsis>
     <funcprototype>
      <funcdef>bool <function>row_expanded</function></funcdef>
-     <paramdef>void</paramdef>
+
+     <paramdef><parameter>path</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -931,7 +817,12 @@ $treeview->append_column($column);
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>scroll_to_cell</function></funcdef>
-     <paramdef>void</paramdef>
+
+     <paramdef><parameter>path</parameter></paramdef>
+     <paramdef><classname>GtkTreeViewColumn</classname> <parameter><optional>column</optional></parameter></paramdef>
+     <paramdef><parameter><optional>use_align</optional></parameter></paramdef>
+     <paramdef><parameter><optional>row_align</optional></parameter></paramdef>
+     <paramdef><parameter><optional>col_align</optional></parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -962,7 +853,8 @@ $treeview->append_column($column);
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_column_drag_function</function></funcdef>
-     <paramdef>void</paramdef>
+
+     <paramdef><parameter>callback</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -977,7 +869,10 @@ $treeview->append_column($column);
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_cursor</function></funcdef>
-     <paramdef>void</paramdef>
+
+     <paramdef><parameter>path</parameter></paramdef>
+     <paramdef><classname>GtkTreeViewColumn</classname> <parameter><optional>focus_column</optional></parameter></paramdef>
+     <paramdef><parameter><optional>start_editing</optional></parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -996,7 +891,11 @@ $treeview->append_column($column);
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_cursor_on_cell</function></funcdef>
-     <paramdef>void</paramdef>
+
+     <paramdef><parameter>path</parameter></paramdef>
+     <paramdef><classname>GtkTreeViewColumn</classname> <parameter><optional>focus_column</optional></parameter></paramdef>
+     <paramdef><classname>GtkCellRenderer</classname> <parameter><optional>focus_cell</optional></parameter></paramdef>
+     <paramdef><parameter><optional>start_editing</optional></parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -1007,26 +906,14 @@ $treeview->append_column($column);
    </desc>
   </method>
 
-  <method id="gtk.gtktreeview.method.set_destroy_count_func">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>void <function>set_destroy_count_func</function></funcdef>
-     <paramdef>void</paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </method>
 
   <method id="gtk.gtktreeview.method.set_drag_dest_row">
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_drag_dest_row</function></funcdef>
-     <paramdef>void</paramdef>
+
+     <paramdef><parameter>path</parameter></paramdef>
+     <paramdef><parameter>pos</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -1106,15 +993,15 @@ $treeview->append_column($column);
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-		 Define o GtkAdjustment para a posição horizontal.
+    Define o GtkAdjustment para a posição horizontal.
    </shortdesc>
    <desc>
     <para>
-			Define o GtkAdjustment para a posição horizontal.
+     Define o GtkAdjustment para a posição horizontal.
     </para>
     <para>
-			Em circunstâncias normais você não precisa deste método se você utilizar 
-			uma <classname>GtkScrolledWindow</classname> e adicionar
+     Em circunstâncias normais você não precisa deste método se você utilizar 
+     uma <classname>GtkScrolledWindow</classname> e adicionar
      (<function class="GtkContainer">add</function>) a view à ela.
     </para>
     <para>
@@ -1205,13 +1092,13 @@ $treeview->append_column($column);
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-		Define o modelo para a view.
+    Define o modelo para a view.
    </shortdesc>
    <desc>
     <para>
-			Define o modelo para a view. Se a view já possui um modelo definido,
-			ele será removido antes do novo modelo ser definido. Se o modelo for
-			<literal>null</literal>, então o antigo será excluído.
+     Define o modelo para a view. Se a view já possui um modelo definido,
+     ele será removido antes do novo modelo ser definido. Se o modelo for
+     <literal>null</literal>, então o antigo será excluído.
     </para>
     <para>
      &seealso;
@@ -1228,25 +1115,25 @@ $treeview->append_column($column);
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-		Habilita/desabilita a reordenação das linhas.
+    Habilita/desabilita a reordenação das linhas.
    </shortdesc>
    <desc>
     <para>
-			Esta função é uma função de conveniência que permite reordenar modelos
-			que suportam <literal>GtkDragSourceIface</literal> e
+     Esta função é uma função de conveniência que permite reordenar modelos
+     que suportam <literal>GtkDragSourceIface</literal> e
      <literal>GtkDragDestIface</literal>. Ambos
      <classname>GtkTreeStore</classname> e
-		 <classname>GtkListStore</classname> o suportam. Se 
-		 <parameter>reorderable</parameter> é <literal>true</literal>, então
-		 o usuário pode reordenar o modelo arastando e soltando linhas. O desenvolvedor
-		 pode capturar essas mudanças conectando ao modelo os sinais
+     <classname>GtkListStore</classname> o suportam. Se 
+     <parameter>reorderable</parameter> é <literal>true</literal>, então
+     o usuário pode reordenar o modelo arastando e soltando linhas. O desenvolvedor
+     pode capturar essas mudanças conectando ao modelo os sinais
      <signalname class="GtkTreeModel">row-inserted</signalname> e
      <signalname class="GtkTreeModel">row-deleted</signalname>.
     </para>
     <para>
-			Esta função não oferece nenhum controle sobre a ordem - qualquer reordenação é
-			permitida. Se mais controle é necessário, você deve provavelmente manipular
-			o arrastamento manualmente.
+     Esta função não oferece nenhum controle sobre a ordem - qualquer reordenação é
+     permitida. Se mais controle é necessário, você deve provavelmente manipular
+     o arrastamento manualmente.
     </para>
     <para>
      &seealso;
@@ -1259,7 +1146,8 @@ $treeview->append_column($column);
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_row_separator_func</function></funcdef>
-     <paramdef>void</paramdef>
+
+     <paramdef><parameter>callback</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -1301,16 +1189,16 @@ $treeview->append_column($column);
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-		 Define as colunas da busca interativa.
+    Define as colunas da busca interativa.
    </shortdesc>
    <desc>
     <para>
-			Define quais as colunas na qual a busca interativa pode buscar.
-			Adicionalmente, habilita a busca interativa.
+     Define quais as colunas na qual a busca interativa pode buscar.
+     Adicionalmente, habilita a busca interativa.
     </para>
     <note>
      <para>
-			 A coluna se refere à uma coluna no modelo.
+      A coluna se refere à uma coluna no modelo.
      </para>
     </note>
     <para>
@@ -1324,7 +1212,8 @@ $treeview->append_column($column);
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_search_equal_func</function></funcdef>
-     <paramdef>void</paramdef>
+
+     <paramdef><parameter>callback</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -1346,16 +1235,16 @@ $treeview->append_column($column);
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-		Define o GtkAdjustment para a posição vertical.
+    Define o GtkAdjustment para a posição vertical.
    </shortdesc>
    <desc>
     <para>
-			Define o GtkAdjustment para a posição vertical.
+     Define o GtkAdjustment para a posição vertical.
     </para>
     <para>
-			Em circunstâncias normais, você não precisa deste método se estiver
-			usando uma <classname>GtkScrolledWindow</classname> e adicionar
-			(<function class="GtkContainer">add</function>) a view à ele.
+     Em circunstâncias normais, você não precisa deste método se estiver
+     usando uma <classname>GtkScrolledWindow</classname> e adicionar
+     (<function class="GtkContainer">add</function>) a view à ele.
     </para>
     <para>
      &seealso;
@@ -1369,7 +1258,9 @@ $treeview->append_column($column);
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>tree_to_widget_coords</function></funcdef>
-     <paramdef>void</paramdef>
+
+     <paramdef><parameter>tx</parameter></paramdef>
+     <paramdef><parameter>ty</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -1414,7 +1305,9 @@ $treeview->append_column($column);
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>widget_to_tree_coords</function></funcdef>
-     <paramdef>void</paramdef>
+
+     <paramdef><parameter>wx</parameter></paramdef>
+     <paramdef><parameter>wy</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -1443,7 +1336,7 @@ $treeview->append_column($column);
 
    </desc>
   </signal>
-  
+
   <signal id="gtk.gtktreeview.signal.cursor-changed">
    <signalname>cursor-changed</signalname>
    <funcsynopsis>
@@ -1458,7 +1351,7 @@ $treeview->append_column($column);
 
    </desc>
   </signal>
-  
+
   <signal id="gtk.gtktreeview.signal.expand-collapse-cursor-row">
    <signalname>expand-collapse-cursor-row</signalname>
    <funcsynopsis>
@@ -1476,7 +1369,7 @@ $treeview->append_column($column);
 
    </desc>
   </signal>
-  
+
   <signal id="gtk.gtktreeview.signal.move-cursor">
    <signalname>move-cursor</signalname>
    <funcsynopsis>
@@ -1493,7 +1386,7 @@ $treeview->append_column($column);
 
    </desc>
   </signal>
-  
+
   <signal id="gtk.gtktreeview.signal.row-activated">
    <signalname>row-activated</signalname>
    <funcsynopsis>
@@ -1510,7 +1403,7 @@ $treeview->append_column($column);
 
    </desc>
   </signal>
-  
+
   <signal id="gtk.gtktreeview.signal.row-collapsed">
    <signalname>row-collapsed</signalname>
    <funcsynopsis>
@@ -1527,7 +1420,7 @@ $treeview->append_column($column);
 
    </desc>
   </signal>
-  
+
   <signal id="gtk.gtktreeview.signal.row-expanded">
    <signalname>row-expanded</signalname>
    <funcsynopsis>
@@ -1544,7 +1437,7 @@ $treeview->append_column($column);
 
    </desc>
   </signal>
-  
+
   <signal id="gtk.gtktreeview.signal.select-all">
    <signalname>select-all</signalname>
    <funcsynopsis>
@@ -1559,7 +1452,7 @@ $treeview->append_column($column);
 
    </desc>
   </signal>
-  
+
   <signal id="gtk.gtktreeview.signal.select-cursor-parent">
    <signalname>select-cursor-parent</signalname>
    <funcsynopsis>
@@ -1574,7 +1467,7 @@ $treeview->append_column($column);
 
    </desc>
   </signal>
-  
+
   <signal id="gtk.gtktreeview.signal.select-cursor-row">
    <signalname>select-cursor-row</signalname>
    <funcsynopsis>
@@ -1590,7 +1483,7 @@ $treeview->append_column($column);
 
    </desc>
   </signal>
-  
+
   <signal id="gtk.gtktreeview.signal.set-scroll-adjustments">
    <signalname>set-scroll-adjustments</signalname>
    <funcsynopsis>
@@ -1607,7 +1500,7 @@ $treeview->append_column($column);
 
    </desc>
   </signal>
-  
+
   <signal id="gtk.gtktreeview.signal.start-interactive-search">
    <signalname>start-interactive-search</signalname>
    <funcsynopsis>
@@ -1622,7 +1515,7 @@ $treeview->append_column($column);
 
    </desc>
   </signal>
-  
+
   <signal id="gtk.gtktreeview.signal.test-collapse-row">
    <signalname>test-collapse-row</signalname>
    <funcsynopsis>
@@ -1639,7 +1532,7 @@ $treeview->append_column($column);
 
    </desc>
   </signal>
-  
+
   <signal id="gtk.gtktreeview.signal.test-expand-row">
    <signalname>test-expand-row</signalname>
    <funcsynopsis>
@@ -1656,7 +1549,7 @@ $treeview->append_column($column);
 
    </desc>
   </signal>
-  
+
   <signal id="gtk.gtktreeview.signal.toggle-cursor-row">
    <signalname>toggle-cursor-row</signalname>
    <funcsynopsis>
@@ -1671,7 +1564,7 @@ $treeview->append_column($column);
 
    </desc>
   </signal>
-  
+
   <signal id="gtk.gtktreeview.signal.unselect-all">
    <signalname>unselect-all</signalname>
    <funcsynopsis>
@@ -1686,7 +1579,7 @@ $treeview->append_column($column);
 
    </desc>
   </signal>
-  
+
  </signals>
 
 </classentry>

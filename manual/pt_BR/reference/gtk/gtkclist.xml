@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 1.13 Maintainer: dnfeitosa Status: ready -->
+<!-- EN-Revision: 1.14 Maintainer: dnfeitosa Status: ready -->
 <classentry id="gtk.gtkclist">
  <classmeta>
   <classtitle>GtkCList</classtitle>
@@ -41,20 +41,6 @@
 
  <methods>
 
-  <method id="gtk.gtkclist.method.append">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>int <function>append</function></funcdef>
-     <paramdef>void</paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-		OBSOLETO. Adiciona uma linha no rodapé da lista.
-   </shortdesc>
-   <desc>
-    &deprecated.method;
-   </desc>
-  </method>
 
   <method id="gtk.gtkclist.method.clear">
    <funcsynopsis>
@@ -177,20 +163,6 @@
    </desc>
   </method>
 
-  <method id="gtk.gtkclist.method.find_row_from_data">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>int <function>find_row_from_data</function></funcdef>
-     <paramdef>void</paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-		OBSOLETO. Procura na CList pela linha com um dado específico.
-   </shortdesc>
-   <desc>
-    &deprecated.method;
-   </desc>
-  </method>
 
   <method id="gtk.gtkclist.method.freeze">
    <funcsynopsis>
@@ -302,62 +274,6 @@
    </desc>
   </method>
 
-  <method id="gtk.gtkclist.method.get_pixmap">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>int <function>get_pixmap</function></funcdef>
-     <paramdef>void</paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-		OBSOLETO. Retorna a máscara da célula especificada.
-   </shortdesc>
-   <desc>
-    &deprecated.method;
-    <para>
-     &seealso;
-     <function class="GtkCList">set_pixmap</function>
-    </para>
-   </desc>
-  </method>
-
-  <method id="gtk.gtkclist.method.get_pixtext">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>int <function>get_pixtext</function></funcdef>
-     <paramdef>void</paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-		OBSOLETO. Retorna o texto e as máscaras para a célula especificada.
-   </shortdesc>
-   <desc>
-    &deprecated.method;
-    <para>
-     &seealso;
-     <function class="GtkCList">set_pixtext</function>
-    </para>
-   </desc>
-  </method>
-
-  <method id="gtk.gtkclist.method.get_row_data">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef> <function>get_row_data</function></funcdef>
-     <paramdef>int <parameter>row</parameter></paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-		OBSOLETO. Retorna o dado atual de uma linha específica.
-   </shortdesc>
-   <desc>
-    &deprecated.method;
-    <para>
-     &seealso;
-     <function class="GtkCList">set_row_data</function>
-    </para>
-   </desc>
-  </method>
 
   <method id="gtk.gtkclist.method.get_row_style">
    <funcsynopsis>
@@ -401,7 +317,9 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>int <function>get_selection_info</function></funcdef>
-     <paramdef>void</paramdef>
+     
+     <paramdef><parameter>x</parameter></paramdef>
+     <paramdef><parameter>y</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -413,24 +331,6 @@
    </desc>
   </method>
 
-  <method id="gtk.gtkclist.method.get_text">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>int <function>get_text</function></funcdef>
-     <paramdef>void</paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-		OBSOLETO. Retorna o texto de uma célula específica.
-   </shortdesc>
-   <desc>
-    &deprecated.method;
-    <para>
-     &seealso;
-     <function class="GtkCList">set_text</function>
-    </para>
-   </desc>
-  </method>
 
   <method id="gtk.gtkclist.method.get_vadjustment">
    <funcsynopsis>
@@ -452,20 +352,6 @@
    </desc>
   </method>
 
-  <method id="gtk.gtkclist.method.insert">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>int <function>insert</function></funcdef>
-     <paramdef>void</paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-		OBSOLETO. Adiciona uma linha de texto na CList em uma posição específica.
-   </shortdesc>
-   <desc>
-    &deprecated.method;
-   </desc>
-  </method>
 
   <method id="gtk.gtkclist.method.moveto">
    <funcsynopsis>
@@ -505,35 +391,6 @@
    </desc>
   </method>
 
-  <method id="gtk.gtkclist.method.prepend">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>int <function>prepend</function></funcdef>
-     <paramdef>void</paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-		OBSOLETO. Adiciona uma linha no topo da lista.
-   </shortdesc>
-   <desc>
-    &deprecated.method;
-   </desc>
-  </method>
-
-  <method id="gtk.gtkclist.method.remove">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>void <function>remove</function></funcdef>
-     <paramdef>int <parameter>row</parameter></paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-		OBSOLETO. Remove uma linha específica da lista.
-   </shortdesc>
-   <desc>
-    &deprecated.method;
-   </desc>
-  </method>
 
   <method id="gtk.gtkclist.method.row_is_visible">
    <funcsynopsis>
@@ -625,7 +482,9 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_background</function></funcdef>
-     <paramdef>void</paramdef>
+     
+     <paramdef><parameter>row</parameter></paramdef>
+     <paramdef><classname>GdkColor</classname> <parameter>color</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -832,27 +691,15 @@
    </desc>
   </method>
 
-  <method id="gtk.gtkclist.method.set_compare_func">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>void <function>set_compare_func</function></funcdef>
-     <paramdef>void</paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-		OBSOLETO. Define a função de comparação para a <classname>GtkClist
-    </classname> para uma função específica.
-   </shortdesc>
-   <desc>
-    &deprecated.method;
-   </desc>
-  </method>
+
 
   <method id="gtk.gtkclist.method.set_foreground">
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_foreground</function></funcdef>
-     <paramdef>void</paramdef>
+     
+     <paramdef><parameter>row</parameter></paramdef>
+     <paramdef><classname>GdkColor</classname> <parameter>color</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -887,7 +734,11 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_pixmap</function></funcdef>
-     <paramdef>void</paramdef>
+     
+     <paramdef><parameter>row</parameter></paramdef>
+     <paramdef><parameter>column</parameter></paramdef>
+     <paramdef><classname>GdkPixmap</classname> <parameter>pixmap</parameter></paramdef>
+     <paramdef><parameter><optional>mask</optional></parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -906,7 +757,13 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_pixtext</function></funcdef>
-     <paramdef>void</paramdef>
+     
+     <paramdef><parameter>row</parameter></paramdef>
+     <paramdef><parameter>column</parameter></paramdef>
+     <paramdef><parameter>text</parameter></paramdef>
+     <paramdef><parameter>spacing</parameter></paramdef>
+     <paramdef><classname>GdkPixmap</classname> <parameter>pixmap</parameter></paramdef>
+     <paramdef><parameter>mask</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -937,40 +794,9 @@
    </desc>
   </method>
 
-  <method id="gtk.gtkclist.method.set_row_data">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>void <function>set_row_data</function></funcdef>
-     <paramdef>void</paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-		OBSOLETO. Define um dado para uma linha específica.
-   </shortdesc>
-   <desc>
-    &deprecated.method;
-    <para>
-     &seealso;
-     <function class="GtkCList">get_row_data</function>
-    </para>
-   </desc>
-  </method>
 
-  <method id="gtk.gtkclist.method.set_row_data_full">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>void <function>set_row_data_full</function></funcdef>
-     <paramdef>void</paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-		 OBSOLETO. Define o dado para uma linha específica com um callback para quando a
-		 linha for destruída.
-   </shortdesc>
-   <desc>
-    &deprecated.method;
-   </desc>
-  </method>
+
+
 
   <method id="gtk.gtkclist.method.set_row_height">
    <funcsynopsis>

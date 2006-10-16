@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<!-- EN-Revision: 1.9 Maintainer: dnfeitosa Status: ready -->
+<!-- EN-Revision: 1.10 Maintainer: dnfeitosa Status: ready -->
 <classentry id="gtk.gtktreeselection">
  <classmeta>
   <classtitle>GtkTreeSelection</classtitle>
@@ -9,29 +9,29 @@
   </shortdesc>
   <desc>
    <para>
-		 O objeto GtkTreeSelection é um objeto que auxilia o gerenciamento da seleção
-		 de um widget <classname>GtkTreeView</classname>. O objeto GtkTreeSelection é
-		 automaticamente criado quando um novo objeto GtkTreeView é criado, e não independente
-		 deste widget. A razão primária para isso é manter o código e a API limpos.
-		 Isto é, não há uma razão conceitual para os métodos deste objeto fazerem parte
-		 do widget GtkTreeView.
+    O objeto GtkTreeSelection é um objeto que auxilia o gerenciamento da seleção
+    de um widget <classname>GtkTreeView</classname>. O objeto GtkTreeSelection é
+    automaticamente criado quando um novo objeto GtkTreeView é criado, e não independente
+    deste widget. A razão primária para isso é manter o código e a API limpos.
+    Isto é, não há uma razão conceitual para os métodos deste objeto fazerem parte
+    do widget GtkTreeView.
    </para>
    <para>
-		 O objeto GtkTreeSelection é obtido a partir de um
+    O objeto GtkTreeSelection é obtido a partir de um
     <classname>GtkTreeView</classname> através da chamada de
-		<function class="GtkTreeView">get_selection</function>. Ele pode ser manipulado
-		para verificar o estado da seleção da árvore, bem como selecionar e remover a seleção
-		de linhas individuais. A seleção é feita do lado da view. Como resultado, mútliplas views
-		do mesmo modelo podem conter seleções diferentes. Adicionalmente, você não pode
-		mudar a seleção de uma linha no modelo que não foi exibido sem a expansão de seus parents
-		antes.
+    <function class="GtkTreeView">get_selection</function>. Ele pode ser manipulado
+    para verificar o estado da seleção da árvore, bem como selecionar e remover a seleção
+    de linhas individuais. A seleção é feita do lado da view. Como resultado, mútliplas views
+    do mesmo modelo podem conter seleções diferentes. Adicionalmente, você não pode
+    mudar a seleção de uma linha no modelo que não foi exibido sem a expansão de seus parents
+    antes.
    </para>
    <para>
-		 Uma das coisas importantes a se lembrar quando se monitora a seleção de uma view,
-		 é que seu sinal <signalname class="GtkTreeSelection">changed</signalname>
-		 é como uma dica. Adicionalmente, isto pode ocasionar a emissão do sinal
-		 quando nada tenha acontecido (assim como o resultado do programador chamar
-		 <function class="GtkTreeView">select_row</function> em uma linha já selecionada).
+    Uma das coisas importantes a se lembrar quando se monitora a seleção de uma view,
+    é que seu sinal <signalname class="GtkTreeSelection">changed</signalname>
+    é como uma dica. Adicionalmente, isto pode ocasionar a emissão do sinal
+    quando nada tenha acontecido (assim como o resultado do programador chamar
+    <function class="GtkTreeView">select_row</function> em uma linha já selecionada).
    </para>
   </desc>
  </classmeta>
@@ -46,11 +46,11 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-		Retorna o número de linhas selecionadas.
+    Retorna o número de linhas selecionadas.
    </shortdesc>
    <desc>
     <para>
-			Retorna o número de linhas selecionadas.
+     Retorna o número de linhas selecionadas.
     </para>
     <para>
      &seealso;
@@ -68,12 +68,12 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-		Retorna o modo de seleção da seleção.
+    Retorna o modo de seleção da seleção.
    </shortdesc>
    <desc>
     <para>
-			Retorna o modo de seleção da seleção. O modo de seleção determina como as
-			linhas na view podem ser selecionadas (apenas uma linha, múltiplas linhas, ...)
+     Retorna o modo de seleção da seleção. O modo de seleção determina como as
+     linhas na view podem ser selecionadas (apenas uma linha, múltiplas linhas, ...)
     </para>
     <para>
      &seealso;
@@ -90,31 +90,30 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-		Retorna a linha selecionada.
+    Retorna a linha selecionada.
    </shortdesc>
    <desc>
     <para>
-			Retorna um array contendo o
-			<link linkend="gtk.gtktreemodel">model</link> e o 
-			<link linkend="gtk.gtktreeiter">iterator</link> da linha selecionada
-			atualmente.
+     Retorna um array contendo o
+     <link linkend="gtk.gtktreemodel">model</link> e o 
+     <link linkend="gtk.gtktreeiter">iterator</link> da linha selecionada
+     atualmente.
     </para>
     <para>
-		 Este método funciona somente se o modo de seleção
+     Este método funciona somente se o modo de seleção
      (<link linkend="gtk.enum.selectionmode">selection mode</link>) está definido
      (<link linkend="gtk.gtktreeselection.method.set_mode">set</link>)
      com
      <optionname enum="GtkSelectionMode">Gtk::SELECTION_SINGLE</optionname>
      ou
      <optionname enum="GtkSelectionMode">Gtk::SELECTION_BROWSE</optionname>.
-		 Para outros modos, retorne a seleção com
+     Para outros modos, retorne a seleção com
      <function class="GtkTreeSelection">get_selected_rows</function>.
     </para>
     <example>
      <title>Usando get_selected</title>
      <programlisting role="php">
-      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
-                  href="&directory.examples;/reference/gtk/gtktreeview/selection.phpw" parse="text">
+      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="&directory.examples;/reference/gtk/gtktreeview/selection.phpw" parse="text">
        <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
       </xi:include>
      </programlisting>
@@ -134,28 +133,27 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-		Retorna as linhas selecionadas para uma seleção múltipla.
+    Retorna as linhas selecionadas para uma seleção múltipla.
    </shortdesc>
    <desc>
     <para>
-			Retorna um array contentdo o
-			<link linkend="gtk.gtktreemodel">model</link> e um array com os caminhos
-			da árvore das linhas selecionadas. O array do caminho pode ser percorrido
-			por um <literal>foreach</literal> ou <literal>for</literal>, e os caminhos
-			podem ser convertidos em iteradores através do método
-			<function class="GtkTreeModel">get_iter</function>
+     Retorna um array contentdo o
+     <link linkend="gtk.gtktreemodel">model</link> e um array com os caminhos
+     da árvore das linhas selecionadas. O array do caminho pode ser percorrido
+     por um <literal>foreach</literal> ou <literal>for</literal>, e os caminhos
+     podem ser convertidos em iteradores através do método
+     <function class="GtkTreeModel">get_iter</function>
      da classe <classname>GtkTreeModel</classname>.
     </para>
     <para>
-			Diferentemente do método <function class="GtkTreeSelection">get_selected</function>,
-			este funciona com todos os modos de seleção
+     Diferentemente do método <function class="GtkTreeSelection">get_selected</function>,
+     este funciona com todos os modos de seleção
      (<link linkend="gtk.enum.selectionmode">selection modes</link>).
     </para>
     <example>
      <title>Usando get_selected_rows</title>
      <programlisting role="php">
-      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
-                  href="&directory.examples;/reference/gtk/gtktreeselection/multi.phpw" parse="text">
+      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="&directory.examples;/reference/gtk/gtktreeselection/multi.phpw" parse="text">
        <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
       </xi:include>
      </programlisting>
@@ -176,30 +174,16 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-		Retorna a treeview.
+    Retorna a treeview.
    </shortdesc>
    <desc>
     <para>
-			Retorna o <classname>GtkTreeView</classname> no qual o objeto da seleção 
-			pertence.
+     Retorna o <classname>GtkTreeView</classname> no qual o objeto da seleção 
+     pertence.
     </para>
    </desc>
   </method>
 
-  <method id="gtk.gtktreeselection.method.get_user_data">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef> <function>get_user_data</function></funcdef>
-     <paramdef>void</paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-    FIXME
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </method>
 
   <method id="gtk.gtktreeselection.method.iter_is_selected">
    <funcsynopsis>
@@ -209,11 +193,11 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-		Verifica se um iterador está selecionado ou não.
+    Verifica se um iterador está selecionado ou não.
    </shortdesc>
    <desc>
     <para>
-			Verifica se um iterador está selecionado ou não.
+     Verifica se um iterador está selecionado ou não.
     </para>
     <para>
      &seealso;
@@ -230,11 +214,11 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-		Verifica se o caminho de uma árvore está selecionado ou não.
+    Verifica se o caminho de uma árvore está selecionado ou não.
    </shortdesc>
    <desc>
     <para>
-			Verifica se o caminho de uma árvore está selecionado ou não.
+     Verifica se o caminho de uma árvore está selecionado ou não.
     </para>
     <para>
      &seealso;
@@ -251,12 +235,12 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-		Seleciona todas as linhas.
+    Seleciona todas as linhas.
    </shortdesc>
    <desc>
     <para>
-			Seleciona todas as linhas.
-		</para>
+     Seleciona todas as linhas.
+    </para>
     <para>
      &seealso;
      <function class="GtkTreeSelection">unselect_all</function>
@@ -272,11 +256,11 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-		Seleciona uma linha.
+    Seleciona uma linha.
    </shortdesc>
    <desc>
     <para>
-			Seleciona uma linha especificada por <parameter>iter</parameter>.
+     Seleciona uma linha especificada por <parameter>iter</parameter>.
     </para>
     <para>
      &seealso;
@@ -293,11 +277,11 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-		Seleciona uma linha.
+    Seleciona uma linha.
    </shortdesc>
    <desc>
     <para>
-			Seleciona uma linha especificada por <parameter>path</parameter>.
+     Seleciona uma linha especificada por <parameter>path</parameter>.
     </para>
     <para>
      &seealso;
@@ -315,7 +299,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-		Seleciona um itervalo de linhas.
+    Seleciona um itervalo de linhas.
    </shortdesc>
    <desc>
     <para>
@@ -337,13 +321,13 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-		Chama uma função para cada linha selecionada.
+    Chama uma função para cada linha selecionada.
    </shortdesc>
    <desc>
     <para>
-			Chama a função ou método especificado pelo parâmetro
-			<parameter>function</parameter> uma vez para cada linha 
-			selecionada.
+     Chama a função ou método especificado pelo parâmetro
+     <parameter>function</parameter> uma vez para cada linha 
+     selecionada.
     </para>
    </desc>
   </method>
@@ -356,12 +340,12 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-		Define o modo de seleção.
+    Define o modo de seleção.
    </shortdesc>
    <desc>
     <para>
-			Define o modo de seleção. O modo de seleção determina como as linhas
-			na view serão selecionadas (apenas uma linha, múltiplas linhas, ...).
+     Define o modo de seleção. O modo de seleção determina como as linhas
+     na view serão selecionadas (apenas uma linha, múltiplas linhas, ...).
     </para>
     <para>
      &seealso;
@@ -393,12 +377,12 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-		Remove a seleção de todas as linhas.
+    Remove a seleção de todas as linhas.
    </shortdesc>
    <desc>
     <para>
-			Remove a seleção de todas as linhas. Após a chamada deste método
-			nenhuma linha permanecerá selecionada.
+     Remove a seleção de todas as linhas. Após a chamada deste método
+     nenhuma linha permanecerá selecionada.
     </para>
     <para>
      &seealso;
@@ -415,11 +399,11 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-		Remove a seleção de um iterador.
+    Remove a seleção de um iterador.
    </shortdesc>
    <desc>
     <para>
-			Remove a seleção de um iterador.
+     Remove a seleção de um iterador.
     </para>
     <para>
      &seealso;
@@ -437,11 +421,11 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-		 Remove a seleção de um caminho.
+    Remove a seleção de um caminho.
    </shortdesc>
    <desc>
     <para>
-		 Remove a seleção de um caminho da árvore.
+     Remove a seleção de um caminho da árvore.
     </para>
     <para>
      &seealso;
@@ -460,12 +444,12 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-		Remove a seleção de um intervalo de linhas.
+    Remove a seleção de um intervalo de linhas.
    </shortdesc>
    <desc>
     <para>
-			Remove a seleção de um intervalo de linhas entre
-			<parameter>lower</parameter> e <parameter>upper</parameter>.
+     Remove a seleção de um intervalo de linhas entre
+     <parameter>lower</parameter> e <parameter>upper</parameter>.
     </para>
     <para>
      &seealso;
@@ -487,13 +471,13 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-		Uma ou mais linhas foram selecionadas.
+    Uma ou mais linhas foram selecionadas.
    </shortdesc>
    <desc>
     <para>
-			Chamado se uma ou mais linhas foram selecionadas, ou se a seleção
-			de alguma linha foi removida. Ele também pode ser chamado
-			quando o programa seleciona uma linha que já está atualmente selecionada.
+     Chamado se uma ou mais linhas foram selecionadas, ou se a seleção
+     de alguma linha foi removida. Ele também pode ser chamado
+     quando o programa seleciona uma linha que já está atualmente selecionada.
     </para>
     <para>
      Veja <function class="GtkTreeSelection">get_selected</function>
