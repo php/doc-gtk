@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- $Revision: 1.11 $ -->
+<!-- $Revision: 1.12 $ -->
 <classentry id="gtk.gtkmenuitem">
  <classmeta>
   <classtitle>GtkMenuItem</classtitle>
@@ -50,11 +50,6 @@
  </constructors>
 
  <methods>
-
-  
-
-  
-
   <method id="gtk.gtkmenuitem.method.get_right_justified">
    <funcsynopsis>
     <funcprototype>
@@ -141,23 +136,18 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    DEPRECATED. Sets the menu item to be right aligned.
+    &deprecated; Sets the menu item to be right aligned.
    </shortdesc>
    <desc>
     <para>
      Use this method to set the menu item to be justified to the right.
     </para>
+    &deprecated.method;
     <note>
-     WARNING! This method has been deprecated in PHP-GTK 2, and should
-     NOT be used in newly written code. Use 
-     <function class="GtkMenuItem">set_right_justified</function> instead.
+     Use <function class="GtkMenuItem">set_right_justified</function> instead.
     </note>    
    </desc>
   </method>
-
-  
-
-  
 
   <method id="gtk.gtkmenuitem.method.set_right_justified">
    <funcsynopsis>
@@ -222,24 +212,37 @@
    </desc>
   </method>
 
-  
-
- <method id="gtk.gtkmenuitem.method.set_item_accel_path">
-    <funcsynopsis>
+  <method id="gtk.gtkmenuitem.method.set_item_accel_path">
+   <funcsynopsis>
     <funcprototype>
-     <funcdef> <function>set_item_accel_path</function></funcdef>
-     <paramdef><parameter>accel_path</parameter></paramdef>
+     <funcdef>void <function>set_item_accel_path</function></funcdef>
+     <paramdef>string <parameter>accel_path</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the accelerator path for the menu item.
    </shortdesc>
    <desc>
-
+    <para>
+     Set the accelerator path on the menu item, through which runtime changes
+     of the menu item's accelerator caused by the user can be identified and
+     saved to persistant storage (see <function 
+     class="Gtk">accel_map_save</function>).
+    </para>
+    <para>
+     To setup a default accelerator for this menu item, call <function 
+     class="Gtk">accel_map_add_entry</function> with the same 
+     <parameter>accel_path</parameter>.
+    </para>
+    <para>
+     &seealso;
+     <function class="Gtk">accel_map_save</function>,
+     <function class="Gtk">accel_map_add_entry</function>,
+     <function class="GtkMenu">set_menu_accel_path</function>
+    </para>
    </desc>
   </method>
-
-  </methods>
+ </methods>
 
  <signals>
 
@@ -248,13 +251,20 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <cbfunction>callback</cbfunction></funcdef>
-     <paramdef>GtkMenuItem <parameter>menuitem</parameter></paramdef>
+     <paramdef>
+      <classname>GtkMenuItem</classname> <parameter>menuitem</parameter>
+     </paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
     Emitted when the menu item is activated.
    </shortdesc>
    <desc>
+    <para>
+     Emitted when the menu item is activated. The menu item can be activated by
+     the user selecting the item or by calling <function 
+     class="GtkMenuItem">activate</function>.
+    </para>
    </desc>
   </signal>
   
@@ -263,13 +273,20 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <cbfunction>callback</cbfunction></funcdef>
-     <paramdef>GtkMenuItem <parameter>menuitem</parameter></paramdef>
+     <paramdef>
+      <classname>GtkMenuItem</classname> <parameter>menuitem</parameter>
+     </paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Emitted when the menu is activated and if the menu item has a submenu.
+    Emitted when the menu item is activated and has a submenu.
    </shortdesc>
    <desc>
+    <para>
+     Emitted when the menu item is activated and has a submenu. A menu item can
+     be activated by the user selecting the item or by calling <function
+     class="GtkMenuItem">activate</function>.
+    </para>
    </desc>
   </signal>
   
@@ -279,13 +296,19 @@
     <funcprototype>
      <funcdef>void <cbfunction>callback</cbfunction></funcdef>
      <paramdef>GtkMenuItem <parameter>menuitem</parameter></paramdef>
-     <paramdef>int <parameter>UNKNOWN</parameter></paramdef>
+     <paramdef>int <parameter>allocation</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-        
+    Emitted when the size allocation is changed.
    </shortdesc>
    <desc>
+    <para>
+     Emitted when the size allocation is changed. The allocation can be changed
+     by calling <function class="GtkMenuItem">toggle_size_allocate</function>.
+     <parameter>allocation</parameter> will be the value passed to <function
+     class="GtkMenuItem">toggle_size_allocate</function>.
+    </para>
    </desc>
   </signal>
   
@@ -295,13 +318,18 @@
     <funcprototype>
      <funcdef>void <cbfunction>callback</cbfunction></funcdef>
      <paramdef>GtkMenuItem <parameter>menuitem</parameter></paramdef>
-     <paramdef><!-- was: gpointer -->XXX <parameter>UNKNOWN</parameter></paramdef>
+     <paramdef>int <parameter>requisition</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
+    Emitted when a size change request is made.
    </shortdesc>
    <desc>
-
+    <para>
+     Emitted when a size change request is made. A size change request can be
+     made by calling <function
+     class="GtkMenuItem">toggle_size_request</function>.
+    </para>
    </desc>
   </signal>
   
