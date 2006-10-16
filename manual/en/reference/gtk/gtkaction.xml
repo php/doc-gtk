@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- $Revision: 1.9 $ -->
+<!-- $Revision: 1.10 $ -->
 <classentry id="gtk.gtkaction">
  <classmeta>
   <classtitle>GtkAction</classtitle>
@@ -143,7 +143,7 @@
     </para>
     <para>
      Please ensure that you have set the accelerator's path and group before 
-     using this method. Doing so otherwise nullifies the effect of this method
+     using this method. Not doing so nullifies the effect of this method
     </para>
     <para>
      &seealso;
@@ -324,11 +324,9 @@
     <para>
      This method takes an action object as its parameter and returns the 
      name associated to that action.
-		  </para>
+    </para>
    </desc>
   </method>
-
-  
 
   <method id="gtk.gtkaction.method.get_sensitive">
    <funcsynopsis>
@@ -338,9 +336,15 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    FIXME
+    Returns current sensitive state
    </shortdesc>
    <desc>
+    <para>
+     This method returns <literal>true</literal> if the action itself is
+     sensitive. Note that this doesn't necessarily mean effective sensitivity.
+     See the <function class="GtkAction">is_sensitive</function> method for more
+     information.
+    </para>
     <para>
      &seealso;
      <function class="GtkAction">is_sensitive</function>, 
@@ -358,9 +362,14 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    FIXME
+    Returns current state of visibility
    </shortdesc>
    <desc>
+    <para>
+     This method returns the current visibility state of the action. Note that
+     this doesn't necessarily mean effective visibility. See the <function
+     class="GtkAction">is_visible</function> method for more information.
+    </para>
     <para>
      &seealso;
      <function class="GtkAction">is_visible</function>, 
@@ -378,9 +387,14 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    FIXME
+    Identifies if action is currently sensitive
    </shortdesc>
    <desc>
+    <para>
+     This method returns <literal>True</literal> if the action is effectively
+     sensitive i.e. both the <classname>GtkAction</classname> and its
+     associated <classname>GtkActionGroup</classname> are sensitive.
+    </para>
     <para>
      &seealso;
      <function class="GtkAction">get_sensitive</function>, 
@@ -398,9 +412,14 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    FIXME
+    Identifies if action is currently visible
    </shortdesc>
    <desc>
+    <para>
+     This method returns <literal>True</literal> if the action is effectively
+     visible i.e. both the <classname>GtkAction</classname> and its associated
+     <classname>GtkActionGroup</classname> are visible.
+    </para>
     <para>
      &seealso;
      <function class="GtkAction">get_visible</function>, 
@@ -422,7 +441,11 @@
     this action will be installed.
    </shortdesc>
    <desc>
-
+    <para>
+     This method sets the <classname>GtkAccelGroup</classname> as the
+     accelerator group for the <classname>GtkAction</classname>. Any
+     accelerators will be installed in the specified GtkAccelGroup.
+    </para>
    </desc>
   </method>
 
@@ -457,9 +480,14 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    FIXME
+    Sets sensitive state for the action
    </shortdesc>
    <desc>
+    <para>
+     This method sets the sensitive state of the action. Note that this doesn't
+     necessarily set the effective sensitivity. See the <function
+     class="GtkAction">is_sensitive</function> method for more information.
+    </para>
     <para>
      &seealso;
      <function class="GtkAction">get_sensitive</function>, 
@@ -477,9 +505,14 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    FIXME
+    Sets visible state for the action
    </shortdesc>
    <desc>
+    <para>
+     This method sets the visible state of the action. Note that this doesn't
+     necessarily set the effective visibility. See the <function
+     class="GtkAction">is_visible</function> method for more information.
+    </para>
     <para>
      &seealso;
      <function class="GtkAction">get_visible</function>, 
@@ -533,6 +566,12 @@
     Emitted when the action is triggered (or activated!)
    </shortdesc>
    <desc>
+    <para>
+     This is emitted when the <literal>action</literal> is triggered or
+     activated by a proxied widget or manually using <function
+     class="GtkAction">activate</function>. The callback is passed one
+     parameter, the <classname>GtkAction</classname> widget.
+    </para>
    </desc>
   </signal>
 
