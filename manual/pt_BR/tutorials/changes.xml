@@ -25,8 +25,9 @@
    instalação (o que era comum), e você tinha que carregar o módulo
    manualmente:
    <programlisting role="php">
-    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
-     href="&directory.examples;/tutorials/changes/extension_load.phpw" parse="text">
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
+     href="&directory.examples;/tutorials/changes/extension_load.phpw"
+     parse="text">
      <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
     </xi:include>
    </programlisting>
@@ -39,8 +40,9 @@
    quiser capturar qualquer possível erro, verifique a existência do módulo e
    dispare um erro se não estiver lá:
    <programlisting role="php">
-    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
-     href="&directory.examples;/tutorials/changes/extension_check.phpw" parse="text">
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
+     href="&directory.examples;/tutorials/changes/extension_check.phpw"
+     parse="text">
      <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
     </xi:include>
    </programlisting>
@@ -52,9 +54,9 @@
   <para>
    O suporte para orientação a objetos era completamente novo para o PHP 4, e
    sendo assim, não era muito sofisticado em comparação ao suporte a OO de
-   outras linguagens, como o Java. Na atribuição de objetos GTK à variáveis, era
-   absolutamente necessário não fazer uma cópia do mesmo, mas sim, passá-lo
-   por referência.
+   outras linguagens, como o Java. Na atribuição de objetos GTK à variáveis,
+   era absolutamente necessário não fazer uma cópia do mesmo, mas sim,
+   passá-lo por referência.
    <programlisting role="php"><![CDATA[
 //PHP 4: cópia como um comportamento padrão
 $a = new GtkLabel();
@@ -83,12 +85,14 @@ $a = &new GtkLabel();
   </para>
 
   <para>
-   Com o PHP 5 as coisas mudaram: passagem por referência agora é o comportamento
-   padrão; não é preciso mais usar o ampersand! O seguinte script funciona
-   perfeitamente no PHP 5 com o PHP-GTK 2, e sem nenhum problema:
+   Com o PHP 5 as coisas mudaram: passagem por referência agora é o
+   comportamento padrão; não é preciso mais usar o ampersand! O seguinte
+   script funciona perfeitamente no PHP 5 com o PHP-GTK 2, e sem nenhum
+   problema:
    <programlisting role="php">
-    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
-     href="&directory.examples;/tutorials/changes/ampersand_php5.phpw" parse="text">
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
+     href="&directory.examples;/tutorials/changes/ampersand_php5.phpw"
+     parse="text">
      <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
     </xi:include>
    </programlisting>
@@ -149,9 +153,10 @@ assumed 'GTK_WIN_POS_CENTER' in /path/to/file.php on line 23
 
   <para>
    Note também, o novo estilo de codificação. Apenas a primeira letra deve ser
-   maiúscula nos nomes das classes <literal>Gtk</literal>, <literal>Gdk</literal>, 
-   <literal>Pango</literal> e <literal>Atk</literal>. Isto serve para exibir o
-   novo status de constantes de classe ao invés de constantes globais.
+   maiúscula nos nomes das classes <literal>Gtk</literal>,
+   <literal>Gdk</literal>, <literal>Pango</literal> e <literal>Atk</literal>.
+   Isto serve para exibir o novo status de constantes de classe ao invés de
+   constantes globais.
   </para>
  </sect1>
 
@@ -190,9 +195,9 @@ assumed 'GTK_WIN_POS_CENTER' in /path/to/file.php on line 23
   </simpara>
 
   <simpara>
-   Para manter compatibilidade, os widgets antigos ainda podem ser usados,
-   mas podem ser removidos em um possível GTK 3 e assim por diante. Isto significa que
-   você não precisa reescrever seu programa completamente, mas ainda pode
+   Para manter compatibilidade, os widgets antigos ainda podem ser usados, mas
+   podem ser removidos em um possível GTK 3 e assim por diante. Isto significa
+   que você não precisa reescrever seu programa completamente, mas ainda pode
    usá-lo sem muitas mudanças. Entretanto, você não deve usar qualquer um dos
    widgets obsoletos nos seus novos programas. Não façam isso!
   </simpara>

@@ -4,19 +4,19 @@
  <title>Alô Mundo (basico)</title>
 
   <simpara>
-   Quando você começa a aprender uma linguagem de programação, o primeiro programa que você
-   escreve normalmente é um programa "alô mundo". Assim, apenas para acompanhar todos os outros,
-   o primeiro tutorial neste manual acontece de ser 
-   um tutorial "alô mundo"!
+   Quando você começa a aprender uma linguagem de programação, o primeiro
+   programa que você escreve normalmente é um programa "alô mundo". Assim,
+   apenas para acompanhar todos os outros, o primeiro tutorial neste manual
+   acontece de ser um tutorial "alô mundo"!
   </simpara>
   <simpara>
-   Através dos tutoriais nós esperamos que você tenha um conhecimento razoável do PHP em sí.
-   Os tutoriais são criados para dar ao usuário uma idéia de como usar o PHP-GTK,
-   e das tecnicas por de trás dele.
+   Através dos tutoriais nós esperamos que você tenha um conhecimento razoável
+   do PHP em sí. Os tutoriais são criados para dar ao usuário uma idéia de
+   como usar o PHP-GTK, e das tecnicas por de trás dele.
   </simpara>
   <simpara>
-   Neste tutorial nós vamos criar uma simples janela com o texto
-   "Alô Mundo!" nela.
+   Neste tutorial nós vamos criar uma simples janela com o texto "Alô Mundo!"
+   nela.
   </simpara>
   <simpara>
    Nós vamos começar listando o programa  iremos explicar cada linha
@@ -28,7 +28,8 @@
    <title>Um script simples Alo Mundo</title>
    <programlisting role="php">
     <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
-     href="&directory.examples;/tutorials/helloworld/helloworld.phpw" parse="text">
+     href="&directory.examples;/tutorials/helloworld/helloworld.phpw"
+     parse="text">
      <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
     </xi:include>
    </programlisting>
@@ -50,13 +51,13 @@
   </example>
 
   <para>
-   Aqui nos vamos ter certesa que o PHP_GTK esta disponível conferindo se a classe
-   <literal>gtk</literal> existe. Diferentemente do PHP 4 e PHP-GTK 1, você não 
-   deve tentar carregar o modulo PHP-GTK usando
+   Aqui nos vamos ter certesa que o PHP_GTK esta disponível conferindo se a
+   classe <literal>gtk</literal> existe. Diferentemente do PHP 4 e PHP-GTK 1,
+   você não deve tentar carregar o modulo PHP-GTK usando
    <ulink url="http://www.php.net/dl">dl()</ulink>. Isto esta obsoleto no
-   PHP 5, e não deve ser usado em código recem escrito. Assim tudo o que nós podemos fazer
-   é mostrar uma mensagem, este módulo não esta ativado e deve ser
-   ativado pelo usuário.
+   PHP 5, e não deve ser usado em código recem escrito. Assim tudo o que nós
+   podemos fazer é mostrar uma mensagem, este módulo não esta ativado e deve
+   ser ativado pelo usuário.
   </para>
 
 
@@ -66,12 +67,12 @@
   </example>
 
   <para>
-   Criando um novo widget <link linkend="gtk.gtkwindow">window</link> é fácil como instanciar um
-   novo objeto: a varável <literal>$wnd</literal> obtém o novo objeto definido. Se você já programou
-   com o PHP 4 e PHP-GTK 1, você irá sentir falta do 
-   <literal>&amp;</literal> antes do <literal>new</literal>. Isto era necessário
-   no PHP 4, mas não deve ser mais usado no PHP 5, já que referencias são criadas
-   automaticamente.
+   Criando um novo widget <link linkend="gtk.gtkwindow">window</link> é fácil
+   como instanciar um novo objeto: a varável <literal>$wnd</literal> obtém o
+   novo objeto definido. Se você já programou com o PHP 4 e PHP-GTK 1, você
+   irá sentir falta do <literal>&amp;</literal> antes do
+   <literal>new</literal>. Isto era necessário no PHP 4, mas não deve ser mais
+   usado no PHP 5, já que referencias são criadas automaticamente.
   </para>
 
 
@@ -81,8 +82,8 @@
   </example>
 
   <simpara>
-   Para tornar mais fácil a identificação da janela na barra de ferramentas, nós definimos o titulo:
-   Apenas uma chamada normal a um metodo do objeto.
+   Para tornar mais fácil a identificação da janela na barra de ferramentas,
+   nós definimos o titulo: Apenas uma chamada normal a um metodo do objeto.
   </simpara>
 
 
@@ -93,8 +94,8 @@
 
   <para>
    Esta é a primeira peça interessante de código: O sinal
-   <signalname class="GtkObject">destroy</signalname> é conectado com o metodo statico
-   <link linkend="gtk.method.main_quit">Gtk::main_quit</link>.
+   <signalname class="GtkObject">destroy</signalname> é conectado com o metodo
+   statico <link linkend="gtk.method.main_quit">Gtk::main_quit</link>.
    Ele basicamente diz ao GTK para sair do loop principal quando a janela é
    fechada/destruída. (O loop principal é explicado alguns paragrafos abaixo.)
   </para>
@@ -107,8 +108,8 @@
 
   <para>
    Como feito antes, nós criamos um novo widget. Desta vez nós queremos mostrar
-   uma pequena quantidade de texto, e <classname>GtkLabel</classname> é perfeito
-   para esta tarefa.
+   uma pequena quantidade de texto, e <classname>GtkLabel</classname> é
+   perfeito para esta tarefa.
   </para>
 
 
@@ -130,11 +131,11 @@
   <para>
    Até agora, você não viu nada na sua janela. Para fazer a janela visível,
    você precisará chamar a função <function class="GtkWidget">show</function>.
-   Isto iria fazer a janela visível, mas não o label - nós teriamos que 
-   chamar <function class="GtkWidget">show</function> no label também.
-   Isto é incoveniente se você tem vários widgets como botões, caixas de verificação e outros
-   na janela: <function class="GtkWidget">show_all</function>
-   torna a janela e todos os seus widgets filhos visíveis.
+   Isto iria fazer a janela visível, mas não o label - nós teriamos que chamar
+   <function class="GtkWidget">show</function> no label também. Isto é
+   incoveniente se você tem vários widgets como botões, caixas de verificação
+   e outros na janela: <function class="GtkWidget">show_all</function> torna a
+   janela e todos os seus widgets filhos visíveis.
   </para>
 
 
@@ -146,18 +147,19 @@
   <para>
    Após tudo estar definido, nós devemos nos certificar que a janela permanece
    aberta e responde a interação do usuário. Um script PHP normal iria terminar
-   e parar neste ponto, mas nós queremos que ele continue sendo executado: Para isto, o loop principal do GTK
-   precisa ser iniciado. Ele mantém a aplicação sendo executada
-   e esperando por eventos do usuário. Se um evento ocorre, ele delega ele para
-   os callbacks correspondentes.
+   e parar neste ponto, mas nós queremos que ele continue sendo executado: Para
+   isto, o loop principal do GTK precisa ser iniciado. Ele mantém a aplicação
+   sendo executada e esperando por eventos do usuário. Se um evento ocorre,
+   ele delega ele para os callbacks correspondentes.
   </para>
 
 
  <sect1 id="tutorials.helloworld.futherreading">
   <title>Próxima leitura</title>
   <para>
-   Agora que você criou a sua primeira aplicação em PHP-GTK 2, você provavelmente quer
-   criar layouts mais complexos. Para aprender o básico, dê uma olhada no
+   Agora que você criou a sua primeira aplicação em PHP-GTK 2, você
+   provavelmente quer criar layouts mais complexos. Para aprender o básico, dê
+   uma olhada no
    <link linkend="tutorials.packing">Tutorial de Empacotamento</link>.
   </para>
  </sect1>

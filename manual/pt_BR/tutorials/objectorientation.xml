@@ -7,41 +7,44 @@
   <title>Sobre este tutorial</title>
   <simpara>
    Este tutorial irá tentar ensinar a você como programar em PHP-GTK 2 em uma
-   mareira orientada a objetos. O PHP5 vem com um grande suporte orientado a objetos e asim nós
-   podemos explorar todas as vantagens de programação orientada a objetos enquanto
-   fazemos aplicações em PHP-GTK 2.
+   mareira orientada a objetos. O PHP5 vem com um grande suporte orientado a
+   objetos e asim nós podemos explorar todas as vantagens de programação
+   orientada a objetos enquanto fazemos aplicações em PHP-GTK 2.
   </simpara>
   <simpara>
-    Porque programar em uma maneira orientada a objetos? Existem várias vantagens
-    em escolher este estilo de programação, especialmente se sua aplicação é dividida 
-    em vários módulos e é esperado que tenha milhares de linhas de tamanho.
-    Uma das vantagens mais importantes e a limpeza e organização do código.
-    Será muito mais fácil para você e para os outros ler e modificar o seu código se
-    o seu programa esta em uma maneira orientada a objetos do que se você escolheu fazer
-    a sua aplicação de uma maneira puramente orientada a procedimentos.
+   Porque programar em uma maneira orientada a objetos? Existem várias
+   vantagens em escolher este estilo de programação, especialmente se sua
+   aplicação é dividida em vários módulos e é esperado que tenha milhares de
+   linhas de tamanho. Uma das vantagens mais importantes e a limpeza e
+   organização do código. Será muito mais fácil para você e para os outros ler
+   e modificar o seu código se o seu programa esta em uma maneira orientada a
+   objetos do que se você escolheu fazer a sua aplicação de uma maneira
+   puramente orientada a procedimentos.
   </simpara>
   <simpara>
-    Se você esta convencido de que a orientação a objetos é o caminho a seguir, vamos começar!
+   Se você esta convencido de que a orientação a objetos é o caminho a seguir,
+   vamos começar!
   </simpara>
  </sect1>
 
  <sect1 id="tutorials.objectorientation.basics">
   <title>Orientação a Objetos Basica</title>
   <simpara>
-   Eu vou assumir que você já seja acostumado a programação orientada a objetos.
-   se você não for, eu sugiro que você se acostume com ela antes de
-   continuar com este tutorial. Você pode também olhar o manual do PHP
-   na seção sobre orientação a objetos para o PHP5, assim tudo
-   isto fará mais censo para você
+   Eu vou assumir que você já seja acostumado a programação orientada a
+   objetos. Se você não for, eu sugiro que você se acostume com ela antes de
+   continuar com este tutorial. Você pode também olhar o manual do PHP na
+   seção sobre orientação a objetos para o PHP5, assim tudo isto fará mais
+   censo para você
   </simpara>
   <para>
    Nós vamos começar em "portar" o programa simples Alô Mundo! para uma
-   natureza orientada a objetos, assim você pode ter uma amostra do conceito rapidamente. A primeira
-   coisa que você tem que fazer é criar uma classe. A maneira mais fácil de fazer a sua classe
-   é extender umas das classes do PHP-GTK 2. Agora, a maioria das aplicações tem um  
-   <classname>GtkWindow</classname> como seu widget principal. Assim faz o nosso
-   programa Alô Mundo. Assim o que nós vamos fazer é criar uma classe que 
-   <literal>extenda</literal> <classname>GtkWindow</classname>, assim fará
+   natureza orientada a objetos, assim você pode ter uma amostra do conceito
+   rapidamente. A primeira coisa que você tem que fazer é criar uma classe. A
+   maneira mais fácil de fazer a sua classe é extender umas das classes do
+   PHP-GTK 2. Agora, a maioria das aplicações tem um
+   <classname>GtkWindow</classname> como seu widget principal. Assim faz o
+   nosso programa Alô Mundo. Assim o que nós vamos fazer é criar uma classe
+   que <literal>extenda</literal> <classname>GtkWindow</classname>, assim fará
    o nosso trabalho mais fácil:
    <programlisting role="php"><![CDATA[
 <?php
@@ -54,19 +57,20 @@ class Hello extends GtkWindow
 ?>]]></programlisting>
    Agora nós precisamos criar o construtor da nossa classe (uma função que é
    chamada quando um objeto da nossa classe é criado). Vamos pensar sobre o
-   que nós precisamos colocar no construtor. Já que o construtor é a primeira coisa a ser chamada
-   quando um objeto da nossa classe é criado, nós precisamos todos os aspectos
-   do design do nosso programa no construtor. Isto indica que o construtor
-   é o lugar onde criamos todos os widgets que vamos precisar, desenhar o nosso
-   layout (veja <link linkend="tutorials.packing">Empacotando Widgets</link>) e
-   finalizar como a nossa aplicação deve aparecer.
+   que nós precisamos colocar no construtor. Já que o construtor é a primeira
+   coisa a ser chamada quando um objeto da nossa classe é criado, nós
+   precisamos todos os aspectos do design do nosso programa no construtor.
+   Isto indica que o construtor é o lugar onde criamos todos os widgets que
+   vamos precisar, desenhar o nosso layout (veja
+   <link linkend="tutorials.packing">Empacotando Widgets</link>) e finalizar
+   como a nossa aplicação deve aparecer.
   </para>
   <para>
-   Agora a nossa classe extende <classname>GtkWindow</classname>, mas isso não quer disser
-   que o construtor <classname>GtkWindow</classname> será chamado
-   automaticamente. Este é o funcionamento padrão no PHP5 e assim nós devemos chamar o construtor de
-   <classname>GtkWindow</classname> explicitamente, usando a palavra chave 
-   <literal>parent</literal>:
+   Agora a nossa classe extende <classname>GtkWindow</classname>, mas isso não
+   quer disser que o construtor <classname>GtkWindow</classname> será chamado
+   automaticamente. Este é o funcionamento padrão no PHP5 e assim nós devemos
+   chamar o construtor de <classname>GtkWindow</classname> explicitamente,
+   usando a palavra chave <literal>parent</literal>:
    <programlisting role="php"><![CDATA[
 class Hello extends GtkWindow
 {
@@ -76,11 +80,11 @@ class Hello extends GtkWindow
     }
 }
 ]]></programlisting>
-   Isto significa que um GtkWindow será criado (sem parâmetros passados para
-   o seu construtor) quando um objeto da nossa classe "Hello" for criado. Agora a questão
-   é como acessar a janela récem criada. A palavra chave
-   <literal>this</literal> vem em nosso socorro! Usando esta palavra chave
-   nós podemos modificar todos os aspectos da nossa janela récem criada:
+   Isto significa que um GtkWindow será criado (sem parâmetros passados para o
+   seu construtor) quando um objeto da nossa classe "Hello" for criado. Agora
+   a questão é como acessar a janela récem criada. A palavra chave
+   <literal>this</literal> vem em nosso socorro! Usando esta palavra chave nós
+   podemos modificar todos os aspectos da nossa janela récem criada:
    <programlisting role="php"><![CDATA[
 function __construct()
 {
@@ -91,38 +95,42 @@ function __construct()
 ]]></programlisting>
   </para>
   <para>
-    Já que este é um programa muito simples, nós podemos finalizar as nossas tarefas
-    no construtor em sí. Nós simplesmente colocamos o código que nós tinhamos colocado em nosso
-    programa orientado a procedimentos aqui. Assim nós temos o programa terminado:
-    <example>
-     <title>Alô Mundo - Estilo Orientado a Objetos</title>
-     <programlisting role="php">
-      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
-       href="&directory.examples;/tutorials/objectoriented/simple.phpw" parse="text">
-       <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
-      </xi:include>
-     </programlisting>
-    </example>
-    Mesmo sendo dificilmente este exemplo um grande exemplo para mostrar o caminho para
-    uma maneira orientada a objetos, ele deve ajudar bastante para você começar. Nós iremos
-    ver alguns dos conceitos mais avançados agora.
+   Já que este é um programa muito simples, nós podemos finalizar as nossas
+   tarefas no construtor em sí. Nós simplesmente colocamos o código que nós
+   tinhamos colocado em nosso programa orientado a procedimentos aqui. Assim
+   nós temos o programa terminado:
+   <example>
+   <title>Alô Mundo - Estilo Orientado a Objetos</title>
+    <programlisting role="php">
+     <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+      href="&directory.examples;/tutorials/objectoriented/simple.phpw"
+      parse="text">
+      <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+     </xi:include>
+    </programlisting>
+   </example>
+   Mesmo sendo dificilmente este exemplo um grande exemplo para mostrar o
+   caminho para uma maneira orientada a objetos, ele deve ajudar bastante para
+   você começar. Nós iremos ver alguns dos conceitos mais avançados agora.
   </para>
  </sect1>
 
  <sect1 id="tutorials.objectorientation.advanced">
   <title>Um pouco mais de complexidade</title>
   <para>
-   Nós não usamos a maioria do poderoso suporte a orientação a objetos do PHP5 ainda. Vamos
-   fazer uma aplicação que abra um arquivo de texto e mostre o seu conteúdo para você,
-   uma aplicação simples parecida com o bloco de notas. Por favor note que esta é uma
-   aplicação muito muito simples apenas para fins educativos e não tem uma funcionalidade pratica.
-   Aqui esta o código, leia-o, e não seja intimidado pelo seu tamanho. Uma explicação
+   Nós não usamos a maioria do poderoso suporte a orientação a objetos do PHP
+   5 ainda. Vamos fazer uma aplicação que abra um arquivo de texto e mostre o
+   seu conteúdo para você, uma aplicação simples parecida com o bloco de
+   notas. Por favor note que esta é uma aplicação muito muito simples apenas
+   para fins educativos e não tem uma funcionalidade pratica. Aqui esta o
+   código, leia-o, e não seja intimidado pelo seu tamanho. Uma explicação
    detalhada segue o código:
    <example>
     <title>Um simples bloco de nota</title>
     <programlisting role="php">
      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
-     href="&directory.examples;/tutorials/objectoriented/notepad.phpw" parse="text">
+      href="&directory.examples;/tutorials/objectoriented/notepad.phpw"
+      parse="text">
       <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
      </xi:include>
     </programlisting>
@@ -133,19 +141,19 @@ function __construct()
    <title>O construtor</title>
    <para>
     A estrutura da classe é semelhante ao que nós vimos antes, exceto pela
-    adição de algumas propriedades da classe e funções. Primeiro vamos dar uma olhada
-    no construtor. O construtor leva um parâmetro opcional que o
-    padrão é <literal>null</literal>. Este parâmetro é (caminho de) o
-    nome do arquivo que você quer abrir. Se você não passar um parâmetro para o
-    cosntrutor, ele simplesmente irá abrir nada.
+    adição de algumas propriedades da classe e funções. Primeiro vamos dar uma
+    olhada no construtor. O construtor leva um parâmetro opcional que o
+    padrão é <literal>null</literal>. Este parâmetro é (caminho de) o nome do
+    arquivo que você quer abrir. Se você não passar um parâmetro para o
+    construtor, ele simplesmente irá abrir nada.
    </para>
    <para>
-    OK, assim  nós primeiro construimos o parent (um GtkWindow) e então criamos alguns
-    widgets que iremos usar. Um <classname>GtkVBox</classname> para o nosso layout, um
-    <classname>GtkTextBuffer</classname> e um
+    OK, assim  nós primeiro construimos o parent (um GtkWindow) e então
+    criamos alguns widgets que iremos usar. Um <classname>GtkVBox</classname>
+    para o nosso layout, um <classname>GtkTextBuffer</classname> e um
     <classname>GtkTextView</classname> para mostrar o conteúdo do arquivo e um 
-    <classname>GtkStatusBar</classname> para mostrar algumas mensagens. Nós configuramos
-    o layout e adicionamos os respectivos widgets para o VBox.
+    <classname>GtkStatusBar</classname> para mostrar algumas mensagens. Nós
+    configuramos o layout e adicionamos os respectivos widgets para o VBox.
    </para>
    <para>
     Próximo nós definimos as propriedades da classe:
@@ -154,43 +162,46 @@ $this->currentFile = $fileName;
 $this->buffer = $textBuff;
 $this->status = $statusBar;
 ]]> </programlisting>
-    Estas três linhas definem valores para as propriedades de classe. Propriedades
-    de classe são uma parte essencial de todas as aplicações orientadas a objeto
-    em PHP-GTK 2. Elas são úteis porque você pode precisar acessar um widget em particular
-    em uma função na qual ele não foi criado. Quando nós criamos um widget, o escopo
-    para o objeto é apenas a função na qual ele foi criado. Por exemplo
-    nós criamos a barra de status no construtor da nossa classe, mas nós obviamente
-    precisamos acessa-la em outros lugar (quando nós precisarmos colocar algumas mensagens nela). Mas
+    Estas três linhas definem valores para as propriedades de classe.
+    Propriedades de classe são uma parte essencial de todas as aplicações
+    orientadas a objeto em PHP-GTK 2. Elas são úteis porque você pode precisar
+    acessar um widget em particular em uma função na qual ele não foi criado.
+    Quando nós criamos um widget, o escopo para o objeto é apenas a função na
+    qual ele foi criado. Por exemplo nós criamos a barra de status no
+    construtor da nossa classe, mas nós obviamente precisamos acessa-la em
+    outros lugar (quando nós precisarmos colocar algumas mensagens nela). Mas
     já que a variável <literal>$statusBar</literal> pode ser acessada apenas
     no construtor, nós definimos um propriedade de classe chamada
-    <literal>status</literal>) para ela. Agora nós podemos acessar a barra de status em qualquer
-    função da classe usando <literal>$this->status</literal>.
+    <literal>status</literal>) para ela. Agora nós podemos acessar a barra de
+    status em qualquer função da classe usando
+    <literal>$this->status</literal>.
    </para>
    <para>
-    Simplesmente extenda este conceito para os outros widgets também. Basicamente, você
-    precisa definir propriedades de classes para os widgets que você acha que vai precisar
-    em todo o escopo da classe. Ataulamente, propriedades de classes podem ser usadas eficientemente para
-    gardar quaisquer dados que você precise em toda a classe. Um exemplo disso em nossas
-    aplicações é a propriedade <literal>currentFile</literal>.
-    Isto irá simplesmente guardar o caminho para o arquivo atualmente aberto, ou
-    <literal>null</literal> se nenhum estiver. Nós podemos então saber
-    o arquivo atualmente aberto em qualquer função da classe. Propriedades de classe tem outros 
-    usos também, um dos que eu posso pensar é como marcador. Para a nossa
-    aplicação de bloco de notas, você deve querer adiionar um propriedade chamada
-    <literal>saved</literal> a qual tem um um valor booleano para indicar
-    quando o arquivo atual foi salvo em disco ou não.
+    Simplesmente extenda este conceito para os outros widgets também.
+    Basicamente, você precisa definir propriedades de classes para os widgets
+    que você acha que vai precisar em todo o escopo da classe. Ataulamente,
+    propriedades de classes podem ser usadas eficientemente para gardar
+    quaisquer dados que você precise em toda a classe. Um exemplo disso em
+    nossas aplicações é a propriedade <literal>currentFile</literal>. Isto irá
+    simplesmente guardar o caminho para o arquivo atualmente aberto, ou
+    <literal>null</literal> se nenhum estiver. Nós podemos então saber o
+    arquivo atualmente aberto em qualquer função da classe. Propriedades de
+    classe tem outros usos também, um dos que eu posso pensar é como marcador.
+    Para a nossa aplicação de bloco de notas, você deve querer adiionar um
+    propriedade chamada <literal>saved</literal> a qual tem um um valor
+    booleano para indicar quando o arquivo atual foi salvo em disco ou não.
    </para>
    <para>
     Note que todas as propriedades de classe foram definidas como
-    <literal>protected</literal>. Isto é simplesmente uma boa pratica de orientação a objetos.
-    Nós não queremos que sejam publicas, mas nós também queremos que qualquer classe
-    que estenda a nossa possa acessa-las.
+    <literal>protected</literal>. Isto é simplesmente uma boa pratica de
+    orientação a objetos. Nós não queremos que sejam publicas, mas nós também
+    queremos que qualquer classe que estenda a nossa possa acessa-las.
    </para>
    <para>
-    E finalmente, nós definios o titulo da janela, maximizamos ela, adicionamos o layout
-    e mostramos todos os widgets. E então nós chamamos a função <literal>loadFile()</literal>
-    para mostrar o conteúdo do nosso arquivo no text buffer que
-    nós tinhamos criado.
+    E finalmente, nós definios o titulo da janela, maximizamos ela,
+    adicionamos o layout e mostramos todos os widgets. E então nós chamamos a
+    função <literal>loadFile()</literal> para mostrar o conteúdo do nosso
+    arquivo no text buffer que nós tinhamos criado.
    </para>
   </sect2>
 
@@ -201,16 +212,17 @@ $this->status = $statusBar;
     <programlisting role="php"><![CDATA[
 $mainBox->pack_start($this->buildMenu(), false, false);
 ]]> </programlisting>
-    Nós fazemos assim porque nós queremos dividir a nossa classe em vários módulos como
-    for possível. Ao invés de todo o nosso layout no construtor em sí,
-    é melhor dividir o layout em partes principais e dedicar uma
-    função para cada parte. Aqui nós temos uma função para fazer a barra do menu, mas
-    não para o text view ou para a barra de status porque eles precisam
-    apenas duas linhas para serem construídos!
+    Nós fazemos assim porque nós queremos dividir a nossa classe em vários
+    módulos como for possível. Ao invés de todo o nosso layout no construtor
+    em sí, é melhor dividir o layout em partes principais e dedicar uma função
+    para cada parte. Aqui nós temos uma função para fazer a barra do menu, mas
+    não para o text view ou para a barra de status porque eles precisam apenas
+    duas linhas para serem construídos!
    </para>
    <para>
-    Nesta função, nós apenas criamos a nossa barra de menus, adicionamos um menu file (arquivo)
-    com um único item "Quit" (sair). Vamos dar uma olhada nestas linhas:
+    Nesta função, nós apenas criamos a nossa barra de menus, adicionamos um
+    menu file (arquivo) com um único item "Quit" (sair). Vamos dar uma olhada
+    nestas linhas:
     <programlisting role="php"><![CDATA[
 $quit->connect_simple('activate', array($this, 'quit'));
 $quit->connect_simple('enter_notify_event', array($this, 'updateStatus'), 1);
@@ -228,23 +240,23 @@ $quit->connect_simple('leave_notify_event', array($this, 'updateStatus'), 0);
     <programlisting role="php"><![CDATA[
 $wnd->connect_simple('destroy', array('gtk', 'main_quit'));
 ]]> </programlisting>
-    Compare a utilização e você deve notar que quando você quiser
-    conectar um sinal para uma função callback a qual seja de uma classe, você deve especificar
-    o callback como uma matriz, o primeiro elemento o qual aponta para uma classe,
-    e o segundo elemento o qual é o nome do callback. Assim, nós
-    conectamos os vários eventos do nosso botão de "quit" para
+    Compare a utilização e você deve notar que quando você quiser conectar um
+    sinal para uma função callback a qual seja de uma classe, você deve
+    especificar o callback como uma matriz, o primeiro elemento o qual aponta
+    para uma classe, e o segundo elemento o qual é o nome do callback. Assim,
+    nós conectamos os vários eventos do nosso botão de "quit" para
     <literal>this</literal> <literal>quit()</literal> e
     <literal>updateStatus()</literal>.
    </para>
    <para>
     Algumas vezes é possível passar parâmetros para funções para poder usar
     estes objetos nas funções. Como uma regra, se você tem mais de uma função
-    que usa um objeto em particular, é melhor dedicar uma propriedade de classe para ele;
-    mas se houver apenas uma única função que precise do objeto, ao invés
-    é melhor passar o objeto como parâmetro. Uma ocorrencia comum
-    para esta situação é ao conectar sinais para callbacks. de uma olhada
-    no tutorial sobre sinais e callbacks para mais sobre isto e sobre como passar
-    parâmetros personalizados para os callbacks.
+    que usa um objeto em particular, é melhor dedicar uma propriedade de
+    classe para ele; mas se houver apenas uma única função que precise do
+    objeto, ao invés é melhor passar o objeto como parâmetro. Uma ocorrencia
+    comum para esta situação é ao conectar sinais para callbacks. de uma
+    olhada no tutorial sobre sinais e callbacks para mais sobre isto e sobre
+    como passar parâmetros personalizados para os callbacks.
    </para>
    <para>
     Voltando para a função, nós retornamos o widget <literal>superior</literal>
@@ -256,11 +268,11 @@ $wnd->connect_simple('destroy', array('gtk', 'main_quit'));
   <sect2 id="tutorials.objectorientation.advanced.loadfile">
    <title>A função loadFile()</title>
    <para>
-    O proposito desta função é carregar o conteúdo do arquivo que será aberto e mostra-lo
-    no text view. Primeiro nós conferimos
-    se a propriedade de classe <literal>currentFile</literal> não é null, e
-    então usamos o metodo <function class="GtkTextBuffer">set_text</function>
-    na propriedade de classe <literal>buffer</literal>.
+    O proposito desta função é carregar o conteúdo do arquivo que será aberto
+    e mostra-lo no text view. Primeiro nós conferimos se a propriedade de
+    classe <literal>currentFile</literal> não é null, e então usamos o metodo
+    <function class="GtkTextBuffer">set_text</function> na propriedade de
+    classe <literal>buffer</literal>.
    </para>
   </sect2>
 
@@ -269,27 +281,29 @@ $wnd->connect_simple('destroy', array('gtk', 'main_quit'));
    <para>
     Esta função serve como callback para os sinais
     <literal>enter-notify-event</literal> e
-    <literal>leave-notify-event</literal>. Aqui nós acessamos a barra de status
-    via a propriedade de classe <literal>status</literal>  e adicionamos/removemos uma mensagem
-    dependendo quando o mouse esta entrando ou saindo do botão de menu "Quit".
+    <literal>leave-notify-event</literal>. Aqui nós acessamos a barra de
+    status via a propriedade de classe <literal>status</literal> e
+    adicionamos/removemos uma mensagem dependendo quando o mouse esta entrando
+    ou saindo do botão de menu "Quit".
    </para>
   </sect2>
 
   <sect2 id="tutorials.objectorientation.advanced.quit">
    <title>A função quit()</title>
    <para>
-    Esta é a mais simples função de todas, apenas uma que sai do loop principal
-    do GTK. Você deve imaginar porque nós temos uma função de apenas uma linha chamada "quit"
-    quando nós podiamos conectar os sinais diretamente a <literal>main_quit</literal> 
-    como isto:
+    Esta é a mais simples função de todas, apenas uma que sai do loop
+    principal do GTK. Você deve imaginar porque nós temos uma função de apenas
+    uma linha chamada "quit" quando nós podiamos conectar os sinais
+    diretamente a <literal>main_quit</literal> como isto:
     <programlisting role="php"><![CDATA[
 $this->connect_simple('destroy', array('Gtk', 'main_quit'));
 ]]> </programlisting>
-    A razão para isto é, em aplicações, você provavelmente quereria fazer 
-    alguma limpesa antes da aplicação terminar, e esta função é a sua change de
-    faze-lo. Para a nossa simples aplicação bloco de notas, uma adição que é possível
-    aqui é conferir se a marcação <literal>saved</literal> (novamente, uma
-    propriedade de classe) e perguntar ao usuário se ele quer salvar o arquivo se não estiver salvo.
+    A razão para isto é, em aplicações, você provavelmente quereria fazer
+    alguma limpesa antes da aplicação terminar, e esta função é a sua change
+    de faze-lo. Para a nossa simples aplicação bloco de notas, uma adição que
+    é possível aqui é conferir se a marcação <literal>saved</literal>
+    (novamente, uma propriedade de classe) e perguntar ao usuário se ele quer
+    salvar o arquivo se não estiver salvo.
    </para>
   </sect2>
 
@@ -300,9 +314,10 @@ $this->connect_simple('destroy', array('Gtk', 'main_quit'));
 new Notepad('simple.phpw');
 Gtk::main();
 ]]> </programlisting>
-    Cria uma instancia de um objeto da nossa classe ( e portanto abre o arquivo simple.phpw
-    localizado no mesmo diretório) e começa o loop principal do GTK. Você pode também
-    mudar <literal>Gtk::main()</literal> para o construtor da nossa classe.
+    Cria uma instancia de um objeto da nossa classe (e portanto abre o arquivo
+    simple.phpw localizado no mesmo diretório) e começa o loop principal do
+    GTK. Você pode também mudar <literal>Gtk::main()</literal> para o
+    construtor da nossa classe.
    </para>
   </sect2>
  </sect1>
@@ -310,50 +325,50 @@ Gtk::main();
  <sect1 id="tutorials.objectorientation.summary">
   <title>Summary</title>
   <para>
-   Espero que este tutorial tenha sido de algum uso em fazer você começar com o
-   estilo de programação orientado a objetos no PHP-GTK 2. Antes de nós terminarmos, mais
-   algumas dicas seguem.
- </para>
+   Espero que este tutorial tenha sido de algum uso em fazer você começar com
+   o estilo de programação orientado a objetos no PHP-GTK 2. Antes de nós
+   terminarmos, mais algumas dicas seguem.
+  </para>
   <para>
    <itemizedlist>
     <listitem>
-     Se você esta construindo uma aplicação extremamente grande, você deve querer
-     dividir em multiplas classes: uma classe para cada módulo. Para a maioria das aplicações
-     entretanto, uma única classe deve ser suficiente.
+     Se você esta construindo uma aplicação extremamente grande, você deve
+     querer dividir em multiplas classes: uma classe para cada módulo. Para a
+     maioria das aplicações entretanto, uma única classe deve ser suficiente.
     </listitem>
     <listitem>
-     Se você usa várias classes em sua aplicação, a questão de acessar
-     objetos de uma classe em outra aparece. Neste caso, tente criar uma 
-     hierarquia, uma classe principal com outras extendendo ela. Se isso não for
-     possível, ao invés use varáveis globais (não recomendado).
+     Se você usa várias classes em sua aplicação, a questão de acessar objetos
+     de uma classe em outra aparece. Neste caso, tente criar uma hierarquia,
+     uma classe principal com outras extendendo ela. Se isso não for possível,
+     ao invés use varáveis globais (não recomendado).
     </listitem>
     <listitem>
-     Se mais de uma função de sua classe precisar acessar um widget, torne-o uma 
-     propriedade de classe. Entretanto se apenas uma função precisa dele, passe-o
-     invés como um parâmetro.
+     Se mais de uma função de sua classe precisar acessar um widget, torne-o
+     uma propriedade de classe. Entretanto se apenas uma função precisa dele,
+     passe-o invés como um parâmetro.
     </listitem>
     <listitem>
-     Sempre tente extender as suas classes a partir da classe widget que irá formar
-     a base da sua classe. Também lembre-se que você precisa construir este widget
-     explicitamente usando o cmando <literal>parent::__construct();</literal>.
-     Você pode acessar os metodos deste widget através da 
-     palavra chave <literal>this</literal>.
+     Sempre tente extender as suas classes a partir da classe widget que irá
+     formar a base da sua classe. Também lembre-se que você precisa construir
+     este widget explicitamente usando o cmando
+     <literal>parent::__construct();</literal>. Você pode acessar os metodos
+     deste widget através da palavra chave <literal>this</literal>.
     </listitem>
     <listitem>
-     Mantenha as sua funções tão pequenas quanto possível. Todo o ponto da programação
-     orientada a objetos é a modulização. Se uma função esta começando a ficar inchada,
-     considere ividi-la. Uma ocorrencia fequente deste caso é quando você
-     tentar todo o seu layout (complicado) no construtor em sí.
-     Ao invés, divida em funções que criam partes do layout e junte-os
-     todos no construtor.
+     Mantenha as sua funções tão pequenas quanto possível. Todo o ponto da
+     programação orientada a objetos é a modulização. Se uma função esta
+     começando a ficar inchada, considere ividi-la. Uma ocorrencia fequente
+     deste caso é quando você tentar todo o seu layout (complicado) no
+     construtor em sí. Ao invés, divida em funções que criam partes do layout
+     e junte-os todos no construtor.
     </listitem>
    </itemizedlist>
   </para>
   <para>
    Não esqueça de dar uma olhada na seção Gtk2_Components no 
-   <ulink url="http://pear.php.net/">PEAR</ulink>. 
-   Todos os pacotes ali são feitos de código orientado a objetos de alta qualidade. 
-   Leia os seus fontes e imite.
+   <ulink url="http://pear.php.net/">PEAR</ulink>. Todos os pacotes ali são
+   feitos de código orientado a objetos de alta qualidade. Leia os seus fontes
+   e imite.
   </para>
  </sect1>
  

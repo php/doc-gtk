@@ -6,23 +6,25 @@
  <sect1 id="tutorials.packing.about">
   <title>Introdução</title>
   <simpara>
-   Este tutorial mostra os vários metodos para arranjar os widgets em uma janela,
-   e diz a você como escolher o certo.
+   Este tutorial mostra os vários metodos para arranjar os widgets em uma
+   janela, e diz a você como escolher o certo.
   </simpara>
   <para>
-   Se você anteriormente fazia as suas GUIs em Visual Basic ou Visual C++, você
-   irá imaginar porque você não precisa de um tutorial sobre a colocação de widgets. Até agora era
-   assim: Define o tamanho da janela, selecione um widget e posicione-o em
-   uma posição <literal>(x,y)</literal> e faça-o em esta largura e com esta altura -
-   nada mais, totalmente fácil. Você tem posições fixas e tamanhos fixos,mas eles
-   ficam no mesmo lugar mesmo quando o tamanho da janela é modificado - eles não
-   se ajustam sozinhos porque eles não sabem como.
+   Se você anteriormente fazia as suas GUIs em Visual Basic ou Visual C++,
+   você irá imaginar porque você não precisa de um tutorial sobre a colocação
+   de widgets. Até agora era assim: Define o tamanho da janela, selecione um
+   widget e posicione-o em uma posição <literal>(x,y)</literal> e faça-o em
+   esta largura e com esta altura - nada mais, totalmente fácil. Você tem
+   posições fixas e tamanhos fixos, mas eles ficam no mesmo lugar mesmo quando
+   o tamanho da janela é modificado - eles não se ajustam sozinhos porque eles
+   não sabem como.
   </para>
   <simpara>
-   No Gtk, as coisas são dinamicas: Widgets ajustam os seus tamanhos quando o tamanho da janela
-   muda, exceto se você dizer para eles explicitamente não fazer isso. Definir as coisas
-   é um pouco mais complicada do que apenas acertar os tamanhos e posições, mas você
-   é recompensado com uma janela flexível que pode ser redimencionada para praticamente qualquer tamanho,
+   No Gtk, as coisas são dinamicas: Widgets ajustam os seus tamanhos quando o
+   tamanho da janela muda, exceto se você dizer para eles explicitamente não
+   fazer isso. Definir as coisas é um pouco mais complicada do que apenas
+   acertar os tamanhos e posições, mas você é recompensado com uma janela
+   flexível que pode ser redimencionada para praticamente qualquer tamanho,
    enquanto ainda permanece com boa aparência.
   </simpara>
  </sect1>
@@ -47,18 +49,18 @@
    maioria dos casos) é um <classname>GtkWindow</classname>, um bin. Isto
    significa que ele só pode ter um filho. Então agora o que - um widget
    é muito pouco para uma aplicação. A solução são containers,
-   dos quais você escolhe um e adiciona na janela. Para este
-   container, você pode adicionar mais alguns widgets ou até mesmo mais containers.
-   Isto lhe dá a abilidade de aninhar containers e ter exatamente
-   o layout que você tem na sua cabeça.
+   dos quais você escolhe um e adiciona na janela. Para este container, você
+   pode adicionar mais alguns widgets ou até mesmo mais containers. Isto lhe
+   dá a abilidade de aninhar containers e ter exatamente o layout que você tem
+   na sua cabeça.
   </para>
 
   <para>
    Os diferentes containers como <classname>GtkHBox</classname>, 
    <classname>GtkVBox</classname>, <classname>GtkTable</classname> e
    <classname>GtkFixed</classname> funcionam diferentemente na maneira que
-   eles posicionam e aranjam os widgets. Cada um é para um fim adequado e precisam ser 
-   combinados para conseguir layouts avançados.
+   eles posicionam e aranjam os widgets. Cada um é para um fim adequado e
+   precisam ser combinados para conseguir layouts avançados.
   </para>
 
   <!-- TODO: Explain filling and expanding, with screenshot -->
@@ -72,14 +74,15 @@
    O mais simples, mas os mais usados normalmente são 
    <classname>GtkBox</classname>es: <classname>GtkHBox</classname> e 
    <classname>GtkVBox</classname>. Eles permitem os widgest em uma única linha,
-   não mais, não menos. <classname>GtkHBox</classname> arranja
-   eles horizontalmente, enquanto <classname>GtkVBox</classname> arranja
-   eles verticalmente.
+   não mais, não menos. <classname>GtkHBox</classname> arranja eles
+   horizontalmente, enquanto <classname>GtkVBox</classname> arranja eles
+   verticalmente.
   </para>
 
   <para>
-   Você adiciona os widgets usando <function class="GtkBox">pack_start</function>
-   ou <function class="GtkBox">pack_end</function>.
+   Você adiciona os widgets usando
+   <function class="GtkBox">pack_start</function> ou
+   <function class="GtkBox">pack_end</function>.
    <function class="GtkBox">pack_start</function> adiciona-os um após o outro
    a aprtir do início (esquerda para a direita, cima para baixo), enquanto
    <function class="GtkBox">pack_end</function> adiciona-os a partir do final
@@ -87,8 +90,8 @@
   </para>
 
   <para>
-   Você pode influenciar o posicionamento ajustando os três parâmetros opcionais
-   de <function class="GtkBox">pack_start</function> e
+   Você pode influenciar o posicionamento ajustando os três parâmetros
+   opcionais de <function class="GtkBox">pack_start</function> e
    <function class="GtkBox">pack_end</function> - veja a documentação deles.
   </para>
 
@@ -103,11 +106,11 @@
   </example>
 
   <para>
-   Comece a demostração e redimencione a janela: O widget de multiplas linhas de texto ajusta o
-   seu tamanho para caber em todo o espaço da janela que não seja necessário para o label
-   ou para o botão. Mude o terceiro parâmetro de <literal>true</literal> para 
-   <literal>false</literal> no lugar onde <varname>scrwnd</varname> é
-   empacotado - O que acontece?
+   Comece a demostração e redimencione a janela: O widget de multiplas linhas
+   de texto ajusta o seu tamanho para caber em todo o espaço da janela que não
+   seja necessário para o label ou para o botão. Mude o terceiro parâmetro de
+   <literal>true</literal> para <literal>false</literal> no lugar onde
+   <varname>scrwnd</varname> é empacotado - O que acontece?
   </para>
 
   <para>
@@ -115,7 +118,8 @@
    <classname>GtkHButtonBox</classname> e <classname>GtkVButtonBox</classname>:
    Elas funcionam do mesmo modo que as suas contra partes, mas podem conter
    apenas <classname>GtkButton</classname>. Para compensar esta limitação,
-   elas tem algumas funções de posicionamento normalmente necessárias para linhas de botões.
+   elas tem algumas funções de posicionamento normalmente necessárias para
+   linhas de botões.
   </para>
  </sect1>
 
@@ -126,10 +130,10 @@
   <para>
    Enquanto é muito fácil criar layouts dinamicos com 
    <classname>GtkBox</classname>, é muito difícil posicionar widgets para,
-   que por exemplo, os labeis na esquerda do widget tenham a mesma
-   largura, sem importar o seu conteúdo. Se você precisa de layous em forma de tabela,
-   <classname>GtkTable</classname> é a escolha certa. Widgets podem
-   ocupar várias linhas e colunas, e podem ter margens de prenchimento diferentes.
+   que por exemplo, os labeis na esquerda do widget tenham a mesma largura,
+   sem importar o seu conteúdo. Se você precisa de layous em forma de tabela,
+   <classname>GtkTable</classname> é a escolha certa. Widgets podem ocupar
+   várias linhas e colunas, e podem ter margens de prenchimento diferentes.
   </para>
 
   <example>
@@ -143,15 +147,15 @@
   </example>
 
   <para>
-   Ao executar o exemplo, você verá que o label <literal>Id</literal>
-   esta centrado horizontalmente. Por padrão, widgets são completados em ambas as
-   direções e ocupam todo o espaço disponível, o que esta bom para
-   a maioria dos widgets. Para <classname>GtkLabel</classname> estretanto, isto não é o melhor:
-   Labels devem estar alinhados em um lado. Já que a função
-   <function class="GtkLabel">set_justify</function> justifica
-   o texto apenas para labels de multiplas linhas, você precisa usar um
-   <classname>GtkAlignment</classname> para alinhar o label propriamente - label
-   <literal>Name</literal> mostra o resultado.
+   Ao executar o exemplo, você verá que o label <literal>Id</literal> esta
+   centrado horizontalmente. Por padrão, widgets são completados em ambas as
+   direções e ocupam todo o espaço disponível, o que esta bom para a maioria
+   dos widgets. Para <classname>GtkLabel</classname> estretanto, isto não é o
+   melhor: Labels devem estar alinhados em um lado. Já que a função
+   <function class="GtkLabel">set_justify</function> justifica o texto apenas
+   para labels de multiplas linhas, você precisa usar um
+   <classname>GtkAlignment</classname> para alinhar o label propriamente -
+   label <literal>Name</literal> mostra o resultado.
   </para>
  </sect1>
 
@@ -160,16 +164,17 @@
   <title>Layout fixo</title>
 
   <para>
-   Este container não tem a sua propria lógica de posicionamento, você tem que dizer
-   aonde o widget deve ser colocado. O tamanho dos widgets é
-   determinado automaticamente, mas você pode sobrescrever isto requerendo
-   um certo tamanho usando <function class="GtkWidget">set_size_request</function>.
+   Este container não tem a sua propria lógica de posicionamento, você tem que
+   dizer aonde o widget deve ser colocado. O tamanho dos widgets é determinado
+   automaticamente, mas você pode sobrescrever isto requerendo um certo
+   tamanho usando <function class="GtkWidget">set_size_request</function>.
   </para>
 
   <simpara>
    Enquanto é muito simples colocar e posicionar os widgets, eles são fixos:
-   Redefinindo o taanho da janela não move ou redimenciona. Use-o apenas quando
-   for absolutamente necessário, container dinamicos normalmente são escolhas melhores.
+   Redefinindo o taanho da janela não move ou redimenciona. Use-o apenas
+   quando for absolutamente necessário, container dinamicos normalmente são
+   escolhas melhores.
   </simpara>
 
   <example>

@@ -12,14 +12,14 @@
  </simpara>
 
  <para>
-  Aqui esta uma captura de tela de como o programa vai parecer quando estiver terminado:
-  <graphic fileref="&directory.images;/tutorials/helloadvanced.png"/>
+  Aqui esta uma captura de tela de como o programa vai parecer quando estiver
+  terminado: <graphic fileref="&directory.images;/tutorials/helloadvanced.png"/>
  </para>
 
  <para>
-  Primeiro, nós criamos uma janela, definimos o seu titulo e dizemos que loop principal
-  deve ser encerado quando a janela for destruída - você já conhece isso do
-  primeiro tutorial:
+  Primeiro, nós criamos uma janela, definimos o seu titulo e dizemos que loop
+  principal deve ser encerado quando a janela for destruída - você já conhece
+  isso do primeiro tutorial:
   <informalexample>
    <programlisting role="php"><![CDATA[
 $wnd = new GtkWindow();
@@ -60,8 +60,8 @@ $btnCancel   = new GtkButton('_Cancel');
   <literal>_</literal> é exibido como sublinhado no próximo caractere,
   mas isso não é feito no construtor de <classname>GtkButton</classname>:
   O construtor do botão faz isto automaticamente, enquanto o do label não faz.
-  Este funcionamento pode ser estranho para você, mas é mais comum que você tenha
-  um mnemonic no label do botão do que um label normal tenha.
+  Este funcionamento pode ser estranho para você, mas é mais comum que você
+  tenha um mnemonic no label do botão do que um label normal tenha.
  </para>
 
  <para>
@@ -94,10 +94,10 @@ $btnLogin ->connect_simple('clicked', 'login', $wnd, $txtUsername, $txtPassword)
  <para>
   Agora que nós temos todos os widgets que precisamos, eles são adicionados na
   janela. Já que <classname>GtkWindow</classname> é um container to tipo bin,
-  ele pode guardar apenas um widget. então nós precisamos de um container que possa
-  guardar vários widgets e fazer o layout dos elemento bonito.
-  A decisão vai para <classname>GtkTable</classname>, porque ele provê um
-  meio de manter os labeis em uma coluna, e os campos de entrada de texto em outra:
+  ele pode guardar apenas um widget. então nós precisamos de um container que
+  possa guardar vários widgets e fazer o layout dos elemento bonito. A decisão
+  vai para <classname>GtkTable</classname>, porque ele provê um meio de manter
+  os labeis em uma coluna, e os campos de entrada de texto em outra:
   <informalexample>
    <programlisting role="php"><![CDATA[
 $tbl = new GtkTable(3, 2);
@@ -125,8 +125,8 @@ $bbox->add($btnLogin);
   A ultima coisa no layout é adicionar a tabela e a caixa de botões
   na janela. Isto não é diretamente possível, porque
   <classname>GtkWindow</classname> é um <classname>GtkBin</classname>
-  e pode ter apenas um unico widget filho, nós precisamos de um outro container,
-  desta vez um <classname>GtkVBox</classname>:
+  e pode ter apenas um unico widget filho, nós precisamos de um outro
+  container, desta vez um <classname>GtkVBox</classname>:
   <informalexample>
    <programlisting role="php"><![CDATA[
 $vbox = new GtkVBox();
@@ -187,8 +187,8 @@ $dialog->destroy();
   <title>O programa completo</title>
   <programlisting role="php">
    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
-               href="&directory.examples;/tutorials/helloadvanced/helloadvanced.phpw"
-               parse="text">
+    href="&directory.examples;/tutorials/helloadvanced/helloadvanced.phpw"
+    parse="text">
     <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
    </xi:include>
   </programlisting>
