@@ -10,17 +10,43 @@
   <desc>
    <para>
     A interface GtkTreeModel define uma interface genérica de árvores usada
-    pelo widget <classname>GtkTreeView</classname>. Esta é uma interface abstrata,
-    e desenhada para ser usada com qualquer estrutura de dados apropriada. O programador
-    tem apenas que implementar esta interface em seu próprio tipo para torná-lo visível
-    em um widget <classname>GtkTreeView</classname>.
+    pelo widget <classname>GtkTreeView</classname>. Esta é uma interface
+    abstrata, e desenhada para ser usada com qualquer estrutura de dados
+    apropriada. O programador tem apenas que implementar esta interface em seu
+    próprio tipo para torná-lo visível em um widget
+    <classname>GtkTreeView</classname>.
    </para>
   </desc>
  </classmeta>
 
  <methods>
 
-
+  <method id="gtk.gtktreemodel.method.filter_new">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef><classname>GtkTreeModelFilter</classname> <function>filter_new</function></funcdef>
+     <paramdef><classname>GtkTreePath</classname> <parameter>path</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Cria um novo filtro usando um caminho dado como a raíz.
+   </shortdesc>
+   <desc>
+    <para>
+     Cria e retorna um novo filtro de árvore que usa o nó referenciado pelo
+     caminho (<parameter>path</parameter>) como o nó raíz (não visível). Isto
+     significa que você pode usá-lo para exibir apenas uma parte da árvore.
+    </para>
+    <example>
+     <title>Exibindo apenas uma parte da árvore</title>
+     <programlisting role="php">
+      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="&directory.examples;/reference/gtk/gtktreemodel/filter_new.phpw" parse="text">
+       <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+      </xi:include>
+     </programlisting>
+    </example>
+   </desc>
+  </method>
 
   <method id="gtk.gtktreemodel.method.foreach">
    <funcsynopsis>
@@ -83,7 +109,7 @@
    <desc>
     <para>
      Retorna um conjunto de flags suportados pela interface. Estas flags serão
-     diferentes implementações da interface (<classname>GtkListStore</classname>, 
+     diferentes implementações da interface (<classname>GtkListStore</classname>,
      <classname>GtkTreeModelSort</classname>, etc.) mas serão constantes durante 
      a vida do objeto.
     </para>
@@ -159,9 +185,8 @@
    </shortdesc>
    <desc>
     <para>
-     Esta função converte uma string (ex. <literal>'0:1:0'</literal>)
-     para um <classname>GtkTreePath</classname> válido e retorna seu iterador 
-     apropriado.
+     Esta função converte uma string (ex. <literal>'0:1:0'</literal>) para um
+     <classname>GtkTreePath</classname> válido e retorna seu iterador apropriado.
     </para>
    </desc>
   </method>
@@ -196,7 +221,7 @@
    <desc>
     <para>
      Retorna o caminho para o iterador.
-    </para>
+   </para>
    </desc>
   </method>
 
@@ -212,9 +237,10 @@
    </shortdesc>
    <desc>
     <para>
-     Gera uma representação do iterador na forma de uma string. Esta string é uma lista
-     de números separada por ':'. Por exemplo, <literal>"4:10:0:3"</literal> pode ser um valor
-     retornado aceitável para esta string.
+     Gera uma representação do iterador na forma de uma string. Esta string é
+     uma lista de números separada por ':'. Por exemplo,
+     <literal>"4:10:0:3"</literal> pode ser um valor retornado aceitável para
+     esta string.
     </para>
    </desc>
   </method>
@@ -305,8 +331,8 @@
    <desc>
     <para>
      Retorna um iterador para a próxima linha no mesmo nível que seu
-     <parameter>sibling</parameter>. Retorna <literal>null</literal> se a linha não 
-     possuir um.
+     <parameter>sibling</parameter>. Retorna <literal>null</literal> se a
+     linha não possuir um.
     </para>
    </desc>
   </method>

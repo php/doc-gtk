@@ -25,7 +25,9 @@
     <example>
      <title>Adicionando vários childs.</title>
      <programlisting role="php">
-      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="&directory.examples;/reference/gtk/gtkwindow/constructor.phpw" parse="text">
+      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
+       href="&directory.examples;/reference/gtk/gtkwindow/constructor.phpw"
+       parse="text">
        <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
       </xi:include>
      </programlisting>
@@ -111,7 +113,9 @@
      <example>
       <title>Ativando o botão com Enter na caixa de texto</title>
       <programlisting role="php">
-       <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="&directory.examples;/reference/gtk/gtkwindow/activate_default.phpw" parse="text">
+       <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
+        href="&directory.examples;/reference/gtk/gtkwindow/activate_default.phpw"
+        parse="text">
         <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
        </xi:include>
       </programlisting>
@@ -187,8 +191,8 @@
    <desc>
     <para>
      Associa <parameter>accel_group</parameter> com a janela, tal que
-     pressionando o atalho e o mnemônico na janela irá ativar os aceleradores em
-     <parameter>accel_group</parameter>.
+     pressionando o atalho e o mnemônico na janela irá ativar os aceleradores
+     em <parameter>accel_group</parameter>.
     </para>
     <para>
      &seealso;
@@ -217,10 +221,10 @@
     </para>
     <para>
      O parâmetro <parameter>keyval</parameter> é o correspondente ASCII da
-     tecla que ativará o mnemônico. Ex.: Se você quiser que <literal>Alt+K</literal> 
-     ative um <literal>$button</literal>, o valor deve ser
-     <programlisting role="php"><![CDATA[ord('K')]]></programlisting> que é
-     <literal>75</literal> em ASCII.
+     tecla que ativará o mnemônico. Ex.: Se você quiser que
+     <literal>Alt+K</literal> ative um <literal>$button</literal>, o valor
+     deve ser <programlisting role="php"><![CDATA[ord('K')]]></programlisting>
+     que é <literal>75</literal> em ASCII.
     </para>
     <note>
      <para>
@@ -232,7 +236,9 @@
      <example>
       <title>Adicionando um mnemônico</title>
       <programlisting role="php">
-       <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="&directory.examples;/reference/gtk/gtkwindow/add_mnemonic.phpw" parse="text">
+       <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
+        href="&directory.examples;/reference/gtk/gtkwindow/add_mnemonic.phpw"
+        parse="text">
         <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
        </xi:include>
       </programlisting>
@@ -264,7 +270,8 @@
     </simpara>
     <note>
      Este método não é normalmente chamado no código. Se você precisa mover
-     uma janela, chame <function class="GtkWindow">set_position</function> ou <function class="GtkWindow">move</function>.
+     uma janela, chame <function class="GtkWindow">set_position</function> ou
+     <function class="GtkWindow">move</function>.
     </note>
     <simpara>
      &seealso;
@@ -295,7 +302,8 @@
     </simpara>
     <note>
      Este método não é normalmente chamado no código. Se você precisa
-     redimensionar uma janela, chame <function class="GtkWindow">resize</function>.
+     redimensionar uma janela, chame
+     <function class="GtkWindow">resize</function>.
     </note>
     <simpara>
      &seealso;
@@ -389,7 +397,8 @@
    <desc>
     <simpara>
      Retorna se as decorações da janela estão sendo mostradas atualmente.
-     As decorações nas janelas podem ser desativadas usando-se <function class="GtkWindow">set_decorated</function>
+     As decorações nas janelas podem ser desativadas usando-se
+     <function class="GtkWindow">set_decorated</function>.
     </simpara>
     <para>
      Por padrão, uma janela é decorada.
@@ -473,8 +482,8 @@
     </para>
     <note>
      <para>
-      Note que este é o widget que terá foco se a janela toplevel estiver ativa; se a
-      janela toplevel não estiver ativa então 
+      Note que este é o widget que terá foco se a janela toplevel estiver
+      ativa; se a janela toplevel não estiver ativa então 
       <programlisting role="php"><![CDATA[$widget->flags() & Gtk::HAS_FOCUS]]></programlisting>
       não será <literal>&gt; 0</literal> para o widget.
      </para>
@@ -483,7 +492,9 @@
      <example>
       <title>Usando GtkWindow::get_focus()</title>
       <programlisting role="php">
-       <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="&directory.examples;/reference/gtk/gtkwindow/get_focus.phpw" parse="text">
+       <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
+        href="&directory.examples;/reference/gtk/gtkwindow/get_focus.phpw"
+        parse="text">
         <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
        </xi:include>
       </programlisting>
@@ -595,8 +606,9 @@
    <desc>
     <para>
      Retorna se a janela possui ou nçao um frame fora de 
-     <classname>GdkWindow</classname>. Uma janela possui um frame window se 
-     o frame window foi adicionado usando-se <function class="GtkWindow">set_has_frame</function>.
+     <classname>GdkWindow</classname>. Uma janela possui um frame window se
+     o frame window foi adicionado usando-se
+     <function class="GtkWindow">set_has_frame</function>.
     </para>
     <para>
      &seealso;
@@ -621,16 +633,18 @@
     <para>
      Retorna o ícone usado para representar a janela. O ícone da janela é
      mostrado na barra de título, na barra de tarefas ou no gerenciador de
-     tarefas. Um ícone pode ser adicionado usando-se <function class="GtkWindow">
-      set_icon</function> ou <function class="GtkWindow">set_icon_list</function>.
+     tarefas. Um ícone pode ser adicionado usando-se
+     <function class="GtkWindow">set_icon</function> ou
+     <function class="GtkWindow">set_icon_list</function>.
     </para>
     <para>
-     Se uma lista de ícone foi setada usando <function class="GtkWindow">
-      set_icon_list</function>, este método retornará o primeiro ícone da lista.
+     Se uma lista de ícone foi setada usando
+     <function class="GtkWindow">set_icon_list</function>, este método
+     retornará o primeiro ícone da lista.
     </para>
     <para>
-     Por padrão, uma janela não possui ícone. Se nenhum ícone for definido, este
-     método retornará <literal>null</literal>.
+     Por padrão, uma janela não possui ícone. Se nenhum ícone for definido,
+     este método retornará <literal>null</literal>.
     </para>
     <para>
      &seealso;
@@ -835,8 +849,9 @@
      retornado, o primeiro elemento é a altura e o segundo a largura.
     </para>
     <para>
-     As dimensões da janela podem ser afetatadas se <function class="GtkWidget">set_size_request</function> for chamado e/ou qualquer
-     child for adicionado à janela.
+     As dimensões da janela podem ser afetatadas se
+     <function class="GtkWidget">set_size_request</function> for chamado e/ou
+     qualquer child for adicionado à janela.
     </para>
     <para>
      &seealso;
@@ -974,9 +989,10 @@
    <desc>
     <para>
      Retorna se um input possui ou não foco dentro da janela. Para janelas
-     toplevel, este método retorna o mesmo que <function
-      class="GtkWindow">is_active</function>, mas para janelas embutidas como 
-     <classname>GtkPlug</classname> os resultados podem ser diferentes.
+     toplevel, este método retorna o mesmo que
+     <function class="GtkWindow">is_active</function>, mas para janelas
+     embutidas como <classname>GtkPlug</classname> os resultados podem ser
+     diferentes.
     </para>
     <para>
      &seealso;
@@ -1062,6 +1078,51 @@
    </desc>
   </method>
 
+  <method id="gtk.gtkwindow.method.mnemonic_activate">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>bool <function>mnemonic_activate</function></funcdef>
+     <paramdef>int <parameter>keyval</parameter></paramdef>
+     <paramdef>GdkModifierType <parameter>modifiers</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Ativa os widgets associados à um menmônico.
+   </shortdesc>
+   <desc>
+    <para>
+     Ativa os widgets associados com os mnemônicos
+     <parameter>keyval</parameter> e <parameter>modifiers</parameter>. Um
+     widget é associado à um mnemônico quando passado como argumento para
+     <function class="GtkWindow">add_mnemonic</function>.
+    </para>
+    <para>
+     O parâmetro <parameter>keyval</parameter> deve ser um integer. Para pegar
+     o valor integer de uma tecla, use a função do PHP <literal>ord</literal>.
+    </para>
+    <para>
+     Os <parameter>modifiers</parameter> devem ser compatíveis com 
+     <function class="GtkWindow">set_mnemonic_modifier</function>.
+    </para>
+    <para>
+     <example>
+      <title>Usando GtkWindow::mnemonic_activate()</title>
+      <programlisting role="php">
+       <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
+        href="&directory.examples;/reference/gtk/gtkwindow/mnemonic_activate.phpw"
+        parse="text">
+        <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+       </xi:include>
+      </programlisting>
+     </example>
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkWindow">add_mnemonic</function>
+     <function class="GtkWindow">remove_mnemonic</function>
+    </para>
+   </desc>
+  </method>
 
   <method id="gtk.gtkwindow.method.move">
    <funcsynopsis>
@@ -1080,9 +1141,10 @@
     </para>
     <para>
      O local referenciado por <parameter>x</parameter> e
-     <parameter>y</parameter> depende da gravidade (<link linkd="gtk.gtkwindow.method.set_gravity">gravity</link>)
+     <parameter>y</parameter> depende da gravidade
+    (<link linkend="gtk.gtkwindow.method.set_gravity">gravity</link>)
      da janela. Por padrão, uma janela contém gravidade à noroeste
-     (<link linkd="gdk.enum.gravity">north west gravity</link>).
+     (<link linkend="gdk.enum.gravity">north west gravity</link>).
      Isto significa que o topo no lado esquerdo será posicionado à
      <parameter>x</parameter> pixels a partir da borda esquerda e
      <parameter>y</parameter> pixels a partir da borda superior.
@@ -1090,10 +1152,11 @@
     <para>
      Este método simplesmente solicita que a janela seja movida. Chamá-lo não
      significa necessariamente que a janela será movida. Para confirmar que
-     ela foi de fato movida, use <function class="GtkWindow">get_position</function>.
+     ela foi de fato movida, use
+     <function class="GtkWindow">get_position</function>.
     </para>
     <para>
-     Para mover a janela para uma posição relativa, como o centro da tela, 
+     Para mover a janela para uma posição relativa, como o centro da tela,
      use <function class="GtkWindow">set_position</function>.
     </para>
     <para>
@@ -1123,10 +1186,13 @@
     </para>
     <para>
      Se qualquer tamanho ou posição podem ser extraídos de
-     <parameter>geometry</parameter>, então <function class="GtkWindow">parse_geometry</function> chama <function
-      class="GtkWindow">set_default_size</function> e/ou <function class="GtkWindow">move</function> conforme o necessário e retorna
-     <literal>true</literal>. Se nem o tamanho ou posição podem ser extraídos
-     de <parameter>geometry</parameter> <function class="GtkWindow">parse_geometry</function> retorna
+     <parameter>geometry</parameter>, então
+     <function class="GtkWindow">parse_geometry</function> chama
+     <function class="GtkWindow">set_default_size</function> e/ou
+     <function class="GtkWindow">move</function> conforme o necessário e
+     retorna <literal>true</literal>. Se nem o tamanho ou posição podem ser
+     extraídos de <parameter>geometry</parameter>
+     <function class="GtkWindow">parse_geometry</function> retorna
      <literal>false</literal>.
     </para>
     <para>
@@ -1181,8 +1247,8 @@
    <desc>
     <para>
      Passa <parameter>keyevent</parameter> ao widget em foco. Se o widget com
-     foco não pode manipular este evento, ele será passado aos seus parents até
-     que seja capturado ou não haja mais parents para ser repassado.
+     foco não pode manipular este evento, ele será passado aos seus parents
+     até que seja capturado ou não haja mais parents para ser repassado.
     </para>
     <para>
      Este método geralmente é chamado automaticamente quando uma tecla é
@@ -1274,13 +1340,14 @@
    <desc>
     <simpara>
      Oculta e depois re-exibe a janela em seu tamenho e posição originais.
-     Este método é normalmente usado constantemente. Ele ignorará qualquer mudança que
-     o usuário tenha feito à janela e a retornará em suas configurações
-     originais. Se você deseja previnir que a janela seja movida, passe 
-     <enumname>Gtk::WIN_POS_CENTER_ALWAYS</enumname> a 
+     Este método é normalmente usado constantemente. Ele ignorará qualquer
+     mudança que o usuário tenha feito à janela e a retornará em suas
+     configurações originais. Se você deseja previnir que a janela seja
+     movida, passe <enumname>Gtk::WIN_POS_CENTER_ALWAYS</enumname> a 
      <function class="GtkWindow">set_position</function>. Se você deseja
-     previnir que o usuário redimensione a janela, passe <literal>false</literal>
-     à <function class="GtkWindow">set_resizable</function>.
+     previnir que o usuário redimensione a janela, passe
+     <literal>false</literal> à
+     <function class="GtkWindow">set_resizable</function>.
     </simpara>
     <simpara>
      &seealso;
@@ -1304,9 +1371,10 @@
    <desc>
     <simpara>
      Redimensiona a janela da mesma maneira que seria redimensionada pelo
-     usuário. A janela obedecerá sua consistência (<link linkd="gtk.gtkwindow.method.set_geometry_hints">
-      geometry contraints</link>). Por padrão essa consistência previne que a
-     janela seja redimensionada para um tamanho menor que o definido com 
+     usuário. A janela obedecerá sua consistência
+     (<link linkend="gtk.gtkwindow.method.set_geometry_hints">geometry contraints</link>).
+     Por padrão essa consistência previne que a janela seja redimensionada
+     para um tamanho menor que o definido com
      <function class="GtkWidget">set_size_request</function>. Sem levar em
      consideração a consistência, uma janela não pode ser redimensionada para
      menor que 1x1 pixel.
@@ -1361,8 +1429,8 @@
    <desc>
     <simpara>
      Por padrão, após exibir a primeira <classname>GtkWindow</classname> para
-     cada <classname>GdkScreen</classname>, GTK+ chama <function
-      class="GdkScreen">notify_startup_complete</function>. Passe
+     cada <classname>GdkScreen</classname>, GTK+ chama
+     <function class="GdkScreen">notify_startup_complete</function>. Passe
      <literal>false</literal> à esta função para desabilitar a auto
      inicialização da notificação. Você deve fazer isso se sua
      primeira janela é um splash screen, e deseja atrasar a notificação até
@@ -1435,7 +1503,8 @@
     </simpara>
     <simpara>
      É mais fácil chamar <function class="GtkWidget">grab_focus</function> no
-     widget que você quer tornar padrão, do que usar <function class="GtkWindow">set_default</function>.
+     widget que você quer tornar padrão, do que usar
+     <function class="GtkWindow">set_default</function>.
     </simpara>
     <note>
      Antes de você poder definir um widget como padrão, você precisa ativar a
@@ -1465,9 +1534,10 @@
    </shortdesc>
    <desc>
     <simpara>
-     Define um ícone para ser usado quando um ícone não foi definido usando 
-     <function class="GtkWindow">set_icon</function>. O parâmetro <parameter>icon</parameter>
-     passado deve ser um objeto <classname>GdkPixbuf</classname>
+     Define um ícone para ser usado quando um ícone não foi definido usando
+     <function class="GtkWindow">set_icon</function>. O parâmetro
+     <parameter>icon</parameter> passado deve ser um objeto
+     <classname>GdkPixbuf</classname>
     </simpara>
     <simpara>
      Veja <function class="GtkWindow">set_icon</function> para uma descrição
@@ -1476,8 +1546,9 @@
     <simpara>
      Você deve chamar este método se sua aplicação permite que o ícone da
      janela seja alterado em tempo de execução. Definir um ícone padrão para
-     a janela permite manter uma única identidade, mesmo se o ícone definido em
-     tempo de execução não possa ser encontrado ou não possa ser carregado por alguma razão.
+     a janela permite manter uma única identidade, mesmo se o ícone definido
+     em tempo de execução não possa ser encontrado ou não possa ser carregado
+     por alguma razão.
     </simpara>
     <simpara>
      &seealso;
@@ -1505,21 +1576,21 @@
     <simpara>
      Define o tamanho padrão da janela para <parameter>width</parameter>
      pixels por <parameter>height</parameter> pixels. Definindo os parâmetros
-     como <literal>-1</literal>, fará com que seja usado o tamanho "natural" da
-     janela. O tamanho natural, é aquele depois que seu child widget foi
+     como <literal>-1</literal>, fará com que seja usado o tamanho "natural"
+     da janela. O tamanho natural, é aquele depois que seu child widget foi
      adicionado e exibido antes de qualquer redimensionamento.
     </simpara>
     <simpara>
      Usar <function class="GtkWindow">set_default_size</function> simplesmente
      definirá o tamanho da janela. Isto não impõe qualquer restrição se o
      usuário pode ou não redimensionar a janela posteriormente. Este método
-     age se o usuário redimensionou a janela. Diferentemente de <function
-      class="GtkWidget">set_size_request</function>,ao usuário deve encolher a
-     janela abaixo da altura e comprimento passados à esta função.
+     age se o usuário redimensionou a janela. Diferentemente de
+     <function class="GtkWidget">set_size_request</function>,ao usuário deve
+     encolher a janela abaixo da altura e comprimento passados à esta função.
     </simpara>
     <simpara>
-     Este método respeita qualquer <link
-      linkd="gtk.gtkwindow.method.set_geometry_hints">dica geométrica</link>
+     Este método respeita qualquer
+     <link linkend="gtk.gtkwindow.method.set_geometry_hints">dica geométrica</link>
      que foi definida para a janela. Se a altura e o comprimento dados não
      casam com a dica geométrica, a janela será travada próxima às dimensões
      aceitáveis.
@@ -1716,7 +1787,8 @@
     <para>
      Define a gravidade da janela para <parameter>gravity</parameter>. A
      gravidade da janela define o significado das coordenadas passadas para
-     <function class="GtkWindow">move</function> definindo um ponto de referência para as coordenadas.
+     <function class="GtkWindow">move</function> definindo um ponto de
+     referência para as coordenadas.
     </para>
     <para>
      &seealso;
@@ -1790,7 +1862,8 @@
     <para>
      Se a imagem para o ícone existe em múltiplos tamanhos, use
      <function class="GtkWindow">set_icon_list</function>. A imagem da lista
-     com o tamanho mais apropriado será usada em cada instância onde o ícone é exibido.
+     com o tamanho mais apropriado será usada em cada instância onde o ícone é
+     exibido.
     </para>
     <para>
      &seealso;
@@ -1888,7 +1961,8 @@
    </shortdesc>
    <desc>
     <simpara>
-     Diz ao gerenciador de janelas para manter a janela acima de todas as outras janelas.
+     Diz ao gerenciador de janelas para manter a janela acima de todas as
+     outras janelas.
     </simpara>
     <note>
      Pode ser que hajam algumas configurações que impeçam isso, então não
@@ -1942,9 +2016,10 @@
    </shortdesc>
    <desc>
     <para>
-     Define o modificador <link linkend="appendix.glossary.m.mnemonic">mnemônico
-     </link> da janela para <parameter>modifier</parameter>. O modificador é uma 
-     máscara utilizada para ativar mnemônicos em uma janela, como
+     Define o modificador
+     <link linkend="appendix.glossary.m.mnemonic">mnemônico</link> da janela
+     para <parameter>modifier</parameter>. O modificador é uma máscara
+     utilizada para ativar mnemônicos em uma janela, como
      <literal>ALT</literal> ou <literal>CTRL</literal>.
     </para>
     <para>
@@ -1971,8 +2046,8 @@
      Define a janela como modal, previnindo a interação do usuário com
      qualquer outra janela da mesma aplicação até que esta seja fechada ou
      tornada não modal. Se o parâmetro <parameter>modal</parameter> for
-     <literal>true</literal>, a janela será modal. Se for <literal>false</literal>
-     não será.
+     <literal>true</literal>, a janela será modal. Se for
+     <literal>false</literal> não será.
     </simpara>
     <simpara>
      Uma janela pode ser modal se requer uma interação com o usuário antes que
@@ -2004,11 +2079,12 @@
      &deprecated.method;
     </note>
     <para>
-     Define como a janela trata requisições no tamanho ou tentativas de redimensionar dos usuários.
+     Define como a janela trata requisições no tamanho ou tentativas de
+     redimensionar dos usuários.
     </para>
     <para>
      &seealso;
-     <function class="GtkWindow">set_resizeable</function>
+     <function class="GtkWindow">set_resizable</function>
     </para>
    </desc>
   </method>
@@ -2026,8 +2102,9 @@
    <desc>
     <para>
      Define a posição para a janela para <parameter>position</parameter>. 
-     Se a nova ou a antiga posição for <optionname enum="GtkWindowPosition">Gtk::WIN_POS_CENTER_ALWAYS
-     </optionname> a janela será reposicionada para satisafazer a condição.
+     Se a nova ou a antiga posição for
+     <optionname enum="GtkWindowPosition">Gtk::WIN_POS_CENTER_ALWAYS</optionname>
+     a janela será reposicionada para satisafazer a condição.
     </para>
     <para>
      &seealso;
@@ -2079,8 +2156,9 @@
     <para>
      A função pode ser usada pelo gerenciador de janelas identificar a janela
      nos casos onde o título não está definido ou é ambíguo. Por exemplo a
-     função de um &quot;toolbox&quot;  é ajudar o gerenciador de janelas a
-     identificar a janela e reposicionar a janela quando a sessão do usuário é reiniciada.
+     função de um &quot;toolbox&quot; é ajudar o gerenciador de janelas a
+     identificar a janela e reposicionar a janela quando a sessão do usuário é
+     reiniciada.
     </para>
     <note>
      Esta função é útil apenas no X11, e não em outros alvos do GTK+.
@@ -2165,8 +2243,8 @@
     <simpara>
      Se a janela <emphasis>não</emphasis> deve ser exibida na barra de
      tarefas. Note que mesmo que a janela não seja exibida na barra de
-     tarefas, continuará visível na lista de janelas quando <literal>ALT+TAB</literal>
-     for pressionado.
+     tarefas, continuará visível na lista de janelas quando
+     <literal>ALT+TAB</literal> for pressionado.
     </simpara>
     <para>
      &seealso;
@@ -2522,10 +2600,10 @@
    </shortdesc>
    <desc>
     <para>
-     <literal>true</literal> se a janela não possui tamanho mínimo, 
-     <literal>false</literal> se possui. Geralmente não é uma boa idéia definir
-     este valor como sendo <literal>true</literal> porque ela permite que o
-     usuário distorça seu layout.
+     <literal>true</literal> se a janela não possui tamanho mínimo,
+     <literal>false</literal> se possui. Geralmente não é uma boa idéia
+     definir este valor como sendo <literal>true</literal> porque ela permite
+     que o usuário distorça seu layout.
     </para>
     <para>
      O padrão é <literal>false</literal>.
@@ -2919,7 +2997,7 @@
    </shortdesc>
    <desc>
     <para>
-     O tipo da janela. O tipo pode ser 
+     O tipo da janela. O tipo pode ser
      <enumname>Gtk::WINDOW_TOPLEVEL</enumname> ou
      <enumname>Gtk::WINDOW_POPUP</enumname>. O tipo não é difinido na construção.
     </para>
@@ -3035,12 +3113,12 @@
    </shortdesc>
    <desc>
     <para>
-     Emitido quando algum evento como um key-press, key-release, ou uma mudança
-     de foco ocorre na janela.
+     Emitido quando algum evento como um key-press, key-release, ou uma
+     mudança de foco ocorre na janela.
     </para>
     <para>
-     No callback serão passados a janela na qual ocorreu o evento e o evento em
-     si.
+     No callback serão passados a janela na qual ocorreu o evento e o evento
+     em si.
     </para>
    </desc>
   </signal>
@@ -3061,7 +3139,8 @@
    </shortdesc>
    <desc>
     <para>
-     Este sinal é emitido quando a definição do acelerador <link linkend="appendix.glossary.m.mnemonic">mnemônico</link>
+     Este sinal é emitido quando a definição do acelerador
+     <link linkend="appendix.glossary.m.mnemonic">mnemônico</link>
      da janela é alterado.
     </para>
     <para>
@@ -3124,7 +3203,8 @@
    <desc>
     <para>
      Emitido quando o widget com foco na janela é alterado (geralmente pela
-     chamada de <function class="GtkWindow">set_focus</function> ou <function class="GtkWidget">grab_focus</function>). 
+     chamada de <function class="GtkWindow">set_focus</function> ou
+     <function class="GtkWidget">grab_focus</function>). 
     </para>
     <para>
      No callback serão passados dois parâmetros:

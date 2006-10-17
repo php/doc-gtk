@@ -11,25 +11,24 @@
   <desc>
    <para>
     Uma GtkTreeView pode exibir tanto listas quanto estruturas de árvore. Para 
-    exibir uma lista, passe um objeto <classname>GtkListStore</classname> no construtor
-    ou <function class="GtkTreeView">set_model</function>. Para uma árvore, use um
-    objeto <classname>GtkTreeStore</classname>. Basicamente, qualquer objeto ou 
-    classe que implemente a interface <classname>GtkTreeModel</classname> 
-    pode ser usado.
+    exibir uma lista, passe um objeto <classname>GtkListStore</classname> no
+    construtor ou <function class="GtkTreeView">set_model</function>. Para uma
+    árvore, use um objeto <classname>GtkTreeStore</classname>. Basicamente,
+    qualquer objeto ou classe que implemente a interface
+    <classname>GtkTreeModel</classname> pode ser usado.
    </para>
    <para>
     Depois de criar a view e definir o modelo, você precisará criar alguns
     <classname>GtkTreeViewColumn</classname>s e adicioná-los com 
-    <function class="GtkTreeView">append_column</function>. Os widgets de coluna
-    precisam de alguns <classname>GtkCellRenderer</classname>s 
-    que desenham e exibem o dado do modelo.
+    <function class="GtkTreeView">append_column</function>. Os widgets de
+    coluna precisam de alguns <classname>GtkCellRenderer</classname>s que
+    desenham e exibem o dado do modelo.
    </para>
    <para>
     Para obter as linhas selecionadas na view, pegue o objeto
     <classname>GtkTreeSelection</classname> que gerencia a seleção usando
     <function class="GtkTreeView">get_selection</function>.
-    Se você'
-    deseja restrear alguma mudança, conecte-o ao sinal
+    Se você' deseja restrear alguma mudança, conecte-o ao sinal
     <signalname class="GtkTreeSelection">changed</signalname>.
    </para>
   </desc>
@@ -49,9 +48,9 @@
    </shortdesc>
    <desc>
     <para>
-     Cria um novo <classname>GtkTreeView</classname>, opcionalmente com uma fonte de dados.
-     Se você não definir esta fonte na construção, você pode usar
-     <function class="GtkTreeView">set_model</function> para definí-la.
+     Cria um novo <classname>GtkTreeView</classname>, opcionalmente com uma
+     fonte de dados. Se você não definir esta fonte na construção, você pode
+     usar <function class="GtkTreeView">set_model</function> para definí-la.
     </para>
     <example>
      <title>GtkTreeview com colunas ordenáveis e alguns dados</title>
@@ -155,8 +154,8 @@
    </shortdesc>
    <desc>
     <para>
-     Redimensiona todas as colunas para seus tamanhos apropriados.
-     Funciona apenas se a treeview já foi processada e exibida.
+     Redimensiona todas as colunas para seus tamanhos apropriados. Funciona
+     apenas se a treeview já foi processada e exibida.
     </para>
    </desc>
   </method>
@@ -174,7 +173,7 @@
    <desc>
     <para>
      Cria uma repredentação <classname>GdkPixmap</classname> da linha
-     dada por <parameter>path</parameter>.  Esta imagem é usada em um ícone.
+     dada por <parameter>path</parameter>. Esta imagem é usada em um ícone.
     </para>
    </desc>
   </method>
@@ -276,8 +275,8 @@
    </shortdesc>
    <desc>
     <para>
-     Retorna a janela na qual a tree view se encontra. Isto é usado para saber se o evento 
-     na treeview está na janela correta.
+     Retorna a janela na qual a tree view se encontra. Isto é usado para saber
+     se o evento na treeview está na janela correta.
     </para>
    </desc>
   </method>
@@ -350,8 +349,8 @@
    </shortdesc>
    <desc>
     <para>
-     Retorna um array com o caminho e o <classname>GtkTreeViewColumn</classname> 
-     que está ativo no momento.
+     Retorna um array com o caminho e o
+     <classname>GtkTreeViewColumn</classname> que está ativo no momento.
     </para>
     <para>
      &seealso;
@@ -437,8 +436,8 @@
    </shortdesc>
    <desc>
     <para>
-     Retorna o <classname>GtkAdjustment</classname> atualmente usado para o posicionamento
-     horizontal.
+     Retorna o <classname>GtkAdjustment</classname> atualmente usado para o
+     posicionamento horizontal.
     </para>
     <para>
      &seealso;
@@ -590,6 +589,26 @@
    </desc>
   </method>
 
+  <method id="gtk.gtktreeview.method.get_row_separator_func">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>callback <function>get_row_separator_func</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Retorna a função atual de separação de linhas.
+   </shortdesc>
+   <desc>
+    <para>
+     Retorna a função atual de separação de linhas.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkTreeView">set_row_separator_func</function>
+    </para>
+   </desc>
+  </method>
 
   <method id="gtk.gtktreeview.method.get_rules_hint">
    <funcsynopsis>
@@ -643,17 +662,19 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Retirna o objeto de seleção associado com a view.
+    Retorna o objeto de seleção associado com a view.
    </shortdesc>
    <desc>
     <para>
-     Este método retorna o objeto <classname>GtkTreeSelection</classname> associado
-     à view. O objeto de seleção por si só contém todos os dados a respeito da seleção,
-     a partir de uma única ou múltiplas linhas selecionadas.
+     Este método retorna o objeto <classname>GtkTreeSelection</classname>
+     associado à view. O objeto de seleção por si só contém todos os dados a
+     respeito da seleção, a partir de uma única ou múltiplas linhas
+     selecionadas.
     </para>
     <para>
-     Tenha sempre em mente que a view, não o modelo, possui uma seleção, o que significa
-     que diferentes views do mesmo modelo podem possuir diferentes seleções.
+     Tenha sempre em mente que a view, não o modelo, possui uma seleção, o que
+     significa que diferentes views do mesmo modelo podem possuir diferentes
+     seleções.
     </para>
     <example>
      <title>Usando o GtkTreeSelection</title>
@@ -1000,7 +1021,7 @@
      Define o GtkAdjustment para a posição horizontal.
     </para>
     <para>
-     Em circunstâncias normais você não precisa deste método se você utilizar 
+     Em circunstâncias normais você não precisa deste método se você utilizar
      uma <classname>GtkScrolledWindow</classname> e adicionar
      (<function class="GtkContainer">add</function>) a view à ela.
     </para>
@@ -1122,18 +1143,18 @@
      Esta função é uma função de conveniência que permite reordenar modelos
      que suportam <literal>GtkDragSourceIface</literal> e
      <literal>GtkDragDestIface</literal>. Ambos
-     <classname>GtkTreeStore</classname> e
-     <classname>GtkListStore</classname> o suportam. Se 
-     <parameter>reorderable</parameter> é <literal>true</literal>, então
-     o usuário pode reordenar o modelo arastando e soltando linhas. O desenvolvedor
-     pode capturar essas mudanças conectando ao modelo os sinais
+     <classname>GtkTreeStore</classname> e <classname>GtkListStore</classname>
+     o suportam. Se <parameter>reorderable</parameter> é
+     <literal>true</literal>, então o usuário pode reordenar o modelo
+     arastando e soltando linhas. O desenvolvedor pode capturar essas mudanças
+     conectando ao modelo os sinais
      <signalname class="GtkTreeModel">row-inserted</signalname> e
      <signalname class="GtkTreeModel">row-deleted</signalname>.
     </para>
     <para>
-     Esta função não oferece nenhum controle sobre a ordem - qualquer reordenação é
-     permitida. Se mais controle é necessário, você deve provavelmente manipular
-     o arrastamento manualmente.
+     Esta função não oferece nenhum controle sobre a ordem - qualquer
+     reordenação é permitida. Se mais controle é necessário, você deve
+     provavelmente manipular o arrastamento manualmente.
     </para>
     <para>
      &seealso;

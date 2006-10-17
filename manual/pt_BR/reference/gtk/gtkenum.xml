@@ -3,8 +3,8 @@
 <enums id="gtkenum">
 
 
- <enum id="gtk.enum.accel">
-  <enumname>GtkAccel</enumname>
+ <enum id="gtk.enum.accelflags">
+  <enumname>GtkAccelFlags</enumname>
   <desc>
    <simpara>
 
@@ -37,8 +37,8 @@
  </enum>
 
 
- <enum id="gtk.enum.anchor">
-  <enumname>GtkAnchor</enumname>
+ <enum id="gtk.enum.anchortype">
+  <enumname>GtkAnchorType</enumname>
   <desc>
    <simpara>
     
@@ -254,7 +254,8 @@
     GtkArgFlags é obsoleto e não deve ser usado em códigos novos.
    </simpara>
    <simpara>
-    Possíveis flags indicando como um argumento deve ser tratado. Ultrapassado devido aos recursos de GParamSpec.
+    Possíveis flags indicando como um argumento deve ser tratado. Ultrapassado
+    devido aos recursos de GParamSpec.
    </simpara>
   </desc>
 
@@ -288,7 +289,7 @@
    <shortdesc>
     O argumento necessita de construção (e será definido durante a criação
     do objeto), caso contrário não será definido. Portanto, esta flag não
-    é permitida com <literal>Gtk::ARG_WRITABLE</literal>, e é redundante com 
+    é permitida com <literal>Gtk::ARG_WRITABLE</literal>, e é redundante com
     <literal>Gtk::ARG_CONSTRUCT</literal>.
    </shortdesc>
   </enumoption>
@@ -426,7 +427,7 @@
  </enum>
 
 
- <enum id="gtk.enum.buttonbox">
+ <enum id="gtk.enum.buttonboxstyle">
   <enumname>GtkButtonBoxStyle</enumname>
   <desc>
    <simpara>
@@ -464,8 +465,8 @@
    <value>3</value>
    <optionname>Gtk::BUTTONBOX_START</optionname>
    <shortdesc>
-    Botões são agrupados para o começo do box,
-    (na esquerda para Hbox, ou topo para VBox).
+    Botões são agrupados para o começo do box, (na esquerda para Hbox, ou topo
+    para VBox).
    </shortdesc>
   </enumoption>
 
@@ -473,8 +474,8 @@
    <value>4</value>
    <optionname>Gtk::BUTTONBOX_END</optionname>
    <shortdesc>
-    Botões são agrupados para o fim do box,
-    (na esquerda para Hbox, ou base para VBox).
+    Botões são agrupados para o fim do box, (na esquerda para Hbox, ou base
+    para VBox).
    </shortdesc>
   </enumoption>
  </enum>
@@ -709,8 +710,8 @@
  </enum>
 
 
- <enum id="gtk.enum.corner">
-  <enumname>GtkCorner</enumname>
+ <enum id="gtk.enum.cornertype">
+  <enumname>GtkCornerType</enumname>
   <desc>
    <simpara>
     Especifica em qual canto um widget filho deve ser posicionado
@@ -726,7 +727,8 @@
    <value>0</value>
    <optionname>Gtk::CORNER_TOP_LEFT</optionname>
    <shortdesc>
-    Posiciona as barras de rolagem à direita no canto inferior do widget (comportamento padrão).
+    Posiciona as barras de rolagem à direita no canto inferior do widget
+    (comportamento padrão).
    </shortdesc>
   </enumoption>
 
@@ -763,7 +765,7 @@
     GtkCListDragPos é obsoleto e não deve ser usado em códigos novos.
    </simpara>
    <simpara>
-		Um valor especificando a posição de um novo nó relativo à um antigo.
+   Um valor especificando a posição de um novo nó relativo à um antigo.
    </simpara>
   </desc>
 
@@ -771,7 +773,7 @@
    <value>0</value>
    <optionname>Gtk::CTREE_POS_BEFORE</optionname>
    <shortdesc>
-		Um sibling, antes do nó especificado.
+   Um sibling, antes do nó especificado.
    </shortdesc>
   </enumoption>
 
@@ -779,7 +781,7 @@
    <value>1</value>
    <optionname>Gtk::CTREE_POS_AS_CHILD</optionname>
    <shortdesc>
-		Um child do nó especificado.
+   Um child do nó especificado.
    </shortdesc>
   </enumoption>
 
@@ -787,7 +789,7 @@
    <value>2</value>
    <optionname>Gtk::CTREE_POS_AFTER</optionname>
    <shortdesc>
-		Um sibling, após o nó especificado.
+   Um sibling, após o nó especificado.
    </shortdesc>
   </enumoption>
  </enum>
@@ -800,7 +802,7 @@
     GtkCTreeLineStyle é obsoleto e não deve ser usado em códigos novos.
    </simpara>
    <simpara>
-		A aparência das linhas na árvore.
+   A aparência das linhas na árvore.
    </simpara>
   </desc>
 
@@ -808,7 +810,7 @@
    <value>0</value>
    <optionname>Gtk::GTK_CTREE_LINES_NONE</optionname>
    <shortdesc>
-		Sem linhas.
+   Sem linhas.
    </shortdesc>
   </enumoption>
 
@@ -816,7 +818,7 @@
    <value>1</value>
    <optionname>Gtk::GTK_CTREE_LINES_SOLID</optionname>
    <shortdesc>
-		Linhas sólidas.
+   Linhas sólidas.
    </shortdesc>
   </enumoption>
 
@@ -824,7 +826,7 @@
    <value>2</value>
    <optionname>Gtk::GTK_CTREE_LINES_DOTTED</optionname>
    <shortdesc>
-		Linhas pontilhadas.
+   Linhas pontilhadas.
    </shortdesc>
   </enumoption>
 
@@ -845,8 +847,8 @@
     GtkCTreeExpanderStyle é obsoleto e não deve ser usado em códigos novos.
    </simpara>
    <simpara>
-				A aparência dos botões de expansão, ex. os pequenos botões que expandem 
-				ou contraem partes da árvore quando pressionados.
+    A aparência dos botões de expansão, ex. os pequenos botões que expandem
+    ou contraem partes da árvore quando pressionados.
    </simpara>
   </desc>
 
@@ -854,7 +856,7 @@
    <value>0</value>
    <optionname>Gtk::CTREE_EXPANDER_NONE</optionname>
    <shortdesc>
-				Sem botões de expansão.
+    Sem botões de expansão.
    </shortdesc>
   </enumoption>
 
@@ -862,7 +864,7 @@
    <value>1</value>
    <optionname>Gtk::CTREE_EXPANDER_SQUARE</optionname>
    <shortdesc>
-				Botões de expansão quadrados.
+    Botões de expansão quadrados.
    </shortdesc>
   </enumoption>
 
@@ -870,7 +872,7 @@
    <value>2</value>
    <optionname>Gtk::CTREE_EXPANDER_TRIANGLE</optionname>
    <shortdesc>
-				Botões de expansão triangulares.
+    Botões de expansão triangulares.
    </shortdesc>
   </enumoption>
 
@@ -878,7 +880,7 @@
    <value>3</value>
    <optionname>Gtk::CTREE_EXPANDER_CIRCULAR</optionname>
    <shortdesc>
-				Botões de expansão circulares.
+    Botões de expansão circulares.
    </shortdesc>
   </enumoption>
  </enum>
@@ -891,7 +893,7 @@
     GtkCTreeExpansionType é obsoleto e não deve ser usado em códigos novos.
    </simpara>
    <simpara>
-				Como expandir ou contrair uma parte da árvore.
+    Como expandir ou contrair uma parte da árvore.
    </simpara>
   </desc>
 
@@ -907,7 +909,7 @@
    <value>1</value>
    <optionname>Gtk::CTREE_EXPANSION_EXPAND_RECURSIVE</optionname>
    <shortdesc>
-				Expande este nó e tudo abaixo em sua hierarquia.
+    Expande este nó e tudo abaixo em sua hierarquia.
    </shortdesc>
   </enumoption>
 
@@ -915,7 +917,7 @@
    <value>2</value>
    <optionname>Gtk::CTREE_EXPANSION_COLLAPSE</optionname>
    <shortdesc>
-				Contrai este nó.
+    Contrai este nó.
    </shortdesc>
   </enumoption>
 
@@ -923,7 +925,7 @@
    <value>3</value>
    <optionname>Gtk::CTREE_EXPANSION_COLLAPSE_RECURSIVE</optionname>
    <shortdesc>
-				Contrai este nó e tudo abaixo em sua hierarquia.
+    Contrai este nó e tudo abaixo em sua hierarquia.
    </shortdesc>
   </enumoption>
 
@@ -931,7 +933,7 @@
    <value>4</value>
    <optionname>Gtk::CTREE_EXPANSION_TOGGLE</optionname>
    <shortdesc>
-				Expande o nó se contraído ou vice versa.
+    Expande o nó se contraído ou vice versa.
    </shortdesc>
   </enumoption>
 
@@ -939,14 +941,14 @@
    <value>4</value>
    <optionname>Gtk::CTREE_EXPANSION_TOGGLE_RECURSIVE</optionname>
    <shortdesc>
-				Ativa ou desativa este nó e tudo abaixo de sua hierarquia.
+    Ativa ou desativa este nó e tudo abaixo de sua hierarquia.
    </shortdesc>
   </enumoption>
  </enum>
 
 
- <enum id="gtk.enum.curve">
-  <enumname>GtkCurve</enumname>
+ <enum id="gtk.enum.curvetype">
+  <enumname>GtkCurveType</enumname>
   <desc>
    <simpara>
     
@@ -957,7 +959,7 @@
    <value>0</value>
    <optionname>Gtk::CURVE_TYPE_LINEAR</optionname>
    <shortdesc>
-				Interpolação linear.
+    Interpolação linear.
    </shortdesc>
   </enumoption>
 
@@ -965,7 +967,7 @@
    <value>1</value>
    <optionname>Gtk::CURVE_TYPE_SPLINE</optionname>
    <shortdesc>
-				Interpolação em ranhura.
+    Interpolação em ranhura.
    </shortdesc>
   </enumoption>
 
@@ -973,7 +975,7 @@
    <value>2</value>
    <optionname>Gtk::CURVE_TYPE_FREE</optionname>
    <shortdesc>
-				Curva de forma livre.
+    Curva de forma livre.
    </shortdesc>
   </enumoption>
  </enum>
@@ -999,8 +1001,8 @@
    <value>1</value>
    <optionname>Gtk::DELETE_WORD_ENDS</optionname>
    <shortdesc>
-				Deleta apenas uma porção do texto à esquerda/direita 
-				do cursor se está no meio de uma palavra.
+    Deleta apenas uma porção do texto à esquerda/direita do cursor se está no
+    meio de uma palavra.
    </shortdesc>
   </enumoption>
 
@@ -1032,7 +1034,7 @@
    <value>5</value>
    <optionname>Gtk::DELETE_PARAGRAPH_ENDS</optionname>
    <shortdesc>
-				Como C-k no Emacs (ou seu oposto).
+    Como C-k no Emacs (ou seu oposto).
    </shortdesc>
   </enumoption>
 
@@ -1040,7 +1042,7 @@
    <value>6</value>
    <optionname>Gtk::DELETE_PARAGRAPHS</optionname>
    <shortdesc>
-				c-k no pico, apaga a linha inteira.
+    c-k no pico, apaga a linha inteira.
    </shortdesc>
   </enumoption>
 
@@ -1048,7 +1050,7 @@
    <value>7</value>
    <optionname>Gtk::DELETE_WHITESPACE</optionname>
    <shortdesc>
-				M-\ no Emacs.
+    M-\ no Emacs.
    </shortdesc>
   </enumoption>
  </enum>
@@ -1058,8 +1060,8 @@
   <enumname>GtkDestDefaults</enumname>
   <desc>
    <simpara>
-				A enumeração GtkDestDefaults especifica vários tipos de ação que serão
-				examinadas pelo interesse do usuário para um local de destino de um arraste.
+    A enumeração GtkDestDefaults especifica vários tipos de ação que serão
+    examinadas pelo interesse do usuário para um local de destino de um arraste.
    </simpara>
   </desc>
 
@@ -1067,9 +1069,9 @@
    <value>1</value>
    <optionname>Gtk::DEST_DEFAULT_MOTION</optionname>
    <shortdesc>
-				Se setado para um widget, o GTK+ durante um arraste sobre este widget irá verificar
-				se o arraste casa com a lista de possíveis alvos para esta operação.
-				GTK+ irá chamar gdk_drag_status() se apropriado.
+    Se setado para um widget, o GTK+ durante um arraste sobre este widget irá
+    verificar se o arraste casa com a lista de possíveis alvos para esta
+    operação. GTK+ irá chamar gdk_drag_status() se apropriado.
    </shortdesc>
   </enumoption>
 
@@ -1077,8 +1079,9 @@
    <value>2</value>
    <optionname>Gtk::DEST_DEFAULT_HIGHLIGHT</optionname>
    <shortdesc>
-				Se setado para um widget, GTK+ irá desenhar um highlight neste widget
-				enquanto um arraste estiver sobre este widget e o formato e ação são aceitáveis.
+    Se setado para um widget, GTK+ irá desenhar um highlight neste widget
+    enquanto um arraste estiver sobre este widget e o formato e ação são
+    aceitáveis.
    </shortdesc>
   </enumoption>
 
@@ -1086,12 +1089,13 @@
    <value>4</value>
    <optionname>Gtk::DEST_DEFAULT_DROP</optionname>
    <shortdesc>
-				Se setado para um widget, quando um item arrastado for solto, o GTK+ irá verificar
-				se o arraste casa com a lista de possíveis alvos e ações.
-				Então GTK+ irá chamar gtk_drag_get_data() do interesse do widget.
-				Se o arraste é ou não concluído com sucesso, o GTK+ irá chamar gtk_drag_finish().
-				Se a ação foi mover, e se o arraste foi feito com sucesso, então <literal>true</literal>
-				será passado para o parâmetro delete para gtk_drag_finish().
+    Se setado para um widget, quando um item arrastado for solto, o GTK+ irá
+    verificar se o arraste casa com a lista de possíveis alvos e ações.
+    Então GTK+ irá chamar gtk_drag_get_data() do interesse do widget. Se o
+    arraste é ou não concluído com sucesso, o GTK+ irá chamar gtk_drag_finish().
+    Se a ação foi mover, e se o arraste foi feito com sucesso, então
+    <literal>true</literal> será passado para o parâmetro delete para
+    gtk_drag_finish().
    </shortdesc>
   </enumoption>
 
@@ -1099,7 +1103,7 @@
    <value>7</value>
    <optionname>Gtk::DEST_DEFAULT_ALL</optionname>
    <shortdesc>
-				Se setado, especifica que todas as ações padrão sejam capturadas.
+    Se setado, especifica que todas as ações padrão sejam capturadas.
    </shortdesc>
   </enumoption>
  </enum>
@@ -1109,7 +1113,7 @@
   <enumname>GtkDialogFlags</enumname>
   <desc>
    <simpara>
-				Flags para influenciar a construção de diálogos.
+    Flags para influenciar a construção de diálogos.
    </simpara>
   </desc>
 
@@ -1117,7 +1121,7 @@
    <value>1</value>
    <optionname>Gtk::DIALOG_MODAL</optionname>
    <shortdesc>
-				Torna o diálogo modal. Veja <function class="GtkWidget">set_modal</function>.
+    Torna o diálogo modal. Veja <function class="GtkWidget">set_modal</function>.
    </shortdesc>
   </enumoption>
 
@@ -1125,7 +1129,7 @@
    <value>2</value>
    <optionname>Gtk::DIALOG_DESTROY_WITH_PARENT</optionname>
    <shortdesc>
-				Destroi o widget quando seu parent é detruído. Veja
+    Destroi o widget quando seu parent é detruído. Veja
     <function class="GtkWindow">set_destroy_with_parent</function>.
    </shortdesc>
   </enumoption>
@@ -1134,7 +1138,7 @@
    <value>4</value>
    <optionname>Gtk::DIALOG_NO_SEPARATOR</optionname>
    <shortdesc>
-				Não adiciona um separador entre a área de ação e o conteúdo do diálogo.
+    Não adiciona um separador entre a área de ação e o conteúdo do diálogo.
    </shortdesc>
   </enumoption>
  </enum>
@@ -1198,11 +1202,11 @@
  </enum>
 
 
- <enum id="gtk.enum.expander">
-  <enumname>GtkExpander</enumname>
+ <enum id="gtk.enum.expanderstyle">
+  <enumname>GtkExpanderStyle</enumname>
   <desc>
    <simpara>
-				Usado para especificar o estilo dos botões de expansão desenhados por 
+    Usado para especificar o estilo dos botões de expansão desenhados por
     <classname>GtkTreeView</classname>.
    </simpara>
   </desc>
@@ -1211,7 +1215,7 @@
    <value>0</value>
    <optionname>Gtk::EXPANDER_COLLAPSED</optionname>
    <shortdesc>
-				O estilo usado para uma árvore contraída.
+    O estilo usado para uma árvore contraída.
    </shortdesc>
   </enumoption>
 
@@ -1219,7 +1223,7 @@
    <value>1</value>
    <optionname>Gtk::EXPANDER_SEMI_COLLAPSED</optionname>
    <shortdesc>
-				Estilo intermediário usado durante as animações.
+    Estilo intermediário usado durante as animações.
    </shortdesc>
   </enumoption>
 
@@ -1227,7 +1231,7 @@
    <value>2</value>
    <optionname>Gtk::EXPANDER_SEMI_EXPANDED</optionname>
    <shortdesc>
-				Estilo intermediário usado durante uma animação.
+    Estilo intermediário usado durante uma animação.
    </shortdesc>
   </enumoption>
 
@@ -1235,7 +1239,7 @@
    <value>3</value>
    <optionname>Gtk::EXPANDER_EXPANDED</optionname>
    <shortdesc>
-				O estilo usado para uma árvore expandida.
+    O estilo usado para uma árvore expandida.
    </shortdesc>
   </enumoption>
  </enum>
@@ -1245,8 +1249,8 @@
   <enumname>GtkFileChooserError</enumname>
   <desc>
    <simpara>
-				Isto identifica vários erros que podem ocorrer enquanto se chama
-				funções do <classname>GtkFileChooser</classname>.
+    Isto identifica vários erros que podem ocorrer enquanto se chama funções
+    do <classname>GtkFileChooser</classname>.
    </simpara>
   </desc>
 
@@ -1254,7 +1258,7 @@
    <value>0</value>
    <optionname>Gtk::FILE_CHOOSER_ERROR_NONEXISTENT</optionname>
    <shortdesc>
-				Indica que um arquivo não existe.
+    Indica que um arquivo não existe.
    </shortdesc>
   </enumoption>
 
@@ -1262,7 +1266,7 @@
    <value>1</value>
    <optionname>Gtk::FILE_CHOOSER_ERROR_BAD_FILENAME</optionname>
    <shortdesc>
-				Indica um nome de arquivo mal-formado.
+    Indica um nome de arquivo mal-formado.
    </shortdesc>
   </enumoption>
  </enum>
@@ -1272,8 +1276,8 @@
   <enumname>GtkFileChooserAction</enumname>
   <desc>
    <simpara>
-				Descreve se um <classname>GtkFileChooser</classname> está sendo
-				usado para abrir arquivos existentes ou para salvar um novo arquivo.
+    Descreve se um <classname>GtkFileChooser</classname> está sendo
+    usado para abrir arquivos existentes ou para salvar um novo arquivo.
    </simpara>
   </desc>
 
@@ -1281,7 +1285,8 @@
    <value></value>
    <optionname>Gtk::FILE_CHOOSER_ACTION_OPEN</optionname>
    <shortdesc>
-				Indica o modo de abertura. O diálogo de arquivos permitirá que o usuário escolha apenas um arquivo.
+    Indica o modo de abertura. O diálogo de arquivos permitirá que o usuário
+    escolha apenas um arquivo.
    </shortdesc>
   </enumoption>
 
@@ -1289,8 +1294,8 @@
    <value></value>
    <optionname>Gtk::FILE_CHOOSER_ACTION_SAVE</optionname>
    <shortdesc>
-				Indica o modo de gravação de arquivo. O usuário permitirá que o usuário escolha um arquivo existente,
-				ou digite um novo nome de arquivo.
+    Indica o modo de gravação de arquivo. O usuário permitirá que o usuário
+    escolha um arquivo existente, ou digite um novo nome de arquivo.
    </shortdesc>
   </enumoption>
 
@@ -1298,8 +1303,8 @@
    <value></value>
    <optionname>Gtk::FILE_CHOOSER_ACTION_SELECT_FOLDER</optionname>
    <shortdesc>
-				Indica o modo de abertura para seleção de diretórios. O diálogo permitirá que o usuário
-				escolha um dretório existente.
+    Indica o modo de abertura para seleção de diretórios. O diálogo permitirá
+    que o usuário escolha um dretório existente.
    </shortdesc>
   </enumoption>
 
@@ -1307,8 +1312,8 @@
    <value></value>
    <optionname>Gtk::FILE_CHOOSER_ACTION_CREATE_FOLDER</optionname>
    <shortdesc>
-				Indica o modo para criação de um novo diretório. O diálogo permitirá que o usuário nomeie um
-				diretório existente ou um novo.
+    Indica o modo para criação de um novo diretório. O diálogo permitirá que o
+    usuário nomeie um diretório existente ou um novo.
    </shortdesc>
   </enumoption>
  </enum>
@@ -1318,8 +1323,8 @@
   <enumname>GtkFileFilterFlags</enumname>
   <desc>
    <simpara>
-				Estas flags indicam quais partes de uma estruturs de um GtkFileFilterInfo
-				serão preenchidas ou necessitam ser preenchidas.
+    Estas flags indicam quais partes de uma estruturs de um GtkFileFilterInfo
+    serão preenchidas ou necessitam ser preenchidas.
    </simpara>
   </desc>
 
@@ -1327,7 +1332,7 @@
    <value>1</value>
    <optionname>Gtk::FILE_FILTER_FILENAME</optionname>
    <shortdesc>
-				O nome do arquivo sendo testado.
+    O nome do arquivo sendo testado.
    </shortdesc>
   </enumoption>
 
@@ -1335,7 +1340,7 @@
    <value>2</value>
    <optionname>Gtk::FILE_FILTER_URI</optionname>
    <shortdesc>
-				A URI para o arquivo sendo testado.
+    A URI para o arquivo sendo testado.
    </shortdesc>
   </enumoption>
 
@@ -1343,7 +1348,7 @@
    <value>4</value>
    <optionname>Gtk::FILE_FILTER_DISPLAY_NAME</optionname>
    <shortdesc>
-				A string que será usada para exibir o arquivo no diálogo de seleção.
+    A string que será usada para exibir o arquivo no diálogo de seleção.
    </shortdesc>
   </enumoption>
 
@@ -1351,7 +1356,7 @@
    <value>8</value>
    <optionname>Gtk::FILE_FILTER_MIME_TYPE</optionname>
    <shortdesc>
-				O mime type do arquivo.
+    O mime type do arquivo.
    </shortdesc>
   </enumoption>
  </enum>
@@ -1361,7 +1366,8 @@
   <enumname>GtkIconLookupFlags</enumname>
   <desc>
    <simpara>
-				Usado para especificar opções para <function class="GtkIconTheme">lookup_icon</function>.
+    Usado para especificar opções para
+    <function class="GtkIconTheme">lookup_icon</function>.
    </simpara>
   </desc>
 
@@ -1369,8 +1375,8 @@
    <value>1</value>
    <optionname>Gtk::ICON_LOOKUP_NO_SVG</optionname>
    <shortdesc>
-				Nunca retorna ícones SVG, mesmo se gdk-pixbuf os suporte. Esta flag não pode
-				ser usada em conjunto com <literal>Gtk::ICON_LOOKUP_FORCE_SVG</literal>.
+    Nunca retorna ícones SVG, mesmo se gdk-pixbuf os suporte. Esta flag não pode
+    ser usada em conjunto com <literal>Gtk::ICON_LOOKUP_FORCE_SVG</literal>.
    </shortdesc>
   </enumoption>
 
@@ -1378,8 +1384,8 @@
    <value>2</value>
    <optionname>Gtk::ICON_LOOKUP_FORCE_SVG</optionname>
    <shortdesc>
-				Retorna ícones SVG, mesmo que gdk-pixbuf não os suporte. Esta flag não deve
-				ser usada em conjunto com <literal>Gtk::ICON_LOOKUP_NO_SVG</literal>.
+    Retorna ícones SVG, mesmo que gdk-pixbuf não os suporte. Esta flag não deve
+    ser usada em conjunto com <literal>Gtk::ICON_LOOKUP_NO_SVG</literal>.
    </shortdesc>
   </enumoption>
 
@@ -1387,8 +1393,8 @@
    <value>4</value>
    <optionname>Gtk::ICON_LOOKUP_USE_BUILTIN</optionname>
    <shortdesc>
-				Quando passado para <function class="GtkIconTheme">lookup_icon</function>
-				inclui ícones internos como arquivos. Para ícones internos 
+    Quando passado para <function class="GtkIconTheme">lookup_icon</function>
+    inclui ícones internos como arquivos. Para ícones internos
     <function class="GtkIconInfo">get_filename</function> retorna
     <literal>null</literal> e você precisa chamar
     <function class="GtkIconInfo">get_builtin_pixbuf</function>.
@@ -1401,7 +1407,7 @@
   <enumname>GtkIconThemeError</enumname>
   <desc>
    <simpara>
-				Códigos de erro para operações do GtkIconTheme
+    Códigos de erro para operações do GtkIconTheme
    </simpara>
   </desc>
 
@@ -1409,7 +1415,7 @@
    <value>0</value>
    <optionname>Gtk::ICON_THEME_NOT_FOUND</optionname>
    <shortdesc>
-				O ícone especificado não existe no tema.
+    O ícone especificado não existe no tema.
    </shortdesc>
   </enumoption>
 
@@ -1417,7 +1423,7 @@
    <value>1</value>
    <optionname>Gtk::ICON_THEME_FAILED</optionname>
    <shortdesc>
-				Ocorreu um erro não especificado.
+    Ocorreu um erro não especificado.
    </shortdesc>
   </enumoption>
  </enum>
@@ -1519,15 +1525,15 @@
   <enumname>GtkImageType</enumname>
   <desc>
    <para>
-				Descreve a representação de um dado de imagem usado por um
-				<classname>GtkImage</classname>. Se você quiser pegar a imagem a partir do widget,
-				você poderá apenas pegar o armazenado na representação corrente. Por exemplo,
-    se <function class="GtkImage">get_storage_type</function> retorna
-    <literal>Gtk::IMAGE_PIXBUF</literal>, então você chama 
+    Descreve a representação de um dado de imagem usado por um
+    <classname>GtkImage</classname>. Se você quiser pegar a imagem a partir do
+    widget, você poderá apenas pegar o armazenado na representação corrente.
+    Por exemplo, se <function class="GtkImage">get_storage_type</function>
+    retorna <literal>Gtk::IMAGE_PIXBUF</literal>, então você chama
     <function class="GtkImage">get_pixbuf</function> mas não
-    <function class="GtkImage">get_stock</function>. <!-- FIXME - this method isn't for real, is it? -->
-				Para imagens vazias, você pode requisitar qualquer tipo armazenado (chame 
-				qualquer uma das funções "get"), mas ele irá retornar <literal>null</literal>.
+    <function class="GtkImage">get_stock</function>. Para imagens vazias, você
+    pode requisitar qualquer tipo armazenado (chame qualquer uma das funções
+    "get"), mas ele irá retornar <literal>null</literal>.
    </para>
   </desc>
 
@@ -1535,7 +1541,7 @@
    <value>0</value>
    <optionname>Gtk::IMAGE_EMPTY</optionname>
    <shortdesc>
-				Não há imagem sendo exibida no widget.
+    Não há imagem sendo exibida no widget.
    </shortdesc>
   </enumoption>
 
@@ -1551,7 +1557,7 @@
    <value>2</value>
    <optionname>Gtk::IMAGE_IMAGE</optionname>
    <shortdesc>
-				O widget contém um <classname>GdkImage</classname>.
+    O widget contém um <classname>GdkImage</classname>.
    </shortdesc>
   </enumoption>
 
@@ -1559,7 +1565,7 @@
    <value>3</value>
    <optionname>Gtk::IMAGE_PIXBUF</optionname>
    <shortdesc>
-				O widget contém um <classname>GdkPixbuf</classname>.
+    O widget contém um <classname>GdkPixbuf</classname>.
    </shortdesc>
   </enumoption>
 
@@ -1567,7 +1573,7 @@
    <value>4</value>
    <optionname>Gtk::IMAGE_STOCK</optionname>
    <shortdesc>
-				O widget contém um nome de um stock icon.
+    O widget contém um nome de um stock icon.
    </shortdesc>
   </enumoption>
 
@@ -1575,7 +1581,7 @@
    <value>5</value>
    <optionname>Gtk::IMAGE_ICON_SET</optionname>
    <shortdesc>
-				O widget contém um <classname>GtkIconSet</classname>.
+    O widget contém um <classname>GtkIconSet</classname>.
    </shortdesc>
   </enumoption>
 
@@ -1583,7 +1589,7 @@
    <value>6</value>
    <optionname>Gtk::IMAGE_ANIMATION</optionname>
    <shortdesc>
-				O widget contém um <classname>GdkPixbufAnimation</classname>.
+    O widget contém um <classname>GdkPixbufAnimation</classname>.
    </shortdesc>
   </enumoption>
 
@@ -1601,8 +1607,12 @@
   <enumname>GtkJustification</enumname>
   <desc>
    <simpara>
-				Usado para justificação de um texto dentro de um <classname>GtkLabel</classname>.
-    (&seealso; <classname>GtkAlignment</classname>).
+    Usado para justificação de um texto dentro de um
+    <classname>GtkLabel</classname>. (Veja também
+    <classname>GtkAlignment</classname>). Usado para justificação de um texto
+    dentro de um <classname>GtkLabel</classname>.
+    &seealso;
+    <classname>GtkAlignment</classname>).
    </simpara>
   </desc>
 
@@ -1610,7 +1620,7 @@
    <value>0</value>
    <optionname>Gtk::JUSTIFY_LEFT</optionname>
    <shortdesc>
-				O texto está posicionado à borda esquerda do label.
+    O texto está posicionado à borda esquerda do label.
    </shortdesc>
   </enumoption>
 
@@ -1618,7 +1628,7 @@
    <value>1</value>
    <optionname>Gtk::JUSTIFY_RIGHT</optionname>
    <shortdesc>
-				O texto está posicionado à borda direita do label.
+    O texto está posicionado à borda direita do label.
    </shortdesc>
   </enumoption>
 
@@ -1626,7 +1636,7 @@
    <value>2</value>
    <optionname>Gtk::JUSTIFY_CENTER</optionname>
    <shortdesc>
-				O texto está posicionado ao centro do label.
+    O texto está posicionado ao centro do label.
    </shortdesc>
   </enumoption>
 
@@ -1634,14 +1644,14 @@
    <value>3</value>
    <optionname>Gtk::JUSTIFY_FILL</optionname>
    <shortdesc>
-				O texto está distribuido ao longo do label.
+    O texto está distribuido ao longo do label.
    </shortdesc>
   </enumoption>
  </enum>
 
 
- <enum id="gtk.enum.match">
-  <enumname>GtkMatch</enumname>
+ <enum id="gtk.enum.matchtype">
+  <enumname>GtkMatchType</enumname>
   <desc>
    <simpara>
     GtkMatchType é obsoleto e não deve ser usado em códigos novos.
@@ -1698,11 +1708,11 @@
  </enum>
 
 
- <enum id="gtk.enum.menu">
-  <enumname>GtkMenu</enumname>
+ <enum id="gtk.enum.menudirectiontype">
+  <enumname>GtkMenuDirectionType</enumname>
   <desc>
    <simpara>
-				Uma enumeração representando movimentos direcionais em um menu.
+    Uma enumeração representando movimentos direcionais em um menu.
    </simpara>
   </desc>
 
@@ -1710,7 +1720,7 @@
    <value>0</value>
    <optionname>Gtk::MENU_DIR_PARENT</optionname>
    <shortdesc>
-				Para o menu parent.
+    Para o menu parent.
    </shortdesc>
   </enumoption>
 
@@ -1718,7 +1728,7 @@
    <value>1</value>
    <optionname>Gtk::MENU_DIR_CHILD</optionname>
    <shortdesc>
-				Para o submenu, se algum, associado ao item.
+    Para o submenu, se algum, associado ao item.
    </shortdesc>
   </enumoption>
 
@@ -1726,7 +1736,7 @@
    <value>2</value>
    <optionname>Gtk::MENU_DIR_NEXT</optionname>
    <shortdesc>
-				Para o próximo item do menu.
+    Para o próximo item do menu.
    </shortdesc>
   </enumoption>
 
@@ -1734,17 +1744,17 @@
    <value>3</value>
    <optionname>Gtk::MENU_DIR_PREV</optionname>
    <shortdesc>
-				Para o item anterior do menu.
+    Para o item anterior do menu.
    </shortdesc>
   </enumoption>
  </enum>
 
 
- <enum id="gtk.enum.message">
-  <enumname>GtkMessage</enumname>
+ <enum id="gtk.enum.messagetype">
+  <enumname>GtkMessageType</enumname>
   <desc>
    <simpara>
-				O tipo de mensagem que será exibido no diálogo.
+    O tipo de mensagem que será exibido no diálogo.
    </simpara>
   </desc>
 
@@ -1752,7 +1762,7 @@
    <value>0</value>
    <optionname>Gtk::MESSAGE_INFO</optionname>
    <shortdesc>
-				Mensagem informativa.
+    Mensagem informativa.
    </shortdesc>
   </enumoption>
 
@@ -1760,7 +1770,7 @@
    <value>1</value>
    <optionname>Gtk::MESSAGE_WARNING</optionname>
    <shortdesc>
-				Alerta não fatal.
+    Alerta não fatal.
    </shortdesc>
   </enumoption>
 
@@ -1768,7 +1778,7 @@
    <value>2</value>
    <optionname>Gtk::MESSAGE_QUESTION</optionname>
    <shortdesc>
-				Questão que necessita de uma escolha.
+    Questão que necessita de uma escolha.
    </shortdesc>
   </enumoption>
 
@@ -1776,7 +1786,7 @@
    <value>3</value>
    <optionname>Gtk::MESSAGE_ERROR</optionname>
    <shortdesc>
-				Erro fatal.
+    Erro fatal.
    </shortdesc>
   </enumoption>
  </enum>
@@ -1786,7 +1796,7 @@
   <enumname>GtkMetricType</enumname>
   <desc>
    <simpara>
-				Usado para indicar qual a métrica usada por um <classname>GtkRuler</classname>.
+    Usado para indicar qual a métrica usada por um <classname>GtkRuler</classname>.
    </simpara>
   </desc>
 
@@ -1828,7 +1838,7 @@
    <value>0</value>
    <optionname>Gtk::MOVEMENT_LOGICAL_POSITIONS</optionname>
    <shortdesc>
-				Símbolos indicando movimento para o item próximo e anterior.
+    Símbolos indicando movimento para o item próximo e anterior.
    </shortdesc>
   </enumoption>
 
@@ -1836,7 +1846,7 @@
    <value>1</value>
    <optionname>Gtk::MOVEMENT_VISUAL_POSITIONS</optionname>
    <shortdesc>
-				Símbolos indicando movimento para o item à direita e à esquerda.
+    Símbolos indicando movimento para o item à direita e à esquerda.
    </shortdesc>
   </enumoption>
 
@@ -1844,7 +1854,7 @@
    <value>2</value>
    <optionname>Gtk::MOVEMENT_WORDS</optionname>
    <shortdesc>
-				Move para a próxima palavra ou anterior.
+    Move para a próxima palavra ou anterior.
    </shortdesc>
   </enumoption>
 
@@ -1852,7 +1862,7 @@
    <value>3</value>
    <optionname>Gtk::MOVEMENT_DISPLAY_LINES</optionname>
    <shortdesc>
-				Move para cima ou para baixo em linhas.
+    Move para cima ou para baixo em linhas.
    </shortdesc>
   </enumoption>
 
@@ -1860,7 +1870,7 @@
    <value>4</value>
    <optionname>Gtk::MOVEMENT_DISPLAY_LINE_ENDS</optionname>
    <shortdesc>
-				Move para cima ou para baixo em linhas.
+    Move para cima ou para baixo em linhas.
    </shortdesc>
   </enumoption>
 
@@ -1868,7 +1878,7 @@
    <value>5</value>
    <optionname>Gtk::MOVEMENT_PARAGRAPHS</optionname>
    <shortdesc>
-				Move para cima ou para baixo parágrafos (terminados com new line).
+    Move para cima ou para baixo parágrafos (terminados com new line).
    </shortdesc>
   </enumoption>
 
@@ -1876,7 +1886,7 @@
    <value>6</value>
    <optionname>Gtk::MOVEMENT_PARAGRAPH_ENDS</optionname>
    <shortdesc>
-				Move para qualquer final de parágrafo.
+    Move para qualquer final de parágrafo.
    </shortdesc>
   </enumoption>
 
@@ -1884,7 +1894,7 @@
    <value>7</value>
    <optionname>Gtk::MOVEMENT_PAGES</optionname>
    <shortdesc>
-				Move as páginas.
+    Move as páginas.
    </shortdesc>
   </enumoption>
 
@@ -1892,7 +1902,7 @@
    <value>8</value>
    <optionname>Gtk::MOVEMENT_BUFFER_ENDS</optionname>
    <shortdesc>
-				Move para o final do buffer.
+    Move para o final do buffer.
    </shortdesc>
   </enumoption>
 
@@ -1900,7 +1910,7 @@
    <value>9</value>
    <optionname>Gtk::MOVEMENT_HORIZONTAL_PAGES</optionname>
    <shortdesc>
-				Move pelas páginas horizontalmente.
+    Move pelas páginas horizontalmente.
    </shortdesc>
   </enumoption>
  </enum>
@@ -1910,7 +1920,7 @@
   <enumname>GtkObjectFlags</enumname>
   <desc>
    <simpara>
-				Dá informação a respeito do estado de um widget.
+    Dá informação a respeito do estado de um widget.
    </simpara>
   </desc>
 
@@ -1918,8 +1928,8 @@
    <value>2</value>
    <optionname>Gtk::IN_DESTRUCTION</optionname>
    <shortdesc>
-				O objeto está sendo destruído atualmente. Isto é usado internamente
-				pelo GTK+ para previnir reinvocações durante a destruição.
+    O objeto está sendo destruído atualmente. Isto é usado internamente
+    pelo GTK+ para previnir reinvocações durante a destruição.
    </shortdesc>
   </enumoption>
 
@@ -1938,7 +1948,7 @@
    <value>2</value>
    <optionname>Gtk::RESERVED_1</optionname>
    <shortdesc>
-				Reservado para ser usado futuramente.
+    Reservado para ser usado futuramente.
    </shortdesc>
   </enumoption>
 
@@ -1946,7 +1956,7 @@
    <value>2</value>
    <optionname>Gtk::RESERVED_2</optionname>
    <shortdesc>
-				Reservado para ser usado futuramente.
+    Reservado para ser usado futuramente.
    </shortdesc>
   </enumoption>
  </enum>
@@ -1956,8 +1966,8 @@
   <enumname>GtkOrientation</enumname>
   <desc>
    <simpara>
-				Representa a orientação dos widgets que podem ser alternados para
-				horizontal e vertical em tempo de execução, como 
+    Representa a orientação dos widgets que podem ser alternados para
+    horizontal e vertical em tempo de execução, como 
     <classname>GtkToolbar</classname>.
    </simpara>
   </desc>
@@ -1966,7 +1976,7 @@
    <value>0</value>
    <optionname>Gtk::ORIENTATION_HORIZONTAL</optionname>
    <shortdesc>
-				O widget está com orientação horizontal.
+    O widget está com orientação horizontal.
    </shortdesc>
   </enumoption>
 
@@ -1974,7 +1984,7 @@
    <value>1</value>
    <optionname>Gtk::ORIENTATION_VERTICAL</optionname>
    <shortdesc>
-				O widget está com orientação vertical.
+    O widget está com orientação vertical.
    </shortdesc>
   </enumoption>
  </enum>
@@ -1984,7 +1994,7 @@
   <enumname>GtkPackType</enumname>
   <desc>
    <simpara>
-				Representa a localização do empacotamento do GtkBox filho.
+    Representa a localização do empacotamento do GtkBox filho.
     (Veja: <classname>GtkVBox</classname>, <classname>GtkHBox</classname>, 
     e <classname>GtkButtonBox</classname>).
    </simpara>
@@ -1994,7 +2004,7 @@
    <value>0</value>
    <optionname>Gtk::PACK_START</optionname>
    <shortdesc>
-				O child está empacotado no começo do box.
+    O child está empacotado no começo do box.
    </shortdesc>
   </enumoption>
 
@@ -2002,7 +2012,7 @@
    <value>1</value>
    <optionname>Gtk::PACK_END</optionname>
    <shortdesc>
-				O child está empacotado no final do box.
+    O child está empacotado no final do box.
    </shortdesc>
   </enumoption>
  </enum>
@@ -2104,7 +2114,7 @@
   <enumname>GtkPolicyType</enumname>
   <desc>
    <simpara>
-				Determina quando uma barra de rolagem estará visível.
+    Determina quando uma barra de rolagem estará visível.
    </simpara>
   </desc>
 
@@ -2112,7 +2122,7 @@
    <value>0</value>
    <optionname>Gtk::POLICY_ALWAYS</optionname>
    <shortdesc>
-				A barra de rolagem é sempre visível.
+    A barra de rolagem é sempre visível.
    </shortdesc>
   </enumoption>
 
@@ -2120,8 +2130,9 @@
    <value>1</value>
    <optionname>Gtk::POLICY_AUTOMATIC</optionname>
    <shortdesc>
-				A barra de rolagem irá aparecer e desaparecer conforme o necessário.
-				Por exemplo, quando todo o conteúdo de um <classname>GtkCList</classname> não pode ser visto.
+    A barra de rolagem irá aparecer e desaparecer conforme o necessário. Por
+    exemplo, quando todo o conteúdo de um <classname>GtkCList</classname> não
+    pode ser visto.
    </shortdesc>
   </enumoption>
 
@@ -2129,7 +2140,7 @@
    <value>2</value>
    <optionname>Gtk::POLICY_NEVER</optionname>
    <shortdesc>
-				A barra de rolagem não irá aparecer.
+    A barra de rolagem não irá aparecer.
    </shortdesc>
   </enumoption>
  </enum>
@@ -2139,10 +2150,10 @@
   <enumname>GtkPositionType</enumname>
   <desc>
    <simpara>
-				Descreve em qual canto do widget um certo recurso está posicionado, ex.
-				as abas de um <classname>GtkNotebook</classname>, 
-				manipulador de um <classname>GtkHandleBox</classname> ou o rótulo de um 
-				<classname>GtkScale</classname>.
+    Descreve em qual canto do widget um certo recurso está posicionado, ex.
+    as abas de um <classname>GtkNotebook</classname>, manipulador de um
+    <classname>GtkHandleBox</classname> ou o rótulo de um
+    <classname>GtkScale</classname>.
    </simpara>
   </desc>
 
@@ -2150,7 +2161,7 @@
    <value>0</value>
    <optionname>Gtk::POS_LEFT</optionname>
    <shortdesc>
-				O recurso está ao canto esquerdo.
+    O recurso está ao canto esquerdo.
    </shortdesc>
   </enumoption>
 
@@ -2158,7 +2169,7 @@
    <value>1</value>
    <optionname>Gtk::POS_RIGHT</optionname>
    <shortdesc>
-				O recurso está ao canto direito.
+    O recurso está ao canto direito.
    </shortdesc>
   </enumoption>
 
@@ -2166,7 +2177,7 @@
    <value>2</value>
    <optionname>Gtk::POS_TOP</optionname>
    <shortdesc>
-				O recurso está ao canto superior.
+    O recurso está ao canto superior.
    </shortdesc>
   </enumoption>
 
@@ -2174,7 +2185,7 @@
    <value>3</value>
    <optionname>Gtk::POS_BOTTOM</optionname>
    <shortdesc>
-				O recurso está ao canto inferior.
+    O recurso está ao canto inferior.
    </shortdesc>
   </enumoption>
  </enum>
@@ -2187,7 +2198,7 @@
     GtkPreviewType é obsoleto e não deve ser usado em códigos novos.
    </simpara>
    <simpara>
-				Um enumerador que descreve se um preview contém dados grayscale ou RGB.
+    Um enumerador que descreve se um preview contém dados grayscale ou RGB.
    </simpara>
   </desc>
 
@@ -2195,7 +2206,7 @@
    <value>0</value>
    <optionname>Gtk::PREVIEW_COLOR</optionname>
    <shortdesc>
-				O preview contém dados RGB.
+    O preview contém dados RGB.
    </shortdesc>
   </enumoption>
 
@@ -2229,9 +2240,9 @@
    <value>100</value>
    <optionname>Gtk::PRIORITY_HIGH_IDLE</optionname>
    <shortdesc>
-				Use isto para timeouts de grande prioridade. A prioridade nunca
-				é usada dentro do Gtk+, então tudo rodando à essa prioridade
-				rodará antes de qualquer coisa dentro do toolkit.
+    Use isto para timeouts de grande prioridade. A prioridade nunca é usada
+    dentro do Gtk+, então tudo rodando à essa prioridade rodará antes de
+    qualquer coisa dentro do toolkit.
    </shortdesc>
   </enumoption>
 
@@ -2239,10 +2250,10 @@
    <value>110</value>
    <optionname>Gtk::PRIORITY_HIGH_IDLE</optionname>
    <shortdesc>
-				Use esta prioridade para redimensionar as coisas. Isto é usado internamente
-				pelo Gtk+ para computar o tamanho dos widgets. Esta prioridade é maior que
-				<literal>Gtk::GTK_PRIORITY</literal> para evitar redimensionamento de widgets
-				foram redesenhados.
+    Use esta prioridade para redimensionar as coisas. Isto é usado internamente
+    pelo Gtk+ para computar o tamanho dos widgets. Esta prioridade é maior que
+    <literal>Gtk::GTK_PRIORITY</literal> para evitar redimensionamento de
+    widgets foram redesenhados.
    </shortdesc>
   </enumoption>
 
@@ -2250,10 +2261,10 @@
    <value>120</value>
    <optionname>Gtk::PRIORITY_REDRAW</optionname>
    <shortdesc>
-				Use esta prioridade para redesenhar as coisas. Isto é usado internamente
-				pelo Gtk+ para executar redesenhamentos pendentes. Esta prioridade é menor que
-				<literal>Gtk::PRIORITY_RESIZE</literal> para evitar redesenhamento de um widget
-				antes de ser redimensionado (e depois redesenhá-lo novamente).
+    Use esta prioridade para redesenhar as coisas. Isto é usado internamente
+    pelo Gtk+ para executar redesenhamentos pendentes. Esta prioridade é menor
+    que <literal>Gtk::PRIORITY_RESIZE</literal> para evitar redesenhamento de
+    um widget antes de ser redimensionado (e depois redesenhá-lo novamente).
    </shortdesc>
   </enumoption>
 
@@ -2261,7 +2272,7 @@
    <value>200</value>
    <optionname>Gtk::PRIORITY_DEFAULT_IDLE</optionname>
    <shortdesc>
-				Prioridade padrão para funções ociosas.
+    Prioridade padrão para funções ociosas.
    </shortdesc>
   </enumoption>
 
@@ -2269,7 +2280,7 @@
    <value>300</value>
    <optionname>Gtk::PRIORITY_LOW</optionname>
    <shortdesc>
-				Prioridade para tarefas não tão importantes.
+    Prioridade para tarefas não tão importantes.
    </shortdesc>
   </enumoption>
  </enum>
@@ -2279,7 +2290,7 @@
   <enumname>GtkProgressBarStyle</enumname>
   <desc>
    <simpara>
-				Uma enumeração representando os estilos para desenhar uma barra de progresso.
+    Uma enumeração representando os estilos para desenhar uma barra de progresso.
    </simpara>
   </desc>
 
@@ -2287,7 +2298,7 @@
    <value>0</value>
    <optionname>Gtk::PROGRESS_CONTINUOUS</optionname>
    <shortdesc>
-				A barra de progresso cresce de uma maneira suave e contínua.
+    A barra de progresso cresce de uma maneira suave e contínua.
    </shortdesc>
   </enumoption>
 
@@ -2295,7 +2306,7 @@
    <value>1</value>
    <optionname>Gtk::PROGRESS_DISCRETE</optionname>
    <shortdesc>
-				A barra de progresso cresce de uma maneira discreta, blocos visíveis.
+    A barra de progresso cresce de uma maneira discreta, blocos visíveis.
    </shortdesc>
   </enumoption>
  </enum>
@@ -2305,7 +2316,7 @@
   <enumname>GtkProgressBarOrientation</enumname>
   <desc>
    <simpara>
-				Uma enumeração representando os estilos para desenhar uma barra de progresso.
+    Uma enumeração representando os estilos para desenhar uma barra de progresso.
    </simpara>
   </desc>
 
@@ -2313,7 +2324,7 @@
    <value>0</value>
    <optionname>Gtk::PROGRESS_LEFT_TO_RIGHT</optionname>
    <shortdesc>
-				A barra horizontal cresce da esquerda para a direita.
+    A barra horizontal cresce da esquerda para a direita.
    </shortdesc>
   </enumoption>
 
@@ -2321,7 +2332,7 @@
    <value>1</value>
    <optionname>Gtk::PROGRESS_RIGHT_TO_LEFT</optionname>
    <shortdesc>
-				A barra horizontal cresce da direita para a esquerda.
+    A barra horizontal cresce da direita para a esquerda.
    </shortdesc>
   </enumoption>
 
@@ -2329,7 +2340,7 @@
    <value>2</value>
    <optionname>Gtk::PROGRESS_BOTTOM_TO_TOP</optionname>
    <shortdesc>
-				A barra vertical cresce da base para o topo.
+    A barra vertical cresce da base para o topo.
    </shortdesc>
   </enumoption>
 
@@ -2337,7 +2348,7 @@
    <value>3</value>
    <optionname>Gtk::PROGRESS_TOP_TO_BOTTOM</optionname>
    <shortdesc>
-				A barra vertical cresce do topo para a base.
+    A barra vertical cresce do topo para a base.
    </shortdesc>
   </enumoption>
  </enum>
@@ -2347,9 +2358,9 @@
   <enumname>GtkRcFlags</enumname>
   <desc>
    <simpara>
-				A enumeração GtkRcFlags é usada como uma máscara de bits para
-				especificar quais campos de um <classname>GtkRcStyle</classname>
-				foi setado para cada estado.
+    A enumeração GtkRcFlags é usada como uma máscara de bits para
+    especificar quais campos de um <classname>GtkRcStyle</classname> foi
+    setado para cada estado.
    </simpara>
   </desc>
 
@@ -2357,7 +2368,7 @@
    <value>1</value>
    <optionname>Gtk::RC_FG</optionname>
    <shortdesc>
-				Se presente, a cor em primeiro plano foi definida para este estado.
+    Se presente, a cor em primeiro plano foi definida para este estado.
    </shortdesc>
   </enumoption>
 
@@ -2365,7 +2376,7 @@
    <value>2</value>
    <optionname>Gtk::RC_BG</optionname>
    <shortdesc>
-				Se presente, a cor de fundo foi definida para este estado.
+    Se presente, a cor de fundo foi definida para este estado.
    </shortdesc>
   </enumoption>
 
@@ -2373,7 +2384,7 @@
    <value>4</value>
    <optionname>Gtk::RC_TEXT</optionname>
    <shortdesc>
-				Se presente, a cor do texto foi definida para este estado.
+    Se presente, a cor do texto foi definida para este estado.
    </shortdesc>
   </enumoption>
 
@@ -2381,7 +2392,7 @@
    <value>8</value>
    <optionname>Gtk::RC_BASE</optionname>
    <shortdesc>
-				Se presente, a cor da base foi definida para este estado.
+    Se presente, a cor da base foi definida para este estado.
    </shortdesc>
   </enumoption>
  </enum>
@@ -2391,9 +2402,9 @@
   <enumname>GtkRcTokenType</enumname>
   <desc>
    <simpara>
-				A enumeração GtkRcTokenType representa os elementos no arquivo RC.
-				Isto fica exposto para que outros temas possam reutilizá-los quando
-				estiverem interpretando porções de um arquivo RC de um tema específico.
+    A enumeração GtkRcTokenType representa os elementos no arquivo RC. Isto
+    fica exposto para que outros temas possam reutilizá-los quando estiverem
+    interpretando porções de um arquivo RC de um tema específico.
    </simpara>
   </desc>
 
@@ -2715,7 +2726,7 @@
   <enumname>GtkReliefStyle</enumname>
   <desc>
    <simpara>
-				Indica o relevo a ser desenhado em torno de um <classname>GtkButton</classname>.
+    Indica o relevo a ser desenhado em torno de um <classname>GtkButton</classname>.
    </simpara>
   </desc>
 
@@ -2723,7 +2734,7 @@
    <value>0</value>
    <optionname>Gtk::RELIEF_NORMAL</optionname>
    <shortdesc>
-				Desenha um relevo normal.
+    Desenha um relevo normal.
    </shortdesc>
   </enumoption>
 
@@ -2731,7 +2742,7 @@
    <value>1</value>
    <optionname>Gtk::RELIEF_HALF</optionname>
    <shortdesc>
-				Um relevo pela metade.
+    Um relevo pela metade.
    </shortdesc>
   </enumoption>
 
@@ -2739,7 +2750,7 @@
    <value>2</value>
    <optionname>Gtk::RELIEF_NONE</optionname>
    <shortdesc>
-				Sem relevo.
+    Sem relevo.
    </shortdesc>
   </enumoption>
  </enum>
@@ -2757,7 +2768,7 @@
    <value>0</value>
    <optionname>Gtk::RESIZE_PARENT</optionname>
    <shortdesc>
-				Passa a solicitação de redimensionamento para seu parent.
+    Passa a solicitação de redimensionamento para seu parent.
    </shortdesc>
   </enumoption>
 
@@ -2765,7 +2776,7 @@
    <value>1</value>
    <optionname>Gtk::RESIZE_QUEUE</optionname>
    <shortdesc>
-				Enfilera o redimensionamento neste widget.
+    Enfilera o redimensionamento neste widget.
    </shortdesc>
   </enumoption>
 
@@ -2773,7 +2784,7 @@
    <value>2</value>
    <optionname>Gtk::RESIZE_IMMEDIATE</optionname>
    <shortdesc>
-				Executa um redimensionamento naquele instante.
+    Executa um redimensionamento naquele instante.
    </shortdesc>
   </enumoption>
  </enum>
@@ -2783,9 +2794,10 @@
   <enumname>GtkResponseType</enumname>
   <desc>
    <simpara>
-				Valores predefinidos para serem usados como resposta na função <function
-				class="GtkDialog">add_button</function>. Todos os valores predefinidos
-				são negativos; Gtk+ considera positivo valores de respostas definidos pela aplicação.
+    Valores predefinidos para serem usados como resposta na função
+    <function class="GtkDialog">add_button</function>. Todos os valores
+    predefinidos são negativos; Gtk+ considera positivo valores de respostas
+    definidos pela aplicação.
    </simpara>
   </desc>
 
@@ -2793,7 +2805,7 @@
    <value>-11</value>
    <optionname>Gtk::RESPONSE_HELP</optionname>
    <shortdesc>
-				Retornado por botões 'Help' em diálogos Gtk+.
+    Retornado por botões 'Help' em diálogos Gtk+.
    </shortdesc>
   </enumoption>
 
@@ -2801,7 +2813,7 @@
    <value>-10</value>
    <optionname>Gtk::RESPONSE_APPLY</optionname>
    <shortdesc>
-				Retornado por botões 'Apply' em diálogos Gtk+.
+    Retornado por botões 'Apply' em diálogos Gtk+.
    </shortdesc>
   </enumoption>
 
@@ -2809,7 +2821,7 @@
    <value>-9</value>
    <optionname>Gtk::RESPONSE_NO</optionname>
    <shortdesc>
-				Retornado por botões 'No' em diálogos Gtk+.
+    Retornado por botões 'No' em diálogos Gtk+.
    </shortdesc>
   </enumoption>
 
@@ -2817,7 +2829,7 @@
    <value>-8</value>
    <optionname>Gtk::RESPONSE_YES</optionname>
    <shortdesc>
-				Retornado por botões 'Yes' em diálogos Gtk+.
+    Retornado por botões 'Yes' em diálogos Gtk+.
    </shortdesc>
   </enumoption>
 
@@ -2825,7 +2837,7 @@
    <value>-7</value>
    <optionname>Gtk::RESPONSE_CLOSE</optionname>
    <shortdesc>
-				Retornado por botões 'Close' em diálogos Gtk+.
+    Retornado por botões 'Close' em diálogos Gtk+.
    </shortdesc>
   </enumoption>
 
@@ -2833,7 +2845,7 @@
    <value>-6</value>
    <optionname>Gtk::RESPONSE_CANCEL</optionname>
    <shortdesc>
-				Retornado por botões 'Cancel' em diálogos Gtk+.
+    Retornado por botões 'Cancel' em diálogos Gtk+.
    </shortdesc>
   </enumoption>
 
@@ -2841,7 +2853,7 @@
    <value>-5</value>
    <optionname>Gtk::RESPONSE_OK</optionname>
    <shortdesc>
-				Retornado por botões 'Ok' em diálogos Gtk+.
+    Retornado por botões 'Ok' em diálogos Gtk+.
    </shortdesc>
   </enumoption>
 
@@ -2849,7 +2861,7 @@
    <value>-4</value>
    <optionname>Gtk::RESPONSE_DELETE_EVENT</optionname>
    <shortdesc>
-				Retornado se o diálogo é deletado.
+    Retornado se o diálogo é deletado.
    </shortdesc>
   </enumoption>
 
@@ -2857,7 +2869,7 @@
    <value>-3</value>
    <optionname>Gtk::RESPONSE_ACCEPT</optionname>
    <shortdesc>
-				Resposta genérica, não usada por diálogos Gtk+.
+    Resposta genérica, não usada por diálogos Gtk+.
    </shortdesc>
   </enumoption>
 
@@ -2865,7 +2877,7 @@
    <value>-2</value>
    <optionname>Gtk::RESPONSE_REJECT</optionname>
    <shortdesc>
-				Resposta genérica, não usada por diálogos Gtk+.
+    Resposta genérica, não usada por diálogos Gtk+.
    </shortdesc>
   </enumoption>
 
@@ -2873,8 +2885,8 @@
    <value>-1</value>
    <optionname>Gtk::RESPONSE_NONE</optionname>
    <shortdesc>
-				Retornado se um widget de ação não possui resposta, ou se o diálogo
-				é ocultado ou destruído.
+    Retornado se um widget de ação não possui resposta, ou se o diálogo é
+    ocultado ou destruído.
    </shortdesc>
   </enumoption>
  </enum>
@@ -2892,7 +2904,7 @@
    <value>0</value>
    <optionname>Gtk::SCROLL_NONE</optionname>
    <shortdesc>
-				Nada é feito.
+    Nada é feito.
    </shortdesc>
   </enumoption>
 
@@ -2900,7 +2912,7 @@
    <value>1</value>
    <optionname>Gtk::SCROLL_JUMP</optionname>
    <shortdesc>
-				A lista rola para a posição relativa: 0 é o topo, 1 é a base.
+    A lista rola para a posição relativa: 0 é o topo, 1 é a base.
    </shortdesc>
   </enumoption>
 
@@ -3022,10 +3034,10 @@
   <enumname>GtkSelectionMode</enumname>
   <desc>
    <simpara>
-				Usado para controlar quais seleções são permitidas.
+    Usado para controlar quais seleções são permitidas.
    </simpara>
    <para>
-				Usado por métodos da classe <classname>GtkTreeSelection</classname>;
+      Usado por métodos da classe <classname>GtkTreeSelection</classname>;
     <function class="GtkTreeSelection">set_mode</function> e
     <function class="GtkTreeSelection">get_mode</function>.
    </para>
@@ -3035,7 +3047,7 @@
    <value>0</value>
    <optionname>Gtk::SELECTION_NONE</optionname>
    <shortdesc>
-				Não é possível selecionar.
+    Não é possível selecionar.
    </shortdesc>
   </enumoption>
 
@@ -3043,7 +3055,7 @@
    <value>1</value>
    <optionname>Gtk::SELECTION_SINGLE</optionname>
    <shortdesc>
-				Um ou nenhum elemento podem ser selecionados.
+    Um ou nenhum elemento podem ser selecionados.
    </shortdesc>
   </enumoption>
 
@@ -3051,11 +3063,11 @@
    <value>2</value>
    <optionname>Gtk::SELECTION_BROWSE</optionname>
    <shortdesc>
-				Exatamente um elemento é selecioando. Em algumas circunstâncias, como uma
-				operação de busca, é possível nenhum elemeto ser selecionado com 
-				<literal>Gtk::SELECTION_BROWSE</literal>. O que é relamente reforçado é que
-				o usuário não pode retirar a seleção de nenhum elemento atualmente selecionado,
-				exceto caso algum outro elemento seja selecionado.
+    Exatamente um elemento é selecioando. Em algumas circunstâncias, como uma
+    operação de busca, é possível nenhum elemeto ser selecionado com
+    <literal>Gtk::SELECTION_BROWSE</literal>. O que é relamente reforçado é
+    que o usuário não pode retirar a seleção de nenhum elemento atualmente
+    selecionado, exceto caso algum outro elemento seja selecionado.
    </shortdesc>
   </enumoption>
 
@@ -3063,10 +3075,11 @@
    <value>3</value>
    <optionname>Gtk::SELECTION_MULTIPLE</optionname>
    <shortdesc>
-				Qualquer quantidade de elementos podem ser selecionados. O clique altera
-				o estado de um item. Qualquer número de elementos pode ser selecionado. Clicar-arrastar
-				seleciona um porção de elementos; a tecla Ctrl deve ser usada para aumentar a seleção,
-				e Shift para selecionar entre o foco e o child apontado.
+    Qualquer quantidade de elementos podem ser selecionados. O clique altera
+    o estado de um item. Qualquer número de elementos pode ser selecionado.
+    Clicar-arrastar seleciona um porção de elementos; a tecla Ctrl deve ser
+    usada para aumentar a seleção, e Shift para selecionar entre o foco e o
+    child apontado.
    </shortdesc>
   </enumoption>
  </enum>
@@ -3076,8 +3089,8 @@
   <enumname>GtkShadowType</enumname>
   <desc>
    <simpara>
-				Usado para alterar a aparência da sombra da linha de um <classname>GtkFrame
-				</classname> ou <classname>GtkScrolledWindow</classname>.
+    Usado para alterar a aparência da sombra da linha de um
+    <classname>GtkFrame</classname> ou
     <classname>GtkScrolledWindow</classname>.
     <classname>GtkArrow</classname>s também usam tipos de sombra.
    </simpara>
@@ -3090,7 +3103,7 @@
    <value>0</value>
    <optionname>Gtk::SHADOW_NONE</optionname>
    <shortdesc>
-				Sem sombra.
+    Sem sombra.
    </shortdesc>
   </enumoption>
 
@@ -3098,7 +3111,7 @@
    <value>1</value>
    <optionname>Gtk::SHADOW_IN</optionname>
    <shortdesc>
-				A linha é cortada para dentro.
+    A linha é cortada para dentro.
    </shortdesc>
   </enumoption>
 
@@ -3106,7 +3119,7 @@
    <value>2</value>
    <optionname>Gtk::SHADOW_OUT</optionname>
    <shortdesc>
-				A linha é cortada para fora, como um botão.
+    A linha é cortada para fora, como um botão.
    </shortdesc>
   </enumoption>
 
@@ -3114,7 +3127,7 @@
    <value>3</value>
    <optionname>Gtk::SHADOW_ETCHED_IN</optionname>
    <shortdesc>
-				A linha é cortada para dentro, mas o frame não.
+    A linha é cortada para dentro, mas o frame não.
    </shortdesc>
   </enumoption>
 
@@ -3174,8 +3187,8 @@
   <enumname>GtkSizeGroupMode</enumname>
   <desc>
    <simpara>
-				O modo do grupo determina as direções nas quais o grupo afeta o
-				tamanho dos widgets.
+    O modo do grupo determina as direções nas quais o grupo afeta o tamanho
+    dos widgets.
    </simpara>
   </desc>
 
@@ -3183,7 +3196,7 @@
    <value>0</value>
    <optionname>Gtk::SIZE_GROUP_NONE</optionname>
    <shortdesc>
-				O grupo não tem efeito.
+    O grupo não tem efeito.
    </shortdesc>
   </enumoption>
 
@@ -3191,7 +3204,7 @@
    <value>1</value>
    <optionname>Gtk::SIZE_GROUP_HORIZONTAL</optionname>
    <shortdesc>
-				O grupo afeta requisições horizontais.
+    O grupo afeta requisições horizontais.
    </shortdesc>
   </enumoption>
 
@@ -3199,7 +3212,7 @@
    <value>2</value>
    <optionname>Gtk::SIZE_GROUP_VERTICAL</optionname>
    <shortdesc>
-				O grupo afeta requisições verticais.
+    O grupo afeta requisições verticais.
    </shortdesc>
   </enumoption>
 
@@ -3207,7 +3220,7 @@
    <value>3</value>
    <optionname>Gtk::SIZE_GROUP_BOTH</optionname>
    <shortdesc>
-				O grupo afeta requisições horizontais e verticais.
+    O grupo afeta requisições horizontais e verticais.
    </shortdesc>
   </enumoption>
  </enum>
@@ -3217,7 +3230,7 @@
   <enumname>GtkSortType</enumname>
   <desc>
    <simpara>
-				Determina a orientação de uma ordenação.
+    Determina a orientação de uma ordenação.
    </simpara>
   </desc>
 
@@ -3225,7 +3238,7 @@
    <value>0</value>
    <optionname>Gtk::SORT_ASCENDING</optionname>
    <shortdesc>
-				Ordena de forma ascendente.
+    Ordena de forma ascendente.
    </shortdesc>
   </enumoption>
 
@@ -3233,7 +3246,7 @@
    <value>1</value>
    <optionname>Gtk::SORT_DESCENDING</optionname>
    <shortdesc>
-				Ordena de forma descendente.
+    Ordena de forma descendente.
    </shortdesc>
   </enumoption>
  </enum>
@@ -3283,7 +3296,7 @@
    <value>4</value>
    <optionname>Gtk::SPIN_HOME</optionname>
    <shortdesc>
-				Define o spin button para seu valor mínimo possível.
+    Define o spin button para seu valor mínimo possível.
    </shortdesc>
   </enumoption>
 
@@ -3291,7 +3304,7 @@
    <value>5</value>
    <optionname>Gtk::SPIN_END</optionname>
    <shortdesc>
-				Define o spin button para seu valor máximo possível.
+    Define o spin button para seu valor máximo possível.
    </shortdesc>
   </enumoption>
 
@@ -3299,7 +3312,7 @@
    <value>6</value>
    <optionname>Gtk::SPIN_USER_DEFINED</optionname>
    <shortdesc>
-				O programador deve especificar o valor exato para 
+    O programador deve especificar o valor exato para 
     <classname>GtkSpinButton</classname>.
    </shortdesc>
   </enumoption>
@@ -3310,10 +3323,11 @@
   <enumname>GtkStateType</enumname>
   <desc>
    <simpara>
-				Este tipo indica o estado atual de um widget; o estado determina como widget
-				está desenhado. A enumeração GtkStateType é também usada para identificar
-				cores diferentes em um <classname>GtkStyle</classname> para desenhar,
-				então esses estados podem ser usados para subpartes como para o widget inteiro.
+    Este tipo indica o estado atual de um widget; o estado determina como
+    widget está desenhado. A enumeração GtkStateType é também usada para
+    identificar cores diferentes em um <classname>GtkStyle</classname> para
+    desenhar, então esses estados podem ser usados para subpartes como para o
+    widget inteiro.
    </simpara>
   </desc>
 
@@ -3321,7 +3335,7 @@
    <value>0</value>
    <optionname>Gtk::STATE_NORMAL</optionname>
    <shortdesc>
-				Estado durante uma operação normal.
+    Estado durante uma operação normal.
    </shortdesc>
   </enumoption>
 
@@ -3329,7 +3343,7 @@
    <value>1</value>
    <optionname>Gtk::STATE_ACTIVE</optionname>
    <shortdesc>
-				Estado de um widget atualmente ativo, como um botão que está pressionado.
+    Estado de um widget atualmente ativo, como um botão que está pressionado.
    </shortdesc>
   </enumoption>
 
@@ -3337,7 +3351,8 @@
    <value>2</value>
    <optionname>Gtk::STATE_PRELIGHT</optionname>
    <shortdesc>
-				Estado indicando que o ponteiro do mouse está sobre o widget e este widget responde à cliques do mouse.
+    Estado indicando que o ponteiro do mouse está sobre o widget e este widget
+    responde à cliques do mouse.
    </shortdesc>
   </enumoption>
 
@@ -3345,7 +3360,7 @@
    <value>3</value>
    <optionname>Gtk::STATE_SELECTED</optionname>
    <shortdesc>
-				Estado de um item selecionado, como uma linha em uma lista.
+    Estado de um item selecionado, como uma linha em uma lista.
    </shortdesc>
   </enumoption>
 
@@ -3353,7 +3368,7 @@
    <value>4</value>
    <optionname>Gtk::STATE_INSENSITIVE</optionname>
    <shortdesc>
-				Estado que indica que o widget não responde à ações do usuário.
+    Estado que indica que o widget não responde à ações do usuário.
    </shortdesc>
   </enumoption>
  </enum>
@@ -3363,7 +3378,7 @@
   <enumname>GtkStockItems</enumname>
   <desc>
    <simpara>
-				Items para serem usados em toolbars e botões.
+    Items para serem usados em toolbars e botões.
    </simpara>
   </desc>
 
@@ -3735,7 +3750,7 @@
    <optionname>Gtk::STOCK_MEDIA_PLAY</optionname>
    <shortdesc>
     <inlinegraphic fileref="&directory.images;/reference/gtk/stock_icons/stock_media_play_24.png"/>
-				Variante RTL: <inlinegraphic fileref="&directory.images;/reference/gtk/stock_icons/stock_media_play_rtl_24.png"/>
+      Variante RTL: <inlinegraphic fileref="&directory.images;/reference/gtk/stock_icons/stock_media_play_rtl_24.png"/>
    </shortdesc>
   </enumoption>
 
@@ -3758,7 +3773,7 @@
    <optionname>Gtk::STOCK_MEDIA_REWIND</optionname>
    <shortdesc>
     <inlinegraphic fileref="&directory.images;/reference/gtk/stock_icons/stock_media_rewind_24.png"/>
-				Variante RTL: <inlinegraphic fileref="&directory.images;/reference/gtk/stock_icons/stock_media_forward_24.png"/>
+      Variante RTL: <inlinegraphic fileref="&directory.images;/reference/gtk/stock_icons/stock_media_forward_24.png"/>
    </shortdesc>
   </enumoption>
 
@@ -3857,7 +3872,7 @@
    <optionname>Gtk::STOCK_REDO</optionname>
    <shortdesc>
     <inlinegraphic fileref="&directory.images;/reference/gtk/stock_icons/stock_redo_24.png"/>
-				Variante RTL: <inlinegraphic fileref="&directory.images;/reference/gtk/stock_icons/stock_redo_rtl_24.png"/>
+      Variante RTL: <inlinegraphic fileref="&directory.images;/reference/gtk/stock_icons/stock_redo_rtl_24.png"/>
    </shortdesc>
   </enumoption>
 
@@ -3879,7 +3894,7 @@
    <optionname>Gtk::STOCK_REVERT_TO_SAVED</optionname>
    <shortdesc>
     <inlinegraphic fileref="&directory.images;/reference/gtk/stock_icons/stock_revert_24.png"/>
-				Variante RTL: <inlinegraphic fileref="&directory.images;/reference/gtk/stock_icons/stock_revert_rtl_24.png"/>
+      Variante RTL: <inlinegraphic fileref="&directory.images;/reference/gtk/stock_icons/stock_revert_rtl_24.png"/>
    </shortdesc>
   </enumoption>
 
@@ -4020,7 +4035,7 @@
     GtkSubmenuDirection é obsoleto e não deve ser usado em códigos novos.
    </simpara>
    <simpara>
-				Indica a direção na qual um submenu irá aparecer.
+    Indica a direção na qual um submenu irá aparecer.
    </simpara>
   </desc>
 
@@ -4028,7 +4043,7 @@
    <value>1</value>
    <optionname>Gtk::DIRECTION_LEFT</optionname>
    <shortdesc>
-				Um submneu irá aparecer do lado esquerdo do menu parent.
+    Um submneu irá aparecer do lado esquerdo do menu parent.
    </shortdesc>
   </enumoption>
 
@@ -4036,7 +4051,7 @@
    <value>2</value>
    <optionname>Gtk::DIRECTION_RIGHT</optionname>
    <shortdesc>
-				Um submneu irá aparecer do lado direito do menu parent.
+    Um submneu irá aparecer do lado direito do menu parent.
    </shortdesc>
   </enumoption>
  </enum>
@@ -4072,8 +4087,8 @@
   <enumname>GtkTargetFlags</enumname>
   <desc>
    <simpara>
-				A enumeração GtkTargetFlags é usada para especificar
-				consistência em umaentrada de um GtkTargetTable.
+    A enumeração GtkTargetFlags é usada para especificar consistência em
+    umaentrada de um <literal>GtkTargetTable</literal>.
    </simpara>
   </desc>
 
@@ -4081,7 +4096,8 @@
    <value>1 &lt;&lt; 0</value>
    <optionname>Gtk::TARGET_SAME_APP</optionname>
    <shortdesc>
-				Se estiver definido, o alvo será selecionado apenas para arrastes na mesma aplicação.
+    Se estiver definido, o alvo será selecionado apenas para arrastes na mesma
+    aplicação.
    </shortdesc>
   </enumoption>
 
@@ -4089,7 +4105,8 @@
    <value>1 &lt;&lt; 1</value>
    <optionname>Gtk::TARGET_SAME_WIDGET</optionname>
    <shortdesc>
-				Se estiver definido, o alvo será selecionado apenas para arrastes no mesmo widget.
+    Se estiver definido, o alvo será selecionado apenas para arrastes no mesmo
+    widget.
    </shortdesc>
   </enumoption>
  </enum>
@@ -4165,9 +4182,9 @@
   <enumname>GtkToolbarStyle</enumname>
   <desc>
    <simpara>
-				Usado para customizar a aparência de um <classname>GtkToolbar</classname>.
-				Note que esta configuração sobrescreve as prefrências de usuário para o
-				estilo padrão.
+    Usado para customizar a aparência de um <classname>GtkToolbar</classname>.
+    Note que esta configuração sobrescreve as prefrências de usuário para o
+    estilo padrão.
    </simpara>
   </desc>
 
@@ -4175,7 +4192,7 @@
    <value>0</value>
    <optionname>Gtk::TOOLBAR_ICONS</optionname>
    <shortdesc>
-				Os botões exibem apenas ícones no toolbar.
+    Os botões exibem apenas ícones no toolbar.
    </shortdesc>
   </enumoption>
 
@@ -4183,7 +4200,7 @@
    <value>1</value>
    <optionname>Gtk::TOOLBAR_TEXT</optionname>
    <shortdesc>
-				Os botões exibem apenas texto no toolbar.
+    Os botões exibem apenas texto no toolbar.
    </shortdesc>
   </enumoption>
 
@@ -4191,7 +4208,7 @@
    <value>2</value>
    <optionname>Gtk::TOOLBAR_BOTH</optionname>
    <shortdesc>
-				Os botões exibem texto e ícone no toolbar.
+    Os botões exibem texto e ícone no toolbar.
    </shortdesc>
   </enumoption>
 
@@ -4199,7 +4216,8 @@
    <value>3</value>
    <optionname>Gtk::TOOLBAR_BOTH_HORIZ</optionname>
    <shortdesc>
-				Os botões exibem ícones e texto, um ao lado do outro, ao invés de um sobre o outro.
+    Os botões exibem ícones e texto, um ao lado do outro, ao invés de um sobre
+    o outro.
    </shortdesc>
   </enumoption>
 
@@ -4218,9 +4236,10 @@
   <enumname>GtkTreeModelFlags</enumname>
   <desc>
    <simpara>
-				Essas flags indicam inúmeras propriedades de um <classname>GtkTreeModel</classname>.
-				Elas são retornadas por <function class="GtkTreeModel">get_flags</function>, e devem ser
-				estáticas durante a vida do objeto.
+    Essas flags indicam inúmeras propriedades de um
+    <classname>GtkTreeModel</classname>. Elas são retornadas por
+    <function class="GtkTreeModel">get_flags</function>, e devem ser
+    estáticas durante a vida do objeto.
    </simpara>
   </desc>
 
@@ -4228,7 +4247,7 @@
    <value>1 &lt;&lt; 0</value>
    <optionname>Gtk::TREE_MODEL_ITERS_PERSIST</optionname>
    <shortdesc>
-				Iteradores sobrevivem à todos os sinais emitidos pela árvore.
+    Iteradores sobrevivem à todos os sinais emitidos pela árvore.
    </shortdesc>
   </enumoption>
 
@@ -4236,7 +4255,7 @@
    <value>1 &lt;&lt; 1</value>
    <optionname>Gtk::TREE_MODEL_LIST_ONLY</optionname>
    <shortdesc>
-				O modelo é uma lista, e nunca possuirá um child.
+    O modelo é uma lista, e nunca possuirá um child.
    </shortdesc>
   </enumoption>
  </enum>
@@ -4255,7 +4274,7 @@
    <value>0</value>
    <optionname>Gtk::GtkTreeViewColumnSizing</optionname>
    <shortdesc>
-		As colunas só se tornam grandes em reação à mudanças no modelo.
+    As colunas só se tornam grandes em reação à mudanças no modelo.
    </shortdesc>
   </enumoption>
 
@@ -4263,7 +4282,8 @@
    <value>1</value>
    <optionname>Gtk::TREE_VIEW_COLUMN_AUTOSIZE</optionname>
    <shortdesc>
-		As colunas se redimensionam para ajustar-se ao melhor tamanho cada vez que o modelo é alterado.
+    As colunas se redimensionam para ajustar-se ao melhor tamanho cada vez que
+    o modelo é alterado.
    </shortdesc>
   </enumoption>
 
@@ -4271,7 +4291,7 @@
    <value>2</value>
    <optionname>Gtk::TREE_VIEW_COLUMN_FIXED</optionname>
    <shortdesc>
-		As colunas possuem uma largura fixa em pixels.
+    As colunas possuem uma largura fixa em pixels.
    </shortdesc>
   </enumoption>
  </enum>
@@ -4289,7 +4309,7 @@
    <value>0</value>
    <optionname>Gtk::TREE_VIEW_LINE</optionname>
    <shortdesc>
-				Modo padrão.
+    Modo padrão.
    </shortdesc>
   </enumoption>
 
@@ -4307,7 +4327,7 @@
   <enumname>GtkTreeViewDropPosition</enumname>
   <desc>
    <simpara>
-				Uma enumeração determinando onde uma linha solta se posiciona.
+    Uma enumeração determinando onde uma linha solta se posiciona.
    </simpara>
   </desc>
 
@@ -4315,7 +4335,7 @@
    <value>0</value>
    <optionname>Gtk::TREE_VIEW_DROP_BEFORE</optionname>
    <shortdesc>
-				Posiciona antes desta linha.
+    Posiciona antes desta linha.
    </shortdesc>
   </enumoption>
 
@@ -4323,7 +4343,7 @@
    <value>1</value>
    <optionname>Gtk::TREE_VIEW_DROP_AFTER</optionname>
    <shortdesc>
-				Posiciona após esta linha.
+    Posiciona após esta linha.
    </shortdesc>
   </enumoption>
 
@@ -4331,8 +4351,8 @@
    <value>2</value>
    <optionname>Gtk::TREE_VIEW_DROP_INTO_OR_BEFORE</optionname>
    <shortdesc>
-				Solta como um child desta linha (com a possibilidade de ser posicionada antes
-				da linha caso não possa ser inserida dentro dela).
+    Solta como um child desta linha (com a possibilidade de ser posicionada
+    antes da linha caso não possa ser inserida dentro dela).
    </shortdesc>
   </enumoption>
 
@@ -4340,8 +4360,8 @@
    <value>3</value>
    <optionname>Gtk::TREE_VIEW_DROP_INTO_OR_AFTER</optionname>
    <shortdesc>
-				Solta como um child desta linha (com a possibilidade de ser posicionada após
-				a linha caso não possa ser inserida dentro dela).
+    Solta como um child desta linha (com a possibilidade de ser posicionada
+    após a linha caso não possa ser inserida dentro dela).
    </shortdesc>
   </enumoption>
  </enum>
@@ -4351,12 +4371,12 @@
   <enumname>GtkType</enumname>
   <desc>
    <para>
-				GtkType é usado em <classname>GtkListStore</classname> e
+    GtkType é usado em <classname>GtkListStore</classname> e
     <classname>GtkTreeStore</classname> para determinar a coluna na tabela.
    </para>
    <simpara>
-				Isto depende de qual tipo de dado pode ser armazenado em uma coluna e como
-				o <classname>GtkCellRenderer</classname> padrão exibe o valor na visualização.
+    Isto depende de qual tipo de dado pode ser armazenado em uma coluna e como
+    o <classname>GtkCellRenderer</classname> padrão exibe o valor na visualização.
    </simpara>
   </desc>
 
@@ -4396,7 +4416,7 @@
    <value>20</value>
    <optionname>Gtk::TYPE_BOOLEAN</optionname>
    <shortdesc>
-				Um valor booleano, <literal>true</literal> ou <literal>false</literal>.
+    Um valor booleano, <literal>true</literal> ou <literal>false</literal>.
    </shortdesc>
   </enumoption>
 
@@ -4404,7 +4424,7 @@
    <value>32</value>
    <optionname>Gtk::TYPE_LONG</optionname>
    <shortdesc>
-				Um número inteiro grande.
+    Um número inteiro grande.
    </shortdesc>
   </enumoption>
 
@@ -4428,7 +4448,7 @@
    <value>60</value>
    <optionname>Gtk::TYPE_DOUBLE</optionname>
    <shortdesc>
-				Um número decimal com um ponto de fração.
+    Um número decimal com um ponto de fração.
    </shortdesc>
   </enumoption>
 
@@ -4436,7 +4456,7 @@
    <value>64</value>
    <optionname>Gtk::TYPE_STRING</optionname>
    <shortdesc>
-				Uma string normal.
+    Uma string normal.
    </shortdesc>
   </enumoption>
 
@@ -4476,7 +4496,7 @@
    <value>137706104</value>
    <optionname>Gtk::TYPE_PHP_VALUE</optionname>
    <shortdesc>
-				Conteúdo de uma váriavel qualquer do PHP.
+    Conteúdo de uma váriavel qualquer do PHP.
    </shortdesc>
   </enumoption>
  </enum>
@@ -4486,9 +4506,9 @@
   <enumname>GtkUiManagerItemType</enumname>
   <desc>
    <simpara>
-				Os valores desta enumeração são usados por
-				<function class="GtkUiManger">add_ui</function> para determinar qual
-				elemento criar.	
+    Os valores desta enumeração são usados por
+    <function class="GtkUiManger">add_ui</function> para determinar qual
+    elemento criar.
    </simpara>
   </desc>
 
@@ -4496,7 +4516,7 @@
    <value>0</value>
    <optionname>Gtk::UI_MANAGER_AUTO</optionname>
    <shortdesc>
-				Pega o tipo do elemento da UI de acordo com o contexto.
+    Pega o tipo do elemento da UI de acordo com o contexto.
    </shortdesc>
   </enumoption>
 
@@ -4504,7 +4524,7 @@
    <value>1</value>
    <optionname>Gtk::UI_MANAGER_MENUBAR</optionname>
    <shortdesc>
-				Cria um menubar.
+    Cria um menubar.
    </shortdesc>
   </enumoption>
 
@@ -4512,7 +4532,7 @@
    <value>2</value>
    <optionname>Gtk::UI_MANAGER_MENU</optionname>
    <shortdesc>
-				Cria um menu.
+    Cria um menu.
    </shortdesc>
   </enumoption>
 
@@ -4520,7 +4540,7 @@
    <value>4</value>
    <optionname>Gtk::UI_MANAGER_TOOLBAR</optionname>
    <shortdesc>
-				Cria um toolbar.
+    Cria um toolbar.
    </shortdesc>
   </enumoption>
 
@@ -4536,7 +4556,7 @@
    <value>16</value>
    <optionname>Gtk::UI_MANAGER_POPUP</optionname>
    <shortdesc>
-				Cria um menu popup.
+    Cria um menu popup.
    </shortdesc>
   </enumoption>
 
@@ -4544,7 +4564,7 @@
    <value>32</value>
    <optionname>Gtk::UI_MANAGER_MENUITEM</optionname>
    <shortdesc>
-				Cria um menuitem.
+    Cria um menuitem.
    </shortdesc>
   </enumoption>
 
@@ -4552,7 +4572,7 @@
    <value>64</value>
    <optionname>Gtk::UI_MANAGER_TOOLITEM</optionname>
    <shortdesc>
-				Cria um toolitem.
+    Cria um toolitem.
    </shortdesc>
   </enumoption>
 
@@ -4560,7 +4580,7 @@
    <value>128</value>
    <optionname>Gtk::UI_MANAGER_SEPARATOR</optionname>
    <shortdesc>
-				Cria um separador.
+    Cria um separador.
    </shortdesc>
   </enumoption>
 
@@ -4568,7 +4588,7 @@
    <value>256</value>
    <optionname>Gtk::UI_MANAGER_ACCELERATOR</optionname>
    <shortdesc>
-				Instala um acelerador.
+    Instala um acelerador.
    </shortdesc>
   </enumoption>
  </enum>
@@ -4586,8 +4606,8 @@
    <value>0</value>
    <optionname>Gtk::UPDATE_CONTINUOUS</optionname>
    <shortdesc>
-				Significa que a qualquer momento o indicador sera modificado e o sinal
-				value_change será emitido.
+    Significa que a qualquer momento o indicador sera modificado e o sinal
+    value_change será emitido.
    </shortdesc>
   </enumoption>
 
@@ -4595,8 +4615,8 @@
    <value>1</value>
    <optionname>Gtk::UPDATE_DISCONTINUOUS</optionname>
    <shortdesc>
-				Significa que o valor será atualizado quando o usuário soltar
-				o botão e terminar a operação no indicador.
+    Significa que o valor será atualizado quando o usuário soltar o botão e
+    terminar a operação no indicador.
    </shortdesc>
   </enumoption>
 
@@ -4604,9 +4624,9 @@
    <value>2</value>
    <optionname>Gtk::UPDATE_DELAYED</optionname>
    <shortdesc>
-				Significa que o valor será atualizado após um breve timeout onde
-				nenhuma movimentação do indicador ocorra, então, atualizações serão
-				feitas após um curto tempo ao invés de continuamente.
+    Significa que o valor será atualizado após um breve timeout onde nenhuma
+    movimentação do indicador ocorra, então, atualizações serão feitas após um
+    curto tempo ao invés de continuamente.
    </shortdesc>
   </enumoption>
  </enum>
@@ -4616,8 +4636,8 @@
   <enumname>GtkVisibility</enumname>
   <desc>
    <simpara>
-				Usado por <classname>GtkCList</classname> e <classname>GtkCTree</classname>.
-				para indicar se uma linha está visível.
+    Usado por <classname>GtkCList</classname> e <classname>GtkCTree</classname>.
+      para indicar se uma linha está visível.
    </simpara>
   </desc>
 
@@ -4625,7 +4645,7 @@
    <value>0</value>
    <optionname>Gtk::VISIBILITY_NONE</optionname>
    <shortdesc>
-				A linha não está visível.
+    A linha não está visível.
    </shortdesc>
   </enumoption>
 
@@ -4633,7 +4653,7 @@
    <value>1</value>
    <optionname>Gtk::VISIBILITY_PARTIAL</optionname>
    <shortdesc>
-				A linha está parcialmente visível.
+    A linha está parcialmente visível.
    </shortdesc>
   </enumoption>
 
@@ -4641,7 +4661,7 @@
    <value>2</value>
    <optionname>Gtk::VISIBILITY_FULL</optionname>
    <shortdesc>
-				A linha está totalmente visível.
+    A linha está totalmente visível.
    </shortdesc>
   </enumoption>
  </enum>
@@ -4677,7 +4697,7 @@
   <enumname>GtkWindowPosition</enumname>
   <desc>
    <simpara>
-				A posição da janela pode ser influenciada usando esta enumeração.
+    A posição da janela pode ser influenciada usando esta enumeração.
    </simpara>
   </desc>
 
@@ -4685,7 +4705,7 @@
    <value>0</value>
    <optionname>Gtk::WIN_POS_NONE</optionname>
    <shortdesc>
-				Nenhuma influência é feita no posicionamento.
+    Nenhuma influência é feita no posicionamento.
    </shortdesc>
   </enumoption>
 
@@ -4693,7 +4713,7 @@
    <value>1</value>
    <optionname>Gtk::WIN_POS_CENTER</optionname>
    <shortdesc>
-				As janelas devem ser posicionadas no centro da tela.
+    As janelas devem ser posicionadas no centro da tela.
    </shortdesc>
   </enumoption>
 
@@ -4701,7 +4721,7 @@
    <value>2</value>
    <optionname>Gtk::WIN_POS_MOUSE</optionname>
    <shortdesc>
-				A janela deve ser posicionada no local que o mouse está atualmente.
+    A janela deve ser posicionada no local que o mouse está atualmente.
    </shortdesc>
   </enumoption>
 
@@ -4709,7 +4729,7 @@
    <value>3</value>
    <optionname>Gtk::WIN_POS_CENTER_ALWAYS</optionname>
    <shortdesc>
-				Mantém a janela centralizada enquanto é modificada.
+    Mantém a janela centralizada enquanto é modificada.
    </shortdesc>
   </enumoption>
 
@@ -4717,7 +4737,7 @@
    <value>4</value>
    <optionname>Gtk::WIN_POS_CENTER_ON_PARENT</optionname>
    <shortdesc>
-				Centraliza a janela em seu parent provisório
+    Centraliza a janela em seu parent provisório
     (veja <function class="GtkWindow">set_transient_for</function>).
    </shortdesc>
   </enumoption>
@@ -4728,23 +4748,25 @@
   <enumname>GtkWindowType</enumname>
   <desc>
    <para>
-				Um <classname>GtkWindow</classname> pode ser de um desses tipos.
-				Uma das coisas que você deve considerar é que uma janela deve ter um tipo
-				<literal>Gtk::WINDOW_TOPLEVEL</literal>; janelas com esse tipo são gerenciadas pelo
-				gerenciador e possuem um frame por padrão (chame 
+    Um <classname>GtkWindow</classname> pode ser de um desses tipos. Uma das
+    coisas que você deve considerar é que uma janela deve ter um tipo
+    <literal>Gtk::WINDOW_TOPLEVEL</literal>; janelas com esse tipo são
+    gerenciadas pelo gerenciador e possuem um frame por padrão (chame
     <function class="GtkWindow">set_decorated</function> para modificar o frame).
    </para>
    <para>
-				Janelas do tipo <literal>Gtk::WINDOW_POPUP</literal> são ignoradas pelo gerenciador
-				de janelas; atribuições de teclas não funcionarão nela; o gerenciador não a decorará
-				com um frame; muitos recursos do Gtk+ relativos à janela não funcionarão
-				(ex. maximização e minimização, área de redimensiomento). 
-    <literal>Gtk::WINDOW_POPUP</literal> é usado para implementar widgets como 
-    <classname>GtkMenu</classname> ou tooltips que você normalmente não deseja uma janela.
+    Janelas do tipo <literal>Gtk::WINDOW_POPUP</literal> são ignoradas pelo
+    gerenciador de janelas; atribuições de teclas não funcionarão nela; o
+    gerenciador não a decorará com um frame; muitos recursos do Gtk+ relativos
+    à janela não funcionarão (ex. maximização e minimização, área de
+    redimensiomento). <literal>Gtk::WINDOW_POPUP</literal> é usado para
+    implementar widgets como <classname>GtkMenu</classname> ou tooltips que
+    você normalmente não deseja uma janela.
    </para>
    <para>
-				Todas as janelas devem ser <literal>Gtk::WINDOW_TOPLEVEL</literal>. Em particular,
-				não use <literal>Gtk::WINDOW_POPUP</literal> apenas para desativar as bordas; use
+    Todas as janelas devem ser <literal>Gtk::WINDOW_TOPLEVEL</literal>. Em
+    particular, não use <literal>Gtk::WINDOW_POPUP</literal> apenas para
+    desativar as bordas; use
     <function class="GtkWindow">set_decorated</function> para isso.
    </para>
   </desc>
@@ -4753,7 +4775,7 @@
    <value>0</value>
    <optionname>Gtk::WINDOW_TOPLEVEL</optionname>
    <shortdesc>
-				Uma janela regular, como um diálogo.
+    Uma janela regular, como um diálogo.
    </shortdesc>
   </enumoption>
 
@@ -4761,7 +4783,7 @@
    <value>1</value>
    <optionname>Gtk::WINDOW_POPUP</optionname>
    <shortdesc>
-				Uma janela especial, como um tooltip.
+    Uma janela especial, como um tooltip.
    </shortdesc>
   </enumoption>
  </enum>
@@ -4771,7 +4793,7 @@
   <enumname>GtkWrapMode</enumname>
   <desc>
    <simpara>
-				Descreve um tipo de quebra de linha.
+    Descreve um tipo de quebra de linha.
    </simpara>
   </desc>
 
@@ -4779,7 +4801,7 @@
    <value>0</value>
    <optionname>Gtk::WRAP_NONE</optionname>
    <shortdesc>
-				Não quebra a linha; apenas faz com que o texto ocupe uma área maior.
+    Não quebra a linha; apenas faz com que o texto ocupe uma área maior.
    </shortdesc>
   </enumoption>
 
@@ -4787,8 +4809,9 @@
    <value>1</value>
    <optionname>Gtk::WRAP_CHAR</optionname>
    <shortdesc>
-				Quebra as linhas do texto em qualquer lugar que o cursor possa aparecer (entre
-				caracteres, geralmente. &seealso;
+    Quebra as linhas do texto em qualquer lugar que o cursor possa aparecer
+    entre caracteres, geralmente.
+    &seealso;
     <function class="Pango">get_log_attrs</function>.
    </shortdesc>
   </enumoption>
@@ -4797,7 +4820,7 @@
    <value>2</value>
    <optionname>Gtk::WRAP_WORD</optionname>
    <shortdesc>
-				Quebra as linhas entre palavras.
+    Quebra as linhas entre palavras.
    </shortdesc>
   </enumoption>
 
@@ -4805,7 +4828,8 @@
    <value>3</value>
    <optionname>Gtk::WRAP_WORD_CHAR</optionname>
    <shortdesc>
-				Quebra as linhas entre palavras, ou se não for o bastante, também entre uma pontuação.
+    Quebra as linhas entre palavras, ou se não for o bastante, também entre
+    uma pontuação.
    </shortdesc>
   </enumoption>
  </enum>

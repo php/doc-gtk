@@ -6,35 +6,36 @@
   <classparent>GtkLabel</classparent>
   <classimage fileref="&directory.images;/reference/gtk/gtkaccellabel.png"/>
   <shortdesc>
-		Um rótulo que exibe um acelerador do lado direito do texto.
+   Um rótulo que exibe um acelerador do lado direito do texto.
   </shortdesc>
   <desc>
    <para>
-		 O widget GtkAccelLabel é uma subclasse de <classname>GtkLabel</classname>
-		 que exibe também um acelerador do lado direito do rótulo de texto, ex.
-		 '<literal>Ctl+S</literal>'. Seu uso comum é em menus para exibir atalhos
-		 de teclado para comandos.
+    O widget GtkAccelLabel é uma subclasse de <classname>GtkLabel</classname>
+    que exibe também um acelerador do lado direito do rótulo de texto, ex.
+    '<literal>Ctl+S</literal>'. Seu uso comum é em menus para exibir atalhos
+    de teclado para comandos.
    </para>
    <para>
-		 A tecla aceleradora exibida não é explicitamente definida. Ao invés, o GtkAccelLabel
-		 exibe os aceleradores que foram adicionados à um widget em particular. Este widget é
-		 definido atrvés da chamada de
-		 <function class="GtkAccelLabel">set_accel_widget</function>.
+    A tecla aceleradora exibida não é explicitamente definida. Ao invés, o
+    GtkAccelLabel exibe os aceleradores que foram adicionados à um widget em
+    particular. Este widget é definido atrvés da chamada de
+    <function class="GtkAccelLabel">set_accel_widget</function>.
    </para>
    <para>
-		 Por exemplo, um widget <classname>GtkMenuItem</classname> deve conter um acelerador
-		 adicionado para emitir o sinal "activate" quando a combinação de teclas
-		 '<literal>Ctl+S</literal>' é pressionada. Um GtkAccelLabel é criado e adicionado ao
-		 <classname>GtkMenuItem</classname>, e 
-		 <function class="GtkAccelLabel">set_accel_widget</function> é chamado com o GtkMenuItem
-		 como segundo argumento. O GtkAccelLabel irá agora exibir <literal>Ctl+S</literal>' após o
-		 rótulo.
+    Por exemplo, um widget <classname>GtkMenuItem</classname> deve conter um
+    acelerador adicionado para emitir o sinal "activate" quando a combinação
+    de teclas <literal>Ctl+S</literal> é pressionada. Um GtkAccelLabel é criado
+    e adicionado ao <classname>GtkMenuItem</classname>, e 
+    <function class="GtkAccelLabel">set_accel_widget</function> é chamado com o
+    GtkMenuItem como segundo argumento. O GtkAccelLabel irá agora exibir
+    <literal>Ctl+S</literal>' após o rótulo.
    </para>
    <para>
-		 Um GtkAccelLabel irá apenas exibir aceleradores que tenham
-		 <literal>Gtk::ACCEL_VISIBLE</literal> definido (veja
-		 <enumname>GtkAccelFlags</enumname>). Um GtkAccelLabel pode exibir múltiplos aceleradores
-		 e até nomes de sinais, embora seja mais usado para exibir apenas uma tecla de aceleração.
+    Um GtkAccelLabel irá apenas exibir aceleradores que tenham
+    <literal>Gtk::ACCEL_VISIBLE</literal> definido (veja
+    <enumname>GtkAccelFlags</enumname>). Um GtkAccelLabel pode exibir múltiplos
+    aceleradores e até nomes de sinais, embora seja mais usado para exibir
+    apenas uma tecla de aceleração.
    </para>
   </desc>
  </classmeta>
@@ -53,13 +54,15 @@
    </shortdesc>
    <desc>
     <para>
-			Cria um novo GtkAccelLabel com <parameter>label</parameter> como o rótulo de 
-			texto.
+     Cria um novo GtkAccelLabel com <parameter>label</parameter> como o rótulo
+     de texto.
     </para>
     <example>
      <title>GtkAccelLabel em uma janela</title>
      <programlisting role="php">
-      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="&directory.examples;/reference/gtk/gtkaccellabel/constructor.phpw" parse="text">
+      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+       href="&directory.examples;/reference/gtk/gtkaccellabel/constructor.phpw"
+       parse="text">
        <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
       </xi:include>
      </programlisting>
@@ -97,11 +100,11 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-		 Traz o widget monitorado por este rótulo de texto.
+    Traz o widget monitorado por este rótulo de texto.
    </shortdesc>
    <desc>
     <para>
-			Traz o widget monitorado por este rótulo de texto.
+     Traz o widget monitorado por este rótulo de texto.
     </para>
     <para>
      &seealso;
@@ -118,13 +121,14 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-		Retorna a largura necessária para exibir a(s) tecla(s) de aceleração.
+   Retorna a largura necessária para exibir a(s) tecla(s) de aceleração.
    </shortdesc>
    <desc>
     <para>
-			Retorna a largura necessária para exibir a(s) tecla(s) de aceleração.
-			Isto é usado pelos menus para alinhar todos seus
-			<classname>GtkMenuItem</classname>s, e não deve ser necessário pelas aplicações.
+     Retorna a largura necessária para exibir a(s) tecla(s) de aceleração.
+     Isto é usado pelos menus para alinhar todos seus
+     <classname>GtkMenuItem</classname>s, e não deve ser necessário pelas
+     aplicações.
     </para>
    </desc>
   </method>
@@ -137,13 +141,13 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-		Recria o texto representando as teclas de aceleração.
+   Recria o texto representando as teclas de aceleração.
    </shortdesc>
    <desc>
     <para>
-			Recria o texto representando as teclas de aceleração. Isto não é necessário
-			uma vez que o texto é automaticamente atualizado quando a associação dos aceleradores
-			é adicionada ou removida do widget.
+     Recria o texto representando as teclas de aceleração. Isto não é necessário
+     uma vez que o texto é automaticamente atualizado quando a associação dos
+     aceleradores é adicionada ou removida do widget.
     </para>
    </desc>
   </method>
@@ -175,11 +179,11 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-		Define o widget a ser monitorado por este rótulo acelerador.
+    Define o widget a ser monitorado por este rótulo acelerador.
    </shortdesc>
    <desc>
     <para>
-			Define o widget a ser monitorado por este rótulo acelerador.
+     Define o widget a ser monitorado por este rótulo acelerador.
     </para>
     <para>
      &seealso;

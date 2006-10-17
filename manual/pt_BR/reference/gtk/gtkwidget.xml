@@ -9,9 +9,10 @@
   </shortdesc>
   <desc>
    <simpara>
-    Um widget é qualquer classe herdada a partir de <classname>GtkWidget</classname>.
-    Widgets são classes que podem aguardar e reagir à eventos do usuário.
-    Eles são geralmente associados com exibição ou layout.
+    Um widget é qualquer classe herdada a partir de
+    <classname>GtkWidget</classname>. Widgets são classes que podem aguardar e
+    reagir à eventos do usuário. Eles são geralmente associados com exibição
+    ou layout.
    </simpara>
   </desc>
  </classmeta>
@@ -82,14 +83,17 @@
      dos tipos de evento a ser notificado.
     </para>
     <para>
-     Com isso, você pode por exemplo, fazer com que um <classname>GtkButton</classname>
-     receba <signalname class="GtkWidget">motion-notify-event</signalname>s
-     que não é feito por padrão.
+     Com isso, você pode por exemplo, fazer com que um
+     <classname>GtkButton</classname> receba
+     <signalname class="GtkWidget">motion-notify-event</signalname>s que não é
+     feito por padrão.
     </para>
     <example>
      <title>Rastreando eventos do mouse em um botão com add_events</title>
      <programlisting role="php">
-      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="&directory.examples;/reference/gtk/gtkwidget/add_events.phpw" parse="text">
+      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
+       href="&directory.examples;/reference/gtk/gtkwidget/add_events.phpw"
+       parse="text">
        <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
       </xi:include>
      </programlisting>
@@ -701,8 +705,9 @@
      função). Se você deseja sintetizar um evento, não utilize esta função; ao
      invés, use <function class="Gtk">main_do_event</function> e então o
      evento se comportará como um evento fila de eventos. Não forge eventos de
-     exposição; no lugar, use <function class="GdkWindow">invalidate_rect</function>
-     para invalidar uma região da janela.
+     exposição; no lugar, use
+     <function class="GdkWindow">invalidate_rect</function> para invalidar uma
+     região da janela.
     </para>
    </desc>
   </method>
@@ -762,7 +767,9 @@
     <example>
      <title>Exibindo o tamanho de um widget</title>
      <programlisting role="php">
-      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="&directory.examples;/reference/gtk/gtkwidget/get_allocation.php" parse="text">
+      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
+       href="&directory.examples;/reference/gtk/gtkwidget/get_allocation.php"
+       parse="text">
        <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
       </xi:include>
      </programlisting>
@@ -823,8 +830,9 @@
    </shortdesc>
    <desc>
     <para>
-     Retorn o valor definido com <function class="GtkWidget">set_child_visible</function>. 
-     Se você sentir a necessidade de usar esta função, seu código provavelmente necessita de
+     Retorn o valor definido com
+     <function class="GtkWidget">set_child_visible</function>. Se você sentir
+     a necessidade de usar esta função, seu código provavelmente necessita de
      reorganização.
     </para>
     <para>
@@ -1783,7 +1791,9 @@
     <example>
      <title>Pegando o caminho de widget</title>
      <programlisting role="php">
-      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="&directory.examples;/reference/gtk/gtkwidget/path.php" parse="text">
+      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
+       href="&directory.examples;/reference/gtk/gtkwidget/path.php"
+       parse="text">
        <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
       </xi:include>
      </programlisting>
@@ -1803,13 +1813,14 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Remove um colormap que foi adicionado com <function class="GtkWidget">push_colormap</function>.
+    Remove um colormap que foi adicionado com
+    <function class="GtkWidget">push_colormap</function>.
    </shortdesc>
    <desc>
     <para>
      &seealso;
-     <function class="GtkWidget">get_colormap</function>, 
-     <function class="GtkWidget">push_colormap</function>, 
+     <function class="GtkWidget">get_colormap</function>,
+     <function class="GtkWidget">push_colormap</function>,
      <function class="GtkWidget">set_colormap</function>
     </para>
 
@@ -1827,7 +1838,8 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Remove um composite adicionado com <function class="GtkWidget">push_composite_child</function>.
+    Remove um composite adicionado com
+    <function class="GtkWidget">push_composite_child</function>.
    </shortdesc>
    <desc>
     <para>
@@ -2022,6 +2034,39 @@
    </desc>
   </method>
 
+  <method id="gtk.gtkwidget.method.ref">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>GtkWidget <function>ref</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Incrementa o contador de referência do widget.
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtkwidget.method.region_intersect">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>
+      <classname>GdkRegion</classname> <function>region_intersect</function>
+     </funcdef>
+     <paramdef>
+      <classname>GdkRegion</classname> <parameter>region</parameter>
+     </paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Retorna a intersecção da área do widget com <parameter>region</parameter>.
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
 
   <method id="gtk.gtkwidget.method.remove_accelerator">
    <funcsynopsis>
@@ -2701,13 +2746,15 @@
     <para>
      O parâmetro opcional <parameter>all</parameter> pode ser usado para
      ocultar ou exibir todos os children abaixo do widget. Se
-     <parameter>all</parameter> for <literal>true</literal>, <function class="GtkWidget">show_all</function>
-     ou  <function class="GtkWidget">hide_all</function> será chamada ao invés
-     de <function class="GtkWidget">show</function> ou <function class="GtkWidget">hide</function>.
+     <parameter>all</parameter> for <literal>true</literal>,
+     <function class="GtkWidget">show_all</function> ou
+     <function class="GtkWidget">hide_all</function> será chamada ao invés de
+     <function class="GtkWidget">show</function> ou
+     <function class="GtkWidget">hide</function>.
     </para>
     <para>
      <function class="GtkWidget">set_visible</function> retorna
-     <literal>true</literal> se o widget for visìvel ou
+     <literal>true</literal> se o widget for visìvel ou 
      <literal>false</literal>.
     </para>
     <para>
@@ -3090,11 +3137,12 @@
      As propriedades de eventos úteis são:
      <itemizedlist>
       <listitem>
-       <literal>x, y</literal> - As coordenadas x e y do widget onde o cursor se
-       encontra.
+       <literal>x, y</literal> - As coordenadas x e y do widget onde o cursor
+       se encontra.
       </listitem>
       <listitem>
-       <literal>button</literal> - Botão do mouse (1 - esquerda, 2 - meio, 3 - direita)
+       <literal>button</literal> - Botão do mouse
+       (1 - esquerda, 2 - meio, 3 - direita)
       </listitem>
       <listitem>
        <literal>state</literal> - Máscara de outras teclas que estão sendo
@@ -3110,7 +3158,9 @@
      <example>
       <title>Usando o sinal key-press-event</title>
       <programlisting role="php">
-       <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="&directory.examples;/reference/gtk/gtkwidget/button-press-event.phpw" parse="text">
+       <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
+        href="&directory.examples;/reference/gtk/gtkwidget/button-press-event.phpw"
+        parse="text">
         <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
        </xi:include>
       </programlisting>
@@ -3383,8 +3433,8 @@
    <desc>
     <para>
      O sinal <literal>drag-drop</literal> é emitido no local onde o dado foi
-     solto quando o usuário arrasta algum dado em algum widget. O manipulador de
-     sinais deve determinar se a posição do cursor está no local onde foi
+     solto quando o usuário arrasta algum dado em algum widget. O manipulador
+     de sinais deve determinar se a posição do cursor está no local onde foi
      solto ou não. Se não está, retorna <literal>false</literal> e nenhum
      processamento adicional é necessário. Caso contrário, o manipulador
      retornará <literal>true</literal>. Neste caso, o manipulador deve
@@ -3414,7 +3464,7 @@
     <para>
      O sinal <literal>drag-end</literal> é emitido na fonte do arrastamento
      quando o mesmo é concluído. Uma razão comum para usar este sinal é
-     desfazer coisas feitas em 
+     desfazer coisas feitas em
      <signalname class="GtkWidget">drag-begin</signalname>.
     </para>
    </desc>
@@ -3666,7 +3716,9 @@
      <example>
       <title>Usando o sinal key-press-event</title>
       <programlisting role="php">
-       <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="&directory.examples;/reference/gtk/gtkwidget/key-press-event.phpw" parse="text">
+       <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
+        href="&directory.examples;/reference/gtk/gtkwidget/key-press-event.phpw"
+        parse="text">
         <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
        </xi:include>
       </programlisting>
