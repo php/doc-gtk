@@ -10,26 +10,27 @@
   <desc>
    <para>
     O <literal>Glade</literal> é um construtor de interfaces para o Gtk+.
-    Você pode criar interfaces em modo WYSIWYG usando esta ferramenta, que gera
-    um arquivo XML representando a interface na forma de um arquivo
+    Você pode criar interfaces em modo WYSIWYG usando esta ferramenta, que
+    gera um arquivo XML representando a interface na forma de um arquivo
     <literal>.glade</literal>
    </para>
    <para>
-    Esta objeto representa uma instância deste arquivo <literal>.glade</literal>.
-    Você pode usar este objeto no seu programa para manipular de informa individual
-    os seus widgets.
+    Esta objeto representa uma instância deste arquivo
+    <literal>.glade</literal>. Você pode usar este objeto no seu programa para
+    manipular de informa individual os seus widgets.
    </para>
    <para>
-    É possível também tabalhar com manipuladores de sinais no Glade. Se você o fez,
-    então pode usar o método <function class="GladeXML">signal_autoconnect</function>
-    para conectar automaticamente seus widgets aos seus respectivos manipuladores.
-    Se seus manipuladores são métodos, use o método
+    É possível também tabalhar com manipuladores de sinais no Glade. Se você o
+    fez, então pode usar o método
+    <function class="GladeXML">signal_autoconnect</function> para conectar
+    automaticamente seus widgets aos seus respectivos manipuladores. Se seus
+    manipuladores são métodos, use o método
     <function class="GladeXML">signal_autoconnect_instance</function>.
    </para>
    <para>
     Dê uma olhada em 
-    <link linkend="tutorials.helloglade">Tutorial Glade</link> para mais informações
-    em como usar esta extensão.
+    <link linkend="tutorials.helloglade">Tutorial Glade</link> para mais
+    informações em como usar esta extensão.
    </para>
   </desc>
  </classmeta>
@@ -69,10 +70,11 @@
    </shortdesc>
    <desc>
     <para>
-     Use esta método para retornar um widget correspondente à um nome particular
-     na descrição <classname>GladeXML</classname>. Esta é provavelmente a função
-     mais usada, uma vez que você precise manipular o widget (conectar sinais, modificar
-     propriedades, etc.) após ter carregado a descrição.
+     Use esta método para retornar um widget correspondente à um nome
+     particular na descrição <classname>GladeXML</classname>. Esta é
+     provavelmente a função mais usada, uma vez que você precise manipular o
+     widget (conectar sinais, modificar propriedades, etc.) após ter carregado
+     a descrição.
     </para>
    </desc>
   </method>
@@ -89,7 +91,7 @@
    </shortdesc>
    <desc>
     <para>
-     Use este método para retornar um array de objetos em que os nomes 
+     Use este método para retornar um array de objetos em que os nomes
      começam com a string passada.
     </para>
    </desc>
@@ -113,8 +115,8 @@
      <classname>GladeXML</classname> está associado, como base.
     </para>
     <para>
-     Se <literal>filename</literal> é um caminho absoluto, então o nome original
-     do arquivo é retornado.
+     Se <literal>filename</literal> é um caminho absoluto, então o nome
+     original do arquivo é retornado.
     </para>
    </desc>
   </method>
@@ -132,13 +134,15 @@
    </shortdesc>
    <desc>
     <para>
-     Se você especificou algum manipulador em seu arquivo <literal>.glade</literal>,
-     use este método para conectar automaticamente todos os seus sinais à funções com o
-     mesmo nome que os manipuladores especificados.
+     Se você especificou algum manipulador em seu arquivo
+     <literal>.glade</literal>, use este método para conectar automaticamente
+     todos os seus sinais à funções com o mesmo nome que os manipuladores
+     especificados.
     </para>
     <para>
-     Note que todas as suas funções devem fazer parte do espaço global em que você
-     está trabalhando. Se você pretende usar algum método de algum objeto, use
+     Note que todas as suas funções devem fazer parte do espaço global em que
+     você está trabalhando. Se você pretende usar algum método de algum
+     objeto, use
      <function class="GladeXML">signal_autoconnect_instance</function>.
     </para>
    </desc>
@@ -152,17 +156,19 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Conecta automaticamente todos os manipuladores aos seus métodos correspondentes.
+    Conecta automaticamente todos os manipuladores aos seus métodos
+    correspondentes.
    </shortdesc>
    <desc>
     <para>
-     Se você especificou algum manipulador de sinais no seu arquivo <literal>.glade</literal>,
-     use este método para conectar automaticamente os sinais aos métodos de mesmo nome
-     aos que você especificou no arquivo e que pertença ao objeto passado.
+     Se você especificou algum manipulador de sinais no seu arquivo
+     <literal>.glade</literal>, use este método para conectar automaticamente
+     os sinais aos métodos de mesmo nome aos que você especificou no arquivo e
+     que pertença ao objeto passado.
     </para>
     <para>
-     Você deve passar uma instância da classe na qual os métodos que você pretende conectar
-     pertencem.
+     Você deve passar uma instância da classe na qual os métodos que você
+     pretende conectar pertencem.
     </para>
    </desc>
   </method>
