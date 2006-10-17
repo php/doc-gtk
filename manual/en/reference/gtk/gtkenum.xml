@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<!-- $Revision: 1.21 $ -->
-<enums id="gtkenum">
+<!-- $Revision: 1.22 $ -->
+<enums id="gtk.gtkenum">
 
-
- <enum id="gtk.enum.accel">
-  <enumname>GtkAccel</enumname>
+ <enum id="gtk.enum.accelflags">
+  <enumname>GtkAccelFlags</enumname>
   <desc>
    <simpara>
 
@@ -16,6 +15,14 @@
    <optionname>Gtk::ACCEL_VISIBLE</optionname>
    <shortdesc>
     Display in GtkAccelLabel?
+   </shortdesc>
+  </enumoption>
+
+  <enumoption>
+   <value>?</value>
+   <optionname>Gtk::ACCEL_SIGNAL_VISIBLE</optionname>
+   <shortdesc>
+
    </shortdesc>
   </enumoption>
 
@@ -37,8 +44,8 @@
  </enum>
 
 
- <enum id="gtk.enum.anchor">
-  <enumname>GtkAnchor</enumname>
+ <enum id="gtk.enum.anchortype">
+  <enumname>GtkAnchorType</enumname>
   <desc>
    <simpara>
     
@@ -426,7 +433,7 @@
  </enum>
 
 
- <enum id="gtk.enum.buttonbox">
+ <enum id="gtk.enum.buttonboxstyle">
   <enumname>GtkButtonBoxStyle</enumname>
   <desc>
    <simpara>
@@ -945,8 +952,8 @@
  </enum>
 
 
- <enum id="gtk.enum.curve">
-  <enumname>GtkCurve</enumname>
+ <enum id="gtk.enum.curvetype">
+  <enumname>GtkCurveType</enumname>
   <desc>
    <simpara>
     
@@ -1201,8 +1208,8 @@
  </enum>
 
 
- <enum id="gtk.enum.expander">
-  <enumname>GtkExpander</enumname>
+ <enum id="gtk.enum.expanderstyle">
+  <enumname>GtkExpanderStyle</enumname>
   <desc>
    <simpara>
     Used to specify the style of the expanders drawn by a 
@@ -1430,7 +1437,7 @@
   <enumname>GtkIconSize</enumname>
   <desc>
    <simpara>
-    
+    Built-in stock icon sizes.
    </simpara>
   </desc>
 
@@ -1643,8 +1650,8 @@
  </enum>
 
 
- <enum id="gtk.enum.match">
-  <enumname>GtkMatch</enumname>
+ <enum id="gtk.enum.matchtype">
+  <enumname>GtkMatchType</enumname>
   <desc>
    <simpara>
     GtkMatchType is deprecated and should not be used in newly-written code.
@@ -1701,8 +1708,8 @@
  </enum>
 
 
- <enum id="gtk.enum.menu">
-  <enumname>GtkMenu</enumname>
+ <enum id="gtk.enum.menudirectiontype">
+  <enumname>GtkMenuDirectionType</enumname>
   <desc>
    <simpara>
     An enumeration representing directional movements within a menu.
@@ -1743,8 +1750,8 @@
  </enum>
 
 
- <enum id="gtk.enum.message">
-  <enumname>GtkMessage</enumname>
+ <enum id="gtk.enum.messagetype">
+  <enumname>GtkMessageType</enumname>
   <desc>
    <simpara>
     The type of message being displayed in the dialog.
@@ -1831,7 +1838,7 @@
    <value>0</value>
    <optionname>Gtk::MOVEMENT_LOGICAL_POSITIONS</optionname>
    <shortdesc>
-    Move by forw/back graphemes.
+    Move by forward/back graphemes.
    </shortdesc>
   </enumoption>
 
@@ -1922,7 +1929,7 @@
    <optionname>Gtk::IN_DESTRUCTION</optionname>
    <shortdesc>
     The object is currently being destroyed. This is used internally 
-    by GTK+ to prevent reinvokations during destruction.
+    by GTK+ to prevent reinvocations during destruction.
    </shortdesc>
   </enumoption>
 
@@ -3364,6 +3371,7 @@
 
 
  <enum id="gtk.enum.stockitems">
+ <!-- Whoever put this here - these are NOT enums!!!! Should be in appendix. - sf -->
   <enumname>GtkStockItems</enumname>
   <desc>
    <simpara>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- $Revision: 1.28 $ -->
+<!-- $Revision: 1.29 $ -->
 <classentry id="gtk.gtkwindow">
  <classmeta>
   <classtitle>GtkWindow</classtitle>
@@ -1087,8 +1087,10 @@
     </para>
     <para>
      The the location referenced by <parameter>x</parameter> and
-     <parameter>y</parameter> depends upon the window's <link linkd="gtk.gtkwindow.method.set_gravity">gravity</link>. By default a
-     window has <link linkd="gdk.enum.gravity">north west gravity</link>. This
+     <parameter>y</parameter> depends upon the window's
+     <link linkend="gtk.gtkwindow.method.set_gravity">gravity</link>. By
+     default a window has
+     <link linkend="gdk.enum.gravity">north west gravity</link>. This
      means that the top left corner of the window will be placed
      <parameter>x</parameter> pixels from the left edge of the screen and
      <parameter>y</parameter> pixels from the top edge of the screen.
@@ -1312,11 +1314,13 @@
    <desc>
     <simpara>
      Resizes the window in the same manner it would be resized by the user.
-     The window will obey its <link linkd="gtk.gtkwindow.method.set_geometry_hints">geometry
-     contraints</link>. By default these constraints prevent the window from
-     being resized smaller than the size set with <function class="GtkWidget">set_size_request</function>. Regardless of the
-     geometry constraints, a window may not be resized smaller than one pixel
-     by one pixel.
+     The window will obey its
+     <link linkend="gtk.gtkwindow.method.set_geometry_hints">geometry contraints</link>.
+     By default these constraints prevent the window from being resized
+     smaller than the size set with
+     <function class="GtkWidget">set_size_request</function>. Regardless of
+     the geometry constraints, a window may not be resized smaller than one
+     pixel by one pixel.
     </simpara>
     <para>
      &seealso;
@@ -1516,11 +1520,13 @@
      Using <function class="GtkWindow">set_default_size</function> simply sets
      the size of the window. It does not set any restrictions on whether or
      not the user can resize the window later. This method acts as if the user
-     had resized the window. Unlike <function class="GtkWidget">set_size_request</function>, the user may shrink the
-     window below the height and width passed to this function.
+     had resized the window. Unlike
+     <function class="GtkWidget">set_size_request</function>, the user may
+     shrink the window below the height and width passed to this function.
     </simpara>
     <simpara>
-     This method respects any <link linkd="gtk.gtkwindow.method.set_geometry_hints">geometry hints</link>
+     This method respects any
+     <link linkend="gtk.gtkwindow.method.set_geometry_hints">geometry hints</link>
      that have been set for the window. If the height and width given do not
      match the geomety hints, the window will be clamped to the nearest
      acceptable dimensions.
@@ -2011,7 +2017,7 @@
     </para>
     <para>
      &seealso;
-     <function class="GtkWindow">set_resizeable</function>
+     <function class="GtkWindow">set_resizable</function>
     </para>
    </desc>
   </method>
