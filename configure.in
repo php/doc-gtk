@@ -121,7 +121,7 @@ AC_ARG_ENABLE(updates-only,
 [  --enable-updates-only     whether to only build updated files],
 [
 UPDATES_ONLY=yes
-if [ test -e ./build/$LANG/php/index.html ]; then
+if [ test -e ./build/$LANG/html/index.html ]; then
 	for xmlfile in `find $LANGDIR -name "*.xml" | sed -e"s%^$LANGDIR\/%%g" | sort`; do
 		if [ test -f $LANGDIR/$xmlfile ]; then
 			filepath=$LANGDIR/$xmlfile
