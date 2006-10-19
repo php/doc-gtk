@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<!-- EN-Revision: 1.28 Maintainer: dnfeitosa Status: ready -->
+<!-- EN-Revision: 1.29 Maintainer: dnfeitosa Status: ready -->
 <classentry id="gtk.gtkwindow">
  <classmeta>
   <classtitle>GtkWindow</classtitle>
@@ -46,15 +46,15 @@
   <constructor id="gtk.gtkwindow.constructor">
    <funcsynopsis>
     <funcprototype>
-     <funcdef> <function>GtkWindow</function></funcdef>
-     <paramdef>
-      <enumname>GtkWindowType</enumname>
-      <parameter>
-       <optional>
-        type = <enumname>Gtk::WINDOW_TOPLEVEL</enumname>
-       </optional>
-      </parameter>
-     </paramdef>
+    <funcdef> <function>GtkWindow</function></funcdef>
+    <paramdef>
+     <enumname>GtkWindowType</enumname>
+     <parameter>
+      <optional>
+       type = <enumname>Gtk::WINDOW_TOPLEVEL</enumname>
+      </optional>
+     </parameter>
+    </paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -155,7 +155,7 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>bool <function>activate_key</function></funcdef>
-     
+
      <paramdef><parameter>event</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
@@ -223,7 +223,8 @@
      O parâmetro <parameter>keyval</parameter> é o correspondente ASCII da
      tecla que ativará o mnemônico. Ex.: Se você quiser que
      <literal>Alt+K</literal> ative um <literal>$button</literal>, o valor
-     deve ser <programlisting role="php"><![CDATA[ord('K')]]></programlisting>
+     deve ser 
+     <programlisting role="php"><![CDATA[ord('K')]]></programlisting>
      que é <literal>75</literal> em ASCII.
     </para>
     <note>
@@ -285,7 +286,7 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>begin_resize_drag</function></funcdef>
-     
+
      <paramdef><parameter>edge</parameter></paramdef>
      <paramdef><parameter>button</parameter></paramdef>
      <paramdef><parameter>root_x</parameter></paramdef>
@@ -302,8 +303,7 @@
     </simpara>
     <note>
      Este método não é normalmente chamado no código. Se você precisa
-     redimensionar uma janela, chame
-     <function class="GtkWindow">resize</function>.
+     redimensionar uma janela, chame <function class="GtkWindow">resize</function>.
     </note>
     <simpara>
      &seealso;
@@ -396,9 +396,8 @@
    </shortdesc>
    <desc>
     <simpara>
-     Retorna se as decorações da janela estão sendo mostradas atualmente.
-     As decorações nas janelas podem ser desativadas usando-se
-     <function class="GtkWindow">set_decorated</function>.
+     Retorna se as decorações da janela estão sendo mostradas atualmente. As decorações 
+     nas janelas podem ser desativadas usando-se <function class="GtkWindow">set_decorated</function>.
     </simpara>
     <para>
      Por padrão, uma janela é decorada.
@@ -425,7 +424,8 @@
     <para>
      Retorna o tamanho padrão da janela. Um valor <literal>-1</literal> para a
      largura ou altura indica que um valor padrão não foi explicitamente
-     definido (com <function class="GtkWindow">set_default_size</function>)
+     definido (com 
+     <function class="GtkWindow">set_default_size</function>)
      para essa dimensão, então o tamanho "natural" da janela será usado.
     </para>
     <para>
@@ -605,10 +605,9 @@
    </shortdesc>
    <desc>
     <para>
-     Retorna se a janela possui ou nçao um frame fora de 
+     Retorna se a janela possui ou não um frame fora de 
      <classname>GdkWindow</classname>. Uma janela possui um frame window se
-     o frame window foi adicionado usando-se
-     <function class="GtkWindow">set_has_frame</function>.
+     o frame window foi adicionado usando <function class="GtkWindow">set_has_frame</function>.
     </para>
     <para>
      &seealso;
@@ -638,7 +637,7 @@
      <function class="GtkWindow">set_icon_list</function>.
     </para>
     <para>
-     Se uma lista de ícone foi setada usando
+     Se uma lista de ícone foi definida usando
      <function class="GtkWindow">set_icon_list</function>, este método
      retornará o primeiro ícone da lista.
     </para>
@@ -831,6 +830,7 @@
 
    </desc>
   </method>
+
 
 
   <method id="gtk.gtkwindow.method.get_size">
@@ -1078,51 +1078,7 @@
    </desc>
   </method>
 
-  <method id="gtk.gtkwindow.method.mnemonic_activate">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>bool <function>mnemonic_activate</function></funcdef>
-     <paramdef>int <parameter>keyval</parameter></paramdef>
-     <paramdef>GdkModifierType <parameter>modifiers</parameter></paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-    Ativa os widgets associados à um menmônico.
-   </shortdesc>
-   <desc>
-    <para>
-     Ativa os widgets associados com os mnemônicos
-     <parameter>keyval</parameter> e <parameter>modifiers</parameter>. Um
-     widget é associado à um mnemônico quando passado como argumento para
-     <function class="GtkWindow">add_mnemonic</function>.
-    </para>
-    <para>
-     O parâmetro <parameter>keyval</parameter> deve ser um integer. Para pegar
-     o valor integer de uma tecla, use a função do PHP <literal>ord</literal>.
-    </para>
-    <para>
-     Os <parameter>modifiers</parameter> devem ser compatíveis com 
-     <function class="GtkWindow">set_mnemonic_modifier</function>.
-    </para>
-    <para>
-     <example>
-      <title>Usando GtkWindow::mnemonic_activate()</title>
-      <programlisting role="php">
-       <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
-        href="&directory.examples;/reference/gtk/gtkwindow/mnemonic_activate.phpw"
-        parse="text">
-        <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
-       </xi:include>
-      </programlisting>
-     </example>
-    </para>
-    <para>
-     &seealso;
-     <function class="GtkWindow">add_mnemonic</function>
-     <function class="GtkWindow">remove_mnemonic</function>
-    </para>
-   </desc>
-  </method>
+
 
   <method id="gtk.gtkwindow.method.move">
    <funcsynopsis>
@@ -1142,7 +1098,7 @@
     <para>
      O local referenciado por <parameter>x</parameter> e
      <parameter>y</parameter> depende da gravidade
-    (<link linkend="gtk.gtkwindow.method.set_gravity">gravity</link>)
+     (<link linkend="gtk.gtkwindow.method.set_gravity">gravity</link>)
      da janela. Por padrão, uma janela contém gravidade à noroeste
      (<link linkend="gdk.enum.gravity">north west gravity</link>).
      Isto significa que o topo no lado esquerdo será posicionado à
@@ -1740,9 +1696,9 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_geometry_hints</function></funcdef>
-     
-     
-     
+
+
+
      <paramdef><classname>GtkWidget</classname> <parameter>widget</parameter></paramdef>
      <paramdef><parameter>min_width</parameter></paramdef>
      <paramdef><parameter>min_height</parameter></paramdef>
@@ -1877,7 +1833,7 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_icon_from_file</function></funcdef>
-     
+
      <paramdef><parameter>filename</parameter></paramdef>
      <paramdef><parameter>error</parameter></paramdef>
     </funcprototype>
@@ -2079,8 +2035,7 @@
      &deprecated.method;
     </note>
     <para>
-     Define como a janela trata requisições no tamanho ou tentativas de
-     redimensionar dos usuários.
+     Define como a janela trata requisições no tamanho ou tentativas de redimensionar dos usuários.
     </para>
     <para>
      &seealso;
@@ -2464,7 +2419,7 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef> <function>get_default_icon_list</function></funcdef>
-     
+
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
@@ -2483,7 +2438,7 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef> <function>list_toplevels</function></funcdef>
-     
+
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
@@ -2502,7 +2457,7 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef> <function>set_default_icon_from_file</function></funcdef>
-     
+
      <paramdef><parameter>filename</parameter></paramdef>
      <paramdef><parameter>error</parameter></paramdef>
     </funcprototype>
@@ -2558,7 +2513,7 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef> <function>window_mnemonic_activate</function></funcdef>
-     
+
      <paramdef><parameter>keyval</parameter></paramdef>
      <paramdef><parameter>modifier</parameter></paramdef>
     </funcprototype>
@@ -2721,7 +2676,7 @@
 
   <field id="gtk.gtkwindow.field.frame" type="ro">
    <fieldname>frame</fieldname>
-   <fieldtype></fieldtype>
+   <fieldtype/>
    <shortdesc>
     A borda que cerca a janela.
    </shortdesc>
@@ -3140,8 +3095,7 @@
    <desc>
     <para>
      Este sinal é emitido quando a definição do acelerador
-     <link linkend="appendix.glossary.m.mnemonic">mnemônico</link>
-     da janela é alterado.
+     <link linkend="appendix.glossary.m.mnemonic">mnemônico</link> da janela é alterado.
     </para>
     <para>
      &seealso;
