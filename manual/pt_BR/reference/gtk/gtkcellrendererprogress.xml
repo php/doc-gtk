@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- EN-Revision: 1.9 Maintainer: dnfeitosa Status: ready -->
+<classentry id="gtk.gtkcellrendererprogress">
+ <classmeta>
+  <classtitle>GtkCellRendererProgress</classtitle>
+  <classparent>GtkCellRenderer</classparent>
+  <shortdesc>
+   Exibe o conteúdo de uma célula em um GtkTreeView como uma barra de progresso
+  </shortdesc>
+  <desc>
+
+  </desc>
+ </classmeta>
+
+ <constructors>
+
+  <constructor id="gtk.gtkcellrendererprogress.constructor">
+   <funcsynopsis>
+    <funcprototype>
+    <funcdef> <function>GtkCellRendererProgress</function></funcdef>
+    <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Cria um novo <classname>GtkCellRendererProgress</classname>.
+   </shortdesc>
+   <desc>
+    Cria um novo <classname>GtkCellRendererProgress</classname>.
+    Os parâmetros de renderização são ajustados usando as propriedades do
+    objeto. As propriedades do objeto podem ser definidas globalmente (com
+    <function class="GObject">set_property</function>).
+    Também com <classname>GtkTreeViewColumn</classname>, você pode associar uma
+    propriedade à um valor em um <classname>GtkTreeModel</classname>. Por
+    exemplo, você pode associar a propriedade "valor" ao renderizador da
+    célula à uma string no modelo, renderizando assim uma string diferente em
+    cada linha do GtkTreeView.
+   </desc>
+  </constructor>
+ </constructors>
+
+<properties>
+  <prop id="gtk.gtkcellrendererprogress.property.text" type="rw">
+   <propname>text</propname>
+   <proptype>string</proptype>
+   <shortdesc>
+    O texto no rótulo que será desenhado na barra de progresso.
+   </shortdesc>
+   <desc>
+    <para>
+     O texto no rótulo que será desenhado na barra de progresso.
+    </para>
+    <para>
+     <example>
+      <title>set_property sample</title>
+      <programlisting role="php"><![CDATA[<?php
+$cellrenderer->set_property( 'text', 'Percentage');
+?>]]></programlisting>
+     </example>
+    </para>
+    <para>
+     &seealso;
+     <function class="GObject">set_property</function>
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtkcellrendererprogress.property.value" type="rw">
+   <propname>value</propname>
+   <proptype>float</proptype>
+   <shortdesc>
+    A porcentagem na qual a barra está preenchida.
+   </shortdesc>
+   <desc>
+    <para>
+     A porcentagem na qual a barra está preenchida.
+    </para>
+    <para>
+     <example>
+      <title>set_property sample</title>
+      <programlisting role="php"><![CDATA[<?php
+$cellrenderer->set_property( 'value', '44');
+?>]]></programlisting>
+     </example>
+    </para>
+    <para>
+     &seealso;
+     <function class="GObject">set_property</function>
+    </para>
+   </desc>
+  </prop>
+</properties>
+
+</classentry>
