@@ -1,0 +1,576 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- EN-Revision: 1.2 Maintainer: fernandoc Status: ready -->
+<classentry id="gobject">
+ <classmeta>
+  <classtitle>GObject</classtitle>
+  <shortdesc>
+   Classe base para praticamente todas as classes no PHP-Gtk.
+  </shortdesc>
+  <desc>
+   <para>
+    <literal>GObject</literal> é a classe base para praticamente todas as
+    classes no Gtk. Ela provê metodos para trabalhar com sinais
+    e propriedades.
+   </para>
+  </desc>
+ </classmeta>
+
+ <methods>
+  <method id="gobject.method.block">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>block</function></funcdef>
+     <paramdef>int <parameter>handler_id</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Bloqueia temporariamente o manipulador de sinal.
+   </shortdesc>
+   <desc>
+    <para>
+     Bloqueia o manipulador de sinal de ser chamado quando um
+     sinal é emitido. Use <function class="GObject">unblock</function> para
+     continuar a receber chamadas ao metodo.
+    </para>
+    <para>
+     Ao utlilizar o metodo múltiplas vezes para o mesmo manipulador,
+     você precisa chamar o metodo <literal>unblock</literal> o mesmo número de
+     vezes para faze-lo funcionar novamente.
+    </para>
+    <para>
+     O <parameter>handler_id</parameter> é o valor de retorno
+     dos metodos <literal>connect_*</literal>.
+    </para>
+    <para>
+     &seealso;
+     <function class="GObject">connect</function>,
+     <function class="GObject">disconnect</function>,
+     <function class="GObject">is_connected</function>,
+     <function class="GObject">unblock</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gobject.method.connect">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>int <function>connect</function></funcdef>
+     <paramdef>string <parameter>signal</parameter></paramdef>
+     <paramdef>callback <parameter>callback</parameter></paramdef>
+     <paramdef>mixed <parameter><optional>userparam</optional></parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Conecta um sinal a um callback.
+   </shortdesc>
+   <desc>
+    <para>
+     Conecta um sinal ao metodo callback dado. Para os parâmetros
+     exatos veja os documentos sobre o respectivo sinal na
+     documentação da classe.
+    </para>
+    <para>
+     O metodo retorna um <emphasis>signal handler id</emphasis> que
+     pode ser usado com <function class="GObject">block</function> ou
+     <function class="GObject">disconnect</function>.
+    </para>
+    <para>
+     Para maiores informações sobre sinais, veja o
+     <link linkend="tutorials.signals">Tutorial de Manipulação de Sinal</link>.
+    </para>
+    <para>
+     &seealso;
+     <function class="GObject">connect_after</function>,
+     <function class="GObject">connect_simple</function>,
+     <function class="GObject">connect_simple_after</function>,
+    </para>
+   </desc>
+  </method>
+
+  <method id="gobject.method.connect_after">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>int <function>connect_after</function></funcdef>
+     <paramdef>string <parameter>signal</parameter></paramdef>
+     <paramdef>callback <parameter>callback</parameter></paramdef>
+     <paramdef>mixed <parameter><optional>userparam</optional></parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Conecta um sinal a um callback, chamado após todos os manipuladores de sinal normais.
+   </shortdesc>
+   <desc>
+    <para>
+     Conecta um sinal ao callback dado. O callback será chamado
+     apenas após todos os callbacks "normais" (não after) terem sido ativados.
+     Para os parâmetros exatos do callback veja a documentação do respectivo
+     sinal na documentação da classe.
+    </para>
+    <para>
+     O metodo retorna um <emphasis>signal handler id</emphasis> que
+     pode ser usado com os metodos <function class="GObject">block</function> ou
+     <function class="GObject">disconnect</function>.
+    </para>
+    <para>
+     Para maiores informações sobre sinais, veja o
+     <link linkend="tutorials.signals">Tutorial de Manipulação de Sinal</link>.
+    </para>
+    <para>
+     &seealso;
+     <function class="GObject">connect</function>,
+     <function class="GObject">connect_simple</function>,
+     <function class="GObject">connect_simple_after</function>,
+    </para>
+   </desc>
+  </method>
+
+  <method id="gobject.method.connect_object">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>int <function>connect_object</function></funcdef>
+     <paramdef>string <parameter>signal</parameter></paramdef>
+     <paramdef>callback <parameter>callback</parameter></paramdef>
+     <paramdef>mixed <parameter><optional>userparam</optional></parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    &deprecated; Apelido de connect_simple.
+   </shortdesc>
+   <desc>
+    <para>
+     &deprecated; Este metodo foi renomeado como
+     <function class="GObject">connect_simple</function> e
+     deve ser usado apenas com o novo nome.
+    </para>
+   </desc>
+  </method>
+
+  <method id="gobject.method.connect_object_after">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>int <function>connect_object_after</function></funcdef>
+     <paramdef>string <parameter>signal</parameter></paramdef>
+     <paramdef>callback <parameter>callback</parameter></paramdef>
+     <paramdef>mixed <parameter><optional>userparam</optional></parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    &deprecated; Apelido de connect_simple_after.
+   </shortdesc>
+   <desc>
+    <para>
+     &deprecated; este metodo foi renomeado como
+     <function class="GObject">connect_simple_after</function> e
+     deve ser usado apenas com o novo nome.
+    </para>
+   </desc>
+  </method>
+
+  <method id="gobject.method.connect_simple">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>int <function>connect_simple</function></funcdef>
+     <paramdef>string <parameter>signal</parameter></paramdef>
+     <paramdef>callback <parameter>callback</parameter></paramdef>
+     <paramdef>mixed <parameter><optional>userparam</optional></parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Conecta um sinal a um callback, omotindo o primeiro parâmetro.
+   </shortdesc>
+   <desc>
+    <para>
+     Conecta um sinal ao callback dado. O primeiro parâmetro da callback
+     (o objeto no qual ele foi chamado) é omitido.
+    </para>
+    <para>
+     O metodo retorna um <emphasis>signal handler id</emphasis> que
+     pode ser usado com os metodos <function class="GObject">block</function> ou
+     <function class="GObject">disconnect</function>.
+    </para>
+    <para>
+     Para maiores informações sobre sinais, veja o
+     <link linkend="tutorials.signals">Tutorial de Manipulação de Sinal</link>.
+    </para>
+    <para>
+     &seealso;
+     <function class="GObject">connect</function>,
+     <function class="GObject">connect_after</function>,
+     <function class="GObject">connect_simple_after</function>,
+    </para>
+   </desc>
+  </method>
+
+  <method id="gobject.method.connect_simple_after">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>int <function>connect_simple_after</function></funcdef>
+     <paramdef>string <parameter>signal</parameter></paramdef>
+     <paramdef>callback <parameter>callback</parameter></paramdef>
+     <paramdef>mixed <parameter><optional>userparam</optional></parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Conecta um sinal a um callback, omitindo o primeiro parâmetro - chamado após todos os manipuladores de sinal normais.
+   </shortdesc>
+   <desc>
+    <para>
+     Conecta um sinal ao callback dado. O primeiro parãmetro do callback
+     (o objeto no qual ele foi chamado) é omitido.
+    </para>
+    <para>
+     Além disso, o manipulador somente será chamado após todos os
+     manipuladores não after tenham sido.
+    </para>
+    <para>
+     Este metodo retorna um <emphasis>signal handler id</emphasis> que
+     pode ser usado com <function class="GObject">block</function>(bloquear) ou
+     <function class="GObject">disconnect</function>(desconectar) o manipulador.
+    </para>
+    <para>
+     Para maiores informações sobre sinais, veja o
+     <link linkend="tutorials.signals">Tutorial de Manipulação de Sinal</link>.
+    </para>
+    <para>
+     &seealso;
+     <function class="GObject">connect</function>,
+     <function class="GObject">connect_after</function>,
+     <function class="GObject">connect_simple</function>,
+    </para>
+   </desc>
+  </method>
+
+  <method id="gobject.method.disconnect">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>disconnect</function></funcdef>
+     <paramdef>int <parameter>handler_id</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Disconecta um manipulador de sinal.
+   </shortdesc>
+   <desc>
+    <para>
+     Disconecta um manipulador de sinal, fazendo com que não seja mais
+     chamado se o sinal acontecer.
+    </para>
+    <para>
+     Se você quer desabilitar temporariamente um manipulador de sinal,
+     use o metodo <function class="GObject">block</function>.
+    </para>
+    <para>
+     Para conferir se o manipulador de sinal ainda esta conectado, use
+     <function class="GObject">is_connected</function>.
+    </para>
+    <para>
+     &seealso;
+     <function class="GObject">block</function>,
+     <function class="GObject">disconnect</function>,
+     <function class="GObject">is_connected</function>,
+     <function class="GObject">unblock</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gobject.method.get_data">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>mixed <function>get_data</function></funcdef>
+     <paramdef>string <parameter>key</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Retorna o valor de um campo definido pelo usuário.
+   </shortdesc>
+   <desc>
+    <para>
+     Retorna o valor de um campo definido pelo usuário.
+    </para>
+    <para>
+     &seealso;
+     <function class="GObject">set_data</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gobject.method.get_property">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>mixed <function>get_property</function></funcdef>
+     <paramdef>string <parameter>property_name</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Retorna o valor de uma propriedade do objeto.
+   </shortdesc>
+   <desc>
+    <para>
+     Retorna o valor de uma propriedade de um objeto.
+    </para>
+    <para>
+     &seealso;
+     <function class="GObject">set_property</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gobject.method.is_connected">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>bool <function>is_connected</function></funcdef>
+     <paramdef>int <parameter>handler_id</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Confere se um manipulador de sinal esta conectado.
+   </shortdesc>
+   <desc>
+    <para>
+     Confere se um manipulador de sinal ainda esta conectado
+     (ex. não foi desconectado com <function class="GObject">disconnect</function>).
+    </para>
+    <para>
+     &seealso;
+     <function class="GObject">block</function>,
+     <function class="GObject">connect</function>,
+     <function class="GObject">disconnect</function>,
+     <function class="GObject">unblock</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gobject.method.notify">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>notify</function></funcdef>
+     <paramdef>string <parameter>property_name</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Emite o sinal "notify" para a propriedade dada.
+   </shortdesc>
+   <desc>
+    <para>
+     Emite o sinal "notify" para a propriedade dada no objeto.
+    </para>
+   </desc>
+  </method>
+
+  <method id="gobject.method.set_data">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_data</function></funcdef>
+     <paramdef>string <parameter>key</parameter></paramdef>
+     <paramdef>mixed <parameter>value</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Define o valor de um campo definido pelo usuário.
+   </shortdesc>
+   <desc>
+    <para>
+     Define o valor de um campo definido pelo usuário. Com este metodo,
+     você pode anexar qualquer dado (ex. variáveis PHP) a um widget
+     e obte-lo posteriormente.
+    </para>
+    <para>
+     &seealso;
+     <function class="GObject">get_data</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gobject.method.set_property">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_property</function></funcdef>
+     <paramdef>string <parameter>property_name</parameter></paramdef>
+     <paramdef>mixed <parameter>value</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Define uma propriedade do objeto.
+   </shortdesc>
+   <desc>
+    <para>
+     Define uma propriedade do objeto.
+    </para>
+    <para>
+     &seealso;
+     <function class="GObject">get_property</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gobject.method.signal_list_ids">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>array <function>signal_list_ids</function></funcdef>
+     <paramdef>int <parameter>gtype</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Lista todos os sinais de uma dada classe.
+   </shortdesc>
+   <desc>
+    <para>
+     Lista todos os sinais pelo id que uma certa instância ou
+     interface criaram.
+     Maiores informações sobre os sinais pode ser adquirida atráves de
+     <function class="GObject">signal_query</function>.
+    </para>
+    <note>
+     <simpara>Este metodo é estatico.</simpara>
+    </note>
+    <para>
+     O parâmetro <parameter>gtype</parameter> é um inteiro
+     único para todas as classes/interfaces. Você pode adquirir o gtype
+     de uma classe usando <literal>ClassName::gtype</literal>.
+    </para>
+    <para>
+     &seealso;
+     <function class="GObject">signal_list_names</function>,
+     <function class="GObject">signal_query</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gobject.method.signal_list_names">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>array <function>signal_list_names</function></funcdef>
+     <paramdef>int <parameter>gtype</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Lista todos os nomes dos sinais de uma dada classe.
+   </shortdesc>
+   <desc>
+    <para>
+     Lista todos os sinais de uma classe dada pelo nome.
+    </para>
+    <note>
+     <simpara>Este metodo é estatico.</simpara>
+    </note>
+    <para>
+     O parâmetro <parameter>gtype</parameter> é um inteiro
+     único para todas as classes/interfaces. Você pode adquirir o gtype
+     de uma classe usando <literal>ClassName::gtype</literal>.
+    </para>
+    <para>
+     &seealso;
+     <function class="GObject">signal_list_ids</function>,
+     <function class="GObject">signal_query</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gobject.method.signal_query">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>array <function>signal_query</function></funcdef>
+     <paramdef>string/int <parameter>signal</parameter></paramdef>
+     <paramdef>int <parameter>gtype</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Provê informações adicionais sobre um sinal.
+   </shortdesc>
+   <desc>
+    <para>
+     Provê informações adicionais sobre um sinal.
+    </para>
+    <para>
+     O parâmetro <parameter>signal</parameter> pode ser 
+     um id de sinal ou um nome de sinal.
+    </para>
+    <note>
+     <simpara>Este metodo é estatico.</simpara>
+    </note>
+    <para>
+     O parâmetro <parameter>gtype</parameter> é um inteiro
+     único para todas as classes/interfaces. Você pode adquirir o gtype
+     de uma classe usando <literal>ClassName::gtype</literal>.
+    </para>
+    <table>
+     <title>Array dos valores de retorno</title>
+     <tgroup cols="2">
+      <tbody>
+       <row>
+        <entry>0</entry>
+        <entry>Id do sinal, ou 0 se o sinal for desconhecido.</entry>
+       </row>
+       <row>
+        <entry>1</entry>
+        <entry>Nome do sinal</entry>
+       </row>
+       <row>
+        <entry>2</entry>
+        <entry>GType da classe/interface para qual o sinal é emitido</entry>
+       </row>
+       <row>
+        <entry>3</entry>
+        <entry>GSignalFlags usada para a instanciação do sinal.</entry>
+       </row>
+       <row>
+        <entry>4</entry>
+        <entry>GType do tipo de retorno</entry>
+       </row>
+       <row>
+        <entry>5</entry>
+        <entry>Array de GTypes para os parâmetros</entry>
+       </row>
+      </tbody>
+     </tgroup>
+    </table>
+    <example>
+     <title>Interrogando um sinal</title>
+     <programlisting role="php">
+      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
+       href="&directory.examples;/reference/gobject/signal_query.php"
+       parse="text">
+       <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+      </xi:include>
+     </programlisting>
+    </example>
+    <para>
+     &seealso;
+     <function class="GObject">signal_list_ids</function>,
+     <function class="GObject">signal_list_names</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gobject.method.unblock">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>unblock</function></funcdef>
+     <paramdef>int <parameter>handler_id</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Desbloquei um manipulador de sinal bloqueado.
+   </shortdesc>
+   <desc>
+    <para>
+     Desbloquei um manipulador de sinal bloqueado com
+     <function class="GObject">block</function>, permitindo a ele continuar a
+     ser chamado quando chegarem sinais.
+    </para>
+    <para>
+     Se você bloqueou um manipulador várias vezes, você precisa
+     deswbloquea-lo o mesmo número de vezes para permitir que ele continue a ser chamado.
+    </para>
+    <para>
+     &seealso;
+     <function class="GObject">block</function>,
+     <function class="GObject">connect</function>,
+     <function class="GObject">disconnect</function>,
+     <function class="GObject">is_connected</function>
+    </para>
+   </desc>
+  </method>
+ </methods>
+
+</classentry>
