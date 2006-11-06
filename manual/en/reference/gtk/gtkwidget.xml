@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- $Revision: 1.29 $ -->
+<!-- $Revision: 1.30 $ -->
 <classentry id="gtk.gtkwidget">
  <classmeta>
   <classtitle>GtkWidget</classtitle>
@@ -3678,6 +3678,11 @@
     <para>
      This signal is emitted when a key has been pressed down.
     </para>
+    <note>
+     This signal is emitted before any changes to the widget are made. For
+     example, if you are using a <classname>GtkEntry</classname>, the signal
+     will be emitted before the text of the entry is changed.
+    </note>
     <para>
      Useful event properties are:
      <itemizedlist>
