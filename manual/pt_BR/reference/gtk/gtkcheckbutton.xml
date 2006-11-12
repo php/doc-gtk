@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- EN-Revision: 1.7 Maintainer: fernandoc Status: ready -->
+<classentry id="gtk.gtkcheckbutton">
+ <classmeta>
+  <classtitle>GtkCheckButton</classtitle>
+  <classparent>GtkToggleButton</classparent>
+  <classimage fileref="&directory.images;/reference/gtk/gtkcheckbutton.png"/>
+  <shortdesc>
+   Um widget que mostra uma caixa de marcar.
+  </shortdesc>
+  <desc>
+   <para>
+    Este é um widget muito comum, usado para mostrar uma caixa de marcar; opcionalmente
+    com um rótulo ao seu lado. É geralmente usado para obter alguma entrada do 
+    usuário (justamente parecido com um botão). Este é atualmente um
+    <classname>GtkToggleButton</classname> colocado próximo a um widget (usualmente
+    próximo a um <classname>GtkLabel</classname>) mas mostra uma marca de conferido
+    para indicar ser estado modificado.
+   </para>
+   <para>
+    Um grupo de botões de marcar é normalmente usado quando você requer que o
+    usuário selecione uma ou mais opções dadas. Note que este widget funciona
+    exatamente como um <classname>GtkToggleButton</classname>.
+   </para>
+  </desc>
+ </classmeta>
+
+ <constructors>
+
+  <constructor id="gtk.gtkcheckbutton.constructor">
+   <funcsynopsis>
+    <funcprototype>
+    <funcdef> <function>GtkCheckButton</function></funcdef>
+    <paramdef>string <parameter><optional>label = null</optional></parameter></paramdef>
+    <paramdef>bool <parameter><optional>use_underline = false</optional></parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Cria um novo botão check-box.
+   </shortdesc>
+   <desc>
+    <para>
+     Use o construtor para criar um novo check-box. Você deve passar uma string
+     como primeiro parâmetro para mostrar esta como rótulo próximo ao
+     botão. Também, passando <literal>true</literal> como o segundo parâmetro
+     tendo uma letra do rótulo precedida por um sublinhado faz que seja
+     o mnemônico para o check-box.
+    </para>
+    <para>
+     Esta classe é derivada e portanto funciona muito parecido com
+     <classname>GtkToggleButton</classname>. Assim, você deve usar o sinal 
+     <signalname class="GtkToggleButton">toggled</signalname> para determinar
+     qualquer mudança no estado do check-box.
+    </para>
+   </desc>
+  </constructor>
+
+ </constructors>
+
+</classentry>
