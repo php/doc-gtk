@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<!-- EN-Revision: 1.29 Maintainer: dnfeitosa Status: ready -->
+<!-- EN-Revision: 1.30 Maintainer: dnfeitosa Status: ready -->
 <classentry id="gtk.gtkwidget">
  <classmeta>
   <classtitle>GtkWidget</classtitle>
@@ -9,10 +9,9 @@
   </shortdesc>
   <desc>
    <simpara>
-    Um widget é qualquer classe herdada a partir de
-    <classname>GtkWidget</classname>. Widgets são classes que podem aguardar e
-    reagir à eventos do usuário. Eles são geralmente associados com exibição
-    ou layout.
+    Um widget é qualquer classe herdada a partir de <classname>GtkWidget</classname>. 
+    Widgets são classes que podem aguardar e reagir à eventos do usuário. Eles são 
+    geralmente associados com exibição ou layout.
    </simpara>
   </desc>
  </classmeta>
@@ -3696,6 +3695,11 @@
     <para>
      Este sinal é emitido quando uma tecla é pressionada.
     </para>
+    <note>
+     Este sinal é emitido antes de qualquer mudança ser feita no widget. Por
+     exemplo, se você está usando <classname>GtkEntry</classname>, o sinal
+     será emitido antes do texto ser modificado.
+    </note>
     <para>
      Propriedades de eventos úteis são:
      <itemizedlist>
