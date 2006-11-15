@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- EN-Revision: 1.10 Maintainer: dnfeitosa Status: ready -->
+<classentry id="gtk.gtkcellrendererpixbuf">
+ <classmeta>
+  <classtitle>GtkCellRendererPixbuf</classtitle>
+  <classparent>GtkCellRenderer</classparent>
+  <shortdesc>
+   Exibe um GdkPixbuf em uma célula de um GtkTreeView.
+  </shortdesc>
+  <desc>
+
+  </desc>
+ </classmeta>
+
+ <constructors>
+
+  <constructor id="gtk.gtkcellrendererpixbuf.constructor">
+   <funcsynopsis>
+    <funcprototype>
+    <funcdef> <function>GtkCellRendererPixbuf</function></funcdef>
+    <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Cria um novo <classname>GtkCellRendererPixbuf</classname>.
+   </shortdesc>
+   <desc>
+    <para>
+     Cria um novo <classname>GtkCellRendererPixbuf</classname>.
+     Os parâmetros de renderização são ajustados usando as propriedades do objeto. As 
+     propriedades do objeto podem ser definidas globalmente usando <function 
+      class="GObject">set_property</function>.  Também, com <classname>GtkTreeViewColumn</classname>, 
+     você pode ligar a propriedade "pixbuf" ao renderizador à um valor em um <classname>GtkTreeModel</classname>,
+     podendo assim renderizar uma imagem diferente em cada linha do <classname>GtkTreeView</classname>.
+    </para>
+   </desc>
+  </constructor>
+
+ </constructors>
+
+<properties>
+
+  <prop id="gtk.gtkcellrendererpixbuf.property.pixbuf" type="rw">
+   <propname>pixbuf</propname>
+   <proptype>GdkPixbuf</proptype>
+   <shortdesc>
+    A imagem GdkPixbuf a ser renderizada na célula.
+   </shortdesc>
+   <desc>
+    <para>
+     A imagem GdkPixbuf a ser renderizada na célula.
+    </para>
+    <para>
+     <example>
+      <title>Amostra de set_property</title>
+      <programlisting role="php"><![CDATA[<?php
+$cellrenderer->set_property('pixbuf',GdkPixbuf::new_from_file('gnome.jpg'));
+?>]]></programlisting>
+     </example>
+    </para>
+    <para>
+     &seealso;
+     <function class="GObject">set_property</function>
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtkcellrendererpixbuf.property.pixbuf-expander-open" type="rw">
+   <propname>pixbuf-expander-open</propname>
+   <proptype>GdkPixbuf</proptype>
+   <shortdesc>
+    Pixbuf para ícone de expansão (abertura).
+   </shortdesc>
+   <desc>
+    <para>
+     Pixbuf para ícone de expansão (abertura).
+    </para>
+    <para>
+     <example>
+      <title>Amostra de set_property</title>
+      <programlisting role="php"><![CDATA[<?php
+$cellrenderer->set_property('pixbuf-expander-open', GdkPixbuf::new_from_file('icone.jpg'));
+?>]]></programlisting>
+     </example>
+    </para>
+    <para>
+     &seealso;
+     <function class="GObject">set_property</function>
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtkcellrendererpixbuf.property.pixbuf-expander-closed" type="rw">
+   <propname>pixbuf-expander-closed</propname>
+   <proptype>GdkPixbuf</proptype>
+   <shortdesc>
+    Pixbuf para ícone de expansão (fechamento).
+   </shortdesc>
+   <desc>
+    <para>
+     Pixbuf para ícone de expansão (fechamento).
+    </para>
+    <para>
+     <example>
+      <title>Amostra de set_property</title>
+      <programlisting role="php"><![CDATA[<?php
+$cellrenderer->set_property('pixbuf-expander-closed', GdkPixbuf::new_from_file('icone.jpg'));
+?>]]></programlisting>
+     </example>
+    </para>
+    <para>
+     &seealso;
+     <function class="GObject">set_property</function>
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtkcellrendererpixbuf.property.stock-id" type="rw">
+   <propname>stock-id</propname>
+   <proptype>string</proptype>
+   <shortdesc>
+    O ID do ícone (stock icon) a ser renderizado. 
+   </shortdesc>
+   <desc>
+    <para>
+     O ID do ícone (stock icon) a ser renderizado. 
+    </para>
+    <para>
+     <example>
+      <title>Amostra de set_property</title>
+      <programlisting role="php"><![CDATA[<?php
+$cellrenderer->set_property('stock-id','gtk-add');
+?>]]></programlisting>
+     </example>
+    </para>
+    <para>
+     &seealso;
+     <function class="GObject">set_property</function>
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtkcellrendererpixbuf.property.stock-size" type="rw">
+   <propname>stock-size</propname>
+   <proptype>integer</proptype>
+   <shortdesc>
+    O ID do ícone (stock icon) a ser renderizado. 
+   </shortdesc>
+   <desc>
+    <para>
+     O ID do ícone (stock icon) a ser renderizado. 
+    </para>
+    <para>
+     <example>
+      <title>set_property sample</title>
+      <programlisting role="php"><![CDATA[<?php
+$cellrenderer->set_property('stock-size',Gtk::ICON_SIZE_BUTTON);
+?>]]></programlisting>
+     </example>
+    </para>
+    <para>
+     &seealso;
+     <function class="GObject">set_property</function>
+    </para>
+   </desc>
+  </prop>
+</properties>
+</classentry>
