@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- EN-Revision: 1.12 Maintainer: dnfeitosa Status: ready -->
+<classentry id="gtk.gtkcellrenderertext">
+ <classmeta>
+  <classtitle>GtkCellRendererText</classtitle>
+  <classparent>GtkCellRenderer</classparent>
+  <shortdesc>
+   Exibe o conteúdo de uma célula em um GtkTreeView como texto.
+  </shortdesc>
+  <desc>
+
+  </desc>
+ </classmeta>
+
+ <constructors>
+
+  <constructor id="gtk.gtkcellrenderertext.constructor">
+   <funcsynopsis>
+    <funcprototype>
+    <funcdef> <function>GtkCellRendererText</function></funcdef>
+    <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Cria um novo <classname>GtkCellRendererText</classname>.
+   </shortdesc>
+   <desc>
+    Cria um novo <classname>GtkCellRendererText</classname>. A forma na qual o
+    texto é exibido pode ser modificada usando propriedades no objeto. As
+    propriedades do objeto podem ser definidas globalmente com <function class="GObject">set_property</function>. 
+    Também com <classname> GtlTreeViewColumn</classname>, você pode ligar uma propriedade à um valor
+    em um <classname>GtkTreeModel</classname>. Por exemplo, você pode ligar a
+    propriedade "text" no renderizador da célula à uma string no modelo,
+    podendo assim renderizar uma string diferente em cada linha do
+    <classname>GtkTreeView</classname>.
+   </desc>
+  </constructor>
+
+ </constructors>
+
+ <methods>
+
+  <method id="gtk.gtkcellrenderertext.method.set_fixed_height_from_font">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_fixed_height_from_font</function></funcdef>
+     <paramdef>int <parameter>number_of_rows</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Define a altura do renderizador para um valor determinado pela fonte e o
+    preenchimento.
+   </shortdesc>
+   <desc>
+    <para>
+     Define a altura do renderizador para um valor determinado pelos valores
+     correntes de <propname class="GtkCellRendererText">font</propname> e 
+     <propname class="GtkCellRendererText">y_pad</propname>.
+     <parameter>number_of_rows</parameter> especifica o número de linhas do
+     texto que deve ser alocado em cada célula. Se <parameter>number_of_rows</parameter> 
+     é <literal>-1</literal>, a definição de altura fixa será removida e a
+     altura voltará a ser determinada pelas propriedades novamente.
+    </para>
+    <note>
+     Este método é inflexível, e deve ser usado somente no caso em que calcular o
+     tamanho de uma célula seja lento (ex. um grande número de células está sendo exibido).
+    </note>
+   </desc>
+  </method>
+
+ </methods>
+
+ <properties>
+
+  <prop id="gtk.gtkcellrenderertext.property.background" type="w">
+   <propname>background</propname>
+   <proptype>string</proptype>
+   <shortdesc>
+    A cor de fundo do texto como uma string.
+   </shortdesc>
+   <desc>
+    <para>
+     A cor de fundo do texto como uma string.
+    </para>
+    <para>
+     <example>
+      <title>Amostra de set_property</title>
+      <programlisting role="php"><![CDATA[<?php
+$cellrenderer->set_property('background', '#FF0000');
+?>]]></programlisting>
+     </example>
+    </para>
+    <para>
+     &seealso;
+     <function class="GObject">set_property</function>
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtkcellrenderertext.property.background-gdk" type="rw">
+   <propname>background-gdk</propname>
+   <proptype>GdkColor</proptype>
+   <shortdesc>
+     A cor de fundo do texto como um <classname>GdkColor</classname>
+   </shortdesc>
+   <desc>
+    <para>
+     Altera a cor de fundo do texto com um <classname>GdkColor</classname>
+    </para>
+    <para>
+     <example>
+      <title>Amostra de set_property</title>
+      <programlisting role="php"><![CDATA[<?php
+$cellrenderer->set_property('background-gdk', new GdkColor(65535,0,0));
+?>]]></programlisting>
+     </example>
+    </para>
+    <para>
+     &seealso;
+     <function class="GObject">set_property</function>
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtkcellrenderertext.property.background-set" type="rw">
+   <propname>background-set</propname>
+   <proptype>boolean</proptype>
+   <shortdesc>
+    Se TRUE, a cor de fundo do texto é definida por este renderizador. Padrão: FALSE.
+   </shortdesc>
+   <desc>
+    <para>
+     Se TRUE, a cor de fundo do texto é definida por este renderizador. Padrão: FALSE.
+    </para>
+    <para>
+     &seealso;
+     <function class="GObject">set_property</function>
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtkcellrenderertext.property.editable" type="rw">
+   <propname>editabele</propname>
+   <proptype>boolean</proptype>
+   <shortdesc>
+    True/False. Indica se o texto pode ou não ser midificado pelo usuário.
+   </shortdesc>
+   <desc>
+    <para>
+     True/False. Indica se o texto pode ou não ser midificado pelo usuário.
+    </para>
+    <para>
+     <example>
+      <title>Amostra de set_property</title>
+      <programlisting role="php"><![CDATA[<?php
+$cellrenderer->set_property('editable', true);
+?>]]></programlisting>
+     </example>
+    </para>
+    <para>
+     &seealso;
+     <function class="GObject">set_property</function>
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtkcellrenderertext.property.family" type="rw">
+   <propname>family</propname>
+   <proptype>string</proptype>
+   <shortdesc>
+    Nome da fonte, ex. Sans, Helvetica, Times, Monospace.
+   </shortdesc>
+   <desc>
+    <para>
+     Nome da fonte, ex. Sans, Helvetica, Times, Monospace.
+    </para>
+    <para>
+     <example>
+      <title>Amostra de set_property</title>
+      <programlisting role="php"><![CDATA[<?php
+$cellrenderer->set_property('family',  'Times');
+?>]]></programlisting>
+     </example>
+    </para>
+    <para>
+     &seealso;
+     <function class="GObject">set_property</function>
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtkcellrenderertext.property.font" type="rw">
+   <propname>font</propname>
+   <proptype>string</proptype>
+   <shortdesc>
+    Descrição da fonte como uma string.
+   </shortdesc>
+   <desc>
+    <para>
+     Descrição da fonte como uma string.
+    </para>
+    <para>
+     <example>
+      <title>Amostra de set_property</title>
+      <programlisting role="php"><![CDATA[<?php
+$cellrenderer->set_property('font',  'Times Bold 10');
+?>]]></programlisting>
+     </example>
+    </para>
+    <para>
+     &seealso;
+     <function class="GObject">set_property</function>
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtkcellrenderertext.property.foreground" type="rw">
+   <propname>foreground</propname>
+   <proptype>string</proptype>
+   <shortdesc>
+     Cor de frente como uma string.
+   </shortdesc>
+   <desc>
+    <para>
+     Cor de frente como uma string.
+    </para>
+    <para>
+     <example>
+      <title>Amostra de set_property</title>
+      <programlisting role="php"><![CDATA[<?php
+$cellrenderer->set_property('foreground',  'red');
+?>]]></programlisting>
+     </example>
+    </para>
+    <para>
+     &seealso;
+     <function class="GObject">set_property</function>
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtkcellrenderertext.property.size-points" type="rw">
+   <propname>size-points</propname>
+   <proptype>integer</proptype>
+   <shortdesc>
+    Tamanho da fonte em pontos.
+   </shortdesc>
+   <desc>
+    <para>
+     Tamanho da fonte em pontos.
+    </para>
+    <para>
+     <example>
+      <title>Amostra de set_property</title>
+      <programlisting role="php"><![CDATA[<?php
+$cellrenderer->set_property('size-points',  '12');
+?>]]></programlisting>
+     </example>
+    </para>
+    <para>
+     &seealso;
+     <function class="GObject">set_property</function>
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtkcellrenderertext.property.text" type="rw">
+   <propname>text</propname>
+   <proptype>string</proptype>
+   <shortdesc>
+    Texto a ser renderizado.
+   </shortdesc>
+   <desc>
+    <para>
+     Texto a ser renderizado.
+    </para>
+    <para>
+     &seealso;
+     <function class="GObject">set_property</function>
+    </para>
+   </desc>
+  </prop>
+
+</properties>
+
+ <signals>
+
+  <signal id="gtk.gtkcellrenderertext.signal.edited">
+   <signalname>edited</signalname>
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
+     <paramdef>GtkCellRendererText <parameter>cellrenderertext</parameter></paramdef>
+     <paramdef>string <parameter>path</parameter></paramdef>
+     <paramdef>string <parameter>new_text</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Emitido quando o texto na célula foi editado.
+   </shortdesc>
+   <desc>
+    Emitido quando o texto na célula foi editado.
+   </desc>
+  </signal>
+  
+ </signals>
+
+</classentry>
