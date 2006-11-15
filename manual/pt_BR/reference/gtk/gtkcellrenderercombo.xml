@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- EN-Revision: 1.8 Maintainer: dnfeitosa Status: ready -->
+<classentry id="gtk.gtkcellrenderercombo">
+ <classmeta>
+  <classtitle>GtkCellRendererCombo</classtitle>
+  <classparent>GtkCellRendererText</classparent>
+  <shortdesc>
+   Exibe o conteúdo de uma célula em um GtkTreeViewColumn como um GtkComboBox.
+  </shortdesc>
+  <desc>
+
+  </desc>
+ </classmeta>
+
+ <constructors>
+
+  <constructor id="gtk.gtkcellrenderercombo.constructor">
+   <funcsynopsis>
+    <funcprototype>
+    <funcdef> <function>GtkCellRendererCombo</function></funcdef>
+    <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Cria um novo <classname>GtkCellRendererCombo</classname>.
+   </shortdesc>
+   <desc>
+    <para>
+     Cria um novo <classname>GtkCellRendererCombo</classname>.
+     Os parâmetros de renderização são ajustados usando as propriedades do
+     objeto. As propriedades do objeto podem ser definidas globalmente com 
+     <function class="GObject">set_property</function>. Também, com 
+     <classname>GtkTreeViewColumn</classname>, você pode ligar a propriedade
+     "text" ao renderizador da célula à um valor em um <classname>GtkTreeModel</classname>,
+     podendo assim renderizar uma string diferente em cada linha do
+     GtkTreeView.
+    </para>
+   </desc>
+  </constructor>
+
+ </constructors>
+
+ <properties>
+
+  <prop id="gtk.gtkcellrenderercombo.property.has-entry" type="rw">
+   <propname>has-entry</propname>
+   <proptype>boolean</proptype>
+   <shortdesc>
+     Se FALSE, não permite a entrada de outras strings que não sejam as
+     corretas (a partir do modelo).
+   </shortdesc>
+   <desc>
+    <para>
+     Se FALSE, não permite a entrada de outras strings que não sejam as
+     corretas (a partir do modelo).
+    </para>
+    <para>
+     <example>
+      <title>Amostra de set_property</title>
+      <programlisting role="php"><![CDATA[<?php
+$cellrenderer->set_property('has-entry', false);
+?>]]></programlisting>
+     </example>
+    </para>
+    <para>
+     &seealso;
+     <function class="GObject">set_property</function>
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtkcellrenderercombo.property.model" type="rw">
+   <propname>model</propname>
+   <proptype>GtkTreeModel</proptype>
+   <shortdesc>
+    O modelo contendo os possíveis valores para o combo box.
+   </shortdesc>
+   <desc>
+    <para>
+     O modelo contendo os possíveis valores para o combo box.
+    </para>
+    <para>
+     &seealso;
+     <function class="GObject">set_property</function>
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtkcellrenderercombo.property.text-column" type="rw">
+   <propname>text-column</propname>
+   <proptype>integer</proptype>
+   <shortdesc>
+    O número da coluna no modelo de dados que será usado como fonte das
+    strings.
+   </shortdesc>
+   <desc>
+    <para>
+     O número da coluna no modelo de dados que será usado como fonte das
+     strings.
+    </para>
+    <para>
+     <example>
+      <title>Amostra de set_property</title>
+      <programlisting role="php"><![CDATA[<?php
+$cellrenderer->set_property('text-column', 0);
+?>]]></programlisting>
+     </example>
+    </para>
+    <para>
+     &seealso;
+     <function class="GObject">set_property</function>
+    </para>
+   </desc>
+  </prop>
+
+</properties>
+
+</classentry>
