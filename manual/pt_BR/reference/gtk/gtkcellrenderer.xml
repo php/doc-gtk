@@ -1,0 +1,540 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- EN-Revision: 1.13 Maintainer: dnfeitosa Status: ready -->
+<classentry id="gtk.gtkcellrenderer">
+ <classmeta>
+  <classtitle>GtkCellRenderer</classtitle>
+  <classparent>GtkObject</classparent>
+  <shortdesc>
+   Classe base para exibição de conteúdos de célula em um GtkTreeView.
+  </shortdesc>
+  <desc>
+   <para>
+    A classe GtkCellRenderer é a classe base de um conjunto de objetos usados
+    para renderizar uma célula para um <classname>GdkDrawable</classname>.
+    Estes objetos são usados primeiramente pelo widget
+    <classname>GtkTreeView</classname>, apesar deles não estarem associados de 
+    nenhuma forma. Vale mencionar que GtkCellRenderer não é um
+    <classname>GtkWidget</classname> e não deve ser tratado como um.
+   </para>
+   <para>
+    Além de apenas renderizar uma célula, os renderizadores podem
+    opcionalmente oferecer uma interface ativa para os elementos. Um
+    renderizador pode ser <literal>activatable</literal> como 
+    <classname>GtkCellRendererToggle</classname>, que é marcado quando ativado
+    por um clique do mouse, ou pode ser <literal>editable</literal> como 
+    <classname>GtkCellRendererText</classname>, que permite que o usuário
+    edite o texto usando um <classname>GtkEntry</classname>.
+   </para>
+   <para>
+    Mudanças feitas nas células editadas não são automaticamente salvas no
+    modelo; isto tem que ser feito à mão: Conecte ao sinal
+    <signalname class="GtkCellRendererText">edited</signalname> (text) ou
+    <signalname class="GtkCellRendererToggle">toggled</signalname> (toggle)
+    e defina o novo valor.
+   </para>
+
+    <example>
+     <title>Renderizadores de célula editáveis</title>
+     <programlisting role="php">
+      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="&directory.examples;/reference/gtk/gtkcellrenderer/gtkcellrenderer.phpw" parse="text">
+       <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+      </xi:include>
+     </programlisting>
+    </example>
+  </desc>
+ </classmeta>
+
+ <methods>
+
+  <method id="gtk.gtkcellrenderer.method.activate">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>bool <function>activate</function></funcdef>
+     
+     <paramdef><classname>GdkEvent</classname> <parameter>event</parameter></paramdef>
+     <paramdef><classname>GtkWidget</classname> <parameter>widget</parameter></paramdef>
+     <paramdef><parameter>path</parameter></paramdef>
+     <paramdef><classname>GdkRectangle</classname> <parameter>background_area</parameter></paramdef>
+     <paramdef><classname>GdkRectangle</classname> <parameter>cell_area</parameter></paramdef>
+     <paramdef><parameter>flags</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtkcellrenderer.method.editing_canceled">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>editing_canceled</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtkcellrenderer.method.get_fixed_size">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>get_fixed_size</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Retorna um array contendo a largura e a altura da célula.
+   </shortdesc>
+   <desc>
+    <para>
+     Retorna um array contendo a largura e a altura da célula.
+    </para>
+    <para>
+     <example>
+      <title>Amostra de set_property</title>
+      <programlisting role="php"><![CDATA[<?php
+print_r ($cellrenderer->get_fixed_size());
+?>]]></programlisting>
+     </example>
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkCellRenderer">set_fixed_size</function>
+    </para>
+
+   </desc>
+  </method>
+
+  
+
+  <method id="gtk.gtkcellrenderer.method.render">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>render</function></funcdef>
+     
+     <paramdef><classname>GdkWindow</classname> <parameter>window</parameter></paramdef>
+     <paramdef><classname>GtkWidget</classname> <parameter>widget</parameter></paramdef>
+     <paramdef><classname>GdkRectangle</classname> <parameter>background_area</parameter></paramdef>
+     <paramdef><classname>GdkRectangle</classname> <parameter>cell_area</parameter></paramdef>
+     <paramdef><classname>GdkRectangle</classname> <parameter>expose_area</parameter></paramdef>
+     <paramdef><parameter>flags</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtkcellrenderer.method.set_fixed_size">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_fixed_size</function></funcdef>
+     <paramdef>int <parameter>width</parameter></paramdef>
+     <paramdef>int <parameter>height</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Define o tamanho do renderizador para a largura e altura especificadas,
+    independentemente das propriedades definidas.
+   </shortdesc>
+   <desc>
+    <para>
+     Define o tamanho do renderizador para a largura e altura especificadas,
+     independentemente das propriedades definidas.
+    </para>
+    <para>
+     <example>
+      <title>Amostra de set_property</title>
+      <programlisting role="php"><![CDATA[<?php
+$cellrenderer->set_fixed_size(30,100);
+?>]]></programlisting>
+     </example>
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkCellRenderer">get_fixed_size</function>
+    </para>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtkcellrenderer.method.start_editing">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef> <function>start_editing</function></funcdef>
+     
+     <paramdef><classname>GdkEvent</classname> <parameter>event</parameter></paramdef>
+     <paramdef><classname>GtkWidget</classname> <parameter>widget</parameter></paramdef>
+     <paramdef><parameter>path</parameter></paramdef>
+     <paramdef><classname>GdkRectangle</classname> <parameter>background_area</parameter></paramdef>
+     <paramdef><classname>GdkRectangle</classname> <parameter>cell_area</parameter></paramdef>
+     <paramdef><parameter>flags</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+    <para>
+     &seealso;
+     <function class="GtkCellRenderer">stop_editing</function>
+    </para>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtkcellrenderer.method.stop_editing">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>stop_editing</function></funcdef>
+     <paramdef>bool <parameter>canceled</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+    <para>
+     &seealso;
+     <function class="GtkCellRenderer">start_editing</function>
+    </para>
+
+   </desc>
+  </method>
+
+ </methods>
+
+ <properties>
+
+  <prop id="gtk.gtkcellrenderer.property.cell-background" type="w">
+   <propname>cell-background</propname>
+   <proptype>string</proptype>
+   <shortdesc>
+    A cor de fundo da célula como uma string. Padrão: NULL
+   </shortdesc>
+   <desc>
+    <para>
+     A cor de fundo da célula como uma string. Padrão: NULL
+    </para>
+    <para>
+     <example>
+      <title>Amostra de set_property</title>
+      <programlisting role="php"><![CDATA[<?php
+$cellrenderer->set_property('cell-background', '#c0c0c0');
+?>]]></programlisting>
+     </example>
+    </para>
+    <para>
+     &seealso;
+     <function class="GObject">set_property</function>
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtkcellrenderer.property.cell-background-gdk" type="rw">
+   <propname>cell-background-gdk</propname>
+   <proptype>GdkColor</proptype>
+   <shortdesc>
+    A cor de fundo de uma célula como um <classname>GtkColor</classname>
+   </shortdesc>
+   <desc>
+    <para>
+     Modifica a cor de fundo de uma célula com um <classname>GtkColor</classname>
+    </para>
+    <para>
+     <example>
+      <title>Amostra de set_property</title>
+      <programlisting role="php"><![CDATA[<?php
+$cellrenderer->set_property('cell-background-gdk', new GdkColor(65535,0,0));
+?>]]></programlisting>
+     </example>
+    </para>
+    <para>
+     &seealso;
+     <function class="GObject">set_property</function>
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtkcellrenderer.property.cell-background-set" type="rw">
+   <propname>cell-background-set</propname>
+   <proptype>boolean</proptype>
+   <shortdesc>
+    Se TRUE, a cor de fundo da célula é definida por este renderizador. Padrão: FALSE.
+   </shortdesc>
+   <desc>
+    <para>
+     Se TRUE, a cor de fundo da célula é definida por este renderizador. Padrão: FALSE.
+    </para>
+    <para>
+     &seealso;
+     <function class="GObject">set_property</function>
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtkcellrenderer.property.height" type="rw">
+   <propname>height</propname>
+   <proptype>integer</proptype>
+   <shortdesc>
+    Modifica a altura da célula. Valores permitidos &gt;= -1. Padrão: -1
+   </shortdesc>
+   <desc>
+    <para>
+     Modifica a altura da célula. Valores permitidos &gt;= -1. Padrão: -1
+    </para>
+    <para>
+     <example>
+      <title>set_property sample</title>
+      <programlisting role="php"><![CDATA[<?php
+$cellrenderer->set_property('height', '28');
+?>]]></programlisting>
+     </example>
+    </para>
+    <para>
+     &seealso;
+     <function class="GObject">set_property</function>
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtkcellrenderer.property.is-expanded" type="rw">
+   <propname>is-expanded</propname>
+   <proptype>boolean</proptype>
+   <shortdesc>
+    Se TRUE, a linha possui um child e está expandida para mostrá-lo.
+   </shortdesc>
+   <desc>
+    <para>
+     Se TRUE, a linha possui um child e está expandida para mostrá-lo.
+    </para>
+    <para>
+     &seealso;
+     <function class="GObject">set_property</function>
+    </para>
+   </desc>
+  </prop>
+
+
+  <prop id="gtk.gtkcellrenderer.property.is-expander" type="rw">
+   <propname>is-expander</propname>
+   <proptype>boolean</proptype>
+   <shortdesc>
+    Se TRUE, a linha possui um child. Padrão: FALSE.
+   </shortdesc>
+   <desc>
+    <para>
+     Se TRUE, a linha possui um child. Padrão: FALSE.
+    </para>
+    <para>
+     &seealso;
+     <function class="GObject">set_property</function>
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtkcellrenderer.property.sensitive" type="rw">
+   <propname>sensitive</propname>
+   <proptype>boolean</proptype>
+   <shortdesc>
+     Se TRUE, a célula exibida como sensitiva. Se FALSE, como tons de cinza.
+     Padrão: TRUE.
+   </shortdesc>
+   <desc>
+    <para>
+     Se TRUE, a célula exibida como sensitiva. Se FALSE, como tons de cinza.
+     Padrão: TRUE.
+    </para>
+    <para>
+     &seealso;
+     <function class="GObject">set_property</function>
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtkcellrenderer.property.visible" type="rw">
+   <propname>visible</propname>
+   <proptype>boolean</proptype>
+   <shortdesc>
+    Se TRUE, a célula é exibida. Padrão: TRUE.
+   </shortdesc>
+   <desc>
+    <para>
+     Se TRUE, a célula é exibida. Padrão: TRUE.
+    </para>
+    <para>
+     &seealso;
+     <function class="GObject">set_property</function>
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtkcellrenderer.property.width" type="rw">
+   <propname>width</propname>
+   <proptype>integer</proptype>
+   <shortdesc>
+    A largura fixa da célula em pixels. Valores permitidos &gt;= -1. Padrão: -1.
+   </shortdesc>
+   <desc>
+    <para>
+     A largura fixa da célula em pixels. Valores permitidos &gt;= -1. Padrão: -1.
+    </para>
+    <para>
+     <example>
+      <title>set_property sample</title>
+      <programlisting role="php"><![CDATA[<?php
+$cellrenderer->set_property('width', '280');
+?>]]></programlisting>
+     </example>
+    </para>
+    <para>
+     &seealso;
+     <function class="GObject">set_property</function>
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtkcellrenderer.property.xalign" type="rw">
+   <propname>xalign</propname>
+   <proptype>float</proptype>
+   <shortdesc>
+    A fração de espaço livre do lado esquerdo da célula.
+   </shortdesc>
+   <desc>
+    <para>
+    A fração de espaço livre do lado esquerdo da célula no intervalo de 0.0 à
+    1.0. Valores permitidos estão entre 0 e 1. padrão: 0.5.
+    </para>
+    <para>
+     &seealso;
+     <function class="GObject">set_property</function>
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtkcellrenderer.property.yalign" type="rw">
+   <propname>yalign</propname>
+   <proptype>float</proptype>
+   <shortdesc>
+    A fração de espaço livre acima da célula.
+   </shortdesc>
+   <desc>
+    <para>
+     A fração de espaço livre acima da célula no intervalo entre 0.0 à 1.0.
+     Valores permitidos estão entre 0 e 1. Padrão: 0.5.
+    </para>
+    <para>
+     &seealso;
+     <function class="GObject">set_property</function>
+    </para>
+   </desc>
+  </prop>
+
+
+  <prop id="gtk.gtkcellrenderer.property.xpad" type="rw">
+   <propname>xpad</propname>
+   <proptype>float</proptype>
+   <shortdesc>
+    A quantidade de preenchimento à esquerda e direita da célula.
+   </shortdesc>
+   <desc>
+    <para>
+     A quantidade de preenchimento à esquerda e direita da célula. Padrão: 0.
+    </para>
+    <para>
+     <example>
+      <title>Amostra de set_property</title>
+      <programlisting role="php"><![CDATA[<?php
+$cellrenderer->set_property('xpad', '32');
+?>]]></programlisting>
+     </example>
+    </para>
+    <para>
+     &seealso;
+     <function class="GObject">set_property</function>
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtkcellrenderer.property.ypad" type="rw">
+   <propname>ypad</propname>
+   <proptype>float</proptype>
+   <shortdesc>
+    A quantidade de preenchimento abaixo da célula.
+   </shortdesc>
+   <desc>
+    <para>
+     A quantidade de preenchimento abaixo da célula. Padrão: 0.
+    </para>
+    <para>
+     <example>
+      <title>set_property sample</title>
+      <programlisting role="php"><![CDATA[<?php
+$cellrenderer->set_property('ypad', '10');
+?>]]></programlisting>
+     </example>
+    </para>
+    <para>
+     &seealso;
+     <function class="GObject">set_property</function>
+    </para>
+   </desc>
+  </prop>
+
+</properties>
+
+ <signals>
+
+  <signal id="gtk.gtkcellrenderer.signal.editing-canceled">
+   <signalname>editing-canceled</signalname>
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
+     <paramdef>GtkCellRenderer <parameter>cellrenderer</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Emitido quando o usuário cancela a edição de uma célula.
+   </shortdesc>
+   <desc>
+    O sinal "editing-canceled" é emitido quando o usuário cancela o processo
+    de edição de uma célula. Por exemplo, um renderizador de célula editável
+    pode ser escrito para cancelar a edição da célula quando o usuário
+    pressionar "Esc". Veja também o método <function class="GtkCellRenderer">editing_canceled</function>.
+   </desc>
+  </signal>
+  
+  <signal id="gtk.gtkcellrenderer.signal.editing-started">
+   <signalname>editing-started</signalname>
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
+     <paramdef>GtkCellRenderer <parameter>cellrenderer</parameter></paramdef>
+     <paramdef>GtkCellEditable <parameter>editable</parameter></paramdef>
+     <paramdef>integer <parameter>path</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Emitido quando uma célula começa a ser editada.
+   </shortdesc>
+   <desc>
+    O sinal "editing-started" é emitido no início de edição de uma célula. O
+    uso para este sinal é configurar opções especiais na edição, por exemplo,
+    adicionar um <classname>GtkEntryCompletion</classname> ou uma coluna
+    adicional em um <classname>GtkComboBox</classname>.
+   </desc>
+  </signal>
+  
+ </signals>
+
+</classentry>
