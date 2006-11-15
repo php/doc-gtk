@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- EN-Revision: 1.13 Maintainer: dnfeitosa Status: ready -->
+<classentry id="gtk.gtkcellrenderertoggle">
+ <classmeta>
+  <classtitle>GtkCellRendererToggle</classtitle>
+  <classparent>GtkCellRenderer</classparent>
+  <classimage fileref="&directory.images;/reference/gtk/gtkcellrenderertoggle.png"/>
+  <shortdesc>
+   Exibe o conteúde uma célula em GtkTreeView como um botão de marcação.
+  </shortdesc>
+  <desc>
+   <para>
+    Exibe o conteúde uma célula em GtkTreeView como um botão de marcação. A
+    célula será desenhada como um checkbox no qual será marcado quando a
+    célula estiver ativa ou desmarcado quando inativa.
+   </para>
+  </desc>
+ </classmeta>
+
+
+ <constructors>
+  <constructor id="gtk.gtkcellrenderertoggle.constructor">
+   <funcsynopsis>
+    <funcprototype>
+    <funcdef> <function>GtkCellRendererToggle</function></funcdef>
+    <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Cria um novo <classname>GtkCellRendererToggle</classname>.
+   </shortdesc>
+   <desc>
+    <para>
+     Cria um novo <classname>GtkCellRendererToggle</classname>.
+     Os parâmetros de renderização do botão de marcação são ajustados usando
+     as propriedades do objeto. As propriedades do objeto podem ser definidas
+     globamente com <function class="GObject">set_property</function>.
+     Também, com <classname>GtkTreeViewColumn</classname>, você pode ligar uma
+     propriedade à um GtkTreeModel. Por exemplo, você pode ligar a propriedade
+     "active" no renderizador à um valor booleano do modelo, podendo assim
+     refletir seu estado na célula.
+    </para>
+    <example>
+     <title>Criando um renderizador com botão de marcação</title>
+     <programlisting role="php">
+      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="&directory.examples;/reference/gtk/gtkcellrenderertoggle/constructor.phpw" parse="text">
+       <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+      </xi:include>
+     </programlisting>
+    </example>
+   </desc>
+  </constructor>
+ </constructors>
+
+
+ <methods>
+  <method id="gtk.gtkcellrenderertoggle.method.get_active">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>bool <function>get_active</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Retorna se o botão na célula está ou não ativo (marcado).
+   </shortdesc>
+   <desc>
+    <para>
+     Retorna <literal>true</literal> se o renderizador da célula está ativo,
+     ou <literal>false</literal> se não estiver.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkCellRendererToggle">set_active</function>
+    </para>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtkcellrenderertoggle.method.get_radio">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>bool <function>get_radio</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Retorna <literal>true</literal> se um radio está sendo renderizado ao
+    invés de um checkbox.
+   </shortdesc>
+   <desc>
+    <para>
+     Retorna <literal>true</literal> se um radio está sendo renderizado ao
+     invés de um checkbox.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkCellRendererToggle">set_radio</function>
+    </para>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtkcellrenderertoggle.method.set_active">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_active</function></funcdef>
+     <paramdef>bool <parameter>state</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Define o estado do renderizador da célula.
+   </shortdesc>
+   <desc>
+    <para>
+     Define o estado do renderizador da célula para
+     <parameter>state</parameter>. Se <parameter>state</parameter> é
+     <literal>true</literal>, o renderizador estará ativo.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkCellRendererToggle">get_active</function>
+    </para>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtkcellrenderertoggle.method.set_radio">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_radio</function></funcdef>
+     <paramdef>bool <parameter>radio</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Define o estilo do botão. Se true, o elemento será exibido como um radio
+    button.
+   </shortdesc>
+   <desc>
+    <para>
+     Define o estilo do botão. Se <parameter>radio</parameter> é
+     <literal>true</literal>, o elemento será exibido como um radio. Se for
+     <literal>false</literal>, como um checkbox.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkCellRendererToggle">get_radio</function>
+    </para>
+
+   </desc>
+  </method>
+ </methods>
+
+
+ <properties>
+  <prop id="gtk.gtkcellrenderertoggle.property.activatable" type="rw">
+   <propname>activatable</propname>
+   <proptype>boolean</proptype>
+   <shortdesc>
+    Se <literal>true</literal>, o botão pode ser ativado.
+   </shortdesc>
+   <desc>
+    <para>
+     Se <literal>true</literal>, o botão pode ser ativado. Se
+     <literal>false</literal>, a célula é exibida em tons de cinza e se torna
+     insensível.
+    </para>
+    <para>
+     &seealso;
+     <function class="GObject">set_property</function>
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtkcellrenderertoggle.property.active" type="rw">
+   <propname>active</propname>
+   <proptype>boolean</proptype>
+   <shortdesc>
+    Representa o estado do botão. True se estiver ativo.
+   </shortdesc>
+   <desc>
+    <para>
+     Representa o estado do botão. True se estiver ativo.
+    </para>
+    <para>
+     &seealso;
+     <function class="GObject">set_property</function>
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtkcellrenderertoggle.property.radio" type="rw">
+   <propname>radio</propname>
+   <proptype>boolean</proptype>
+   <shortdesc>
+    Se <literal>true</literal>, exibe o elemento como um radio button.
+   </shortdesc>
+   <desc>
+    <para>
+     Se <literal>true</literal>, exibe o elemento como um radio button.
+    </para>
+    <para>
+     &seealso;
+     <function class="GObject">set_property</function>
+    </para>
+   </desc>
+  </prop>
+ </properties>
+
+
+ <signals>
+  <signal id="gtk.gtkcellrenderertoggle.signal.toggled">
+   <signalname>toggled</signalname>
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
+     <paramdef>
+      <classname>GtkCellRendererToggle</classname>
+      <parameter>cellrenderertoggle</parameter>
+     </paramdef>
+     <paramdef>string <parameter>path</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Emitido quando o usuário modifica o estado do botão.
+   </shortdesc>
+   <desc>
+    <para>
+     O sinal "toggled" é emitido quando o usuário modifica o estado do botão.
+    </para>
+   </desc>
+  </signal>
+ </signals>
+
+</classentry>
