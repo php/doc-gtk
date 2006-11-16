@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- EN-Revision: 1.10 Maintainer: dnfeitosa Status: ready -->
+<classentry id="gtk.gtkcellview">
+ <classmeta>
+  <classtitle>GtkCellView</classtitle>
+  <classparent>GtkWidget</classparent>
+  <implements>GtkCellLayout</implements>
+
+  <shortdesc>
+   Um widget para exibir uma única célula em um GtkTreeModel.
+  </shortdesc>
+  <desc>
+   <para>
+    Um widget para exibir uma única célula em um <classname>GtkTreeModel</classname>, 
+    usando renderizadores como em <classname>GtkTreeView</classname>.
+    GtkCellView não suporta alguns dos recursos mais complexos de um 
+    <classname>GtkTreeView</classname>,
+    como edição e clique-arraste.
+   </para>
+   <para>
+    A classe GtkCellView é usada em <classname>GtkComboBox</classname> onde
+    é capaz de exibir muitas colunas de um modelo de uma vez.
+   </para>
+  </desc>
+ </classmeta>
+
+ <constructors>
+
+  <constructor id="gtk.gtkcellview.constructor">
+   <funcsynopsis>
+    <funcprototype>
+    <funcdef> <function>GtkCellView</function></funcdef>
+    <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Cria um novo GtkCellView.
+   </shortdesc>
+   <desc>
+    <para>
+     Cria um novo GtkCellView.
+    </para>
+   </desc>
+  </constructor>
+
+  <!-- FIXME: new_with_markup isn't implemented yet -->
+
+  <constructor id="gtk.gtkcellview.constructor.new_with_pixbuf">
+   <funcsynopsis>
+    <funcprototype>
+    <funcdef> <function>GtkCellView::new_with_pixbuf</function></funcdef>
+    <paramdef><classname>GdkPixbuf</classname> <parameter>pixbuf</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Cria um novo GtkCellView e adiciona um renderizador de pixbuf.
+   </shortdesc>
+   <desc>
+    <para>
+     Cria um novo GtkCellView, adiciona um <classname>GtkCellRendererPixbuf</classname> 
+     e o exibe.
+    </para>
+    <simpara>
+     &static;
+    </simpara>
+   </desc>
+  </constructor>
+
+  <constructor id="gtk.gtkcellview.constructor.new_with_text">
+   <funcsynopsis>
+    <funcprototype>
+    <funcdef> <function>GtkCellView::new_with_text</function></funcdef>
+    <paramdef>string <parameter>text</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Cria um novo GtkCellView e adiciona um renderizador de texto.
+   </shortdesc>
+   <desc>
+    <para>
+     Cria um novo GtkCellView e adiciona um 
+     <classname>GtkCellRendererText</classname> e o exibe.
+    </para>
+    <simpara>
+     &static;
+    </simpara>
+   </desc>
+  </constructor>
+
+ </constructors>
+
+ <methods>
+  <method id="gtk.gtkcellview.method.get_cell_renderers">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>array <function>get_cell_renderers</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Retorna todos os renderizadores da célula.
+   </shortdesc>
+   <desc>
+    <para>
+     Retorna todos os renderizadores da célula.
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkcellview.method.get_displayed_row">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>int <function>get_displayed_row</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Retorna o caminho da linha que está sendo exibida atualmente.
+   </shortdesc>
+   <desc>
+    <para>
+     Retorna o caminho da linha que está sendo exibida atualmente.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkCellView">set_displayed_row</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkcellview.method.get_size_of_row">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef><classname>GtkRequisition</classname> <function>get_size_of_row</function></funcdef>
+     <paramdef>string <parameter>path</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Retorna o tamanho necessário para renderizar a célula.
+   </shortdesc>
+   <desc>
+    <para>
+     Retorna o tamanho necessário para renderizar a célula indicada em
+     <parameter>path</parameter>.
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkcellview.method.set_background_color">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_background_color</function></funcdef>
+     <paramdef><classname>GdkColor</classname> <parameter>color</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Define a cor de fundo da view.
+   </shortdesc>
+   <desc>
+    <para>
+     Define a cor de fundo da view.
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkcellview.method.set_displayed_row">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_displayed_row</function></funcdef>
+     <paramdef>string <parameter>path</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Define a linha do modelo a será exibida.
+   </shortdesc>
+   <desc>
+    <para>
+     Define a linha do modelo que está sendo exibida atualmente no
+     GtkCellView. Se <parameter>path</parameter> for <literal>null</parameter>, 
+     então o conteúdo do cellview é "grudado" ao seu último valor; este não é um 
+     resultado normalmente esperado, mas pode ser necessário um estado intermediário, 
+     o modelo para o GtkCellView se torna temporariamente vazio.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkCellView">get_displayed_row</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkcellview.method.set_model">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_model</function></funcdef>
+     <paramdef><classname>GtkTreeModel</classname> <parameter>model</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Define o modelo com o dado a ser exibido.
+   </shortdesc>
+   <desc>
+    <para>
+     Define o modelo com o dado a ser exibido. Passe <literal>null</literal>
+     para limpá-lo.
+    </para>
+   </desc>
+  </method>
+ 
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  </methods>
+
+</classentry>
