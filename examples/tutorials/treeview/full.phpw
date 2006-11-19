@@ -1,0 +1,149 @@
+<?php
+// This is an example for demonstrating use of the GtkTreeView widget.
+// The code in this example is not particularly good: it is written to
+// concentrate on widget usage demonstration, not for maintainability.
+
+$view = null;
+$choose_parent_view = null;
+$dialog = null;
+
+function move($old_iter = null, $new_parent, $model)
+{
+    if ($old_iter) {
+        $folder = $model->get_value($old_iter, 0);
+        $model->remove($old_iter);
+        $new_iter = $model->insert_before($new_parent, null);
+        $model->set($new_iter, 0, $folder);
+        $model->set($new_iter, 1, $folder['name']);
+    }
+}
+
+function dialog_ok($args)
+{
+    global $dialog, $choose_parent_view, $view;
+
+    $dialog->hide();
+
+    list($model, $parent_iter) = $choose_parent_view->get_selection()->get_selected();
+    list($model, $old_iter) = $view->get_selection()->get_selected();
+
+    if ($parent_iter && $old_iter) {
+        move($old_iter, $parent_iter, $model);
+    }
+}
+
+function dialog_cancel($args)
+{
+    global $dialog;
+
+    $dialog->hide();
+}
+
+function choose_parent($args)
+{
+    global $dialog;
+
+    $dialog->show();
+}
+
+function move_to_bottom($args)
+{
+    global $view;
+
+    list ($model, $old_iter) = $view->get_selection()->get_selected();
+
+    if ($old_iter) {
+        move($old_iter, null, $model);
+    }
+}
+
+function quit($args)
+{
+    Gtk::main_quit();
+}
+
+function make_view($model)
+{
+    $view = new GtkTreeView($model);
+    $view->set_reorderable(true);
+    $renderer = new GtkCellRendererText();
+    $column = new GtkTreeViewColumn("Folder", $renderer, "text", 1);
+    $view->append_column($column);
+    $view->show();
+
+    $scrolled = new GtkScrolledWindow();
+    $scrolled->add($view);
+    $scrolled->show();
+
+    return array($view, $scrolled);
+}
+
+function make_buttons($list)
+{
+    $buttonbox = new GtkHBox();
+
+    foreach ($list as $label => $func) {
+        $button = new GtkButton();
+        $button->set_label($label);
+        $button->connect("clicked", $func);
+        $button->show();
+        $buttonbox->pack_start($button, false, false);
+    }
+
+    $buttonbox->show();
+
+    return $buttonbox;
+}
+
+$model = new GtkTreeStore(Gtk::TYPE_PHP_VALUE, Gtk::TYPE_STRING);
+
+for ($i=0; $i < 100; $i++)
+{
+    $folder = array('name' => 'folder ' . $i, 'files' => array('foo', 'bar'));
+    $iter = $model->insert_before(null, null);
+    $model->set($iter, 0, $folder);
+    $model->set($iter, 1, $folder['name']);
+}
+
+list($view, $scrolled) = make_view($model);
+$view->set_reorderable(true);
+
+$buttons = array(
+    "Quit"           => "quit",
+    "Choose parent"  => "choose_parent",
+    "Move to bottom" => "move_to_bottom"
+);
+
+$buttonbox = make_buttons($buttons);
+
+$vbox = new GtkVBox();
+$vbox->pack_start($buttonbox, false, false);
+$vbox->pack_start($scrolled, true, true);
+$vbox->show();
+
+$win = new GtkWindow(Gtk::WINDOW_TOPLEVEL);
+$win->connect("delete_event", "quit");
+$win->add($vbox);
+$win->show();
+$win->resize(300, 500);
+
+list($choose_parent_view, $scrolled) = make_view($model);
+
+$buttons = array(
+    "OK"     => "dialog_ok",
+    "Cancel" => "dialog_cancel"
+);
+
+$buttonbox = make_buttons($buttons);
+
+$vbox = new GtkVBox();
+$vbox->pack_start($scrolled, true, true);
+$vbox->pack_start($buttonbox, false, false);
+$vbox->show();
+
+$dialog = new GtkWindow(Gtk::WINDOW_TOPLEVEL);
+$dialog->set_default_size(200, 400);
+$dialog->add($vbox);
+
+Gtk::main();
+?>
