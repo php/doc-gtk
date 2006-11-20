@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- $Revision: 1.15 $ -->
+<!-- $Revision: 1.16 $ -->
 <classentry id="gtk.gtknotebook">
  <classmeta>
   <classtitle>GtkNotebook</classtitle>
@@ -1086,8 +1086,8 @@
     <funcprototype>
      <funcdef>void <cbfunction>callback</cbfunction></funcdef>
      <paramdef><classname>GtkNotebook</classname> <parameter>notebook</parameter></paramdef>
-     <paramdef><!-- was: gpointer -->XXX <parameter>UNKNOWN</parameter></paramdef>
-     <paramdef>int <parameter>UNKNOWN</parameter></paramdef>
+     <paramdef>pointer <parameter>pointer</parameter></paramdef>
+     <paramdef>int <parameter>page_num</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -1097,6 +1097,14 @@
     <para>
      Called when the page has been switched.
     </para>
+    <example>
+     <title>Listening to the switch-page signal</title>
+     <programlisting role="php">
+      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="&directory.examples;/reference/gtk/gtknotebook/switch-page.phpw" parse="text">
+       <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+      </xi:include>
+     </programlisting>
+    </example>
    </desc>
   </signal>
 

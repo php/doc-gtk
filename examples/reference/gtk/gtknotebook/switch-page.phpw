@@ -1,0 +1,45 @@
+<?php
+//Create a new notebook
+$ntbk = new GtkNotebook();
+
+//Create a first page
+$ntbk->append_page(new GtkLabel('Page one'), new GtkLabel('1.'));
+
+$ntbk->append_page(
+    new GtkLabel('This is the second child'),
+    new GtkLabel('Second')
+);
+
+$ntbk->append_page(
+    new GtkLabel('Third page'),
+    new GtkLabel('3rd')
+);
+
+//the fourth tab has no user-defined label
+// get_tab_label_text() will return NULL in this case
+$ntbk->append_page(new GtkLabel('IV'));
+
+
+function onSwitchPage($ntbk, $pointer, $pageNum, $wnd)
+{
+    //the number of the newly selected tab is $pageNum
+    //use it to get the page child widget
+    $pageWidget = $ntbk->get_nth_page($pageNum);
+    //now we can use the page child to retrieve the tab label
+    $text = $ntbk->get_tab_label_text($pageWidget);
+    //show the selected tab's title in the window title
+    $wnd->set_title($text);
+}
+
+$wnd = new GtkWindow();
+//everytime the user switches the tab, call the onSwitchPage function
+$ntbk->connect('switch-page', 'onSwitchPage', $wnd);
+
+
+//The rest of the setup is standard
+$wnd->set_default_size(300, -1);
+$wnd->connect_simple('destroy', array('Gtk', 'main_quit'));
+$wnd->add($ntbk);
+$wnd->show_all();
+Gtk::main();
+?>
