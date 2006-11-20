@@ -1,0 +1,32 @@
+<?php
+//Simple clock using Gtk::timeout_add()
+
+//At first, we need a label displaying the time
+$lbl = new GtkLabel('Clock');
+//Now, call function "onTimeout" every 1 second
+// (1 second == 1000 milliseconds)
+//Also pass $lbl as parameter so we can
+// change it in the function without using
+// global variables (bad!)
+Gtk::timeout_add(1000, 'onTimeout', $lbl);
+
+//our callback function has one parameter,
+// the one we defined in Gtk::timeout_add()
+function onTimeout($lbl)
+{
+    //do the things we want to do
+    $lbl->set_text(date('H:i:s'));
+
+    //at the end, return "true" if the timeout shall
+    // be executed again. If you don't return anything
+    // or return false, the timeout is stopped.
+    return true;
+}
+
+//standard stuff
+$wnd = new GtkWindow();
+$wnd->connect_simple('destroy', array('gtk', 'main_quit'));
+$wnd->add($lbl);
+$wnd->show_all();
+Gtk::main();
+?>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<!-- $Revision: 1.13 $ -->
+<!-- $Revision: 1.14 $ -->
 <refentry id="gtk.functions">
  <refmeta>
    <!-- do *not* change this to "Gtk Static Methods" or anything
@@ -2443,7 +2443,31 @@ while (Gtk::events_pending()) {
     Adds a callback to be called at regular intervals.
    </shortdesc>
    <desc>
+    <para>
+     Registers a function to be called periodically.
+     The function will be called repeatedly after
+     <parameter>interval</parameter> milliseconds until it
+     returns <literal>false</literal> (or nothing) at which point the timeout
+     is destroyed and will not be called again.
+    </para>
+    <para>
+     So to keep the timeout alive, your callback function
+     needs to <literal>return true;</literal>
+    </para>
+    <example>
+     <title>Using Gtk::timeout_add() to create a simple clock</title>
+     <programlisting role="php">
+      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="&directory.examples;/reference/gtk/gtk/timeout_add.phpw" parse="text">
+       <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+      </xi:include>
+     </programlisting>
+    </example>
 
+    <para>
+     The integer returned by this method can be used by
+     <function class="Gtk">timeout_remove</function> to destroy
+     the timeout independent of the return value of the callback.
+    </para>
    </desc>
   </method>
 
@@ -2475,7 +2499,14 @@ while (Gtk::events_pending()) {
     Removes a callback from being called at regular intervals.
    </shortdesc>
    <desc>
-
+    <para>
+     Destroys a timeout, stopping the callback from being
+     called periodically.
+    </para>
+    <para>
+     <parameter>timeout_handler_id</parameter> is the value
+     returned by <function class="Gtk">timeout_add</function>.
+    </para>
    </desc>
   </method>
 
