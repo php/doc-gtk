@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- $Revision: 1.30 $ -->
+<!-- $Revision: 1.31 $ -->
 <classentry id="gtk.gtkwindow">
  <classmeta>
   <classtitle>GtkWindow</classtitle>
@@ -663,9 +663,9 @@
     </para>
     <para>
      &seealso;
+     <function class="GtkWindow">get_icon</function>,
      <function class="GtkWindow">set_icon_list</function>
     </para>
-
    </desc>
   </method>
 
@@ -1801,6 +1801,24 @@
      image from the list will be used in each instance where the icon is
      shown.
     </para>
+    <example>
+     <title>Using a stock icon as window icon</title>
+     <programlisting role="php"><![CDATA[
+$wnd = new GtkWindow();
+$pixbuf = $wnd->render_icon(
+    Gtk::STOCK_FIND,
+    Gtk::ICON_SIZE_DIALOG
+);
+$wnd->set_icon($pixbuf);
+]]></programlisting>
+     <para>
+      This example uses <function class="GtkWidget">render_icon</function>
+      to create a <classname>GdkPixbuf</classname> from a
+      <enumname>GtkStockItems</enumname> enum, together with a
+      <enumname>GtkIconSize</enumname> size definition.
+     </para>
+    </example>
+
     <para>
      &seealso;
      <function class="GtkWindow">get_icon</function>,

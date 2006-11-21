@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- $Revision: 1.30 $ -->
+<!-- $Revision: 1.31 $ -->
 <classentry id="gtk.gtkwidget">
  <classmeta>
   <classtitle>GtkWidget</classtitle>
@@ -2087,17 +2087,23 @@
   <method id="gtk.gtkwidget.method.render_icon">
    <funcsynopsis>
     <funcprototype>
-     <funcdef> <function>render_icon</function></funcdef>
-     <paramdef>string <parameter>stock_id</parameter></paramdef>
-     <paramdef>GtkIconSize <parameter>size</parameter></paramdef>
+     <funcdef><classname>GdkPixbuf</classname> <function>render_icon</function></funcdef>
+     <paramdef><enumname>GtkStockItems</enumname> <parameter>stock_id</parameter></paramdef>
+     <paramdef><enumname>GtkIconSize</enumname> <parameter>size</parameter></paramdef>
      <paramdef>string <parameter><optional>detail = null</optional></parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Creates a GdkPixbuf from a stock item.
    </shortdesc>
    <desc>
-
+    <para>
+     Creates a <classname>GdkPixbuf</classname> from a given
+     stock item enum and at the given <parameter>size</parameter>.
+    </para>
+    <para>
+     See <function class="GtkWindow">set_icon</function> for a usage example.
+    </para>
    </desc>
   </method>
 
