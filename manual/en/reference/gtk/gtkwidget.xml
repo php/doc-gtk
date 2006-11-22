@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- $Revision: 1.31 $ -->
+<!-- $Revision: 1.32 $ -->
 <classentry id="gtk.gtkwidget">
  <classmeta>
   <classtitle>GtkWidget</classtitle>
@@ -59,6 +59,57 @@
     Adds an accelerator for the widget.
    </shortdesc>
    <desc>
+    <para>
+     Adds an accelerator (shortcut key) for the widget, so that the
+     button/widget can be accessed by using the keyboard, without moving
+     the mouse or tabbing through widgets.
+    </para>
+    <para>
+     <parameter>signal</parameter> is the name of a signal that should
+     be invoked on the widget once the accelerator is pressed. For a button,
+     you most likely want to pass <literal>clicked</literal> here.
+    </para>
+    <para>
+     <parameter>group</parameter> is a <classname>GtkAccelGroup</classname>
+     and should be the one set active for the window. Maybe you
+     need to create the group and add it to the window first via
+     <function class="GtkWindow">add_accel_group</function> to be
+     able to use it here.
+    </para>
+    <para>
+     <parameter>accel_key</parameter> defines the key to be pressed, see
+     <link linkend="appendix.keysyms">Symbolic names for keys</link> to
+     find the right one.
+    </para>
+    <para>
+     <parameter>modifiers</parameter> tells which additional button
+     has to be pressed to emit the signal. Normally, you want to use
+     <literal>Gdk::CONTROL_MASK</literal> (<literal>Ctrl</literal> key)
+     or <literal>Gdk::MOD1_MASK</literal> (<literal>Alt</literal> key).
+    </para>
+
+    <example>
+     <title>Adding a shortcut for a button</title>
+     <programlisting role="php"><![CDATA[
+//Our window
+$wnd = new GtkWindow();
+//Accelerator group
+$group = new GtkAccelGroup();
+//Add group to window, making it active
+$wnd->add_accel_group($group);
+
+//"back" button
+$btn = GtkButton::new_from_stock(Gtk::STOCK_GO_BACK);
+$btn->add_accelerator(
+    'clicked', $group, Gdk::KEY_Left, Gdk::MOD1_MASK, 0
+);
+$wnd->add($btn);
+]]></programlisting>
+     <para>
+      In this example, you can use the shortcut <literal>Alt+Left</literal>
+      to activate the back-button.
+     </para>
+    </example>
     <para>
      &seealso;
      <function class="GtkWidget">remove_accelerator</function>
