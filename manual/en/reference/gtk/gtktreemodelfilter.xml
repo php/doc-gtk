@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- $Revision: 1.6 $ -->
+<!-- $Revision: 1.7 $ -->
 <classentry id="gtk.gtktreemodelfilter">
  <classmeta>
   <classtitle>GtkTreeModelFilter</classtitle>
   <classparent>GObject</classparent>
-    <implements>GtkTreeModel</implements>
+  <implements>GtkTreeModel</implements>
   <implements>GtkTreeDragSource</implements>
-<shortdesc>
+  <shortdesc>
    A GtkTreeModel wrapper which hides parts of the underlying model.
   </shortdesc>
   <desc>
@@ -125,8 +125,6 @@
    </desc>
   </method>
 
-  
-
   <method id="gtk.gtktreemodelfilter.method.set_visible_column">
    <funcsynopsis>
     <funcprototype>
@@ -135,10 +133,22 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Defines model colum deciding which row to show or hide.
    </shortdesc>
    <desc>
-
+    <para>
+     Sets <parameter>column</parameter> of the child model to be the column
+     where filter should look for visibility information.
+     The <parameter>column</parameter> should be a column of type
+     <optionname enum="GtkType">Gtk::Gtk::TYPE_BOOLEAN</optionname>,
+     where <literal>true</literal> means that a row is visible,
+     and <literal>false</literal> not.
+    </para>
+    <note>
+     <para>
+      Once set, the column cannot be changed or disabled.
+     </para>
+    </note>
    </desc>
   </method>
 
@@ -146,72 +156,33 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_visible_func</function></funcdef>
-     
      <paramdef><parameter>callback</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Defines callback deciding which rows to show or hide.
    </shortdesc>
    <desc>
-
+    <para>
+     Sets the visible function used when filtering the model.
+     The function should return <literal>true</literal> if the given
+     row should be visible and <literal>false</literal> otherwise.
+    </para>
+    <para>
+     If the condition calculated by the function changes over time
+     (e.g. because it depends on some global parameters), you must call
+     <function class="GtkTreeModelFilter">refilter</function> to keep
+     the visibility information of the model up to date.
+    </para>
+    <!-- FIXME: need example and callback parameters -->
+    <note>
+     <para>
+      Once set, the function cannot be changed or disabled.
+     </para>
+    </note>
    </desc>
   </method>
 
- 
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  </methods>
+ </methods>
 
 </classentry>
