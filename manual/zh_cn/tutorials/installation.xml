@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- $Revision: 1.1 $ -->
+<chapter id="tutorials.installation">
+ <title>安装 PHP-GTK 2</title>
+
+  <sect1 id="tutorials.installation.introduction">
+   <title>简介</title>
+   <para>
+    PHP-GTK 2 是 PHP 的扩展之一，并且只可用于 5.1 以及更高版本。虽然编译是最常用的安装 PHP-GTK 2 的方法，但是这一过程在 Windows 系统上也显得过于漫长。鉴于这样的原因，多数人将会选择使用官方发布的二进制 PHP-GTK 2 Alpha 版本或使用 Gnope 安装包。
+   </para>
+   <para>
+   我们将介绍三种主流系统上面的安装过程：Windows，Linux 和 Mac OS X。关于 Linux 的介绍同样也适用于符合 POSIX 标准的系统。
+   </para>
+  </sect1>
+
+  <sect1 id="tutorials.installation.windows">
+  <title>在 Windows 上安装</title>
+
+   <sect2 id="tutorials.installation.windows.gnope">
+    <title>使用 Gnope</title>
+    <para>
+     使用 Gnope 在 Windows 上安装和维护 PHP-GTK 2 已经被证明几乎是最简单的方法。Gnope 是全功能的 PHP-GTK 2 安装包，包含 PHP 5.1、GTK 2.6 和 PEAR。简单的点几下鼠标你就可以安装完成！
+    </para>
+    <para>
+     只要从 <ulink url="&url.gnope;">gnope.org</ulink> 下载安装包，并跟随屏幕上的指引。Gnope 也拥有它自己的 PEAR 自动安装频道，那里你可以下载 PHP-GTK 2 程序添加到官方的 PEAR 包中。例如从 <ulink url="&url.pear.gtk2;">Gtk2 category</ulink>。
+    </para>
+   </sect2>
+
+   <sect2 id="tutorials.installation.windows.manual">
+    <title>手工安装</title>
+    <para>
+     从 PHP-GTK 2 <ulink url="&url.phpgtk.download;">下载</ulink>页面下载 PHP-GTK 2 的针对 Windows 的 Alpha 版本二进制发行包。解压缩文件到指定目录。一个名为 <literal>php-gtk</literal> 的目录将会创建，并包含发行版的所有内容。
+    </para>
+    <para>
+     你需要 <filename>php.exe</filename>（CLI 版本）和 <filename>php5ts.dll</filename>，这两个都可从 PHP 5 的 Windows 发行版中获得，并且放置到 <filename>php-gtk</filename> 目录。如果你希望使用这个 <filename>php.exe</filename> 的其他扩展，请确保你已经存放二进制文件于此。
+    </para>
+    <para>
+     <!-- FIXME: Do we need to do this? I doubt that this is necessary
+        -cweiske -->
+     之后，你必须设置环境变量 <literal>PATH</literal> 包含发行包中的 <filename>gtk+2.6.9</filename> 目录。你也可以让批处理文件 <literal>gtkpath.bat</literal> 在运行时设置适当的 <literal>PATH</literal> 变量用于当前命令行会话中。
+    </para>
+   </sect2>
+
+   <sect2 id="tutorials.installation.windows.cvs">
+    <title>从 CVS 编译</title>
+    <para>
+    这里仅仅包含在 Windows 上安装 PHP-GTK 2 最主要的步骤。如果你希望了解更多内容，请从 CVS 上获取 <filename>win32/README.win32.txt</filename> 并阅读。
+    </para>
+   </sect2>
+  </sect1>
+
+  <sect1 id="tutorials.installation.linux">
+  <title>在 Linux 上安装</title>
+
+   <para>
+   在 Linux 上安装 PHP-GTK 2 的最好方式就是编译它。还没有二进制包或源码包发行于任何 Linux 发布版本，所以你不能使用你最喜欢的包管理方式安装 PHP-GTK 2。这个介绍应当适用于多数 Linux 发行版，同时也适用于符合 POSIX 标准的系统。
+   </para>
+
+   <note>有消息表明下面的方法不能用于 FreeBSD。</note>
+
+   <para>
+    有两种方式在你的 Linux 系统上安装 PHP-GTK 2。你可以选择使用已有的 PHP 安装，或安装一套独立的用于 PHP-GTK 2 的 PHP。后一种会略微简单一些，对于缺乏或没有 Linux 经验的用户这是推荐的方法。无论如何，你都需要安装有 Gtk+ 2.6 或更新版本。
+   </para>
+
+   <sect2 id="tutorials.installation.linux.newphp">
+   <title>新的 PHP 安装包上安装 PHP-GTK 2</title>
+
+    <para>
+     请遵循下面的步骤，将会一切顺利！首先你需要的是从 CVS 中新取出的 PHP。你可以选择 <literal>5_1</literal> 或 <literal>5_2</literal> 分支，都会工作得很好：
+
+     <programlisting role="bash"><![CDATA[
+$ cvs -d :pserver:cvsread@cvs.php.net:/repository login
+$ cvs -d :pserver:cvsread@cvs.php.net:/repository co -r PHP_5_2 php-src]]></programlisting>
+
+     现在，你需要编译并安装它：
+
+     <programlisting role="bash"><![CDATA[
+$ cd php-src
+$ ./buildconf
+$ ./configure --prefix=/opt/php5_2 --disable-cgi
+$ make
+$ su
+$ make install
+$ echo extension=php_gtk2.so >> /opt/php5_2/lib/php.ini
+$ /opt/php5_2/bin/php-config --extension-dir | xargs echo 'extension_dir=' >> /opt/php5_2/lib/php.ini]]></programlisting>
+    </para>
+
+    <note>
+     <para>
+     如果当前 CVS 上的 PHP 不可以被编译，尝试从 <ulink url="&url.php.download;">php 下载页面</ulink>或 <ulink url="&url.php.snapshots;">snapshot</ulink> 下载官方发布的版本。
+     </para>
+    </note>
+
+    <para>
+     现在，让我们取出并安装 PHP-GTK 2：
+      <programlisting role="bash"><![CDATA[
+$ cd ..
+$ cvs -d :pserver:cvsread@cvs.php.net:/repository co php-gtk
+$ cd php-gtk
+$ ./buildconf --with-phpize=/opt/php5_2/bin/phpize
+$ ./configure --with-php-config=/opt/php5_2/bin/php-config
+$ make
+$ make install]]></programlisting>
+    </para>
+
+    <para>
+     你可能希望创建一个连接到新安装的 PHP 执行文件：
+      <programlisting role="bash"><![CDATA[
+$ ln -s /opt/php5_2/bin/php /usr/bin/php-gtk]]></programlisting>
+
+     就是这些，完成了！
+    </para>
+   </sect2>
+
+   <sect2 id="tutorials.installation.linux.existingphp">
+    <title>使用现有的 PHP 安装包</title>
+
+    <para>
+    如果你决定“增加” PHP-GTK 2 到已有的 PHP 安装包上，请确保 PHP 的版本至少是 CLI 可用的 5.1 版。PHP-GTK 2 不能工作于其他版本的 PHP。你可以在命令行中输入 <command>php -v</command> 检查你的 PHP 版本。不要忘记检查单词 <literal>cli</literal> 是否出现在输出中。
+    </para>
+
+    <para>
+     现在，从 CVS 中取出最新版本的 PHP-GTK 2 源代码，或下载 Alpha 版本的源码包，每次提到的 PHP-GTK 2 <ulink url="&url.phpgtk.download;">下载</ulink>页面。使用 <literal>cd</literal> 进入取出或解压缩的目录，并执行下面的命令：
+     <programlisting role="bash"><![CDATA[
+$ ./buildconf
+$ ./configure
+$ make
+$ make install]]></programlisting>
+    </para>
+
+    <para>
+     对于多数人来说这应当是可用的。然而，如果有多个 PHP 的安装在你的机器上或者你已经在其他目录安装了 PHP，你可能遇到麻烦。多数这种情况可以使用指定 <literal>phpize</literal> 和 <literal>php-config</literal> 文件的安装目录解决：
+     <programlisting role="bash"><![CDATA[
+$ ./buildconf --with-phpize=/path/to/phpize
+$ ./configure --with-php-config=/path/to/php-config]]></programlisting>
+    </para>
+   </sect2>
+
+   <sect2 id="tutorials.installation.linux.testing">
+    <title>测试你的安装</title>
+
+    <para>
+     在你可以使用 PHP-GTK 2 之前，你需要在 php.ini 中设置该扩展可用。在其他 <literal>extension=</literal> 设置之下仅仅需要添加：
+     <programlisting role="ini"><![CDATA[
+extension=php_gtk2.so]]></programlisting>
+     即可。
+    </para>
+
+    <para>
+     为了确定安装是否成功，可以执行下面的内容测试：
+     <programlisting role="bash"><![CDATA[
+$ php -m | grep php-gtk]]></programlisting>
+
+     你应当得到一行内容，只有 <literal>php-gtk</literal>。
+    </para>
+
+    <para>
+     接下来，你可以测试在 php-gtk 源码中 <filename>demos</filename> 下的示例程序。例如 <filename>demos/phpgtk2-demo.php</filename>。
+    </para>
+   </sect2>
+  </sect1>
+
+  <sect1 id="tutorials.installation.macosx">
+  <title>在 Mac OS X 上安装</title>
+
+    <para>
+     在安装 PHP-GTK 2 之前，应当确认你已经安装有 Apple 开发者工具（Apple Developer Tools），BSD 子系统（BSD Subsystem），和 X。虽然，BSD 子系统默认安装于 Mac OS X，但是你需要手工选择开发者工具和 X 服务器。虽然你可以使用任何 X 服务器，但是最简单的方法是使用在安装程序中 Apple 默认提供的。
+    </para>
+
+    <para>
+     获取 <ulink url="&url.macports;">MacPorts</ulink> （之间被称作 DarwinPorts）或者 <ulink url="&url.fink;">Fink</ulink> 并安装。你可以选择安装某一个版本的 X （如果你决定不使用 Apple 默认发行的），以及 Gtk+ 本身。同时确保你有 5.2 版本以上的 PHP，MacPorts 提供了包。在终端中输入 <literal>php -v</literal> 获得版本信息。如果希望手工编译 PHP 你可以按如下操作：
+
+     <programlisting role="bash"><![CDATA[
+$ cvs -d :pserver:cvsread@cvs.php.net:/repository co -r PHP_5_2 php-src
+$ cd php-src
+$ ./buildconf
+$ ./configure --disable-cgi
+$ make
+$ sudo make install]]></programlisting>
+    虽然你可以将它安装到任何地方，但是 <literal>/usr/local</literal> 通常都是不错的选择。MacPorts 将 PHP 安装到 <literal>/opt/local</literal>。
+    </para>
+
+    <para>
+     现在获取最新版本的 PHP-GTK 并编译它：
+
+     <programlisting role="bash"><![CDATA[
+$ cd..
+$ cvs -d :pserver:cvsread@cvs.php.net:/repository co php-gtk
+$ cd php-gtk
+$ ./buildconf --with-phpize=/usr/local/bin/phpize
+$ ./configure --with-php-config=/usr/local/bin/php-config \
+            --disable-libglade
+$ make
+$ sudo make install]]></programlisting>
+    记得替换 <literal>/usr/local</literal> 为 PHP 真实的安装路径。例如，如果你使用 MacPorts 安装 PHP 5.2，你应当输入 <literal>/opt/local</literal> 来代替。
+    </para>
+
+    <para>
+     最后，复制 <literal>php.ini-recommended</literal> 文件到 <literal>/usr/local/lib/php.ini</literal> 并修改 <literal>extension_dir</literal> 的值为 <literal>php_gtk2.so</literal> 的存放位置。通常如下所示：<literal>/usr/local/lib/php/extensions/no-debug-non-zts-some-date</literal>。你可能希望在 <literal>/usr/bin</literal> 中创建新的符号连接指向 <literal>/usr/local/bin/php</literal>。再次说明，鉴于你的 PHP 安装目录，可能需要使用 <literal>/opt/local</literal> 替换 <literal>/usr/local</literal>。
+    </para>
+
+    <para>
+     下面继续
+     <link linkend="tutorials.installation.linux.testing">测试你的安装</link>.
+    </para>
+   </sect1>
+
+</chapter>

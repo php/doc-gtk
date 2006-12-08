@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- $Revision: 1.1 $ -->
+<chapter id="tutorials.helloworld">
+ <title>Hello World（基础）</title>
+
+  <simpara>
+   当你开始学习一门编程语言，通常你的第一个程序都是编写“hello world”。所以，为了符合这个通常的习惯，本手册中的第一个指南也就从“hello world”指南开始！
+  </simpara>
+  <simpara>
+   我们希望在通篇指南中紧扣 PHP 本身。指南被设计为提供用户如何使用 PHP-GTK，以及这其中的思想和技术。
+  </simpara>
+  <simpara>
+   在这个指南中我们将创建一个简单的窗口，并有“Hello World!”的文本在上面。
+  </simpara>
+  <simpara>
+   我们将从列出的程序开始，然后将逐行解释，提供一个非常基本的 PHP-GTK 应用的概况。
+  </simpara>
+
+
+  <example>
+   <title>简单的 Hello World 脚本</title>
+   <programlisting role="php">
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+     href="&directory.examples;/tutorials/helloworld/helloworld.phpw" parse="text">
+     <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+    </xi:include>
+   </programlisting>
+  </example>
+
+  <para>
+  复制代码到文本编辑器中并保存为 <filename>hello.phpw</filename>。然后开启一个控制台使用命令 <command>php hello.phpw</command>。一个标题为“Hello world”的窗口应当显示出来，除了文本“Just wanted to say 'Hello world!'”上面没有任何内容。
+  </para>
+
+
+  <example>
+   <title>检查 PHP-GTK 是否可用</title>
+   <programlisting role="php"><![CDATA[if (!class_exists('gtk')) {
+    die("Please load the php-gtk2 module in your php.ini\r\n");
+}]]></programlisting>
+  </example>
+
+  <para>
+   这里通过检查类 <literal>gtk</literal> 是否存在来确定 PHP-GTK 是否可用。不像 PHP 4 和 PHP-GTK 1，你不应当尝试使用 <ulink url="http://www.php.net/dl">dl()</ulink> 加载 PHP-GTK 模块。在 PHP 5 中不赞成这么做，并且不应当在新的代码中使用。所以我们能做的就是输出一个消息，告诉用户模块不可用并且需要进一步设置可用。
+  </para>
+
+
+  <example>
+   <title>创建窗口</title>
+   <programlisting role="php"><![CDATA[$wnd = new GtkWindow();]]></programlisting>
+  </example>
+
+  <para>
+   创建新 <link linkend="gtk.gtkwindow">窗口</link> 元件对象就像创建新对象一样简单：变量 <literal>$wnd</literal> 被赋值新的对象。如果你已经使用 PHP 4 和 PHP-GTK 1 编写过程序，你会发现你漏写了 <literal>&amp;</literal> 在 <literal>new</literal> 之前。这个在 PHP 4 中是必须的，但是在 PHP 5 中由于引用创建，所以不再需要了。
+  </para>
+
+
+  <example>
+   <title>设置窗口标题</title>
+   <programlisting role="php"><![CDATA[$wnd->set_title('Hello world');]]></programlisting>
+  </example>
+
+  <simpara>
+   为了让窗口在任务栏中便于识别，我们设置窗口标题：仅仅是调用了对象的方法。
+  </simpara>
+
+
+  <example>
+   <title>设置退出清理</title>
+   <programlisting role="php"><![CDATA[$wnd->connect_simple('destroy', array('gtk', 'main_quit'));]]></programlisting>
+  </example>
+
+  <para>
+   这是代码中第一处有趣的部分：<signalname class="GtkObject">destroy</signalname> 信号连接到静态方法 <link linkend="gtk.method.main_quit">Gtk::main_quit</link>。它简单的告诉 GTK 当窗口关闭或销毁时退出主循环。（关于主循环将在下面的部分解释）
+  </para>
+
+
+  <example>
+   <title>创建一个用于显示文本的标签</title>
+   <programlisting role="php"><![CDATA[$lblHello = new GtkLabel("Just wanted to say\r\n'Hello world!'");]]></programlisting>
+  </example>
+
+  <para>
+   像之前一样，我们创建了一个新的元件。这次我们希望显示一小段文字，而 <classname>GtkLabel</classname> 非常适合这个任务。
+  </para>
+
+
+  <example>
+  <title>在窗口上添加标签</title>
+   <programlisting role="php"><![CDATA[$wnd->add($lblHello);]]></programlisting>
+  </example>
+
+  <simpara>
+  现在我们告诉窗口，标签将会添加在上面。
+  </simpara>
+
+
+  <example>
+   <title>显示窗口</title>
+   <programlisting role="php"><![CDATA[$wnd->show_all();]]></programlisting>
+  </example>
+
+  <para>
+  到现在为止，你的屏幕上还什么都没有。为了显示窗口，你需要调用 <function class="GtkWidget">show</function>。这可以显示窗口，但不包含标签——我们不得不对标签也调用 <function class="GtkWidget">show</function>。如果你在窗口上有多个元件如按钮、选择框或者其他这是很不方便的：<function class="GtkWidget">show_all</function> 会帮助显示窗口以及所有的子元件。
+  </para>
+
+
+  <example>
+   <title>开始主循环</title>
+   <programlisting role="php"><![CDATA[Gtk::main();]]></programlisting>
+  </example>
+
+  <para>
+   在所有都设置好了以后，我们需要确保窗口保持开启并相应用户交互。一个普通的 PHP 脚本会中指并退出，但是我们希望它继续执行：为了这个目的，GTK 主循环被调用。用于程序保持运行并等待用户事件。如果事件发生，它将其委派到相应的回调函数中去。
+  </para>
+
+
+ <sect1 id="tutorials.helloworld.futherreading">
+  <title>进一步阅读</title>
+  <para>
+   现在你已经创建了你的第一个 PHP-GTK 2 应用，你可能希望创建更加复杂的布局。阅读 <link linkend="tutorials.packing">包装指南</link> 了解基础的方法。
+  </para>
+ </sect1>
+
+</chapter>
