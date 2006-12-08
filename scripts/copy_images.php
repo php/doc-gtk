@@ -19,7 +19,8 @@ function copy_images($src, $dest, &$count) {
                 if ($file != "." && $file != ".." && $file != "CVS") {
                     $fulldest = $dest.substr(getcwd(), strpos(getcwd(), 'images')-1)."/$file";
                     if (is_dir($file)) {
-                        mkdir($fulldest, 0777);
+                        if (is_dir($file))
+                            mkdir($fulldest, 0777);
                         copy_images(realpath($file), $dest, $count);
                     } else {
                         copy($file, $fulldest);
