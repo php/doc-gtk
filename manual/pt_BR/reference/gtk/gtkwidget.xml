@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<!-- EN-Revision: 1.30 Maintainer: dnfeitosa Status: ready -->
+<!-- EN-Revision: 1.32 Maintainer: dnfeitosa Status: ready -->
 <classentry id="gtk.gtkwidget">
  <classmeta>
   <classtitle>GtkWidget</classtitle>
@@ -60,6 +60,57 @@
    </shortdesc>
    <desc>
     <para>
+     Adiciona um acelerador (tecla de atalho) ao widget, fazendo com que ele possa
+     ser acessado usando o teclado, sem mover o mouse, ou sem mover o foco através
+     da tecla <literal>Tab</literal>.
+    </para>
+    <para>
+     <parameter>signal</parameter> é o nome do sinal que deve ser emitido no
+     widget quando o acelerador for pressionado. Para um botão, o caso mais comum é
+     <literal>clicked</literal> aqui.
+    </para>
+    <para>
+     <parameter>group</parameter> é um <classname>GtkAccelGroup</classname>
+     e deve ser o mesmo que foi definido para a janela. Talvez você precise
+     criar o grupo e adicioná-lo à janela primeiro através de
+     <function class="GtkWindow">add_accel_group</function> para ser capaz
+     de usá-lo aqui.
+    </para>
+    <para>
+     <parameter>accel_key</parameter> define a tecla a ser pressionada. Veja
+     <link linkend="appendix.keysyms">Nomes simbólicos de teclas</link> para
+     achar a correta.
+    </para>
+    <para>
+     <parameter>modifiers</parameter> informa qual botão adicional deve ser
+     pressionado para emitir o sinal. Normalmente, você desejará usar
+     <literal>Gdk::CONTROL_MASK</literal> (tecla <literal>Ctrl</literal>)
+     ou <literal>Gdk::MOD1_MASK</literal> (tecla <literal>Alt</literal>).
+    </para>
+
+    <example>
+     <title>Adicionando um atalho para um botão</title>
+     <programlisting role="php"><![CDATA[
+// Sua janela
+$wnd = new GtkWindow();
+// Grupo acelerador (AccelGroup)
+$group = new GtkAccelGroup();
+// Adicionando o grupo à janela, tornando-o ativo
+$wnd->add_accel_group($group);
+
+// Botão "back"
+$btn = GtkButton::new_from_stock(Gtk::STOCK_GO_BACK);
+$btn->add_accelerator(
+    'clicked', $group, Gdk::KEY_Left, Gdk::MOD1_MASK, 0
+);
+$wnd->add($btn);
+]]></programlisting>
+     <para>
+      Neste exemplo, você pode usar o atalho <literal>Alt+Left</literal>
+      para ativar o botão "back".
+     </para>
+    </example>
+    <para>
      &seealso;
      <function class="GtkWidget">remove_accelerator</function>
     </para>
@@ -90,9 +141,7 @@
     <example>
      <title>Rastreando eventos do mouse em um botão com add_events</title>
      <programlisting role="php">
-      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
-       href="&directory.examples;/reference/gtk/gtkwidget/add_events.phpw"
-       parse="text">
+      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="&directory.examples;/reference/gtk/gtkwidget/add_events.phpw" parse="text">
        <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
       </xi:include>
      </programlisting>
@@ -243,7 +292,8 @@
    </desc>
   </method>
 
-  <!--
+
+<!--
   <method id="gtk.gtkwidget.method.destroyed">
    <funcsynopsis>
     <funcprototype>
@@ -723,7 +773,8 @@
    </shortdesc>
    <desc>
     <para>
-     Interrompe a emissão de sinais <signalname class="GtkContainer">child-notify</signalname>
+     Interrompe a emissão de sinais 
+     <signalname class="GtkContainer">child-notify</signalname>
      no widget. Os sinais são enfilerados até que 
      <function class="GtkWidget">thaw_child_notify </function> seja chamado.
     </para>
@@ -766,9 +817,7 @@
     <example>
      <title>Exibindo o tamanho de um widget</title>
      <programlisting role="php">
-      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
-       href="&directory.examples;/reference/gtk/gtkwidget/get_allocation.php"
-       parse="text">
+      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="&directory.examples;/reference/gtk/gtkwidget/get_allocation.php" parse="text">
        <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
       </xi:include>
      </programlisting>
@@ -1476,11 +1525,11 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Remove o widget e todos seus childs de serem exibidos na tela.
+    Remove o widget e todos seus filhos de serem exibidos na tela.
    </shortdesc>
    <desc>
     <para>
-     Oculta o widget e todos seus childs.
+     Oculta o widget e todos seus filhos.
     </para>
     <para>
      &seealso;
@@ -1560,7 +1609,8 @@
    </shortdesc>
    <desc>
     <para>
-     Verifica se o widget é o widget com foco em seu parent.
+     Verifica se o widget 
+     é o widget com foco em seu parent.
     </para>
     <para>
      &seealso;
@@ -1790,9 +1840,7 @@
     <example>
      <title>Pegando o caminho de widget</title>
      <programlisting role="php">
-      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
-       href="&directory.examples;/reference/gtk/gtkwidget/path.php"
-       parse="text">
+      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="&directory.examples;/reference/gtk/gtkwidget/path.php" parse="text">
        <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
       </xi:include>
      </programlisting>
@@ -1837,8 +1885,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Remove um composite adicionado com
-    <function class="GtkWidget">push_composite_child</function>.
+    Remove um composite adicionado com <function class="GtkWidget">push_composite_child</function>.
    </shortdesc>
    <desc>
     <para>
@@ -2033,39 +2080,6 @@
    </desc>
   </method>
 
-  <method id="gtk.gtkwidget.method.ref">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>GtkWidget <function>ref</function></funcdef>
-     <paramdef>void</paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-    Incrementa o contador de referência do widget.
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </method>
-
-  <method id="gtk.gtkwidget.method.region_intersect">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>
-      <classname>GdkRegion</classname> <function>region_intersect</function>
-     </funcdef>
-     <paramdef>
-      <classname>GdkRegion</classname> <parameter>region</parameter>
-     </paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-    Retorna a intersecção da área do widget com <parameter>region</parameter>.
-   </shortdesc>
-   <desc>
-
-   </desc>
-  </method>
 
   <method id="gtk.gtkwidget.method.remove_accelerator">
    <funcsynopsis>
@@ -2111,17 +2125,23 @@
   <method id="gtk.gtkwidget.method.render_icon">
    <funcsynopsis>
     <funcprototype>
-     <funcdef> <function>render_icon</function></funcdef>
-     <paramdef>string <parameter>stock_id</parameter></paramdef>
-     <paramdef>GtkIconSize <parameter>size</parameter></paramdef>
+     <funcdef><classname>GdkPixbuf</classname> <function>render_icon</function></funcdef>
+     <paramdef><enumname>GtkStockItems</enumname> <parameter>stock_id</parameter></paramdef>
+     <paramdef><enumname>GtkIconSize</enumname> <parameter>size</parameter></paramdef>
      <paramdef>string <parameter><optional>detail = null</optional></parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Cria um GdkPixbuf a partir de um item de estoque.
    </shortdesc>
    <desc>
-
+    <para>
+     Cria um <classname>GdkPixbuf</classname> a partir do enumerador de um item de estoque
+     e do tamanho (<parameter>size</parameter>) definido.
+    </para>
+    <para>
+     Veja <function class="GtkWindow">set_icon</function> para um exemplo de uso.
+    </para>
    </desc>
   </method>
 
@@ -2748,8 +2768,7 @@
      <parameter>all</parameter> for <literal>true</literal>,
      <function class="GtkWidget">show_all</function> ou
      <function class="GtkWidget">hide_all</function> será chamada ao invés de
-     <function class="GtkWidget">show</function> ou
-     <function class="GtkWidget">hide</function>.
+     <function class="GtkWidget">show</function> ou <function class="GtkWidget">hide</function>.
     </para>
     <para>
      <function class="GtkWidget">set_visible</function> retorna
@@ -2964,7 +2983,8 @@
    </desc>
   </method>
 
-  <method id="gtk.gtkwidget.method.drag_source_add_image_targets">
+
+ <method id="gtk.gtkwidget.method.drag_source_add_image_targets">
    <funcsynopsis>
     <funcprototype>
      <funcdef> <function>drag_source_add_image_targets</function></funcdef>
@@ -3140,8 +3160,7 @@
        se encontra.
       </listitem>
       <listitem>
-       <literal>button</literal> - Botão do mouse
-       (1 - esquerda, 2 - meio, 3 - direita)
+       <literal>button</literal> - Botão do mouse (1 - esquerda, 2 - meio, 3 - direita)
       </listitem>
       <listitem>
        <literal>state</literal> - Máscara de outras teclas que estão sendo
@@ -3157,9 +3176,7 @@
      <example>
       <title>Usando o sinal key-press-event</title>
       <programlisting role="php">
-       <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
-        href="&directory.examples;/reference/gtk/gtkwidget/button-press-event.phpw"
-        parse="text">
+       <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="&directory.examples;/reference/gtk/gtkwidget/button-press-event.phpw" parse="text">
         <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
        </xi:include>
       </programlisting>
@@ -3720,9 +3737,7 @@
      <example>
       <title>Usando o sinal key-press-event</title>
       <programlisting role="php">
-       <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
-        href="&directory.examples;/reference/gtk/gtkwidget/key-press-event.phpw"
-        parse="text">
+       <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="&directory.examples;/reference/gtk/gtkwidget/key-press-event.phpw" parse="text">
         <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
        </xi:include>
       </programlisting>

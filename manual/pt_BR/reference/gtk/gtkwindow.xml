@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<!-- EN-Revision: 1.30 Maintainer: dnfeitosa Status: ready -->
+<!-- EN-Revision: 1.31 Maintainer: dnfeitosa Status: ready -->
 <classentry id="gtk.gtkwindow">
  <classmeta>
   <classtitle>GtkWindow</classtitle>
@@ -25,9 +25,7 @@
     <example>
      <title>Adicionando vários childs.</title>
      <programlisting role="php">
-      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
-       href="&directory.examples;/reference/gtk/gtkwindow/constructor.phpw"
-       parse="text">
+      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="&directory.examples;/reference/gtk/gtkwindow/constructor.phpw" parse="text">
        <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
       </xi:include>
      </programlisting>
@@ -113,9 +111,7 @@
      <example>
       <title>Ativando o botão com Enter na caixa de texto</title>
       <programlisting role="php">
-       <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
-        href="&directory.examples;/reference/gtk/gtkwindow/activate_default.phpw"
-        parse="text">
+       <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="&directory.examples;/reference/gtk/gtkwindow/activate_default.phpw" parse="text">
         <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
        </xi:include>
       </programlisting>
@@ -237,9 +233,7 @@
      <example>
       <title>Adicionando um mnemônico</title>
       <programlisting role="php">
-       <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
-        href="&directory.examples;/reference/gtk/gtkwindow/add_mnemonic.phpw"
-        parse="text">
+       <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="&directory.examples;/reference/gtk/gtkwindow/add_mnemonic.phpw" parse="text">
         <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
        </xi:include>
       </programlisting>
@@ -492,9 +486,7 @@
      <example>
       <title>Usando GtkWindow::get_focus()</title>
       <programlisting role="php">
-       <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
-        href="&directory.examples;/reference/gtk/gtkwindow/get_focus.phpw"
-        parse="text">
+       <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="&directory.examples;/reference/gtk/gtkwindow/get_focus.phpw" parse="text">
         <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
        </xi:include>
       </programlisting>
@@ -672,9 +664,9 @@
     </para>
     <para>
      &seealso;
+     <function class="GtkWindow">get_icon</function>,
      <function class="GtkWindow">set_icon_list</function>
     </para>
-
    </desc>
   </method>
 
@@ -1821,6 +1813,24 @@
      com o tamanho mais apropriado será usada em cada instância onde o ícone é
      exibido.
     </para>
+    <example>
+     <title>Usando um ícone de estoque como ícone da janela</title>
+     <programlisting role="php"><![CDATA[
+$wnd = new GtkWindow();
+$pixbuf = $wnd->render_icon(
+    Gtk::STOCK_FIND,
+    Gtk::ICON_SIZE_DIALOG
+);
+$wnd->set_icon($pixbuf);
+]]></programlisting>
+     <para>
+      Este exemplo usa <function class="GtkWidget">render_icon</function>
+      para criar um <classname>GdkPixbuf</classname> a partir de um enumerador
+      <enumname>GtkStockItems</enumname>, junto com uma definição
+      <enumname>GtkIconSize</enumname>.
+     </para>
+    </example>
+
     <para>
      &seealso;
      <function class="GtkWindow">get_icon</function>,
