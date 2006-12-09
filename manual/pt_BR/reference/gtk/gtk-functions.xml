@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<!-- EN-Revision: 1.13 Maintainer: dnfeitosa Status: ready -->
-
+<!-- EN-Revision: 1.14 Maintainer: dnfeitosa Status: ready -->
 <refentry id="gtk.functions">
  <refmeta>
    <refentrytitle>Funções GTK</refentrytitle>
@@ -1171,7 +1170,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Adiciona um callback que será chamado quando o loop principal estiver ocioso.
+    Registra um callback que será chamado quando o loop principal estiver ocioso.
    </shortdesc>
    <desc>
 
@@ -1220,7 +1219,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Remove um callback que seria processado quando o loop principal estivesse
+    Remove um callback que seria chamado quando o loop principal estiver
     ocioso.
    </shortdesc>
    <desc>
@@ -1525,7 +1524,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Executa uma iteração única do loop principal.
    </shortdesc>
    <desc>
    <para>
@@ -1552,7 +1551,6 @@ while (Gtk::events_pending()) {
      <function class="Gtk">main_quit</function> foi chamado para o loop
      principal.
     </para>
-
    </desc>
   </method>
 
@@ -2145,7 +2143,6 @@ while (Gtk::events_pending()) {
 
   <!-- Not implemented as of 2006-06-05
   <method id="gtk.method.rc_property_parse_requisition">
-  <method id="gtk.method.icon_size_from_name">
    <funcsynopsis>
     <funcprototype>
      <funcdef>bool <function>rc_property_parse_requisition</function></funcdef>
@@ -2360,7 +2357,7 @@ while (Gtk::events_pending()) {
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-   Retorna uma lista com os ids dos stocks disponíveis.
+    Retorna uma lista com o id dos estoques disponíveis.
    </shortdesc>
    <desc>
 
@@ -2377,7 +2374,7 @@ while (Gtk::events_pending()) {
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-   Retorna um array com informações para o stock indicado por id.
+    Retorna um array com informações para o stock indicado por id.
    </shortdesc>
    <desc>
 
@@ -2444,7 +2441,31 @@ while (Gtk::events_pending()) {
     Adiciona um callback que será chamado em intervalos regulares.
    </shortdesc>
    <desc>
+    <para>
+     Registra  uma função que será chamada periodicamente.
+     A função será chamada repetidamente depois de 
+     <parameter>interval</parameter> milissegundos até que retorne 
+     <literal>false</literal> (ou nada), ponto no qual o timeout 
+     é destruído e não será chamado novamente.
+    </para>
+    <para>
+     Para manter o timeout ativo, seu callback deve retornar
+     <literal>true</literal>.
+    </para>
+    <example>
+     <title>Usando Gtk::timeout_add() para criar um simples relógio</title>
+     <programlisting role="php">
+      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="&directory.examples;/reference/gtk/gtk/timeout_add.phpw" parse="text">
+       <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+      </xi:include>
+     </programlisting>
+    </example>
 
+    <para>
+     O inteiro retornado por este método pode ser usado por
+     <function class="Gtk">timeout_remove</function> para destruir o timeout
+     independentemente do valor retornado pelo callback.
+    </para>
    </desc>
   </method>
 
@@ -2476,7 +2497,14 @@ while (Gtk::events_pending()) {
     Remove um callback que seria chamado em intervalos regulares.
    </shortdesc>
    <desc>
-
+    <para>
+     Destrói um timeout, eliminando a função callback
+     de ser chamada periodicamente.
+    </para>
+    <para>
+     <parameter>timeout_handler_id</parameter> é o valor retornado por
+     <function class="Gtk">timeout_add</function>.
+    </para>
    </desc>
   </method>
 
