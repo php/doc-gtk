@@ -1,0 +1,1058 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- EN-Revision: 1.15 Maintainer: fernandoc Status: ready -->
+<classentry id="gtk.gtkentry">
+ <classmeta>
+  <classtitle>GtkEntry</classtitle>
+  <classparent>GtkWidget</classparent>
+  <implements>GtkEditable</implements>
+  <implements>GtkCellEditable</implements>
+  <shortdesc>
+   Um campo de entrada de texto de uma única linha.
+  </shortdesc>
+  <desc>
+   <para>
+    <classname>GtkEntry</classname> é um campo de entrada de texto de uma única linha.
+    É geralmente usado quando é necessária uma entrada pelo usuário. Um grande
+    conjunto de teclas de atalho são suportadas por padrão e tem o
+    potencial de serer editado pelo usuário. Se o texto entrado é maior do
+    que o espaço alocado para o widget, o widget irá rolar assim a posição do
+    cursor será visível.
+   </para>
+  </desc>
+ </classmeta>
+
+ <constructors>
+  <constructor id="gtk.gtkentry.constructor">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef> <function>GtkEntry</function></funcdef>
+     <paramdef>
+      string <parameter><optional>text</optional></parameter>
+     </paramdef>
+     <paramdef>
+      int <parameter><optional>max</optional></parameter>
+     </paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Cria um widget campo de entrada de texto de uma única linha.
+   </shortdesc>
+   <desc>
+    <para>
+      Cria um widget que irá guardar uma única linha de texto. Você tem a 
+      liberdade de definir o widget através de programação usando
+      <function class="GtkEntry">set_text</function> ou te-lo entrado
+      pelo usuário.
+    </para>
+    <para>
+     Se <parameter>text</parameter> for dado, ele será definido como o valor padrão
+     para o widget. Se <parameter>max</parameter> for dado, ele será 
+     definido como o tamanho máximo do texto do widget
+     em caracteres.
+    </para>
+    <example>
+     <title>
+      Obtendo texto e exibindo-o usando 
+      <classname>GtkEntry</classname>
+     </title>
+      <programlisting role="php">
+       <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="&directory.examples;/reference/gtk/gtkentry/constructor.phpw" parse="text">
+        <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+       </xi:include>
+      </programlisting>
+    </example>
+   </desc>
+  </constructor>
+ </constructors>
+
+
+ <methods>
+  <method id="gtk.gtkentry.method.append_text">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>append_text</function></funcdef>
+     <paramdef>string <parameter>text</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    &deprecated;. Adiciona
+    texto ao texto atual do widget.
+   </shortdesc>
+   <desc>
+    <para>
+     &deprecated.method;
+    </para>
+    <para>
+     Adiciona <parameter>text</parameter> para o texto atual ao
+     valor atual da caixa de texto.
+    </para>
+    <note>
+     <link linkend="appendix.glossary.d.deprecated">DEPRECATED</link>. Este
+     método não deve ser usado em código récem escrito. Use <function class="GtkEntry">get_text</function> e <function class="GtkEntry">set_text</function> ao invés.
+    </note>
+    <para>
+     &seealso;
+     <function class="GtkEntry">get_text</function>,
+     <function class="GtkEntry">prepend_text</function>,
+     <function class="GtkEntry">set_text</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkentry.method.get_activates_default">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>bool <function>get_activates_default</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Retorna quando a caixa de texto ativa ou não o widget padrão para a
+    janela.
+   </shortdesc>
+   <desc>
+    <para>
+     Retorna quando pressionar <literal>Enter</literal> na caixa de texto
+     irá ativar ou não o widget padrão para a janela. 
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkEntry">set_activates_default</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkentry.method.get_alignment">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>double <function>get_alignment</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Retorna o valor do alinhamento da caixa de texto.
+   </shortdesc>
+   <desc>
+    <para>
+     Retorna o valor do alinhamento da caixa de texto. O alinhamento determina
+     o posicionamento horizontal do texto na caixa de texto quando o texto é mais curto
+     do que pode ser exibido.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkEntry">set_alignment</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkentry.method.get_completion">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef><classname>GtkEntryCompletion</classname> <function>get_completion</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Retorna o objeto de complementação usado atualmente.
+   </shortdesc>
+   <desc>
+    <para>
+     Retorna o objeto auxiliar de complementação atualmente em uso pela caixa de texto.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkEntry">set_completion</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkentry.method.get_has_frame">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>bool <function>get_has_frame</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Se a caixa de texto tem uma borda talhada.
+   </shortdesc>
+   <desc>
+    <para>
+     Retorna se a caixa de texto tem uma borda talhada ao seu redor.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkEntry">set_has_frame</function>
+    </para>
+   </desc>
+  </method>
+<!--
+  <method id="gtk.gtkentry.method.get_invisible_char">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef> <function>get_invisible_char</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+    <para>
+     &seealso;
+     <function class="GtkEntry">set_invisible_char</function>
+    </para>
+
+   </desc>
+  </method>
+-->
+  <method id="gtk.gtkentry.method.get_layout">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef><classname>PangoLayout</classname> <function>get_layout</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Retorna o PangoLayout usado para exibir o texto.
+   </shortdesc>
+   <desc>
+    <para>
+     Retorna o <classname>PangoLayout</classname> usado para mostrar a caixa de texto.
+     O layout é útil para, por exemplo, converter posições do texto em posições do pixel,
+     em combinação com
+     <function class="GtkEntry">get_layout_offsets</function>. 
+    </para>
+<!-- method is missing
+    <para>
+     Keep in mind that the layout text may contain a preedit string,
+     so layout_index_to_text_index() and gtk_entry_text_index_to_layout_index()
+     are needed to convert byte indices in the layout to byte indices in the entry contents.
+    </para>
+-->
+   </desc>
+  </method>
+
+  <method id="gtk.gtkentry.method.get_layout_offsets">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>array <function>get_layout_offsets</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Retorna a posição
+   </shortdesc>
+   <desc>
+    <para>
+     Obtém a posição do <classname>PangoLayout</classname> usado para
+     desenhar o texto na caixa de texto, em coordenadas do widget. Útil se você quer
+     alinhar o texto na caixa de texto com algum outro texto, exemplo, ao usar a
+     caixa de texto para implementar células editáveis em um widget de planilha.
+    </para>
+    <para>
+     Também é útil para converter evento do mouse em coordenadas dentro do
+     <classname>PangoLayout</classname>, por exemplo, para realizar alguma ação se alguma
+     parte do texto da caixa de texto for clicado.
+    </para>
+    <para>
+     Note que se o usuário mudar a posição na caixa de texto os índices irão
+     mudar. Lembre-se ao usar as funções PangoLayout você precisa converter
+     para e a partir de pixels usando PANGO_PIXELS() ou PANGO_SCALE.
+    </para>
+    <para>
+     O valor retornado é <literal>array($x, $x)</literal>.
+    </para>
+<!--
+    <para>
+     Keep in mind that the layout text may contain a preedit string,
+     so gtk_entry_layout_index_to_text_index() and gtk_entry_text_index_to_layout_index()
+     are needed to convert byte indices in the layout to byte indices in the entry contents.
+    </para>
+-->
+   </desc>
+  </method>
+
+  <method id="gtk.gtkentry.method.get_max_length">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>int <function>get_max_length</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Obtém o tamanho máximo permitido do texto.
+   </shortdesc>
+   <desc>
+    <para>
+     Obtém o tamanho máximo permitido do texto na caixa de texto.
+     Um valor <literal>0</literal> indica que não há limite.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkEntry">set_max_length</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkentry.method.get_text">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>string <function>get_text</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Retorna o conteúdo do widget <classname>GtkEntry</classname>.
+   </shortdesc>
+   <desc>
+    <para>
+      Retorna o texto entrado no widget <classname>GtkEntry</classname>,
+      e também qualquer texto adicionado antes ou depois que tenha sido definido
+      usando <function class="GtkEntry">set_text</function> mas 
+      não exibido.
+    </para>
+    <note>
+     <para>
+      Ao contrário dos rumores, esta função NÃO esta marcada como obsoleta,
+      nem nas versões anteriores do GTK+ usada pelo PHP-GTK nem nas
+      versões atuais.
+     </para>
+    </note>
+    <para>
+     &seealso;
+     <function class="GtkEntry">append_text</function>,
+     <function class="GtkEntry">prepend_text</function>,
+     <function class="GtkEntry">set_text</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkentry.method.get_visibility">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>bool <function>get_visibility</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Se o texto esta visível ou esconsido por estrelas.
+   </shortdesc>
+   <desc>
+    <para>
+     Retorna se o texto esta visível ou "escondido" por estrelas
+     ou outros caracteres.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkEntry">set_visibility</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkentry.method.get_width_chars">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>int <function>get_width_chars</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Retorna o número de caracteres para os quais solicitar espaço.
+   </shortdesc>
+   <desc>
+    <para>
+     Retorna o número de caracteres para os quais solicitar espaço, ou negativo se não estiver definido.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkEntry">set_width_chars</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkentry.method.prepend_text">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>prepend_text</function></funcdef>
+     <paramdef>string <parameter>text</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    &deprecated; Adiciona no início o texto dado ao conteúdo do widget.
+   </shortdesc>
+   <desc>
+    <para>
+     &deprecated.method;
+    </para>
+    <para>
+     Adiciona no início o texto dado ao conteúdo do widget.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkEntry">append_text</function>,
+     <function class="GtkEntry">get_text</function>,
+     <function class="GtkEntry">set_text</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkentry.method.set_activates_default">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_activates_default</function></funcdef>
+     <paramdef>bool <parameter>setting</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Define se pressionar Enter ativa o widget padrão.
+   </shortdesc>
+   <desc>
+    <para>
+     Se for definido como true <literal>true</literal>, pressionar Enter em uma caixa de texto
+     irá ativar o widget padrão para a janela contendo a caixa de texto.
+     Isto normalmente significa que a caixa de dialogo contendo a caixa de texto será fechada,
+     já que o widget padrão é normalmente um dos botões do dialogo.
+    </para>
+    <para>
+     (Para experts: se definir <literal>true</literal>, a caixa de texto chama
+     <function class="GtkWindow">activate_default</function> na janela contendo
+     a caixa de texto, no manipulador padrão para o sinal "activate".)
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkEntry">get_activates_default</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkentry.method.set_alignment">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_alignment</function></funcdef>
+     <paramdef>double <parameter>xalign</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Define o alinhamento do conteúdo.
+   </shortdesc>
+   <desc>
+    <para>
+     Define o alinhamento para o conteúdo na caixa de texto. Isto controla
+     o posicionamento horizontal do conteúdo quando o texto exibido é
+     menor do que a largura da caixa de texto. <literal>0</literal>
+     significa esquerda, <literal>1</literal> direita. Funciona de maneira reversa para quem usa texto escrito da direita para a esquerda.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkEntry">get_alignment</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkentry.method.set_completion">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_completion</function></funcdef>
+     <paramdef><classname>GtkEntryCompletion</classname> <parameter>completion</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Define a complementação da caixa de texto.
+   </shortdesc>
+   <desc>
+    <para>
+     Define o objeto auxiliar de complementação a ser usado com a caixa de texto.
+     Todas as configurações posteriores para o mecanismo de complementação é feita
+     na complementação usando a API <classname>GtkEntryCompletion</classname>.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkEntry">get_completion</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkentry.method.set_has_frame">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_has_frame</function></funcdef>
+     <paramdef>bool <parameter>setting</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Define se a caixa de texto terá uma borda talhada ao seu redor.
+   </shortdesc>
+   <desc>
+    <para>
+     Define se a caixa de texto terá uma borda talhada ao seu redor.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkEntry">get_has_frame</function>
+    </para>
+   </desc>
+  </method>
+<!--not implemented yet
+  <method id="gtk.gtkentry.method.set_invisible_char">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_invisible_char</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+    <para>
+     &seealso;
+     <function class="GtkEntry">get_invisible_char</function>
+    </para>
+
+   </desc>
+  </method>
+-->
+  <method id="gtk.gtkentry.method.set_max_length">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_max_length</function></funcdef>
+     <paramdef>int <parameter>max</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Define o tamanho máximo do conteúdo.
+   </shortdesc>
+   <desc>
+    <para>
+     Define o tamanho máximo permitido do conteúdo do widget.
+     Se o conteúdo atual for maior que o tamanho dado,
+     então ele será truncado para caber. <literal>0</literal> significa
+     sem limite.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkEntry">get_max_length</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkentry.method.set_text">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_text</function></funcdef>
+     <paramdef>string <parameter>text</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Define o texto.
+   </shortdesc>
+   <desc>
+    <para>
+     Define o texto no widget para o valor dado, substituindo o
+     conteúdo atual.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkEntry">append_text</function>,
+     <function class="GtkEntry">get_text</function>,
+     <function class="GtkEntry">prepend_text</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkentry.method.set_visibility">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_visibility</function></funcdef>
+     <paramdef>bool <parameter>visible</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Define se o texto ou um asterisco * é exibido.
+   </shortdesc>
+   <desc>
+    <para>
+     Define quando o conteúdo da caixa de texto é visível ou não. Quando a visibilidade
+     esta definida como <literal>false</literal>, caracteres são exibidos como
+     o caractere invisível, e também irá aparecer desta maneira quando o texto na
+     caixa de texto for copiado em outro lugar.
+    </para>
+    <para>
+     O caractere invisível por padrão é o asterisco <literal>*</literal>,
+<!-- not implemented yet
+     but it can be changed with
+     <function class="GtkEntry">set_invisible_char</function>.
+-->
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkEntry">get_visibility</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkentry.method.set_width_chars">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_width_chars</function></funcdef>
+     <paramdef>int <parameter>n_chars</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Define o tamanho da caixa de texto em caracteres.
+   </shortdesc>
+   <desc>
+    <para>
+     Muda o tamanho solicitado da caixa de texto para ser proxímo do tamanho certo
+     para <parameter>n_chars</parameter> caracteres. Note que isso muda o
+     tamanho solicidado, o tamanho ainda pode ser afetado pela maneira que você empacota
+     o widget em containers. Se <parameter>n_chars</parameter> é
+     <literal>-1</literal>, o tamanho reverte para o tamanho padrão da caixa de texto.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkEntry">get_width_chars</function>
+    </para>
+   </desc>
+  </method>
+ </methods>
+
+
+ <properties>
+  <prop id="gtk.gtkentry.property.activates-default" type="rw">
+   <propname>activates-default</propname>
+   <proptype>bool</proptype>
+   <shortdesc>
+    Quando ativar o widget padrão quando Enter é pressionado.
+   </shortdesc>
+   <desc>
+    <para>
+     Quando ativar o widget padrão (como o botão padrão
+     em um dialogo) quando Enter for pressionado.
+    </para>
+    <para>
+     Padrão: <literal>false</literal>
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtkentry.property.cursor-position" type="r">
+   <propname>cursor-position</propname>
+   <proptype>int</proptype>
+   <shortdesc>
+    A posição atual do cursor de inserção em caracteres.
+   </shortdesc>
+   <desc>
+    <para>
+     A posição atual do cursor de inserção em caracteres.
+    </para>
+    <para>
+     Valores permitidos: <literal>[0,65535]</literal>
+    </para>
+    <para>
+     Padrão: <literal>0</literal>
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtkentry.property.editable" type="rw">
+   <propname>editable</propname>
+   <proptype>bool</proptype>
+   <shortdesc>
+    Quando o conteúdo da caixa de texto pode ser editado.
+   </shortdesc>
+   <desc>
+    <para>
+     Quando o conteúdo da caixa de texto pode ser editado.
+    </para>
+    <para>
+     Padrão: <literal>true</literal>
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtkentry.property.has-frame" type="rw">
+   <propname>has-frame</propname>
+   <proptype>bool</proptype>
+   <shortdesc>
+    Se a caixa de texto tem um quadro.
+   </shortdesc>
+   <desc>
+    <para>
+     Se a caixa de texto tem um quadro.
+    </para>
+    <para>
+     Padrão: <literal>true</literal>
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtkentry.property.invisible-char" type="rw">
+   <propname>invisible-char</propname>
+   <proptype>char</proptype>
+   <shortdesc>
+    O caractere para usar ao mascarar o conteúdo da caixa de texto.
+   </shortdesc>
+   <desc>
+    <para>
+     O caractere para usar ao mascarar o conteúdo da caixa de texto. (em "modo de senha").
+    </para>
+    <para>
+     Padrão: <literal>*</literal>
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtkentry.property.max-length" type="rw">
+   <propname>max-length</propname>
+   <proptype>int</proptype>
+   <shortdesc>
+    O número máximo de caracteres para esta caixa de texto.
+   </shortdesc>
+   <desc>
+    <para>
+     O número máximo de caracteres para esta caixa de texto. Zero se não houver máximo.
+    </para>
+    <para>
+     Valores permitidos: <literal>[0,65535]</literal>
+    </para>
+    <para>
+     Padrão: <literal>0</literal>
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtkentry.property.scroll-offset" type="r">
+   <propname>scroll-offset</propname>
+   <proptype/>
+   <shortdesc>
+    Número de pixels da caixa de texto rolada para fora da tela a esquerda.
+   </shortdesc>
+   <desc>
+    <para>
+     Número de pixels da caixa de texto rolada para fora da tela a esquerda.
+    </para>
+    <para>
+     Valores permitidos: <literal>[0,65535]</literal>
+    </para>
+    <para>
+     Padrão: <literal>0</literal>
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtkentry.property.selection-bound" type="rw">
+   <propname>selection-bound</propname>
+   <proptype/>
+   <shortdesc>
+    A posição do final oposto do cursor de seleção.
+   </shortdesc>
+   <desc>
+    <para>
+     A posição do final oposto da seleção a partir do cursor em caracteres.
+    </para>
+    <para>
+     Valores permitidos: <literal>[0,65535]</literal>
+    </para>
+    <para>
+     Padrão: <literal>0</literal>
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtkentry.property.text" type="rw">
+   <propname>text</propname>
+   <proptype>string</proptype>
+   <shortdesc>
+    O conteúdo da caixa de texto.
+   </shortdesc>
+   <desc>
+    <para>
+     O conteúdo da caixa de texto.
+    </para>
+    <para>
+     Padrão: <literal>""</literal>
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtkentry.property.visibility" type="rw">
+   <propname>visibility</propname>
+   <proptype>bool</proptype>
+   <shortdesc>
+    Se o texto é exibido ou apenas asteriscos *.
+   </shortdesc>
+   <desc>
+    <para>
+     <literal>false</literal> mostra o "caractere invisível"
+     ao invés do texto atual (modo de senha).
+    </para>
+    <para>
+     Padrão: <literal>true</literal>
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtkentry.property.width-chars" type="rw">
+   <propname>width-chars</propname>
+   <proptype>int</proptype>
+   <shortdesc>
+   Numero de caracteres para deixar espaço para eles na caixa de texto.
+   </shortdesc>
+   <desc>
+    <para>
+      Numero de caracteres para deixar espaço para eles na caixa de texto.
+    </para>
+    <para>
+     Valores permitidos: <literal>&gt;= -1</literal>
+    </para>
+    <para>
+     Padrão: <literal>-1</literal>
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtkentry.property.xalign" type="rw">
+   <propname>xalign</propname>
+   <proptype>double</proptype>
+   <shortdesc>
+    O alinhamento horizontal, de 0 até 1.
+   </shortdesc>
+   <desc>
+    <para>
+     O alinhamento horizontal, de 0 (esquerda) até 1 (direita). Revertido para layouts RTL.
+    </para>
+    <para>
+     Valores permitidos: <literal>[0,1]</literal>
+    </para>
+    <para>
+     Padrão: <literal>0</literal>
+    </para>
+   </desc>
+  </prop>
+ </properties>
+
+
+ <signals>
+  <signal id="gtk.gtkentry.signal.activate">
+   <signalname>activate</signalname>
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
+     <paramdef><classname>GtkEntry</classname> <parameter>entry</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    O widget é ativado.
+   </shortdesc>
+   <desc>
+    <para>
+     O sinal "activate" é emitido quando a caixa de texto é ativada
+     ou por uma ação do usuário (pressionando a tecla Enter) ou através de programação
+     com o método <function class="GtkWidget">activate</function>.
+    </para>
+   </desc>
+  </signal>
+
+  <signal id="gtk.gtkentry.signal.backspace">
+   <signalname>backspace</signalname>
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
+     <paramdef><classname>GtkEntry</classname> <parameter>entry</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    A tecla Backspace é pressionada.
+   </shortdesc>
+   <desc>
+    <para>
+     O sinal "backspace" é emitido quando a tecla Backspace é pressionada
+     no teclado.
+    </para>
+   </desc>
+  </signal>
+
+  <signal id="gtk.gtkentry.signal.copy-clipboard">
+   <signalname>copy-clipboard</signalname>
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
+     <paramdef><classname>GtkEntry</classname> <parameter>entry</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    A seleção é copiada para a area de transferência.
+   </shortdesc>
+   <desc>
+    <para>
+     O sinal "copy-clipboard" é emitido quando o texto selecionado
+     na caixa de texto é copiado para a area de transferência.
+    </para>
+   </desc>
+  </signal>
+
+  <signal id="gtk.gtkentry.signal.cut-clipboard">
+   <signalname>cut-clipboard</signalname>
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
+     <paramdef><classname>GtkEntry</classname> <parameter>entry</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    A seleção é recortada na area de transferência.
+   </shortdesc>
+   <desc>
+    <para>
+     O sinal "cut-clipboard" signal é emitido quando a seleção na caixa de texto é 
+     recortada (removida da caixa de texto) e colocada na area de transferência.
+    </para>
+   </desc>
+  </signal>
+
+  <signal id="gtk.gtkentry.signal.delete-from-cursor">
+   <signalname>delete-from-cursor</signalname>
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
+     <paramdef><classname>GtkEntry</classname> <parameter>entry</parameter></paramdef>
+     <paramdef><enumname>GtkDeleteType</enumname> <parameter>delete_type</parameter></paramdef>
+     <paramdef>int <parameter>count</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Algum texto é excluído da caixa de texto.
+   </shortdesc>
+   <desc>
+    <para>
+     O sinal "delete-from-cursor" é emitido quando há uma exclusão do cursor,
+     ex, a remoção do texto na posição do cursor, ou antes dele (contagem negativa)
+     ou depois dele (contagem positiva).
+    </para>
+   </desc>
+  </signal>
+
+  <signal id="gtk.gtkentry.signal.insert-at-cursor">
+   <signalname>insert-at-cursor</signalname>
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
+     <paramdef><classname>GtkEntry</classname> <parameter>entry</parameter></paramdef>
+     <paramdef>string <parameter>string</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    O texto é inserido.
+   </shortdesc>
+   <desc>
+    <para>
+     O sinal "insert-at-cursor" é emitido quando o texto esta sendo inserido
+     na caixa de texto.
+    </para>
+   </desc>
+  </signal>
+
+  <signal id="gtk.gtkentry.signal.move-cursor">
+   <signalname>move-cursor</signalname>
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
+     <paramdef><classname>GtkEntry</classname> <parameter>entry</parameter></paramdef>
+     <paramdef><enumname>GtkMovementStep</enumname> <parameter>step</parameter></paramdef>
+     <paramdef>int <parameter>count</parameter></paramdef>
+     <paramdef>bool <parameter>extend_selection</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    O cursor é movido.
+   </shortdesc>
+   <desc>
+    <para>
+     O sinal "move-cursor" é emitido quando o cursor esta sendo movido por
+     <parameter>count</parameter> passos de tamanho <parameter>step</parameter>.
+     Se <parameter>extend_selection</parameter> é <literal>true</literal>,
+     a seleção esta sendo extendida enquanto o cursor esta sendo movido.
+    </para>
+   </desc>
+  </signal>
+
+  <signal id="gtk.gtkentry.signal.paste-clipboard">
+   <signalname>paste-clipboard</signalname>
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
+     <paramdef><classname>GtkEntry</classname> <parameter>entry</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    O texto é colado da area de transferência.
+   </shortdesc>
+   <desc>
+    <para>
+     O sinal "paste-clipboard" é emitido quando o conteúdo
+     da area de transferência é colado na caixa de texto.
+    </para>
+   </desc>
+  </signal>
+
+  <signal id="gtk.gtkentry.signal.populate-popup">
+   <signalname>populate-popup</signalname>
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
+     <paramdef><classname>GtkEntry</classname> <parameter>entry</parameter></paramdef>
+     <paramdef><classname>GtkMenu</classname> <parameter>menu</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    O menu de contexto precisa ser povoado.
+   </shortdesc>
+   <desc>
+    <para>
+     O sinal "populate-popup" é emitido quando o menu precisa ser povoado.
+    </para>
+   </desc>
+  </signal>
+
+  <signal id="gtk.gtkentry.signal.toggle-overwrite">
+   <signalname>toggle-overwrite</signalname>
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
+     <paramdef><classname>GtkEntry</classname> <parameter>entry</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Modifica o atributo interno overwrite_mode (modo de sobrescrita).
+   </shortdesc>
+   <desc>
+    <para>
+     O sinal "toggle-overwrite" é emitido quando o atributo interno da
+     caixa de texto "overwrite_mode" é modificado pressionando-se a tecla Insert.
+    </para>
+   </desc>
+  </signal>
+ </signals>
+
+</classentry>
+<!-- Keep this comment at the end of the file
+Local variables:
+mode: sgml
+sgml-omittag:t
+sgml-shorttag:t
+sgml-minimize-attributes:nil
+sgml-always-quote-attributes:t
+sgml-indent-step:1
+sgml-indent-data:t
+sgml-parent-document:nil
+sgml-default-dtd-file:"../../../manual.ced"
+sgml-exposed-tags:nil
+sgml-local-catalogs:nil
+sgml-local-ecat-files:nil
+End:
+vim600: syn=xml fen fdm=syntax fdl=2 si
+vim: et tw=78 syn=sgml
+vi: ts=1 sw=1
+-->
