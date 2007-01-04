@@ -1,0 +1,404 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- EN-Revision: 1.12 Maintainer: fernandoc Status: ready -->
+<classentry id="gtk.gtkexpander">
+ <classmeta>
+  <classtitle>GtkExpander</classtitle>
+  <classparent>GtkBin</classparent>
+  <classimage fileref="&directory.images;/reference/gtk/gtkexpander.png"/>
+  <shortdesc>
+    Um container que pode esconder o seu filho.
+  </shortdesc>
+  <desc>
+   <para>
+    <classname>GtkExpander</classname> cria um container que pode esconder ou
+    exibir detalhes caso solicitado. Isto é feito usando um pequeno triangulo
+    (similar ao usado em <classname>GtkTreeView</classname>) para controlar
+    quando os detalhes são exibidos ou não. Se o triangulo esta apontando para a 
+    direita, os detalhes são escondidos. Clicando no objeto, o triangulo aponta
+    para baixo o que indica que os detalhes agora estão visíveis.
+   </para>
+   <para>
+    Você pode usar <classname>GtkExpander</classname> como qualquer descendente de 
+    <classname>GtkBin</classname> primeiro criando o widget filho e depois usando
+    <function class="GtkContainer">add</function> para adiciona-lo ao 
+    expander. Quando o expander é modificado, ele automaticamente cuida de
+    exibir e esconder os detalhes.
+   </para>
+  </desc>
+ </classmeta>
+
+ <constructors>
+
+  <constructor id="gtk.gtkexpander.constructor">
+   <funcsynopsis>
+    <funcprototype>
+    <funcdef> <function>GtkExpander</function></funcdef>
+    <paramdef>string <parameter>label</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Cria o objeto expander.
+   </shortdesc>
+   <desc>
+    <para>
+     Cria um novo objeto expander usando o parãmetro como texto do rótulo.
+     O exemplo abaixo ilustra o uso do construtor.
+    </para>
+    <example>
+      <title>
+        Usando o Expander para Mostrar/Esconder os detalhes.
+        <classname>GtkExpander</classname>
+      </title>
+      <programlisting role="php">
+       <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="&directory.examples;/reference/gtk/gtkexpander/constructor.phpw" parse="text">
+        <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+       </xi:include>
+      </programlisting>
+    </example>
+   </desc>
+  </constructor>
+
+  <constructor id="gtk.gtkexpander.constructor.new_with_mnemonic">
+   <funcsynopsis>
+    <funcprototype>
+    <funcdef> <function>GtkExpander::new_with_mnemonic</function></funcdef>
+    <paramdef>string <parameter>label</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Cria uma instancia GtkExpander com um rótulo minemonico.
+   </shortdesc>
+   <desc>
+    <para>
+     Este é um método estatico o qual cria uma novainstancia de
+     <classname>GtkExpander</classname> usando <literal>label</literal>
+     como o texto do rótulo. Se caracteres no rótulo forem precedidos por um sublinhado,
+     eles são siblinhados. Se você precisa de um caractere de sublinhado literal
+     em um rótulo, use '__' (dois sublinhados). O primeiro caractere sublinhado
+     representa um acelerador chamado minemonico. Pressionando Alt com esta
+     tecla ativa o botão. Se o rótulo for <literal>Null</literal> o expander
+     não terá rótulo.
+    </para>
+    <para>
+     Este método é um atalho, você pode atingir os mesmos resultados criando uma
+     nova instancia de <classname>GtkExpander</classname> com um rótulo contendo um sublinhado
+     e então chamar <function class="GtkExpander">set_use_underline</function>.
+    </para>
+    <simpara>
+     &static;
+    </simpara>
+   </desc>
+  </constructor>
+
+ </constructors>
+
+ <methods>
+
+  <method id="gtk.gtkexpander.method.get_expanded">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>bool <function>get_expanded</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Retorna o estado atual do expander.
+   </shortdesc>
+   <desc>
+    <para>
+     Pergunta a um <classname>GtkExpander</classname> e retorna o estado atual.
+     Retorna <literal>true</literal> se o widget filho esta revelado.
+     <literal>false</literal> se não.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkExpander">set_expanded</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkexpander.method.get_label">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>string <function>get_label</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Obtém o texto do rótulo do expander
+   </shortdesc>
+   <desc>
+    <para>
+     Obtém o texto do rótulo do GtkExpander especificado, como definido por 
+     <function class="GtkExpander">set_label</function>. Se o rótulo não foi definido,
+     o valor de retorno será <literal>null</literal>.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkExpander">set_label</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkexpander.method.get_label_widget">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>GtkWidget <function>get_label_widget</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Obtém o widget do rótulo
+   </shortdesc>
+   <desc>
+    <para>
+     Use este método para obter o widget do rótulo para o objeto
+     <classname>GtkExpander</classname> especificado.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkExpander">set_label_widget</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkexpander.method.get_spacing">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>int <function>get_spacing</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Retorna o valor definido por 
+    <function class="GtkExpander">set_spacing</function>
+   </shortdesc>
+   <desc>
+    <para>
+     Retorna o espaçamento entre o 
+     <classname>GtkExpander</classname> especificado e seu widget filho em pixels.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkExpander">set_spacing</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkexpander.method.get_use_markup">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>bool <function>get_use_markup</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Determina se o texto do rótulo deve ser interpretado como
+    texto com marcação Pango.
+   </shortdesc>
+   <desc>
+    <para>
+     Este metodo retorna <literal>true</literal> se o  
+     <classname>GtkExpander</classname> especificado tem um rótulo que contém texto a 
+     ser interpretado como marcação.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkExpander">set_use_markup</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkexpander.method.get_use_underline">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>bool <function>get_use_underline</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Determina quando um caractere de sublinhado no rótulo do expander
+    indica um minemonico.
+   </shortdesc>
+   <desc>
+    <para>
+     Este método retorna <literal>true</literal> se um sublinhado
+     no rótulo do expander indica uma tecla de atalho.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkExpander">set_use_underline</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkexpander.method.set_expanded">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_expanded</function></funcdef>
+     <paramdef>bool <parameter>expanded</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Define o estado do filho como 'visível'.
+   </shortdesc>
+   <desc>
+    <para>
+     Use este método para definir o estado do
+     <classname>GtkExpander</classname> especificado. Defina como <literal>true</literal> 
+     se você quer que o filho seja revelado, e <literal>false</literal> se
+     você quer que o filho seja escondido.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkExpander">get_expanded</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkexpander.method.set_label">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_label</function></funcdef>
+     <paramdef>string <parameter>label</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Define o texto do rótulo do expander.
+   </shortdesc>
+   <desc>
+    <para>
+     Use este método para definir o texto do 
+     <classname>GtkExpander</classname> especificado para o valor passado do parâmetro. Note
+     que usar esta função irá limpar quiasquer rótulos definidos anteriormente.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkExpander">get_label</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkexpander.method.set_label_widget">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_label_widget</function></funcdef>
+     <paramdef>GtkWidget <parameter>label_widget</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Define o widget do rótulo para o expander.
+   </shortdesc>
+   <desc>
+    <para>
+     Use este método para definir o widget do rótulo associado com o  
+     <classname>GtkExpander</classname> especificado. Este widget irá aparecer
+     embutido em conjunto com a seta do expander.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkExpander">get_label_widget</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkexpander.method.set_spacing">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_spacing</function></funcdef>
+     <paramdef>int <parameter>spacing</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Define a distancia entre <classname>GtkExpander</classname> e seu 
+    filho.
+   </shortdesc>
+   <desc>
+    <para>
+     Use este método para definir o número de pixels a colocar entre o
+     objeto <classname>GtkExpander</classname> e seu filho (normalmente um
+     <classname>GtkLabel</classname>).
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkExpander">get_spacing</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkexpander.method.set_use_markup">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_use_markup</function></funcdef>
+     <paramdef>bool <parameter>use_markup</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Define se o texto do rótulo deve ser interpretado como texto
+    com marcação na língua Pango.
+   </shortdesc>
+   <desc>
+    <para>
+     Use este método se você quer que o texto do rótulo do expander seja
+     interpretado como texto com marcação Pango. Defina como <literal>true</literal> se você
+     quer que o texto seja interpretado como marcação, <literal>false</literal> 
+     se não.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkExpander">get_use_markup</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkexpander.method.set_use_underline">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_use_underline</function></funcdef>
+     <paramdef>bool <parameter>use_underline</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Define quando um sublinhado precedendo um caractere no rótulo significa que
+    o caractere é um acelerador minemonico para o expander.
+   </shortdesc>
+   <desc>
+    <para>
+     Use este método para permitir um sublinhado para determinar qual caractere
+     será definido como um acelerador minemonico para o 
+     <classname>GtkExpander</classname> especificado. O caractere que segue imediatamente
+     um sublinhado no texto do rótulo é definido como minemonico.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkExpander">get_use_underline</function>
+    </para>
+   </desc>
+  </method>
+
+ </methods>
+
+ <signals>
+
+  <signal id="gtk.gtkexpander.signal.activate">
+   <signalname>activate</signalname>
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
+     <paramdef>GtkExpander <parameter>expander</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Emitido quando o expander é ativado.
+   </shortdesc>
+   <desc>
+    <para>
+     Este sinal é emitido quando o expander é ativado pelo usuário
+     clicando na seta do expander.
+    </para>
+   </desc>
+  </signal>
+  
+ </signals>
+
+</classentry>
