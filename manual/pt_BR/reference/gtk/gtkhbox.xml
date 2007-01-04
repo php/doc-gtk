@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- EN-Revision: 1.10 Maintainer: fernandoc Status: ready -->
+<classentry id="gtk.gtkhbox">
+ <classmeta>
+  <classtitle>GtkHBox</classtitle>
+  <classparent>GtkBox</classparent>
+  <shortdesc>
+   Uma caixa horizontal para organizar widgets filhos.
+  </shortdesc>
+  <desc>
+   <para>
+    O container <classname>GtkHBox</classname> é designado para organizar widgets
+    filhos em uma simples linha, alocando a mesma altura para todos os filhos.
+    Isso sobrescreve qualquer tamanho requisitado pelo filho, e widgets filhos que ocupam
+    menos do que o espaço alocado são centrados horizontalmente por padrão
+    neste espaço.
+   </para>
+   <para>
+    Adicionar widgets filhos a um <classname>GtkHBox</classname> é feito por
+    métodos de empacotamento que são herdados da classe <classname>GtkBox</classname>,
+    como <function class="GtkBox">pack_start</function>, ou pelo menos
+    flexível <function class="GtkContainer">add</function>, comum a
+    todos os widgets que são container.
+   </para>
+   <para>
+    GtkHBox e GtkVBox, em combinação, são os widgets usados para
+    empacotamento mais comum. Para um código de exemplo de como usar ambos,
+    veja o construtor de <classname>GtkVBox</classname>.
+   </para>
+   <para>
+    &seealso;
+    <classname>GtkVBox</classname>, <classname>GtkTable</classname>, <classname>GtkButtonBox</classname>,
+    <classname>GtkBox</classname>, <classname>GtkContainer</classname>.
+   </para>
+  </desc>
+ </classmeta>
+
+ <constructors>
+
+  <constructor id="gtk.gtkhbox.constructor">
+   <funcsynopsis>
+    <funcprototype>
+    <funcdef> <function>GtkHBox</function></funcdef>
+    <paramdef>bool <parameter><optional>homogeneous = false</optional></parameter></paramdef>
+    <paramdef>int <parameter><optional>spacing = 0</optional></parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Cria um container que arranja os widgets horizontalmente.
+   </shortdesc>
+   <desc>
+    <para>
+     O parâmetro <parameter>homogeneous</parameter> é um valor boleano o qual determina quando
+     os widgets filhos na caixa devem ter a largura do widget mais largo. O funcionamento
+     padrão (false) é manter a largura individual dos widgets sem modificação.
+     O segundo parâmetro, <parameter>spacing</parameter>, define o número minimo de pixels
+     a deixar entre os widgets.
+    </para>
+    <example>
+     <title>Demostração de empacotamento com GtkHBox e GtkVBox</title>
+     <programlisting role="php">
+      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="&directory.examples;/reference/gtk/gtkvbox/constructor.phpw" parse="text">
+       <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+      </xi:include>
+     </programlisting>
+    </example>
+   </desc>
+  </constructor>
+
+ </constructors>
+
+</classentry>
