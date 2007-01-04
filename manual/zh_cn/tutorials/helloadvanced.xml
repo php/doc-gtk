@@ -1,9 +1,12 @@
 <chapter id="tutorials.helloadvanced">
-<!-- $Revision: 1.1 $ -->
+<!-- EN-Revision: 1.4 Maintainer: mikespook Status: ready -->
+<!-- $Revision: 1.2 $ -->
  <title>Hello World（高级）</title>
 
  <simpara>
-  这个指南比第一个 hello world 指南介绍了更加高级的功能。这里，我们创建一个用户可以输入用户名和密码的登录窗口。用户点击登录按钮时，检查文本框内容，当用户忘记他的用户名或密码时显示错误的消息。
+   本指南比第一个 hello world 指南介绍了更加高级的功能。
+   这里，我们创建一个用户可以输入用户名和密码的登录窗口。
+   用户点击登录按钮时，检查文本框内容，当用户忘记他的用户名或密码时显示错误的消息。
  </simpara>
 
  <para>
@@ -12,7 +15,8 @@
  </para>
 
  <para>
-  首先，创建一个窗口，设置它的标题并且设置当窗口销毁时退出主循环——这些你应当已经在之前的指南中有所了解：
+   首先，创建一个窗口，设置它的标题并且设置当窗口销毁时退出主循环——
+   这些你应当已经在之前的指南中有所了解：
   <informalexample>
    <programlisting role="php"><![CDATA[
 $wnd = new GtkWindow();
@@ -33,7 +37,7 @@ $txtPassword = new GtkEntry();
   我们希望用户明白哪个文本框输入用户名，哪个文本框输入密码，所以还需要标签用于描述：
   <informalexample>
    <programlisting role="php"><![CDATA[
-//The second parameter says that the underscore should be parsed as underline
+//第二个参数表明下划线应当转化为助记符下划线
 $lblUsername = new GtkLabel('_Username', true);
 $lblPassword = new GtkLabel('_Password', true);
 ]]></programlisting>
@@ -45,7 +49,11 @@ $btnLogin    = new GtkButton('_Login');
 $btnCancel   = new GtkButton('_Cancel');
 ]]></programlisting>
   </informalexample>
-  你可能注意到 <classname>GtkLabel</classname> 传递的第二个参数，这表明下划线的作用是其后的字符显示下划线，而 <classname>GtkButton</classname> 的构造函数并没有这个参数：按钮的构造函数自动完成助记符的转换，而标签的并不是这样。这个行为可能对你来说有点奇怪，但是这非常类似你有一个助记符在按钮的标签上除此之外普通标签也有一个。（有问题的翻译：This behavior might be strange to you, but it's more likely that you have a mnemonic in a button's label than that a normal label has one.）
+  你可能注意到 <classname>GtkLabel</classname> 传递的第二个参数，
+  这表明下划线的作用是其后的字符显示下划线，而 <classname>GtkButton</classname>
+  的构造函数并没有这个参数：按钮的构造函数自动完成助记符的转换，
+  而标签的并不是这样。这个行为可能对你来说有点奇怪，
+  但是大概原因是按钮标签上的助记符比普通标签上的更加常用。
  </para>
 
  <para>
@@ -56,19 +64,27 @@ $lblUsername->set_mnemonic_widget($txtUsername);
 $lblPassword->set_mnemonic_widget($txtPassword);
 ]]></programlisting>
   </informalexample>
-  更进一步，我们需要判断当按钮按下时调用哪个操作。取消按钮将会销毁窗口（这将中止应用程序）而登录按钮将检查文本框并调用进一步的操作：
+  更进一步，我们需要判断当按钮按下时调用哪个操作。
+  取消按钮将会销毁窗口（这将中止应用程序）
+  而登录按钮将检查文本框并调用进一步的操作：
   <informalexample>
    <programlisting role="php"><![CDATA[
 $btnCancel->connect_simple('clicked', array($wnd, 'destroy'));
 $btnLogin ->connect_simple('clicked', 'login', $wnd, $txtUsername, $txtPassword);
 ]]></programlisting>
   </informalexample>
-  我们向（还未经定义的）<literal>login</literal> 函数传递了作为可选参数的三个元件 <varname>$wnd</varname>，
-  <varname>$txtUsername</varname> 和 <varname>$txtPassword</varname> ，因为我们需要：获取文本框的值，同时如果一切正常则销毁或隐藏窗口。
+  我们向（还未经定义的）<literal>login</literal> 函数传递了作为可选参数的三个元件
+  <varname>$wnd</varname>，<varname>$txtUsername</varname> 和
+  <varname>$txtPassword</varname>，因为我们需要：获取文本框的值，
+  同时如果一切正常则销毁或隐藏窗口。
  </para>
 
  <para>
- 现在我们已经有了全部需要的元件，并添加到了窗口上。由于 <classname>GtkWindow</classname> 是二进制容器，它仅仅可容纳一个元件。所以我们需要一个可以容纳许多元件并可很好的对元件进行布局的容器。 <classname>GtkTable</classname> 是一个不错的选择，因为它可以保持标签在一列，同时文本框在下一列：
+   现在我们已经有了全部需要的元件，并添加到了窗口上。由于 
+   <classname>GtkWindow</classname> 是二进制容器，它仅仅可容纳一个元件。
+   所以我们需要一个可以容纳许多元件并可很好的对元件进行布局的容器。
+   <classname>GtkTable</classname> 是一个不错的选择，因为它可以保持标签在一列，
+   同时文本框在下一列：
   <informalexample>
    <programlisting role="php"><![CDATA[
 $tbl = new GtkTable(3, 2);
@@ -80,7 +96,8 @@ $tbl->attach($txtPassword, 1, 2, 2, 3);
 ]]></programlisting>
   </informalexample>
   (<varname>$lblCredit</varname> 是仅仅有一条信息的标签。).
-  按钮有它们自己的 <classname>GtkHButtonBox</classname>，因为这个类可以将许多按钮排列得非常好：
+  按钮有它们自己的 <classname>GtkHButtonBox</classname>，
+  因为这个类可以将许多按钮排列得非常好：
   <informalexample>
    <programlisting role="php"><![CDATA[
 $bbox = new GtkHButtonBox();
@@ -92,7 +109,10 @@ $bbox->add($btnLogin);
  </para>
 
  <para>
-  布局的最后工作是在窗口上添加 table 和 button box。这是无法直接完成的，因为 <classname>GtkWindow</classname> 继承于 <classname>GtkBin</classname> 而只能保持一个元件。所以我们需要另外的容器，这回使用 <classname>GtkVBox</classname>：
+   布局的最后工作是在窗口上添加 table 和 button box。这是无法直接完成的，
+   因为 <classname>GtkWindow</classname> 继承于 <classname>GtkBin</classname>
+   而只能保持一个元件。所以我们需要另外的容器，这回使用 
+   <classname>GtkVBox</classname>：
   <informalexample>
    <programlisting role="php"><![CDATA[
 $vbox = new GtkVBox();
@@ -111,18 +131,24 @@ Gtk::main();
  </para>
 
  <para>
-  最后还未完成的是 <literal>login</literal> 函数，当用户点击登录按钮时调用。它将检查用户名和密码的值：如果它们的长度是 0（用户没有输入任何内容），一个错误信息将会显示。如果一切正常，窗口将销毁同时程序继续执行并显示主窗口。
+   最后还未完成的是 <literal>login</literal> 函数，当用户点击登录按钮时调用。
+   它将检查用户名和密码的值：如果它们的长度是 0（用户没有输入任何内容），
+   一个错误信息将会显示。如果一切正常，窗口将销毁同时程序继续执行并显示主窗口。
  </para>
 
  <para>
-  从元件获取文本是非常简单的，我们仅仅需要使用 <classname>GtkEntry</classname> 的 <function class="GtkEntry">get_text</function> 方法：
+   从元件获取文本是非常简单的，我们仅仅需要使用 <classname>GtkEntry</classname> 的 
+   <function class="GtkEntry">get_text</function> 方法：
   <informalexample>
    <programlisting role="php"><![CDATA[
 $strUsername = $txtUsername->get_text();
 $strPassword = $txtPassword->get_text();
 ]]></programlisting>
   </informalexample>
-  使用普通的 php 函数 <literal>strlen</literal> 完成检查。如果出现错误，我们希望显示一个有一条消息的对话框。<classname>GtkMessageDialog</classname> 用于这个任务，它自动创建了图标和按钮（OK, Yes/No）：
+  使用普通的 php 函数 <literal>strlen</literal> 完成检查。
+  如果出现错误，我们希望显示一个有一条消息的对话框。
+  <classname>GtkMessageDialog</classname> 用于这个任务，
+  它自动创建了图标和按钮（OK, Yes/No）：
   <informalexample>
    <programlisting role="php"><![CDATA[
 $dialog = new GtkMessageDialog($wnd, Gtk::DIALOG_MODAL, Gtk::MESSAGE_ERROR, Gtk::BUTTONS_OK, $errors);
@@ -134,7 +160,7 @@ $dialog->destroy();
  </para>
 
  <para>
-  现在你只要确保已经将 login 函数放在了主循环的前面（！），那么运行它。
+  现在你只要确保已经将 login 函数放在了主循环的“前面”，那么运行它。
  </para>
 
  <example>
