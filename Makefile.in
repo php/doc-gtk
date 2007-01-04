@@ -134,7 +134,7 @@ $(BUILD_TEST)/updates-$(LANG).php: $(SCRIPT_DIR)/testclasses.xml
 	@mkdir -p $(BUILD_TEST)
 	$(XSLTPROC) $(updates) $(SCRIPT_DIR)/testmanual.xml > $(TMP)
 	@cat $(TMP) | sed -e 's/ \[en\]//;s/\"\"/"$(TS)"/;/php/!d;s/^  *//' > $(BUILD_TEST)/updates-new.php
-	@if test -f $(HISTORY)/updates-$(LANG).php; then \
+	@if test $(HISTORY) != "no" -a -f $(HISTORY)/updates-$(LANG).php; then \
 		cp $(HISTORY)/updates-$(LANG).php $@; \
 		$(PHP) $(SCRIPT_DIR)/merge_updates.php $(BUILD_TEST)/updates-new.php $@; \
 	else \
