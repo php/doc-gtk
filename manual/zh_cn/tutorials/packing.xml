@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- EN-Revision: 1.5 Maintainer: mikespook Status: ready -->
+<!-- $Revision: 1.1 $ -->
+<chapter id="tutorials.packing">
+ <title>摆放元件</title>
+
+ <sect1 id="tutorials.packing.about">
+  <title>介绍</title>
+  <simpara>
+   本指南介绍了在窗口中安放元件的不同方法，并且告诉你如何选择正确的方式。
+  </simpara>
+  <para>
+    如果你之前在 Visual Basic 或 Visual C++中开发过用户界面，
+    你一定奇怪为什么需要一个指南来介绍元件摆放。到现在为止基本上都是这样的形式：
+    修改窗口大小，选择一个元件摆放在坐标 <literal>(x,y)</literal> 的位置
+    并调整宽度和高度——没有其他了，绝对简单。元件有固定的位置和大小，
+    但是即便当窗口大小改变时它还是在原先的位置上——元件无法自动调整它们的位置，
+    因为它们不知道如何调整。
+  </para>
+  <simpara>
+    在 Gtk 中，这都是动态的：当窗口尺寸改变时元件修改自己的尺寸，
+    除非你设置它们不要这么做。这样设置会比固定尺寸和位置的稍微复杂一点，
+    但是好处是窗口可以修改大小到几乎任何尺寸，这看起来也不错。
+  </simpara>
+ </sect1>
+
+
+ <sect1 id="tutorials.packing.basics">
+  <title>基本的摆放</title>
+
+  <simpara>
+   在 Gtk 中基于元件可以包含多少子元件，而分为不同的类型。
+  </simpara>
+
+  <itemizedlist>
+   <listitem>不可放置子元件：普通元件</listitem>
+   <listitem>最多一个子元件：普通容器</listitem>
+   <listitem>两个以上子元件：容器</listitem>
+  </itemizedlist>
+
+  <para>
+    当你开始编写程序时使用的基本的元件是 <classname>GtkWindow</classname>
+    （多数情况下），这是一个普通容器。这意味着它只可容纳一个子元件。
+    不管怎么说，一个元件对于一个应用来说是远远不够的。解决方法是使用容器，
+    选择一个并添加到窗口上去。在这个容器上，你可以添加更多的元件，
+    甚至是更多的容器。这样你可以嵌套容器并通过这种方式获得你想要的布局。
+  </para>
+
+  <para>
+    不同的容器如 <classname>GtkHBox</classname>，
+    <classname>GtkVBox</classname>，<classname>GtkTable</classname>
+    和 <classname>GtkFixed</classname> 在布局元件的时候有着不同的表现。
+    每个容器都有其适合的用途，并且需要联合使用以实现高级的布局。
+  </para>
+
+  <!-- TODO: Explain filling and expanding, with screenshot -->
+ </sect1>
+
+
+ <sect1 id="tutorials.packing.box">
+  <title>盒子 —— GtkHBox 和 GtkVBox</title>
+
+  <para>
+    最简单但也是最常用的容器是 <classname>GtkBox</classname> 特别是：
+    <classname>GtkHBox</classname> 和 <classname>GtkVBox</classname>。
+    它们允许在一行中添加元件，不多也不少。<classname>GtkHBox</classname> 
+    水平摆放元件，而  <classname>GtkVBox</classname> 则垂直摆放它们。
+  </para>
+
+  <para>
+    使用 <function class="GtkBox">pack_start</function> 或
+    <function class="GtkBox">pack_end</function> 添加元件。
+    <function class="GtkBox">pack_start</function> 会从开始添加，
+    将一个元件放到另一个的后面（从左到右，从上到下），
+    而 <function class="GtkBox">pack_end</function>
+    则从末尾添加（从右到左，从下到上）。
+  </para>
+
+  <para>
+   你可以通过 <function class="GtkBox">pack_start</function> 和
+   <function class="GtkBox">pack_end</function> 的三个可选的参数来调整布局。
+   详细情况请看它们的文档。
+  </para>
+
+  <example>
+   <title>使用 <classname>GtkVBox</classname> 简单实现动态布局</title>
+   <programlisting role="php">
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+     href="&directory.examples;/tutorials/packing/boxes.phpw" parse="text">
+     <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+    </xi:include>
+   </programlisting>
+  </example>
+
+  <para>
+    运行例子并调整窗口大小：多行文本元件调整它的大小充满整个窗口，
+    除了标签或按钮使用的空间。修改设置 <varname>scrwnd</varname> 
+    位置的第三个参数，从 <literal>true</literal> 为 <literal>false</literal>。
+    会发生什么？
+  </para>
+
+  <para>
+    <classname>GtkBox</classname> 的特殊版本，如 
+    <classname>GtkHButtonBox</classname> 和 <classname>GtkVButtonBox</classname>：
+    它们的其他行为跟它们的兄弟一样，除了只能容纳 <classname>GtkButton</classname>。
+    为了补偿这个限制，它们拥有在布局按钮上更加需要的方法。
+  </para>
+ </sect1>
+
+
+ <sect1 id="tutorials.packing.table">
+  <title>使用 GtkTable 实现表格状布局</title>
+
+  <para>
+    虽然使用 <classname>GtkBox</classname> 创建动态布局是非常简单的，
+    但是它非常难做到：不论标签内容多少，等宽的摆放在交互元件的左边。
+    如果你需要这样的布局，<classname>GtkTable</classname> 是很好的选择。
+    元件可以分为若干行和列，并有不同的填充区域。
+  </para>
+
+  <example>
+   <title>表格状布局</title>
+   <programlisting role="php">
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+     href="&directory.examples;/tutorials/packing/table.phpw" parse="text">
+     <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+    </xi:include>
+   </programlisting>
+  </example>
+
+  <para>
+    运行例子，你会看到 <literal>Id</literal> 标签当前水平置中。
+    默认情况下，元件会从两个方向填充到每一个可用的区域，对于多数元件这没有问题。
+    而对于 <classname>GtkLabel</classname> 这并不是最理想的：标签应当排列在一边。
+    <function class="GtkLabel">set_justify</function> 函数只能用于多行文本元件中
+    文本对齐的指定。我们需要用 <classname>GtkAlignment</classname>
+    指定标签的文本对齐方式。上面的例子中，标签 <literal>Name</literal> 显示了结果。
+   </para>
+ </sect1>
+
+
+ <sect1 id="tutorials.packing.fixed">
+  <title>固定布局</title>
+
+  <para>
+    这个容器没有自己的布局逻辑；你必须指定元件摆放的位置。
+    元件的尺寸是自动设定的，但是你可以通过
+    <function class="GtkWidget">set_size_request</function> 重新设置一个尺寸。
+  </para>
+
+  <simpara>
+    当然摆放固定位置的元件是非常简单的：调整窗口大小不会移动元件或调整其尺寸。
+    只有当绝对必要的时候才使用它；多数情况下动态容器是更好的选择。
+  </simpara>
+
+  <example>
+   <title>使用 <classname>GtkFixed</classname> 实现固定布局</title>
+   <programlisting role="php">
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+     href="&directory.examples;/tutorials/packing/fixed.phpw" parse="text">
+     <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+    </xi:include>
+   </programlisting>
+  </example>
+ </sect1>
+
+</chapter>
