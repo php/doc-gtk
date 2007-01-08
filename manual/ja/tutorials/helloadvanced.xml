@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- $Revision: 1.1 $ -->
+<!-- EN-Revision: 1.4 Maintainer: takagi Status: ready -->
+<chapter id="tutorials.helloadvanced">
+ <title>Hello World (上級)</title>
+
+ <simpara>
+  このチュートリアルでは、最初の hello world チュートリアルより
+  もうすこし高度な機能を扱います。ここではログイン画面を作成し、
+  ユーザ名とパスワードを入力してもらうようにします。
+  ユーザがログインボタンをクリックした際にテキストフィールドの内容をチェックし、
+  ユーザ名やパスワードが入力されていない場合にエラーメッセージを表示します。
+ </simpara>
+
+ <para>
+  これが、最終的なプログラムの実行画面です。
+  <graphic fileref="&directory.images;/tutorials/helloadvanced.png"/>
+ </para>
+
+ <para>
+  まず最初にウィンドウを作成し、タイトルを設定します。
+  そして、ウィンドウが破棄された際にメインループを終了させるようにします。
+  これらについては最初のチュートリアルで説明しました。
+  <informalexample>
+   <programlisting role="php"><![CDATA[
+$wnd = new GtkWindow();
+$wnd->set_title('Login');
+$wnd->connect_simple('destroy', array('gtk', 'main_quit'));
+]]></programlisting>
+  </informalexample>
+ </para>
+
+ <para>
+  次に行うことは、このダイアログで必要な全ウィジェットを作成することです。
+  最初に、二つのテキスト入力フィールドを作成します。
+  それぞれユーザ名とパスワードを入力するためのものです。
+  <informalexample>
+   <programlisting role="php"><![CDATA[
+$txtUsername = new GtkEntry();
+$txtPassword = new GtkEntry();
+]]></programlisting>
+  </informalexample>
+  ユーザに対して、
+  そのテキストフィールドがユーザ名用なのかパスワード用なのかを説明しなければなりませんね。
+  そこで、説明用のラベルが必要になります。
+  <informalexample>
+   <programlisting role="php"><![CDATA[
+//The second parameter says that the underscore should be parsed as underline
+$lblUsername = new GtkLabel('_Username', true);
+$lblPassword = new GtkLabel('_Password', true);
+]]></programlisting>
+  </informalexample>
+  最後に、二つのボタンが必要です。まずログイン用のボタン、
+  そしてキャンセル用のボタンです。
+  <informalexample>
+   <programlisting role="php"><![CDATA[
+$btnLogin    = new GtkButton('_Login');
+$btnCancel   = new GtkButton('_Cancel');
+]]></programlisting>
+  </informalexample>
+  <classname>GtkLabel</classname> のコンストラクタに二番目のパラメータを渡していることにお気づきでしょうか。
+  これは、<literal>_</literal> をその次の文字のアンダーラインとして表示させるものです。
+  しかし、<classname>GtkButton</classname> のコンストラクタにはこのパラメータがありません。
+  ボタンのコンストラクタは、この処理を自動的に行います。
+  一方、ラベルは自動的には行いません。
+  ちょっと不思議に感じられるかもしれません。
+  しかし、ボタンのラベルにニモニックを指定することは多いでしょうが、
+  単なるラベルの場合にはそれほど多くはないですよね。
+ </para>
+
+ <para>
+  さて、ラベルのニモニックが入力された際に
+  どのウィジェットをアクティブにするかを指定しなければなりません。
+  このように指定します。
+  <informalexample>
+   <programlisting role="php"><![CDATA[
+$lblUsername->set_mnemonic_widget($txtUsername);
+$lblPassword->set_mnemonic_widget($txtPassword);
+]]></programlisting>
+  </informalexample>
+  さらに、ボタンがクリックされた際にどのアクションが実行されるのかを決める必要があります。
+  キャンセルボタンを押すとウィンドウを破棄
+  (アプリケーションを終了) し、ログインボタンを押すと、
+  テキストフィールドの内容をチェックしてその先に進むようにします。
+  <informalexample>
+   <programlisting role="php"><![CDATA[
+$btnCancel->connect_simple('clicked', array($wnd, 'destroy'));
+$btnLogin ->connect_simple('clicked', 'login', $wnd, $txtUsername, $txtPassword);
+]]></programlisting>
+  </informalexample>
+  三つのウィジェット <varname>$wnd</varname>、
+  <varname>$txtUsername</varname> および <varname>$txtPassword</varname>
+  を、(後で定義する) <literal>login</literal>
+  関数のオプションパラメータとして渡します。なぜなら、そこでこれらが必要になるからです。
+  テキストフィールドの値を取得したり、
+  すべてが正常に進んだ場合にウィンドウを破棄したりする際に使用します。
+ </para>
+
+ <para>
+  必要なウィジェットがすべてそろったので、それをウィンドウに追加します。
+  <classname>GtkWindow</classname> は bin コンテナなので、
+  ウィジェットをひとつだけしか保持することができません。そこで、
+  複数のウィジェットを保持でき、それらをきれいに並べることのできるコンテナが必要となります。
+  ここでは <classname>GtkTable</classname> を使用します。
+  これを使用すると、ひとつのカラムにラベルをおき、
+  その隣に入力フィールドをおいたりすることができるからです。
+  <informalexample>
+   <programlisting role="php"><![CDATA[
+$tbl = new GtkTable(3, 2);
+$tbl->attach($lblCredit, 0, 2, 0, 1);
+$tbl->attach($lblUsername, 0, 1, 1, 2);
+$tbl->attach($txtUsername, 1, 2, 1, 2);
+$tbl->attach($lblPassword, 0, 1, 2, 3);
+$tbl->attach($txtPassword, 1, 2, 2, 3);
+]]></programlisting>
+  </informalexample>
+  (<varname>$lblCredit</varname> は、メッセージを表示するためのラベルです)。
+  ボタンには <classname>GtkHButtonBox</classname> を使用します。
+  このクラスを使用すると、複数のボタンをうまい具合に配置することができるからです。
+  <informalexample>
+   <programlisting role="php"><![CDATA[
+$bbox = new GtkHButtonBox();
+$bbox->set_layout(Gtk::BUTTONBOX_EDGE);
+$bbox->add($btnCancel);
+$bbox->add($btnLogin);
+]]></programlisting>
+  </informalexample>
+ </para>
+
+ <para>
+  配置の最後の仕上げは、テーブルとボタンボックスをウィンドウに追加することです。
+  直接これを行うことはできません。なぜなら
+  <classname>GtkWindow</classname> は <classname>GtkBin</classname>
+  であり、ウィジェットをひとつだけしか保持できないからです。
+  そこで別のコンテナ、今回は <classname>GtkVBox</classname> を使用します。
+  <informalexample>
+   <programlisting role="php"><![CDATA[
+$vbox = new GtkVBox();
+$vbox->pack_start($tbl);
+$vbox->pack_start($bbox);
+]]></programlisting>
+  </informalexample>
+  これで完了です。ウィンドウを表示しましょう。
+  <informalexample>
+   <programlisting role="php"><![CDATA[
+$wnd->add($vbox);
+$wnd->show_all();
+Gtk::main();
+]]></programlisting>
+  </informalexample>
+ </para>
+
+ <para>
+  最後に残ったのが <literal>login</literal> 関数です。
+  これは、ユーザがログインボタンをクリックした際にコールされます。
+  この関数は、ユーザ名とパスワードの入力値をチェックします。
+  その長さが 0 (何も入力していなかった) の場合にエラーメッセージを表示します。
+  すべてが正常だった場合は、ウィンドウが破棄され、
+  メインウィンドウを読み込みます。
+ </para>
+
+ <para>
+  ウィジェットからテキストを取得するのは簡単です。
+  <classname>GtkEntry</classname> の
+  <function class="GtkEntry">get_text</function> メソッドを使用します。
+  <informalexample>
+   <programlisting role="php"><![CDATA[
+$strUsername = $txtUsername->get_text();
+$strPassword = $txtPassword->get_text();
+]]></programlisting>
+  </informalexample>
+  入力のチェックには、PHP の <literal>strlen</literal> 関数を使用します。
+  エラーが発生した場合には、メッセージボックスでメッセージを表示します。
+  このような場合には <classname>GtkMessageDialog</classname> が最適です。
+  これは自動的にアイコンとボタン (Ok, Yes/No) を作成します。
+  <informalexample>
+   <programlisting role="php"><![CDATA[
+$dialog = new GtkMessageDialog($wnd, Gtk::DIALOG_MODAL, Gtk::MESSAGE_ERROR, Gtk::BUTTONS_OK, $errors);
+$dialog->set_markup("The following errors occured:\r\n<span foreground='red'>" . $errors . "</span>");
+$dialog->run();
+$dialog->destroy();
+]]></programlisting>
+  </informalexample>
+ </para>
+
+ <para>
+  login 関数はメインループの前に (!) 書くようにし、メインループを実行します。
+ </para>
+
+ <example>
+  <title>完全なプログラム</title>
+  <programlisting role="php">
+   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
+               href="&directory.examples;/tutorials/helloadvanced/helloadvanced.phpw"
+               parse="text">
+    <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+   </xi:include>
+  </programlisting>
+ </example>
+
+</chapter>

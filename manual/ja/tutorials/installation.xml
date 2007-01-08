@@ -1,0 +1,608 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- $Revision: 1.1 $ -->
+<!-- EN-Revision: 1.12 Maintainer: takagi Status: ready -->
+<chapter id="tutorials.installation">
+ <title>PHP-GTK 2 のインストール</title>
+
+ <sect1 id="tutorials.installation.introduction">
+  <title>導入</title>
+  <para>
+   PHP-GTK 2 は PHP の拡張モジュールで、PHP 5.1 以降でのみ使用できます。
+   PHP-GTK 2 をインストールするための最も一般的な方法は自分でコンパイルすることですが、
+   Windows 環境においてはこれはかなり難しいことでしょう。
+   そんなときには、公式の PHP-GTK 2 アルファバイナリリリースか
+   Gnope インストーラを使用します。
+  </para>
+  <para>
+   このマニュアルでは、主要な三つのオペレーティングシステムである
+   Windows、Linux そして Mac OS X におけるインストール手順を説明します。
+   Linux での説明はほとんどのディストリビューションに適用できるでしょうし、
+   その他 POSIX に準拠したシステムでもそのままあてはまるでしょう。
+  </para>
+ </sect1>
+
+ <sect1 id="tutorials.installation.windows">
+  <title>Windows でのインストール</title>
+
+  <sect2 id="tutorials.installation.windows.gnope">
+   <title>Gnope の使用</title>
+   <para>
+    Gnope は、PHP-GTK 2 を Windows
+    上でインストールしたりメンテナンスしたりするための一番簡単な方法です。
+    Gnope はフル機能を搭載した PHP-GTK 2 インストーラで、
+    PHP 5.1、GTK 2.6 および PEAR がある環境で動作します。
+    マウスを何回かクリックするだけでインストールは終わりです!
+   </para>
+   <para>
+    インストーラを <ulink url="&url.gnope;">gnope.org</ulink> からダウンロードし、
+    画面上の説明に従ってください。Gnope は独自の PEAR チャネルも持っており、
+    公式 PEAR パッケージの <ulink url="&url.pear.gtk2;">Gtk2 カテゴリ</ulink>
+    にあるいもの以外の PHP-GTK 2 アプリケーションをダウンロードすることもできます。
+   </para>
+  </sect2>
+
+  <sect2 id="tutorials.installation.windows.manual">
+   <title>手動インストール</title>
+   <para>
+    PHP-GTK 2 の Windows 版アルファバイナリリリースを
+    <ulink url="&url.phpgtk.download;">ダウンロード</ulink>
+    ページから取得します。そのファイルを、お好みのディレクトリに展開します。
+    <literal>php-gtk</literal> という名前のディレクトリが作成され、
+    リリースに含まれるファイルがすべてそこに展開されます。
+   </para>
+   <para>
+    <filename>php.exe</filename> (CLI バージョン) および
+    <filename>php5ts.dll</filename> が必要です。これらはどちらも
+    Windows 版の PHP 5 のバイナリに含まれています。これらのファイルを
+    <filename>php-gtk</filename> ディレクトリにおいてください。
+    もしその他の拡張モジュールをこの <filename>php.exe</filename>
+    で使用したい場合は、拡張モジュールのバイナリもここにおいてください。
+    put their binaries here too.
+   </para>
+   <para>
+    <!-- FIXME: Do we need to do this? I doubt that this is necessary
+       -cweiske -->
+    それから、環境変数 <literal>PATH</literal> にこのリリースの
+    <filename>gtk+2.6.9</filename> ディレクトリを追加する必要があります。
+    バッチファイル <literal>gtkpath.bat</literal> を使用すると、
+    現在実行中のコマンドラインセッション内で適切に <literal>PATH</literal>
+    を設定してくれます。
+   </para>
+  </sect2>
+
+  <sect2 id="tutorials.installation.windows.cvs">
+   <title>CVS からのコンパイル</title>
+   <para>
+    これは、Windows で PHP-GTK 2 を使用する方法としてはお勧めしません。
+    どうしてもやってみたいという方は、CVS をチェックアウトした中にある
+    <filename>win32/README.win32.txt</filename> を熟読してください。
+   </para>
+  </sect2>
+ </sect1>
+
+ <sect1 id="tutorials.installation.linux">
+  <title>Linux でのインストール</title>
+
+  <para>
+   PHP-GTK 2 を Linux にインストールするのに最もお勧めなのは、自分でコンパイルすることです。
+   各ディストリビューション向けのバイナリパッケージやソースパッケージはまだないので、
+   パッケージ管理システムを使用して PHP-GTK 2 をインストールすることはできません!
+   ここで説明する手順は、大半の Linux ディストリビューションはもちろん
+   その他の POSIX 準拠のシステムにもあてはまります。
+  </para>
+
+  <note>ここで説明する方法は、FreeBSD ではうまくいかないという報告を受けています。</note>
+
+  <para>
+   PHP-GTK 2 を Linux システムにインストールする方法は二通りあります。
+   すでにインストール済みの PHP を使用する方法か、
+   あるいは別途 PHP-GTK 2 専用の PHP をインストールする方法です。
+   後者のほうがいくらか簡単なので、Linux の経験があまりないかたにお勧めです。
+   いずれにせよ、Gtk+ バージョン 2.6 以降がインストールされている必要があります。
+  </para>
+
+  <sect2 id="tutorials.installation.linux.newphp">
+   <title>PHP-GTK 2 を、それ用の新しい PHP とともにインストールする</title>
+
+   <para>
+    次の手順のとおりにすれば大丈夫です!
+    まず、PHP をチェックアウトします。
+    <literal>5_1</literal> ブランチあるいは <literal>5_2</literal>
+    ブランチのどちらか好きなほうをお選びください。どちらでもうまく動作します。
+    both work fine:
+
+    <programlisting role="bash"><![CDATA[
+$ cvs -d :pserver:cvsread@cvs.php.net:/repository login
+$ cvs -d :pserver:cvsread@cvs.php.net:/repository co -r PHP_5_2 php-src]]></programlisting>
+
+     そして、それをコンパイルしてインストールします。
+
+     <programlisting role="bash"><![CDATA[
+$ cd php-src
+$ ./buildconf
+$ ./configure --prefix=/opt/php5_2 --disable-cgi
+$ make
+$ su
+$ make install
+$ echo extension=php_gtk2.so >> /opt/php5_2/lib/php.ini
+$ /opt/php5_2/bin/php-config --extension-dir | xargs echo 'extension_dir=' >> /opt/php5_2/lib/php.ini]]></programlisting>
+   </para>
+
+   <note>
+    <para>
+     CVS 版の PHP がコンパイルできない場合は、
+     <ulink url="&url.php.download;">PHP ダウンロードページ</ulink>
+     の公式リリースか
+     <ulink url="&url.php.snapshots;">スナップショット</ulink>
+     をご利用ください。
+    </para>
+   </note>
+
+   <para>
+    さあ、それでは PHP-GTK 2 をチェックアウトしてインストールしましょう。
+    <programlisting role="bash"><![CDATA[
+$ cd ..
+$ cvs -d :pserver:cvsread@cvs.php.net:/repository co php-gtk
+$ cd php-gtk
+$ ./buildconf --with-phpize=/opt/php5_2/bin/phpize
+$ ./configure --with-php-config=/opt/php5_2/bin/php-config
+$ make
+$ make install]]></programlisting>
+   </para>
+
+   <para>
+    新しくインストールした PHP 実行ファイルのリンクを作成するには、このようにします。
+
+    <programlisting role="bash"><![CDATA[
+$ ln -s /opt/php5_2/bin/php /usr/bin/php-gtk]]></programlisting>
+
+    以上。これで終わりです!
+   </para>
+  </sect2>
+
+  <sect2 id="tutorials.installation.linux.existingphp">
+   <title>インストール済みの PHP を使用する方法</title>
+
+   <para>
+    既にインストールされている PHP に PHP-GTK 2 を '追加' することにするなら、
+    まず PHP のバージョンが 5.1 以降であること、かつ CLI が使えることを確かめておきましょう。
+    PHP-GTK 2 は、それ以外のバージョンの PHP では動きません。
+    PHP のバージョンを調べるには、コマンドラインから
+    <command>php -v</command> とタイプします。
+    その結果の出力中に <literal>cli</literal>
+    という単語があらわれることをしっかり確認しておきましょう。
+   </para>
+
+   <para>
+    さあ、CVS の最新のソースかあるいはアルファ版の tar ボールから
+    PHP-GTK 2 のソースを取得しましょう。ダウンロードページは
+    <ulink url="&url.phpgtk.download;">ここ</ulink> です。
+    そして、チェックアウト先か展開したディレクトリに <literal>cd</literal>
+    し、以下を実行します。
+    <programlisting role="bash"><![CDATA[
+$ ./buildconf
+$ ./configure
+$ make
+$ make install]]></programlisting>
+   </para>
+
+   <para>
+    たいていの場合はこれでうまくいきます。ただ、複数の PHP
+    をインストールしている場合やちょっと変わった場所に PHP
+    をインストールしている場合は、おかしなことが起こるかもしれません。
+    このような場合は、<literal>phpize</literal> および
+    <literal>php-config</literal> の場所を正確に指定することで解決できるでしょう。
+    <programlisting role="bash"><![CDATA[
+$ ./buildconf --with-phpize=/path/to/phpize
+$ ./configure --with-php-config=/path/to/php-config]]></programlisting>
+   </para>
+  </sect2>
+
+  <sect2 id="tutorials.installation.linux.testing">
+   <title>インストール状態のテスト</title>
+
+   <para>
+    PHP-GTK 2 を使い始めるには、この拡張モジュールを
+    <filename>php.ini</filename> で有効にしなければなりません。
+    <programlisting role="ini"><![CDATA[
+extension=php_gtk2.so]]></programlisting>
+    を、その他の <literal>extension=</literal> 設定の最後に追加します。
+   </para>
+
+   <para>
+    インストールに成功したかどうかを調べるには、
+
+    <programlisting role="bash"><![CDATA[
+$ php -m | grep php-gtk]]></programlisting>
+
+    を実行します。うまくいっていれば、
+    <literal>php-gtk</literal> という行が表示されるはずです。
+   </para>
+
+   <para>
+    次に、デモアプリケーションを動かしてみましょう。これは、
+    php-gtk ソースの <filename>demos</filename> ディレクトリにあります。
+    たとえば <filename>demos/phpgtk2-demo.php</filename> などです。
+   </para>
+  </sect2>
+ </sect1>
+
+ <sect1 id="tutorials.installation.macosx">
+  <title>Mac OS X でのインストール</title>
+
+  <para>
+   PHP-GTK 2 をインストールする前に、まず Apple Developer Tools、
+   BSD Subsystem および X をインストールしておく必要があります。
+   BSD subsystem はデフォルトで Mac OS X にインストールされていますが、
+   Developer Tools や X サーバは自分でインストールする必要があります。
+   X サーバは何でもお好みのものを使用できますが、一番お手軽なのは
+   Apple が Mac OS X のインストーラで提供しているデフォルトのものでしょう。
+  </para>
+
+  <para>
+   <ulink url="&url.macports;">MacPorts</ulink> (以前は
+   DarwinPorts という名前でした) あるいは <ulink url="&url.fink;">Fink</ulink>
+   を取得し、インストールしましょう。このいずれかを使用して、
+   X (Apple のデフォルトのもの以外を使用する場合)
+   および Gtk+ をインストールします。
+   Fink および MacPorts は、どちらもバージョン 2.6 以降の Gtk+ を提供します。
+   また、PHP のバージョンは 5.2 以降を使用するようにしてください。
+   MacPorts でパッケージが提供されています。ターミナルで
+   <literal>php -v</literal> とタイプすると、バージョンがわかります。
+   自分で PHP をコンパイルしたい場合は、次のようにします。
+
+   <programlisting role="bash"><![CDATA[
+$ cvs -d :pserver:cvsread@cvs.php.net:/repository co -r PHP_5_2 php-src
+$ cd php-src
+$ ./buildconf
+$ ./configure --disable-cgi
+$ make
+$ sudo make install]]></programlisting>
+   インストールする場所はどこでも大丈夫ですが、通常は
+   <filename>/usr/local/</filename> をお勧めします。
+   MacPorts は PHP を <filename>/opt/local/</filename>
+   にインストールします。
+  </para>
+
+  <para>
+   そして最新の PHP-GTK をチェックアウトし、それをコンパイルします。
+
+   <programlisting role="bash"><![CDATA[
+$ cd..
+$ cvs -d :pserver:cvsread@cvs.php.net:/repository co php-gtk
+$ cd php-gtk
+$ ./buildconf --with-phpize=/usr/local/bin/phpize
+$ ./configure --with-php-config=/usr/local/bin/php-config \
+            --disable-libglade
+$ make
+$ sudo make install]]></programlisting>
+   <filename>/usr/local/</filename> の部分は、実際の PHP
+   のインストール先に置き換えてください。たとえば、PHP 5.2 を
+   MacPorts でインストールした場合は、
+   <filename>/opt/local/</filename> に置き換えます。
+  </para>
+
+  <para>
+   最後に、<filename>php.ini-recommended</filename> を
+   <filename>/usr/local/lib/php.ini</filename> にコピーし、
+   <literal>extension_dir</literal> の値を
+   <literal>php_gtk2.so</literal> がある場所に変更します。これは、通常は
+   <literal>/usr/local/lib/php/extensions/no-debug-non-zts-some-date</literal>
+   のようになります。<filename>/usr/bin/</filename> に、
+   <filename>/usr/local/bin/php</filename> を指すシンボリックリンクを作成するのもよいでしょう。
+   もう一度言いますが、PHP のインストール場所によっては
+   <filename>/usr/local/</filename> ではなく
+   <filename>/opt/local/</filename> となることもあります。
+  </para>
+
+  <para>
+   続いて、<link linkend="tutorials.installation.linux.testing">
+   インストールできたかどうかを確かめます</link>。
+  </para>
+ </sect1>
+
+
+ <sect1 id="tutorials.installation.macosx-stepbystep">
+  <title>Mac OS X でのインストール - ステップ・バイ・ステップ</title>
+  <para>著者: Jonathan Richter</para>
+
+  <para>
+   PHP-GTK2 を Mac OS X 10.4 上で動かすにあたっての情報を以下にまとめます。
+   数々の失敗やエラーを経て、やっとうまく動かせるようになりました。
+  </para>
+  <para>
+   以下に、私がやったことをすべて書いていきます。
+   私はターミナル上での操作に精通しているわけではありません。
+   作業時間の半分くらいは、自分が何をやっているのか不安な状態でした。
+   ここに書かれている情報は、自己責任で使用するようにしてください。
+   これはあくまでも個人的なメモです。皆さんの役に立てばいいなと思い公開しています。
+  </para>
+
+  <note>
+   <para>
+    念のため。以下の手順をすべて実行するための所要時間は数時間程度です。
+   </para>
+  </note>
+
+  <para>
+   以下の記事が参考になります。
+   <itemizedlist>
+    <listitem>
+     <para>
+      <link linkend="tutorials.installation.macosx">インストール情報のページ</link>
+     </para>
+    </listitem>
+    <listitem>
+     <para>
+      <ulink url="http://www.macports.org/">macports.org</ulink>
+     </para>
+    </listitem>
+   </itemizedlist>
+  </para>
+
+  <sect2>
+   <title>ステップ 1 - Xcode の取得</title>
+   <para>
+    最新の Xcode (別名: Developer Tools) を Apple から取得しましょう。
+    これは必須です。
+    <ulink url="https://connect.apple.com">connect.apple.com</ulink>
+    に行き、ログインあるいは登録 (無料) し、ダウンロードページに行きます。
+   </para>
+   <para>
+    ダウンロードボックスの右側で Developer Tools を選択し、
+    最新の Xcode をダウンロードします。私がダウンロードしたときのバージョンは
+    2.4.1 で、大きさは 923 MB でした。
+    ダウンロードしたら、インストーラを使用してその指示に従います。
+   </para>
+  </sect2>
+
+  <sect2>
+   <title>ステップ 2 - Macports の取得</title>
+   <para>
+    最初は Fink を使用していたのですが、必要なパッケージ (GTK 2.6 以降)
+    が見つからないことに途中で気づきました。そこで、改めて
+    Macports で最初からやり直すことにしました。
+   </para>
+   <para>
+    <ulink url="http://trac.macosforge.org/projects/macports/wiki/InstallingMacPorts">macosforge/InstallingMacPorts</ulink>
+    に行きます。
+   </para>
+   <para>
+    すでに最初のステップで Xcode のダウンロードは終了しています。
+    このページに書いてあるとおりにするだけでうまくいきました。
+   </para>
+   <note>
+    <para>
+     最新バージョンには通常の Apple installer がありません。そこで、私は
+     <ulink url="http://svn.macosforge.org/repository/macports/downloads/DarwinPorts-1.3.1/DarwinPorts-1.3.1-10.4.dmg">DarwinPorts-1.3.1-10.4.dmg</ulink>
+     をダウンロードしました。
+    </para>
+   </note>
+   <para>
+    Macports をインストールするには、ディスクイメージ内のインストーラをダブルクリックします。
+   </para>
+  </sect2>
+
+  <sect2>
+   <title>ステップ 3 - GTK2 (別名: GTK+) の取得</title>
+   <para>
+    ターミナルで、
+    <command>sudo port install gtk2</command>
+    を実行します。
+   </para>
+  </sect2>
+
+  <sect2>
+   <title>ステップ 4 - PHP5.x の取得</title>
+   <para>
+    私の環境には既に、標準的な OS X 環境の PHP 4.4.4 がインストールされていました。
+    そこに <ulink url="http://www.entropy.ch">Entropy.ch</ulink>
+    の PHP5 をインストールしたのですが、うまく動作しませんでした。
+    そこで Entropy の PHP5 を削除することにしました。
+   </para>
+   <note>
+    <para>
+     Apache 1 や 2 で PHP4 あるいは 5 を動かしたいのなら、
+     Entropy から取得するのが一番だとは思います。
+    </para>
+   </note>
+   <para>
+    ターミナルで
+    <command>cd /</command>、そして
+    <command>sudo port install php5</command>
+    と入力します。
+   </para>
+   <para>
+    コーヒーでもいれて、しばらく待ちましょう……。
+    少々時間がかかります。私のマシンでは約二時間かかりました
+    (Macports は、すべてを <filename>/opt</filename>
+    フォルダ配下にインストールします。"cd /"
+    で、このフォルダをルートとしました)。
+   </para>
+  </sect2>
+
+  <sect2>
+   <title>ステップ 5 - PHP-GTK の前に</title>
+   <para>
+    他のチュートリアルを見ていると、PHP-GTK をインストールする際のパラメータに
+    <literal>--disable-libglade</literal> を使用しているものがあります。
+    なぜなのでしょう? 本当に Glade がいらないのか、もう一度考えてみてください。
+    <ulink url="http://glade.gnome.org">glade.gnome.org</ulink>
+    を読むといいでしょう。
+   </para>
+   <para>
+    スクリーンショットにも注目しましょう。
+    私は、最初は Glade なしでインストールしたのですが、
+    翌日には Glade 込みでインストールしなおしました。
+    もし Glade がいらないというのなら、次のステップは飛ばしてください。
+   </para>
+  </sect2>
+
+  <sect2>
+   <title>ステップ 6 - Glade の取得</title>
+   <para>
+    何らかの理由で、ここでエラーが発生しました。
+    ところが、バックグラウンドで X11 をオープンした状態でターミナルを使用したところ、
+    エラーが出ずにうまくいきました。
+    そこで、まず X11 をオープンしてそれを隠します (apple-h)。
+   </para>
+   <para>
+    ターミナルで次のコマンドを入力し、
+    <screen>
+cd /opt
+sudo port install libglade
+sudo port install glade
+    </screen>
+     コーヒーをもう一杯飲みましょう……。
+   </para>
+  </sect2>
+
+  <sect2>
+   <title>ステップ 7 - PHP-GTK2 の取得</title>
+   <note>
+    <para>
+     CVS 版ではなく、最新の公式バージョンを使用したい場合は、
+     <ulink url="http://gtk.php.net/download.php">PHP-GTK2 ダウンロードページ</ulink>
+     から取得します。
+    </para>
+   </note>
+   <para>
+    念のため、X11 はオープンしたままにしておきます。
+    <command>phpize</command> および <command>php-config</command>
+    がともに <filename>/opt/local/bin/</filename> に存在するものとします。
+    それを確認したあと、ターミナルで以下のように入力します。
+    <screen>
+sudo cvs -d :pserver:cvsread@cvs.php.net:/repository co php-gtk
+cd php-gtk
+sudo ./buildconf --with-phpize=/opt/local/bin/phpize
+sudo ./configure --with-php-config=/opt/local/bin/php-config
+sudo make
+sudo make install
+    </screen>
+   </para>
+   <para>
+    処理が終わると、ターミナルには拡張モジュールのインストール先が表示されます。
+    おそらく
+    <filename>/opt/local/lib/php/extensions/no-debug-non-zts-20060613</filename>
+    のようになっているでしょう。このパスを Apple-c
+    するか、あるいはどこかに書き留めておきましょう。後で必要になります。
+   </para>
+  </sect2>
+
+  <sect2>
+   <title>ステップ 8 - php.ini の設定</title>
+   <para>
+    Finder で Go &gt; Go To Folder... (あるいは shift-apple-g)
+    を選択し、<literal>/opt/local/etc</literal> と入力します。
+   </para>
+   <para>
+    <filename>php.ini-recommended</filename> というファイルを探し、コピーします。
+    コピーしたファイルの名前を <filename>php.ini</filename> に変更し、それを
+    - できれば BBedit で - 開きます。
+   </para>
+   <para>
+    <literal>extension_dir = "./"</literal> という行を探し、
+    <literal>extension_dir = "/opt/local/lib/php/extensions/no-debug-non-zts-20060613"</literal>
+    (このパスは、さきほどのステップでのターミナルの出力をコピーしたものです)
+    のように書き換えます。
+   </para>
+   <para>
+    拡張モジュールのブロックの最後に
+    <literal>extension=php_gtk2.so</literal>
+    を追加します。
+   </para>
+   <para>
+    ファイルを保存します。
+   </para>
+  </sect2>
+
+  <sect2>
+   <title>ステップ 9 - テスト</title>
+   <para>
+    まだ行っていない場合は、まず X11 を開始し、それを隠します (apple-h)。
+   </para>
+   <para>
+    ターミナルを起動し、次のように入力します。
+    <screen>
+cd /opt/php-gtk/demos
+php phpgtk2-demo.php
+    </screen>
+    デモが、X11 のウィンドウとしてオープンするはずです。
+   </para>
+   <para>
+    Glade で動作させるには、(X11 をオープンした状態で)
+    ターミナルで
+    <command>/opt/local/bin/glade-2</command>
+    と入力します。
+   </para>
+  </sect2>
+
+  <sect2>
+   <title>ステップ 10 - 見栄えをもうちょっとよくする</title>
+   <para>
+    私見ですが、OS X 上での X11 インターフェイスは、あまりイケてません。
+    別のテーマを使用するために、
+    <ulink url="http://art.gnome.org/themes/gtk2">art.gnome.org</ulink>
+    に行ってみましょう。ここにあるテーマを使用するために、さらに準備が必要です。
+   </para>
+   <para>
+    ターミナルで
+    <command>sudo port install gtk-theme-switch</command>
+    と入力します。
+   </para>
+   <para>
+    終了したら、さきほどのリンク先からテーマをダウンロードします。
+    テーマのインストール方法は、次の二通りです。
+    <orderedlist>
+     <listitem>
+      <para>
+       ダウンロードした <filename>.tar.gz</filename>
+       を、(展開せずに!) <filename>/opt/local/share/themes/</filename>
+       に移動あるいはコピーします。
+      </para>
+      <para>
+       (X11 をオープンした状態で) ターミナルで
+       <command>/opt/local/bin/switch2</command>
+       と入力し、Glade を開始します。
+      </para>
+      <para>
+       + を押し、Install New Theme ボタンをクリックして
+       <filename>/opt/local/share/themes/&lt;your-new-theme-name&gt;.tar.gz</filename>
+       を選択します。
+      </para>
+      <para>
+       OK をクリックすると、そのテーマが一覧に表示されるようになります。
+      </para>
+     </listitem>
+
+     <listitem>
+      <para>
+       <filename>&lt;your-new-theme-name&gt;.tar.gz</filename> を展開し、そのフォルダを
+       <filename>/opt/local/share/themes/</filename>
+       に移動あるいはコピーします。
+      </para>
+      <para>
+       (X11 をオープンした状態で) ターミナルで
+       <command>/opt/local/bin/switch2</command>
+       と入力し、Glade を開始します。
+      </para>
+      <para>
+       新しいテーマの名前が一覧に表示されます。
+      </para>
+     </listitem>
+    </orderedlist>
+   </para>
+  </sect2>
+
+  <sect2>
+   <para>
+    もう一度言います。これは私のマシンでうまくいったときの手順です。私の環境は、
+    iMac G5 2.0 GHz/1 GB RAM/OS X 10.4.8 および
+    Mac mini G4 1.42 GHz/512 MB RAM/OS X 10.4.8 です。
+    Mac ユーザの皆さん、注意点や TIPS、裏技などがあればぜひ教えてください。
+    PHP-GTK を OS X でも使っていきましょう!
+   </para>
+  </sect2>
+
+ </sect1>
+</chapter>

@@ -1,0 +1,829 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- $Revision: 1.1 $ -->
+<!-- EN-Revision: 1.15 Maintainer: takagi Status: ready -->
+<chapter id="tutorials.doccing">
+ <title>PHP-GTK 2 のドキュメント</title>
+
+ <sect1>
+  <title>このチュートリアルおよびマニュアルについて</title>
+  <simpara>
+   このチュートリアルでは、PHP-GTK 2 の公式ドキュメント、
+   つまりあなたが今読んでいるこのマニュアルを取得し、コンパイルする方法や
+   変更したり拡張したりする方法を説明します。
+  </simpara>
+  <simpara>
+   単にマニュアルを読みたいだけの人にとっては、この内容は不要です。
+  </simpara>
+  <para>
+   このドキュメントのソースや PHP-GTK 2 自体のソースなど、
+   PHP プロジェクトの管理下にあるものはすべて PHP プロジェクトの CVS サーバ
+   <ulink url="http://cvs.php.net">cvs.php.net</ulink> にあります。
+   このマニュアルは XML の方言のひとつである <emphasis>DocBook</emphasis>
+   に緩やかにもとづいて作成されています。これは書籍や技術文書のために設計されたものです。
+   PHP-GTK ドキュメントプロジェクトが DocBook の文法に厳密に従っていない理由は、
+   DocBook には大きな弱点があるからです。
+   DocBook にはオブジェクト指向言語のドキュメントをサポートする構文がないのです。
+   そこで自分たちで独自のものを作成することになりました。
+   こんなことをしたために、PHP-GTK Documentation Group
+   は、他の php.net のシステム (livedocs や .chm 形式のビルドなど)
+   に php-gtk-doc の構文を対応させるための作業も必要となりました。
+   もし DocBook XML をそのまま使えたら、これらの php.net のシステムももう少しうまく使用できたんですけどね。
+  </para>
+  <para>
+   このような問題があるにもかかわらず、DocBook を使用してマニュアルを作ることには利点もあります。
+   ドキュメント (このマニュアル全体) を多くのファイルに分けて配布できるので、
+   個々のファイルは小さなものになります。それにより、
+   多くの人が同時にいろいろな箇所をいじれるようになります。
+   さらに、もととなる XML ファイルからさまざまな形式に変換することができます。
+   たとえばオフラインで読むための HTML、PHP のコード (オンラインマニュアルの形式)、
+   Windows の <literal>.chm</literal> ファイルや
+   <literal>.pdf</literal> ファイルが作成できます。これらはほんの一部に過ぎません。
+  </para>
+  <para>
+   逆に大きな問題となるのが、XML ソースをお好みの形式にするためにはコンパイルが必要だということです。
+   これには少々時間がかかります。このマニュアルは 300 以上のファイルからできており
+   HTML 形式にコンパイルすると 3000 以上のファイル数になりますが、
+   1.6GHz のシステムではコンパイルに約 10 分かかります。
+   400MHz のシステムでは 40 分から 45 分程度かかります。
+   これが気になる場合は、マニュアル全体をひとつの HTML ファイル
+   <literal>bigmanual.html</literal> にまとめることができます。
+   これは数分でビルドできるので、ソースファイルの構文エラーをチェックするのに便利です。
+  </para>
+ </sect1>
+
+ <sect1 id="tutorials.doccing.checkout">
+  <title>チェックアウト、更新そしてコンパイル</title>
+
+  <sect2>
+   <title>ビルド環境の設定</title>
+   <para>
+    現在、php-gtk-doc モジュールをビルドする方法は二通りあります。
+    標準的な方法のほうは、サーバ上で使用されており、
+    さまざまなビルドオプションを指定することができます。
+    もうひとつの方法については、現在は英語版で複数 HTML
+    ファイル形式のものしか作成することができません。
+   </para>
+   <para>
+    もうひとつの方法の最大の利点は、PHP-GTk のマニュアルを Windows
+    上でコンパイルできることです。その際に、
+    <ulink url="http://www.cygwin.com/">cygwin</ulink>
+    のような Linux エミュレータをインストールする必要はありません。
+    しかしその代わりに、ビルド環境を構築するためにいくつかの
+    <ulink url="http://unxutils.sourceforge.net/">Unix ツール</ulink>
+    をインストールする必要があります。
+    インストールするって言うか、単にルートディレクトリにファイルを展開するだけです。
+    なので、インターネットの接続速度が遅いなどの理由で
+    cygwin をインストールできないような環境でも簡単に導入できます。
+   </para>
+   <para>
+    どちらのビルド方式を使用するにしても、XSL スタイルシートを処理するために
+    <command>xsltproc</command> が必要となります。Linux 環境では、
+    これはパッケージマネージャからインストールします。
+    cygwin を使用している場合は、cygwin のインストーラを使用します。
+    cygwin を使用しない Windows 環境の場合は、xsltproc のバイナリ
+    (iconv、zlib、libxml2 および libxslt パッケージが必要です)
+    を Igor Zlatkovic (彼は xmlsoft.org のコントリビュータです) の
+    <ulink url="http://www.zlatkovic.com/libxml.en.html">プロジェクトのサイト</ulink>
+    から取得し、ルートディレクトリにそれを展開します。
+   </para>
+
+   <note>
+    <para>
+     世の中にはその他の XSLT 処理系もありますが、
+     それらの中でも xsltproc の処理速度は群を抜いています。そこで、
+     PHP-GTK 2 マニュアルの作成に使用するスタイルシートは、
+     いまや完全に xsltproc に依存したものになっています。
+    </para>
+   </note>
+  </sect2>
+
+  <sect2>
+   <title>チェックアウト</title>
+   <para>
+    マニュアルを更新したりだとかコンパイルしたりだとかするためには、
+    まずマニュアルのコピーを CVS から取得しなければなりません。
+    そのためには CVS クライアントが必要となります。たいていの Linux
+    システムには、コマンドラインの <literal>cvs</literal>
+    ツールがインストールされています。cygwin でも同様です。
+    Windows の場合は、クリックひとつで使える CVS クライアントである
+    <ulink url="http://www.tortoisecvs.org/">Tortoise CVS</ulink>
+    のようなものがあります。
+   </para>
+   <para>
+    ドキュメントのコピーをコマンドラインツール <literal>cvs</literal> で取得するには、
+    <command>cvs -d :pserver:cvsread@cvs.php.net:/repository co -P php-gtk-doc</command>
+    と入力します。
+   </para>
+   <para>
+    もしすでにコピーを持っているのなら、以下のようにしてそれを更新できます。
+    <command>cvs -d :pserver:cvsread@cvs.php.net:/repository update -Pd php-gtk-doc</command>
+    (php-gtk-doc ディレクトリの中にいる場合は、
+    <literal>php-gtk-doc</literal> の部分を省略できます (しなければなりません))。
+   </para>
+   <para>
+    ドキュメントのコピーを TortoiseCVS で取得するには、
+    <literal>File/CVS checkout</literal> を選択してフォームに入力します。
+    プロトコルは <literal>Password server (:pserver)</literal>
+    を選択します。サーバは <literal>cvs.php.net</literal>、
+    そしてリポジトリのフォルダは <literal>/repository</literal> です。
+    CVS アカウントをお持ちの場合はそれを使用します。
+    もっていない場合は <literal>cvsread</literal> を使用します。
+    モジュールは、もちろん <literal>php-gtk-doc</literal> です。
+    現在のバージョンの TortoiseCVS では、Windows 用に改行コードが自動変換されます。
+    php.net のリポジトリでは、これは不要です。
+    手元の変更をコミットされる場合は、<literal>Options</literal>
+    で <literal>Use UNIX line endings</literal>
+    をチェックしておいてください。
+   </para>
+  </sect2>
+
+  <sect2>
+   <title>標準のビルド方式によるコンパイル</title>
+   <para>
+    コマンドラインで、php-gtk-doc directory ディレクトリに移動するために
+    <command>cd php-gtk-doc</command> と入力します。
+    そして <command>autoconf</command> と入力し、設定ファイルを作成します。
+   </para>
+   <para>
+    このビルド方式は完全に国際化 (i18n) されており、デフォルトの設定は英語
+    (en) に対応しています。英語以外の言語用にコンパイルするには、
+    configure の際にその言語の言語コードを指定します。たとえば
+    <command>./configure --with-lang=de</command> のようになります。
+    これは、その言語用の基盤となるファイル、
+    たとえばこの例ではドイツ語用のファイルがある場合にのみ動作します!
+   </para>
+   <para>
+    これ以外に使用する可能性のあるオプションは、
+    <command>--with-php=PATH</command> です。<literal>PATH</literal>
+    の部分には、使用したい PHP バイナリ実行ファイルのフルパスを指定します。
+    たいていの場合は、PHP 4 あるいは PHP 5 のバイナリを autoconf
+    が自動的に見つけてくれます。しかし、時にはちょっと変わった設定をしている人もいるものです。
+    ビルドの際には CLI を使用する必要がありますが、CGI がその邪魔をすることがあります。
+   </para>
+   <para>
+    複数ファイル分割方式のビルド (<literal>html</literal>、
+    <literal>phpweb</literal>、<literal>test</literal>)
+    の際に、書き出されたファイルがいちいち表示されるのをとめるには、
+    <command>--disable-output</command> を使用します。
+    これを使用すると、ビルドにかかる時間がすこしは短くなります。
+   </para>
+   <para>
+    最後にもうひとつ、<command>--with-history</command>
+    オプションについて説明しておきましょう。これは、
+    使用するかもしれませんししないかもしれません。これを使用して、
+    <literal>manual/*</literal> (<literal>php-gtk-doc/manual</literal>
+    のスナップショット) のみを含む外部ディレクトリを指定します。
+    これを使用するのは <command>make updates</command> の場合のみで、
+    サーバ上で更新されたドキュメントの一覧を作成するために使用します。
+    通常は使用することはないでしょう。
+   </para>
+   <para>
+    最後に、出力方式を選択します。
+    <command>make bigmanual.html</command> とすると、ひとつの巨大な
+    HTML ファイルが五分弱で出来上がります。<command>make text</command>
+    も同じですが、それに加えて単一のテキストファイル形式のマニュアルも作成します。
+    <command>make html</command> は、各ディレクトリに分かれた複数の
+    HTML ファイルを作成し、<literal>images</literal> ディレクトリをコピーします。
+    <command>make phpweb</command> は、gtk.php.net にある形式のマニュアルを作成します。
+    よくあるご要望にこたえて、これ以外にも <command>make test id=ID</command>
+    が使用できます。<literal>ID</literal> の部分はマニュアルの ID で、
+    たとえば <literal>tutorials.helloadvanced</literal> あるいは
+    <literal>gtk.gtkwindow</literal> などになります。これは、関連するファイル群を
+    <literal>build</literal> ではなく <literal>testbuild</literal>
+    というディレクトリに作成します。
+   </para>
+   <para>
+    ほとんど使わないであろう出力形式が、あと二種類あります。
+    <command>make mtoc</command> は、機械可読形式の表を XML 形式で作成し、
+    <command>make updates</command> はマニュアルの更新一覧を作成します。これは
+    <ulink url="&url.phpgtk;">&url.phpgtk;</ulink> のホームページで用いられます。
+   </para>
+   <para>
+    これ以外の出力フォーマットについても、近い将来に対応する予定です。
+   </para>
+  </sect2>
+
+  <sect2>
+   <title>もうひとつのビルド方式でのコンパイル</title>
+   <para>
+    コマンドラインで <command>cd php-gtk-doc</command> と入力し、
+    php-gtk-doc ディレクトリに移動します。そして、基本ファイル群を作成するために
+    <command>./runfirst.sh</command> (Windows の場合は
+    <command>sh ./runfirst.sh</command>)
+    を実行します。<literal>runfirst</literal> スクリプトをコールするのは、
+    新しいファイルをマニュアルに追加したときか、あるいはビルド日を更新する必要があるときです。
+    つまり、マニュアルを毎日定期的にコンパイルしたい場合は、
+    これを毎回コールする必要があります。
+   </para>
+   <para>
+    では、マニュアルを作ってみましょう。まず最初に念を押しておきますが、
+    php-gtk のマニュアルはさまざまな言語で作成されており、
+    さらに先に説明したようにさまざまな形式で作成できます。
+    そのため、コンパイルする際にはどのマニュアルを作成するのかを知っておく必要があります。
+    言語の定義は、二文字のコードによって行います。たとえば
+    <literal>en</literal> は英語、<literal>de</literal>
+    はドイツ語といった具合です。形式の指定は、次のいずれかどなります。
+    <literal>html</literal> は通常の html で、
+    <ulink url="&url.phpgtk;">gtk.php.net</ulink> からダウンロードできるものと同じ形式です。
+    <literal>phpweb</literal> は、PHP-GTK
+    サイトのオンラインドキュメントと同じようなファイルを作成します。
+    <literal>test</literal> は、特定のファイルだけをコンパイルしたい場合に使用します。
+   </para>
+   <para>
+    <command>./gen_manual.sh &lt;language&gt; &lt;type&gt;</command>
+    形式でコールします。たとえば
+    <command>./gen_manual.sh en html</command> のようになります。
+    すると、ターミナルに次々に文字があふれ出すことでしょう。
+    ここで、いったん席をはずして十分後くらいに戻ってきましょう
+    - ちょっと時間がかかります。ファイルは、ディレクトリ
+    <filename>build/&lt;language&gt;/&lt;type&gt;/</filename>
+    に作成されます。この例では <filename>build/en/html/</filename> です。
+   </para>
+  </sect2>
+
+  <sect2>
+   <title>Livedocs</title>
+   <para>
+    マニュアルを編集した際に、その編集した部分が正しい形式であり期待通りの
+    html に変換されることを確かめたい場合は、
+    <command>./gen_manual.sh &lt;language&gt; test &lt;id&gt;</command>
+    形式でコールします。たとえば <command>./gen_manual.sh en test gtk.gtkiconview</command>
+    のようになります。これは特殊なモードで、この指定したページ (id)
+    をコンパイルするために必要な最小限のものだけに絞り込んだマニュアルを作成します。
+    しかしこのスクリプトは完全ではなく、(現在は)
+    リファレンスファイルだけしか作成できません。
+    この多くのリンクは、うまく動作しません。
+   </para>
+
+   <para>
+    PHP がインストールされた Apache ウェブサーバがある場合は、
+    livedocs を使用できます。<filename>live.php</filename>
+    をブラウザで開き (ウェブサーバ経由で開きます。
+    ローカルディレクトリではありません!)、マニュアルを閲覧してみましょう。
+    リクエストに応じて随時ページが作成されます。たいていは
+    1 秒から 2 秒でできあがります。
+   </para>
+  </sect2>
+ </sect1>
+
+ <sect1 id="tutorials.doccing.translating">
+  <title>マニュアルの翻訳</title>
+  <para>
+   この章では、PHP-GTK 2 のドキュメントの翻訳について説明します。
+   ドキュメントの翻訳とは、これまでに書かれた英語のドキュメントを
+   他の言語に書き直すことです。
+  </para>
+
+  <sect2>
+   <title>はじめに</title>
+   <simpara>
+    おめでとう! 今これを読んでいるということは、
+    あなたはすでにドキュメントの翻訳への第一歩を踏み出しています。
+    このチュートリアル (&quot;PHP-GTK 2 ドキュメント&quot;
+    チュートリアル全体です。この節だけではありません)
+    を読むことが、翻訳作業に参加するための第一歩となります。
+    このチュートリアルを読むにあたって、<literal>lang</literal>
+    はあなたが翻訳しようとしている言語を表す二文字
+    (場合によっては四文字) の略称に読み替えてください (日本語は ja です)。
+   </simpara>
+   <para>
+    このチュートリアルを読み終えた後で、まず最初に翻訳しなければならないファイルは以下のとおりです。
+    これらがそろうと、その言語のドキュメントが正しくビルドできるようになります。
+    <itemizedlist>
+     <listitem>manual/<literal>lang</literal>/preface.xml</listitem>
+     <listitem>manual/<literal>lang</literal>/bookinfo.xml</listitem>
+     <listitem>manual/<literal>lang</literal>/language-defs.ent</listitem>
+     <listitem>stylesheets/common/<literal>lang</literal>.xml</listitem>
+    </itemizedlist>
+    これらの四つのファイルには、ドキュメントの基本となる部分や
+    よく使用される単語、熟語の一覧が含まれています。
+   </para>
+   <para>
+    これらのファイルを翻訳し終えたら、
+    <ulink url="mailto:php-gtk-doc@lists.php.net">php-gtk-doc
+    メーリングリスト</ulink> にそれを送ってください。
+    ドキュメントチームのメンバーが、
+    そのファイルがビルドシステムで正常に動作するかどうかを確認します。
+    調べた結果、問題がないようなら、できるだけ早く結果をお知らせします。
+    <note>
+     ファイルをメーリングリストに送る際には、language-defs.ent を
+     language-defs.ent.txt という名前に変更してください。
+     そうしないと、メーリングリストサーバがこのファイルを削除してしまいます。
+    </note>
+   </para>
+  </sect2>
+  <sect2>
+   <title>ファイルの翻訳</title>
+   <para>
+    基本となる四つのファイルの翻訳が終われば、
+    次はその他のファイルを翻訳し、新しい言語のバージョンを作っていきましょう。
+    新しい言語のバージョンを公開する前には、
+    読者を満足させるためにある程度のドキュメントがなければなりません。
+    そこで、少なくとも三つのチュートリアルの翻訳が終わるまでは、
+    翻訳されたバージョンは公開されないことになっています。
+    まずはこのチュートリアルを翻訳することからはじめてみましょう。
+   </para>
+   <para>
+    三つのチュートリアルを翻訳し終えたら、
+    あとはその他のドキュメントの中からお好みのものの翻訳を進めてください。
+   </para>
+  </sect2>
+  <sect2>
+   <title>翻訳したファイルの投稿</title>
+   <para>
+    ドキュメントのソースは CVS で管理されています。
+    誰でもドキュメントをチェックアウトすることができますが、
+    誰もが変更をコミットできるわけではありません。
+    ファイルを直接コミットする権限を得るには、
+    多少の「お試し期間」を辛抱する必要があります。
+    お試し期間の間は、翻訳したファイルは
+    <ulink url="mailto:php-gtk-doc@lists.php.net">php-gtk-doc
+    メーリングリスト</ulink> に送っていただくことになります。
+    ドキュメントチームのメンバーがファイルの内容をレビューし、
+    あなたのかわりにそれを CVS にコミットします。
+    このようなやりとりを何度か繰り返しているうちに、
+    ドキュメントチームからコミット権をもらえるようになるでしょう。
+   </para>
+  </sect2>
+ </sect1>
+
+ <sect1 id="tutorials.doccing.writing">
+  <title>ドキュメントの作成</title>
+  <para>
+   この章では、PHP-GTK 2 のドキュメント作成に貢献するための情報をとりあげます。
+   わからないことがある場合は、
+   <ulink url="mailto:php-gtk-doc@lists.php.net">php-gtk-doc メーリングリスト</ulink>
+   で質問してみましょう。
+  </para>
+  <para>
+   何らかのドキュメントを書いたなら、おそらくそれを公式マニュアルに追加したくなることでしょう。
+   そういった場合は、そのファイルを先ほど述べた php-gtk-doc
+   メーリングリストに送るか、あるいは
+   <link linkend="appendix.doccredits">ドキュメントのクレジット</link>
+   に挙げられている貢献者の誰かに直接メールを送ってください。
+   彼らがあなたのドキュメントを CVS サーバに置いてくれるでしょう。
+   もし今後もずっと貢献を続けていくつもりなら、CVS アカウントを取得するとよいでしょう。
+   メーリングリストでアカウントを申請してください。
+  </para>
+
+  <para>
+   CVS アカウントを取得したら、変更をコミットする前には
+   <emphasis>常に</emphasis> マニュアルをコンパイルしてみるようにしましょう。
+   xml に問題があると、毎晩のマニュアル生成処理に失敗し、
+   他のみんなに迷惑がかかります。
+  </para>
+
+  <sect2>
+   <title>どこから手をつけるか</title>
+   <simpara>
+    マニュアルのソースは 300 以上のファイルで構成されています。
+    そして、まだまだ空白の部分が多くあります。
+    マニュアルを見ていて記述が足りない箇所にお気づきの場合は、
+    ぜひその部分に手を入れてください。
+    記述が足りない部分がどこにあるかわからない場合は、マニュアルのファイルを
+    <literal>FIXME</literal> および
+    <literal>TODO</literal> で検索してください。
+    そこからはじめるといいでしょう。
+   </simpara>
+  </sect2>
+
+  <sect2 id="tutorials.doccing.writing.dirstructure">
+   <title>ディレクトリおよびファイルの構造</title>
+   <para>
+    すでにお気づきでしょうが、マニュアルのソースは
+    <filename>manual/</filename> ディレクトリ内にあります。
+    この中に、各言語用のフォルダが含まれます。
+    <filename>manual/en/reference/</filename> の中を見てみましょう。すると
+    <literal>gtk</literal> や <literal>gdk</literal> のフォルダが見つかるでしょう。
+    すべてのクラスについて、これらのフォルダのいずれかの中に
+    そのクラス用の <literal>xml</literal> ファイルが存在します。
+    これにより、複数の人がマニュアルの異なる部分を同時に作業できるようになります。
+    また、貧弱なマシンでもマニュアルのファイルを開けるようになります。
+   </para>
+   <para>
+    おそらく、新しいファイルを追加する必要はないでしょう。
+    少なくとも、クラスのドキュメントについてはすべて雛形が存在するからです。
+    新しいファイルを追加する際には、それを
+    <filename>manual/reference.xml</filename> に登録することを忘れないようにしましょう。
+    そうしないと、追加したファイルがマニュアルに含められません。
+   </para>
+   <para>
+    クラスの画像は、別のディレクトリ <filename>images/</filename> にあります。
+    このディレクトリの構造は、xml ファイルの構造とほぼ同じです。
+    たとえば <classname>GtkAboutDialog</classname> 用の画像は
+    <filename>images/reference/gtk/gtkaboutdialog.png</filename> となります。
+    新しい画像を作成する場合は、できるだけサイズを小さくしてください。
+    30kb だとちょっと大きすぎです。すべての画像がそんな大きさだと、かなりの負荷になります。
+    また、ファイル形式は <literal>.png</literal> を用い、
+    色パレットを小さな固定値とすることでファイルサイズを節約してください。
+   </para>
+   <para>
+    実行可能なサンプルは、別のディレクトリ <filename>examples/</filename>
+    におきます。このディレクトリの構造は、画像や xml 文書ファイルとほぼ同じです。
+    ただ、各クラスごとのディレクトリが存在するという点が違います。
+    ファイル名は、使用例を示す関数/メソッドの名前をもとにして決まります。たとえば
+    <classname>GtkAboutDialog</classname> の
+    <function class="GtkAboutDialog">set_logo</function> 関数のサンプルは、
+    <filename>examples/reference/gtk/gtkaboutdialog/set_logo.phpw</filename>
+    となります。拡張子に注意しましょう。デフォルトのコンストラクタのファイル名は
+    <filename>constructor.phpw</filename> です。
+   </para>
+  </sect2>
+
+  <sect2 id="tutorials.doccing.writing.basics">
+   <title>基礎</title>
+
+   <para>
+    最初に言っておきます。ドキュメントを書くツールは、なんでも好きなものでかまいません。
+    個人的には KDE のテキストエディタ <literal>Kate</literal> が好きですが、
+    別に <literal>vi</literal> や <literal>emacs</literal> でもかまいませんし、
+    なんだったら <literal>メモ帳</literal> であったって別に問題ありません。
+    注意: 非 ASCII 文字を使用する場合は、
+    <literal>UTF-8</literal> でのファイル保存に対応している必要があります。
+   </para>
+
+   <para>
+    ドキュメントは、構造化テキスト形式になります。
+    テキストは段落の中になければなりませんし、特定の単語を
+    <emphasis>強調</emphasis> したり、あるいは
+    <literal>リテラル</literal> として扱ったりしたい場合は、それを指定する必要があります。
+    HTML のページを書いたことがある人なら、
+    何が言いたいのかおわかりでしょう。
+   </para>
+   <para>
+    じゃあ、なぜ HTML のタグを使わないのかと疑問に思われるかもしれません。
+    その理由は、DocBook があくまでテキストの構造を記述するためのものであり、
+    テキストの整形を行うためのものではないからです。
+    HTML は、レイアウト (CSS) とコンテンツ (XHTML) をうまく分離しようとしています。
+    しかし、DocBook で作成するのは HTML だけではありません。
+    PDF や、実際の書籍の作成にも使用されます。書籍には、多くの特殊な要素があります。
+    たとえば章、節、例、そしてプログラミングマニュアルにおける
+    メソッド、パラメータ、プロパティ、シグナルなどなどです。
+    それぞれの要素に対して、固有のタグが定義されています。
+    そのせいで、最初に docbook を使い始めたときには混乱するかもしれません。
+    しかし、これにより、出力内容を完全に制御できるという利点があるのです。
+   </para>
+
+   <para>
+    最も基本的な要素が <literal>&lt;para&gt;</literal> です。
+    これを使用して、テキストを段落に分けます。段落の中には、
+    リンク (link) やファイル名 (filename)、
+    そして表 (table) などの他のタグを含めることができます。
+    特別な段落型として <literal>&lt;simpara&gt;</literal>
+    というものもあり、こちらはその内部に他のタグを含みません。
+   </para>
+
+   <para>
+    次に重要になるタグはリンクです。
+    <link linkend="tutorials.doccing.writing.linking">この節</link>
+    を参照ください。
+   </para>
+
+   <para>
+    単語や熟語を <emphasis>強調</emphasis> するには、
+    <literal>&lt;emphasis&gt;</literal> を使用するか、<literal>リテラル</literal>
+    を <literal>&lt;literal&gt;</literal> で定義します。
+    <filename>ファイル名</filename> を表すには
+    <literal>&lt;filename&gt;</literal>、
+    <varname>変数</varname> を表すには <literal>&lt;varname&gt;</literal>
+    を使用します。それ以外にもさまざまなタグがありますが、
+    全部紹介しようとすると、それだけでひとつのマニュアルになってしまいます。
+   </para>
+
+   <para>
+    項目を箇条書きしたい場合は、<literal>&lt;itemizedlist&gt;</literal>
+    (順序を指定しない) あるいは <literal>&lt;orderedlist&gt;</literal> (順序つき)
+    タグを使用します。各項目は、<literal>&lt;listitem&gt;</literal> タグで囲みます。
+    <informalexample>
+     <programlisting role="xml"><![CDATA[
+<itemizedlist>
+ <listitem>最初の項目</listitem>
+ <listitem>二番目の項目</listitem>
+</itemizedlist>
+]]></programlisting>
+    </informalexample>
+    <literal>&lt;listitem&gt;</literal> の内部には
+    <literal>&lt;para&gt;</literal> やその他のタグを含めることができます。
+   </para>
+
+   <!-- some more tags? Which? -->
+
+   <para>
+    ほとんどの場合はクラスのドキュメントの雛形がすでに用意されています。
+    あなたがしなければならないことは、その説明や上で説明したタグを埋めていくことだけです。
+    中身を埋めなければならないタグは次のふたつです。
+    <literal>&lt;shortdesc&gt;</literal> には、
+    クラス/関数/シグナル/プロパティ についての簡単な説明を記入します
+    (一段落でまとめ、できれば中に何のタグも含めないようにします)。
+    そして <literal>&lt;desc&gt;</literal> にはそのクラスの完全な説明を記入します
+    (複数の段落を使用します)。
+   </para>
+
+   <para>
+    どこから手をつけていいのかわからない場合や、
+    選択したタグが正しいのかどうかが不安な場合は、
+    他の既存のファイルを参照ください。いい例となるでしょう。
+   </para>
+  </sect2>
+
+  <sect2 id="tutorials.doccing.writing.linking">
+   <title>リンク</title>
+   <para>
+    リンクがあってこそのマニュアルです。リンクによってページ間をつなぎ、
+    関連する節にクリックひとつでジャンプできるようになります。
+    他のクラスや似た関数を参照する場合は、そこにリンクするようにしましょう。
+    それにより、読者が検索する手間を省けます。
+   </para>
+   <para>
+    マニュアルで使用できるページ間リンクは、次の四種類です。
+   </para>
+
+   <itemizedlist>
+    <listitem>
+     <para>
+      <emphasis>クラスへのリンク</emphasis> は、そのクラスの概要ページにリンクします。
+      たとえば、
+      <informalexample>
+       <programlisting role="xml"><![CDATA[
+<classname>GtkAboutDialog</classname>
+]]></programlisting>
+      </informalexample>
+      とすると GtkAboutDialog の概要ページにリンクします。
+      これは、<classname>GtkAboutDialog</classname> のようになります。
+     </para>
+    </listitem>
+
+    <listitem>
+     <para>
+      <emphasis>メソッド/関数へのリンク</emphasis> は、
+      そのクラスの特定のメソッドや関数にリンクします。
+      関数名には、自動的に <literal>()</literal> が付加されます。
+      これを使用するには
+      <informalexample>
+       <programlisting role="xml"><![CDATA[
+<function class="GtkAboutDialog">set_logo</function>
+]]></programlisting>
+      </informalexample>
+      のようにします。こうすると、マニュアル上では
+      <function class="GtkAboutDialog">set_logo</function> のようになります。
+      パラメータ <literal>class</literal> は、
+      現在のクラスへリンクする際には必須ではありません。
+      しかし、常につけておくようにしましょう。
+      その内容をマニュアルの他のページにコピーする際に、余計な手間が省けます。
+     </para>
+    </listitem>
+
+    <listitem>
+     <para>
+      <emphasis>シグナルへのリンク</emphasis> は、このように指定します。
+      <informalexample>
+       <programlisting role="xml"><![CDATA[
+<signalname class="GtkDialog">close</signalname>
+]]></programlisting>
+      </informalexample>
+      これは <signalname class="GtkDialog">close</signalname> のようになります。
+     </para>
+    </listitem>
+
+    <listitem>
+     <para>
+      <emphasis>列挙子へのリンク</emphasis> も簡単です。
+      <informalexample>
+       <programlisting role="xml"><![CDATA[
+<enumname>GtkButtonBoxStyle</enumname>
+]]></programlisting>
+      </informalexample>
+      これは <enumname>GtkButtonBoxStyle</enumname> のようになります。
+      列挙子やフラグへのリンクは、次のようなオプションフィールドによっても可能です。
+      <informalexample>
+       <programlisting role="xml"><![CDATA[
+<optionname enum="GtkIconLookupFlags">Gtk::ICON_LOOKUP_FORCE_SVG</optionname>
+]]></programlisting>
+      </informalexample>
+      これは
+      <optionname enum="GtkIconLookupFlags">Gtk::ICON_LOOKUP_FORCE_SVG</optionname>
+      のように変換されます。
+     </para>
+    </listitem>
+
+    <listitem>
+     <para>
+      <emphasis>プロパティへのリンク</emphasis> は簡単です。
+      <informalexample>
+       <programlisting role="xml"><![CDATA[
+<fieldname class="GtkDialog">action_area</fieldname>
+]]></programlisting>
+      </informalexample>
+      これは <fieldname class="GtkDialog">action_area</fieldname> のようになります。
+     </para>
+    </listitem>
+
+    <listitem>
+     <para>
+      <emphasis>マニュアル内のフリーリンク</emphasis>
+      は、テキスト内の特定の単語にリンクしたり
+      チュートリアルの特定の節にリンクしたりする際に必要となります。
+      リンク先の節の ID を指定したうえで、好きなタイトルを選択します。
+      <informalexample>
+       <programlisting role="xml"><![CDATA[
+マニュアルのコンパイル方法は
+<link linkend="tutorials.doccing">ドキュメント作成のチュートリアル</link>
+にあります。
+]]></programlisting>
+      </informalexample>
+      この結果は、
+      「マニュアルのコンパイル方法は
+      <link linkend="tutorials.doccing">ドキュメント作成のチュートリアル</link> 
+      にあります。」
+      となります。
+     </para>
+    </listitem>
+
+    <listitem>
+     <para>
+      <emphasis>URL へのリンク</emphasis> はマニュアルの中でも可能です。
+      HTTP、FTP やメールアドレスへの普通のリンクも使用することができます。
+      <informalexample>
+       <programlisting role="xml"><![CDATA[
+<ulink url="mailto:php-gtk-doc@lists.php.net">ドキュメントメーリングリスト</ulink>
+]]></programlisting>
+      </informalexample>
+      は
+      <ulink url="mailto:php-gtk-doc@lists.php.net">ドキュメントメーリングリスト</ulink>
+      となります。もしマニュアル内で特定のリンクを何度も使用するのなら、
+      <literal>manual/global.ents</literal> の XML
+      エンティティにそれを追加しましょう。すると、
+      <informalexample>
+       <programlisting role="xml"><![CDATA[
+&link.phpgtkdoc;
+]]></programlisting>
+      </informalexample>
+      が &link.phpgtkdoc; となるのと同様に、
+      <informalexample>
+       <programlisting role="xml"><![CDATA[
+<ulink url="mailto:&email.phpgtkdoc;">ドキュメントメーリングリスト</ulink>
+]]></programlisting>
+      </informalexample>
+      と書けば
+      <ulink url="mailto:&email.phpgtkdoc;">ドキュメントメーリングリスト</ulink>
+      となります。
+     </para>
+    </listitem>
+   </itemizedlist>
+  </sect2>
+
+  <sect2 id="tutorials.doccing.writing.examples">
+   <title>サンプルコードと画像</title>
+
+   <simpara>
+    PHP-GTK 2 のドキュメントは、PHP-GTK 1 用に作られたこれまでのドキュメントと異なり、
+    画像や外部のサンプルコードをサポートしています。
+   </simpara>
+   <simpara>
+    画像には三種類の形式があります。
+    クラスの画像、独立した段落を構成する通常の画像、
+    そしてテキスト中にインライン形式で配置できる画像です。
+   </simpara>
+   <para>
+    <emphasis>クラスの画像</emphasis> は、
+    クラスの概要ページで説明の右側に表示されるものです。これは、単に
+    <informalexample>
+     <programlisting role="xml"><![CDATA[
+<classimage fileref="&directory.images;/reference/gtk/gtkiconview.constructor.png"/>
+]]></programlisting>
+    </informalexample>
+    のように追加するだけです。
+    基底ディレクトリ <literal>&amp;directory.images;</literal> に注目しましょう。
+    これは、コンパイル時に正しい画像ディレクトリに変換されます。
+   </para>
+   <para>
+    通常の画像は、段落の中に
+    <informalexample>
+     <programlisting role="xml"><![CDATA[
+<graphic fileref="&directory.images;/path/to/the/file.png"/>
+]]></programlisting>
+    </informalexample>
+    のように指定します。インライン画像は
+    <informalexample>
+     <programlisting role="xml"><![CDATA[
+<inlinegraphic fileref="&directory.images;/path/to/the/file.png"/>
+]]></programlisting>
+    </informalexample>
+    となります。
+   </para>
+
+   <para>
+    サンプルコードも、マニュアルファイルから分離させることができます。
+    これは、実際にサンプルを実行させたい読者にとって便利です。
+    コードをいちいちコピーペーストする必要はなく、サンプルコードを直接実行できるのです。
+    さらに、マニュアルを作成したり編集している際にサンプルコードをテストするのも簡単です。
+   </para>
+
+   <note>
+    <para>
+     サンプルを別ファイルにできるのは、それが完全に実行可能なプログラムである場合
+     <emphasis>のみ</emphasis> です。コードの一部だけの場合はインラインにする必要があります。
+    </para>
+   </note>
+
+   <para>
+     別ファイルに分けたサンプルは、このようにして使用します。
+     <informalexample>
+      <programlisting role="xml"><![CDATA[
+    <example>
+     <title>単純な GtkAboutDialog</title>
+     <programlisting role="php">
+      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+          ]]>href="&amp;directory.examples;/reference/gtk/gtkaboutdialog/constructor.phpw"
+             parse="text"><![CDATA[
+       <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+      </xi:include>
+     </programlisting>
+    </example>
+]]></programlisting>
+    </informalexample>
+   </para>
+
+   <para>
+    サンプルコードの一部をインライン表示するには、このようにします。
+    <informalexample>
+     <programlisting role="xml"><![CDATA[
+    <informalexample>
+     <programlisting role="php"><![CDATA[
+// ここに php のコードを書きます
+]]>]]&gt;<![CDATA[</programlisting>
+    </informalexample>
+]]></programlisting>
+    </informalexample>
+    <literal>CDATA</literal> セクションはとても便利なもので、
+    コードを記入する際にエスケープする必要がなくなります。サンプルコードの一部を表示する際には
+    &lt;?php および ?&gt; タグは必要ありません。<literal>CDATA</literal> は、
+    現在のドキュメントの中に新しいドキュメントをオープンすることに注意しましょう。
+    悲しいかな、新たな字下げが必要になります。
+    CDATA セクション内で字下げの規約を破ることを気にしないでください。
+   </para>
+  </sect2>
+
+ </sect1>
+
+ <sect1 id="tutorials.doccing.standards">
+  <title>コーディング規約</title>
+  <simpara>
+   ドキュメントの一貫性を保つため、
+   xml ドキュメントを書く際のルールをいくつか決めました。
+  </simpara>
+
+  <itemizedlist>
+   <listitem>
+    すべてのファイルは
+    <ulink url="http://en.wikipedia.org/wiki/UTF-8">UTF-8</ulink>
+    で記述します。
+   </listitem>
+   <listitem>
+    XML タグの字下げは、その親から <literal>1</literal> 文字ぶんとします。
+   </listitem>
+   <listitem>
+    字下げにはスペースを使用します。タブを使用してはいけません。
+    たとえ字下げの量がタブの長さと等しくなったとしても同じです。
+   </listitem>
+   <listitem>
+    最大 80 文字までで改行します。
+   </listitem>
+   <listitem>
+    非推奨項目の <literal>shortdesc</literal> 要素には、
+    以下の非推奨エントリ
+    <literal>&amp;deprecated.class;</literal>、
+    <literal>&amp;deprecated.method;</literal>、
+    <literal>&amp;deprecated.property;</literal>
+    のうちのいずれかを含めます。
+   </listitem>
+  </itemizedlist>
+
+  <para>
+   マニュアルに使用する PHP のコード例は、
+   <ulink url="http://cvs.php.net/viewcvs.cgi/*checkout*/php-gtk/CODING_STANDARDS">PHP-GTK
+   コーディング規約</ulink> に従わなければなりません。
+  </para>
+ </sect1>
+
+</chapter>
+<!-- Keep this comment at the end of the file
+Local variables:
+mode: sgml
+sgml-omittag:t
+sgml-shorttag:t
+sgml-minimize-attributes:nil
+sgml-always-quote-attributes:t
+sgml-indent-step:1
+sgml-indent-data:t
+sgml-parent-document:nil
+sgml-default-dtd-file:"../../../manual.ced"
+sgml-exposed-tags:nil
+sgml-local-catalogs:nil
+sgml-local-ecat-files:nil
+End:
+vim600: syn=xml fen fdm=syntax fdl=2 si
+vim: et tw=78 syn=sgml
+vi: ts=1 sw=1
+-->
+

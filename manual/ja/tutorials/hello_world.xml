@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- $Revision: 1.1 $ -->
+<!-- EN-Revision: 1.8 Maintainer: takagi Status: ready -->
+<chapter id="tutorials.helloworld">
+ <title>Hello World (初級)</title>
+
+  <simpara>
+   新しいプログラミング言語を学ぶ際に最初に書くプログラムは、
+   たいてい 'hello world' です。そこで、皆さんのご期待にこたえて、
+   このマニュアルでも最初のチュートリアルとして
+   'hello world' をとりあげます!
+  </simpara>
+  <simpara>
+   このチュートリアルの前提条件として、PHP 自身についての概要は知っているものとします。
+   このチュートリアルでは、PHP-GTK の使用法およびその背景となる概念や技術を扱います。
+  </simpara>
+  <simpara>
+   このチュートリアルでは、単純なウィンドウを作成してそこに
+   "Hello World!" というテキストを表示します。
+  </simpara>
+  <simpara>
+   まずはプログラムのリストをご覧に入れます。それから、
+   プログラムの各行について説明していきます。
+   これによって、基本的な PHP-GTK アプリケーションについての概要がつかめるでしょう。
+  </simpara>
+
+
+  <example>
+   <title>単純な Hello World スクリプト</title>
+   <programlisting role="php">
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+     href="&directory.examples;/tutorials/helloworld/helloworld.phpw" parse="text">
+     <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+    </xi:include>
+   </programlisting>
+  </example>
+
+  <note>
+   <para>
+    もし
+    <literal>Fatal error: Call to undefined function: connect_simple()</literal>
+    というエラーが出たら、あなたが使用しているのは PHP-Gtk1 であり、
+    PHP-Gtk2 ではありません。このマニュアルは PHP-Gtk1 のものではありません。
+   </para>
+  </note>
+
+  <para>
+   このコードをテキストエディタにコピーし、
+   <filename>hello.phpw</filename> という名前で保存しましょう。
+   次に、コンソールを開いて <command>php hello.phpw</command>
+   でプログラムを起動します。"Hello world" というタイトルのウィンドウが開き、
+   "Just wanted to say 'Hello world!'" というテキストが表示されることでしょう。
+  </para>
+
+
+  <example>
+   <title>PHP-GTK が使用可能かどうかのチェック</title>
+   <programlisting role="php"><![CDATA[if (!class_exists('gtk')) {
+    die("Please load the php-gtk2 module in your php.ini\r\n");
+}]]></programlisting>
+  </example>
+
+  <para>
+   PHP-GTK が使用可能であることを確認するため、
+   <literal>gtk</literal> クラスが存在するかどうかを調べます。
+   PHP 4 および PHP-GTK 1 の場合と違い、PHP-GTK モジュールを
+   <ulink url="http://www.php.net/dl">dl()</ulink>
+   で読み込もうとしてはいけません。この方法は PHP 5 では非推奨となっており、
+   新しく作成するコードでは使用してはいけません。
+   つまり、ここでできるのはメッセージを表示することだけです。
+   モジュールが使用できないことを知らせた上で、
+   ユーザ自身にモジュールを有効にしてもらう必要があります。
+  </para>
+
+
+  <example>
+   <title>ウィンドウの作成</title>
+   <programlisting role="php"><![CDATA[$wnd = new GtkWindow();]]></programlisting>
+  </example>
+
+  <para>
+   新しい <link linkend="gtk.gtkwindow">window</link> ウィジェットを作成する方法は、
+   単にオブジェクトのインスタンスを作成するだけのことです。
+   変数 <literal>$wnd</literal> に、新しいオブジェクトが代入されます。
+   PHP 4 で PHP-GTK 1 のプログラムを書いたことがある人は、
+   <literal>new</literal> の前に <literal>&amp;</literal>
+   がないことにお気づきになるかもしれません。これは PHP 4 では必須でしたが、
+   PHP 5 ではもはや使用されません。自動的に参照が作成されます。
+  </para>
+
+
+  <example>
+   <title>ウィンドウのタイトルの設定</title>
+   <programlisting role="php"><![CDATA[$wnd->set_title('Hello world');]]></programlisting>
+  </example>
+
+  <simpara>
+   タスクバー内でウィンドウを識別しやすくするため、タイトルを設定します。
+   単にオブジェクトのメソッドをコールするだけです。
+  </simpara>
+
+
+  <example>
+   <title>正常に終了できるようにする</title>
+   <programlisting role="php"><![CDATA[$wnd->connect_simple('destroy', array('gtk', 'main_quit'));]]></programlisting>
+  </example>
+
+  <para>
+   ちょっと見慣れないコードが出てきました。これにより、
+   <signalname class="GtkObject">destroy</signalname> シグナルが
+   静的メソッド <link linkend="gtk.method.main_quit">Gtk::main_quit</link>
+   と関連付けられます。これは、ウィンドウが 閉じられた/破壊された
+   場合に GTK のメインループを終了させるようにします
+   (メインループについてはもう少し後で説明します)。
+  </para>
+
+
+  <example>
+   <title>テキストを表示するラベルの作成</title>
+   <programlisting role="php"><![CDATA[$lblHello = new GtkLabel("Just wanted to say\r\n'Hello world!'");]]></programlisting>
+  </example>
+
+  <para>
+   先ほど、新しいウィジェットを作成しました。
+   そこにちょっとしたテキストを表示させるようにしましょう。このような場合に最適なのが
+   <classname>GtkLabel</classname> です。
+  </para>
+
+
+  <example>
+   <title>ウィンドウへのラベルの追加</title>
+   <programlisting role="php"><![CDATA[$wnd->add($lblHello);]]></programlisting>
+  </example>
+
+  <simpara>
+   これで、ウィンドウに対してラベルを直接追加します。
+  </simpara>
+
+
+  <example>
+   <title>ウィンドウの可視化</title>
+   <programlisting role="php"><![CDATA[$wnd->show_all();]]></programlisting>
+  </example>
+
+  <para>
+   ここまでの段階では、画面には何も表示されません。
+   ウィンドウを表示するには、<function class="GtkWidget">show</function>
+   をコールする必要があります。
+   これでウィンドウが表示されますが、ラベルは表示されません。ラベルの
+   <function class="GtkWidget">show</function> もコールしなければならないのです。
+   ウィンドウ上にボタンやチェックボックスなどのウィジェットを複数配置している場合、
+   これでは不便です。<function class="GtkWidget">show_all</function>
+   を使用すると、ウィンドウおよびその配下のすべてのウィジェットを表示させます。
+  </para>
+
+
+  <example>
+   <title>メインループの開始</title>
+   <programlisting role="php"><![CDATA[Gtk::main();]]></programlisting>
+  </example>
+
+  <para>
+   全設定が終了したら、ウィンドウを表示したままにしておき、
+   ユーザの操作に反応させる必要があります。
+   通常の PHP スクリプトはこの時点で終了してしまいますが、
+   ここではスクリプトを実行し続けなければならないのです。
+   そのためには、GTK のメインループを作成する必要があります。
+   このループがアプリケーションを実行し続け、ユーザのイベントを待ち受けます。
+   イベントが発生すると、対応するコールバック関数にそれを委譲します。
+  </para>
+
+
+ <sect1 id="tutorials.helloworld.futherreading">
+  <title>次に進む道</title>
+  <para>
+   これで初めての PHP-GTK 2 アプリケーションができあがりました。
+   おそらく、次はもっと複雑なレイアウトを作成したくなることでしょう。
+   その基礎を学ぶには、
+   <link linkend="tutorials.packing">パッキングのチュートリアル</link>
+   を参照ください。
+  </para>
+ </sect1>
+
+</chapter>
