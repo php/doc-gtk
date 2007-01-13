@@ -1,0 +1,190 @@
+<chapter id="tutorials.helloadvanced">
+<!-- $Revision: 1.1 $ -->
+ <title>Здравей свят (за напреднали)</title>
+
+ <simpara>
+  В този урок ще задълбочим разгледания в предишният урок пример Здравей Свят.
+  Ще създадем прозоре, в който потребителя трябва да въведе потребителското
+  си име и парола за достъп. Когато потребителя натисне бутона Вход, текстовите
+  полета ще бъдат проверени и ще бъде отпечатена грешка ако не са въведени
+  правилно потребителското име и парола за достъп.
+ </simpara>
+
+ <para>
+  Ето така ще изглежда програмата, когато бъде завършена:
+  <graphic fileref="&directory.images;/tutorials/helloadvanced.png"/>
+ </para>
+
+ <para>
+  Първото нещо, което трябва да направим е, да създадем прозорец, да му
+  зададем заглавие и да кажем на главният цикъл да прекъсне програмата,
+  ако прозореца бъде затворен. Това вече знаете от първият урок:
+  <informalexample>
+   <programlisting role="php"><![CDATA[
+$wnd = new GtkWindow();
+$wnd->set_title('Login');
+$wnd->connect_simple('destroy', array('gtk', 'main_quit'));
+]]></programlisting>
+  </informalexample>
+ </para>
+
+ <para>
+  Следващата стъпка е създаването на всички уйджети за този диалог:
+  създаваме две текстови полета за въвеждане на потребителско име и парола
+  за достъп:
+  <informalexample>
+   <programlisting role="php"><![CDATA[
+$txtUsername = new GtkEntry();
+$txtPassword = new GtkEntry();
+]]></programlisting>
+  </informalexample>
+  Необходимо е да създадем описателни етикети, за да може потребителя да
+  знае къде да въведе потребителското име и къде паролата за достъп:
+  <informalexample>
+   <programlisting role="php"><![CDATA[
+//The second parameter says that the underscore should be parsed as underline
+$lblUsername = new GtkLabel('_Username', true);
+$lblPassword = new GtkLabel('_Password', true);
+]]></programlisting>
+  </informalexample>
+  За край ни трябват и два бутона - единият за вход, другият за отказване:
+  <informalexample>
+   <programlisting role="php"><![CDATA[
+$btnLogin    = new GtkButton('_Login');
+$btnCancel   = new GtkButton('_Cancel');
+]]></programlisting>
+  </informalexample>
+  Може би забелязвате, че конструктура <classname>GtkLabel</classname> приема
+  втори параметър - долна черта <literal>_</literal>, за да може първата буква
+  да се изобрази като подчертана. Както забелязвате същото нещо не се прави
+  с конструктуро на бутона, тъй като той го прави автоматично. Това поведение
+  може би ще Ви се стори странно, но ще Ви помогне при разграничаване на етикетите
+  на бутоните от самите етикети.
+ </para>
+
+ <para>
+  Сега трябва да покажем на етикетите кой уйджет да активират при избиране на
+  подчертаната буква. Това се прави по този начин:
+  <informalexample>
+   <programlisting role="php"><![CDATA[
+$lblUsername->set_mnemonic_widget($txtUsername);
+$lblPassword->set_mnemonic_widget($txtPassword);
+]]></programlisting>
+  </informalexample>
+  Следващата процудура е да определим какво действие ще се извърши, когато
+  е натиснат даден бутон. Бутонът за изход (Cancel) ще разруши прозореца, т.е. ще
+  прекрати нашата програма, а бутонаът за вход Login ще провери техтовите полета
+  и ще продължи с други действия:
+  <informalexample>
+   <programlisting role="php"><![CDATA[
+$btnCancel->connect_simple('clicked', array($wnd, 'destroy'));
+$btnLogin ->connect_simple('clicked', 'login', $wnd, $txtUsername, $txtPassword);
+]]></programlisting>
+  </informalexample>
+  Предаваме три уйджета като допълнителни параметри към функцията за вход,
+  която още не е дефинирана, (<literal>login</literal> function) -
+  <varname>$wnd</varname>, <varname>$txtUsername</varname> и <varname>$txtPassword</varname>.
+  Тези три уйджета са необходими, за да получим стойностите на текстовите полета и
+  ако всичко е наред да разрушим прозорецът.
+ </para>
+
+ <para>
+  Сега след като имаме всичко, трябва да ги добавим в прозорец.
+  Тъй като <classname>GtkWindow</classname> е бинсарен контейнер, той може да приеме
+  само един уйджет, затова ни трябва друг контейнер, в който да разположим нашите уйджети.
+  Използваме <classname>GtkTable</classname>, защото ни позволява да запазим етикетите
+  в колони, а стойностите на полетата по следният начин:
+  <informalexample>
+   <programlisting role="php"><![CDATA[
+$tbl = new GtkTable(3, 2);
+$tbl->attach($lblCredit, 0, 2, 0, 1);
+$tbl->attach($lblUsername, 0, 1, 1, 2);
+$tbl->attach($txtUsername, 1, 2, 1, 2);
+$tbl->attach($lblPassword, 0, 1, 2, 3);
+$tbl->attach($txtPassword, 1, 2, 2, 3);
+]]></programlisting>
+  </informalexample>
+  (<varname>$lblCredit</varname> е просто етикет със съобщение).
+  За бутоните използваме <classname>GtkHButtonBox</classname>, за да
+  можем да разположим няколко от тях:
+  <informalexample>
+   <programlisting role="php"><![CDATA[
+$bbox = new GtkHButtonBox();
+$bbox->set_layout(Gtk::BUTTONBOX_EDGE);
+$bbox->add($btnCancel);
+$bbox->add($btnLogin);
+]]></programlisting>
+  </informalexample>
+ </para>
+
+ <para>
+  Слдва да разположим таблицата с бутоните в прозореца. Не е възможно да направим
+  това директно, тъй като <classname>GtkWindow</classname> е <classname>GtkBin</classname>
+  и може да съдържа само един уйджет. Затова ни е необходим друг контейнер, който
+  този път е <classname>GtkVBox</classname>:
+  <informalexample>
+   <programlisting role="php"><![CDATA[
+$vbox = new GtkVBox();
+$vbox->pack_start($tbl);
+$vbox->pack_start($bbox);
+]]></programlisting>
+  </informalexample>
+  Това е всичко и сега трябва да покажем прозореца:
+  <informalexample>
+   <programlisting role="php"><![CDATA[
+$wnd->add($vbox);
+$wnd->show_all();
+Gtk::main();
+]]></programlisting>
+  </informalexample>
+ </para>
+
+ <para>
+  Последното, което липсва е функцията за вход <literal>login</literal>,
+  която се извиква, когато потребителя натисне бутона Вход (Login). Тя трябва
+  да провери стойностите за потребителско име и парола. Ако тяхната дължина
+  е 0, то потребителя не е въвел нищо и ще се появи съобщение за грешка.
+  Ако всичко е наред, прозорецът ще бъде унищожен и програмата ще продължи
+  със зареждане на основният прозорец.
+ </para>
+
+ <para>
+  Вземането на техт от уйджет става много лесно с използването на метода
+  <function class="GtkEntry">get_text</function> на
+  <classname>GtkEntry</classname>:
+  <informalexample>
+   <programlisting role="php"><![CDATA[
+$strUsername = $txtUsername->get_text();
+$strPassword = $txtPassword->get_text();
+]]></programlisting>
+  </informalexample>
+  Проверката се прави чрез стандартната функция в php <literal>strlen</literal>.
+  Ако има грешка ще искаме да покажен кратко съобщение.
+  <classname>GtkMessageDialog</classname> е идеален, защото автоматически генерира
+  икона и стандартните бутони (Ok, Yes/No):
+  <informalexample>
+   <programlisting role="php"><![CDATA[
+$dialog = new GtkMessageDialog($wnd, Gtk::DIALOG_MODAL, Gtk::MESSAGE_ERROR, Gtk::BUTTONS_OK, $errors);
+$dialog->set_markup("The following errors occured:\r\n<span foreground='red'>" . $errors . "</span>");
+$dialog->run();
+$dialog->destroy();
+]]></programlisting>
+  </informalexample>
+ </para>
+
+ <para>
+  Сложете функцията за влизане преди (!) главният цикъл и я стартирайте.
+ </para>
+
+ <example>
+  <title>Пълният лист на програмата</title>
+  <programlisting role="php">
+   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
+               href="&directory.examples;/tutorials/helloadvanced/helloadvanced.phpw"
+               parse="text">
+    <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+   </xi:include>
+  </programlisting>
+ </example>
+
+</chapter>

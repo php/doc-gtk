@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- $Revision: 1.1 $ -->
+<chapter id="tutorials.helloworld">
+ <title>Здравей свят (прост пример)</title>
+
+  <simpara>
+   Когато започнете с някой език за програмиране, първата програма, която ще напишете е
+   така известната програма 'здравей свят'. За да не разочароваме всички и ние първата
+   програмка в нашето ръководство ще бъде точно 'здравей свят'!
+  </simpara>
+  <simpara>
+   Чрез уроците ще имате възможност да научите и за възможностите на PHP.
+   Уроците са направени така, че да получите ясна представа при програмиране
+   под PHP-GTK, а също така и техниките за постигането му.
+  </simpara>
+  <simpara>
+   В този урок ще създадем простичък прозорец с техт "Здравей свят!".
+  </simpara>
+  <simpara>
+   Ще започнем с листинга на програмата, след което ще обясним всяка линия
+   от програмата, за да можете да получите основна представа за една простичка
+   програма написана на PHP-GTK.
+  </simpara>
+
+
+  <example>
+   <title>Простичък скрипт Здравей свят</title>
+   <programlisting role="php">
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+     href="&directory.examples;/tutorials/helloworld/helloworld.phpw" parse="text">
+     <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+    </xi:include>
+   </programlisting>
+  </example>
+
+  <note>
+   <para>
+    Ако получите грешката
+    <literal>Fatal error: Call to undefined function: connect_simple()</literal>,
+    в този случай използвате PHP-Gtk1, а не PHP-Gtk2. Това е грешното ръководство.
+   </para>
+  </note>
+
+  <para>
+   Копирайте този код в програма за текстова обработка и го запазете като
+   файл <filename>hello.phpw</filename>.Отворете конзола и го стартирайте с
+   <command>php hello.phpw</command>. Нов прозорец със заглавие "Здравей свят" трябва
+   да се покаже и в него да бъде изписано само текста "Просто исках да Ви кажа 'Здравей свят!'".
+  </para>
+
+
+  <example>
+   <title>Проверка дали е зареден модулът PHP-GTK</title>
+   <programlisting role="php"><![CDATA[if (!class_exists('gtk')) {
+    die("Моля, заредете модулът php-gtk2 в php.ini\r\n");
+}]]></programlisting>
+  </example>
+
+  <para>
+   Тук провиряваме дали е налично PHP-GTK, като проверяваме дали е зареден класът
+   <literal>gtk</literal>. При PHP 4 и PHP-GTK 1, трябваще да заредите модула
+   на PHP-GTK чрез <ulink url="http://www.php.net/dl">dl()</ulink>. Този начин 
+   отпада в PHP 5 и не трябва да се използва при написване на нов код. Сега единственото,
+   което трябва да направим е да отпечатме съобщение за грешка със съобщение да бъде
+   заредено ръчно от потребителя.
+  </para>
+
+
+  <example>
+   <title>Създаване на прозорец</title>
+   <programlisting role="php"><![CDATA[$wnd = new GtkWindow();]]></programlisting>
+  </example>
+
+  <para>
+   Създаване на нов уйджет с <link linkend="gtk.gtkwindow">прозорец</link> е също тлокоз лесно,
+   колкото е да създадете нов обект: Чрез променливата
+   <literal>$wnd</literal> задаваме новият обект. Ако вече сте програмирали на
+   PHP 4 и PHP-GTK 1, трябва да изпукнете амперсанта <literal>&amp;</literal>
+   преди <literal>new</literal>. Това беше необходимо при PHP 4, 
+   но при PHP 5 не е необходимо.
+  </para>
+
+
+  <example>
+   <title>Задаване на заглавие на прозореца</title>
+   <programlisting role="php"><![CDATA[$wnd->set_title('Hello world');]]></programlisting>
+  </example>
+
+  <simpara>
+   За по-лесно откриване на прозорците в лентата със задачи задаваме имена на прозорците:
+   Просто обръщение към обектен метод.
+  </simpara>
+
+
+  <example>
+   <title>За чисто изключване на програмата</title>
+   <programlisting role="php"><![CDATA[$wnd->connect_simple('destroy', array('gtk', 'main_quit'));]]></programlisting>
+  </example>
+
+  <para>
+   Това е първият интересен код, който ще разгледаме: Сигналът
+   <signalname class="GtkObject">destroy</signalname> се свързва със статичният метод
+   <link linkend="gtk.method.main_quit">Gtk::main_quit</link> и той казва на
+   GTK, да прекрати главният цикъл когато бъде затворен отпределен прозорец.
+   (Главният цикъл ще бъде разгледан по-надолу в Ръководството)
+  </para>
+
+
+  <example>
+   <title>Създаване на етикет за показване на текст</title>
+   <programlisting role="php"><![CDATA[$lblHello = new GtkLabel("Just wanted to say\r\n'Hello world!'");]]></programlisting>
+  </example>
+
+  <para>
+   Както преди, създаваме нов уйджет. Този път обаче искаме да покажем
+   кратко съобщение - за тази цел изполваме <classname>GtkLabel</classname>.
+  </para>
+
+
+  <example>
+   <title>Добавяне на етикет към прозорец</title>
+   <programlisting role="php"><![CDATA[$wnd->add($lblHello);]]></programlisting>
+  </example>
+
+  <simpara>
+   Сега казваме на прозореца да изобрази директно съдържанието на етикета.
+  </simpara>
+
+
+  <example>
+   <title>Да направим прозореца да се вижда</title>
+   <programlisting role="php"><![CDATA[$wnd->show_all();]]></programlisting>
+  </example>
+
+  <para>
+   До сега нищо от направеното няма да бъде показано. За да бъде показано трябва да извикате 
+   функцията <function class="GtkWidget">show</function>.
+   Това ще покаже прозореца, но няма да покаже етикета, затова трябва да извикаме
+   <function class="GtkWidget">show</function> и за етикета.
+   Това не е много целесъобразно ако в прозореца имаме многократни уйджети от бутони,
+   полета с отметки и др. Използването на функцията <function class="GtkWidget">show_all</function>
+   ще покаже прозореца с всички подчинени уйджети.
+  </para>
+
+
+  <example>
+   <title>Стартиране на главния цикъл</title>
+   <programlisting role="php"><![CDATA[Gtk::main();]]></programlisting>
+  </example>
+
+  <para>
+   След като всичко е готово е нобходимо да запазим прозореца активен и да сме сигурни,
+   че прозорецът отговаря на извършените действия от потребителя. При обикновен скрипт
+   на PHP дейността му спира тук. На нас обаче ни е необходимо той да продължи. За тази цел
+   е необходимо да се стартира главният цикъл на GTK. Работата му е да поддържа нашата програма
+   работеща и да приема заявките от потребителя. Ако се появи някакво действие, главният
+   цикъл го прехвърля към съответстващото обратно извикване (callbacks).
+  </para>
+
+
+ <sect1 id="tutorials.helloworld.futherreading">
+  <title>По-задълбочено четене</title>
+  <para>
+   Сега след като направихте първата си проста програма на PHP-GTK 2 може би
+   ще пожелаете и нещо по-сложничко. Можете да отидете и да прочетете
+   <link linkend="tutorials.packing">Урокът за пакетиране</link>.
+  </para>
+ </sect1>
+
+</chapter>

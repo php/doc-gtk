@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- $Revision: 1.1 $ -->
+<chapter id="tutorials.helloglade">
+ <title>Здравей Glade!</title>
+
+ <sect1>
+  <title>Относно този урок</title>
+  <para>
+   Този урок ще ви научи на основните похвати при работа с файлове с разширение
+   <literal>.glade</literal> в програмите ви под PHP-Gtk2.
+  </para>
+  <para>
+   Glade2 е Разработчик на Потребителски Интерфейси, позволявайки ви да създадете 
+   програми под Gtk2 само чрез ползване на мишката, без никакво програмиране.
+   Получената програма се записва във файл с разширение <filename>.glade</filename> 
+   и може след това да бъде заредена в програмата ви под PHP-Gtk2.
+  </para>
+  <simpara>
+   Създаване на потребителски интерфейси с помощта на Glade спестява много време, 
+   особено при голями проекти, а също така ви позволява да разделите работата по
+   създавето на програмата ви и на други хора. 
+   Интерфейс дезайнерът се занимава само с проектирането на графичната част, т.нар. GUI, 
+   с помощта на Glade (и не трябва изобщо да разбира от програмиране). От друга страна, ти, 
+   като програмист трябва да се занимаваш само с програмилане без да се занимаваш с 
+   графичната част.
+  </simpara>
+ </sect1>
+
+
+ <sect1 id="tutorials.helloglade.preparation">
+  <title>Подготовка</title>
+  <simpara>
+   Ще се концентрираме върху работата с фаловете написан с помощта на Glade, 
+   а не как да правил супер сложни потребителски интефейси. Ето затова, примерът с 
+   <filename>.glade</filename> файла е много простичък - просто прозорец с един бутон.
+  </simpara>
+  <para>
+   Прозорецът получава име (id) <literal>wndClose</literal>, а бутонът получава 
+   име <literal>btnClose</literal>.
+  </para>
+  <example>
+   <title>Примерът с .glade файл - helloglade.glade</title>
+   <programlisting role="xml">
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
+     href="&directory.examples;/tutorials/helloglade/helloglade.glade" parse="text">
+     <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+    </xi:include>
+   </programlisting>
+  </example>
+ </sect1>
+
+
+ <sect1 id="tutorials.helloglade.loading">
+  <title>Зареждане на файлът</title>
+
+  <para>
+   Първото нещо, което трябва да направим е да заредим
+    <filename>.glade</filename> файла. <classname>GladeXML</classname> конструктора 
+    взема за първи параметър пътят до файла, така че единственото нещо, което трябва
+    да направим е:
+  </para>
+  <example>
+   <title>Зареждане на .glade файла</title>
+   <programlisting role="php">
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
+     href="&directory.examples;/tutorials/helloglade/loading.phpw" parse="text">
+     <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+    </xi:include>
+   </programlisting>
+  </example>
+  <para>
+   При изпълнението на скрипта ще видите, че на вашият екран са изобразени 
+   прозорец с бутон, но единственото нещо, което можете да правите, е да затворите 
+   прозореца. Вижда се, че въпреки че сте затворили прозореца, вашият скрипт 
+   продължава да функционира - това се получава най-често, когато липсва връзка 
+   към даден сигнал.
+  </para>
+
+  <sect2 id="tutorials.helloglade.connecting">
+   <title>Ръчно свързване на сигналите</title>
+   <para>
+    Следващото нещо е просто да свържем сигналите: чрез извикване на
+    <function class="GtkObject">connect</function> или
+    <function class="GtkObject">connect_simple</function> за
+    уйджет обект. За получаване на обекта използвайте метода
+    <function class="GladeXML">get_widget</function> и подайте името му 
+    (id) към него. След което продължаваме по стандартният начин:
+   </para>
+   <example>
+    <title>Вземане и свързване на уйджети</title>
+    <programlisting role="php">
+     <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
+      href="&directory.examples;/tutorials/helloglade/connecting_by_hand.phpw" parse="text">
+      <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+     </xi:include>
+    </programlisting>
+   </example>
+  </sect2>
+
+  <sect2 id="tutorials.helloglade.autoconnect">
+   <title>Изполване на Glade за свързване на сигнали</title>
+   <para>
+    Може би сте забелязали, че вътре в .glade файла можете директно 
+    да дефинирате кой ще обработва сигналът. Единственото нещо е да 
+    кажете на Glade е да направи връзка, чрез извикването на 
+    <function class="GladeXML">signal_autoconnect</function>.
+   </para>
+   <para>
+    Можете да дефинирате име на проста функция, които при възникване на 
+    дадено действие ще беди извикан или специална анотация към извикване 
+    на статичен метод чрез отделянето името на класа и на метода чрез 
+    двойно двоеточие <literal>Classname::methodName</literal>.
+   </para>
+   <example>
+    <title>Изполване на signal_autoconnect</title>
+    <programlisting role="php">
+     <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
+      href="&directory.examples;/tutorials/helloglade/autoconnect.phpw" parse="text">
+      <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+     </xi:include>
+    </programlisting>
+   </example>
+  </sect2>
+
+  <sect2 id="tutorials.helloglade.autoconnect_instance">
+   <title>Свързване с обектен метод</title>
+   <para>
+    За добрите програмисти свързването към прости функции или статични 
+    методи няма да бъде достатъчно. За да не бъде разтеглен много нашият
+    код е необходимо да можем да свържем сигналите с методи от обекти.
+   </para>
+   <para>
+    Направата на това е много просто: Използвайте
+    <function class="GladeXML">signal_autoconnect_instance</function> с обекта като
+    първи параметър вместо да ползвате 
+    <function class="GladeXML">signal_autoconnect</function>:
+   </para>
+   <example>
+    <title>Използване на signal_autoconnect_instance</title>
+    <programlisting role="php">
+     <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
+      href="&directory.examples;/tutorials/helloglade/autoconnect_instance.phpw" parse="text">
+      <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+     </xi:include>
+    </programlisting>
+   </example>
+  </sect2>
+
+ </sect1>
+
+
+ <sect1 id="tutorials.helloglade.partial">
+  <title>Зареждане само част от файл .glade</title>
+
+  <para>
+   При големи проекти е възможно да дефинирате много прозорци във един единствен файл
+   <filename>.glade</filename>, и всички те ще бъдат заредени със зареждането на
+   файла <filename>.glade</filename>. Това обаче: a) забавя стартирането на 
+   вашата програма и б) веднага ще изобрази всички прозорци ако не зададен параметъра
+   за видимост да бъде "скрит". Продължавайки нататък, може дори да ви се прииска чрез 
+   <function class="GladeXML">signal_autoconnect_instance</function>
+   само част от файлът <filename>.glade</filename> да е обект, а друга част от 
+   този файл да бъде свързана към друг обект.
+  </para>
+  <para>
+   Решението на този пробелм е във вторият параметър на конструктура
+   <classname>GladeXML</classname>: Прехвърлете id само на така наречения
+   root уйджет и само тази част от <filename>.glade</filename> файла ще бъде зареден.
+  </para>
+  <example>
+   <title>Частично зареждане на файл .glade</title>
+   <programlisting role="php">
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
+     href="&directory.examples;/tutorials/helloglade/partially.phpw" parse="text">
+     <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+    </xi:include>
+   </programlisting>
+  </example>
+
+</sect1>
+</chapter>
