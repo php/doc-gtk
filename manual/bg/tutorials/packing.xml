@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- $Revision: 1.1 $ -->
+<chapter id="tutorials.packing">
+ <title>Пакетиране на уйджети</title>
+
+ <sect1 id="tutorials.packing.about">
+  <title>Въведение</title>
+  <simpara>
+   Това ръководство има за цел да ви покаже различните методи за организиране 
+   на уйджети в един прозорец и как да изберете на-правилният от тях.
+  </simpara>
+  <para>
+   Ако и преди сте се занимавали с графични потребителски интрфейси в някой от 
+   езиците като Visual Basic или Visual C++ със сигурност ще се почудите, защо 
+   ви е необходимо да има урок за позициониране на уйджети, you will
+   wonder why you'd need a tutorial on widget placement. До саге нещата стояха 
+   така: Размерът на прозореца, избирате уйджета и го позиционирате в 
+   координатите <literal>(x,y)</literal>. Правите го едиколкоси дълъг и 
+   едиколкоси широк, и край, това е всичко. Имате фиксирани позиции и размери 
+   и дори когато размерът на прозореца се промени те си остават фиксирани, 
+   защото не знаят как да се пренастроят.
+  </para>
+  <simpara>
+   В Gtk нещага са динамични. Уйджетите променят размерите си при промяна 
+   размера на прозореца, ако рлазбира се не сте им забранили предварително 
+   да го правят. Нагласяването на всичкото това е малко по-сложно от колкото 
+   просто да фиксирате размерът и позицията им, но всичко тези мъки ще ви 
+   доведат до един прозорец който е достатъчно разчупен и добре изглеждащ при 
+   почти всички размери.
+  </simpara>
+ </sect1>
+
+
+ <sect1 id="tutorials.packing.basics">
+  <title>Основи при пакетирането</title>
+
+  <simpara>
+   Има разрични видове уйджети в Gtk в зависимост от това, колко под-уйджета 
+   могат да съдържат:
+  </simpara>
+
+  <itemizedlist>
+   <listitem>Без под-уйджета - нормален уйджет</listitem>
+   <listitem>Само един под-уйджет: bin</listitem>
+   <listitem>Два или повече под-уйджета: контейнер (container)</listitem>
+  </itemizedlist>
+
+  <para>
+   Основният уйджет, с който, в по.голямята част при програмирането ще 
+   започвате е <classname>GtkWindow</classname>, т.е bin уйджет. Това означав, 
+   че той може да съдаржа само един под-уйджет. И от тук накъде. Програма само 
+   с един уйджет не нещо което ще ни впечатли. Решението е в контейнерите. 
+   Изибате си един и го добавяте в прозореца. В този контейнер вече можете да 
+   добавите други уйджети или дори други контейнери. Това ви позволява да 
+   получите желаният от вас изглед.
+  </para>
+
+  <para>
+   Различните контейнери, като: <classname>GtkHBox</classname>, 
+   <classname>GtkVBox</classname>, <classname>GtkTable</classname> и
+   <classname>GtkFixed</classname> се държат различно, по начинът има на 
+   поставяне и организиране на уйджетите. Всеки един от тях си има свое 
+   собствено предназначение и за да получите наистина сложни интерфейси е 
+   необходимо тяхното комбиниране.
+  </para>
+
+  <!-- TODO: Explain filling and expanding, with screenshot -->
+ </sect1>
+
+
+ <sect1 id="tutorials.packing.box">
+  <title>Кутии - GtkHBox и GtkVBox</title>
+
+  <para>
+   Най-простите, но в същото време най-често използваните са  
+   <classname>GtkBox</classname>-овете: <classname>GtkHBox</classname> и 
+   <classname>GtkVBox</classname>. Тяхното предназначение е за подреждане на
+   уйджетите в една права линия. <classname>GtkHBox</classname> ги организира 
+   по хоризонталата, а <classname>GtkVBox</classname> по вертикалата.
+  </para>
+
+  <para>
+   Добавянето на уйджетите става чрез <function class="GtkBox">pack_start</function>
+   и <function class="GtkBox">pack_end</function>.
+   <function class="GtkBox">pack_start</function> ги добавя един след друг 
+   последователно, започвайки от началото (от ляво на дясно или от горе на 
+   долу), докато <function class="GtkBox">pack_end</function> ги добавя в 
+   обратен ред (от дясно на ляво или от долу на горе).
+  </para>
+
+  <para>
+   Можете да управлявате разположението им чрез трите допълнителни параметъра 
+   на <function class="GtkBox">pack_start</function> и <function class="GtkBox">pack_end</function>. 
+   За повече подробности вижте тяхната документация.
+  </para>
+
+  <example>
+   <title>Просто динамично разположение чрез <classname>GtkVBox</classname></title>
+   <programlisting role="php">
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+     href="&directory.examples;/tutorials/packing/boxes.phpw" parse="text">
+     <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+    </xi:include>
+   </programlisting>
+  </example>
+
+  <para>
+   Стартирайте демото и променете размера на прозореца. Многоредовият текстов 
+   уйджет променя размерът си, за да запълни пространството в прозореца, 
+   образувано между етикета и бутона. Променете третият параметър от 
+   <literal>true</literal> на <literal>false</literal> в пакета на 
+   <varname>scrwnd</varname> и вижте какво ще се получи.
+  </para>
+
+  <para>
+   Специална версия на <classname>GtkBox</classname>-овете са
+   <classname>GtkHButtonBox</classname> и <classname>GtkVButtonBox</classname>:
+   Тяхното предназначение е същото като кутиените контейнери, но могат да 
+   съдържат само <classname>GtkButton</classname>-ите. За компенсация на това 
+   ограничение те имат специални функции, използвани при поредица от бутони.
+  </para>
+ </sect1>
+
+
+ <sect1 id="tutorials.packing.table">
+  <title>Табулаторно разполагане чрез GtkTable</title>
+
+  <para>
+   Докато създаването на динамични разполагане чрез 
+   <classname>GtkBox</classname>-овете е много лесно, то е сравнително трудно 
+   да подредите уйджетите така, че етикетите взаимодействащите си уйджети да 
+   имат еднаква ширина, независимо от тяхното съдържание. За да получите 
+   табулаторно подреждане е най-добре да получите 
+   <classname>GtkTable</classname>. Уйджетите могат да се разполагат върху 
+   няколко колони и реда и да имат различен размер при попълването.
+  </para>
+
+  <example>
+   <title>Табулаторно разполагане</title>
+   <programlisting role="php">
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+     href="&directory.examples;/tutorials/packing/table.phpw" parse="text">
+     <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+    </xi:include>
+   </programlisting>
+  </example>
+
+  <para>
+   Изпълнявайки примерът, ще видите, че етикетът <literal>Id</literal> е 
+   центриран хоризонтално. По подразбиране, се запълват и от двете страни 
+   и заемат цялото свободно пространство. В повечето случаи това върши 
+   работа. Не е рационално обаче при изполването с 
+   <classname>GtkLabel</classname> - Етикетът трябва да бъде подравнен в 
+   едната страна. При използване на функцията 
+   <function class="GtkLabel">set_justify</function> се подравняват множество 
+   етикети, затова ние ще използваме <classname>GtkAlignment</classname> за 
+   да направим правилно подравняване - етикетът <literal>Name</literal> 
+   показва този резултат.
+  </para>
+ </sect1>
+
+
+ <sect1 id="tutorials.packing.fixed">
+  <title>Фиксирано разполагане</title>
+
+  <para>
+   Този контейнер няма свое логическо разположение. Вие трябва лично да му 
+   кажете къде да бъде поставен. Размерът на уйджета се определя автоматично, 
+   но можете да зададете свои собствени размери, чрез функцията - 
+   <function class="GtkWidget">set_size_request</function>.
+  </para>
+
+  <simpara>
+   Много е лесно да създадете и разположите уйджетите, но тяхните размери са 
+   фиксирани. При промяна размерът на прозореца, уйджета не променя размерът 
+   или своето положение. Използвайте го в случаите, когата е наистина 
+   необходимо. По-добрият избор е изполването на динамичните контийнери.
+  </simpara>
+
+  <example>
+   <title>Фиксирано разполагане чрез <classname>GtkFixed</classname></title>
+   <programlisting role="php">
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+     href="&directory.examples;/tutorials/packing/fixed.phpw" parse="text">
+     <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+    </xi:include>
+   </programlisting>
+  </example>
+ </sect1>
+
+</chapter>
