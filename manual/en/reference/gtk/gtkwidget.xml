@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- $Revision: 1.32 $ -->
+<!-- $Revision: 1.33 $ -->
 <classentry id="gtk.gtkwidget">
  <classmeta>
   <classtitle>GtkWidget</classtitle>
@@ -162,7 +162,7 @@ $wnd->add($btn);
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Adds a widget to the list of mnemonic labels for this widget.
    </shortdesc>
    <desc>
     <para>
@@ -181,7 +181,8 @@ $wnd->add($btn);
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns whether or not the signal can be activated by its associated
+    accelerator.
    </shortdesc>
    <desc>
 
@@ -196,7 +197,7 @@ $wnd->add($btn);
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Invokes the focus singal when a widgets child has the focus.
    </shortdesc>
    <desc>
     <para>
@@ -216,7 +217,7 @@ $wnd->add($btn);
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Emits a child-notify signal for the given child property.
    </shortdesc>
    <desc>
 
@@ -266,7 +267,8 @@ $wnd->add($btn);
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Creates a new <classname>PangoContext</classname> with the appropriate font map, font
+    description, and base direction for drawing text for this widget.
    </shortdesc>
    <desc>
     <para>
@@ -285,7 +287,8 @@ $wnd->add($btn);
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Creates a new <classname>PangoLayout</classname> with the appropriate font 
+    map, font description, and base direction for drawing text for this widget.
    </shortdesc>
    <desc>
 
@@ -373,7 +376,8 @@ $wnd->add($btn);
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Checks to see if a mouse drag has crossed the widgets drag threshold and
+    should therefore trigger a drag and drop operation.
    </shortdesc>
    <desc>
 
@@ -403,7 +407,8 @@ $wnd->add($btn);
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Add the image targets supported by <classname>GtkSelection</classname> to
+    the target list of the drag destination. 
    </shortdesc>
    <desc>
 
@@ -418,7 +423,8 @@ $wnd->add($btn);
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Add the URI targets supported by <classname>GtkSelection</classname> to
+    the target list of the drag destination. 
    </shortdesc>
    <desc>
 
@@ -429,13 +435,13 @@ $wnd->add($btn);
    <funcsynopsis>
     <funcprototype>
      <funcdef> <function>drag_dest_find_target</function></funcdef>
-     
      <paramdef><classname>GdkDragContext</classname> <parameter>context</parameter></paramdef>
      <paramdef><parameter><optional>targets</optional></parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Looks for a match between the context targets and the destination target
+    list.
    </shortdesc>
    <desc>
 
@@ -450,7 +456,7 @@ $wnd->add($btn);
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the list of targets this widget can accept from a drag and drop.
    </shortdesc>
    <desc>
 
@@ -468,7 +474,7 @@ $wnd->add($btn);
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the widget as a potential drop destination.
    </shortdesc>
    <desc>
 
@@ -479,14 +485,13 @@ $wnd->add($btn);
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>drag_dest_set_proxy</function></funcdef>
-     
      <paramdef><classname>GdkWindow</classname> <parameter>proxy_window</parameter></paramdef>
      <paramdef><parameter>protocol</parameter></paramdef>
      <paramdef><parameter>use_coordinates</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets this widget as a proxy for drops to another window.
    </shortdesc>
    <desc>
 
@@ -497,12 +502,11 @@ $wnd->add($btn);
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>drag_dest_set_target_list</function></funcdef>
-     
      <paramdef><parameter>targets</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the list of targets that this widget can accept from a drag and drop.
    </shortdesc>
    <desc>
 
@@ -517,7 +521,7 @@ $wnd->add($btn);
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Unsets this widget as a potential drop destination.
    </shortdesc>
    <desc>
 
@@ -535,7 +539,7 @@ $wnd->add($btn);
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Gets the data associated with the drag.
    </shortdesc>
    <desc>
 
@@ -550,7 +554,7 @@ $wnd->add($btn);
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Draws a highlight around the widget.
    </shortdesc>
    <desc>
 
@@ -565,7 +569,8 @@ $wnd->add($btn);
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Add the text targets supported by <classname>GtkSelection</classname> to
+    the target list of the drag destination.
    </shortdesc>
    <desc>
 
@@ -580,7 +585,7 @@ $wnd->add($btn);
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Returns the list of targets this widget can provide for drag and drop.
    </shortdesc>
    <desc>
 
@@ -591,14 +596,13 @@ $wnd->add($btn);
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>drag_source_set</function></funcdef>
-     
      <paramdef><parameter>sbmask</parameter></paramdef>
      <paramdef><parameter>targets</parameter></paramdef>
      <paramdef><parameter>actions</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets widget to be the source of a drag operation.
    </shortdesc>
    <desc>
 
@@ -609,14 +613,13 @@ $wnd->add($btn);
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>drag_source_set_icon</function></funcdef>
-     
      <paramdef><classname>GdkColormap</classname> <parameter>colormap</parameter></paramdef>
      <paramdef><classname>GdkPixmap</classname> <parameter>pixmap</parameter></paramdef>
      <paramdef><parameter><optional>mask</optional></parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the icon that will be displayed when the user drags the widget.
    </shortdesc>
    <desc>
 
@@ -627,12 +630,11 @@ $wnd->add($btn);
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>drag_source_set_icon_pixbuf</function></funcdef>
-     
      <paramdef><classname>GdkPixbuf</classname> <parameter>pixbuf</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the icon that will be displayed when the user drags the widget.
    </shortdesc>
    <desc>
 
@@ -647,7 +649,7 @@ $wnd->add($btn);
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets a stock icon that will be displayed when the user drags the widget.
    </shortdesc>
    <desc>
 
@@ -663,7 +665,7 @@ $wnd->add($btn);
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the target types that the widget offers for drag and drop.
    </shortdesc>
    <desc>
 
@@ -678,7 +680,7 @@ $wnd->add($btn);
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Unsets the widget as a potential source for drag and drop.
    </shortdesc>
    <desc>
 
@@ -693,7 +695,7 @@ $wnd->add($btn);
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Removes the highlight around a widget.
    </shortdesc>
    <desc>
 
@@ -708,7 +710,7 @@ $wnd->add($btn);
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    DEPRECATED. Invalidates, then updates a region of the widget.
    </shortdesc>
    <desc>
 
@@ -723,7 +725,7 @@ $wnd->add($btn);
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Ensures that the widget has a style.
    </shortdesc>
    <desc>
     <para>
