@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- $Revision: 1.15 $ -->
+<!-- $Revision: 1.16 $ -->
 <classentry id="gtk.gtktreeview">
  <classmeta>
   <classtitle>GtkTreeView</classtitle>
@@ -950,9 +950,19 @@ $treeview->append_column($column);
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets whether or not interactive search is enabled for the view.
    </shortdesc>
    <desc>
+   <para>
+    Sets whether or not interactive search (also called typeahead find) is 
+    enabled for the view. If interactive search is enable, an entry box will 
+    appear if a user begins typing while the view has focus. The selection for
+    the view will move to a row matching what the user types.
+   </para>
+   <para>
+    Even if interactive search is turned off, the user can still initiate a
+    search using the &quot;start-interactive-search&quot; key binding.
+   </para>
     <para>
      &seealso;
      <function class="GtkTreeView">get_enable_search</function>
