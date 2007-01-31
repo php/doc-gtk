@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- $Revision: 1.4 $ -->
+<!-- $Revision: 1.5 $ -->
 <classentry id="glade.gladexml">
  <classmeta>
   <classtitle>GladeXML</classtitle>
   <classparent>GObject</classparent>
   <shortdesc>
-   Represents an instantiation of an XML interface description. 
+   Represents an instantiation of an XML interface description.
   </shortdesc>
   <desc>
    <para>
     <literal>Glade</literal> is an user builder for Gtk+. You can rapidly
-    create user interfaces in a WYSIWYG fashion using the tool, which 
-    generates an XML representation of that interface in the form of a 
+    create user interfaces in a WYSIWYG fashion using the tool, which
+    generates an XML representation of that interface in the form of a
     <literal>.glade</literal>
    </para>
    <para>
@@ -37,6 +37,25 @@
 
 
  <constructors>
+  <constructor id="glade.gladexml.constructor">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef><function>GladeXML</function></funcdef>
+     <paramdef><parameter>filename</parameter></paramdef>
+     <paramdef><parameter><optional>root</optional></parameter></paramdef>
+     <paramdef><parameter><optional>domain</optional></parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Creates a new GladeXML instance from a file.
+   </shortdesc>
+   <desc>
+    <simpara>
+     &static;
+    </simpara>
+   </desc>
+  </constructor>
+
   <constructor id="glade.gladexml.constructor.new_from_buffer">
    <funcsynopsis>
     <funcprototype>
@@ -47,6 +66,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
+    Creates a new GladeXML instance from a string.
    </shortdesc>
    <desc>
     <simpara>
@@ -61,7 +81,7 @@
   <method id="glade.gladexml.method.get_widget">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>void <function>get_widget</function></funcdef>
+     <funcdef><classname>GtkWidget</classname> <function>get_widget</function></funcdef>
      <paramdef>string <parameter>name</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
@@ -83,12 +103,12 @@
   <method id="glade.gladexml.method.get_widget_prefix">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>void <function>get_widget_prefix</function></funcdef>
+     <funcdef>array <function>get_widget_prefix</function></funcdef>
      <paramdef>string <parameter>prefix</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Returns a set of widgets whose names begin with the provided string. 
+    Returns a set of widgets whose names begin with the provided string.
    </shortdesc>
    <desc>
     <para>
@@ -102,12 +122,12 @@
   <method id="glade.gladexml.method.relative_file">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>void <function>relative_file</function></funcdef>
+     <funcdef>string <function>relative_file</function></funcdef>
      <paramdef><parameter>filename</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Resolves relative pathnames specified by a file. 
+    Resolves relative pathnames specified by a file.
    </shortdesc>
    <desc>
     <para>
@@ -137,7 +157,7 @@
    <desc>
     <para>
      If you have specified signal handlers in your <literal>.glade</literal>
-     file; then use this method to automatically connect all your signals to 
+     file; then use this method to automatically connect all your signals to
      functions with the same name as the signal handlers specified.
     </para>
     <para>
@@ -163,7 +183,7 @@
    <desc>
     <para>
      If you have specified signal handlers in your <literal>.glade</literal>
-     file; then use this method to automatically connect all your signals to 
+     file; then use this method to automatically connect all your signals to
      methods with the same name as the signal handlers specified, and belonging
      to the specified class object.
     </para>
@@ -182,6 +202,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
+    <!-- FIXME -->
    </shortdesc>
    <desc>
    </desc>
