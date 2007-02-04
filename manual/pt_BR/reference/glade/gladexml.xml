@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 1.4 Maintainer: dnfeitosa Status: ready -->
+<!-- EN-Revision: 1.5 Maintainer: dnfeitosa Status: ready -->
 <classentry id="glade.gladexml">
  <classmeta>
   <classtitle>GladeXML</classtitle>
@@ -12,11 +12,11 @@
     O <literal>Glade</literal> é um construtor de interfaces para o Gtk+.
     Você pode criar interfaces em modo WYSIWYG usando esta ferramenta, que
     gera um arquivo XML representando a interface na forma de um arquivo
-    <literal>.glade</literal>
+    <literal>.glade</literal>.
    </para>
    <para>
     Esta objeto representa uma instância deste arquivo
-    <literal>.glade</literal>. Você pode usar este objeto no seu programa para
+    <literal>.glade</literal> e você pode usar este objeto no seu programa para
     manipular de informa individual os seus widgets.
    </para>
    <para>
@@ -28,7 +28,7 @@
     <function class="GladeXML">signal_autoconnect_instance</function>.
    </para>
    <para>
-    Dê uma olhada em 
+    Dê uma olhada no
     <link linkend="tutorials.helloglade">Tutorial Glade</link> para mais
     informações em como usar esta extensão.
    </para>
@@ -37,6 +37,25 @@
 
 
  <constructors>
+  <constructor id="glade.gladexml.constructor">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef><function>GladeXML</function></funcdef>
+     <paramdef><parameter>filename</parameter></paramdef>
+     <paramdef><parameter><optional>root</optional></parameter></paramdef>
+     <paramdef><parameter><optional>domain</optional></parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Cria uma nova instância do objeto GladeXML a partir de um arquivo.
+   </shortdesc>
+   <desc>
+    <simpara>
+     &static;
+    </simpara>
+   </desc>
+  </constructor>
+
   <constructor id="glade.gladexml.constructor.new_from_buffer">
    <funcsynopsis>
     <funcprototype>
@@ -47,6 +66,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
+    Cria uma nova instância do objeto GladeXML a partir de uma string.
    </shortdesc>
    <desc>
     <simpara>
@@ -61,7 +81,7 @@
   <method id="glade.gladexml.method.get_widget">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>void <function>get_widget</function></funcdef>
+     <funcdef><classname>GtkWidget</classname> <function>get_widget</function></funcdef>
      <paramdef>string <parameter>name</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
@@ -82,7 +102,7 @@
   <method id="glade.gladexml.method.get_widget_prefix">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>void <function>get_widget_prefix</function></funcdef>
+     <funcdef>array <function>get_widget_prefix</function></funcdef>
      <paramdef>string <parameter>prefix</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
@@ -100,7 +120,7 @@
   <method id="glade.gladexml.method.relative_file">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>void <function>relative_file</function></funcdef>
+     <funcdef>string <function>relative_file</function></funcdef>
      <paramdef><parameter>filename</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
