@@ -38,12 +38,14 @@ class Log2Coverage
     *   is shown as fallback.
     */
     protected static $filetitles = array(
-        'gen_gtk.log'   => 'Gtk',
-        'gen_gdk.log'   => 'Gdk',
-        'gen_atk.log'   => 'Atk',
-        'gen_pango.log'   => 'Pango',
+        'gen_gtk.log'        => 'Gtk',
+        'gen_gdk.log'        => 'Gdk',
+        'gen_atk.log'        => 'Atk',
+        'gen_pango.log'      => 'Pango',
         'gen_libglade.log'   => 'Glade',
-        'gen_sourceview.log'   => 'GtkSourceview',
+        'gen_mozembed.log'   => 'GtkMozEmbed',
+        'gen_scintilla.log'  => 'GtkScintilla',
+        'gen_sourceview.log' => 'GtkSourceview',
     );
 
 
