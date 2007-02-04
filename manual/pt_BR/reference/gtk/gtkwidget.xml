@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<!-- EN-Revision: 1.32 Maintainer: dnfeitosa Status: ready -->
+<?xml version="1.0" encoding="utf-8"?>
+<!-- EN-Revision: 1.34 Maintainer: dnfeitosa Status: ready -->
 <classentry id="gtk.gtkwidget">
  <classmeta>
   <classtitle>GtkWidget</classtitle>
@@ -162,7 +162,7 @@ $wnd->add($btn);
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Adiciona um widget à lista de rótulos mnemônicos para este widget.
    </shortdesc>
    <desc>
     <para>
@@ -181,7 +181,7 @@ $wnd->add($btn);
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Retorna se o sinal pode ou não ser ativado pelo acelerador associado.
    </shortdesc>
    <desc>
 
@@ -196,7 +196,7 @@ $wnd->add($btn);
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Invoca o sinal focus quando o widget filho possuir foco.
    </shortdesc>
    <desc>
     <para>
@@ -216,7 +216,7 @@ $wnd->add($btn);
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Emite o sinal child-notify para a propriedade do filho especificado.
    </shortdesc>
    <desc>
 
@@ -266,7 +266,8 @@ $wnd->add($btn);
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Cria um novo <classname>PangoContext</classname> com o mapa de fonte apropriado, 
+    descrição de fonte e direção base do desenho do texto para este widget.
    </shortdesc>
    <desc>
     <para>
@@ -285,7 +286,8 @@ $wnd->add($btn);
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Cria um novo <classname>PangoLayout</classname> com o mapa de fonte apropriado, 
+    descrição de fonte e direção base do desenho do texto para este widget.
    </shortdesc>
    <desc>
 
@@ -373,7 +375,8 @@ $wnd->add($btn);
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Verifica se um arraste do mouse cruzou a área do widget e se deve então
+    disparar uma operação arrastar-soltar.
    </shortdesc>
    <desc>
 
@@ -403,7 +406,8 @@ $wnd->add($btn);
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Adiciona alvos de imagem suportados por <classname>GtkSelection</classname>
+    à lista de alvos do destino do arraste.
    </shortdesc>
    <desc>
 
@@ -418,7 +422,8 @@ $wnd->add($btn);
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Adiciona URI dos alvos suportados por <classname>GtkSelection</classname>
+    à lista de alvos do destino do arraste.
    </shortdesc>
    <desc>
 
@@ -429,13 +434,12 @@ $wnd->add($btn);
    <funcsynopsis>
     <funcprototype>
      <funcdef> <function>drag_dest_find_target</function></funcdef>
-     
      <paramdef><classname>GdkDragContext</classname> <parameter>context</parameter></paramdef>
      <paramdef><parameter><optional>targets</optional></parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Procura por um alvo entre o contexto dos alvos e a lista de destinos.
    </shortdesc>
    <desc>
 
@@ -450,7 +454,7 @@ $wnd->add($btn);
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Retorna uma lista de widgets alvos que podem aceitar algo a partir de um clique-arraste.
    </shortdesc>
    <desc>
 
@@ -468,7 +472,7 @@ $wnd->add($btn);
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Define o widget como um potencial destino.
    </shortdesc>
    <desc>
 
@@ -479,14 +483,14 @@ $wnd->add($btn);
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>drag_dest_set_proxy</function></funcdef>
-     
      <paramdef><classname>GdkWindow</classname> <parameter>proxy_window</parameter></paramdef>
      <paramdef><parameter>protocol</parameter></paramdef>
      <paramdef><parameter>use_coordinates</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Define este widget como um intermediário para que widgets sejam soltos e
+    enviados à outra janela.
    </shortdesc>
    <desc>
 
@@ -497,12 +501,11 @@ $wnd->add($btn);
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>drag_dest_set_target_list</function></funcdef>
-     
      <paramdef><parameter>targets</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Define uma lista de alvos que este widget poderá aceitar um arrastar-soltar.
    </shortdesc>
    <desc>
 
@@ -517,7 +520,7 @@ $wnd->add($btn);
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Redefine o widget como não sendo um potencial destino de um arraste.
    </shortdesc>
    <desc>
 
@@ -535,7 +538,7 @@ $wnd->add($btn);
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Retorna o dado associado ao arraste.
    </shortdesc>
    <desc>
 
@@ -550,7 +553,7 @@ $wnd->add($btn);
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Desenha um contorno em volta do widget.
    </shortdesc>
    <desc>
 
@@ -565,7 +568,8 @@ $wnd->add($btn);
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Adiciona os alvos de text suportados por <classname>GtkSelection</classname>
+    à lista de destinos.
    </shortdesc>
    <desc>
 
@@ -580,7 +584,8 @@ $wnd->add($btn);
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Retorna uma lista de alvos que este widget pode oferecer para
+    arrastar-soltar.
    </shortdesc>
    <desc>
 
@@ -591,14 +596,13 @@ $wnd->add($btn);
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>drag_source_set</function></funcdef>
-     
      <paramdef><parameter>sbmask</parameter></paramdef>
      <paramdef><parameter>targets</parameter></paramdef>
      <paramdef><parameter>actions</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Define o widget como sendo a fonte de uma operação de arraste.
    </shortdesc>
    <desc>
 
@@ -609,14 +613,13 @@ $wnd->add($btn);
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>drag_source_set_icon</function></funcdef>
-     
      <paramdef><classname>GdkColormap</classname> <parameter>colormap</parameter></paramdef>
      <paramdef><classname>GdkPixmap</classname> <parameter>pixmap</parameter></paramdef>
      <paramdef><parameter><optional>mask</optional></parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Define o ícone que será exibido quando o usuário arrastar o widget.
    </shortdesc>
    <desc>
 
@@ -627,12 +630,11 @@ $wnd->add($btn);
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>drag_source_set_icon_pixbuf</function></funcdef>
-     
      <paramdef><classname>GdkPixbuf</classname> <parameter>pixbuf</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Define o ícone que será exibido quando o usuário arrastar o widget.
    </shortdesc>
    <desc>
 
@@ -647,7 +649,7 @@ $wnd->add($btn);
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Define o ícone de estoque que será exibido quando o usuário arrastar o widget.
    </shortdesc>
    <desc>
 
@@ -663,7 +665,8 @@ $wnd->add($btn);
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Define os tipos de alvos que o widget oferece para uma operação
+    arrastar-soltar.
    </shortdesc>
    <desc>
 
@@ -678,7 +681,8 @@ $wnd->add($btn);
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Redifine o widget como não sendo uma potencial fonte da operação de
+    arrastar-soltar.
    </shortdesc>
    <desc>
 
@@ -693,7 +697,7 @@ $wnd->add($btn);
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Remove o contorno em volta do widget.
    </shortdesc>
    <desc>
 
@@ -708,7 +712,7 @@ $wnd->add($btn);
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    OBSOLETO. Invalida e depois atualiza uma região do widget.
    </shortdesc>
    <desc>
 
@@ -723,7 +727,7 @@ $wnd->add($btn);
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Assegura que um widget possui um estilo.
    </shortdesc>
    <desc>
     <para>

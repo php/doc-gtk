@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<!-- EN-Revision: 1.15 Maintainer: dnfeitosa Status: ready -->
+<!-- EN-Revision: 1.16 Maintainer: dnfeitosa Status: ready -->
 <classentry id="gtk.gtktreeview">
  <classmeta>
   <classtitle>GtkTreeView</classtitle>
@@ -39,8 +39,8 @@
   <constructor id="gtk.gtktreeview.constructor">
    <funcsynopsis>
     <funcprototype>
-     <funcdef> <function>GtkTreeView</function></funcdef>
-     <paramdef><classname>GtkTreeModel</classname> <parameter><optional>model</optional></parameter></paramdef>
+    <funcdef> <function>GtkTreeView</function></funcdef>
+    <paramdef><classname>GtkTreeModel</classname> <parameter><optional>model</optional></parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -83,10 +83,10 @@
     <example>
      <title>Adicionando uma coluna à um tree view</title>
      <programlisting role="php"><![CDATA[
-      $renderer = new GtkCellRendererText();
-      $column = new GtkTreeViewColumn('Title', $renderer, 'text', 0);
-      $treeview->append_column($column);
-      ]]></programlisting>
+$renderer = new GtkCellRendererText();
+$column = new GtkTreeViewColumn('Title', $renderer, 'text', 0);
+$treeview->append_column($column);
+]]></programlisting>
     </example>
     <para>
      &seealso;
@@ -589,26 +589,7 @@
    </desc>
   </method>
 
-  <method id="gtk.gtktreeview.method.get_row_separator_func">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>callback <function>get_row_separator_func</function></funcdef>
-     <paramdef>void</paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-    Retorna a função atual de separação de linhas.
-   </shortdesc>
-   <desc>
-    <para>
-     Retorna a função atual de separação de linhas.
-    </para>
-    <para>
-     &seealso;
-     <function class="GtkTreeView">set_row_separator_func</function>
-    </para>
-   </desc>
-  </method>
+  
 
   <method id="gtk.gtktreeview.method.get_rules_hint">
    <funcsynopsis>
@@ -957,13 +938,23 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Define se uma busca interativa está ou não habilitada para a view.
    </shortdesc>
    <desc>
-    <para>
-     &seealso;
-     <function class="GtkTreeView">get_enable_search</function>
-    </para>
+   <para>
+    Define se uma busca interativa está ou não habilitada para a view. Se
+    estiver, uma caixa de entrada irá aparecer se o usuário digitar algo enquanto a view
+    tiver foco. A seleção da view será movida para a linha que casar com o que
+    o usuário digitar.
+   </para>
+   <para>
+    Mesmo que a busca esteja desativada, o usuário poderá iniciar uma busca
+    usando &quot;start-interactive-search&quot;.
+   </para>
+   <para>
+    &seealso;
+    <function class="GtkTreeView">get_enable_search</function>
+   </para>
 
    </desc>
   </method>
