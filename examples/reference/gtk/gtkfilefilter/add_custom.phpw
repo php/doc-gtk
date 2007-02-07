@@ -1,0 +1,44 @@
+<?php
+/**
+*   Our file check function. It returns
+*   true whenever a file matches our requirements.
+*/
+function fileCheck($info, $char) {
+    $display_name = $info[2];
+    return strpos($display_name, $char) !== false;
+}
+
+//Create a new file filter
+$filterA = new GtkFileFilter();
+//Set a name so we can recognize it in the file dialog
+$filterA->set_name('My first custom filter "a"');
+/**
+*   Add our filter:
+*   - first the information we need about the files
+*   - second the callback function's name
+*   - the third parameter is normally not needed;
+*       here it's a user-defined parameter that lets us
+*       customize the filter function a bit.
+*/
+$filterA->add_custom(
+    Gtk::FILE_FILTER_DISPLAY_NAME | Gtk::FILE_FILTER_MIME_TYPE,
+    'fileCheck',
+    'a'
+);
+
+//Add a second one with different filter parameter
+$filterB = new GtkFileFilter();
+$filterB->set_name('My first custom filter "b"');
+$filterB->add_custom(
+    Gtk::FILE_FILTER_DISPLAY_NAME | Gtk::FILE_FILTER_MIME_TYPE,
+    'fileCheck', 'b'
+);
+
+//Now add those filters to the file dialog
+$filedlg = new GtkFileChooserDialog('custom filter demo');
+$filedlg->add_filter($filterA);
+$filedlg->add_filter($filterB);
+
+$filedlg->run();
+
+?>
