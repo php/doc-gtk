@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- $Revision: 1.6 $ -->
+<!-- $Revision: 1.7 $ -->
 <classentry id="gtk.gtkfilefilter">
  <classmeta>
   <classtitle>GtkFileFilter</classtitle>
@@ -9,13 +9,16 @@
   </shortdesc>
   <desc>
    <para>
-    This is a filter that is basically used to restrict the the files that 
+    This is a filter that is basically used to restrict the the files that
     are shown in a <classname>GtkFileChooserWidget</classname>. You may filter
-    the files either by basis of their names 
-    (<function class="GtkFileFilter">add_pattern</function>), mime types 
-    (<function class="GtkFileFilter">add_mime_type</function>), or files 
-    that are supported by GdkPixbuf 
+    the files either by basis of their names
+    (<function class="GtkFileFilter">add_pattern</function>), mime types
+    (<function class="GtkFileFilter">add_mime_type</function>), or files
+    that are supported by GdkPixbuf
     (<function class="GtkFileFilter">add_pixbuf_formats</function>).
+    To check with your very own function, use
+    <function class="GtkFileFilter">add_custom</function> with a
+    callback.
    </para>
    <para>
     When you choose to filter by mime types, note that selecting a
@@ -27,7 +30,7 @@
    </para>
    <para>
     The most common way to use a file filter is to add it to a
-    <classname>GtkFileChooserWidget</classname> with the 
+    <classname>GtkFileChooserWidget</classname> with the
     <function class="GtkFileChooserWidget">set_filter</function> method. Of
     course, the same method may also be used on a
     <classname>GtkFileChooserButton</classname> or a
@@ -58,8 +61,65 @@
  </constructors>
 
  <methods>
-
-  
+  <method id="gtk.gtkfilefilter.method.add_custom">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>add_custom</function></funcdef>
+     <paramdef><enumname>GtkFileFilterFlags</enumname> <parameter>flags</parameter></paramdef>
+     <paramdef><parameter>callback</parameter></paramdef>
+     <paramdef><parameter><optional>user_param</optional></parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Display files passing checks of your own function.
+   </shortdesc>
+   <desc>
+    <para>
+     Sometimes is filtering by mime type or file name pattern
+     not enough, and you need to define your own method that
+     checks a file for validity. <emphasis>add_custom</emphasis> allows
+     exactly this.
+    </para>
+    <para>
+     The callback function referred in the <parameter>callback</parameter> parameter
+     needs by default one parameter; it's an array of four values containing
+     either <literal>null</literal> or a string - depending on the settings
+     in <parameter>flags</parameter>. The first element is the file name, second
+     is the URI of the file. Third array element is the "display name" that is
+     displayed in the file chooser, and the fourth element is the mime type of
+     the file.
+    </para>
+    <screen><![CDATA[array(4) {
+  [0]=>
+  string(48) "/data/cvs/phpgtk2/test/window_set_icon_list.phpw"
+  [1]=>
+  string(55) "file:///data/cvs/phpgtk2/test/window_set_icon_list.phpw"
+  [2]=>
+  string(25) "window_set_icon_list.phpw"
+  [3]=>
+  string(17) "application/x-php"
+}]]></screen>
+    <para>
+     You may pass any number of user defined parameters after the
+     <parameter>callback</parameter> parameter; they get also passed to
+     the callback function.
+    </para>
+    <para>
+     Your callback needs to return <literal>true</literal> if the file matches
+     your filter and shall be displayed, <literal>false</literal> if not.
+    </para>
+    <example>
+     <title>Filtering files by characters</title>
+     <programlisting role="php">
+      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
+        href="&directory.examples;/reference/gtk/gtkfilefilter/add_custom.phpw"
+        parse="text">
+       <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+      </xi:include>
+     </programlisting>
+    </example>
+   </desc>
+  </method>
 
   <method id="gtk.gtkfilefilter.method.add_mime_type">
    <funcsynopsis>
@@ -130,7 +190,45 @@
    </desc>
   </method>
 
-  
+  <method id="gtk.gtkfilefilter.method.filter">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>boolean <function>filter</function></funcdef>
+     <paramdef>array <parameter>fileinfo</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Test file filters.
+   </shortdesc>
+   <desc>
+    <para>
+     Call this method to test if a file passes the filter or not.
+     When the <parameter>fileinfo</parameter> data match the filter
+     rules, <literal>true</literal> is returned - otherwise
+     the method returns <literal>false</literal>.
+    </para>
+    <para>
+     The <parameter>fileinfo</parameter> parameter consists of four
+     elements; the first is the file name including path; the second
+     the file URI. Third element is the "display name", the file name
+     without path as displayed in file choosers. Fourth and last
+     array element is the mime type of the file.
+     Not every element is needed; use
+     <function classname="GtkFileFilter">get_needed</function> to check
+     which values have to be set. If a value is not needed, you should
+     put <literal>null</literal> in it.
+    </para>
+    <example>
+     <title>Sample array</title>
+     <screen><![CDATA[$info = array(
+    '/data/cvs/phpgtk2/test/window_set_icon_list.phpw',
+    'file:///data/cvs/phpgtk2/test/window_set_icon_list.phpw',
+    'window_set_icon_list.phpw',
+    'application/x-php'
+);]]></screen>
+    </example>
+   </desc>
+  </method>
 
   <method id="gtk.gtkfilefilter.method.get_name">
    <funcsynopsis>
@@ -156,7 +254,7 @@
   <method id="gtk.gtkfilefilter.method.get_needed">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>GtkFileFilterFlags <function>get_needed</function></funcdef>
+     <funcdef><enumname>GtkFileFilterFlags</enumname> <function>get_needed</function></funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
