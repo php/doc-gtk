@@ -1,0 +1,26 @@
+<?php
+//Using GtkTreeView::insert_column_with_data_func()
+
+/*
+ * Creating a column with a data function callback
+ */
+$nameRenderer = new GtkCellRendererText();
+$view->insert_column_with_data_func(
+                                    0,
+                                    "Test suites",
+                                    $nameRenderer,
+                                    "showTestName"
+                                    );
+
+/*
+ * This data function column makes the cell renderer display the text from model
+ * column 0 in uppercase letters.
+ */
+function showTestName($column, $cell, $model, $iter)
+{
+    $cell->set_property(
+                        "text",
+                        strtoupper( $model->get_value($iter, 0))
+                        );
+}
+?>
