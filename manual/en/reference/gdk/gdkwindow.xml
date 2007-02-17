@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<!-- $Revision: 1.7 $ -->
+<!-- $Revision: 1.8 $ -->
 <classentry id="gdk.gdkwindow">
  <classmeta>
   <classtitle>GdkWindow</classtitle>
@@ -1067,14 +1067,36 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_cursor</function></funcdef>
-     <paramdef>void</paramdef>
+     <paramdef><enumname>GdkCursor</enumname> <parameter>cursor</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Sets the cursor for the window.
    </shortdesc>
    <desc>
+    <para>
+     Sets the cursor for this <classname>GdkWindow</classname>.
+     This method is useful i.e. if you want to show that this
+     widget executes a long-running operation and does not react.
+    </para>
+    <para>
+     You could set the cursor to <optionname enum="GdkCursor">Gdk::WATCH</optionname>
+     before running the operation, and set it back to normal afterwards.
+    </para>
+    <example>
+     <programlisting role="php"><![CDATA[
+//something before
 
+$widget->window->set_cursor(new GdkCursor(Gdk::WATCH));
+while (Gtk::events_pending()) {
+    Gtk::main_iteration();
+}
+
+//do some operation
+
+$widget->window->set_cursor(new GdkCursor(Gdk::LEFT_PTR));
+]]></programlisting>
+    </example>
    </desc>
   </method>
 
