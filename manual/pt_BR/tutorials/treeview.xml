@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- EN-Revision: 1.1 Maintainer: fernandoc Status: ready -->
+<chapter id="tutorials.treeview">
+ <title>Tutorial GtkTreeView (básico)</title>
+
+ <sect1 id="tutorials.treeview.intro">
+  <title>Introdução</title>
+
+  <para>
+   Agradecimentos a Lars Wirzenius pela 
+   <ulink url="http://liw.iki.fi/liw/texts/gtktreeview-tutorial.html">versão original</ulink>
+   deste tutorial escrito para o PyGtk. Mudanças no documento foram apenas para 
+   refletir o estado atual da base de código do Gtk+ e para ser aplicável ao PHP-Gtk2.
+  </para>
+
+  <para>
+   A versão 2.0 do Gtk+ introduz a sua terceira geração de widgets de arvore e
+   lista. A versão 1.0 tinha GtkList e GtkTree, versão 1.2
+   tinha <classname>GtkCList</classname> e <classname>GtkCTree</classname>,
+   e agora a versão 2.0 tem <classname>GtkTreeView</classname>,
+   o qual serve como ambos arvore e lista. Com cada versão, a
+   força e utilidade dos widgets tem crescido.
+  </para>
+
+  <para>
+   <classname>GtkTreeView</classname> usa uma aproximação Modelo/Vista/Controlador.
+   Isto significa que o código é dividido em uma estrutura de dados representando
+   os dados do usuário ("o modelo"), o widget que exibem os dados e
+   interagem com o usuário ("a vista"), e alguma lógica para manter
+   as coisas felizmente unidas ("o controlador"). O modelo é implementado por
+   <classname>GtkTreeModel</classname> (atualmente, as classes que implementam esta interface), a
+   vista pelo GtkTreeView com alguns auxiliares e o controle pelo
+   código do usuário.
+  </para>
+
+  <simpara>
+   Isto parace desnecessáriamente complicado, mas a complexidade
+   é local, e esta aproximação atualmente simplifica a estrutura geral
+   do programa. Por exemplo, várias vezes é necessário ver os dados
+   (ex. modelo) de maneiras diferentes, ou em janelas diferentes. Pense,
+   por exemplo, de um editor de programação: o mesmo código-fonte
+   pode ser visto em várias janelas ao mesmo tempo, e mudanças em uma
+   vista devem ser exibidas em todas as outras também. Assim, faz
+   sentido separar o armazanamento do texto da sua exibição, ao invés
+   de armazanar o texto em cada widget em cada janela.
+  </simpara>
+
+  <simpara>
+   A aplicação de exemplo neste artigo permite ao usuário gerenciar 
+   uma arvore de pastas. As pastas são virtuais, não diretórios reais no
+   sistema de arquivos, para manter o código simples. O exemplo é atualmente 
+   derivado de Lodju, no qual as pastas não tem nada a ver com 
+   o sistea de arquivos.
+  </simpara>
+
+  <para>
+   A <ulink url="&url.gnomeAPI;">documentação oficial
+   da referência da API do Gtk+ 2.0 para o GtkTreeView</ulink>
+   deve ser lida em conjunto com este tutorial, mesmo sendo ela um pouco
+   dispersa em alguns detalhes.
+  </para>
+
+  <para>
+   Eu agradeço o pessoal no
+   <ulink url="&url.gtkIRCchannel;">Canal de IRC do Desenvolvedor Gtk+</ulink> pelo
+   encorajamento e apoio.
+  </para>
+ </sect1>
+
+ <sect1 id="tutorials.treeview.model">
+  <title>O modelo: GtkTreeModel e GtkTreeStore</title>
+
+  <para>
+   <classname>GtkTreeModel</classname> é a definição da interface para a parte de modelo do 
+   <classname>GtkTreeView</classname>. O programador da aplicação pode definir o seu próprio modelo
+   mas o GtkTreeView provê os dois mais populares: uma lista linear 
+   com <classname>GtkListStore</classname>, e uma arvore hierarquica com
+   <classname>GtkTreeStore</classname>. O manual de referência
+   de GtkTreeView diz que uns poucos programadores de aplicações
+   vão precisar usar alguma outra coisa, e eles devem estar certos. Já que
+   eu tenho pouca experiência com <classname>GtkListStore</classname>, este artigo irá discutir
+   apenas o GtkTreeStore.
+  </para>
+
+  <para>
+   O primeiro passo é usar <classname>GtkTreeView</classname>, então, configurar um
+   <classname>GtkTreeStore</classname> para manter os seus dados. O modelo contém algum número de
+   linhas e cada linha contém o mesmo número de colunas. As células
+   em cada coluna contém o mesmo tipo de dados. Estas colunas são 
+   declaradas quando o modelo é criado, entretanto elas podem ser modificadas depois,
+   se necessário.
+  </para>
+
+  <example>
+   <title>Modelo</title>
+   <programlisting role="php"><![CDATA[$model = new GtkTreeStore(Gtk::TYPE_PHP_VALUE, Gtk::TYPE_STRING);]]></programlisting>
+  </example>
+
+  <para>
+   Aqui nos criamos um <classname>GtkTreeStore</classname> com duas colunas. A primeira 
+   coluna contém uma variável PHP (de qualquer tipo), e a segunda uma
+   string. Existem vários tipos diferentes disponíveis, veja 
+   <link linkend="gtkenum">GTK Enums</link>.
+   Nós estaremos usando a primeira coluna para guadar uma matriz
+   contendo toda a informação sobre uma pasta e a segunda
+   coluna para mostrar o seu nome.
+  </para>
+
+  <note>
+   Não importa em qual ordem você define as colunas. 
+   A ordem na qual <classname>GtkTreeStore</classname>
+   conhece elas não
+   afetas como elas são exibidas para os usuários. Não é mesmo nem necessário
+   mostrar todas as colunas para o usuário.
+  </note>
+
+  <simpara>
+   Ramos podem ser adicionados em um GtkTreeStore de diversas maneiras. Minha
+   preferência é usar a função gtk_tree_store_insert_before,
+   conhecido como o método <function class="GtkTreeStore">insert_before</function> no PHP.
+  </simpara>
+
+  <example>
+   <title>Criar Linha</title>
+   <programlisting role="php"><![CDATA[$folder = new_folder();
+$iter = $model->insert_before(null, null);
+$model->set($iter, 0, $folder);
+$model->set($iter, 1, $folder['name']);]]></programlisting>
+  </example>
+
+  <simpara>
+   Este código primeiro insere uma linha em branco no modelo, 
+   então define os valores em ambas as células.
+  </simpara>
+
+  <para>
+   Um GtkTreeModel permite ao programador se referir a linhas de várias maneiras.
+   Nós vemos mais aqui o objeto <classname>GtkTreeIter</classname>,
+   o qual essencialmente funciona como 
+   um ponteiro para a linha. Nós então usamos este ponteiro, mais um número de coluna,
+   para se referir a uma célula.
+  </para>
+
+  <para>
+   Objetos <classname>GtkTreeIter</classname> são também usados como argumentos para
+   <function class="GtkTreeStore">insert_before</function>, para definir o parente
+   do novo ramo,
+   e vizinho que é para seguir o novo ramo. Se o parente for <literal>NULL</literal>,
+   como no exemplo acima, o novo ramo é adicionado para o nível superior,
+   e se o vizinho for <literal>NULL</literal>, então o ramo se torna
+   o ultimo filho do parente.
+  </para>
+
+  <simpara>
+   Os objetos GtkTreeIter podem ser temporários, e podem se tornar
+   inválidos quando a arvore for modificada pela adição ou remoção de ramos.
+   Provavelmente é uma má idéia guarda-los.
+  </simpara>
+
+  <simpara>
+   Você também pode remover linhas (gtk_tree_store_remove a.k.a.
+   $model-&gt;<function class="GtkTreeStore">remove</function>).
+   Para outras operações, por favor veja a documentação de referência da API.
+  </simpara>
+
+ </sect1>
+
+
+ <sect1 id="tutorials.treeview.view">
+  <title>A visão: GtkTreeView, GtkTreeViewColumn, GtkCellRenderer</title>
+
+  <para>
+   O widget GtkTreeView é a visão na aproximação Modelo/Vista/Controlador.
+   Ela cuida de mostrar os dados guardados em um modelo
+   (<classname>GtkTreeStore</classname> ou <classname>GtkListStore</classname>)
+   para o usuário. Você pode ter vários
+   GtkTreeViews para um único modelo, e mudanças no modelo serão
+   exibidos automaticamente em todos eles.
+  </para>
+
+  <simpara>
+   Para usar o GtkTreeView, você precisa criar o widget em sí, então criar
+   <classname>GtkTreeViewColumn</classname>s para as colunas a exibir e
+   <classname>GtkCellRenderer</classname>s
+   para dizer para as colunas como exibir uma célula na coluna.
+  </simpara>
+
+  <example>
+   <title>TreeView e Renderer</title>
+   <programlisting role="php"><![CDATA[$view = new GtkTreeView($model);
+$renderer = new GtkCellRendererText();
+$column = new GtkTreeViewColumn("Folder", $renderer, "text", 1);
+$view->append_column($column);]]></programlisting>
+  </example>
+
+  <simpara>
+   Este código cria um novo GtkTreeView a anexa-o ao modelo.
+   Então cria um cell renderer de texto e uma coluna e adiciona estes para
+   a visão. "Folder" é o nome da coluna, exibida ao topo
+   da coluna.
+  </simpara>
+
+  <para>
+   Existem vários <classname>GtkCellRenderer</classname>s na biblioteca Gtk+, e
+   você pode escrever o seu próprio, se estes não forem o suficiente.
+  </para>
+
+  <para>
+   As seleções do usuário em um GtkTreeView (por visão) são seguidas
+   usando o objeto <classname>GtkTreeSelection</classname>.
+   Se o seu código necessita saber quando
+   o usuário muda a seleção, conecte com o sinal
+   <signalname class="GtkTreeSelection">changed</signalname> do GtkTreeSelection.
+   Você também pode fazer o objeto da seleção chamar uma função
+   para cada ramo selecionado, ou mudar atráves de programação a
+   seleção. Veja a documentação da API para detalhes.
+  </para>
+
+  <example>
+   <title>O sinal "changed" da seleção</title>
+   <programlisting role="php"><![CDATA[$selection = $view->get_selection();
+$selection->connect("changed", "display_selected_folder");]]></programlisting>
+  </example>
+
+  <para>
+   Este código conecta o sinal "changed" a função
+   (<literal>display_selected_folder()</literal>)
+   que exibe o conteúdo da pasta selecionada.
+  </para>
+
+  <simpara>
+   Você precisa dizer ao GtkTreeView explicitamente que é permitido ao
+   usuário rearanjar a arvore de pastas usando drag-and-drop. Felizmente,
+   após dizer isto uma vez, o widget se encarrega de cuidar do resto.
+  </simpara>
+
+  <example>
+   <title>Reordenando com Drag-and-Drop</title>
+   <programlisting role="php"><![CDATA[$view->set_reorderable(true);]]></programlisting>
+   <para>
+    Isto é tudo o que você precisa para ativar o drag-and-drop no widget.
+   </para>
+  </example>
+
+  <simpara>
+   A mesma coisa pode ser feita manualmente se você escolher não ativar
+   o drag-and-drop removendo o ramo filho da arvore e inserindo-o de volta
+   como filho de outro ramo.
+  </simpara>
+
+  <example>
+   <title>Reordenamento manual</title>
+   <programlisting role="php"><![CDATA[$folder = $model->get_value($old_iter, 0);
+$model->remove($old_iter);
+$new_iter = $model->insert_before($new_parent, null);
+$model->set($new_iter, 0, $folder);
+$model->set($new_iter, 1, $folder['name']);]]></programlisting>
+  </example>
+
+  <para>
+   Este código move um ramo de <literal>old_iter</literal> para ser o último filho
+   do ramo <literal>new_parent</literal>.
+  </para>
+
+  <simpara>
+   Quando este tutorial foi escrito/portado havia um bug no PHP-Gtk2 que
+   a ordem dos parãmetros para <function class="GtkTreeStore">insert_before</function>
+   e <function class="GtkTreeStore">insert_after</function> foram trocadas. O
+   código acima não irá funcionar (nem o código do exemplo abaixo) sem trocar a
+   ordem dos parâmetros. Na versão <literal>php-gtk-2.0.0 alpha</literal>,
+   a ordem ainda é <literal>(sibling, parent)</literal> e deveria ser
+   <literal>(parent, sibling)</literal>. Isto já foi modificado no CVS.
+  </simpara>
+
+  <example>
+   <title>Código fonte de exemplo</title>
+   <programlisting role="php">
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+     href="&directory.examples;/tutorials/treeview/full.phpw" parse="text">
+     <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+    </xi:include>
+   </programlisting>
+  </example>
+
+ </sect1>
+
+</chapter>
