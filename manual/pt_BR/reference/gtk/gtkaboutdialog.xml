@@ -1,0 +1,704 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- $Revision: 1.1 $ -->
+<classentry id="gtk.gtkaboutdialog">
+ <classmeta>
+  <classtitle>GtkAboutDialog</classtitle>
+  <classparent>GtkDialog</classparent>
+  <classimage fileref="&directory.images;/reference/gtk/gtkaboutdialog.png"/>
+  <shortdesc>
+   Exibe informação sobre uma aplicação.
+  </shortdesc>
+  <desc>
+   <para>
+    O widget GtkAboutDialog oferece uma maneira simples de exibir informações
+    sobre um programa, como o seu logo, nome, copyright, website e
+    licença. Também é possível dar créditos aos autores,
+    a equipe de documentação, tradutores, artistas que trabalharam no
+    programa. Um dialogo sobre e normalmente aberto pelo usuário quando
+    seleciona a opção <literal>Sobre</literal> no menu ajuda. Todas as 
+    partes do dialogo são opcionais.
+   </para>
+  <para>
+    Um dialogo sobre normalmente contém links e endereços de email.
+    <classname>GtkAboutDialog </classname> suporta isto oferecendo ganchos 
+    globais, os quais são chamados quando um usuário clica em um link ou endereço de email, veja
+    <function class="GtkAboutDialog">set_email_hook</function> e <function
+    class="GtkAboutDialog">set_url_hook</function>. Endereços de email nos
+    autores, documentadores e artistas são reconhecidos procurando por
+    &lt;user@host&gt;, URLs sõa reconhecidas procurando por http://url, com a url
+    extendendo até o próximo espaço, tab ou quebra de linha.
+   </para>
+  </desc>
+ </classmeta>
+
+ <constructors>
+
+  <constructor id="gtk.gtkaboutdialog.constructor">
+   <funcsynopsis>
+    <funcprototype>
+    <funcdef> <function>GtkAboutDialog</function></funcdef>
+    <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Constroi um novo dialogo sobre.
+   </shortdesc>
+   <desc>
+    <para>
+     Cria uma nova instancia de <classname>GtkAboutDialog</classname>.
+     Lembre-se que todas as funções da classe pai,
+     <classname>GtkDialog</classname>, também podem ser usada - por exemplo,
+     <function class="GtkDialog">run</function>.
+    </para>
+
+    <example>
+     <title>Simples GtkAboutDialog</title>
+     <programlisting role="php">
+      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="&directory.examples;/reference/gtk/gtkaboutdialog/constructor.phpw" parse="text">
+       <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+      </xi:include>
+     </programlisting>
+    </example>
+
+   </desc>
+  </constructor>
+
+ </constructors>
+
+ <methods>
+
+  <method id="gtk.gtkaboutdialog.method.get_artists">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>array <function>get_artists</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Retorna os créditos dos artitas como um array.
+   </shortdesc>
+   <desc>
+   <simpara>
+    Retorna os créditos dos artitas como um array.
+   </simpara>
+    <para>
+     &seealso;
+     <function class="GtkAboutDialog">set_artists</function>
+    </para>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtkaboutdialog.method.get_authors">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>array <function>get_authors</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Retorna os créditos dos autores como um array.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Retorna os créditos dos autores como um array.
+    </simpara>
+    <para>
+     &seealso;
+     <function class="GtkAboutDialog">set_authors</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkaboutdialog.method.get_comments">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>string <function>get_comments</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Retorna a string dos comentários.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Retorna a string dos comentários.
+    </simpara>
+    <para>
+     &seealso;
+     <function class="GtkAboutDialog">set_comments</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkaboutdialog.method.get_copyright">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>string <function>get_copyright</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Retorna a string do copyright.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Retorna a string do copyright.
+    </simpara>
+    <para>
+     &seealso;
+     <function class="GtkAboutDialog">set_copyright</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkaboutdialog.method.get_documenters">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>array <function>get_documenters</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Retorna os créditos dos documentadores como um array.
+   </shortdesc>
+   <desc>   
+   <simpara>
+    Retorna os créditos dos documentadores como um array.
+   </simpara>
+    <para>
+     &seealso;
+     <function class="GtkAboutDialog">set_documenters</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkaboutdialog.method.get_license">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>string <function>get_license</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Retorna a informação da licença.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Retorna a informação da licença.
+    </simpara>
+    <para>
+     &seealso;
+     <function class="GtkAboutDialog">set_license</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkaboutdialog.method.get_logo">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef><classname>GdkPixbuf</classname> <function>get_logo</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Retorna o pixbuf exibido como logo na caixa de dialogo sobre.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Retorna o <classname>GdkPixbuf</classname> exibido como logo 
+     na caixa de dialogo sobre.
+    </simpara>
+    <para>
+     &seealso;
+     <function class="GtkAboutDialog">set_logo</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkaboutdialog.method.get_logo_icon_name">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>string <function>get_logo_icon_name</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Retorna o nome do ícone.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Retorna o nome do ícone exibido como logo no dialogo sobre.
+    </simpara>
+    <para>
+     &seealso;
+     <function class="GtkAboutDialog">set_logo_icon_name</function>
+    </para>
+   </desc>
+  </method>
+
+  
+
+  <method id="gtk.gtkaboutdialog.method.get_translator_credits">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>string <function>get_translator_credits</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Retorna a string dos créditos do tradutor.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Retorna a string dos créditos do tradutor o qual é exibido
+     na aba dos tradutores no dialogo secundário de créditos.
+    </simpara>
+    <para>
+     &seealso;
+     <function class="GtkAboutDialog">set_translator_credits</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkaboutdialog.method.get_version">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>string <function>get_version</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+   Retorna a string da versão.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Retorna a string da versão.
+    </simpara>
+    <para>
+     &seealso;
+     <function class="GtkAboutDialog">set_version</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkaboutdialog.method.get_website">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>string <function>get_website</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Retorna a URL do website.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Retorna a URL do website.
+    </simpara>
+    <para>
+     &seealso;
+     <function class="GtkAboutDialog">set_website</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkaboutdialog.method.get_website_label">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>string <function>get_website_label</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Retorna o rótulo usado para o link do website.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Retorna o rótulo usado para o link do website.
+    </simpara>
+    <para>
+     &seealso;
+     <function class="GtkAboutDialog">set_website_label</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkaboutdialog.method.set_artists">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_artists</function></funcdef>
+     <paramdef>array <parameter>artists</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+   Define as strings que devem ser exibidas na aba dos artistas no dialogo secundário dos créditos.
+   </shortdesc>
+   <desc>
+    <para>
+     Esta função define as strings que devem ser exibidas na aba dos artistas
+     que é colocada no dialogo secundário de créditos.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkAboutDialog">get_artists</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkaboutdialog.method.set_authors">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_authors</function></funcdef>
+     <paramdef>array <parameter>authors</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Define as strings que devem ser exibidas na aba dos autores,
+    np dialogo secundário de créditos.
+   </shortdesc>
+   <desc>
+    <simpara>
+     O <classname>GtkAboutDialog</classname> suporta créditos
+     secundários para artistas, autores, equipe de documentação e tradutores,
+     se algum destes esta definido a janela <classname>GtkAboutDialog</classname> irá
+     automaticamente exibir um botão "Credits", clicando nele mostra a
+     janela secundária de créditos.
+    </simpara>
+    <simpara>
+     <function class="GtkAboutDialog">set_authors</function>, 
+     <function class="GtkAboutDialog">set_artists</function> e 
+     <function class="GtkAboutDialog">set_documenters</function> todas
+     aceitam uma array de strings de créditos, se qualquer um dos créditos são reconhecidos como endereço
+     de email ou urls então estes são exibidos como links assumindo que os ganchos apropriados
+     tenham sido definidos com <function class="GtkAboutDialog">set_email_hook</function>
+     ou <function class="GtkAboutDialog">set_url_hook</function>
+    </simpara>
+    <para>
+     &seealso;
+     <function class="GtkAboutDialog">get_authors</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkaboutdialog.method.set_comments">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_comments</function></funcdef>
+     <paramdef>string <parameter>comments</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Define a string dos comentários a exibir.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Define a string dos comentários a exibir no dialogo sobre.
+     Isto deve ser uma string curta de uma ou duas linhas. Será exibido
+     diretamente abaixo do nome do programa e versão.
+    </simpara>
+    <para>
+     &seealso;
+     <function class="GtkAboutDialog">get_comments</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkaboutdialog.method.set_copyright">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_copyright</function></funcdef>
+     <paramdef>string <parameter>copyright</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Define o texto do copyright.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Define o texto do copyright. Ele é exibido entre 
+     <link linkend="gtk.gtkaboutdialog.method.set_comments">comments</link> e
+     o <link linkend="gtk.gtkaboutdialog.method.set_website">website</link>.
+    </simpara>
+    <para>
+     &seealso;
+     <function class="GtkAboutDialog">get_copyright</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkaboutdialog.method.set_documenters">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_documenters</function></funcdef>
+     <paramdef>array <parameter>documenters</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Sets the strings which are displayed in the documenters tab of the secondary credits dialog.
+   </shortdesc>
+   <desc>
+    <para>
+     This function is used to set the string which will be displayed
+     documenters tab that placed in the secondary credits dialog.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkAboutDialog">get_documenters</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkaboutdialog.method.set_email_hook">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef> <function>set_email_hook</function></funcdef>
+     
+     
+     <paramdef><parameter>callback</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Sets a global callback to be called when a user activates an email link in
+    the dialog.
+   </shortdesc>
+   <desc>
+    <para>
+     Sets <parameter>callback</parameter> as a callback to be called when the 
+     user activates an email link. This callback will be called for all email
+     links in the dialog.
+    </para>
+    <para>
+     The optional argument <parameter>data</parameter> can be passed to provide
+     data for the callback function.
+    </para>
+    <simpara>
+     &static;
+    </simpara>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkaboutdialog.method.set_license">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_license</function></funcdef>
+     <paramdef>string <parameter>license</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Set the license text.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Sets the license information to be displayed in the secondary 
+     license dialog. If license is not set or <literal>null</literal>, the
+     license button is hidden.
+    </simpara>
+    <para>
+     &seealso;
+     <function class="GtkAboutDialog">get_license</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkaboutdialog.method.set_logo">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_logo</function></funcdef>
+     <paramdef><classname>GdkPixbuf</classname> <parameter>logo</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Set the program logo
+   </shortdesc>
+   <desc>
+    <para>
+     Sets the program logo. The <parameter>logo</parameter> has to be of
+     type <classname>GdkPixbuf</classname>, which can easily be constructed
+     via the <function class="GtkWidget">render_icon</function> method
+     of <classname>GtkWidget</classname>.
+    </para>
+    <para>
+      If you set it explicitly to <literal>null</literal>, the dialogs
+      default icon is used.
+    </para>
+
+    <example>
+     <title>Dialog icon is used when logo is <literal>null</literal></title>
+     <programlisting role="php">
+      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="&directory.examples;/reference/gtk/gtkaboutdialog/set_logo.phpw" parse="text">
+       <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+      </xi:include>
+     </programlisting>
+    </example>
+
+    <para>
+     &seealso;
+     <function class="GtkAboutDialog">get_logo</function>
+    </para>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtkaboutdialog.method.set_logo_icon_name">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_logo_icon_name</function></funcdef>
+     <paramdef>string <parameter>icon_name</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Set logo to be displayed, by name.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Sets the logo icon to be displayed, but not with the 
+     <classname>GdkPixbuf</classname> as
+     <function class="GtkAboutDialog">set_logo</function> does - 
+     you pass a name, and Gtk tries to find the icon in the list
+     of named images.
+     <!-- FIXME: give some working example names -->
+    </simpara>
+    <para>
+     &seealso;
+     <function class="GtkAboutDialog">get_logo_icon_name</function>,
+     <function class="GtkAboutDialog">set_logo</function>
+    </para>
+   </desc>
+  </method>
+
+  
+
+  <method id="gtk.gtkaboutdialog.method.set_translator_credits">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_translator_credits</function></funcdef>
+     <paramdef>string <parameter>translator_credits</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Sets the translator credits string.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Sets the translator credits string which is displayed in the translators 
+     tab of the secondary credits dialog.
+    </simpara>
+    <simpara>
+     If you set this value, a new "Credits" button appears on the lower left
+     of the about dialog, opening the window with the translator credits
+     (and other credits if set).
+    </simpara>
+    <para>
+     &seealso;
+     <function class="GtkAboutDialog">get_translator_credits</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkaboutdialog.method.set_url_hook">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef> <function>set_url_hook</function></funcdef>
+     
+     
+     <paramdef><parameter>callback</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Sets a global callback for all URL links in the dialog.
+   </shortdesc>
+   <desc>
+    <para>
+     Sets <parameter>callback</parameter> as a global callback to be called
+     when the user activates a URL link in the dialog.
+    </para>
+    <para>
+     The optional argument <parameter>data</parameter> can be passed to provide
+     data for the callback function.
+    </para>
+    <simpara>
+     &static;
+    </simpara>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkaboutdialog.method.set_version">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_version</function></funcdef>
+     <paramdef>string <parameter>version</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Set the version of your program
+   </shortdesc>
+   <desc>
+    <simpara>
+     Set the version of your program that will be displayed alongside the
+     name of the program.
+    </simpara>
+    <simpara>
+     It is wise not to hard-code
+     the value in your "about code", but use a central constant or
+     a variable from within your program class. If done so,
+     you can change the program version at one central place without having
+     to remember to change it at all places that you mentioned it.
+    </simpara>
+    <para>
+     &seealso;
+     <function class="GtkAboutDialog">get_version</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkaboutdialog.method.set_website">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_website</function></funcdef>
+     <paramdef>string <parameter>website</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Set the program's website.
+   </shortdesc>
+   <desc>
+    <simpara>
+     Set the program's website. This will be displayed just below the
+     program description.
+    </simpara>
+    <para>
+     &seealso;
+     <function class="GtkAboutDialog">get_website</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkaboutdialog.method.set_website_label">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_website_label</function></funcdef>
+     <paramdef>string <parameter>website_label</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Sets the label to be used for the website link.
+   </shortdesc>
+   <desc>
+    <para>
+     Sets the label to be used for the website link. It defaults to the website
+     URL. This has no effect if you do not use <function
+     class="GtkAboutDialog">set_url_hook</function> with a callback. The text
+     set using <function class="GtkAboutDialog">set_website</function> will be
+     displayed instead.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkAboutDialog">get_website_label</function>
+    </para>
+   </desc>
+  </method>
+
+ </methods>
+
+</classentry>
