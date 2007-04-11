@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- EN-Revision: 1.9 Maintainer: fernandoc Status: ready -->
+<classentry id="gtk.gtkarrow">
+ <classmeta>
+  <classtitle>GtkArrow</classtitle>
+  <classparent>GtkMisc</classparent>
+  <classimage fileref="&directory.images;/reference/gtk/gtkarrow.png"/>
+  <shortdesc>
+    Mostra uma seta apontando para um dos quatro pontos cardinais.
+  </shortdesc>
+  <desc>
+    <para>
+      O widget <classname>GtkArrow</classname> pode ser usado para desenhar
+      setas simples que precisam apontar para uma das quatro direções cardinais (cima,
+      baixo, esquerda e direita). O estilo da seta exibida pode ser
+      modificado para se adequar ao que você necessita modificando-se os valores dos
+      parâmetros GtkShadowType e GtkArrowType.
+    </para>
+    <para>
+      <classname>GtkArrow</classname> irá prencher qualquer espaço alocado para ela,
+      mas já que é descendente de <classname>GtkMisc</classname>,
+      ela pode ser prenchida e/ou alinhada, para ocupar exatamente o espaço
+      que o programador deseje.
+    </para>
+    <para>
+      A direção ou o estilo da seta pode ser modificado depois da criação
+      usando <function class="GtkArrow">set</function>.
+    </para>
+  </desc>
+ </classmeta>
+
+ <constructors>
+
+  <constructor id="gtk.gtkarrow.constructor">
+   <funcsynopsis>
+    <funcprototype>
+    <funcdef> <function>GtkArrow</function></funcdef>
+    <paramdef>
+     <enumname>GtkArrowType</enumname> <parameter>direction</parameter>
+    </paramdef>
+    <paramdef><enumname>GtkShadowType</enumname> <parameter>shadow_type</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Cria um widget de seta apontando para uma das quatro direções cardinais.
+   </shortdesc>
+   <desc>
+    <para>
+     Cria uma seta apontando na direção  <parameter>direction</parameter>.
+     <parameter>shadow_type</parameter> define a aparência da seta.
+    </para>
+    <para>
+     <classname>GtkArrow</classname> é extendida de  
+     <classname>GtkMisc</classname> significando que pode ser prenchida e alinhada
+     para ocupar mais ou menos espaço de acordo com o desejado. Por padrão, uma seta
+     irá expandir e ocupar todo o espaço disponível para ela.
+    </para>
+   </desc>
+  </constructor>
+
+ </constructors>
+
+ <methods>
+
+  <method id="gtk.gtkarrow.method.set">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set</function></funcdef>
+     <paramdef><enumname>GtkArrowType</enumname> <parameter>arrow_type</parameter></paramdef>
+     <paramdef><enumname>GtkShadowType</enumname> <parameter>shadow_type</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Define novos parâmetros para um já existente <classname>GtkArrow</classname>
+   </shortdesc>
+   <desc>
+    Este método redefine os parâmetros para um á existente
+    <classname>GtkArrow</classname>. Tipicamente, este método é usado dentro
+    de uma função de callback aonde é necessário que a seta aponte em 
+    outra direção, mude a sua aparência e/ou suma.
+   </desc>
+  </method>
+
+ </methods>
+
+ <properties>
+
+  <prop id="gtk.gtkarrow.property.arrow-type" type="rw">
+   <propname>arrow_type</propname>
+   <proptype><enumname>GtkDirectionType</enumname></proptype>
+   <shortdesc>
+    A direção a qual a seta esta atualmente apontando.
+   </shortdesc>
+   <desc>
+    <para>
+     A direção a qual a seta esta atualmente apontando. 
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkArrow">set</function>
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtkarrow.property.shadow-type" type="rw">
+   <propname>shadow_type</propname>
+   <proptype><enumname>GtkShadowType</enumname></proptype>
+   <shortdesc>
+    O estilo de sombra para a seta.
+   </shortdesc>
+   <desc>
+    <para>
+     O estilo de sombra para a seta.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkArrow">set</function>
+    </para>
+   </desc>
+  </prop>
+
+ </properties>
+
+</classentry>
