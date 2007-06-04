@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- $Revision: 1.6 $ -->
+<!-- $Revision: 1.7 $ -->
 <classentry id="gtk.gtkeditable" type="interface">
  <classmeta>
   <classtitle>GtkEditable</classtitle>
@@ -246,8 +246,8 @@ $text = $editable->get_chars(0, -1);
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>insert_text</function></funcdef>
-     <paramdef>string <parameter>text</parameter></paramdef>
      <paramdef>int <parameter>position</parameter></paramdef>
+     <paramdef>string <parameter>text</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -491,7 +491,7 @@ $text = $editable->select_region(0, -1);
      <paramdef><classname>GtkEditable</classname> <parameter>editable</parameter></paramdef>
      <paramdef>string <parameter>new_text</parameter></paramdef>
      <paramdef>int <parameter>new_text_length</parameter></paramdef>
-     <paramdef>int <parameter>position</parameter></paramdef>
+     <paramdef>GPointer <parameter>position</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
