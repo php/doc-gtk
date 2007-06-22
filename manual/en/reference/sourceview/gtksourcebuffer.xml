@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- $Revision: 1.2 $ -->
+<!-- $Revision: 1.3 $ -->
 <classentry id="sourceview.gtksourcebuffer">
  <classmeta>
   <classtitle>GtkSourceBuffer</classtitle>
@@ -15,6 +15,23 @@
 
  <constructors>
   <constructor id="sourceview.gtksourcebuffer.constructor.new_with_language">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef><function>GtkSourceBuffer::new_with_language</function></funcdef>
+     <paramdef><classname>GtkSourceLanguage</classname> <parameter>language</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    
+   </shortdesc>
+   <desc>
+    <simpara>
+     &static;
+    </simpara>
+   </desc>
+  </constructor>
+
+  <constructor id="gtk.gtksourcebuffer.constructor.new_with_language">
    <funcsynopsis>
     <funcprototype>
      <funcdef><function>GtkSourceBuffer::new_with_language</function></funcdef>
@@ -362,6 +379,374 @@
   </method>
 
   <method id="sourceview.gtksourcebuffer.method.undo">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>undo</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    
+   </shortdesc>
+   <desc>
+   </desc>
+  </method>
+
+  <method id="gtk.gtksourcebuffer.method.begin_not_undoable_action">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>begin_not_undoable_action</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    
+   </shortdesc>
+   <desc>
+   </desc>
+  </method>
+
+  <method id="gtk.gtksourcebuffer.method.can_redo">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>can_redo</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    
+   </shortdesc>
+   <desc>
+   </desc>
+  </method>
+
+  <method id="gtk.gtksourcebuffer.method.can_undo">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>can_undo</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    
+   </shortdesc>
+   <desc>
+   </desc>
+  </method>
+
+  <method id="gtk.gtksourcebuffer.method.create_marker">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>create_marker</function></funcdef>
+     <paramdef><parameter>name</parameter></paramdef>
+     <paramdef><parameter>type</parameter></paramdef>
+     <paramdef><classname>GtkTextIter</classname> <parameter>where</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    
+   </shortdesc>
+   <desc>
+   </desc>
+  </method>
+
+  <method id="gtk.gtksourcebuffer.method.delete_marker">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>delete_marker</function></funcdef>
+     <paramdef><classname>GtkSourceMarker</classname> <parameter>marker</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    
+   </shortdesc>
+   <desc>
+   </desc>
+  </method>
+
+  <method id="gtk.gtksourcebuffer.method.end_not_undoable_action">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>end_not_undoable_action</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    
+   </shortdesc>
+   <desc>
+   </desc>
+  </method>
+
+  <method id="gtk.gtksourcebuffer.method.get_check_brackets">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>get_check_brackets</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    
+   </shortdesc>
+   <desc>
+   </desc>
+  </method>
+
+  <method id="gtk.gtksourcebuffer.method.get_escape_char">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>get_escape_char</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    
+   </shortdesc>
+   <desc>
+   </desc>
+  </method>
+
+  <method id="gtk.gtksourcebuffer.method.get_first_marker">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>get_first_marker</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    
+   </shortdesc>
+   <desc>
+   </desc>
+  </method>
+
+  <method id="gtk.gtksourcebuffer.method.get_highlight">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>get_highlight</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    
+   </shortdesc>
+   <desc>
+   </desc>
+  </method>
+
+  <method id="gtk.gtksourcebuffer.method.get_iter_at_marker">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>get_iter_at_marker</function></funcdef>
+     <paramdef><classname>GtkTextIter</classname> <parameter>iter</parameter></paramdef>
+     <paramdef><classname>GtkSourceMarker</classname> <parameter>marker</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    
+   </shortdesc>
+   <desc>
+   </desc>
+  </method>
+
+  <method id="gtk.gtksourcebuffer.method.get_language">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>get_language</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    
+   </shortdesc>
+   <desc>
+   </desc>
+  </method>
+
+  <method id="gtk.gtksourcebuffer.method.get_last_marker">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>get_last_marker</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    
+   </shortdesc>
+   <desc>
+   </desc>
+  </method>
+
+  <method id="gtk.gtksourcebuffer.method.get_marker">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>get_marker</function></funcdef>
+     <paramdef><parameter>name</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    
+   </shortdesc>
+   <desc>
+   </desc>
+  </method>
+
+  <method id="gtk.gtksourcebuffer.method.get_max_undo_levels">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>get_max_undo_levels</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    
+   </shortdesc>
+   <desc>
+   </desc>
+  </method>
+
+  <method id="gtk.gtksourcebuffer.method.get_next_marker">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>get_next_marker</function></funcdef>
+     <paramdef><classname>GtkTextIter</classname> <parameter>iter</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    
+   </shortdesc>
+   <desc>
+   </desc>
+  </method>
+
+  <method id="gtk.gtksourcebuffer.method.get_prev_marker">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>get_prev_marker</function></funcdef>
+     <paramdef><classname>GtkTextIter</classname> <parameter>iter</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    
+   </shortdesc>
+   <desc>
+   </desc>
+  </method>
+
+  <method id="gtk.gtksourcebuffer.method.move_marker">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>move_marker</function></funcdef>
+     <paramdef><classname>GtkSourceMarker</classname> <parameter>marker</parameter></paramdef>
+     <paramdef><classname>GtkTextIter</classname> <parameter>where</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    
+   </shortdesc>
+   <desc>
+   </desc>
+  </method>
+
+  <method id="gtk.gtksourcebuffer.method.redo">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>redo</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    
+   </shortdesc>
+   <desc>
+   </desc>
+  </method>
+
+  <method id="gtk.gtksourcebuffer.method.set_bracket_match_style">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_bracket_match_style</function></funcdef>
+     <paramdef><classname>GtkSourceTagStyle</classname> <parameter>style</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    
+   </shortdesc>
+   <desc>
+   </desc>
+  </method>
+
+  <method id="gtk.gtksourcebuffer.method.set_check_brackets">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_check_brackets</function></funcdef>
+     <paramdef><parameter>check_brackets</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    
+   </shortdesc>
+   <desc>
+   </desc>
+  </method>
+
+  <method id="gtk.gtksourcebuffer.method.set_escape_char">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_escape_char</function></funcdef>
+     <paramdef><parameter>char</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    
+   </shortdesc>
+   <desc>
+   </desc>
+  </method>
+
+  <method id="gtk.gtksourcebuffer.method.set_highlight">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_highlight</function></funcdef>
+     <paramdef><parameter>highlight</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    
+   </shortdesc>
+   <desc>
+   </desc>
+  </method>
+
+  <method id="gtk.gtksourcebuffer.method.set_language">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_language</function></funcdef>
+     <paramdef><classname>GtkSourceLanguage</classname> <parameter>language</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    
+   </shortdesc>
+   <desc>
+   </desc>
+  </method>
+
+  <method id="gtk.gtksourcebuffer.method.set_max_undo_levels">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_max_undo_levels</function></funcdef>
+     <paramdef><parameter>max_undo_levels</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    
+   </shortdesc>
+   <desc>
+   </desc>
+  </method>
+
+  <method id="gtk.gtksourcebuffer.method.undo">
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>undo</function></funcdef>
