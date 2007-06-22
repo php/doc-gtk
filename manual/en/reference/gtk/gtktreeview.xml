@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- $Revision: 1.18 $ -->
+<!-- $Revision: 1.19 $ -->
 <classentry id="gtk.gtktreeview">
  <classmeta>
   <classtitle>GtkTreeView</classtitle>
@@ -254,9 +254,11 @@ $treeview->append_column($column);
     <funcprototype>
      <funcdef>void <function>get_background_area</function></funcdef>
      
+     
+     
+     
      <paramdef><parameter>path</parameter></paramdef>
      <paramdef><classname>GtkTreeViewColumn</classname> <parameter>column</parameter></paramdef>
-     <paramdef><classname>GdkRectangle</classname> <parameter>rect</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -291,9 +293,11 @@ $treeview->append_column($column);
     <funcprototype>
      <funcdef>void <function>get_cell_area</function></funcdef>
      
+     
+     
+     
      <paramdef><parameter>path</parameter></paramdef>
      <paramdef><classname>GtkTreeViewColumn</classname> <parameter>column</parameter></paramdef>
-     <paramdef><classname>GdkRectangle</classname> <parameter>rect</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -1001,7 +1005,7 @@ $treeview->append_column($column);
    </para>
    <para>
     Even if interactive search is turned off, the user can still initiate a
-    search using the &quot;start-interactive-search&quot; key binding.
+    search using the "start-interactive-search" key binding.
    </para>
     <para>
      &seealso;
@@ -1382,7 +1386,207 @@ $treeview->append_column($column);
    </desc>
   </method>
 
- </methods>
+   <method id="gtk.gtktreeview.method.enable_model_drag_dest">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>enable_model_drag_dest</function></funcdef>
+     <paramdef><parameter>targets</parameter></paramdef>
+     <paramdef><parameter>actions</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    
+   </shortdesc>
+   <desc>
+   </desc>
+  </method>
+
+  <method id="gtk.gtktreeview.method.enable_model_drag_source">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>enable_model_drag_source</function></funcdef>
+     <paramdef><parameter>sbmask</parameter></paramdef>
+     <paramdef><parameter>targets</parameter></paramdef>
+     <paramdef><parameter>actions</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    
+   </shortdesc>
+   <desc>
+   </desc>
+  </method>
+
+  <method id="gtk.gtktreeview.method.get_dest_row_at_pos">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>get_dest_row_at_pos</function></funcdef>
+     <paramdef><parameter>x</parameter></paramdef>
+     <paramdef><parameter>y</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    
+   </shortdesc>
+   <desc>
+   </desc>
+  </method>
+
+  <method id="gtk.gtktreeview.method.get_drag_dest_row">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>get_drag_dest_row</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    
+   </shortdesc>
+   <desc>
+   </desc>
+  </method>
+
+  <method id="gtk.gtktreeview.method.get_enable_tree_lines">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>get_enable_tree_lines</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    
+   </shortdesc>
+   <desc>
+   </desc>
+  </method>
+
+  <method id="gtk.gtktreeview.method.get_grid_lines">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>get_grid_lines</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    
+   </shortdesc>
+   <desc>
+   </desc>
+  </method>
+
+  <method id="gtk.gtktreeview.method.get_headers_clickable">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>get_headers_clickable</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    
+   </shortdesc>
+   <desc>
+   </desc>
+  </method>
+
+  <method id="gtk.gtktreeview.method.get_rubber_banding">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>get_rubber_banding</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    
+   </shortdesc>
+   <desc>
+   </desc>
+  </method>
+
+  <method id="gtk.gtktreeview.method.get_search_entry">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>get_search_entry</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    
+   </shortdesc>
+   <desc>
+   </desc>
+  </method>
+
+  <method id="gtk.gtktreeview.method.get_visible_range">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>get_visible_range</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    
+   </shortdesc>
+   <desc>
+   </desc>
+  </method>
+
+  <method id="gtk.gtktreeview.method.set_enable_tree_lines">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_enable_tree_lines</function></funcdef>
+     <paramdef><parameter>enabled</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    
+   </shortdesc>
+   <desc>
+   </desc>
+  </method>
+
+  <method id="gtk.gtktreeview.method.set_grid_lines">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_grid_lines</function></funcdef>
+     <paramdef><parameter>grid_lines</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    
+   </shortdesc>
+   <desc>
+   </desc>
+  </method>
+
+  <method id="gtk.gtktreeview.method.set_rubber_banding">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_rubber_banding</function></funcdef>
+     <paramdef><parameter>enable</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    
+   </shortdesc>
+   <desc>
+   </desc>
+  </method>
+
+  <method id="gtk.gtktreeview.method.set_search_entry">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_search_entry</function></funcdef>
+     <paramdef><classname>GtkEntry</classname> <parameter><optional>entry</optional></parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    
+   </shortdesc>
+   <desc>
+   </desc>
+  </method>
+
+</methods>
 
  <signals>
 
