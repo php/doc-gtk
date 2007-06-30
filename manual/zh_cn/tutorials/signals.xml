@@ -1,0 +1,349 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- EN-Revision: 1.3 Maintainer: mikespook Status: ready -->
+<!-- $Revision: 1.1 $ -->
+<chapter id="tutorials.signals">
+    <title>信号处理</title>
+
+    <sect1 id="tutorials.signals.introduction">
+        <title>简介</title>
+        <para>
+            本指南将介绍在 PHP-GTK 2
+            中非常重要并且很基础的信号处理，正是这个让你的程序可以”嘀哒（tick）”
+            （译注：在消息循环中，每一次循环可以看作一次‘嘀哒’，也可称作一次‘呼吸’；
+            通常，在游戏开发中为了保证不同速度的机器可以有相同的表现速度，
+            会更加注重这个指标）。
+        </para>
+        <para>
+            你应该已经注意到在每个 PHP-GTK 2 程序的最后编写有如下语句：
+            <programlisting role="php"><![CDATA[
+                Gtk::main();
+                ]]></programlisting>
+            这意味着一个死循环被运行，并等待事件发生。明显，你不是希望仅仅创建并显示元件，
+            然后退出！这个循环就是用于获取事件并且是应用程序执行的关键。相反，语句：
+            <programlisting role="php"><![CDATA[
+                Gtk::main_quit();
+                ]]></programlisting>
+            退出这个循环。我们在需要终止应用程序时调用它。
+        </para>
+        <para>
+            首先，这在定义一些经常使用的条件是非常有用的。
+        </para>
+        <para>
+            <itemizedlist>
+                <listitem>
+                    动作：发生的一些事情。例如，用户在按钮上点击就是一次动作。
+                </listitem>
+                <listitem>
+                    信号：当事件发生时产生的通告。这是你的应用程序了解刚刚发生了什么动作的途径。
+                </listitem>
+                <listitem>
+                    回调函数：被其他代码段调用的函数或者方法。
+                </listitem>
+                <listitem>
+                    信号处理：用于响应信号发出的回调函数。处理信号的代码将被放置于此。
+                </listitem>
+                <listitem>
+                    事件：作为窗口系统的基础，用于连接环境底层变化的连续队列。
+                </listitem>
+            </itemizedlist>
+        </para>
+        <para>
+            信号处理一般包含连接一个信号到其信号处理，当然也包含编写信号处理本身。
+            当一个事件发生时产生信号的工作由 PHP-GTK 2 来完成。另外一个需要注意的是
+            信号生成不保证用户已经完成某些动作。有时可能需要手工产生一些信号，
+            但是 PHP-GTK 2 任何时候都是在内部产生信号的。
+        </para>
+        <para>
+            通常来说，当 <classname>GtkAdjustment</classname> 发出
+            <signalname class="GtkAdjustment">value-changed</signalname> 时，
+            一个信号的实例就由内部产生，并由 <classname>GtkProgressBar</classname> 等使用。
+            因此，一些信号已经有内建的信号处理，你是否工连接信号处理，
+            决定了是否执行这个内建的信号处理。
+        </para>
+        <para>
+            尽管如此，多数情况下，你希望在信号产生时进行一些操作，都需要为此创建一个信号处理。
+        </para>
+    </sect1>
+
+    <sect1 id="tutorials.signals.signals">
+        <title>信号</title>
+        <note>
+            信号是由元件产生的用于反馈捕获的动作的通知。
+        </note>
+        <para>
+            如同之前讨论过的，任何应用程序响应不论是用户或者自动产生的动作都是非常必要的。
+            信号帮助程序了解什么时候指定的动作发生，这样你就可以处理它。
+        </para>
+        <para>
+            每个元件都拥有一组信号。这意味着，元件可以根据它收到的动作发出任何信号。
+            同时请注意，信号可以被子类继承，因此子类总是拥有父类有的所有信号并可能增添只属于它自己的部分。
+        </para>
+        <para>
+            很重要的一点是在没有用户执行的任何操作的前提下，也可以产生信号。
+            多数元件拥有通过调用就可以产生信号的方法，不论用户是否执行了一个操作。
+            关于这样的方法的一个例子就是 <classname>GtkButton</classname>
+            的 <function class="GtkButton">clicked</function> 方法，它将为按钮产生 
+            <literal>clicked</literal> 信号。
+        </para>
+    </sect1>
+
+    <sect1 id="tutorials.signals.callbacks">
+        <title>回调函数和信号处理</title>
+        <note>
+            回调函数是由其他代码段调用的。
+        </note>
+        <note>
+            信号处理是当特定信号产生时执行的回调函数。
+        </note>
+        <para>
+            信号处理是针对接收到的信号进行具体操作的地方。
+            对于开发人员，信号处理是编写当元件产生特定信号时被执行的代码。
+        </para>
+        <para>
+            信号处理分为两种：<literal>默认处理</literal> 和 <literal>用户定义处理</literal>。
+            当收到信号时，对应的 <literal>默认处理</literal> 自动被调用。
+            另一方面，<literal>用户定义处理</literal> 由开发人员（就是你！）
+            <emphasis>连接</emphasis> 到信号。
+        </para>
+    </sect1>  
+
+    <sect1 id="tutorials.signals.connecting">
+        <title>连接两部分</title>
+        <para>
+            现在如果希望响应一个动作的方式应该很清晰了，你必须连接信号到你编写的信号处理，
+            这样当信号产生时 PHP-GTK 2 可以调用那个函数。让我们看一看如何连接信号到信号处理。
+        </para>
+        <para>
+            这是 4 个主要的函数用于连接信号到回调函数：
+            <itemizedlist>
+                <listitem>connect_simple</listitem>
+                <listitem>connect_simple_after</listitem>
+                <listitem>connect</listitem>
+                <listitem>connect_after</listitem>
+            </itemizedlist>
+        </para>
+        <note>
+            *_after 方法仅仅在信号到达<emphasis>之后</emphasis>调用信号处理。我们将只讨论
+            <literal>connect_simple</literal> 和 <literal>connect</literal> 方法。
+            每个 *_after 方法有相同的作用，除了让信号处理在 <literal>connect</literal> 或
+            <literal>connect_simple</literal> 方法连接后被调用。
+        </note>
+
+        <sect2 id="tutorials.signals.connecting.simple">
+            <title>简单的连接</title>
+            <para>
+                首先来看一下如何用简单的方法连接一个信号到信号处理。你应该已经猜到了，使用
+                <literal>connect_simple</literal> 方法。
+            </para>
+            <para>
+                当然，非常重要的是必须知道要连接的信号的名称。PHP-GTK 2 文档有一个包含了
+                所有信号以及相关元件的列表。一旦你了解这个，并且开始编写信号产生时候需要执行的代码，
+                你所需要做的只是：
+                <programlisting role="php"><![CDATA[
+                    ${widget}->connect_simple('{signal-name}', '{callback-name}');
+                    ]]> </programlisting>
+                这里 {widget} 是产生那个要连接的信号的对象；{signal-name} 是信号的名称，
+                当然必须是跟 {widget} 相关的信号；而 {callback-name} 是回调函数的名称。
+            </para>
+            <note>
+                无论什么原因，当信号产生时信号处理被调用。注意用函数也可以产生信号，
+                因此一个信号产生并不能确保用户已经进行了操作。
+            </note>
+            <para>
+                让事情更清晰一些，尝试一个完整的范例。这里，在窗口上添加一个按钮。
+                当用户点击这个按钮时，退出程序：
+                <example>
+                    <title>简单的连接</title>
+                    <programlisting role="php">
+                        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+                            href="&directory.examples;/tutorials/signals/simple.phpw" parse="text">
+                            <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+                        </xi:include>
+                    </programlisting>
+                </example>
+            </para>
+            <para>
+                这是一个非常简单的程序。我们创建了一个窗口和一个按钮，将按钮添加到窗口上并显示它们。
+                需要特别留意这一行：
+                <programlisting role="php"><![CDATA[
+                    $but->connect_simple('clicked', 'quit');
+                    ]]> </programlisting>
+                如同你看到的，这里已经连接了 <classname>GtkButton</classname> 元件产生的信号
+                <signalname class="GtkButton">clicked</signalname>
+                到信号处理 <literal>quit</literal>。简单吗？当按钮产生信号 <literal>clicked</literal> 时，
+                或者进一步说，当用户点击这个按钮时，函数 <literal>quit</literal> 被调用。
+            </para>
+            <para>
+                可以了解到 <literal>quit</literal> 函数定义了显示一个消息然后调用
+                <literal>Gtk::main_quit()</literal> 函数退出程序。
+            </para>
+        </sect2>
+
+        <sect2 id="tutorials.signals.connecting.multiple">
+            <title>多重连接</title>
+            <para>
+                <emphasis>如果连接同一个信号到两个不同的回调函数会怎么样？</emphasis>你或许会这样问。当然，信号处理会在它连接的地方被调用。
+            </para>
+            <note>
+                如果信号处理返回 <literal>true</literal> 那么不会再对当前信号进行任何处理。当有多个信号处理时，这对控制逻辑是很有用的。
+            </note>
+            <para>
+                例子总能让事情更清晰：
+                <example>
+                    <title>信号多重连接</title>
+                    <programlisting role="php">
+                        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+                            href="&directory.examples;/tutorials/signals/multiple.phpw" parse="text">
+                            <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+                        </xi:include>
+                    </programlisting>
+                </example>
+                执行程序将会发现信号处理确实对其连接的信号进行了响应。
+            </para>
+            <para>
+                <emphasis>OK，但是如果连接一个信号到相同的回调函数上百次会怎么样？</emphasis> 回调函数会被调用上百次。不过没有什么理由让谁会这么做。
+            </para>
+            <para>
+                <emphasis>可以连接多个信号到同一个回调函数么？</emphasis> 
+                当然，事实上这是相当有用的。许多应用都有多种方式退出程序：常规的“小叉”按钮，在文件菜单中的“退出”项等等。
+                可以将每一个信号都连接到唯一的 <literal>quit</literal> 函数上。
+                不需要关心信号是从什么地方发出的，只需要了解用户希望退出应用。
+            </para>
+        </sect2>
+
+        <sect2 id="tutorials.signals.connecting.advanced">
+            <title>定制连接</title>
+            <para>
+                有时，知道信号是从哪个元件发出的是很有用的。如果应用程序有多个按钮，而这些按钮的 
+                <literal>clicked</literal> 已经被连接到一个回调函数上，那无疑需要知道信号是从哪个按钮来的。
+                为多个信号编写一个信号处理已经被证明是效率极高的做法。
+            </para>
+            <para>
+                这里有一种实现 <literal>connect</literal> 方法的情况。这个方法用信号处理的第一个参数传递了产生信号的元件对象。
+                <programlisting role="php"><![CDATA[
+                    $button1 = new GtkButton('First');
+                    $button2 = new GtkButton('Second');
+
+                    $button1->connect('clicked', 'show');
+                    $button2->connect('clicked', 'show');
+
+                    function show($whichbutton)
+                    {
+                    echo $whichbutton->get_label();
+                    }
+                    ]]> </programlisting>    
+                在上面的例子中，通过点击不同的按钮将输出“First”或“Second”。
+            </para>
+            <para>
+                这对于传递自定义的参数到信号处理也是很有用的。PHP-GTK 2 在 <literal>connect</literal> 和 <literal>connect_after</literal>
+                方法中都提供了这个功能。只要如下所示，在第二个变量后传递用逗号分隔的自定义参数即可：
+                <example>
+                    <title>传递自定义参数</title>
+                    <programlisting role="php">
+                        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+                            href="&directory.examples;/tutorials/signals/custom.phpw" parse="text">
+                            <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+                        </xi:include>
+                    </programlisting>
+                </example>
+                本例中，传递了两个可以帮助确定鼠标是否移入或移出的自定义参数到信号处理中。
+                请注意自定义参数可以试任何类型：string、boolean、integer、数组，甚至对象，只要是 PHP
+                中合法的类型即可。事实上，作为信号处理的参数传递元件对象是很常见，并且非常必要的。
+                因为元件产生的信号触发回调函数可能需要修改另外一些元件。可以传递任意数量的自定义参数。
+                只要保证信号处理可以接受相同数量的参数，否则的话应该产生一个警告。
+            </para>
+            <note>
+                关于信号的更多内容，例如 <literal>enter-notify-event</literal>，请浏览
+                <link linkend="tutorials.signals.events">events</link>, because
+                there is more to this than meets the eye.
+            </note>
+        </sect2>
+
+        <sect2 id="tutorials.signals.connecting.object">
+            <title>面向对象的连接</title>
+            <para>
+                现在来分析一下经常见到的这一行：
+                <programlisting role="php"><![CDATA[
+                    $window->connect_simple('destroy', array('gtk', 'main_quit'));
+                    ]]> </programlisting>
+                第二个参数的数组为什么是这样？
+            </para>
+            <para>
+                会议一下,当使用面向对象的方式连接到回调函数时，connect_* 函数的第二个参数必须是数组。
+                数组的第一个元素是回调函数的类，第二个元素是回调函数本身。
+            </para>
+            <para>
+                当回调函数是静态的（如 <literal>Gtk::main_quit()</literal>），通常用类名字符串来指定类。
+                然而如果回调函数不是静态的，而是当前类的一个方法，第一个元素应当使用 <literal>$this</literal>
+                变量指定。阅读 <link linkend="tutorials.objectorientation.advanced">面向对象编程</link> 
+                中的例子了解关于这个部分的使用方法。要点是如何让数组的第一个元素表示含有回调函数的类，
+                而第二个元素代表回调。
+            </para>
+        </sect2>
+    </sect1>
+
+    <sect1 id="tutorials.signals.events">
+        <title>事件</title>
+        <para>
+            <literal>事件</literal> 和 <literal>信号</literal> 是完全不同的，并且是绝对不可相互代替的。
+        </para>
+        <para>
+            信号是由 <classname>GtkObject</classname> 的实例产生，用于响应用户的动作或函数及方法的指令。
+        </para>
+        <para>
+            另一方面，事件是一个关于底层窗口系统环境变化的，持续的消息驱动通讯流。
+            它更加的底层化，这意味着环境的微小变化都会产生事件。
+        </para>
+        <note>
+            无法直接连接事件到回调函数。
+        </note>
+        <para>
+            在之前的例子中，必须使用 <literal>进入通知事件（enter-notify-event）</literal> 信号。
+            但是现在来看，似乎应该是一个事件，不是么？许多事件都有重要的用途，并且经常需要能够同回调函数连接。
+            由于这个原因，PHP-GTK 2 提供了若干信号作为 <literal>事件信号</literal> （例如
+            <literal>进入事件通知</literal> 和 <literal>离开事件通知</literal>）
+            用于封装事件本身。这是通过信号描述事件的一种方法，这样就可以使用回调函数连接他们。
+        </para>
+        <para>
+            当需要捕获一个事件的时候，应该可以找到一个与之对应的信号来处理。如果没有找到，
+            则需要元件所在的 <classname>GdkWindow</classname> 捕获相关的事件。若元件没有
+            <classname>GdkWindow</classname>，则必须将其封装于 <classname>GtkEventBox</classname>
+            以捕获事件。捕获事件不是一个很容易的任务，也超出了本指南的范围。如同前面所描述的，
+            只要找到一个与之对应的信号然后处理就好了，不需要对事件处理担心太多。
+        </para>
+    </sect1>
+
+    <sect1 id="tutorials.signals.summary">
+        <title>总结</title>
+        <para>
+            在总结中将回顾一下之前所讲解的东西。
+        </para>
+        <para>
+            <itemizedlist>
+                <listitem>
+                    信号处理要连接信号到其信号处理上，并编写信号处理本身。
+                </listitem>
+                <listitem>
+                    可以连接多个信号到信号处理，或者一个信号到多个信号处理。
+                    只要记得信号处理的顺序同连接它们的顺序一致。
+                </listitem>
+                <listitem>
+                    可以通过指定 connect_* 函数的参数传递自定义参数到信号处理中去。
+                    同样记得信号处理必须能接收相应个数的参数。
+                </listitem>
+                <listitem>
+                    当使用对象方式处理回调函数时，记得第二个参数必须是数组，第一个元素必须指向含有回调函数的类，
+                    第二个元素是回调函数的名字。
+                </listitem>
+                <listitem>
+                    牢记事件和信号的区别。同时请记住通过处理对应的信号，可以简介的处理事件。
+                </listitem>
+            </itemizedlist>
+        </para>
+        <para>
+            希望这个指南让事情变得清晰一些。学习唯一的途径是连接，所以，打开最顺手的编辑器，开始打代码吧！
+            一切都会更好！
+        </para>
+    </sect1>
+
+</chapter> 
