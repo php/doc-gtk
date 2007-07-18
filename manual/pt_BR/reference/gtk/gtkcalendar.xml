@@ -1,0 +1,409 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- EN-Revision: 1.13 Maintainer: fernandoc Status: ready -->
+<classentry id="gtk.gtkcalendar">
+ <classmeta>
+  <classtitle>GtkCalendar</classtitle>
+  <classparent>GtkWidget</classparent>
+  <classimage fileref="&directory.images;/reference/gtk/gtkcalendar.png"/>   
+  <shortdesc>
+   Exibe um calendário e permite ao usuário escolher uma data.
+  </shortdesc>
+  <desc>
+   <para>
+    Um <classname>GtkCalendar</classname> é um widget que exibe um calendário
+    como uma grade, um mês de cada vez, permitindo ao usuário escolher
+    uma data em particular.
+   </para>
+   <para>
+    O mês e o ano atualmente exibidos podem ser modificados usando
+    <function class="GtkCalendar">select_month</function>. O dia exato
+    pode ser modificado usando
+    <function class="GtkCalendar">select_day</function>.
+   </para>
+   <para>
+    Você pode definir uma marca visual em um dia particular usando
+    <function class="GtkCalendar">mark_day</function>. A marca
+    pode ser removida usando
+    <function class="GtkCalendar">unmark_day</function>.
+   </para>
+   <para>
+    O estilo visual do calendário pode ser modificado comprensivamente usando
+    <function class="GtkCalendar">set_display_options</function>. Claro,
+    todo o significado de criar um calendário em sí é para receber uma entrada
+    do usuário. Você pode usar
+    <function class="GtkCalendar">get_date</function> para obter a data
+    selecionada pelo usuário.
+   </para>
+  </desc>
+ </classmeta>
+
+ <constructors>
+
+  <constructor id="gtk.gtkcalendar.constructor">
+   <funcsynopsis>
+    <funcprototype>
+    <funcdef> <function>GtkCalendar</function></funcdef>
+    <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Cria um widget de calendário.
+   </shortdesc>
+   <desc>
+    Cria um widget de calendário que pode ser configurado para exibir
+    o mês e ano atual.
+   </desc>
+  </constructor>
+
+ </constructors>
+
+ <methods>
+
+  <method id="gtk.gtkcalendar.method.clear_marks">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>clear_marks</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Remove todas as marcas visuais.
+   </shortdesc>
+   <desc>
+    <para>
+     Remove todas as marcas visuais.
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkcalendar.method.display_options">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>display_options</function></funcdef>
+     <paramdef><enumname>GtkCalendarDisplayOptions</enumname> <parameter>flags</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    OBSOLETO. Define opções de exibição para o calendário.
+   </shortdesc>
+   <desc>
+    <para>
+     &deprecated.method;
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkcalendar.method.freeze">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>freeze</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Congela a exibição antes de permitir atualizações.
+   </shortdesc>
+   <desc>
+    <para>
+     Congela a exibição antes de permitir atualizações.
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkcalendar.method.get_date">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>get_date</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Retorna a data atualmente selecionada como uma matriz indexada condo o ano, o mês e o dia.
+   </shortdesc>
+   <desc>
+     <para>
+      Retorna a data atualmente selecionada como uma matriz indexada condo o ano, o mês e o dia.
+     </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkcalendar.method.get_display_options">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef><enumname>GtkCalendarDisplayOptions</enumname> <function>get_display_options</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Retorna as opções de exibição atuais do calendário.
+   </shortdesc>
+   <desc>
+    <para>
+      Retorna as opções de exibição atuais do calendário.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkCalendar">set_display_options</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkcalendar.method.mark_day">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>bool <function>mark_day</function></funcdef>
+     <paramdef>int <parameter>day</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Coloca uma marca visual no dia dado.
+   </shortdesc>
+   <desc>
+    <para>
+      Coloca uma marca visual no dia dado.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkCalendar">select_day</function>,
+     <function class="GtkCalendar">unmark_day</function>
+    </para>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtkcalendar.method.select_day">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>select_day</function></funcdef>
+     <paramdef>int <parameter>day</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Determina o dia a ser selecionado.
+   </shortdesc>
+   <desc>
+    <para>
+      Determina o dia a ser selecionado.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkCalendar">mark_day</function>,
+     <function class="GtkCalendar">unmark_day</function>
+    </para>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtkcalendar.method.select_month">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>bool <function>select_month</function></funcdef>
+     <paramdef>int <parameter>month</parameter></paramdef>
+     <paramdef>int <parameter>year</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Determina o mês e o ano a ser selecionado.
+   </shortdesc>
+   <desc>
+    <para>
+      Determina o mês e o ano a ser selecionado. Use 0 para Janeiro, 1 para Fevereiro...
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkcalendar.method.set_display_options">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_display_options</function></funcdef>
+     <paramdef><enumname>GtkCalendarDisplayOptions</enumname> <parameter>flags</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Define as opções de exibição do calendário.
+   </shortdesc>
+   <desc>
+    <para>
+      Define as opções de exibição do calendário.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkCalendar">get_display_options</function>
+    </para>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtkcalendar.method.thaw">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>thaw</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Descongela a exbição depois de congelar.
+   </shortdesc>
+   <desc>
+    <para>
+      Descongela a exbição depois de congelar.
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkcalendar.method.unmark_day">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>bool <function>unmark_day</function></funcdef>
+     <paramdef>int <parameter>day</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Remove a marca visual definida em um dia dado.
+   </shortdesc>
+   <desc>
+    <para>
+      Remove a marca visual definida em um dia dado.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkCalendar">mark_day</function>,
+     <function class="GtkCalendar">select_day</function>
+    </para>
+
+   </desc>
+  </method>
+
+ </methods>
+
+ <signals>
+
+  <signal id="gtk.gtkcalendar.signal.day-selected">
+   <signalname>day-selected</signalname>
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
+     <paramdef><classname>GtkCalendar</classname> <parameter>calendar</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Emitido quando um dia é selecionado.
+   </shortdesc>
+   <desc>
+    <para>
+     Emitido quando um dia é selecionado.
+    </para>
+   </desc>
+  </signal>
+
+  <signal id="gtk.gtkcalendar.signal.day-selected-double-click">
+   <signalname>day-selected-double-click</signalname>
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
+     <paramdef><classname>GtkCalendar</classname> <parameter>calendar</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Emitido quando há um duplo clique em um dia.
+   </shortdesc>
+   <desc>
+    <para>
+      Emitido quando há um duplo clique em um dia.
+    </para>
+   </desc>
+  </signal>
+
+  <signal id="gtk.gtkcalendar.signal.month-changed">
+   <signalname>month-changed</signalname>
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
+     <paramdef><classname>GtkCalendar</classname> <parameter>calendar</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Emitido quando o usuário muda o mês atual.
+   </shortdesc>
+   <desc>
+    <para>
+      Emitido quando o usuário muda o mês atual.
+    </para>
+   </desc>
+  </signal>
+
+  <signal id="gtk.gtkcalendar.signal.next-month">
+   <signalname>next-month</signalname>
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
+     <paramdef><classname>GtkCalendar</classname> <parameter>calendar</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Emitido quando o usuário escolhe ir um mês a frente.
+   </shortdesc>
+   <desc>
+     <para>
+       Emitido quando o usuário escolhe ir um mês a frente.
+     </para>
+   </desc>
+  </signal>
+
+  <signal id="gtk.gtkcalendar.signal.next-year">
+   <signalname>next-year</signalname>
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
+     <paramdef><classname>GtkCalendar</classname> <parameter>calendar</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+     Emitido quando o usuário escolhe ir um ano a frente.
+   </shortdesc>
+   <desc>
+    <para>
+      Emitido quando o usuário escolhe ir um ano a frente.
+    </para>
+   </desc>
+  </signal>
+
+  <signal id="gtk.gtkcalendar.signal.prev-month">
+   <signalname>prev-month</signalname>
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
+     <paramdef><classname>GtkCalendar</classname> <parameter>calendar</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Emitido quando o usuário escolhe voltar um mês.
+   </shortdesc>
+   <desc>
+    <para>
+      Emitido quando o usuário escolhe voltar um mês.
+    </para>
+   </desc>
+  </signal>
+
+  <signal id="gtk.gtkcalendar.signal.prev-year">
+   <signalname>prev-year</signalname>
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
+     <paramdef><classname>GtkCalendar</classname> <parameter>calendar</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+     Emitido quando o usuário escolhe voltar um ano.
+   </shortdesc>
+   <desc>
+    <para>
+      Emitido quando o usuário escolhe voltar um ano.
+    </para>
+   </desc>
+  </signal>
+
+ </signals>
+
+</classentry>

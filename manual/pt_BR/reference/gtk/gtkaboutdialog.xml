@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- $Revision: 1.1 $ -->
+<!-- EN-Revision: 1.1 Maintainer: fernandoc Status: ready -->
 <classentry id="gtk.gtkaboutdialog">
  <classmeta>
   <classtitle>GtkAboutDialog</classtitle>
@@ -355,7 +355,7 @@
    </funcsynopsis>
    <shortdesc>
     Define as strings que devem ser exibidas na aba dos autores,
-    np dialogo secundário de créditos.
+    no dialogo secundário de créditos.
    </shortdesc>
    <desc>
     <simpara>
@@ -435,12 +435,12 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Sets the strings which are displayed in the documenters tab of the secondary credits dialog.
+    Define as strings que são exibidas na aba dos documentadores do dialogo secundário de créditos.
    </shortdesc>
    <desc>
     <para>
-     This function is used to set the string which will be displayed
-     documenters tab that placed in the secondary credits dialog.
+     Esta função é usada para definir a string a qual será exibida na aba
+dos documentadores que é colocada no dialogo secundário de créditos.
     </para>
     <para>
      &seealso;
@@ -459,18 +459,17 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Sets a global callback to be called when a user activates an email link in
-    the dialog.
+    Define um callback global a ser usado quando o usuário ativa um link de email no dialogo.
    </shortdesc>
    <desc>
     <para>
-     Sets <parameter>callback</parameter> as a callback to be called when the 
-     user activates an email link. This callback will be called for all email
-     links in the dialog.
+     Define <parameter>callback</parameter> como um callback a ser usado quando o usuário ativa um link de email.
+     Este callback será chamado para todos os
+     links de email no dialogo.
     </para>
     <para>
-     The optional argument <parameter>data</parameter> can be passed to provide
-     data for the callback function.
+     O argumento opcional <parameter>data</parameter> pode ser passado para prover
+     dados para a função de callback.
     </para>
     <simpara>
      &static;
@@ -486,13 +485,13 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Set the license text.
+    Define o texto da licença.
    </shortdesc>
    <desc>
     <simpara>
-     Sets the license information to be displayed in the secondary 
-     license dialog. If license is not set or <literal>null</literal>, the
-     license button is hidden.
+     Define a informação da licença a ser exibida no dialogo
+     secundário da licença. Se a licença não for definida ou for <literal>null</literal>, o
+     borão da licença é escondido.
     </simpara>
     <para>
      &seealso;
@@ -509,22 +508,22 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Set the program logo
+    Define o logo do programa
    </shortdesc>
    <desc>
     <para>
-     Sets the program logo. The <parameter>logo</parameter> has to be of
-     type <classname>GdkPixbuf</classname>, which can easily be constructed
-     via the <function class="GtkWidget">render_icon</function> method
-     of <classname>GtkWidget</classname>.
+     Define o logo do programa. O <parameter>logo</parameter> deve ser do 
+     tipo <classname>GdkPixbuf</classname>, o qual pode ser facilmente construido 
+     através do metodo <function class="GtkWidget">render_icon</function> 
+     da classe <classname>GtkWidget</classname>.
     </para>
     <para>
-      If you set it explicitly to <literal>null</literal>, the dialogs
-      default icon is used.
+      Se você defini-lo explicitamente como <literal>null</literal>, o icone
+      padrão dos dialogos é usado.
     </para>
 
     <example>
-     <title>Dialog icon is used when logo is <literal>null</literal></title>
+     <title>Icone do dialogo usado quando o logo é <literal>null</literal></title>
      <programlisting role="php">
       <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="&directory.examples;/reference/gtk/gtkaboutdialog/set_logo.phpw" parse="text">
        <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
@@ -548,15 +547,15 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Set logo to be displayed, by name.
+    Define o logo a ser exibido, pelo nome.
    </shortdesc>
    <desc>
     <simpara>
-     Sets the logo icon to be displayed, but not with the 
-     <classname>GdkPixbuf</classname> as
-     <function class="GtkAboutDialog">set_logo</function> does - 
-     you pass a name, and Gtk tries to find the icon in the list
-     of named images.
+     Define o icone do logo a ser exibido, pelo nome, mas não com o 
+     <classname>GdkPixbuf</classname> como
+     <function class="GtkAboutDialog">set_logo</function> faz - 
+     você passa um nome, e o Gtk tenta encontrar um icone a lista
+     de imagens nomeadas.
      <!-- FIXME: give some working example names -->
     </simpara>
     <para>
@@ -577,17 +576,17 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Sets the translator credits string.
+    Define a string dos créditos do tradutor.
    </shortdesc>
    <desc>
     <simpara>
-     Sets the translator credits string which is displayed in the translators 
-     tab of the secondary credits dialog.
+     Define os créditos do tradutor o qual é exibido na aba dos tradutores
+     no dialogo secundário de créditos.
     </simpara>
     <simpara>
-     If you set this value, a new "Credits" button appears on the lower left
-     of the about dialog, opening the window with the translator credits
-     (and other credits if set).
+     Se você definir este valor, um novo botão "Credits" aparece na parte inferior esquerda
+     do dialogo sobre, abrindo a janela com os créditos do tradutor
+     (e outros créditos se definidos).
     </simpara>
     <para>
      &seealso;
@@ -606,16 +605,16 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Sets a global callback for all URL links in the dialog.
+    Define um callback global para todos os links de URL no dialogo.
    </shortdesc>
    <desc>
     <para>
-     Sets <parameter>callback</parameter> as a global callback to be called
-     when the user activates a URL link in the dialog.
+     Define <parameter>callback</parameter> como um callback a ser chamado quando
+     um usuário ativa um link de uma URL no dialogo.
     </para>
     <para>
-     The optional argument <parameter>data</parameter> can be passed to provide
-     data for the callback function.
+     O argumento opcional <parameter>data</parameter> pode ser passado para
+     prover dados para a função de callback.
     </para>
     <simpara>
      &static;
@@ -631,19 +630,19 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Set the version of your program
+    Define a versão do seu programa
    </shortdesc>
    <desc>
     <simpara>
-     Set the version of your program that will be displayed alongside the
-     name of the program.
+     Define a versão do seu programa que será exibido em conjunto com
+     o nome do programa.
     </simpara>
     <simpara>
-     It is wise not to hard-code
-     the value in your "about code", but use a central constant or
-     a variable from within your program class. If done so,
-     you can change the program version at one central place without having
-     to remember to change it at all places that you mentioned it.
+     É sábio não colocar diretamente o
+     valor em seu "sobre", mas usar uma constante central ou uma
+     variável da sua classe do programa. Se feito assim, 
+     você pode mudar a versão do seu programa em um local central sem ter
+     que se lembrar de muda-lo em todos os lugar que você mencionou.
     </simpara>
     <para>
      &seealso;
@@ -660,12 +659,12 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Set the program's website.
+    Define o website do programa.
    </shortdesc>
    <desc>
     <simpara>
-     Set the program's website. This will be displayed just below the
-     program description.
+     Define o website do programa. Isto será exibido justamente abaixo
+     da descrição do programa.
     </simpara>
     <para>
      &seealso;
@@ -682,15 +681,15 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Sets the label to be used for the website link.
+    Define o rótulo para ser usado para o link do website.
    </shortdesc>
    <desc>
     <para>
-     Sets the label to be used for the website link. It defaults to the website
-     URL. This has no effect if you do not use <function
-     class="GtkAboutDialog">set_url_hook</function> with a callback. The text
-     set using <function class="GtkAboutDialog">set_website</function> will be
-     displayed instead.
+     Define o rótulo a ser usado para o link do website. O padrão é a URL do website.
+     Isto não tem efeito se você não usar <function
+     class="GtkAboutDialog">set_url_hook</function> com um callback. O texto
+     definido usando <function class="GtkAboutDialog">set_website</function> será
+     exibido ao invés.
     </para>
     <para>
      &seealso;
