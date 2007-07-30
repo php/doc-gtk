@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 1.22 Maintainer: dnfeitosa Status: ready -->
+<!-- EN-Revision: 1.22 Maintainer: fernando Status: ready -->
 <classentry id="gtk.gtkcombobox">
  <classmeta>
   <classtitle>GtkComboBox</classtitle>
@@ -290,7 +290,7 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-     Obtém o objeto correspondente ao popup.
+    Obtém o objeto correspondente ao popup.
    </shortdesc>
    <desc>
     <para>
@@ -474,10 +474,10 @@
        <literal>position</literal>: ìndice do item a remover.
     </para>
     <para>
-    O metodo <function class="GtkComboBox">remove_text</function> method
-    removes the string at the index specified by position in the associated 
-    <classname>GtkListStore</classname>. Note that you can only use this function with combo
-    boxes constructed with the <function class="GtkComboBox">new_text</function> function.
+    O metodo <function class="GtkComboBox">remove_text</function>
+    remove a string no índice especificado por position no
+    <classname>GtkListStore</classname> associado. Note tque você somente pode usar esta função com
+    caixas combo construídas com a função <function class="GtkComboBox">new_text</function>.
     </para>
     <para>
      &seealso;
@@ -497,17 +497,17 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Sets the active item of the combo_box.
+    Define o item ativo na caixa combo.
    </shortdesc>
    <desc>
     <para>
-        <literal>index</literal>: An index in the model passed during construction, or -1 to have no active item.
+     <literal>index</literal>: Um índice no modelo passado durante a construção, ou -1 para não haver um item ativo.
     </para>
     <para>
-       The <function class="GtkComboBox">set_active</function> method
-       sets the active item of the combo_box to the item with the
-       model index specified by index. If index is -1 the combo box
-       will have no active item. The "active" property is also set to the value of index.
+     O metodo <function class="GtkComboBox">set_active</function>
+     define o item ativo da caixa combo como sendo o item do modelo
+     com o índice especificado. Se o index for -1 a caixa combo
+     não terá item ativo. A propriedade "active" também é definida com o valor de index.
     </para>
     <para>
      &seealso;
@@ -525,16 +525,16 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Sets the current active item.
+    Define o item ativo atual.
    </shortdesc>
    <desc>
     <para>
-        <literal>iter</literal>: A valid <classname>GtkTreeIter</classname> pointing at an item in the associated <classname>GtkTreeModel</classname>.
+     <literal>iter</literal>: Um <classname>GtkTreeIter</classname> valido apontando para um item no <classname>GtkTreeModel</classname> associado.
     </para>
     <para>
-        The <function class="GtkComboBox">set_active_iter</function> method sets the current
-        active item to be the one referenced by iter in the associated <classname>GtkTreeModel</classname>.
-        iter must correspond to a path of depth one. The "active" property is also set by this method.
+     O metodo <function class="GtkComboBox">set_active_iter</function> define o item
+     atualmente ativo como o item referenciado pelo iter no <classname>GtkTreeModel</classname> associado.
+     iter deve corresponder com um caminho de profundidade um. A propriedade "active" também é definido por este metodo.
     </para>
     <para>
      &seealso;
@@ -552,15 +552,15 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Sets the "add-tearoffs" property.
+    Define a propriedade "add-tearoffs".
    </shortdesc>
    <desc>
     <para>
-        <literal>add_tearoffs</literal> : if <literal>true</literal> add tearoff menu items
+     <literal>add_tearoffs</literal> : se <literal>true</literal> adiciona menu tearoff
     </para>
     <para>
-    The <function class="GtkComboBox">set_add_tearoffs</function> method sets the "add-tearoffs" property
-    to the value of add_tearoffs. If add_tearoffs is <literal>true</literal>, the popup menu should have a tearoff menu item.
+     O metodo <function class="GtkComboBox">set_add_tearoffs</function> define a propriedade "add-tearoffs" 
+     como o valor de add_tearoffs. Se add_tearoffs for <literal>true</literal>, o menu popup deve ter um item de menu tearoff.
     </para>
    </desc>
   </method>
@@ -573,18 +573,18 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-        Sets the "column-span-column" property.
+    Define a propriedade "column-span-column".
    </shortdesc>
    <desc>
     <para>
-        <literal>column_span </literal>: A column in the model passed during construction.
+     <literal>column_span </literal>: Uma coluna do modelo passado durante a construção.
     </para>
     <para>
-        The <function class="GtkComboBox">set_column_span_column</function> method sets the
-        "column-span-column" property to the value specified by column_span.
-        The "column-span-column" property indicates the column in the associated
-        <classname>GtkTreeModel</classname> row that contains an integer that indicates how many
-        columns the item should span.
+     O metodo <function class="GtkComboBox">set_column_span_column</function> define a propriedade
+     "column-span-column" com o valor especificado por column_span.
+     A propriedade "column-span-column" indica a coluna no 
+     <classname>GtkTreeModel</classname> associado que contém um inteiro que indica
+     quantas colunas o item deve ocupar.
     </para>
     <para>
      &seealso;
@@ -602,16 +602,16 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-        Sets the value of the "focus-on-click" property.
+    Define o valor da propriedade "focus-on-click".
    </shortdesc>
    <desc>
     <para>
-        <literal>focus_on_click </literal>: if <literal>true</literal> the combo box grabs focus when clicked with the mouse.
+     <literal>focus_on_click </literal>: se <literal>true</literal> a caixa combo agarra o foco quando clicada com o mouse.
     </para>
     <para>
-        The <function class="GtkComboBox">set_focus_on_click</function> method sets the
-        value of the "focus-on-click" property to the value of focus_on_click.
-        If focus_on_click is <literal>true</literal> the combo box grabs focus when clicked with the mouse.
+     O metodo <function class="GtkComboBox">set_focus_on_click</function> define o valor
+     da propriedade "focus-on-click" com o valor de focus_on_click.
+     Se focus_on_click for <literal>true</literal> a caixa combo agarra o foco quando clicada com o mouse.
     </para>
     <para>
      &seealso;
@@ -630,17 +630,17 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-        Sets the model used by the combo box.
+    Define o modelo usado pela caixa combo.
    </shortdesc>
    <desc>
     <para>
-        <literal>model </literal>: A gtk.TreeModel.
+     <literal>model </literal>: Um GtkTreeModel.
     </para>
     <para>
-        The <function class="GtkComboBox">set_model</function> method sets the model used by the
-        combo box to the value specified by model. The "model" property will also be set to
-        the value of model. A previously set model will be unset. If model is null or not specified,
-        the old model will be unset.
+     O metodo <function class="GtkComboBox">set_model</function> define o modelo usado pela caixa
+     combo para o valor especificado por model. A propriedade "model" irá também ser definida com
+     o valor de model. Um modelo definido anteriormente será removido. Se model for null ou não especificado
+     o modelo anterior será removido.
     </para>
 
     <para>
@@ -661,31 +661,31 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-        Sets the row separator function.
+     Define a função para separador de linha.
    </shortdesc>
    <desc>
     <para>
-        <literal>func</literal> : a function or null
+     <literal>func</literal>: uma função ou null
     </para>
     <para>
-        <literal>data</literal> : user data to pass to func
+     <literal>data</literal>: dados do usuário para passar para a função
     </para>
     <para>
-        The <function class="GtkComboBox">set_row_separator_func</function> method sets
-        the row separator function to func, which is used to determine if a row should
-        be drawn as a separator. If func is null, no separators are drawn. This is the default value.
+     O metodo <function class="GtkComboBox">set_row_separator_func</function> define
+     a função separador de linha para func, a qual é usada para determinar se uma linha deve
+     ser desenhada como um separador. Se func e null, nenhum separador é desenhado. Este é o valor padrão.
     </para>
     <para>
-        The signature of func is:
+     A assinatura da função:
     </para>
     <para>
-        <literal>def func(model, iter, user_data):</literal>
+     <literal>def func(model, iter, user_data):</literal>
     </para>
     <para>
-        where model is the <classname>GtkTreeModel</classname> used by the combo box, iter is a
-        <classname>GtkTreeIter</classname> pointing at a row in model and user_data is data.
-        func returns <literal>true</literal> if the row is a separator. A common way to implement func is
-        to have a boolean column in model, that indicates if the row is a separator.
+     Aonde model é o <classname>GtkTreeModel</classname> usado pela caixa combo, iter é um
+     <classname>GtkTreeIter</classname> apontando para uma linha no modelo e user_data é dados do usuário.
+     func retorna <literal>true</literal> se uma linha é um separador. Uma maneira comum de implementar func
+     é ter uma coluna booleana no model, que indica se uma linha é o separador.
     </para>
     <para>
      &seealso;
@@ -703,17 +703,17 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-        Sets the "row-span-column" property.
+    Define a propriedade "row-span-column".
    </shortdesc>
    <desc>
     <para>
-        <literal>row_span</literal>: A column in the model passed during construction.
+     <literal>row_span</literal>: Uma coluna no modelo passada durante a construção.
     </para>
     <para>
-        The <function class="GtkComboBox">set_row_span_column</function> method sets the "row-span-column"
-        property to the value specified by row_span. The "row-span-column" property indicates the column
-        in the associated <classname>GtkTreeModel</classname> row that contains an integer that indicates
-        how many rows the item should span.
+     O metodo <function class="GtkComboBox">set_row_span_column</function> define a propriedade "row-span-column"
+     para o valor especificado por row_span. A propriedade "row-span-column" indica a coluna no
+     <classname>GtkTreeModel</classname> associado que contém um inteiro que indica
+     quantas linhas o item deve ocupar.
     </para>
     <para>
      &seealso;
@@ -731,17 +731,17 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-        Sets the wrap width property of the combo box.
+     Define a propriedade wrap width da caixa combo.
    </shortdesc>
    <desc>
     <para>
-        <literal>width </literal>: The preferred number of columns of width.
+     <literal>width </literal>: O número preferido de colunas de largura.
     </para>
     <para>
-        The <function class="GtkComboBox">set_wrap_width</function> method sets the wrap
-        width (and the "wrap-width" property) of the combo box to the value specified by width.
-        The wrap width is basically the preferred number of columns to use to lay out the popup i.e.
-        lays out the popup items in a table with width columns.
+     O metodo <function class="GtkComboBox">set_wrap_width</function> define o
+     wrap width (e a propriedade "wrap-width") da caixa combo com o valor especificado por width.
+     O wrap width é basicamente o número preferido de colunas para usar para posicionar o popup, exemplo,
+     posiciona os itens no popup em uma tabela com width colunas.
     </para>
     <para>
      &seealso;
@@ -774,17 +774,17 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-       The "changed" signal is emitted when a new item in the combo box is selected.
+    O sinal "changed" é emitido quando um novo item na caixa combo é selecionado.
    </shortdesc>
    <desc>
     <para>
-        <literal>combobox </literal>: the combo box that received the signal.
+     <literal>combobox </literal>: a caixa combo que recebeu o sinal.
     </para>
     <para>
-        <literal>user param... </literal>: the first user parameter (if any) specified with the connect() method
+     <literal>user param... </literal>: o primeiro parâmetro do usuário(se houver algum) especificado com o metodo connect().
     </para>
     <para>
-        The "changed" signal is emitted when a new item in the combo box is selected.
+     O sinal "changed" é emitido quando um novo item na caixa combo é selecionado.
     </para>
    </desc>
   </signal>

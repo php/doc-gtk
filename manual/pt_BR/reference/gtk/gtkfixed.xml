@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- EN-Revision: 1.16 Maintainer: fernandoc Status: ready -->
+<classentry id="gtk.gtkfixed">
+ <classmeta>
+  <classtitle>GtkFixed</classtitle>
+  <classparent>GtkContainer</classparent>
+  <shortdesc>
+   Um container que permite a colocação precisa dos widgets.
+  </shortdesc>
+  <desc>
+   <para>
+    Um container <classname>GtkFixed</classname> não realiza o gerenciamento
+    automático da posição, já que isto fica para o programador prover a colocação e
+    tamanho de todos os widgets filhos, em pontos, atráves dos metodos 
+    <function class="GtkFixed">put</function> e
+    <function class="GtkFixed">move</function>. O metodo
+    <function class="GtkContainer">add</function> não deve ser usado
+    com o GtkFixed.
+   </para>
+   <para>
+    Mesmo este container permitindo um controle fino sobre o posicionamento exato
+    de um programa, ele não deve ser usado na maioria das aplicações. Uma
+    razão para esta recomendação é que isto requer grande cuidado e esforço para previnir
+    erros de exibição (como texto truncado ou widgets se sobrepondo), e
+    torna problemático adicionar ou remover widgets, já que provavelmente muitos outros
+    terão que ser rearranjados. Ele também em outras limitações, particularmente quanto
+    a tradução e a manipulação de línguas da direita para a esquerda. É também
+    difícil manter a consistencia do posicionamento, especialmente em aplicações
+    com janelas complexas ou multíplas.
+   </para>
+   <para>
+    &seealso;<classname>GtkTable</classname>, <classname>GtkBox</classname>.
+   </para>
+  </desc>
+ </classmeta>
+
+ <constructors>
+
+  <constructor id="gtk.gtkfixed.constructor">
+   <funcsynopsis>
+    <funcprototype>
+    <funcdef> <function>GtkFixed</function></funcdef>
+    <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Cria um novo container GtkFixed.
+   </shortdesc>
+   <desc>
+    <para>
+     Esta função cria e retorna um novo widget <classname>GtkFixed</classname>.
+    </para>
+   </desc>
+  </constructor>
+
+ </constructors>
+
+ <methods>
+
+  <method id="gtk.gtkfixed.method.get_has_window">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>bool <function>get_has_window</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Retorna quando9 o gtkFixed tem a sua própria GdkWindow.
+   </shortdesc>
+   <desc>
+    <para>
+     Esta função retorna quando o <classname>GtkFixed</classname> tem um
+     <classname>GdkWindow</classname> próprio. Veja
+     <function class="GtkFixed">set_has_window</function> para maiores informações.
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkfixed.method.move">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>move</function></funcdef>
+     <paramdef>GtkWidget <parameter>widget</parameter></paramdef>
+     <paramdef>int <parameter>x</parameter></paramdef>
+     <paramdef>int <parameter>y</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Move um filho para uma nova posição.
+   </shortdesc>
+   <desc>
+    <para>
+     Este metodo define uma nova posição p-ara o widget filho em um 
+     container GtkFixed. Os parâmetros são as coordenadas <parameter>x</parameter> e
+     <parameter>y</parameter> do canto superior esquerdo do
+     widget filho, medido em pixels a partir do canto superior esquerdo
+     do container.
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkfixed.method.put">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>put</function></funcdef>
+     <paramdef>GtkWidget <parameter>widget</parameter></paramdef>
+     <paramdef>int <parameter>x</parameter></paramdef>
+     <paramdef>int <parameter>y</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Define a posição inicial do filho.
+   </shortdesc>
+   <desc>
+		<para>
+     Este metodo define a posição inicial do widget(s) filho em um container
+     <classname>GtkFixed</classname>. Os parâmetros são a coordenadas 
+     <parameter>x</parameter> e <parameter>y</parameter> do canto
+     superior esquerdo do widget filho, medidos em pontos a partir do 
+     canto superior esquerdo do container. 
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkfixed.method.set_has_window">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_has_window</function></funcdef>
+     <paramdef>bool <parameter>has_window</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Define quando uma janela separada deve ser criada.
+   </shortdesc>
+   <desc>
+    <para>
+     Est função foi adicionada para prover uma migração fácil para aplicações
+     antigas as quais podem esperar que o GtkFixed tenha um 
+     <classname>GdkWindow</classname> separado. O padrão é não criar uma 
+     janela separada.
+    </para>
+    <para>
+     Esta função deve ser chamada enquanto o GtkFixed não for realizado, por
+     exemplo, imediatamente após a janela ser criada.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkFixed">get_has_window</function>
+    </para>
+
+   </desc>
+  </method>
+
+ </methods>
+
+</classentry>

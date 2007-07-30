@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- EN-Revision: 1.6 Maintainer: dnfeitosa Status: ready -->
+<classentry id="gtk.gtkaspectframe">
+ <classmeta>
+  <classtitle>GtkAspectFrame</classtitle>
+  <classparent>GtkFrame</classparent>
+  <shortdesc>
+   Uma moldura que mantém seu filho em um aspecto em particular.
+  </shortdesc>
+  <desc>
+   <para>
+    <classname>GtkAspectFrame</classname> é útil quando você quer 
+    permitir ao usuário mudar o tamanho do widget mas ainda manter a sua
+    proporção. Como um exemplo, você pode estar exibindo umja pequena previsão
+    de uma imagem maior.
+   </para>
+  </desc>
+ </classmeta>
+
+ <constructors>
+
+  <constructor id="gtk.gtkaspectframe.constructor">
+   <funcsynopsis>
+    <funcprototype>
+    <funcdef> <function>GtkAspectFrame</function></funcdef>
+    <paramdef>string <parameter><optional>label = null</optional></parameter></paramdef>
+    <paramdef>double <parameter><optional>xalign = 0.5</optional></parameter></paramdef>
+    <paramdef>double <parameter><optional>yalign = 0.5</optional></parameter></paramdef>
+    <paramdef>double <parameter><optional>ratio = 1.0</optional></parameter></paramdef>
+    <paramdef>bool <parameter><optional>obey_child = true</optional></parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Cria um novo <classname>GtkAspectFrame</classname>
+   </shortdesc>
+   <desc>
+    <para>
+     Use o construtor para criar um novo <classname>GtkAspectFrame</classname> 
+     com os parâmetros especificados.
+    </para>
+   </desc>
+  </constructor>
+
+ </constructors>
+
+ <methods>
+
+  <method id="gtk.gtkaspectframe.method.set">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set</function></funcdef>
+     <paramdef>double <parameter><optional>xalign = 0.0</optional></parameter></paramdef>
+     <paramdef>double <parameter><optional>yalign = 0.0</optional></parameter></paramdef>
+     <paramdef>double <parameter><optional>ratio = 1.0</optional></parameter></paramdef>
+     <paramdef>bool <parameter><optional>obey_child = 1</optional></parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Define os parâmetros para um <classname>GtkAspectFrame</classname> existente.
+   </shortdesc>
+   <desc>
+    Muito útil quando você quer mudar os parâmetros de um <classname>
+    GtkAspectFrame</classname> após você te-lo criado. Este metodo é
+    geralmente usado baseado em uma certa condição ou em um callback.
+   </desc>
+  </method>
+
+ </methods>
+
+</classentry>

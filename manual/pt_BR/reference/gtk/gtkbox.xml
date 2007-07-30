@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 1.16 Maintainer: fernandoc Status: ready -->
+<!-- EN-Revision: 1.18 Maintainer: fernandoc Status: ready -->
 <classentry id="gtk.gtkbox">
  <classmeta>
   <classtitle>GtkBox</classtitle>
@@ -334,8 +334,21 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
+    Retorna um array de informações sobre o widget empacotado.
    </shortdesc>
    <desc>
+    <para>
+     Este metodo retorna uma matriz com quatro elementos contendo informações
+     sobre como o filho esta empacotado. Índice 0 contém o valor
+     <literal>expand</literal> para o widget aonde 0 é
+     <literal>false</literal> e 1 é <literal>true</literal>. Índice 1 contém
+     o valor <literal>fill</literal> para o widget aonde 0 é
+     <literal>false</literal> e 1 é <literal>true</literal>. Índice 2 contém
+     o valor <literal>padding</literal> para o widget como um integer(inteiro) com
+     o número de pixels de prenchimento. Índice 3 contém o valor
+     <literal>pack_type</literal> para o widget: um entre <optionname enum="GtkPackType">
+     Gtk::PACK_START</optionname> ou <optionname enum="GtkPackType">Gtk::PACK_END</optionname>
+    </para>
    </desc>
   </method>
   </methods>

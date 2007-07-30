@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- EN-Revision: 1.8 Maintainer: fernando Status: ready -->
+<classentry id="gtk.gtkcomboboxentry">
+ <classmeta>
+  <classtitle>GtkComboBoxEntry</classtitle>
+  <classparent>GtkComboBox</classparent>
+  <classimage fileref="&directory.images;/reference/gtk/gtkcomboboxentry.png"/>
+    <implements>GtkCellLayout</implements>
+  <shortdesc>
+   Uma caixa de entrada de texto com uma lista drop down de valores pré povoados.
+  </shortdesc>
+  <desc>
+   <para>
+    Este widget é similar a um <classname>GtkComboBox</classname> com
+    excessão que o usuário pode entrar um valor que não esteja presente na
+    lista de escolhas. Ele exibe o valor selecionado em um 
+    <classname>GtkEntry</classname> assim o usuário pode modificar
+    um valor xistente ou entrar com um novo.
+   </para>
+   <para>
+    Como o <classname>GtkComboBox</classname>, este widget pode ter um
+    modelo por baixo, ou usar o construtor conveniente
+    <function class="GtkComboBoxEntry">new_text</function> 
+    Se você usar um modelo, o seu modelo deve sempre ter 
+    uma coluna de texto que pode ser definida com
+    a função
+    <function name="GtkComboBoxEntry">set_text_column</function>.
+   </para>
+   <para>
+    Você pode obter o texto da caixa de texto atráves
+    da função
+    <function name="GtkComboBox">get_active_text</function>.
+   </para>
+  </desc>
+ </classmeta>
+
+ <constructors>
+
+  <constructor id="gtk.gtkcomboboxentry.constructor">
+   <funcsynopsis>
+    <funcprototype>
+    <funcdef> <function>GtkComboBoxEntry</function></funcdef>
+    <paramdef><classname>GtkTreeModel</classname><parameter><optional>model = null</optional></parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Cria um novo widget <classname>GtkComboBoxEntry</classname>.
+   </shortdesc>
+   <desc>
+    <para>
+     Use este construtor para criar um
+     <classname>GtkComboBoxEntry</classname> básico. Após a construção
+     você deve definir um modelo usando
+     <function name="GtkComboBox">set_model</function>.
+     Alternativamente, você pode passar o modelo como um parâmetro ao
+     construtor. O modelo também deve conter uma coluna de texto, a
+     qual deve ser definida usando
+     <function name="GtkComboBoxEntry">set_text_column</function>.
+    </para>
+   </desc>
+  </constructor>
+
+  <constructor id="gtk.gtkcomboboxentry.constructor.new_text">
+   <funcsynopsis>
+    <funcprototype>
+    <funcdef> <function>GtkComboBoxEntry::new_text</function></funcdef>
+    <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Um construtor de conveniência para criar um
+    <classname>GtkComboBoxEntry</classname> sem criar um modelo.
+   </shortdesc>
+   <desc>
+    <para>
+     Este é um construtor de conveniência que cria um
+     <classname>GtkComboBoxEntry</classname> que mostra apenas
+     strings. Se você usar este para criar o widget, você deverá apenas
+     manipular as escolhas usando
+     <function name="GtkComboBox">append_text</function>,
+     <function name="GtkComboBox">insert_text</function>,
+     <function name="GtkComboBox">prepend_text</function>, e
+     <function name="GtkComboBox">remove_text</function>.
+    </para>
+   </desc>
+  </constructor>
+
+ <constructor id="gtk.gtkcomboboxentry.constructor.new_with_model">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef> <function>GtkComboBoxEntry::new_with_model</function></funcdef>
+     
+     <paramdef><parameter>model</parameter></paramdef>
+     <paramdef><parameter>text_column</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+
+   </shortdesc>
+   <desc>
+
+    <simpara>
+     &static;
+    </simpara>
+   </desc>
+  </constructor>
+
+  </constructors>
+
+ <methods>
+
+  <method id="gtk.gtkcomboboxentry.method.get_text_column">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>int <function>get_text_column</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Retorna a coluna a qual o <classname>GtkEntry</classname> usa
+    para exibir as strings das escolhas.
+   </shortdesc>
+   <desc>
+    <para>
+     Retorna a coluna a qual o <classname>GtkEntry</classname> usa
+     para exibir as strings das escolhas.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkComboBoxEntry">set_text_column</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkcomboboxentry.method.set_text_column">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_text_column</function></funcdef>
+     <paramdef>int <parameter>text_column</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Define a coluna do modelo a qual o <classname>GtkEntry</classname> usa
+    para exibir as strings das escolhas.
+   </shortdesc>
+   <desc>
+    <para>
+     Define a coluna do modelo a qual o <classname>GtkEntry</classname> usa
+     para exibir as strings das escolhas.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkComboBoxEntry">get_text_column</function>
+    </para>
+   </desc>
+  </method>
+
+ </methods>
+
+</classentry>
