@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- $Revision: 1.19 $ -->
+<!-- $Revision: 1.20 $ -->
 <classentry id="gtk.gtktreeview">
  <classmeta>
   <classtitle>GtkTreeView</classtitle>
@@ -753,36 +753,36 @@ $treeview->append_column($column);
    </shortdesc>
    <desc>
     <para>
-	 This method inserts a new column into a <classname>GtkTreeView</classname>
-	 at the given position with a given name. In contrast to
-	 <function class="GtkTreeView">insert_column</function> and
-	 <function class="GtkTreeView">append_column</function> this method creates
-	 the column object internally and allows you to specify a data function,
-	 which is called everytime a cell in the model for this column changed and
-	 needs to be rendered.
+     This method inserts a new column into a <classname>GtkTreeView</classname>
+     at the given position with a given name. In contrast to
+     <function class="GtkTreeView">insert_column</function> and
+     <function class="GtkTreeView">append_column</function> this method creates
+     the column object internally and allows you to specify a data function,
+     which is called everytime a cell in the model for this column changed and
+     needs to be rendered.
     </para>
     <para>
      The provided callback function receives the following parameters to act on them:
      <itemizedlist>
       <listitem>
-	   <classname>GtkTreeViewColumn</classname> The column object created by the
-	   <function class="GtkTreeView">insert_column_with_data_func</function>
-	   call.
+       <classname>GtkTreeViewColumn</classname> The column object created by the
+       <function class="GtkTreeView">insert_column_with_data_func</function>
+       call.
       </listitem>
       <listitem>
-	   <classname>GtkCellRenderer</classname> The cell renderer used to display
-	   this cell.
+       <classname>GtkCellRenderer</classname> The cell renderer used to display
+       this cell.
       </listitem>
       <listitem>
-	   <classname>GtkTreeModel</classname> The model rendered by the tree view.
-	  </listitem>
+       <classname>GtkTreeModel</classname> The model rendered by the tree view.
+      </listitem>
       <listitem>
-	   <classname>GtkTreeIter</classname> The tree row affected by the change.
-	  </listitem>
+       <classname>GtkTreeIter</classname> The tree row affected by the change.
+      </listitem>
      </itemizedlist>
-	 Inside the data function you most propably want to change the
-	 <classname>GtkCellRenderer</classname>, which is responsible for
-	 displaying.
+     Inside the data function you most propably want to change the
+     <classname>GtkCellRenderer</classname>, which is responsible for
+     displaying.
     </para>
     <example>
      <title>Using <function class="GtkTreeView">insert_column_with_data_func</function></title>
