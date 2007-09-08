@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<!-- EN-Revision: 1.16 Maintainer: dnfeitosa Status: ready -->
+<!-- EN-Revision: 1.20 Maintainer: dnfeitosa Status: ready -->
 <classentry id="gtk.gtktreeview">
  <classmeta>
   <classtitle>GtkTreeView</classtitle>
@@ -123,7 +123,7 @@ $treeview->append_column($column);
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>collapse_row</function></funcdef>
-     <paramdef><classname>GtkTreePath</classname> <parameter>path</parameter></paramdef>
+     <paramdef>array <parameter>path</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -164,7 +164,7 @@ $treeview->append_column($column);
    <funcsynopsis>
     <funcprototype>
      <funcdef> <function>create_row_drag_icon</function></funcdef>
-     <paramdef><classname>GtkTreePath</classname> <parameter>path</parameter></paramdef>
+     <paramdef>array <parameter>path</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -252,7 +252,6 @@ $treeview->append_column($column);
 
      <paramdef><parameter>path</parameter></paramdef>
      <paramdef><classname>GtkTreeViewColumn</classname> <parameter>column</parameter></paramdef>
-     <paramdef><classname>GdkRectangle</classname> <parameter>rect</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -288,7 +287,6 @@ $treeview->append_column($column);
 
      <paramdef><parameter>path</parameter></paramdef>
      <paramdef><classname>GtkTreeViewColumn</classname> <parameter>column</parameter></paramdef>
-     <paramdef><classname>GdkRectangle</classname> <parameter>rect</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -724,21 +722,61 @@ $treeview->append_column($column);
    </desc>
   </method>
 
-
   <method id="gtk.gtktreeview.method.insert_column_with_data_func">
    <funcsynopsis>
     <funcprototype>
      <funcdef>int <function>insert_column_with_data_func</function></funcdef>
 
-     <paramdef><parameter>position</parameter></paramdef>
-     <paramdef><parameter>title</parameter></paramdef>
+     <paramdef>int <parameter>position</parameter></paramdef>
+     <paramdef>string <parameter>title</parameter></paramdef>
      <paramdef><classname>GtkCellRenderer</classname> <parameter>cellrenderer</parameter></paramdef>
-     <paramdef><parameter>callback</parameter></paramdef>
+     <paramdef>callback <parameter>callback</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-
+    Insere uma coluna em uma determinada posição com um callback associado.
    </shortdesc>
+   <desc>
+    <para>
+     Este método adiciona uma nova coluna à <classname>GtkTreeView</classname>
+     na posição e nome informados. Diferentemente de
+     <function class="GtkTreeView">insert_column</function> e
+     <function class="GtkTreeView">append_column</function>, este método cria o
+     objeto da coluna internamente e permite que você especifique uma função, que
+     é chamada cada vez que uma célula no modelo desta coluna é modificada e
+     necessita ser renderizada.
+    </para>
+    <para>
+     A função recebe os seguintes parâmetros:
+     <itemizedlist>
+      <listitem>
+       <classname>GtkTreeViewColumn</classname> O objeto da coluna criado pela
+       chamada de <function class="GtkTreeView">insert_column_with_data_func</function>.
+      </listitem>
+      <listitem>
+       <classname>GtkCellRenderer</classname> O renderizador utilizado para
+       exibir esta célula.
+      </listitem>
+      <listitem>
+       <classname>GtkTreeModel</classname> O modelo renderizado pela tree view.
+      </listitem>
+      <listitem>
+       <classname>GtkTreeIter</classname> A linha alterada.
+      </listitem>
+     </itemizedlist>
+     Dentro da função, você provavelmente desejará alterar o
+     <classname>GtkCellRenderer</classname>, que é o responsável pela
+     exibição.
+   </para>
+   <example>
+    <title>Usando <function class="GtkTreeView">insert_column_with_data_func</function></title>
+    <programlisting role="php">
+     <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="&directory.examples;/reference/gtk/gtktreeview/insert_column_with_data_func.phpw" parse="text">
+      <xi:fallback>FIXME:MISSING XINCLUDE CONTENT</xi:fallback>
+     </xi:include>
+    </programlisting>
+   </example>
+   </desc>
    <desc>
 
    </desc>
@@ -1330,6 +1368,206 @@ $treeview->append_column($column);
    </desc>
   </method>
 
+   <method id="gtk.gtktreeview.method.enable_model_drag_dest">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>enable_model_drag_dest</function></funcdef>
+     <paramdef><parameter>targets</parameter></paramdef>
+     <paramdef><parameter>actions</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    
+   </shortdesc>
+   <desc>
+   </desc>
+  </method>
+
+  <method id="gtk.gtktreeview.method.enable_model_drag_source">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>enable_model_drag_source</function></funcdef>
+     <paramdef><parameter>sbmask</parameter></paramdef>
+     <paramdef><parameter>targets</parameter></paramdef>
+     <paramdef><parameter>actions</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    
+   </shortdesc>
+   <desc>
+   </desc>
+  </method>
+
+  <method id="gtk.gtktreeview.method.get_dest_row_at_pos">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>get_dest_row_at_pos</function></funcdef>
+     <paramdef><parameter>x</parameter></paramdef>
+     <paramdef><parameter>y</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    
+   </shortdesc>
+   <desc>
+   </desc>
+  </method>
+
+  <method id="gtk.gtktreeview.method.get_drag_dest_row">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>get_drag_dest_row</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    
+   </shortdesc>
+   <desc>
+   </desc>
+  </method>
+
+  <method id="gtk.gtktreeview.method.get_enable_tree_lines">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>get_enable_tree_lines</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    
+   </shortdesc>
+   <desc>
+   </desc>
+  </method>
+
+  <method id="gtk.gtktreeview.method.get_grid_lines">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>get_grid_lines</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    
+   </shortdesc>
+   <desc>
+   </desc>
+  </method>
+
+  <method id="gtk.gtktreeview.method.get_headers_clickable">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>get_headers_clickable</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    
+   </shortdesc>
+   <desc>
+   </desc>
+  </method>
+
+  <method id="gtk.gtktreeview.method.get_rubber_banding">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>get_rubber_banding</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    
+   </shortdesc>
+   <desc>
+   </desc>
+  </method>
+
+  <method id="gtk.gtktreeview.method.get_search_entry">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>get_search_entry</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    
+   </shortdesc>
+   <desc>
+   </desc>
+  </method>
+
+  <method id="gtk.gtktreeview.method.get_visible_range">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>get_visible_range</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    
+   </shortdesc>
+   <desc>
+   </desc>
+  </method>
+
+  <method id="gtk.gtktreeview.method.set_enable_tree_lines">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_enable_tree_lines</function></funcdef>
+     <paramdef><parameter>enabled</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    
+   </shortdesc>
+   <desc>
+   </desc>
+  </method>
+
+  <method id="gtk.gtktreeview.method.set_grid_lines">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_grid_lines</function></funcdef>
+     <paramdef><parameter>grid_lines</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    
+   </shortdesc>
+   <desc>
+   </desc>
+  </method>
+
+  <method id="gtk.gtktreeview.method.set_rubber_banding">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_rubber_banding</function></funcdef>
+     <paramdef><parameter>enable</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    
+   </shortdesc>
+   <desc>
+   </desc>
+  </method>
+
+  <method id="gtk.gtktreeview.method.set_search_entry">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_search_entry</function></funcdef>
+     <paramdef><classname>GtkEntry</classname> <parameter><optional>entry</optional></parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    
+   </shortdesc>
+   <desc>
+   </desc>
+  </method>
+
  </methods>
 
  <signals>
@@ -1405,11 +1643,13 @@ $treeview->append_column($column);
     <funcprototype>
      <funcdef>void <cbfunction>callback</cbfunction></funcdef>
      <paramdef>GtkTreeView <parameter>treeview</parameter></paramdef>
-     <paramdef><!-- was:GtkTreePath -->XXX <parameter>UNKNOWN</parameter></paramdef>
-     <paramdef>GtkTreeViewColumn <parameter>UNKNOWN</parameter></paramdef>
+     <paramdef>array <parameter>path</parameter></paramdef>
+     <paramdef>GtkTreeViewColumn <parameter>column</parameter></paramdef>
+     <paramdef>array <parameter>userdata</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
+    Sinal emitido quando uma linha em um GtkTreeView é clicado duas vezes.
    </shortdesc>
    <desc>
 
