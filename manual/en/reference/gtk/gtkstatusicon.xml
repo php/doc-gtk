@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- $Revision: 1.1 $ -->
+<classentry id="gtk.gtkstatusicon">
+ <classmeta>
+  <classtitle>GtkStatusIcon</classtitle>
+  <classparent>GObject</classparent>
+  <shortdesc>
+   <classname>GtkStatusIcon</classname> is used for displaying an icon in the
+   system tray.
+  </shortdesc>
+  <desc>
+   <para>
+   </para>
+  </desc>
+ </classmeta>
+
+
+ <methods>
+
+  <method id="gtk.statusicon.method.position_menu">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>position_menu</function></funcdef>
+     <paramdef><classname>GtkMenu</classname> <parameter><optional>menu</optional></parameter></paramdef>
+     <paramdef><classname>GtkStatusIcon</classname> <parameter><optional>statusicon</optional></parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Menu positioning function for use with <function class="GtkMenu">popup</function>
+   </shortdesc>
+   <desc>
+    <simpara>
+     &static;
+    </simpara>
+    <para>
+     Menu positioning function for use with <function class="GtkMenu">popup</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkstatusicon.method.set_from_pixbuf">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_from_pixbuf</function></funcdef>
+     <paramdef><classname>GdkPixbuf</classname> <parameter>pixbuf</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Sets the GdkPixbuf being displayed by the GtkStatusIcon.
+   </shortdesc>
+   <desc>
+    <para>
+     Sets the GdkPixbuf being displayed by the GtkStatusIcon.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkStatusIcon">get_pixbuf</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkstatusicon.method.get_pixbuf">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef><classname>GdkPixbuf</classname> <function>get_pixbuf</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Gets the GdkPixbuf being displayed by the GtkStatusIcon.
+   </shortdesc>
+   <desc>
+    <para>
+     Gets the GdkPixbuf being displayed by the GtkStatusIcon.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkStatusIcon">set_from_pixbuf</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkstatusicon.method.set_visible">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_visible</function></funcdef>
+     <paramdef>bool <parameter>visible</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Sets the visibility of the GtkStatusIcon.
+   </shortdesc>
+   <desc>
+    <para>
+     Sets the visibility of the GtkStatusIcon.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkStatusIcon">get_visible</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkstatusicon.method.get_visible">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>bool <function>get_visible</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Returns whether or not the GtkStatusIcon is visible.
+   </shortdesc>
+   <desc>
+    <para>
+     Returns whether or not the GtkStatusIcon is visible.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkStatusIcon">set_blinking</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkstatusicon.method.set_blinking">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>bool <function>set_blinking</function></funcdef>
+     <paramdef>bool <parameter>blinking</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Sets the blinking state of the GtkStatusIcon.
+   </shortdesc>
+   <desc>
+    <para>
+     Sets the blinking state of the GtkStatusIcon.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkStatusIcon">get_blinking</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkstatusicon.method.get_blinking">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>bool <function>get_blinking</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Returns whether or not the GtkStatusIcon is blinking.
+   </shortdesc>
+   <desc>
+    <para>
+     Returns whether or not the GtkStatusIcon is blinking.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkStatusIcon">set_blinking</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkstatusicon.method.set_tooltip">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_tooltip</function></funcdef>
+     <paramdef>string <parameter>tip_text</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Sets the tooltip for the GtkStatusIcon.
+   </shortdesc>
+   <desc>
+    <para>
+     Sets the tooltip for the GtkStatusIcon.
+    </para>
+   </desc>
+  </method>
+
+ </methods>
+
+ <signals>
+  <signal id="gtk.gtkstatusicon.signal.activate">
+   <signalname>activate</signalname>
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>callback</function></funcdef>
+     <paramdef>GtkWidget <parameter>widget</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Signal for left mouse clicks.
+   </shortdesc>
+  </signal>
+  <signal id="gtk.gtkstatusicon.signal.popup-menu">
+   <signalname>popup-menu</signalname>
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>callback</function></funcdef>
+     <paramdef>GtkWidget <parameter>widget</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Signal for right mouse clicks.
+   </shortdesc>
+  </signal>
+ </signals>
+
+</classentry>
