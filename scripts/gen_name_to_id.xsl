@@ -190,6 +190,7 @@
   <xsl:text disable-output-escaping="yes">
   &lt;xsl:template name="get_sig_id_from_name"&gt;
   &lt;xsl:param name="signame" /&gt;
+  &lt;xsl:param name="class" select="no" /&gt;
   </xsl:text>
    <xsl:text disable-output-escaping="yes">
     &lt;xsl:choose&gt;
