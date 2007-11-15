@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- EN-Revision: 1.8 Maintainer: fernandoc Status: ready -->
+<classentry id="gtk.gtkframe">
+ <classmeta>
+  <classtitle>GtkFrame</classtitle>
+  <classparent>GtkBin</classparent>
+  <classimage fileref="&directory.images;/reference/gtk/gtkframe.png"/>
+  <shortdesc>
+   Uma moldura decorativa para guardar um widget.
+  </shortdesc>
+  <desc>
+   <para>
+    Um <classname>GtkFrame</classname> é essencialmente um
+    <classname>GtkBin</classname> com uma borda decorativa e um
+    rótulo opcional. É na maioria usado para conter seus widgets em
+    uma aplicação em uma maneira organizada e atraente.
+   </para>
+   <para>
+    Se um rótulo é especificado, ele irá aparecer em uma brecha no topo
+    da moldura. A posição do rótulo pode ser especificada com 
+    <function class="GtkFrame">set_label_align</function>.
+   </para>
+   <para>
+    Uma coisa importante para notar é que, desde que 
+    <classname>GtkFrame</classname> é derivado de 
+    <classname>GtkBin</classname>, ele pode conter apenas um widget filho!
+   </para>
+  </desc>
+ </classmeta>
+
+ <constructors>
+
+  <constructor id="gtk.gtkframe.constructor">
+   <funcsynopsis>
+    <funcprototype>
+    <funcdef> <function>GtkFrame</function></funcdef>
+    <paramdef>string <parameter><optional>label = null</optional></parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Cria uma nova moldura opcionalmente com um rotulo.
+   </shortdesc>
+   <desc>
+    <para>
+     Use o construtor para criar uma nova moldura, Você pode também especificar o
+     rótulo que será exibido no topo da moldura como um argumento para a função.
+     Alternativamente, você pode usar
+     <function class="GtkFrame">set_label_widget</function>, ou
+     <function class="GtkFrame">set_label</function> para adicionar um rótulo
+     a moldura depois que ela já tiver sido criada.
+    </para>
+   </desc>
+  </constructor>
+
+ </constructors>
+
+ <methods>
+
+  <method id="gtk.gtkframe.method.get_label">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>string <function>get_label</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Retorna o rótulo definido para a moldura.
+   </shortdesc>
+   <desc>
+    <para>
+     Use este metodo para determinar o rótulo que esta atualmente definido
+     para a moldura. O texto do rótulo será retornado,
+     <literal>null</literal> se não tiver sido definido um rótulo para a moldura ou
+     se o widget do rótulo não for do tipo <classname>GtkLabel</classname>.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkFrame">set_label</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkframe.method.get_label_align">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>array <function>get_label_align</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Obtém o alinhamento X e Y do rótulo do frame.
+   </shortdesc>
+   <desc>
+    <para>
+     Obtém o alinhamento X e Y do rótulo do frame.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkFrame">set_label_align</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkframe.method.get_label_widget">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>GtkWidget <function>get_label_widget</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Retorna o widget do rótulo da moldura.
+   </shortdesc>
+   <desc>
+    <para>
+     Use este metodo para obter o widget do rótulo da moldura. A função irá sempre
+     retornar um objeto <classname>GtkLabel</classname>, a menos que
+     não tenha sido definido um rótulo, caso no qual <literal>null</literal> será retornado.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkFrame">set_label_widget</function>
+    </para>
+
+   </desc>
+  </method>
+
+  <method id="gtk.gtkframe.method.get_shadow_type">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>GtkShadowType <function>get_shadow_type</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Retorna o tipo de sombra da moldura.
+   </shortdesc>
+   <desc>
+    <para>
+     Use este metodo para obter o tipo de sombra da moldura. A função irá
+     retornar uma constante GtkShadowType.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkFrame">set_shadow_type</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkframe.method.set_label">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_label</function></funcdef>
+     <paramdef>string <parameter>label</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Define o rótulo atual para a moldura.
+   </shortdesc>
+   <desc>
+    <para>
+     Use este metodo para definir o rótulo atual para a moldura. Você deve 
+     passar uma string como parâmetro para definir este texto como rótulo.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkFrame">get_label</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkframe.method.set_label_align">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_label_align</function></funcdef>
+     <paramdef>double <parameter>xalign</parameter></paramdef>
+     <paramdef>double <parameter>yalign</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Define o alinhamento do rótulo da moldura.
+   </shortdesc>
+   <desc>
+    <para>
+     Este metodo pode ser usado para controlar o alinhamento do rótulo da moldura.
+     Dois parâmetros são passados para a função, ambos são números variando
+     de 0 a 1. <literal>xalign</literal> determina o alinhamento horizontal
+     do rótulo (0 significa o canto mais à esquerda) e
+     <literal>yalign</literal> determina o alinhamento vertical (0 aqui, implica
+     que o rótulo irá aparecer no topo superior da moldura).
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkFrame">get_label_align</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkframe.method.set_label_widget">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_label_widget</function></funcdef>
+     <paramdef>GtkWidget <parameter>label_widget</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Define o rótulo do frame.
+   </shortdesc>
+   <desc>
+    <para>
+     Se você quiser passar um <classname>GtkLabel</classname> para ser o rótulo
+     da moldura, use este metodo.
+     <function class="GtkFrame">set_label</function> irá apenas permitir
+     uma string como o seu parâmetro e esta função ira apenas permitir
+     <classname>GtkLabel</classname>s.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkFrame">get_label_widget</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkframe.method.set_shadow_type">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_shadow_type</function></funcdef>
+     <paramdef><enumname>GtkShadowType</enumname> <parameter>type</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+     Define o tipo de sombra da moldura.
+   </shortdesc>
+   <desc>
+    <para>
+     Você pode usar esta função para definir o tipo de sombra da borda da moldura.
+     0 como parâmetro irá resultar em uma moldura sem borda, enquanto 3
+     irá dar a você uma borda entalhada.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkFrame">get_shadow_type</function>
+    </para>
+   </desc>
+  </method>
+
+ </methods>
+
+</classentry>

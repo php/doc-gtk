@@ -1,0 +1,394 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- EN-Revision: 1.14 Maintainer: fernandoc Status: ready -->
+<classentry id="gtk.gtkdialog">
+ <classmeta>
+  <classtitle>GtkDialog</classtitle>
+  <classparent>GtkWindow</classparent>
+  <classimage fileref="&directory.images;/reference/gtk/gtkdialog.png"/>
+  <shortdesc>
+   Uma janela popup.
+  </shortdesc>
+  <desc>
+   <para>
+    Como o nome sugere, <classname>GtkDialog</classname> é um widget que
+    é útil quando você quer interagir com o usuário. Por exemplo,
+    você pode querer perguntar uma questão ao usuário, pedir alguma entrada, ou
+    confirmar alguma ação. O <classname>GtkDialog</classname> ajuda em casos
+    assim provendo uma janela adequada para interação. Não seja enganado
+    pelo exemplo simples, um <classname>GtkDialog</classname> pode fazer
+    muito mais coisas do que é mostrado!
+   </para>
+   <para>
+    Um <classname>GtkDialog</classname> é basicamente feito de duas
+    areas principais, a area de cima, aonde você empacota widgets como
+    <classname>GtkLabel</classname> ou um <classname>GtkEntry</classname>.
+    A area de baixo deve ser usada para exibir
+    <classname>GtkButton</classname>s que irão realizar alguma ação, como
+    OK ou cancelar. A area de baixo do dialogo é conhecida como
+    <fieldname class="GtkDialog">action_area</fieldname>, enquanto a area de cima
+    é um <fieldname class="GtkDialog">vbox</fieldname>.
+   </para>
+   <para>
+    O procedimento geral para criar uma caixa de dialogo seria criar
+    uma caixa de dialogo com o seu construtor e então adicionar os widgets apropriados
+    ao <fieldname class="GtkDialog">vbox</fieldname> e
+    <fieldname class="GtkDialog">action_area</fieldname>. Alternativamente,
+    ao invés de adicionar os botões necessários ao 
+    <fieldname class="GtkDialog">action_area</fieldname>, você pode fazer uso do 
+    metodo <function class="GtkDialog">add_button</function>. A vantagem
+    deste metodo é que você obtém um sinal de resposta da escolha.
+    Você pode escolher um ID do sinal de resposta de <enumname>GtkResponseType</enumname>,
+    que seja adequado ao significado do seu botão. A terceira e mais 
+    conveniente maneira de adicionar botões ao dialogo é passa-los como parâmetros
+    ao usar o contrutor.
+   </para>
+   <note>
+    A maioria das vezes, entretanto, você não tem que passar por todo este problema
+    a menos que você queira criar um dialogo altamente personalizado. Os
+    tipos comuns de caixa de dialogo tem widgets por sí, como o
+    <classname>GtkFileChooserDialog</classname> ou o
+    <classname>GtkColorSelectionDialog</classname>.
+   </note>
+  </desc>
+ </classmeta>
+
+ <constructors>
+
+  <constructor id="gtk.gtkdialog.constructor">
+   <funcsynopsis>
+    <funcprototype>
+    <funcdef> <function>GtkDialog</function></funcdef>
+    <paramdef>string <parameter><optional>title = null</optional></parameter></paramdef>
+    <paramdef>GtkWidget <parameter><optional>parent_window = null</optional></parameter></paramdef>
+    <paramdef><enumname>GtkDialogFlags</enumname> <parameter><optional>dialog_flags = 0</optional></parameter></paramdef>
+    <paramdef>array <parameter><optional>(GtkButton,
+    <enumname>GtkResponseType</enumname>)</optional></parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Cria uma nova caixa de dialogo.
+   </shortdesc>
+   <desc>
+    <para>
+     Use o construtor para gerar uma caixa de dialogo de acordo com os
+     parãmetros providos. Alternativamente, você pode não passar qualquer parâmetro
+     e construir todos os elementos do dialogo manualmente.
+    </para>
+    <example>
+     <title>Uma reconstrução de GtkMessageDialog usando GtkDialog.</title>
+     <programlisting role="php">
+       <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="&directory.examples;/reference/gtk/gtkdialog/constructor.phpw" parse="text">
+       <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+      </xi:include>
+     </programlisting>
+    </example>
+   </desc>
+  </constructor>
+ </constructors>
+
+ <methods>
+
+  <method id="gtk.gtkdialog.method.add_action_widget">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>add_action_widget</function></funcdef>
+     <paramdef>GtkWidget <parameter>child</parameter></paramdef>
+     <paramdef>int <parameter>response_id</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Adiciona um widget ao <literal>action_area</literal>
+   </shortdesc>
+   <desc>
+    <para>
+     Use este metodo para adicionar um widget que pode ser ativado no
+     <literal>action_area</literal> do dialogo. O ID de resposta a ser
+     gerado quando o widget é ativado é passado como parâmetro para o
+     metodo. O widget é adicionado ao fim da area de ação do dialogo.
+    </para>
+    <note>
+     Apenas widgets <literal>ativáveis</literal> podem ser adicionados usando este
+     metodo. Para adicionar um widget não-ativável, use o metodo add na
+     propriedade <literal>action_area</literal> do
+     <classname>GtkDialog</classname>.
+    </note>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkdialog.method.add_button">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>GtkWidget <function>add_button</function></funcdef>
+     <paramdef>string <parameter>button_text</parameter></paramdef>
+     <paramdef>int <parameter>response_id</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Adiciona um botão ao dialogo.
+   </shortdesc>
+   <desc>
+    <para>
+     Você pode usar este metodo para manualmente adicionar um botão para a
+     propriedade <literal>action_area</literal> do dialogo. Claro, você
+     pode também adicionar botões após você ter chamado o construtor com
+     botões. Você pode adicionar um botão personalizado ou um item do estoque, dependendo
+     quando você passa um stock-ID ou texto plano como um parâmetro string. O
+     sinal de resposta também pode ser indicado como dado em 
+     <enumname>GtkResponseType</enumname>.
+    </para>
+    <para>
+     O botão criado é retornado como um widget por este metodo, mas na
+     maioria você não vai precisar usa-lo.
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkdialog.method.add_buttons">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>add_buttons</function></funcdef>
+     <paramdef>array <parameter>buttons</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Adiciona um array de botões ao dialogo.
+   </shortdesc>
+   <desc>
+    <para>
+     Adiciona um array de botões ao
+     <propname class="GtkDialog">action_area</propname> do dialogo.
+     <parameter>buttons</parameter> deve ser um array contendo pares de
+     rótulos de botões e respostas de dialogo. 
+    </para>
+    <para>
+     Chamar <function class="GtkDialog">add_buttons</function> é similar a
+     chamar <function class="GtkDialog">add_button</function> many times.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkDialog">add_button</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkdialog.method.get_has_separator">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>bool <function>get_has_separator</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Retorna se o dialogo tem um separador.
+   </shortdesc>
+   <desc>
+    <para>
+     Você deve usar esta função para determinar se a caixa de dialogo contém
+     um separador (entre as propriedades <literal>vbox</literal> e
+     <literal>action_area</literal>). A função retorna
+     <literal>true</literal> se tiver, <literal>false</literal>
+     se não.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkDialog">set_has_separator</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkdialog.method.response">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>response</function></funcdef>
+     <paramdef>int <parameter>response_id</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Emite o sinal de resposta.
+   </shortdesc>
+   <desc>
+    <para>
+     Este metodo emite o sinal de resposta do dialogo. O sinal de
+     resposta será do tipo especificado por response ID que é passado
+     como um parâmetro.
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkdialog.method.run">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>int <function>run</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Bloqueia o loop principal até que o dialogo seja destruído.
+   </shortdesc>
+   <desc>
+    <para>
+     Este é o metodo que perite a você analizar a resposta gerada
+     pelo dialogo. Quando você chama este metodo em um 
+     <classname>GtkDialog</classname>, o loop principal do GTK é bloqueado
+     até que o dialogo seja ou destruído ou emita um sinal de resposta.
+    </para>
+    <para>
+     O dialogo é também automaticamente definido como tipo modal, e o metodo
+     show também é chamado automaticamente. Entretanto, você precisa exibir
+     quaisquer widgets filhos por sí.
+    </para>
+    <para>
+     É altamente recomendado gerar um sinal de resposta para sair
+     da execução do loop. Se você destruir o dialogo enquanto o loop esta sendo executado,
+     então o seu código para depois da execução não saberá se o dialogo foi
+     destruído ou não.
+    </para>
+    <para>
+     A função irá retorna um id de resposta assim que um for gerado e saíra.
+     Note que você precisa destruir o dialogo manualmente quando
+     tiver processado a resposta.
+    </para>
+   </desc>
+  </method>
+
+  
+
+  
+
+  <method id="gtk.gtkdialog.method.set_default_response">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_default_response</function></funcdef>
+     <paramdef>int <parameter>response_id</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Define o ID de resposta a ser gerado pelo dialogo.
+   </shortdesc>
+   <desc>
+    <para>
+     Esta função é usada para definir um ID de resposta gerado pelo widget
+     que foi adicionado por último no <literal>action_area</literal>. O último
+     widget é normalmente o widget padrão para o dialogo, e será ativado
+     quando a tecla enter for pressionada. O ID de resposta é passado como
+     parâmetro para o metodo.
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkdialog.method.set_has_separator">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_has_separator</function></funcdef>
+     <paramdef>bool <parameter>setting</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Define quando o dialogo tem um separador.
+   </shortdesc>
+   <desc>
+    <para>
+     Você deve usar este metodo para definir quando o <literal>vbox</literal> e
+     <literal>action_area</literal> são separados por um (usualmente horizontal)
+     separador. Passe <literal>true</literal> como um parâmetro se você quer que o
+     separador esteja presente, <literal>false</literal> se não.
+    </para>
+    <para>
+     A definição é <literal>true</literal> por padrão.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkDialog">get_has_separator</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkdialog.method.set_response_sensitive">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_response_sensitive</function></funcdef>
+     <paramdef>int <parameter>response_id</parameter></paramdef>
+     <paramdef>bool <parameter>setting</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Define os widgets ativáveis para ser sensíveis ou não.
+   </shortdesc>
+   <desc>
+    <para>
+     Você pode usar esta função para convenientemente tornar sensível ou não
+     os botões do dialogo presente no <literal>action_area</literal>. Esta função
+     chama <function classname="GtkWidget">set_sensitive</function> on cada
+     widget presente no <literal>action_area</literal> com o
+     ID de resposta (passado como parâmetro). A definição pode ser
+     <literal>true</literal> ou <literal>false</literal> dependendo se
+     você quer que os botões correspondentes sejam sensíveis ou não.
+    </para>
+   </desc>
+  </method>
+
+ </methods>
+
+ <fields>
+
+  <field id="gtk.gtkdialog.field.action_area" type="ro">
+   <fieldname>action_area</fieldname>
+   <fieldtype>GtkWidget</fieldtype>
+   <shortdesc>
+    Descreve a area do dialogo que guarda os widgets de ação
+    (botões).
+   </shortdesc>
+   <desc>
+   </desc>
+  </field>
+
+  <field id="gtk.gtkdialog.field.vbox" type="ro">
+   <fieldname>vbox</fieldname>
+   <fieldtype>GtkWidget</fieldtype>
+   <shortdesc>
+    Descreve a area do dialogo que guarda os widgets de perguntas
+    (rótulos).
+   </shortdesc>
+   <desc>
+   </desc>
+  </field>
+
+ </fields>
+
+ <signals>
+
+  <signal id="gtk.gtkdialog.signal.close">
+   <signalname>close</signalname>
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
+     <paramdef>GtkDialog <parameter>dialog</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Emitido quando o dialogo é destruído.
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </signal>
+  
+  <signal id="gtk.gtkdialog.signal.response">
+   <signalname>response</signalname>
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
+     <paramdef>GtkDialog <parameter>dialog</parameter></paramdef>
+     <paramdef>int <parameter>UNKNOWN</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Emitido quando um widget de ação(botão) é clicado.
+   </shortdesc>
+   <desc>
+   </desc>
+  </signal>
+  
+ </signals>
+
+</classentry>

@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- EN-Revision: 1.7 Maintainer: dnfeitosa Status: ready -->
+<classentry id="gtk.gtkalignment">
+ <classmeta>
+  <classtitle>GtkAlignment</classtitle>
+  <classparent>GtkBin</classparent>
+  <shortdesc>
+   Um container que controla o tamanho eo alinhamento do seu filho.
+  </shortdesc>
+  <desc>
+   <para>
+    O container <classname>GtkAlignment</classname> controla o alinhamento
+    e o tamanho do seu filho, mrelativo as suas proprias dimensões. Entretanto, se o filho
+    tem um tamanho requisitado de seu próprio filho/filhos, isso terá
+    precedencia. Por exemplo, um <classname>GtkButton</classname> com um mrótulo
+    nunca será redimencionado para um tamanho menos do que o do rótulo.
+   </para>
+   <para>
+    Ele pode ser usado para definir o alinhamento relativo do filho 
+    <emphasis>dentro</emphasis> do container, através dos parâmtros
+    <parameter>xalign</parameter> e <parameter>yalign</parameter>.
+    Ambos podem variar entra 0 e 1, significando esquerda/cima e direita/baixo respecitivamente.
+    Isto é muito útil, por exemplo, em alinhar a esquerda ou direita um <classname>GtkLabel</classname>.
+   </para>
+   <para>
+    Outro uso para <classname>GtkAlignment</classname> (através de
+    <parameter>xscale</parameter> e <parameter>yscale</parameter>), é para
+    indicar a quantidade de espaço extra livre no container que o filho deve ser
+    extendido para ocupar. Note que isto não é o mesmo que o tamanho total do
+    widget filho.
+   </para>
+   <para>
+    <classname>GtkAlignment</classname> também prove metodos para especificamente
+    definir (e obter o atual) o prenchimento em cima, baixo, direito e esquerda do widget.
+   </para>
+  </desc>
+ </classmeta>
+
+ <constructors>
+
+  <constructor id="gtk.gtkalignment.constructor">
+   <funcsynopsis>
+    <funcprototype>
+    <funcdef><function>GtkAlignment</function></funcdef>
+    <paramdef>double <parameter><optional>xalign = 0.5</optional></parameter></paramdef>
+    <paramdef>double <parameter><optional>yalign = 0.5</optional></parameter></paramdef>
+    <paramdef>double <parameter><optional>xscale = 1.0</optional></parameter></paramdef>
+    <paramdef>double <parameter><optional>yscale = 1.0</optional></parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Cria o container que controla o alinhamento e o tamanho do seu filho.
+   </shortdesc>
+   <desc>
+    <para>
+     <classname>GtkAlignment</classname> é um widget container que controla o
+     alinhamento e o tamanho do seu filho.
+    </para>
+    <para>
+     Um widget <classname>GtkAlignment</classname> tem quatro definições:
+     <itemizedlist>
+      <listitem><parameter>xalign</parameter>: Este parâmetro é usado para
+      colocar horizontalmente o filho. Seu valor pode ser qualque coisa entre 0 (esquerda)
+      e 1 (direita). O padrão é 0.5, o que centraliza o widget filho
+      <emphasis>relativamente ao container<classname>GtkAlignment</classname> 
+      </emphasis>.
+      </listitem>
+      <listitem><parameter>yalign</parameter>: Este parâmetro é usado para 
+      colocar verticalmente o filho. O seu valor pode ser qualquer coisa entre 0 (cima)
+      e 1 (baixo). O seu padrão é 0.5.
+      </listitem>
+      <listitem><parameter>xscale</parameter>: Define a quantidade de espaço horizontal
+      livre no container <classname>GtkAlignment</classname>
+      que o filho deve ser extendido para ocupar. 0 significa que o filho não irá
+      extender, 1 significa que será extendido por todo o espaço livre disponível.
+      </listitem>
+      <listitem><parameter>yscale</parameter>: Define a quantidade de espaço vertical
+      livre no container que o filho será extendido para ocupar. O intervalo é de 0 (o
+      filho não será extendifo) até 1 (extendido para ocupar todo o espaço livre disponível).
+      </listitem>
+     </itemizedlist>
+     <example>
+      <title>Demostração do uso de GtkAlignment</title>
+      <programlisting role="php">
+       <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="&directory.examples;/reference/gtk/gtkalignment/constructor.phpw" parse="text">
+        <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+       </xi:include>
+      </programlisting>
+     </example> 
+    </para>
+   </desc>
+  </constructor>
+
+ </constructors>
+
+ <methods>
+
+  <method id="gtk.gtkalignment.method.get_padding">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>get_padding</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Obtém o prenchimentos de lados diferentes do widget.
+   </shortdesc>
+   <desc>
+    <para>
+     Este metodo obtém o prenchimento atual nos diferentes lados do
+     container <classname>GtkAlignment</classname>.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkAlignment">set_padding</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkalignment.method.set">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set</function></funcdef>
+     <paramdef>double <parameter>xalign</parameter></paramdef>
+     <paramdef>double <parameter>yalign</parameter></paramdef>
+     <paramdef>double <parameter>xscale</parameter></paramdef>
+     <paramdef>double <parameter>yscale</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Define os novos valores para o <classname>GtkAlignment</classname>.
+   </shortdesc>
+   <desc>
+    <para>
+     Este metodo é usado para definir novos valores para
+     um container <classname>GtkAlignment</classname>.
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkalignment.method.set_padding">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_padding</function></funcdef>
+     <paramdef>int <parameter>padding_top</parameter></paramdef>
+     <paramdef>int <parameter>padding_bottom</parameter></paramdef>
+     <paramdef>int <parameter>padding_left</parameter></paramdef>
+     <paramdef>int <parameter>padding_right</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Define o prenchimento dos diferentes lados do widget.
+   </shortdesc>
+   <desc>
+    <para>
+     Este metodo define o prenchimento dos diferentes lados do
+     container <classname>GtkAlignment</classname>.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkAlignment">get_padding</function>
+    </para>
+
+   </desc>
+  </method>
+
+ </methods>
+
+</classentry>
