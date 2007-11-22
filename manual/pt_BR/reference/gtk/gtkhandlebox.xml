@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- EN-Revision: 1.9 Maintainer: fernandoc Status: ready -->
+<classentry id="gtk.gtkhandlebox">
+ <classmeta>
+  <classtitle>GtkHandleBox</classtitle>
+  <classparent>GtkBin</classparent>
+  <shortdesc>
+   Um container para criar elementos de janela que podem ser desanexados.
+  </shortdesc>
+  <desc>
+   <para>
+    O widget GtkHandleBox permite que uma parte da janela seja "separada".
+    É um widget bin o qual exibe o seu filho e um manipulador que
+    o usuário pode arrastar para uma janela separada (a janela flutuante) contendo
+    o widget filho.
+    Um fino fantasma é desenhado no local original do handlebox.
+    Arrastando a janela separada de volta ao seu local original,
+    ela pode ser reanexada.
+   </para>
+   <para>
+    Ao reanexar, o fantasma e a janela flutuante, devem estar alinhadas em
+    um dos cantos, o <emphasis>snap edge</emphasis>.
+    Isto pode ser especificado pelo programador da aplicação explicitamente, ou o
+    GTK+ irá escolher um padrão razoável dependendo da posição do manipulador.
+   </para>
+   <para>
+    Para fazer a desanexação e a reanexação do handlebox o minimamente confuso
+    possível para o usuário, é importante definir um snap edge assim o
+    snap edge não se move quando o handlebox é desanexado.
+    Por exemplo, é o handlebox esta empacotado no fim de um VBox,
+    então quando o handlebox é dexanexado, o canto inferior do handlebox
+    permanecerá fixo enquanto a altura do handlebox encolhe,
+    assim o snap edge deve ser definido como
+    <optionname enum="GtkPositionType">Gtk::POS_BOTTOM</optionname>.
+   </para>
+  </desc>
+ </classmeta>
+
+ <constructors>
+  <constructor id="gtk.gtkhandlebox.constructor">
+   <funcsynopsis>
+    <funcprototype>
+    <funcdef> <function>GtkHandleBox</function></funcdef>
+    <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Cria um novo handle box.
+   </shortdesc>
+   <desc>
+    <para>
+     Cria um novo handle box.
+    </para>
+    <example>
+     <title>Adicionando um handle box em uma janela</title>
+     <programlisting role="php">
+      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="&directory.examples;/reference/gtk/gtkhandlebox/constructor.phpw" parse="text">
+       <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+      </xi:include>
+     </programlisting>
+    </example>
+   </desc>
+  </constructor>
+ </constructors>
+
+ <methods>
+  <method id="gtk.gtkhandlebox.method.get_handle_position">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef><enumname>GtkPositionType</enumname> <function>get_handle_position</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Obtém a posição do manipulador do handle box.
+   </shortdesc>
+   <desc>
+    <para>
+      Obtém a posição do manipulador do handle box.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkHandleBox">set_handle_position</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkhandlebox.method.get_shadow_type">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef><enumname>GtkShadowType</enumname> <function>get_shadow_type</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Obtém o tipo de sombra desenhada em torno do handle box.
+   </shortdesc>
+   <desc>
+    <para>
+     Obtém o tipo de sombra desenhada em torno do handle box.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkHandleBox">set_shadow_type</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkhandlebox.method.get_snap_edge">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef><enumname>GtkPositionType</enumname> <function>get_snap_edge</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Obtém o canto usado para determinar a reanexação do handle box.
+   </shortdesc>
+   <desc>
+    <para>
+     Obtém o canto usado para determinar a reanexação do handle box.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkHandleBox">set_snap_edge</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkhandlebox.method.set_handle_position">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_handle_position</function></funcdef>
+     <paramdef><enumname>GtkPositionType</enumname> <parameter>position</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Define o lado do handlebox aonde o manipulador é desenhado.
+   </shortdesc>
+   <desc>
+    <para>
+     Define o lado do handlebox aonde o manipulador é desenhado.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkHandleBox">get_handle_position</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkhandlebox.method.set_shadow_type">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_shadow_type</function></funcdef>
+     <paramdef><enumname>GtkShadowType</enumname> <parameter>type</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Define o tipo de sombra desenhado em torno da borda do handle box.
+   </shortdesc>
+   <desc>
+    <para>
+      Define o tipo de sombra desenhado em torno da borda do handle box.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkHandleBox">get_shadow_type</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkhandlebox.method.set_snap_edge">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_snap_edge</function></funcdef>
+     <paramdef><enumname>GtkPositionType</enumname> <parameter>edge</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Define o snap edge do handlebox.
+   </shortdesc>
+   <desc>
+    <para>
+     Define o snap edge do handlebox.
+     O snap edge é o canto do filho dexanexado que deve estar alinhado com o
+     canto correspondente do "fantasma" deixado quando o filho foi
+     dexanexado para reanexar a janela que foi separada.
+     Normalmente, o snap edge deve ser escolhido de uma maneira que fique
+     no mesmo lugar na tela quando o handlebox é separado.
+    </para>
+    <para>
+     Se o snap edge não for definido, então um valor apropriado será divinhado
+     a partir da posição do manipulador.
+     Se a posição do manipulador for
+     <optionname enum="GtkPositionType">Gtk::POS_RIGHT</optionname> ou
+     <optionname enum="GtkPositionType">Gtk::POS_LEFT</optionname>, então o
+     snap edge será
+     <optionname enum="GtkPositionType">Gtk::POS_TOP</optionname>, senão
+     ele será <optionname enum="">Gtk::POS_LEFT</optionname>.
+    </para>
+    <para>
+     Para remover o valor (e deixar o Gtk adivinhar a posição), defina-o como
+     <literal>-1</literal>.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkHandleBox">get_snap_edge</function>
+    </para>
+   </desc>
+  </method>
+ </methods>
+
+
+ <properties>
+  <prop id="gtk.gtkhandlebox.property.handle-position" type="rw">
+   <propname>handle-position</propname>
+   <proptype><enumname>GtkPositionType</enumname></proptype>
+   <shortdesc>
+     Posição do manipulador em relação ao widget filho.
+   </shortdesc>
+   <desc>
+    <para>
+     Posição do manipulador em relação ao widget filho.
+    </para>
+    <para>
+     Padrão: <optionname enum="GtkPositionType">Gtk::POS_LEFT</optionname>
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtkhandlebox.property.shadow-type" type="rw">
+   <propname>shadow-type</propname>
+   <proptype><enumname>GtkShadowType</enumname></proptype>
+   <shortdesc>
+     Aparencia da sombra em torno do container.
+   </shortdesc>
+   <desc>
+    <para>
+     Aparencia da sombra em torno do container.
+    </para>
+    <para>
+     Padrão: <optionname enum="GtkShadowType">Gtk::SHADOW_ETCHED_OUT</optionname>
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtkhandlebox.property.snap-edge" type="rw">
+   <propname>snap-edge</propname>
+   <proptype><enumname>GtkPositionType</enumname></proptype>
+   <shortdesc>
+     Lado do handlebox que esta alinhado com o ponto de docar o handlebox.
+   </shortdesc>
+   <desc>
+    <para>
+     Lado do handlebox que esta alinhado com o ponto de
+     docar o handlebox.
+    </para>
+    <para>
+     Padrão: <optionname enum="GtkPositionType">Gtk::POS_LEFT</optionname>
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtkhandlebox.property.snap-edge-set" type="rw">
+   <propname>snap-edge-set</propname>
+   <proptype>boolean</proptype>
+   <shortdesc>
+     Quando usar o valor da propriedade <literal>snap_edge</literal>.
+   </shortdesc>
+   <desc>
+    <para>
+     Quando usar o valor da propriedade
+     <propname class="GtkHandleBox">snap_edge</propname> ou um
+     valor derivado de 
+     <propname class="GtkHandleBox">handle_position</propname>.
+    </para>
+    <para>
+     Padrão: <literal>false</literal>
+    </para>
+   </desc>
+  </prop>
+ </properties>
+
+
+ <signals>
+  <signal id="gtk.gtkhandlebox.signal.child-attached">
+   <signalname>child-attached</signalname>
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
+     <paramdef><classname>GtkHandleBox</classname> <parameter>handlebox</parameter></paramdef>
+     <paramdef><classname>GtkWidget</classname> <parameter>child_widget</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    O conteúdo da caixa é reanexado a janela principal.
+   </shortdesc>
+   <desc>
+    <para>
+     Este sinal é emitido quando o conteúdo do handlebox é reanexado
+     a janela principal.
+    </para>
+   </desc>
+  </signal>
+
+  <signal id="gtk.gtkhandlebox.signal.child-detached">
+   <signalname>child-detached</signalname>
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
+     <paramdef><classname>GtkHandleBox</classname> <parameter>handlebox</parameter></paramdef>
+     <paramdef><classname>GtkWidget</classname> <parameter>child_widget</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    O widget é desanexado da janela principal.
+   </shortdesc>
+   <desc>
+    <para>
+     Este sinal é emitido quando o o conteúdo do handlebox é desanexado
+     da janela principal.
+    </para>
+   </desc>
+  </signal>
+ </signals>
+
+</classentry>

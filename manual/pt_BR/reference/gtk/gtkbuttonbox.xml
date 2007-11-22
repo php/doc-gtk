@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- EN-Revision: 1.7 Maintainer: fernandoc Status: ready -->
+<classentry id="gtk.gtkbuttonbox">
+ <classmeta>
+  <classtitle>GtkButtonBox</classtitle>
+  <classparent>GtkBox</classparent>
+  <shortdesc>
+   Classe base para GtkHButtonBox e GtkVButtonBox.
+  </shortdesc>
+  <desc>
+   <para>
+    <classname>GtkButtonBox</classname> é a classe base para
+    <classname>GtkHButtonBox</classname> e 
+    <classname>GtkVButtonBox</classname>, que provê alguns metodos para controlar
+    o posicionamento do botão dentro destes widgets. Um destes metodos é 
+    <function class="GtkButtonBox">set_layout</function>, que aplica um dos
+    posicionamentos <enumname>GtkButtonBoxStyle</enumname> a caixa de botões. Outro
+    é <function class="GtkButtonBox">set_child_secondary</function>, que
+    causa o filho aparecer em um grupo secundário da caixa de botões.
+   </para>
+   <para>
+    O principal sentido de <classname>GtkButtonBox</classname> é certificar-se de que todos os filhos
+    tem o mesmo tamanho. Sendo assim, ele ignora a propriedade
+    homogeneous a qual é herdada de GtkBox, e sempre funciona como se 
+    homogeneous for <literal>true</literal>.
+   </para>	    
+  </desc>
+ </classmeta>
+
+ <methods>
+
+  <method id="gtk.gtkbuttonbox.method.get_child_ipadding">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>get_child_ipadding</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    OBSOLETO. Obtém o prenchimento interno do filho.
+   </shortdesc>
+   <desc>
+    <para>
+     <note>
+      Aviso! Este método esta obsoleto! Este metodo se tornou OBSOLETO e não deve ser
+      usado em código novo. Use as propriedades de estilo 
+      <literal>child-internal-pad-x/-y</literal> ao invés.
+     </note>
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkButtonBox">set_child_ipadding</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkbuttonbox.method.get_child_secondary">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>bool <function>get_child_secondary</function></funcdef>
+     <paramdef>GtkWidget <parameter>child</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Obtém quando um filho deve aparecer em um grupoGets whether the child should appear in a secondary group of children.
+   </shortdesc>
+   <desc>
+    <para>
+     Returns whether a child will appear in a secondary group of children. See
+     <function class="GtkButtonBox">set_child_secondary</function> for more
+     information.
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkbuttonbox.method.get_child_size">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>get_child_size</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    DEPRECATED. Returns the current width and height of all child widgets in a
+    button box.
+   </shortdesc>
+   <desc>
+    <para>
+     <note>
+      Warning! <function class="GtkButtonBox">get_child_size</function> is 
+      DEPRECATED and should NOT be used in newly-written code. Use the style
+      properties <literal>child-min-width/-height</literal> instead.
+     </note>
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkButtonBox">set_child_size</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkbuttonbox.method.get_layout">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>GtkButtonBoxStyle <function>get_layout</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Retrieves the method being used to arrange the buttons in a button box.
+   </shortdesc>
+   <desc>
+    <para>
+     This returns the <enumname>GtkButtonBoxStyle</enumname> being used to 
+     arrange the buttons in a button box.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkButtonBox">set_layout</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkbuttonbox.method.set_child_ipadding">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_child_ipadding</function></funcdef>
+     <paramdef>int <parameter>ipad_x</parameter></paramdef>
+     <paramdef>int <parameter>ipad_y</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    DEPRECATED. Changes the amount of internal padding used by all buttons in a
+    given button box.
+   </shortdesc>
+   <desc>
+    <para>
+     <note>
+      Warning! This method is DEPRECATED and should NOT be used in 
+      newly-written code. Use the style properties 
+      <literal>child-internal-pad-x/-y</literal> instead.
+     </note>
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkButtonBox">get_child_ipadding</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkbuttonbox.method.set_child_secondary">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_child_secondary</function></funcdef>
+     <paramdef>GtkWidget <parameter>child</parameter></paramdef>
+     <paramdef>bool <parameter>is_secondary</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Sets whether child should appear in a secondary group of children.
+   </shortdesc>
+   <desc>
+    <para>
+     This group appears after the other children if the style is 
+     <literal>Gtk::BUTTONBOX_START</literal>, 
+     <literal>Gtk::BUTTONBOX_SPREAD</literal> or 
+     <literal>GTK::BUTTONBOX_EDGE</literal>, and before the other children if
+     the style is <literal>GTK::BUTTONBOX_END</literal>. For horizontal button
+     boxes, the definition of before/after depends on direction of the widget
+     (see <function class="GtkWidget">set_direction</function>). If the style
+     is <literal>Gtk::BUTTONBOX_START</literal> or 
+     <literal>Gtk::BUTTONBOX_END</literal>, then the secondary children are 
+     aligned at the other end of the button box from the main children. For the
+     other styles, they appear immediately next to the main children.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkButtonBox">get_child_secondary</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkbuttonbox.method.set_child_size">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_child_size</function></funcdef>
+     <paramdef>int <parameter>min_width</parameter></paramdef>
+     <paramdef>int <parameter>min_height</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    DEPRECATED. Sets a new default size for the children of a given button box.
+   </shortdesc>
+   <desc>
+    <para>
+     <note>
+      Warning! This method is DEPRECATED and should NOT be used in 
+      newly-written code. Use the style properties 
+      <literal>child-min-width/-height</literal> instead.
+     </note>
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkButtonBox">get_child_size</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkbuttonbox.method.set_layout">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_layout</function></funcdef>
+     <paramdef><enumname>GtkButtonBoxStyle</enumname> <parameter>layout_style</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Changes the way buttons are arranged in their container.
+   </shortdesc>
+   <desc>
+    <para>
+     Defines one of the <enumname>GtkButtonBoxStyle</enumname> options as the
+     way the children should be arranjed in the containing button box.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkButtonBox">get_layout</function>
+    </para>
+   </desc>
+  </method>
+
+ </methods>
+
+</classentry>
