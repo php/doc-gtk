@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- EN-Revision: 1.10 Maintainer: fernando Status: ready -->
+<classentry id="gtk.gtkcombo">
+ <classmeta>
+  <classtitle>GtkCombo</classtitle>
+  <classparent>GtkHBox</classparent>
+  <shortdesc>
+   OBSOLETO. Um campo de entrada de texto com uma lista dropdown.
+  </shortdesc>
+  <desc>
+   <note>
+    &deprecated.class;
+    Use <classname>GtkComboBox</classname> instead.
+   </note>
+   <para>
+    O widget GtkCombo consiste de um campo de edição de txto de uma linha e
+    uma lista dropdown. Isto é similar ao elemento <literal>select</literal>
+    no HTML, mais com uma funcionalidade mais limitada. É recomendado que você
+    use <classname>GtkComboBox</classname> ao invés.
+   </para>
+  </desc>
+ </classmeta>
+
+ <constructors>
+  <constructor id="gtk.gtkcombo.constructor">
+   <funcsynopsis>
+    <funcprototype>
+    <funcdef> <function>GtkCombo</function></funcdef>
+    <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Cria uma nova caixa combo.
+   </shortdesc>
+   <desc>
+    <para>
+     &deprecated.method;
+    </para>
+    <para>
+     Cria uma nova caixa combo.
+    </para>
+   </desc>
+  </constructor>
+ </constructors>
+
+ <methods>
+  <method id="gtk.gtkcombo.method.disable_activate">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>disable_activate</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Para o GtkCombo de exibir a lista popup quando é pressionado enter.
+   </shortdesc>
+   <desc>
+    <para>
+     &deprecated.method;
+    </para>
+    <para>
+     Para o widget GtkCombo de exibir a lista popup quando o 
+     <classname>GtkEntry</classname> emite o sinal "activate", exemplo,
+     quando a tecla enter é pressionada. Isto pode ser útil se, por exemplo,
+     você queira que ao invés a tecla enter feche o dialogo.
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkcombo.method.set_case_sensitive">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_case_sensitive</function></funcdef>
+     <paramdef>bool <parameter>val</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Quando o texto entrado diferencia maiúsculas e minúsculas.
+   </shortdesc>
+   <desc>
+    <para>
+     &deprecated.method;
+    </para>
+    <para>
+     Especifica quando o texto entrado no campo GtkEntry e o texto
+     na lista de itens diferenciam maiúsculas e minúsculas.
+    </para>
+    <para>
+     Isto pode ser útil, por exemplo, quando você tiver chamado
+     <function class="GtkCombo">set_value_in_list</function> para limitar
+     os valores entrados, mais não esta preocupado com diferenças de maiúsculas e minúsculas.
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkcombo.method.set_item_string">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_item_string</function></funcdef>
+     <paramdef><classname>GtkItem</classname> <parameter>item</parameter></paramdef>
+     <paramdef>string <parameter>item_value</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Define a representação como string de um item da lista em particular.
+   </shortdesc>
+   <desc>
+    <para>
+     &deprecated.method;
+    </para>
+    <para>
+     Define a string a ser colocada no campo GtkEntry quando um item da lista em particular
+     é selecionado. Isto é necessário se o item da lista não é um simples rótulo.
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkcombo.method.set_popdown_strings">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_popdown_strings</function></funcdef>
+     <paramdef>array <parameter>strings</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Função de conveniência para definir todos itens da lista popup.
+   </shortdesc>
+   <desc>
+    <para>
+     &deprecated.method;
+    </para>
+    <para>
+     Função de conveniência para definir todos itens da lista popup.
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkcombo.method.set_use_arrows">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_use_arrows</function></funcdef>
+     <paramdef>bool <parameter>val</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Se a seta pode ser usada para caminhar pela lista.
+   </shortdesc>
+   <desc>
+    <para>
+     &deprecated.method;
+    </para>
+    <para>
+     Especifica se as teclas de seta (cursor) podem ser usadas para caminhar
+     pelos itens da lista. Isto esta ativado por padrão.
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkcombo.method.set_use_arrows_always">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_use_arrows_always</function></funcdef>
+     <paramdef>bool <parameter>val</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Função obsoleta, não faz nada.
+   </shortdesc>
+   <desc>
+    <para>
+     &deprecated.method;
+    </para>
+    <para>
+     Função obsoleta, não faz nada.
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkcombo.method.set_value_in_list">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_value_in_list</function></funcdef>
+     <paramdef>bool <parameter>val</parameter></paramdef>
+     <paramdef>bool <parameter>ok_if_empty</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Quando o valor entrado deve combinar com um dos valores na lista.
+   </shortdesc>
+   <desc>
+    <para>
+     &deprecated.method;
+    </para>
+    <para>
+     Especifica quando o valor entrado no campo de entrada de texto
+     deve combinar com um dos valores da lista. Se isto for definido
+     então o usuário não será capaz de realizar nenhuma outra ação até que
+     seja entrado um valor valido.
+    </para>
+    <para>
+     Se um valor vazio for aceitável, o parâmetro
+     <parameter>ok_if_empty</parameter> deve ser
+     <literal>true</literal>.
+    </para>
+   </desc>
+  </method>
+ </methods>
+
+
+ <fields>
+  <field id="gtk.gtkcombo.field.entry" type="ro">
+   <fieldname>entry</fieldname>
+   <fieldtype>GtkWidget</fieldtype>
+   <shortdesc>
+   Widget GtkEntry para escrever os valores.
+   </shortdesc>
+   <desc>
+    <para>
+     &deprecated.property;
+    </para>
+    <para>
+     Widget GtkEntry para escrever os valores.
+    </para>
+   </desc>
+  </field>
+
+  <field id="gtk.gtkcombo.field.list" type="ro">
+   <fieldname>list</fieldname>
+   <fieldtype>GtkWidget</fieldtype>
+   <shortdesc>
+    Widget da lista dropdown.
+   </shortdesc>
+   <desc>
+    <para>
+     &deprecated.property;
+    </para>
+    <para>
+     Widget da lista dropdown.
+    </para>
+   </desc>
+  </field>
+ </fields>
+
+</classentry>
