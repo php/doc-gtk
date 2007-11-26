@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- EN-Revision: 1.7 Maintainer: fernando Status: ready -->
+<classentry id="gtk.gtkseparatortoolitem">
+ <classmeta>
+  <classtitle>GtkSeparatorToolItem</classtitle>
+  <classparent>GtkToolItem</classparent>
+  <shortdesc>
+   Um item da barra de ferramentas que separa um grupo de itens de outro grupo.
+  </shortdesc>
+  <desc>
+   <para>
+    Um item da barra de ferramentas que separa um grupo de itens de outro grupo.
+   </para>
+  </desc>
+ </classmeta>
+
+ <constructors>
+  <constructor id="gtk.gtkseparatortoolitem.constructor">
+   <funcsynopsis>
+    <funcprototype>
+    <funcdef> <function>GtkSeparatorToolItem</function></funcdef>
+    <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Cria um novo item separador.
+   </shortdesc>
+   <desc>
+    <para>
+     Cria um novo item separador.
+    </para>
+   </desc>
+  </constructor>
+ </constructors>
+
+ <methods>
+  <method id="gtk.gtkseparatortoolitem.method.get_draw">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>bool <function>get_draw</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Se o separador desenha uma linha ou n�o.
+   </shortdesc>
+   <desc>
+    <para>
+      Se o separador desenha uma linha ou n�o.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkSeparatorToolItem">set_draw</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkseparatortoolitem.method.set_draw">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_draw</function></funcdef>
+     <paramdef>bool <parameter>draw</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Seta se o separador � desenhado com uma linha vertical, ou simplesmente em branco.
+   </shortdesc>
+   <desc>
+    <para>
+     Seta se o separador � desenhado com uma linha vertical, ou simplesmente em branco.
+    </para>
+    <para>
+     Deixando como <literal>false</literal>, o m�todo<function class="GtkToolItem">set_expand</function>
+     torna-se �til para criar um item que for�a os itens seguintes a estarem no fim
+     da barra de ferramentas.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkSeparatorToolItem">get_draw</function>
+    </para>
+   </desc>
+  </method>
+ </methods>
+
+ <properties>
+  <prop id="gtk.gtktoolbutton.property.draw" type="rw">
+   <fieldname>draw</fieldname>
+   <fieldtype>bool</fieldtype>
+   <shortdesc>
+    Se o separador � desenhado ou fica em branco.
+   </shortdesc>
+   <desc>
+    <para>
+     Se o separador � desenhado ou fica em branco.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkWindow">get_draw</function>,
+     <function class="GtkWindow">set_draw</function>
+    </para>
+   </desc>
+  </prop>
+ </properties>
+
+</classentry>
