@@ -10,21 +10,21 @@
   </shortdesc>
   <desc>
    <para>
-    An abstract class to be extended by widget that hole one or more other
-    widgets.
+    Uma classe abstrata a ser estendida por widgets que guardam um ou
+    mais widgets.
    </para>
    <para>
-    Containers (widgets that extend from <classname>GtkContainer</classname>)
-    provide a context for the widgets they contain. Containers manage the
-    location, re-sizing and order of their children.
+    Containers (widgets que estendem de  <classname>GtkContainer</classname>)
+    provem um contexto para os widgets que eles contém. Containers gerenciam a 
+    localização, redimensionamento e ordem dos seus filhos.
    </para>
    <para>
-    Containers can be broken down into two groups: bins (containers that
-    extend from <classname>GtkBin</classname>) and multi-child containers.
-    Bins may only have one child and in general provide some additional set of
-    functionality or display enhancement for their child widget. Multi-child
-    containers, on the other hand, normally do not provide any additional
-    functionality and instead focus on organizing a set of widgets.
+    Containers podem ser divididos em dois grupos: bins (containers que
+    estendem de <classname>GtkBin</classname>) e containers de múltiplos filhos.
+    Bins podem ter apenas um filho e em geral provem algum conjunto adicional
+    de funcionalidade ou melhorias na exibição para o seu widget filho. Containers de múltiplos filhos,
+    por outro lado, normalmente não provem qualquer funcionalidade
+    adicional e, ao invés, focam na organização de um conjunto de widgets.
    </para>
   </desc>
  </classmeta>
@@ -39,20 +39,20 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Adds the given widget to the container.
+    Adiciona o widget dado ao container.
    </shortdesc>
    <desc>
     <simpara>
-     Adds the given widget to the container.
+     Adiciona o widget dado ao container.
     </simpara>
     <simpara>
-     When a child is added to the container the
-     <signalname>add</signalname> is emitted.
+     Quando um filho é adicionado ao container o sinal
+     <signalname>add</signalname> é emitido.
     </simpara>
     <note>
-     Most multi-child containers provide an alternative, more powerful method
-     for adding children to the container. <function class="GtkContainer">add</function> should normally only be called on
-     bins.
+     A maioria dos containers de múltiplos filhos provem um método alternativo, mais poderoso,
+     para adicionar filhos ao container. <function class="GtkContainer">add</function> deve normalmente
+     ser chamada apenas para bins.
     </note>
    </desc>
   </method>
@@ -82,12 +82,12 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Emits the "check-resize" signal on the container.
+    Emite o sinal "check-resize" no container.
    </shortdesc>
    <desc>
     <para>
-     Emits the <signalname class="GtkContainer">check-resize</signalname>
-     signal on the container.
+     Emite o sinal <signalname class="GtkContainer">check-resize</signalname>
+     no container.
     </para>
    </desc>
   </method>
@@ -190,16 +190,16 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Returns the type of the children supported by the container.
+    Retorna o tipo de filhos suportado pelo container.
    </shortdesc>
    <desc>
     <para>
-     Returns the type of the children supported by the container.
+     Retorna o tipo de filhos suportado pelo container.
     </para>
     <para>
-     Note that this may return <literal>Gtk::TYPE_NONE</literal> to indicate
-     that no more children can be added, e.g. for a
-     <classname>GtkPaned</classname> which already has two children.
+     Note que isto pode retornar <literal>Gtk::TYPE_NONE</literal> para indicar
+     que não podem ser adicionados mais filhos, exemplo, para um
+     <classname>GtkPaned</classname> o qual já tenha dois filhos.
     </para>
    </desc>
   </method>
@@ -219,7 +219,7 @@
      &deprecated.method;
     </para>
     <para>
-     Use <function class="GtkContainer">get_children</function> instead.
+     Use <function class="GtkContainer">get_children</function> ao invés
     </para>
    </desc>
   </method>
@@ -277,11 +277,11 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Returns border width.
+    Retorna a largura da borda.
    </shortdesc>
    <desc>
     <para>
-     Returns the border width around the container.
+     Retorna a largura da borda entorno do container.
     </para>
     <para>
      &seealso;
@@ -299,11 +299,11 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Returns an array of all children
+    Retorna um array com todos os filhos.
    </shortdesc>
    <desc>
     <para>
-     Returns an array with all non-internal children.
+     Retorna um array com todos os filhos não internos.
     </para>
    </desc>
   </method>
@@ -316,14 +316,14 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Returns the focus order.
+    Retorna a ordem do foco.
    </shortdesc>
    <desc>
     <para>
-     Retrieves the focus chain of the container, if one has been set
-     explicitly. If no focus chain has been explicitly set, GTK+
-     computes the focus chain based on the positions of the children.
-     In that case, <literal>null</literal> is returned.
+     Obtém a cadeia de foco do container, se uma foi definida explicitamente.
+     Se nenhuma cadeia de foco foi definida explicitamente, o GTK+
+     calcula a cadeia de foco baseado na posição dos filhos.
+     Neste caso, é retornado <literal>null</literal>.
     </para>
     <para>
      &seealso;
@@ -341,11 +341,11 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Retrieves the horizontal focus adjustment.
+    Obtém o ajustamento do foco horizontal
    </shortdesc>
    <desc>
     <para>
-     Retrieves the horizontal focus adjustment for the container.
+     Obtém o ajustamento do foco horizontal para o container.
     </para>
     <para>
      &seealso;
@@ -362,11 +362,11 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Retrieves the vertical focus adjustment.
+    Obtém o ajustamento do foco vertical.
    </shortdesc>
    <desc>
     <para>
-     Retrieves the vertical focus adjustment for the container.
+     Obtém o ajustamento do foco vertical para o container.
     </para>
     <para>
      &seealso;
@@ -383,11 +383,11 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Returns the resize mode.
+    Retorna o modo de redimencionamento
    </shortdesc>
    <desc>
     <para>
-     Returns the resize mode for the container.
+     Retorna o modo de redimencionamento.
     </para>
     <para>
      &seealso;
@@ -406,13 +406,15 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Sends an expose event to a child.
+    Envia um evento "expose" para um filho.
    </shortdesc>
    <desc>
     <para>
-     When a container receives an expose event, it must send synthetic
-     expose events to all children that don't have their own
-     <classname>GdkWindow</classname>s. This function provides a convenient
+     Quando um container recebe um evento expose, ele deve enviar sinteticamente
+     o evento expose para todos os filhos que não tem o seu próprio
+     <classname>GdkWindow</classname>. Esta função prove uma maneira
+     conveniente de fazer isto. Um container, quando rev
+     This function provides a convenient
      way of doing this. A container, when it receives an expose event, calls
      <literal>propagate_expose</literal> once for each child, passing in the
      event the container received.
