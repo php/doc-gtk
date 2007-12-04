@@ -413,21 +413,19 @@
      Quando um container recebe um evento expose, ele deve enviar sinteticamente
      o evento expose para todos os filhos que não tem o seu próprio
      <classname>GdkWindow</classname>. Esta função prove uma maneira
-     conveniente de fazer isto. Um container, quando rev
-     This function provides a convenient
-     way of doing this. A container, when it receives an expose event, calls
-     <literal>propagate_expose</literal> once for each child, passing in the
-     event the container received.
+     conveniente de fazer isto. Um container, quando recebe um evento expose, chama
+     <literal>propagate_expose</literal> uma vez para cada filho, passando no evento
+     o container recebido
     </para>
     <para>
-     propagate_expose() takes care of deciding whether an expose event needs
-     to be sent to the child, intersecting the event's area with the child
-     area, and sending the event.
+     propagate_expose() cuida de decidir quando um evento event precisa
+     ser enviado para o filho, intersecionando a area do evento com a area
+     do filho, e enviando o evento.
     </para>
     <para>
-     In most cases, a container can simply either simply inherit the
-     expose implementation from <classname>GtkContainer</classname>, or,
-     do some drawing and then chain to the expose implementation from
+     Na maioria dos casos um container pode simplesmente ou herdar a implementação
+     do expose de <classname>GtkContainer</classname>, ou,
+     então fazer algum desenho e então encadear a implementação do expose de
      <classname>GtkContainer</classname>.
     </para>
    </desc>
@@ -441,11 +439,11 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Removes a widget from the container.
+    Remove um widget do container.
    </shortdesc>
    <desc>
     <para>
-     Removes widget from container. The widget must be inside container.
+     Remove um widget do container. O widget deve estar dentro do container.
     </para>
    </desc>
   </method>
@@ -458,11 +456,11 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Recalculates its and the children's sizes.
+    Recalcula o seu tamanho e de todos os seus filhos.
    </shortdesc>
    <desc>
     <para>
-     Causes the container to recalculate its size and its children's sizes.
+     Faz com que o container recalcule o seu tamanho e de todos os seus filhos.
     </para>
     <para>
      &seealso;
@@ -479,11 +477,11 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Sets the border around the container.
+    Define a borda em torno do container.
    </shortdesc>
    <desc>
     <para>
-     Sets the width of the empty border drawn around the container.
+     Define a largura da borda vazia desenhada em torno do container.
     </para>
     <para>
      &seealso;
@@ -501,18 +499,18 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Overrides the automatically computed focus chain.
+    Sobrescreve a cadeia de foco automaticamente calculada.
    </shortdesc>
    <desc>
     <para>
-     Sets a focus chain, overriding the one computed automatically by GTK+.
+     Define uma cadeia de foco, sobrescrevendo aquela automaticamente calculada pelo GTK+.
     </para>
     <para>
-     In principle each widget in the chain should be a descendant of the
-     container, but this is not enforced by this method, since it's allowed
-     to set the focus chain before you pack the widgets, or have a widget
-     in the chain that isn't always packed. The necessary checks are done
-     when the focus chain is actually traversed.
+     Em princípio cada widget em uma cadeia deve ser descendente de um
+     container, mas isso não é obrigatório por este método, já que é permitido
+     definir a cadeia de foco antes de você empacotar os widgets, ou ter um widget
+     na cadeia que não esta sempre empacotado. Os testes necessários são feitos
+     quando a cadeia de focos e atualmente transversada.
     </para>
     <para>
      &seealso;
@@ -530,13 +528,13 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Emits the "set-focus-child" signal.
+    Emite o sinal "set-focus-child".
    </shortdesc>
    <desc>
     <para>
-     This method emits the "set-focus-child" signal that arranges
-     for the child widget referenced by child to get the focus and
-     recalculates the container adjustments.
+     Este método emite o sinal "set-focus-child" que arranja
+     para o widget filho referenciado por child para obter o
+     foco e recalcular o adjustments do container.
     </para>
     <para>
      &seealso;
@@ -553,17 +551,17 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Sets the horizontal adjustment.
+    Define o adjustment horizontal.
    </shortdesc>
    <desc>
     <para>
-     Hooks up an adjustment to focus handling in a container, so when a child
-     of the container is focused, the adjustment is scrolled to show that
-     widget. This function sets the horizontal alignment.
+     Engancha um adjustment para manipular o foco em um container, assim quando
+     um widget filho do container tem o foco, o adjustment é rolado para exibir
+     este widget. Esta função define o alinhamento horizontal.
     </para>
     <para>
-     The adjustments have to be in pixel units and in the same coordinate
-     system as the allocation for immediate children of the container.
+     Os adjustments devem ser em unidades de pixel e no mesmo sistema de
+     cordenadas como a alocação para o filho imediato do container.
     </para>
     <para>
      &seealso;
@@ -581,17 +579,17 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Sets the vertical adjustment.
+    Define o adjustment vertical.
    </shortdesc>
    <desc>
     <para>
-     Hooks up an adjustment to focus handling in a container, so when a child
-     of the container is focused, the adjustment is scrolled to show that
-     widget. This function sets the vertical alignment.
+     Engancha um adjustment para manipular o foco no container, assim quando um filho
+     do container é focado, adjustment é rolado para mostrar
+     este widget. Esta função define o alignment vertical.
     </para>
     <para>
-     The adjustments have to be in pixel units and in the same coordinate
-     system as the allocation for immediate children of the container.
+     Os adjustments devem ser em unidades de pixel e no mesmo sistema de
+     cordenadas como a alocação para o filho imediato do container.
     </para>
     <para>
      &seealso;
@@ -609,15 +607,15 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Sets the reallocate_redraws flag.
+    Define a opção reallocate_redraws.
    </shortdesc>
    <desc>
     <para>
-     Sets the reallocate_redraws flag of the container to the given value. 
+     Define a opção reallocate_redraws do container para o valor dado. 
     </para>
     <para>
-     Containers requesting reallocation redraws get automatically
-     redrawn if any of their children changed allocation.
+     Containers requerendo redesenho por realocação são automaticamente
+     redesenhados se qualquer um dos seus filhos muda a alocação.
     </para>
    </desc>
   </method>
@@ -630,16 +628,16 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Sets the resize mode for the container.
+    Define o modo de redimencionamento para o container.
    </shortdesc>
    <desc>
     <para>
-     Sets the resize mode for the container.
+     Define o modo de redimencionamento para o container.
     </para>
     <para>
-     The resize mode of a container determines whether a resize request will
-     be passed to the container's parent, queued for later execution
-     or executed immediately.
+     O modo de redimencionamento do container determina quando uma solicitação de redimencionamento
+     será passada para o parente do container, agendado para execução posterior
+     ou executado imediatamente.
     </para>
     <para>
      &seealso;
@@ -657,11 +655,11 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Removes a focus chain explicitly set.
+    Remove uma cadeia de foco explicitamente definida.
    </shortdesc>
    <desc>
     <para>
-     Removes a focus chain explicitly set with
+     Remove uma cadeia de foco explicitamente definida com
      <function class="GtkContainer">set_focus_chain</function>.
     </para>
     <para>
@@ -679,14 +677,14 @@
    <propname>border-width</propname>
    <proptype>int</proptype>
    <shortdesc>
-    Border around the container
+    Borda em torno do container
    </shortdesc>
    <desc>
     <para>
-     The width of the empty border outside the containers children.
+     A largura da borda vazia do lado de fora dos filhos do container.
     </para>
     <para>
-     Default: <literal>0</literal>
+     Padrão: <literal>0</literal>
     </para>
     <para>
      &seealso;
@@ -700,11 +698,11 @@
    <propname>child</propname>
    <proptype><classname>GtkWidget</classname></proptype>
    <shortdesc>
-    Add a new child to the container.
+    Adiciona um novo filho ao container.
    </shortdesc>
    <desc>
     <para>
-     Can be used to add a new child to the container.
+     Pode ser usado para adicionar um novo filho ao container.
     </para>
    </desc>
   </prop>
@@ -747,14 +745,14 @@
    <propname>resize-mode</propname>
    <proptype><enumname>GtkResizeMode</enumname></proptype>
    <shortdesc>
-    How resize events are handled.
+    Como eventos resize são manipulados.
    </shortdesc>
    <desc>
     <para>
-     Specify how resize events are handled.
+     Especifica como eventos resize são manipulados.
     </para>
     <para>
-     Default: <optionname enum="GtkResizeMode">Gtk::RESIZE_PARENT</optionname>
+     Padrão: <optionname enum="GtkResizeMode">Gtk::RESIZE_PARENT</optionname>
     </para>
     <para>
      &seealso;
@@ -777,17 +775,17 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Emitted when a child is added to the container with the add
-    method.
+    Emitido quando um filho é adicionado ao container com
+    o método add.
    </shortdesc>
    <desc>
-    Emitted by the container when a child is added with the add
-    method. When this signal is emitted, both the container and
-    child are passed to the callback. The add signal is only 
-    emitted when a child is added to the container using the add
-    method. If a child is added using the box method
-    <function class="GtkBox">pack_start</function>, the add
-    signal will not be emitted.
+    Emitido pelo container quando um filho é adicionado com o
+    método add. Quando este sinal é emitido, ambos o container e o
+    filho são passados para o callback. O sinal add é apenas emitido
+    quando um filho é adicionado ao container usando o método add.
+    Se um filho é adicionado usando o método de caixa
+    <function class="GtkBox">pack_start</function>, o sinal
+    add não será emitido.
    </desc>
   </signal>
 
@@ -800,15 +798,15 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Recalculation of children is requested.
+    Recalculo dos filhos é solicitado.
    </shortdesc>
    <desc>
     <para>
-     The "check-resize" signal is emitted when the
-      <function class="GtkContainer">check_resize</function> method is called
-      forcing the recalculation of the container and its children.
-      See the <function class="GtkContainer">set_resize_mode</function> method
-      for details.
+     O sinal "check-resize" é emitido quando o método
+     <function class="GtkContainer">check_resize</function> é chamado
+     forçando o recalculo do container e seus filhos.
+     Veja o método <function class="GtkContainer">set_resize_mode</function>
+     para detalhes.
     </para>
    </desc>
   </signal>
@@ -823,11 +821,11 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Widget is removed from container.
+    Um widget é removido do container.
    </shortdesc>
    <desc>
     <para>
-     Emitted whenever a child is removed from the container.
+     Emitido quando um filho é removido do container.
     </para>
    </desc>
   </signal>
@@ -842,11 +840,11 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Focus changes.
+    Mudança de foco.
    </shortdesc>
    <desc>
     <para>
-     The child widget is given focus.
+     É dado o foco ao widget filho.
     </para>
    </desc>
   </signal>
