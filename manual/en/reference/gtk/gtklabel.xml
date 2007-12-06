@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- $Revision: 1.21 $ -->
+<!-- $Revision: 1.22 $ -->
 <classentry id="gtk.gtklabel">
  <classmeta>
   <classtitle>GtkLabel</classtitle>
@@ -18,10 +18,14 @@
    <para>
     You can have control over the way a GtkLabel will be displayed with 
     some methods such as <function class="GtkLabel">set_justify</function>
-    or <function class="GtkLabel">set_width_chars</function>. If you wish to
-    define an alignment (note that align and justify are not the same thing)
-    or padding for a GtkLabel, you can insert it into a 
-    <classname>GtkAlignment</classname> container.
+	or <function class="GtkLabel">set_width_chars</function>. As a subclass
+    of <classname>GtkMisc</classname>, you may specify alignment and padding
+    with <function class="GtkMisc">set_alignment</function> and
+    <function class="GtkMisc">set_padding</function>.  However,
+    <function class="GtkMisc">set_padding</function> only supports setting
+    padding for the right/left and top/bottom pairs.  If you need to specify
+    different values for left and right padding, you can insert the label
+    into a <classname>GtkAlignment</classname> container.
    </para>
   </desc>
  </classmeta>
