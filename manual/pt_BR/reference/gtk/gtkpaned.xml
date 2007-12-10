@@ -1,0 +1,519 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- $Revision: 1.1 $ -->
+<classentry id="gtk.gtkpaned">
+ <classmeta>
+  <classtitle>GtkPaned</classtitle>
+  <classparent>GtkContainer</classparent>
+  <shortdesc>
+   Classe base para GtkHPaned e GtkVPaned.
+  </shortdesc>
+  <desc>
+   <para>
+    GtkPaned é a classe base para widgets com dois painéis, arranjados ou
+    horizontalmente (<classname>GtkHPaned</classname>) ou verticalmente
+    (<classname>GtkVPaned</classname>).
+    Widgets filhos são adicionados aos painéis do widget com
+    <function class="GtkPaned">pack1</function> e
+    <function class="GtkPaned">pack2</function>. A divisão entre
+    os dois filhos é definido por padrão a partir das solicitações de tamanho dos filhos, mas
+    pode ser ajustado pelo usuário. 
+   </para>
+   <para>
+    Um widget de paineis desenha um separador entre os dois widgets filhos e um
+    pequeno manipulador que um usuário pode arrastar para ajustar a divisão. Ele não desenha
+    nenhuma borda em torno dos filhos ou em torno do separador. ( O espaço onde o
+    separador esta é chamado gutter.) Normalmente, é útil colocar cada filho dentro 
+    de um GtkFrame com o tipo de sombra definido como
+    <optionname enum="GtkShadowType">Gtk::SHADOW_IN</optionname> assim o 
+    gutter aparece com destaque.
+   </para>
+   <para>
+    Cada filho tem duas opções que podem ser definidas, redimensionar e encolher. Se redimencionar
+    for <literal>true</literal>, então quando o GtkPaned for redimencionado, este filho
+    será expandido ou encolhido junto com o widget de painéis. Se encolher for
+    <literal>true</literal>, então este fihlo pode ser feito menor do que a 
+    sua requisição pelo usuário. Definindo encolher como <literal>false</literal> permite a 
+    aplicação definir o tamanho mínimo. Se redimencionar for <literal>false</literal>
+    para ambos os filhos, então isso é tratado como se redimencionar fosse
+    verdadeiro para ambos os filhos.
+   </para>
+   <para>
+    A aplicação pode definir a posição do separador como se ele tivesse sido
+    definido pelo usuário, chamando a função <function class="GtkPaned">set_position</function>.
+   </para>
+  </desc>
+ </classmeta>
+
+ <methods>
+  <method id="gtk.gtkpaned.method.add1">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>add1</function></funcdef>
+     <paramdef><classname>GtkWidget</classname> <parameter>child</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Adiciona um filho ao painél de cima ou esquerda.
+   </shortdesc>
+   <desc>
+    <para>
+     Adiciona um filho ao painél de cima ou esquerda. Isto é
+     equivalente a chamar <literal><function class="GtkPaned">pack1</function>
+     (child, false, true)</literal>.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkPaned">add2</function>, 
+     <function class="GtkPaned">pack1</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkpaned.method.add2">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>add2</function></funcdef>
+     <paramdef><classname>GtkWidget</classname> <parameter>child</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Adiciona um filho ao painél de baixo ou da direita. 
+   </shortdesc>
+   <desc>
+    <para>
+     Adiciona um filho ao painél de baixo ou da direita. Isto é equivalente
+     a chamar <literal><function class="GtkPaned">pack2</function>
+     (child, false, true)</literal>.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkPaned">add2</function>, 
+     <function class="GtkPaned">pack1</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkpaned.method.compute_position">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>compute_position</function></funcdef>
+     <paramdef>int <parameter>allocation</parameter></paramdef>
+     <paramdef>int <parameter>child1_req</parameter></paramdef>
+     <paramdef>int <parameter>child2_req</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Calcula a posição do separador.
+   </shortdesc>
+   <desc>
+    <para>
+     This method computes the position of the separator according
+     to the specification of the parameters. The calculation is
+     affected by the packing parameters of the child widgets depending
+     on whether they can resize and shrink. This method is used by subclasses
+     of <classname>GtkPaned</classname> and is usually not needed by
+     applications. the <function class="GtkWidget">queue_resize</function>
+     method must be called after this method to have the resizing displayed.
+    </para>
+    <para>
+     The minimum position is <literal>0</literal> if child1's shrink value is
+     <literal>true</literal> or the value of child1_req, if
+     <literal>false</literal>. The maximum position is the value of allocation
+     if child2's shrink value is <literal>true</literal>, or the value of
+     (allocation - child2_req), if <literal>false</literal>. The final
+     calculated position will be between the minimum and maximum positions.
+    </para>
+    <para>
+     <itemizedlist>
+      <listitem>
+       <parameter>allocation</parameter> - the total space allocation in pixels
+       for the paned widget
+      </listitem>
+      <listitem>
+       <parameter>child1_req</parameter> - 	the minimum space in pixels required
+        for the left or top child widget
+      </listitem>
+      <listitem>
+       <parameter>child2_req</parameter> - the minimum space in pixels required
+       for the right or bottom child widget
+      </listitem>
+     </itemizedlist>
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkPaned">get_position</function>,
+     <function class="GtkPaned">set_position</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkpaned.method.get_child1">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef><classname>GtkWidget</classname> <function>get_child1</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Obtains the first child of the paned widget.
+   </shortdesc>
+   <desc>
+    <para>
+     Obtains the first child of the paned widget.
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkpaned.method.get_child2">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef><classname>GtkWidget</classname> <function>get_child2</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Obtains the second child of the paned widget.
+   </shortdesc>
+   <desc>
+    <para>
+     Obtains the second child of the paned widget.
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkpaned.method.get_position">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>int <function>get_position</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Obtains the position of the divider between the two panes.
+   </shortdesc>
+   <desc>
+    <para>
+     Obtains the position of the divider between the two panes.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkPaned">set_position</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkpaned.method.pack1">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>pack1</function></funcdef>
+     <paramdef><classname>GtkWidget</classname> <parameter>child</parameter></paramdef>
+     <paramdef>bool <parameter><optional>resize = false</optional></parameter></paramdef>
+     <paramdef>bool <parameter><optional>shrink = true</optional></parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Adds a child to the top or left pane.
+   </shortdesc>
+   <desc>
+    <para>
+     Adds a child to the top or left pane.
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkpaned.method.pack2">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>pack2</function></funcdef>
+     <paramdef><classname>GtkWidget</classname> <parameter>child</parameter></paramdef>
+     <paramdef>bool <parameter><optional>resize = true</optional></parameter></paramdef>
+     <paramdef>bool <parameter><optional>shrink = true</optional></parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Adds a child to the bottom or right pane.
+   </shortdesc>
+   <desc>
+    <para>
+     Adds a child to the bottom or right pane.
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkpaned.method.set_position">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_position</function></funcdef>
+     <paramdef>int <parameter>position</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Sets the position of the divider between the two panes.
+   </shortdesc>
+   <desc>
+    <para>
+     Sets the position of the divider between the two panes in pixels.
+    </para>
+    <para>
+     A negative value means that the position is unset.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkPaned">get_position</function>
+    </para>
+   </desc>
+  </method>
+ </methods>
+
+
+ <properties>
+  <prop id="gtk.gtkpaned.property.max-position" type="rw">
+   <propname>max-position</propname>
+   <proptype>int</proptype>
+   <shortdesc>
+    The largest possible value for the position property.
+   </shortdesc>
+   <desc>
+    <para>
+     The largest possible value for the position property.
+     This property is derived from the size and shrinkability of 
+     the widget's children.
+    </para>
+    <para>
+     Allowed values: <literal>&gt;= 0</literal>
+    </para>
+    <para>
+     Default: <literal>0</literal>
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtkpaned.property.min-position" type="rw">
+   <propname>min-position</propname>
+   <proptype>int</proptype>
+   <shortdesc>
+    The smallest possible value for the position property.
+   </shortdesc>
+   <desc>
+    <para>
+     The smallest possible value for the position property.
+     This property is derived from the size and shrinkability
+     of the widget's children.
+    </para>
+    <para>
+     Allowed values: <literal>&gt;= 0</literal>
+    </para>
+    <para>
+     Default: <literal>0</literal>
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtkpaned.property.position" type="rw">
+   <propname>position</propname>
+   <proptype>int</proptype>
+   <shortdesc>
+    Position of paned separator in pixels.
+   </shortdesc>
+   <desc>
+    <para>
+     Position of paned separator in pixels
+     (0 means all the way to the left/top).
+    </para>
+    <para>
+     Allowed values: <literal>&gt;= 0</literal>
+    </para>
+    <para>
+     Default: <literal>0</literal>
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtkpaned.property.position-set" type="rw">
+   <propname>position-set</propname>
+   <proptype>bool</proptype>
+   <shortdesc>
+    If the Position property should be used.
+   </shortdesc>
+   <desc>
+    <para>
+     If the Position property should be used.
+    </para>
+    <para>
+     Default: <literal>false</literal>
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtkpaned.property.resize" type="rw">
+   <propname>resize</propname>
+   <proptype>bool</proptype>
+   <shortdesc>
+    Child property: Whether the child expands and shrinks.
+   </shortdesc>
+   <desc>
+    <para>
+     The "resize" child property determines whether the
+     child expands and shrinks along with the paned widget.
+    </para>
+    <para>
+     Default: <literal>true</literal>
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtkpaned.property.shrink" type="rw">
+   <propname>shrink</propname>
+   <proptype>bool</proptype>
+   <shortdesc>
+    Child property: Whether the child can be made smaller
+    than its requisition.
+   </shortdesc>
+   <desc>
+    <para>
+     The "shrink" child property determines whether the
+     child can be made smaller than its requisition.
+    </para>
+    <para>
+     Default: <literal>true</literal>
+    </para>
+   </desc>
+  </prop>
+ </properties>
+
+
+ <signals>
+  <signal id="gtk.gtkpaned.signal.accept-position">
+   <signalname>accept-position</signalname>
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>bool <cbfunction>callback</cbfunction></funcdef>
+     <paramdef><classname>GtkPaned</classname> <parameter>paned</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Set gutter position and activate the child widget.
+   </shortdesc>
+   <desc>
+    <para>
+     The "accept-position" signal is emitted when paned has the focus and any
+     of the Return, Enter, Space keys are pressed. This will also cause the
+     child widget with the focus to be activated.
+    </para>
+   </desc>
+  </signal>
+
+  <signal id="gtk.gtkpaned.signal.cancel-position">
+   <signalname>cancel-position</signalname>
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>bool <cbfunction>callback</cbfunction></funcdef>
+     <paramdef><classname>GtkPaned</classname> <parameter>paned</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Cancels gutter positioning.
+   </shortdesc>
+   <desc>
+    <para>
+     The "cancel-position" signal is emitted when the Esc key is pressed while
+     paned has the focus.
+    </para>
+   </desc>
+  </signal>
+
+  <signal id="gtk.gtkpaned.signal.cycle-child-focus">
+   <signalname>cycle-child-focus</signalname>
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>bool <cbfunction>callback</cbfunction></funcdef>
+     <paramdef><classname>GtkPaned</classname> <parameter>paned</parameter></paramdef>
+     <paramdef>bool <parameter>reversed</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Cycles the focus between children.
+   </shortdesc>
+   <desc>
+    <para>
+     The "cycle-child-focus" signal is emitted when F6 or Shift+F6
+     is pressed while paned has the focus.
+    </para>
+   </desc>
+  </signal>
+
+  <signal id="gtk.gtkpaned.signal.cycle-handle-focus">
+   <signalname>cycle-handle-focus</signalname>
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>bool <cbfunction>callback</cbfunction></funcdef>
+     <paramdef><classname>GtkPaned</classname> <parameter>paned</parameter></paramdef>
+     <paramdef>bool <parameter>reversed</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Cycles the focus between children.
+   </shortdesc>
+   <desc>
+    <para>
+     The "cycle-handle-focus" signal is emitted when paned has the focus and
+     any of the Tab, Ctrl+Tab, Shift+Tab or Ctrl+Shift+Tab keys combinations
+     are pressed. Tab and Ctrl+Tab set reversed to
+     <literal>false</literal> while Shift+Tab and Ctrl+Shift+Tab set reversed
+     to <literal>true</literal>.
+    </para>
+   </desc>
+  </signal>
+
+  <signal id="gtk.gtkpaned.signal.move-handle">
+   <signalname>move-handle</signalname>
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>bool <cbfunction>callback</cbfunction></funcdef>
+     <paramdef><classname>GtkPaned</classname> <parameter>paned</parameter></paramdef>
+     <paramdef><enumname>GtkScrollType</enumname> <parameter>scrolltype</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Moves the gutter.
+   </shortdesc>
+   <desc>
+    <para>
+     The "move-handle" signal is emitted when paned has the focus and one of
+     the following key combinations is pressed to move the separator:
+    </para>
+    <itemizedlist>
+     <listitem>Left Arrow</listitem>
+     <listitem>Right Arrow</listitem>
+     <listitem>Up Arrow</listitem>
+     <listitem>Down Arrow</listitem>
+     <listitem>Page Up</listitem>
+     <listitem>Page Down</listitem>
+     <listitem>Home</listitem>
+     <listitem>End</listitem>
+    </itemizedlist>
+   </desc>
+  </signal>
+
+  <signal id="gtk.gtkpaned.signal.toggle-handle-focus">
+   <signalname>toggle-handle-focus</signalname>
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>bool <cbfunction>callback</cbfunction></funcdef>
+     <paramdef><classname>GtkPaned</classname> <parameter>paned</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Focus shall be transferred to the gutter.
+   </shortdesc>
+   <desc>
+    <para>
+     The "toggle-handle-focus" signal is emitted when paned has the focus and
+     F8 is pressed to give the focus to or take the focus from the separator
+     handle.
+    </para>
+   </desc>
+  </signal>
+ </signals>
+
+</classentry>
