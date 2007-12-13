@@ -1,144 +1,202 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- $Revision: 1.1 $ -->
+<!-- $Revision: 1.2 $ -->
 <classentry id="gtk.gtkstatusicon">
  <classmeta>
   <classtitle>GtkStatusIcon</classtitle>
   <classparent>GObject</classparent>
+  <classimage fileref="&directory.images;/reference/gtk/gtkstatusicon.png"/>
   <shortdesc>
    <classname>GtkStatusIcon</classname> is used for displaying an icon in the
    system tray.
   </shortdesc>
   <desc>
    <para>
+    <classname>GtkStatusIcon</classname> is used for displaying an icon in the
+    system tray. The system tray is generally used to indicate some special
+    state that a user would be interested in.
+   </para>
+   <para>
+    A <classname>GtkStatusIcon</classname> object can be assigned
+    a tooltip, handle <signalname class="GtkStatusIcon">activate</signalname>
+    and <signalname class="GtkStatusIcon">popup-menu</signalname> signals,
+    set to blink, and set invisible. All of these states and settings can help
+    the user more easily identify the type of notification being displayed to
+    them.
+   </para>
+   <note>
+    <classname>GtkStatusIcon</classname> is a <classname>GObject</classname>,
+    NOT a <classname>GtkWidget</classname>.
+   </note>
+   <para>
+    <example>
+     <title>Simple Tray Application</title>
+     <programlisting role="php">
+      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
+                  href="&directory.examples;/reference/gtk/gtkstatusicon/traysimple.phpw"
+                  parse="text">
+       <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+      </xi:include>
+     </programlisting>
+    </example>
    </para>
   </desc>
  </classmeta>
 
+ <constructors>
 
- <methods>
-
-  <method id="gtk.statusicon.method.position_menu">
+  <constructor id="gtk.statusicon.constructor">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>void <function>position_menu</function></funcdef>
-     <paramdef><classname>GtkMenu</classname> <parameter><optional>menu</optional></parameter></paramdef>
-     <paramdef><classname>GtkStatusIcon</classname> <parameter><optional>statusicon</optional></parameter></paramdef>
+    <funcdef> <function>GtkStatusIcon</function></funcdef>
+    <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Menu positioning function for use with <function class="GtkMenu">popup</function>
+    Creates a new object.
    </shortdesc>
    <desc>
-    <simpara>
-     &static;
-    </simpara>
     <para>
-     Menu positioning function for use with <function class="GtkMenu">popup</function>
+     Creates a new <classname>GtkStatusIcon</classname>.
+    </para>
+    <para>
+     <informalexample>
+      <programlisting role="php"><![CDATA[
+$tray = new GtkStatusIcon();
+]]></programlisting>
+     </informalexample>
     </para>
    </desc>
-  </method>
+  </constructor>
 
-  <method id="gtk.gtkstatusicon.method.set_from_pixbuf">
+  <constructor id="gtk.statusicon.constructor.new_from_file">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>void <function>set_from_pixbuf</function></funcdef>
-     <paramdef><classname>GdkPixbuf</classname> <parameter>pixbuf</parameter></paramdef>
+     <funcdef> <function>GtkStatusIcon::new_from_file</function></funcdef>
+      <paramdef>string <parameter>filepath</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Sets the GdkPixbuf being displayed by the GtkStatusIcon.
+    Creates a new object using the supplied filepath.
    </shortdesc>
    <desc>
     <para>
-     Sets the GdkPixbuf being displayed by the GtkStatusIcon.
+     Creates a new <classname>GtkStatusIcon</classname> using the supplied
+     filepath. The icon image should easily identify the state of the item being
+     monitored by the user.
+    </para>
+    <para>
+     &static;
+    </para>
+    <para>
+     <informalexample>
+      <programlisting role="php"><![CDATA[
+$tray = GtkStatusIcon::new_from_file('icon.png');
+]]></programlisting>
+     </informalexample>
     </para>
     <para>
      &seealso;
-     <function class="GtkStatusIcon">get_pixbuf</function>
+     <function class="GtkStatusIcon">set_from_file</function>
     </para>
    </desc>
-  </method>
+  </constructor>
 
-  <method id="gtk.gtkstatusicon.method.get_pixbuf">
+  <constructor id="gtk.statusicon.constructor.new_from_pixbuf">
    <funcsynopsis>
     <funcprototype>
-     <funcdef><classname>GdkPixbuf</classname> <function>get_pixbuf</function></funcdef>
-     <paramdef>void</paramdef>
+     <funcdef> <function>GtkStatusIcon::new_from_pixbuf</function></funcdef>
+      <paramdef><classname>GdkPixbuf</classname> <parameter>pixbuf</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Gets the GdkPixbuf being displayed by the GtkStatusIcon.
+    Creates a new object using the supplied <classname>GdkPixbuf</classname>.
    </shortdesc>
    <desc>
     <para>
-     Gets the GdkPixbuf being displayed by the GtkStatusIcon.
+     Creates a new <classname>GtkStatusIcon</classname> using the supplied
+     <classname>GdkPixbuf</classname>. The icon image should easily identify the
+     state of the item being monitored by the user.
+    </para>
+    <para>
+     &static;
+    </para>
+    <para>
+     <informalexample>
+      <programlisting role="php"><![CDATA[
+$pixbuf = GdkPixbuf::new_from_file('icon.png');
+$tray = GtkStatusIcon::new_from_pixbuf($pixbuf);
+]]></programlisting>
+     </informalexample>
     </para>
     <para>
      &seealso;
      <function class="GtkStatusIcon">set_from_pixbuf</function>
     </para>
    </desc>
-  </method>
+  </constructor>
 
-  <method id="gtk.gtkstatusicon.method.set_visible">
+  <constructor id="gtk.statusicon.constructor.new_from_stock">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>void <function>set_visible</function></funcdef>
-     <paramdef>bool <parameter>visible</parameter></paramdef>
+     <funcdef> <function>GtkStatusIcon::new_from_stock</function></funcdef>
+      <paramdef><enumname>GtkStockItems</enumname> <parameter>stock_id</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Sets the visibility of the GtkStatusIcon.
+    Creates a new object using the supplied stock_id.
    </shortdesc>
    <desc>
     <para>
-     Sets the visibility of the GtkStatusIcon.
+     Creates a new <classname>GtkStatusIcon</classname> using the supplied
+     stock_id. The icon image should easily identify the state of the item being
+     monitored by the user.
+    </para>
+    <para>
+     &static;
+    </para>
+    <para>
+     <informalexample>
+      <programlisting role="php"><![CDATA[
+$tray = GtkStatusIcon::new_from_stock(Gtk::STOCK_EXECUTE);
+]]></programlisting>
+     </informalexample>
     </para>
     <para>
      &seealso;
-     <function class="GtkStatusIcon">get_visible</function>
+     <function class="GtkStatusIcon">set_from_stock</function>
     </para>
    </desc>
-  </method>
+  </constructor>
 
-  <method id="gtk.gtkstatusicon.method.get_visible">
+ </constructors>
+
+ <methods>
+
+  <method id="gtk.gtkstatusicon.method.is_embedded">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>bool <function>get_visible</function></funcdef>
+     <funcdef>bool <function>is_embedded</function></funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Returns whether or not the GtkStatusIcon is visible.
+    Get embedded state of the object.
    </shortdesc>
    <desc>
     <para>
-     Returns whether or not the GtkStatusIcon is visible.
+     Get embedded state of the <classname>GtkStatusIcon</classname> object. If
+     a <classname>GtkStatusIcon</classname> is embedded, then no system tray is
+     accessible on the host machine.
     </para>
     <para>
-     &seealso;
-     <function class="GtkStatusIcon">set_blinking</function>
-    </para>
-   </desc>
-  </method>
-
-  <method id="gtk.gtkstatusicon.method.set_blinking">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>bool <function>set_blinking</function></funcdef>
-     <paramdef>bool <parameter>blinking</parameter></paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-    Sets the blinking state of the GtkStatusIcon.
-   </shortdesc>
-   <desc>
-    <para>
-     Sets the blinking state of the GtkStatusIcon.
-    </para>
-    <para>
-     &seealso;
-     <function class="GtkStatusIcon">get_blinking</function>
+     <informalexample>
+      <programlisting role="php"><![CDATA[
+$tray = new GtkStatusIcon();
+if ($tray->is_embedded()) {
+  echo 'No system tray available!';
+}
+]]></programlisting>
+     </informalexample>
     </para>
    </desc>
   </method>
@@ -151,11 +209,24 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Returns whether or not the GtkStatusIcon is blinking.
+    Get blinking state of the object.
    </shortdesc>
    <desc>
     <para>
-     Returns whether or not the GtkStatusIcon is blinking.
+     Get blinking state of the <classname>GtkStatusIcon</classname> object.
+     A blinking state generally indicates a special state that requires the
+     user's attention.
+    </para>
+    <note>
+     Not all systems support the blinking state.
+    </note>
+    <para>
+     <informalexample>
+      <programlisting role="php"><![CDATA[
+$tray = new GtkStatusIcon();
+$is_blinking = $tray->get_blinking();
+]]></programlisting>
+     </informalexample>
     </para>
     <para>
      &seealso;
@@ -164,19 +235,313 @@
    </desc>
   </method>
 
+  <method id="gtk.gtkstatusicon.method.get_pixbuf">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef><classname>GdkPixbuf</classname> <function>get_pixbuf</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Get <classname>GdkPixbuf</classname> icon image of the object.
+   </shortdesc>
+   <desc>
+    <para>
+     Get <classname>GdkPixbuf</classname> icon image of the object.
+    </para>
+    <para>
+     <informalexample>
+      <programlisting role="php"><![CDATA[
+$tray = new GtkStatusIcon();
+$pixbuf_in = GdkPixbuf::new_from_file('icon.png');
+$tray->set_from_pixbuf($pixbuf);
+$pixbuf_out = $tray->get_pixbuf();
+]]></programlisting>
+     </informalexample>
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkStatusIcon">set_from_pixbuf</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkstatusicon.method.get_size">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>int <function>get_size</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Get image size of the object.
+   </shortdesc>
+   <desc>
+    <para>
+     Get image size of the <classname>GtkStatusIcon</classname> object.
+    </para>
+    <para>
+     <informalexample>
+      <programlisting role="php"><![CDATA[
+$tray = new GtkStatusIcon();
+$tray->set_from_stock(Gtk::STOCK_EXECUTE);
+echo $tray->get_size();
+// 16
+]]></programlisting>
+     </informalexample>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkstatusicon.method.get_visible">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>bool <function>get_visible</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Get visibility state of the object.
+   </shortdesc>
+   <desc>
+    <para>
+     Get visibility state of the <classname>GtkStatusIcon</classname> object.
+     An invisible state is useful for applications that do not require the
+     constant reporting of the current state to the user. An example would be an
+     auto updater for an application, that only displays an icon when an update
+     is available.
+    </para>
+    <para>
+     <informalexample>
+      <programlisting role="php"><![CDATA[
+$tray = new GtkStatusIcon();
+$is_visible = $tray->get_visible();
+]]></programlisting>
+     </informalexample>
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkStatusIcon">set_visible</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.statusicon.method.position_menu">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>position_menu</function></funcdef>
+     <paramdef><classname>GtkMenu</classname> <parameter><optional>menu</optional></parameter></paramdef>
+     <paramdef><classname>GtkStatusIcon</classname> <parameter><optional>statusicon</optional></parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Use to position a popup menu over the object.
+   </shortdesc>
+   <desc>
+    <para>
+     Use to position a menu over a <classname>GtkStatusIcon</classname> object.
+     This function makes sure the supplied menu is displayed over the icon when
+     <function class="GtkMenu">popup</function> is called.
+    </para>
+    <para>
+     &static;
+    </para>
+    <para>
+     <informalexample>
+      <programlisting role="php"><![CDATA[
+$menu = new GtkMenu();
+$tray = new GtkStatusIcon();
+GtkStatusIcon::position_menu($menu, $tray);
+]]></programlisting>
+     </informalexample>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkstatusicon.method.set_blinking">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>bool <function>set_blinking</function></funcdef>
+     <paramdef>bool <parameter>blinking</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Set blinking state of the object.
+   </shortdesc>
+   <desc>
+    <para>
+     Set blinking state of the <classname>GtkStatusIcon</classname> object.
+     A blinking state generally indicates a special state that requires the
+     user's attention.
+    </para>
+    <note>
+     Not all systems support the blinking state.
+	</note>
+    <para>
+     <informalexample>
+      <programlisting role="php"><![CDATA[
+$tray = new GtkStatusIcon();
+$tray->set_blinking(false);
+]]></programlisting>
+     </informalexample>
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkStatusIcon">get_blinking</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkstatusicon.method.set_from_file">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_from_file</function></funcdef>
+     <paramdef>string <parameter>filepath</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Set icon image of the object using the supplied filepath.
+   </shortdesc>
+   <desc>
+    <para>
+     Set icon image of the <classname>GtkStatusIcon</classname> using the
+     supplied filepath. The icon image should easily identify the state of the
+     item being monitored by the user.
+    </para>
+    <para>
+     <informalexample>
+      <programlisting role="php"><![CDATA[
+$tray = new GtkStatusIcon();
+$tray->set_from_file('icon.png');
+]]></programlisting>
+     </informalexample>
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkStatusIcon">GtkStatusIcon::new_from_file</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkstatusicon.method.set_from_pixbuf">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_from_pixbuf</function></funcdef>
+     <paramdef><classname>GdkPixbuf</classname> <parameter>pixbuf</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Set icon image of the object using the supplied <classname>GdkPixbuf</classname>.
+   </shortdesc>
+   <desc>
+    <para>
+     Set icon image of the <classname>GtkStatusIcon</classname> using the
+     supplied <classname>GdkPixbuf</classname>. The icon image should easily
+     identify the state of the item being monitored by the user.
+    </para>
+    <para>
+     <informalexample>
+      <programlisting role="php"><![CDATA[
+$tray = new GtkStatusIcon();
+$pixbuf = GdkPixbuf::new_from_file('icon.png');
+$tray->set_from_pixbuf($pixbuf);
+]]></programlisting>
+     </informalexample>
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkStatusIcon">GtkStatusIcon::new_from_pixbuf</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkstatusicon.method.set_from_stock">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_from_stock</function></funcdef>
+     <paramdef><enumname>GtkStockItems</enumname> <parameter>stock_id</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Set icon image of the object using the supplied stock_id.
+   </shortdesc>
+   <desc>
+    <para>
+     Set icon image of the <classname>GtkStatusIcon</classname> using the
+     supplied stock_id. The icon image should easily identify the state of the
+     item being monitored by the user.
+    </para>
+    <para>
+     <informalexample>
+      <programlisting role="php"><![CDATA[
+$tray = new GtkStatusIcon();
+$tray->set_from_stock(Gtk::STOCK_EXECUTE);
+]]></programlisting>
+     </informalexample>
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkStatusIcon">GtkStatusIcon::new_from_stock</function>
+    </para>
+   </desc>
+  </method>
+
   <method id="gtk.gtkstatusicon.method.set_tooltip">
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>set_tooltip</function></funcdef>
-     <paramdef>string <parameter>tip_text</parameter></paramdef>
+     <paramdef>string <parameter>tooltip</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Sets the tooltip for the GtkStatusIcon.
+    Set tooltip text of the object.
    </shortdesc>
    <desc>
     <para>
-     Sets the tooltip for the GtkStatusIcon.
+     Set tooltip to display for the <classname>GtkStatusIcon</classname> object.
+     A tooltip is a short description that will be displayed to the user when
+     they hover their mouse pointer over the icon.
+    </para>
+    <para>
+     <informalexample>
+      <programlisting role="php"><![CDATA[
+$tray = new GtkStatusIcon();
+$tray->set_tooltip('This is a GtkStatusIcon object');
+]]></programlisting>
+     </informalexample>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtkstatusicon.method.set_visible">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_visible</function></funcdef>
+     <paramdef>bool <parameter>visible</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Set visibility state of the object.
+   </shortdesc>
+   <desc>
+    <para>
+     Set visibility state of the <classname>GtkStatusIcon</classname> object.
+     An invisible state is useful for applications that do not require the
+     constant reporting of the current state to the user. An example would be an
+     auto updater for an application, that only displays an icon when an update
+     is available.
+    </para>
+    <para>
+     <informalexample>
+      <programlisting role="php"><![CDATA[
+$tray = new GtkStatusIcon();
+$tray->set_visible(false);
+]]></programlisting>
+     </informalexample>
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkStatusIcon">get_visible</function>
     </para>
    </desc>
   </method>
@@ -193,8 +558,13 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Signal for left mouse clicks.
+    Signal emitted on a left mouse button click.
    </shortdesc>
+   <desc>
+    <para>
+     Signal emitted on a left mouse button click.
+    </para>
+   </desc>
   </signal>
   <signal id="gtk.gtkstatusicon.signal.popup-menu">
    <signalname>popup-menu</signalname>
@@ -205,8 +575,13 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Signal for right mouse clicks.
+    Signal emitted on a right mouse button click.
    </shortdesc>
+   <desc>
+    <para>
+     Signal emitted on a right mouse button click.
+    </para>
+   </desc>
   </signal>
  </signals>
 

@@ -1,0 +1,69 @@
+<?php
+
+  class TrayApplication {
+   /**
+    * Application Tray Menu
+    *
+    * @var GtkMenu
+    */
+   protected $_menu;
+   /**
+    * Application Tray Icon
+    *
+    * @var GtkStatusIcon
+    */
+   protected $_tray;
+   /**
+    * Application Constructor
+    *
+    * @param string $tooltip Tooltip to display for GtkStatusIcon object
+    * @return void
+    */
+    public function __construct($tooltip) {
+      $this->_menu = new GtkMenu();
+      $this->_tray = new GtkStatusIcon();
+      $this->_tray->set_tooltip($tooltip);
+      $this->_tray->set_from_stock(Gtk::STOCK_EXECUTE);
+      $this->_tray->connect('popup-menu', array($this, 'onMenu'));
+
+      $quit = new GtkMenuItem('Quit');
+      $quit->connect('activate', array($this, 'onQuit'));
+      $this->_menu->append($quit);
+      $this->_menu->show_all();
+
+      $this->_tray->set_visible(true);
+      $this->_tray->set_blinking(false);
+
+      GtkStatusIcon::position_menu($this->_menu, $this->_tray);
+
+      Gtk::main();
+    }
+    /**
+     * Application Destructor
+     *
+     * @return void
+     */
+    public function __destruct() {
+      Gtk::main_quit();
+    }
+    /**
+     * Event handler for onQuit
+     *
+     * @return void
+     */
+    public function onQuit() {
+      $this->__destruct();
+    }
+    /**
+     * Event handler for onMenu
+     *
+     * @return void
+     */
+    public function onMenu() {
+      $this->_menu->popup();
+    }
+  }
+
+  $app = new TrayApplication('GtkStatusIcon object');
+
+?>
