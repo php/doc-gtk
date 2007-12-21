@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- EN-Revision: 1.11 Maintainer: morcelli Status: ready -->
+<classentry id="gtk.gtktooltips">
+ <classmeta>
+  <classtitle>GtkTooltips</classtitle>
+  <classparent>GtkObject</classparent>
+  <shortdesc>
+   Um objeto para gerenciar um conjunto de tootips.
+  </shortdesc>
+  <desc>
+   <para>
+    Tooltips são mensagens que aparecem próximas a um widget quando o ponteiro
+    do mouse fica sobre ele por um determinado período de tempo. Sua especialidade
+    é ajudar, de forma redundante, a dar descrições das ações de botões em
+    uma barra de ferramentas.
+   </para>
+   <para>
+    Um tootip pertence a um grupo de tooltips. Um grupo é criado
+    com o construtor. Cada tootip do grupo pode ser desligada com o
+    método <function class="GtkTooltips">disable</function> e habilitado com
+    o método <function class="GtkTooltips">enable</function>.
+   </para>
+   <note>
+    <para>
+     Tooltips podem ser colocadas em widgets que tenham sua própria window.
+     Para colocar um tooltip em um widget que não possua sua própria window,
+     deve-se colocá-lo dentro de um <classname>GtkEventBox</classname> e
+     então adicionar o tooltip nele.
+    </para>
+   </note>
+  </desc>
+ </classmeta>
+
+ <constructors>
+  <constructor id="gtk.gtktooltips.constructor">
+   <funcsynopsis>
+    <funcprototype>
+    <funcdef> <function>GtkTooltips</function></funcdef>
+    <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Cria um novo objeto tootilp.
+   </shortdesc>
+   <desc>
+    <para>
+     Cria um novo objeto tootilp. Após inicializar o objeto,
+     pode-se começar a adicionar tooltips nele usando o método
+     <function class="GtkTooltips">set_tip</function>.
+    </para>
+    <example>
+     <title>Colocando um tooltip em um button</title>
+     <programlisting role="php">
+      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="&directory.examples;/reference/gtk/gtktooltips/constructor.phpw" parse="text">
+       <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+      </xi:include>
+     </programlisting>
+    </example>
+   </desc>
+  </constructor>
+ </constructors>
+
+ <methods>
+  <method id="gtk.gtktooltips.method.disable">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>disable</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Desabilita os tootilps.
+   </shortdesc>
+   <desc>
+    <para>
+     Desabilita todas as tips do objeto.
+     Pode-se agrupar tooltips para um objeto usando múltiplos
+     objetos tooltips para diferentes widgets.
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtktooltips.method.enable">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>enable</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Habilita os tooltips.
+   </shortdesc>
+   <desc>
+    <para>
+     habilita as tips no objeto tooltip.
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtktooltips.method.force_window">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>force_window</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Apenas para uso interno.
+   </shortdesc>
+   <desc>
+    <para>
+     Assegura que a window usada para exibição dos tooltips informados seja criada.
+    </para>
+    <para>
+     Aplicações jamais deveriam chamar este método, já que o
+     GTK+ dá cabo disto.
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtktooltips.method.set_delay">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_delay</function></funcdef>
+     <paramdef>int <parameter>delay</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Seta o tempo para as tips aparecerem.
+   </shortdesc>
+   <desc>
+    <para>
+     Seta o tempo em segundos até que as tips apareçam.
+    </para>
+    <para>
+     &seealso;
+     <fieldname class="GtkTooltips">delay</fieldname>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtktooltips.method.set_tip">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_tip</function></funcdef>
+     <paramdef><classname>GtkWidget</classname> <parameter>widget</parameter></paramdef>
+     <paramdef>string <parameter>tip_text</parameter></paramdef>
+     <paramdef>string <parameter><optional>tip_private = null</optional></parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Seta o tooltip para um widget.
+   </shortdesc>
+   <desc>
+    <para>
+
+     Seta o tooltip para o widget informado. O segundo parâmetro é opcional
+     e não exibido por padrão. Para torná-lo visível, pode-se usar
+     <classname> GtkTipsQuery</classname>.
+    </para>
+   </desc>
+  </method>
+ </methods>
+
+ <fields>
+  <field id="gtk.gtktooltips.field.active_tips_data" type="ro">
+   <fieldname>active_tips_data</fieldname>
+   <fieldtype/>
+   <shortdesc>
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </field>
+
+  <field id="gtk.gtktooltips.field.delay" type="ro">
+   <fieldname>delay</fieldname>
+   <fieldtype>int</fieldtype>
+   <shortdesc>
+   </shortdesc>
+   <desc>
+    <para>
+     &seealso;
+     <function class="GtkTooltips">set_delay</function>
+    </para>
+
+   </desc>
+  </field>
+
+  <field id="gtk.gtktooltips.field.enabled" type="ro">
+   <fieldname>enabled</fieldname>
+   <fieldtype>int</fieldtype>
+   <shortdesc>
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </field>
+
+  <field id="gtk.gtktooltips.field.timer_tag" type="ro">
+   <fieldname>timer_tag</fieldname>
+   <fieldtype>int</fieldtype>
+   <shortdesc>
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </field>
+
+  <field id="gtk.gtktooltips.field.tip_label" type="ro">
+   <fieldname>tip_label</fieldname>
+   <fieldtype>GtkWidget</fieldtype>
+   <shortdesc>
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </field>
+
+  <field id="gtk.gtktooltips.field.tip_window" type="ro">
+   <fieldname>tip_window</fieldname>
+   <fieldtype>GtkWidget</fieldtype>
+   <shortdesc>
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </field>
+
+  <field id="gtk.gtktooltips.field.tips_data_list" type="ro">
+   <fieldname>tips_data_list</fieldname>
+   <fieldtype/>
+   <shortdesc>
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </field>
+
+  <field id="gtk.gtktooltips.field.use_sticky_delay" type="ro">
+   <fieldname>use_sticky_delay</fieldname>
+   <fieldtype>int</fieldtype>
+   <shortdesc>
+   </shortdesc>
+   <desc>
+
+   </desc>
+  </field>
+ </fields>
+
+</classentry>

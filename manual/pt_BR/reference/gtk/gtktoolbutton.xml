@@ -1,0 +1,415 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- EN-Revision: 1.11 Maintainer: morcelli Status: ready -->
+<classentry id="gtk.gtktoolbutton">
+ <classmeta>
+  <classtitle>GtkToolButton</classtitle>
+  <classparent>GtkToolItem</classparent>
+  <shortdesc>
+   Um GtkToolItem que exibe um botão.
+  </shortdesc>
+  <desc>
+   <para>
+    GtkToolButtons são <classname>GtkToolItem</classname>s que contêm botões.
+   </para>
+   <para>
+    O label de um GtkToolButton é determinado pelas propriedades
+    <propname class="GtkToolButton">label_widget</propname>,
+    <propname class="GtkToolButton">label</propname>,
+    e <propname class="GtkToolButton">stock_id</propname>.
+    Se <literal>label_widget</literal> não for NULL, então esse widget é usado como
+    label. Mas se <literal>label</literal> não for NULL, essa string
+    é usada como label. E caso <literal>stock_id</literal> não for NULL,
+    o label é detrminado pelo item stock. Senão, o botão não
+    tem um label.
+   </para>
+   <para>
+    O ícone de um GtkToolButton é determinado pelas propriedades
+    <propname class="GtkToolButton">icon_widget</propname> e
+    <propname class="GtkToolButton">stock_id</propname>.
+    Se <literal>icon_widget</literal> não for NULL, então esse widget é usado
+    como ícone. Mas se <literal>stock_id</literal> não for NULL, o
+    ícone é determinado pelo item stock. Senão, o botão não tem
+    um ícone.
+   </para>
+  </desc>
+ </classmeta>
+
+ <constructors>
+  <constructor id="gtk.gtktoolbutton.constructor">
+   <funcsynopsis>
+    <funcprototype>
+    <funcdef> <function>GtkToolButton</function></funcdef>
+    <paramdef><classname>GtkWidget</classname> <parameter><optional>icon_widget = null</optional></parameter></paramdef>
+    <paramdef>string <parameter><optional>label = null</optional></parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Cria um novo tool button.
+   </shortdesc>
+   <desc>
+    <para>
+     Cria um novo tool button.
+    </para>
+   </desc>
+  </constructor>
+
+  <constructor id="gtk.gtktoolbutton.constructor.new_from_stock">
+   <funcsynopsis>
+    <funcprototype>
+    <funcdef> <function>GtkToolButton::new_from_stock</function></funcdef>
+    <paramdef><enumname>GtkStockItems</enumname> <parameter>stock_id</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Cria um novo tool button baseado no item stock.
+   </shortdesc>
+   <desc>
+    <para>
+     Cria um novo tool button usando o label e o ícone do item stock
+     informado.
+    </para>
+    <simpara>
+     &static;
+    </simpara>
+   </desc>
+  </constructor>
+ </constructors>
+
+ <methods>
+  <method id="gtk.gtktoolbutton.method.get_icon_widget">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef><classname>GtkWidget</classname> <function>get_icon_widget</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Retorna o ícone usado.
+   </shortdesc>
+   <desc>
+    <para>
+     Retorna o ícone usado.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkToolButton">set_icon_widget</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtktoolbutton.method.get_label">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>string <function>get_label</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Retorna o label do botão.
+   </shortdesc>
+   <desc>
+    <para>
+     Retorna o label do botão.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkToolButton">set_label</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtktoolbutton.method.get_label_widget">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef><classname>GtkWidget</classname> <function>get_label_widget</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Retorna o label widget.
+   </shortdesc>
+   <desc>
+    <para>
+     Retorna o label widget.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkToolButton">set_label_widget</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtktoolbutton.method.get_stock_id">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>string <function>get_stock_id</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Retorno o id do stock.
+   </shortdesc>
+   <desc>
+    <para>
+     Retorno o id do item stock caso o botão tenha
+     sido gerado a partir de um stock.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkToolButton">set_stock_id</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtktoolbutton.method.get_use_underline">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>bool <function>get_use_underline</function></funcdef>
+     <paramdef>void</paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Se um underscore será usado para tecla de atalho.
+   </shortdesc>
+   <desc>
+    <para>
+     Retorna se um underscore será usado para tecla de atalho.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkToolButton">set_use_underline</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtktoolbutton.method.set_icon_widget">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_icon_widget</function></funcdef>
+     <paramdef><classname>GtkWidget</classname> <parameter>icon_widget</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Seta o widget para ser usado como ícone.
+   </shortdesc>
+   <desc>
+    <para>
+     Seta o widget para ser usado como ícone. Se ele for
+     <literal>null</literal>, o ícone é determinado pela propriedade
+     <propname class="GtkToolButton">stock-id</propname>. Mas caso ele também
+     esteja <literal>null</literal>, o botão fica sem ícone.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkToolButton">get_icon_widget</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtktoolbutton.method.set_label">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_label</function></funcdef>
+     <paramdef>string <parameter>label</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Seta o label como sendo o utilizado pelo tool button.
+   </shortdesc>
+   <desc>
+    <para>
+     Seta o label como sendo o utilizado pelo tool button. A propriedade "label"
+     só tem efeito se não for substituída pela propriedade "label_widget"
+     quando não estiver NULL. Se tanto o "label_widget" como o "label" estiverem NULL,
+     o label é determinado pela propriedade "stock_id". Mas caso "stock_id"
+     também esteja NULL, o botão não terá um label.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkToolButton">get_label</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtktoolbutton.method.set_label_widget">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_label_widget</function></funcdef>
+     <paramdef><classname>GtkWidget</classname> <parameter>label_widget</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Seta o widget usado como label.
+   </shortdesc>
+   <desc>
+    <para>
+     Seta o label_widget como o widget que será usado como label pelo
+     botão. Se label_widget for NULL, a propriedade the "label" é usada
+     como label. Se "label" também for NULL, o label do item stock
+     determinado pela propriedade "stock_id" é usado como label.
+     Se "stock_id" também for NULL, o botão não tem um label.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkToolButton">get_label_widget</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtktoolbutton.method.set_stock_id">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_stock_id</function></funcdef>
+     <paramdef><enumname>GtkStockItems</enumname> <parameter>stock_id</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Seta o stock item.
+   </shortdesc>
+   <desc>
+    <para>
+     Seta o stock item.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkToolButton">get_stock_id</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gtk.gtktoolbutton.method.set_use_underline">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_use_underline</function></funcdef>
+     <paramdef>bool <parameter>use_underline</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Seta se um underscore é usado como indicador de tecla de atalho.
+   </shortdesc>
+   <desc>
+    <para>
+     Seta se um underscore é usado como indicador de tecla de atalho.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkToolButton">get_use_underline</function>
+    </para>
+   </desc>
+  </method>
+ </methods>
+
+ <properties>
+  <prop id="gtk.gtktoolbutton.property.icon_widget" type="rw">
+   <fieldname>icon-widget</fieldname>
+   <fieldtype><classname>GtkWidget</classname></fieldtype>
+   <shortdesc>
+    Ícone a ser exibido no item.
+   </shortdesc>
+   <desc>
+    <para>
+     Ícone a ser exibido no item.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkWindow">get_icon_widget</function>,
+     <function class="GtkWindow">set_icon_widget</function>
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtktoolbutton.property.label" type="rw">
+   <fieldname>label</fieldname>
+   <fieldtype>string</fieldtype>
+   <shortdesc>
+    Texto para exibir no item.
+   </shortdesc>
+   <desc>
+    <para>
+     Texto para exibir no item.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkWindow">get_label</function>,
+     <function class="GtkWindow">set_label</function>
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtktoolbutton.property.label_widget" type="rw">
+   <fieldname>label-widget</fieldname>
+   <fieldtype><enumname>GtkWidget</enumname></fieldtype>
+   <shortdesc>
+    Widget a ser usado como label.
+   </shortdesc>
+   <desc>
+    <para>
+     Widget a ser usado como label.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkWindow">get_label_widget</function>,
+     <function class="GtkWindow">set_label_widget</function>
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtktoolbutton.property.stock_id" type="rw">
+   <fieldname>stock-id</fieldname>
+   <fieldtype><enumname>GtkStockItems</enumname></fieldtype>
+   <shortdesc>
+    O ícone stock exibido no item.
+   </shortdesc>
+   <desc>
+    <para>
+     O ícone stock exibido no item.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkWindow">get_stock_id</function>,
+     <function class="GtkWindow">set_stock_id</function>
+    </para>
+   </desc>
+  </prop>
+
+  <prop id="gtk.gtktoolbutton.property.use_underline" type="rw">
+   <fieldname>use-underline</fieldname>
+   <fieldtype>bool</fieldtype>
+   <shortdesc>
+    Se um underscore significa tecla de atalho.
+   </shortdesc>
+   <desc>
+    <para>
+     Se for setado, um underline na propriedade label indica que o próximo
+     caracter será reconhecido como uma tecla de atalho.
+    </para>
+    <para>
+     &seealso;
+     <function class="GtkWindow">get_stock_id</function>,
+     <function class="GtkWindow">set_stock_id</function>
+    </para>
+   </desc>
+  </prop>
+ </properties>
+
+ <signals>
+  <signal id="gtk.gtktoolbutton.signal.clicked">
+   <signalname>clicked</signalname>
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <cbfunction>callback</cbfunction></funcdef>
+     <paramdef><classname>GtkToolButton</classname> <parameter>toolbutton</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    O botão foi clicado.
+   </shortdesc>
+   <desc>
+    <para>
+     Quando o botão é clicado, este signal é emitido.
+    </para>
+   </desc>
+  </signal>
+ </signals>
+
+</classentry>
