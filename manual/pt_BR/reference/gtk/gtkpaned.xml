@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- $Revision: 1.1 $ -->
+<!-- $Revision: 1.2 $ -->
 <classentry id="gtk.gtkpaned">
  <classmeta>
   <classtitle>GtkPaned</classtitle>
@@ -107,35 +107,35 @@
    </shortdesc>
    <desc>
     <para>
-     This method computes the position of the separator according
-     to the specification of the parameters. The calculation is
-     affected by the packing parameters of the child widgets depending
-     on whether they can resize and shrink. This method is used by subclasses
-     of <classname>GtkPaned</classname> and is usually not needed by
-     applications. the <function class="GtkWidget">queue_resize</function>
-     method must be called after this method to have the resizing displayed.
+     Este método calcula a posição do separador de acordo com o especificado
+     pelos parâmetros. O calculo é afetado
+     pelos parâmetros de empacotamento dos widgets filhos dependendo
+     de eles podem encolher ou expandir. Este método é usado por subclasses de 
+     <classname>GtkPaned</classname> e normalmente não é necessário pelas 
+     aplicações. O método <function class="GtkWidget">queue_resize</function>
+     deve ser chamado após este método para ter o redimencionamento exibido.
     </para>
     <para>
-     The minimum position is <literal>0</literal> if child1's shrink value is
-     <literal>true</literal> or the value of child1_req, if
-     <literal>false</literal>. The maximum position is the value of allocation
-     if child2's shrink value is <literal>true</literal>, or the value of
-     (allocation - child2_req), if <literal>false</literal>. The final
-     calculated position will be between the minimum and maximum positions.
+     A posição mínima é <literal>0</literal> se o valor de encolher de child1
+     for <literal>true</literal> ou o valor de child1_req, se
+     <literal>false</literal>. A posição máxima é o valor de alocação 
+     se o valor de encolher do child2 for <literal>true</literal>, ou o valor de
+     (allocation - child2_req), se <literal>false</literal>. A posição
+     calculada final será entre a posição mínima e máxima.
     </para>
     <para>
      <itemizedlist>
       <listitem>
-       <parameter>allocation</parameter> - the total space allocation in pixels
-       for the paned widget
+       <parameter>allocation</parameter> - o espaço total alocado para o
+       widget de painéis.
       </listitem>
       <listitem>
-       <parameter>child1_req</parameter> - 	the minimum space in pixels required
-        for the left or top child widget
+       <parameter>child1_req</parameter> - 	o mínimo espaço em pixels requerido
+       para o widget filho da esquerda ou de cima
       </listitem>
       <listitem>
-       <parameter>child2_req</parameter> - the minimum space in pixels required
-       for the right or bottom child widget
+       <parameter>child2_req</parameter> - o mínimo espaço em pixels requerido
+       para o widget filho da direita ou de baixo
       </listitem>
      </itemizedlist>
     </para>
@@ -155,11 +155,11 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Obtains the first child of the paned widget.
+    Obtém o primeiro filho do widget de painéis.
    </shortdesc>
    <desc>
     <para>
-     Obtains the first child of the paned widget.
+     Obtém o primeiro filho do widget de painéis.
     </para>
    </desc>
   </method>
@@ -172,11 +172,11 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Obtains the second child of the paned widget.
+    Obtém o segundo filho do widget de painéis.
    </shortdesc>
    <desc>
     <para>
-     Obtains the second child of the paned widget.
+     Obtém o segundo filho do widget de painéis.
     </para>
    </desc>
   </method>
@@ -189,11 +189,11 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Obtains the position of the divider between the two panes.
+    Obtém a posição do divisor entre os painéis.
    </shortdesc>
    <desc>
     <para>
-     Obtains the position of the divider between the two panes.
+     Obtém a posição do divisor entre os painéis.
     </para>
     <para>
      &seealso;
@@ -212,11 +212,11 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Adds a child to the top or left pane.
+    Adicione um filho ao painel de cima ou da esquerda.
    </shortdesc>
    <desc>
     <para>
-     Adds a child to the top or left pane.
+     Adicione um filho ao painel de cima ou da esquerda.
     </para>
    </desc>
   </method>
@@ -231,11 +231,11 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Adds a child to the bottom or right pane.
+    Adiciona um filho ao painel de baixo ou da direita.
    </shortdesc>
    <desc>
     <para>
-     Adds a child to the bottom or right pane.
+     Adiciona um filho ao painel de baixo ou da direita.
     </para>
    </desc>
   </method>
@@ -248,14 +248,14 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    Sets the position of the divider between the two panes.
+    Define a posição do divisor entre os dois painéis.
    </shortdesc>
    <desc>
     <para>
-     Sets the position of the divider between the two panes in pixels.
+     Define a posição do divisor entre os dois painéis em pixels.
     </para>
     <para>
-     A negative value means that the position is unset.
+     Um valor negativo significa que a definição anterior é removida.
     </para>
     <para>
      &seealso;
@@ -271,19 +271,19 @@
    <propname>max-position</propname>
    <proptype>int</proptype>
    <shortdesc>
-    The largest possible value for the position property.
+    O maior valor possível para a propriedade position.
    </shortdesc>
    <desc>
     <para>
-     The largest possible value for the position property.
-     This property is derived from the size and shrinkability of 
-     the widget's children.
+     O maior valor possível para a propriedade position.
+     Este propriedade é derivada do tamanho e da capacidade de encolher
+     dos filhos do widget.
     </para>
     <para>
-     Allowed values: <literal>&gt;= 0</literal>
+     Valores permitidos: <literal>&gt;= 0</literal>
     </para>
     <para>
-     Default: <literal>0</literal>
+     Padrão: <literal>0</literal>
     </para>
    </desc>
   </prop>
@@ -292,19 +292,19 @@
    <propname>min-position</propname>
    <proptype>int</proptype>
    <shortdesc>
-    The smallest possible value for the position property.
+    O menor valor possível para a propriedade position.
    </shortdesc>
    <desc>
     <para>
-     The smallest possible value for the position property.
-     This property is derived from the size and shrinkability
-     of the widget's children.
+     O menor valor possível para a propriedade position.
+     Este propriedade é derivada do tamanho e da capacidade de encolher
+     dos filhos do widget.
     </para>
     <para>
-     Allowed values: <literal>&gt;= 0</literal>
+     Valores permitidos: <literal>&gt;= 0</literal>
     </para>
     <para>
-     Default: <literal>0</literal>
+     Padrão: <literal>0</literal>
     </para>
    </desc>
   </prop>
@@ -313,18 +313,18 @@
    <propname>position</propname>
    <proptype>int</proptype>
    <shortdesc>
-    Position of paned separator in pixels.
+    Posição do separador de painéis em pixels.
    </shortdesc>
    <desc>
     <para>
-     Position of paned separator in pixels
-     (0 means all the way to the left/top).
+     Posição do separador dos painéis em pixels
+     (0 significa o limite esquerdo/cima).
     </para>
     <para>
-     Allowed values: <literal>&gt;= 0</literal>
+     Valores permitidos: <literal>&gt;= 0</literal>
     </para>
     <para>
-     Default: <literal>0</literal>
+     Padrão: <literal>0</literal>
     </para>
    </desc>
   </prop>
@@ -333,14 +333,14 @@
    <propname>position-set</propname>
    <proptype>bool</proptype>
    <shortdesc>
-    If the Position property should be used.
+    Se a propriedade position deve ser usada.
    </shortdesc>
    <desc>
     <para>
-     If the Position property should be used.
+     Se a propriedade position deve ser usada.
     </para>
     <para>
-     Default: <literal>false</literal>
+     Padrão: <literal>false</literal>
     </para>
    </desc>
   </prop>
@@ -349,15 +349,15 @@
    <propname>resize</propname>
    <proptype>bool</proptype>
    <shortdesc>
-    Child property: Whether the child expands and shrinks.
+    Propriedade do filho: Quando o filho expande e encolhe.
    </shortdesc>
    <desc>
     <para>
-     The "resize" child property determines whether the
-     child expands and shrinks along with the paned widget.
+     A propriedade do filho "resize" determina quando o filho
+     expande e encolhe em conjunto com o widget de painéis.
     </para>
     <para>
-     Default: <literal>true</literal>
+     Padrão: <literal>true</literal>
     </para>
    </desc>
   </prop>
@@ -366,6 +366,7 @@
    <propname>shrink</propname>
    <proptype>bool</proptype>
    <shortdesc>
+    Propriedade do Filho
     Child property: Whether the child can be made smaller
     than its requisition.
    </shortdesc>
