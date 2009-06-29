@@ -853,7 +853,7 @@ END_OF_MULTILINE;
         // If we have a 'numeric' revision diff and it is not zero,
         // make a link to the CVS repository's diff script
         if ($file["revision"][2] != "n/a" && $file["revision"][2] !== 0) {
-            $url = 'http://cvs.php.net/viewcvs.cgi/' .
+            $url = 'http://cvs.php.net/viewvc.cgi/' .
                    preg_replace( "'^".$DOCDIR."'", 'php-gtk-doc/manual/', $file['full_name']) .
                    '?r1=' . $file['revision'][1] . '&amp;r2=' . $file['revision'][0];
             $url_ws = $url . CVS_OPT_NOWS;
