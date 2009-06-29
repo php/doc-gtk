@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<!-- EN-Revision: 1.21 Maintainer: dnfeitosa Status: ready -->
+<!-- EN-Revision: 1.22 Maintainer: dnfeitosa Status: ready -->
 <classentry id="gtk.gtklabel">
  <classmeta>
   <classtitle>GtkLabel</classtitle>
@@ -16,12 +16,16 @@
     <classname>GtkOptionMenu</classname>.
    </para>
    <para>
-    Você pode ter controle sobre o caminho no qual o GtkLabel será exibido com
-    alguns métodos, como <function class="GtkLabel">set_justify</function>
-    ou <function class="GtkLabel">set_width_chars</function>. Se você deseja
-    definir o alinhamento (note que alinhamento e justificação não são a
-    mesma coisa) ou preenchimento para um GtkLabel, você pode inserí-lo dentro
-    de um container <classname>GtkAlignment</classname>.
+    Você pode ter controle sobre a maneira que o GtkLabel será exibido com
+    alguns métodos como <function class="GtkLabel">set_justify</function>
+    ou <function class="GtkLabel">set_width_chars</function>. Como uma
+    subclasse de <classname>GtkMisc</classname>, você pode especificar alinhamento e
+    e espaçamento com <function class="GtkMisc">set_alignment</function> e
+    <function class="GtkMisc">set_padding</function>. Entretanto,
+    <function class="GtkMisc">set_padding</function> apenas suporta a definição
+    de prenchimento para pares right/left e top/bottom. Se você necessitar especificar
+    valores diferentes para o espaçamento esquerda/direita, você pode inserir o
+    rotulo em um container <classname>GtkAlignment</classname>.
    </para>
   </desc>
  </classmeta>
