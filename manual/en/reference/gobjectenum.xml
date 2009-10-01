@@ -1,0 +1,399 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- $Revision: 1.23 $ -->
+<enums id="gobject.gobjectenum">
+
+ <enum id="gobject.enum.gtype">
+  <enumname>GType</enumname>
+  <desc>
+   <para>
+    GType is used in <classname>GtkListStore</classname> and
+    <classname>GtkTreeStore</classname> to determine the type of
+    the column in the data table.  It is also used for custom signals
+    when defining the return values and accepted parameters for callbacks.
+   </para>
+   <simpara>
+    The GType controls what type of data may be stored in
+    the particular column, how the default
+    <classname>GtkCellRenderer</classname> displays the value in
+    the view, even what user defined signal callbacks can accept and return.
+    The typing is very strict.  It is generally safest to make
+    sure you cast your variables properly.  In addition, every object
+    that is an instanceof Gobject will have a type in a class constant called
+    gtype.  This allows you to store widgets or pixbufs in data stores, or
+    use them for parameters and return values with custom signals.
+   </simpara>
+  </desc>
+
+  <enumoption>
+   <value>0</value>
+   <optionname>Gobject::TYPE_INVALID</optionname>
+   <shortdesc>
+    
+   </shortdesc>
+  </enumoption>
+
+  <enumoption>
+   <value>4</value>
+   <optionname>Gobject::TYPE_NONE</optionname>
+   <shortdesc>
+    
+   </shortdesc>
+  </enumoption>
+
+  <enumoption>
+   <value>8</value>
+   <optionname>Gobject::TYPE_INTERFACE</optionname>
+   <shortdesc>
+    
+   </shortdesc>
+  </enumoption>
+
+  <enumoption>
+   <value>12</value>
+   <optionname>Gobject::TYPE_CHAR</optionname>
+   <shortdesc>
+    
+   </shortdesc>
+  </enumoption>
+
+  <enumoption>
+   <value>20</value>
+   <optionname>Gobject::TYPE_BOOLEAN</optionname>
+   <shortdesc>
+    A boolean value, <literal>true</literal> or <literal>false</literal>
+   </shortdesc>
+  </enumoption>
+
+  <enumoption>
+   <value>32</value>
+   <optionname>Gobject::TYPE_LONG</optionname>
+   <shortdesc>
+    A big integer number.
+   </shortdesc>
+  </enumoption>
+
+  <enumoption>
+   <value>48</value>
+   <optionname>Gobject::TYPE_ENUM</optionname>
+   <shortdesc>
+    
+   </shortdesc>
+  </enumoption>
+
+  <enumoption>
+   <value>52</value>
+   <optionname>Gobject::TYPE_FLAGS</optionname>
+   <shortdesc>
+    
+   </shortdesc>
+  </enumoption>
+
+  <enumoption>
+   <value>60</value>
+   <optionname>Gobject::TYPE_DOUBLE</optionname>
+   <shortdesc>
+    A decimal number with a fraction dot in it.
+   </shortdesc>
+  </enumoption>
+
+  <enumoption>
+   <value>64</value>
+   <optionname>Gobject::TYPE_STRING</optionname>
+   <shortdesc>
+    A normal string.
+   </shortdesc>
+  </enumoption>
+
+  <enumoption>
+   <value>68</value>
+   <optionname>Gobject::TYPE_POINTER</optionname>
+   <shortdesc>
+    
+   </shortdesc>
+  </enumoption>
+
+  <enumoption>
+   <value>72</value>
+   <optionname>Gobject::TYPE_BOXED</optionname>
+   <shortdesc>
+    
+   </shortdesc>
+  </enumoption>
+
+  <enumoption>
+   <value>76</value>
+   <optionname>Gobject::TYPE_PARAM</optionname>
+   <shortdesc>
+    
+   </shortdesc>
+  </enumoption>
+
+  <enumoption>
+   <value>80</value>
+   <optionname>Gobject::TYPE_OBJECT</optionname>
+   <shortdesc>
+    
+   </shortdesc>
+  </enumoption>
+
+  <enumoption>
+   <value>137706104</value>
+   <optionname>Gobject::TYPE_PHP_VALUE</optionname>
+   <shortdesc>
+    Any PHP variable content.
+   </shortdesc>
+  </enumoption>
+ </enum>
+
+ <enum id="gobject.enum.gpriority">
+  <enumname>GPriority</enumname>
+  <desc>
+   <simpara>
+    Controls how important event sources are during the main loop.
+   </simpara>
+  </desc>
+
+  <enumoption>
+   <value>-100</value>
+   <optionname>Gobject::PRIORITY_DEFAULT</optionname>
+   <shortdesc>
+    Use this for default priority event sources
+   </shortdesc>
+  </enumoption>
+
+  <enumoption>
+   <value>100</value>
+   <optionname>Gobject::PRIORITY_HIGH_IDLE</optionname>
+   <shortdesc>
+    Use this for high priority timeouts. This priority is never 
+    used inside GTK+ so everything running at this priority will 
+    be running before anything inside the toolkit.
+   </shortdesc>
+  </enumoption>
+
+  <enumoption>
+   <value>110</value>
+   <optionname>Gobject::PRIORITY_HIGH_IDLE</optionname>
+   <shortdesc>
+    Use this priority for resizing related stuff. It is used internally by 
+    GTK+ to compute the sizes of widgets. This priority is higher than 
+    <literal>Gobject::GTK_PRIORITY</literal>to avoid resizing a widget which 
+    was just redrawn.
+   </shortdesc>
+  </enumoption>
+
+  <enumoption>
+   <value>120</value>
+   <optionname>Gobject::PRIORITY_REDRAW</optionname>
+   <shortdesc>
+    Use this priority for redrawing related stuff. It is used internally by
+    GTK+ to do pending redraws. This priority is lower than 
+    <literal>Gobject::PRIORITY_RESIZE</literal> to avoid redrawing a widget just
+    before resizing (and therefore redrawing it again).
+   </shortdesc>
+  </enumoption>
+
+  <enumoption>
+   <value>200</value>
+   <optionname>Gobject::PRIORITY_DEFAULT_IDLE</optionname>
+   <shortdesc>
+    Default priority for idle functions.
+   </shortdesc>
+  </enumoption>
+
+  <enumoption>
+   <value>300</value>
+   <optionname>Gobject::PRIORITY_LOW</optionname>
+   <shortdesc>
+    Priority for very unimportant background tasks.
+   </shortdesc>
+  </enumoption>
+ </enum>
+
+ <enum id="gobject.enum.giocondition">
+  <enumname>GIOCondition</enumname>
+  <desc>
+   <simpara>
+    A bitwise combination representing a condition to watch for on an event source
+   </simpara>
+  </desc>
+
+  <enumoption>
+   <value>1</value>
+   <optionname>Gobject::IO_IN</optionname>
+   <shortdesc>
+    There is data to read
+   </shortdesc>
+  </enumoption>
+
+  <enumoption>
+   <value>4</value>
+   <optionname>Gobject::IO_OUT</optionname>
+   <shortdesc>
+    Data can be written (without blocking)
+   </shortdesc>
+  </enumoption>
+
+  <enumoption>
+   <value>2</value>
+   <optionname>Gobject::IO_PRI</optionname>
+   <shortdesc>
+    There is urgent data to read
+   </shortdesc>
+  </enumoption>
+
+  <enumoption>
+   <value>8</value>
+   <optionname>Gobject::IO_ERR</optionname>
+   <shortdesc>
+    Error condition
+   </shortdesc>
+  </enumoption>
+
+  <enumoption>
+   <value>16</value>
+   <optionname>Gobject::IO_HUP</optionname>
+   <shortdesc>
+    Hung up (the connection has been broken, usually for pipes and sockets)
+   </shortdesc>
+  </enumoption>
+
+  <enumoption>
+   <value>32</value>
+   <optionname>Gobject::IO_NVAL</optionname>
+   <shortdesc>
+    Invalid request. The file descriptor is not open
+   </shortdesc>
+  </enumoption>
+
+ </enum>
+
+ <enum id="gobject.enum.gsignalflags">
+  <enumname>GSignalFlags</enumname>
+  <desc>
+   <simpara>
+    The signal flags are used to specify a signal's behaviour,
+    the overall signal description outlines how the stages of a signal emission
+    occur
+   </simpara>
+  </desc>
+
+  <enumoption>
+   <value>1</value>
+   <optionname>Gobject::SIGNAL_RUN_FIRST</optionname>
+   <shortdesc>
+    Invoke the object method handler in the first emission stage
+   </shortdesc>
+  </enumoption>
+ 
+  <enumoption>
+   <value>2</value>
+   <optionname>Gobject::SIGNAL_RUN_LAST</optionname>
+   <shortdesc>
+    Invoke the object method handler in the third emission stage
+   </shortdesc>
+  </enumoption>
+
+  <enumoption>
+   <value>4</value>
+   <optionname>Gobject::SIGNAL_RUN_CLEANUP</optionname>
+   <shortdesc>
+    Invoke the object method handler in the last emission stage. 
+   </shortdesc>
+  </enumoption>
+
+  <enumoption>
+   <value>8</value>
+   <optionname>Gobject::SIGNAL_NO_RECURSE</optionname>
+   <shortdesc>
+    Signals being emitted for an object while currently being in emission for
+    the same object will not be emitted recursively, but instead cause the
+    first emission to be restarted. 
+   </shortdesc>
+  </enumoption>
+
+  <enumoption>
+   <value>16</value>
+   <optionname>Gobject::SIGNAL_DETAILED</optionname>
+   <shortdesc>
+    This signal supports "::detail" appendices to the signal name upon handler connections and emissions
+   </shortdesc>
+  </enumoption>
+
+  <enumoption>
+   <value>32</value>
+   <optionname>Gobject::SIGNAL_ACTION</optionname>
+   <shortdesc>
+    Action signals are signals that may freely be emitted on alive objects
+   </shortdesc>
+  </enumoption>
+
+  <enumoption>
+   <value>64</value>
+   <optionname>Gobject::SIGNAL_NO_HOOKS</optionname>
+   <shortdesc>
+    No emissions hooks are supported for this signal. 
+   </shortdesc>
+  </enumoption>
+
+ </enum>
+
+ <enum id="gobject.enum.gparamflags">
+  <enumname>GParamFlags</enumname>
+  <desc>
+   <simpara>
+    GParamFlags certain aspects of custom gobject parameters to be configured
+   </simpara>
+  </desc>
+
+  <enumoption>
+   <value>1</value>
+   <optionname>Gobject::PARAM_READABLE</optionname>
+   <shortdesc>
+    the parameter is readable 
+   </shortdesc>
+  </enumoption>
+ 
+  <enumoption>
+   <value>2</value>
+   <optionname>Gobject::PARAM_WRITABLE</optionname>
+   <shortdesc>
+    the parameter is writable
+   </shortdesc>
+  </enumoption>
+
+  <enumoption>
+   <value>4</value>
+   <optionname>Gobject::PARAM_CONSTRUCT</optionname>
+   <shortdesc>
+    the parameter will be set upon object construction 
+   </shortdesc>
+  </enumoption>
+
+  <enumoption>
+   <value>8</value>
+   <optionname>Gobject::PARAM_CONSTRUCT_ONLY</optionname>
+   <shortdesc>
+    the parameter will only be set upon object construction 
+   </shortdesc>
+  </enumoption>
+
+  <enumoption>
+   <value>16</value>
+   <optionname>Gobject::PARAM_LAX_VALIDATION</optionname>
+   <shortdesc>
+    upon parameter conversion strict validation is not required 
+   </shortdesc>
+  </enumoption>
+
+  <enumoption>
+   <value>3</value>
+   <optionname>Gobject::PARAM_READWRITE</optionname>
+   <shortdesc>
+    Simple alias for Gobject::PARAM_READABLE | Gobject::PARAM_WRITABLE
+   </shortdesc>
+  </enumoption>
+
+ </enum>
+
+</enums>
