@@ -16,7 +16,7 @@ function copy_images($src, $dest, &$count) {
         if ($handle = opendir($src)) {
             chdir($src);
             while (false !== ($file = readdir($handle))) {
-                if ($file != "." && $file != ".." && $file != "CVS") {
+                if ($file != "." && $file != ".." && $file != "CVS" && $file != '.svn') {
                     $fulldest = $dest.substr(getcwd(), strpos(getcwd(), 'images')-1)."/$file";
                     if (is_dir($file)) {
                         if (!file_exists($fulldest))

@@ -27,7 +27,7 @@ function gen_dir_ents($langdir)
     $dir_handle = opendir($langdir);
     while($file = readdir($dir_handle))
     {
-        if (($file != "CVS") && ($file != ".cvsignore") && ($file != ".") && ($file != ".."))
+        if (($file != "CVS") && ($file != ".cvsignore") && ($file != ".svn") && ($file != ".") && ($file != ".."))
         {
             if(is_dir($langdir."/".$file))
             {

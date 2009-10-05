@@ -23,7 +23,7 @@ function gen_dir_ents($path)
 	global $entities, $lang;
 	$dir_handle = opendir($path);
 	while ($file = readdir($dir_handle)) {
-		if (($file != "CVS") && ($file != ".cvsignore") && ($file != ".") && ($file != "..")) {
+		if (($file != "CVS") && ($file != ".cvsignore") && ($file != ".svn") && ($file != ".") && ($file != "..")) {
 			if (is_dir($path."/".$file)) {
 				gen_dir_ents($path."/".$file);
 			} else {
