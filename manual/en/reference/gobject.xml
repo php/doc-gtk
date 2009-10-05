@@ -15,7 +15,54 @@
   </desc>
  </classmeta>
 
+ <constructors>
+
+  <constructor id="gobject.constructor">
+   <funcsynopsis>
+    <funcprototype>
+    <funcdef> <function>GObject</function></funcdef>
+    <paramdef>
+     <parameter>
+      <optional>
+       <paramdef><enumname>string</enumname> <parameter>gtype</parameter></paramdef>
+       <paramdef><enumname>array</enumname> <parameter>properties</parameter></paramdef>
+      </optional>
+     </parameter>
+    </paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Creates a new GObject instance.
+   </shortdesc>
+   <desc>
+    <para>
+     Creates a new instance of Gobject, or optionally of type <parameter>gtype</parameter>. 
+     The properties parameter should contain an associative array of Gobject properties
+     to set for the new instance.
+    </para>
+   </desc>
+  </constructor>
+
+ </constructors>
+
  <methods>
+  <method id="gobject.method.__tostring">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>string<function>__toString</function></funcdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Creates a string representation of a GObject
+   </shortdesc>
+   <desc>
+    <para>
+     Returns a string representation of an object, including the PHP name and the
+     GType associated with the object.
+    </para>
+   </desc>
+  </method>
+
   <method id="gobject.method.block">
    <funcsynopsis>
     <funcprototype>
@@ -273,6 +320,59 @@
    </desc>
   </method>
 
+  <method id="gobject.method.emit">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>emit</function></funcdef>
+     <paramdef>string <parameter>signal_name</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Emits a signal on an object.  Additional values may be passed with the emit
+    call, these values will then be sent to any connected handlers.
+   </shortdesc>
+   <desc>
+    <para>
+     Emits a signal on an object, calling any connected handlers and passing any
+     user supplied data to the connected handlers.  Only signals registered for
+     the particular object can be emitted.  If a singal requires parameters in
+     the definition, then the required number of parameters must be sent to the
+     emit method.
+    </para>
+    <para>
+     &seealso;
+     <function class="GObject">connect</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gobject.method.freeze_notify">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>freeze_notify</function></funcdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Increments the freeze notify count
+   </shortdesc>
+   <desc>
+    <para>
+     Increases the freeze count on object. If the freeze count is non-zero, the
+     emission of "notify" signals on object is stopped. The signals are queued until
+     the freeze count is decreased to zero.
+    </para>
+    <para>
+     This is necessary for accessors that modify multiple properties to prevent
+     premature notification while the object is still being modified.
+    </para>
+    <para>
+     &seealso;
+     <function class="GObject">notify</function>,
+     <function class="GObject">thaw_notify</function>
+    </para>
+   </desc>
+  </method>
+
   <method id="gobject.method.get_data">
    <funcsynopsis>
     <funcprototype>
@@ -340,6 +440,38 @@
    </desc>
   </method>
 
+  <method id="gobject.method.list_properties">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>array <function>list_properties</function></funcdef>
+     <paramdef>int <parameter>gtype</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Lists all properties of a given class.
+   </shortdesc>
+   <desc>
+    <para>
+     Lists all properties in any class descended from gobject or registered as a
+     gtype.  Property information is returned in the same format as 
+     <function class="GObject">get_property</function>.
+    </para>
+    <note>
+     <simpara>This method is static.</simpara>
+    </note>
+    <para>
+     The <parameter>gtype</parameter> parameter is an integer
+     unique to all classes/interfaces. You can acquire the gtype
+     of a class by using <literal>ClassName::gtype</literal>.
+    </para>
+    <para>
+     &seealso;
+     <function class="GObject">get_property</function>,
+     <function class="GObject">set_property</function>
+    </para>
+   </desc>
+  </method>
+
   <method id="gobject.method.notify">
    <funcsynopsis>
     <funcprototype>
@@ -354,6 +486,50 @@
     <para>
      Emits a "notify" signal for the given property on the object.
     </para>
+   </desc>
+  </method>
+
+  <method id="gobject.method.register_type">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>bool<function>register_type</function></funcdef>
+     <paramdef>string<parameter>classname</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Register a custom Gtype
+   </shortdesc>
+   <desc>
+    <para>
+     Allows custom signals and properties to be used in PHP classes.
+    </para>
+    <para>
+     You must call this method before attempting to instantiate any classes
+     that use custom signals and properties.
+    </para>
+    <note>
+     <simpara>This method is static.</simpara>
+    </note>
+    <example>
+     <title>Creating Custom Signals</title>
+     <programlisting role="php">
+      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
+       href="&directory.examples;/reference/gobject/register_type_signals.php"
+       parse="text">
+       <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+      </xi:include>
+     </programlisting>
+    </example>
+    <example>
+     <title>Creating Custom Properties</title>
+     <programlisting role="php">
+      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
+       href="&directory.examples;/reference/gobject/register_type_properties.php"
+       parse="text">
+       <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+      </xi:include>
+     </programlisting>
+    </example>
    </desc>
   </method>
 
@@ -538,6 +714,59 @@
      &seealso;
      <function class="GObject">signal_list_ids</function>,
      <function class="GObject">signal_list_names</function>
+    </para>
+   </desc>
+  </method>
+
+  <method id="gobject.method.stop_emission">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>stop_emission</function></funcdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Stops emission of a signal that is currently being emitted
+   </shortdesc>
+   <desc>
+    <para>
+     Stops a signal's current emission for the object this is called on.
+    </para>
+    <para>
+     This will prevent the default method from running, if the signal was
+     G_SIGNAL_RUN_LAST and you connected normally (i.e. without the "after" flag).
+     Prints a warning if used on a signal which isn't being emitted.
+    </para>
+    <para>
+     &seealso;
+     <function class="GObject">emit</function>,
+    </para>
+   </desc>
+  </method>
+
+  <method id="gobject.method.thaw_notify">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>thaw_notify</function></funcdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Decrements the freeze notify count
+   </shortdesc>
+   <desc>
+    <para>
+     Reverts the effect of a previous call to <function
+     class="GObject">freeze_notify</function>. The freeze count is decreased on
+     object and when it reaches zero, all queued "notify" signals are emitted.
+     It is an error to call this function when the freeze count is zero
+    </para>
+    <para>
+     If multiple calls to <function class="GObject">freeze_notify</function>
+     were made, and equal number of calls must be made to unfreeze.
+    </para>
+    <para>
+     &seealso;
+     <function class="GObject">notify</function>,
+     <function class="GObject">freeze_notify</function>
     </para>
    </desc>
   </method>
