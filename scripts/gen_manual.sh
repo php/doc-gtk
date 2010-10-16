@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #just for testing!
 
 cd "`dirname "$0"`"
@@ -75,7 +75,7 @@ elif [ $type != "coverage" ]; then
 	rm -R $build_dir/*
 fi
 
-xsltproc --param base.dir "'$build_dir/'" --xinclude $xslfile $manualpath
+xsltproc --param base.dir "'$build_dir/'" --xinclude $xslfile ../manual/en/$manualpath
 
 #highlight php sources
 #we need to escape the wildcard, because php doesn't allow enough
