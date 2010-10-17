@@ -18,10 +18,61 @@
    </para>
    <para>
     Note that the <classname>GtkFileChooserDialog</classname> has no
-    methods of its own.
+    methods of its own other than its constructor.
    </para>
   </desc>
  </classmeta>
+ 
+ <constructors>
+  <constructor id="gtk.gtkfilechooserdialog.constructor">
+   <funcsynopsis>
+    <funcprototype>
+    <funcdef><function>GtkFileChooserDialog</function></funcdef>
+    <paramdef>
+     <classname>GtkAdjustment</classname>
+     <parameter>string <optional>title</optional></parameter>
+    </paramdef>
+    <paramdef>
+     <classname>GtkWindow</classname>
+     <parameter>
+       <optional>parent</optional>
+     </parameter>
+    </paramdef>
+    <paramdef>
+     <enumname>GtkFileChooserAction</enumname>
+     <parameter>
+      <optional>action</optional>
+     </parameter>
+    </paramdef>
+    <paramdef>
+     array
+     <parameter>
+       <optional>buttons (<classname>GtkButton</classname> button,
+       <enumname>GtkResponseType</enumname> response, ...)</optional>
+     </parameter>
+    </paramdef>
+    <paramdef>
+     string
+     <parameter>
+      <optional>backend</optional>
+     </parameter>
+    </paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Creates a new GtkFileChooserDialog.
+    <!-- FIXME: GtkDialog::new_with_buttons() needs making
+    This function is analogous to gtk_dialog_new_with_buttons().
+    -->
+   </shortdesc>
+   <desc>
+    <para>
+     Creates a GtkFileChooserDialog window to be used for functionality such as
+     opening and saving files.
+    </para>
+   </desc>
+   <!-- FIXME: Needs an example -->
+  </constructor>
+ </constructors>
 
- <!-- FIXME: constructor -->
 </classentry>
