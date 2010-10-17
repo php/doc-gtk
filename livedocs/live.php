@@ -54,7 +54,7 @@ class PhpGtkLiveDocs
 /*		$hdl = popen('./gen_manual.sh en test ' . $id . ' 2>&1', 'r');
 		var_dump(fread($hdl, 2048));
 		pclose($hdl);*/
-		$strCommand = '../scripts/gen_manual.sh en test ' . $id . ' 2>&1';
+		$strCommand = '../configure && ../scripts/gen_manual.sh en test ' . $id . ' 2>&1';
 		$retval = shell_exec($strCommand);
 		if (isset($_GET['debug'])) {
             echo 'Executing ' . $strCommand . "<br/>\r\n";
