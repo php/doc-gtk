@@ -191,20 +191,6 @@
     Sets the <classname>GdkScreen</classname> to the value of <parameter>screen</parameter>.
    </desc>
   </method>
-  <method id="gdk.gdkevent.method.set_test">
-   <funcsynopsis>
-    <funcprototype>
-     <funcdef>void <function>set_test</function></funcdef>
-     <paramdef><classname>GdkScreen</classname> <parameter>screen</parameter></paramdef>
-    </funcprototype>
-   </funcsynopsis>
-   <shortdesc>
-    Sets the <classname>GdkScreen</classname> for the event.
-   </shortdesc>
-   <desc>
-    Sets the <classname>GdkScreen</classname> to the value of <parameter>screen</parameter>.
-   </desc>
-  </method>
  </methods>
  
  <fields>
@@ -220,6 +206,32 @@
     (e.g. Control, Shift and Alt) and the pointer buttons.
    </shortdesc>
    <desc>
+    A bit-mask representing the state of the modifier keys 
+    (e.g. Control, Shift and Alt) and the pointer buttons.
+    
+    <para>
+     This field is available for the following events:
+     <itemizedlist>
+      <listitem>
+       <enumname>Gdk::MOTION_NOTIFY</enumname>
+      </listitem>
+      <listitem>
+       <enumname>Gdk::BUTTON_PRESS</enumname>
+      </listitem>
+      <listitem>
+       <enumname>Gdk::KEY_PRESS</enumname>
+      </listitem>
+      <listitem>
+       <enumname>Gdk::ENTER_NOTIFY</enumname>
+      </listitem>
+      <listitem>
+       <enumname>Gdk::PROPERTY_NOTIFY</enumname>
+      </listitem>
+      <listitem>
+       <enumname>Gdk::VISIBILITY_NOTIFY</enumname>
+      </listitem>
+     </itemizedlist>
+    </para>
    </desc>
   </field>
   <field id="gdk.gdkevent.field.type" type="ro">
@@ -229,7 +241,10 @@
     The event type
    </shortdesc>
    <desc>
-    The event type
+    The event type.
+    <para>
+     This field is available for all <enumname>GdkEventType</enumname>s.
+    </para>
    </desc>
   </field>
    <field id="gdk.gdkevent.field.window" type="rw">
@@ -240,6 +255,10 @@
    </shortdesc>
    <desc>
     The <classname>GdkWindow</classname> the event occurred on.
+    
+    <para>
+     This field is available for all event types.
+    </para>
    </desc>
   </field>
    <field id="gdk.gdkevent.field.send_event" type="rw">
@@ -250,6 +269,9 @@
    </shortdesc>
    <desc>
     <emphasis>TRUE</emphasis> if the event was sent explicitly.
+    <para>
+     This field is available for all event types.
+    </para>
    </desc>
   </field>
    <field id="gdk.gdkevent.field.area" type="rw">
@@ -260,6 +282,16 @@
    </shortdesc>
    <desc>
     The bounding box of the area to be redrawn.
+    
+    <para>
+     This field is available for the following event:
+     
+     <itemizedlist>
+      <listitem>
+       <enumname>Gdk::EXPOSE</enumname>
+      </listitem>
+     </itemizedlist>
+    </para>
    </desc>
   </field>
    <field id="gdk.gdkevent.field.count" type="rw">
@@ -272,6 +304,16 @@
    <desc>
     The number of contiguous <enumname>Gdk::EXPOSE</enumname> events 
     following this one.
+    
+    <para>
+     This field is available for the following events:
+     
+     <itemizedlist>
+      <listitem>
+       <enumname>Gdk::EXPOSE</enumname>
+      </listitem>
+     </itemizedlist>
+    </para>
    </desc>
   </field>
    <field id="gdk.gdkevent.field.time" type="rw">
@@ -282,6 +324,43 @@
    </shortdesc>
    <desc>
     The time of the event in milliseconds.
+    
+     <para>
+     This field is available for the following events:
+     
+     <itemizedlist>
+      <listitem>
+       <enumname>Gdk::MOTION_NOTIFY</enumname>
+      </listitem>
+      <listitem>
+       <enumname>Gdk::BUTTON_PRESS</enumname>
+      </listitem>
+      <listitem>
+       <enumname>Gdk::KEY_PRESS</enumname>
+      </listitem>
+      <listitem>
+       <enumname>Gdk::ENTER_NOTIFY</enumname>
+      </listitem>
+      <listitem>
+       <enumname>Gdk::PROPERTY_NOTIFY</enumname>
+      </listitem>
+      <listitem>
+       <enumname>Gdk::SELECTION_CLEAR</enumname>
+      </listitem>
+      <listitem>
+       <enumname>Gdk::PROXIMITY_IN</enumname>
+      </listitem>
+      <listitem>
+       <enumname>Gdk::DRAG_ENTER</enumname>
+      </listitem>
+      <listitem>
+       <enumname>Gdk::SCROLL</enumname>
+      </listitem>
+      <listitem>
+       <enumname>Gdk::OWNER_CHANGE</enumname>
+      </listitem>
+     </itemizedlist>
+    </para>
    </desc>
   </field>
    <field id="gdk.gdkevent.field.x" type="rw">
@@ -292,6 +371,28 @@
    </shortdesc>
    <desc>
     The x coordinate of the pointer relative to the window.
+    
+    <para>
+     This field is available for the following events:
+     
+     <itemizedlist>
+      <listitem>
+       <enumname>Gdk::MOTION_NOTIFY</enumname>
+      </listitem>
+      <listitem>
+       <enumname>Gdk::BUTTON_PRESS</enumname>
+      </listitem>
+      <listitem>
+       <enumname>Gdk::ENTER_NOTIFY</enumname>
+      </listitem>
+      <listitem>
+       <enumname>Gdk::CONFIGURE</enumname>
+      </listitem>
+      <listitem>
+       <enumname>Gdk::SCROLL</enumname>
+      </listitem>
+     </itemizedlist>
+    </para>
    </desc>
   </field>
    <field id="gdk.gdkevent.field.y" type="rw">
@@ -302,6 +403,27 @@
    </shortdesc>
    <desc>
     The y coordinate of the pointer relative to the window.
+    
+    <para>
+     This field is available for the following events:
+     <itemizedlist>
+      <listitem>
+       <enumname>Gdk::MOTION_NOTIFY</enumname>
+      </listitem>
+      <listitem>
+       <enumname>Gdk::BUTTON_PRESS</enumname>
+      </listitem>
+      <listitem>
+       <enumname>Gdk::ENTER_NOTIFY</enumname>
+      </listitem>
+      <listitem>
+       <enumname>Gdk::CONFIGURE</enumname>
+      </listitem>
+      <listitem>
+       <enumname>Gdk::SCROLL</enumname>
+      </listitem>
+     </itemizedlist>
+    </para>
    </desc>
   </field>
     <field id="gdk.gdkevent.field.axes" type="ro">
@@ -312,6 +434,19 @@
     axes of device, or <emphasis>NULL</emphasis> if device is the mouse.
    </shortdesc>
    <desc>
+    <fieldname>x</fieldname>, <fieldname>y</fieldname> translated to the 
+    axes of device, or <emphasis>NULL</emphasis> if device is the mouse.
+    <para>
+     This field is available for the following events:
+     <itemizedlist>
+      <listitem>
+       <enumname>Gdk::MOTION_NOTIFY</enumname>
+      </listitem>
+      <listitem>
+       <enumname>Gdk::BUTTON_PRESS</enumname>
+      </listitem>
+     </itemizedlist>
+    </para>
    </desc>
   </field>
     <field id="gdk.gdkevent.field.is_hint" type="rw">
@@ -322,6 +457,15 @@
    </shortdesc>
    <desc>
     <emphasis>TRUE</emphasis> if the <enumname>Gdk::POINTER_MOTION_HINT_MASK</enumname> is set.
+    
+    <para>
+     This field is available for the following events:
+     <itemizedlist>
+      <listitem>
+       <enumname>Gdk::MOTION_NOTIFY</enumname>
+      </listitem>
+     </itemizedlist>
+    </para>
    </desc>
   </field>
     <field id="gdk.gdkevent.field.device" type="ro">
@@ -332,6 +476,24 @@
    </shortdesc>
    <desc>
    The device where the event originated.
+
+    <para>
+     This field is available for the following events:
+     <itemizedlist>
+      <listitem>
+       <enumname>Gdk::MOTION_NOTIFY</enumname>
+      </listitem>
+      <listitem>
+       <enumname>Gdk::BUTTON_PRESS</enumname>
+      </listitem>
+      <listitem>
+       <enumname>Gdk::PROXIMITY_IN</enumname>
+      </listitem>
+      <listitem>
+       <enumname>Gdk::SCROLL</enumname>
+      </listitem>
+     </itemizedlist>
+    </para>
    </desc>
   </field>
     <field id="gdk.gdkevent.field.x_root" type="rw">
@@ -342,6 +504,27 @@
    </shortdesc>
    <desc>
    The x coordinate of the pointer relative to the root of the screen.
+   
+    <para>
+     This field is available for the following events:
+     <itemizedlist>
+      <listitem>
+       <enumname>Gdk::MOTION_NOTIFY</enumname>
+      </listitem>
+      <listitem>
+       <enumname>Gdk::BUTTON_PRESS</enumname>
+      </listitem>
+      <listitem>
+       <enumname>Gdk::ENTER_NOTIFY</enumname>
+      </listitem>
+      <listitem>
+       <enumname>Gdk::DRAG_ENTER</enumname>
+      </listitem>
+      <listitem>
+       <enumname>Gdk::SCROLL</enumname>
+      </listitem>     
+     </itemizedlist>
+    </para>
    </desc>
   </field>
   <field id="gdk.gdkevent.field.y_root" type="rw">
@@ -352,6 +535,27 @@
    </shortdesc>
    <desc>
     The y coordinate of the pointer relative to the root of the screen.
+
+    <para>
+     This field is available for the following events:
+     <itemizedlist>
+      <listitem>
+       <enumname>Gdk::MOTION_NOTIFY</enumname>
+      </listitem>
+      <listitem>
+       <enumname>Gdk::BUTTON_PRESS</enumname>
+      </listitem>
+      <listitem>
+       <enumname>Gdk::ENTER_NOTIFY</enumname>
+      </listitem>
+      <listitem>
+       <enumname>Gdk::DRAG_ENTER</enumname>
+      </listitem>
+      <listitem>
+       <enumname>Gdk::SCROLL</enumname>
+      </listitem>     
+     </itemizedlist>
+    </para>
    </desc>
   </field>
  </fields>
