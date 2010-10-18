@@ -5,10 +5,11 @@
   <classtitle>GdkEvent</classtitle>
 <!--   <classparent>GObject</classparent> -->
   <shortdesc>
-   
+   An object representing an event from the windowing system.
   </shortdesc>
   <desc>
-
+   An object representing an event from the windowing system with
+   data specific to that event.
   </desc>
  </classmeta>
 
@@ -18,13 +19,17 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef><function>GdkEvent</function></funcdef>
-     <paramdef><parameter>type</parameter></paramdef>
+     <paramdef>
+     	<enumname>GdkEventtype</enumname>
+     	<parameter>type</parameter>
+     </paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    
+    Creates a new <classname>GdkEvent</classname> object for the given type.
    </shortdesc>
    <desc>
+   Creates a new <classname>GdkEvent</classname> object for the given type.
    </desc>
   </constructor>
  </constructors>
@@ -38,9 +43,15 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    
+    Free the event and any resources associated with it.
    </shortdesc>
    <desc>
+    Frees the event, freeing or decrementing any resources 
+    associated with it. Note that this method should only be called on 
+    <classname>GdkEvent</classname> objects returned from methods or functions such as 
+     <link linked="gdk.method.event_peek">Gdk::event_peek()</link>, 
+     <link linked="gdk.method.event_get">Gdk::event_get()</link> and 
+     <link linked="gdk.method.event_get_graphics_expose">Gdk::event_get_graphics_expose()</link>.
    </desc>
   </method>
 
@@ -48,83 +59,106 @@
    <funcsynopsis>
     <funcprototype>
      <funcdef>void <function>get_axis</function></funcdef>
-     <paramdef><parameter>axis_type</parameter></paramdef>
+     <paramdef><enumname>GdkAxisUse</enumname> <parameter>axis_type</parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    
+    The get_axis() method returns the axis value for the axis use 
+    specified by <parameter>axis_use</parameter> from an event structure.
    </shortdesc>
    <desc>
+    <para>
+     The get_axis() method returns the axis value for the axis use 
+     specified by <parameter>axis_use</parameter> from an event structure.
+     Otherwise it returns <emphasis>FALSE</emphasis>.
+    </para>
    </desc>
   </method>
 
   <method id="gdk.gdkevent.method.get_coords">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>void <function>get_coords</function></funcdef>
+     <funcdef>array <function>get_coords</function></funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    
+    Returns an array of the event coordinates.
    </shortdesc>
    <desc>
+    Returns an array containing the x and y 
+    coordinates of an event relative to the event <classname>GdkWindow</classname> 
+    or <emphasis>FALSE</emphasis> if the event did not deliver event window coordinates.
    </desc>
   </method>
 
   <method id="gdk.gdkevent.method.get_root_coords">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>void <function>get_root_coords</function></funcdef>
+     <funcdef>array <function>get_root_coords</function></funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    
+    Returns an array containing the x and y coordinates of the event 
+    relative to the root window.
    </shortdesc>
    <desc>
+    Returns an array containing the x and y coordinates 
+    from an event relative to the root window or <emphasis>FALSE</emphasis> if the event did not 
+    deliver root window coordinates.
    </desc>
   </method>
 
   <method id="gdk.gdkevent.method.get_screen">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>void <function>get_screen</function></funcdef>
+     <funcdef><classname>GdkScreen</classname> <function>get_screen</function></funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    
+    Returns the <classname>GdkScreen</classname> for the event.
    </shortdesc>
    <desc>
+    Returns the <classname>GdkScreen</classname> for the event.
+    The screen is typically the screen for the event window, 
+    but for events such as mouse events, it is the screen where 
+    the the pointer was when the event occurs - that is, the screen 
+    that has the root window for the event.
    </desc>
   </method>
 
   <method id="gdk.gdkevent.method.get_state">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>void <function>get_state</function></funcdef>
+     <funcdef>int <function>get_state</function></funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    
+    Returns the value of the modifier "state" field.  
    </shortdesc>
    <desc>
+	 Returns the value of the modifier "state" field. 
+	 If the event has no "state" field the empty state value (0) is returned. 
+	 The "state" field contains a combination of the <enumname>GdkModifierType</enumname>
+	 constants.
    </desc>
   </method>
 
   <method id="gdk.gdkevent.method.get_time">
    <funcsynopsis>
     <funcprototype>
-     <funcdef>void <function>get_time</function></funcdef>
+     <funcdef>int <function>get_time</function></funcdef>
      <paramdef>void</paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    
+    Returns the timestamp field from the event.
    </shortdesc>
    <desc>
+    Returns the time stamp from the event, if there is one; otherwise returns 0.
    </desc>
   </method>
 
@@ -136,9 +170,10 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    
+    Appends a copy of the given event onto the tail of the event queue.
    </shortdesc>
    <desc>
+    Appends a copy of the given event onto the tail of the event queue.
    </desc>
   </method>
 
@@ -150,9 +185,10 @@
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
-    
+    Sets the <classname>GdkScreen</classname> for the event.
    </shortdesc>
    <desc>
+    Sets the <classname>GdkScreen</classname> to the value of <parameter>screen</parameter>.
    </desc>
   </method>
  </methods>
