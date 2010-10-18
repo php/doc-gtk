@@ -191,6 +191,169 @@
     Sets the <classname>GdkScreen</classname> to the value of <parameter>screen</parameter>.
    </desc>
   </method>
+  <method id="gdk.gdkevent.method.set_test">
+   <funcsynopsis>
+    <funcprototype>
+     <funcdef>void <function>set_test</function></funcdef>
+     <paramdef><classname>GdkScreen</classname> <parameter>screen</parameter></paramdef>
+    </funcprototype>
+   </funcsynopsis>
+   <shortdesc>
+    Sets the <classname>GdkScreen</classname> for the event.
+   </shortdesc>
+   <desc>
+    Sets the <classname>GdkScreen</classname> to the value of <parameter>screen</parameter>.
+   </desc>
+  </method>
  </methods>
+ 
+ <fields>
+  <para>
+   Note: fields are dependant on the type of event. Each field's page 
+   lists the event types that field as available to.
+  </para>
+  <field id="gdk.gdkevent.field.state" type="ro">
+   <fieldname>state</fieldname>
+   <fieldtype>int</fieldtype>
+   <shortdesc>
+    A bit-mask representing the state of the modifier keys 
+    (e.g. Control, Shift and Alt) and the pointer buttons.
+   </shortdesc>
+   <desc>
+   </desc>
+  </field>
+  <field id="gdk.gdkevent.field.type" type="ro">
+   <fieldname>type</fieldname>
+   <fieldtype><enumname>GdkEventType</enumname></fieldtype>
+   <shortdesc>
+    The event type
+   </shortdesc>
+   <desc>
+    The event type
+   </desc>
+  </field>
+   <field id="gdk.gdkevent.field.window" type="rw">
+   <fieldname>window</fieldname>
+   <fieldtype><enumname>GdkWindow</enumname></fieldtype>
+   <shortdesc>
+    The <classname>GdkWindow</classname> the event occurred on.
+   </shortdesc>
+   <desc>
+    The <classname>GdkWindow</classname> the event occurred on.
+   </desc>
+  </field>
+   <field id="gdk.gdkevent.field.send_event" type="rw">
+   <fieldname>send_event</fieldname>
+   <fieldtype>boolean</fieldtype>
+   <shortdesc>
+    <emphasis>TRUE</emphasis> if the event was sent explicitly.
+   </shortdesc>
+   <desc>
+    <emphasis>TRUE</emphasis> if the event was sent explicitly.
+   </desc>
+  </field>
+   <field id="gdk.gdkevent.field.area" type="rw">
+   <fieldname>area</fieldname>
+   <fieldtype><enumname>GdkRectangle</enumname></fieldtype>
+   <shortdesc>
+    The bounding box of the area to be redrawn.
+   </shortdesc>
+   <desc>
+    The bounding box of the area to be redrawn.
+   </desc>
+  </field>
+   <field id="gdk.gdkevent.field.count" type="rw">
+   <fieldname>count</fieldname>
+   <fieldtype>int</fieldtype>
+   <shortdesc>
+    The number of contiguous <enumname>Gdk::EXPOSE</enumname> events 
+    following this one.
+   </shortdesc>
+   <desc>
+    The number of contiguous <enumname>Gdk::EXPOSE</enumname> events 
+    following this one.
+   </desc>
+  </field>
+   <field id="gdk.gdkevent.field.time" type="rw">
+   <fieldname>time</fieldname>
+   <fieldtype>int</fieldtype>
+   <shortdesc>
+    The time of the event in milliseconds.
+   </shortdesc>
+   <desc>
+    The time of the event in milliseconds.
+   </desc>
+  </field>
+   <field id="gdk.gdkevent.field.x" type="rw">
+   <fieldname>x</fieldname>
+   <fieldtype>int</fieldtype>
+   <shortdesc>
+    The x coordinate of the pointer relative to the window.
+   </shortdesc>
+   <desc>
+    The x coordinate of the pointer relative to the window.
+   </desc>
+  </field>
+   <field id="gdk.gdkevent.field.y" type="rw">
+   <fieldname>y</fieldname>
+   <fieldtype>int</fieldtype>
+   <shortdesc>
+    The y coordinate of the pointer relative to the window.
+   </shortdesc>
+   <desc>
+    The y coordinate of the pointer relative to the window.
+   </desc>
+  </field>
+    <field id="gdk.gdkevent.field.axes" type="ro">
+   <fieldname>axes</fieldname>
+   <fieldtype>int</fieldtype>
+   <shortdesc>
+    <fieldname>x</fieldname>, <fieldname>y</fieldname> translated to the 
+    axes of device, or <emphasis>NULL</emphasis> if device is the mouse.
+   </shortdesc>
+   <desc>
+   </desc>
+  </field>
+    <field id="gdk.gdkevent.field.is_hint" type="rw">
+   <fieldname>is_hint</fieldname>
+   <fieldtype>boolean</fieldtype>
+   <shortdesc>
+    <emphasis>TRUE</emphasis> if the <enumname>Gdk::POINTER_MOTION_HINT_MASK</enumname> is set.
+   </shortdesc>
+   <desc>
+    <emphasis>TRUE</emphasis> if the <enumname>Gdk::POINTER_MOTION_HINT_MASK</enumname> is set.
+   </desc>
+  </field>
+    <field id="gdk.gdkevent.field.device" type="ro">
+   <fieldname>device</fieldname>
+   <fieldtype><classname>GdkDevice</classname></fieldtype>
+   <shortdesc>
+   The device where the event originated.
+   </shortdesc>
+   <desc>
+   The device where the event originated.
+   </desc>
+  </field>
+    <field id="gdk.gdkevent.field.x_root" type="rw">
+   <fieldname>x_root</fieldname>
+   <fieldtype>int</fieldtype>
+   <shortdesc>
+   The x coordinate of the pointer relative to the root of the screen.
+   </shortdesc>
+   <desc>
+   The x coordinate of the pointer relative to the root of the screen.
+   </desc>
+  </field>
+  <field id="gdk.gdkevent.field.y_root" type="rw">
+   <fieldname>y_root</fieldname>
+   <fieldtype>int</fieldtype>
+   <shortdesc>
+    The y coordinate of the pointer relative to the root of the screen.
+   </shortdesc>
+   <desc>
+    The y coordinate of the pointer relative to the root of the screen.
+   </desc>
+  </field>
+ </fields>
 
 </classentry>
