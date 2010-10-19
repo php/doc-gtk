@@ -20,8 +20,8 @@
     <funcprototype>
      <funcdef><function>GdkEvent</function></funcdef>
      <paramdef>
-     	<enumname>GdkEventtype</enumname>
-     	<parameter>type</parameter>
+      <enumname>GdkEventtype</enumname>
+      <parameter>type</parameter>
      </paramdef>
     </funcprototype>
    </funcsynopsis>
@@ -231,6 +231,10 @@
        <enumname>Gdk::VISIBILITY_NOTIFY</enumname>
       </listitem>
      </itemizedlist>
+     
+     &seealso;
+     
+     <enumname>GdkModifierType</enumname>
     </para>
    </desc>
   </field>
@@ -557,6 +561,301 @@
      </itemizedlist>
     </para>
    </desc>
+  </field>
+  <field id="gdk.gdkevent.field.button" type="rw">
+   <fieldname>button</fieldname>
+   <fieldtype>int</fieldtype>
+   <shortdesc>
+    The mouse button that was clicked.
+   </shortdesc>
+   <desc>
+    The button which was pressed or released, numbered from 1 to 5. 
+    Normally button 1 is the left mouse button, 2 is the middle button, 
+    and 3 is the right button. On 2-button mice, the middle button can 
+    often be simulated by pressing both mouse buttons together.
+    <para>
+     This field is available for the following events:
+     
+     <itemizedlist>
+       <listitem>
+         <enumname>Gdk::BUTTON_PRESS</enumname>
+       </listitem>
+       <listitem>
+        <enumname>Gdk::_2BUTTON_PRESS</enumname>
+       </listitem>
+       <listitem>
+         <enumname>Gdk::_3BUTTON_PRESS</enumname>
+       </listitem>
+       <listitem>
+         <enumname>Gdk::BUTTON_RELEASE</enumname>
+       </listitem>
+     </itemizedlist>
+    </para>
+   </desc>
+  </field>
+  
+  <field id="gdk.gdkevent.field.keyval" type="rw">
+    <fieldname>keyval</fieldname>
+    <fieldtype>int</fieldtype>
+    <shortdesc>
+      The key that was pressed or released.
+    </shortdesc>
+    <desc>
+      The key that was pressed or released.
+      
+      <para>
+        This field is available for the following events:
+        
+        <itemizedlist>
+          <listitem>
+            <enumname>Gdk::KEY_PRESS</enumname>
+          </listitem>
+          <listitem>
+            <enumname>Gdk::KEY_RELEASE</enumname>
+          </listitem>
+        </itemizedlist>
+      </para>
+    </desc>
+  </field>
+  
+  <field id="gdk.gdkevent.field.string" type="rw">
+    <fieldname>string</fieldname>
+    <fieldtype>string</fieldtype>
+    <shortdesc>
+      A string containing the composed characters resulting from the key press.
+    </shortdesc>
+    <desc>
+     <para>A string containing the composed characters resulting from the key press.</para>
+     <para>
+      When text is being input, in a <classname>GtkEnter</classname> for example, it is these 
+      characters which should be added to the input buffer. When using Input 
+      Methods to support internationalized text input, the composed characters 
+      appear here after the pre-editing has been completed.
+     </para>
+     
+      <para>
+        This field is available for the following events:
+
+        <itemizedlist>
+          <listitem>
+            <enumname>Gdk::KEY_PRESS</enumname>
+          </listitem>
+          <listitem>
+            <enumname>Gdk::KEY_RELEASE</enumname>
+          </listitem>
+        </itemizedlist>
+      </para>
+    </desc>
+  </field>
+  
+  <field id="gdk.gdkevent.field.hardward_keycode" type="rw">
+   <fieldname>hardware_keycode</fieldname>
+   <fieldtype>int</fieldtype>
+   <shortdesc>
+    The raw code of the key that was pressed or released.
+   </shortdesc>
+   <desc>
+    The raw code of the key that was pressed or released.
+
+    <para>
+     This field is available for the following events:
+
+     <itemizedlist>
+       <listitem>
+         <enumname>Gdk::KEY_PRESS</enumname>
+       </listitem>
+       <listitem>
+         <enumname>Gdk::KEY_RELEASE</enumname>
+       </listitem>
+     </itemizedlist>
+    </para>
+   </desc>
+  </field>
+  <field id="gdk.gdkevent.field.group" type="rw">
+   <fieldname>group</fieldname>
+   <fieldtype>int</fieldtype>
+   <shortdesc>The keyboard group.</shortdesc>
+   <desc>
+     The keyboard group.
+    <para>
+     This field is available for the following events:
+
+     <itemizedlist>
+       <listitem>
+         <enumname>Gdk::KEY_PRESS</enumname>
+       </listitem>
+       <listitem>
+         <enumname>Gdk::KEY_RELEASE</enumname>
+       </listitem>
+     </itemizedlist>
+    </para>
+   </desc>
+  </field>
+  
+  <field id="gdk.gdkevent.field.mode" type="rw">
+    <fieldname>mode</fieldname>
+    <fieldtype><enumname>GdkCrossing</enumname></fieldtype>
+    <shortdesc>
+      The crossing mode (<enumname>Gdk::CROSSING_NORMAL</enumname>, 
+      <enumname>Gdk::CROSSING_GRAB</enumname>
+      or <enumname>Gdk::CROSSING_UNGRAB</enumname>).
+    </shortdesc>
+    <desc>
+      The crossing mode (<enumname>Gdk::CROSSING_NORMAL</enumname>, 
+      <enumname>Gdk::CROSSING_GRAB</enumname>
+      or <enumname>Gdk::CROSSING_UNGRAB</enumname>).
+      
+      <para>
+        This field is available for the following events:
+        
+        <itemizedlist>
+          <listitem>
+            <enumname>Gdk::ENTER_NOTIFY</enumname>
+          </listitem>
+          <listitem>
+            <enumname>Gdk::LEAVE_NOTIFY</enumname>
+          </listitem>
+        </itemizedlist>
+      </para>
+    </desc>
+  </field>
+  <field id="gdk.gdkevent.field.detail" type="rw">
+    <fieldname>detail</fieldname>
+    <fieldtype><enumname>GdkNotify</enumname></fieldtype>
+    <shortdesc>
+      The kind of crossing that happened.
+    </shortdesc>
+    <desc>
+      The kind of crossing that happened.
+      
+      <para>
+        This field is available for the following events:
+
+        <itemizedlist>
+          <listitem>
+            <enumname>Gdk::ENTER_NOTIFY</enumname>
+          </listitem>
+          <listitem>
+            <enumname>Gdk::LEAVE_NOTIFY</enumname>
+          </listitem>
+        </itemizedlist>
+      </para>
+    </desc>
+  </field>
+  <field id="gdk.gdkevent.field.focus" type="rw">
+    <fieldname>focus</fieldname>
+    <fieldtype>boolean</fieldtype>
+    <shortdesc>
+      <emphasis>TRUE</emphasis> if <fieldname>window</fieldname> is the focus window or an inferior.
+    </shortdesc>
+    
+    <desc>
+      <emphasis>TRUE</emphasis> if <fieldname>window</fieldname> is the focus window or an inferior.
+
+      <para>
+        This field is available for the following events:
+
+        <itemizedlist>
+          <listitem>
+            <enumname>Gdk::ENTER_NOTIFY</enumname>
+          </listitem>
+          <listitem>
+            <enumname>Gdk::LEAVE_NOTIFY</enumname>
+          </listitem>
+        </itemizedlist>
+      </para>
+    </desc>
+  </field>
+  <field id="gdk.gdkevent.field.in" type="rw">
+    <fieldname>in</fieldname>
+    <fieldtype>boolean</fieldtype>
+    <shortdesc>
+      <emphasis>TRUE</emphasis> if the <fieldname>window</fieldname> has gained the keyboard 
+      focus, <emphasis>FALSE</emphasis> if it has lost the focus.
+    </shortdesc>
+    
+    <para>
+      This field is available for the following events:
+      
+      <itemizedlist>
+        <listitem>
+          <enumname>Gdk::FOCUS_CHANGED</enumname>
+        </listitem>
+      </itemizedlist>
+    </para>
+  </field>
+  <field id="gdk.gdkevent.field.width" type="rw">
+    <fieldname>width</fieldname>
+    <fieldtype>int</fieldtype>
+    <shortdesc>The new width of the <fieldname>window</fieldname>.</shortdesc>
+    
+    <desc>
+      The new width of the <fieldname>window</fieldname>.
+      
+      <para>
+        This field is available for the following event:
+        
+        <itemizedlist>
+          <listitem>
+            <enumname>Gdk::CONFIGURE</enumname>
+          </listitem>
+        </itemizedlist>
+      </para>
+    </desc>
+  </field>
+  <field id="gdk.gdkevent.field.height" type="rw">
+    <fieldname>height</fieldname>
+    <fieldtype>int</fieldtype>
+    <shortdesc>The new height of the <fieldname>window</fieldname>.</shortdesc>
+
+    <desc>
+      The new height of the <fieldname>window</fieldname>.
+
+      <para>
+        This field is available for the following event:
+
+        <itemizedlist>
+          <listitem>
+            <enumname>Gdk::CONFIGURE</enumname>
+          </listitem>
+        </itemizedlist>
+      </para>
+    </desc>
+  </field>
+  <field id="gdk.gdkevent.field.context" type="ro">
+    <fieldname>context</fieldname>
+    <fieldtype><classname>GdkDragContext</classname></fieldtype>
+    <shortdesc>
+      The <classname>GdkDragContext</classname> for the DnD operation.
+    </shortdesc>
+    <desc>
+      The <classname>GdkDragContext</classname> for the DnD operation.
+      
+      <para>
+        This field is available for the following events:
+        
+        <itemizedlist>
+          <listitem>
+            <enumname>Gdk::ENTER_NOTIFY</enumname>
+          </listitem>
+          <listitem>
+            <enumname>Gdk::LEAVE_NOTIFY</enumname>
+          </listitem>
+          <listitem>
+            <enumname>Gdk::MOTION_NOTIFY</enumname>
+          </listitem>
+          <listitem>
+            <enumname>Gdk::STATUS_NOTIFY</enumname>
+          </listitem>
+          <listitem>
+            <enumname>Gdk::START_NOTIFY</enumname>
+          </listitem>
+          <listitem>
+            <enumname>Gdk::FINISHED_NOTIFY</enumname>
+          </listitem>
+        </itemizedlist>
+      </para>
+    </desc>
   </field>
  </fields>
 
