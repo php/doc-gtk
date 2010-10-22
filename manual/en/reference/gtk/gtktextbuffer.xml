@@ -748,7 +748,7 @@ if (!extension_loaded('php-gtk')) {
      <funcdef>string <function>get_text</function></funcdef>
      <paramdef><classname>GtkTextIter</classname> <parameter>start</parameter></paramdef>
      <paramdef><classname>GtkTextIter</classname> <parameter>end</parameter></paramdef>
-     <paramdef>boolean <parameter>include_hidden_chars</parameter></paramdef>
+     <paramdef>boolean <parameter><optional>include_hidden_chars</optional></parameter></paramdef>
     </funcprototype>
    </funcsynopsis>
    <shortdesc>
@@ -756,7 +756,7 @@ if (!extension_loaded('php-gtk')) {
    </shortdesc>
    <desc>
     <para>
-    Returns the text in the specified range [<parameter>start</parameter>,
+    Returns the text in the specified range (<parameter>start</parameter>,
     <parameter>end</parameter>). This method does not return characters
     representing embedded images, so byte and character indexes
     into the returned string do not correspond to byte and character
@@ -764,6 +764,7 @@ if (!extension_loaded('php-gtk')) {
     invisibility attribute are excluded if <parameter>include_hidden_chars</parameter>
     is FALSE.
     </para>
+	<para>Note: If you want to get the full text stored in the <classname>GtkTextBuffer</classname>, use the <function class="GtkTextBuffer">get_start_iter</function> and <function class="GtkTextBuffer">get_end_iter</function> respectively.</para>
     <para>
      &seealso;
      <function class="GtkTextBuffer">set_text</function>
