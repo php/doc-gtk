@@ -6,7 +6,7 @@
  The "name" is of type "string", and the number
  of inhabitants is of type long (big integer).
 */
-$store = new GtkListStore(Gtk::TYPE_STRING, Gtk::TYPE_LONG);
+$store = new GtkListStore(Gobject::TYPE_STRING, Gobject::TYPE_LONG);
 
 /*
 * Using the "set" method

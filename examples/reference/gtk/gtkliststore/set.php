@@ -1,6 +1,6 @@
 <?php
 //Create new list store with string and number columns
-$store = new GtkListStore(Gtk::TYPE_STRING, Gtk::TYPE_LONG);
+$store = new GtkListStore(Gobject::TYPE_STRING, Gobject::TYPE_LONG);
 
 //at first, get an iterator for a new row
 $iterator = $store->append();

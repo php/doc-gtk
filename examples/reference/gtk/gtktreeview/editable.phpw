@@ -17,14 +17,14 @@
 //Data are stored in there (the model)
 $store = new GtkListStore(
     GdkPixbuf::gtype, //icon
-    Gtk::TYPE_STRING, //title
-    Gtk::TYPE_STRING, //category
-    Gtk::TYPE_BOOLEAN,//works?
-    Gtk::TYPE_LONG    //development progress (percent)
+    Gobject::TYPE_STRING, //title
+    Gobject::TYPE_STRING, //category
+    Gobject::TYPE_BOOLEAN,//works?
+    Gobject::TYPE_LONG    //development progress (percent)
 );
 
 //List with allowed categories
-$categories = new GtkListStore(Gtk::TYPE_STRING);
+$categories = new GtkListStore(Gobject::TYPE_STRING);
 $categories->append(array('Editors'));
 $categories->append(array('Games'));
 $categories->append(array('Setup'));

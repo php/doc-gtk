@@ -1,5 +1,5 @@
 <?php
-$store = new GtkListStore(Gtk::TYPE_STRING, Gtk::TYPE_LONG);
+$store = new GtkListStore(Gobject::TYPE_STRING, Gobject::TYPE_LONG);
 
 //insert the rows at different positions
 $tokio  = $store->insert(0, array('Tokio', 34100000));
