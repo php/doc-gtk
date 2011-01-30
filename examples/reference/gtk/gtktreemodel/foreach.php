@@ -1,5 +1,5 @@
 <?php
-$store = new GtkListStore(Gtk::TYPE_STRING, Gtk::TYPE_LONG);
+$store = new GtkListStore(Gobject::TYPE_STRING, Gobject::TYPE_LONG);
 
 $store->append(array('Tokio', 34100000));
 $store->append(array('Mexico city', 22650000));
